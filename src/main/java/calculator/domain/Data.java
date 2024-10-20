@@ -10,13 +10,14 @@ public class Data {
     private static final String EMPTY_STRING = "";
     private static final String SEPARATOR_COMMA = ",";
     private static final String SEPARATOR_COLON = ":";
-    private final String firstInputData;
+    private final String input;
     private final List<Integer> numbersForSum;
     private String removedSeparatorInput;
     private List<String> separators;
 
-    public Data(String firstInputData) {
-        this.firstInputData = firstInputData;
+    public Data(String input) {
+        this.input = input;
+        removedSeparatorInput = input;
         separators = new ArrayList<>();
         numbersForSum = handleInput();
     }
@@ -49,20 +50,20 @@ public class Data {
 
     private List<String> extractCustomSeparator() {
         List<String> customSeparator = new ArrayList<>();
-        if (containsCustomSeparator(firstInputData)) {
-            customSeparator.add(firstInputData.substring(CUSTOM_START_LETTERS.length(),
-                    firstInputData.indexOf(CUSTOM_END_LETTERS)));
+        if (containsCustomSeparator()) {
+            customSeparator.add(input.substring(CUSTOM_START_LETTERS.length(),
+                    input.indexOf(CUSTOM_END_LETTERS)));
             removedSeparatorInput = removeCustomSeparatorFormat();
         }
         return customSeparator;
     }
 
-    private boolean containsCustomSeparator(String inputData) {
-        return inputData.startsWith(CUSTOM_START_LETTERS) && inputData.contains(CUSTOM_END_LETTERS);
+    private boolean containsCustomSeparator() {
+        return input.startsWith(CUSTOM_START_LETTERS) && input.contains(CUSTOM_END_LETTERS);
     }
 
     private String removeCustomSeparatorFormat() {
-        return firstInputData.substring(firstInputData.indexOf(CUSTOM_END_LETTERS) + CUSTOM_END_LETTERS.length());
+        return input.substring(input.indexOf(CUSTOM_END_LETTERS) + CUSTOM_END_LETTERS.length());
     }
 
 
@@ -78,6 +79,6 @@ public class Data {
     }
 
     private boolean hasEmptyString() {
-        return firstInputData.equals(EMPTY_STRING);
+        return input.equals(EMPTY_STRING);
     }
 }
