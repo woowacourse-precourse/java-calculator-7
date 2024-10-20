@@ -1,27 +1,30 @@
 package calculator.service.separator;
 
+import static calculator.util.Constants.MATH;
+import static calculator.util.Constants.UNKNOWN;
+
 import java.util.Arrays;
 
 public enum UnsupportedSeparatorType {
 
-    BLANK(" ", "인식되지 않는 구분자"),
-    BACKSLASH("\\", "인식되지 않는 구분자"),
+    BLANK(" ", UNKNOWN),
+    BACKSLASH("\\", UNKNOWN),
 
-    PLUS("+", "수학적 기호"),
-    MINUS("-", "수학적 기호"),
-    MULTIPLY("*", "수학적 기호"),
-    DIVIDE("/", "수학적 기호"),
-    MODULO("%", "수학적 기호"),
-    FACTORIAL("!", "수학적 기호"),
-    ROOT("√", "수학적 기호"),
-    PI("π", "수학적 기호"),
-    EQUALS("=", "수학적 기호"),
-    SQUARE("^", "수학적 기호"),
-    POINT(".", "수학적 기호"),
-    OPEN_BRACKET("(", "수학적 기호"),
-    CLOSE_BRACKET(")", "수학적 기호"),
-    OPEN_BRACE("{", "수학적 기호"),
-    CLOSE_BRACE("}", "수학적 기호");
+    PLUS("+", MATH),
+    MINUS("-", MATH),
+    MULTIPLY("*", MATH),
+    DIVIDE("/", MATH),
+    MODULO("%", MATH),
+    FACTORIAL("!", MATH),
+    ROOT("√", MATH),
+    PI("π", MATH),
+    EQUALS("=", MATH),
+    SQUARE("^", MATH),
+    POINT(".", MATH),
+    OPEN_BRACKET("(", MATH),
+    CLOSE_BRACKET(")", MATH),
+    OPEN_BRACE("{", MATH),
+    CLOSE_BRACE("}", MATH);
 
     private final String value;
     private final String reason;
@@ -31,21 +34,21 @@ public enum UnsupportedSeparatorType {
         this.reason = reason;
     }
 
-    public static boolean isUnsupportedSeparator(String value) {
+    public static boolean isUnsupported(String value) {
         return Arrays.stream(values())
-                .noneMatch(separator -> separator.getValue().equals(value));
+                .anyMatch(separator -> separator.isMatchValue(value));
     }
 
     public static String getReason(String value) {
         return Arrays.stream(values())
-                .filter(separator -> separator.getValue().equals(value))
+                .filter(separator -> separator.isMatchValue(value))
                 .findFirst()
                 .map(UnsupportedSeparatorType::getReason)
-                .orElse("인식되지 않는 구분자");
+                .orElse(UNKNOWN);
     }
 
-    public String getValue() {
-        return value;
+    private boolean isMatchValue(String inputValue) {
+        return value.equals(inputValue);
     }
 
     public String getReason() {

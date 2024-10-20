@@ -123,6 +123,32 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 인식되지_않는_커스텀_구분자로_사용_예외_메시지_테스트() {
+        assertSimpleTest(() -> {
+                    assertThatThrownBy(() -> runException("// \\n1 2 3"))
+                            .isInstanceOf(IllegalArgumentException.class)
+                            .hasMessage("해당 구분자( )는 커스텀 구분자로 사용할 수 없어요. (사유: 인식되지 않는 구분자) 다른 구분자를 사용해주세요.");
+                    assertThatThrownBy(() -> runException("//\\\\n1\\2\\3"))
+                            .isInstanceOf(IllegalArgumentException.class)
+                            .hasMessage("해당 구분자(\\)는 커스텀 구분자로 사용할 수 없어요. (사유: 인식되지 않는 구분자) 다른 구분자를 사용해주세요.");
+                }
+        );
+    }
+
+    @Test
+    void 수학적_기호를_커스텀_구분자로_사용_예외_메시지_테스트() {
+        assertSimpleTest(() -> {
+                    assertThatThrownBy(() -> runException("//+\\n1+2+3"))
+                            .isInstanceOf(IllegalArgumentException.class)
+                            .hasMessage("해당 구분자(+)는 커스텀 구분자로 사용할 수 없어요. (사유: 수학적 기호) 다른 구분자를 사용해주세요.");
+                    assertThatThrownBy(() -> runException("//-\\n1-2-3"))
+                            .isInstanceOf(IllegalArgumentException.class)
+                            .hasMessage("해당 구분자(-)는 커스텀 구분자로 사용할 수 없어요. (사유: 수학적 기호) 다른 구분자를 사용해주세요.");
+                }
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
