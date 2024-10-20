@@ -14,6 +14,7 @@ public class Application {
         // TODO: 프로그램 구현
         String inputValue = Console.readLine();
         try {
+            System.out.println("덧셈할 문자열을 입력해 주세요.");
             Set<Character> delimiters = extractDelimiter(inputValue);
             long result = calcNumbers(delimiters);
             System.out.println("결과 : " + result);
