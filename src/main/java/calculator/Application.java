@@ -6,5 +6,9 @@ public class Application {
         Calculator calculator = new Calculator();
 
         String inputStr = inputHandler.getInput();
+        calculator.parseAndAddNumbers(inputStr);
+        int result = calculator.sum();
+
+        System.out.println("결과: " + result);
     }
 }
