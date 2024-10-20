@@ -13,22 +13,21 @@ public class Number {
         this.number = convertToInteger(number);
     }
 
-    public int convertToInteger(String number) {
-
-        return Integer.parseInt(number);
-    }
 
     public int getNumber() {
         return number;
     }
 
+    private int convertToInteger(String number) {
+        return Integer.parseInt(number);
+    }
 
-    public void validate(String number) {
+    private void validate(String number) {
         validateNumeric(number);
         validateRange(number);
     }
 
-    public void validateNumeric(String number) {
+    private void validateNumeric(String number) {
         try {
             Integer.parseInt(number);
         } catch (NumberFormatException e) {
@@ -36,7 +35,7 @@ public class Number {
         }
     }
 
-    public void validateRange(String number) {
+    private void validateRange(String number) {
         if (Integer.parseInt(number) < NUMBER_RANGE_CONDITION) {
             throw new IllegalArgumentException(RANGE_EXCEPTION.getMessage());
         }

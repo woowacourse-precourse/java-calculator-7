@@ -1,5 +1,7 @@
 package calculator.model;
 
+import static calculator.model.Calculator.Mode.CUSTOM;
+import static calculator.model.Calculator.Mode.DEFAULT;
 import static calculator.model.token.ParsingPattern.DEFAULT_DELIMITER_PATTERN;
 
 import calculator.model.token.CustomDelimiterToken;
@@ -8,8 +10,13 @@ import calculator.model.token.Tokenizer;
 
 public class Calculator {
 
-    private boolean defaultMode;
-    private Tokenizer tokenizer;
+    enum Mode {
+        DEFAULT,
+        CUSTOM
+    }
+
+    private Mode mode;
+    private final Tokenizer tokenizer;
 
     private static final int EMPTY_RESULT = 0;
 
@@ -33,12 +40,12 @@ public class Calculator {
         return sum(numbers);
     }
 
-    public int sum(Numbers numbers) {
+    private int sum(Numbers numbers) {
         return numbers.sum();
     }
 
-    public Delimiter selectDelimiter(String input) {
-        if (defaultMode) {
+    private Delimiter selectDelimiter(String input) {
+        if (mode == DEFAULT) {
             return new Delimiter(DEFAULT_DELIMITER_PATTERN.getPattern());
         }
 
@@ -46,11 +53,11 @@ public class Calculator {
         return new Delimiter(customDelimiterToken.extractDelimiter());
     }
 
-    public void setMode(String input) {
+    private void setMode(String input) {
         if (tokenizer.isExistsCustomDelimiterToken(input)) {
-            defaultMode = false;
+            mode = DEFAULT;
         } else {
-            defaultMode = true;
+            mode = CUSTOM;
         }
     }
 }

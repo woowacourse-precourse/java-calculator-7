@@ -14,8 +14,8 @@ public class NumbersToken {
         this.token = token;
     }
 
-    public String[] extractNumbers(Delimiter delimiter) {
-        return token.split(delimiter.getDelimiter(), NUMBER_SPLIT_LIMIT.getNumber());
+    public boolean isEmpty() {
+        return token.isEmpty();
     }
 
     public Numbers convertToNumbers(Delimiter delimiter) {
@@ -28,12 +28,12 @@ public class NumbersToken {
         return numbers;
     }
 
-    public boolean isEmpty() {
-        return token.isEmpty();
-    }
-
     @Override
     public String toString() {
         return token;
+    }
+
+    private String[] extractNumbers(Delimiter delimiter) {
+        return token.split(delimiter.getDelimiter(), NUMBER_SPLIT_LIMIT.getNumber());
     }
 }
