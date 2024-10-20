@@ -1,6 +1,8 @@
 package calculator;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static calculator.AppConfig.CUSTOM_DELIMITER_END;
 import static calculator.AppConfig.CUSTOM_DELIMITER_START;
@@ -11,16 +13,9 @@ import static calculator.AppConfig.CUSTOM_DELIMITER_START;
  * - 책임: 커스텀 구분자가 있는 경우 이를 파악하고, 적절한 구분자를 이용해 정규 표현식을 생성
  */
 public class Delimiters {
-    private static final String LEFT_BRACKET = "[";
-    private static final String RIGHT_BRACKET = "]";
     private static final String OR_OPERATOR = "|";
-    private static final String STARTS_WITH = "^";
-    private static final String NUMBER_ONE_OR_MORE = "[0-9]+";
-    private static final String ZERO_OR_MORE_AT_END = "*$";
-    private static final String GROUP_START = "(";
-    private static final String GROUP_END = ")";
-    private static final String ANY_FOLLOWING_CHARACTERS = ".*";
-    private static final String NON_ALPHANUMERIC_CHARACTER = "[^a-zA-Z0-9]";
+    private static final Pattern isCustomDelimiterPresent= Pattern.compile("^" + CUSTOM_DELIMITER_START + "[^a-zA-Z0-9]" + CUSTOM_DELIMITER_END + ".*");
+    private static final Pattern splitBetweenCustomDelimiters = Pattern.compile(CUSTOM_DELIMITER_START + "(.*?)" + CUSTOM_DELIMITER_END);
 
     private final List<String> delimiters;
     private final String customDelimiter;
@@ -40,31 +35,32 @@ public class Delimiters {
         return !customDelimiter.isEmpty();
     }
 
-
-    public String generateRegexForDefaultDelimiters() {
-        return LEFT_BRACKET + regexForDefault() + RIGHT_BRACKET;
+    public Pattern getCustomDelimiterPattern() {
+        return Pattern.compile("^[0-9]+([" + regexForDefault() + OR_OPERATOR + customDelimiter + "][0-9]+)*$");
     }
-
-    public String generateRegexForCustomDelimiter() {
-        return LEFT_BRACKET + regexForDefault() + OR_OPERATOR + customDelimiter + RIGHT_BRACKET;
+    public Pattern getDefaultDelimiterPattern() {
+        return Pattern.compile("^[0-9]+([" + regexForDefault() + "][0-9]+)*$");
     }
-
-    /**
-     * 커스텀 구분자를 포함한 문자열의 유효성 검사를 위한 정규 표현식 생성
-     * - 커스텀 구분자를 이용해 숫자 패턴이 맞는지 검사
-     * @return 숫자 패턴을 포함한 정규 표현식
-     */
-    public String regexForCustomPattern() {
-        return STARTS_WITH + NUMBER_ONE_OR_MORE + GROUP_START + generateRegexForCustomDelimiter() + NUMBER_ONE_OR_MORE + GROUP_END + ZERO_OR_MORE_AT_END;
+    public Pattern getDefaultDelimiterForSplit() {
+        return Pattern.compile("[" + regexForDefault()+ "]");
+    }
+    public Pattern getCustomDelimiterForSplit() {
+        return Pattern.compile("[" + regexForDefault() + OR_OPERATOR + customDelimiter + "]");
     }
 
     /**
-     * 기본 구분자만 사용하는 문자열의 유효성 검사를 위한 정규 표현식 생성
-     * - 기본 구분자를 이용해 숫자 패턴이 맞는지 검사
-     * @return 숫자 패턴을 포함한 정규 표현식
+     * 커스텀 구분자가 있는지 판단하는 메서드
+     * - "//"로 시작하고 구분자 정의 후 "\n"이 포함된 형식인지를 검사
+     * @param input 사용자 입력 문자열
+     * @return 커스텀 구분자가 있으면 true 반환
      */
-    public String regexForDefaultPattern() {
-        return STARTS_WITH + NUMBER_ONE_OR_MORE + GROUP_START + generateRegexForDefaultDelimiters() + NUMBER_ONE_OR_MORE + GROUP_END  + ZERO_OR_MORE_AT_END;
+    private boolean isCustomDelimiterPresent(String input) {
+        return isCustomDelimiterPresent.matcher(input).matches();
+    }
+
+
+    private String regexForDefault() {
+        return String.join(OR_OPERATOR, delimiters);
     }
 
 
@@ -76,8 +72,10 @@ public class Delimiters {
      */
     private String getCustomDelimiter(String input) {
         if(isCustomDelimiterPresent(input)){
-            String[] customString = input.split(CUSTOM_DELIMITER_START + OR_OPERATOR + CUSTOM_DELIMITER_END);
-            return customString[1];
+            Matcher matcher = splitBetweenCustomDelimiters.matcher(input);
+            if (matcher.find()) {
+                return matcher.group(1);
+            }
         }
         return "";
     }
@@ -92,18 +90,4 @@ public class Delimiters {
         }
     }
 
-    /**
-     * 커스텀 구분자가 있는지 판단하는 메서드
-     * - "//"로 시작하고 구분자 정의 후 "\n"이 포함된 형식인지를 검사
-     * @param input 사용자 입력 문자열
-     * @return 커스텀 구분자가 있으면 true 반환
-     */
-    private boolean isCustomDelimiterPresent(String input) {
-        return input.matches(STARTS_WITH + CUSTOM_DELIMITER_START + NON_ALPHANUMERIC_CHARACTER + CUSTOM_DELIMITER_END + ANY_FOLLOWING_CHARACTERS);
-    }
-
-
-    private String regexForDefault() {
-        return String.join(OR_OPERATOR, delimiters);
-    }
 }

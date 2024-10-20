@@ -2,6 +2,8 @@ package calculator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static calculator.AppConfig.CUSTOM_DELIMITER_END;
 
@@ -55,22 +57,22 @@ public class Classifier {
             return List.of(0);
         }
         if(!delimiters.isCustomDelimiterPresent()) {
-            return splitAndConvertInput(input, delimiters.generateRegexForDefaultDelimiters());
+            return splitAndConvertInput(input, delimiters.getDefaultDelimiterForSplit());
         }
-        return splitAndConvertInput(getExcludedString(input), delimiters.generateRegexForCustomDelimiter());
+        return splitAndConvertInput(getExcludedString(input), delimiters.getCustomDelimiterForSplit());
     }
 
     /**
      * 문자열을 구분자로 나누고 숫자로 변환
      * - 이 함수의 기능이 너무 많지 않은지 한번 더 생각해봐야 함
      * @param input 입력 문자열
-     * @param delimiter 구분자 (정규 표현식)
+     * @param pattern 컴파일 된 Pattern 객체
      * @return 숫자로 변환된 리스트
      */
-    private List<Integer> splitAndConvertInput(String input, String delimiter) {
-        String[] numbersString = input.split(delimiter);
+    private List<Integer> splitAndConvertInput(String input, Pattern pattern) {
+        String[] numberStrings = pattern.split(input);
         List<Integer> numbersInteger = new ArrayList<>();
-        for (String number : numbersString) {
+        for(String number : numberStrings) {
             numbersInteger.add(Integer.parseInt(number));
         }
         return numbersInteger;
@@ -82,7 +84,9 @@ public class Classifier {
      * @param input 입력 문자열
      */
     private void isCustomStringValid(String input) {
-        if(!getExcludedString(input).matches(delimiters.regexForCustomPattern())) {
+        String excludedString = getExcludedString(input);
+        Matcher matcher = delimiters.getCustomDelimiterPattern().matcher(excludedString);
+        if(!matcher.matches()) {
             throw new IllegalArgumentException("Invalid custom delimiter");
         }
     }
@@ -93,7 +97,8 @@ public class Classifier {
      * @return 커스텀 구분자를 제외한 문자열
      */
     private String getExcludedString(String input) {
-        return input.split(CUSTOM_DELIMITER_END)[1];
+        Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_END);
+        return pattern.split(input)[1];
     }
 
     /**
@@ -102,7 +107,8 @@ public class Classifier {
      * @param input 입력 문자열
      */
     private void isStringValid(String input) {
-        if(!input.isEmpty() && !input.matches(delimiters.regexForDefaultPattern())) {
+        Matcher matcher = delimiters.getDefaultDelimiterPattern().matcher(input);
+        if(!input.isEmpty() && !matcher.matches()) {
             throw new IllegalArgumentException("Invalid string");
         }
     }
