@@ -6,21 +6,17 @@ import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
-        try{
-            System.out.println("덧셈할 문자열을 입력해 주세요.");
-            String input = Console.readLine();
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        String input = Console.readLine();
 
-            String[] result = extractCustomDelimiter(input);
-            String delimiter = result[0];
-            String numberString = result[1];
+        String[] result = extractCustomDelimiter(input);
+        String delimiter = result[0];
+        String numberString = result[1];
 
-            List<Integer> numbers = parseNumbers(numberString, delimiter);
-            int sum = add(numbers);
+        List<Integer> numbers = parseNumbers(numberString, delimiter);
+        int sum = add(numbers);
 
-            System.out.println("결과 : " + sum);
-        } catch (IllegalArgumentException e){
-            System.out.println(e.getMessage());
-        }
+        System.out.println("결과 : " + sum);
     }
 
     public static String[] extractCustomDelimiter(String input) {
