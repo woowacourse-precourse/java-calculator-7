@@ -19,6 +19,7 @@ calculator/
  ├── Application.java           # 애플리케이션 시작
  ├── calculator/                
  │    ├── Calculator.java       # 계산기 로직 처리
+ │    ├── Input.java            # 입력값과 구분자 처리
  │    └── StringParsing.java    # 문자열 파싱 기능
  ├── io/ 
  │    ├── InputString.java      # 사용자 입력 기능
