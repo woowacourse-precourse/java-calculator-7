@@ -8,7 +8,7 @@ public class CalculatorInput {
     private CalculatorInput() {
     }
 
-    public static String getString() {
+    public static String getLine() {
         System.out.println(WELCOME_MESSAGE);
 
         String line = "";
