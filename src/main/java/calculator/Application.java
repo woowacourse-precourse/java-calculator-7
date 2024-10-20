@@ -67,6 +67,13 @@ public class Application {
         }
     }
 
+    // 입력에 공백이 있는지 확인하는 함수
+    public static void validateBlankInput(String input) {
+        if(input.contains(" ")) {
+            throw new IllegalArgumentException("문자열에 공백이 포함되어 있습니다.");
+        }
+    }
+
     public static void main(String[] args) {
         init();
         input();
@@ -77,5 +84,6 @@ public class Application {
         };
         validateBasicSeparator(userInput);
         validateEndWithNumber(userInput);
+        validateBlankInput(userInput);
     }
 }
