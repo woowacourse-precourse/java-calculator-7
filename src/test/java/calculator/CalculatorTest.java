@@ -3,6 +3,8 @@ package calculator;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import calculator.delimiter.handler.factory.DelimiterHandlerFactory;
+import java.math.BigInteger;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -35,5 +37,17 @@ class CalculatorTest {
         assertThat(calculator.sum(s8)).isEqualTo(15);
         assertThat(calculator.sum(s9)).isEqualTo(15);
         assertThat(calculator.sum(s10)).isEqualTo(7);
+    }
+
+    @Test
+    @DisplayName("int형 범위를 넘어가는 문자열의 합을 구할 수 있다..")
+    void calculate_sum_with_over_integer() {
+        List<String> list = List.of("123456789012345678901234567890", "9");
+
+        BigInteger ret = list.stream()
+                .map(BigInteger::new)
+                .reduce(BigInteger.ZERO, BigInteger::add);
+
+        assertThat(ret).isEqualTo(new BigInteger("123456789012345678901234567899"));
     }
 }

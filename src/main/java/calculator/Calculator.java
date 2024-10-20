@@ -2,6 +2,7 @@ package calculator;
 
 import calculator.delimiter.handler.DelimiterHandler;
 import calculator.delimiter.handler.factory.DelimiterHandlerFactory;
+import java.math.BigInteger;
 
 public class Calculator {
     private final DelimiterHandlerFactory factory;
@@ -10,11 +11,11 @@ public class Calculator {
         this.factory = factory;
     }
 
-    public Integer sum(String str) {
+    public BigInteger sum(String str) {
         DelimiterHandler handler = factory.getHandler(str);
 
-        return handler.split(str)
-                .parallelStream().mapToInt(Integer::parseInt)
-                .sum();
+        return handler.split(str).parallelStream()
+                .map(BigInteger::new)
+                .reduce(BigInteger.ZERO, BigInteger::add);
     }
 }
