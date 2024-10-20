@@ -6,31 +6,37 @@ import calculator.delimiterExtractor.DelimiterExtractor;
 import calculator.numberExtractor.CustomNumberExtractor;
 import calculator.numberExtractor.DefaultNumberExtractor;
 import calculator.numberExtractor.NumberExtractor;
+import calculator.validator.Validator;
 import java.util.HashMap;
 
 public class ExtractorProvider {
 
-    private final static HashMap<String, DelimiterExtractor> delimiterExtractorMappingMap = new HashMap<>();
-    private final static HashMap<String, NumberExtractor> numberExtractorMappingMap = new HashMap<>();
 
-    static {
-        initExtractorMappingMap();
+    private Validator validator;
+
+
+    public ExtractorProvider(Validator validator) {
+        this.validator = validator;
+        initExtractorMappingMap(validator);
     }
 
-    public static void initExtractorMappingMap() {
-        delimiterExtractorMappingMap.put("CustomInput", new CustomDelimiterExtractor());
-        delimiterExtractorMappingMap.put("DefaultInput", new DefaultDelimiterExtractor());
-        numberExtractorMappingMap.put("CustomInput", new CustomNumberExtractor());
-        numberExtractorMappingMap.put("DefaultInput", new DefaultNumberExtractor());
+    public void initExtractorMappingMap(Validator validator) {
+        ExtractorMappingMap.putDelimiterExtractor("CustomInput", new CustomDelimiterExtractor());
+        ExtractorMappingMap.putDelimiterExtractor("DefaultInput", new DefaultDelimiterExtractor());
+        ExtractorMappingMap.putNumberExtractor("CustomInput", new CustomNumberExtractor(validator));
+        ExtractorMappingMap.putNumberExtractor("DefaultInput", new DefaultNumberExtractor(validator));
+
     }
 
-    public static DelimiterExtractor getDelimiterExtractor(String type) {
+    public DelimiterExtractor getDelimiterExtractor(String type) {
+        HashMap<String, DelimiterExtractor> delimiterExtractorMappingMap = ExtractorMappingMap.getDelimiterExtractorMappingMap();
         return delimiterExtractorMappingMap.get(type);
 
     }
 
 
-    public static NumberExtractor getNumberExtractor(String type) {
+    public NumberExtractor getNumberExtractor(String type) {
+        HashMap<String, NumberExtractor> numberExtractorMappingMap = ExtractorMappingMap.getNumberExtractorMappingMap();
         return numberExtractorMappingMap.get(type);
 
     }
