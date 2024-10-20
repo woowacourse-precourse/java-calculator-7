@@ -1,5 +1,8 @@
 package calculator.model;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class InputText {
     private final Delimiter delimiter;
     private final PlainText plainText;
@@ -8,6 +11,13 @@ public class InputText {
         this.delimiter = new Delimiter(delimiter);
         this.plainText = new PlainText(text);
         validateAfterInitialize(this.delimiter, this.plainText);
+    }
+
+    public List<Integer> tokenize() {
+        return Arrays.stream(plainText.getValue().split(delimiter.getValue()))
+                .filter(string -> !string.isEmpty())
+                .map(Integer::parseInt)
+                .toList();
     }
 
     private void validateAfterInitialize(Delimiter delimiter, PlainText plainText) {
