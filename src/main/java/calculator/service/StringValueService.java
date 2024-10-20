@@ -1,46 +1,37 @@
 package calculator.service;
 
-import calculator.domain.Value;
+import calculator.domain.Separator;
+import calculator.domain.StringValue;
 
-public class ValueService {
+public class StringValueService {
 
-    public static void saveOriginalString(String userInput){
-        new StringValue();
+    public static StringValue saveOriginalString(String userInput){
+        return new StringValue(userInput);
     }
 
-    public static void separateInputString(){
-        String separators = SeparatorService.getSeparators();
-
-        String originalValue = getOriginalInput();
-        String[] parts = originalValue.split(separators);
-
-        saveParts(parts);
-    }
-
-    public static String getOriginalInput(){
-        return Value.getOriginalInput();
-    }
-
-    public static void saveParts(String[] parts){
-        Value.saveParts(parts);
-    }
-
-    public static void removeMarking(){
-        String originalInput = getOriginalInput();
-        String changedInput = originalInput.substring(5);
-        Value.setOriginalValue(changedInput);
-    }
-
-    public static String[] getSeparatedValue(){
-        return Value.getSeparatedValue();
-    }
-
-    public static boolean isEmpty(){
-        String originalValue = Value.getOriginalInput();
-        if(originalValue.isBlank()||originalValue==null){
+    public static boolean isEmpty(StringValue stringValue){
+        if(stringValue.getOriginalValue().isBlank() || stringValue.getOriginalValue() == null){
             return true;
         }else{
             return false;
         }
+    }
+
+    public static String[] separateInputString(StringValue stringValue, Separator separator){
+        String separators = separator.getSeparators();
+        String originalValue = stringValue.getOriginalValue();
+
+        String[] separatedValue = originalValue.split(separators);
+
+        saveSeparatedValue(stringValue, separatedValue);
+        return stringValue.getSeparatedValue();
+    }
+
+    public static void removeMarking(StringValue stringValue){
+        stringValue.removeMarking();
+    }
+
+    private static void saveSeparatedValue(StringValue stringValue, String[] separatedValue){
+        stringValue.saveSeparatedValue(separatedValue);
     }
 }
