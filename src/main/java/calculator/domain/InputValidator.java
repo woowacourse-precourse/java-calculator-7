@@ -9,11 +9,12 @@ public class InputValidator {
     }
 
 
-    public static void validateOnlyDigits(String number) {
+    public static void validateOnlyDigits(String input) {
         try {
-            Integer.parseInt(number);
+            Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Number must be an integer");
+            throw new IllegalArgumentException(
+                    "Input must be a string consisting of a delimiter and a positive number.");
         }
     }
 
