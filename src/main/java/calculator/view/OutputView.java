@@ -6,5 +6,6 @@ public class OutputView {
 
     public void output(int sum){
         System.out.printf("%s %d", OUTPUT_MESSAGE, sum);
+        System.out.println();
     }
 }

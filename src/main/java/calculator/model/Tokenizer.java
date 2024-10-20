@@ -38,6 +38,10 @@ public class Tokenizer {
             if (!isNumeric(token)) {
                 throw new IllegalArgumentException();
             }
+            int number = Integer.parseInt(token);
+            if (number < 0) {
+                throw new IllegalArgumentException("음수 값은 허용되지 않습니다: " + token);
+            }
             numbers.add(Integer.parseInt(token));
         }
 
