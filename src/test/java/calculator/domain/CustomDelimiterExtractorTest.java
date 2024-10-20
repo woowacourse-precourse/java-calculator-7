@@ -29,9 +29,10 @@ class CustomDelimiterExtractorTest {
         assertThat(customDelimiter).isEqualTo(expectedDelimiter);
     }
 
-    @DisplayName("문자열 앞부분은 \"//\"로 시작하지만 \"\\n\" 로 끝나지 않으면 WRONG_CUSTOM_DELIMITER_FORMAT 예외가 발생한다.")
+    @DisplayName("문자열 앞부분은 \"//\"로 시작하지 않거나, \"\\n\" 로 끝나지 않으면 WRONG_CUSTOM_DELIMITER_FORMAT 예외가 발생한다.")
     @ParameterizedTest
-    @ValueSource(strings = {"//|\\t1|2|3", "//|1|2|3", "//|\n1|2|3", "//|n1|2|3", "//|\\1|2|3"})
+    @ValueSource(strings = {"/%\\n1%2%3", " \\\\^\\n1^2^3", "/;\\n1;2;3",
+            "//|\\t1|2|3", "//|1|2|3", "//|\n1|2|3", "//|n1|2|3", "//|\\1|2|3"})
     void throwsExceptionWhenCustomDelimiterFormatIsWrong(String stringWithDelimiter) {
         //given
         //when
