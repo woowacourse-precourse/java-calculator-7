@@ -3,12 +3,6 @@ import java.util.Scanner;
 
 public class Application {
     public static void main(String[] args) {
-        /**
-         * 기능
-         * 1. 기본조건: , 와 ; 처리
-         * 2. 커스텀 구분자 ex)//,\n
-         * 3. 예외처리: IllegalArgumentException 발생 후 종료
-         */
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("덧셈할 문자열을 입력해 주세요.\n");
@@ -18,7 +12,7 @@ public class Application {
             final String input = scanner.nextLine();
             int result = makeCalculation(input);
             printResult(result);
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             return;
         } finally {
             scanner.close();
@@ -32,16 +26,25 @@ public class Application {
         String Num = "";
 
         while (i != input.length()) {
-            char curNum = input.charAt(i);
+            char curVal = input.charAt(i);
 
-            if(curNum >= '0' && curNum <= '9') {
-               Num += Character.toString(curNum);
-            } else if(curNum == ',' || curNum == ':') {
+            if(curVal >= '0' && curVal <= '9') {
+               Num += Character.toString(curVal);
+            } else if(curVal == ',' || curVal == ':') {
                 sum += Integer.parseInt(Num);
                 Num = "";
+            } else if(curVal == '/'){
+                char nxtVal = input.charAt(i+1);
+                if(nxtVal == '/'){
+                    find_escapeN();
+                } else{
+                    throw new IllegalArgumentException();
+                }
+
+            } else{
+                throw new IllegalArgumentException();
             }
             ++i;
-            //2. 만약, "/나올시 //?\n인지 탐색"
         }
 
         sum += Integer.parseInt(Num); //마지막 숫자
@@ -49,10 +52,12 @@ public class Application {
     }
 
 
-    static void printResult(int result){
+    public static void printResult(int result){
         System.out.println("결과 : " + result);
     }
-    //git commit -am "테스트"
-}
 
+    public static void find_escapeN() {
+        //\n을 찾는 알고리즘
+    }
+}
 
