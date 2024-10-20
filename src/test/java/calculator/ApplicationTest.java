@@ -41,6 +41,13 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 정수_범위를_넘는_경우() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("999999999:999999999999"))
+                        .isInstanceOf(IllegalArgumentException.class));
+    }
+
+    @Test
     void 커스텀_등록_문자열_시작_위치_오류() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("3//:\\n3:2,1"))
