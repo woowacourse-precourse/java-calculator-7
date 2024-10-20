@@ -44,7 +44,7 @@ class CalculatorServiceTest {
         assertEquals("구분자가 적절하지 않습니다", exception.getMessage());
     }
 
-    @DisplayName("글자 입력이 들어오면, 에러 발생")
+    @DisplayName("구분자 이외의 글자 입력이 들어오면, 에러 발생")
     @ParameterizedTest
     @CsvSource({
             "'1a2,3'",    // 영어 'a'가 구분자로 들어온 경우
@@ -120,6 +120,22 @@ class CalculatorServiceTest {
         assertEquals("잘못된 형식입니다. 커스텀 구분자 뒤에 '\\n'이 있어야 합니다.", exception.getMessage());
     }
 
+    @DisplayName("숫자가 커스텀 구분자로 사용되면 IllegalArgumentException 발생")
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "//1\n1,2,3",  // 숫자 '1'이 커스텀 구분자로 사용됨
+            "//2\n2,3,4",  // 숫자 '2'가 커스텀 구분자로 사용됨
+            "//3\n3:4:5",  // 숫자 '3'이 커스텀 구분자로 사용됨
+    })
+    void add_withNumberAsCustomDelimiter_throwsException(String input) {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            CalculatorService.add(input);
+        });
+
+        // 예외 메시지가 예상된 것과 일치하는지 확인
+        assertEquals("숫자는 커스텀 구분자로 사용할 수 없습니다", exception.getMessage());
+    }
+
     @DisplayName("커스텀 구분자에 대한 성공 로직 테스트")
     @ParameterizedTest
     @CsvSource({
@@ -184,5 +200,6 @@ class CalculatorServiceTest {
         // 결과가 기대한 숫자와 일치해야 함
         assertEquals(expected, result);
     }
+
 
 }

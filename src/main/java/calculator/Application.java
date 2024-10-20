@@ -1,7 +1,10 @@
 package calculator;
 
+import calculator.interfaces.CalculateRequest;
+
 public class Application {
+
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        CalculateRequest.add();
     }
 }
