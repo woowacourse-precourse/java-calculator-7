@@ -23,7 +23,6 @@ public class Calculator {
     public void run(){
         inputView.showStartMessage();
         String inputValue = inputView.getInput();
-        System.out.println(inputValue);
         if(separator.isExistCustomSeparator(inputValue)){
             inputValue = separator.processCustomSeparator(inputValue);
         }

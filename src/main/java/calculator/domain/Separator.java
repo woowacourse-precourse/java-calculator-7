@@ -3,11 +3,12 @@ package calculator.domain;
 import java.util.*;
 import java.util.regex.Pattern;
 
-import static calculator.constant.Constant.DEFAULT_SEPARATOR_COLON;
-import static calculator.constant.Constant.DEFAULT_SEPARATOR_COMMA;
 
 
 public class Separator {
+    public static final String DEFAULT_SEPARATOR_COMMA = ",";
+    public static final String DEFAULT_SEPARATOR_COLON = ":";
+
     private String customSeparator = null;
 
     public String processCustomSeparator(String inputValue){

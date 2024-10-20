@@ -2,9 +2,9 @@ package calculator.view;
 
 import camp.nextstep.edu.missionutils.Console;
 
-import static calculator.constant.Constant.START_MESSAGE;
-
 public class InputView {
+    public static final String START_MESSAGE = "덧셈할 문자열을 입력해 주세요.";
+
     public void showStartMessage(){
         System.out.println(START_MESSAGE);
     }
