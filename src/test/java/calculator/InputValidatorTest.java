@@ -42,4 +42,13 @@ class InputValidatorTest {
                 .hasMessage("잘못된 형식의 입력입니다.");
     }
 
+    @Test
+    void 커스텀_구분자_형식_검증_테스트() {
+        String input = "//;\n1:2;3";
+
+        assertThatThrownBy(() -> inputValidator.validateInput(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("잘못된 커스텀 구분자 형식입니다.");
+    }
+
 }
