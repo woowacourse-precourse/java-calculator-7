@@ -51,32 +51,47 @@ public class Application {
     // 문자열을 구분자로 구분해주는 메서드
     private static List<Integer> splitByDelimiter(String delimiter, String str) {
         String[] splitedStringList = str.split("[" + Pattern.quote(delimiter) + ",:]");
-
-        List<Integer> intList = new ArrayList<>();
-
-        try {
-            for (String strNum : splitedStringList){
-                int intNum = Integer.parseInt(strNum);
-                intList.add(intNum);
-            }
-        } catch (NumberFormatException e){
-            throw new IllegalArgumentException("구분자를 올바르게 입력하세요.");
-        }
-
-        return intList;
+        return convertToOperand(splitedStringList);
     }
 
     // 합을 구하는 메서드
-    public static int calculate(List<Integer> intList){
+    public static int calculate(List<Integer> operands){
         int sum = 0;
-
-        for (int num : intList){
-            if (num > 0){
-                sum += num;
-            }
-            throw new IllegalArgumentException("양수만 입력해 주세요.");
+        for (Integer operand : operands) {
+            sum+=operand;
         }
 
         return sum;
+    }
+
+    // 피연산자로 변환 하는 메서드
+    private static List<Integer> convertToOperand(String[] operands){
+        List<Integer> numbers = convertToDigit(operands);
+        validatePositive(numbers);
+
+        return numbers;
+    }
+
+    // 숫자로 변환하는 메서드
+    private static List<Integer> convertToDigit(String[] operands){
+        List<Integer> numbers = new ArrayList<>();
+
+        for (String operand : operands) {
+            try {
+                numbers.add(Integer.valueOf(operand));
+            } catch (NumberFormatException e){
+                throw new IllegalArgumentException("피연산자는 숫자만 가능합니다.");
+            }
+        }
+        return numbers;
+    }
+
+    // 양수 검증 메서드
+    private static void validatePositive(List<Integer> numbers){
+        for (Integer number : numbers) {
+            if (number <= 0 ){
+                throw  new IllegalArgumentException("양수만 가능합니다.");
+            }
+        }
     }
 }
