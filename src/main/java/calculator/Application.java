@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
+import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     static String[] setDelimiter( String input ){
@@ -61,16 +62,12 @@ public class Application {
 
     public static void main(String[] args) {
         int result = 0;
-        try{
-            BufferedReader bufferedReader = new BufferedReader( new InputStreamReader( System.in ) );
-            System.out.println( "덧셈할 문자열을 입력해 주세요." );
-            String input = bufferedReader.readLine();
-            if( !validateInput( input ) ) throw new IllegalArgumentException();
-            String[] delimiterList = setDelimiter( input );
-            int[] numbers = getNumbers( input, delimiterList );
-            result = sum( numbers );
-            System.out.println( "결과 : " + result );
-            bufferedReader.close();
-        } catch (IOException e ){e.printStackTrace();}
+        System.out.println( "덧셈할 문자열을 입력해 주세요." );
+        String input = Console.readLine();
+        if( !validateInput( input ) ) throw new IllegalArgumentException();
+        String[] delimiterList = setDelimiter( input );
+        int[] numbers = getNumbers( input, delimiterList );
+        result = sum( numbers );
+        System.out.println( "결과 : " + result );
     }
 }
