@@ -203,6 +203,14 @@ public class FunctionTest extends NsTest {
         );
     }
 
+    @Test
+    void 커스텀_구분자_테스트_예외_7() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1//**\\n1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
 
     @Override
     public void runMain() {

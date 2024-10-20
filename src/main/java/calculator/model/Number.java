@@ -2,10 +2,10 @@ package calculator.model;
 
 import calculator.util.Validations;
 
-public class InputNumber {
+public class Number {
     private String number;
 
-    public InputNumber() {
+    public Number() {
         this.number = "";
     }
 
@@ -21,7 +21,7 @@ public class InputNumber {
         this.number = "";
     }
 
-    public void validate() {
+    public void validateNumber() {
         Validations.validatePositiveNumber(number);
         Validations.validateNumberMaxLength(number);
     }

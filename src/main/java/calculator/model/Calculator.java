@@ -5,16 +5,16 @@ import static calculator.util.Constants.*;
 public class Calculator {
     private String inputValue;
     private int sum;
-    private InputNumber inputNumber;
-    private InputDelimiter inputDelimiter;
+    private Number number;
+    private Delimiter delimiter;
 
     public Calculator(String inputValue, RegDelimiter regDelimiter) {
         this.inputValue = inputValue.substring(
                 regDelimiter.getCustomDeliEndIdx() + 1
         );
         this.sum = 0;
-        this.inputNumber = new InputNumber();
-        this.inputDelimiter = new InputDelimiter(regDelimiter);
+        this.number = new Number();
+        this.delimiter = new Delimiter(regDelimiter);
     }
 
     public void calculate() {
@@ -42,20 +42,20 @@ public class Calculator {
     }
 
     private void calculateNumber(String value) {
-        if (inputNumber.isNotStarted()) {
-            inputDelimiter.validate();
-            inputDelimiter.initDelimiter();
+        if (number.isNotStarted()) {
+            delimiter.validateDelimiter();
+            delimiter.initDelimiter();
         }
-        inputNumber.addNumber(value);
+        number.addNumber(value);
     }
 
     private void calculateDelimiter(String value) {
-        if (inputDelimiter.isNotStarted()) {
-            inputNumber.validate();
-            addNumberToSum(inputNumber.getNumberToInt());
-            inputNumber.initNumber();
+        if (delimiter.isNotStarted()) {
+            number.validateNumber();
+            addNumberToSum(number.getNumberToInt());
+            number.initNumber();
         }
-        inputDelimiter.updateDelimiter(value);
+        delimiter.updateDelimiterAndMode(value);
     }
 
     private void addNumberToSum(int number) {
@@ -63,20 +63,20 @@ public class Calculator {
     }
 
     private void calculateLastInputValue() {
-        inputDelimiter.validate();
-        inputNumber.validate();
-        addNumberToSum(inputNumber.getNumberToInt());
+        delimiter.validateDelimiter();
+        number.validateNumber();
+        addNumberToSum(number.getNumberToInt());
     }
 
-    public InputDelimiter getInputDelimiter() {
-        return inputDelimiter;
+    public Delimiter getInputDelimiter() {
+        return delimiter;
     }
 
     public int getSum() {
         return sum;
     }
 
-    public InputNumber getInputNumber() {
-        return inputNumber;
+    public Number getInputNumber() {
+        return number;
     }
 }

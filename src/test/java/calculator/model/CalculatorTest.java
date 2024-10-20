@@ -33,9 +33,9 @@ public class CalculatorTest {
         Calculator calculator = new Calculator(testString, defaultRegDelimiter);
 
         calculator.calculate();
-        InputDelimiter inputDelimiter = calculator.getInputDelimiter();
+        Delimiter delimiter = calculator.getInputDelimiter();
 
-        assertThat(inputDelimiter.getDelimiter()).isEqualTo("");
+        assertThat(delimiter.getDelimiter()).isEqualTo("");
     }
 
     @DisplayName("등록되지 않은 구분자 다음에 숫자를 입력하면 예외를 발생시킨다.")
@@ -55,9 +55,9 @@ public class CalculatorTest {
         Calculator calculator = new Calculator(testString, defaultRegDelimiter);
 
         calculator.calculate();
-        InputNumber inputNumber = calculator.getInputNumber();
+        Number number = calculator.getInputNumber();
 
-        assertThat(inputNumber.getNumberToInt()).isEqualTo(0);
+        assertThat(number.getNumberToInt()).isEqualTo(0);
         assertThat(calculator.getSum()).isEqualTo(12);
     }
 

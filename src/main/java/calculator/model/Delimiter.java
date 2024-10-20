@@ -5,18 +5,18 @@ import static calculator.model.DelimiterMode.*;
 import calculator.util.Validations;
 import java.util.List;
 
-public class InputDelimiter {
+public class Delimiter {
     private String delimiter;
     private DelimiterMode mode;
     private List<String> regDelimiters;
 
-    public InputDelimiter(RegDelimiter regDelimiter) {
+    public Delimiter(RegDelimiter regDelimiter) {
         this.delimiter = "";
         this.mode = NONE;
         this.regDelimiters = regDelimiter.getDelimiters();
     }
 
-    public void updateDelimiter(String value) {
+    public void updateDelimiterAndMode(String value) {
         this.delimiter += value;
         if (isRegisteredDelimiter()) {
             updateMode(CORRECT);
@@ -47,7 +47,7 @@ public class InputDelimiter {
         return delimiter.isEmpty();
     }
 
-    public void validate() {
+    public void validateDelimiter() {
         Validations.validateCorrectDelimiter(mode);
     }
 
