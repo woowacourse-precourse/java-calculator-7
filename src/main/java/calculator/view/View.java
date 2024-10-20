@@ -1,4 +1,5 @@
 package calculator.view;
+
 import camp.nextstep.edu.missionutils.Console;
 
 public class View {
@@ -8,7 +9,7 @@ public class View {
         return Console.readLine();
     }
 
-    public void printCalculationResult(Integer result) {
+    public void printCalculateResult(Integer result) {
         System.out.printf("결과 : %d\n", result);
     }
 }
