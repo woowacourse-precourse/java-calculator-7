@@ -65,7 +65,7 @@
         - [ ] CalculatorController 생성 및 실행
     
 
-# 체크 목록
+# 추가 체크 목록
 
 - [ ] 결과값이 StackOverFlow 발생할 경우
 - [ ] 커스텀 구분자가 숫자일 경우
