@@ -42,7 +42,7 @@ public class InputValidatorTest{
   void 커스텀_구분자_길이_예외(){
     assertThatThrownBy(() -> validator.validateInput("//##\n1,2:3"))
         .isInstanceOf(IllegalArgumentException.class)
-        .hasMessageContaining("구분자는 한 글자여야 합니다.");
+        .hasMessageContaining(ErrorCode.CUSTOM_DELIMITER_LENGTH_ERROR.toString());
   }
 
   @Test
