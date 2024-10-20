@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.dto.CalculatorResultResponse;
 import calculator.dto.NumberRequest;
 
 import static camp.nextstep.edu.missionutils.Console.close;
@@ -14,5 +15,9 @@ public class CalculatorView {
         close();
 
         return new NumberRequest(word);
+    }
+
+    public void resultResponseMessage(CalculatorResultResponse response) {
+        System.out.println("결과 : " + response.sumResult());
     }
 }
