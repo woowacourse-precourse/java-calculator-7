@@ -19,7 +19,7 @@ public class CalculatorService {
         return sumBigIntegerArray(ExpressionParser.parseExpressionToBigIntegerArray(tokens));
     }
 
-    private String sumIntArray (int[] numbers) {
+    private String sumIntArray(int[] numbers) {
         int sum = 0;
         for (int number : numbers) {
             sum += number;
@@ -27,7 +27,7 @@ public class CalculatorService {
         return String.valueOf(sum);
     }
 
-    private String sumLongArray (long[] numbers) {
+    private String sumLongArray(long[] numbers) {
         long sum = 0;
         for (long number : numbers) {
             sum += number;
@@ -35,7 +35,7 @@ public class CalculatorService {
         return String.valueOf(sum);
     }
 
-    private String sumBigIntegerArray (BigInteger[] numbers) {
+    private String sumBigIntegerArray(BigInteger[] numbers) {
         BigInteger sum = BigInteger.ZERO;
         for (BigInteger number : numbers) {
             sum = sum.add(number);

@@ -5,7 +5,7 @@ import calculator.domain.NumberType;
 import java.math.BigInteger;
 
 public class ExpressionParser {
-    public static int[] parseExpressionToIntArray (String[] tokens) {
+    public static int[] parseExpressionToIntArray(String[] tokens) {
         int[] numbers = new int[tokens.length];
         try {
             for (int i = 0; i < tokens.length; i++) {
@@ -18,7 +18,7 @@ public class ExpressionParser {
         return numbers;
     }
 
-    public static long[] parseExpressionToLongArray (String[] tokens) {
+    public static long[] parseExpressionToLongArray(String[] tokens) {
         long[] numbers = new long[tokens.length];
         try {
             for (int i = 0; i < tokens.length; i++) {
@@ -31,7 +31,7 @@ public class ExpressionParser {
         return numbers;
     }
 
-    public static BigInteger[] parseExpressionToBigIntegerArray (String[] tokens) {
+    public static BigInteger[] parseExpressionToBigIntegerArray(String[] tokens) {
         BigInteger[] numbers = new BigInteger[tokens.length];
         try {
             for (int i = 0; i < tokens.length; i++) {
@@ -44,13 +44,13 @@ public class ExpressionParser {
         return numbers;
     }
 
-    public static String[] tokenizeExpression (Expression expression) {
+    public static String[] tokenizeExpression(Expression expression) {
         String expressionString = expression.getExpression();
         String delimiter = expression.getDelimiter();
         return expressionString.split(delimiter);
     }
 
-    public static NumberType getArrayType (String[] tokens) {
+    public static NumberType getArrayType(String[] tokens) {
         int maxValueSize = 0;
         for (String token : tokens) {
             maxValueSize = Math.max(maxValueSize, token.length());
