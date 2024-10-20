@@ -42,7 +42,7 @@ public class DelimiterParser {
         return DEFAULT_DELIMITER + "|" + String.join("|", customDelimiter.split(""));
     }
 
-    private boolean isNumeric(String str) {
-        return str.matches("\\d+");  // 숫자로만 이루어졌는지 확인
+    private boolean isNumeric(String delimiter) {
+        return delimiter.matches("\\d+");
     }
 }
