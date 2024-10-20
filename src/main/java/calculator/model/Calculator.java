@@ -58,6 +58,6 @@ public class Calculator {
     }
 
     private boolean isPositiveNumber(String number) {
-        return number.matches("[1-9]\\d*");
+        return number.matches("(0\\.\\d+|[1-9]\\d*(\\.\\d+)?)");
     }
 }
