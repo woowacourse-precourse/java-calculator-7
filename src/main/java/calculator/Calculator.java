@@ -41,12 +41,19 @@ public class Calculator {
      * 커스텀 구분자 추출
      */
     private char extractCustomDelimiter(String customInput) {
-        if (customInput.length() == 2 || Character.getNumericValue(customInput.charAt(2)) != -1) {
-            throw new IllegalArgumentException("커스텀 구분자는 숫자를 제외한 문자(기호)만 가능합니다.");
-        }
-        if (customInput.length() != 3) {
-            throw new IllegalArgumentException("커스텀 구분자로 한 개의 문자를 한번만 입력해주세요.");
+        if (customInput.length() > 3 || customInput.length() == 2 ||
+                Character.getNumericValue(customInput.charAt(2)) != -1) {
+            handleInvalidInput(customInput);
         }
         return customInput.charAt(2);
     }
+
+    /**
+     * 유효하지 않은 입력값 예외 처리
+     */
+    public static void handleInvalidInput(String input) {
+        System.out.println("유효하지 않은 문자열 입니다. 프로그램을 종료합니다.");
+        throw new IllegalArgumentException("Invalid input: " + input);
+    }
+
 }
