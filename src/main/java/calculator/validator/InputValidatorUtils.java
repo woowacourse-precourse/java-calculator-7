@@ -2,12 +2,11 @@ package calculator.validator;
 
 import java.util.List;
 
-public class InputValidator implements Validator{
+public class InputValidatorUtils {
 
-    @Override
-    public boolean hasNegativeValue(List<Integer> list) {
+    public static boolean hasNegativeValue(List<Integer> list) {
         for (Integer i : list) {
-            if(i < 0) {
+            if (i < 0) {
                 return false;
             }
         }
@@ -15,13 +14,11 @@ public class InputValidator implements Validator{
         return true;
     }
 
-    @Override
-    public boolean customDelimiterContains(String input) {
+    public static boolean customDelimiterContains(String input) {
         return input.startsWith("//");
     }
 
-    @Override
-    public boolean isSpecialDelimiter(String string) {
+    public static boolean isSpecialDelimiter(String string) {
         if (string.equals("\"") || string.equals("\'") || string.equals("\\") || string.equals("(") ||
                 string.equals(")") || string.equals("[") || string.equals("]") || string.equals("}") ||
                 string.equals("{") || string.equals("?") || string.equals("*") || string.equals("|")) {
