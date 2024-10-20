@@ -1,15 +1,15 @@
 package calculator.model;
 
+import calculator.util.ErrorMessage;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
-import calculator.util.ErrorMessage;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
-import java.util.List;
 
 @DisplayName("연산부분 테스트")
 class ArithmeticTest {
@@ -91,6 +91,7 @@ class ArithmeticTest {
     void arithmeticWithInvalidCount(String input){
         InputData inputData = new InputData(input);
         assertThatThrownBy(()->new Arithmetic(new DefaultDelimiter(), inputData))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.ARITHMETIC_LENGTH_LIMIT.getError());
     }
 }

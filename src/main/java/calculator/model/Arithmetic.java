@@ -38,8 +38,10 @@ public class Arithmetic {
 
     public void validateNumbers(List<Integer> numbers){
         if (numbers.size() > 30){
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.ARITHMETIC_LENGTH_LIMIT.getError());
         }
+
+
     }
 
     public List<Integer> splitArithmetic(Delimiter delimiter, String calculatorPart) {
