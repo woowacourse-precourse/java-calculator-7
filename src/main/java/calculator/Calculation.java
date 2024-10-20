@@ -13,8 +13,8 @@ public class Calculation {
 
         //숫자가 아닌 문자들은 공백으로 변환
         return Arrays.stream(parseredString)
-                .map(number -> number.replaceAll("[^0-9]", ""))
-                .filter(number -> !number.isEmpty())
+                .map(number -> number.replaceAll("[^0-9-]", ""))
+                .filter(number -> !number.isEmpty() && !number.equals("-"))
                 .toArray(String[]::new);
     }
 
@@ -25,7 +25,13 @@ public class Calculation {
         int result = 0;
 
         for (String exactNumber : exactNumbers) {
-            result += Integer.parseInt(exactNumber);
+            int beforeNumber = Integer.parseInt(exactNumber);
+
+            if (beforeNumber < 0) {
+                throw new IllegalArgumentException("음수는 허락되지 않습니다");
+            }
+
+            result += beforeNumber;
         }
 
         return result;
