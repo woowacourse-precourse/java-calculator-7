@@ -58,4 +58,4 @@
     -  합산이 끝난 값을 콘솔에 “결과 : `res`” 형식으로 표시한다.
 
 ## 플로우차트
-![calculator](https://github.com/user-attachments/assets/669813f8-983c-438b-8377-8b1a1326cb1a)
+![calculator](https://github.com/user-attachments/assets/2b9440fc-260e-4555-ba54-00de2edc6e85)
