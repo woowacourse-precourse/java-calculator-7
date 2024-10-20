@@ -13,11 +13,14 @@ public class NumberSeparator {
     private static final int EQUATION_POSITION = 2;
 
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("^//(.*?)\\\\n(.*?)$");
+    private static final Pattern ANTI_CUSTOM_DELIMITER_PATTERN = Pattern.compile(".+//(.*?)\\\\n.*");
 
     private final String equation;
     private final List<Delimiter> delimiters = new ArrayList<>();
 
     private NumberSeparator(String input) {
+        validateAntiCustomDelimiterPattern(input);
+
         delimiters.addAll(DefaultDelimiter.getDefaultDelimiter());
 
         Matcher matcher = getMatcher(input);
@@ -32,6 +35,13 @@ public class NumberSeparator {
 
     public static NumberSeparator from(String input) {
         return new NumberSeparator(input);
+    }
+
+    private void validateAntiCustomDelimiterPattern(String input) {
+        if (ANTI_CUSTOM_DELIMITER_PATTERN.matcher(input).matches()) {
+            throw new IllegalArgumentException(
+                    ErrorMessage.NUMBER_SEPARATOR_CUSTOM_DELIMITER_POSITION_FOREFRONT.getMessage());
+        }
     }
 
     private void validateNotDefaultDelimiter(Delimiter delimiter) {
