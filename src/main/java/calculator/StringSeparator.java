@@ -5,9 +5,8 @@ public class StringSeparator { //TODO: 구분자를 인식하고, 구분자로 �
         String separator = "[,:]";
         String refinedString = getRefinedInput(input);
         String[] refinedStringList = refinedString.split(separator);
-        if (!InputHandler.isValidInput(refinedStringList)) {
-            throw new IllegalArgumentException();
-        }
+        InputHandler.isValidInput(refinedStringList);
+
         return refinedStringList;
     }
 

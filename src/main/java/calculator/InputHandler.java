@@ -11,7 +11,7 @@ public class InputHandler { //TODO: 사용자의 입력이 올바른지 판단
         return expression == null || expression.isEmpty();
     }
 
-    public static boolean isValidInput(String[] input) {
+    public static void isValidInput(String[] input) {
         for (String s : input) {
             try {
                 if (Integer.parseInt(s) < 0) {
@@ -21,6 +21,5 @@ public class InputHandler { //TODO: 사용자의 입력이 올바른지 판단
                 throw new IllegalArgumentException();
             }
         }
-        return true;
     }
 }
