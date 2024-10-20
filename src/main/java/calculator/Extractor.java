@@ -4,6 +4,7 @@ import static calculator.Constant.BASIC_DELIMITER_1;
 import static calculator.Constant.BASIC_DELIMITER_2;
 import static calculator.Constant.CUSTOM_DELIMITER_END;
 import static calculator.Constant.CUSTOM_DELIMITER_START;
+import static calculator.Constant.INVALID_VALUE_IN_NUMBER_EXTRACTION;
 import static calculator.Constant.REGEX_PIPE_OPERATOR;
 
 import java.util.Arrays;
@@ -25,7 +26,7 @@ public class Extractor {
 
             // 커스텀 구분자가 숫자인 경우
             if (delimiter[2].matches("^\\d+$")) {
-                throw new IllegalArgumentException("숫자 추출에서 유효하지 않은 값이 검출되었습니다.");
+                throw new IllegalArgumentException(INVALID_VALUE_IN_NUMBER_EXTRACTION);
             }
 
             // 커스텀 구분자 필드 제거
