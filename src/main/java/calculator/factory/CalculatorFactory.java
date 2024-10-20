@@ -1,22 +1,22 @@
 package calculator.factory;
 
 import calculator.calculatorApplication.Calculator;
-import calculator.domain.calculation.InputValidator;
-import calculator.domain.calculation.NumberExtractor;
-import calculator.domain.calculation.NumberParser;
-import calculator.domain.calculation.StringCalculator;
-import calculator.domain.extractor.impl.DelimitedNumberExtractor;
-import calculator.domain.extractor.impl.NumberExtractorChain;
-import calculator.domain.extractor.impl.delimitedNumberExtractorImpl.CustomDelimiterNumberExtractor;
-import calculator.domain.extractor.impl.delimitedNumberExtractorImpl.StandardDelimiterNumberExtractor;
-import calculator.domain.parser.impl.StringCalculatorNumberParser;
-import calculator.domain.validator.impl.StringCalculatorValidator;
-import calculator.domain.validator.impl.ValidationRule;
-import calculator.domain.validator.impl.validationRule.BasicFormatValidationRule;
-import calculator.domain.validator.impl.validationRule.CompositeValidationRule;
-import calculator.domain.validator.impl.validationRule.CustomTokenFormatValidationRule;
-import calculator.domain.validator.impl.validationRule.EmptyInputValidationRule;
-import calculator.domain.validator.impl.validationRule.NullInputValidationRule;
+import calculator.calculatorApplication.domain.calculation.InputValidator;
+import calculator.calculatorApplication.domain.calculation.NumberExtractor;
+import calculator.calculatorApplication.domain.calculation.NumberParser;
+import calculator.calculatorApplication.domain.calculation.StringCalculator;
+import calculator.calculatorApplication.domain.extractor.impl.DelimitedNumberExtractor;
+import calculator.calculatorApplication.domain.extractor.impl.NumberExtractorChain;
+import calculator.calculatorApplication.domain.extractor.impl.delimitedNumberExtractorImpl.CustomDelimiterNumberExtractor;
+import calculator.calculatorApplication.domain.extractor.impl.delimitedNumberExtractorImpl.StandardDelimiterNumberExtractor;
+import calculator.calculatorApplication.domain.parser.impl.StringCalculatorNumberParser;
+import calculator.calculatorApplication.domain.validator.impl.StringCalculatorValidator;
+import calculator.calculatorApplication.domain.validator.impl.ValidationRule;
+import calculator.calculatorApplication.domain.validator.impl.validationRule.BasicFormatValidationRule;
+import calculator.calculatorApplication.domain.validator.impl.validationRule.CompositeValidationRule;
+import calculator.calculatorApplication.domain.validator.impl.validationRule.CustomTokenFormatValidationRule;
+import calculator.calculatorApplication.domain.validator.impl.validationRule.EmptyInputValidationRule;
+import calculator.calculatorApplication.domain.validator.impl.validationRule.NullInputValidationRule;
 import java.util.List;
 
 public class CalculatorFactory {

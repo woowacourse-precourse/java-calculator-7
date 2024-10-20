@@ -2,8 +2,8 @@ package calculator.factory;
 
 import calculator.calculatorApplication.InputReader;
 import calculator.calculatorApplication.OutputPrinter;
-import calculator.io.inputReader.ConsoleInputReader;
-import calculator.io.outputPrinter.ConsoleOutputPrinter;
+import calculator.calculatorApplication.io.inputReader.ConsoleInputReader;
+import calculator.calculatorApplication.io.outputPrinter.ConsoleOutputPrinter;
 
 public class IOFactory {
 
