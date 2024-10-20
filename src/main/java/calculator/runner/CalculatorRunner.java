@@ -29,31 +29,41 @@ public class CalculatorRunner {
             temp = addStringToCharSet(newSeparator);
         }
         String number = splitString(userInput);
+        if (temp.contains(number.charAt(0))) {
+            throw new IllegalArgumentException("입력은 구분자로 시작할 수 없습니다.");
+        }
         IOHelper.printResult(calculateSum(number,temp));
     }
 
     public int calculateSum(String inputString,Set<Character> newSeparator) {
         StringBuilder number = new StringBuilder();
-        int num = 0;
+        int sum = 0;
+        boolean lastCharWasSeparator = false;
+
         for (char ch : inputString.toCharArray()) {
             if (Character.isDigit(ch)) {
                 number.append(ch);
-                continue;
+                lastCharWasSeparator = false;
             } else if (newSeparator.contains(ch)) {
-                if (number.isEmpty()) {
+                if (lastCharWasSeparator) {
                     throw new IllegalArgumentException("구분자가 연속으로 들어왔습니다.");
                 }
-                num += Integer.parseInt(number.toString());
-                number = new StringBuilder();
-                continue;
+
+                if (number.length() > 0) {
+                    sum += Integer.parseInt(number.toString());
+                    number.setLength(0);
+                }
+                lastCharWasSeparator = true;
+            } else {
+                // 잘못된 구분자가 있는 경우 예외 발생
+                throw new IllegalArgumentException("잘못된 구분자입니다.");
             }
-            throw new IllegalArgumentException("잘못된 구분자.");
         }
 
-        if (!number.isEmpty()) {
-            num += Integer.parseInt(String.valueOf(number));
+        if (number.length() > 0) {
+            sum += Integer.parseInt(number.toString());
         }
 
-        return num;
+        return sum;
     }
 }
