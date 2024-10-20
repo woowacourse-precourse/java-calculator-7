@@ -32,13 +32,13 @@ public class Delimiter {
         return input.replaceAll(REGEX_NUMBER, EMPTY_TEXT);
     }
 
-    private Boolean isDuplicated(String value) {
+    private Boolean isDuplicated(final String value) {
         return Arrays.stream(value.split(EMPTY_TEXT))
                 .distinct()
                 .count() >= OPERATOR_DUPLICATE_VALUE;
     }
 
-    private String removeDuplication(String values) {
+    private String removeDuplication(final String values) {
         HashSet<String> set = new HashSet<>();
         for (String value : values.split(EMPTY_TEXT)) {
             set.add(value);
