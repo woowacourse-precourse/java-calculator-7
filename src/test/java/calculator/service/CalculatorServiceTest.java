@@ -83,6 +83,25 @@ class CalculatorServiceTest {
         assertEquals("음수는 허용되지 않습니다", exception.getMessage());
     }
 
+    @DisplayName("입력 문자열의 시작이 잘못되면, 에러 발생")
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "a1,2,3",       // 첫 글자가 문자
+            "#1,2,3",       // 첫 글자가 특수 문자
+            "@//;\n1;2;3",  // 커스텀 구분자가 아닌 특수 문자로 시작
+            " ,2,3",        // 공백으로 시작
+            ";1,2,3"        // 잘못된 특수 문자로 시작
+    })
+    void add_invalidStartingCharacter_throwsException(String input) {
+        // 문자열이 숫자나 "//"로 시작하지 않으면 IllegalArgumentException이 발생하는지 확인
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            CalculatorService.add(input);
+        });
+
+        // 예외 메시지가 예상된 것과 일치하는지 확인
+        assertEquals("잘못된 형식입니다. 숫자 또는 '//'로 시작해야 합니다.", exception.getMessage());
+    }
+
     @DisplayName("커스텀 구분자에 대한 성공 로직 테스트")
     @ParameterizedTest
     @CsvSource({
