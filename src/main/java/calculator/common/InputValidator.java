@@ -8,7 +8,7 @@ import static calculator.common.Constants.SLASH;
 public class InputValidator {
 
     public static Boolean isCustomSeparator (String input) {
-        return input.startsWith(SLASH) && input.charAt(DELIMITER_IDX) == DELIMITER;
+        return input.startsWith(SLASH) && input.startsWith(DELIMITER, DELIMITER_IDX);
     }
 
     public static Boolean isBasicSeparator (String input) {
