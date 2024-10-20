@@ -14,15 +14,6 @@ public class SeparatorManager {
         separators.add(DEFAULT_SEPARATOR_COLON);
     }
 
-    public Set<String> getSeparators() {
-        return separators;
-    }
-
-    public void save(String separatorCandidate) {
-        validate(separatorCandidate);
-        separators.add(separatorCandidate);
-    }
-
     public void validate(String separatorCandidate) {
         if (separatorCandidate == null || separatorCandidate.isEmpty()) {
             throw new IllegalArgumentException(ERROR_EMPTY_SEPARATOR);
@@ -48,5 +39,14 @@ public class SeparatorManager {
         if ((int) separator >= DIGIT_MIN && (int) separator <= DIGIT_MAX) {
             throw new IllegalArgumentException(ERROR_NUMERIC_SEPARATOR);
         }
+    }
+
+    public Set<String> getSeparators() {
+        return separators;
+    }
+
+    public void save(String separatorCandidate) {
+        validate(separatorCandidate);
+        separators.add(separatorCandidate);
     }
 }
