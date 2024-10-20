@@ -1,6 +1,7 @@
 package calculator.controller;
 
-import calculator.model.StringProcessor;
+import calculator.model.Delimiter;
+import calculator.model.StringCalculation;
 import calculator.view.InputView;
 import calculator.view.ResultView;
 
@@ -11,10 +12,11 @@ public class CalculationController {
         InputView inputView = new InputView();
         ResultView resultView = new ResultView();
 
-        StringProcessor stringProcessor = new StringProcessor();
+        StringCalculation stringCalculation = new StringCalculation();
+        Delimiter delimiter = new Delimiter();
 
-        String[] splitedString = stringProcessor.splitWithCustomDelimiter(inputView.inputString());
-        resultView.printResult(stringProcessor.calculate(splitedString));
+        String[] splitedString = delimiter.splitWithCustomDelimiter(inputView.inputString());
+        resultView.printResult(stringCalculation.calculate(splitedString));
 
     }
 
