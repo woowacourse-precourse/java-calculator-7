@@ -19,7 +19,6 @@ public class ValidationUtils {
     }
 
     public static void validateInput(String input, List<String> delimiters) {
-        validateDelimiterAbsent(input, delimiters);
         validateIncorrectDelimiterPosition(input, delimiters);
         validateConsecutiveDelimiters(input, delimiters);
     }
@@ -45,12 +44,6 @@ public class ValidationUtils {
         return numbers.stream()
                 .filter(number -> number <= 0)
                 .toList();
-    }
-
-    private static void validateDelimiterAbsent(String input, List<String> delimiters) {
-        if (delimiters.stream().noneMatch(input::contains)) {
-            throw new IllegalArgumentException("구분자가 없습니다. 입력값은 구분자를 포함한 형식의 문자열이어야 합니다");
-        }
     }
 
     private static void validateIncorrectDelimiterPosition(String input, List<String> delimiters) {

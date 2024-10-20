@@ -20,8 +20,8 @@ public class Calculator {
         }
 
         List<String> delimiters = buildDelimiters(input);
-        ValidationUtils.validateInput(input, delimiters);
         String numbers = extractNumbers(input, delimiters.size());
+        ValidationUtils.validateInput(numbers, delimiters);
 
         return sumNumbers(numbers.split(String.join("|", delimiters)));
     }
