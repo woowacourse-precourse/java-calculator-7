@@ -28,5 +28,7 @@ public class StringCalculator {
 			inputString = customDelimiterValidator.removeCustomDelimiter(inputString);
 		}
 		stringValidator.validate(inputString);
+		NumberExtractor numberExtractor = new NumberExtractor();
+		List<Integer> numbers = numberExtractor.extractNumbers(inputString);
 	}
 }
