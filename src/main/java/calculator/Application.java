@@ -14,7 +14,7 @@ public class Application {
     }
 
     public static int add(String userInput) {
-        if (userInput == null || userInput.trim().isEmpty()) {
+        if (isNullOrEmpty(userInput)) {
             return 0;
         }
         String[] numbers = userInput.split(",|:");
@@ -23,5 +23,9 @@ public class Application {
             sum += Integer.parseInt(number);
         }
         return sum;
+    }
+
+    private static boolean isNullOrEmpty(String userInput) {
+        return userInput == null || userInput.trim().isEmpty();
     }
 }
