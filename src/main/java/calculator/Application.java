@@ -2,6 +2,9 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Application {
     private static final String CUSTOM_SEPARATOR_START = "//";
     private static final String CUSTOM_SEPARATOR_END = "\\n";
@@ -17,6 +20,14 @@ public class Application {
         inputValidationCheck(userInput);
     }
 
+    public static Long[] getNumber(String userInput){
+        String regex = "[" + baseSeparator + "]";
+        return Arrays.stream(userInput.split(regex))
+                .map(s -> s.isEmpty() ? "0" : s)
+                .map(Long::parseLong)
+                .toArray(Long[]::new);
+    }
+
     public static void inputValidationCheck(String input){
         checkBlankExist(input);
         checkMinusExist(input);
@@ -30,6 +41,7 @@ public class Application {
         }
         containsOnlyDelimitersAndDigits(input);
         isEndWithDigit(input);
+        userInput = input;
     }
 
     public static boolean isEmptyInput(String input){
@@ -54,8 +66,10 @@ public class Application {
     }
 
     public static boolean checkCustomSeparatorExist(String input) {
+        if (!input.startsWith(CUSTOM_SEPARATOR_START)) return false;
+        if (input.length() < 5) return false;
         String customSeparatorEnd = input.substring(3,5);
-        return input.startsWith(CUSTOM_SEPARATOR_START) && customSeparatorEnd.equals(CUSTOM_SEPARATOR_END);
+        return customSeparatorEnd.equals(CUSTOM_SEPARATOR_END);
     }
 
     public static void checkBlankExist(String input){
