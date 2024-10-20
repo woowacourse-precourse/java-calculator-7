@@ -46,6 +46,9 @@ public class StringAddCalculator {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("입력한 숫자에 숫자가 아닌 값이 포함되어 있습니다.");
         }
+        if (num < 0) {
+            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+        }
         return num;
     }
 
