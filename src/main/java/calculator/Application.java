@@ -46,7 +46,11 @@ public class Application {
         String customDelimiter = customDelimiterMatcher.group(1);
         text = customDelimiterMatcher.group(2);
 
-        delimiters = delimiters + "|" + "\\Q" + customDelimiter + "\\E";
+        delimiters = "\\Q" + customDelimiter + "\\E" + "|" + delimiters;
+
+        System.out.println(customDelimiter);
+        System.out.println(text);
+        System.out.println(delimiters);
 
         return new String[]{text, delimiters};
     }
@@ -66,13 +70,10 @@ public class Application {
     }
 
     public static void validateArrElement(String s) {
-        try {
-            if (s.isBlank() || !Pattern.matches("^[0-9]*$", s)) {
-                throw new IllegalArgumentException();
-            }
-        } catch (IllegalArgumentException e) {
-            System.exit(1);
+        if (s.isBlank() || !Pattern.matches("^[0-9]*$", s)) {
+            throw new IllegalArgumentException();
         }
+
     }
 
 }
