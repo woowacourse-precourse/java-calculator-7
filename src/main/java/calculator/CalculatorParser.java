@@ -7,43 +7,60 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CalculatorParser {
-    public static final String DEFAULT_DELIMITER = ",:";
-    public static final Pattern CUSTOM_PATTERN = Pattern.compile("//(.*)(\n|\\\\n)(.*)");
+    public static final String DEFAULT_DELIMITER = "[,:]";
+    public static final Pattern CUSTOM_EMPTY_PATTERN = Pattern.compile("//\\\\n");
+    public static final Pattern CUSTOM_PATTERN = Pattern.compile("//(.+?)\\\\n.*");
+    public static final Pattern EXPRESSION_PATTERN = Pattern.compile("-?\\d(.*)");
     public static final Pattern POSITIVE_INTEGER_PATTERN = Pattern.compile("^\\d+$");
 
     public static List<Integer> parse(String text) {
-        Result result = getResult(text);
-        // 숫자로 변환
-        String regex = "[" + result.delimiter() + "]";
+        text = text.replaceAll("\n", "\\\\n");
+        String customDelimiter = extractCustomDelimiter(text);
+        String expression = extractExpression(text);
+        String regex = DEFAULT_DELIMITER + "|" + customDelimiter;
 
-        return Arrays.stream(result.text().split(regex))
-                .map(CalculatorParser::toInteger)
-                .toList();
+        if (expression == null) {
+            throw new CalculatorParsedException(CalculatorParsedException.EMPTY_EXPRESSION);
+        }
+        return Arrays.stream(expression.split(regex))
+                .map(CalculatorParser::toInteger).toList();
     }
 
-    private static Result getResult(String text) {
-        String delimiter = DEFAULT_DELIMITER;
+    public static String extractCustomDelimiter(String text) {
         Matcher matcher = CUSTOM_PATTERN.matcher(text);
 
         if (!matcher.find()) {
-            return new Result(delimiter, text);
+            Matcher emptyMatcher = CUSTOM_EMPTY_PATTERN.matcher(text);
+            if (emptyMatcher.find()) {
+                throw new CalculatorParsedException(CalculatorParsedException.EMPTY_CUSTOM_DELIMITER);
+            }
+
+            return null;
         }
 
         String customDelimiter = matcher.group(1);
-        String parsedText = matcher.group(3);
 
-        CustomDelimiterValidator.validate(customDelimiter);
+        if (Character.isDigit(customDelimiter.charAt(0))) {
+            throw new CalculatorParsedException(CalculatorParsedException.CUSTOM_NOT_NUMERIC);
+        }
 
-        return new Result(delimiter + customDelimiter, parsedText);
+        return Pattern.quote(customDelimiter);
     }
 
-    private record Result(String delimiter, String text) {
+    private static String extractExpression(String text) {
+        Matcher matcher = EXPRESSION_PATTERN.matcher(text);
+        if (!matcher.find()) {
+            return null;
+        }
+
+        return matcher.group(0);
     }
 
     private static int toInteger(String str) {
         Matcher matcher = POSITIVE_INTEGER_PATTERN.matcher(str);
-        if (!matcher.find()) {
-            throw new CalculatorParsedException(CalculatorParsedException.NOT_NUMERIC);
+
+        if (!matcher.matches()) {
+            throw new CalculatorParsedException(CalculatorParsedException.POSITIVE_EXPRESSION);
         }
 
         return Integer.parseInt(str);

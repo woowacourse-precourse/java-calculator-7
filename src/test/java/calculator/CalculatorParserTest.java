@@ -45,27 +45,11 @@ class CalculatorParserTest {
         return Stream.of(
                 Arguments.of("//A\n1A2A3", List.of(1, 2, 3)),
                 Arguments.of("//?\n1?2:3", List.of(1, 2, 3)),
-                Arguments.of("//;\\n1", List.of(1))
-        );
-    }
-
-    @ParameterizedTest
-    @MethodSource("provide3")
-    void 커스텀_구분자로_2자_이상이_값이_올_수_없다(String input) {
-        // when
-        Throwable exception = assertThrows(CalculatorParsedException.class, () -> {
-            CalculatorParser.parse(input);
-        });
-
-        // then
-        assertThat(exception.getMessage()).isEqualTo("커스텀 구분자는 1자를 초과할 수 없습니다.");
-    }
-
-    private static Stream<Arguments> provide3() {
-        return Stream.of(
-
-                Arguments.of("//AAA\n1AAA2AAA3"),
-                Arguments.of("////\n1//2//3")
+                Arguments.of("//;\\n1", List.of(1)),
+                Arguments.of("//AAA\n1AAA2AAA3", List.of(1, 2, 3)),
+                Arguments.of("////\n1//2//3", List.of(1, 2, 3)),
+                Arguments.of("//\n\n1\n2\n3", List.of(1, 2, 3)),
+                Arguments.of("//\\n\\n1\\n2\\n3", List.of(1, 2, 3))
         );
     }
 
@@ -73,11 +57,11 @@ class CalculatorParserTest {
     void 커스텀_구분자로_빈_값이_올_수_없다() {
         // when
         Throwable exception = assertThrows(CalculatorParsedException.class, () -> {
-            CalculatorParser.parse("//\n\n13:A:2");
+            CalculatorParser.parse("//\n13:A:2");
         });
 
         // then
-        assertThat(exception.getMessage()).isEqualTo(CalculatorParsedException.CUSTOM_NOT_EMPTY);
+        assertThat(exception.getMessage()).isEqualTo(CalculatorParsedException.EMPTY_CUSTOM_DELIMITER);
     }
 
     @Test
@@ -91,14 +75,43 @@ class CalculatorParserTest {
         assertThat(exception.getMessage()).isEqualTo(CalculatorParsedException.CUSTOM_NOT_NUMERIC);
     }
 
-    @Test
-    void 정수만_입력_할_수_있습니다() {
+    @ParameterizedTest
+    @MethodSource("provide3")
+    void 표현식에는_정수만_입력_할_수_있습니다(String input) {
         // when
         Throwable exception = assertThrows(CalculatorParsedException.class, () -> {
-            CalculatorParser.parse("-1:2:A");
+            CalculatorParser.parse(input);
         });
 
         // then
-        assertThat(exception.getMessage()).isEqualTo(CalculatorParsedException.NOT_NUMERIC);
+        assertThat(exception.getMessage()).isEqualTo(CalculatorParsedException.POSITIVE_EXPRESSION);
+    }
+
+    private static Stream<Arguments> provide3() {
+        return Stream.of(
+                Arguments.of("-1:2:3"),
+                Arguments.of("2:-1:3"),
+                Arguments.of("//?\n2?-1?3"),
+                Arguments.of("//?\n2?A?3")
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("provide4")
+    void 표현식에는_빈_값이_올_수_없습니다(String input) {
+        // when
+        Throwable exception = assertThrows(CalculatorParsedException.class, () -> {
+            CalculatorParser.parse(input);
+        });
+
+        // then
+        assertThat(exception.getMessage()).isEqualTo(CalculatorParsedException.EMPTY_EXPRESSION);
+    }
+
+    private static Stream<Arguments> provide4() {
+        return Stream.of(
+                Arguments.of(""),
+                Arguments.of("//?\n")
+        );
     }
 }
