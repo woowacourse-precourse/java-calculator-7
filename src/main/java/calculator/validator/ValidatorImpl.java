@@ -22,7 +22,7 @@ public class ValidatorImpl implements Validator {
             return StringConst.DEFAULT_INPUT;
         }
 
-        ExceptionUtils.throwCanNotParseToNumberException();
+        ExceptionUtils.throwInvalidFormatException();
         return null;
     }
 

@@ -19,5 +19,9 @@ public class ExceptionUtils {
         throw new CanNotParseToNumberException(ErrorConst.CAN_NOT_PARSE_NUMBER_ERROR);
     }
 
+    public static void throwInvalidFormatException() {
+        throw new CanNotParseToNumberException(ErrorConst.INVALID_FORMAT_ERROR);
+    }
+
 
 }
