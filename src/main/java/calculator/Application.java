@@ -4,14 +4,14 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static void main(String[] args) {
+        Calculator calculator = new Calculator();
 
-        try (Calculator calculator = new Calculator()) {
+        try {
             calculator.displayPrompt();
             calculator.readInput(Console.readLine());
             calculator.printSum();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
+        } finally {
+            Console.close();
         }
     }
 }
