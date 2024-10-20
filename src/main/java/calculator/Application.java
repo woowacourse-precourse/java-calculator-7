@@ -11,26 +11,20 @@ public class Application {
 
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = scanner.nextLine();
+        String[] splits;
 
         if (input.charAt(0) == '/') {
             char delimiter = input.charAt(2);
             String regex = "[,:" + delimiter + "]";
-            String[] splits = input.substring(5).split(regex);
-
-            if (isPositive(splits)) {
-                System.out.println("결과 : " + sumNumber(splits));
-            } else {
-                throw new IllegalArgumentException("올바르지 않은 입력입니다.");
-
-            }
-
+            splits = input.substring(5).split(regex);
         } else {
-            String[] splits = input.split("[,:]");
-            if (isPositive(splits)) {
-                System.out.println("결과 : " + sumNumber(splits));
-            } else {
-                throw new IllegalArgumentException("올바르지 않은 입력입니다.");
-            }
+            splits = input.split("[,:]");
+        }
+
+        if (isPositive(splits)) {
+            System.out.println("결과 : " + sumNumber(splits));
+        } else {
+            throw new IllegalArgumentException("올바르지 않은 입력입니다.");
         }
     }
 
