@@ -17,20 +17,9 @@ public class CalculatorController {
     }
 
     public void run() {
-
         String userInput = input.getInput();
-
-        if (isEmpty(userInput)) {
-            output.printResult(0);
-            return;
-        }
 
         int result = calculatorService.calculate(userInput);
         output.printResult(result);
-
-    }
-
-    private boolean isEmpty(String input) {
-        return input == null || input.trim().isEmpty();
     }
 }
