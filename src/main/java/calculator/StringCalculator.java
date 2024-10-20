@@ -58,15 +58,21 @@ public class StringCalculator {
         String removed = removeHeaderFromInput(userInput);
         List<String> numbers = splitStringByDelimiters(removed, delimiters);
 
-        long result = 0;
+        long returnValue = 0;
         for (String number : numbers) {
             try {
-                result += Long.parseLong(number);
+                long result = Long.parseLong(number);
+
+                if (result < 0)
+                    throw new IllegalArgumentException("Negative input is not possible.");
+
+                returnValue += result;
+
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("The value entered is not a number.");
             }
         }
-        return result;
+        return returnValue;
     }
 
     public List<String> splitStringByDelimiters(String target, List<String> delimiters) {
@@ -85,6 +91,6 @@ public class StringCalculator {
         if (!matcher.find())
             return userInput;
 
-        return matcher.replaceAll("");
+        return matcher.replaceFirst("");
     }
 }
