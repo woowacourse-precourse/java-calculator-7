@@ -12,9 +12,9 @@ public class DefaultDelimiterSplitterTest {
     @ParameterizedTest
     @ValueSource(strings = {"1,1,3", "1:3:1", "1,1:3"})
     public void 기본구분자_분리(String value) {
-        DefaultDelimiterSplitter tokenizer = new DefaultDelimiterSplitter();
+        DefaultDelimiterSplitter splitter = new DefaultDelimiterSplitter();
 
-        List<String> result = tokenizer.split(value);
+        List<String> result = splitter.split(value);
 
         assertThat(result).containsExactlyInAnyOrder("3", "1", "1");
     }
