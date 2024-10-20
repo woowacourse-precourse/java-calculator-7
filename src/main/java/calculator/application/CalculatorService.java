@@ -1,4 +1,4 @@
-package calculator.service;
+package calculator.application;
 
 import calculator.domain.Calculator;
 import calculator.domain.Delimiter;

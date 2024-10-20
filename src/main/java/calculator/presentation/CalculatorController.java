@@ -2,7 +2,7 @@ package calculator.presentation;
 
 import calculator.common.io.Input;
 import calculator.common.io.Output;
-import calculator.service.CalculatorService;
+import calculator.application.CalculatorService;
 
 public class CalculatorController {
 
