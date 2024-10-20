@@ -36,7 +36,8 @@ public class Application {
     }
 
     private void initialize() {
-
+        isValidString();
+        numbersList = parsingString();
     }
 
     private List<Integer> parsingString() {
