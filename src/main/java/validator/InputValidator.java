@@ -8,7 +8,7 @@ public class InputValidator {
 
     private static final String REGEX_DELIMITER = "[,:]";
     private static final String REGEX_CUSTOM_DELIMITER = "[\'\",;:\\-\\.\\*\\+\\?\\[\\]\\{\\}\\(\\)" +
-            "\\|\\^\\$\\!\\@\\#\\&\\`\\~\\=\\`\\~\\<\\>\\/\\\\]";
+            "\\_\\|\\^\\$\\!\\@\\#\\&\\`\\~\\=\\`\\~\\<\\>\\/\\\\]";
     private static final String CUSTOM_END_TEXT = "\\n";
     private static final String MINUS_DELIMITER = "-";
     private static boolean isMinusDelimiter = false;
