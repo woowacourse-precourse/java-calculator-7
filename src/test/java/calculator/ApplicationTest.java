@@ -24,6 +24,14 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 입력은_공백일_수_없다(){
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException(" "))
+                .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
