@@ -68,21 +68,30 @@ public class Application {
     public static long parseToLong(String string) {
         if (string.isEmpty()) {
             return 0;
-        } else {
-            try {
-                long number = Long.parseLong(string);
+        }
 
-                if (number <= 0) {
-                    System.out.println("양수만 입력할 수 있습니다.");
-                    throw new IllegalArgumentException();
-                }
+        if (!isNumeric(string)) {
+            System.out.println("잘못된 입력입니다.");
+            throw new IllegalArgumentException();
+        }
 
-                return number;
-            } catch (NumberFormatException e) {
-                System.out.println("잘못된 입력입니다.");
+        try {
+            long number = Long.parseLong(string);
+
+            if (number <= 0) {
+                System.out.println("양수만 입력할 수 있습니다.");
                 throw new IllegalArgumentException();
             }
+
+            return number;
+        } catch (NumberFormatException e) {
+            System.out.println("숫자가 범위를 초과했습니다.");
+            throw new IllegalArgumentException();
         }
+    }
+
+    public static boolean isNumeric(String string) {
+        return string.matches("^-?\\d+$");
     }
 
     private static long calculateSum(long[] numbers) {
