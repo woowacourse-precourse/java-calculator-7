@@ -3,6 +3,7 @@ package calculator.delimiter;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -63,6 +64,24 @@ class CustomDelimiterPatternTest {
     })
     public void 숫자앞에_0이_포함될때(String input) {
         assertThat(pattern.validate(input)).isFalse();
+    }
+
+    @Test
+    void 숫자_갯수가_50개일때() {
+        StringBuilder input = new StringBuilder("//;\\n1");
+        for (int i = 2; i <= 50; i++) {
+            input.append(";").append(i);
+        }
+        assertThat(pattern.validate(input.toString())).isTrue();
+    }
+
+    @Test
+    void 숫자_갯수_50개를_넘을때() {
+        StringBuilder input = new StringBuilder("//;\\n1");
+        for (int i = 2; i <= 51; i++) {
+            input.append(";").append(i);
+        }
+        assertThat(pattern.validate(input.toString())).isFalse();
     }
 
 }
