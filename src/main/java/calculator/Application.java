@@ -17,8 +17,9 @@ public class Application {
       StringInput input = new StringInput();
 
       //문자열 유효성 검사
-      if (!StringChecker.checkString
-          (input.getDelimiters(), input.getNums())) {
+      if (input.getIsCustomDelimiter() &&
+          !StringChecker.checkString
+              (input.getDelimiters(), input.getNums())) {
         throw new IllegalArgumentException("문자열이 유효하지 않습니다");
       }
 
@@ -32,7 +33,6 @@ public class Application {
 
       answer.calSum();
       answer.printAns();
-
 
     } catch (NoSuchElementException |
              IllegalArgumentException noSuchElementException) {
