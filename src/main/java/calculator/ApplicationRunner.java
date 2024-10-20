@@ -19,7 +19,7 @@ public class ApplicationRunner {
         String input = userInteractionManager.readInput();
         inputManager.save(input);
 
-        if (inputManager.isCustomSeparatorCandidateExisted()) {
+        if (inputManager.isSeparatorCandidateExisted()) {
             separatorManager.save(inputManager.getSeparatorCandidate());
         }
         operandManager.save(inputManager.getOperandCandidates());

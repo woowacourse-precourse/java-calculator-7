@@ -28,7 +28,7 @@ public class InputManager {
     public String getOperandCandidates() {
         if (operandCandidates == null) {
             int startIndex = 0;
-            if (isCustomSeparatorCandidateExisted()) {
+            if (isSeparatorCandidateExisted()) {
                 startIndex = input.lastIndexOf(CUSTOM_SEPARATOR_POSTFIX) + 2;
             }
             operandCandidates = input.substring(startIndex);
@@ -46,7 +46,7 @@ public class InputManager {
         }
     }
 
-    public boolean isCustomSeparatorCandidateExisted() {
+    public boolean isSeparatorCandidateExisted() {
         return this.input.startsWith(CUSTOM_SEPARATOR_PREFIX);
     }
 }
