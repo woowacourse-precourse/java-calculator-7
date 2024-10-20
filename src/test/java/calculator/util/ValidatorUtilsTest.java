@@ -12,9 +12,9 @@ public class ValidatorUtilsTest {
     String validInput  = "1,2";
     String EmptyValidInput  = "";
     String NotIncludeNumberInput = ",,,,";
-    String validInput_startWithChar = "//a\n1,2,3,4:5:6";
-    String invalidInput_startWithChar = "//ab\n1,2,3,4:5:6";
-    String invalidInput_startWithChar2 = "//a\n1,2,3a4:5b6";
+    String validInput_startWithChar = "//a\\n1,2,3,4:5:6";
+    String invalidInput_startWithChar = "//ab\\n1,2,3,4:5:6";
+    String invalidInput_startWithChar2 = "//a\\n1,2,3a4:5b6";
     String nullInput = null;
     String invalidInput_startWithInt = "1,2:3a4";
     String invalidInput_startWithInt2 = "1,2:3,4,";

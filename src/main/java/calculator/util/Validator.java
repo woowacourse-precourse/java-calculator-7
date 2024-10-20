@@ -72,7 +72,7 @@ public class Validator {
 
     // 커스텀 구분자 생성하는 부분 패턴 체크
     private static void checkCustomDelimiter(String customDelimiter) {
-        final String pattern = "^//(.)\\n.*";
+        final String pattern = "^//(.)\\\\n.*";
 
         if (!customDelimiter.matches(pattern)) {
             throw new IllegalArgumentException("Input Invalid case4: 커스텀 구분자 생성 오류");
