@@ -4,6 +4,8 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static java.lang.Character.isDigit;
+
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
@@ -14,41 +16,35 @@ public class Application {
             String[] str;
 
             System.out.println("덧셈할 문자열을 입력해주세요. ");
-            String line = Console.readLine().trim();
+            String line = Console.readLine();
 
-            if(line.matches(".*[A-Z가-힣]+.*"))
-                throw new IllegalArgumentException("한글과 알파벳은 입력할 수 없습니다.");
-
-            if (line.isEmpty()) {
-                throw new IllegalArgumentException("입력이 비어 있습니다.");
+            if(line.isEmpty()|| line==null){
+                str[0] = 0 ;
             }
+
+            if(line.matches(".*[가-힣]+.*")|| line.contains("-"))
+                throw new IllegalArgumentException("한글은 입력할 수 없습니다.");
 
             Pattern pattern = Pattern.compile("//(.)\\\\n(.*)");
             Matcher sep = pattern.matcher(line);
 
             if (sep.find()) {
                 separator = sep.group(1);
-                num = sep.group(2);
-                str = num.split(Pattern.quote(separator) + "|,|:");
+                if(isDigit(Integer.parseInt(separator))) throw new IllegalArgumentException("구분자 오류");
+                else{num = sep.group(2);
+                str = num.split(separator + "|,|:");}
 
             } else {
                 str = line.split(":|,");
             }
 
-
             for (int i = 0; i < str.length; i++) {
                 try {
-                    if (str[i].isEmpty()) {
-                        throw new IllegalArgumentException("숫자 부분이 비어있습니다.");
-                    }
-                    total += Integer.parseInt(str[i]);
+                    if(Integer.parseInt(str[i])<=0) throw new IllegalArgumentException("양수를 입력하세요.");
+                    else total += Integer.parseInt(str[i]);
+
                 } catch (NumberFormatException e) {
-                    if(str[i]==""){
-                        total += 0;
-                    }
-                    else{
-                        throw new IllegalArgumentException("숫자가 아닙니다.");
-                    }
+                    throw new IllegalArgumentException("숫자를 입력하세요.");
                 }
             }
 
