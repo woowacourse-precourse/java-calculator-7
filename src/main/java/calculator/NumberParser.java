@@ -17,6 +17,7 @@ public class NumberParser {
     private List<Integer> convertToIntegerList(String[] numbers) {
         List<Integer> list = new ArrayList<>();
         for (String number : numbers) {
+            NumberValidator.validate(number);
             list.add(Integer.parseInt(number));
         }
         return list;
