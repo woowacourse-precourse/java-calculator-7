@@ -1,6 +1,8 @@
 package calculator.service;
 
 import calculator.domain.Calculator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringSeparator {
 
@@ -11,77 +13,42 @@ public class StringSeparator {
     }
 
     public void divideSeparator(String str) {
+        String customSeparator = null;
+        String numbersPart = str;
+
         if (str.startsWith("//")) {
-            String divide = "";
-            int customEndIndex = 0;
-            for (int i = 0; i < str.length(); i++) {
-                divide += str.charAt(i);
-                if (divide.contains("\\n")) {
-                    break;
-                }
-            }
-            if (!isWrongInput(divide)) {
-                customEndIndex = divide.length();
+            Pattern customPattern = Pattern.compile("//(.*?)\\\\n(.*)");
+            Matcher matcher = customPattern.matcher(str);
+
+            if (matcher.matches()) {
+                customSeparator = matcher.group(1);
+                numbersPart = matcher.group(2);
+                calculator.addSeparator(customSeparator);
             } else {
                 throw new IllegalArgumentException("잘못된 입력입니다.");
             }
-            String customSeparator = extractionCustomSeparator(divide);
-            calculator.addSeparator(customSeparator);
-            str = str.substring(customEndIndex);
         }
-        String number = "";
-        String separator = "";
-        for (int i = 0; i < str.length(); i++) {
-            char nowChar = str.charAt(i);
-            if (isNumber(nowChar)) {
-                if (!separator.isEmpty()) {
-                    if (isSeparator(separator)) {
-                        calculator.addSeparator(separator);
-                        separator = "";
-                    } else {
-                        throw new IllegalArgumentException("잘못된 입력입니다.");
-                    }
+        parseAndCalculate(numbersPart, customSeparator);
+    }
+
+    private void parseAndCalculate(String numbersPart, String customSeparator) {
+        String separators = ",|:";
+
+        if (customSeparator != null) {
+            separators += "|" + Pattern.quote(customSeparator);
+        }
+
+        String[] tokens = numbersPart.split(separators);
+
+        for (String token : tokens) {
+            if (!token.isEmpty()) {
+                try {
+                    int number = Integer.parseInt(token);
+                    calculator.addNumber(number);
+                } catch (NumberFormatException e) {
+                    throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
                 }
-                number += nowChar;
-            } else {
-                if (!number.isEmpty()) {
-                    calculator.addNumber(Integer.parseInt(number));
-                    number = "";
-                }
-                separator += nowChar;
             }
         }
-        if (!number.isEmpty()) {
-            calculator.addNumber(Integer.parseInt(number));
-        }
     }
-
-    private boolean isNumber(char ch) {
-        if (ch >= '0' && ch <= '9') {
-            return true;
-        }
-        return false;
-    }
-
-    private boolean isWrongInput(String divide) {
-        if (divide == null || divide.length() < 5) {
-            return true;
-        }
-        if (!divide.startsWith("//") || !divide.contains("\\n")) {
-            return true;
-        }
-        return false;
-    }
-
-    public String extractionCustomSeparator(String divide) {
-        return divide.substring(2, divide.indexOf("\\n"));
-    }
-
-    private boolean isSeparator(String str) {
-        if (calculator.getSeparators().contains(String.valueOf(str))) {
-            return true;
-        }
-        return false;
-    }
-
 }
