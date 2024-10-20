@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class Regex {
 
-    public static final String OR = "|";
+    private static final String OR = "|";
 
     private final StringBuilder regex;
 
@@ -15,6 +15,10 @@ public class Regex {
     }
 
     public void add(final String value) {
+        regex.append(quote(value));
+    }
+
+    public void addContinuously(final String value) {
         regex.append(OR).append(quote(value));
     }
 

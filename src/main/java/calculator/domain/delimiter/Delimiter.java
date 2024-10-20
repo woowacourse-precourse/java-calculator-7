@@ -1,5 +1,6 @@
 package calculator.domain.delimiter;
 
+import calculator.util.regex.Regex;
 import java.util.Objects;
 
 public record Delimiter(String delimiter) {
@@ -8,11 +9,10 @@ public record Delimiter(String delimiter) {
 
     public Delimiter {
         validateDelimiter(delimiter);
-
     }
 
-    public boolean matches(final String totalRegex) {
-        return delimiter.matches(totalRegex);
+    public boolean matches(final Regex regex) {
+        return delimiter.matches(regex.getRegex());
     }
 
     private void validateDelimiter(final String delimiter) {
@@ -37,4 +37,9 @@ public record Delimiter(String delimiter) {
         return Objects.equals(delimiter, delimiter1.delimiter);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(delimiter);
+    }
+    
 }
