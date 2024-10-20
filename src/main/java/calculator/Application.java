@@ -7,10 +7,17 @@ import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class Application {
     public static void main(String[] args) {
+        String userInput;
         int[] arrayUserInput;
         String numberLine;
-
-        String userInput = readLine();
+        
+        //입력 값이 없을 경우 예외 처리
+        try {
+            userInput = readLine();
+        }catch (java.util.NoSuchElementException e){
+            System.out.printf("결과 : %d",0);
+            return;
+        }
 
         //여는 커스텀 구분자만 있을 경우
         if(userInput.contains("//") && !userInput.contains("\\n")){
@@ -53,16 +60,17 @@ public class Application {
         }
 
         // 정규식 메타문자를 구분자를 처리하기 위해 delimiter를 이스케이프 처리
-        String escapedDelimiter = Pattern.quote(delimiter);
+        String escapedDelimiter = delimiter.equals("[,:]") ? "[,:]" : Pattern.quote(delimiter);
 
         String[] stringNumbers = numberLine.split(escapedDelimiter);
         int[] numbers = new int[stringNumbers.length];
 
         for (int i = 0; i < stringNumbers.length; i++) {
-            if (stringNumbers[i].matches("\\d+")){
-                numbers[i] = Integer.parseInt(stringNumbers[i].trim());
-            }else{
-                throw new IllegalArgumentException("The input contains invalid characters. Only numbers can be added : " + stringNumbers[i]);
+            String trimmedNumber = stringNumbers[i].trim();
+            if (trimmedNumber.matches("\\d+")) {
+                numbers[i] = Integer.parseInt(trimmedNumber);
+            } else {
+                throw new IllegalArgumentException("The input contains invalid characters. Only numbers can be added: " + stringNumbers[i]);
             }
 
         }
