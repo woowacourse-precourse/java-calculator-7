@@ -26,6 +26,6 @@ public class Application {
             result += number;
         }
 
-//        System.out.println("결과 : " + result);
+        System.out.println("결과 : " + result);
     }
 }
