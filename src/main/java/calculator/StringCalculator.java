@@ -76,4 +76,8 @@ public class StringCalculator {
             sum = sum + number;
         }
     }
+
+    public void printResult() {
+        System.out.println("결과 : " + sum);
+    }
 }
