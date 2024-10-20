@@ -16,19 +16,28 @@ public class Application {
 
     public static void main(String[] args) {
 
-        System.out.println("=========================");
+        System.out.print("input : ");
         String userInput = Console.readLine();
-        System.out.println("=========================");
+
+        //구분자 추출
+        String delimiter = userInput.substring(userInput.indexOf("//")+2, userInput.indexOf("\\n"));
+        System.out.println("추출된 구분자 : " +delimiter);
+
+        //숫자 부분만 추출
+        userInput = userInput.substring(userInput.indexOf("\\n")+2);
+        System.out.println("추출된 숫자 : "+userInput);
 
         // 쉼표 또는 콜론을 구분자로 가지는 문자열
-        String[] array = userInput.split("[,:]");
+        String[] array = userInput.split("[,:"+delimiter+"]");
+
 
         int sum = 0;
-
         for (String s : array) {
+
             sum += Integer.parseInt(s);
         }
 
         System.out.println(sum);
+
     }
 }
