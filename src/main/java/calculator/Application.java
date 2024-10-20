@@ -14,17 +14,16 @@ public class Application {
 
     public static void main(String[] args) {
 
-        CalculationInput calculationInput = getInputString();
+        CalculationInput calculationInput = getCalculationInput();
 
         int[] extractedNumbers = extractNumbers(calculationInput);
         int result = calculate(extractedNumbers);
         showResult(result);
     }
 
-    private static CalculationInput getInputString() {
+    private static CalculationInput getCalculationInput() {
 
-        System.out.println(INPUT_GUIDE_MESSAGE);
-        String userInput = Console.readLine();
+        String userInput = getUserInput();
 
         Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_INPUT_REGEX);
         Matcher matcher = pattern.matcher(userInput);
@@ -37,6 +36,11 @@ public class Application {
         }
 
         return new CalculationInput(DEFAULT_DELIMITER_REGEX, userInput);
+    }
+
+    private static String getUserInput() {
+        System.out.println(INPUT_GUIDE_MESSAGE);
+        return Console.readLine();
     }
 
     private static int[] extractNumbers(CalculationInput calculationInput) {
