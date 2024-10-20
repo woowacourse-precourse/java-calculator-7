@@ -20,11 +20,19 @@ public class Calculator {
         int sum = 0;
 
         for (String number : numberArray) {
+            filterNegativeNum(number);
+
             if (!number.isEmpty()) {
                 sum += Integer.parseInt(number);
             }
         }
 
         return sum;
+    }
+
+    private void filterNegativeNum(String number) {
+        if (Integer.parseInt(number) < 0) {
+            throw new IllegalArgumentException();
+        }
     }
 }
