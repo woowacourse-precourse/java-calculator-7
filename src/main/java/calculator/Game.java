@@ -1,26 +1,25 @@
 package calculator;
 
-import static camp.nextstep.edu.missionutils.Console.readLine;
-
-import calculator.view.InputPrint;
-import calculator.view.OutputPrint;
 import java.util.Arrays;
 
 public class Game {
 
+    private final InputHandler inputHandler;
+    private final OutputHandler outputHandler;
+
+    public Game() {
+        this.inputHandler = new InputHandler();
+        this.outputHandler = new OutputHandler();
+    }
+
     public void start() {
-        String input = getUserInput();
+        String input = inputHandler.getUserInput();
         Separators separators = new Separators();
 
         String processedInput = processInput(input, separators);
         int[] numbers = convertInputToNumbers(processedInput, separators);
 
         printResult(numbers);
-    }
-
-    private String getUserInput() {
-        InputPrint.printInput();
-        return readLine();
     }
 
     private String processInput(String input, Separators separators) {
@@ -35,6 +34,6 @@ public class Game {
 
     private void printResult(int[] numbers) {
         int sum = Arrays.stream(numbers).sum();
-        OutputPrint.printResult(numbers.length == 0 ? 0 : sum);
+        outputHandler.printResult(sum);
     }
 }
