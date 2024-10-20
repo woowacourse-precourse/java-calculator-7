@@ -78,7 +78,7 @@ public class DelimiterMaker {
 	}
 
 	public boolean hasCustomSeparator(String input) {
-		return input.contains(CUSTOM_DELIMITER_PREFIX) || input.contains(CUSTOM_DELIMITER_SUFFIX);
+		return input.contains(CUSTOM_DELIMITER_PREFIX) && input.contains(CUSTOM_DELIMITER_SUFFIX);
 	}
 
 	public String getDelimiterEndSign() {
