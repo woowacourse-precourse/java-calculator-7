@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 public class Application {
+
     public static void main(String[] args) throws IOException {
         // TODO: 프로그램 구현
         System.out.println("덧셈할 문자열을 입력해 주세요.");

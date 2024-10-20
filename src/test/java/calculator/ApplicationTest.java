@@ -41,6 +41,4 @@ class ApplicationTest extends NsTest {
             throw new RuntimeException(e);
         }
     }
-
-
 }
