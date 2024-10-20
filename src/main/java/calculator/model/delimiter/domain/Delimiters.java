@@ -17,7 +17,7 @@ public class Delimiters {
     }
 
     public List<Delimiter> getValues() {
-        return values;
+        return List.copyOf(values);
     }
 
     public String splitRegex() {
