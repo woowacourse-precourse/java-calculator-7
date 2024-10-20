@@ -23,7 +23,14 @@ public class NumberExtractorTest {
     @Test
     void 숫자_아닌_문자_시작시_예외() {
         assertThatThrownBy(() ->
-                numberExtractor.extractNumber("+5,3", delimiters))
+                numberExtractor.extractNumber(",5,3", delimiters))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 구분자_숫자_제외한_문자_포함시_예외() {
+        assertThatThrownBy(() ->
+                numberExtractor.extractNumber("5+5,13-3", delimiters))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
