@@ -6,7 +6,17 @@ import java.util.regex.Pattern;
 
 public class Application {
     public static void main(String[] args) {
-
+        try{
+            String input = readInput();
+            String delimiter = extraDelimiter(input);
+            String numbers = extraNumbers(input);
+            String[] numberTokens = splitNumbers(numbers, delimiter);
+            int result = calculateSum(numberTokens);
+            printResult(result);
+        }catch (IllegalArgumentException e)
+        {
+            System.out.println(e.getMessage());
+        }
 
     }
 
@@ -15,7 +25,7 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
         //커스텀 구분자 사용 시 다음줄 입력받기.
-        if (input.startsWith("//") && input.contains("\n")) {
+        if (input.startsWith("//") && !input.contains("\n")) {
             String nextLine = Console.readLine();
             input += "\n" + nextLine;
         }
@@ -33,6 +43,17 @@ public class Application {
             delimiter = Pattern.quote(input.substring(2, delimiterIndex));
         }
         return delimiter;
+    }
+
+    private static String extraNumbers(String input) {
+        if (input.startsWith("//")) {
+            int delimiterIndex = input.indexOf("\n");
+            if (delimiterIndex == -1) {
+                throw new IllegalArgumentException("입력 형식이 잘못 되었습니다");
+            }
+            return input.substring(delimiterIndex + 1);
+        }
+        return input;
     }
 
     //3.숫자와 문자열 분리
@@ -69,10 +90,10 @@ public class Application {
             throw new IllegalArgumentException("음수는 허용되지 않습니다");
         }
     }
+
     //5. 결과출력
-    private static void printResult(int result)
-    {
-        System.out.println("결과 : "+result);
+    private static void printResult(int result) {
+        System.out.println("결과 : " + result);
     }
 
 }
