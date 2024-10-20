@@ -1,11 +1,19 @@
 package calculator.model;
 
-public record Parser(String number) {
+import java.math.BigDecimal;
+import java.math.BigInteger;
 
-    public long parseToLong(String number) {
+public record Parser() {
+
+    public BigDecimal parseToBigDecimal(String number) {
+        BigDecimal result = handleEmptyString(number);
+        return new BigDecimal(String.valueOf(result));
+    }
+
+    private static BigDecimal handleEmptyString(String number) {
         if (number.isEmpty()) {
-            return 0;
+            return new BigDecimal(BigInteger.ZERO);
         }
-        return Long.parseLong(number);
+        return new BigDecimal(number);
     }
 }

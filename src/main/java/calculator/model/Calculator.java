@@ -2,24 +2,27 @@ package calculator.model;
 
 import static calculator.validate.Validator.validateNumber;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 public class Calculator {
 
-    private long result;
-    private final Extractor extractor;
+    private BigDecimal result = new BigDecimal(BigInteger.ZERO);
 
-    public Calculator() {
-        this.extractor = new Extractor();
-    }
-
-    public void calculateSum(String input) {
-        String[] numbers = extractor.extractNumber(input);
+    public void calculateSum(String delimiter, String numberContent) {
+        String[] numbers = splitNumber(delimiter, numberContent);
         for (String number : numbers) {
             validateNumber(number);
-            result += new Parser(number).parseToLong(number);
+            result = result.add(new Parser().parseToBigDecimal(number));
         }
     }
 
-    public long getResult() {
+    private String[] splitNumber(String delimiter, String numberContent) {
+        return numberContent.split(delimiter);
+    }
+
+
+    public BigDecimal getResult() {
         return result;
     }
 }

@@ -1,12 +1,19 @@
 package calculator.validate;
 
+import static calculator.constants.Regex.POSITIVE_NUMBER_PATTERN;
+
 import java.util.regex.Matcher;
 
 public class Validator {
 
-    private static final String POSITIVE_NUMBER_PATTERN = "^(|[1-9][0-9]*)$";
-
     public static void validateNumber(String number) {
+        if (number.isEmpty()) {
+            return;
+        }
+        validatePositiveNumber(number);
+    }
+
+    private static void validatePositiveNumber(String number) {
         if (!number.matches(POSITIVE_NUMBER_PATTERN)) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_NUMBER);
         }
