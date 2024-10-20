@@ -2,7 +2,6 @@ package calculator.controller;
 
 import calculator.model.Calculator;
 import calculator.model.Tokenizer;
-import calculator.validator.InputValidator;
 import calculator.view.View;
 import camp.nextstep.edu.missionutils.Console;
 

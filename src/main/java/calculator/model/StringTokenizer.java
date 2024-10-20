@@ -1,23 +1,21 @@
 package calculator.model;
 
-import calculator.validator.Validator;
+import calculator.validator.InputValidatorUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class StringTokenizer implements Tokenizer {
     private final StringBuilder delimiters;
-    private final Validator validator;
 
-    public StringTokenizer(StringBuilder delimiters, Validator validator) {
+    public StringTokenizer(StringBuilder delimiters) {
         this.delimiters = delimiters;
-        this.validator = validator;
         addDelimiter(",");
         addDelimiter(":");
     }
 
     private void addDelimiter(String delimiter) {
-        if (validator.isSpecialDelimiter(delimiter)) {
+        if (InputValidatorUtils.isSpecialDelimiter(delimiter)) {
             delimiters.append("\\");
         }
 
@@ -27,7 +25,7 @@ public class StringTokenizer implements Tokenizer {
     private List<String> tokenize(String input) {
         String string = input;
 
-        if (validator.customDelimiterContains(string)) {
+        if (InputValidatorUtils.customDelimiterContains(string)) {
             string = addCustomDelimiter(string);
         }
 
@@ -52,7 +50,7 @@ public class StringTokenizer implements Tokenizer {
                 .map(Integer::valueOf)
                 .toList();
 
-        if(validator.hasNegativeValue(list)) {
+        if(InputValidatorUtils.hasNegativeValue(list)) {
             return list;
         } else {
             throw new IllegalArgumentException();
