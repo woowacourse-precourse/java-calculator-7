@@ -1,4 +1,4 @@
-package calculator.util;
+package calculator.common;
 
 import java.util.logging.Logger;
 
