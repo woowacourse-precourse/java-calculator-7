@@ -14,6 +14,10 @@ public class InputUtil {
         }
     }
 
+    public static boolean checkEmptyInput(String input) {
+        return input.isEmpty() || input == "";
+    }
+
     public static void checkArrayNumber(String[] array) {
         for (String s : array) {
             checkArrayDigit(s);
@@ -30,5 +34,6 @@ public class InputUtil {
             }
         }
     }
+
 
 }
