@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DelimeterHandler {
-    private static final String DEFAULTDELEMETERS = ",:";
+    private static final String DEFAULT_DELIMITERS = ",:";
 
     public static List<Character> extractDelimiters(String input) {
         List<Character> delimiterList = new ArrayList<>();
 
-        for (int i = 0; i < DEFAULTDELEMETERS.length(); i++) {
-            delimiterList.add(DEFAULTDELEMETERS.charAt(i));
+        for (int i = 0; i < DEFAULT_DELIMITERS.length(); i++) {
+            delimiterList.add(DEFAULT_DELIMITERS.charAt(i));
         }
-        
+
         if (hasCustomDelimiter(input) == true) {
             int newlineIdx = input.indexOf("\\n");
 
