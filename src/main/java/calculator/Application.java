@@ -61,9 +61,9 @@ public class Application {
 
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
-            System.exit(1);
+        } finally {
+            Console.close();
         }
 
-        Console.close();
     }
 }
