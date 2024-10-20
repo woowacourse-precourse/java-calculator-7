@@ -1,4 +1,4 @@
-package calculator;
+package calculator.model;
 
 public class StringDivider {
     private static final String DEFAULT_SEPARATOR = ":|,";

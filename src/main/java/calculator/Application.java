@@ -1,5 +1,11 @@
 package calculator;
 
+import calculator.model.Calculator;
+import calculator.model.StringDivider;
+import calculator.model.StringDividerFactory;
+import calculator.view.InputHandler;
+import calculator.view.OutputHandler;
+
 public class Application {
 
     public static void main(String[] args) {
