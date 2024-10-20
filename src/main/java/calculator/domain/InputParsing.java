@@ -12,9 +12,9 @@ public class InputParsing {
     private final List<Double> numbers;
 
     public InputParsing(String userInput) {
-        List<String> towPartUserInput = splitUserInputTowPart(userInput);
-        addCustomDelimiter(towPartUserInput);
-        numbers = parsingStringToNumbers(towPartUserInput.getLast());
+        List<String> twoPartUserInput = splitUserInputTowPart(userInput);
+        addCustomDelimiter(twoPartUserInput);
+        numbers = parsingStringToNumbers(twoPartUserInput.getLast());
     }
 
     private void addCustomDelimiter(List<String> parsedUserInput){
