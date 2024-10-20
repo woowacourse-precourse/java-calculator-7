@@ -9,16 +9,23 @@ import org.junit.jupiter.api.Test;
 class ExtractorTest {
 
     @Test
-    public void 문자열에서_커스텀_구분자를_추출한다() {
+    public void 커스텀_구분자의_유무를_안다() {
         //given
         Extractor ex = new Extractor();
-        String input = "//;\\n1;2;3";
+        String input = "//+\\n1,2,3";
 
-        //when
-        String result = ex.extractDelimiter(input);
+        //when & then
+        assertTrue(ex.hasCustomDelimiter(input));
+    }
 
-        //then
-        assertThat(result).isEqualTo(";");
+    @Test
+    public void 커스텀_구분자의_유무를_안다2() {
+        //given
+        Extractor ex = new Extractor();
+        String input = "1,2,3";
+
+        //when & then
+        assertFalse(ex.hasCustomDelimiter(input));
     }
 
     @Test

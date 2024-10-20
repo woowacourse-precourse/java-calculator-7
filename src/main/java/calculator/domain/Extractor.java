@@ -10,9 +10,9 @@ public class Extractor {
     private static final String DEFAULT_DELIMITER = "[,:]";
     private static final int NUMBER_BEGIN_INDEX = 5;
 
-    public int[] makeNumberArray(String numsWithDelimiter, String delimiter) {
-        String nums = extractNumbers(numsWithDelimiter, delimiter);
-        String regexDelimiter = makeRegexDelimiter(delimiter);
+    public boolean hasCustomDelimiter(String numsWithCustomDelimiter) {
+        return numsWithCustomDelimiter.startsWith(HEADER);
+    }
 
         String[] splitNumbers = nums.split(regexDelimiter);
 
