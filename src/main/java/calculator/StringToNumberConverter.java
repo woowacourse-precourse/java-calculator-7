@@ -14,7 +14,11 @@ public class StringToNumberConverter {
     public List<Integer> convert() {
         List<Integer> result = new ArrayList<>();
         for (String s : numbers) {
-            result.add(Integer.parseInt(s));
+            try {
+                result.add(Integer.parseInt(s));
+            } catch (NumberFormatException e) {
+                result.add(0);
+            }
         }
         return result;
     }
