@@ -17,6 +17,7 @@ public class SeparatorManager {
     }
 
     public void save(String separatorCandidate) {
+        validate(separatorCandidate);
         separators.add(separatorCandidate);
     }
 

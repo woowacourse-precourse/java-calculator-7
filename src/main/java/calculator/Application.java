@@ -13,7 +13,6 @@ public class Application {
         SeparatorManager separatorManager = new SeparatorManager();
 
         if(inputManager.isCustomSeparatorCandidateExisted()) {
-            separatorManager.validate(inputManager.getSeparatorCandidate());
             separatorManager.save(inputManager.getSeparatorCandidate());
         }
 
