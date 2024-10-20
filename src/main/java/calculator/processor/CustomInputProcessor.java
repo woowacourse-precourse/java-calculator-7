@@ -17,7 +17,7 @@ public class CustomInputProcessor implements InputProcessor {
         validator.validateNumberInCustom(customSeparator);
 
         separator.addCustomSeparator(customSeparator);
-        separator.validateSeparators(parts[1]);
+//        separator.validateSeparators(parts[1]);
         return separator.splitCalculationString(parts[1]);
     }
 }

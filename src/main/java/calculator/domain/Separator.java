@@ -21,7 +21,7 @@ public class Separator {
     public void validateSeparators(String input) {
         SeparatorValidator validator = new SeparatorValidator();
         validator.validateDefaultSeparators(input, separatorList);
-        validator.validateHasSeparators(input, separatorList);
+//        validator.validateHasSeparators(input, separatorList);
     }
 
     public String[] splitCalculationString(String expression) {
