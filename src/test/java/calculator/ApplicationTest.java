@@ -3,28 +3,39 @@ package calculator;
 import calculator.controller.Application;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 class ApplicationTest extends NsTest {
 
-    // 구분자 관련 테스트 케이스
-    @Test
-    void 커스텀_구분자_사용() {
+    @ParameterizedTest
+    @MethodSource("provideInputsForTest")
+    void 커스텀_구분자_반복테스트(String input, int expectedResult) {
         assertSimpleTest(() -> {
-            run("//;\\n1");
-            assertThat(output()).contains("결과 : 1");
+            run(input);
+            assertThat(output()).contains("결과 : " + expectedResult);
         });
     }
-    @Test
-    void 구분자_전체사용() {
-        assertSimpleTest(() -> {
-            run("//;\\n1;2:3,4;5");
-            assertThat(output()).contains("결과 : 15");
-        });
+
+    // 테스트에 필요한 입력값과 예상 결과를 제공하는 메서드
+    static Stream<Arguments> provideInputsForTest() {
+        return Stream.of(
+                Arguments.of("//;\\n1", 1),        // 커스텀 구분자 ; 사용
+                Arguments.of("//,\\n2,3", 5),      // 커스텀 구분자 , 사용
+                Arguments.of("//:\\n4:5", 9),     // 커스텀 구분자 : 사용
+                Arguments.of("1,2:3", 6),          // 기본 구분자 , 및 : 사용
+                Arguments.of("// \n1 2 3:4,5", 15), // 커스텀 구분자 " " 및 , 사용
+                Arguments.of("", 0)                // 빈 입력의 경우
+        );
     }
+
+
 
     // 예외 테스트 케이스
     @Test
