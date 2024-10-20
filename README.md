@@ -13,7 +13,7 @@
 ## 3. 입력값 유효성 검사 기능
 - **`validateInput(String input, String custom)`**
 - 커스텀 구분자가 존재할 경우
-  - 커스텀 구분자가 숫자일 경우 IllegalArgumentException 발생
+  - 커스텀 구분자가 숫자나 문자일 경우 IllegalArgumentException 발생
   - "\n" 이후 문자열이 [숫자, 쉼표, 콜론, 커스텀 구분자]가 아니면 IllegalArgumentException 발생
 - 커스텀 구분자가 없을 경우 전체 문자열이 [숫자, 쉼표, 콜론]이 아니면 IllegalArgumentException 발생
 
