@@ -42,7 +42,9 @@ public class SeparatorParser {
             separators += BASIC_SEPARATOR[basicSeparatorIndex];
         }
 
-        separatorAndNumberString.put("separator", separators);
+        if (parserValidator.isValidSeparator(separators)) {
+            separatorAndNumberString.put("separator", separators);
+        }
 
         separatorAndNumberString.put("type", "numberStringWithCustomSeparator");
         separatorAndNumberString.put("numberString", splitInputString[++numberStringIndex]);
