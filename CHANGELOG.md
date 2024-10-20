@@ -1,10 +1,24 @@
-* test(calculator): 커스텀 구분자 사용 및 예외 처리 테스트 추가
-* feat(app): 계산기 애플리케이션 진입점 추가
-* feat(validate): 계산기 입력 검증 클래스 추가
-* feat(exception): 음수 예외 클래스 추가
-* feat(exception): 잘못된 형식 예외 클래스 추가
-* feat(exception): 잘못된 구분자 전략 예외 클래스 추가
-* feat(service): 계산기 서비스 구현 클래스 추가
-* feat(service): 계산기 서비스 인터페이스 추가
-* feat(factory): 계산기 전략 선택 팩토리 클래스 추가
-* feat(factory): 계산기 전략 선택 팩토리 인터페이스 추가
+* test(all): 테스트 기저 추가 (KNU-K, 2024-10-20)
+* refactor(app): 입력과 출력 처리 메소드 분리 (KNU-K, 2024-10-20)
+* refactor(app): Console.close()를 finally 영역에서 호출하도록 변경 (KNU-K, 2024-10-20)
+* style(service): 코드 포매팅 정리 (KNU-K, 2024-10-20)
+* refactor(strategy): EnumMap과 Optional 처리로 StrategyMap 최적화 (KNU-K, 2024-10-20)
+* refactor(validate): 메소드 이름 변경 및 정규식 타입 변경 (KNU-K, 2024-10-20)
+* docs(changelog): CHANGELOG.md 업데이트 (KNU-K, 2024-10-17)
+* test(calculator): 커스텀 구분자 사용 및 예외 처리 테스트 추가 (KNU-K, 2024-10-17)
+* feat(app): 계산기 애플리케이션 진입점 추가 (KNU-K, 2024-10-17)
+* feat(validate): 계산기 입력 검증 클래스 추가 (KNU-K, 2024-10-17)
+* feat(exception): 음수 예외 클래스 추가 (KNU-K, 2024-10-17)
+* feat(exception): 잘못된 형식 예외 클래스 추가 (KNU-K, 2024-10-17)
+* feat(exception): 잘못된 구분자 전략 예외 클래스 추가 (KNU-K, 2024-10-17)
+* feat(service): 계산기 서비스 구현 클래스 추가 (KNU-K, 2024-10-17)
+* feat(service): 계산기 서비스 인터페이스 추가 (KNU-K, 2024-10-17)
+* feat(factory): 계산기 전략 선택 팩토리 클래스 추가 (KNU-K, 2024-10-17)
+* feat(factory): 계산기 전략 선택 팩토리 인터페이스 추가 (KNU-K, 2024-10-17)
+* feat(strategy): 기본 구분자 전략 클래스 추가 (KNU-K, 2024-10-17)
+* feat(strategy): 사용자 정의 구분자 전략 클래스 추가 (KNU-K, 2024-10-17)
+* feat(strategy): 추상 구분자 전략 클래스 추가 (KNU-K, 2024-10-17)
+* feat(strategy): 전략을 담는 일급 컬렉션 객체 생성 (KNU-K, 2024-10-17)
+* feat(strategy): 계산기의 구분자에 따른 전략 인터페이스 추가 (KNU-K, 2024-10-17)
+* docs(all): 자바 계산기 프리코스 구현 기능 명세 (KNU-K, 2024-10-17)
+* feat: setup project (woowabrie, 2024-10-15)
