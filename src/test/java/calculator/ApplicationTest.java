@@ -18,9 +18,9 @@ class ApplicationTest extends NsTest {
         });
     }
     @Test
-    void 커스텀_구분자_특수문자_사용() {
+    void 커스텀_구분자_메타문자_사용() {
         assertSimpleTest(() -> {
-            run("//&\\n1&2,1:4");
+            run("//*\\n1*2,1:4");
             assertThat(output()).contains("결과 : 8");
         });
     }
