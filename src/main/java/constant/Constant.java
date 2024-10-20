@@ -1,4 +1,4 @@
-package calculator;
+package constant;
 
 public class Constant {
     public static final String BASIC_SEPARATOR_REGEX = "[,:]";
