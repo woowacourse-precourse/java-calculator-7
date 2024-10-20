@@ -1,6 +1,5 @@
 package calculator.service;
 
-import calculator.controller.CalculatorController;
 import calculator.dto.request.ConverterRequest;
 import calculator.dto.request.DelimiterExtractRequest;
 import calculator.dto.response.ConverterResponse;
@@ -8,14 +7,27 @@ import calculator.dto.response.DelimiterExtractResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 class CalculatorServiceImplTest {
     private final CalculatorService calculatorService = new CalculatorServiceImpl();
+
+    @Test
+    @DisplayName("입력값이 공백인 경우")
+    void testIsEmptyList() {
+        int sum = calculatorService.addInput("");
+
+        assertThat(sum).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("올바르게 적은 입력값인 경우")
+    void testIsExistList() {
+        int sum = calculatorService.addInput("1,2:3,4");
+
+        assertThat(sum).isEqualTo(10);
+    }
 
     @Test
     @DisplayName("기본 구분자 반환")
