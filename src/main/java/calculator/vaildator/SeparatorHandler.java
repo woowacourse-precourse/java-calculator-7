@@ -6,19 +6,23 @@ public class SeparatorHandler {
 
     // 사용자 지정 구분자를 추출하는 메서드
     public String getCustomSeparator(String input) {
+        // 커스텀 구분자가 제대로 된 형식인지 확인 (//로 시작하고 구분자가 1글자 이상 뒤에 \n이 와야 함)
+        if (input.startsWith("/")) {
+            if (!input.matches("//.{1,}\\\\n.*")) {
+                throw new IllegalArgumentException("구분자를 정확하게 입력해주세요.");
+            }
 
-        if (!input.matches("//.+\\\\n.*")) {
-            throw new IllegalArgumentException("구분자를 정확하게 입력해주세요.");
+            // 구분자 추출
+            String separator = input.substring(2, input.indexOf("\\n"));
+
+            // 구분자 유효성 검사
+            validateSeparator(separator);
+
+            return separator;
         }
 
-        // 구분자 추출: 두 번째 위치의 문자가 구분자
-        String separator = input.substring(2, input.indexOf("\\n"));
-
-        // 구분자 유효성 검사
-        validateSeparator(separator);
-
-        // 사용자 정의 구분자를 반환
-        return separator;
+        // 커스텀 구분자가 없으면 기본 구분자 사용
+        return null;
     }
 
     // 입력 문자열을 구분자 기준으로 분리하는 메서드
@@ -32,7 +36,7 @@ public class SeparatorHandler {
             return splitByCustomSeparator(input, separator);
         }
 
-        // 기본 구분자 ','와 ':'로 분리
+        // 커스텀 구분자가 없을 경우 기본 구분자 ','와 ':'로 분리
         return splitByDefaultSeparators(input);
     }
 
@@ -48,7 +52,6 @@ public class SeparatorHandler {
 
     // 구분자 유효성을 검증하는 메서드
     private void validateSeparator(String separator) {
-        // 구분자가 포함된 문자열에서 쉼표, 콜론 또는 숫자가 있는지 확인
         for (char c : separator.toCharArray()) {
             if (c == ',' || c == ':') {
                 throw new IllegalArgumentException("기본 구분자를 커스텀 구분자로 사용할 수 없습니다.");
