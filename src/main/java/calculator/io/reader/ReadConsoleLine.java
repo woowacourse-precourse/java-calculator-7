@@ -5,6 +5,10 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.List;
 
 public class ReadConsoleLine implements Input {
+
+    private static final String SEPARATOR_PREFIX = "//";
+    private static final String SEPARATOR_SUFFIX = "\\n";
+
     @Override
     public String inputString() {
         System.out.println("Please enter the strings to add.");
@@ -19,12 +23,12 @@ public class ReadConsoleLine implements Input {
         String numberPart = input;
         String separtor = "";
 
-        if (input.startsWith("//") && input.contains("\\n")) {
-            separtor = input.substring(input.indexOf("//") + 2, input.indexOf("\\n"));
+        if (input.startsWith(SEPARATOR_PREFIX) && input.contains(SEPARATOR_SUFFIX)) {
+            separtor = input.substring(input.indexOf(SEPARATOR_PREFIX) + 2, input.indexOf(SEPARATOR_SUFFIX));
             if (separtor.length() != 1)
                 throw new IllegalArgumentException("Separator format is invalid");
             else
-                numberPart = input.substring(input.indexOf("\\n") + 2);
+                numberPart = input.substring(input.indexOf(SEPARATOR_SUFFIX) + 2);
         }
 
         List<String> separators = new java.util.ArrayList<>(List.of(",", ":"));
