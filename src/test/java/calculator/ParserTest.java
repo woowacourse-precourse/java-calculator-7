@@ -29,4 +29,16 @@ public class ParserTest {
         List<Double> result = parser.extractNumbersWithSeparator(customSeparators, inputToExtract);
         assertEquals(expected, result);
     }
+
+    @Test
+    void 커스텀_구분자가_존재하지_않을_때_숫자_추출_테스트() {
+        String inputToExtract = "1:2:3:4,5,6,7:8,9:10";
+        List<Double> expected = List.of(
+                1.0, 2.0, 3.0, 4.0, 5.0,
+                6.0, 7.0, 8.0, 9.0, 10.0
+        );
+
+        List<Double> result = parser.extractNumbersWithSeparator(inputToExtract);
+        assertEquals(expected, result);
+    }
 }

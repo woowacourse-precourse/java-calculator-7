@@ -37,6 +37,31 @@ public class Parser {
         return numbers;
     }
 
+    /**
+     * 문자열에서 기본 구분자(쉼표, 콜론)를 사용하여 숫자를 추출합니다.
+     *
+     * @param inputToExtract 구분자로 분리된 숫자가 포함된 입력 문자열 (예: "1:2,3:4:5").
+     * @return 추출된 숫자 리스트를 반환합니다.
+     */
+
+    public List<Double> extractNumbersWithSeparator(String inputToExtract) {
+        List<Double> numbers = new ArrayList<>();
+
+        String regex = "[,:]";
+
+        // 정규식을 사용하여 입력 문자열을 구분자를 기준으로 분리
+        String[] splitInputToExtract = inputToExtract.split(regex);
+
+        // 분리된 각 부분을 순회하며 숫자로 변환하여 리스트에 추가
+        for (String part : splitInputToExtract) {
+            // 빈 문자열을 처리하지 않고, 숫자 형식으로 변환하여 리스트에 추가
+            numbers.add(Double.parseDouble(part));
+        }
+
+        // 추출된 숫자 리스트 반환
+        return numbers;
+    }
+
 
 }
 
