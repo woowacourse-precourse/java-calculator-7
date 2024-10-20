@@ -21,6 +21,7 @@ public class NumberParser {
         calculatedValue.setNumberValueToken(numberValue);
     }
 
+
     private List<Integer> extractNumberValue(CalculatedValue calculatedValue) {
         List<Integer> result = new ArrayList<>();
         String dividers = formatDividerSplit();
@@ -48,7 +49,7 @@ public class NumberParser {
 
     private String formatDividerSplit() {
         return String.format(DIVIDER_SPLIT_FORMAT,
-                divider.getClon(),
+                divider.getColon(),
                 divider.getComma()
                 , handleMetaCharacter(divider.getCustomDivider()));
     }
@@ -60,15 +61,16 @@ public class NumberParser {
         return customDivider;
     }
 
-    private boolean isMetaChar(String ch) {
-        return META_CHARACTERS.contains(ch);
-    }
-
     private String addEscapeCharToMetaChar(String metaCharacter) {
         return ESCAPE_CHARACTER + metaCharacter;
     }
 
+    private boolean isMetaChar(String ch) {
+        return META_CHARACTERS.contains(ch);
+    }
 
+
+    // 커스텀 구분자가 - 일때 --가 연속으로 사용될(//-\n1--2-3) 경우 음수 사용으로 분류
     private void validateCustomDividerMinusAndNumberValueNegative(String value) {
         if ("-".equals(divider.getCustomDivider()) && value.isEmpty()) {
             throw new IllegalArgumentException("음수는 계산이 불가능합니다.");

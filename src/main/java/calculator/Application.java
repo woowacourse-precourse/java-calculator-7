@@ -7,4 +7,5 @@ public class Application {
         MainController mainController = new MainController();
         mainController.main();
     }
+    
 }

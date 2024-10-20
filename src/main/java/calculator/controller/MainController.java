@@ -23,9 +23,11 @@ public class MainController {
         printCalculatedResult(result);
     }
 
+
     private Integer getCalculatedResult(CalculatedValue calculatedValue) {
         return AddCalculator.add(calculatedValue.getNumberValueToken());
     }
+
 
     private void extractNumberValue(CalculatedValue calculatedValue, NumberParser numberParser) {
         numberParser.parse(calculatedValue);
@@ -35,6 +37,7 @@ public class MainController {
                                      CustomDividerFinder customDividerFinder) {
         customDividerFinder.findCustomDividers(calculatedValue, divider);
     }
+
 
     private NumberParser createNumberParser(Divider divider) {
         return new NumberParser(divider);
@@ -51,6 +54,7 @@ public class MainController {
     private CalculatedValue createCalculatedValue() {
         return new CalculatedValue(inputStringToAdd());
     }
+
 
     private String inputStringToAdd() {
         return Input.inputStringToAdd();

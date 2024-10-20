@@ -28,13 +28,14 @@ public class CustomDividerFinder {
 
     private void handleCustomDivider(CalculatedValue calculatedValue, Divider divider, String inputValue) {
         char charCustomDivider = inputValue.charAt(CUSTOM_DIVIDER_INDEX);
+        validateNumber(charCustomDivider);
         String onlyCalculatedValue = extractCalculatedValue(inputValue);
 
         updateCalculatedValueAndDivider(calculatedValue, divider, onlyCalculatedValue, charCustomDivider);
     }
 
     private String extractCalculatedValue(String inputValue) {
-        return inputValue.substring(CALCULATED_VALUE_START_INDEX);
+        return inputValue.substring(CALCULATED_VALUE_START_INDEX); //커스텀 양식 분리
     }
 
     private static void updateCalculatedValueAndDivider(CalculatedValue calculatedValue, Divider divider,
@@ -44,14 +45,14 @@ public class CustomDividerFinder {
     }
 
 
+    private boolean isNonexistentCustomDivider(int openerIndex, int closerIndex) {
+        return openerIndex == NONE_CUSTOM_DIVIDER && closerIndex == NONE_CUSTOM_DIVIDER;
+    }
+    
     private boolean hasCustomDivider(int openerIndex, int closerIndex) {
         validateStringCustomDivider(closerIndex);
         validateNullCustomDivider(closerIndex);
         return openerIndex == OPENER_INDEX && closerIndex == CLOSER_INDEX;
-    }
-
-    private boolean isNonexistentCustomDivider(int openerIndex, int closerIndex) {
-        return openerIndex == NONE_CUSTOM_DIVIDER && closerIndex == NONE_CUSTOM_DIVIDER;
     }
 
 
@@ -71,6 +72,15 @@ public class CustomDividerFinder {
         if ("".equals(calculatedValue)) {
             throw new IllegalArgumentException("계산식이 비어있어요.");
         }
+    }
+
+    private void validateNumber(char customDivider) {
+        try {
+            Integer.parseInt(String.valueOf(customDivider));
+        } catch (IllegalArgumentException e) {
+            return;
+        }
+        throw new IllegalArgumentException("커스텀 구분자로 숫자는 불가능합니다.");
     }
 
 }

@@ -5,7 +5,7 @@ import java.util.List;
 
 public class CalculatedValue {
     private String value;
-    private final List<Integer> NumberValueToken = new ArrayList<>();
+    private final List<Integer> NumberValueToken = new ArrayList<>(); //숫자만
 
     public CalculatedValue(String value) {
         this.value = value;
@@ -26,5 +26,5 @@ public class CalculatedValue {
     public List<Integer> getNumberValueToken() {
         return NumberValueToken;
     }
-    
+
 }
