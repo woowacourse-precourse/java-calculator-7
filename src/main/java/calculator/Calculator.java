@@ -17,7 +17,7 @@ public class Calculator {
         this.delimiter.addAll(List.of(":", "."));
         this.inputString = input();
         addCustomDelimiter();
-        tokenizationInteger();
+        tokenization();
     }
 
     public String input() {
@@ -39,7 +39,7 @@ public class Calculator {
         }
     }
 
-    public void tokenizationInteger() {
+    public void tokenization() {
         String[] split = inputString.split(String.valueOf(delimiter));
         for (String s : split) {
             try {
