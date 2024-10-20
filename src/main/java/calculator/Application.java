@@ -42,6 +42,10 @@ public class Application {
         int sum = 0;
 
         for (String number : numbers) {
+            int num = Integer.parseInt(number);
+            if (num < 0) {
+                throw new IllegalArgumentException("음수 입력 불가능 합니다." );
+            }
             sum += Integer.parseInt(number);
         }
         return sum;
