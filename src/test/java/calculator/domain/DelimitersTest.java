@@ -10,8 +10,8 @@ import static org.assertj.core.api.Assertions.*;
 class DelimitersTest {
 
     @ParameterizedTest
-    @DisplayName("Delimiters는_커스텀_구분자를_고려하여_정규표현식을_반환할_수_있다")
-    @CsvSource(value = {"t/:|,|t", "1/:|,|1", ";/:|,|;"}, delimiter = '/')
+    @DisplayName("Delimiters는_커스텀_구분자를_유무를_고려하여_정규표현식을_반환할_수_있다")
+    @CsvSource(value = {"//:|,", "t//:|,|t", "1//:|,|1", ";//:|,|;"}, delimiterString = "//")
     public void convertToRegex(String input, String expected) {
         //given
         CustomDelimiter customDelimiter = new CustomDelimiter(input);
