@@ -33,9 +33,14 @@ public class StringCalculator {
         return sum(numbers);
     }
 
-
+    private static int sumWithCustomSeparator(String input) {
+        String separator = input.substring(2, 3);
+        String[] numbers = input.substring(5).split(Pattern.quote(separator));
+        return sum(numbers);
+    }
 
     private static int sum(String[] numbers) {
-       return 0;
+
+        return 0;
     }
 }
