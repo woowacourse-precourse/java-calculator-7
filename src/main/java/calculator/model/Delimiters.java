@@ -25,4 +25,15 @@ public class Delimiters {
         return new Delimiters(delimiter);
     }
 
+    public String getRegex() {
+        StringBuilder regexBuilder = new StringBuilder();
+        regexBuilder.append("[");
+
+        for (Character delimiter : delimiters) {
+            regexBuilder.append(delimiter);
+        }
+
+        regexBuilder.append("]");
+        return regexBuilder.toString();
+    }
 }
