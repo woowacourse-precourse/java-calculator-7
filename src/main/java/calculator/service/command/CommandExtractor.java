@@ -1,5 +1,6 @@
 package calculator.service.command;
 
+import calculator.service.expression.Expression;
 import calculator.service.separator.Separator;
 import calculator.util.Constants;
 import java.util.regex.Matcher;
@@ -20,7 +21,7 @@ public class CommandExtractor {
     public Command extract(String input) {
         validateInput(input);
         Separator customSeparator = extractCustomSeparator(input);
-        String expression = extractExpression(input);
+        Expression expression = extractExpression(input);
         return new Command(customSeparator, expression);
     }
 
@@ -47,12 +48,12 @@ public class CommandExtractor {
         }
     }
 
-    private String extractExpression(String input) {
+    private Expression extractExpression(String input) {
         String expression = removeCustomSeparator(input);
         if (expression.isEmpty()) {
             throw new IllegalArgumentException("계산할 식을 찾을 수 없어요. 입력값을 확인해주세요.");
         }
-        return expression;
+        return Expression.create(expression);
     }
 
     private String removeCustomSeparator(String input) {

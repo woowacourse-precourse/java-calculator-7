@@ -2,7 +2,7 @@ package calculator.service;
 
 import calculator.service.command.Command;
 import calculator.service.command.CommandExtractor;
-import calculator.service.command.ExpressionSplitter;
+import calculator.service.expression.Expression;
 import calculator.service.separator.Separators;
 import calculator.util.Constants;
 import java.util.Arrays;
@@ -23,18 +23,18 @@ public class CalculatorService {
         if (command.hasCustomSeparator()) {
             separators.add(command.customSeparator());
         }
-        String expression = command.expression();
+        Expression expression = command.expression();
         return getExpressionResult(expression);
     }
 
-    private Number getExpressionResult(String expression) {
+    private Number getExpressionResult(Expression expression) {
         List<Double> values = splitExpressionToPositiveNumber(expression);
         double result = sum(values);
         return transformResultType(result);
     }
 
-    private List<Double> splitExpressionToPositiveNumber(String expression) {
-        String[] separatedValues = ExpressionSplitter.split(separators, expression);
+    private List<Double> splitExpressionToPositiveNumber(Expression expression) {
+        String[] separatedValues = expression.split(separators.getValues());
         return convertToPositiveNumber(separatedValues);
     }
 
