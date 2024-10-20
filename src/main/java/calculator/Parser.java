@@ -9,6 +9,7 @@ public class Parser {
         String[] tokens = input.split(delimiter);
         int sum = 0;
         for (String token : tokens) {
+            token = token.trim();
             if(!token.isEmpty()) {
                 try {
                     int num = parseNumber(token);

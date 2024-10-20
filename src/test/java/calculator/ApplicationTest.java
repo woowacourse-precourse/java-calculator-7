@@ -37,13 +37,28 @@ class ApplicationTest extends NsTest {
         });
     }
     @Test
-    void 공백_문자(){
+    void 공백_문자만(){
         assertSimpleTest(() -> {
             run(" ");
             assertThat(output()).contains("결과 : 0");
         });
     }
 
+    @Test
+    void 숫자사이공백_문자(){
+        assertSimpleTest(() -> {
+            run("1,2    ,3,4 ");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
+    @Test
+    void 여러자리숫자(){
+        assertSimpleTest(() -> {
+            run("1234,1,2,3");
+            assertThat(output()).contains("결과 : 1240");
+        });
+    }
 
     @Test
     void 예외_테스트() {
@@ -52,6 +67,23 @@ class ApplicationTest extends NsTest {
                 .isInstanceOf(IllegalArgumentException.class)
         );
     }
+    @Test
+    void 숫자초과_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("2147483648"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 문자_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,a,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+
 
     @Override
     public void runMain() {
