@@ -25,11 +25,19 @@
 - [ ]  예외 처리
    - 잘못된 값 입력 시 IllegalArgumentException 발생
 
-## 프로그램 설계
+## **프로그램 설계**
+
 ### **Domain**
 
 - Calculator
-  - 덧셈 연산을 수행하는 domain
+  - 덧셈 연산을 수행하는 domain(long 범위)
+    - add() -> 덧셈 수행
+    - getResult() -> 계산 결과 반환
+    - validateNum() → 음수가 입력되었는지 검증
+    - validateSum() → 더한값이 long 범위를 넘어가는지 검증
+    - validateIsLong() → 입력값이 long 범위를 넘어가는지 검증
+- BigIntegerCalculator
+  - long 범위를 넘어가는 입력값이 들어올때 덧셈 연산을 수행하는 domain
     - add() -> 덧셈 수행
     - getResult() -> 계산 결과 반환
     - validateNum() → 음수가 입력되었는지 검증
@@ -61,6 +69,7 @@
   - 스트링 계산과 관련된 로직을 처리하는 Service
     - add() -> 입력된 문자열을 받아 파싱하고 계산을 수행하고 결과를 반환
     - stringAdd() -> 파싱된 문자열 배열을 받아 처리하고 최종 결과를 계산
+    - stringAddBig() → stringAdd 메서드에서 long 범위가 넘어갔을때 BigInteger로 계산
     - stringParse() -> 입력된 문자열을 받아, 커스텀 구분자를 사용하는지 여부에 따라 적절한 parser를 선택해 문자열을 파싱
     - validateEmptyAndNumber() → 입력된 문자열이 Empty 이거나 숫자로만 이루어져있을때 처리
 
@@ -81,4 +90,3 @@
   - 입력값을 검증하는 클래스
     - validateNoSpace() → 입력된 문자열에 공백이 포함되었는지 검증
     - validateIsNumber() → 파싱된 문자열에서 숫자가 아닌 문자가 포함되었는지 확인
-    - validateIsLong() → long 범위를 넘어가는 숫자가 입력되었는지 검증
