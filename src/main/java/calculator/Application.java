@@ -29,6 +29,7 @@ public class Application {
         }
     }
 
+    // 합치는 코드 만들기
     public static int makeResult(String str) {
         int result;
         char ndiv, ndiv1, ndiv2;
@@ -38,7 +39,7 @@ public class Application {
         // 숫자만 있는 경우
         if (isNumeric(str)) { // 문자열에 문자가 포함되어 있나?
             return Integer.parseInt(str);
-        } //공백만 있는 경우
+        } // 공백만 있는 경우
         else if (str.isEmpty() || str.trim().isEmpty()) { // 문자가 포함되어 있지만 공백만 있나?
             return 0;
         } // 구분 지정자(//@\n) 경우
@@ -56,7 +57,7 @@ public class Application {
                 } else { // #3
                     throw new IllegalArgumentException("구분자와 입력 형식이 잘못되었습니다.");
                 }
-            }else { //구분 지정자를 설정하고, 뒤에도 구분 지정자가 나오는 경우
+            } else { //구분 지정자를 설정하고, 뒤에도 구분 지정자가 나오는 경우
 
                 try { //구분 지정자가 정상적으로 작동하지만, 다른 문자가 나오는 경우 예외처리 (처음 부분을 더해줌)
                     result = Integer.parseInt(str.substring(5, arr.get(0)));
@@ -73,6 +74,7 @@ public class Application {
                         throw new IllegalArgumentException("숫자 변환 오류 발생: " + e.getMessage(), e);
                     }
                 }
+
                 // 마지막 구분 지정자부터 끝까지 더해줌
                 // 만약 문자로 끝나는 경우
                 if (arr.get(arr.size() - 1) == str.length() - 1) {
@@ -82,43 +84,76 @@ public class Application {
                     return result;
                 }
             }
-        }
-            return 0;
 
+
+        } else {
+            //구분지정자가 잘못 되었을 경우 이쪽으로 들어옴
+            //여기서 예외처리 해주면 오류 잡을 수 있음
+            // str = //@@\n1,3,2,4,5 면 여기로 들어옴 (처리 가능함)
+            ndiv1 = ',';
+            ndiv2 = ':';
+            whereDiv = new div(str, ndiv1, ndiv2);
+            arr = whereDiv.makeArr();
+
+            try {
+                result = Integer.parseInt(str.substring(0, arr.get(0))); // 여기서 오류가 발생할 수 있음
+            } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                throw new IllegalArgumentException("숫자 변환 또는 인덱스 오류 발생: " + e.getMessage(), e);
+            }
+
+            for (int i = 0; i < arr.size() - 1; i++) {
+                try {
+                    String substring = str.substring(arr.get(i) + 1, arr.get(i + 1));
+                    int num = Integer.parseInt(substring); // 숫자 변환 오류 처리
+                    result += num;
+                } catch (NumberFormatException e) {
+                    throw new IllegalArgumentException("숫자 변환 오류 발생: " + e.getMessage(), e);
+                }
+            }
+
+            try {
+                result += Integer.parseInt(str.substring(arr.get(arr.size() - 1) + 1)); // 여기서 오류가 발생할 수 있음
+            } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                throw new IllegalArgumentException("숫자 변환 또는 인덱스 오류 발생: " + e.getMessage(), e);
+            }
+
+            return result;
+        }
     }
 }
 
-    class div { // 구분자 위치 반환
-        String str;
-        char std1, std2;
+class div { // 구분자 위치 반환
+    String str;
+    char std1, std2;
 
-        div(String str, char std1) {
-            this.str = str;
-            this.std1 = std1;
-            this.std2 = std1;
-        }
+    div(String str, char std1) {
+        this.str = str;
+        this.std1 = std1;
+        this.std2 = std1;
+    }
 
-        div(String str, char std1, char std2) {
-            this.str = str;
-            this.std1 = std1;
-            this.std2 = std2;
-        }
+    div(String str, char std1, char std2) {
+        this.str = str;
+        this.std1 = std1;
+        this.std2 = std2;
+    }
 
-        public ArrayList<Integer> makeArr() { // 구분자 위치를 반환한다
-            ArrayList<Integer> arr = new ArrayList<>();
-            if (std1 == std2) { // 구분자 같은 경우
-                for (int i = 5; i < str.length(); i++) {
-                    if (str.charAt(i) == std1) {
-                        arr.add(i);
-                    }
-                }
-            } else { // 구분자가 다른 경우
-                for (int i = 0; i < str.length(); i++) {
-                    if (str.charAt(i) == std1 || str.charAt(i) == std2) {
-                        arr.add(i);
-                    }
+    public ArrayList<Integer> makeArr() { // 구분자 위치를 반환한다
+        ArrayList<Integer> arr = new ArrayList<>();
+        if (std1 == std2) { // 구분자 같은 경우
+            for (int i = 5; i < str.length(); i++) {
+                if (str.charAt(i) == std1) {
+                    arr.add(i);
                 }
             }
-            return arr;
+        } else { // 구분자가 다른 경우
+            for (int i = 0; i < str.length(); i++) {
+                if (str.charAt(i) == std1 || str.charAt(i) == std2) {
+                    arr.add(i);
+                }
+            }
         }
+        return arr;
     }
+}
+
