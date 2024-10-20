@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.Arrays;
+
 public class Spliter {
     private String inputString;
     private char customSeparator1;
@@ -29,13 +31,13 @@ public class Spliter {
             }
         }
 
-        // result 배열 내 잘못된 변수 존재 시 프로그램 종료
+        System.out.println(Arrays.toString(result));
+
         if(inspectionValue(result) == true) {
-            // result 배열 합 계산
             sum(result);
         } else {
-            System.out.println("에러 발생");
-            //throw new IllegalAccessException("dd");
+            System.out.println("[result문자열]잘못된 값을 입력하였습니다.");
+            throw new IllegalArgumentException();
         }
 
     }
@@ -49,6 +51,7 @@ public class Spliter {
     }
 
     // 작성 필요
+    //*\n1:2,3*4*-4
     public void generateCustomSeparator() {
         if(inputString.length() >= 5) {
             char[] inputArray = inputString.toCharArray();
@@ -57,7 +60,7 @@ public class Spliter {
             if(inputArray[0] == '/' && inputArray[1] == '/' && inputArray[3] == '\\' && inputArray[4] == 'n') {
                 customSeparator1 = inputArray[2];
             } else {
-                //System.out.println("[커스텀 구분자 생성]잘못된 값을 입력하였습니다!");
+                System.out.println("[커스텀 구분자 생성]잘못된 값을 입력하였습니다!");
                 throw new IllegalArgumentException();
             }
             this.inputString = inputString.substring(5);
@@ -66,11 +69,19 @@ public class Spliter {
 
     // 작성 필요
     public boolean inspectionValue(String[] result) {
+        for(int i=0; i<result.length; i++) {
+            for(int j=0; j<result[i].length(); j++) {
+                if(result[i].charAt(j) < 48 || result[i].charAt(j) > 57) {
+                    System.out.println("result[" + i + "][" + j + "] = " + result[i].charAt(j));
+                    return false;
+                }
+            }
+        }
         return true;
     }
 
     public void sum(String[] result) {
-        //System.out.println("커스텀 구분자 = " + customSeparator1 + ", result = " + Arrays.toString(result));
+        System.out.println("커스텀 구분자 = " + customSeparator1 + ", result = " + Arrays.toString(result));
         for(int i=0; i<result.length; i++) {
             this.resultValue += Integer.parseInt(result[i]);
         }
