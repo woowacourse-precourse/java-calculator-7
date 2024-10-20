@@ -80,6 +80,31 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 음수_입력_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//#$%\\n1:-2:3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 소수_입력_예외테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//#$%\\n1:0.2:3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 유효_구분자_입력_예외테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//#$%\\n1#2.3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
