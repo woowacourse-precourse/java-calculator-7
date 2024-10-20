@@ -21,6 +21,10 @@ class ExpressionModel {
         return expression.indexOf("//");
     }
 
+    boolean isLastDelimeterIdx(String expression, int idx) {
+        return expression.startsWith("\\n", idx);
+    }
+
     int plusData() {
         return cntData;
     }
