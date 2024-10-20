@@ -6,7 +6,7 @@ import calculator.constants.ErrorMessages;
 import calculator.utils.NumberUtils;
 
 public class Number {
-    private static final Double BLANK_ZERO = 0.0;
+    private static final Double BLANK_ZERO = 0.0; // 공백이나 없는 값이 들어올때 대신 사용할 값
     private static final int ZERO = 0;
 
     private final Double number;
