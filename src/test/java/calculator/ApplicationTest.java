@@ -88,6 +88,14 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 예외_테스트_유효하지않은_숫자확인() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//h\\n1h1h1h234234하33h"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
