@@ -3,17 +3,21 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
 
-    public static int calc(String input) {
+    //입력 형식 검증
+    private static void inputCheck(String input) {
         if (input == null || input.isEmpty()) {
             throw new IllegalArgumentException("잘못된 입력 형식");
         }
+    }
 
-        String delimiter = ",|:"; //기본 구분자 쉼표(,)와 콜론(:)
+    //커스텀 구분자 처리
+    private static String[] split(String input) {
+        String delimiter = ",|:"; // 기본 구분자 쉼표(,)와 콜론(:)
         String numbers = input;
 
-        //커스텀 구분자가 확인
+        // 커스텀 구분자가 있는지 확인
         if (input.startsWith("//")) {
-            int delimiterIdx = input.indexOf("\\n"); //\n문자 확인
+            int delimiterIdx = input.indexOf("\\n"); // \n 문자 확인
             if (delimiterIdx == -1) { // //로 시작하는데 \n이 없으면 잘못된 입력 형식
                 throw new IllegalArgumentException("잘못된 입력 형식");
             }
@@ -21,29 +25,37 @@ public class Application {
             numbers = input.substring(delimiterIdx + 2);
         }
 
-        //구분자를 기준으로 문자열을 분리
-        String[] num = numbers.split(delimiter);
+        return numbers.split(delimiter); //구분자를 기준으로 문자열 분리
+    }
 
-        //숫자의 합을 계산
+    //숫자 합계 계산
+    private static int sum(String[] numbers) {
         int sum = 0;
-        for (String n : num) { //분리된 문자열에서 숫자 꺼내오기
+        for (String n : numbers) {
             if (!n.isEmpty()) {
                 int number = Integer.parseInt(n.trim());
                 if (number < 0) {
-                    throw new IllegalArgumentException("음수 입력됨");
+                    throw new IllegalArgumentException("음수 입력");
                 }
                 sum += number;
-                }
             }
-            return sum;
         }
+        return sum;
+    }
 
+    // 계산 함수
+    public static int calc(String input) {
+        inputCheck(input); //입력 체크
+        String[] numbers = split(input); //구분자로 문자열 분리
+        return sum(numbers); //덧셈 계산
+    }
+
+    // 메인 함수
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String input = Console.readLine();  // 사용자 입력 받기
+        String input = Console.readLine();  //사용자 입력
 
         int result = calc(input);
         System.out.println("결과 : " + result);
-
     }
 }
