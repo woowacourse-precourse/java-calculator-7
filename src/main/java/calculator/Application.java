@@ -14,7 +14,6 @@ public class Application {
             result = calculateResult(input);
             System.out.printf("결과 : %d",result);
         } catch (IllegalArgumentException e) {
-            System.err.println("입력 형식이 잘못되었습니다. ");
         }
     }
 
@@ -35,10 +34,10 @@ public class Application {
         try {
             result = Integer.parseInt(str.substring(startIndex, arr.get(0)));
             if (result < 0) {
-                throw new IllegalArgumentException("입력 형식이 잘못되었습니다. ");
+                throw new IllegalArgumentException();
             }
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new IllegalArgumentException("입력 형식이 잘못되었습니다. " );
+            throw new IllegalArgumentException();
         }
 
         for (int i = 0; i < arr.size() - 1; i++) {
@@ -46,11 +45,11 @@ public class Application {
                 String substring = str.substring(arr.get(i) + 1, arr.get(i + 1));
                 int num = Integer.parseInt(substring);
                 if (num < 0) {
-                    throw new IllegalArgumentException("입력 형식이 잘못되었습니다. ");
+                    throw new IllegalArgumentException();
                 }
                 result += num;
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("입력 형식이 잘못되었습니다." );
+                throw new IllegalArgumentException();
             }
         }
 
@@ -88,7 +87,7 @@ public class Application {
                 } else if (isNumeric(str.substring(5))) { // #2
                     return Integer.parseInt(str.substring(5));
                 } else { // #3
-                    throw new IllegalArgumentException("입력 형식이 잘못되었습니다.");
+                    throw new IllegalArgumentException();
                 }
             } else {
                 //구분 지정자를 설정하고, 뒤에도 구분 지정자가 나오는 경우 -> 정상 작동
@@ -96,7 +95,7 @@ public class Application {
                 //마지막 숫자를 제외한 나머지를 더하는 과정
                 result = parseAndSum(str, delimiterPositions, 5);
                 if (result < 0) {
-                    throw new IllegalArgumentException("입력 형식이 잘못되었습니다.");
+                    throw new IllegalArgumentException();
                 }
 
                 // 마지막 숫자 처리
@@ -122,12 +121,12 @@ public class Application {
             try {
                 int lastNumber = Integer.parseInt(str.substring(delimiterPositions.get(delimiterPositions.size() - 1) + 1));
                 if (lastNumber<0){
-                    throw new IllegalArgumentException("입력 형식이 잘못되었습니다. ");
+                    throw new IllegalArgumentException();
                 } else {
                     result += lastNumber;
                 }
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                throw new IllegalArgumentException("입력 형식이 잘못되었습니다. " );
+                throw new IllegalArgumentException();
             }
 
             return result;
