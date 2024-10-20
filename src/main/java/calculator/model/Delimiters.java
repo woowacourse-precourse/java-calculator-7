@@ -15,4 +15,8 @@ public class Delimiters {
     public boolean hasCustomDelimiter(String input) {
         return input.startsWith(CUSTOM_DELIMITER_PREFIX);
     }
+
+    public String toConcatenatedString() {
+        return delimiters.stream().reduce("", (a, b) -> a + b);
+    }
 }
