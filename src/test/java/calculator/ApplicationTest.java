@@ -18,6 +18,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 큰숫자_입력(){
+        assertSimpleTest(()->{
+            run("22222222222222:2222222222222222222");
+            assertThat(output().contains("결과 : 2,222,244,444,444,444,444"));
+        });
+    }
+
+    @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
             run("//;\\n1;2");
