@@ -77,6 +77,8 @@
 ---
 ```
 calculator
+    ├─Application.java
+    |
     ├─controller
     |   └─CalController.java
     ├─service
@@ -84,6 +86,15 @@ calculator
     └─view
         ├─UserInput.java
         └─UserOutput.java
+        
+test
+  └─calculator
+     ├─ApplicationTest.java
+     |
+     ├─service
+     |  └─CalculatorTest.java
+     └─view
+        └─UserInputTest.java
 ```
 
 ## ✅프로그래밍 요구 사항
