@@ -20,21 +20,31 @@ public class Calculator {
         }
     }
 
-    public int sum(String expression) {
-        //delimiters를 거꾸로 돌면서 구분자로 정의된 문자를 : 으로 변경해야 한다.
-        String changedExpression = replaceDelimitersToColon(expression);
+    public float sum(String expression) {
+        List<Float> numbers = resolveNumbersFromExpression(expression);
 
-        String[] numbers = changedExpression.split(":");
-
-        int sum = 0;
-        for (String number : numbers) {
-            if (!isPositiveNumber(number)) {
-                throw new IllegalArgumentException();
-            }
-            sum += Integer.parseInt(number);
+        float sum = 0;
+        for (Float num : numbers) {
+            sum += num;
         }
 
         return sum;
+    }
+
+    private List<Float> resolveNumbersFromExpression(String expression) {
+        String changedExpression = replaceDelimitersToColon(expression);
+
+        String[] stringNumbers = changedExpression.split(":");
+
+        List<Float> numbers = new ArrayList<>();
+        for (String stringNumber : stringNumbers) {
+            if (!isPositiveNumber(stringNumber)) {
+                throw new IllegalArgumentException();
+            }
+            numbers.add(Float.parseFloat(stringNumber));
+        }
+
+        return numbers;
     }
 
     private String replaceDelimitersToColon(String expression) {

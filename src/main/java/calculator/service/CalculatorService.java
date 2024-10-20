@@ -13,7 +13,7 @@ public class CalculatorService {
         this.calculator = new Calculator();
     }
 
-    public int calculateSumString(String inputString) {
+    public float calculateSumString(String inputString) {
         if (inputString.isEmpty()) {
             return 0;
         }

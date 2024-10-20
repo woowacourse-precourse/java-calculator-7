@@ -20,7 +20,7 @@ public class CalculatorController {
         calculatorOutputer.printIntro();
         String inputString = calculatorInputer.getInput();
 
-        int result = calculatorService.calculateSumString(inputString);
+        float result = calculatorService.calculateSumString(inputString);
 
         calculatorOutputer.printResult(result);
     }
