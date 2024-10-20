@@ -20,8 +20,7 @@ public class StringCalculator {
 	}
 
 	public void run() {
-		output.printInitialMessage();
-		String inputString = input.getString();
+		String inputString = getInput();
 		CustomDelimiterValidator customDelimiterValidator = new CustomDelimiterValidator();
 		StringValidator stringValidator = new StringValidator();
 		if (customDelimiterValidator.hasCustomDelimiter(inputString)) {
@@ -34,5 +33,10 @@ public class StringCalculator {
 		SumCalculator sumCalculator = new SumCalculator();
 		int answer = sumCalculator.calculate(numbers);
 		output.printAnswerMessage(answer);
+	}
+
+	private String getInput() {
+		output.printInitialMessage();
+		return input.getString();
 	}
 }
