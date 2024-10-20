@@ -9,7 +9,7 @@ public class Calculation {
 
     public Double calculationString(String separator, String input){
 
-        if(!separator.equals("[,;]")){
+        if(!separator.equals("[,:]")){
             int i = input.indexOf("\\");
             input = input.substring(i+2);
         }

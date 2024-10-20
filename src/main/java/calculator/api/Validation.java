@@ -4,7 +4,7 @@ public class Validation {
     private String separator;
 
     public Validation() {
-        this.separator = "[,;]";
+        this.separator = "[,:]";
     }
 
     public String validateString(String input){
