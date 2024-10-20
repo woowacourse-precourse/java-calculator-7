@@ -25,9 +25,9 @@ public class InputString {
     public long calculate() {
         getCustomDelimiter();
 
-        String delimiters = this.customDelimiter == null ? ",|:" : customDelimiter + "|,|:";
+        validateInputString(this.inputString);
 
-        long[] numberList = splitStringByDelimiters(delimiters);
+        long[] numberList = getNumbers(combineDelimiters());
 
         sum(numberList);
 
@@ -45,12 +45,38 @@ public class InputString {
     }
 
     /**
+     * 문자열 검증 (숫자, 구분자 외의 다른 값은 입력할 수 없다.)
+     */
+    private void validateInputString(String inputString) {
+        String delimiters = combineDelimiters();
+
+        String invalidCharsRegex = "[^[0-9]" + delimiters + "]";
+
+        if (inputString.matches(".*" + invalidCharsRegex + ".*")) {
+            throw new IllegalArgumentException("입력은 양수와 구분자만을 포함해야 합니다.");
+        }
+    }
+
+    /**
+     * split을 위한 구분자 리스트 생성
+     */
+    private String combineDelimiters() {
+        if (this.customDelimiter == null) {
+            return ",|:";
+        }
+        if (this.customDelimiter.equals("|")) {
+            return "\\|" + "|,|:";
+        }
+        return customDelimiter + "|,|:";
+    }
+
+    /**
      * 문자열에서 숫자 추출
      *
      * @param delimiters 구분자(쉼표 (,)또는 콜론(:)또는 커스텀 구분자)
      * @return 문자열에서 추출한 숫자 리스트
      */
-    private long[] splitStringByDelimiters(String delimiters) {
+    private long[] getNumbers(String delimiters) {
 
         String[] numbersInString = this.inputString.split(delimiters);
 
