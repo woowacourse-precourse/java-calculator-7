@@ -17,12 +17,12 @@ public class ExpressionSplitter {
         if (expression == null || expression.isEmpty()) {
             throw new IllegalArgumentException("계산할 식을 찾을 수 없어요. 입력값을 확인해주세요.");
         }
-        if (hasUnrecognizedSeparator(possibleSeparatorsRegex, expression)) {
+        if (hasUnrecognizedInput(possibleSeparatorsRegex, expression)) {
             throw new IllegalArgumentException("숫자와 사용 가능한 구분자 외에 다른 문자가 포함되어 있습니다. 입력값을 확인해주세요.");
         }
     }
 
-    private static boolean hasUnrecognizedSeparator(String possibleSeparatorsRegex, String expression) {
+    private static boolean hasUnrecognizedInput(String possibleSeparatorsRegex, String expression) {
         return !expression.matches("[" + possibleSeparatorsRegex + Constants.POSITIVE_NUMBER_REGEX + "]+");
     }
 }
