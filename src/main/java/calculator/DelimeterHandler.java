@@ -19,9 +19,7 @@ public class DelimeterHandler {
             int customDelimiterEndIndex = input.indexOf(CUSTOM_DELIMITERS_END);
 
             String customDelimiters = input.substring(customDelimiterStartIndex, customDelimiterEndIndex);
-            for (int i = 0; i < customDelimiters.length(); i++) {
-                char delimiterChar = customDelimiters.charAt(i);
-
+            for (char delimiterChar : customDelimiters.toCharArray()) {
                 if (delimiterList.contains(delimiterChar) == true) {
                     throw new IllegalArgumentException("duplicate delimiter: " + delimiterChar);
                 }
