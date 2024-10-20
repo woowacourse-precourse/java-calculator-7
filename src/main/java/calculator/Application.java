@@ -34,5 +34,10 @@ public class Application {
         }
         return delimiter;
     }
+    //3.숫자와 문자열 분리
+    private static String[] splitNumbers(String input,String delimiter)
+    {
+        return input.split(delimiter);// ex ) 1:2:3 을 구분자 기준으로 나눔
+    }
 
 }
