@@ -38,7 +38,15 @@ public class StringParser {
 
         String[] numberStr = processedInput.split(separators);
         for (String s : numberStr) {
-            result.add(Integer.parseInt(s));
+            try {
+                int num = Integer.parseInt(s);
+                if (num < 0) {
+                    throw new IllegalArgumentException("Negative numbers are not allowed: " + num);
+                }
+                result.add(num);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Invalid input: Non-numeric value found - " + s);
+            }
         }
 
         return result;
