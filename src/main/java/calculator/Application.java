@@ -35,7 +35,7 @@ public class Application {
     }
 
     private static boolean checkCustom(String str) {
-        return str.startsWith("//") && str.indexOf("\n") > 2;
+        return str.startsWith("//") && str.indexOf("\\n") > 2;
     }
 
     private static void addCustom(String regex, String str) {
