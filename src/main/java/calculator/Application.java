@@ -60,9 +60,9 @@ public class Application {
                 throw new IllegalArgumentException("잘못된 숫자 입력: " + number);
             }
         }
-        if (!isContainsNumber) {
+        /*if (!isContainsNumber) {
             throw new IllegalArgumentException("숫자가 입력되지 않았습니다.");
-        }
+        }*/
         System.out.println("결과 : " + sum);
     }
 }
