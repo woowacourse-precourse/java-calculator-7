@@ -23,6 +23,7 @@ public class FunctionOperator {
 
     public void run() {
         // 입력 받기
+        outputView.askInput();
         String input = inputView.askInput();
 
         // 전처리: 구분자 처리 및 숫자 추출
@@ -32,7 +33,7 @@ public class FunctionOperator {
         int result = addition.calculate(separated);
 
         // 결과 출력
-        outputView.printResult(result);
+        outputView.printAnswer(result);
     }
 
 }
