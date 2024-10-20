@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Preprocessing extends InputValidator {
+    private static final List<String> DEFAULT_SEPARATORS = Arrays.asList(",", ":");
 
     // 첫 글자가 "/"로 시작하는지 아닌지에 따라 메소드 실행
     public boolean firstLetter(String given) {
