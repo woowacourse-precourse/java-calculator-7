@@ -71,6 +71,9 @@ public class StringCalculator {
 
         intNumbers = new ArrayList<>();
         for (String stringNumber : stringNumbers) {
+            if (stringNumber.matches("(.*)[^\\d](.*)")) {
+                throw new IllegalArgumentException();
+            }
             intNumbers.add(Integer.parseInt(stringNumber));
         }
     }
