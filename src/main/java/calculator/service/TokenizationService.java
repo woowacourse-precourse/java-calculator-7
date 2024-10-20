@@ -2,17 +2,19 @@ package calculator.service;
 
 public class TokenizationService {
 
+    private final CustomDelimiterChecker customDelimiterChecker;
+
+    public TokenizationService(CustomDelimiterChecker customDelimiterChecker) {
+        this.customDelimiterChecker = customDelimiterChecker;
+    }
+
     public long[] tokenize(String input){
 
         StringBuilder delimiterBuilder = new StringBuilder(",|:");
 
         if(input.startsWith("//")){
-            if (!input.substring(0, 2).equals("//") || !input.substring(3, 5).equals("\\n")) {
-                throw new IllegalArgumentException("커스텀 구분자가 규칙에 맞지 않습니다.");
-            }
-            if (Character.isDigit(input.charAt(2))) {
-                throw new IllegalArgumentException("커스텀 구분자는 문자여야 합니다.");
-            }
+            customDelimiterChecker.checkCustomDelimiterRule(input);
+            customDelimiterChecker.checkCustomDelimiter(input);
 
             delimiterBuilder.append("|").append(input.charAt(2));
 
