@@ -9,6 +9,14 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
     @Test
+    void 구분자를_사용하지_않은_경우() {
+        assertSimpleTest(() -> {
+            run("123");
+            assertThat(output()).contains("결과 : 123");
+        });
+    }
+
+    @Test
     void 구분자_사용() {
         assertSimpleTest(() -> {
             run("1,2:3");
