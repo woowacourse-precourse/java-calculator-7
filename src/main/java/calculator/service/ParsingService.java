@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import static calculator.utils.Constants.*;
 import static calculator.validators.InvalidInputStringFormatException.errorCheck;
+import static calculator.validators.InvalidOperandFormatException.validateToken;
 
 public class ParsingService {
     public static OperandDTO parseOperandStr(String operandStr) {
@@ -41,7 +42,7 @@ public class ParsingService {
 
         String[] tokens = operandStr.split(regex);
         for (String token : tokens) {
-
+            operandList.add(validateToken(token));
         }
     }
 
@@ -62,6 +63,4 @@ public class ParsingService {
         regexBuilder.append("]");
         return regexBuilder.toString();
     }
-
-
 }

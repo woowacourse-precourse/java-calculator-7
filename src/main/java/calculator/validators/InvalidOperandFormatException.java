@@ -2,9 +2,9 @@ package calculator.validators;
 
 public class InvalidOperandFormatException {
     // 빈 값 및 정수 체크를 위한 함수
-    private static void validateToken(String token) {
+    public static int validateToken(String token) {
         checkEmpty(token);
-        checkInteger(token);
+        return checkInteger(token);
     }
     private static void checkEmpty(String str){
         if (str.isEmpty()) {
