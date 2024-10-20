@@ -18,4 +18,8 @@ public class Delimiters {
         delimiters.add(DEFAULT_DELIMITER_COMMA);
         delimiters.add(DEFAULT_DELIMITER_COLON);
     }
+
+    public void addCustomDelimiters(Set<String> customDelimiters) {
+        delimiters.addAll(customDelimiters);
+    }
 }
