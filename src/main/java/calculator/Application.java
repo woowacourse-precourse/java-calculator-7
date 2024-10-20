@@ -15,4 +15,24 @@ public class Application {
 
 		System.out.println("결과 : " + result);
 	}
+	private static String[] split(String input) {
+		if (input.startsWith("//")) {
+			int enterIndex = input.indexOf("\\n");
+
+			if (enterIndex == -1) {
+				throw new IllegalArgumentException("잘못된 입력입니다.");
+			}
+
+			String customDelimiter = input.substring(2, enterIndex);
+			String numbers = input.substring(enterIndex + 2);
+
+			// 구분자를 전부 쉼표로 교체
+			numbers = numbers.replace(customDelimiter, ",");
+			numbers = numbers.replace(":", ",");
+
+			return numbers.split(",");
+		}
+
+		return input.split(",|:");
+	}
 }
