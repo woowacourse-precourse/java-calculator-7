@@ -65,7 +65,17 @@ class DelimiterTest {
         assertThat(delimiter.split(input)).isEqualTo(expectedNumbers);
     }
 
-    @ValueSource(strings = {"1.", "!1", "1,2:3;4", ",|;", "//\n"})
+    @Test
+    @DisplayName("이모지 커스텀 구분자 입력 분리")
+    void 이모지_커스텀_구분자() {
+        String input = "// ➕ \\n1 ➕ 2 ➕ 3";
+
+        List<String> numbers = delimiter.split(input);
+
+        assertThat(numbers).containsExactly("1", "2", "3");
+    }
+
+    @ValueSource(strings = {"1.", "!1", "1,2:3;4", ",|;", "//\\n", "// ➕; \\n"})
     @ParameterizedTest(name = "{0}은 분리할 수 없습니다")
     @DisplayName("입력 분리 실패: 기본/커스텀 구분자에 속하지 않음")
     void 입력_분리_실패(String input) {
