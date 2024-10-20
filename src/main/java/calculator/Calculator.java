@@ -15,7 +15,11 @@ public class Calculator {
         if(str.startsWith("//")){
             String custom = str.substring(0,5);
             if(custom.endsWith("\\n")) {
-                delimiters.add(str.charAt(2));
+                char customDelimiter = str.charAt(2);
+                if(Character.isDigit(customDelimiter)){
+                    throw new IllegalArgumentException("양수는 구분자로 사용할 수 없습니다.");
+                }
+                delimiters.add(customDelimiter);
                 i = 5;
             } else {
                 throw new IllegalArgumentException("커스텀 구분자는 //과 \\n 사이에 위치해야합니다.");
