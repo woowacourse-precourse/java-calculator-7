@@ -17,6 +17,9 @@ public class SeparatorServiceImpl implements SeparatorService{
     // 커스텀 구분자가 위치하는 인덱스 (커스텀 구분자는 입력 문자열에서 세 번째 위치에 있음)
     private static final int INDEX_OF_CUSTOM_SEPARATOR = 2;
 
+    // 커스텀 구분자를 등록하는 헤더의 길이
+    private static final int LENGTH_OF_CUSTOM_SEPARATOR_HEADER = 5;
+
 
     /**
      * 입력에서 커스텀 구분자가 있는지 확인합니다.
@@ -25,13 +28,13 @@ public class SeparatorServiceImpl implements SeparatorService{
      */
     @Override
     public boolean checkCustomSeparator(String input) {
-        if(!(input.length() < 5)){
+        if(input.length() < LENGTH_OF_CUSTOM_SEPARATOR_HEADER){
             return false;
         }
         if (!input.startsWith("//")){
             return false;
         }
-        if (!input.startsWith("\\n",3)){
+        if (!input.startsWith("\\n",INDEX_OF_CUSTOM_SEPARATOR+1)){
             return false;
         }
         return true;
