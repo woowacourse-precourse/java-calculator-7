@@ -18,8 +18,7 @@ public class Application {
             int result = calculate(input);
             System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
-            // 예외 발생 시 예외 메시지와 stack trace 출력
-            System.err.println("예외 발생: " + e.getMessage());
+            // 예외 발생 시 stack trace 출력
             e.printStackTrace();
         }
     }
@@ -94,6 +93,9 @@ public class Application {
             int num = Integer.parseInt(number);
             if (num < 0) {
                 throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
+            }
+            if (!number.matches("-?\\d+")) {  // 정수인지 확인 (음수 포함)
+                throw new IllegalArgumentException("숫자가 아닌 값이 포함되었습니다: " + number);
             }
         }
     }
