@@ -3,10 +3,8 @@ package calculator.domain;
 import calculator.validator.DelimiterValidator;
 import calculator.validator.StringValidator;
 
-import static calculator.global.constant.DelimiterConstant.PREFIX;
-import static calculator.global.constant.DelimiterConstant.SUFFIX;
-import static calculator.global.constant.DelimiterConstant.ESCAPE_CHAR;
-import static calculator.global.constant.DelimiterConstant.ESCAPE_REQUIRED_REGEX;
+import static calculator.global.constant.DelimiterConstant.*;
+
 
 public class Delimiter {
 
@@ -20,11 +18,12 @@ public class Delimiter {
     }
 
     public static void addCustomDelimiter(String str) {
-        str = str.substring(0, str.lastIndexOf(SUFFIX)+SUFFIX.length());
-        str = removePrefixAndSuffix(str);
-        String customDelimiter = addEscapeChar(str);
+        if (!DelimiterValidator.hasCustomDelimiter(str)) {
+            return;
+        }
+        String customDelimiter = extractCustomDelimiter(str);
         validateCustomDelimiter(customDelimiter);
-        addDelimiter(customDelimiter);
+        addDelimiter(escapeSpecialCharacters(customDelimiter));
     }
 
     public static String removeEnrollmentString(String str) {
@@ -35,25 +34,28 @@ public class Delimiter {
         return str.replaceFirst(delimiter, EMPTY_STRING);
     }
 
-    private static void addDelimiter(String customDelimiter) {
-        delimiter +=  DELIMITER_SEPARATOR + customDelimiter;
+    private static String removePrefixAndSuffix(String str) {
+        str = str.replace(PREFIX, EMPTY_STRING);
+        str = str.replace(SUFFIX, EMPTY_STRING);
+        return str;
     }
 
-    private static String addEscapeChar(String customDelimiter) {
-        if (customDelimiter.matches(ESCAPE_REQUIRED_REGEX)) {
-            customDelimiter = ESCAPE_CHAR + customDelimiter;
-        }
-        return customDelimiter;
+    private static String extractCustomDelimiter(String str) {
+        int startIndex = str.indexOf(PREFIX) + PREFIX.length();
+        int endIndex = str.indexOf(SUFFIX);
+        return str.substring(startIndex, endIndex);
+    }
+
+    private static void addDelimiter(String customDelimiter) {
+        delimiter += DELIMITER_SEPARATOR + customDelimiter;
+    }
+
+    private static String escapeSpecialCharacters(String customDelimiter) {
+        return customDelimiter.replaceAll(ESCAPE_REQUIRED_REGEX, ESCAPE_REPLACE_CHAR);
     }
 
     private static void validateCustomDelimiter(String customDelimiter) {
         StringValidator.validateCustomDelimiterFormat(customDelimiter);
         DelimiterValidator.validateCustomDelimiterLength(customDelimiter);
-    }
-
-    private static String removePrefixAndSuffix(String str) {
-        str = str.replace(PREFIX, EMPTY_STRING);
-        str = str.replace(SUFFIX, EMPTY_STRING);
-        return str;
     }
 }
