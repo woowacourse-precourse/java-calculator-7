@@ -24,7 +24,7 @@ public class Separator {
             return false;
         }
         if (userInput.startsWith("//")) {
-            int index = userInput.indexOf("\n");
+            int index = userInput.indexOf("\\n");
             if (index > 2) {
                 return true;
             }
@@ -34,22 +34,53 @@ public class Separator {
     }
 
     public BigDecimal notExistCustomSeparator(String userInput) {
-        if (userInput == null || userInput.isEmpty()) {
-            return BigDecimal.ZERO;
+        BigDecimal zero = emptyCheck(userInput);
+        if (zero != null) {
+            return zero;
         }
 
         String delimiter = ",|:";
+        BigDecimal sum = sumExpression(userInput, delimiter);
+
+        return sum;
+    }
+
+    public BigDecimal existCustomSeparator(String userInput) {
+        BigDecimal zero = emptyCheck(userInput);
+        if (zero != null) {
+            return zero;
+        }
+
+        String delimiter = ",|:";
+        int index = userInput.indexOf("\\n");
+        String customDelimiter = userInput.substring(2, 3);
+        String expression = userInput.substring(index + 2);
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(delimiter);
+        sb.append("|");
+        sb.append(customDelimiter);
+        String newDelimiter = sb.toString();
+
+        BigDecimal sum = sumExpression(expression, newDelimiter);
+
+        return sum;
+    }
+
+    private BigDecimal emptyCheck(String userInput) {
+        if (userInput == null || userInput.isEmpty()) {
+            return BigDecimal.ZERO;
+        }
+        return null;
+    }
+
+    private BigDecimal sumExpression(String userInput, String delimiter) {
         List<String> numbers = Arrays.asList(userInput.split(delimiter));
         BigDecimal sum = BigDecimal.ZERO;
 
         for (String number : numbers) {
             sum = sum.add(new BigDecimal(number));
         }
-
         return sum;
-    }
-
-    public BigDecimal existCustomSeparator(String userInput) {
-        return BigDecimal.ZERO;
     }
 }
