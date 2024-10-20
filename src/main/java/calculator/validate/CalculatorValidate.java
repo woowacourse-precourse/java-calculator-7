@@ -23,7 +23,6 @@ public class CalculatorValidate {
         int[] validateIntArray = new int[userInput.length];
         int index = 0;
         for (String element : userInput) {
-            System.out.println(element);
             int number;
             try {
                 number = Integer.parseInt(element);
@@ -32,7 +31,7 @@ public class CalculatorValidate {
             }
 
             if (number < 1) {
-                throw new IllegalArgumentException("음수가 입력되었습니다.");
+                throw new IllegalArgumentException("0이하의 수가 입력되었습니다.");
             }
             validateIntArray[index] = Integer.parseInt(element);
             index++;
