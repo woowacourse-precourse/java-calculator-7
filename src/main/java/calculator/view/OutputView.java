@@ -6,8 +6,8 @@ public class OutputView {
         System.out.println("계산기를 시작합니다.");
     }
 
-    public void printCalculatorResult(int ans) {
-        System.out.println("결과 : " + ans);
+    public void printCalculatorResult(int result) {
+        System.out.println("결과 : " + result);
     }
 
     public void printCalculatorEndMessage() {
