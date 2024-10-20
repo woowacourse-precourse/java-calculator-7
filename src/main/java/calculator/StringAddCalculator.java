@@ -10,8 +10,12 @@ public class StringAddCalculator {
         int result = 0;
 
         // 빈 문자열 확인
-        if(exp==null || exp.trim().isEmpty()) {
+        if(exp==null) {
             throw new IllegalArgumentException("문자열이 입력되지 않았습니다.");
+        }
+
+        if(exp.isEmpty()) {
+            return 0;
         }
 
         // 커스텀 문자열 확인
