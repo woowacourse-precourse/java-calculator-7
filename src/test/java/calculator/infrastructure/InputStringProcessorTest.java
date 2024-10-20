@@ -2,6 +2,7 @@ package calculator.infrastructure;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -78,24 +79,25 @@ class InputStringProcessorTest {
 
     @ParameterizedTest
     @MethodSource("provideSlicedStr")
-    void 문자열에서_구분자를_모두_제거하여_반환하는_테스트(String slicedStr, Set<Character> separators, String expectedStr) {
+    void 문자열에서_구분자를_기준으로_잘라서_리스트를_반환하는_테스트(String slicedStr, Set<Character> separators, List<String> strList) {
         InputStringProcessor inputStringProcessor = new InputStringProcessor();
-        assertThat(inputStringProcessor.removeSeparator(separators, slicedStr)).isEqualTo(expectedStr);
+        assertThat(inputStringProcessor.removeSeparator(separators, slicedStr)).isEqualTo(strList);
     }
 
     private static Stream<Arguments> provideSlicedStr() {
         Set<Character> defaultSeparators = Set.of(':', ',');
         return Stream.of(
-                Arguments.of("12345", defaultSeparators, "12345"),
-                Arguments.of("123", defaultSeparators, "123"),
-                Arguments.of("//12345", defaultSeparators, "//12345"),
-                Arguments.of("123\n:,5", defaultSeparators, "123\n5"),
-                Arguments.of("//+\1234:,", defaultSeparators, "//+\1234"),
-                Arguments.of("12,3-4:5", defaultSeparators, "123-45"),
-                Arguments.of("12,!@#$3+4:5", Set.of(':', ',', '!', '@', '#', '+', '$'), "12345"),
-                Arguments.of("12,3+4:5", Set.of(':', ',', '+'), "12345"),
+                Arguments.of("12345", defaultSeparators, List.of("12345")),
+                Arguments.of("123", defaultSeparators, List.of("123")),
+                Arguments.of("//12345", defaultSeparators, List.of("//12345")),
+                Arguments.of("123\n:,5", defaultSeparators, List.of("123\n", "5")),
+                Arguments.of("//+\1234:,", defaultSeparators, List.of("//+\1234")),
+                Arguments.of("12,3-4:5", defaultSeparators, List.of("12", "3-4", "5")),
+                Arguments.of("12,!@3#4$53+4:590", Set.of(':', ',', '!', '@', '#', '+', '$'),
+                        List.of("12", "3", "4", "53", "4", "590")),
+                Arguments.of("12,3+4:5", Set.of(':', ',', '+'), List.of("12", "3", "4", "5")),
                 Arguments.of("2,3+-`1=-09*()&%$4:5", Set.of(':', ',', '+', '-', '`', '=', '*', '(', ')', '&', '%', '$'),
-                        "2310945")
+                        List.of("2", "3", "1", "09", "4", "5"))
         );
     }
 
