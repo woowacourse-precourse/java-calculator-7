@@ -15,6 +15,21 @@ public class CalculatorService {
     private static final List<String> DEFAULT_DELIMITERS = Arrays.asList(",", ":");
     private static final DelimiterValidation validation = new DelimiterValidation();
 
+    public int initCalculator(String input) {
+
+        if (input.isEmpty()) {
+            return 0;
+        }
+
+        DelimiterValidation validation = new DelimiterValidation();
+        validation.validate(input);
+
+        DelimiterAndNumber delimiterAndNumber = isDelimiterCustomOrDefault(input, validation);
+        String[] numbers = splitNumbersByDelimiter(delimiterAndNumber);
+
+        return sum(numbers);
+    }
+
 
     // 기본 구분자, 커스텀 구분자 타입 체크
     private DelimiterAndNumber isDelimiterCustomOrDefault(String input, DelimiterValidation validation) {
