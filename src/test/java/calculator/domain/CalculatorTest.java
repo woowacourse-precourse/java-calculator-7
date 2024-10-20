@@ -5,6 +5,8 @@ import calculator.exception.StringInSplittedInputException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 
 class CalculatorTest {
@@ -22,12 +24,13 @@ class CalculatorTest {
         Assertions.assertThat(sum).isEqualTo(60);
     }
 
-    @Test
+    @ParameterizedTest
     @DisplayName("분리된 입력값 중 음수가 존재할 경우 예외 발생")
-    void validatePositiveNumber() {
+    @ValueSource(strings = {"10,-20,30", "0,0,0"})
+    void validatePositiveNumber(String input) {
         //given
         Calculator calculator = new Calculator();
-        String[] strings = {"10", "-20", "30"};
+        String[] strings = input.split(",");
 
         //then
         Assertions.assertThatThrownBy(() ->
