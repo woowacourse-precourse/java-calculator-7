@@ -10,6 +10,13 @@ public class StringCalculator {
         this.input = input;
     }
 
+    public int calculate() {
+        String separator = findSeperator();
+        List<Integer> seperatedNums = separateMachine(separator);
+        // 구현 예정
+        return 0;
+    }
+
     private String findSeperator() {
         // 1차적으로 문자열 맨 앞에 "//" 가 있고, "\n"으로 닫혀있는지 확인하여 어떤 커스텀 구분자를 사용하는지 검출
         if (input.startsWith("//")) {
@@ -57,7 +64,6 @@ public class StringCalculator {
         // 아무 입력이 없을 경우
         if (input.length() == 0) {
             splitedNums.add(0);
-            System.out.println("splitedNums = " + splitedNums);
             return splitedNums;
         }
         for (int i = 0; i != input.length(); i++) {
@@ -67,7 +73,6 @@ public class StringCalculator {
                 // 구분자가 나왔지만 앞에 숫자가 없었을 경우
                 if (splitedNum == "") {
                     splitedNums.add(0);
-                    System.out.println("splitedNums = " + splitedNums);
                     continue;
                 }
                 splitedNums.add(Integer.parseInt(splitedNum));
@@ -97,9 +102,4 @@ public class StringCalculator {
         return splitedNums;
     }
 
-    public int calculate() {
-        String separator = findSeperator();
-        List<Integer> seperatedNums = separateMachine(separator);
-        return 0;
-    }
 }
