@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Numbers {
+
     private final List<Integer> numbers;
 
     public Numbers(final String[] input) {
@@ -19,7 +20,6 @@ public class Numbers {
                 throw new IllegalArgumentException(INPUT_NEGATIVE_NUMBER_ERROR.getMessage());
             }
         });
-
     }
 
     private List<Integer> convertToIntegers(final String[] strings) {
