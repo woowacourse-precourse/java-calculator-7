@@ -1,4 +1,4 @@
-package calculator.Calculate;
+package calculator.calculate;
 
 import calculator.model.Calculate;
 import java.util.List;

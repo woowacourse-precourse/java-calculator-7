@@ -1,4 +1,4 @@
-package calculator.NumberParser;
+package calculator.numberParser;
 
 import calculator.model.NumberParser;
 import calculator.model.dto.DelimiterInputData;
