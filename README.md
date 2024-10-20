@@ -3,9 +3,9 @@
 # Calculator class
 
 - Calculator class has below Large functions
-    1. read input
-    2. process input
-    3. sum all element
+    1. process input ( internal function)
+    2. sum all element (internal funtion)
+    3. interface for calculating
 
-    - By using these functions, satisfy the functional requirement
+    - By using interface, User can use calculator and calculator do tasks processing input and sum all elements
   

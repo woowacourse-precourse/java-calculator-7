@@ -11,11 +11,9 @@ public class Application {
         String input = camp.nextstep.edu.missionutils.Console.readLine();
 
         Calculator cal = new calculator.Calculator();
-        cal.readInput(input);
+        String res = cal.doTask(input);
 
-        long res = cal.sum();
-
-        result = result.concat(String.valueOf(res));
+        result = result.concat(res);
 
         System.out.println(result);
 

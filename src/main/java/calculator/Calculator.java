@@ -1,18 +1,15 @@
 package calculator;
 
-
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
 public class Calculator {
 
-    Set<Character> delimiterSet;
-    ArrayList<Long> elementList;
-    String startConfigStr = "//";
-    String endConfigStr = "\n";
-    String endConfigStrEscapeExp = "\\n";
-    char[] defaultDel = {',', ':'};
+    protected Set<Character> delimiterSet;
+    protected ArrayList<Long> elementList;
+    protected final char[] DEFAULT_DELIMITER = {',', ':'};
 
     Calculator() {
         delimiterSet = new HashSet<>();
@@ -20,76 +17,126 @@ public class Calculator {
 
     }
 
-    /*TODO
-    - 입력값은 UTF-8 CharSet인가?
-    - 입력 문자의 범위는?
-    */
-    void readInput(String input) {
+    protected String[] parseInput(String input) {
 
-        final int startIdx = 0;
-        final int maxNumLength = String.valueOf(Long.MAX_VALUE).length() + 1;
-        //문자열 입력 부분 제대로 읽게 만들기
-        int idxOfCustom = input.indexOf(startConfigStr);
-        int idxOfCustomEnd =
-                input.indexOf(endConfigStr) != -1 ? input.indexOf(endConfigStr)
-                        : input.indexOf(endConfigStrEscapeExp) != -1 ? input.indexOf(endConfigStrEscapeExp) + 1 : -1;
+        if (input.isEmpty()) {
+            throw new IllegalArgumentException("Input string is empty. please check input");
+        }
 
-        if (idxOfCustom != -1 && idxOfCustom != startIdx) {
-            // exception 유효치않은 입력 문자열
+        final int headStartIdx = 0;
+        final String headStartStr = "//";
+        final String headEndStr = "\\n";
+
+        int idxHeadStart = input.indexOf(headStartStr);
+
+        int idxHeadEnd = input.indexOf(headEndStr);
+
+        //validate header
+        if (idxHeadStart != -1 && idxHeadStart != headStartIdx) {
+            // exception 유효치 않은 입력 문자열
             throw new IllegalArgumentException("Invalid Input String. Need to start \"//\" when set custom delimiter.");
         }
 
-        if (idxOfCustom != -1 && idxOfCustomEnd == -1) {
+        if (idxHeadStart != -1 && idxHeadEnd == -1) {
             //exception 유효치 않은 입력 문자열
             throw new IllegalArgumentException("Invalid Input String. Need to keep format \"//...\\n\" ");
         }
 
-        //get custom delimiter
-        if (idxOfCustom != -1) {
-            int idx = startConfigStr.length();
-            int end = idxOfCustomEnd;
+        String customDelimiters = "";
+        String body = "";
+        int bodyIdx = 0;
 
-            while (idx < end) {
-                delimiterSet.add(input.charAt(idx));
-                System.out.println(input.charAt(idx));
-                idx++;
-            }
+        if (idxHeadStart != -1) {
+            int s = idxHeadStart + headStartStr.length();
+            int e = idxHeadEnd;
+            customDelimiters = input.substring(s, e);
+
+            bodyIdx = e + headEndStr.length();
         }
 
-        //get number
-        int idxNum = idxOfCustomEnd + endConfigStr.length();
-        String strEle = input.substring(idxNum).replace(defaultDel[1], defaultDel[0]); // check
+        body = input.substring(bodyIdx);
 
-        for (Character del : delimiterSet) {
-            strEle = strEle.replace(del, defaultDel[0]);
-        }
+        String[] ret = {customDelimiters, body};
 
-        String[] strNum = strEle.split(String.valueOf(defaultDel[0]));
+        //System.out.println("[parseInput] result : [ " + customDelimiters + " , " + body + "] ");
 
-        for (String s : strNum) {
+        return ret;
 
-            if (s.length() >= maxNumLength) {
-                throw new IllegalArgumentException("Over MAX Number. num : " + s);
-            }
-
-            long ll = Long.valueOf(s);
-
-            if (ll <= 0) {
-                throw new IllegalArgumentException("Out Of Range Number. num : + ll");
-            }
-            elementList.add(ll);
-        }
 
     }
 
-    long sum() {
-        long sum = 0;
 
-        for (long ll : elementList) {
-            sum += ll;
+    protected void setCustomDelimiter(String delimiters) {
+
+        //System.out.println("[setCustomDelimiter] delimiters : " + delimiters);
+        for (int i = 0; i < delimiters.length(); i++) {
+            char ch = delimiters.charAt(i);
+            delimiterSet.add(ch);
         }
 
-        return sum;
+        //System.out.print("[setCustomDelimiter] delimiterSet : [");
+        delimiterSet.forEach((del -> {
+            //System.out.print(del + ", ");
+        }));
+        //System.out.print("]\n");
+    }
+
+    protected String[] parseBody(String body) {
+
+        //replace delimiter
+
+        String strEle = body.replace(DEFAULT_DELIMITER[1], DEFAULT_DELIMITER[0]);
+
+        for (Character del : delimiterSet) {
+            strEle = strEle.replace(del, DEFAULT_DELIMITER[0]);
+        }
+
+        //System.out.println("[parseBody] : output : " + strEle);
+
+        String[] ret = strEle.split(String.valueOf(DEFAULT_DELIMITER[0]));
+
+        return ret;
+    }
+
+
+    protected String sum(String[] elementList) {
+
+        final int maxSize = 8;
+        BigInteger sum = new BigInteger("0");
+
+        for (String s : elementList) {
+
+            for (int i = 0; i < s.length(); i++) {
+                char ch = s.charAt(i);
+
+                if (!Character.isDigit(ch)) {
+                    throw new IllegalArgumentException(s + " is not number or positive number. please check it");
+                }
+            }
+
+            BigInteger num = new BigInteger(s);
+
+            sum = sum.add(num);
+        }
+
+        //System.out.println("[sum] result : " + sum);
+
+        return sum.toString();
+
+    }
+
+    String doTask(String input) {
+
+        final int bodyIdx = 1;
+        final int headerIdx = 0;
+        //get custom delimiter
+        String[] dataList = parseInput(input);
+
+        setCustomDelimiter(dataList[headerIdx]);
+
+        String[] numbers = parseBody(dataList[bodyIdx]);
+
+        return sum(numbers);
 
     }
 }
