@@ -38,7 +38,6 @@ public class Application {
         } else {
             return input.split(separator1 + "|" + separator2 + "|" + Pattern.quote(separator3)); // 모든 구분자로 나누기
         }
-
     }
 
     private static int calculator(String[] sepArr) {
