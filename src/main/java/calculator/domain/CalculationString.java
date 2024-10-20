@@ -37,4 +37,9 @@ public class CalculationString {
             throw new IllegalArgumentException("구분자와 정수 이외 다른 문자는 입력x");
         }
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return value.equals(obj);
+    }
 }
