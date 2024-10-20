@@ -5,10 +5,6 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
-record InputSliceResult(String input, String delimiters) {
-
-}
-
 public class Application {
 
     private static InputSliceResult getCustomDelimiters(String input, String delimiters) {
