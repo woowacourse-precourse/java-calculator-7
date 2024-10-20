@@ -19,21 +19,21 @@ public class CustomDelimiterProcessorTest {
     }
 
     @Test
-    void 커스텀_구분자_포맷_예외_1() {
+    void 커스텀_구분자_앞부분_포맷_예외() {
         assertThatThrownBy(() ->
                 customDelimiterProcessor.addCustomDelimiters("/%$\\n5,3", delimiters))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    void 커스텀_구분자_포맷_예외_2() {
+    void 커스텀_구분자_뒷부분_포맷_예외() {
         assertThatThrownBy(() ->
                 customDelimiterProcessor.addCustomDelimiters("//$\\%5,3", delimiters))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    void 커스텀_구분자_포맷_예외_3() {
+    void 커스텀_구분자_길이_포맷_예외() {
         assertThatThrownBy(() ->
                 customDelimiterProcessor.addCustomDelimiters("//%$\\n5,3", delimiters))
                 .isInstanceOf(IllegalArgumentException.class);
