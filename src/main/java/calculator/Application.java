@@ -28,10 +28,16 @@ public class Application {
         separatedNumbers = finalStr.split(",");
         System.out.println(separatedNumbers);
 
+
         // 합계 도출하기
         int sum=0;
         IllegalArgumentException printError = new IllegalArgumentException();
         for (String num : separatedNumbers){
+            //구분자 사이 숫자가 없는 경우 고려
+            if(num==""){
+                continue;
+            }
+
             int partNum = 0;
             try{
                 partNum = Integer.parseInt(num);
