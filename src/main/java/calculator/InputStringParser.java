@@ -34,9 +34,6 @@ public class InputStringParser {
     public String[] split(String input) {
         String[] numbers = input.split(delimiterPattern);
         InputValidator.validateNumbers(numbers);
-        for (String number : numbers) {
-            System.out.println(number);
-        }
         return numbers;
     }
 }
