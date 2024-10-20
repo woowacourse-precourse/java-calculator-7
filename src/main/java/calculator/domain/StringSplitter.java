@@ -17,9 +17,9 @@ public class StringSplitter {
     }
 
     /*
-              "|" 기호는 정규 표현식에서 "또는"의 의미를 가지고 있습니다.
-              즉, 아래 split 코드는 customDelimiter, COLON, 또는 COMMA 로 문자열을 나누겠다는 뜻입니다.
-         */
+          "|" 기호는 정규 표현식에서 "또는"의 의미를 가지고 있습니다.
+          즉, 아래 split 코드는 customDelimiter, COLON, 또는 COMMA 로 문자열을 나누겠다는 뜻입니다.
+     */
     public String[] getNumberStringsToAdd(String stringToAdd) {
         String customDelimiter = customDelimiterExtractor.getCustomDelimiter(stringToAdd);
         if (!customDelimiter.isEmpty()) {

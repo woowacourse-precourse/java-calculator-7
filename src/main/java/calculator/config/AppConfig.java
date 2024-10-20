@@ -5,6 +5,7 @@ import calculator.domain.Calculator;
 import calculator.domain.CustomDelimiterExtractor;
 import calculator.domain.NumberExtractor;
 import calculator.domain.StringSplitter;
+import calculator.service.CalculatorService;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -14,11 +15,14 @@ public class AppConfig {
         return new CalculatorController(
                 new InputView(),
                 new OutputView(),
-                calculator());
+                calculatorService());
     }
 
-    public Calculator calculator() {
-        return new Calculator(numberStringExtractor());
+    public CalculatorService calculatorService() {
+        return new CalculatorService(
+                new Calculator(),
+                numberStringExtractor()
+        );
     }
 
     public NumberExtractor numberStringExtractor() {
