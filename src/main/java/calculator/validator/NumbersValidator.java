@@ -13,7 +13,7 @@ public class NumbersValidator {
     public static final String ONLY_NUMBER_REGEX = "^[0-9]*$";
     public static final String CHAR_ONLY_CAN_USE_AS_CUSTOM = "문자는 커스텀 구분자로 지정 후 사용할 수 있습니다.";
     public static final String ONLY_POSITIVE = "양수만 계산 가능합니다.";
-    public static final String NUMBER_RANGE_LIMIT_MESSAGE = "입력 가능한 숫자의 최대 범위는 20억입니다.";
+    public static final String NUMBER_RANGE_LIMIT_MESSAGE = "입력 가능한 숫자의 최대 범위는 2억입니다.";
     public static final String NUMBER_SIZE_LIMIT_MESSAGE = "입력 가능한 숫자의 개수는 최대 10개입니다.";
 
     public int validate(String input) {
