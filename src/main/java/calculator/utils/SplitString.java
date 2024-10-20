@@ -7,11 +7,11 @@ public class SplitString {
         String delimiter = defaultDelimiter;
 
         if (input.startsWith("//")) {
-            int delimiterIndex = input.indexOf("\n");
+            int delimiterIndex = input.indexOf("\\n");
             String customDelimiter = input.substring(2, delimiterIndex);
             delimiter = customDelimiter;
 
-            input = input.substring(delimiterIndex + 1);
+            input = input.substring(delimiterIndex + 2);
         }
 
         return input.split(delimiter);
