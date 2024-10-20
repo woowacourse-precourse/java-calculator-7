@@ -16,9 +16,16 @@ public class StringCalculator {
         String[] nums = str.split(regex);
 
         try {
-             result = Arrays.stream(nums).mapToInt(Integer::parseInt).sum();
+             result = Arrays.stream(nums)
+                     .mapToInt(num -> {
+                         int number = Integer.parseInt(num);
+                         if (number < 0) {
+                             throw new IllegalArgumentException(); // "음수"
+                         }
+                         return number;})
+                     .sum();
         }catch (NumberFormatException e) {
-            throw new IllegalArgumentException("유효하지 않은 입력입니다.");
+            throw new IllegalArgumentException(); // 유효X
         }
 
         return result;

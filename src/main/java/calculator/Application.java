@@ -30,14 +30,7 @@ public class Application {
             inputStr = regexUtil.removeCustomDelimiter(inputStr);
         }
 
-        try {
-            int result = stringCalculator.calculate(inputStr, regex);
-            System.out.println("결과 : " + result);
-
-        } catch (IllegalArgumentException ex) {
-            System.err.println(ex.getMessage());
-
-        }
-
+        int result = stringCalculator.calculate(inputStr, regex);
+        System.out.println("결과 : " + result);
     }
 }
