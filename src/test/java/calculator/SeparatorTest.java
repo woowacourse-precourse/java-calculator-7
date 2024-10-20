@@ -103,6 +103,12 @@ public class SeparatorTest extends NsTest {
             String result = obj.getSeparator("//;\\n//#\\n//!\\n1;2,3:4");
             assertThat(result).isEqualTo(",|:|;|#|!");
         });
+
+        assertSimpleTest(() -> {
+            Separator obj = new Separator();
+            String result = obj.getSeparator("//!@\\n//#\\n//!\\n1;2,3:4");
+            assertThat(result).isEqualTo(",|:|!@|#|!");
+        });
     }
 
     @Override
