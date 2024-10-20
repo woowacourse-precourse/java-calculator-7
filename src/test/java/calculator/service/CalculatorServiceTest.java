@@ -20,9 +20,9 @@ class CalculatorServiceTest {
             "1/2"   // 슬래시는 기본 구분자가 아님
     })
     void add_invalidDelimiter_throwsException(String input) {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            CalculatorService.add(input);
-        });
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> CalculatorService.add(input));
+
         assertEquals("구분자가 적절하지 않습니다", exception.getMessage());
     }
 
@@ -38,9 +38,9 @@ class CalculatorServiceTest {
             "'9:10,11/12,13'", // 네 번째 잘못된 구분자 (슬래시), 네 개의 숫자
     })
     void add_validAndInvalidMixedDelimiters_throwsException(String input) {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            CalculatorService.add(input);
-        });
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> CalculatorService.add(input));
+
         assertEquals("구분자가 적절하지 않습니다", exception.getMessage());
     }
 
@@ -58,9 +58,8 @@ class CalculatorServiceTest {
     void add_invalidCharacterDelimiter_throwsException(String input) {
 
         // 영어 또는 한글이 구분자로 포함되어 있으면 예외가 발생해야 함
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            CalculatorService.add(input);
-        });
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> CalculatorService.add(input));
 
         assertEquals("글자는 들어올 수 없습니다", exception.getMessage());
     }
@@ -75,9 +74,8 @@ class CalculatorServiceTest {
             "1,-2:-3"   // 음수가 두 번째와 세 번째 위치, 콜론과 쉼표 혼합
     })
     void add_negativeNumber_throwsException(String input) {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            CalculatorService.add(input);
-        });
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> CalculatorService.add(input));
 
         // 예외 메시지에 음수가 포함되어 있는지 확인
         assertEquals("음수는 허용되지 않습니다", exception.getMessage());
@@ -94,9 +92,8 @@ class CalculatorServiceTest {
     })
     void add_invalidStartingCharacter_throwsException(String input) {
         // 문자열이 숫자나 "//"로 시작하지 않으면 IllegalArgumentException이 발생하는지 확인
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            CalculatorService.add(input);
-        });
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> CalculatorService.add(input));
 
         // 예외 메시지가 예상된 것과 일치하는지 확인
         assertEquals("잘못된 형식입니다. 숫자 또는 '//'로 시작해야 합니다.", exception.getMessage());
@@ -112,9 +109,8 @@ class CalculatorServiceTest {
     })
     void add_missingNewlineAfterCustomDelimiter_throwsException(String input) {
         // 문자열의 앞부분이 "//"인데 그 뒤에 '\n'이 없으면 IllegalArgumentException이 발생하는지 확인
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            CalculatorService.add(input);
-        });
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> CalculatorService.add(input));
 
         // 예외 메시지가 예상된 것과 일치하는지 확인
         assertEquals("잘못된 형식입니다. 커스텀 구분자 뒤에 '\\n'이 있어야 합니다.", exception.getMessage());
@@ -128,9 +124,8 @@ class CalculatorServiceTest {
             "//3\n3:4:5",  // 숫자 '3'이 커스텀 구분자로 사용됨
     })
     void add_withNumberAsCustomDelimiter_throwsException(String input) {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            CalculatorService.add(input);
-        });
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> CalculatorService.add(input));
 
         // 예외 메시지가 예상된 것과 일치하는지 확인
         assertEquals("숫자는 커스텀 구분자로 사용할 수 없습니다", exception.getMessage());
@@ -144,9 +139,8 @@ class CalculatorServiceTest {
             "//|||\n3:4:5",  // | 는 커스텀 구분자가 될 수 없음
     })
     void add_withNumberOrPipeMisusedAsCustomDelimiter_throwsException(String input) {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            CalculatorService.add(input);
-        });
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> CalculatorService.add(input));
 
         // 예외 메시지가 예상된 것과 일치하는지 확인
         assertEquals("커스텀 구분자 등록의 형식이 잘못되었습니다. 파이프(`|`)는 커스텀 구분자를 구분하는 용도로만 사용할 수 있습니다", exception.getMessage());
