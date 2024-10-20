@@ -1,6 +1,8 @@
 package calculator;
 
 public class StringValidator {
+    private static final String DEFAULT_DELIMITER = ",|:";
+
     public String validateAndProcess(String input) {
         if (isEmpty(input)) {
             return "0";
@@ -10,11 +12,10 @@ public class StringValidator {
             return input;
         }
 
-        if (isCustomDelimiter(input)) {
-            return validateCustomDelimiter(input);
-        }
+        String delimiter = determineDelimiter(input);
+        String numbersString = extractNumbersString(input);
 
-        return validateNumbers(input);
+        return validateNumbers(numbersString, delimiter);
     }
 
     private boolean isEmpty(String input) {
@@ -25,7 +26,7 @@ public class StringValidator {
         return input.startsWith("//");
     }
 
-    private String validateCustomDelimiter(String input) {
+    private String extractCustomDelimiter(String input) {
         int delimiterSeparatorIndex = input.indexOf("\n");
         if (delimiterSeparatorIndex <= 2) {
             throw new IllegalArgumentException();
@@ -36,11 +37,22 @@ public class StringValidator {
             throw new IllegalArgumentException();
         }
 
-        return validateNumbers(input.substring(delimiterSeparatorIndex + 1), delimiter);
+        return delimiter;
     }
 
-    private String validateNumbers(String input) {
-        return validateNumbers(input, ",|:");
+    private String determineDelimiter(String input) {
+        if (isCustomDelimiter(input)) {
+            return extractCustomDelimiter(input);
+        }
+        return DEFAULT_DELIMITER;
+    }
+
+    private String extractNumbersString(String input) {
+        if (isCustomDelimiter(input)) {
+            int delimiterSeparatorIndex = input.indexOf("\n");
+            return input.substring(delimiterSeparatorIndex + 1);
+        }
+        return input;
     }
 
     private String validateNumbers(String input, String delimiter) {
@@ -69,11 +81,6 @@ public class StringValidator {
     }
 
     private boolean isNumeric(String text) {
-        for (char c : text.toCharArray()) {
-            if (!Character.isDigit(c)) {
-                return false;
-            }
-        }
-        return true;
+        return text.chars().allMatch(Character::isDigit);
     }
 }
