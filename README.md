@@ -84,26 +84,58 @@
 - **테스트 코드**
 ```java
 @Test
-void 커스텀_구분자_사용() {
-    assertSimpleTest(() -> {
-        run("//;\\n1");
-        assertThat(output()).contains("결과 : 1");
-    });
-}
+    void 커스텀_구분자_사용() {
+            assertSimpleTest(() -> {
+            run("//;\\n1");
+            assertThat(output()).contains("결과 : 1");
+            });
+            }
 
 @Test
-void 예외_테스트() {
-    assertSimpleTest(() ->
-        assertThatThrownBy(() -> runException("-1,2,3"))
+    void 예외_테스트() {
+            assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException("-1,2,3"))
             .isInstanceOf(IllegalArgumentException.class)
-    );
-}
+        );
+        }
+
+@Test
+    void 마이너스_구분자_사용() {
+            assertSimpleTest(() -> {
+            run("//-\\n1,2:3-4");
+            assertThat(output()).contains("결과 : 10");
+            });
+            }
+
+@Test
+    void 예외_테스트_마이너스_구분자와_음수_사용() {
+            assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException("//-\\n1,2:3--4"))
+            .isInstanceOf(IllegalArgumentException.class)
+        );
+        }
+
+@Test
+    void 예외_테스트_잘못된_숫자_형식() {
+            assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException("//-\\n1,2:+"))
+            .isInstanceOf(IllegalArgumentException.class)
+        );
+        }
+
+@Test
+    void 예외_테스트_잘못된_커스텀_형식() {
+            assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException("//;\n1,2"))
+            .isInstanceOf(IllegalArgumentException.class)
+        );
+        }
 ```
 
 
 > 아래의 출력 결과처럼 테스트가 잘 됐음을 알 수 있다.
 
-<img src="https://github.com/user-attachments/assets/03ba9aa5-1a98-42f5-b3ec-9bb62668869f" width="700;" alt="">
+<img src="https://github.com/user-attachments/assets/87b71440-2017-457a-acb7-4e077ab7ee55" width="700;" alt="">
 
 <br />
 
