@@ -37,6 +37,24 @@ public class InputTest extends NsTest {
         });
     }
 
+    @Test
+    @DisplayName("콤마 구분자만 존재하는 케이스")
+    void onlyCommaSeparator() {
+        assertSimpleTest(() -> {
+            run("1,2,3,4,5");
+            assertThat(output()).contains(OUTPUT_MESSAGE + "15");
+        });
+    }
+
+    @Test
+    @DisplayName("콜론 구분자만 입력되는 케이스")
+    void onlyColonSeparator() {
+        assertSimpleTest(() -> {
+            run("1:2:3:4:5");
+            assertThat(output()).contains(OUTPUT_MESSAGE + "15");
+        });
+    }
+    
     @Override
     protected void runMain() {
         Application.main(new String[]{});
