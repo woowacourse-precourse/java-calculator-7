@@ -30,22 +30,22 @@ public class Application {
     private static CalculationInput getCalculationInput() {
 
         String userInput = getUserInput();
-
-        if (userInput.trim().isEmpty()) {
-            return new CalculationInput(EMPTY_INPUT, EMPTY_INPUT);
-        }
+        String delimiter = DEFAULT_DELIMITER;
+        String inputString = userInput;
 
         Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_INPUT_REGEX);
         Matcher matcher = pattern.matcher(userInput);
 
         if (matcher.matches()) {
-            String delimiter = matcher.group(1);
-            String inputString = matcher.group(2);
-
-            return new CalculationInput(delimiter, inputString);
+            delimiter = matcher.group(1);
+            inputString = matcher.group(2);
         }
 
-        return new CalculationInput(DEFAULT_DELIMITER, userInput);
+        if (inputString.trim().isEmpty()) {
+            inputString = EMPTY_INPUT;
+        }
+
+        return new CalculationInput(delimiter, inputString);
     }
 
     private static String getUserInput() {
