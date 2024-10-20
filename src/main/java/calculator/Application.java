@@ -1,12 +1,25 @@
 package calculator;
 
+import camp.nextstep.edu.missionutils.Console;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Application {
     public static void main(String[] args) {
+        int answer = 0;
+
+        try {
+            String input = Console.readLine();
+            answer = add(input);
+        } catch (NoSuchElementException e) {
+        }
+
+        System.out.println("결과 : " + answer);
+        Console.close();
 
     }
 
