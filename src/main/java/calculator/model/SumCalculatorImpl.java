@@ -9,5 +9,9 @@ public class SumCalculatorImpl implements SumCalculator {
         long sum = Arrays.stream(numbers).sum();
         return String.valueOf(sum);
     }
-}
 
+    @Override
+    public boolean willOverflow(long currentSum, long newNumber) {
+        return newNumber > 0 && currentSum > Long.MAX_VALUE - newNumber;
+    }
+}
