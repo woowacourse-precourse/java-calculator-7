@@ -19,5 +19,6 @@ public class CalculatorController {
     public void run() {
         String userInput = CalculatorView.getUserInput();
         Numbers numbers = calculatorService.extractNumbers(userInput);
+        CalculatorView.showResult(numbers);
     }
 }
