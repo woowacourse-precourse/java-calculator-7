@@ -3,7 +3,7 @@ package calculator.domain;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+//정제된 문자열만 들어간다
 public class Calculator {
     private static final Pattern CUSTOM_SEPERATOR_PATTERN=Pattern.compile("^//(.)\\\\n{1}(.*)");
     private static final String NUMBER_REGEX="[0-9]{0,}";
@@ -14,24 +14,9 @@ public class Calculator {
 
     private static final String BLANK="";
 
-    public static int inputCalculate(String input){
+    public static int inputCalculate(String input,String seperatorRegex){
         //커스텀 구분자 패턴이 존재하는지 확인한다
-       return checkExtractor(input);
-    }
-
-    private static int checkExtractor(String input){
-        Matcher matcher=CUSTOM_SEPERATOR_PATTERN.matcher(input);
-
-        if (matcher.find()){//일치한다면
-            String customSeperator=matcher.group(1);
-            input= matcher.group(2);
-
-            SeperatorFactory.addRegex(customSeperator);
-        }
-
-        String seperatorRegex=SeperatorFactory.getSeperatorRegex();
-
-        return calculate(input,seperatorRegex);
+       return calculate(input,seperatorRegex);
     }
 
     private static int calculate(String input,String seperatorRegex) {
