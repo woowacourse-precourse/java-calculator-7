@@ -1,11 +1,9 @@
 package calculator.view;
 
-import java.util.Scanner;
+import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
-    private static final Scanner scanner = new Scanner(System.in);
-
     public String getString() {
-        return scanner.nextLine();
+        return Console.readLine();
     }
 }
