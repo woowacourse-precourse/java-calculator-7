@@ -4,7 +4,7 @@ import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class DeilimitersTest {
+class DelimitersTest {
     @Test
     void 구분자_조회() {
         Delimiters delimiters = Delimiters.create();
