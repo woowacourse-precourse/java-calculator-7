@@ -24,6 +24,38 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 쉼표_또는_클론_한자리수_확인(){
+        assertSimpleTest(() -> {
+            run("1,2");
+            assertThat(output()).contains("결과 : 3");
+        });
+    }
+
+    @Test
+    void 쉼표_또는_클론_두자리이상의_수_확인(){
+        assertSimpleTest(() -> {
+            run("1,24,540,400");
+            assertThat(output()).contains("결과 : 965");
+        });
+    }
+
+    @Test
+    void 아무런_숫자가_들어가지_않을_때(){
+        assertSimpleTest(() -> {
+            run("0");
+            assertThat(output()).contains("결과 : 965");
+        });
+    }
+
+    @Test
+    void 첫번째_값_확인(){
+        assertSimpleTest(() -> {
+            run("1,2");
+            assertThat(output()).contains("결과 : 3");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
