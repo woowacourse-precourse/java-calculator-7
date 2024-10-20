@@ -14,6 +14,6 @@ public class Application {
         int result = calculator.check(input);
 
         // 합산 결과를 출력한다.
-        System.out.printf("결과: %d", result);
+        System.out.printf("결과 : %d", result);
     }
 }
