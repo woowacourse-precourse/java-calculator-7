@@ -45,4 +45,24 @@ class ParserTest {
 				.isThrownBy(() -> parser.parse("//3\\n132"))
 				.withMessage("커스텀 구분자는 숫자는 불가능합니다.");
 	}
+
+	@ParameterizedTest
+	@ValueSource(strings = {"//;\\n1;2", "1,2,3"})
+	void 순수_식_만들기_성공(String input) {
+		assertThatNoException().isThrownBy(() -> parser.parse(input));
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = {"//;\\n;1;2;3", ",1,2,3"})
+	void 순수_식_만들기_실패_숫자로_시작하지_않음(String input) {
+		assertThatIllegalArgumentException()
+				.isThrownBy(() -> parser.parse(input));
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = {"//;\\n1;2;3;", "1,2,3,"})
+	void 순수_식_만들기_실패_숫자로_끝나지_않음(String input) {
+		assertThatIllegalArgumentException()
+				.isThrownBy(() -> parser.parse(input));
+	}
 }
