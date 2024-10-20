@@ -21,10 +21,18 @@ public class NumberValidator {
         if (hasNegativeNumber(numbers)) {
             throw new IllegalArgumentException(ERROR_MESSAGE_FOR_NEGATIVE_NUMBER);
         }
+        if (hasZero(numbers)) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_FOR_ZERO);
+        }
     }
 
     private static boolean hasNegativeNumber(List<Integer> numbers) {
         return numbers.stream()
                 .anyMatch(number -> number < 0);
+    }
+
+    private static boolean hasZero(List<Integer> numbers) {
+        return numbers.stream()
+                .anyMatch(number -> number == 0);
     }
 }
