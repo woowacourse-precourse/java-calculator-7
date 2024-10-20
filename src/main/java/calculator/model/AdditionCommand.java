@@ -10,6 +10,7 @@ public class AdditionCommand {
     private final String customDelimiter;
     private Number[] numbers;
     public AdditionCommand(String input){
+        validateInput(input);
         customDelimiter = findCustomDelimiter(input).orElse("");
         if (!customDelimiter.isBlank()){
             input = removeCustomDelimiter(input);
@@ -41,14 +42,21 @@ public class AdditionCommand {
         return input.replaceAll(customDelimiterFormat, "");
     }
     private String[] splitStrings(String input, String customDelimiter) {
-        if (input == null || input.isEmpty()) {
-            return new String[0];
-        }
-
         if (customDelimiter == null || customDelimiter.isBlank()) {
             return input.split("[,:]");
         }
-
         return input.split(customDelimiter);
+    }
+    private void validateInput(String input){
+        if (isNull(input)){
+            throw new IllegalArgumentException("잘못된 입력입니다. 숫자가 아닙니다.");
+        }
+    }
+
+    private boolean isNull(String input){
+        if (input == null || input.isEmpty()) {
+            return true;
+        }
+        return false;
     }
 }
