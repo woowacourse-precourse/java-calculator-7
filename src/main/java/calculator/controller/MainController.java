@@ -23,12 +23,15 @@ public class MainController {
 
     public void run() {
         final String input = InputView.startInput();
-        final String[] stringNumber = splitString(input);
-
-        final Numbers numbers = new Numbers(stringNumber);
+        final Numbers numbers = createNumber(input);
         final int result = calculator.calculate(numbers);
 
         OutputView.printResultMessage(result);
+    }
+
+    private Numbers createNumber(String input) {
+        final String[] stringNumber = splitString(input);
+        return new Numbers(stringNumber);
     }
 
     private String[] splitString(String input) {
