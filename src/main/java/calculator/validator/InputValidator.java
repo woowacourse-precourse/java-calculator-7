@@ -64,9 +64,14 @@ public class InputValidator {
     }
 
     public void validateNumber(String input) {
-        BigDecimal number = new BigDecimal(input);
-        if (number.compareTo(BigDecimal.ZERO) <= 0) {
-            throw new IllegalArgumentException("양수를 입력해주세요.");
+        try {
+            BigDecimal number = new BigDecimal(input);
+            if (number.compareTo(BigDecimal.ZERO) <= 0) {
+                throw new IllegalArgumentException("양수를 입력해주세요.");
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("올바르지 않은 구분자 혹은 입력값이 있습니다.");
         }
+
     }
 }
