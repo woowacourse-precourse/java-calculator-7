@@ -68,7 +68,7 @@ public class StringCalculator {
         if (target.isEmpty())
             return new ArrayList<>();
 
-        String pattern = "[%s]".formatted(String.join("", delimiters));
+        String pattern = "[%s]".formatted(Pattern.quote(String.join("", delimiters)));
         String[] result = target.split(pattern);
         return List.of(result);
     }
