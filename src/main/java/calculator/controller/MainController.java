@@ -2,14 +2,15 @@ package calculator.controller;
 
 import calculator.domain.Calculator;
 import calculator.domain.Numbers;
+import calculator.domain.Separator;
 import calculator.view.InputView;
 import calculator.view.OutputView;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.List;
 
 public class MainController {
 
-    private static final String SEPARATOR = ",|:";
+    private static final String DEFAULT_SEPARATOR1 = ",";
+    private static final String DEFAULT_SEPARATOR2 = ":";
     private static final String REGEX = "^//(.*)\\\\n";
     private final Calculator calculator;
 
@@ -35,12 +36,9 @@ public class MainController {
     }
 
     private String[] splitString(String input) {
-        String addedSeparator = "";
-        final Matcher matcher = Pattern.compile(REGEX).matcher(input);
-        if (matcher.find()) {
-            addedSeparator = Pattern.quote(matcher.group(1));
-            input = input.substring(matcher.end());
-        }
-        return input.trim().split(SEPARATOR + "|" + addedSeparator);
+        final List<String> defaultSeparator = List.of(DEFAULT_SEPARATOR1, DEFAULT_SEPARATOR2);
+        final Separator separator = new Separator(defaultSeparator);
+        input = separator.addCustomSeparator(input, REGEX);
+        return separator.separateString(input);
     }
 }
