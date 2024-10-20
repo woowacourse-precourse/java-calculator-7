@@ -35,6 +35,22 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 공백_입력_2() {
+        assertSimpleTest(() -> {
+            run(" ");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void 공백_사이_입력() {
+        assertSimpleTest(() -> {
+            run("   1   :   2  :    3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
     @ParameterizedTest
     @ValueSource(strings = {"1,2:3", "1:2:7", "12,3,2", "13:43,54"})
     void 기본구분자_정상_입력(String input) {
@@ -139,6 +155,14 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             run(input);
             assertThat(output()).contains("결과 : ");
+        });
+    }
+
+    @Test
+    void 아주_큰_양수() {
+        assertSimpleTest(() -> {
+            run("100000000000000:100000000000000");
+            assertThat(output()).contains("결과 : 200000000000000");
         });
     }
 
