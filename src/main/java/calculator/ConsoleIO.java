@@ -13,7 +13,11 @@ public class ConsoleIO {
         return Console.readLine();
     }
 
-    public static void printResult(int result) {
+    public static void printResult(double result) {
+        if (result == (int) result) {
+            System.out.println("결과 : " + (int) result);
+            return;
+        }
         System.out.println("결과 : " + result);
     }
 }
