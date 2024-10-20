@@ -1,4 +1,4 @@
-package calculator.model;
+package calculator.model.delimiter;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -8,7 +8,7 @@ public class CustomDelimiterStrategy implements DelimiterStrategy {
     private static final Pattern CUSTOM_PATTERN = Pattern.compile(CUSTOM_DELIMITERS);
 
     @Override
-    public String[] getStringNumbersArray(String input) {
+    public String[] getStringArray(String input) {
         Matcher matcher = CUSTOM_PATTERN.matcher(input);
         if (matcher.matches()) {
             String customDelimiter = Pattern.quote(matcher.group(1));
@@ -16,7 +16,6 @@ public class CustomDelimiterStrategy implements DelimiterStrategy {
             String[] numberArray = numbers.split(customDelimiter, -1);
             return checkDuplicatedDelimiters(numberArray);
         }
-        throw new IllegalArgumentException(
-                "커스텀 구분자 형식이 아닙니다.");
+        throw new IllegalArgumentException("[Error] 커스텀 구분자 형식이 아닙니다.");
     }
 }
