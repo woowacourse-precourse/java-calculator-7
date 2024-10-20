@@ -5,7 +5,6 @@ import java.util.List;
 
 public class Delimiters {
     private static final String EMPTY = "";
-
     private List<Delimiter> delimiters;
 
     public Delimiters(String input) {
@@ -30,9 +29,14 @@ public class Delimiters {
             }
             delimiters.add(customDelimiter);
 
-            input = input.replace(customDelimiter.getCustomDelimiterPattern(), EMPTY);
+            input = removeFrontCustomDelimiter(input, customDelimiter);
         }
     }
+
+    private String removeFrontCustomDelimiter(String input, CustomDelimiter customDelimiter) {
+        return input.replace(customDelimiter.getCustomDelimiterPattern(), EMPTY);
+    }
+
 
     public List<Delimiter> getDelimiters() {
         return delimiters;
