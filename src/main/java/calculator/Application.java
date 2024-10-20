@@ -1,39 +1,71 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Pattern;
 
 // model
+class SumModel {
+    private final int count;
+
+    public SumModel(int count) {
+        this.count = count;
+    }
+}
+
 class ExpressionModel {
-    private final String delimiter;
-    private final int cntData;
-    private final List<String> operand;
+    private final String expression;
 
-    public ExpressionModel() {
+    public ExpressionModel(String expression) {
+        this.expression = expression;
+    }
+
+    public boolean hasCustomDelimiter(String expression) {
+        return expression.startsWith("//");
+    }
+
+    public String delimiterSection() {
+        int startIdx = expression.indexOf("//") + 2;
+        int endIdx = expression.indexOf("\\n");
+        return expression.substring(startIdx, endIdx);
+    }
+
+    public String nonDelimiterSection() {
+        int startIdx = expression.indexOf("\\n") + 2;
+        return expression.substring(startIdx);
+    }
+}
+
+class DelimiterModel {
+    private String delimiter;
+
+    public DelimiterModel() {
         this.delimiter = ",|:";
-        this.cntData = 0;
-        this.operand = new ArrayList<>();
     }
 
-    int isCustom(String expression) {
-        return expression.indexOf("//");
-    }
-
-    boolean isLastDelimiterIdx(String expression, int idx) {
-        return expression.startsWith("\\n", idx);
-    }
-
-    void registerDelimiter(String delimiterRange) {
+    public void registerDelimiter(String delimiterRange) {
         for (int nowDelimiterIdx = 0; nowDelimiterIdx < delimiterRange.length(); nowDelimiterIdx++) {
-
+            this.delimiter += ("|\\" + delimiterRange.charAt(nowDelimiterIdx));
         }
     }
 
-    int plusData() {
-        return cntData;
+    public String getDelimiter() {
+        return delimiter;
     }
+}
+
+class CalculatorModel {
+    private DelimiterModel delimiter;
+
+    public int calculate(ExpressionModel expressionModel) {
+        // 커스텀 구분자 등록
+
+        // 구분자로 문자열 자르기
+
+        int sum = 0;
+        // 숫자 합 계산
+        return sum;
+    }
+
 }
 
 // view
@@ -50,10 +82,10 @@ class CalculateView {
 
 // controller
 class CalculatorController {
-    private final ExpressionModel model;
+    private final CalculatorModel model;
     private final CalculateView view;
 
-    public CalculatorController(ExpressionModel model, CalculateView view) {
+    public CalculatorController(CalculatorModel model, CalculateView view) {
         this.model = model;
         this.view = view;
     }
@@ -78,6 +110,7 @@ public class Application {
     static void registerCustom(String str) {
         int customStart = hasCustom(str);
         for (int i = customStart + 2; i < str.length() - 2; i++) {
+            // 여기 안의 과정을 하나로 묶어야 함 (idx 필요)
             if (str.startsWith("\\n", i)) {
                 String tmp = str.substring(customStart + 2, i);
                 for (int j = 0; j < tmp.length(); j++) {
