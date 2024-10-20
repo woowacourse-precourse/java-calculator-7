@@ -7,7 +7,7 @@ public class DelimiterExtractor {
 
     public String extractDelimiter(String input) {
         if (input.startsWith("//")) {
-            int delimiterEndIndex = input.indexOf("\n");
+            int delimiterEndIndex = input.indexOf("\\n");
             if (delimiterEndIndex == -1) {
                 throw new IllegalArgumentException("커스텀 구분자 선언 후 개행이 필요합니다.");
             }

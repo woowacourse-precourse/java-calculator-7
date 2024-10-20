@@ -5,7 +5,7 @@ import java.util.List;
 
 public class NumberExtractor {
     public List<Integer> extractNumbers(String input, String delimiterRegex) {
-        String numbersPart = input.startsWith("//") ? input.substring(input.indexOf("\n") + 1) : input;
+        String numbersPart = input.startsWith("//") ? input.substring(input.indexOf("\\n") + 2) : input;
         String[] tokens = numbersPart.split(delimiterRegex);
         List<Integer> numbers = new ArrayList<>();
         for (String token : tokens) {

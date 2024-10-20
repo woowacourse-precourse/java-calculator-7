@@ -21,7 +21,7 @@ class NumberExtractorTest {
 
     @Test
     void 커스텀_구분자_세미콜론() {
-        String input = "//;\n1;2;3";
+        String input = "//;\\n1;2;3";
         String delimiter = Pattern.quote(";");
         List<Integer> numbers = numberExtractor.extractNumbers(input, delimiter);
         assertThat(numbers).containsExactly(1, 2, 3);
@@ -29,7 +29,7 @@ class NumberExtractorTest {
 
     @Test
     void 커스텀_구분자_문자열() {
-        String input = "//abcd\n1abcd2abcd3";
+        String input = "//abcd\\n1abcd2abcd3";
         String delimiter = Pattern.quote("abcd");
         List<Integer> numbers = numberExtractor.extractNumbers(input, delimiter);
         assertThat(numbers).containsExactly(1, 2, 3);
@@ -37,7 +37,7 @@ class NumberExtractorTest {
 
     @Test
     void 커스텀_구분자_공백() {
-        String input = "// \n1 2 3";
+        String input = "// \\n1 2 3";
         String delimiter = Pattern.quote(" ");
         List<Integer> numbers = numberExtractor.extractNumbers(input, delimiter);
         assertThat(numbers).containsExactly(1, 2, 3);
@@ -51,7 +51,7 @@ class NumberExtractorTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("숫자가 누락되었습니다.");
     }
-    
+
     @Test
     void 유효하지_않은_숫자_있으면_예외() {
         String input = "1,2,a";

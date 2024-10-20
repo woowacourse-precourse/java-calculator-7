@@ -19,21 +19,21 @@ class DelimiterExtractorTest {
 
     @Test
     void 커스텀_구분자_세미콜론() {
-        String input = "//;\n1;2;3";
+        String input = "//;\\n1;2;3";
         String delimiter = delimiterExtractor.extractDelimiter(input);
         assertThat(delimiter).isEqualTo(Pattern.quote(";"));
     }
 
     @Test
     void 커스텀_구분자_문자열() {
-        String input = "//abcdef\n1;2;3";
+        String input = "//abcdef\\n1;2;3";
         String delimiter = delimiterExtractor.extractDelimiter(input);
         assertThat(delimiter).isEqualTo(Pattern.quote("abcdef"));
     }
 
     @Test
     void 커스텀_구분자_공백() {
-        String input = "// \n1;2;3";
+        String input = "// \\n1;2;3";
         String delimiter = delimiterExtractor.extractDelimiter(input);
         assertThat(delimiter).isEqualTo(Pattern.quote(" "));
     }
@@ -48,7 +48,7 @@ class DelimiterExtractorTest {
 
     @Test
     void 커스텀_구분자가_비어있으면_예외() {
-        String input = "//\n1,2,3";
+        String input = "//\\n1,2,3";
         assertThatThrownBy(() -> delimiterExtractor.extractDelimiter(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("커스텀 구분자가 비어 있습니다.");
