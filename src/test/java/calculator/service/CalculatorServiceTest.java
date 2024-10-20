@@ -1,5 +1,12 @@
 package calculator.service;
 
+import static calculator.global.instance.Messages.INVALID_CHARACTER_ERROR;
+import static calculator.global.instance.Messages.INVALID_DELIMITER_ERROR;
+import static calculator.global.instance.Messages.INVALID_STARTING_CHARACTER_ERROR;
+import static calculator.global.instance.Messages.MISSING_NEWLINE_AFTER_CUSTOM_DELIMITER_ERROR;
+import static calculator.global.instance.Messages.NEGATIVE_NUMBER_ERROR;
+import static calculator.global.instance.Messages.NUMBER_AS_CUSTOM_DELIMITER_ERROR;
+import static calculator.global.instance.Messages.PIPE_MISUSED_AS_DELIMITER_ERROR;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -23,7 +30,7 @@ class CalculatorServiceTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> CalculatorService.add(input));
 
-        assertEquals("구분자가 적절하지 않습니다", exception.getMessage());
+        assertEquals(INVALID_DELIMITER_ERROR, exception.getMessage());
     }
 
     @DisplayName("여러 숫자 입력에 대한 구분자가 잘못 들어 왔을 시, 에러 발생")
@@ -41,7 +48,7 @@ class CalculatorServiceTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> CalculatorService.add(input));
 
-        assertEquals("구분자가 적절하지 않습니다", exception.getMessage());
+        assertEquals(INVALID_DELIMITER_ERROR, exception.getMessage());
     }
 
     @DisplayName("구분자 이외의 글자 입력이 들어오면, 에러 발생")
@@ -57,11 +64,10 @@ class CalculatorServiceTest {
     })
     void add_invalidCharacterDelimiter_throwsException(String input) {
 
-        // 영어 또는 한글이 구분자로 포함되어 있으면 예외가 발생해야 함
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> CalculatorService.add(input));
 
-        assertEquals("글자는 들어올 수 없습니다", exception.getMessage());
+        assertEquals(INVALID_CHARACTER_ERROR, exception.getMessage());
     }
 
     @DisplayName("음수 입력이 들어오면, 에러 발생")
@@ -77,8 +83,7 @@ class CalculatorServiceTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> CalculatorService.add(input));
 
-        // 예외 메시지에 음수가 포함되어 있는지 확인
-        assertEquals("음수는 허용되지 않습니다", exception.getMessage());
+        assertEquals(NEGATIVE_NUMBER_ERROR, exception.getMessage());
     }
 
     @DisplayName("입력 문자열의 시작이 잘못되면, 에러 발생")
@@ -91,12 +96,10 @@ class CalculatorServiceTest {
             ";1,2,3"        // 잘못된 특수 문자로 시작
     })
     void add_invalidStartingCharacter_throwsException(String input) {
-        // 문자열이 숫자나 "//"로 시작하지 않으면 IllegalArgumentException이 발생하는지 확인
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> CalculatorService.add(input));
 
-        // 예외 메시지가 예상된 것과 일치하는지 확인
-        assertEquals("잘못된 형식입니다. 숫자 또는 '//'로 시작해야 합니다.", exception.getMessage());
+        assertEquals(INVALID_STARTING_CHARACTER_ERROR, exception.getMessage());
     }
 
     @DisplayName("커스텀 구분자 정의 시 '\\n'이 누락되면, IllegalArgumentException 발생")
@@ -108,12 +111,10 @@ class CalculatorServiceTest {
             "//#1#2"      // '\n'이 없고 바로 숫자가 나옴
     })
     void add_missingNewlineAfterCustomDelimiter_throwsException(String input) {
-        // 문자열의 앞부분이 "//"인데 그 뒤에 '\n'이 없으면 IllegalArgumentException이 발생하는지 확인
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> CalculatorService.add(input));
 
-        // 예외 메시지가 예상된 것과 일치하는지 확인
-        assertEquals("잘못된 형식입니다. 커스텀 구분자 뒤에 '\\n'이 있어야 합니다.", exception.getMessage());
+        assertEquals(MISSING_NEWLINE_AFTER_CUSTOM_DELIMITER_ERROR, exception.getMessage());
     }
 
     @DisplayName("숫자가 커스텀 구분자로 사용되면 IllegalArgumentException 발생")
@@ -127,8 +128,7 @@ class CalculatorServiceTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> CalculatorService.add(input));
 
-        // 예외 메시지가 예상된 것과 일치하는지 확인
-        assertEquals("숫자는 커스텀 구분자로 사용할 수 없습니다", exception.getMessage());
+        assertEquals(NUMBER_AS_CUSTOM_DELIMITER_ERROR, exception.getMessage());
     }
 
     @DisplayName("파이프(`|`)가 구분자 외에 다른 위치에서 사용되면 IllegalArgumentException 발생")
@@ -142,8 +142,7 @@ class CalculatorServiceTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> CalculatorService.add(input));
 
-        // 예외 메시지가 예상된 것과 일치하는지 확인
-        assertEquals("커스텀 구분자 등록의 형식이 잘못되었습니다. 파이프(`|`)는 커스텀 구분자를 구분하는 용도로만 사용할 수 있습니다", exception.getMessage());
+        assertEquals(PIPE_MISUSED_AS_DELIMITER_ERROR, exception.getMessage());
     }
 
     @DisplayName("커스텀 구분자에 대한 성공 로직 테스트")
@@ -155,10 +154,7 @@ class CalculatorServiceTest {
             "'//.\n5.6.7', 18"      // 점(.)을 커스텀 구분자로 사용
     })
     void add_withCustomDelimiters_returnsSum(String input, int expectedSum) {
-        // 입력 문자열을 기반으로 숫자 합계를 계산
         int result = CalculatorService.add(input);
-
-        // 결과가 예상된 값과 같은지 확인
         assertEquals(expectedSum, result);
     }
 
@@ -170,10 +166,7 @@ class CalculatorServiceTest {
             "'1,2:3', 6",           // 쉼표와 콜론 혼합 구분자
     })
     void add_withValidInput_returnsSum(String input, int expectedSum) {
-        // 입력 문자열을 기반으로 숫자 합계를 계산
         int result = CalculatorService.add(input);
-
-        // 결과가 예상된 값과 같은지 확인
         assertEquals(expectedSum, result);
     }
 
@@ -185,10 +178,7 @@ class CalculatorServiceTest {
             "//@\n",    // 커스텀 구분자만 있고 숫자가 없음
     })
     void add_customDelimiterWithNoValues_returnsZero(String input) {
-        // 입력 문자열에 값이 없을 때 결과가 0이어야 함
         int result = CalculatorService.add(input);
-
-        // 결과가 0이어야 함
         assertEquals(0, result);
     }
 
@@ -201,10 +191,7 @@ class CalculatorServiceTest {
             "'//.\n25', 25"   // 점 구분자와 숫자 25
     })
     void add_customDelimiterWithSingleNumber_returnsNumber(String input, int expected) {
-        // 입력 문자열에 숫자가 하나만 있을 때 해당 숫자가 반환되어야 함
         int result = CalculatorService.add(input);
-
-        // 결과가 기대한 숫자와 일치해야 함
         assertEquals(expected, result);
     }
 
@@ -244,6 +231,4 @@ class CalculatorServiceTest {
         int result = CalculatorService.add(input);
         assertEquals(expectedSum, result);
     }
-
-
 }
