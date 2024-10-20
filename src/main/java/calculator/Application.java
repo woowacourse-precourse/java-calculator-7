@@ -15,7 +15,10 @@ public class Application {
 
             if (endIndex != -1) { // \n 이 있다면 커스텀 구분자로 업데이트
                 String customDetermine = input.substring(2, endIndex); // 커스텀 구분자 업데이트
-                determine = "[,:" + customDetermine+ "]";
+                if(customDetermine.length() > 1){
+                    throw new IllegalArgumentException();
+                }
+                determine = "[,:" + customDetermine + "]";
                 input = input.substring(endIndex + 2);
 
                 if(!input.contains(customDetermine)){ // 커스텀 구분자로 구분되지 않을 경우
