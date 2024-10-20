@@ -42,4 +42,16 @@ class DelimiterHandlerTest {
                 .hasMessage(String.format("(%s)에서는 허용되지 않는 구분자가 발견되었습니다. ([!, !])", input));
 
     }
+
+    @DisplayName("처음 계산식에 숫자가 아닌 값이 들어가면 예외를 반환하는 메서드를 테스트하라")
+    @Test
+    void test_validateDefaultDelimiter2() {
+        String input = ":1:2:3";
+        DelimiterHandler delimiterHandler = new DelimiterHandler();
+        assertThatThrownBy(() ->
+                delimiterHandler.validateDefaultDelimiter(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("입력 문자열이 잘못되었습니다: 입력의 첫 글자가 기본 구분자입니다.");
+
+    }
 }

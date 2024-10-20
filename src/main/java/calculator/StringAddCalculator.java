@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static calculator.DefaultDelimiter.DEFAULT_DELIMITER;
 import static calculator.NumberUtils.sum;
 
 public class StringAddCalculator {
@@ -38,7 +37,8 @@ public class StringAddCalculator {
 
     private int sumWithDefaultDelimiter(String input) {
         delimiterHandler.validateDefaultDelimiter(input);
-        String[] splitNumbers = input.split(DEFAULT_DELIMITER.getDelimiter());
+        String[] splitNumbers = input.split(DefaultDelimiter.getAllDelimiters());
+
         List<Integer> numbers = Arrays.stream(splitNumbers)
                 .map(Integer::parseInt)
                 .toList();
