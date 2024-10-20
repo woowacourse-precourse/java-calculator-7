@@ -1,5 +1,6 @@
 package calculator.service;
 
+import calculator.model.Calculator;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +17,8 @@ class CalculatorServiceTest {
 
     @BeforeEach
     void setUp() {
-        calculatorService = new CalculatorService();
+        Calculator calculator = new Calculator();
+        calculatorService = new CalculatorService(calculator);
     }
 
     @Test
