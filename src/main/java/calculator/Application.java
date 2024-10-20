@@ -1,7 +1,11 @@
 package calculator;
 
+import calculator.model.DelimiterManagerImpl;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+
+        DelimiterManagerImpl delimiterManagerImpl = new DelimiterManagerImpl();
+        delimiterManagerImpl.init();
     }
 }
