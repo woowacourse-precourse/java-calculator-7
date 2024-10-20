@@ -16,7 +16,7 @@ public final class NumberString {
             input = input.substring(5);
         }
 
-        SeparatorManager separator = new SeparatorManager(customSeparator);
-        return separator.getSeparatedStringNumber(input);
+        Separator separator = new Separator(customSeparator);
+        return separator.separate(input);
     }
 }

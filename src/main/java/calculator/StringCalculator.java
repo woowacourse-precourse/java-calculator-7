@@ -8,16 +8,16 @@ public final class StringCalculator {
 
     }
 
-    public static BigInteger calculate(List<String> stringNumberList){
+    public static BigInteger calculate(List<String> numberString){
         long sumOfLongValues = 0L;
         BigInteger sumOfBigIntegerValues = BigInteger.ZERO;
 
-        for (String stringNumber : stringNumberList) {
+        for (String number : numberString) {
             try {
-                long longValue = Long.parseLong(stringNumber);
+                long longValue = Long.parseLong(number);
                 sumOfLongValues += longValue;
             } catch (NumberFormatException e) {
-                BigInteger bigIntegerValue = new BigInteger(stringNumber);
+                BigInteger bigIntegerValue = new BigInteger(number);
                 sumOfBigIntegerValues = sumOfBigIntegerValues.add(bigIntegerValue);
             }
         }
