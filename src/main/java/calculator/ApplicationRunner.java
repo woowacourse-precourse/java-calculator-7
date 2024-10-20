@@ -1,7 +1,5 @@
 package calculator;
 
-import java.math.BigInteger;
-
 public class ApplicationRunner {
     private final UserInteractionManager userInteractionManager;
     private final InputManager inputManager;
