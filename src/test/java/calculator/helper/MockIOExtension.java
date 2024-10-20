@@ -37,7 +37,7 @@ public class MockIOExtension implements BeforeEachCallback, AfterEachCallback {
         System.out.println(byteArrayOutputStream.toString());
     }
 
-    public static String getOutput() {
+    public static String output() {
         return byteArrayOutputStream.toString().split(":")[1].strip();
     }
 }

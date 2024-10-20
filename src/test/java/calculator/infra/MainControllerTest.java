@@ -1,13 +1,15 @@
 package calculator.infra;
 
 import static calculator.common.message.ErrorMessage.CAN_NOT_PARSE;
+import static calculator.helper.MockIOExtension.output;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import calculator.helper.MockIOExtension;
 import calculator.helper.MockInput;
 import calculator.infra.controller.MainController;
 import calculator.model.exception.ParseToIntegerFailedException;
 import calculator.service.SeparateService;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,8 +27,7 @@ public class MainControllerTest {
         // given & when
         sut.runCalculator();
         // then
-        String output = MockIOExtension.getOutput();
-        Assertions.assertThat(output).isEqualTo("21");
+        assertThat(output()).isEqualTo("21");
     }
 
     @Test
@@ -34,7 +35,7 @@ public class MainControllerTest {
     @MockInput("//^\\n6%7%9")
     void mainTestV2() {
         // given & when & then
-        Assertions.assertThatThrownBy(sut::runCalculator)
+        assertThatThrownBy(sut::runCalculator)
                 .isInstanceOf(ParseToIntegerFailedException.class)
                 .hasMessage(CAN_NOT_PARSE);
     }
@@ -46,8 +47,7 @@ public class MainControllerTest {
         // given & when
         sut.runCalculator();
         // then
-        String output = MockIOExtension.getOutput();
-        Assertions.assertThat(output).isEqualTo("16");
+        assertThat(output()).isEqualTo("16");
     }
 
     @Test
@@ -57,7 +57,7 @@ public class MainControllerTest {
         // given & when
         sut.runCalculator();
         // then
-        String output = MockIOExtension.getOutput();
-        Assertions.assertThat(output).isEqualTo("123");
+        String output = output();
+        assertThat(output).isEqualTo("123");
     }
 }
