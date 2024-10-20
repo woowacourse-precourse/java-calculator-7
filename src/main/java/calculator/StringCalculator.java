@@ -1,13 +1,14 @@
 package calculator;
 
+import static calculator.global.constant.IoFormatConstants.INPUT_PROMPT_FORMAT;
+import static calculator.global.constant.IoFormatConstants.OUTPUT_PROMPT_FORMAT;
+
 import calculator.utils.InputParserUtil;
 import calculator.validation.NumberValidator;
 import camp.nextstep.edu.missionutils.Console;
 
 public class StringCalculator {
 
-    private static final String INPUT_PROMPT_FORMAT = "덧셈할 문자열을 입력해 주세요.";
-    private static final String OUTPUT_PROMPT_FORMAT = "결과 : ";
     private static final int DEFAULT_RESULT = 0;
 
     private final InputParserUtil inputParserUtil;

@@ -1,8 +1,8 @@
 package calculator.validation;
 
-public class NumberValidator {
+import static calculator.global.constant.ExceptionConstants.INVALID_INPUT_ERROR;
 
-    private static final String INVALID_INPUT_ERROR = "잘못된 입력값입니다.";
+public class NumberValidator {
 
     public void validateNumbers(String[] values) {
         for (String value : values) {
