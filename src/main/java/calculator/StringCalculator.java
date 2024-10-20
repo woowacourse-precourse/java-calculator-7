@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.Arrays;
+
 /**
  * This class parses the input string and calculates the sum of a list of integers.
  */
@@ -24,6 +26,13 @@ public class StringCalculator {
         String custom_separator = input.split("\\\\n")[0];
         custom_separator = custom_separator.substring(2);
         separators = separators + "|" + custom_separator;
+
+        String[] separators_array = separators.split("\\|");
+        Arrays.sort(separators_array, (s1, s2) -> s2.length() - s1.length());
+
+        separators = String.join("|", separators_array);
+
+        System.out.println(separators);
 
         return separators;
     }
