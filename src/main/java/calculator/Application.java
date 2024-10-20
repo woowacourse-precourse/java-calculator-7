@@ -7,7 +7,7 @@ public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
 
-        int Result = Constant.ZERO;
+        int Result;
         int StartIndex;
 
         boolean PatternEnable;
@@ -28,7 +28,12 @@ public class Application {
         StartIndex = StartIndexSetting(PatternEnable);
 
         String[] NumberList = UserInput.substring(StartIndex).split(AllSeparator);
+        Result = SumNumericValues(NumberList);
+        resultPrint(Result);
+    }
 
+    public static int SumNumericValues(String[] NumberList) {
+        int Result = Constant.ZERO;
         for (String s : NumberList) {
             if (s.matches(Constant.MATCHER_CHECK)) {
                 Result += Integer.parseInt(s);
@@ -38,8 +43,7 @@ public class Application {
                 throw new IllegalArgumentException();
             }
         }
-
-        resultPrint(Result);
+        return Result;
     }
 
     private static int StartIndexSetting(boolean patternEnable) {
