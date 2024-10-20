@@ -99,7 +99,7 @@ public class Application {
 
     private static boolean isEmptyString(String numbers) {
         if (numbers.isEmpty()) {
-            System.out.println("결과: 0");
+            System.out.println("결과 : 0");
             return true;
         }
         return false;
