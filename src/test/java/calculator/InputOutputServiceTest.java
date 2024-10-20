@@ -11,7 +11,7 @@ import java.io.PrintStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class InputHandlerTest {
+class InputOutputServiceTest {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
@@ -31,8 +31,11 @@ class InputHandlerTest {
     @DisplayName("안내 문구를 출력한다.")
     @Test
     void testWelcomeMessage() {
-        // when: 안내 문구 출력
-        InputHandler.welcome();
+        // given: OutputService 인스턴스 생성
+        OutputService outputService = new OutputService();
+
+        // when: 출력 메시지 호출
+        outputService.printResult("덧셈할 문자열을 입력해 주세요.");
 
         // then: 출력된 안내 문구 검증
         assertThat(outContent.toString().trim()).contains("덧셈할 문자열을 입력해 주세요.");
@@ -46,7 +49,8 @@ class InputHandlerTest {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
 
         // when: 입력을 처리
-        String result = new InputHandler().getInput();
+        InputService inputService = new InputService();
+        String result = inputService.getInput();
 
         // then: 입력된 값이 예상과 일치하는지 검증
         assertThat(result).isEqualTo("123");
