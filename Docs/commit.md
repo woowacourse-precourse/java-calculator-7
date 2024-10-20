@@ -1,4 +1,4 @@
-# Git Commit Conventions
+# Git Commit Message Conventions
 
 ## Commit Format
 ```
@@ -11,6 +11,7 @@
 
 ### Type
 커밋의 종류를 나타낸다.
+
 | Commit Type | Description |
 | --- | --- |
 | feat | 새로운 기능 추가 |
