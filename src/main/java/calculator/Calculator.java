@@ -1,24 +1,25 @@
 package calculator;
 
-import static camp.nextstep.edu.missionutils.Console.readLine;
-
 import java.util.List;
 
 public class Calculator {
     private final Parser parser;
+    private final Reader reader;
+    private final Writer writer;
 
-    public Calculator(Parser parser) {
+    public Calculator(Parser parser, Reader reader, Writer writer) {
         this.parser = parser;
+        this.reader = reader;
+        this.writer = writer;
     }
 
     public void run() {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String input = readLine();
+        String input = reader.readInput();
 
         Character delimiter = parser.parseCustomDelimiter(input);
         List<Integer> integers = parser.parsePositiveIntegers(input, delimiter);
 
-        System.out.println("결과 : " + sum(integers));
+        writer.writeOutput(sum(integers));
     }
 
     private Integer sum(List<Integer> integers) {
