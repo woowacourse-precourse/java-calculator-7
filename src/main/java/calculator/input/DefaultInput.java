@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class DefaultInput {
-    public int defaultParseSum(String input) {
+    public static int defaultParseSum(String input) {
         StringTokenizer tokenizer = new StringTokenizer(input, ",:");
         ArrayList<Integer> tokens = new ArrayList<>();  // 구분된 토큰을 저장할 리스트
 

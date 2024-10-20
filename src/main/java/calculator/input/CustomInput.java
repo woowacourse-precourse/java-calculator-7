@@ -3,7 +3,7 @@ package calculator.input;
 import java.util.ArrayList;
 
 public class CustomInput {
-    public int customParseSum(String input) {
+    public static int customParseSum(String input) {
         // 구분자를 찾기 위해 문자열 \n으로 나누는 과정이 필요
         // \n을 기준으로 구분자와 숫자로 이루어진 문자열. 두 파트로 나누어 줄 것임.
         String[] parts = input.split("\\\\n", 2);

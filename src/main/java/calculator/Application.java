@@ -12,11 +12,9 @@ public class Application {
         int result = 0;
 
         if (input.startsWith("//")) {
-            CustomInput customInput = new CustomInput();
-            result = customInput.customParseSum(input);
+            result = CustomInput.customParseSum(input);
         } else {
-            DefaultInput defaultInput = new DefaultInput();
-            result = defaultInput.defaultParseSum(input);
+            result = DefaultInput.defaultParseSum(input);
         }
         System.out.println("결과 : " + result);
     }
