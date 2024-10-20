@@ -54,8 +54,8 @@ public class StringCalculator {
         this.noBlankInput = this.noBlankInput.replaceAll("//\\\\n", "");
     }
 
-    public void makeStringForSplit() {
-        regexString = String.join("|", dividerList);
+    public void makeStringForToken() {
+        regexString = String.join("", dividerList);
     }
 
     public void extractNumbers() {
