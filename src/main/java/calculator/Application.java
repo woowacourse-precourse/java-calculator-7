@@ -22,17 +22,17 @@ public class Application {
     private void validateInput(String input, String custom) {
         if (!custom.isEmpty()) {
             if (custom.matches("^[0-9]*$")) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("커스텀 구분자는 숫자나 문자를 포함할 수 없습니다.");
             }
             String subInput = input.substring(5);
             String allowedCharsPattern = "^[0-9, : " + custom + "]*$";
             if (!subInput.matches(allowedCharsPattern)) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("잘못된 값을 입력했습니다.");
             }
         } else {
             String allowedCharsPattern = "^[0-9, :]*$";
             if (!input.matches(allowedCharsPattern)) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("잘못된 값을 입력했습니다.");
             }
         }
     }
