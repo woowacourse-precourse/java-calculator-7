@@ -1,13 +1,20 @@
 package calculator;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class DelimiterSelectorTest {
+    private DelimiterSplitter delimiterSelector;
+
+    @BeforeEach
+    void setup() {
+        delimiterSelector = new DelimiterSplitter();
+    }
+
     @Test
     void isNotCustomDelimiterTest() {
         String input = "1;2";
-        DelimiterSelector delimiterSelector = new DelimiterSelector();
 
         boolean result = delimiterSelector.isCustomDelimiter(input);
 
@@ -17,7 +24,6 @@ public class DelimiterSelectorTest {
     @Test
     void isCustomDelimiterTest() {
         String input = "//.\n1.2";
-        DelimiterSelector delimiterSelector = new DelimiterSelector();
 
         boolean result = delimiterSelector.isCustomDelimiter(input);
 
