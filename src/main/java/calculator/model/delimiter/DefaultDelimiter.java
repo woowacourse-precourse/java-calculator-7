@@ -8,11 +8,6 @@ public class DefaultDelimiter implements Delimiter {
     }
 
     @Override
-    public boolean isApplicable(String input) {
-        return true;
-    }
-
-    @Override
     public String getDelimiter() {
         return delimiter;
     }
