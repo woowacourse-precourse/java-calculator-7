@@ -24,6 +24,9 @@ public class Application {
             delimiter = ",|:";
             numbers = input;
             System.out.println("기본 구분자를 사용합니다. 입력값: " + input);
+        }else {
+
+            throw new IllegalArgumentException("잘못된 입력입니다.");
         }
 
 
