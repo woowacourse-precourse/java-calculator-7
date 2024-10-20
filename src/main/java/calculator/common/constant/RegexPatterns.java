@@ -1,4 +1,4 @@
-package calculator.common.constants;
+package calculator.common.constant;
 
 public class RegexPatterns {
     public static final String START_WITH_WORD = "^[^\\d]";

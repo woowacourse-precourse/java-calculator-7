@@ -1,6 +1,6 @@
 package calculator.common.util;
 
-import calculator.common.constants.RegexPatterns;
+import calculator.common.constant.RegexPatterns;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

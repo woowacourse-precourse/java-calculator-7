@@ -1,6 +1,6 @@
 package calculator.view;
 
-import calculator.common.constants.CalculatorMessages;
+import calculator.common.constant.CalculatorMessages;
 import camp.nextstep.edu.missionutils.Console;
 
 public class View {
