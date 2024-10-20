@@ -25,6 +25,7 @@ public class StringCalculator {
 		StringValidator stringValidator = new StringValidator();
 		if (customDelimiterValidator.hasCustomDelimiter(inputString)) {
 			stringValidator.addCustomDelimiter(customDelimiterValidator.getCustomDelimiter(inputString));
+			inputString = customDelimiterValidator.removeCustomDelimiter(inputString);
 		}
 	}
 }
