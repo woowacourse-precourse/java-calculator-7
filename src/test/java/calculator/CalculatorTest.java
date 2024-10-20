@@ -125,6 +125,7 @@ class CalculatorTest {
       String defaultDelimeter = "1,0:5,9";
 
     // "this.calculator" is null
+    // "calculator.Calculator.calculating(String)" because "this.calculator" is null
     int calculateCustom = calculator.calculating(customDelimeter);
     int calculateDefault = calculator.calculating(defaultDelimeter);
 

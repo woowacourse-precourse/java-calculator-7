@@ -6,6 +6,10 @@ import static java.lang.String.valueOf;
 
 public class Calculator {
 
+  public Calculator(String readLine) {
+    this.target = target;
+  }
+
   private int target = 0;
 
   public int calculating(String readLine) {

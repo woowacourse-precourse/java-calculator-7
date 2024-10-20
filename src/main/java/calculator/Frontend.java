@@ -8,7 +8,7 @@ public class Frontend {
   private String readLine;
   public Frontend(String readLine) {
 
-    calculator = new Calculator();
+    calculator = new Calculator(readLine);
   }
 
   // 전달받은 계산 결과를 출력한다
