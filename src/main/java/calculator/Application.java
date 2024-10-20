@@ -6,9 +6,10 @@ import java.util.HashSet;
 
 public class Application {
     public static void main(String[] args) {
-
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
         // 입력 받기
         String input = Console.readLine();
+
 
         // 구분자 파싱
         DelimiterParser delimiterParser = new DelimiterParser();
@@ -16,14 +17,9 @@ public class Application {
         delimiterParser.addDelimiters(",");
         delimiterParser.parse(input);
 
-        System.out.println("indextest: "+delimiterParser.getParseIndex());
-
         // 숫자 추출
         NumberExtractor numberExtractor = new NumberExtractor();
         numberExtractor.extractNumbers(delimiterParser, input);
-        System.out.println("numarrtest: ");
-
-        System.out.println("numarrtest: "+numberExtractor.getNumbers().size());
 
         // 계산
         Calculator calculator = new Calculator();
