@@ -8,6 +8,9 @@ public class StringCalculator {
     }
 
     public int add(String input) {
+        if (input == null || input.isEmpty()) {
+            throw new IllegalArgumentException("입력값이 없습니다.");
+        }
         String split = delimiterParser.parse(input);
         String numbers = delimiterParser.extractNumbers(input);
         String[] splitNumbers = delimiterParser.split(numbers, split);
