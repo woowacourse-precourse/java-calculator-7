@@ -9,6 +9,7 @@ import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.*;
 
 class ApplicationTest extends NsTest {
+
     @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
