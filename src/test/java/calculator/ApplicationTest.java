@@ -26,6 +26,43 @@ class ApplicationTest extends NsTest {
         );
     }
 
+
+    @Test
+    void 빈입력1_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException(""))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+    @Test
+    void 빈입력2_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("   "))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+    @Test
+    void 빈입력3_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException(",,,"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+    @Test
+    void 빈입력4_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//\\n,,,"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+    @Test
+    void 빈입력5_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//?\\n"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
