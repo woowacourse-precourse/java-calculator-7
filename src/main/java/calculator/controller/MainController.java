@@ -33,7 +33,7 @@ public class MainController {
 
     private String[] splitString(String input) {
         String addedSeparator = "";
-        Matcher matcher = Pattern.compile(REGEX).matcher(input);
+        final Matcher matcher = Pattern.compile(REGEX).matcher(input);
         if (matcher.find()) {
             addedSeparator = Pattern.quote(matcher.group(1));
             input = input.substring(matcher.end());
