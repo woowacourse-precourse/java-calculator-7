@@ -13,6 +13,10 @@ public class InputView {
 
     public String InputString(){
         System.out.println(INPUT);
-        return Console.readLine();
+        String inputString = Console.readLine();
+        if(inputString.isBlank()){
+            throw new IllegalStateException("입력을 부탁합니다.");
+        }
+        return inputString;
     }
 }
