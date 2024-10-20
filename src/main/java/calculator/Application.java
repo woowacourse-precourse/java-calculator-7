@@ -1,10 +1,8 @@
 package calculator;
 
-import java.util.Scanner;
-
 public class Application {
     public static void main(String[] args) {
-        String input = getInput();
+        String input = GetInput.input_String();
 
         // 구분자 추출
         String delimiter = ExtractDelimiter.extract_delimiter(input);
@@ -16,12 +14,5 @@ public class Application {
         String[] nums = SplitInput.split(refine_string, delimiter);
 
         System.out.println("결과 : " + AddingNum.sum(nums));
-    }
-
-    // 사용자의 입력을 받는 메서드
-    private static String getInput() {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        Scanner sc = new Scanner(System.in);
-        return sc.nextLine().replace("\\n", "\n"); // 문자열에서 "\n"을 실제 줄바꿈 문자로 변환
     }
 }
