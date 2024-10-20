@@ -55,10 +55,16 @@ public class CalculatorService {
     }
 
     public void addNumbers() {
-        for (String number : numberList) {
-            if (number.isEmpty())
-                continue;
-            sum += Long.parseLong(number);
+        try {
+            for (String number : numberList) {
+                if (number.isEmpty())
+                    continue;
+                sum += Long.parseLong(number);
+            }
+        }
+        catch (NumberFormatException e) {
+            System.out.println(OVERFLOW_NUMBER_MESSAGE);
+            sum = -1L;
         }
     }
 
