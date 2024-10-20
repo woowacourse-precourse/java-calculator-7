@@ -17,7 +17,6 @@ public class Application {
         inputHandler.parseInput();
         addCalculator.setNumbers(inputHandler.getNumbers());
         System.out.println(addCalculator.calculate());
-
     }
 
 }
