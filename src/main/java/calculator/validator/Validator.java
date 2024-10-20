@@ -39,15 +39,7 @@ public class Validator {
     //구분자가 아닌 다른 문자가 있는지 검사
     public boolean checkIsCorrectString(String input, ArrayList<String> separators) {
         // 커스텀 구분자가 있는지 확인
-        if (input.startsWith("//")) {
-            // "\n"의 위치 찾기
-            int newlineIndex = input.indexOf("\\n");
-            if (newlineIndex == -1 || newlineIndex <= 2) {
-                return false; // 형식이 잘못된 경우
-            }
-            // 커스텀 구분자 이후의 문자열만 처리
-            input = input.substring(newlineIndex + 2);
-        }
+        input = getStringAfterCustomSeparator(input);
         int i = 0;
         while (i < input.length()) {
             boolean isSeparator = false;
@@ -76,15 +68,7 @@ public class Validator {
     //음수가 있는지 검사
     public boolean checkHasNegative(String  input, ArrayList<String> separators) {
         // 커스텀 구분자가 있을 경우 처리
-        if (input.startsWith("//")) {
-            // "\n"의 위치 찾기
-            int newlineIndex = input.indexOf("\\n");
-            if (newlineIndex == -1 || newlineIndex <= 2) {
-                return false; // 형식이 잘못된 경우
-            }
-            // 커스텀 구분자 이후의 문자열만 처리
-            input = input.substring(newlineIndex + 2);
-        }
+        input = getStringAfterCustomSeparator(input);
         boolean hasMinus = false;
         int minusSize = 0;
         for (int i = 0; i < separators.size(); i++) {
@@ -102,5 +86,18 @@ public class Validator {
             }
         }
         return true;
+    }
+
+    public String getStringAfterCustomSeparator(String input) {
+        if (input.startsWith("//")) {
+            // "\n"의 위치 찾기
+            int newlineIndex = input.indexOf("\\n");
+            if (newlineIndex <= 2) {
+                return input; // 형식이 잘못된 경우
+            }
+            // 커스텀 구분자 이후의 문자열만 처리
+            input = input.substring(newlineIndex + 2);
+        }
+        return input;
     }
 }
