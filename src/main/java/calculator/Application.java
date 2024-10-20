@@ -22,6 +22,7 @@ public class Application {
         }
 
         long result = calculate(input, separators);
+        System.out.println("결과 : " + result);
     }
 
     private static String extractCustomSeparator(String input) {
