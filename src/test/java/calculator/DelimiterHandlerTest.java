@@ -9,7 +9,15 @@ import org.junit.jupiter.api.Test;
 class DelimiterHandlerTest {
 
     @Test
-    void 기본_구분자로_문자열을_계산한다() {
+    void 숫자만_계산한다() {
+        StringCalculator calculator = new StringCalculator();
+        int result = calculator.calculate("1");
+        System.out.println("결과 : " + result);
+        assertEquals(1, result);  // 1
+    }
+
+    @Test
+    void 기본_구분자로_문자열을_계산한다2() {
         StringCalculator calculator = new StringCalculator();
         int result = calculator.calculate("1,2:3");  // 기본 구분자(, :)로 문자열 계산
         System.out.println("결과 : " + result);

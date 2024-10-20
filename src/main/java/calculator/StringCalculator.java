@@ -11,6 +11,14 @@ public class StringCalculator {
             throw new InvalidInputException("입력값이 없습니다.");  // 빈 문자열일 경우 예외 발생
         }
 
+        // 입력값이 숫자 하나만 있는 경우 바로 반환
+        try {
+            int singleNumber = Integer.parseInt(input.trim());
+            return singleNumber;
+        } catch (NumberFormatException e) {
+            // 숫자가 아닌 경우 구분자 처리 계속 진행
+        }
+
         if (!CustomDelimiterHandler.isCustomDelimiter(input) && !input.contains(",") && !input.contains(":")) {
             throw new InvalidInputException("유효하지 않은 구분자입니다."); // 커스텀 구분자와 기본 구분자가 아닌 경우 예외 발생
         }
