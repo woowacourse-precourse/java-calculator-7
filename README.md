@@ -25,9 +25,9 @@
     - [X] 빈 문자열을 입력 받았을 경우 ["0"]을 반환한다.
 
 5. 문자열 파싱
-    - [ ] 문자열 리스트를 받아서 숫자 리스트로 변환한다.
-        - [ ] 숫자로 변환할 수 없는 문자가 포함되어 있을 경우 IllegalArgumentException 이 발생한다.
-        - [ ] 변환 된 숫자가 양수가 아닐 경우 IllegalArgumentException 이 발생한다.
+    - [X] 문자열 리스트를 받아서 숫자 리스트로 변환한다.
+        - [X] 숫자로 변환할 수 없는 문자가 포함되어 있을 경우 IllegalArgumentException 이 발생한다.
+        - [X] 변환 된 숫자가 양수가 아닐 경우 IllegalArgumentException 이 발생한다.
 
 6. 덧셈
     - [ ] 숫자 리스트를 받아서 모든 숫자의 합을 반환한다.
