@@ -19,6 +19,10 @@ public class CalculatorService {
         this.numberAddProcessor = numberAddProcessor;
     }
 
+    public void validateUserInput(String inputStr) {
+        inputStringProcessor.validateInputStr(inputStr);
+    }
+
     public List<String> splitStrBySeparators(String inputStr) {
         // 1. 구분자가 있는지 확인한다.
         boolean hasCustomSeparator = inputStringProcessor.checkIfInputStringContainsSeparator(inputStr);

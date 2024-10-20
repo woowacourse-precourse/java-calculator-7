@@ -1,4 +1,4 @@
-package calculator.controller;
+package calculator.interfaces;
 
 import calculator.domain.CalculatorService;
 import java.util.List;
@@ -10,8 +10,9 @@ public class CalculatorController {
         this.calculatorService = calculatorService;
     }
 
-    public Long calculate(String input) {
-        List<String> splitStrBySeparators = calculatorService.splitStrBySeparators(input);
+    public Long calculate(String inputStr) {
+        calculatorService.validateUserInput(inputStr);
+        List<String> splitStrBySeparators = calculatorService.splitStrBySeparators(inputStr);
         List<Long> numberList = calculatorService.makeNumberList(splitStrBySeparators);
         return calculatorService.sum(numberList);
     }

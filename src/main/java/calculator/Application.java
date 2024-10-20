@@ -1,10 +1,10 @@
 package calculator;
 
-import calculator.controller.CalculatorController;
 import calculator.domain.CalculatorService;
 import calculator.infrastructure.InputStringProcessor;
 import calculator.infrastructure.NumberAddProcessor;
 import calculator.infrastructure.SplitStrListValidator;
+import calculator.interfaces.CalculatorController;
 import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
