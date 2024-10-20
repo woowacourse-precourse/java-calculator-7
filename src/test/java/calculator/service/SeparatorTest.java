@@ -75,5 +75,6 @@ class SeparatorTest {
         Assertions.assertThrows(IllegalArgumentException.class, () -> separator.separate("///a\n1a2a3"));
         Assertions.assertThrows(IllegalArgumentException.class, () -> separator.separate("//a\\\n1a2a3"));
         Assertions.assertThrows(IllegalArgumentException.class, () -> separator.separate("/a\\n1a2a3"));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> separator.separate("//a\\\n1a2a3a"));
     }
 }
