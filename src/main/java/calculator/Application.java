@@ -10,7 +10,7 @@ public class Application {
         // TODO: 프로그램 구현
         String input = Input.inputString();
         String numberPart = Input.validateInput(input);
-        System.out.println(numberPart);
+        List<String> separators = Input.extractSeparator(input);
     }
 }
 
@@ -46,5 +46,12 @@ class Input {
         }
 
         return numberPart;
+    }
+
+    public static List<String> extractSeparator(String input) {
+        if(input.startsWith("//"))
+            return List.of(",", ":", input.substring(2, 3));
+        else
+            return List.of(",", ":");
     }
 }
