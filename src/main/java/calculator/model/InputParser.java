@@ -36,7 +36,7 @@ public class InputParser {
 	// 구분자들을 이용해 정규식을 만들고, 이를 이용해 입력값을 분리
 	private String[] splitInput(String input, List<String> delimiters) {
 		String processedInput = removeCustomDelimiter(input);
-		inputValidator.validateInvalidDelimiter(processedInput);
+		inputValidator.validateInvalidDelimiter(processedInput, delimiters);
 
 		String regex = String.join("|",
 			delimiters.stream()
@@ -82,18 +82,19 @@ public class InputParser {
 	 */
 	// 입력값에서 커스텀 구분자를 추출 (없을 수 있음)
 	private Optional<String> extractCustomDelimiter(String input) {
-		Optional<String> customDelimiter = Optional.empty();
-
-		if (hasCustomDelimiter(input)) {
-			int delimiterStart = input.indexOf("//") + 2;
-			int delimiterEnd = input.indexOf("\\n");
-			if (delimiterEnd == -1) {
-				throw new IllegalArgumentException("커스텀 구분자의 끝을 의미하는 \\n이 없습니다.");
-			}
-
-			customDelimiter = Optional.of(input.substring(delimiterStart, delimiterEnd));
+		if (!hasCustomDelimiter(input)) {
+			return Optional.empty();
 		}
 
-		return customDelimiter;
+		int delimiterStart = input.indexOf("//") + 2;
+		int delimiterEnd = input.indexOf("\\n");
+		if (delimiterEnd == -1) {
+			throw new IllegalArgumentException("커스텀 구분자의 끝을 의미하는 \\n이 없습니다.");
+		}
+
+		String customDelimiter = input.substring(delimiterStart, delimiterEnd)
+			.replace("\\\\", "\\"); // \\는 \로 변환
+
+		return Optional.of(customDelimiter);
 	}
 }

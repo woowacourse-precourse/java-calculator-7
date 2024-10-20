@@ -3,9 +3,7 @@ package calculator.validation;
 import java.util.List;
 
 public class InputValidator {
-	List<String> delimiters;
-
-	public void validateInvalidDelimiter(String input) {
+	public void validateInvalidDelimiter(String input, List<String> delimiters) {
 		String regex = "[\\d" + String.join("", delimiters) + "]*";
 		String filteredInput = input.replaceAll(regex, "");
 
