@@ -53,8 +53,16 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(
                 () -> {
                     run("1,2,3");
-                    assertThat(output()).contains("결과 : 1");
+                    assertThat(output()).contains("결과 : 6");
                 }
+        );
+    }
+
+    @Test
+    void 기본_구분자_개수_초과시_오류() {
+        assertSimpleTest(
+                () -> assertThatThrownBy(() -> runException("1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
