@@ -12,10 +12,10 @@ public class Application {
 
         // 커스텀 구분자가 있는지 확인
         if (str.startsWith("/")) {
-            if(str.startsWith("//")) {
+            if(checkStructure(str.substring(0,5))) {
                 str = customDelimiter(str);
             } else {
-                throw new IllegalArgumentException("잘못된 형식 : 커스텀 구분자가 잘못 지정되었습니다.");
+                throw new IllegalArgumentException("잘못된 형식 : 커스텀 구분자 구조가 잘못 설정되었습니다.");
             }
         }
         // 각 숫자의 합을 구하기

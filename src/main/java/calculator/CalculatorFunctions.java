@@ -4,6 +4,13 @@ public class CalculatorFunctions {
 
     private static String DEFAULT_DELIMITER = ",|:";
 
+    public static boolean checkStructure(String str) {
+        String forward = str.substring(0,2);
+        String back = str.substring(3,5);
+
+        return forward.equals("//") && back.equals("\\n");
+    }
+
     public static int splitAndSum(String str) {
         String[] token = str.split(DEFAULT_DELIMITER);
         return addToken(token);
@@ -33,13 +40,10 @@ public class CalculatorFunctions {
 
     public static String customDelimiter(String input) {
         int delimiterIndex = input.indexOf("\\n");
-        if(delimiterIndex == -1 ) {
-            throw new IllegalArgumentException("잘못된 형식 : 커스텀 구분자가 잘못 지정되었습니다.");
-        }
-
         String customDelimiter = input.substring(2, delimiterIndex);
+
         if(customDelimiter.length() != 1) {
-            throw new IllegalArgumentException("잘못된 형식 : 커스텀 구분자가 잘못 지정되었습니다.");
+            throw new IllegalArgumentException("잘못된 형식 : 커스텀 구분자가 두글자 이상입니다");
         }
 
         String str = input.substring(delimiterIndex + 2);
