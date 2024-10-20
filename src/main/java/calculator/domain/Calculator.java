@@ -43,7 +43,7 @@ public class Calculator {
 
     private static int addTwoNum(int a,int b) {
         if (a>Integer.MAX_VALUE-b){
-            throw new IllegalArgumentException("덧셈의 결과가 int 범위를 넘어갔습니다");
+            throw new IllegalArgumentException(MessageType.OVERFLOW_RESULT.getMessage());
         }
         return a+b;
     }
