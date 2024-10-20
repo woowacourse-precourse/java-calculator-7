@@ -2,6 +2,7 @@ package calculator.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import static calculator.constant.ExceptionMessage.*;
 
 public class NumberExtractor {
     public static List<Integer> extractNums(String inputStr, String delimiter) {
@@ -11,11 +12,11 @@ public class NumberExtractor {
             try{
                 int int_num = Integer.parseInt(str_num.trim());
                 if (int_num < 0) {
-                    throw new IllegalArgumentException("음수는 허용되지 않습니다.");
+                    throw new IllegalArgumentException(UNDER_ZERO_NOT_ALLOW);
                 }
                 numbers.add(int_num);
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("잘못된 숫자 형태입니다.");
+                throw new IllegalArgumentException(INVALID_NUMBER_FORMAT);
             }
         }
         return numbers;

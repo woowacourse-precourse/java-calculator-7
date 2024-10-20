@@ -1,5 +1,7 @@
 package calculator.util;
 
+import static calculator.constant.ExceptionMessage.*;
+
 public class CustomDelimeterParser {
     public static String[] parse(String inputStr, String delimiter) {
         if(inputStr.startsWith("//")){
@@ -9,7 +11,7 @@ public class CustomDelimeterParser {
                 delimiter += "|" + customDelimiter;
                 inputStr = split_str[1];
             } else {
-                throw new IllegalArgumentException("커스텀 구분자는 //와 \\n사이에 존재해야 합니다.");
+                throw new IllegalArgumentException(INVALID_CUSTOM_DELIMITER_FORMAT);
             }
         }
         return new String[]{inputStr, delimiter};
