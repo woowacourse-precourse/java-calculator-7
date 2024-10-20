@@ -1,0 +1,23 @@
+- feat(ApplicationTest.java) : Add custom delimiter & Exception test cases
+- refactor(Application.java) : Refactor method name
+- refactor(Calculator.java) : Refactor method names & Add annotations
+- refactor(ApplicationTest.java) : Refactor method names
+- refactor(CalculatorTest.java) : Refactor method names & structure
+- feat(Application.java) : Add whole functions
+- feat(ApplicationTest.java) : Add 기본_구분자_사용 & Modify 커스텀_구분자_사용, 예외_테스트
+- fix(Calculator.java) : Fix get_input() method to use Console.readLine() method
+- Revert "fix(Calculator.java) : Fix get_input() method to use Console.readLine() method"
+- fix(Calculator.java) : Fix get_input() method to use Console.readLine() method
+- Revert "fix(Calculator.java) : Fix get_input() method to use Console.readLine() method"
+- fix(Calculator.java) : Fix get_input() method to use Console.readLine() method
+- Fix(Calculator.java) : Fix parse() to parse \\n
+- fix(CalculatorTest.java) : Fix test cases(\n->\\n)
+- feat(Calculator.java) : Add add() method
+- feat(CalculatorTest.java) : Add add() test
+- feat(Calculator.java) : Add parse() function
+- feat(ApplicationTest.java) : Seperate Caculator test code & Add parse test
+- feat(Calculator.java) : Add get_input() method
+- docs(README.md) : Update function list
+- feat(ApplicationTest) : Add get_input test
+- docs(README.md) : update fuctional requirements & function list
+- feat: setup project
