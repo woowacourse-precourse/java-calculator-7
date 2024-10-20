@@ -6,14 +6,18 @@ import java.util.List;
 public class CalculatorModel {
     private String delimiter = ",:";
 
-    public List<Integer> parser(String input) throws IllegalArgumentException {
+    private String extraDelimiter(String input) {
         int startIdx = input.indexOf("//");
         int endIdx = input.indexOf("\\n");
         if (startIdx != -1 && endIdx != -1) {
             delimiter += input.substring(startIdx + 2, endIdx);
             input = input.substring(endIdx + 2);
         }
+        return input;
+    }
 
+    public List<Integer> parser(String input) throws IllegalArgumentException {
+        input = extraDelimiter(input);
         String[] parsedInput = input.split("[" + delimiter + ']');
         List<Integer> result = new ArrayList<>();
 
