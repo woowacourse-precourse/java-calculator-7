@@ -34,10 +34,10 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 커스텀_구분자_2개_이상_등록해서_사용() {
-        assertSimpleTest(() ->{
-            run("1//{\\n3{2//#\\n5#6");
-            assertThat(output()).contains("결과 : 17");
+    void 공백_문자_입력() {
+        assertSimpleTest(() -> {
+            run(" ");
+            assertThat(output()).contains("결과 : 0");
         });
     }
 
