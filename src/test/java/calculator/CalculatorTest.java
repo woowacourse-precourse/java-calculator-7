@@ -28,7 +28,6 @@ public class CalculatorTest {
 
     }
 
-
     @Test
     public void addTest() {
         assertEquals(6, Calculator.add(new int[]{1, 2, 3}));

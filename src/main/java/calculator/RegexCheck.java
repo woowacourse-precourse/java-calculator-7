@@ -54,9 +54,5 @@ public abstract class RegexCheck {
 
         throw new IllegalArgumentException("구분자가 잘못되었습니다.");
     }
-
-
-
-
 }
 
