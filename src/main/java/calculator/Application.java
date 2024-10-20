@@ -7,12 +7,8 @@ public class Application {
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
-        try {
-            int result = add(input);
-            System.out.println("결과 : " + result);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
+        int result = add(input);
+        System.out.println("결과 : " + result);
     }
 
     // 문자열 더하는 메소드
@@ -54,7 +50,7 @@ public class Application {
         int num;
         try {
             num = Integer.parseInt(text); // 숫자로 변환
-            if (num < 0) {
+            if (num <= 0) {
                 throw new IllegalArgumentException("Negative numbers are not allowed");
             }
         } catch (NumberFormatException e) {
