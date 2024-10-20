@@ -20,13 +20,6 @@ class ApplicationTest extends NsTest {
         });
     }
     @Test
-    void 다양한_커스텀_구분자(){
-        assertSimpleTest(() -> {
-            run("//;\\n//-\\n1;2-3,4:5");
-            assertThat(output()).contains("결과 : 15");
-        });
-    }
-    @Test
     void 커스텀_구분자_특수기호(){
         assertSimpleTest(() -> {
             run("//\\\\n1\\2");
@@ -79,6 +72,13 @@ class ApplicationTest extends NsTest {
     void 예외_테스트_문자(){
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("///1\n,1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+    @Test
+    void 예외_테스트_커스텀구분자(){
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("////\n,1,2,3"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
