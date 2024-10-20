@@ -11,10 +11,10 @@ public class PositiveIntegerOperand extends IntegerOperand {
 
     private void validatePositive(List<Integer> numbers) {
         numbers.stream()
-                .filter(number -> number < 0)
+                .filter(number -> number <= 0)
                 .findAny()
                 .ifPresent(number -> {
-                    throw new IllegalArgumentException("피연산자로 음수는 허용되지 않습니다: " + number);
+                    throw new IllegalArgumentException("피연산자로 0이나 음수는 허용되지 않습니다: " + number);
                 });
     }
 }
