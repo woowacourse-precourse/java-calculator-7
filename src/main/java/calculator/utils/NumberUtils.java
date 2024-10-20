@@ -1,4 +1,4 @@
-package calculator.Utils;
+package calculator.utils;
 
 public class NumberUtils {
 

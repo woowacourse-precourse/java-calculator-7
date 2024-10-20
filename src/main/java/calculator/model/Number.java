@@ -1,9 +1,9 @@
-package calculator.Model;
+package calculator.model;
 
-import static calculator.Constants.ErrorMessages.INVALID_NUMBER_MESSAGE;
+import static calculator.constants.ErrorMessages.INVALID_NUMBER_MESSAGE;
 
-import calculator.Constants.ErrorMessages;
-import calculator.Utils.NumberUtils;
+import calculator.constants.ErrorMessages;
+import calculator.utils.NumberUtils;
 
 public class Number {
     private static final Double BLANK_ZERO = 0.0;

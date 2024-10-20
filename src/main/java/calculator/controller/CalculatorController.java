@@ -1,11 +1,11 @@
-package calculator.Controller;
+package calculator.controller;
 
-import calculator.Model.Delimiter;
-import calculator.Model.Number;
-import calculator.Model.Numbers;
-import calculator.Model.OriginalInput;
-import calculator.View.InputView;
-import calculator.View.OutputView;
+import calculator.model.Delimiter;
+import calculator.model.Number;
+import calculator.model.Numbers;
+import calculator.model.OriginalInput;
+import calculator.view.InputView;
+import calculator.view.OutputView;
 import java.util.List;
 
 public class CalculatorController {

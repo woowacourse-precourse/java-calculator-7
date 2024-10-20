@@ -1,11 +1,11 @@
-package calculator.View;
+package calculator.view;
 
-import calculator.Constants.InputMessages;
+import calculator.constants.InputMessages;
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
     private InputView() {
-        
+
     }
 
     public static void printInsertMessage() {

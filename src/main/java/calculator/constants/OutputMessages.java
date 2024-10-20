@@ -1,4 +1,4 @@
-package calculator.Constants;
+package calculator.constants;
 
 public class OutputMessages {
     public final static String RESULT = "결과 : ";

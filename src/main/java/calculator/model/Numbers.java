@@ -1,6 +1,6 @@
-package calculator.Model;
+package calculator.model;
 
-import calculator.Constants.ErrorMessages;
+import calculator.constants.ErrorMessages;
 import java.util.List;
 
 public class Numbers {

@@ -1,10 +1,10 @@
-package calculator.Utils;
+package calculator.utils;
 
-import static calculator.Constants.DelimiterConstants.BASIC_DELIMITER;
+import static calculator.constants.DelimiterConstants.BASIC_DELIMITER;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import calculator.Application;
-import calculator.Model.Delimiter;
+import calculator.model.Delimiter;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import java.util.ArrayList;
 import java.util.List;

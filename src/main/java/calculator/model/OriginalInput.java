@@ -1,11 +1,11 @@
-package calculator.Model;
+package calculator.model;
 
-import static calculator.Constants.DelimiterConstants.BASIC_DELIMITER;
-import static calculator.Constants.DelimiterConstants.CUSTOM_DELIMITER_END;
-import static calculator.Constants.DelimiterConstants.CUSTOM_DELIMITER_START;
-import static calculator.Constants.ErrorMessages.INVALID_CUSTOM_INDICATOR_MESSAGE;
+import static calculator.constants.DelimiterConstants.BASIC_DELIMITER;
+import static calculator.constants.DelimiterConstants.CUSTOM_DELIMITER_END;
+import static calculator.constants.DelimiterConstants.CUSTOM_DELIMITER_START;
+import static calculator.constants.ErrorMessages.INVALID_CUSTOM_INDICATOR_MESSAGE;
 
-import calculator.Utils.StringSplitter;
+import calculator.utils.StringSplitter;
 import java.util.List;
 
 public class OriginalInput {

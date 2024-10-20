@@ -1,4 +1,4 @@
-package calculator.Model;
+package calculator.model;
 
 import calculator.Application;
 import camp.nextstep.edu.missionutils.test.NsTest;

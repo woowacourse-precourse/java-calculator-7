@@ -1,7 +1,7 @@
-package calculator.View;
+package calculator.view;
 
-import calculator.Constants.OutputMessages;
-import calculator.Utils.NumberUtils;
+import calculator.constants.OutputMessages;
+import calculator.utils.NumberUtils;
 
 public class OutputView {
     private OutputView() {

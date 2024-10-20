@@ -1,10 +1,10 @@
-package calculator.Utils;
+package calculator.utils;
 
-import static calculator.Constants.DelimiterConstants.CUSTOM_DELIMITER_END;
-import static calculator.Constants.DelimiterConstants.CUSTOM_DELIMITER_START_INDEX;
-import static calculator.Constants.DelimiterConstants.CUSTOM_INDICATOR_REGEX;
+import static calculator.constants.DelimiterConstants.CUSTOM_DELIMITER_END;
+import static calculator.constants.DelimiterConstants.CUSTOM_DELIMITER_START_INDEX;
+import static calculator.constants.DelimiterConstants.CUSTOM_INDICATOR_REGEX;
 
-import calculator.Model.Delimiter;
+import calculator.model.Delimiter;
 import java.util.Arrays;
 import java.util.List;
 

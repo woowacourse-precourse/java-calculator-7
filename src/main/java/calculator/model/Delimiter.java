@@ -1,12 +1,12 @@
-package calculator.Model;
+package calculator.model;
 
-import static calculator.Constants.DelimiterConstants.DOT;
-import static calculator.Constants.ErrorMessages.INVALID_CUSTOM_SEPARATOR_BLANK_MESSAGE;
-import static calculator.Constants.ErrorMessages.INVALID_CUSTOM_SEPARATOR_DIGIT_MESSAGE;
-import static calculator.Constants.ErrorMessages.INVALID_CUSTOM_SEPARATOR_DOT_MESSAGE;
-import static calculator.Constants.ErrorMessages.INVALID_CUSTOM_SEPARATOR_EMPTY_MESSAGE;
+import static calculator.constants.DelimiterConstants.DOT;
+import static calculator.constants.ErrorMessages.INVALID_CUSTOM_SEPARATOR_BLANK_MESSAGE;
+import static calculator.constants.ErrorMessages.INVALID_CUSTOM_SEPARATOR_DIGIT_MESSAGE;
+import static calculator.constants.ErrorMessages.INVALID_CUSTOM_SEPARATOR_DOT_MESSAGE;
+import static calculator.constants.ErrorMessages.INVALID_CUSTOM_SEPARATOR_EMPTY_MESSAGE;
 
-import calculator.Utils.NumberUtils;
+import calculator.utils.NumberUtils;
 import java.util.Objects;
 
 public class Delimiter {

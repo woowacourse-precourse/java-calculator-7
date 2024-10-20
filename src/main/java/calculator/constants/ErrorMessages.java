@@ -1,4 +1,4 @@
-package calculator.Constants;
+package calculator.constants;
 
 public enum ErrorMessages {
     ERROR_PREFIX("[ERROR] "),

@@ -1,4 +1,4 @@
-package calculator.Constants;
+package calculator.constants;
 
 public class DelimiterConstants {
     public final static String COMMA = ",";
