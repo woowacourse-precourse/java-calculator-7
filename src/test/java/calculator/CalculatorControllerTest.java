@@ -1,30 +1,33 @@
 package calculator;
 
-import calculator.model.Calculator;
-import calculator.model.Number;
-import camp.nextstep.edu.missionutils.test.NsTest;
-
-import org.junit.jupiter.api.Test;
-
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.math.BigInteger;
-import java.util.List;
+import org.junit.jupiter.api.Test;
 
-class ApplicationTest extends NsTest {
+import camp.nextstep.edu.missionutils.test.NsTest;
+
+class CalculatorControllerTest extends NsTest {
 
     @Test
-    void 커스텀_구분자_사용() {
+    void 입력이_없는_경우_0을_반환한다() {
         assertSimpleTest(() -> {
-            run("//;\\n1");
-            assertThat(output()).contains("결과 : 1");
+            run("\n");
+            assertThat(output()).contains("결과 : 0");
         });
     }
 
     @Test
-    void 예외_테스트() {
+    void 커스텀_구분자를_사용하여_계산한다() {
+        assertSimpleTest(() -> {
+            run("//;\\n1,2,5;10:10");
+            assertThat(output()).contains("결과 : 28");
+        });
+    }
+
+    @Test
+    void 음수를_입력하면_예외를_반환한다() {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -37,17 +40,6 @@ class ApplicationTest extends NsTest {
             assertThatThrownBy(() -> runException("-one,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
         );
-    }
-
-    @Test
-    void 계산기_테스트() {
-        Calculator calculator = new Calculator();
-        BigInteger sum = calculator.sum(List.of(
-            new Number(BigInteger.valueOf(1L)),
-            new Number(BigInteger.valueOf(3L)),
-            new Number(BigInteger.valueOf(2L))
-        ));
-        assertThat(sum).isEqualTo(6);
     }
 
     @Override
