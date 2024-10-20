@@ -39,6 +39,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("-1,2,3"))
                         .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage("양수만 입력이 가능합니다")
         );
     }
 
