@@ -4,19 +4,20 @@ public class CalculateSpecialSeparator {
 
     private static final Character BACK_SLASH = '\\';
     private static final String STRING_BACK_SLASH = "\\";
-    private static final Character LEFT_PARENTHESIS = '(';
-    private static final String STRING_LEFT_PARENTHESIS = "(";
-    private static final Character RIGHT_PARENTHESIS = ')';
-    private static final String STRING_RIGHT_PARENTHESIS = ")";
-    private static final Character CARET = '^';
-    private static final String STRING_CARET = "^";
+    private static final String SPECIAL = "()^&*+|{.$[";
+    private static final String SPECIAL_REGEX = "[()^&*+|{.$]";
+    private static final String LEFT_BRACKET = "[";
 
     public static boolean checkContainBackSlash(String custom) {
         return custom.contains(STRING_BACK_SLASH);
     }
 
     public static boolean checkContainSpecial(String custom) {
-        return custom.contains(STRING_LEFT_PARENTHESIS) || custom.contains(STRING_RIGHT_PARENTHESIS) || custom.contains(STRING_CARET);
+        return custom.matches(SPECIAL_REGEX) || checkContainLeftBracket(custom);
+    }
+
+    public static boolean checkContainLeftBracket(String custom) {
+        return custom.contains(LEFT_BRACKET);
     }
 
     public static String createNewCustom(String custom) {
@@ -39,6 +40,6 @@ public class CalculateSpecialSeparator {
     }
 
     public static boolean checkIsCustomEqualSpecial(Character custom) {
-        return custom == LEFT_PARENTHESIS || custom == RIGHT_PARENTHESIS || custom == CARET;
+        return SPECIAL.contains(String.valueOf(custom));
     }
 }
