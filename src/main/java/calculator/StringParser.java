@@ -5,14 +5,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StringParser {
+    private static final String CUSTOM_DELIMITERS_END = "\\n";
+    private static final String NUMBER_REGEX = "\\d+";
+
     public static List<BigInteger> extractNumbers(String input) {
         List<BigInteger> numberList = new ArrayList<>();
         String inputWithoutCustomDelimiter;
         List<Character> delimiters = DelimeterHandler.extractDelimiters(input);
 
         if (DelimeterHandler.hasCustomDelimiter(input) == true) {
-            int newlineIdx = input.indexOf("\\n");
-            inputWithoutCustomDelimiter = input.substring(newlineIdx + 2);
+            int customDelimiterEndIndex = input.indexOf(CUSTOM_DELIMITERS_END);
+            inputWithoutCustomDelimiter = input.substring(customDelimiterEndIndex + CUSTOM_DELIMITERS_END.length());
         } else {
             inputWithoutCustomDelimiter = input;
         }
@@ -28,7 +31,7 @@ public class StringParser {
                 }
                 String number = inputWithoutCustomDelimiter.substring(numberStartIdx, i + ifend);
 
-                if (number.matches("\\d+") == false) {
+                if (number.matches(NUMBER_REGEX) == false) {
                     throw new IllegalArgumentException("Invalid number: " + number);
                 }
                 BigInteger bigint = new BigInteger(number);
