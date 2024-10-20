@@ -8,15 +8,22 @@ public class Logic {
     private final ArrayList<Character> delimiter = new ArrayList<>(Arrays.asList(',', ':'));
 
     // 문자열에 커스텀 구분자를 갖고 있는지 확인
-    public boolean hasCustomDelimiter(String str) {
+    public int hasCustomDelimiter(String str) {
         if (str.startsWith("//")) { // 커스텀 구분자일 경우
-            if (str.charAt(3) != '\\' || str.charAt(4) != 'n') { // 커스텀 구분자 형식에 안맞을 경우 exception
+            int idx = 1;
+            while (++idx < str.length()) { // '\'로 끝나지 않으면 커스텀 구분자로 취긊하고 구분자 리스트에 추가
+                if (str.charAt(idx) == '\\') {
+                    idx++;
+                    break;
+                }
+                delimiter.add(str.charAt(idx)); // 구분자 리스트에 커스텀 구분자 추가
+            }
+            if (idx >= str.length() || str.charAt(idx) != 'n') { // 커스텀 구분자 형식에 안맞을 경우 exception
                 throw new IllegalArgumentException();
             }
-            delimiter.add(str.charAt(2)); // 구분자 리스트에 커스텀 구분자 추가
-            return true;
+            return idx;
         }
-        return false;
+        return -1;
     }
 
     // 해당 인덱스부터 숫자를 추출
@@ -34,11 +41,7 @@ public class Logic {
 
     // 주어진 문자열 요구사항에 맞게 계산
     public int calculate(String str) {
-        int result = 0, i = -1;
-
-        if (hasCustomDelimiter(str)) {
-            i = 4;
-        }
+        int result = 0, i = hasCustomDelimiter(str);
 
         while (++i < str.length()) {
             char c = str.charAt(i);
