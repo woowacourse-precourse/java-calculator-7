@@ -45,4 +45,15 @@ class DelimitersTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("구분자는 길이가 1인 문자여야 합니다.");
     }
+
+    @Test
+    void 구분자는_숫자이면_안된다(){
+        // given
+        Delimiters delimiters = new Delimiters();
+        String input = "//4\\n1,2,3";
+
+        assertThatThrownBy(() -> delimiters.getAllDelimiters(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("구분자는 숫자가 될 수 없습니다.");
+    }
 }

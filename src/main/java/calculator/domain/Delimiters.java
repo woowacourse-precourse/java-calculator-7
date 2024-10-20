@@ -43,9 +43,8 @@ public class Delimiters {
             if (matcher.find()) {
                 return matcher.group(1);
             }
-            return NO_CUSTOM_DELIMITER;
         }
-        return null;
+        return NO_CUSTOM_DELIMITER;
     }
 
     private boolean hasCustomDelimiter(String input){
@@ -56,6 +55,10 @@ public class Delimiters {
         if(!isSingleCharacterDelimiter(delimiter)){
             throw new IllegalArgumentException("구분자는 길이가 1인 문자여야 합니다.");
         }
+
+        if(isNumeric(delimiter)){
+            throw new IllegalArgumentException("구분자는 숫자가 될 수 없습니다.");
+        }
     }
 
     private boolean isDefaultDelimiter(String delimiter){
@@ -64,5 +67,14 @@ public class Delimiters {
 
     private boolean isSingleCharacterDelimiter(String delimiter){
         return delimiter.length() == 1;
+    }
+
+    private boolean isNumeric(String delimiter){
+        try{
+            Double.parseDouble(delimiter);
+            return true;
+        } catch (Exception e){
+            return false;
+        }
     }
 }
