@@ -41,7 +41,9 @@ public class Separator {
         String regex = SEPARATOR;
 
         if (isContainsCustomSeparatorSymbol(input)) {
-            Matcher match = Pattern.compile(Constants.REGEX_CUSTOM_SEPARATOR_PATTERN).matcher(input);
+            Matcher match = Pattern
+                    .compile(Constants.REGEX_CUSTOM_SEPARATOR_PATTERN)
+                    .matcher(input);
 
             while (match.find()) {
                 String customSeparator = match.group(1);

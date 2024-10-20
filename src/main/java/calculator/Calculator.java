@@ -6,9 +6,9 @@ public class Calculator {
     private final Plus plus;
 
     public Calculator() {
-        validator = new Validator();
-        separator = new Separator();
-        plus = new Plus();
+        this.validator = new Validator();
+        this.separator = new Separator();
+        this.plus = new Plus();
     }
 
     public int calc(String input) {
