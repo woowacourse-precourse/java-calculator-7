@@ -113,4 +113,9 @@ class CalculatorTest {
         assertEquals(606, result2);
         assertEquals(6066, result3);
     }
+    @Test
+    void inputNegative() {
+        String case1 = "-1";
+        assertThrows(IllegalArgumentException.class, () -> calculator.calculate(case1));
+    }
 }
