@@ -7,8 +7,9 @@ public class Parser {
     public String parseStringToCalculate(String input) {
 
         Separator separator = new Separator();
+
         if (!separator.validateCustomSeparatorForParsing(input)) {
-            throw new IllegalArgumentException();
+            return input;
         }
 
         if (input.substring(0, 4).equals("//\\n")) {
