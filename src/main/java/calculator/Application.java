@@ -29,23 +29,9 @@ public class Application {
 
 
         // error case 확인
-        try {
-            checkForErrors(changeInputStr);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
-
-//        // debug
-//        for (String delimiter : delimiters) {
-//            System.out.println(delimiter.getClass().getName());
-//        }
+        checkForErrors(changeInputStr,delimiters);
         int sumNum = 0;
-        try{
-            sumNum = splitDelimiterAddNum(changeInputStr, delimiters);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
-
+        sumNum = splitDelimiterAddNum(changeInputStr, delimiters);
         System.out.println("결과 : " + sumNum);
     }
     public static ArrayList<String> getDelimiter(String inputString){
@@ -83,21 +69,30 @@ public class Application {
             return null;
         }
     }
-    public static String changeInputStr(String matchStr, String InputString){
-        String changeStr = InputString.replace(matchStr,"");
+    public static String changeInputStr(String matchStr, String inputString){
+        String changeStr = inputString.replace(matchStr,"");
 //        System.out.println(changeStr);
         return changeStr;
     }
 
-    public static void checkForErrors (String inputString){
-        String ErrorCase1 = ".*[a-zA-Z].*";//"[^a-zA-Z]";
-        Pattern pattern1 = Pattern.compile(ErrorCase1);
+    public static void checkForErrors (String inputString, ArrayList delimiters){
+        // 특수구분자 외 알파벳과 특수기호
+        StringBuilder errorCase = new StringBuilder();
+        errorCase.append("[^-");
+        for (Object delimiter : delimiters) {
+            errorCase.append(delimiter);
+        }
+        errorCase.append("0-9]");
+//        String ErrorCase1 = "[^0-9]";//"[^a-zA-Z]";
+        String errorString = errorCase.toString();
+        Pattern pattern1 = Pattern.compile(errorString);
         Matcher matcher1 = pattern1.matcher(inputString);
 
         if (matcher1.find()) {
             throw new IllegalArgumentException();
         }
     }
+
     public static int splitDelimiterAddNum(String inputString, ArrayList delimiters){
         StringBuilder newString = new StringBuilder();
         int sumNum = 0;
