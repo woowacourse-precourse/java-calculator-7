@@ -12,7 +12,7 @@ class CalculatorFactoryTest {
     void splitStringToNumbers() {
         //given
         String inputStr = "//;\\n1;2;3";
-        CalculatorFactory calculatorFactory = new CalculatorFactory();
+        CalculatorMapper calculatorFactory = new CalculatorMapper();
         //when
         int[] numberArray = calculatorFactory.splitStringToNumbers(inputStr);
         //then

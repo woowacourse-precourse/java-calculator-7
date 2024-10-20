@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class CalculatorImpl implements Calculator {
     @Override
     public int plus(String str) {
-        CalculatorFactory calculatorFactory = new CalculatorFactory();
+        CalculatorMapper calculatorFactory = new CalculatorMapper();
         CalculatorVerify calculatorVerify = new CalculatorVerify();
 
         int[] numberArray = calculatorFactory.splitStringToNumbers(str);  //숫자 추출

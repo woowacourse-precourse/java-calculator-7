@@ -1,6 +1,6 @@
 package calculator;
 
-public class CalculatorFactory {
+public class CalculatorMapper {
     private static final String CUSTOM_FORMAT_START = "//";
     private static final String CUSTOM_FORMAT_END = "\\n";
 
