@@ -11,9 +11,17 @@ public class InputManager {
         input = DEFAULT_INPUT;
     }
 
-    public void save(String input) {
-        this.input = input;
-        validate();
+    public void validate() {
+        if (input.matches(VALID_DEFAULT_INPUT_REGEX)) {
+            return;
+        }
+        if (!(input.startsWith(CUSTOM_SEPARATOR_PREFIX) && input.contains(CUSTOM_SEPARATOR_POSTFIX))) {
+            throw new IllegalArgumentException(ERROR_INVALID_FORMAT);
+        }
+    }
+
+    public boolean isSeparatorCandidateExisted() {
+        return input.startsWith(CUSTOM_SEPARATOR_PREFIX);
     }
 
     public String getSeparatorCandidate() {
@@ -36,17 +44,8 @@ public class InputManager {
         return operandCandidates;
     }
 
-
-    public void validate() {
-        if (input.matches(VALID_DEFAULT_INPUT_REGEX)) {
-            return;
-        }
-        if (!(input.startsWith(CUSTOM_SEPARATOR_PREFIX) && input.contains(CUSTOM_SEPARATOR_POSTFIX))) {
-            throw new IllegalArgumentException(ERROR_INVALID_FORMAT);
-        }
-    }
-
-    public boolean isSeparatorCandidateExisted() {
-        return input.startsWith(CUSTOM_SEPARATOR_PREFIX);
+    public void save(String input) {
+        this.input = input;
+        validate();
     }
 }
