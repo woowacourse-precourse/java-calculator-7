@@ -1,11 +1,30 @@
 package calculator.Model;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class StringManagement {
     String delimiter = ",:";
 
+    public String checkString(String input) {
+        if (Pattern.matches("\\d+", input))
+            throw new IllegalArgumentException("숫자만 입력하셨습니다.");
+        if (Pattern.matches("^[,:]+$", input))
+            throw new IllegalArgumentException("구분자만 입력하셨습니다");
+        return input;
+    }
+
+    public String checkDelimiter(String input){
+        for (char ch : input.toCharArray()) {
+            if (!Character.isLetterOrDigit(ch) && delimiter.indexOf(ch) == -1) {
+                throw new IllegalArgumentException();
+            }
+        }
+        return input;
+    }
+
     public String customDelimiter(String input){
+        input = checkString(input);
         int start = input.indexOf("//");
         int last = input.indexOf("\\n");
         if(start != -1 && last != -1){
@@ -15,6 +34,7 @@ public class StringManagement {
         else if(start != -1 || last != -1){
             throw new IllegalArgumentException("구분자를 분리할 수 없습니다.");
         }
+        checkDelimiter(input);
         return input;
     }
 
