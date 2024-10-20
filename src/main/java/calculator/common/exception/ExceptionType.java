@@ -8,8 +8,10 @@ public enum ExceptionType {
     CUSTOM_DELIMITER_CONTAINS_NUMBER("커스텀 구분자에 숫자가 포함되어 있습니다.", IllegalArgumentException.class),
     CUSTOM_DELIMITER_CONTAINS_ESCAPE("커스텀 구분자에 이스케이프 문자가 포함되어 있습니다.", IllegalArgumentException.class),
     PARSE_INTEGER_FAILED("정수로 변환할 수 없는 값이 포함되어 있습니다.", IllegalArgumentException.class),
+    SUM_INTEGER_OVERFLOW("덧셈 결과가 정수 범위를 초과했습니다.", IllegalArgumentException.class),
 
     UNSUPPORTED_NUMBER_CLASS("지원하지 않는 숫자 클래스입니다.", UnsupportedOperationException.class);
+
 
     private final String message;
     private final Class<? extends RuntimeException> exceptionClass;
