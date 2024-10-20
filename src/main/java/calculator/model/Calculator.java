@@ -4,13 +4,13 @@ import java.util.List;
 
 public class Calculator {
 
-    public int calculate(Numbers numbers) {
-        List<Integer> numbersList = numbers.getNumbers();
+    public long calculate(Numbers numbers) {
+        List<Long> numbersList = numbers.getNumbers();
         if (numbersList.isEmpty()) {
             return 0;
         }
         return numbersList.stream()
-                .mapToInt(Integer::intValue)
+                .mapToLong(Long::longValue)
                 .sum();
     }
 }

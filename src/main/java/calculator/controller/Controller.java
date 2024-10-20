@@ -25,7 +25,7 @@ public class Controller {
 
         Numbers numbers = numberExtractProgress(processedString, delimiters);
 
-        int result = calculateProgress(numbers);
+        long result = calculateProgress(numbers);
 
         OutputView.printResultMessage(result);
     }
@@ -38,7 +38,7 @@ public class Controller {
         return numberExtractor.extractNumber(inputString, delimiters);
     }
 
-    private int calculateProgress(Numbers numbers) {
+    private long calculateProgress(Numbers numbers) {
         return calculator.calculate(numbers);
     }
 

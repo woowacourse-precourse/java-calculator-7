@@ -5,13 +5,13 @@ import java.util.Collections;
 import java.util.List;
 
 public class Numbers {
-    private final ArrayList<Integer> numbers = new ArrayList<>();
+    private final ArrayList<Long> numbers = new ArrayList<>();
 
-    public void saveNumber(int number) {
+    public void saveNumber(long number) {
         numbers.add(number);
     }
 
-    public List<Integer> getNumbers() {
+    public List<Long> getNumbers() {
         return Collections.unmodifiableList(numbers);
     }
 
