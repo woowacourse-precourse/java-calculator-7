@@ -23,6 +23,11 @@ public class CalculatorModel {
                 input = matcher.group(2);
             }
         }
+
+        if (!input.matches("[\\d" + delimiter + "]+")) {
+            throw new IllegalArgumentException("올바르지 않은 구분자입니다.");
+        }
+
         String[] numbers = input.split(delimiter);
 
         if (numbers.length == 0 || input.matches(delimiter + "+")) {
