@@ -1,49 +1,57 @@
 package calculator.domain.calculator.domain;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 public class Delimiter {
-    private static final String DEFAULT_PATTERN= "[,:]";
+    private static final String DEFAULT_PATTERN = "[,:]";
     private final String pattern;
 
     private Delimiter(String pattern) {
-        String validateDelimiter = validateDelimiter(pattern);
-        this.pattern =parse(validateDelimiter);
+        this.pattern = validateAndParseDelimiter(pattern);
     }
 
-    public static Delimiter of(
-            final String pattern
-    ) {
-        return new Delimiter(pattern);
+    public static Delimiter of(final String input) {
+        return new Delimiter(input);
     }
 
-    /*
-    TO-DO: util 클래스로 나중에 옮겨야함
-     */
-    public static String parse(String input) {
-        boolean startsWithCustom = input.startsWith("//");
-        if (startsWithCustom) {
-            int lastIndex = input.indexOf("\\n");
-            if (lastIndex == -1) {
-                throw new IllegalArgumentException("커스텀 구분자를 닫는 문자가 없습니다.");
-            }
-            final String customDelimiter = input.substring(2, lastIndex);
-            return customDelimiter;
-        }
-
-        return DEFAULT_PATTERN;
-    }
-
-    private String validateDelimiter(String pattern) {
-        /*
-        TO-DO: 이 부분은 예외를 발생 시키고 시스템 종료 시켜도 상관없어 보이지만 체크
-         */
-        if (pattern.isEmpty()) {
+    private String validateAndParseDelimiter(final String input) {
+        if (input.isEmpty()) {
             return DEFAULT_PATTERN;
         }
 
-        return pattern;
+        if (!input.startsWith("//")) {
+            return DEFAULT_PATTERN;
+        }
+
+        int newLineIndex = input.indexOf("\\n");
+        if (newLineIndex == -1) {
+            throw new IllegalArgumentException("커스텀 구분자를 닫는 문자가 없습니다.");
+        }
+
+        final String customDelimiterPart = input.substring(2, newLineIndex);
+
+        System.out.println(buildPattern(customDelimiterPart));
+        return buildPattern(customDelimiterPart);
+    }
+
+    private String escapeSpecialCharacters(final String delimiter) {
+        return delimiter.replaceAll("([\\[\\](){}.*+?^$|\\\\])", "\\\\$1");
+    }
+
+    private String buildPattern(final String customDelimiterPart) {
+        if (customDelimiterPart.isEmpty()) {
+            return DEFAULT_PATTERN;
+        }
+
+        final String escapedDelimiters = Arrays.stream(customDelimiterPart.split("\\|"))
+                .map(this::escapeSpecialCharacters)
+                .collect(Collectors.joining("|"));
+
+        return DEFAULT_PATTERN + "|" + escapedDelimiters;
     }
 
     public String getPattern() {
-        return pattern;
+        return this.pattern;
     }
 }
