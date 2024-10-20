@@ -19,30 +19,18 @@ public class CustomNumberExtractor implements NumberExtractor {
 
     }
 
-    private static String[] splitNextToken(String input, String customDelimiter) {
+    private String[] splitNextToken(String input, String customDelimiter) {
         return input.split(StringConst.LINE_SEPARATOR_REGEX)[1].split(customDelimiter);
     }
 
 
-    private static void saveValidatedNumber(String[] splitDelimiter, NumberRepository numberRepository) {
+    private void saveValidatedNumber(String[] splitDelimiter, NumberRepository numberRepository) {
         for (String split : splitDelimiter) {
 
             int parseNumber = parseNumber(split);
             Validator.validate(parseNumber);
             numberRepository.saveNumber(parseNumber);
         }
-    }
-
-
-    private static int parseNumber(String split) {
-
-        try {
-            int parseInt = Integer.parseInt(split);
-            return parseInt;
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException();
-        }
-
     }
 
 
