@@ -42,5 +42,16 @@ public class DelimiterParserTest {
             inputValidator.validateUnspecifiedCharacters(splitResults);
         });
     }
+
+    @Test
+    void 분리된_문자열을_숫자로_변환() {
+        String[] mockSplitResults = {"1", "23", "4"};
+        int[] expectedResults = {1, 23, 4};
+
+        var delimiterParser = new DelimiterParser();
+        int[] actualResults = delimiterParser.convertToNumber(mockSplitResults);
+
+        assertArrayEquals(expectedResults, actualResults);
+    }
 }
 
