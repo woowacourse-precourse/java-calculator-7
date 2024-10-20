@@ -33,7 +33,7 @@ public class InputPreprocessing {
 
     private void validateSplit(String input) {
         if (!input.chars().allMatch(Character::isDigit)) {
-            throw new IllegalArgumentException("구분자 외의 문자가 존재합니다.");
+            throw new IllegalArgumentException("구분자 외의 문자나 음수가 존재합니다.");
         }
     }
 
