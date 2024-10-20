@@ -7,7 +7,7 @@ import calculator.model.InputParser;
 import calculator.model.InputValidator;
 import calculator.model.NumberValidator;
 import calculator.model.PositiveNumbers;
-import calculator.util.PositiveNumberConverter;
+import calculator.util.NumberConverter;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 import java.util.List;
@@ -60,7 +60,7 @@ public class CalculatorController {
     }
 
     private int[] convertToInt(String[] values) {
-        return PositiveNumberConverter.convertToInt(values);
+        return NumberConverter.convertToInt(values);
     }
 
     private int getSum(int[] numbers) {
