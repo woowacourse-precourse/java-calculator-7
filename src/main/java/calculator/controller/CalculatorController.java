@@ -9,8 +9,6 @@ public class CalculatorController {
 
     public void run(){
         String input = view.getInput();
-
-        int result = calculator.add(input);
-        view.showResult(result);
+        view.showResult(calculator.add(input));
     }
 }
