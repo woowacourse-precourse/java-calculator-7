@@ -59,6 +59,10 @@ public class Calculator {
     }
 
     private void calculate() {
+        if (numbers.length == 1 && numbers[0].equals("")) {
+            printResult();
+            return;
+        }
         for (String number : numbers) {
             try {
                 int numberInt = Integer.parseInt(number);
@@ -69,7 +73,7 @@ public class Calculator {
                 throw new IllegalArgumentException();
             }
         }
-        System.out.println(OUTPUT_MESSAGE + result);
+        printResult();
     }
 
     private boolean isPositiveNumber(int number) {
@@ -77,5 +81,9 @@ public class Calculator {
             throw new IllegalArgumentException();
         }
         return true;
+    }
+
+    private void printResult() {
+        System.out.println(OUTPUT_MESSAGE + result);
     }
 }
