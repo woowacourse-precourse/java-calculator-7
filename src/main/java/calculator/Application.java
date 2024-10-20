@@ -19,8 +19,16 @@ public class Application {
             if (defaultIndex == -1) {
                 throw new IllegalArgumentException(" 커스텀 구분자가 잘못된 형식입니다.");
             }
+
             // 커스텀 구분자를 추출하여 기본 구분자로 설정
             String customSeparator = input.substring(2, defaultIndex);
+            if (customSeparator.length() != 1) {
+                throw new IllegalArgumentException(" 커스텀 구분자는 한 개의 문자만 가능합니다.");
+            }
+            if (customSeparator.length() == 1 && Character.isDigit(customSeparator.charAt(0))) {
+                throw new IllegalArgumentException(" 숫자는 구분자로 사용할 수 없습니다.");
+            }
+
             defaultSeparator = customSeparator + "|[,:]"; // 커스텀 구분자 설정 -> 커스텀 구분자와 기본 구분자를 둘 다 사용할 수 있도록
             numbers = input.substring(defaultIndex + 2);    // 숫자 문자열 추출
         }
@@ -47,9 +55,14 @@ public class Application {
     private static int toPositiveInt(String token) {
         int number = Integer.parseInt(token.trim());
         if (number < 0) {
-            throw new IllegalArgumentException("양수를 입력해주세요.");
+            throw new IllegalArgumentException(" 양수를 입력해주세요.");
         }
         return number;
+    }
+
+    // 입력 문자열이 숫자인지 확인하는 메서드
+    private static boolean isNumber(String str) {
+        return str != null && str.matches("-?\\d+");
     }
 
     public static void main(String[] args) {
