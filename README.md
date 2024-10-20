@@ -150,8 +150,7 @@ More : [Commit Message convention](https://gist.github.com/9941e89d80e2bc58a153.
 - **분리(Split)** : 문자열에서 구분자를 기준으로 수를 분리하는 것을 의미한다.
 - **덧셈(Sum)** : 문자열에서 분리된 수들의 합을 구하는 것을 의미한다.
 
-![MethodDiagram](https://github.com/user-attachments/assets/16b8c794-00e3-46d7-961b-df543226ea2b)
-
+![MethodDiagram](https://github.com/user-attachments/assets/5318708f-29b7-4fe7-8248-808f54b78353)
 ### Model
 
 - Numbers
@@ -201,6 +200,10 @@ More : [Commit Message convention](https://gist.github.com/9941e89d80e2bc58a153.
 - CalculateCustom(Child)
     - `커스텀 구분자(//\n) 포함 판단` 기능 
     - `커스텀 구분자(//\n)로 문자열 분리` 기능
+
+- CalculateSpecialSeparator
+    - `커스텀 구분자의 특수 문자 판단` 기능
+    - `커스텀 구분자의 특수 문자 처리` 기능
 
 - CalculateValidation
     - `계산(List<String> -> List<Integer>)에 필요한 검증` 기능
