@@ -14,10 +14,12 @@ public class Application {
 
 class Configurator {
     public static CalculatorController configure() {
+
         CalculatorView view = new CalculatorView();
         Parser parser = new Parser();
         CalculatorModel model = new CalculatorModel(parser);
         return new CalculatorController(view, model);
+
     }
 }
 
