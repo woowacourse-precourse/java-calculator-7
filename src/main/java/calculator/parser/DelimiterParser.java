@@ -1,4 +1,4 @@
-package calculator;
+package calculator.parser;
 
 public class DelimiterParser {
 

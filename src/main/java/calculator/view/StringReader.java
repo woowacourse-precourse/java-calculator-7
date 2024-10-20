@@ -1,6 +1,7 @@
 package calculator.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.NoSuchElementException;
 
 public class StringReader {
 
@@ -8,6 +9,13 @@ public class StringReader {
 
     public String read() {
         System.out.println(MESSAGE);
-        return Console.readLine();
+
+        String input = "";
+        try {
+            input = Console.readLine();
+        } catch (NoSuchElementException ignored) {
+            // 아무런 값도 입력하지 않았을 때, 기본 값 ""을 반환합니다.
+        }
+        return input;
     }
 }

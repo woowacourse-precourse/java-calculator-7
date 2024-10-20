@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.parser.DelimiterParser;
 import java.util.Arrays;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -32,5 +33,16 @@ class DelimiterParserTest {
 
         //then
         Assertions.assertThat(result.length).isEqualTo(3);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"", " ", "1, ,2"})
+    void 다양한_입력값을_분리한_결과를_출력한다(String input) {
+        //given
+        DelimiterParser parser = new DelimiterParser();
+
+        //when & then
+        String[] result = parser.parseFromInput(input);
+        System.out.println(Arrays.toString(result));
     }
 }

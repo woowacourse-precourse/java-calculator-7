@@ -1,18 +1,18 @@
-package calculator;
+package calculator.domain;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class AdderTest {
+class NumbersTest {
 
     @Test
-    void 입력받은_문자열의_숫자를_더한다() {
+    void Number의_값들을_전부_더해서_반환한다() {
         //given
-        Adder adder = new Adder();
         String[] input = {"1", "2", "3"};
+        Numbers numbers = new Numbers(input);
 
         //when
-        int sum = adder.add(input);
+        int sum = numbers.add();
 
         //then
         Assertions.assertThat(sum).isEqualTo(6);

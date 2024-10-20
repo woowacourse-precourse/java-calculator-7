@@ -1,5 +1,7 @@
 package calculator;
 
+import calculator.domain.Numbers;
+import calculator.parser.DelimiterParser;
 import calculator.view.StringReader;
 import calculator.view.StringWriter;
 import camp.nextstep.edu.missionutils.Console;
@@ -9,13 +11,12 @@ public class Application {
     public static void main(String[] args) {
         StringReader reader = new StringReader();
         DelimiterParser parser = new DelimiterParser();
-        Adder adder = new Adder();
+        StringWriter writer = new StringWriter();
 
         String[] parsedInput = parser.parseFromInput(reader.read());
-        int result = adder.add(parsedInput);
+        Numbers numbers = new Numbers(parsedInput);
 
-        StringWriter writer = new StringWriter();
-        writer.write(result);
+        writer.write(numbers.add());
 
         Console.close();
     }
