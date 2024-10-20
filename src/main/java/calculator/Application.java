@@ -4,8 +4,10 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.StringTokenizer;
 
 public class Application {
+    static String str;
+
     // 구분자들을 기준으로 문자열 분리
-    public static String[] seperateString(String str, String seperators) {
+    public static String[] seperateString(String seperators) {
         StringTokenizer st = new StringTokenizer(str, seperators);
         String[] nums = new String[st.countTokens()];
         int i = 0;
@@ -17,7 +19,7 @@ public class Application {
     }
 
     // 문자열을 분리하기 위해 구분자들을 모아놓은 문자열 생성
-    public static String makeSeperators(String str) {
+    public static String makeSeperators() {
         String seperators = ",:";
         // 커스텀 구분자가 있는 경우, 커스텀 구분자를 찾아 문자열을 분리할 구분자들(seperators)에 추가
         if (str.contains("//") && str.contains("\\n")) {
@@ -60,7 +62,7 @@ public class Application {
     public static void main(String[] args) {
         // 문자열 입력받기
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String str = Console.readLine();
+        str = Console.readLine();
 
         // 아무것도 입력하지 않은 경우
         if (str.isEmpty()) {
@@ -72,7 +74,7 @@ public class Application {
             throw new IllegalArgumentException("숫자를 포함하여 입력해 주세요.");
         }
 
-        String seperators = makeSeperators(str);
-        String[] nums = seperateString(str, seperators);
+        String seperators = makeSeperators();
+        String[] nums = seperateString(seperators);
     }
 }
