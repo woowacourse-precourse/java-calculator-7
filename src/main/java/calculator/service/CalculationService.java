@@ -1,13 +1,16 @@
 package calculator.service;
 
+import calculator.model.Operand;
+import calculator.model.Result;
+
 public class CalculationService {
 
-    public long sum(long[] operands) {
+    public Result sum(Operand[] operands) {
 
-        long result = 0;
+        Result result = new Result(0);
 
-        for(long operand : operands) {
-            result += operand;
+        for (Operand operand : operands) {
+            result.add(operand.getNumber());
         }
 
         return result;
