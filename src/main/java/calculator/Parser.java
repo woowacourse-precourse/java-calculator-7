@@ -22,7 +22,7 @@ public class Parser {
             return null;
         }
 
-        int endIndex = input.indexOf("\n");
+        int endIndex = input.indexOf("\\n");
         if (endIndex == -1) {
             throw new IllegalArgumentException("올바르지 않은 문법입니다.");
         }
@@ -48,7 +48,7 @@ public class Parser {
             return false;
         }
 
-        if (!input.contains("\n")) {
+        if (!input.contains("\\n")) {
             throw new IllegalArgumentException("올바르지 않은 문법입니다.");
         }
 
@@ -66,8 +66,8 @@ public class Parser {
 
         // customDelimiter가 존재하는 경우 = //*\n이 존재하는 경우
         if (customDelimiter != null) {
-            int lastIndex = input.lastIndexOf("\n");
-            integersAndDelimiters = input.substring(lastIndex + 1);
+            int lastIndex = input.lastIndexOf("\\n");
+            integersAndDelimiters = input.substring(lastIndex + 2);
         }
 
         // customDelimiter가 존재하지 않는 경우 = 바로 숫자부터 시작하는 경우
