@@ -26,10 +26,13 @@ public class CalculatorController {
     }
 
     private boolean isCustomSeparator(String[] parts) {
-
+        return parts.length == 2 && parts[0].startsWith("//");
     }
 
     private String getCustomSeparator(String part) {
-
+        if (part.length() != 3) {
+            throw new IllegalArgumentException("커스텀 구분자 입력 길이 틀림");
+        }
+        return Character.toString(part.charAt(2));
     }
 }
