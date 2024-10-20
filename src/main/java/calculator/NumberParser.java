@@ -31,7 +31,10 @@ public class NumberParser {
     private String delimitersToRegex(List<Character> delimiters) {
         StringBuilder regex = new StringBuilder("[");
         for (Character delimiter : delimiters) {
-            regex.append("\\").append(delimiter);
+            if (!Character.isLetterOrDigit(delimiter)) {
+                regex.append("\\");
+            }
+            regex.append(delimiter);
         }
 
         regex.append("]");

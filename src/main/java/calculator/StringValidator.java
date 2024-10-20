@@ -15,7 +15,10 @@ public class StringValidator {
     private String regexPattern(List<Character> delimiters) {
         StringBuilder regex = new StringBuilder("[0-9");
         for (Character delimiter : delimiters) {
-            regex.append("\\").append(delimiter);
+            if (!Character.isLetterOrDigit(delimiter)) {
+                regex.append("\\");
+            }
+            regex.append(delimiter);
         }
 
         regex.append("]+$");
