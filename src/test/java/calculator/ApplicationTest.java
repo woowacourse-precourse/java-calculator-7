@@ -22,7 +22,6 @@ class ApplicationTest extends NsTest {
                 assertThatThrownBy(() -> runException(","))
                         .isInstanceOf(IllegalArgumentException.class)
         );
-
     }
 
     @Test
@@ -42,9 +41,9 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 잘못된_구분자_위치() {
+    void 잘못된_구분자_존재() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException(",1,2,3"))
+                assertThatThrownBy(() -> runException("//-\\n-1,2,3"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
