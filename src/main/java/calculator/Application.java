@@ -77,23 +77,35 @@ public class Application {
         return false;
     }
 
-    private static long calculateSum(String input, List<String> tokens) {
+    private static String calculateSum(String input, List<String> tokens) {
         splitInput(input, tokens);
-        List<Long> nums = strToNumber(tokens);
-        long result = 0L;
-        for (Long num : nums) {
-            result += num;
-        }
-        return result;
+        return add(tokens);
     }
 
-
-    private static List<Long> strToNumber(List<String> tokens) {
-        List<Long> nums = new ArrayList<>();
+    private static String add(List<String> tokens) {
+        int max_len = 0;
         for (String token : tokens) {
-            nums.add(Long.parseLong(token));
+            if (token.length() > max_len) {
+                max_len = token.length();
+            }
         }
-        return nums;
+        int[] a = stringToIntArray(tokens.get(0), max_len);
+
+        for (int i = 1; i < tokens.size(); i++) {
+            String token = tokens.get(i);
+            int[] b = stringToIntArray(token, max_len);
+
+        }
+        return "";
     }
+
+    private static int[] stringToIntArray(String token, int max_len) {
+        int[] array = new int[max_len + 1];
+        for (int i = token.length() - 1, idx = 0; i >= 0; i--, idx++) {
+            array[idx] = token.charAt(i) - '0';
+        }
+        return array;
+    }
+
 }
 
