@@ -11,9 +11,8 @@ public class Calculator {
 		int delmiiterEndIdx = findDelimiterEndIndex(input);
 		String[] numbers = splitString(input, customDelimiter, delmiiterEndIdx);
 		long result = 0;
-
 		for (String num : numbers){
-			result += convertInt(num);
+			result += atoi(num);
 		}
 		System.out.println("결과 : " + result);
 	}
@@ -22,15 +21,17 @@ public class Calculator {
 		if (input == null || input.isEmpty()){
 			throw new IllegalArgumentException("비어있는 사용자 입력");
 		}
-		String delimiter = ",|:";
+		int customPrefixIndex = input.indexOf("//");
+		String delimiter = ",:";
 
-		if (input.startsWith("//")){
+		if (customPrefixIndex == 0) {
 			input = input.replace("\\n", "\n");
-			int	endIndex = input.indexOf('\n');
-			if (endIndex == -1){
+			int	customSuffixIndex = input.indexOf('\n');
+			// 커스텀 구분자 포맷을 커스텀 구분자로 사용하지 못하게 함
+			if (customSuffixIndex == -1 || customPrefixIndex + 2 == customSuffixIndex || input.indexOf("///") == 0) {
 				throw new IllegalArgumentException("잘못된 커스텀 구분자 포맷");
 			}
-			delimiter = input.substring(2, endIndex);
+			delimiter = input.substring(2, customSuffixIndex);
 		}
 		return delimiter;
 	}
@@ -40,21 +41,21 @@ public class Calculator {
 		if (input.indexOf("//") == -1){
 			return 0;
 		}
-		int endIndex = input.indexOf('\n');
-		return endIndex + 2; // 커스텀 구분자 지정 문자를 뺀 끝 인덱스 반환
+		int customSuffixIndex = input.indexOf('\n');
+		return customSuffixIndex + 2; // 커스텀 구분자 지정 문자를 뺀 끝 인덱스 반환
 	}
 
 	public static String[] splitString(String input, String delimiter, int beginIndex) {
 		String newString = input;
+
 		if (beginIndex != 0) {
 			newString = input.substring(beginIndex);
-			delimiter = Pattern.quote(delimiter); // 커스텀 구분자일 때 (주석 추가 설명 필요)
+			delimiter = Pattern.quote(delimiter);
 		}
-		return newString.split(delimiter);
+		return newString.split("[" + delimiter + "]"); // 복수의 커스텀 구분자를 분리해서 사용 []
 	}
 
-	public static int convertInt(String num)
-	{
+	public static int atoi(String num) {
 		long	result = 0;
 		int		digit;
 		char	charNum;
