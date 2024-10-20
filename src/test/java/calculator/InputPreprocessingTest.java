@@ -23,7 +23,7 @@ class InputPreprocessingTest {
         String input = "1n,2,4,5";
         Delimiter delimiter = new Delimiter(input);
         assertThatThrownBy(() -> new InputPreprocessing(delimiter).of(input))
-                .hasMessage("구분자 외의 문자가 존재합니다.");
+                .hasMessage("구분자 외의 문자나 음수가 존재합니다.");
     }
 
     @Test
