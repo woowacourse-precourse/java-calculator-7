@@ -45,4 +45,13 @@ public class CalculatorTest {
         assertEquals("1000000000023", result);
     }
 
+    @Test
+    void 소수점_테스트() {
+        ParsedInput parsedInput = new ParsedInput(new String[]{"1.1", "2.2", "3.3"});
+
+        String result = calculator.calculate(parsedInput);
+
+        assertEquals("6.6", result);
+    }
+
 }
