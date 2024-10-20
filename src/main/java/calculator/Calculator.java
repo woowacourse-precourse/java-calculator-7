@@ -10,9 +10,17 @@ public class Calculator {
         delimiters.add(',');
         delimiters.add(':');
 
-        int answer = 0;
+        if (str.isEmpty()) {
+            return 0;
+        }
+
+        if(str.length() < 5 && !Character.isDigit(str.charAt(0)) && !delimiters.contains(str.charAt(0))) {
+            throw new IllegalArgumentException("구분자나 양수로 시작하지않는 문자열이 커스텀 구분자 지정 구문보다 짧습니다.");
+        }
+
         int i = 0;
-        if(str.startsWith("//")){
+
+        if(str.startsWith("//")) {
             String custom = str.substring(0,5);
             if(custom.endsWith("\\n")) {
                 char customDelimiter = str.charAt(2);
@@ -26,14 +34,16 @@ public class Calculator {
             }
         }
 
+        int answer = 0;
+
         for (; i < str.length(); i++) {
             char c = str.charAt(i);
             if(Character.isDigit(c)) {
                 int startIdx = i;
-                while(i < str.length() && Character.isDigit(str.charAt(i))){
+                while(i + 1 < str.length() && Character.isDigit(str.charAt(i + 1))){
                     i++;
                 }
-                int endIdx = i;
+                int endIdx = i + 1;
                 String numString = str.substring(startIdx, endIdx);
                 int num = Integer.parseInt(numString);
                 answer += num;
