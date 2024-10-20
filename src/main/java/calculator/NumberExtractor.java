@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 public class NumberExtractor {
     public static final String numberRegex = "\\d+";
 
-    public List<Integer> extractNumbers(String input) {
+    public List<Integer> extract(String input) {
         List<Integer> numbers = new ArrayList<>();
         Pattern pattern = Pattern.compile(numberRegex);
         Matcher matcher = pattern.matcher(input);

@@ -23,7 +23,7 @@ public class CalculatorService {
     public void start() {
         String input = inputView.input();
         inputValidator.validate(input);
-        List<Integer> numbers = numberExtractor.extractNumbers(input);
+        List<Integer> numbers = numberExtractor.extract(input);
         int sum = sumCalculator.sum(numbers);
         outputView.printResult(sum);
     }
