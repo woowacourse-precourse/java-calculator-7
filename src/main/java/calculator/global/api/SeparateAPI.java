@@ -23,10 +23,21 @@ public class SeparateAPI {
 		return false;
 	}
 
-	public void findCustomSeparator(String sentence) {
+	public boolean findCustomSeparator(String sentence) {
 		if(BeanFactory.judgement().judgmentFormat(sentence)) {
 			char customSeparator = sentence.replaceAll(REGEX_PATTERN.getString(), "$1").charAt(0);
 			separator.addSeparator(customSeparator);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public String separateInput(String sentence) {
+		if(findCustomSeparator(sentence)) {
+			return sentence.substring(4);
+		} else {
+			return sentence;
 		}
 	}
 

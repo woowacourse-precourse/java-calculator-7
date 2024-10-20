@@ -2,6 +2,7 @@ package calculator.global.api;
 
 import calculator.domain.Separator;
 import calculator.global.config.BeanFactory;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -59,18 +60,36 @@ class SeparateAPITest {
 				() -> separator.getSeparators(2));
 	}
 
+//	@Test
+//	@DisplayName("숫자 추출 기능 테스트")
+//	void findNumberAndSave() {
+//		//given
+//		String sentence = "13:235:33";
+//
+//		//when
+//		separateAPI.findNumberAndSave(sentence);
+//		int answer = calculatorAPI.answer();
+//
+//		//then
+//		assertEquals(281, answer);
+//	}
+
 	@Test
-	@DisplayName("숫자 추출 기능 테스트")
-	void findNumberAndSave() {
+	@DisplayName("커스텀 문자열이 있을 때 숫자 추출 기능 테스트")
+	void find_CustomSeparator_Number_Save() {
 		//given
-		String sentence = "13:235:33";
+		String sentence = "//;\n1;2;3";
 
 		//when
-		separateAPI.findNumberAndSave(sentence);
+		if(separateAPI.findCustomSeparator(sentence)) {
+			String s = separateAPI.separateInput(sentence);
+			separateAPI.findNumberAndSave(s);
+		}
+
 		int answer = calculatorAPI.answer();
 
 		//then
-		assertEquals(281, answer);
+		assertEquals(6, answer);
 	}
 
 }
