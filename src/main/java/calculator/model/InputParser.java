@@ -50,6 +50,14 @@ public class InputParser {
     }
 
     private int[] changeStringArrayToIntegerArray(String[] stringNumbers) {
-        return Arrays.stream(stringNumbers).mapToInt(Integer::parseInt).toArray();
+        return Arrays.stream(stringNumbers)
+                .mapToInt(number -> {
+                    int intValue = Integer.parseInt(number);
+                    if (intValue < 0) {
+                        throw new IllegalArgumentException("Negative numbers are not allowed: " + intValue);
+                    }
+                    return intValue;
+                })
+                .toArray();
     }
 }
