@@ -1,34 +1,30 @@
 package calculator;
 
-
 public class CustomDelimiter {
-    protected static String result = "";
-    protected static String customDelimiter = "";
-    private static final int lengthOfCustomDelimiterExpression = "//?\n".length();
-    private static final int indexOfCustomDelimiter = "//?\n".indexOf("?");
-    private static final String[] metaCharacters = {".", "*", "+", "?", "|", "^", "$", "(", ")", "[", "]", "{", "}" ,"\\"};
+    private static String result = "";
+    private static String customDelimiter = "";
+    private static final int LENGTH_OF_CUSTOM_DELIMITER_EXPRESSION = "//?\n".length();
+    private static final int INDEX_OF_CUSTOM_DELIMITER = "//?\n".indexOf("?");
+    private static final String[] META_CHARACTERS = {".", "*", "+", "?", "|", "^", "$", "(", ")", "[", "]", "{", "}", "\\"};
 
     public static String extractCustomDelimiter(String input) {
         if (isValidExpression(input)) {
             customDelimiter = input.substring(2, 3);
 
             customDelimiter = escapeMetaCharacters(customDelimiter);
-            result = input.substring(lengthOfCustomDelimiterExpression+1);
+            result = input.substring(LENGTH_OF_CUSTOM_DELIMITER_EXPRESSION + 1);
             return result;
         }
 
-        if (Character.isDigit(Integer.parseInt(customDelimiter))){
+        if (Character.isDigit(Integer.parseInt(customDelimiter))) {
             throw new IllegalArgumentException("커스텀 구분자로 숫자가 입력되었습니다.");
         }
 
         return result;
     }
 
-
-
-
     public static boolean isValidExpression(String input) {
-        if(input.contains("\\n")) {
+        if (input.contains("\\n")) {
             return true;
         }
 
@@ -37,28 +33,14 @@ public class CustomDelimiter {
         }
 
         throw new IllegalArgumentException();
-
-    }
-
-//    private static boolean isValidExpressionWhileContainCaracter(String input) {
-//    }
-
-
-    private static boolean isValidExpressionWhileContainEscapeCaracter(String input) {
-        if(input.startsWith("//\\")) {
-            customDelimiter = String.valueOf(input.charAt(indexOfCustomDelimiter));
-            result = input.substring(indexOfCustomDelimiter+1);
-            return true;
-        }
-        return false;
     }
 
     private static boolean isValidExpressionLength(String input) {
-        return input.substring(0, input.indexOf("\n")+1).length() == lengthOfCustomDelimiterExpression;
+        return input.substring(0, input.indexOf("\n") + 1).length() == LENGTH_OF_CUSTOM_DELIMITER_EXPRESSION;
     }
 
     private static String escapeMetaCharacters(String customDelimiter) {
-        for (String metaChar : metaCharacters) {
+        for (String metaChar : META_CHARACTERS) {
             if (customDelimiter.equals(metaChar)) {
                 return "\\" + customDelimiter;  // 메타 문자가 있다면 이스케이프 처리
             }
@@ -66,4 +48,12 @@ public class CustomDelimiter {
         return customDelimiter;
     }
 
+
+    public static String getResult() {
+        return result;
+    }
+
+    public static String getCustomDelimiter() {
+        return customDelimiter;
+    }
 }

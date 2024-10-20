@@ -35,7 +35,7 @@ class InputHandlerTest {
         InputHandler.welcome();
 
         // then: 출력된 안내 문구 검증
-        assertThat(outContent.toString().trim()).contains(InputHandler.welcomeMessage);
+        assertThat(outContent.toString().trim()).contains("덧셈할 문자열을 입력해 주세요.");
     }
 
     @DisplayName("문자열을 입력 받는다.")

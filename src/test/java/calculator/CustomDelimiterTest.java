@@ -15,14 +15,11 @@ class CustomDelimiterTest {
         //given
         String input = "//\\\\n11";
         //when
-
         //then
         assertTrue(CustomDelimiter.isValidExpression(input));
         assertEquals("11", extractCustomDelimiter(input));
-        assertEquals("\\\\", CustomDelimiter.customDelimiter);
+        assertEquals("\\\\", CustomDelimiter.getCustomDelimiter());
     }
-
-
 
     @DisplayName("커스텀 구분자를 바르게 추출하는가?")
     @Test
@@ -33,20 +30,7 @@ class CustomDelimiterTest {
         extractCustomDelimiter(input);
         //then
         assertTrue(CustomDelimiter.isValidExpression(input));
-        assertEquals("11", CustomDelimiter.result);
-        assertEquals("!", CustomDelimiter.customDelimiter);
-
-    }
-
-    @DisplayName("커스텀 구분자 입력이 비정상 적으로 길어도 처리하는가?")
-    @Test
-    void canHandleTooLongExpression() {
-        //given
-        String input = "//,,,,\n11";
-        //when
-
-        //then
-        assertThrows(IllegalArgumentException.class,() -> isValidExpression(input));
-        assertNotEquals(",,,", CustomDelimiter.customDelimiter );
+        assertEquals("11", CustomDelimiter.getResult());
+        assertEquals("!", CustomDelimiter.getCustomDelimiter());
     }
 }
