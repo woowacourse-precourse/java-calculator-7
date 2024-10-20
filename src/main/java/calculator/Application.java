@@ -43,11 +43,9 @@ public class Application {
         // custom구분자가 있는 경우
         if (input.startsWith("//")) {
             int sepEndIndex = input.indexOf("\\n");
-            System.out.println("sepEndIndex = " + sepEndIndex);
 
             // 커스텀 구분자가 있으면 구분자 이후의 문자열만 input에 넣음
             input = input.substring(sepEndIndex + 2);
-            System.out.println("input = " + input);
         }
 
         String[] separatedNumber = input.split(separator.get(0));
@@ -55,10 +53,8 @@ public class Application {
         for (int i = 1; i < separator.size(); i++) {
             List<String> tempStorage = new ArrayList<>();
             for (String numStr : separatedNumber) {
-                System.out.println("numStr = " + numStr);
                 String[] tempSplit = numStr.split(separator.get(i));
                 for (String s : tempSplit) {
-                    System.out.println("s = " + s);
                     tempStorage.add(s.trim());
                 }
             }
@@ -70,7 +66,6 @@ public class Application {
     // separatedNumber가 양수 맞는지 검증
     private static void validateNumbers(String[] separatedNumber) {
         for (String number : separatedNumber) {
-            System.out.println("number = " + number);
             int parseNum = Integer.parseInt(number);
             validatePositiveNumbers(parseNum);
         }
