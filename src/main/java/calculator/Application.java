@@ -20,5 +20,24 @@ public class Application {
                 line = nums[1];
             }
         }
+
+        // 구분자를 기준으로 분리
+        nums = line.split(delimiter);
+
+        for (String num : nums) {
+            if (num.isEmpty()) {
+                continue;
+            }
+            try {
+                sum += Integer.parseInt(num);
+                if (Integer.parseInt(num) < 0) {
+                    throw new IllegalArgumentException("Negative number");
+                }
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Invalid number format");
+            }
+        }
+
+        System.out.println("결과 : " + sum);
     }
 }
