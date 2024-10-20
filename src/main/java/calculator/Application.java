@@ -29,7 +29,13 @@ public class Application {
             String[] numbers = input.split(delimiter);
             int sum = 0;
             for (String number : numbers) {
-            sum += Integer.parseInt(number);
+                int num = Integer.parseInt(number);
+
+                // 4. 잘못된 입력 시 IllegalArgumentException을 발생
+                if (num < 0) {
+                    throw new IllegalArgumentException("잘못된 값을 입력하셨습니다.");
+                }
+                sum += num;
             }
             return sum;
         } 
@@ -38,11 +44,14 @@ public class Application {
             String[] numbers = input.split("[,|:]");
             int sum = 0;
             for (String number : numbers) {
-            sum += Integer.parseInt(number);
+                int num = Integer.parseInt(number);
+                // 4. 잘못된 입력 시 IllegalArgumentException을 발생
+                if (num < 0) {
+                    throw new IllegalArgumentException("잘못된 값을 입력하셨습니다.");
+                }
+                sum += num;
             }
             return sum;
         }
-        // 4. 잘못된 입력 시 IllegalArgumentException을 발생
     }
-    
 }
