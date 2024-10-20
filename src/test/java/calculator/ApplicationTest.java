@@ -56,6 +56,14 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 형식에_맞지_않는_단순_문자열이_입력되었을_때_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("asd123"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
