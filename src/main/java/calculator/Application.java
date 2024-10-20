@@ -17,6 +17,11 @@ public class Application {
         separators.add(customSeparator);
         validInput(input, separators);
 
+        if (customSeparator != null) {
+            input = input.substring(input.indexOf("\\n") + 2);
+        }
+
+        long result = calculate(input, separators);
     }
 
     private static String extractCustomSeparator(String input) {
@@ -48,5 +53,14 @@ public class Application {
         if (!m.replaceAll("").isEmpty()) {
             throw new IllegalArgumentException("입력 형식이 잘못되었습니다.");
         }
+    }
+
+    private static long calculate(String input, List<String> separators) {
+        if (input.isEmpty()) {
+            return 0;
+        }
+        return Arrays
+                .stream(input.split(String.join("|", separators))).
+                mapToLong(Long::parseLong).sum();
     }
 }
