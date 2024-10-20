@@ -1,5 +1,8 @@
 package calculator;
 
+import static calculator.enums.Delimiter.COLON;
+import static calculator.enums.Delimiter.COMMA;
+
 public class DelimiterParser {
 
     public String[] splitByDelimiter(String userInput) {
@@ -10,8 +13,8 @@ public class DelimiterParser {
             userInput = retainAdditionString(userInput);
             userInput = userInput.replace(customDelimiter, ' ');
         }
-        userInput = userInput.replace(',',' ');
-        userInput = userInput.replace(':', ' ');
+        userInput = userInput.replace(COMMA.getDelimiter(),' ');
+        userInput = userInput.replace(COLON.getDelimiter(), ' ');
 
         return userInput.split(" ");
     }
