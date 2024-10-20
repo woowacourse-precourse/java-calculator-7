@@ -3,13 +3,12 @@ package calculator.view;
 import calculator.model.InputHandler;
 
 public class View {
-    InputHandler inputHandler = new InputHandler();
 
-    public void displayInputPrompt() {
+    public static void displayInputPrompt() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
     }
 
-    public void displayResult() {
+    public static void displayResult(InputHandler inputHandler) {
         System.out.println("결과 : " + inputHandler.getResult());
     }
 }

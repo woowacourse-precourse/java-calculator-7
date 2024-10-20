@@ -1,14 +1,15 @@
 package calculator.controller;
 
+import static calculator.view.View.displayInputPrompt;
+import static calculator.view.View.displayResult;
+
 import calculator.model.InputHandler;
-import calculator.view.View;
 
 public class Controller {
     InputHandler inputHandler = new InputHandler();
-    View view = new View();
 
     public void start() {
-        view.displayInputPrompt();
+        displayInputPrompt();
         inputHandler.setInputString(); // 문자열 받는 메서드
     }
 
@@ -19,6 +20,6 @@ public class Controller {
 
     public void resulting() {
         inputHandler.getResult();
-        view.displayResult();
+        displayResult(inputHandler);
     }
 }
