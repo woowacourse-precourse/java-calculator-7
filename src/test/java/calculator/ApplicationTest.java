@@ -27,12 +27,34 @@ class ApplicationTest extends NsTest {
         }
     }
 
-    @Test
-    void 커스텀_구분자_사용() {
-        assertSimpleTest(() -> {
-            run("//;\\n1");
-            assertThat(output()).contains("결과 : 1");
-        });
+    @Nested
+    @DisplayName("커스텀 구분자 테스트")
+    class CustomDelimiterTests {
+        @Test
+        void 커스텀_구분자_사용() {
+            assertSimpleTest(() -> {
+                run("//;\\n1");
+                assertThat(output()).contains("결과 : 1");
+            });
+        }
+
+        @Test
+        @DisplayName("커스텀 구분자로 덧셈")
+        void 커스텀_구분자_테스트() {
+            assertRandomUniqueNumberTest("//;\\n1;2;3", "6");
+        }
+
+        @Test
+        @DisplayName("한글 커스텀 구분자로 덧셈")
+        void 한글_커스텀_구분자_테스트() {
+            assertRandomUniqueNumberTest("//가\\n1가2가3", "6");
+        }
+
+        @Test
+        @DisplayName("이모지 커스텀 구분자로 덧셈")
+        void 이모지_커스텀_구분자_테스트() {
+            assertRandomUniqueNumberTest("//🍎\\n1🍎2🍎3", "6");
+        }
     }
 
     @Test
