@@ -17,10 +17,11 @@ public class CalculatorController {
     }
 
     public void run() {
-        String input = InputView.inputString();
-        separator.findAndAddSeparator(input);
-        List<Integer> numbers = separator.extractionNumbers(input);
+        String inputString = InputView.inputString();
+        String numberWithSeparators = separator.findAndAddSeparator(inputString);
+        List<Integer> numbers = separator.extractionNumbers(numberWithSeparators);
         calculator.addNumber(numbers);
         OutputView.printResult(calculator);
     }
+
 }
