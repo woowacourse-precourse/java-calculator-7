@@ -17,8 +17,7 @@ public class Calculator {
         }
 
         validator.validate(input);
-
-        return plus.plus(separator.separate(input));
-
+        String regex = separator.getSeparator(input);
+        return plus.plus(separator.separate(input, regex));
     }
 }
