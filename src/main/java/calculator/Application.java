@@ -23,6 +23,10 @@ public class Application {
             input = input.substring(i + CUSTOM_SEPARATOR_END_VALUE.length());
         }
 
+        return sumStringNumbers(input, separator);
+    }
+
+    private static int sumStringNumbers(String input, String separator){
         String[] stringNumbers = input.split(separator);
         int sum = 0;
 
@@ -39,6 +43,7 @@ public class Application {
                 throw new IllegalArgumentException();
             }
         }
+
         return sum;
     }
 }
