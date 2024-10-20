@@ -1,8 +1,7 @@
 package calculator.splitor;
 
-import calculator.InputString;
 import calculator.SplittedResult;
-import calculator.util.IntegerConverter;
+import calculator.validator.Validator;
 
 import java.util.List;
 
@@ -16,16 +15,7 @@ public class BasicSplitor extends Splitor {
 
     @Override
     public SplittedResult split() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(SEPERATOR_COLON).append(SEPERATOR_COMMA);
-
-        if (numString.matches(OTHER_SEPERATOR_REGEX)) {
-            throw new IllegalArgumentException("쉼표(,) 또는 콜론(:)이 아닌 다른 구분자는 사용할 수 없습니다.");
-        }
-
-        if (numString.matches(SEQUENCE_REGEX)) {
-            throw new IllegalArgumentException("구분자를 연속으로 작성할 수 없습니다.");
-        }
+        Validator.validateSeperator(OTHER_SEPERATOR_REGEX, numString);
 
         return new SplittedResult(List.of(numString.split(SEPERATOR_REGEX)));
     }

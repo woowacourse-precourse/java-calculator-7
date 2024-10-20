@@ -53,7 +53,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//\\n1+2+13;9"))
                         .isInstanceOf(IllegalArgumentException.class)
-                        .hasMessage("'//'와 '\\n' 사이에 유효한 구분자가 있어야 합니다.")
+                        .hasMessage("'//'와 '\\n' 사이에 구분자가 있어야 합니다.")
         );
     }
 
