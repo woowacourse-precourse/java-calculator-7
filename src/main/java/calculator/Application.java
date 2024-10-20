@@ -10,10 +10,8 @@ public class Application {
         String input = Console.readLine();
     }
 
-    public static int makeInt(String number) {
-        try {
-            return Integer.parseInt(number.trim());
-        } catch (NumberFormatException e) {
+    public static void checkMinus(int number) {
+        if (number < 0) {
             throw new IllegalArgumentException();
         }
     }
