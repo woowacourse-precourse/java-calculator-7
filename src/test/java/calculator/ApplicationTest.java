@@ -48,6 +48,14 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 커스텀_구분자_입력_형식이_잘못되었을_때_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//21,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
