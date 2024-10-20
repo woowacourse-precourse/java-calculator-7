@@ -30,7 +30,7 @@ public class CalculatorValidator {
         for (int i = 0; i < inputToken.length(); i++) {
             char part = inputToken.charAt(i);
             if (!Character.isDigit(part)) {
-                throw new IllegalArgumentException(ErrorMessage.CUSTOM_DELIMITER_FORMAT_ERROR.getMessage(part));
+                throw new IllegalArgumentException(ErrorMessage.TOKEN_FORMAT_ERROR.getMessage(part));
             }
         }
     }
