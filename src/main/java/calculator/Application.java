@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.Objects;
+
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class Application {
@@ -32,6 +34,9 @@ public class Application {
         else {
             line_result = line.split(",|:");
         }
+
+        // 파싱된 리스트 더하고 출력
+        printSum(line_result);
     }
 
     // 기본 구분자 및 커스텀 구분자 판별
@@ -46,4 +51,25 @@ public class Application {
             } else return false;
         } else return false;
     }
+
+    // 추출한 수 더하기 및 예외처리
+    public static void printSum(String[] result) {
+        int sum = 0;
+        try {
+            for (String s : result) {
+                if (Objects.equals(s, "")) continue;
+                int str2int = Integer.parseInt(s);
+                if (str2int > 0) {
+                    sum += str2int;
+                }
+                else {
+                    throw new IllegalArgumentException();
+                }
+            }
+            System.out.println("결과 : " + sum);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException();
+        }
+    }
 }
+
