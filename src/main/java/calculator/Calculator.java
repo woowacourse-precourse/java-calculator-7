@@ -4,7 +4,10 @@ public class Calculator {
 
     public void Calculation(String str) {
 
-        basic(str); // 기본 구분자를 사용하는 기본 계산기
+        String start = str.substring(0, 2); // 첫 시작 문자
+
+        if(start.equals("//")) custom(str.substring(5), str.substring(2, 3)); // 커스텀 구분자(?)를 사용하는 커스텀 계산기
+        else basic(str); // 기본 구분자를 사용하는 기본 계산기
 
     }
 
@@ -20,5 +23,20 @@ public class Calculator {
         }
 
         System.out.println(sum);
+    }
+
+    // 커스텀 구분자(?)를 사용하는 커스텀 계산기
+    public void custom(String str, String sep) {
+
+        Integer sum = 0;
+
+        String[] numbers = str.split(sep); // 콤마(,), 콜론(:)을 구분자로 지정
+
+        for(String number : numbers) {
+            sum += Integer.parseInt(number);
+        }
+
+        System.out.println(sum);
+
     }
 }
