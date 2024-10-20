@@ -10,8 +10,8 @@ public class Application {
     public static void runCalculator() {
         String input = getInput();
         String[] strings = splitInput(input);
-        int[] numbers = parseToIntArray(strings);
-        int result = calculateSum(numbers);
+        long[] numbers = parseToLongArray(strings);
+        long result = calculateSum(numbers);
 
         System.out.println("결과 : " + result);
     }
@@ -55,22 +55,22 @@ public class Application {
         return customDelimiter;
     }
 
-    public static int[] parseToIntArray(String[] strings) {
-        int[] intArray = new int[strings.length];
+    public static long[] parseToLongArray(String[] strings) {
+        long[] longArray = new long[strings.length];
 
         for (int i = 0; i < strings.length; i++) {
-            intArray[i] = parseToInt(strings[i]);
+            longArray[i] = parseToLong(strings[i]);
         }
 
-        return intArray;
+        return longArray;
     }
 
-    public static int parseToInt(String string) {
+    public static long parseToLong(String string) {
         if (string.isEmpty()) {
             return 0;
         } else {
             try {
-                int number = Integer.parseInt(string);
+                long number = Long.parseLong(string);
 
                 if (number <= 0) {
                     System.out.println("양수만 입력할 수 있습니다.");
@@ -85,10 +85,10 @@ public class Application {
         }
     }
 
-    private static int calculateSum(int[] numbers) {
-        int sum = 0;
+    private static long calculateSum(long[] numbers) {
+        long sum = 0;
 
-        for (int number : numbers) {
+        for (long number : numbers) {
             sum += number;
         }
 
