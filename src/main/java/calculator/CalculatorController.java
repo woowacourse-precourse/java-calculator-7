@@ -2,13 +2,15 @@ package calculator;
 
 public class CalculatorController {
     private final CalculatorView calculatorView;
+    private final CalculatorModel calculatorModel;
 
-    public CalculatorController(CalculatorView calculatorView) {
+    public CalculatorController(CalculatorView calculatorView, CalculatorModel calculatorModel) {
         this.calculatorView = calculatorView;
+        this.calculatorModel = calculatorModel;
     }
 
     public void runProgram() {
         String userInput = calculatorView.getUserInput();
-        System.out.println(userInput);          //test
+        Long[] operandArray = calculatorModel.changeStringtoLongOperandArray(userInput);
     }
 }
