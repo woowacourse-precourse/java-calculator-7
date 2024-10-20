@@ -1,6 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.regex.Pattern;
 
 public class Application {
     public static void main(String[] args) {
@@ -35,6 +36,9 @@ public class Application {
 
             /** (\n) 뒤에 있는 입력값만 분리해 realData 에 저장 */
             String realData = inputData.substring(index + 2);
+
+            /** realData 를 커스텀 구분자를 기준으로 분리 */
+            String[] separatedData = realData.split(Pattern.quote(customDelimiter));
         }
     }
 }
