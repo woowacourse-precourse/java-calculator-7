@@ -1,10 +1,13 @@
 package calculator.controller;
 
+import calculator.domain.Calculator;
 import calculator.domain.DelimiterManager;
 import calculator.domain.ExpressionSplitter;
 import calculator.domain.PositiveIntegerConverter;
 import calculator.domain.StringParser;
+import calculator.domain.SumCalculator;
 import calculator.dto.AdditionInput;
+import calculator.dto.AdditionResult;
 import calculator.dto.ParsedComponents;
 import calculator.view.InputView;
 import calculator.view.OutputView;
@@ -36,5 +39,8 @@ public class CalculatorController {
 
         PositiveIntegerConverter positiveIntegerConverter = new PositiveIntegerConverter(splittedExpression);
         List<Integer> positiveIntegers = positiveIntegerConverter.convertToPositiveIntegers();
+
+        Calculator calculator = new SumCalculator(positiveIntegers);
+        AdditionResult additionResult = AdditionResult.from(calculator.calculate());
     }
 }
