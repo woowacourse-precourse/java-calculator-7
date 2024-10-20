@@ -19,7 +19,7 @@ public class Application {
             throw new IllegalArgumentException("입력값이 유효하지 않습니다.");
         }
 
-        int sumResult = sumNumbers(input, delimiters);
+        int sumResult = sumNumbers(validTarget, delimiters);
 
         System.out.println("결과 : " + sumResult);
     }
