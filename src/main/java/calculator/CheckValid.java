@@ -11,7 +11,7 @@ public class CheckValid {
                 throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
             }
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("유효한 숫자가 아닙니다.");
+            throw new IllegalArgumentException("유효한 입력이 아닙니다.");
         }
     }
 
@@ -34,6 +34,14 @@ public class CheckValid {
             if (input[i].isEmpty()) {
                 throw new IllegalArgumentException("구분자가 두 개 이상 연속으로 사용되었습니다.");
             }
+        }
+    }
+
+    // 구분자 형식 검사를 위한 메서드
+    static void checkDelimiterFormat(String input, int delimiterEnd) {
+        // 구분자 형식이 올바른지 검사
+        if (delimiterEnd == -1 || delimiterEnd == 2 || input.charAt(2) == '/') {
+            throw new IllegalArgumentException("잘못된 구분자 형식입니다.");
         }
     }
 }
