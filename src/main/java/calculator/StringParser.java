@@ -1,11 +1,13 @@
 package calculator;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringParser {
 
     private final DelimiterProcessor delimiterProcessor;
+    private static final String PATTERN = "//(.*)\\\\n(.*)";
     private String input;
 
     public StringParser(String input) {
@@ -40,9 +42,12 @@ public class StringParser {
     }
 
     private String extractExpression(String input) {
-        return Optional.ofNullable(input)
-                .map(i -> i.substring(i.indexOf("\n") + 1))
-                .orElse("");
+        Matcher matcher = Pattern.compile(PATTERN).matcher(input);
+        if (matcher.find()) {
+            return matcher.group(2);
+        }
+
+        return input;
     }
 
     private void validateInput(List<String> strings) {

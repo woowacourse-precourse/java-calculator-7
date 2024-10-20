@@ -10,7 +10,7 @@ class DelimiterProcessorTest {
     @Test
     void 커스텀_구분자를_추가할_수_있다() {
         // given
-        String input = "//;\n1;2;3";
+        String input = "//;\\n1;2;3";
 
         // when
         DelimiterProcessor delimiterProcessor = new DelimiterProcessor(input);
@@ -22,7 +22,7 @@ class DelimiterProcessorTest {
     @Test
     void 다중_구분자는_예외를_발생시킨다() {
         // given
-        String input = "//&^\n1;2;3";
+        String input = "//&^\\n1;2;3";
 
         // when & then
         assertThrows(IllegalArgumentException.class, () ->
@@ -45,7 +45,7 @@ class DelimiterProcessorTest {
     @Test
     void 다중_커스텀_구분자를_처리할_수_있다() {
         // given
-        String input = "//;\n1;2;3//&\n4&5&6";
+        String input = "//;\\n1;2;3//&\n4&5&6";
 
         // when & then
         assertThrows(IllegalArgumentException.class, () -> new DelimiterProcessor(input));

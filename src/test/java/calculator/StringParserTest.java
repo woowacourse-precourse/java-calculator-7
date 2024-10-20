@@ -14,8 +14,8 @@ class StringParserTest {
 
     @ParameterizedTest
     @CsvSource({
-            "'//;\n1;2;3', '1,2,3'",
-            "'//&\n1&2&3', '1,2,3'",
+            "'//;\\n1;2;3', '1,2,3'",
+            "'//&\\n1&2&3', '1,2,3'",
             "'1,2,3', '1,2,3'"
     })
     void 문자열을_숫자열로_올바르게_분할해야_한다(String input, String expected) {

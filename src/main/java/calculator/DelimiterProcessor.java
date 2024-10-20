@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class DelimiterProcessor {
     private static final String PREFIX = "//";
-    private static final String SUFFIX = "\n";
+    private static final String SUFFIX = "\\\\n";
     private static final String PATTERN = PREFIX + "(.*)" + SUFFIX + "(.*)";
 
     private List<String> delimiters = new ArrayList<>();
