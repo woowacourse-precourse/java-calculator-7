@@ -11,7 +11,7 @@ public class AddServiceImpl implements AddService {
             addResult=addResult.add(number);
         }
     }
-
+    @Override
     public BigInteger getAddResult() {
         return addResult;
     }
