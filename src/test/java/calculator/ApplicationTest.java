@@ -17,6 +17,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 수가_하나만_입력() {
+        assertSimpleTest(() -> {
+            run("1");
+            assertThat(output()).contains("결과 : 1");
+        });
+    }
+
+    @Test
     void 기본_구분자_사용_1() {
         assertSimpleTest(() -> {
             run("1,2");
@@ -92,14 +100,6 @@ class ApplicationTest extends NsTest {
     void 예외_테스트_구분자_사용이_없음() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("1 2 3"))
-                        .isInstanceOf(IllegalArgumentException.class)
-        );
-    }
-
-    @Test
-    void 예외_테스트_수가_하나만_들어옴() {
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("1"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
