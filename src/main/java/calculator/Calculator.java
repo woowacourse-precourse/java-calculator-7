@@ -1,5 +1,6 @@
 package calculator;
 
+import constant.ErrorMessage;
 import java.util.List;
 
 public class Calculator {
@@ -10,7 +11,7 @@ public class Calculator {
         for (String value : values) {
             int num = Integer.parseInt(value);
             if (num <= 0) {
-                throw new IllegalArgumentException("0 또는 음수는 입력값에 포함될 수 없습니다.");
+                throw new IllegalArgumentException(ErrorMessage.CONTAINS_ZERO_OR_NEGATIVE);
             }
             sum += Integer.parseInt(value);
         }

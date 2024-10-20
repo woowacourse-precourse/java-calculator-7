@@ -1,27 +1,30 @@
 package stringprocess;
 
+import constant.ErrorMessage;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class SeparatorExtractor {
 
-    private final String regex;
+    private final String customSeparatorPrefix;
+    private final String extractRegex;
     private List<String> customSeparators;
 
 
     //테스트환경에서는 \n가 문자열로 인식되지만 실제 런타입에서는 개행문자로 인식되는 문제가 있어 정규식을 상황에 맞게 받도록함
-    public SeparatorExtractor(String regex, List<String> customSeparators) {
-        this.regex = regex;
+    public SeparatorExtractor(String customSeparatorPrefix, String extractRegex, List<String> customSeparators) {
+        this.customSeparatorPrefix = customSeparatorPrefix;
+        this.extractRegex = extractRegex;
         this.customSeparators = customSeparators;
     }
 
     public String extractCustomSeparator(String value) {
-        if (!value.contains("//")) {
+        if (!value.contains(customSeparatorPrefix)) {
             return value;
         }
 
-        Pattern pattern = Pattern.compile(regex);
+        Pattern pattern = Pattern.compile(extractRegex);
         Matcher matcher = pattern.matcher(value);
 
         while (matcher.find()) {
@@ -33,17 +36,17 @@ class SeparatorExtractor {
             int firstIndex = value.indexOf(separator);
 
             if (firstIndex < declarationIndex) {
-                throw new IllegalArgumentException("커스텀 구분자 선언이 사용보다 선행되어야합니다.");
+                throw new IllegalArgumentException(ErrorMessage.CUSTOM_SEPARATOR__DECLARATION_ORDER_ERROR);
             }
 
             if (separator.isBlank()) {
-                throw new IllegalArgumentException("공백 또는 \"\\n\"은 커스텀 구분자로 사용이 불가합니다.");
+                throw new IllegalArgumentException(ErrorMessage.SPACE_OR_CHANGING_CHAR_CANNOT_USE);
             }
 
-            //커스텀 구분자에 양수가 포함되면 예외 발생
-            boolean isNumContains = separator.chars().anyMatch(c -> c >= '1' && c <= '9');
+            //커스텀 구분자에 숫자가 포함되면 예외 발생
+            boolean isNumContains = separator.chars().anyMatch(c -> c >= '0' && c <= '9');
             if (isNumContains) {
-                throw new IllegalArgumentException("커스텀 구분자에는 양수가 포함될 수 없습니다.");
+                throw new IllegalArgumentException(ErrorMessage.CUSTOM_SEPARATOR_CONTAINS_NUM);
             }
 
             //구분자 리스트에 추출한 커스텀 구분자 추가

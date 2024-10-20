@@ -2,6 +2,7 @@ package calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import constant.ErrorMessage;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
@@ -39,7 +40,7 @@ class CalculatorTest {
 
         //then
         Assertions.assertThrows(IllegalArgumentException.class, () -> calculator.calculate(list),
-                "0 또는 음수는 입력값에 포함될 수 없습니다.");
+                ErrorMessage.CONTAINS_ZERO_OR_NEGATIVE);
     }
 
 }

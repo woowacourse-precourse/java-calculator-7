@@ -4,11 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import constant.Constant;
+import constant.ErrorMessage;
 import org.junit.jupiter.api.Test;
 
 class ValidatorTest {
 
-    private final Validator validator = new Validator(Constant.CUSTOM_SEPARATOR_END_STR_TEST);
+    private final Validator validator = new Validator(Constant.CUSTOM_SEPARATOR_PREFIX,
+            Constant.CUSTOM_SEPARATOR_SUFFIX_TEST);
 
     @Test
     void 문자열_유효성_검사_성공() {
@@ -31,12 +33,12 @@ class ValidatorTest {
         //then
         for (String str : input1) {
             assertThrows(IllegalArgumentException.class, () -> validator.validate(str),
-                    "문자열의 시작은 커스텀 구분자 선언 또는 양수여야 합니다");
+                    ErrorMessage.START_OF_INPUT_ERROR);
         }
 
         for (String str : input2) {
             assertThrows(IllegalArgumentException.class, () -> validator.validate(str),
-                    "문자열의 끝은 커스텀 구분자 종료 선언 또는 양수여야 합니다.");
+                    ErrorMessage.END_OF_INPUT_ERROR);
         }
     }
 
@@ -48,7 +50,7 @@ class ValidatorTest {
         //then
         for (String str : input) {
             assertThrows(IllegalArgumentException.class, () -> validator.validate(str),
-                    "문자열의 끝은 커스텀 구분자 종료 선언 또는 양수여야 합니다.");
+                    ErrorMessage.END_OF_INPUT_ERROR);
         }
     }
 
@@ -69,7 +71,7 @@ class ValidatorTest {
         //then
         for (String str : input) {
             assertThrows(IllegalArgumentException.class, () -> validator.validate(str),
-                    "커스텀 구분자 형식이 올바르지 않습니다.");
+                    ErrorMessage.CUSTOM_SEPARATOR_FORMAT_ERROR);
         }
 
     }

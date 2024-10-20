@@ -15,9 +15,12 @@ public class StringProcessorFacade {
 
     public StringProcessorFacade() {
         customSeparators = new ArrayList<>();
-        validator = new Validator(Constant.CUSTOM_SEPARATOR_END_STR_APP);
+        validator = new Validator(Constant.CUSTOM_SEPARATOR_PREFIX, Constant.CUSTOM_SEPARATOR_SUFFIX_APP);
+
         splitter = new Splitter(Constant.BASIC_SEPARATOR_REGEX, customSeparators);
-        separatorExtractor = new SeparatorExtractor(Constant.EXTRACT_REGEX_APP, customSeparators);
+
+        separatorExtractor = new SeparatorExtractor(Constant.CUSTOM_SEPARATOR_PREFIX, Constant.EXTRACT_REGEX_APP,
+                customSeparators);
     }
 
     public List<String> process(String input) {

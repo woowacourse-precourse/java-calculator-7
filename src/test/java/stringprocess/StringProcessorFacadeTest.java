@@ -4,6 +4,7 @@ package stringprocess;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import constant.ErrorMessage;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
@@ -58,7 +59,7 @@ class StringProcessorFacadeTest {
 
         //then
         assertThrows(IllegalArgumentException.class, () -> processor.process(input),
-                "공백 또는 \"\\n\"은 커스텀 구분자로 사용이 불가합니다.");
+                ErrorMessage.SPACE_OR_CHANGING_CHAR_CANNOT_USE);
 
     }
 
@@ -69,7 +70,7 @@ class StringProcessorFacadeTest {
 
         //then
         assertThrows(IllegalArgumentException.class, () -> processor.process(input),
-                "커스텀 구분자 형식이 올바르지 않습니다.");
+                ErrorMessage.CUSTOM_SEPARATOR_FORMAT_ERROR);
     }
 
     @Test
@@ -79,7 +80,7 @@ class StringProcessorFacadeTest {
 
         //then
         assertThrows(IllegalArgumentException.class, () -> processor.process(input),
-                "커스텀 구분자에는 양수가 포함될 수 없습니다.");
+                ErrorMessage.CUSTOM_SEPARATOR_CONTAINS_NUM);
 
     }
 
@@ -90,8 +91,8 @@ class StringProcessorFacadeTest {
 
         //then
         assertThrows(IllegalArgumentException.class, () -> processor.process(input),
-                "커스텀 구분자 선언이 사용보다 선행되어야합니다.");
-        
+                ErrorMessage.CUSTOM_SEPARATOR__DECLARATION_ORDER_ERROR);
+
     }
 
 }

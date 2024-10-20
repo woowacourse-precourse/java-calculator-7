@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import constant.Constant;
+import constant.ErrorMessage;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +17,8 @@ class SeparatorExtractorTest {
     @BeforeEach
     void init() {
         customSeparators = new ArrayList<>();
-        extractor = new SeparatorExtractor(Constant.EXTRACT_REGEX_TEST, customSeparators);
+        extractor = new SeparatorExtractor(Constant.CUSTOM_SEPARATOR_PREFIX, Constant.EXTRACT_REGEX_TEST,
+                customSeparators);
     }
 
     @Test
@@ -40,7 +42,7 @@ class SeparatorExtractorTest {
 
         //then
         assertThrows(IllegalArgumentException.class, () -> extractor.extractCustomSeparator(input),
-                "커스텀 구분자 선언이 사용보다 선행되어야합니다.");
+                ErrorMessage.CUSTOM_SEPARATOR__DECLARATION_ORDER_ERROR);
 
     }
 

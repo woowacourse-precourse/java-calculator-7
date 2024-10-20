@@ -1,12 +1,16 @@
 package stringprocess;
 
+import constant.ErrorMessage;
+
 class Validator {
 
-    private final String customSeparatorEndString;
+    private final String customSeparatorPrefix;
+    private final String customSeparatorSuffix;
 
     //테스트 환경에서는 \n가 일반문자로 인식되지만 실제 런타임에 개행문자로 인식되는 문제가 있어 상황에 맞게 문자열을 받도록 함
-    public Validator(String customSeparatorEndString) {
-        this.customSeparatorEndString = customSeparatorEndString;
+    public Validator(String customSeparatorPrefix, String customSeparatorSuffix) {
+        this.customSeparatorPrefix = customSeparatorPrefix;
+        this.customSeparatorSuffix = customSeparatorSuffix;
     }
 
     public void validate(String value) {
@@ -17,11 +21,11 @@ class Validator {
 
     //문자열의 시작 확인
     private void checkBeginOfValue(String value) {
-        if (value.startsWith("//") || isPositiveNum(value.charAt(0))) {
+        if (value.startsWith(customSeparatorPrefix) || isPositiveNum(value.charAt(0))) {
             return;
         }
 
-        throw new IllegalArgumentException("문자열의 시작은 커스텀 구분자 선언 또는 양수여야 합니다");
+        throw new IllegalArgumentException(ErrorMessage.START_OF_INPUT_ERROR);
     }
 
     //문자열의 끝 확인
@@ -37,22 +41,22 @@ class Validator {
             return;
         }
 
-        throw new IllegalArgumentException("문자열의 끝은 커스텀 구분자 선언 또는 양수여야 합니다");
+        throw new IllegalArgumentException(ErrorMessage.END_OF_INPUT_ERROR);
     }
 
 
     //문자열에서 커스텀 구분자 형식 유효성 검사하기
     private void checkCustomSeparatorFormat(String value) {
-        if (!value.contains("//")) {
+        if (!value.contains(customSeparatorPrefix)) {
             return;
         }
 
-        int start = value.indexOf("//");
-        int end = value.indexOf(customSeparatorEndString);
+        int start = value.indexOf(customSeparatorPrefix);
+        int end = value.indexOf(customSeparatorSuffix);
 
         // 커스텀 구분자 선언이 //후에 \n인 형태인지,
         if (start > end) {
-            throw new IllegalArgumentException("커스텀 구분자 형식이 올바르지 않습니다.");
+            throw new IllegalArgumentException(ErrorMessage.CUSTOM_SEPARATOR_FORMAT_ERROR);
         }
 
         if (end + 2 < value.length()) {
