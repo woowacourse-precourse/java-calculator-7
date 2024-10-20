@@ -12,7 +12,3 @@
    b. **커스텀 구분자**: 문자열 앞부분의 "//"와 "\n"사이에 위치한 문자를 커스텀 구분자로 사용  
    ㄴ> ex) "//;\n1;2;3"에서 " ; "이 커스텀 구분자  
    c. **에러 기능**: 사용자가 잘못된 값 입력한 경우 "IllegalArgumentException" 발생시킨 후 App 종료
-
-
-3. 구현  
-![Description](./src/img/algorithm.png)
