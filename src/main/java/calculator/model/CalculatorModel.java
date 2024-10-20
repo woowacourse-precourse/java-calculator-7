@@ -5,9 +5,12 @@ import java.math.BigInteger;
 public class CalculatorModel {
     public int getResult(String[] digits) {
         int result = 0;
+        if (digits.length == 0) {
+            throw new IllegalArgumentException("구분자만 입력되었습니다.");
+        }
         for (String val : digits) {
             int intVal;
-            if (val.isEmpty()) {
+            if (val.isEmpty()) { //배열의 빈 문자열
                 intVal = 0;
             } else {
                 intVal = exception(val);
