@@ -13,7 +13,7 @@ public class RunCalculator {
             System.out.println(0);
             return;
         }
-        long sumResult = delimiterService.DelimiterProcess(input);
+        int sumResult = delimiterService.DelimiterProcess(input);
         System.out.println("결과 : " + sumResult);
 
     }

@@ -48,7 +48,7 @@ public class InputValidation { // 입력의 유효성을 확인하는 클래스�
     //입력된 값이 숫자인지 그 유효성을 확인하는 메서드이다.
     public static void CheckNumber(String token) {
         try {
-            long number = Long.parseLong(token); // 입력이 숫자가 아니라면 예외를 터뜨린다.
+            int number = Integer.parseInt(token); // 입력이 숫자가 아니라면 예외를 터뜨린다.
             if (number < 0) {
                 throw new IllegalArgumentException();
             }

@@ -4,8 +4,8 @@ import static vaildation.InputValidation.CheckCustomDelimiter;
 import static vaildation.InputValidation.CheckInput;
 
 public class DelimiterService { // 코드 실행 제어 서비스 클래스
-    public long DelimiterProcess(String input) {
-        long sumResult = 0;
+    public int DelimiterProcess(String input) {
+        int sumResult;
         String[] Custom;
         String customDelimiter = "";
 
@@ -25,18 +25,18 @@ public class DelimiterService { // 코드 실행 제어 서비스 클래스
     }
 
     //입력의 유효성이 증명되면 덧셈을 수행한다.
-    public static long SumInput(String remainingInput, String customDelimiter) {
+    public static int SumInput(String remainingInput, String customDelimiter) {
         if (remainingInput.isEmpty()) {
             return 0;
         }
-        long sum = 0;
+        int sum = 0;
         String[] sumToken = remainingInput.split(customDelimiter);
 
         for (String token : sumToken) {
             if (token.isEmpty()) {
                 continue;  // 빈 문자열 건너뛰기
             }
-            sum += Long.parseLong(token);
+            sum += Integer.parseInt(token);
         }
 
         return sum;
