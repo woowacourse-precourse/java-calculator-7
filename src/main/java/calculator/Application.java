@@ -40,12 +40,11 @@ public class Application {
         if (input.equals("")) return new String[]{"0"};
 
         if (!customSeperator.equals("")) {
-            input = input.replace(CUSTOM_SEPERATE_START + customSeperator + CUSTOM_SEPERATE_END, "");
+            input = input.replaceFirst(CUSTOM_SEPERATE_START + customSeperator + CUSTOM_SEPERATE_END, "");
             seperator = DEFAULT_SEPERATOR + "|" + customSeperator;
         }
-        String[] number = input.split(seperator);
 
-        return number;
+        return input.split(seperator);
     }
 
     public static int sumCalculate(int[] number) {
