@@ -33,6 +33,15 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 구분자_여러_문자_포함() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;-(\\n1;-(2"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+
+    @Test
     void 커스텀_구분자로_분리() {
         assertSimpleTest(() -> {
             run("1,2//;\\n3;4;5");
