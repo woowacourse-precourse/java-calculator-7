@@ -146,7 +146,7 @@ main/
 - 입력: `//AW\n2AW3,4`
 - 출력: `IllegalArgumentException` 발생 후 종료 (커스텀 구분자는 **문자**이다)
 
-**예외 테스트 case 7**: 커스텀 구분자가 '-'
+**예외 테스트 case 7**: 커스텀 구분자가 마이너스 기호
 
 - 입력: `//-\n1-2,3`
 - 출력: `IllegalArgumentException` 발생 후 종료 ('-'는 음수 표현에 사용된다)
