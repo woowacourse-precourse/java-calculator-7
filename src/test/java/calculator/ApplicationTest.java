@@ -17,6 +17,41 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 커스텀_구분자_사용2() {
+        assertSimpleTest(() -> {
+            run("//+;\\n1+;2+;3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용3() {
+        assertSimpleTest(() -> {
+            run("//;;\\n1;;3;;3");
+            assertThat(output()).contains("결과 : 7");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용4() {
+        assertSimpleTest(() -> {
+            run("//?\\n1?3?4");
+            assertThat(output()).contains("결과 : 8");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용5() {
+        assertSimpleTest(() -> {
+            run("//de\\n4de3de3");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
+
+
+
+    @Test
     void 이스케이프_문자_구분자_예외처리() {
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> runException("//;\\\\n1;\\2;\\3"))
