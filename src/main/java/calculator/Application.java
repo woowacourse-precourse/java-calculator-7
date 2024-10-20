@@ -43,4 +43,12 @@ class Calculator {
 
         return sum;
     }
+
+    private static int separatorLocator(String input) {
+        if(input.contains("//") && input.contains("\\n")){
+            return customSeparator(input);
+        }else {
+            return defaultSeparator(input);
+        }
+    }
 }
