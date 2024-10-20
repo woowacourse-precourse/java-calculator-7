@@ -3,8 +3,8 @@ package calculator.controller;
 import calculator.controller.io.InputHandler;
 import calculator.controller.io.OutputHandler;
 import calculator.controller.io.UserInput;
-import calculator.model.InputText;
-import calculator.model.Tokens;
+import calculator.domain.InputText;
+import calculator.domain.Tokens;
 
 public class Calculator {
     private final InputHandler inputHandler;
