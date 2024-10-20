@@ -27,13 +27,6 @@ class DelimiterProcessorTest {
         assertArrayEquals(result, expected);
     }
 
-    @DisplayName("구분자가 없을 때 예외가 발생한다.")
-    @Test
-    void 구분자가_없을_때_예외_발생() {
-        DelimiterProcessor delimiterProcessor = new DelimiterProcessor("123");
-        assertThrows(IllegalArgumentException.class, delimiterProcessor::process);
-    }
-
     @DisplayName("커스텀 구분자를 지정하지 못했을 때 예외가 발생한다.")
     @Test
     void 커스텀_구분자_지정하지_못했을_때_예외_발생() {

@@ -86,15 +86,6 @@ class CalculatorTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("사용자 입력 값에 기본 구분자, 커스텀 구분자가 없을 때 예외가 발생한다.")
-    @Test
-    void 사용자_입력_구분자_X() {
-        String input = "1";
-
-        assertThatThrownBy(() -> new Calculator(input).sum())
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
     @DisplayName("사용자가 커스텀 구분자를 지정 못할 경우 예외가 발생한다.")
     @Test
     void 사용자_커스텀_구분자_실패() {

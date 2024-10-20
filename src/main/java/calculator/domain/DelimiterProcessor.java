@@ -13,14 +13,7 @@ public class DelimiterProcessor {
         replaceBasicDelimiters();
         replaceCustomDelimiter();
 
-        validateDelimiterPresence();
         return expression.split(":");
-    }
-
-    private void validateDelimiterPresence() {
-        if (!expression.contains(":")) {
-            throw new IllegalArgumentException("구분자가 없습니다.");
-        }
     }
 
     private void replaceBasicDelimiters() {
