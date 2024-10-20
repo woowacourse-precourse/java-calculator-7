@@ -29,20 +29,17 @@ public class StringCalculator {
         int newlineIndex = subInput.indexOf("\\n");
 
         if (newlineIndex == -1) {
-            // exception 구현 예정
-            throw new IllegalArgumentException("\\n으로 끝나지 않았다는 exception 구현 예정");
+            throw new IllegalArgumentException("\\n을 사용하여 어떤 문자가 커스텀 구분자인지 구분해주세요.");
         }
         // "\n" 이전까지의 문자열을 커스텀 구분자로 사용
         String customSperator = subInput.substring(0, newlineIndex);
 
         if (customSperator.isEmpty()) {
-            // exception 구현 예정
-            throw new IllegalArgumentException("// \\n 사이 구분자가 존재하지 않는다는 exception 구현 예정");
+            throw new IllegalArgumentException("// \\n 사이 문자가 존재하지 않습니다. 커스텀 구분자를 넣어주세요.");
         }
 
         if (customSperator.length() != 1) {
-            // exception 구현 예정
-            throw new IllegalArgumentException("// \\n 사이 구분자가 문자가 아닌 문자열이라는 exception 구현 예정");
+            throw new IllegalArgumentException("// \\n 사이 구분자는 문자이어야 합니다. 문자열이 아닌 문자를 넣어주세요.");
         }
         return customSperator;
     }
@@ -89,13 +86,12 @@ public class StringCalculator {
             }
             // 숫자나 기본 구분자가 아닐경우 에러 발생
             else {
-                throw new IllegalArgumentException("기본 구분자, 숫자가 아닌 문자가 들어왔다는 에러 구현 예정");
+                throw new IllegalArgumentException("기본 구분자, 숫자로만 이루어진 문자열을 작성해주세요.");
             }
         }
         return splitedNums;
     }
 
-    // 구현 예정
     private List<Integer> customSeperateMachine(String seperator) {
         List<Integer> splitedNums = new ArrayList<>();
         Character seperatorToChar = seperator.charAt(0);
@@ -126,7 +122,7 @@ public class StringCalculator {
             }
             // 숫자나 커스텀 구분자가 아닐경우 에러 발생
             else {
-                throw new IllegalArgumentException("커스텀 구분자, 숫자가 아닌 문자가 들어왔다는 에러 구현 예정");
+                throw new IllegalArgumentException("커스텀 구분자, 숫자로만 이루어진 문자열을 작성해주세요.");
             }
         }
         return splitedNums;
