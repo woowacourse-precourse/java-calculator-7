@@ -1,11 +1,14 @@
 package calculator;
 
+import calculator.view.InputView;
+import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ApplicationTest extends NsTest {
     @Test
@@ -22,6 +25,29 @@ class ApplicationTest extends NsTest {
             assertThatThrownBy(() -> runException("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
         );
+    }
+
+    @Test
+    void 문자열을_입력하였을_때_예외발생() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("a, 2, 3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+    @Test
+    void 문자열만_입력하였을_때_예외발생() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("안녕하세요"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 공백만_입력하였을_때() {
+        assertSimpleTest(() -> {
+            run("                             ");
+            assertThat(output()).contains("결과 : 0");
+        });
     }
 
     @Override
