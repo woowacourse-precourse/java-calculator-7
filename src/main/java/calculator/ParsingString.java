@@ -12,6 +12,7 @@ public class ParsingString {
     }
 
     private static void findStartString(String input, String delimiter) {
+        findStartIndex = 0;
         if (delimiter.length() != BASIC_DELIMITER_SIZE) {
             findStartIndex = 5;
             if (delimiter.length() == 4) {

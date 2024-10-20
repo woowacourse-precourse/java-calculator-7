@@ -3,9 +3,10 @@ package calculator;
 import java.util.regex.Pattern;
 
 public class CustomDelimiter {
-    private static String delimiters = ",|:";
+    private static String delimiters;
 
     public static String parseDelimiters(String inputMessage) {
+        delimiters = ",|:";
         if (inputMessage.length() >= 4) {
             findDelimiter(inputMessage);
         }
