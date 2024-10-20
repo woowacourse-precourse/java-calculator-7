@@ -25,9 +25,16 @@ public class StringSumCalculator {
 
         if (input.startsWith("//") && input.contains("\n")) {
             int delimiterIdx = input.indexOf("\n");
-            String customDelimiter = input.substring(2, delimiterIdx);
+            String customDelimiters = input.substring(2, delimiterIdx);
             String numbersWithDelimiter = input.substring(delimiterIdx + 1);
-            splitNumbers = numbersWithDelimiter.split(Pattern.quote(customDelimiter));
+
+            if (customDelimiters.startsWith("[") && customDelimiters.endsWith("]")) {
+                String[] delimiters = customDelimiters.substring(1, customDelimiters.length() - 1).split("]\\[");
+                String delimiterPattern = String.join("|", Pattern.quote(delimiters[0]), Pattern.quote(delimiters[1]));
+                splitNumbers = numbersWithDelimiter.split(delimiterPattern);
+            } else {
+                splitNumbers = numbersWithDelimiter.split(Pattern.quote(customDelimiters));
+            }
         } else {
             splitNumbers = input.split(",|:");
         }
