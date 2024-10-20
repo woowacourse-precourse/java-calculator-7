@@ -20,6 +20,12 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 커스텀_구분자_두글자_이상_사용() {
+        StringAddCalculator calculator = new StringAddCalculator();
+        assertThat(calculator.splitAndSum("//;:\n1;:2;:3")).isEqualTo(6);
+    }
+
+    @Test
     void 예외_테스트_기본_구분자_사용_실수() {
         StringAddCalculator calculator = new StringAddCalculator();
         assertThatThrownBy(() -> calculator.splitAndSum("1.2,2:3"))
