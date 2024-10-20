@@ -8,6 +8,9 @@ public class Application {
         // TODO: 프로그램 구현
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
-        System.out.println("결과 : ");
+
+        int result = 0;
+
+        System.out.println("결과 : " + result);
     }
 }
