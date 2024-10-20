@@ -13,8 +13,6 @@ public class Parser {
         List<String> stringList = splitByDelimiter(str);
         List<Integer> intList = convertToIntList(stringList);
 
-        Validator.isNegativeNumber(intList);
-
         return intList;
     }
 
@@ -38,6 +36,8 @@ public class Parser {
 
             intList.add(Integer.parseInt(element));
         }
+
+        Validator.isNegativeNumber(intList);
 
         return intList;
     }
