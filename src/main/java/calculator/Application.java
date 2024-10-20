@@ -1,8 +1,8 @@
 package calculator;
 
+import static camp.nextstep.edu.missionutils.Console.readLine;
 import camp.nextstep.edu.missionutils.Console;
 import java.util.*;
-import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class Application {
     public static void main(String[] args) {
@@ -16,6 +16,7 @@ public class Application {
             Console.close();
             return;
         }
+
         for (char c : input.toCharArray()) {
             inputList.add(c);
         }
@@ -39,9 +40,7 @@ public class Application {
         int sum = 0;
 
         if (inputList.get(1) == '/' && inputList.get(3) == '\\' && inputList.get(4) == 'n') {
-            if (Character.isDigit(inputList.get(2))
-                    || inputList.get(2).equals(':')
-                    || inputList.get(2).equals(',')) {
+            if (Character.isDigit(inputList.get(2)) || inputList.get(2).equals(':') || inputList.get(2).equals(',')) {
                 throw new IllegalArgumentException();
             } else if (inputList.size() == 5) {
                 return sum;
@@ -56,6 +55,7 @@ public class Application {
 
         return sum;
     }
+
     private static int handleDefaultDelimiters(List<Character> inputList) {
         List<Character> dividerList = Arrays.asList(':', ',');
         List<Integer> tmpNum = new ArrayList<>();
