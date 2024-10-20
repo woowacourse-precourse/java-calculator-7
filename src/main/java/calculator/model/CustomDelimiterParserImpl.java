@@ -2,11 +2,11 @@ package calculator.model;
 
 import calculator.view.Message;
 
-public class CustomStringParserImpl implements CustomStringParser {
+public class CustomDelimiterParserImpl implements CustomDelimiterParser {
 
     private final DelimiterManager delimiterManager;
 
-    public CustomStringParserImpl(DelimiterManager delimiterManager) {
+    public CustomDelimiterParserImpl(DelimiterManager delimiterManager) {
         this.delimiterManager = delimiterManager;
     }
 

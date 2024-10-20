@@ -83,7 +83,7 @@
 
 ## model
 
-### CustomStringParser
+### CustomDelimiterParser
 
 - 입력된 문자열로부터, 커스텀 구분자와 숫자 부분을 추출
 

@@ -1,8 +1,8 @@
 package calculator;
 
 import calculator.controller.CalculatorController;
-import calculator.model.CustomStringParser;
-import calculator.model.CustomStringParserImpl;
+import calculator.model.CustomDelimiterParser;
+import calculator.model.CustomDelimiterParserImpl;
 import calculator.model.DelimiterManagerImpl;
 import calculator.model.NumberStringConverter;
 import calculator.model.NumberStringConverterImpl;
@@ -19,8 +19,9 @@ public class Application {
         DelimiterManagerImpl delimiterManagerImpl = new DelimiterManagerImpl();
         delimiterManagerImpl.init();
 
-        CustomStringParser customStringParser = new CustomStringParserImpl(delimiterManagerImpl);
-        CalculatorController calculatorController = getCalculatorController(delimiterManagerImpl, customStringParser);
+        CustomDelimiterParser customDelimiterParser = new CustomDelimiterParserImpl(delimiterManagerImpl);
+        CalculatorController calculatorController = getCalculatorController(delimiterManagerImpl,
+                customDelimiterParser);
         CalculatorInputView calculatorInputView = new CalculatorInputView();
 
         String inputStr = calculatorInputView.inputExpression();
@@ -28,14 +29,14 @@ public class Application {
     }
 
     private static CalculatorController getCalculatorController(DelimiterManagerImpl delimiterManagerImpl,
-                                                                CustomStringParser customStringParser) {
+                                                                CustomDelimiterParser customDelimiterParser) {
         NumberStringSplitter numberStringSplitter = new NumberStringSplitterImpl(delimiterManagerImpl);
         NumberStringConverter numberStringConverter = new NumberStringConverterImpl();
         SumCalculator sumCalculator = new SumCalculatorImpl();
         CalculatorOutputView calculatorOutputView = new CalculatorOutputView();
 
         return new CalculatorController(
-                customStringParser, numberStringSplitter, numberStringConverter, sumCalculator, calculatorOutputView
+                customDelimiterParser, numberStringSplitter, numberStringConverter, sumCalculator, calculatorOutputView
         );
     }
 }

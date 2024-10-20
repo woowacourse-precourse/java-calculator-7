@@ -1,6 +1,6 @@
 package calculator.model;
 
-public interface CustomStringParser {
+public interface CustomDelimiterParser {
 
     String parse(String input);
 
