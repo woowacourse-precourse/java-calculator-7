@@ -10,14 +10,14 @@ public class CustomDelimiter implements Delimiter {
     private final Set<String> delimiters;
 
     protected CustomDelimiter(final String input) {
-        this.delimiters = Collections.singleton(escapeMetaCharacter(findCustomDelimiter(input)));
+        this.delimiters = Collections.singleton(findCustomDelimiter(input));
     }
 
     private String findCustomDelimiter(final String input) {
         final int delimiterStart = input.indexOf(CUSTOM_DELIMITER_PREFIX);
         final int delimiterEnd = input.indexOf(CUSTOM_DELIMITER_SUFFIX);
         validateCustomDelimiterPosition(delimiterStart, delimiterEnd);
-        return input.substring(delimiterStart + 2, delimiterEnd);
+        return escapeMetaCharacter(input.substring(delimiterStart + 2, delimiterEnd));
     }
 
     private void validateCustomDelimiterPosition(final int delimiterStart, final int delimiterEnd) {
