@@ -2,7 +2,7 @@ package calculator.view;
 
 public class OutputView {
     private final static String RESULT = "결과 : %d";
-    private final static int ZERO = 0;
+    private final static String ZERO = "결과 : 0";
     public OutputView(){
     }
     public void printResult(int sum){

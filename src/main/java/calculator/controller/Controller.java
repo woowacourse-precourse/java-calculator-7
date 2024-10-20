@@ -16,12 +16,13 @@ public class Controller {
 
         if(model.isValidationCheckNullOrEmpty(model.getUserInput())){
             outputView.printZero();
+            return;
         }
         inputValidate.stringStartsCheck(model.getUserInput());
 
         String[] tokens = model.userInputSplit(model.getUserInput());
 
-        inputValidate.checkForNegativeNumbersAndZero(tokens);  // 음수 체크를 문자열 분리 후에 실행
+        inputValidate.checkForNegativeNumbersAndZero(tokens);
 
         outputView.printResult(model.calculateSum(tokens));
     }

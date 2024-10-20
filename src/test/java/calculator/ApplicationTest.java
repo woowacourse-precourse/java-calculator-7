@@ -17,6 +17,13 @@ class ApplicationTest extends NsTest {
         });
     }
     @Test
+    void 빈칸은_0으로_인식() {
+        assertSimpleTest(() -> {
+            run(" ");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+    @Test
     void 기본_구분자_사용() {
         assertSimpleTest(() -> {
             run("1,2,3");
