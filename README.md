@@ -10,19 +10,11 @@
 - 숫자에 대한 에외처리를 하는 checkNumberException() 메서드 작성.
 - 커스텀 구분자에 대한 예외처리를 하는 checkSeparatorException() 메서드 작성.
 
-
-## MVC 구조 리텍토링
-
-# 폴더 구조
+## MVC 폴더 구조
 - controller: 사용자의 요청을 받아서 적절한 Service로 전달하고, 결과를 받아서 View에 전달.
-
 - service: 애플리케이션의 핵심 비즈니스 로직을 구현합니다. Controller에서 받은 요청을 처리하고, 필요에 따라 여러 Domain 객체나 Validator와 상호작용.
-
 - domain: 애플리케이션의 핵심 데이터 모델과 해당 데이터에 관련된 로직을 정의.
-
 - view: 사용자에게 데이터를 보여주고, 사용자로부터 입력을 받는 역할.
-
 - validator: 사용자 입력의 유효성을 검사.
-
 - factory: 객체들을 하나의 팩토리 클래스에서 관리하게 하여 객체 생성을 담당.
 
