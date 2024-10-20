@@ -18,6 +18,13 @@ public class Application {
     public static void run(){
         userInput = Console.readLine();
         inputValidationCheck(userInput);
+        claculate(userInput);
+    }
+
+    public static void claculate(String userInput) {
+        long sum = Arrays.stream(getNumber(userInput))
+                .reduce(0L, Long::sum);
+        System.out.println("결과 : " + sum);
     }
 
     public static Long[] getNumber(String userInput){
