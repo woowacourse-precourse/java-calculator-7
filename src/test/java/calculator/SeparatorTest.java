@@ -67,31 +67,19 @@ public class SeparatorTest extends NsTest {
 
         assertSimpleTest(() -> {
             Separator obj = new Separator();
-            String[] result = obj.separate("//;\\n1;2,3:4");
+            String[] result = obj.separate("1;2,3:4", ",|:|;");
             assertThat(result).containsExactly("1", "2", "3", "4");
         });
 
         assertSimpleTest(() -> {
             Separator obj = new Separator();
-            String[] result = obj.separate("//;\\n1;;2,,3:4");
+            String[] result = obj.separate("1;2!3#4", ",|:|!|#");
             assertThat(result).containsExactly("1", "2", "3", "4");
         });
 
         assertSimpleTest(() -> {
             Separator obj = new Separator();
-            String[] result = obj.separate("//;\\n1;;2,,,,3:4");
-            assertThat(result).containsExactly("1", "2", "3", "4");
-        });
-
-        assertSimpleTest(() -> {
-            Separator obj = new Separator();
-            String[] result = obj.separate("//;\\n//!\\n//#\\n1;2!3#4");
-            assertThat(result).containsExactly("1", "2", "3", "4");
-        });
-
-        assertSimpleTest(() -> {
-            Separator obj = new Separator();
-            String[] result = obj.separate("//!\\n1;2,3!4");
+            String[] result = obj.separate("1;2,3!4", ",|:|;|!");
             assertThat(result).containsExactly("1", "2", "3", "4");
         });
 
@@ -99,6 +87,21 @@ public class SeparatorTest extends NsTest {
             Separator obj = new Separator();
             String[] result = obj.separate("1,2,3:4");
             assertThat(result).containsExactly("1", "2", "3", "4");
+        });
+    }
+
+    @Test
+    void testGetSeparator() {
+        assertSimpleTest(() -> {
+            Separator obj = new Separator();
+            String result = obj.getSeparator("//;\\n1;2,3:4");
+            assertThat(result).isEqualTo(",|:|;");
+        });
+
+        assertSimpleTest(() -> {
+            Separator obj = new Separator();
+            String result = obj.getSeparator("//;\\n//#\\n//!\\n1;2,3:4");
+            assertThat(result).isEqualTo(",|:|;|#|!");
         });
     }
 
