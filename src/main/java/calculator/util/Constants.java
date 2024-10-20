@@ -19,4 +19,6 @@ public class Constants {
                     new String[]{MINUS, CUSTOM_DELI_START_SIGNAL, CUSTOM_DELI_END_SIGNAL})
             .flatMap(Stream::of)
             .toArray(String[]::new);
+
+    public static final int INTEGER_PARSE_MAX_LENGTH = 10;
 }

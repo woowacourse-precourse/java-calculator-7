@@ -116,6 +116,14 @@ public class FunctionTest extends NsTest {
     }
 
     @Test
+    void 계산_테스트_예외_7() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1000000000000000000,20000000000000000000"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
     void 커스텀_구분자_테스트_통과_1() {
         assertSimpleTest(() -> {
             run("//*\\n1*2,3:4");

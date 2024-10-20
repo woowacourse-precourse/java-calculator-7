@@ -2,6 +2,8 @@ package calculator.model;
 
 import static calculator.util.Constants.NONE;
 
+import calculator.util.Validations;
+
 public class InputNumber {
     private String number;
 
@@ -14,6 +16,7 @@ public class InputNumber {
     }
 
     public void addNumber(String value) {
+        Validations.validateNumberMaxLength(number);
         number += value;
     }
 

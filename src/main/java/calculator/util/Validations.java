@@ -34,4 +34,10 @@ public class Validations {
             }
         }
     }
+
+    public static void validateNumberMaxLength(String number) {
+        if (number.length() > INTEGER_PARSE_MAX_LENGTH) {
+            throw new IllegalArgumentException(EXCEED_MAX_NUMBER_LENGTH.getMsg());
+        }
+    }
 }
