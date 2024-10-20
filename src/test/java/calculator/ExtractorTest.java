@@ -86,14 +86,54 @@ class ExtractorTest {
     }
 
     @Test
-    public void 입력은_올바른_형식을_가져야한다() {
+    public void 지정된_커스텀_구분자를_사용해야한다() {
         //given
-        // 맨 처음은 숫자이거나 // 여야함
-        // //로 시작한다면 \\n이 있어야함
-
+        Extractor ex = new Extractor();
+        String input = "//\\n1=2=3=4=5";
         //when
+        String delimiter = ex.extractCustomDelimiter(input);
 
         //then
+        assertThrows(IllegalArgumentException.class, () -> ex.extractNumbersWithCustomDelimiter(input, delimiter));
+    }
 
+    @Test
+    public void 지정된_커스텀_구분자를_사용해야한다2() {
+        //given
+        Extractor ex = new Extractor();
+        String input = "//'\\1;2;3";
+
+        //when
+        String delimiter = ex.extractCustomDelimiter(input);
+
+        //then
+        assertThrows(IllegalArgumentException.class, () -> ex.extractNumbersWithCustomDelimiter(input, delimiter));
+    }
+
+    @Test
+    public void 커스텀_구분자는_정해진_접두사가_있다() {
+        //given
+        Extractor ex = new Extractor();
+        String input = "/\\\\n1\\2\\3\\4";
+
+        //when
+        //여기서 문제가 발생해야함
+        String delimiter = ex.extractCustomDelimiter(input);
+
+        //then
+        assertThrows(IllegalArgumentException.class, () -> ex.extractNumbersWithCustomDelimiter(input, delimiter));
+    }
+
+    @Test
+    public void 커스텀_구분자는_정해진_접미사가_있다() {
+        //given
+        Extractor ex = new Extractor();
+        String input = "//?n1?2?3?4";
+
+        //when
+        String delimiter = ex.extractCustomDelimiter(input);
+
+        //then
+        assertThrows(IllegalArgumentException.class, () -> ex.extractNumbersWithCustomDelimiter(input, delimiter));
     }
 }
