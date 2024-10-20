@@ -2,21 +2,14 @@ package calculator.tool1;
 
 public class StringChecker {
 
-  public static boolean checkString(String delimiter, String nums) {
-    //문자열 유효성 체크
-    if (!delimiter.startsWith("//")) {
-      return false;
-    } else if (delimiter.length() < 3) {
-      return false;
-    } else {
+  public static boolean checkNumberic(String[] inputString) {
+    try{
+      for (String s : inputString) {
+        int num = Integer.parseInt(s);
+        if (num < 0) return false;
+      }
       return true;
-    }
-  }
-
-  public static boolean checkCustomDelimiter(String inputString) {
-    if (inputString.contains("//")) {
-      return true;
-    } else {
+    } catch(NumberFormatException e){
       return false;
     }
   }
