@@ -26,6 +26,12 @@ public class Application {
         String numbers = input;
 
         if (input.startsWith("//")) {
+            /*
+            "//" : 리터럴
+            (.) : 구분자로 사용될 문자
+            "\\\\n" : 실제 \n를 표현 정규표현식
+            "(.*) : numbers
+             */
             Matcher matcher = Pattern.compile("//(.)\\\\n(.*)").matcher(input);
             if (matcher.find()) {
                 separator = Pattern.quote(matcher.group(1));
