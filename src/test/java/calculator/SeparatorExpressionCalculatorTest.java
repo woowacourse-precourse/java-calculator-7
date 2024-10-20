@@ -14,14 +14,24 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class SeparatorExpressionCalculatorTest {
     private int actual;
+    private final Display resultUpdater = new Display() {
+        @Override
+        public void showResult(int result) {
+            actual = result;
+        }
+
+        @Override
+        public void showInputMessage() {
+        }
+    };
+
 
     @ParameterizedTest
     @DisplayName("주어진 문자열을 올바르게 계산하는지 확인")
     @MethodSource("generateExpressionAndAnswer")
     void testOperate(String expressionString, int expected) {
         InputReceiver inputReceiver = () -> expressionString;
-        Display display = (result) -> actual = result;
-        SeparatorExpressionCalculator calculator = new SeparatorExpressionCalculator(inputReceiver, display);
+        SeparatorExpressionCalculator calculator = new SeparatorExpressionCalculator(inputReceiver, resultUpdater);
 
         calculator.operate();
 
@@ -44,9 +54,8 @@ class SeparatorExpressionCalculatorTest {
     @MethodSource("generateIllegalExpression")
     void testOperateThrowIllegalArgumentException(String expressionString) {
         InputReceiver inputReceiver = () -> expressionString;
-        Display emptyDisplay = (result) -> {
-        };
-        SeparatorExpressionCalculator calculator = new SeparatorExpressionCalculator(inputReceiver, emptyDisplay);
+
+        SeparatorExpressionCalculator calculator = new SeparatorExpressionCalculator(inputReceiver, resultUpdater);
 
         assertThatThrownBy(calculator::operate).isInstanceOf(IllegalArgumentException.class);
     }
