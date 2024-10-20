@@ -8,6 +8,9 @@ public class NumberChecker {
 	private static final Pattern NUMBER_PATTERN = Pattern.compile("^-?\\d+$");
 	private static final Pattern NEGATIVE_NUMBER_PATTERN = Pattern.compile("^-\\d+$");
 
+	private NumberChecker() {
+	}
+
 	public static boolean isNumber(String value) {
 		return NUMBER_PATTERN.matcher(value).matches();
 	}
@@ -24,8 +27,5 @@ public class NumberChecker {
 		return NEGATIVE_NUMBER_PATTERN.matcher(value).matches();
 	}
 
-	public static boolean isNotNegativeNumber(String value) {
-		return !isNegativeNumber(value);
-	}
 
 }
