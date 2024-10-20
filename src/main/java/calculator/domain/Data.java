@@ -11,13 +11,14 @@ public class Data {
     private static final String SEPARATOR_COMMA = ",";
     private static final String SEPARATOR_COLON = ":";
     private final String firstInputData;
-    private List<String> separators;
     private final List<Integer> numbersForSum;
+    private String removedSeparatorInput;
+    private List<String> separators;
 
     public Data(String firstInputData) {
         this.firstInputData = firstInputData;
         separators = new ArrayList<>();
-        numbersForSum = handleInputString();
+        numbersForSum = handleInput();
     }
 
     public int calculateAddition() {
@@ -28,13 +29,13 @@ public class Data {
         return sum;
     }
 
-    private List<Integer> handleInputString() {
+    public List<Integer> handleInput() {
         if (hasEmptyString()) {
             numbersForSum.add(0);
             return numbersForSum;
         }
         separators = handleSeparator();
-        String[] extractedStrings = removeSeparator(separators, firstInputData);
+        String[] extractedStrings = removeSeparator();
         return NumberValidator.convertNumbers(extractedStrings);
     }
 
@@ -45,26 +46,14 @@ public class Data {
         return separators;
     }
 
-    public List<String> extractCustomSeparator() {
+    private List<String> extractCustomSeparator() {
         List<String> customSeparator = new ArrayList<>();
         if (containsCustomSeparator(firstInputData)) {
             customSeparator.add(firstInputData.substring(CUSTOM_START_LETTERS.length(),
                     firstInputData.indexOf(CUSTOM_END_LETTERS)));
-            removeCustomSeparatorFormat();
+            removedSeparatorInput = removeCustomSeparatorFormat();
         }
         return customSeparator;
-    }
-
-    public String[] removeSeparator() {
-        String str = inputData;
-        String[] separatedString = separateString(separators, str);
-
-        for (String string : separatedString) {
-            if (hasInvalidSeparatorFormat(string)) {
-                throw new IllegalArgumentException(ERROR_MESSAGE_FOR_SEPARATOR);
-            }
-        }
-        return separatedString;
     }
 
     private boolean containsCustomSeparator(String inputData) {
@@ -75,7 +64,8 @@ public class Data {
         return firstInputData.substring(firstInputData.indexOf(CUSTOM_END_LETTERS) + CUSTOM_END_LETTERS.length());
     }
 
-    private String[] separateString(List<String> separators, String inputData) {
+
+    private String[] removeSeparator() {
         StringBuilder splitFormat = new StringBuilder();
         for (int i = 0; i < separators.size(); i++) {
             splitFormat.append(separators.get(i));
@@ -83,7 +73,7 @@ public class Data {
                 splitFormat.append(MAKE_SPLIT_FORMAT_LETTER);
             }
         }
-        return inputData.split(splitFormat.toString());
+        return removedSeparatorInput.split(splitFormat.toString());
     }
 
     private boolean hasEmptyString() {
