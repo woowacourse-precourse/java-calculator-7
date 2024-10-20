@@ -1,103 +1,63 @@
 package calculator;
 
-import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
-import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+public class ApplicationTest {
 
-class ApplicationTest extends NsTest {
-
-    @Override
-    public void runMain() {
-        Application.main(new String[]{}); // Application의 main 메서드 호출
+    @Test
+    void testBasicDelimiter() {
+        assertEquals(6, Application.calculator("1,2,3")); // 쉼표 구분자
+        assertEquals(6, Application.calculator("1:2:3")); // 콜론 구분자
+        assertEquals(10, Application.calculator("1,2:3:4")); // 콜론과 쉼표 혼합
     }
 
     @Test
-    void 빈_문자열_입력() {
-        assertSimpleTest(() -> {
-            long result = Application.calculate(null);
-            assertThat(result).isEqualTo(0); // null 입력 시 0 반환
-        });
-
-        assertSimpleTest(() -> {
-            long result = Application.calculate("");
-            assertThat(result).isEqualTo(0); // 빈 문자열 입력 시 0 반환
-        });
+    void testCustomDelimiter() {
+        assertEquals(6, Application.calculator("//;\n1;2;3")); // 세미콜론 구분자
+        assertEquals(10, Application.calculator("//-\n1-2-3-4")); // 하이픈 구분자
+        assertEquals(15, Application.calculator("//|\n3|5|7")); // 파이프 구분자
     }
 
     @Test
-    void 숫자_하나만_입력() {
-        assertSimpleTest(() -> {
-            long result = Application.calculate("1");
-            assertThat(result).isEqualTo(1); // 숫자 하나 입력 시 해당 숫자 반환
-        });
+    void testInputWithSpaces() {
+        assertEquals(6, Application.calculator("1, 2 , 3")); // 쉼표 구분자, 공백 포함
+        assertEquals(10, Application.calculator("//;\n 1 ; 2 ; 3 ;4 ")); // 세미콜론 구분자, 공백 포함
     }
 
     @Test
-    void 쉼표_구분자로_숫자_덧셈() {
-        assertSimpleTest(() -> {
-            long result = Application.calculate("1,2,3");
-            assertThat(result).isEqualTo(6); // 1 + 2 + 3 = 6
-        });
+    void testEmptyOrNullInput() {
+        assertEquals(0, Application.calculator(null)); // null 입력
+        assertEquals(0, Application.calculator("")); // 빈 문자열 입력
+        assertEquals(0, Application.calculator("    ")); // 공백만 있는 문자열 입력
+        assertEquals(0, Application.calculator(",:,:")); // 구분자만 있을 때
     }
 
     @Test
-    void 쉼표와_콜론_구분자로_숫자_덧셈() {
-        assertSimpleTest(() -> {
-            long result = Application.calculate("1,2:3");
-            assertThat(result).isEqualTo(6); // 1 + 2 + 3 = 6
-        });
+    void testSingleNumberInput() {
+        assertEquals(1, Application.calculator("1")); // 숫자 하나만 있을 때
+        assertEquals(5, Application.calculator("5")); // 다른 숫자 하나만 있을 때
     }
 
     @Test
-    void 음수_입력시_예외처리() {
-        assertThatThrownBy(() -> Application.calculate("1,-2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("음수는 허용되지 않습니다"); // 음수 입력 시 예외 발생
+    void testNegativeNumberInput() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> Application.calculator("1,-2,3")); // 음수 포함
+        assertEquals("음수는 입력할 수 없습니다: -2", exception.getMessage());
+
+        exception = assertThrows(IllegalArgumentException.class,
+                () -> Application.calculator("//;\n1;-2;3")); // 커스텀 구분자와 음수 포함
+        assertEquals("음수는 입력할 수 없습니다: -2", exception.getMessage());
     }
 
     @Test
-    void 음수가_두개일때_예외처리() {
-        assertThatThrownBy(() -> Application.calculate("-1,-2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("음수는 허용되지 않습니다"); // 음수가 두 개일 때 예외 발생
-    }
+    void testInvalidNumberInput() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> Application.calculator("1,a,3")); // 유효하지 않은 숫자 포함
+        assertEquals("유효하지 않은 숫자가 입력되었습니다.", exception.getMessage());
 
-    @Test
-    void 콜론_구분자로_숫자_덧셈() {
-        assertSimpleTest(() -> {
-            long result = Application.calculate("1:2:3");
-            assertThat(result).isEqualTo(6); // 1 + 2 + 3 = 6
-        });
-    }
-
-    @Test
-    void 커스텀_구분자로_숫자_덧셈() {
-        assertSimpleTest(() -> {
-            long result = Application.calculate("//;\n1;2;3");
-            assertThat(result).isEqualTo(6); // 1 + 2 + 3 = 6
-        });
-
-        assertSimpleTest(() -> {
-            long result = Application.calculate("//|\n4|5|6");
-            assertThat(result).isEqualTo(15); // 4 + 5 + 6 = 15
-        });
-    }
-
-    @Test
-    void 커스텀_구분자가_기본_구분자와_혼합된_경우() {
-        assertSimpleTest(() -> {
-            long result = Application.calculate("//;\n1;2,3:4");
-            assertThat(result).isEqualTo(10); // 1 + 2 + 3 + 4 = 10
-        });
-    }
-
-    @Test
-    void 커스텀_구분자_정의가_없는경우() {
-        assertThatThrownBy(() -> Application.calculate("//\n1,2"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("유효한 숫자를 입력해야 합니다!"); // 커스텀 구분자가 비어있을 때 예외 발생
+        exception = assertThrows(IllegalArgumentException.class,
+                () -> Application.calculator("//;\n1;X;3")); // 커스텀 구분자와 유효하지 않은 숫자 포함
+        assertEquals("유효하지 않은 숫자가 입력되었습니다.", exception.getMessage());
     }
 }
