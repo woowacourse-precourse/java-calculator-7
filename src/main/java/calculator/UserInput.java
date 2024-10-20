@@ -54,7 +54,7 @@ public class UserInput {
     }
 
     public static void main(String[] args) {
-        new UserInput("//;\n1;2;3");
+        new UserInput("//,\\n1;2;3");
     }
 
 }

@@ -27,7 +27,7 @@ public class StringCalculator {
         }
     }
     private void calculate(String numberString,String regex) {
-        int sum = 0;
+        long sum = 0;
         String[] split = numberString.split(regex);
         validateNumberString(split);
         try {
@@ -37,10 +37,13 @@ public class StringCalculator {
         }catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자 형식이 아닌 문자열입니다.");
         }
+        if(sum <0) {
+            throw new ArithmeticException("오버플로우 발생");
+        }
         printResult(sum);
     }
 
-    private void printResult(int sum) {
+    private void printResult(long sum) {
         System.out.printf("결과 : %d",sum);
     }
 
