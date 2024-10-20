@@ -23,6 +23,9 @@ public class Application {
                 continue;
             }
             try {
+                if (Integer.parseInt(num) < 0) {
+                    throw new IllegalArgumentException("음수 입력");
+                }
                 sum += Integer.parseInt(num);
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("숫자가 아닌 입력 값");
