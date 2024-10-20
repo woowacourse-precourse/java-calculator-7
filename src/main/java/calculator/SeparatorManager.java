@@ -9,13 +9,13 @@ public class SeparatorManager {
     private final Set<String> separators;
 
     public SeparatorManager() {
-        this.separators = new HashSet<>();
-        this.separators.add(DEFAULT_SEPARATOR_COMMA);
-        this.separators.add(DEFAULT_SEPARATOR_COLON);
+        separators = new HashSet<>();
+        separators.add(DEFAULT_SEPARATOR_COMMA);
+        separators.add(DEFAULT_SEPARATOR_COLON);
     }
 
     public Set<String> getSeparators() {
-        return this.separators;
+        return separators;
     }
 
     public void save(String separatorCandidate) {
