@@ -42,7 +42,8 @@
 
   ![Separators Sum](images/Separators_Sum.PNG)
 
-  //(구분자)\n 형식을 이어서 작성하는 것으로 여러 개의 커스텀 구분자를 지정할 수 있습니다 위 예시는 ';'와 '+'를 커스텀 구분자로 지정했습니다.
+  '//(구분자)\n' 형식을 이어서 작성하는 것으로 여러 개의 커스텀 구분자를 지정할 수 있습니다.<br>
+  위 예시는 ';'와 '+'를 커스텀 구분자로 지정했습니다.
   <br><br><br>
 
 - **프로그램을 실행할 시에 사용자에게 위 기능을 설명하는 설명서를 제공합니다.**
@@ -56,6 +57,7 @@
 - **Java**
 - **Gradle** build tool
 
+<br>
 레포지토리를 clone하고 IntelliJ IDEA, Eclipse 등의 IDE에서 src/main/java에 있는 Application.java를 실행합니다.
 
 ```conventionalcommit
