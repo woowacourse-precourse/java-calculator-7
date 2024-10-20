@@ -1,6 +1,6 @@
 package calculator.view;
 
-import calculator.enums.Message;
+import calculator.constants.Message;
 
 public class OutputView {
 	public void printStartMessage() {

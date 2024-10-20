@@ -1,6 +1,6 @@
 package calculator.model;
 
-import calculator.enums.ExceptionMessage;
+import calculator.constants.ExceptionMessage;
 
 public class InputModel {
 	private final String input;
