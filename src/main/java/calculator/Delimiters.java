@@ -13,7 +13,7 @@ public class Delimiters {
         separators.add(",");
         separators.add(":");
         separators.add("//");
-        separators.add("\\n");
+        separators.add("\\\\n");
         findCustomSeparator(rawString);
         checkNotDelimiter(rawString);
     }
@@ -28,7 +28,7 @@ public class Delimiters {
     }
 
     private void findCustomSeparator(String rawString) {
-        Matcher matcher = Pattern.compile("(?<=//)(.*?)(?=\n)").matcher(rawString);
+        Matcher matcher = Pattern.compile("//(.*?)\\\\n").matcher(rawString);
         while (matcher.find()) {
             separators.add(matcher.group());
         }
