@@ -6,7 +6,7 @@ import java.util.StringTokenizer;
 
 public class Separator {
     private final Delimiter delimiter;
-    private final List<String> numList;
+    private final List<Integer> numList;
 
     public Separator(Delimiter delimiter) {
         this.delimiter = delimiter;
@@ -14,28 +14,31 @@ public class Separator {
     }
 
     // 문자열 분리
-    public List<String> separateString(String input) {
+    public List<Integer> separateString(String input) {
         List<String> delimiterList = delimiter.getDelimiters(input);
 
         if(delimiterList.size() == 3) {
             input = input.substring(5);
         }
 
-        StringTokenizer st = new StringTokenizer(input);
+        StringBuilder delimiterString = new StringBuilder();
+        for (String delim : delimiterList) {
+            delimiterString.append(delim);
+        }
+
+        StringTokenizer st = new StringTokenizer(input, delimiterString.toString());
         StringBuilder sb = new StringBuilder();
         while(st.hasMoreTokens()) {
             String separatedStr = st.nextToken();
 
             try {
                 int num = Integer.parseInt(separatedStr);
-                sb.append(num);
-            } catch(NumberFormatException e) {
-                checkDelimiter(separatedStr, delimiterList);
-
-                if(!sb.isEmpty()) {
-                    numList.add(sb.toString());
-                    sb.setLength(0);
-                }
+                numList.add(num);
+            } catch (NumberFormatException e) {
+                // 숫자 변환 실패 시 예외 발생 후 프로그램 종료
+                throw new IllegalArgumentException(
+                        "잘못된 입력입니다. 입력 문자열에는 숫자만 포함되어야 합니다: " + separatedStr
+                );
             }
         }
 
