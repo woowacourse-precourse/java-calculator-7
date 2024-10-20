@@ -18,6 +18,18 @@ public class CustomStringParserImpl implements CustomStringParser {
         if (customDelimiterStart == 0 && customDelimiterEnd > 0) {
             String customDelimiter = input.substring(customDelimiterStart + 2, customDelimiterEnd);
 
+            if (customDelimiter.isEmpty()) {
+                throw new IllegalArgumentException(Message.INCLUDE_NOT_NUMBER.getMessage() + "//\\n");
+            }
+
+            if (customDelimiter.length() > 1) {
+                throw new IllegalArgumentException(Message.ONLY_ONE_CUSTOM_DELIMITER.getMessage());
+            }
+
+            if (isNumeric(customDelimiter)) {
+                throw new IllegalArgumentException(Message.INVALID_NUMERIC_CUSTOM_DELIMITER.getMessage());
+            }
+
             delimiterManager.addDelimiter(customDelimiter);
 
             return input.substring(customDelimiterEnd + 2).trim();
