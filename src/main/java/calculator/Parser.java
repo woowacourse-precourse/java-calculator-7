@@ -53,9 +53,7 @@ public class Parser {
             return String.join("", separators);
         }
         Validator.isCorrectCustomSeparatorForm(input);
-
-        addCustomSeparators(separators, input);
-
+        appendCustomSeparators(separators, input);
         return String.join("", separators);
     }
 
@@ -70,7 +68,7 @@ public class Parser {
         }
     }
 
-    private static void addCustomSeparators(List<String> separators, String input) {
+    private static void appendCustomSeparators(List<String> separators, String input) {
         String separatorString = getSeparatorString(input);
         for (int i = 0; i + 4 < separatorString.length(); i++) {
             String newCustomSeparator = String.valueOf(separatorString.charAt(i + 2));
