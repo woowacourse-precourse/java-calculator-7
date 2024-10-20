@@ -11,7 +11,7 @@ public class ValidationUtils {
 
     public static void validateCustomLineFormat(Matcher delimiterStringMatcher) {
         if (!delimiterStringMatcher.find()) {
-            throw new IllegalStateException("커스텀 구분자 입력 형식이 잘못되었습니다.");
+            throw new IllegalArgumentException("커스텀 구분자 입력 형식이 잘못되었습니다.");
         }
         validateDuplicatedCharacter(delimiterStringMatcher.group(1));
         validateIllegalNumericDelimiter(delimiterStringMatcher.group(1));
