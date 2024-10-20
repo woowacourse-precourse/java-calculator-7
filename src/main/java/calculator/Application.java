@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 
 public class Application {
     private static final String CUSTOM_DELIMITER = "^//(.*)\\\\n(.*)";
+    private static final String DEFAULT_DELIMITER = "[:,]";
 
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
@@ -30,7 +31,14 @@ public class Application {
                     .filter(string -> !string.isEmpty())
                     .mapToInt(Application::parsePositiveInt)
                     .sum();
+            return;
         }
+
+        String[] tokens = userInput.split(DEFAULT_DELIMITER);
+        int sum = Arrays.stream(tokens)
+                .filter(string -> !string.isEmpty())
+                .mapToInt(Application::parsePositiveInt)
+                .sum();
     }
 
     private static int parsePositiveInt(String str) {
