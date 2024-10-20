@@ -8,7 +8,6 @@ public class InputString {
     public static final int CUSTOM_DELIMITER_RANGE = 3;
 
     private String inputString;             // 문자열
-    private long[] numberList;              // 문자열에 포함된 숫자 리스트
 
     public InputString(String input) {
         this.inputString = input;
@@ -40,14 +39,6 @@ public class InputString {
         }
 
         return this.inputString;
-    }
-
-    /**
-     * 문자열로부터 추출된 숫자 리스트 저장
-     */
-    public long[] saveNumberList(long[] numberList) {
-        this.numberList = numberList;
-        return this.numberList;
     }
 
 }
