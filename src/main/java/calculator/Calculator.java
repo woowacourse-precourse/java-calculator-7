@@ -9,8 +9,10 @@ public class Calculator {
     }
 
     public void saveNumber() {
-        total += Integer.parseInt(temporaryNumber);
-        temporaryNumber = "";
+        if (temporaryNumber.length() != 0) {
+            total += Integer.parseInt(temporaryNumber);
+            temporaryNumber = "";
+        }
     }
 
     public int getTotal() {
