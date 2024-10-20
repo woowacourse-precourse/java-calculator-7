@@ -66,6 +66,13 @@ public class Application {
         if (number.length() == 1 && number.charAt(0) == '0') {
             throw new IllegalArgumentException("0값은 올 수 없습니다.");
         }
+        if (duplicateZeroCheck(number)) {
+            throw new IllegalArgumentException("0값은 올 수 없습니다.");
+        }
+    }
+
+    private static boolean duplicateZeroCheck(String number) {
+        return new BigInteger(number).equals(new BigInteger("0"));
     }
 
     private static String customDelimiterCheck(String input) {
