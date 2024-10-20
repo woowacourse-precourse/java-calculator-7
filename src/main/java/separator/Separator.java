@@ -11,8 +11,8 @@ public class Separator {
     }
 
     public void saveSeparator(String input) {
-        if (!this.validateCustomSeparatorForParsing(input)) {
-            throw new IllegalArgumentException();
+        if (!validateCustomSeparatorForParsing(input)) {
+            return;
         }
 
         Character customSeparator = parseCustomSeparator(input);
