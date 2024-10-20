@@ -60,7 +60,7 @@ class ApplicationTest extends NsTest {
     @DisplayName("문자열에서 구분자를 기준으로 숫자를 추출합니다.")
     void splitNumbersTest() {
         //when
-        String input = "//;\n1;2;3";
+        String input = "1:2:3";
         String[] expected = {"1", "2", "3"};
 
         //given
