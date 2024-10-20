@@ -85,16 +85,17 @@ public class InputParser {
 		if (!hasCustomDelimiter(input)) {
 			return Optional.empty();
 		}
+		String customDelimiter = parseCustomDelimiter(input);
 
+		return Optional.of(customDelimiter);
+	}
+
+	private String parseCustomDelimiter(String input) {
 		int delimiterStart = input.indexOf("//") + 2;
 		int delimiterEnd = input.indexOf("\\n");
 		if (delimiterEnd == -1) {
 			throw new IllegalArgumentException("커스텀 구분자의 끝을 의미하는 \\n이 없습니다.");
 		}
-
-		String customDelimiter = input.substring(delimiterStart, delimiterEnd)
-			.replace("\\\\", "\\"); // \\는 \로 변환
-
-		return Optional.of(customDelimiter);
+		return input.substring(delimiterStart, delimiterEnd);
 	}
 }
