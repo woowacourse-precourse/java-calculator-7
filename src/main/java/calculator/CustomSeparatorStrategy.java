@@ -9,7 +9,9 @@ public class CustomSeparatorStrategy implements CalculatorStrategy {
     public void calculate(String inputText) {
         String customSeparator = calculator.findCustomSeparator(inputText);
         String text = calculator.removeCustomReserveWord(inputText);
+
         String arr[] = calculator.extractNumber(customSeparator, text);
-        calculator.sum(arr);
+        int totalSum = calculator.sum(arr);
+        System.out.println("결과 : " + totalSum);
     }
 }
