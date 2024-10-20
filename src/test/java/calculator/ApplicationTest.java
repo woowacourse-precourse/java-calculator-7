@@ -34,6 +34,16 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 잘못된_입력_예외_테스트() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("1,a,3"))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessageContaining("잘못된 입력 값입니다.");
+        });
+    }
+
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
