@@ -22,8 +22,8 @@ public class Application {
             }
             String input = scanner.nextLine();
 
-            String delimiters = ",|:"; // 기본 구문자 설정
-            String allowedDelimitersPattern = "[,|:0-9]"; // 기본 구문자와 숫자를 허용
+            String delimiters = ",|:"; // 기본 구분자 설정
+            String allowedDelimitersPattern = "[,|:0-9]"; // 기본 구분자와 숫자를 허용
 
             // //로 문장이 시작하는 지 체크
             if (input.startsWith("//")) {
@@ -47,7 +47,7 @@ public class Application {
                     // 입력 문자열에서 실제 값만 남기기 (구분자 정의 부분 제외)
                     input = input.substring(endpointIndex + 2);
                 } else {
-                    throw new IllegalArgumentException("잘못된 구분자 형식입니다. //뒤에 구분자를 지정하고 \\n을 입력해야 합니다.");
+                    throw new IllegalArgumentException("잘못된 구분자 형식입니다. //뒤에 구분자를 지정하고 \n을 입력해야 합니다.");
 
                 }
 
@@ -71,8 +71,8 @@ public class Application {
             for (String numberStr : numbers) {
                 try {
                     int number = Integer.parseInt(numberStr.trim()); // 숫자로 변환
-                    if (number < 0) {
-                        throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+                    if (number <= 0) {
+                        throw new IllegalArgumentException("양수만 입력할 수 있습니다.");
                     }
                     result += number;
                 } catch (IllegalArgumentException e) {
