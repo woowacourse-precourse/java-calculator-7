@@ -14,5 +14,12 @@ public enum ExceptionMessage {
             return "사용자 입력은 기본 및 커스텀 구분자 및 숫자를 제외한 문자를 포함할 수 없습니다.";
 
         }
+    },
+    
+    INVALID_CUSTOM_DELIMITER_CHAR {
+        @Override
+        public String toString() {
+            return "커스텀 구분자 내에는 1개의 문자가 존재해야 합니다.";
+        }
     };
 }
