@@ -10,7 +10,7 @@ public class Application {
         String input = Console.readLine();
         int sum = 0;
 
-        if(input.isEmpty()){
+        if(input == null || input.trim().isEmpty()){
             System.out.println("결과 : " + sum );
             return;
         }
