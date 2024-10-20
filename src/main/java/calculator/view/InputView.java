@@ -9,7 +9,7 @@ public class InputView {
         System.out.println(INPUT_MESSAGE);
         String expression = Console.readLine();
         if (Validator.isValidate(expression))
-            return Console.readLine();
+            return expression;
         throw new IllegalArgumentException("Input Invalid");
     }
 
