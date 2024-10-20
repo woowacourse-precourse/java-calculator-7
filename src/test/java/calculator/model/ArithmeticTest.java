@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import calculator.util.ErrorMessage;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import java.util.List;
@@ -69,5 +70,27 @@ class ArithmeticTest {
         assertThat(new Arithmetic
                 (new CustomDelimiter(inputData.convertDelimiterPart()), inputData)
                 .getArithmetic()).isEqualTo(List.of(1,2,3,4));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"",
+            "1",
+            "1,2:3,4",
+            "1:2:3,4,5,6,7,8:9:10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30"})
+    @DisplayName("입력된 숫자의 개수가 0개 이상 30개 이하이면 예외가 발생하지 않는다")
+    void arithmeticWithValidCount(String input){
+        InputData inputData = new InputData(input);
+        assertThatCode(()->new Arithmetic(new DefaultDelimiter(), inputData))
+                .doesNotThrowAnyException();
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "1:2:3,4,5,6,7,8:9:10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31"})
+    @DisplayName("입력된 숫자의 개수가 30개 초과하면 예외가 발생한다")
+    void arithmeticWithInvalidCount(String input){
+        InputData inputData = new InputData(input);
+        assertThatThrownBy(()->new Arithmetic(new DefaultDelimiter(), inputData))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

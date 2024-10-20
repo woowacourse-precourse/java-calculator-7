@@ -15,7 +15,12 @@ public class Arithmetic {
         if(!inputData.isDelimiter()){
             validateWithDefaultDelimiter(inputData);
         }
-        this.arithmetic = splitArithmetic(delimiter, inputData.convertCalculatorPart());
+
+        List<Integer> number = splitArithmetic(delimiter, inputData.convertCalculatorPart());
+
+        validateNumbers(number);
+
+        this.arithmetic = number;
     }
 
     public void validateWithDefaultDelimiter(InputData inputData){
@@ -28,6 +33,12 @@ public class Arithmetic {
         if (!inputData.convertCalculatorPart()
                 .matches("^[0-9" + new DefaultDelimiter().getDelimiter() + delimiter.getDelimiter() + "]*$")) {
             throw new IllegalArgumentException(ErrorMessage.ARITHMETIC_WITH_CUSTOM_DELIMITER_FORMAT.getError());
+        }
+    }
+
+    public void validateNumbers(List<Integer> numbers){
+        if (numbers.size() > 30){
+            throw new IllegalArgumentException();
         }
     }
 

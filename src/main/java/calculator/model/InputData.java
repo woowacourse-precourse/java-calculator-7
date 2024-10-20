@@ -36,6 +36,10 @@ public class InputData {
             calculator = calculatorMatcher.group(2);
         }
 
+        if(calculator.isEmpty()){
+            calculator = "0";
+        }
+
         return calculator;
     }
 
