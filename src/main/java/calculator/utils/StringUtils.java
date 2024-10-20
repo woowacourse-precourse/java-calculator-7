@@ -14,8 +14,11 @@ public class StringUtils {
         String delimiters = DEFAULT_DELIMITERS;
         Matcher matcher = Pattern.compile("^//(.)\\\\n(.*)").matcher(input);
         if (matcher.find()) {
-            delimiters = Pattern.quote(matcher.group(1));
+            delimiters = DEFAULT_DELIMITERS + "|" + Pattern.quote(matcher.group(1));
             input = matcher.group(2);
+        }
+        if (isEmpty(input)) {
+            return new String[0];
         }
         return input.split(delimiters);
     }
