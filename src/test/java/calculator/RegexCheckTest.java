@@ -1,37 +1,34 @@
 package calculator;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class RegexCheckTest {
-  Calculator calculator = new Calculator("//`\\n1`2`3");
+    Calculator calculator = new Calculator("woo");
 
 
-  @BeforeEach
-  public void setUp() {
-    calculator.matchesAndInsert();
-  }
+    @Test
+    public void inputValidatorTest() {
 
-  @Test
-  public void isValidInputTest() {
-    assertTrue(calculator.inputValidator());
-  }
+        assertThrows(IllegalArgumentException.class, () -> calculator.inputValidator());
 
-  @Test
-  public void matchDelimiterTest() {
-    Calculator calculator1 = new Calculator("1;2;3");
-    assertThrows(IllegalArgumentException.class, calculator1::matchesAndInsert);
-  }
+        assertEquals(0, calculator.getStringNumbers().length);
 
-  @Test
-  public void matchAndInsertTest() {
-    assertArrayEquals(new String[]{"1", "2", "3"}, calculator.getStringNumbers());
-  }
+        calculator = new Calculator("1,2,3");
+        calculator.inputValidator();
+        assertArrayEquals(new String[]{"1", "2", "3"}, calculator.getStringNumbers());
+    }
 
-  @Test
-  public void parseIntTest() {
-    assertArrayEquals(new int[]{1, 2, 3}, calculator.allPositiveNumber().getNumbers());
-  }
+
+    @Test
+    public void matchDelimiterTest() {
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            String regex = "([;]*[-]?[0-9]+([;]*[-]?[0-9]*)*)?";
+            calculator.matchDelimiter(regex, "1`2`3");
+        });
+
+    }
 }
