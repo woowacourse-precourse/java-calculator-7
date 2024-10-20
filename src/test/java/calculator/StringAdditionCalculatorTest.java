@@ -40,6 +40,14 @@ class StringAdditionCalculatorTest extends NsTest {
         });
     }
 
+    @Test
+    void 공백_0반환_테스트() {
+        assertSimpleTest(() -> {
+            run(" ");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
     @Override
     protected void runMain() {
         Application.main(new String[]{});

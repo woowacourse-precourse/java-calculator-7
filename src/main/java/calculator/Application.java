@@ -12,19 +12,28 @@ public class Application {
     private static final String INPUT_GUIDE_MESSAGE = "덧셈할 문자열을 입력해 주세요.";
     private static final String DEFAULT_DELIMITER = ",:";
     private static final String CUSTOM_DELIMITER_INPUT_REGEX = "^//(.*?)\\\\n(.*)";
+    private static final String EMPTY_INPUT = "";
 
     public static void main(String[] args) {
 
+        int result = 0;
         CalculationInput calculationInput = getCalculationInput();
 
-        ArrayList<Integer> extractedNumbers = extractNumbers(calculationInput);
-        int result = calculate(extractedNumbers);
+        if (!calculationInput.inputString().equals(EMPTY_INPUT)) {
+            ArrayList<Integer> extractedNumbers = extractNumbers(calculationInput);
+            result = calculate(extractedNumbers);
+        }
+
         showResult(result);
     }
 
     private static CalculationInput getCalculationInput() {
 
         String userInput = getUserInput();
+
+        if (userInput.trim().isEmpty()) {
+            return new CalculationInput(EMPTY_INPUT, EMPTY_INPUT);
+        }
 
         Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_INPUT_REGEX);
         Matcher matcher = pattern.matcher(userInput);
