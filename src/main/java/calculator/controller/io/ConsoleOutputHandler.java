@@ -1,6 +1,5 @@
 package calculator.controller.io;
 
-import calculator.controller.OutputHandler;
 import calculator.view.ConsoleView;
 
 public class ConsoleOutputHandler implements OutputHandler {

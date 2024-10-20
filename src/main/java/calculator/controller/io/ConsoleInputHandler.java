@@ -1,6 +1,5 @@
 package calculator.controller.io;
 
-import calculator.controller.InputHandler;
 import calculator.view.ConsoleView;
 import camp.nextstep.edu.missionutils.Console;
 
