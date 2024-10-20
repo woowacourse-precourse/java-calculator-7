@@ -1,5 +1,6 @@
 package calculator.validator;
 
+import calculator.global.constants.DelimiterConstants;
 import calculator.global.exception.CalculatorException;
 import calculator.global.message.ErrorMessage;
 
@@ -29,6 +30,11 @@ public class DelimiterValidator {
 
         if (Character.isDigit(customDelimiter.charAt(0))) {
             throw CalculatorException.from(ErrorMessage.CUSTOM_DELIMITER_IS_NUMBER);
+        }
+
+        if (customDelimiter.charAt(0) == DelimiterConstants.COMMA_DELIMITER
+                || customDelimiter.charAt(0) == DelimiterConstants.COLON_DELIMITER) {
+            throw CalculatorException.from(ErrorMessage.CUSTOM_DELIMITER_IS_DEFAULT);
         }
     }
 }
