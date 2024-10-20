@@ -7,7 +7,7 @@ public class CustomException extends IllegalArgumentException {
         super(errorCode.getMessage());
     }
 
-    public static CustomException create(ErrorCode errorCode) {
+    public static CustomException from(ErrorCode errorCode) {
         return new CustomException(errorCode);
     }
 }
