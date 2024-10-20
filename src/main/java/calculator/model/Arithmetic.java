@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class Arithmetic {
-    private List<Integer> arithmetic;
+    private final List<Integer> arithmetic;
 
     public Arithmetic(Delimiter delimiter, InputData inputData) {
         if (inputData.isDelimiter()) {
@@ -27,14 +27,14 @@ public class Arithmetic {
         this.arithmetic = number;
     }
 
-    public void validateWithDefaultDelimiter(InputData inputData) {
+    private void validateWithDefaultDelimiter(InputData inputData) {
         if (!inputData.convertCalculatorPart()
                 .matches(Regex.ARITHMETIC_WITH_DEFAULT_DELIMITER.getRegex())) {
             throw new IllegalArgumentException(ErrorMessage.INPUT_DATA_WITH_DEFAULT_DELIMITER_FORMAT.getError());
         }
     }
 
-    public void validateWithCustomDelimiter(Delimiter delimiter, InputData inputData) {
+    private void validateWithCustomDelimiter(Delimiter delimiter, InputData inputData) {
         if (!inputData.convertCalculatorPart()
                 .matches(Regex.ARITHMETIC_WITH_CUSTOM_DELIMITER_PREFIX.getRegex()
                         + new DefaultDelimiter().getDelimiter()
@@ -44,7 +44,7 @@ public class Arithmetic {
         }
     }
 
-    public void validateNumbers(List<Integer> numbers) {
+    private void validateNumbers(List<Integer> numbers) {
         if (numbers.size() > Limit.MAX_DIGIT_LENGTH.getValue()) {
             throw new IllegalArgumentException(ErrorMessage.ARITHMETIC_LENGTH_LIMIT.getError());
         }
@@ -55,7 +55,7 @@ public class Arithmetic {
         }
     }
 
-    public List<Integer> splitArithmetic(Delimiter delimiter, String calculatorPart) {
+    private List<Integer> splitArithmetic(Delimiter delimiter, String calculatorPart) {
         List<String> temp = Arrays.stream(
                         calculatorPart
                                 .split(Regex.OPEN.getRegex()
