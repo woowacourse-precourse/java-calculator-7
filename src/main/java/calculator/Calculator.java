@@ -20,6 +20,10 @@ public class Calculator {
     public String add() {
         double sum = 0;
 
+        if (isEmpty()) {
+            return "결과 : 0";
+        }
+
         addCustomDelimiter();
         splitInput();
 
@@ -28,6 +32,10 @@ public class Calculator {
         }
 
         return Result(sum);
+    }
+
+    public boolean isEmpty() {
+        return input.isEmpty();
     }
 
     public void addCustomDelimiter() {
@@ -44,6 +52,17 @@ public class Calculator {
     public void splitInput() {
         String combinedDelimiters = String.join("|", escapeDelimiters(delimiters));
         parts = Arrays.asList(input.split(combinedDelimiters));
+        parts = filterEmptyParts(parts);
+    }
+
+    private List<String> filterEmptyParts(List<String> parts) {
+        List<String> nonEmptyParts = new ArrayList<>();
+        for (String part : parts) {
+            if (!part.isEmpty()) {
+                nonEmptyParts.add(part);
+            }
+        }
+        return nonEmptyParts;
     }
 
     private static List<String> escapeDelimiters(List<String> delimiter) {
