@@ -26,6 +26,14 @@ public class Application {
         }
     }
 
+    // 빈 문자열인지 확인하는 함수
+    public static int validateInput(String input) {
+        if(input == null || input.isEmpty()) {
+            return 0;
+        }
+        return 0;
+    }
+
     public static void main(String[] args) {
         init();
         input();
