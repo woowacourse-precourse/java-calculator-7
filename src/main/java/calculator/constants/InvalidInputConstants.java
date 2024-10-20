@@ -3,6 +3,7 @@ package calculator.constants;
 public final class InvalidInputConstants {
 
     private InvalidInputConstants() {
+        throw new UnsupportedOperationException("인스턴스화 금지");
     }
 
     public static final String WRONG_DELIMITER = "잘못된 구분자가 포함되어 있어 계산이 불가합니다";
