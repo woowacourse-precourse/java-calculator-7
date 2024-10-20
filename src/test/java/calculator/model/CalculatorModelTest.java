@@ -43,4 +43,11 @@ class CalculatorModelTest {
         Assertions.assertThat(cm.CustomExtraction("//\\n1,2;3")).isEqualTo("");
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"//1\\n1,2,3", "//ad-\\n1,2,3"})
+    void 커스텀_구분자_지정_예외처리(String input) {
+        CalculatorModel cm = new CalculatorModel();
+        assertThatThrownBy(() -> cm.CustomExtraction(input))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
