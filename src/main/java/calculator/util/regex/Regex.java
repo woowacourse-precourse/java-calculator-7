@@ -42,4 +42,5 @@ public class Regex {
     public int hashCode() {
         return Objects.hash(getRegex());
     }
+
 }
