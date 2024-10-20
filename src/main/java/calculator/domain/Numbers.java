@@ -1,8 +1,10 @@
 package calculator.domain;
 
+import static calculator.common.Constants.BASIC_SEPARATOR;
 import static calculator.common.Constants.BLANK_NUMBER;
 import static calculator.common.Constants.FIRST_NUM_IDX;
 import static calculator.common.Constants.SEPARATOR_IDX;
+import static calculator.common.InputValidator.isBasicSeparator;
 import static calculator.common.InputValidator.isCustomSeparator;
 
 import java.util.ArrayList;
@@ -28,6 +30,9 @@ public class Numbers {
             String separator = String.valueOf(input.charAt(SEPARATOR_IDX));
 
             extractedNumbers = extractNumbers(extractedStr, separator);
+        }
+        else if (isBasicSeparator(input)) {
+            extractedNumbers = extractNumbers(input, BASIC_SEPARATOR);
         }
 
         return extractedNumbers;

@@ -11,7 +11,7 @@ public class InputValidator {
         return input.startsWith(SLASH) && input.charAt(DELIMITER_IDX) == DELIMITER;
     }
 
-    public static Boolean startNumber (String input) {
+    public static Boolean isBasicSeparator (String input) {
         return Character.isDigit(input.charAt(FIRST_IDX));
     }
 }

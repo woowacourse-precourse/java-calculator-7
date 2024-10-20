@@ -1,10 +1,9 @@
 package calculator.controller;
 
 import static calculator.common.Constants.INVALID_INPUT_FORMAT;
+import static calculator.common.InputValidator.isBasicSeparator;
 import static calculator.common.InputValidator.isCustomSeparator;
-import static calculator.common.InputValidator.startNumber;
 
-import calculator.domain.Number;
 import calculator.domain.Numbers;
 import calculator.view.InputView;
 
@@ -28,7 +27,7 @@ public class Calculator {
     }
 
     private void validateInput (String input) {
-        if (!input.isBlank() && !isCustomSeparator(input) && !startNumber(input)) {
+        if (!input.isBlank() && !isCustomSeparator(input) && !isBasicSeparator(input)) {
             throw new IllegalArgumentException(INVALID_INPUT_FORMAT);
         }
     }

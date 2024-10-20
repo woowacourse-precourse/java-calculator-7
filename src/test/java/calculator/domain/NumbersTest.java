@@ -6,6 +6,7 @@ import static calculator.TestConstants.BLANK_NUMBER;
 import static calculator.TestConstants.FIRST_IDX;
 import static calculator.TestConstants.FIRST_NUM;
 import static calculator.TestConstants.INPUT_CUSTOM_SEPARATOR;
+import static calculator.TestConstants.INPUT_START_NUMBER;
 import static calculator.TestConstants.NUM_CNT;
 import static calculator.TestConstants.SECOND_IDX;
 import static calculator.TestConstants.SECOND_NUM;
@@ -39,6 +40,27 @@ class NumbersTest {
     void GetNumbersByCustomSeparator () {
         // given
         String input = INPUT_CUSTOM_SEPARATOR;
+
+        // when
+        Numbers numbers = new Numbers(input);
+
+        // then
+        Number expectedFirstNum = new Number(FIRST_NUM);
+        Number expectedSecondNum = new Number(SECOND_NUM);
+        Number expectedThirdNum = new Number(THIRD_NUM);
+
+        assertThat(numbers.size()).isEqualTo(NUM_CNT);
+        assertThat(numbers.compareNumber(FIRST_IDX, expectedFirstNum)).isTrue();
+        assertThat(numbers.compareNumber(SECOND_IDX, expectedSecondNum)).isTrue();
+        assertThat(numbers.compareNumber(THIRD_IDX, expectedThirdNum)).isTrue();
+
+    }
+
+    @Test
+    @DisplayName("입력이 숫자로 시작할 경우, 입력 문자열을 쉼표(,) 또는 콜론(:)으로 분리하여 숫자들을 추출한다.")
+    void GetNumbersByBasicSeparator () {
+        // given
+        String input = INPUT_START_NUMBER;
 
         // when
         Numbers numbers = new Numbers(input);
