@@ -11,6 +11,12 @@ public class CalculatorController {
 
     public void runProgram() {
         String userInput = calculatorView.getUserInput();
-        Long[] operandArray = calculatorModel.changeStringtoLongOperandArray(userInput);
+        long[] operandArray = calculatorModel.changeStringtoLongOperandArray(userInput);
+
+        // test용
+        for (int i = 0; i < operandArray.length; i++) {
+            System.out.println(operandArray[i]);
+        }
+
     }
 }

@@ -3,28 +3,39 @@ package calculator;
 public class CalculatorModel {
     private final Util util = new Util();
 
-    public Long[] changeStringtoLongOperandArray(String userInput) {
+    public long[] changeStringtoLongOperandArray(String userInput) {
 
         if (!util.checkforInvalidPrefix(userInput)) {
             throw new IllegalArgumentException("잘못된 입력값입니다: " + userInput);
         }
+        if (userInput.isEmpty()) {
+            // case1: 문자열이 비어있는 경우
+            long[] operandArrayinLong = {0};
+            return operandArrayinLong;
+        }
+//        else if (userInput.startsWith("//")) {
+//            //case2: 커스텀 구분자가 있는 경우
+//
+//        }
+        else {
+            //case3: 커스텀 구분자가 없는 경우
+            String[] operandArrayinString = userInput.split(",|:");
+            long[] operandArrayinLong = changeStringArrtoLongArr(operandArrayinString);
 
-        //case1: 커스텀 구분자가 있는 경우
-
-        //case2: 커스텀 구분자가 없는 경우
-        String[] operandArrayinString = userInput.split(",|:");
-        Long[] operandArrayinLong = changeStringArrtoLongArr(operandArrayinString);
-
-        return operandArrayinLong;
+            return operandArrayinLong;
+        }
     }
 
-    public Long[] changeStringArrtoLongArr(String[] stringArr) {
-        Long[] longArr = new Long[stringArr.length];
+    public long[] changeStringArrtoLongArr(String[] stringArr) {
+        long[] longArr = new long[stringArr.length];
+
         for (int i = 0; i < stringArr.length; i++) {
-            longArr[i] = Long.parseLong(stringArr[i]);
+            try {
+                longArr[i] = Long.parseLong(stringArr[i]);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("피연산자는 숫자만 입력해주세요: " + stringArr[i]);
+            }
         }
         return longArr;
     }
-
-
 }
