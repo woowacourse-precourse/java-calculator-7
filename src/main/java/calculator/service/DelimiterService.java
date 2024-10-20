@@ -45,7 +45,7 @@ public class DelimiterService {
 
     private void validateMatcherGroup(Matcher matcher) {
         if (IntegerUtils.isNumeric(matcher.group(1))) {
-            throw new IllegalArgumentException("커스텀 문자에 숫자를 입력할 수 없습니다.");
+            throw new IllegalArgumentException(ErrorMessage.CUSTOM_DELIMITER_CANNOT_BE_NUMBER.getMessage());
         }
     }
 
