@@ -7,11 +7,8 @@ public class Application {
         Calculator calculator = new Calculator();
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
-        try {
-            int result = calculator.calc(input);
-            System.out.print("결과 : " + result);
-        } catch (IllegalArgumentException e) {
-            System.err.println(e.getMessage());
-        }
+
+        int result = calculator.calc(input);
+        System.out.print("결과 : " + result);
     }
 }
