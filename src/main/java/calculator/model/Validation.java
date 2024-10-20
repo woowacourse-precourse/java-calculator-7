@@ -4,11 +4,11 @@ import java.util.List;
 
 public class Validation {
     public boolean isValidInput(List<String> list) {
-        boolean isInteger = list.stream().allMatch(this::isPositiveInteger);
-        return isInteger;
+        boolean isPositiveInteger = list.stream().allMatch(this::isPositiveInteger);
+        return isPositiveInteger;
     }
 
-    public boolean isPositiveInteger(String str) {
+    private boolean isPositiveInteger(String str) {
         try {
             if (Integer.parseInt(str) < 0) {
                 throw new IllegalArgumentException("음의 정수가 입력되었습니다: " + str);
