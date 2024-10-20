@@ -3,7 +3,6 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -40,7 +39,7 @@ public class Application {
                 int endIndexDelimiter = input.indexOf("\n");
 
                 // 구분자 부분을 저장할 변수 선언
-                String delimiterPart;
+                String delimiterPart = DEFAULT_DELIMITER;
 
                 // 만약 실제 줄바꿈 문자가 없다면, 이스케이프된 "\\n"을 처리
                 if (endIndexDelimiter == -1) {
