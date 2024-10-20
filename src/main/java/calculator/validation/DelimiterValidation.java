@@ -2,6 +2,7 @@ package calculator.validation;
 
 import calculator.exception.CalculatorException;
 
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class DelimiterValidation {
@@ -23,6 +24,17 @@ public class DelimiterValidation {
     public void validate(String input) {
         if (!isCustomDelimiter(input) && !isDefaultDelimiter(input)) {
             throw new CalculatorException("잘못된 입력 형식입니다.");
+        }
+    }
+
+    // 구분자와 숫자 문자열의 유효성을 검사
+    public void isCheckAllowedDelimiter(String numbers, List<String> delimiters) {
+        String validCharactersRegex = "[0-9" + String.join("", delimiters) + "]+";
+
+        for (char number : numbers.toCharArray()) {
+            if (!String.valueOf(number).matches(validCharactersRegex)) {
+                throw new CalculatorException("등록되지 않은 구분자가 있습니다.");
+            }
         }
     }
 
