@@ -53,7 +53,7 @@ public class InputParser {
 
     private static List<Integer> splitAndConvert(String customDelimiter, String inputNum) {
         if (inputNum.isEmpty()) {
-            return List.of(0, 0);
+            return List.of();
         }
         String[] split = inputNum.split(customDelimiter);
         List<Integer> list = convertToIntList(split);
