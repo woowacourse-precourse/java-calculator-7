@@ -18,10 +18,17 @@ class ApplicationTest extends NsTest {
 
     @Test
     void 예외_테스트() {
-        assertSimpleTest(() ->
+        // 테스트 모드를 활성화
+        Application.setTestMode(true);
+
+        assertSimpleTest(() -> {
             assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
-        );
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessageContaining("음수는 허용되지 않습니다");  // 예외 메시지를 검증
+        });
+
+        // 테스트 종료 후 테스트 모드 비활성화 (optional)
+        Application.setTestMode(false);
     }
 
     @Override
