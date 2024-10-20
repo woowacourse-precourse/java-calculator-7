@@ -1,23 +1,25 @@
 package calculator.model;
 
+import calculator.util.DelimiterParser;
 import calculator.util.NumberParser;
 
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class AdditionCommand {
-    private static final String customDelimiterFormat = "^//.*\\\\n";
-    private static final Pattern customDelimiterPattern = Pattern.compile("^//(.*)\\\\n");
+public class AdditionCommand { ;
     private final String customDelimiter;
     private final NumberParser numberParser = new NumberParser();
+    private final DelimiterParser delimiterParser = new DelimiterParser();
     private Number[] numbers;
     public AdditionCommand(String input){
         validateInput(input);
-        customDelimiter = findCustomDelimiter(input).orElse("");
-        if (!customDelimiter.isBlank()){
-            input = removeCustomDelimiter(input);
+        customDelimiter = delimiterParser.findCustomDelimiter(input).orElse("");
+
+        if (!customDelimiter.isBlank()) {
+            input = delimiterParser.removeCustomDelimiter(input);
         }
+
         numbers = numberParser.parse(input,customDelimiter);
     }
 
@@ -27,24 +29,6 @@ public class AdditionCommand {
             result += number.getNumber();
         }
         return result;
-    }
-
-    private Optional<String> findCustomDelimiter(String input){
-        Matcher matcher = customDelimiterPattern.matcher(input);
-        if (matcher.find()) {
-            String delimiter = matcher.group(1);
-            return Optional.ofNullable(delimiter);
-        }
-        return Optional.empty();
-    }
-    private String removeCustomDelimiter(String input) {
-        return input.replaceAll(customDelimiterFormat, "");
-    }
-    private String[] splitStrings(String input, String customDelimiter) {
-        if (customDelimiter == null || customDelimiter.isBlank()) {
-            return input.split("[,:]");
-        }
-        return input.split(customDelimiter);
     }
     private void validateInput(String input){
         if (isNull(input)){
