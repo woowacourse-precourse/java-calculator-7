@@ -61,6 +61,7 @@ public class Application {
             }
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
+            System.exit(0);
         }
         return sum;
     }
