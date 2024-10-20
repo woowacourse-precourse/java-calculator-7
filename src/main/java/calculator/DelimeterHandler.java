@@ -34,10 +34,7 @@ public class DelimeterHandler {
     }
 
     public static boolean hasCustomDelimiter(String input) {
-        if (input.length() >= 5 && input.charAt(0) == '/' && input.charAt(1) == '/') {
-            if (input.indexOf("\\n") == -1) {
-                throw new IllegalArgumentException("Invalid delimiter: " + input);
-            }
+        if (input.startsWith("//") == true && input.contains("\\n") == true) {
             return true;
         }
         return false;
