@@ -1,6 +1,8 @@
 package calculator.service;
 
-import calculator.util.CustomDelimiterFormatParser;
+import calculator.util.delimiter.BasicDelimiter;
+import calculator.util.delimiter.CustomDelimiterFormatParser;
+import calculator.util.delimiter.InvalidCustomDelimiter;
 import java.util.List;
 
 public class InputValidator {
@@ -32,7 +34,7 @@ public class InputValidator {
     }
 
     private boolean isCheckedBasicDelimiter(String input) {
-        List<String> basicDelimiters = Delimiter.getBasicDelimiters();
+        List<String> basicDelimiters = BasicDelimiter.getDelimiters();
 
         return basicDelimiters.stream()
                 .anyMatch(input::contains);
@@ -50,7 +52,7 @@ public class InputValidator {
     }
 
     private boolean isCheckedInvalidDelimiter(List<String> customDelimiters) {
-        List<String> invalidDelimiters = Delimiter.getInvalidCustomDelimiters();
+        List<String> invalidDelimiters = InvalidCustomDelimiter.getDelimiters();
 
         return customDelimiters.stream()
                 .anyMatch(customDelimiter ->

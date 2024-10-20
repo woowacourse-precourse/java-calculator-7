@@ -1,6 +1,5 @@
-package calculator.util;
+package calculator.util.delimiter;
 
-import calculator.service.Delimiter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,6 +17,7 @@ public final class DelimiterExtractor {
 
     private static List<String> extractCustomDelimiter(String input) {
         List<String> customDelimiters = new ArrayList<>();
+
         if (CustomDelimiterFormatParser.isCheckedFormat(input)) {
             List<String> delimiterSections = CustomDelimiterFormatParser.splitDelimiterSection(input);
             for (String section : delimiterSections) {
@@ -29,7 +29,8 @@ public final class DelimiterExtractor {
 
     private static List<String> extractBasicDelimiter(String input) {
         List<String> basicDelimiters = new ArrayList<>();
-        Delimiter.getBasicDelimiters().forEach(delimiter -> {
+
+        BasicDelimiter.getDelimiters().forEach(delimiter -> {
             if (input.contains(delimiter)) {
                 basicDelimiters.add(delimiter);
             }
@@ -40,6 +41,7 @@ public final class DelimiterExtractor {
 
     private static List<String> mergeDelimiters(List<String> customDelimiters, List<String> basicDelimiters) {
         List<String> delimiters = new ArrayList<>();
+
         delimiters.addAll(customDelimiters);
         delimiters.addAll(basicDelimiters);
 

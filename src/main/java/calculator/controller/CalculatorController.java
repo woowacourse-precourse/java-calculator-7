@@ -1,8 +1,8 @@
 package calculator.controller;
 
 import calculator.service.InputValidator;
-import calculator.util.DelimiterExtractor;
-import calculator.util.NumberExtractor;
+import calculator.util.delimiter.DelimiterExtractor;
+import calculator.util.number.NumberExtractor;
 import calculator.service.SumCalculator;
 import camp.nextstep.edu.missionutils.Console;
 import java.util.List;
