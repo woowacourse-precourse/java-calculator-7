@@ -3,6 +3,7 @@ package calculator;
 import static calculator.constant.DelimiterConst.DEFAULT_DELIMITER_COLON;
 import static calculator.constant.DelimiterConst.DEFAULT_DELIMITER_COMMA;
 import static calculator.util.CalculatorUtil.printAdditionCalculatorStartGuideMessage;
+import static calculator.util.CalculatorUtil.printOutputGuideMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,15 @@ public class AdditionCalculator {
 
     public void runAdditionCalculator() {
         printAdditionCalculatorStartGuideMessage();
+        printOutputGuideMessage(addNumbers());
+    }
 
+    // 배열에 있는 모든 값들의 합을 구한다
+    public int addNumbers() {
+        int result = 0;
+        for (int number : additionNumbers) {
+            result += number;
+        }
+        return result;
     }
 }
