@@ -79,6 +79,10 @@ public class DelimiterCalculator {
         String regex =
                 "(" + Arrays.stream(delimiter.split("")).map(Pattern::quote).collect(Collectors.joining("|")) + "){2,}";
 
+        if (delimiter.isEmpty()) {
+            throw new IllegalArgumentException(INVALID_INPUT);
+        }
+
         if (Pattern.compile(regex).matcher(input).find()) {
             throw new IllegalArgumentException(CONSECUTIVE_DELIMITERS);
         }
