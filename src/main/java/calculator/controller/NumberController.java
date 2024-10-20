@@ -17,7 +17,6 @@ public class NumberController {
 
         // 구분자를 이용하여 숫자를 추출하는 과정에서 정규식에 포함되지 은 구분자가 존재하는 경우 예외처리
         try {
-            System.out.println("input : " + inputString);
             // 정규 표현식으로 나타낸 구분자들을 이용하여 숫자만 추출
             List<Integer> extractedNumbers = Arrays.stream(inputString.split(regex))
                     .filter(element -> !element.isEmpty())
