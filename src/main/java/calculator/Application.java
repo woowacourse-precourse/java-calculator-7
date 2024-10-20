@@ -45,10 +45,11 @@ public class Application {
     }
 
     private static String[] checkValidation(String[] arr) {
-        for (String text : arr) {
-            // 입력된 값이 빈 값일 경우 0을 리턴한다.
+        for (int i = 0; i < arr.length; i++) {
+            String text = arr[i];
+            // 입력된 값이 빈 값일 경우 0으로 바꾼다.
             if (text == null || text.isEmpty()) {
-                return new String[]{"0"};
+                arr[i] = "0";
             }
             // 입력된 값이 양수가 아닌 경우 에러를 발생한다.
             else if (!text.matches("[1-9]\\d*")) {
