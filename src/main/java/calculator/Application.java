@@ -35,8 +35,7 @@ public class Application {
         SumCalculator sumCalculator = new SumCalculatorImpl();
         CalculatorOutputView calculatorOutputView = new CalculatorOutputView();
 
-        return new CalculatorController(
-                customDelimiterParser, numberStringSplitter, numberStringConverter, sumCalculator, calculatorOutputView
-        );
+        return new CalculatorController(customDelimiterParser, numberStringSplitter, numberStringConverter,
+                sumCalculator, calculatorOutputView);
     }
 }
