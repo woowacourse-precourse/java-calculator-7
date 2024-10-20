@@ -1,6 +1,10 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
+import java.util.stream.Collectors;
 
 public class InputProcessor {
     private static InputProcessor instance;
@@ -17,7 +21,7 @@ public class InputProcessor {
 
     ExceptionHandler exceptionHandler = ExceptionHandler.getInstance();
 
-    public void getInputFromUser() {
+    public List<Integer> getInputFromUser() {
         String input = Console.readLine();
         String delimiters = ",:";
         char customDelim = '0';
@@ -30,6 +34,8 @@ public class InputProcessor {
         }
 
         validateIsInputIncorrect(input, customDelimFlag, customDelim);
+        List<String> splitElems = makeSplitElemsList(input, delimiters);
+        return makeNumsList(splitElems);
     }
 
     private boolean isInputHasCustomDelim(String input) {
@@ -61,5 +67,25 @@ public class InputProcessor {
         }
 
         exceptionHandler.checkIncorrectInputWithoutCustomDelim(input.toCharArray());
+    }
+
+    private List<String> makeSplitElemsList(String input, String delimiters) {
+        StringTokenizer st = new StringTokenizer(input, delimiters);
+        List<String> splitElems = new ArrayList<>();
+        while (st.hasMoreTokens()) {
+            splitElems.add(st.nextToken());
+        }
+
+        return splitElems;
+    }
+
+    private List<Integer> makeNumsList(List<String> splitElems) {
+        List<Integer> nums = splitElems.stream()
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+
+        exceptionHandler.checkZeroAndNegativeDigit(nums);
+
+        return nums;
     }
 }
