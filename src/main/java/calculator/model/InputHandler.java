@@ -1,5 +1,8 @@
 package calculator.model;
 
+import static calculator.model.Calculator.getSum;
+import static calculator.model.InputValidator.validateExtractedNumbers;
+
 import camp.nextstep.edu.missionutils.Console;
 import java.util.Vector;
 import java.util.regex.Matcher;
@@ -36,7 +39,7 @@ public class InputHandler {
         target = removeDelimiterCreator(target);
 
         String[] extractedStrings = target.split(regExp);
-        InputValidator.validateExtractedNumbers(extractedStrings);
+        validateExtractedNumbers(extractedStrings);
 
         for (String extractedString : extractedStrings) {
             int extractedNumber = Integer.parseInt(extractedString);
@@ -54,8 +57,7 @@ public class InputHandler {
 
 
     public int getResult() {
-        Calculator calculator = new Calculator();
-        return calculator.getSum(extractedNumbers);
+        return getSum(extractedNumbers);
     }
 
 
