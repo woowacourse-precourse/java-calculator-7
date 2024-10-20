@@ -55,6 +55,14 @@ class ApplicationTest extends NsTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @Test
+    void 구분자만_사용() {
+        assertSimpleTest(() -> {
+            run(",");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
