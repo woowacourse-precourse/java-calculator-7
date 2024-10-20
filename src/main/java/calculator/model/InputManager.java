@@ -22,15 +22,21 @@ public class InputManager {
 
     private String removeDelimiters(String input, Delimiters delimiters) {
         input = removeCustomDelimiterHeader(input, delimiters);
+
         return removeStandardDelimiters(input, delimiters);
     }
 
     private String removeCustomDelimiterHeader(String input, Delimiters delimiters) {
         for (Delimiter delimiter : delimiters.getDelimiters()) {
-            if (delimiter.isCustomDelimiter()) {
-                String delimiterHeader = createDelimiterHeader(delimiter);
-                input = input.replace(delimiterHeader, EMPTY);
-            }
+            input = removeIfCustomDelimiterSpecifier(input, delimiter);
+        }
+        return input;
+    }
+
+    private String removeIfCustomDelimiterSpecifier(String input, Delimiter delimiter) {
+        if (delimiter.isCustomDelimiter()) {
+            String delimiterHeader = createDelimiterHeader(delimiter);
+            return input.replace(delimiterHeader, EMPTY);
         }
         return input;
     }
