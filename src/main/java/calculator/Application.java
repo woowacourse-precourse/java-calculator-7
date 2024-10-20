@@ -2,6 +2,9 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
@@ -23,11 +26,14 @@ public class Application {
         String[] tokens;
         String delimiter = ",|:";  // 기본 구분자
 
-        tokens = input.split(delimiter);   // 입력 문자열을 구분자를 기준으로 분리
+        Matcher matcher = Pattern.compile("//(.)\\\\n(.*)").matcher(input);  // 정규표현식으로 커스텀 구분자 찾기
 
-//        for(String token : tokens) {  // 배열에 담긴 값 확인
-//            System.out.println(token);
-//        }
+        if (matcher.find()) {
+            delimiter += "|" + matcher.group(1);  // 기본 구분자에 커스텀 구분자 추가
+            input = matcher.group(2);      // 실제 숫자 부분
+        }
+
+        tokens = input.split(delimiter);   // 입력 문자열을 구분자를 기준으로 분리
 
         return sumTokens(tokens);          // 분리된 문자열을 숫자로 변환하여 더함
     }
