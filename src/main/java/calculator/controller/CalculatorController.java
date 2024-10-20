@@ -1,10 +1,12 @@
 package calculator.controller;
 
+import calculator.domain.DelimiterManager;
 import calculator.domain.StringParser;
 import calculator.dto.AdditionInput;
 import calculator.dto.ParsedComponents;
 import calculator.view.InputView;
 import calculator.view.OutputView;
+import java.util.regex.Pattern;
 
 public class CalculatorController {
 
@@ -21,5 +23,8 @@ public class CalculatorController {
 
         StringParser stringParser = new StringParser(validatedInput);
         ParsedComponents parsedComponents = stringParser.parse();
+
+        DelimiterManager delimiterManager = new DelimiterManager(parsedComponents.delimiters());
+        Pattern delimiterPattern = delimiterManager.createDelimiterPattern();
     }
 }
