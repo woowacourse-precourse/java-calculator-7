@@ -13,7 +13,7 @@ public class StringAddCalculator {
     private static final int NUMBERS_IN_GROUP = 2;
 
     public int calculate(String input) {
-        return validateEmptyInput(input) ? EMPTY_VALUE : splitAndSumNumber(input);
+        return validateEmptyValue(input) ? EMPTY_VALUE : splitAndSumNumber(input);
     }
 
     private int splitAndSumNumber(String input) {
@@ -32,7 +32,7 @@ public class StringAddCalculator {
         return input.split(pattern);
     }
 
-    private boolean validateEmptyInput(String input) {
-        return input == null || input.trim().isEmpty();
+    private boolean validateEmptyValue(String input) {
+        return input == null || input.isBlank();
     }
 }
