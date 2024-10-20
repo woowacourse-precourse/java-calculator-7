@@ -6,8 +6,10 @@ import org.junit.jupiter.api.Test;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static vaildation.InputValidation.CheckInput;
 
 class ApplicationTest extends NsTest {
+
     @Test
     void UseCustomSeparator() {
         assertSimpleTest(() -> {
@@ -19,11 +21,10 @@ class ApplicationTest extends NsTest {
     @Test
     void exception_test() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> runException("-1,2,3"))
+            assertThatThrownBy(() -> CheckInput("-1,2,3", ","))
                     .isInstanceOf(IllegalArgumentException.class);
         });
     }
-
     @Override
     public void runMain() {
         Application.main(new String[]{});
