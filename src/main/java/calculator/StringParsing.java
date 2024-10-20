@@ -17,6 +17,7 @@ public class StringParsing {
 
     public static String[] splitNpushString(String userInput, String delimiter) {
         userInputArr = userInput.split(delimiter);
+
         for (String s : userInputArr) {
             if (s.isEmpty()) {
                 continue;
