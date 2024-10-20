@@ -7,57 +7,64 @@ public class Calculator {
     private static final String CUSTOM_DELIMITER_PREFIX = "//";
     private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
 
-    private static int result = 0;
-
     private final CalculatorConsole calculatorConsole = new CalculatorConsole();
 
     public void run() {
-        String s = calculatorConsole.inputString();
-        System.out.println("결과 : " + stringSplit(s));
+        String input = calculatorConsole.inputString();
+        System.out.println("결과 : " + stringSplit(input));
     }
 
-    private int stringSplit(String s) {
-        if (s.isEmpty()) {
+    private int stringSplit(String input) {
+        if (input.isEmpty()) {
             return 0;
         }
+        String[] numbers;
 
-        // 커스텀 구분자 있을 경우
-        if (s.startsWith(CUSTOM_DELIMITER_PREFIX)) {
-            if (s.startsWith(CUSTOM_DELIMITER_SUFFIX, 3)) {
-                char custom = s.charAt(2);
-
-                // 커스텀 구분자 부분 삭제
-                String sliceS = s.substring(5);
-
-                String[] customArr = sliceS.split(DEFAULT_DELIMITER1 + "|" + DEFAULT_DELIMITER2 + "|" + custom);
-
-                numberExtract(customArr);
-                return result;
-            } else {
-                throw new IllegalArgumentException();
-            }
+        if (input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
+            numbers = splitCustomDelimiter(input);
+        } else {
+            numbers = splitDefaultDelimiter(input);
         }
-        // 커스텀 구분자 없을 경우
-        String[] defaultArr = s.split(DEFAULT_DELIMITER1 + "|" + DEFAULT_DELIMITER2);
+        return sumPositiveNumbers(numbers);
+    }
 
-        numberExtract(defaultArr);
+    private String[] splitCustomDelimiter(String input) {
+        if (!input.startsWith(CUSTOM_DELIMITER_SUFFIX, 3)) {
+            throw new IllegalArgumentException("커스텀 구분자 형식이 잘못되었습니다.");
+        }
+        char customDelimiter = input.charAt(2);
+
+        // 커스텀 구분자 부분 삭제
+        String data = input.substring(5);
+        return data.split(DEFAULT_DELIMITER1 + "|" + DEFAULT_DELIMITER2 + "|" + customDelimiter);
+    }
+
+    private String[] splitDefaultDelimiter(String input) {
+        return input.split(DEFAULT_DELIMITER1 + "|" + DEFAULT_DELIMITER2);
+    }
+
+    private int sumPositiveNumbers(String[] numbers) {
+        int result = 0;
+        for (String number : numbers) {
+            int extractNumber = extractPositiveNumber(number);
+            result += extractNumber;
+        }
         return result;
     }
 
-    // 양수 추출 및 더하기, 양수 이외의 값일 경우 예외처리
-    private void numberExtract(String[] arr) {
-        for (String str : arr) {
-            try {
-                int positiveNum = Integer.parseInt(str);
-                // 0 또는 음수일 경우 예외처리
-                if (positiveNum <= 0) {
-                    throw new IllegalArgumentException();
-                }
-                result += positiveNum;
-                // 숫자가 아닌 경우 예외처리
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException();
+    private int extractPositiveNumber(String number) {
+        try {
+            int positiveNumber = Integer.parseInt(number);
+            // 0 또는 음수일 경우 예외처리
+            if (positiveNumber <= 0) {
+                throw new IllegalArgumentException("0 또는 음수는 허용되지 않습니다.");
             }
+            return positiveNumber;
+            // 숫자가 아닌 경우 예외처리
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("유효한 숫자가 아닙니다.");
         }
     }
+
+
 }
