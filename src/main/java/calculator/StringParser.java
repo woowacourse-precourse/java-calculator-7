@@ -9,35 +9,27 @@ public class StringParser {
     private String delimiter;
     private String numbers;
 
-    // 기본 구분자
     private static final String DEFAULT_DELIMITER = ",|:";
 
     public StringParser(String input) {
-
         this.input = input;
         this.delimiter = DEFAULT_DELIMITER;
         parseInput();
-
     }
 
     private void parseInput() {
-
         if (isCustomDelimiterFormat(input)) {
             processCustomDelimiter();
         } else {
             this.numbers = input;
         }
-
     }
 
     private boolean isCustomDelimiterFormat(String input) {
-
-        return input != null && input.startsWith("//");
-
+        return (input != null) && input.startsWith("//");
     }
 
     private void processCustomDelimiter() {
-
         String modifiedInput = input.replace("\\n", "\n");
         int delimiterEndIndex = modifiedInput.indexOf("\n");
 
@@ -48,16 +40,16 @@ public class StringParser {
         } else {
             throw new IllegalArgumentException("잘못된 형식의 커스텀 구분자 입력입니다.");
         }
-
     }
 
     public String[] getTokens() {
-
-        if (numbers == null || numbers.isEmpty()) {
+        if (isBoolean(numbers)) {
             return new String[]{};
         }
         return numbers.split(delimiter);
-
     }
 
+    private boolean isBoolean(String check) {
+        return check == null || check.isEmpty();
+    }
 }
