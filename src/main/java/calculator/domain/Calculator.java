@@ -14,11 +14,11 @@ public class Calculator {
         try {
             num = Integer.parseInt(value);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("올바른 형태의 숫자가 아닙니다.");
         }
 
         if (num < 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("양수만 입력가능합니다.");
         }
 
         return num;

@@ -29,7 +29,7 @@ public class Separator {
         }
         return currentString.split(separator);
     }
-    
+
     //커스텀 구분자가 존재할경우 실행됨
     private String customSeparator() {
         StringBuilder sb = new StringBuilder();
@@ -42,6 +42,12 @@ public class Separator {
             }
 
             sb.append(currentString.charAt(i));
+        }
+
+        char startChar = sb.charAt(1);
+        
+        if (startChar >= '0' && startChar <= '9') {
+            throw new IllegalArgumentException("구분자의 시작은 숫자가 아니어야 합니다.");
         }
 
         return separator + sb.toString();

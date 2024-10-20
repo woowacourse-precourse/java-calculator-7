@@ -1,5 +1,6 @@
 package calculator.domain;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import org.junit.jupiter.api.Test;
@@ -37,5 +38,18 @@ public class SeparatorTest {
         separator.cut();
 
         assertThat(separator.getCurrentString()).isEqualTo("1;2,3:4,5:6;;");
+    }
+
+    @Test
+    void 구분자_숫자시작_테스트() {
+        Separator separator = new Separator("//1b\\n1;2,3:4;5:6;;");
+
+        assertThatThrownBy(() -> separator.cut()).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 커스텀구분자_분리_테스트2() {
+        Separator separator = new Separator("//n2\\n1:2,3n24,5:6");
+        assertThat(separator.cut()).isEqualTo(new String[]{"1", "2", "3", "4", "5", "6"});
     }
 }
