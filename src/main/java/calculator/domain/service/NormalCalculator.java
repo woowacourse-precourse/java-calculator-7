@@ -1,8 +1,9 @@
 package calculator.domain.service;
 
-import dto.InputDTO;
 
-public Interface NormalCalculator {
+import calculator.domain.dto.InputDTO;
+
+public interface NormalCalculator {
 
     int calculate(InputDTO inputDTO);
 

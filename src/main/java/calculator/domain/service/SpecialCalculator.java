@@ -1,6 +1,7 @@
 package calculator.domain.service;
 
-import dto.InputDTO;
+
+import calculator.domain.dto.InputDTO;
 
 public interface SpecialCalculator {
 
