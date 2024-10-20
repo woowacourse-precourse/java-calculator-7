@@ -10,7 +10,12 @@ public class ParserValidator {
         return true;
     }
 
-    // TODO: 오직 구분자만 입력되었는지 확인한다.
+    public boolean isOnlySeparator(String numberString) {
+        if (numberString.matches("^\\d.*")) {
+            return false;
+        }
+        return true;
+    }
 
     // TODO: 구분자가 유효한지 확인한다.
 
