@@ -8,7 +8,7 @@ public class InputParser {
     private String[] numbers;
 
     public InputParser(String inputText) {
-        this.inputText = inputText;
+        this.inputText = inputText.trim();  // 공백 제거
         parseInput();
     }
 
@@ -23,7 +23,7 @@ public class InputParser {
                 this.separator = "\\\\";
             }
             this.separator = "[,|:|" + this.separator + "]";  // 커스텀 구분자 외에 기본 구분자도 허용
-            this.numbers = inputText.substring(5).split(separator);
+            this.numbers = inputText.substring(5).trim().split(separator);
         } else if (isDefaultSeparator(inputText)) {
             this.separator = "[,:]";
             this.numbers = inputText.split(separator);

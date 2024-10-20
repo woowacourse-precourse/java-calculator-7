@@ -30,7 +30,7 @@ public class Calculator {
 
     private BigInteger stringToNum(String number) {
         try {
-            return new BigInteger(number);
+            return new BigInteger(number.trim());
         } catch (NumberFormatException e) {
             System.out.println("입력 오류: 숫자를 입력해주세요");
             throw new IllegalArgumentException();
