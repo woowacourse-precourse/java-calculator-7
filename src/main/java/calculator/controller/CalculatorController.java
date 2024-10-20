@@ -24,8 +24,7 @@ public class CalculatorController {
 
         Input input = consoleView.input();
 
-        SeparatorSet separatorSet = separatorService.getCustomSeparators(input);
-        RegexStr regexStr = separatorSet.toRegexStr();
+        RegexStr regexStr = separatorService.getCustomSeparators(input);
 
         IndexQueue idxQueue = separatorService.getAllCustomSepIdx(input);
         RefinedInput refinedInput = separatorService.refineInput(input, idxQueue);

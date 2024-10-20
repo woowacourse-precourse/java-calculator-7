@@ -29,8 +29,7 @@ public class Separator {
     protected static String toRegexString(Set<Separator> separatorSet) {
         StringBuilder sb = new StringBuilder();
 
-        sb.append(COLON);
-        sb.append(COMMA);
+        sb.append(standardSeparator());
 
         for (Separator separator : separatorSet) {
             String v = separator.sep;
@@ -40,11 +39,15 @@ public class Separator {
         return sb.toString();
     }
 
+    private static String standardSeparator() {
+        return COLON + COMMA;
+    }
+
     @Override
     public String toString() {
         return "Separator{" +
-            "sep='" + sep + '\'' +
-            '}';
+                "sep='" + sep + '\'' +
+                '}';
     }
 
     @Override

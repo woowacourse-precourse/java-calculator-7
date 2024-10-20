@@ -14,9 +14,7 @@ public class Num {
      */
 
     public Num(String numString) {
-        int numLen = numString.length();
-
-        if (numLen == 0) {
+        if (numString.isEmpty()) {
             this.number = 0;
             return;
         }
@@ -37,6 +35,7 @@ public class Num {
         if (number <= 0) {
             throw new IllegalArgumentException("number must be positive");
         }
+
         this.number = number;
     }
 

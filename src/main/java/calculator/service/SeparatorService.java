@@ -5,18 +5,17 @@ import calculator.entity.Input;
 import calculator.entity.NumList;
 import calculator.entity.RefinedInput;
 import calculator.entity.RegexStr;
-import calculator.entity.SeparatorSet;
 
 public interface SeparatorService {
 
     /**
-     * 커스텀 구분자에 값을 탐색해 Set 자료구조로 반환
+     * 커스텀 구분자에 값을 탐색해 정규표현식으로 변환
      *
      * @param input 입력값
-     * @return 커스텀 구현체만 있는 {@code SeparatorSet} 객체
+     * @return 기본 구분자와 커스텀 구분자가 포함된 정규표현식 {@code RegexStr} 객체
      */
 
-    SeparatorSet getCustomSeparators(Input input);
+    RegexStr getCustomSeparators(Input input);
 
     /**
      * 커스텀 구분자로 인식되는 문자열의 첫번째 인덱스를 큐에 삽입하여 반환
