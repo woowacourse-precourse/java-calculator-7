@@ -41,6 +41,11 @@ public class Application {
             /** (\n) 뒤에 있는 입력값만 분리해 realData 에 저장 */
             String realData = inputData.substring(index + 2);
 
+            /** (\n) 뒤에 커스텀구분자가 먼저 오고 숫자가 나올 경우, 커스텀구분자 빼고 realData 에 저장 */
+            if (realData.startsWith(customDelimiter)) {
+                realData = realData.substring(customDelimiter.length());
+            }
+
             /** realData 를 커스텀 구분자를 기준으로 분리 */
             String[] separatedData = realData.split(Pattern.quote(customDelimiter));
 
