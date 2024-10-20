@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class DefaultDelimiter implements Delimiter {
-    private static final String[] DEFAULT_DELIMITERS = new String[]{",", ":"};
+    protected static final String[] DEFAULT_DELIMITERS = new String[]{",", ":"};
     private final Set<String> delimiters;
 
     protected DefaultDelimiter() {

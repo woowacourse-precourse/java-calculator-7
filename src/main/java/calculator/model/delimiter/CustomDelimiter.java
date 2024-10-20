@@ -1,6 +1,9 @@
 package calculator.model.delimiter;
 
-import java.util.Collections;
+import static calculator.model.delimiter.DefaultDelimiter.DEFAULT_DELIMITERS;
+
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Pattern;
 
@@ -10,7 +13,13 @@ public class CustomDelimiter implements Delimiter {
     private final Set<String> delimiters;
 
     protected CustomDelimiter(final String input) {
-        this.delimiters = Collections.singleton(findCustomDelimiter(input));
+        this.delimiters = initDelimiters(input);
+    }
+
+    private Set<String> initDelimiters(final String input) {
+        Set<String> delimiters = new HashSet<>(Arrays.asList(DEFAULT_DELIMITERS));
+        delimiters.add(findCustomDelimiter(input));
+        return delimiters;
     }
 
     private String findCustomDelimiter(final String input) {
