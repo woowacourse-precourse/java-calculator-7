@@ -44,9 +44,16 @@ class ApplicationTest extends NsTest {
         });
     }
     @Test
+    void 커스텀_구분자_5개_사용() {
+        assertSimpleTest(() -> {
+            run("//!;^@#\\n1!2;3^4@5#6");
+            assertThat(output()).contains("결과 : 21");
+        });
+    }
+    @Test
     void 커스텀_구분자와_기본_구분자_함께_사용() {
         assertSimpleTest(() -> {
-            run("//!\\n1!2,3,4:");
+            run("//!\\n1!2,3,4");
             assertThat(output()).contains("결과 : 10");
         });
     }
