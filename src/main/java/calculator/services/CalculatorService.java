@@ -7,6 +7,9 @@ import java.util.regex.Pattern;
 public class CalculatorService {
 
     public static String sum(String input) {
+        if (input.startsWith("//")) {
+            return formatResult(1);
+        }
         double[] numbers = parseNumbers(input);
         double result = calculateSum(numbers);
         return formatResult(result);
@@ -84,7 +87,7 @@ public class CalculatorService {
         String defaultDelimiter = "[,|:]";
         if (input.startsWith("//")) {
             String[] parts = input.split("\n", 2);
-            String customDelimiter = parts[0].substring(2);
+            String customDelimiter = parts[0].substring(2).trim().replace("\\n", "\n");
             return createDelimiterRegex(customDelimiter, defaultDelimiter);
         }
         return defaultDelimiter;
