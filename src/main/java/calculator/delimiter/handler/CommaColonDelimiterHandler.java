@@ -5,18 +5,22 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 // ,와 :로 이루어진 문자열 처리 핸들러
-public class ColonSemicolonDelimiterHandler implements DelimiterHandler {
+public class CommaColonDelimiterHandler implements DelimiterHandler {
     @Override
     public List<String> split(String str) throws IllegalArgumentException {
         if (!isSupport(str)) {
             throw new IllegalArgumentException("형식이 일치하지 않습니다.");
         }
 
+        if (str.endsWith(",") || str.endsWith(":")) {
+            throw new IllegalArgumentException("구분자로 문자열이 끝납니다.");
+        }
+
         String[] splits = str.split("[,:]");
         if (Arrays.stream(splits).anyMatch(String::isEmpty)) {
             throw new IllegalArgumentException("구분자가 연속해서 있습니다.");
         }
-        
+
         return Arrays.stream(splits)
                 .collect(Collectors.toList());
     }

@@ -7,8 +7,8 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class ColonSemicolonDelimiterHandlerTest {
-    private ColonSemicolonDelimiterHandler handler = new ColonSemicolonDelimiterHandler();
+class CommaColonDelimiterHandlerTest {
+    private CommaColonDelimiterHandler handler = new CommaColonDelimiterHandler();
 
     @Test
     @DisplayName("support() 메서드는 구분자로 ,와 :만 들어올 수 있다.")
@@ -43,5 +43,17 @@ class ColonSemicolonDelimiterHandlerTest {
         assertThatThrownBy(() -> handler.split(s))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("구분자가 연속해서 있습니다.");
+    }
+
+    @Test
+    @DisplayName("구분자로 마지막에 끝나면 IllegalException예외가 발생한다.")
+    void throw_illegalException_when_string_ends_with_commaColon_delimiter() {
+        // given
+        String s = "1,4:";
+
+        // when, then
+        assertThatThrownBy(() -> handler.split(s))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("구분자로 문자열이 끝납니다.");
     }
 }

@@ -2,7 +2,7 @@ package calculator.delimiter.handler.factory;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import calculator.delimiter.handler.ColonSemicolonDelimiterHandler;
+import calculator.delimiter.handler.CommaColonDelimiterHandler;
 import calculator.delimiter.handler.CustomDelimiterHandler;
 import calculator.delimiter.handler.DelimiterHandler;
 import calculator.delimiter.handler.NoDelimiterHandler;
@@ -22,7 +22,7 @@ class DelimiterHandlerFactoryTest {
         DelimiterHandler handler = factory.getHandler(str);
 
         // then
-        assertThat(handler).isInstanceOf(ColonSemicolonDelimiterHandler.class);
+        assertThat(handler).isInstanceOf(CommaColonDelimiterHandler.class);
         assertThat(handler.split(str)).containsExactly("1", "2", "3");
     }
 

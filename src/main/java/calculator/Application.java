@@ -12,6 +12,7 @@ public class Application {
         OutputContext outputContext = new OutputContext(new ConsoleOutputStrategy());
         DelimiterHandlerFactory factory = new DelimiterHandlerFactory();
 
+        outputContext.execute("덧셈할 문자열을 입력해주세요.");
         String input = inputContext.execute();
         Calculator calculator = new Calculator(factory);
 

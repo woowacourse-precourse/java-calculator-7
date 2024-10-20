@@ -1,6 +1,6 @@
 package calculator.delimiter.handler.factory;
 
-import calculator.delimiter.handler.ColonSemicolonDelimiterHandler;
+import calculator.delimiter.handler.CommaColonDelimiterHandler;
 import calculator.delimiter.handler.CustomDelimiterHandler;
 import calculator.delimiter.handler.DelimiterHandler;
 import calculator.delimiter.handler.NoDelimiterHandler;
@@ -13,7 +13,7 @@ public class DelimiterHandlerFactory {
     public DelimiterHandlerFactory() {
         handlers = new ArrayList<>();
         handlers.add(new NoDelimiterHandler());
-        handlers.add(new ColonSemicolonDelimiterHandler());
+        handlers.add(new CommaColonDelimiterHandler());
         handlers.add(new CustomDelimiterHandler());
     }
 
