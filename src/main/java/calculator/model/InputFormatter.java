@@ -8,6 +8,7 @@ public class InputFormatter {
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.*?)\n(.*)", Pattern.DOTALL);
 
     public static String[] splitByDelimiter(String input) {
+        // 입력이 없는 경우 예외처리 구현
         String delimiter = DEFAULT_DELIMITERS;
         input = input.replace("\\n", "\n"); // \n을 바꿔주지 않아서 계속 제대로 구분이 안됐었다 -> 이스케이프 시퀀스 문자를 바꿔줘야함.
 
