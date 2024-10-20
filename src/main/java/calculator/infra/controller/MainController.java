@@ -1,9 +1,9 @@
 package calculator.infra.controller;
 
+import calculator.common.io.InputManager;
+import calculator.common.io.OutputManager;
 import calculator.infra.view.ResultView;
 import calculator.model.CalculateSystem;
-import calculator.model.io.InputManager;
-import calculator.model.io.OutputManager;
 import calculator.service.SeparateService;
 import java.util.List;
 

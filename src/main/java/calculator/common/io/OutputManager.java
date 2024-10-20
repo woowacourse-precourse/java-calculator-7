@@ -1,12 +1,11 @@
-package calculator.model.io;
+package calculator.common.io;
+
+import static calculator.common.message.IOMessage.RESULT;
+import static java.util.Objects.isNull;
 
 import calculator.infra.view.ResultView;
 
-import java.util.Objects;
-
-import static calculator.common.message.IOMessage.RESULT;
-
-public class OutputManager implements IOManager{
+public class OutputManager implements IOManager {
 
     private static OutputManager manager;
 
@@ -15,7 +14,7 @@ public class OutputManager implements IOManager{
     }
 
     public static OutputManager getInstance() {
-        if (Objects.isNull(manager)) {
+        if (isNull(manager)) {
             manager = new OutputManager();
         }
         return manager;

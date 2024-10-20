@@ -1,17 +1,17 @@
-package calculator.model.io;
-
-import camp.nextstep.edu.missionutils.Console;
-
-import java.util.Objects;
+package calculator.common.io;
 
 import static calculator.common.message.IOMessage.ENTER_INPUT;
 
-public class InputManager implements IOManager{
+import camp.nextstep.edu.missionutils.Console;
+import java.util.Objects;
+
+public class InputManager implements IOManager {
 
     private static InputManager inputManager;
 
     // Constructor
-    private InputManager() { }
+    private InputManager() {
+    }
 
     public static InputManager getInstance() {
         if (Objects.isNull(inputManager)) {

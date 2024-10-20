@@ -1,7 +1,7 @@
 package calculator.model.separate;
 
-import static calculator.common.SystemConstant.emptyString;
-import static calculator.common.SystemConstant.maxCustomDelimiterCount;
+import static calculator.common.constant.SystemConstant.emptyString;
+import static calculator.common.constant.SystemConstant.maxCustomDelimiterCount;
 import static calculator.model.separate.RegexCompileCache.CUSTOM_DELIMITER_COUNT;
 import static calculator.model.separate.RegexCompileCache.CUSTOM_DELIMITER_PARSE;
 import static calculator.model.separate.RegexCompileCache.CUSTOM_DELIMITER_PARSE_CONDITION;

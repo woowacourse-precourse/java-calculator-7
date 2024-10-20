@@ -1,9 +1,9 @@
-package calculator.common;
+package calculator.common.constant;
 
 public enum SystemConstant {
     MAX_CUSTOM_DELIMITER_COUNT(1),
-    EMPTY_STRING("")
-    ;
+    EMPTY_STRING("");
+
     private final Object value;
 
     SystemConstant(Object value) {
