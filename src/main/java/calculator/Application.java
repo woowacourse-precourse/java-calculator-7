@@ -30,9 +30,6 @@ public class Application {
 
         if (matcher.find()) {
             separator3 = matcher.group(1); // 추출된 문자가 존재한다면 구분자로 지정
-            if (separator3.length() > 1) { // 두 글자 이상인 경우
-                throw new IllegalArgumentException("구분자는 한 글자여야 합니다: " + separator3);
-            }
             input = input.substring(matcher.end()).trim(); // 구분자 지정하는 구간 삭제
         }
 
@@ -41,22 +38,35 @@ public class Application {
         } else {
             return input.split(separator1 + "|" + separator2 + "|" + Pattern.quote(separator3)); // 모든 구분자로 나누기
         }
+
     }
 
     private static int calculator(String[] sepArr) {
         int sum = 0;
+        boolean hasValidNumber = false; // 유효한 숫자가 있는지 여부 체크
+
         for (String numStr : sepArr) {
-            sum += splitNumber(numStr);
+            numStr = numStr.trim(); // 각 숫자 문자열의 앞뒤 공백 제거
+            if (numStr.isEmpty()) {
+                continue; // 빈 문자열이면 다음으로 넘어감
+            }
+            try {
+                sum += splitNumber(numStr); // 유효한 숫자만 처리
+                hasValidNumber = true; // 유효한 숫자가 발견됨
+            } catch (IllegalArgumentException e) {
+                // 유효하지 않은 문자열에 대한 예외는 무시
+            }
         }
-        return sum;
+
+        // 유효한 숫자가 없었던 경우 0 반환
+        return hasValidNumber ? sum : 0;
     }
 
     private static int splitNumber(String numStr) {
         int sum = 0;
         numStr = numStr.trim(); // 문자열의 앞뒤 공백 제거
         if (numStr.isEmpty()) {
-            return 0;
-
+            throw new IllegalArgumentException("공백입니다.");
         }
         try {
             int number = Integer.parseInt(numStr); // 형변환
