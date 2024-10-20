@@ -1,18 +1,25 @@
 package calculator.controller;
 
-import camp.nextstep.edu.missionutils.Console;
+import calculator.io.InputHandler;
+import calculator.io.OutputHandler;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Calculator {
-
     private static final String CUSTOM_DELIMITER = "^//(.*)\\\\n(.*)";
     private static final String DEFAULT_DELIMITER = "[:,]";
+    private final InputHandler inputHandler;
+    private final OutputHandler outputHandler;
+
+    public Calculator(InputHandler inputHandler, OutputHandler outputHandler) {
+        this.inputHandler = inputHandler;
+        this.outputHandler = outputHandler;
+    }
 
     public void calculate() {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String userInput = Console.readLine();
+        outputHandler.showEntryMessage();
+        String userInput = inputHandler.getUserInput();
 
         Matcher customPatternMatcher = Pattern.compile(CUSTOM_DELIMITER).matcher(userInput);
         boolean isCustomPatternMatch = customPatternMatcher.matches();
@@ -32,7 +39,7 @@ public class Calculator {
                     .mapToInt(this::parsePositiveInt)
                     .sum();
 
-            System.out.println("결과 : " + sum);
+            outputHandler.showCalculatedValue(sum);
             return;
         }
 
@@ -42,7 +49,7 @@ public class Calculator {
                 .mapToInt(this::parsePositiveInt)
                 .sum();
 
-        System.out.println("결과 : " + sum);
+        outputHandler.showCalculatedValue(sum);
     }
 
     private int parsePositiveInt(String str) {
