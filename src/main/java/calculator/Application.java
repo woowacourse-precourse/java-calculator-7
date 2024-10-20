@@ -2,7 +2,9 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class Application {
@@ -64,27 +66,24 @@ public class Application {
             // 숫자 합 저장 변수 선언
             int sum = 0;
 
-            // 음수 값 저장 용도 배열
-            int[] negativeNumbers = new int[tokens.length];
-            int negativeCount = 0;
+            // 음수 값 저장 용도 리스트 선언
+            List<Integer> negativeNumbers = new ArrayList<>();
 
             // 각 숫자 합산 도출
             for (String token : tokens) {
                 int number = Integer.parseInt(token.trim()); // 문자열을 정수로 변환하여 합산
                 // 음수일 경우 해당 배열에 추가
                 if (number < 0) {
-                    negativeNumbers[negativeCount++] = number;
-                }
-                // 1000 초과하는 숫자는 연산 대상에서 제외
+                    negativeNumbers.add(number);
+                }// 1000 초과하는 숫자는 연산 대상에서 제외
                 else if (number <= 1000) {
                     sum += number;
                 }
             }
 
-            if (negativeCount > 0) {
+            if (!negativeNumbers.isEmpty()) {
                 // 음수 값들을 포함하는 배열을 읽고 예외 발생
-                throw new IllegalArgumentException("Negative numbers are not allowed: "
-                        + Arrays.toString(Arrays.copyOf(negativeNumbers, negativeCount)));
+                throw new IllegalArgumentException("Negative numbers are not allowed: " + negativeNumbers);
             }
 
             return sum;
