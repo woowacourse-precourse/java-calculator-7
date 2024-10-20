@@ -9,7 +9,7 @@ public class InputNumber {
         this.number = "";
     }
 
-    public void initialize() {
+    public void initNumber() {
         this.number = "";
     }
 

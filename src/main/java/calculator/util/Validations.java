@@ -7,7 +7,7 @@ import static calculator.util.Exceptions.*;
 import calculator.model.Mode;
 
 public class Validations {
-    public static void validateWrongDelimiter(Mode mode) {
+    public static void validateCorrectDelimiter(Mode mode) {
         if (mode == WRONG_DELI) {
             throw new IllegalArgumentException(WRONG_INPUT_DELIMITER.getMsg());
         }
@@ -20,13 +20,13 @@ public class Validations {
         }
     }
 
-    public static void validateIfCustomDeliEnds(int customDeliEndIdx) {
+    public static void validateCustomDeliEnds(int customDeliEndIdx) {
         if (customDeliEndIdx == DEFAULT_CUSTOM_DELI_END_IDX) {
             throw new IllegalArgumentException(CUSTOM_DELI_NOT_ENDS.getMsg());
         }
     }
 
-    public static void validateCustomDelimiter(String customDeli) {
+    public static void validateCorrectCustomDelimiter(String customDeli) {
         for (String resWord : RESERVED_WORDS) {
             if (customDeli.contains(resWord)
                     || customDeli.matches(NUMBER_REGEX)) {

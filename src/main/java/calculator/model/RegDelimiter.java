@@ -16,7 +16,7 @@ public class RegDelimiter {
     }
 
     public void registerCustomDelimiter(String value) {
-        customDeli.findCustomDelimiter(value);
+        customDeli.register(value);
         if (customDeli.exists()) {
             addCustomDeliToDelimiters(customDeli.getValue());
         }
@@ -26,9 +26,15 @@ public class RegDelimiter {
         this.delimiters.add(customDeli);
     }
 
-    public List<String> getDelimiters() { return delimiters; }
+    public List<String> getDelimiters() {
+        return delimiters;
+    }
 
-    public CustomDelimiter getCustomDeli() { return customDeli; }
+    public CustomDelimiter getCustomDeli() {
+        return customDeli;
+    }
 
-    public int getCustomDeliEndIdx() { return customDeli.getValueEndIdx(); }
+    public int getCustomDeliEndIdx() {
+        return customDeli.getValueEndIdx();
+    }
 }

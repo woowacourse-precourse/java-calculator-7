@@ -2,11 +2,8 @@ package calculator.model;
 
 import static calculator.model.Mode.*;
 import static calculator.util.Constants.*;
-import static calculator.util.Exceptions.*;
-import static calculator.util.Validations.validatePositiveNumber;
-import static calculator.util.Validations.validateWrongDelimiter;
+import static calculator.util.Validations.*;
 
-import calculator.util.Validations;
 import java.util.List;
 
 public class Calculator {
@@ -32,22 +29,19 @@ public class Calculator {
         if (inputValue.isEmpty()) {
             return;
         }
-        calculateInputValue();
-        calculateLeftValue();
+        calculateEachInputValue();
+        calculateLastInputValue();
     }
 
-    private void calculateInputValue() {
+    private void calculateEachInputValue() {
         String[] inputValues = inputValue.split("");
         for (int i=0; i<inputValues.length; i++) {
-            checkTypeAndCalculate(inputValue.substring(i, i+1));
-        }
-    }
-
-    private void checkTypeAndCalculate(String value) {
-        if (isNumber(value)) {
-            calculateNumber(value);
-        } else {
-            calculateDelimiter(value);
+            String eachValue = inputValue.substring(i, i + 1);
+            if (isNumber(eachValue)) {
+                calculateNumber(eachValue);
+            } else {
+                calculateDelimiter(eachValue);
+            }
         }
     }
 
@@ -57,9 +51,9 @@ public class Calculator {
 
     private void calculateNumber(String value) {
         if (isStartOfNumber()) {
-            validateWrongDelimiter(mode);
+            validateCorrectDelimiter(mode);
             validatePositiveNumber(value);
-            inputDelimiter.initialize();
+            inputDelimiter.initDelimiter();
         }
         inputNumber.addNumber(value);
         updateMode(NUM);
@@ -75,8 +69,8 @@ public class Calculator {
 
     private void calculateDelimiter(String value) {
         if (isStartOfDelimiter()) {
-            addSum(inputNumber.getNumber());
-            inputNumber.initialize();
+            addNumberToSum(inputNumber.getNumber());
+            inputNumber.initNumber();
         }
         inputDelimiter.addDelimiter(value);
         checkDelimiterAndUpdateMode();
@@ -86,22 +80,22 @@ public class Calculator {
         return mode == NUM;
     }
 
-    private void addSum(int number) {
+    private void addNumberToSum(int number) {
         this.sum += number;
     }
 
     private void checkDelimiterAndUpdateMode() {
         if (inputDelimiter.isDelimiter(regDelimiters)) {
-            inputDelimiter.initialize();
+            inputDelimiter.initDelimiter();
             updateMode(DELI);
         } else {
             updateMode(WRONG_DELI);
         }
     }
 
-    private void calculateLeftValue() {
-        validateWrongDelimiter(mode);
-        addSum(inputNumber.getNumber());
+    private void calculateLastInputValue() {
+        validateCorrectDelimiter(mode);
+        addNumberToSum(inputNumber.getNumber());
     }
 
     public InputDelimiter getInputDelimiter() {

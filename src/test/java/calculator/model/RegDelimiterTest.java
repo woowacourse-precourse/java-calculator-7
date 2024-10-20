@@ -4,13 +4,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class RegDelimiterTest {
 
     /**
      * Deprecated
-     * 비즈니스 로직과 거리가 먼 메서드의 테스트 코드로 주석 처리함.
+     * private 메서드의 테스트 코드로 주석 처리함.
      */
 //    @Test
 //    void 커스텀_구분자_시작_문자_true_반환() {
@@ -38,8 +39,9 @@ public class RegDelimiterTest {
 //        assertThat(includesCustomDeli).isFalse();
 //    }
 
+    @DisplayName("예약어가 포함된 커스텀 구분자 입력 시 예외를 발생시킨다.")
     @Test
-    void 잘못된_커스텀_구분자_입력_시_예외_발생() {
+    void fail_IfCustomDelimiterContainsRegisteredWords() {
         RegDelimiter regDelimiter = new RegDelimiter();
         String testString1 = "//%//";
         String testString2 = "//-";
@@ -50,8 +52,19 @@ public class RegDelimiterTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("커스텀 구분자 종료 문자를 입력하지 않으면 예외를 발생시킨다.")
     @Test
-    void 커스텀_구분자_종료_문자_입력() {
+    void fail_IfCustomDeliEndSignalNotExists() {
+        RegDelimiter regDelimiter = new RegDelimiter();
+        String testString = "//%%1%2,3";
+
+        assertThatThrownBy(() -> regDelimiter.registerCustomDelimiter(testString))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("커스텀 구분자를 입력하면 커스텀 구분자 문자열이 종료되는 인덱스가 저장된다.")
+    @Test
+    void getCustomDeliEndIndex_WhenInputCustomDelimiter() {
         RegDelimiter regDelimiter = new RegDelimiter();
         String testString = "//%%\\n1%%2,3";
 
@@ -60,17 +73,9 @@ public class RegDelimiterTest {
         assertThat(regDelimiter.getCustomDeliEndIdx()).isEqualTo(5);
     }
 
+    @DisplayName("커스텀 구분자를 입력하면 커스텀 구분자가 등록된 구분자 목록에 저장된다.")
     @Test
-    void 커스텀_구분자_종료_문자_없으면_예외_발생() {
-        RegDelimiter regDelimiter = new RegDelimiter();
-        String testString = "//%%1%2,3";
-
-        assertThatThrownBy(() -> regDelimiter.registerCustomDelimiter(testString))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
-    void 최종_커스텀_구분자_입력_성공_1() {
+    void registerCustomDeli_WhenInputCustomDelimiter_1() {
         RegDelimiter regDelimiter = new RegDelimiter();
         String testString = "//%$\\n1%2,3";
 
@@ -86,8 +91,9 @@ public class RegDelimiterTest {
         assertThat(delimiters.get(2)).isEqualTo("%$");
     }
 
+    @DisplayName("커스텀 구분자를 입력하면 커스텀 구분자가 등록된 구분자 목록에 저장된다.")
     @Test
-    void 최종_커스텀_구분자_입력_성공_2() {
+    void registerCustomDeli_WhenInputCustomDelimiter_2() {
         RegDelimiter regDelimiter = new RegDelimiter();
         String testString = "//%\\n1%2,3";
 

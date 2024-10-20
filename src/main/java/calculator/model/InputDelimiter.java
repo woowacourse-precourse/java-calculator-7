@@ -9,7 +9,7 @@ public class InputDelimiter {
         this.delimiter = "";
     }
 
-    public void initialize() {
+    public void initDelimiter() {
         this.delimiter = "";
     }
 
