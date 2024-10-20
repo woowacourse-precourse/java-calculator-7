@@ -18,7 +18,8 @@ public class CalculatorProcess {
         try{
             System.out.println(INPUT_MESSAGE);
             String inputString = Console.readLine();
-            if(inputString.trim().isEmpty()){
+            inputString = inputString.trim();
+            if(inputString.isEmpty()){
                 printAnswer(0);
             }
             else{
