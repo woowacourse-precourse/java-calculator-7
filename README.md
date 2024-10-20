@@ -1,10 +1,10 @@
 # java-calculator-precourse
 
-# 문자열 덧셈 계산기
+# 🔢문자열 덧셈 계산기
 
 <br/>
 
-### 기본 과제 요약
+## 🔍기본 과제 요약
 
 1. 기본 구분자로 ;와 ,를 사용합니다.
 2. 커스텀 구분자를 추가할 수 있습니다.
@@ -12,7 +12,7 @@
 
 <br/>
 
-### 미션 구현 방식
+## 🔧 미션 구현 방식
 1. 입력 문자열 검증
 2. 커스텀 구분자 추가 여부 확인
 3. 커스텀 구분자 추출 후 추가
@@ -23,7 +23,7 @@
 
 <br/>
 
-### 파일 구조도
+## 📂 파일 구조도
 ``` 
 └─src
     ├─main
@@ -67,7 +67,7 @@
 ```
 
 
-### 패키지 설명
+## 📚 패키지 설명
 
 1. **calculator**: 메인 패키지
     - `Application.java`
@@ -107,7 +107,7 @@
 <br/>
 
 
-### 테스트 설명
+## 🧪 테스트 설명
 
 1. **ApplicationTest.java** : 전체 애플리케이션의 통합 테스트
     - 사용자 입력부터 결과 출력까지의 전체 흐름을 테스트
@@ -127,7 +127,7 @@
 
 <br/>
 
-## 유효성 검사
+## ✅ 유효성 검사
 
 ```java
 public static void checkStringLength(String str) {
@@ -148,3 +148,20 @@ public static void checkStringLength(String str) {
 
 - 예외 메시지는 `InputValidationException` enum 클래스에서 관리
 
+
+## 🔄 DI - singleton
+- 주요 service 클래스와 controller 클래스에 싱글톤 패턴 적용
+
+```java
+    private static CalculateService instance;
+
+    private CalculateService() {
+    }
+
+    public static CalculateService getInstance() {
+        if (instance == null) {
+            instance = new CalculateService();
+        }
+        return instance;
+    }
+```
