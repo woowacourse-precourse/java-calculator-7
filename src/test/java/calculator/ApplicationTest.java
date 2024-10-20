@@ -72,6 +72,16 @@ class ApplicationTest extends NsTest {
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage("문자열을 입력하지 않았습니다.");
 
+            //식을 입력하지 않은 상황
+            assertThatThrownBy(() -> runException("//.\\n"))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage("식을 입력하지 않았습니다.");
+
+            //식에 공백을 입력한 상황
+            assertThatThrownBy(() -> runException("//.\\n "))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage("식을 입력하지 않았습니다.");
+
         });
     }
 
@@ -112,6 +122,34 @@ class ApplicationTest extends NsTest {
             assertThatThrownBy(() -> runException("-2:3"))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage("양수끼리의 계산만 지원합니다.");
+
+        });
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자 판별 후 추가하기")
+    void 커스텀_구분자_추가() {
+        assertSimpleTest(() -> {
+
+            //커스텀 구분자 하나만 사용한 상황
+            run("//;\\n1;2;3");
+            assertThat(output()).contains("결과 : 6"); //1+2+3=6
+
+            //커스텀 구분자를 여러개 사용한 상황
+            run("//,;c\\n1c2,3;4,1:4");
+            assertThat(output()).contains("결과 : 15"); //1+2+3=6
+
+            //정규식 특수 문자를 사용한 상황
+            run("//.^$*+?{}[]\\|()\\n1.2^3$4*5+6?7{8[9|10(11)1");
+            assertThat(output()).contains("결과 : 67");
+
+            //커스텀 구분자를 반복적으로 사용한 상황
+            run("//||''\\n4|6'1");
+            assertThat(output()).contains("결과 : 11"); //4+6+1=11
+
+            //커스텀 구분자에 기본 구분자를 사용한 상황
+            run("//,:\\n4:3,1");
+            assertThat(output()).contains("결과 : 8"); //4+3+1=8
 
         });
     }

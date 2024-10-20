@@ -10,7 +10,7 @@ public class StringParser {
 
         //구분자로 숫자 추출
         if (inputString == null || inputString.isBlank()) {
-            throw new IllegalArgumentException("문자열을 입력하지 않았습니다.");
+            throw new IllegalArgumentException("식을 입력하지 않았습니다.");
         }
         String noSpaceString = inputString.replace(" ", "");
         String[] numberStrings = noSpaceString.split(separator);
