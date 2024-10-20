@@ -20,6 +20,10 @@ public class Application {
             Parser parser = new Parser();
             List<String> numberList = parser.extractNumberList(userInput);
             List<Integer> parsedNumberList = parser.parseNumberList(numberList);
+
+            Calculator calculator = new Calculator();
+            Integer result = calculator.sum(parsedNumberList);
+            System.out.println(result);
         }
     }
 }
