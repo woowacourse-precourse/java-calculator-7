@@ -18,9 +18,15 @@ public class Calculator {
         }
         String[] tokens = input.split(delimiter); //쉼표나 콜론을 구분자로 분리
 
+        int number;
+
         for (String token : tokens) {
 
-            int number = Integer.parseInt(token.trim());
+            try {
+                number = Integer.parseInt(token.trim());
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다: " + token);
+            }
             if (number < 0) {
                 throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
             }
