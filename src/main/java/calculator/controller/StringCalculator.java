@@ -33,5 +33,6 @@ public class StringCalculator {
 		List<Integer> numbers = numberExtractor.extractNumbers(inputString);
 		SumCalculator sumCalculator = new SumCalculator();
 		int answer = sumCalculator.calculate(numbers);
+		output.printAnswerMessage(answer);
 	}
 }
