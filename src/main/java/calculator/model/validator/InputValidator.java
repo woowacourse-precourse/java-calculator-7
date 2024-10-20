@@ -4,7 +4,7 @@ import calculator.model.dto.DelimiterInputData;
 
 public class InputValidator implements Validator {
 
-    private String userInput;
+    private final String userInput;
     private String bodyInput;
     private Character customDelimiter;
 
@@ -47,12 +47,12 @@ public class InputValidator implements Validator {
     }
 
     private void validateCharacter(char ch) {
-        if ((ch < '1' || ch > '9')
+        if ((ch < '0' || ch > '9')
                 && ch != DelimiterInputData.COMMA
                 && ch != DelimiterInputData.COLON
                 && (customDelimiter == null || ch != customDelimiter)) {
 
-            throw new IllegalArgumentException("구분자와 숫자 이외의 문자가 포함된 잘못 된 입력입니다.:" + ch);
+            throw new IllegalArgumentException("구분자와 숫자 이외의 문자가 포함되어있습니다.:" + ch);
         }
     }
 
