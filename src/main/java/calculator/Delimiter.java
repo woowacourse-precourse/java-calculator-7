@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.regex.Pattern;
+
 public class Delimiter {
 
     private static final String DEFAULT_DELIMITERS = ",|:";
@@ -11,7 +13,7 @@ public class Delimiter {
         if (customDelimiter.isEmpty()) {
             return DEFAULT_DELIMITERS;
         }
-        return DEFAULT_DELIMITERS + "|" + customDelimiter;
+        return DEFAULT_DELIMITERS + "|" + Pattern.quote(customDelimiter);
     }
 
     public String extractCustomDelimiter(String input) {
