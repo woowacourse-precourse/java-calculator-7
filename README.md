@@ -40,7 +40,7 @@
           └── ExceptionUtil.java // Implement Static Method to check Runtime Exception
                 + checkParamsIsNotEmpty(String str, String delim, boolean custom) : void
                 + checkNextTargetIsLiteral(String str) : int
-                + checkStringHasRightNumOfTarget(String str, String delim);
+                + checkStringHasRightNumOfTarget(CalculatorDTO:CalculatorDTO);
         
 
 ```
@@ -147,7 +147,9 @@
 
 
     ✅ 구현 후 느낀점 / 추가 개선사항 
-    
+    ㄴ DTO를 입력받아 각각의 상황에 맞춰서 Delimiter와 계산 대상의 개수가 올바르게 설정되었는지 검증하는 코드를 추가하였다.
+    ㄴ 커스텀 구분자를 가공하면서 입력값에 정규표현식관련한 문자를 처리하는 것이 조금 까다로웠지만 일단 목표한 예외처리는 추가하였다.
+    ㄴ 하지만 사실 숫자가 구분자로 들어온 경우에는 잘 처리할 수 있을지는 의문이다.
 
         
 ```
