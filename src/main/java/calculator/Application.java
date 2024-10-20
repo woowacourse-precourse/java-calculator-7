@@ -36,6 +36,7 @@ public class Application {
 
             /** 커스텀 구분자 초기화 */
             String customDelimiter = inputData.substring(2, index);
+            /** System.out.println("사용자가 설정한 커스텀 구분자는 : " + customDelimiter);    에러검증 코드 */
 
             /** (\n) 뒤에 있는 입력값만 분리해 realData 에 저장 */
             String realData = inputData.substring(index + 2);
