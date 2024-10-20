@@ -7,6 +7,7 @@ public class Application {
         String input = InputHandler.getInput();
         String[] numbers = DelimeterParser.parse(input);
         List<Long> validNumbers = InputValidator.validateInput(numbers);
-        // OutputHandler.printResult(result);
+        long result = Calculator.add(validNumbers);
+        OutputHandler.printResult(result);
     }
 }
