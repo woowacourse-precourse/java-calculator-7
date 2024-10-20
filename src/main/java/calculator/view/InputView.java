@@ -17,6 +17,7 @@ public class InputView {
         StartWithCharacter.validate(input);
         EndWithCharacter.validate(input);
         customSeperator = getCustomSeperator(input);
+        CheckCustomSeperatorPos.validate(input);
         return input;
     }
     private static String getCustomSeperator(String input) {
