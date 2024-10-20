@@ -18,7 +18,7 @@ public class InputValidatorTest {
         // then
         DelimiterInputData result = validator.validatedData();
         System.out.println(result);
-        Assertions.assertEquals(';', result.getcustomedDelimiter());
+        Assertions.assertEquals(';', result.getcustomDelimiter());
         Assertions.assertEquals("1;2;3", result.getInput(), "입력 본문이 잘못되었습니다.");
     }
 
@@ -32,7 +32,7 @@ public class InputValidatorTest {
 
         // then
         DelimiterInputData result = validator.validatedData();
-        Assertions.assertNull(result.getcustomedDelimiter(), "커스텀 구분자가 있어서는 안 됩니다.");
+        Assertions.assertNull(result.getcustomDelimiter(), "커스텀 구분자가 있어서는 안 됩니다.");
         Assertions.assertEquals("1,2,3", result.getInput(), "입력 본문이 잘못되었습니다.");
     }
 
@@ -75,7 +75,7 @@ public class InputValidatorTest {
         InputValidator validator = new InputValidator(userInput);
 
         // then
-        Assertions.assertNull(validator.validatedData().getcustomedDelimiter(), "빈 입력일 경우 커스텀 구분자는 null이어야 합니다.");
+        Assertions.assertNull(validator.validatedData().getcustomDelimiter(), "빈 입력일 경우 커스텀 구분자는 null이어야 합니다.");
         Assertions.assertEquals("", validator.validatedData().getInput(), "빈 입력일 경우 입력 본문은 빈 문자열이어야 합니다.");
     }
 }

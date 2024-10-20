@@ -4,17 +4,17 @@ public class DelimiterInputData {
     public static Character COMMA = ',';
     public static Character COLON = ':';
 
-    private final Character customedDelimiter;
+    private final Character customDelimiter;
 
     private final String input;
 
-    public DelimiterInputData(Character customedDelimiter, String input) {
-        this.customedDelimiter = customedDelimiter;
+    public DelimiterInputData(Character customDelimiter, String input) {
+        this.customDelimiter = customDelimiter;
         this.input = input;
     }
 
-    public Character getcustomedDelimiter() {
-        return customedDelimiter;
+    public Character getcustomDelimiter() {
+        return customDelimiter;
     }
 
     public String getInput() {

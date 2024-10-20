@@ -11,7 +11,7 @@ public class NumberParser {
     private final String input;
 
     public NumberParser(DelimiterInputData delimiterInputData) {
-        this.customDelimiter = delimiterInputData.getcustomedDelimiter();
+        this.customDelimiter = delimiterInputData.getcustomDelimiter();
         this.input = delimiterInputData.getInput();
     }
 
@@ -29,7 +29,7 @@ public class NumberParser {
         List<Long> numbers = new ArrayList<>();
 
         for (String str : extractedStrings) {
-            Long number=checkPositiveInteger(convertToLong(str));
+            Long number = checkPositiveInteger(convertToLong(str));
             numbers.add(number);
         }
 
@@ -38,8 +38,8 @@ public class NumberParser {
     }
 
     private Long checkPositiveInteger(Long number) {
-        if(number<=0){
-            throw new IllegalArgumentException("양의 정수만 입력해주세요"+number);
+        if (number <= 0) {
+            throw new IllegalArgumentException("양의 정수만 입력해주세요" + number);
         }
         return number;
     }
