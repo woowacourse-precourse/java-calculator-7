@@ -19,24 +19,24 @@ public class MainController {
     }
 
     public void run() {
-        String input = InputView.startInput();
-        String[] stringNumber = splitString(input);
-        int[] numbers = parseInteger(stringNumber);
-        int result = calculate(numbers);
+        final String input = InputView.startInput();
+        final String[] stringNumber = splitString(input);
+        final int[] numbers = parseInteger(stringNumber);
+        final int result = calculate(numbers);
         OutputView.printResultMessage(result);
     }
 
-    private String[] splitString(String input) {
+    private String[] splitString(final String input) {
         return input.trim().split(REGEX);
     }
 
-    private int[] parseInteger(String[] strings) {
+    private int[] parseInteger(final String[] strings) {
         return Arrays.stream(strings)
                 .mapToInt(s -> Integer.parseInt(s.trim()))
                 .toArray();
     }
 
-    private int calculate(int[] numbers) {
+    private int calculate(final int[] numbers) {
         int result = 0;
         for (int number : numbers) {
             result += number;
