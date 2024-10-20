@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.regex.Pattern;
+
 public class StringCalculator {
     public int calculate(String input) {
         if (input.isEmpty()) {
@@ -11,7 +13,7 @@ public class StringCalculator {
 
         if (input.startsWith("//")) {
             if (input.charAt(3) == '\\' && input.charAt(4) == 'n') {
-                String customDelimiter = String.valueOf(input.charAt(2));
+                String customDelimiter = Pattern.quote(String.valueOf(input.charAt(2)));
                 delimiter = delimiter + "|" + customDelimiter;
                 numberString = input.substring(5);
             } else {
