@@ -8,8 +8,8 @@ import java.util.Vector;
 public class InputProcessor {
     private String inputString;
     private int result = 0;
-    private Vector<Integer> extractedNumbers = new Vector<>();
-    private InputParser inputParser = new InputParser();
+    private final Vector<Integer> extractedNumbers = new Vector<>();
+    private final InputParser inputParser = new InputParser();
 
     public void setInputString() {
         this.inputString = Console.readLine();
