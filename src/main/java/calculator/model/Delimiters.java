@@ -31,6 +31,7 @@ public class Delimiters {
 
         for (Character delimiter : delimiters) {
             regexBuilder.append(delimiter);
+            if(delimiter=='\\')regexBuilder.append('\\');
         }
 
         regexBuilder.append("]");
