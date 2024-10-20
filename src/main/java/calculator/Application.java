@@ -48,10 +48,15 @@ public class Application {
 
     public static int sumParsedNumbers(String[] numbers) {
         int sum = 0;
+
         for (String number : numbers) {
             if (!number.isEmpty()) {
                 int parsedNumber = Integer.parseInt(number);
-                sum += parsedNumber;
+                if (parsedNumber < 0) {
+                    throw new IllegalArgumentException("음수는 허용되지 않습니다.");
+                } else {
+                    sum += parsedNumber;
+                }
             }
         }
         return sum;
