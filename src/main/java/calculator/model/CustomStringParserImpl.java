@@ -34,4 +34,19 @@ public class CustomStringParserImpl implements CustomStringParser {
 
         return input;
     }
+
+    @Override
+    public boolean isNumeric(String strNum) {
+        if (strNum == null || strNum.isEmpty()) {
+            return false;
+        }
+
+        try {
+            double d = Double.parseDouble(strNum);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+
+        return true;
+    }
 }
