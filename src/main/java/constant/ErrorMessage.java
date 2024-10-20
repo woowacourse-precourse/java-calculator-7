@@ -14,4 +14,6 @@ public class ErrorMessage {
     public static final String END_OF_INPUT_ERROR = "문자열의 끝은 커스텀 구분자 선언 또는 양수여야 합니다";
 
     public static final String CUSTOM_SEPARATOR_FORMAT_ERROR = "커스텀 구분자 형식이 올바르지 않습니다.";
+
+    public static final String INVALID_CHARACTER_FOUND = "구분자, 양수 외의 잘못된 문자가 입력되었습니다.";
 }
