@@ -1,15 +1,14 @@
 package calculator;
 
+import camp.nextstep.edu.missionutils.Console;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Application {
     public static void main(String[] args) {
         String input1;
 
-        Scanner scanner = new Scanner(System.in);
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-        input1 = scanner.next();
+        input1 = Console.readLine();
 
         String[] tokens = input1.split("[,:]");
         ArrayList<Integer> numbers = new ArrayList<>();
