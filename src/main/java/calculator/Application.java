@@ -8,7 +8,6 @@ public class Application {
     // 커스텀 구분자를 지정한 문자열의 패턴
     private final String CUSTOM_SEPARATOR_PATTERN = "^//.\\\\n.*";
 
-
     private final Integer CUSTOM_SEPARATOR_POS = 2;
     // 기본 구분자 리스트
     private final List<Character> DEFAULT_SEPARATOR_LIST = List.of(':', ',');
@@ -34,7 +33,7 @@ public class Application {
     public Integer calculate() {
         Integer sumOfList = 0;
         for (Integer element : numbersList) {
-            sumOfList = element;
+            sumOfList += element;
         }
         return sumOfList;
     }
