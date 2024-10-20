@@ -7,7 +7,7 @@ public class StringAddCalculator {
     private static final String BLANK = " ";
 
     public static int splitAndSum(String input) {
-        if (validateNull(input)) {
+        if (validateNullOrEmpty(input)) {
             return ZERO_VALUE;
         }
         validateContainBlank(input);
@@ -15,7 +15,7 @@ public class StringAddCalculator {
         return calculateSum(splitByInput(input));
     }
 
-    private static boolean validateNull(String input) {
+    private static boolean validateNullOrEmpty(String input) {
         return isNull(input) || isEmpty(input);
     }
 
@@ -41,18 +41,6 @@ public class StringAddCalculator {
         return Separator.splitByDelimiter(input);
     }
 
-    private static int toInt(String splitNumber) {
-        return validateParseNumber(splitNumber);
-    }
-
-    private static int validateParseNumber(String splitNumber) {
-        try {
-            return Integer.parseInt(splitNumber);
-        } catch (NumberFormatException exception) {
-            throw new IllegalArgumentException("구분자가 잘못 되었습니다. 커스텀 구분자, 기본 구분자를 확인 후, 다시 입력하세요");
-        }
-    }
-
     private static int calculateSum(String[] splitInput) {
         int sum = ZERO_VALUE;
         for (String splitNumber : splitInput) {
@@ -60,5 +48,17 @@ public class StringAddCalculator {
             sum = positiveNumber.addNumber(sum);
         }
         return sum;
+    }
+
+    private static int toInt(String splitNumber) {
+        return parseNumber(splitNumber);
+    }
+
+    private static int parseNumber(String splitNumber) {
+        try {
+            return Integer.parseInt(splitNumber);
+        } catch (NumberFormatException exception) {
+            throw new IllegalArgumentException("구분자가 잘못 되었습니다. 커스텀 구분자, 기본 구분자를 확인 후, 다시 입력하세요");
+        }
     }
 }
