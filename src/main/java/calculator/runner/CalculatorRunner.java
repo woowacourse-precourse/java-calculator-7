@@ -1,79 +1,57 @@
-package calculator;
+package calculator.runner;
 
 
-import calculator.view.InputView;
-import calculator.view.OutputView;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import calculator.helper.IOHelper;
+import calculator.helper.SeparateHelper;
 
-public class Calculator {
+import java.util.HashSet;
+import java.util.Set;
 
-    private final InputView inputView = new InputView();
+import static calculator.helper.SeparateHelper.*;
+
+
+public class CalculatorRunner {
+
     private String userInput;
-    private List<Character> basicSeparator = new ArrayList<>(Arrays.asList(':', ','));
-    OutputView outputView = new OutputView();
 
     public void run() {
 
-        userInput = inputView.getInput();
-        if (isSeparator()) {
-            String newSeparator = findSeparator();
-            addStringToCharList(newSeparator);
+        userInput = IOHelper.getInput();
+
+        if (userInput == null) {
+            IOHelper.printResult(0);
+            return;
         }
-        String number = splitString();
-        outputView.printResult(calculateSum(number));
-    }
 
-    public boolean isSeparator() {
-        return userInput.startsWith("//") && userInput.contains("\\n");
-    }
-
-    public String findSeparator() {
-        int startIndex = 2;
-        int endIndex = userInput.lastIndexOf("\\n");
-        return userInput.substring(startIndex, endIndex);
-    }
-
-    public void addStringToCharList(String separator) {
-        for (int i = 0; i < separator.length(); i++) {
-            basicSeparator.add(separator.charAt(i));
+        Set<Character> temp = new HashSet<>(BASIC_SEPARATOR);
+        if (isSeparator(userInput)) {
+            String newSeparator = findSeparator(userInput);
+            temp = addStringToCharSet(newSeparator);
         }
+        String number = splitString(userInput);
+        IOHelper.printResult(calculateSum(number,temp));
     }
 
-    public String splitString() {
-        if (userInput.startsWith("//") && userInput.contains("\\n")) {
-            int index = userInput.lastIndexOf("\\n");
-            return userInput.substring(index + 2);
-        }
-        return userInput;
-    }
-
-    public int calculateSum(String number) {
-        String result = "";
+    public int calculateSum(String inputString,Set<Character> newSeparator) {
+        StringBuilder number = new StringBuilder();
         int num = 0;
-        boolean lastCharFlag = false;
-        for (char ch : number.toCharArray()) {
+        for (char ch : inputString.toCharArray()) {
             if (Character.isDigit(ch)) {
-                result += ch;
-                lastCharFlag = false;
-            } else if (lastCharFlag) {
-                throw new IllegalArgumentException("구분자가 연속으로 존재합니다.");
-
-            } else if (basicSeparator.contains(ch)) {
-                if (!result.isEmpty()) {
-                    num += Integer.parseInt(result);
-                    result = "";
-
-                    lastCharFlag = true;
+                number.append(ch);
+                continue;
+            } else if (newSeparator.contains(ch)) {
+                if (number.isEmpty()) {
+                    throw new IllegalArgumentException("구분자가 연속으로 들어왔습니다.");
                 }
-            } else if (!basicSeparator.contains(ch)) {
-                throw new IllegalArgumentException("잘못된 구분자가 포함되어 있습니다.");
+                num += Integer.parseInt(number.toString());
+                number = new StringBuilder();
+                continue;
             }
+            throw new IllegalArgumentException("잘못된 구분자.");
         }
 
-        if (!result.isEmpty()) {
-            num += Integer.parseInt(result);
+        if (!number.isEmpty()) {
+            num += Integer.parseInt(String.valueOf(number));
         }
 
         return num;
