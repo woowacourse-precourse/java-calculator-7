@@ -29,7 +29,9 @@ public class Application {
 
 
         // error case 확인
+        System.out.println("error check 전 ");
         checkForErrors(changeInputStr,delimiters);
+        System.out.println("error check 후");
         int sumNum = 0;
         sumNum = splitDelimiterAddNum(changeInputStr, delimiters);
         System.out.println("결과 : " + sumNum);
@@ -88,7 +90,15 @@ public class Application {
         Pattern pattern1 = Pattern.compile(errorString);
         Matcher matcher1 = pattern1.matcher(inputString);
 
+        // 숫자로 시작하지 않으면 오류(구분자로 시작하는 경우 에러 발생)
+        String startError = "^[0-9].*";
+        Pattern pattern2 = Pattern.compile(startError);
+        Matcher matcher2 = pattern2.matcher(inputString);
+
         if (matcher1.find()) {
+            throw new IllegalArgumentException();
+        }
+        if (matcher2.find() == false) {
             throw new IllegalArgumentException();
         }
     }
