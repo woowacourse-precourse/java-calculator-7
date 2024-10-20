@@ -4,6 +4,7 @@ import calculator.validator.CustomSeparatorsValidator;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import static calculator.constant.Message.DEFAULT_VALUE_STR;
 import static calculator.constant.Message.WHITE_SPACE;
@@ -21,7 +22,7 @@ public class CustomSeparators implements Separators {
         new CustomSeparatorsValidator().validateCalculatePart(customSeparators, calculatePart);
 
         String numbers = customSeparators.stream()
-                .reduce(calculatePart, (result, customSeparator) -> result.replaceAll(customSeparator, WHITE_SPACE));
+                .reduce(calculatePart, (result, customSeparator) -> result.replaceAll(Pattern.quote(customSeparator), WHITE_SPACE));
 
         return Arrays.stream(numbers.split(WHITE_SPACE))
                 .map(number -> number.isEmpty() ? DEFAULT_VALUE_STR : number)
