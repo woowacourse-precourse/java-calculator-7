@@ -1,7 +1,13 @@
 package calculator.service;
 
 public class CalculatorService {
-    public void calculate(String input) {
 
+    public int calculate(String input) {
+        int answer = 0;
+        if (input.isEmpty()) {
+            return answer;
+        }
+
+        return answer;
     }
 }
