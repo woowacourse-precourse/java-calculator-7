@@ -16,7 +16,14 @@ public class Calculator {
     public String[] extractNumber(String customSeparator, String text) {
         String regex = Pattern.quote(customSeparator);
         String arr[] = text.split(regex);
+        if (IsEqualRegexAndCustomSeparator(regex, text, customSeparator)) {
+            throw new IllegalArgumentException();
+        }
         return arr;
+    }
+
+    private Boolean IsEqualRegexAndCustomSeparator(String regex, String text, String customSeparator) {
+        return text.matches(".*[^0-9" + regex + "].*");
     }
 
     public String findCustomSeparator(String inputText) {
@@ -28,28 +35,28 @@ public class Calculator {
     }
 
 
-    public void sum(String[] extractNumberArr) {
+    public int sum(String[] extractNumberArr) {
         int sum = 0;
         for (String str : extractNumberArr) {
             try {
                 sum += validateNumber(Integer.parseInt(str));
             } catch (NumberFormatException e) {
                 if (isInputBlank(extractNumberArr)) {
-                    System.out.println("결과 : " + sum);
+                    return sum;
                 }
                 if (!isInputBlank(extractNumberArr)) {
                     throw new IllegalArgumentException();
                 }
             }
         }
-        System.out.println("결과 : " + sum);
+        return sum;
     }
 
     private Boolean isInputBlank(String[] arr) {
-        if (arr.length != 1) {
-            return false;
+        if (arr.length == 1) {
+            return true;
         }
-        return true;
+        return false;
     }
 
     private int validateNumber(int positiveNumber) {

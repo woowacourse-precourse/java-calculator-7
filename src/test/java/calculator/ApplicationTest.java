@@ -17,6 +17,38 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 오직_숫자() {
+        assertSimpleTest(() -> {
+            run("1");
+            assertThat(output()).contains("결과 : 1");
+        });
+    }
+
+    @Test
+    void 오직_문자() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("a"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+//    @Test
+//    void 숫자_컴마() {
+//        assertSimpleTest(() -> {
+//            run("1,");
+//            assertThat(output()).contains("결과 : 1");
+//        });
+//    }
+//
+//    @Test
+//    void 컴마_숫자() {
+//        assertSimpleTest(() -> {
+//            run(",1");
+//            assertThat(output()).contains("결과 : 1");
+//        });
+//    }
+
+    @Test
     void 입력_공백() {
         assertSimpleTest(() -> {
             run("");
@@ -52,6 +84,14 @@ class ApplicationTest extends NsTest {
     void 커스텀_예약어_커스텀_구분자_일반_구분자_공존() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//;\\n1;4,2:3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 커스텀_예약어_아닌_다른_문자() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;\\n1!4!2!3"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
