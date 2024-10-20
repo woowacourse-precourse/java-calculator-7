@@ -34,7 +34,7 @@
 │   └── NumbersValidator.java : Numbers의 유효성 검증
 └── view
     ├── InputReader.java : 사용자 입력 수신
-    ├── OutputView.java : 출력 메시지 제어
+    ├── OutputView.java : 출력 관리
     └── OutputWriter.java : 메시지 출력
 ```
 
