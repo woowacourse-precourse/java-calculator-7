@@ -30,7 +30,7 @@ public class StringCalculator {
     }
 
     public Integer operate() {
-        List<String> results = delimiterStrategy.decideDelimiter(userInput);
+        List<String> results = delimiterStrategy.setUpDelimiter(userInput);
         return calculateStrategy.add(
                 numberStrategy.extractNumber(results.getFirst(), results.subList(1, results.size())));
     }
