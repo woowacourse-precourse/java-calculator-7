@@ -18,7 +18,8 @@ public class Application {
             int delimiterStart = input.indexOf("//") + 2; // "//" 이후
             int delimiterEnd = input.indexOf("\\n");
             if (delimiterEnd != -1) {
-                delimiter = input.substring(delimiterStart, delimiterEnd); // 구분자 추출
+                String customDelimiter = input.substring(delimiterStart, delimiterEnd);
+                delimiter += "|" + customDelimiter;
                 numbers = input.substring(delimiterEnd + 2); // 구분자 뒤의 숫자 문자열
             } else {
                 throw new IllegalArgumentException("잘못된 입력 형식입니다.");
