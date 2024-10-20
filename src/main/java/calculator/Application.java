@@ -15,6 +15,7 @@ public class Application {
             isMinus(sum);
             System.out.println("결과 : " + sum); // 결과
         } catch (IllegalArgumentException e) {
+            throw e;
         }
 
     }
@@ -93,6 +94,7 @@ public class Application {
     public static void isMinus(String part) {
         long num = Long.parseLong(part);
         if (num < 0) {
+            System.out.println("음수");
             throw new IllegalArgumentException();
         }
     }
@@ -137,5 +139,5 @@ public class Application {
     public static boolean isCDelimiter(String input) {
         return input.startsWith("//") && input.contains("\\n");
     }
-    
+
 }

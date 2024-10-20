@@ -1,3 +1,4 @@
+= fix: bug fix that do not throw e at main
 = feat: feature delimiter method, error on delimiter is empty
 = refactor: refactor isFormatException method
 = feat: feature isMinus method for check sum is overflow
