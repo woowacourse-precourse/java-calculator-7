@@ -41,4 +41,8 @@ public class StringAddCalculator {
     private String findStandardDelimiter() {
         return ",|:";
     }
+
+    private String[] extractNumbersForStandard(String input) {
+        return input.split(findStandardDelimiter());
+    }
 }
