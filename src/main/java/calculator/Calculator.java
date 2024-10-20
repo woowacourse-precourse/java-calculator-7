@@ -62,9 +62,7 @@ public class Calculator {
             return positiveNumber;
             // 숫자가 아닌 경우 예외처리
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("유효한 숫자가 아닙니다.");
+            throw new IllegalArgumentException("입력된 값이 숫자 형식이 아닙니다.");
         }
     }
-
-
 }
