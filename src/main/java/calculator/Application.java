@@ -10,6 +10,7 @@ public class Application {
 
 
     public static void main(String[] args) {
+
         System.out.println("덧셈할 문자열을 입력해 주세요.");
 
         String inputStr =null;
@@ -24,7 +25,7 @@ public class Application {
 
         String[] splitStr;
 
-        if(inputStr.startsWith("//")&&inputStr.substring(3,5).equals("\n")){
+        if(inputStr.startsWith("//")){
             inputStr=method.changeString(inputStr);
         }
 
