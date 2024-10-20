@@ -18,7 +18,6 @@ public class Input  {
             Matcher matcher = Pattern.compile("//(.)\\\\n(.*)").matcher(input);
             if (matcher.find()) {
                 input = matcher.group(2); // 숫자 부분만 추출
-                System.out.println("커스텀 구분자 이후 숫자 부분: " + input);  // 숫자 부분 출력
             } else {
                 throw new IllegalArgumentException("잘못된 커스텀 구분자 형식입니다.");
             }
