@@ -1,42 +1,44 @@
 package calculator;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.List;
 
 public class StringCalculator {
 
-    // 커스텀 구분자 정규식
-    private static final Pattern customDelimiterRegex = Pattern.compile("^//([\\D]+)\\\\n([1-9][0-9]*((\\1|,|:)[1-9][0-9]*)*)$");
+    private final List<DelimiterStrategy> strategies;
 
-    public static int start(String input) {
+    // 의존성 주입을 통해 구분자 처리 전략을 설정 (DIP)
+    public StringCalculator(List<DelimiterStrategy> strategies) {
+        this.strategies = strategies;
+    }
 
-        // 빈 문자열 검증
-        if (input.isBlank()) {
+    // 계산을 시작하는 메서드
+    public int start(String input) {
+        if (input == null || input.isBlank()) {
             return 0;
         }
 
-        // 기본 구분자: 쉼표와 콜론
-        String delimiter = "[,:]";
-        // 커스텀 구분자 확인
-        Matcher matcher = customDelimiterRegex.matcher(input);
-
-        if (matcher.matches()) {
-            delimiter = Pattern.quote(matcher.group(1));  // 커스텀 구분자를 추출하여 패턴으로 변경
-            input = matcher.group(2);  // 숫자 부분 추출
+        // 적합한 구분자 전략 찾기
+        for (DelimiterStrategy strategy : strategies) {
+            if (strategy.supports(input)) {
+                String[] factors = strategy.split(input);
+                return sum(factors);
+            }
         }
 
-        // 구분자를 기준으로 문자열 분리
-        String[] factors = input.split(delimiter);
+        throw new IllegalArgumentException("유효한 구분자 전략이 없습니다.");
+    }
+
+    // 숫자 합산 로직 (SRP)
+    private int sum(String[] factors) {
         int sum = 0;
         for (String factor : factors) {
             try {
-                int number = Integer.parseInt(factor.trim());  // 문자열을 숫자로 변환 (trim을 활용한 공백 제거)
+                int number = Integer.parseInt(factor.trim());
                 sum += number;
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
             }
         }
-
         return sum;
     }
 
