@@ -23,7 +23,7 @@ public class CalculatorController {
 
     public void start() {
         while (true) {
-            String input = inputView.getUserInput();               // 사용자 입력 받기
+            String input = inputView.getUserInput();
             List<Integer> extractedIntegers = extractor.extractNumbers(input);
             int result = adder.addAllNumbers(extractedIntegers);
             outputView.printAllAddedResult(result);
