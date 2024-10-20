@@ -11,15 +11,15 @@ public class Application {
         CalculatorModel model = new CalculatorModel();
         CalculatorView view = new CalculatorView();
 
-        String inputString = view.getInput().trim();
+        String inputString = view.getInput();
 
         processInput(inputString, model, view);
     }
 
     private static void addNumbersToModel(String[] numbers, CalculatorModel model) {
         for (String number : numbers) {
-            model.validateNumber(number);
-            model.addNumber(Integer.parseInt(number.trim()));
+                model.validateNumber(number);
+            model.addNumber(Integer.parseInt(number));
         }
     }
 
@@ -36,18 +36,13 @@ public class Application {
     }
 
     public static String[] parseNumbers(String input, List<String> dividers) {
-        // 구분자가 공백일 경우 "\\s+"로 처리
-        if (dividers.contains(" ")) {
-            dividers.remove(" ");
-            return input.split("\\s+");
-        }
         String combinedDividers = String.join("|", dividers);
         return input.split(combinedDividers);
     }
 
     private static void processInput(String inputString, CalculatorModel model, CalculatorView view) {
-        if (inputString == null || inputString.trim().isEmpty()) {
-            view.displayResult(0); // 공백 입력 시 0 출력
+        if (inputString == null || inputString.isEmpty()) {
+            view.displayResult(0);
             return;
         }
 

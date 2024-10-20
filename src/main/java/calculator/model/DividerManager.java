@@ -11,12 +11,7 @@ public class DividerManager {
     }
 
     public void addDivider(String divider) {
-//        dividers.add(divider);
-        if (divider.equals(" ")) {
-            dividers.add("\\s+"); // 공백 구분자를 정규식으로 처리
-        } else {
-            dividers.add(divider);
-        }
+        dividers.add(divider);
     }
 
 

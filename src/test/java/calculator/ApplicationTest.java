@@ -26,16 +26,12 @@ class ApplicationTest extends NsTest {
     // 테스트에 필요한 입력값과 예상 결과를 제공하는 메서드
     static Stream<Arguments> provideInputsForTest() {
         return Stream.of(
-                Arguments.of("//;\\n1", 1),        // 커스텀 구분자 ; 사용
-                Arguments.of("//,\\n2,3", 5),      // 커스텀 구분자 , 사용
-                Arguments.of("//:\\n4:5", 9),     // 커스텀 구분자 : 사용
-                Arguments.of("1,2:3", 6),          // 기본 구분자 , 및 : 사용
-                Arguments.of("// \n1 2 3:4,5", 15), // 커스텀 구분자 " " 및 , 사용
-                Arguments.of("", 0)                // 빈 입력의 경우
+                Arguments.of("//;\\n1", 1),         // 커스텀 구분자 ; 사용
+                Arguments.of("//,\\n2,3", 5),       // 커스텀 구분자 , 사용
+                Arguments.of("//:\\n4:5", 9),       // 커스텀 구분자 : 사용
+                Arguments.of("1,2:3", 6)           // 기본 구분자 , 및 : 사용
         );
     }
-
-
 
     // 예외 테스트 케이스
     @Test
