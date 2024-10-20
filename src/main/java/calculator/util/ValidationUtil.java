@@ -30,13 +30,4 @@ public class ValidationUtil {
         }
     }
 
-    public boolean isSpecialSeparator(Character separator) {
-        char[] specialSeparators = {'!', '@', '#', '$', '%', '^', '&', '*', '.'};
-        for (char ch : specialSeparators) {
-            if (ch == separator) {
-                return true;
-            }
-        }
-        return false;
-    }
 }

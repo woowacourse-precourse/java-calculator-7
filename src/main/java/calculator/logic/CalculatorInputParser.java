@@ -15,7 +15,6 @@ public class CalculatorInputParser {
             separators = separators + "|" + setExtraSeparator(initialString);
             initialString = initialString.substring(5);
         }
-//        System.out.println(separators);
 
         String[] numList = initialString.split(separators);
         List<Integer> integerList = new ArrayList<>();
@@ -27,18 +26,12 @@ public class CalculatorInputParser {
             }
             validationUtil.isValidNumber(s);
             integerList.add(Integer.valueOf(s));
-//            System.out.println(Integer.valueOf(s));
         }
         return integerList;
     }
 
     private String setExtraSeparator(String initialString) {
-//      구분자가 특수문자일 경우 처리
-//      !@#$%^&* 특수문자 고려
         char extraSeparator = initialString.charAt(2);
-        if (validationUtil.isSpecialSeparator(extraSeparator)) {
-            return "\\" + extraSeparator;
-        }
-        return initialString.substring(2, 3);
+        return "\\" + extraSeparator;
     }
 }
