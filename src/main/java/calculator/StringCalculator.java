@@ -6,10 +6,10 @@ import java.util.regex.Pattern;
 public class StringCalculator {
     public static int calculate(String input) {
         if (isDefaultPattern(input)) {
-            // 합해주는 메소드 구현 예정
+            return sumWithDefaultSeparators(input);
         }
         if (isCustomPattern(input)) {
-            // 합해주는 메소드 구현 예정
+            return sumWithCustomSeparator(input);
         }
         throw new IllegalArgumentException();
     }
@@ -26,5 +26,16 @@ public class StringCalculator {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(input);
         return matcher.matches();
+    }
+
+    private static int sumWithDefaultSeparators(String input) {
+        String[] numbers = input.split("[,:]");
+        return sum(numbers);
+    }
+
+
+
+    private static int sum(String[] numbers) {
+       return 0;
     }
 }
