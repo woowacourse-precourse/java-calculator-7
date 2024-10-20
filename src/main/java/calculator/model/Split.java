@@ -10,7 +10,6 @@ public class Split {
     public String splitString(ArrayList<String> delimeters) {
         for(String delimeter : delimeters) {
             input = input.replace(delimeter, " ");
-            System.out.println(input);
         }
         return input;
     }
