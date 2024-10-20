@@ -116,4 +116,30 @@ class CalculatorTest {
         assertThatThrownBy(() -> calculator.sum(str))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void 문자열에_구분자만_있을_경우() {
+        //given
+        final Calculator calculator = new Calculator();
+        final String str = ",:";
+
+        //when
+        int result = calculator.sum(str);
+
+        //Then
+        assertThat(result).isEqualTo(0);
+    }
+
+    @Test
+    void 커스텀구분자가_있을때_문자열에_구분자만_있을_경우() {
+        //given
+        final Calculator calculator = new Calculator();
+        final String str = "//;\\n";
+
+        //when
+        int result = calculator.sum(str);
+
+        //Then
+        assertThat(result).isEqualTo(0);
+    }
 }
