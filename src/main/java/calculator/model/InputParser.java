@@ -9,5 +9,6 @@ public class InputParser {
 
     public String[] parse(String input) {
         String delimiters = delimiterExtractor.extractDelimiters(input);
+        String numbersPart = delimiterExtractor.extractNumbers(input);
     }
 }
