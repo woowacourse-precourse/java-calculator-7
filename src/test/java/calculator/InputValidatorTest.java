@@ -17,7 +17,7 @@ class InputValidatorTest {
 
     @Test
     void 등록되지_않은_구분자_검증_테스트() {
-        List<String> delimiters = List.of(";",":",",");
+        List<String> delimiters = List.of("%",":",",");
 
         assertThatThrownBy(() -> inputValidator.validateUnregisteredDelimiter(delimiters))
                 .isInstanceOf(IllegalArgumentException.class)
