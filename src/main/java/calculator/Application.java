@@ -10,6 +10,7 @@ public class Application {
         int StartIndex = Constant.ZERO;
         int Result = Constant.ZERO;
 
+        System.out.println(Constant.INPUT_MESSAGE);
         String UserInput = valueInput();
         String AllSeparator;
 
