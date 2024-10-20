@@ -10,7 +10,7 @@ public class Arithmetic {
 
     public Arithmetic(Delimiter delimiter, InputData inputData) {
         if(inputData.isDelimiter()){
-            validateWithCustomDelimiter(inputData);
+            validateWithCustomDelimiter(delimiter, inputData);
         }
         if(!inputData.isDelimiter()){
             validateWithDefaultDelimiter(inputData);
@@ -24,8 +24,11 @@ public class Arithmetic {
         }
     }
 
-    public void validateWithCustomDelimiter(InputData inputData){
-
+    public void validateWithCustomDelimiter(Delimiter delimiter, InputData inputData){
+        if (!inputData.convertCalculatorPart()
+                .matches("^[0-9" + new DefaultDelimiter().getDelimiter() + delimiter.getDelimiter() + "]*$")) {
+            throw new IllegalArgumentException(ErrorMessage.ARITHMETIC_WITH_CUSTOM_DELIMITER_FORMAT.getError());
+        }
     }
 
     public List<Integer> splitArithmetic(Delimiter delimiter, String calculatorPart) {
