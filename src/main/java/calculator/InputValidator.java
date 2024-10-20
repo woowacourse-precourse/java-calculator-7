@@ -5,11 +5,7 @@ public class InputValidator {
 
     public static void validateCustomDelimiter(String input, int start, int end) {
 
-        if (!input.startsWith("//")  || !input.contains("\\n"))  {
-            throw new IllegalArgumentException("구분자 정의가 올바르지 않습니다.");
-        }
-
-        if (end == -1) {
+        if (!input.startsWith("//")  || !input.contains("\\n") || end == -1)  {
             throw new IllegalArgumentException("구분자 정의가 올바르지 않습니다.");
         }
 
@@ -27,7 +23,7 @@ public class InputValidator {
         String regex = "[" + delimiters + "]";
         String[] parts = numbersSection.split(regex);
         for (String part : parts) {
-            if (!part.isEmpty() && !part.matches("\\d+")) {
+            if (!part.isEmpty() && !part.matches("-?\\d+")) { //-는 음수로 예외처리시키기 위해
                 throw new IllegalArgumentException("사용할 수 없는 구분자가 포함되어 있습니다");
             }
         }

@@ -4,7 +4,7 @@ public class Calculator {
 
     public static int stringSum(String input) {
 
-        if (input == null || input.isEmpty()) {
+        if (input.isEmpty()) {
             return 0;
         }
 
@@ -46,11 +46,10 @@ public class Calculator {
 
         for (String num : numbers) {
             if (!num.isEmpty()) {
-                int number = Integer.parseInt(num);
-
-                if (number < 0) {
-                    throw new IllegalArgumentException("유효하지 않은 입력값입니다. : " + num);
+                if (num.startsWith("-") && num.length() > 1) {
+                    throw new IllegalArgumentException("유효하지 않은 입력값입니다.");
                 }
+                int number = Integer.parseInt(num);
                 sum += number;
             }
         }
