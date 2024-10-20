@@ -4,6 +4,9 @@ import java.math.BigInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * 문자열을 파싱하여 커스텀 구분자를 얻고, 이를 바탕으로 문자열 덧셈을 실행하는 계산기. 매우 큰 수도 더할 수 있게 BigInteger 로 계산한다.
+ */
 public class StringCalculator {
     private static final String patternString = "(//(.*)\\\\n)?(.*)";
 
