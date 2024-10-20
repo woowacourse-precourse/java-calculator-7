@@ -9,17 +9,17 @@
 * 잘못된 값 입력 시에 IllegalArgumentException 발생 후 종료.
 
 ## 기능 목록
-[x] 1. 입력 (InputView)
+- [x] 1: 입력 (InputView)
 
-[x] 2. 계산 실행 (CalculateApplication)
+- [x] 2: 계산 실행 (CalculateApplication)
 
-[x] 2-1.커스텀 연산자 찾기 (CustomSeparator)
+- [x] 2-1: 커스텀 연산자 찾기 (CustomSeparator)
 
-[x] 2-2. 입력 문자열 파싱 (InputDivider)
+- [x] 2-2: 입력 문자열 파싱 (InputDivider)
 
-[x] 2-3. 파싱된 숫자 덧셈 (InputCalculator)
+- [x] 2-3: 파싱된 숫자 덧셈 (InputCalculator)
 
-[x] 3. 계산 결과 출력 (OutputView)
+- [x] 3: 계산 결과 출력 (OutputView)
 
 ## 예외 사항
 * 잘못된 값 입력 시에 IllegalArgumentException 발생 후 종료한다.
