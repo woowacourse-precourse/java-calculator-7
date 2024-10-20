@@ -33,6 +33,22 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 구분자_분리_실패_END_문자() {
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException("//1,2,3"))
+                .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 구분자_분리_실패_START_문자() {
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException(";\\n1,2,3"))
+                .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
     void 여러_구분자_사용() {
         assertSimpleTest(() -> {
             run("1,2:3");
