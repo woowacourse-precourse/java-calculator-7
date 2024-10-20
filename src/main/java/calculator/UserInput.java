@@ -44,10 +44,7 @@ public class UserInput {
     }
     public static boolean isEmptyString(String input) {
         input = input.replaceFirst(regex,"");
-        if(input.equals("") || input.equals("\\n"))
-            return true;
-        else
-            return false;
+        return input.isEmpty() || input.equals("\\n");
     }
     public boolean isCustomDelimiterPresent() {
         return customDelimiter != null;

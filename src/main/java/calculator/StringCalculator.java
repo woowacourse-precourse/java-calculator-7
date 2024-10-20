@@ -36,12 +36,12 @@ public class StringCalculator {
         try {
             for(String num : split) {
                 sum += Integer.parseInt(num);
+                if(sum <0) {
+                    throw new IllegalArgumentException("오버플로우 발생");
+                }
             }
         }catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자 형식이 아닌 문자열입니다.");
-        }
-        if(sum <0) {
-            throw new IllegalArgumentException("오버플로우 발생");
         }
         printResult(sum);
     }
