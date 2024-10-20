@@ -38,11 +38,15 @@ public class Application {
 
     public static boolean isValidNumbers(ArrayList<String> numbers) {
         for (String number : numbers) {
-            if (!number.matches("^[0-9]*$") || number.equals("0")) {
+            if (!number.matches("^[0-9]+(\\.[0-9]+)?$") || number.equals("0")) {
                 throw new IllegalArgumentException("양수가 아닌 문자 포함");
             }
         }
         return true;
+    }
+
+    public static boolean hasFloatingPoint(String number) {
+        return number.contains(".");
     }
 
     public static void main(String[] args) {
@@ -55,12 +59,20 @@ public class Application {
         boolean hasCustomDelimiter = hasCustomDelimiter(input);
         HashSet<String> delimiters = getDelimiters(input, hasCustomDelimiter);
         ArrayList<String> numbers = getNumbers(input, delimiters);
+        boolean hasFloatingPoint = numbers.stream().anyMatch(Application::hasFloatingPoint);
 
         if (isValidNumbers(numbers)) {
-            int sum = numbers.stream()
-                .mapToInt(Integer::parseInt)
-                .sum();
-            System.out.println("결과 : " + sum);
+            if (hasFloatingPoint) {
+                double sum = numbers.stream()
+                    .mapToDouble(Double::parseDouble)
+                    .sum();
+                System.out.println("결과 : " + sum);
+            } else {
+                int sum = numbers.stream()
+                    .mapToInt(Integer::parseInt)
+                    .sum();
+                System.out.println("결과 : " + sum);
+            }
         }
     }
 }
