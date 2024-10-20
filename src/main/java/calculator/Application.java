@@ -7,6 +7,8 @@ public class Application {
         //1. camp.nextstep.edu.missionutils에서 제공하는 Console API를 사용하여 문자열 입력 받기
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
+        ExtractAndAdd extractAndAdd = new ExtractAndAdd(input);
+        extractAndAdd.checkFirstChar();
     }
 
 }
