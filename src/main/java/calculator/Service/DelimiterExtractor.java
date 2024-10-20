@@ -1,11 +1,12 @@
 package calculator.Service;
+
 import calculator.DTO.StringCalculatorDTO;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DelimiterExtractor {
     // 문자열을 특정 구분자를 기준으로 분리하는 메서드
-    public List<String> extractDelimiter (StringCalculatorDTO inputDTO) {
+    public List<String> extractDelimiter(StringCalculatorDTO inputDTO) {
         String input = inputDTO.getInput();
         List<String> result = new ArrayList<>();
         StringBuilder current = new StringBuilder();
