@@ -4,42 +4,42 @@ import calculator.domain.Calculator;
 
 public class Utils {
 
-    public void addCustomDelimiters(Calculator list, String s) {
-        if (s.startsWith("//")) {
-            char[] ss = extractDelimitersFromHeader(s);
-            for (char c : ss) {
-                list.delimiters.add(c);
+    public void addCustomDelimiters(Calculator calculator, String inputString) {
+        if (inputString.startsWith("//")) {
+            char[] delimiterChars = extractDelimitersFromHeader(inputString);
+            for (char delimiter : delimiterChars) {
+                calculator.delimiters.add(delimiter);
             }
         }
     }
 
-    private char[] extractDelimitersFromHeader(String s) {
-        String ss = s.substring(2);
-        String[] split = ss.split("\\\\n");
-        return split[0].toCharArray();
+    private char[] extractDelimitersFromHeader(String inputString) {
+        String delimiterString = inputString.substring(2);
+        String[] sections = delimiterString.split("\\\\n");
+        return sections[0].toCharArray();
     }
 
-    public String extractCalculationString(String s) {
-        String[] split = s.split("\\\\n");
-        return split[1];
+    public String extractCalculationString(String inputString) {
+        String[] sections = inputString.split("\\\\n");
+        return sections[1];
     }
 
-    public int[] convertStringToIntList(String s, Calculator list) {
-        String result = list.getDelimitersAsString();
-        String[] split = s.split(result);
+    public int[] convertStringToIntList(String inputString, Calculator calculator) {
+        String result = calculator.getDelimitersAsString();
+        String[] sections = inputString.split(result);
 
-        int[] lists = new int[split.length];
-        for (int i = 0; i < split.length; i++) {
-            lists[i] = Integer.parseInt(split[i]);
+        int[] numbers = new int[sections.length];
+        for (int i = 0; i < sections.length; i++) {
+            numbers[i] = Integer.parseInt(sections[i]);
         }
-        return lists;
+        return numbers;
     }
 
-    public int sumIntList(int[] list) {
-        int ans = 0;
-        for (int i = 0; i < list.length; i++) {
-            ans += list[i];
+    public int sumIntList(int[] numbers) {
+        int result = 0;
+        for (int i = 0; i < numbers.length; i++) {
+            result += numbers[i];
         }
-        return ans;
+        return result;
     }
 }
