@@ -34,7 +34,7 @@ public class StandardDelimiterNumberExtractorTest implements DelimitedNumberExtr
     }
 }
 
-class test {
+class StandardDelimiterNumberExtractorMethodTest {
     @Test
     @DisplayName("extract 메서드 성공 테스트 ")
     void extract_ok() {

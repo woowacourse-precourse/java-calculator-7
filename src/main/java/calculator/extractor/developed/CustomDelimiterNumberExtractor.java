@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 public class CustomDelimiterNumberExtractor implements DelimitedNumberExtractor {
     private static final String CUSTOM_DELIMITER_PREFIX = "//";
     private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
+    private static final String ZERO = "0";
 
     @Override
     public ExtractResult extract(String input) {
@@ -36,7 +37,7 @@ public class CustomDelimiterNumberExtractor implements DelimitedNumberExtractor 
 
     private List<String> splitNumbers(String numberString, String delimiter) {
         if (numberString.isEmpty()) {
-            return List.of("0");
+            return List.of(ZERO);
         }
         return Arrays.stream(numberString.split(delimiter))
                 .filter(this::isNumber)

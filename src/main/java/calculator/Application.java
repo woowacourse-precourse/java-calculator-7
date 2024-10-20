@@ -27,16 +27,11 @@ public class Application {
                         new CustomTokenFormatValidationRule()
                 ))
         );
-//        DelimitedNumberExtractor delimitedNumberExtractor = new CompositeDelimitedNumberExtractor(List.of(
-//                new DefaultDelimitedNumberExtractor(),
-//                new CustomDelimitedNumberExtractor()
-//        ));
+
         NumberExtractorChain numberExtractorChain = new NumberExtractorChain(
                 List.of(new StandardDelimiterNumberExtractor(), new CustomDelimiterNumberExtractor()));
         NumberParser numberParser = new StringCalculatorNumberParser();
-
-//        StringCalculatorImpl calculator = new StringCalculatorImpl(inputValidator, delimitedNumberExtractor,
-//                numberParser);
+        
         StringCalculatorImpl calculator = new StringCalculatorImpl(inputValidator, numberExtractorChain,
                 numberParser);
         System.out.println("덧셈할 문자열을 입력해 주세요.");
