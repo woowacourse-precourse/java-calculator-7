@@ -9,6 +9,8 @@ public class InputUtils {
         validateWhitespaceInput(input);
         if (input.startsWith("//")) {
             validateCustomDelimiterInput(input);
+        } else if (input.isEmpty()){
+            input = "0";
         } else {
             validateDefaultDelimiterInput(input);
         }
@@ -31,16 +33,21 @@ public class InputUtils {
         String delimiter = input.substring(2, input.indexOf("\\n"));
         String expression = input.substring(input.indexOf("\\n") + 2);
         String[] tokens = expression.split(delimiter);
-        for (String token : tokens) {
-            if (token.isEmpty()) {
-                throw new IllegalArgumentException();
-            }
-            validateNumericInput(token);
-        }
+        validateTokens(tokens);
     }
 
     private static void validateDefaultDelimiterInput(String input) {
+        char firstChar = input.charAt(0);
+        char lastChar = input.charAt(input.length() - 1);
+        if (!Character.isDigit(firstChar) || !Character.isDigit(lastChar)) {
+            throw new IllegalArgumentException();
+        }
         String[] tokens = input.split("[,:]");
+        validateTokens(tokens);
+    }
+
+    // 토큰이 유효한지 검증하는 메서드
+    private static void validateTokens(String[] tokens) {
         for (String token : tokens) {
             if (token.isEmpty()) {
                 throw new IllegalArgumentException();
@@ -52,6 +59,10 @@ public class InputUtils {
     // 문자열이 양수인지 검증하는 메서드
     private static void validateNumericInput(String token) {
         try {
+            // 옳바른 양수인지 확인 01은 숫자가 아님
+            if (token.charAt(0) == '0') {
+                throw new IllegalArgumentException();
+            }
             int number = Integer.parseInt(token); // 숫자로 변환 시도
             if (number < 0) {
                 throw new IllegalArgumentException();
