@@ -8,7 +8,22 @@ public class Application {
         String input = Console.readLine();
 
         String customDelimiter = extractCustomDelimiter(input); // 커스텀 구분자 추출
-        System.out.println(customDelimiter);
+        // 커스텀 구분자가 있다면, 커스텀 구분자 지정 문자 제외한 부분 추출
+        if (customDelimiter != "") {
+            System.out.println("worked!!");
+            String numbersPart = extractNumbersPart(input);
+            System.out.println("nums: " + numbersPart);
+        }
+
+    }
+
+    public static String extractNumbersPart(String input) {
+        int delimiterEndIndex = input.indexOf("\\n");
+        if (delimiterEndIndex != -1) {
+            return input.substring(delimiterEndIndex + 2);
+        } else {
+            return input; // \n이 없으면 전체 문자열을 반환
+        }
     }
 
     public static String extractCustomDelimiter(String input) {
