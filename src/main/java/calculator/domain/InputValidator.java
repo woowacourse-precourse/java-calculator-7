@@ -1,9 +1,12 @@
 package calculator.domain;
 
+import static calculator.exception.Exception.INVALID_NEGATIVE_NUMBER;
+import static calculator.exception.Exception.INVALID_NUMBER_FORMAT;
+
 import java.util.List;
 
-public class Validator {
-    public void validateInputs(List<String> stringInputs) {
+public class InputValidator {
+    public void validate(List<String> stringInputs) {
         for (String s : stringInputs) {
             validateNumberFormat(s);
             validatePositiveNumber(s);
@@ -15,7 +18,7 @@ public class Validator {
         try {
             Integer.parseInt(s);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("유효하지 않은 형식입니다: " + s);
+            throw new IllegalArgumentException(INVALID_NUMBER_FORMAT.getMessage() + s);
         }
     }
 
@@ -23,7 +26,7 @@ public class Validator {
     private void validatePositiveNumber(String s) {
         int value = Integer.parseInt(s);
         if (value < 0) {
-            throw new IllegalArgumentException("양수만 허용됩니다: " + s);
+            throw new IllegalArgumentException(INVALID_NEGATIVE_NUMBER.getMessage() + s);
         }
     }
 }

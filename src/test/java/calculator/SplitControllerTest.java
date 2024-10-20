@@ -34,7 +34,7 @@ class SplitControllerTest {
         String input = "//;\\n1;2,3";
         Separator separator = new Separator();
         SeparatorService separatorService = new SeparatorService(separator);
-        String processedInput = separatorService.processCustomSeparator(input); // 커스텀 구분자 세미콜론 추가
+        String processedInput = separatorService.extractAndAddSeparator(input); // 커스텀 구분자 세미콜론 추가
         SplitterService splitterService = new SplitterService();
 
         List<String> separators = separator.getSeparators(); // 기본 + 커스텀 구분자

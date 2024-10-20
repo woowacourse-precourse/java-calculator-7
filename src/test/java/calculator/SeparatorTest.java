@@ -25,7 +25,7 @@ class SeparatorTest {
         String input = "//;\\n1;2;3";
         Separator separator = new Separator();
         SeparatorService separatorService = new SeparatorService(separator);
-        separatorService.processCustomSeparator(input);
+        separatorService.extractAndAddSeparator(input);
 
         List<String> separators = separator.getSeparators();
 
@@ -41,7 +41,7 @@ class SeparatorTest {
         String input = "1,2:3";
         Separator separator = new Separator();
         SeparatorService separatorService = new SeparatorService(separator);
-        separatorService.processCustomSeparator(input);
+        separatorService.extractAndAddSeparator(input);
 
         // 커스텀 구분자가 없는 경우 기본 구분자만 있어야 함
         List<String> separators = separator.getSeparators();
@@ -58,7 +58,7 @@ class SeparatorTest {
 
         // 커스텀 구분자가 있으나 \n이 없는 경우 예외가 발생해야 함
         assertThrows(IllegalArgumentException.class, () ->
-                        separatorService.processCustomSeparator("//;"),
+                        separatorService.extractAndAddSeparator("//;"),
                 "커스텀 구분자 뒤에 \\n이 없을 때 IllegalArgumentException이 발생해야 합니다.");
     }
 }
