@@ -2,6 +2,7 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.math.BigInteger;
 import java.util.StringTokenizer;
 
 public class Application {
@@ -13,7 +14,7 @@ public class Application {
 
         String pattern = "^//.\\\\n.*";
         StringTokenizer st = null;
-        int result = 0;
+        BigInteger result = BigInteger.ZERO;
 
         if (input.matches(pattern)) {
             String delim = String.valueOf(input.charAt(2));
@@ -23,13 +24,13 @@ public class Application {
         }
 
         while (st.hasMoreTokens()) {
-            int value = Integer.parseInt(st.nextToken());
+            BigInteger value = new BigInteger(st.nextToken());
 
-            if (value < 0) {
+            if (value.signum() < 0) {
                 throw new IllegalArgumentException();
             }
 
-            result += value;
+            result = result.add(value);
         }
 
         System.out.println("결과 : " + result);
