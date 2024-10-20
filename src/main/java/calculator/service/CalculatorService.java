@@ -1,6 +1,7 @@
 package calculator.service;
 
 import calculator.model.CalculationInput;
+import calculator.util.InputValidator;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
@@ -11,6 +12,8 @@ public class CalculatorService {
     private static final String DEFAULT_DELIMITER = ",:";
     private static final String CUSTOM_DELIMITER_INPUT_REGEX = "^//(.*?)\\\\n(.*)";
     private static final String EMPTY_INPUT = "";
+
+    InputValidator inputValidator = new InputValidator();
 
     public int calculateString(String userInput) {
 
@@ -54,7 +57,8 @@ public class CalculatorService {
         StringTokenizer stringTokenizer = new StringTokenizer(inputString, delim);
 
         while (stringTokenizer.hasMoreTokens()) {
-            numbersToSum.add(Integer.valueOf(stringTokenizer.nextToken()));
+            int number = inputValidator.validateStringToken(stringTokenizer.nextToken());
+            numbersToSum.add(number);
         }
 
         return numbersToSum;
