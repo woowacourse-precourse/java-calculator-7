@@ -31,6 +31,13 @@ public class AdditionCalculator {
     }
 
     private void parseInput() {
+
+        // 사용자가 입력한 값이 공백인지 판단
+        if (inputString.isEmpty()) {
+            additionNumbers.add(0);
+            return;
+        }
+
         int index = 0;
         while (index < inputString.length()) {
             char currentChar = inputString.charAt(index);
