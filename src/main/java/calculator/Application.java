@@ -33,10 +33,12 @@ public class Application {
     }
 
     static private boolean isCommand(String s) {
-        if (s.charAt(0)=='/' && s.charAt(1)=='/') {
+        if (s.isEmpty()) {
             return false;
-        } else if (isNum(s.charAt(0)) || delimiters.contains((int)s.charAt(0))) {
+        } else if (s.charAt(0)=='/' && s.charAt(1)=='/') {
             return true;
+        } else if (isNum(s.charAt(0)) || delimiters.contains((int)s.charAt(0))) {
+            return false;
         } else {
             throw new IllegalArgumentException();
         }
