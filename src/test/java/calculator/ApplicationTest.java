@@ -32,6 +32,14 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 구분자만_입력(){
+        assertSimpleTest(() -> {
+            run("//;\\n");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
