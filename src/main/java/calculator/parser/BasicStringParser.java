@@ -9,9 +9,6 @@ public class BasicStringParser implements StringParser{
 
     @Override
     public List<String> parse(String input) {
-        if (input.isEmpty()) {
-            return List.of("0");
-        }
         return Arrays.stream(input.split(BASIC_DELIMITER_REGEX)).toList();
     }
 }
