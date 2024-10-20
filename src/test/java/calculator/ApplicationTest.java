@@ -278,6 +278,23 @@ class ApplicationTest extends NsTest {
                     .isInstanceOf(IllegalArgumentException.class);
         });
     }
+
+    @Test
+    void 입력된_숫자가_Integer_MAX_VALUE를_벗어나는_경우() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> run("2222222222:1:4"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+    }
+
+    @Test
+    void 입력된_숫자가_Integer_MAX_VALUE를_벗어나지_않는_경우() {
+        assertSimpleTest(() -> {
+            run("2147483647:2147483647:2147483647");
+            assertThat(output()).contains("결과 : 6442450941");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
