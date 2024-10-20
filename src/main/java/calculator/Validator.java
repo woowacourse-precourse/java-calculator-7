@@ -9,7 +9,6 @@ public class Validator {
 
     /*2.유효성 검사*/
     public void validation(String[] numbers) {
-
         for (String num : numbers) {
             if (!isNumeric(num)){
                 throw new IllegalArgumentException("숫자가 아닌 값이 포함되었습니다.");
