@@ -60,5 +60,22 @@ public class Application {
     }
 
     // 커스텀 구분자를 추출하는 메서드
+    public static String extractDelimiter(String text) {
+        // 찾고자 하는 시작 패턴과 끝 패턴
+        String startPattern = "//";
+        String endPattern = "\\n";
+
+        // 시작 패턴과 끝 패턴의 위치를 찾기
+        int startIndex = text.indexOf(startPattern);
+        int endIndex = text.indexOf(endPattern);
+
+        if (startIndex != -1 && endIndex != -1 && endIndex > startIndex) {
+            // 시작 패턴 바로 뒤부터 끝 패턴 전까지의 문자열 추출
+            return text.substring(startIndex + startPattern.length(), endIndex);
+        } else {
+            // 패턴이 없거나 잘못된 경우 null 반환
+            return null;
+        }
+    }
 
 }
