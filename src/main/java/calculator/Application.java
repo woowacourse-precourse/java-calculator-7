@@ -57,6 +57,8 @@ public class Application {
             }
         }
 
+        result.add(Integer.parseInt(str.substring(beginIdx)));
+
         return result;
     }
 
