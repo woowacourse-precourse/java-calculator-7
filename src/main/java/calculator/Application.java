@@ -4,9 +4,12 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static void main(String[] args) {
-        // TODO : input, process, output
+        String targetString = Input.read();
+        int result = -1;
+        Output.handleResult(result);
     }
 }
+
 
 
 class Input {
@@ -18,3 +21,11 @@ class Input {
     }
 }
 
+class Output {
+    private static final String OUTPUT_FORMAT = "결과 : ";
+    public static void handleResult(int result){
+        if (result < 0) return;
+
+        System.out.println(OUTPUT_FORMAT+result);
+    }
+}
