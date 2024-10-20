@@ -2,9 +2,6 @@ package calculator.util;
 
 import static calculator.message.Delimiter.CUSTOM_DELIMITER;
 import static calculator.message.Delimiter.DELIMITERS;
-import static calculator.message.ErrorMessage.EMPTY_ELEMENT_MESSAGE;
-import static calculator.message.ErrorMessage.INVALID_ELEMENT_MESSAGE;
-import static calculator.message.ErrorMessage.INVALID_FLOAT_INPUT_MESSAGE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,17 +34,7 @@ public class Parser {
         List<Integer> intList = new ArrayList<>();
 
         for (String element : stringList) {
-            if (isEmpty(element)) {
-                throw new IllegalArgumentException(EMPTY_ELEMENT_MESSAGE);
-            }
-
-            if (isFloat(element)) {
-                throw new IllegalArgumentException(INVALID_FLOAT_INPUT_MESSAGE);
-            }
-
-            if (!isInteger(element)) {
-                throw new IllegalArgumentException(INVALID_ELEMENT_MESSAGE);
-            }
+            Validator.validateElement(element);
 
             intList.add(Integer.parseInt(element));
         }
@@ -55,25 +42,5 @@ public class Parser {
         return intList;
     }
 
-    private static boolean isInteger(String element) {
-        try {
-            Integer.parseInt(element);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
 
-    private static boolean isFloat(String element) {
-        try {
-            Float.parseFloat(element);
-            return element.contains(".");
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
-    private static boolean isEmpty(String element) {
-        return element.isEmpty();
-    }
 }
