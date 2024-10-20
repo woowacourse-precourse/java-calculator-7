@@ -48,7 +48,7 @@ public class Application {
     public static int addString(String[] numbers) {
 
         int sum = 0;
-        try {
+
             for (String number : numbers) {
                 if (number.isEmpty()) {
                     continue;
@@ -59,16 +59,13 @@ public class Application {
                 }
                 sum += num;
             }
-        } catch (IllegalArgumentException e) {
-            System.out.println("Error: " + e.getMessage());
-            System.exit(0);
-        }
+
         return sum;
     }
 
     // 문자열을 숫자로 변환하는 메서드
     public static int stringToInt(String number) {
-        try {
+
             if (number.charAt(0) == '0') {
                 throw new IllegalArgumentException("숫자는 0으로 시작할 수 없습니다.");
             }
@@ -79,10 +76,7 @@ public class Application {
                 }
 
             }
-        } catch (IllegalArgumentException e) {
-            System.out.println("Error: " + e.getMessage());
-            System.exit(0);
-        }
+
         return Integer.parseInt(number);
 //        try {
 //            return Integer.parseInt(number);
