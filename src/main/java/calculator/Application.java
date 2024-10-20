@@ -54,6 +54,9 @@ public class Application {
         return (separator == customSeparator);
     }
 
+    private Boolean isValidCustomSeparator() {
+        return !Character.isDigit(customSeparator);
+    }
 
     public static void main(String[] args) {
         // TODO: 프로그램 구현
