@@ -26,10 +26,12 @@ public class Application {
         String numbers = input;
 
         if(input.startsWith("//")){
-            Matcher matcher = Pattern.compile("//(.)\\n(.*)").matcher(input);
+            Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
             if(matcher.find()){
                 separator = Pattern.quote(matcher.group(1));
                 numbers = matcher.group(2);
+            } else{
+                throw new IllegalArgumentException();
             }
         }
         return Arrays.stream(numbers.split(separator))
