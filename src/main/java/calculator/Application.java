@@ -48,15 +48,16 @@ public class Application {
         int startIdx = inputValue.indexOf(START_DELIMITER);
         int endIdx = inputValue.indexOf(END_DELIMITER);
 
-        // 구분자를 정의하지 않는 문자열 양식인 경우, null을 반환한다.
+        // 구분자를 정의하지 않는 문자열 양식인 경우, 더 이상 작업을 수행하지 않는다.
         if (startIdx == -1 && endIdx == -1) {
             numberInputString = inputValue;
             return delimiterSet;
         } else if (startIdx > 0) {
-            // 구분자 정의를 시작하는 "//"의 위치가 0이 아닌 경우. 즉, "//"의 앞에 다른 문자가 있는 경우.
+            // 구분자 정의를 시작하는 "//"의 위치가 0이 아닌 경우.
+            // 즉, "//"의 앞에 다른 문자가 있는 경우 에러를 반환한다.
             throw new IllegalArgumentException("올바르지 않는 형식의 문자열 입력입니다.");
         } else if ((startIdx != -1 && endIdx == -1) || (startIdx == -1 && endIdx != -1)) {
-            // 구분자의 시작과 끝을 정의하는 문자가 둘 다 있지 않는 경우.
+            // 구분자의 시작과 끝을 정의하는 문자가 둘 중 하나만 있는 경우 에러를 반환한다.
             throw new IllegalArgumentException("올바르지 않는 형식의 문자열 입력입니다.");
         }
 
@@ -122,6 +123,7 @@ public class Application {
             if (Character.isDigit(character)) {
                 stringBuilder.append(character);
             } else if (delimiters.contains(character)) {
+                // 구분자 문자를 만났을 때 stringBuilder의 내용이 있을 경우, 수로 변환하여 List에 추가한다.
                 if (!stringBuilder.toString().isEmpty()) {
                     resultList.add(Long.parseLong(stringBuilder.toString()));
                 }
@@ -131,6 +133,7 @@ public class Application {
             }
         }
 
+        // stringBuilder의 내용이 남아 있을 경우, 수로 변환하여 List에 추가한다.
         if (!stringBuilder.toString().isEmpty()) {
             resultList.add(Long.parseLong(stringBuilder.toString()));
         }
