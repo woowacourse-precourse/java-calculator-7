@@ -14,9 +14,9 @@ public class InputHandler {
 
 
     public void setInputString() {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
         this.inputString = Console.readLine();
     }
+
 
     public void ensureCustomDelimiter() {
         String regExp = "^//(.)\\\\n";
@@ -44,7 +44,6 @@ public class InputHandler {
             int extractedNumber = Integer.parseInt(extractedString);
             extractedNumbers.add(extractedNumber);
         }
-
     }
 
     public String removeDelimiterCreator(String target) {
@@ -55,11 +54,11 @@ public class InputHandler {
         return target;
     }
 
-    public void printResult() {
-        Calculator calculator = new Calculator();
-        int result = calculator.getSum(extractedNumbers);
 
-        System.out.println("결과 : " + result);
+    public int getResult() {
+        Calculator calculator = new Calculator();
+        return calculator.getSum(extractedNumbers);
     }
+
 
 }
