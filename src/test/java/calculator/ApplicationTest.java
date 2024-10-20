@@ -59,7 +59,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 예외_테스트_커스텀_구분자_형식체크1() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("//;\n1;1"))
+                assertThatThrownBy(() -> runException("//h\n1h1"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
@@ -67,7 +67,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 예외_테스트_커스텀_구분자_형식체크2() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("//;n1;1"))
+                assertThatThrownBy(() -> runException("//hn1h1"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
@@ -75,7 +75,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 예외_테스트_커스텀_구분자_형식체크3() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("//;1;1"))
+                assertThatThrownBy(() -> runException("//h1h1"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
@@ -83,7 +83,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 예외_테스트_구분자앞뒤로_숫자존재확인() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("//h\n;1;1;"))
+                assertThatThrownBy(() -> runException("//h\\n1h1h"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
