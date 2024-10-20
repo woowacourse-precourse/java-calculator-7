@@ -5,7 +5,6 @@ import static calculator.Constants.*;
 import java.math.BigInteger;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 public class OperandManager {
     private final List<BigInteger> operands;
