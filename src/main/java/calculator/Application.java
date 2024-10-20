@@ -69,6 +69,7 @@ public class Application {
         return sum;
     }
 
+    // 문자열을 숫자로 변환하는 메서드
     public static int stringToInt(String number){
         for(int i=0;i<number.length();i++){
             if(!(number.charAt(i)>='0'&&number.charAt(i)<='9'))
@@ -77,10 +78,12 @@ public class Application {
         return Integer.parseInt(number);
     }
 
+    // 숫자만 더하는 메서드
     public static int StringCalculator(String input){
-        if(input.isEmpty())
+        if(input.isEmpty()) // 빈문자열 입력 시 0을 출력한다.
             return 0;
-        int sum=-1;
+        int sum=0;
+        
         String delimiter = ",|:";
 
         try {
@@ -89,12 +92,14 @@ public class Application {
             System.out.println("Error: " + e.getMessage());
         }
 
-        if(delimiter!=",|:"){
+        if(delimiter!=",|:"){ // 커스텀 구분자 사용 시, 5번째 문자부터 읽기
             input = input.substring(5);
         }
+
         String[] numbers = splitString(input,delimiter);
-        if(numbers.length==0)
+        if(numbers.length==0) // 구분자로만 이루어져있는 경우
             throw new IllegalArgumentException("계산할 숫자가 없습니다.");
+
         sum = addString(numbers);
 
         return sum;
@@ -106,6 +111,7 @@ public class Application {
     public static void main(String[] args) {
         String input = Console.readLine();
         int sum=0;
+
         try{
             sum = StringCalculator(input);
         } catch (IllegalArgumentException e) {
