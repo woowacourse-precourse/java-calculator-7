@@ -13,19 +13,14 @@ public class Delimiter {
     }
 
     private Character findCustomDelimiter(String userInputMessage){
-        if(userInputMessage.substring(0, 2) == "//" && userInputMessage.substring(3, 5) == "\n"){
+        if(userInputMessage.substring(0, 2).equals("//") && userInputMessage.substring(3, 5).equals("\\n")){
             return userInputMessage.charAt(2);
         }
         else throw new IllegalArgumentException();
     }
 
-    public boolean checkDelimiter(char targetChar){
-        if(targetChar == COMMA_DELIMITER || targetChar == COLON_DELIMITER){
-            return true;
-        }
-        else if(CUSTOM_DELIMITER != null && targetChar == CUSTOM_DELIMITER){
-            return true;
-        }
+    public boolean hasCustomDelimiter(){
+        if(CUSTOM_DELIMITER != null) return true;
         else return false;
     }
 }

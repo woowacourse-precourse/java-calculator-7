@@ -22,7 +22,7 @@ public class InputParser {
                     throw new IllegalArgumentException();
                 }
             }
-            else if(userInputMessage.charAt(i) != delimiter.CUSTOM_DELIMITER && userInputMessage.charAt(i) != Delimiter.COLON_DELIMITER && userInputMessage.charAt(i) != Delimiter.COMMA_DELIMITER && !UserInputController.checkNumber(userInputMessage.charAt(i))){
+            else if((delimiter.CUSTOM_DELIMITER == null || userInputMessage.charAt(i) != delimiter.CUSTOM_DELIMITER) && userInputMessage.charAt(i) != Delimiter.COLON_DELIMITER && userInputMessage.charAt(i) != Delimiter.COMMA_DELIMITER && !UserInputController.checkNumber(userInputMessage.charAt(i))){
                 throw new IllegalArgumentException();
             }
         }

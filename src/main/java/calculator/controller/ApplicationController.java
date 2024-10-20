@@ -30,38 +30,28 @@ public class ApplicationController {
 
 
 
-    private List<Integer> findNumIndex(String userSubInputMessage){
-        List<Integer> numIndexList = new ArrayList<>();
-        int id = 0;
-        while(id < userSubInputMessage.length()-1 && numIndexList.size() < 3){
-            if(delimiter.checkDelimiter(userSubInputMessage.charAt(id)) && numIndexList.size() < 1 && id < userSubInputMessage.length() - 2){
-                numIndexList.add(id+1);
-            }
-            else if(delimiter.checkDelimiter(userSubInputMessage.charAt(id)) && numIndexList.size() > 0){
-                numIndexList.add(id);
-                if(numIndexList.get(0) >= numIndexList.get(1)){
-                    numIndexList.clear();
-                }
-            }
-            id++;
+    private List<String> getNumList(String userInputMessage) {
+        List<String> numIndexList;
+        if (delimiter.hasCustomDelimiter()) {
+            numIndexList = Arrays.asList(userInputMessage.split("[" + delimiter.CUSTOM_DELIMITER + Delimiter.COLON_DELIMITER + Delimiter.COMMA_DELIMITER + "]"));
+        } else {
+            numIndexList = Arrays.asList(userInputMessage.split("[" + Delimiter.COLON_DELIMITER + Delimiter.COMMA_DELIMITER + "]"));
         }
-        if(numIndexList.size() == 1) numIndexList.add(userSubInputMessage.length());
         return numIndexList;
     }
 
     private void updateNumberStorage(){
-        List<Integer> numIndexList = findNumIndex(userInputMessage);
-        int subFirstIndex = 0;
-        while(numIndexList.size() != 0 && numIndexList.get(1) != userInputMessage.length() - 1){
-            numberStorage.addNumber(userInputMessage.substring(subFirstIndex + numIndexList.get(0), subFirstIndex + numIndexList.get(1)), delimiter);
-            subFirstIndex += numIndexList.get(1);
-            numIndexList = findNumIndex(userInputMessage.substring(subFirstIndex, userInputMessage.length()));
+        List<String> numList;
+        if(delimiter.hasCustomDelimiter()) numList = getNumList(userInputMessage.substring(5));
+        else numList = getNumList(userInputMessage);
+        for(int i = 0; i < numList.size(); i++){
+            numberStorage.addNumber(numList.get(i), delimiter);
         }
     }
 
     private String changeResultToString(Double totalSum){
         if(totalSum % 1 == 0.0){
-            return Integer.toString(Integer.parseInt(Double.toString(totalSum)));
+            return Integer.toString((int) Math.floor(totalSum));
         }
         else{
             return Double.toString(totalSum);

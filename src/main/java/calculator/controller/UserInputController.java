@@ -43,11 +43,11 @@ public class UserInputController {
             }
             else hasDelimiter = true;
         }
-        if(hasNumber && hasDelimiter) throw new IllegalArgumentException();
+        if(!hasNumber || !hasDelimiter) throw new IllegalArgumentException();
     }
 
     private boolean checkCustomDelimiter(String userInputMessage){
-        if(userInputMessage.substring(0, 2) != "//" && !userInputMessage.contains("\n")){
+        if(!userInputMessage.substring(0, 2).equals("//") && !userInputMessage.contains("\\n")){
             return false;
         }
         return true;
