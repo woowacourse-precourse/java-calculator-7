@@ -4,17 +4,16 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static void main(String[] args) {
-        String delimiters = ":,";
-
         System.out.println("덧셈할 문자열을 입력해주세요.");
         String input = Console.readLine();
 
+        String delimiters = ":,";
         String validTarget = input;
         String escapedDelimiters = delimiters;
 
-        if (isCustomDelimiterDefined(input)) {
+        if (hasCustomDelimiter(input)) {
             delimiters = getCustomDelimiter(input);
-            validTarget = input.substring(input.indexOf("\\n") + 2);
+            validTarget = extractNumbersSection(input);
             escapedDelimiters = escapeSpecialCharacters(delimiters);
         }
 
@@ -33,9 +32,11 @@ public class Application {
         }
 
         String regex = "^\\d+(" + "[" + delimiters + "]" + "\\d+)*$";
-        System.out.println("regex = " + regex);
-
         return validTarget.matches(regex);
+    }
+
+    private static String extractNumbersSection(String input) {
+        return input.substring(input.indexOf("\\n") + 2);
     }
 
     private static String escapeSpecialCharacters(String delimiter) {
@@ -51,18 +52,15 @@ public class Application {
         return escapedDelimiter.toString();
     }
 
-    private static boolean isCustomDelimiterDefined(String input) {
+    private static boolean hasCustomDelimiter(String input) {
         return input.startsWith("//") && (input.indexOf("\\n") == input.indexOf("//") + 3);
     }
 
     private static String getCustomDelimiter(String input) {
-
         int startIndex = input.indexOf("//") + 2;
         int endIndex = input.indexOf("\\n");
 
-        String customDelimiter = input.substring(startIndex, endIndex);
-
-        return customDelimiter;
+        return input.substring(startIndex, endIndex);
     }
 
     private static int sumNumbers(String input, String delimiters) {
