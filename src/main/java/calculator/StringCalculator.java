@@ -7,6 +7,16 @@ public class StringCalculator {
 
     private static final String DEFAULT_DELIMITERS = ",|:";  // 기본 구분자: 쉼표 또는 콜론
 
+    // 입력 문자열을 처리하여 합을 계산하는 메서드
+    public int add(String input) {
+        if (isEmpty(input)) {
+            return 0;  // 빈 문자열 또는 null 입력 시 0 반환
+        }
+
+        String[] numbers = extractNumbers(input);
+        return calculateSum(numbers);
+    }
+
     // 입력이 빈 문자열 또는 null인지 확인하는 메서드
     private boolean isEmpty(String input) {
         return input == null || input.isEmpty();
