@@ -38,6 +38,10 @@ public class IntegerCalculatorDependencyRegistry implements NumberCalculatorDepe
         return customDelimiterService;
     }
 
+    public DelimiterFactory getDelimiterFactory() {
+        return delimiterFactory;
+    }
+
     public DelimiterService getDelimiterService() {
         return delimiterService;
     }
