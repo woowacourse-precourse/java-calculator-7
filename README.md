@@ -19,8 +19,10 @@
 
 
 #설계 방식
+![우테코 1주차 설계](https://github.com/user-attachments/assets/e97f622f-8ec6-4ca8-b622-08280ce53b55)
 
-![image](/Users/ihojae/Desktop/java-calculator-7/우테코 1주차 과제 설계.jpeg)
+
+
 
 이러한 방식으로 설계해보겠다.
 
