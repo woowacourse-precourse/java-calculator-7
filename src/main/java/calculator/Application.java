@@ -2,11 +2,15 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.List;
+
 public class Application {
+
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         String input = Input.inputString();
         String numberPart = Input.validateInput(input);
+        System.out.println(numberPart);
     }
 }
 
@@ -20,17 +24,27 @@ class Input {
         if(input.isBlank())
             throw new IllegalArgumentException("Blank InputString Error");
 
+        String numberPart = input;
+        String separtor = "";
+
         if(input.startsWith("//") && input.contains("\\n")) {
-            String delimiterSection = input.substring(2, input.indexOf("\\n"));
-            if(delimiterSection.length() == 1)
-                return input.substring(input.indexOf("\\n") + 2);
-            else
+            separtor = input.substring(input.indexOf("//") + 2, input.indexOf("\\n"));
+            if(separtor.length() != 1)
                 throw new IllegalArgumentException("Separator format is invalid");
+            else
+                numberPart = input.substring(input.indexOf("\\n") + 2);
         }
-        else if (input.charAt(0) >= '0' && input.charAt(0) <= '9') {
-            return input;
+
+        List<String> separators = new java.util.ArrayList<>(List.of(",", ":"));
+        if(!separtor.isEmpty()) separators.add(separtor);
+
+        for (int i = 0; i < numberPart.length(); i++) {
+            if(!separators.contains(String.valueOf(numberPart.charAt(i)))
+                    && (numberPart.charAt(i) < '0' || numberPart.charAt(i) > '9'))
+
+                throw new IllegalArgumentException("Number part is invalid");
         }
-        else
-            throw new IllegalArgumentException("Invalid InputString Error");
+
+        return numberPart;
     }
 }
