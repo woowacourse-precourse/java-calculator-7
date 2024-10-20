@@ -160,6 +160,11 @@ if (input.startsWith("//") && input.contains("\\n")) {
     // 커스텀 구분자 추출
     delimiters += "|" + input.charAt(2);
     input = input.substring(5);
+} else {
+    // 형식 검증: "//" 이후에 커스텀 구분자가 오고, 그 뒤에 "\n"이 있는지 확인
+    if (!input.matches("//.\\n.*")) {
+        throw new IllegalArgumentException("잘못된 구분자 형식입니다. 올바른 형식은 //구분자\\n 입니다.");
+    }
 }
 ```
 
