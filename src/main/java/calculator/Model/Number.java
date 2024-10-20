@@ -71,10 +71,10 @@ public class Number {
     }
 
     public String removeDelimiter(String rawNumber, String customDelimiter) {
-        rawNumber = rawNumber.replace(":", ",");
         if (customDelimiter != null) {
             rawNumber = rawNumber.replace(customDelimiter, ",");
         }
+        rawNumber = rawNumber.replace(":", ",");
         return rawNumber;
     }
 
