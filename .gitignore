@@ -33,3 +33,16 @@ out/
 
 ### Mac OS ###
 .DS_Store
+
+README.md
+build.gradle
+gradlew
+
+# 빌드 디렉토리 무시
+/build/
+/out/
+
+# IDE 관련 파일 무시
+*.iml
+.idea/
+*.class
