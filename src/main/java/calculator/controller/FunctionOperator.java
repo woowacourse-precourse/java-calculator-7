@@ -8,12 +8,20 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FunctionOperator {
-    public InputView inputView = new InputView();
-    public OutputView outputView = new OutputView();
-    Preprocessing preprocessing = new Preprocessing();
-    Addition addition = new Addition();
+    private final InputView inputView;
+    private final OutputView outputView;
+    private final Preprocessing preprocessing;
+    private final Addition addition;
 
-    public void operator() {
+    public FunctionOperator(InputView inputView, OutputView outputView, Preprocessing preprocessing, Addition addition)
+    {
+        this.inputView = inputView;
+        this.outputView = outputView;
+        this.preprocessing = preprocessing;
+        this.addition = addition;
+    }
+
+    public void run() {
         outputView.askInput();
         String input = inputView.input();
 
