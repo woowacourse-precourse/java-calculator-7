@@ -9,7 +9,7 @@ public class Application {
 
         int sum = 0;
 
-        if (!userText.isEmpty() && !userText.isBlank()) {
+        if (!userText.isBlank()) {
             String[] stringTokens = getStringTokens(userText);
             sum = generateSum(stringTokens, sum);
         }
