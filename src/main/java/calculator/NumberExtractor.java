@@ -5,12 +5,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class NumberExtractor {
-    ArrayList<Integer> numArr = new ArrayList<>();
+    private ArrayList<Integer> numArr;
 
-    public ArrayList<Integer> extractNumbers(DelimiterParser delimiterParser, String input){
+    public NumberExtractor() {
+        numArr = new ArrayList<>();
+    }
+
+    public ArrayList<Integer> extractNumbers(DelimiterParser delimiterParser, String input) {
 
         // 숫자 추출 및 구분자 처리
-
         StringBuilder curNum = new StringBuilder();
         int letterIndex = delimiterParser.getParseIndex();
 
@@ -22,14 +25,15 @@ public class NumberExtractor {
                 curNum.append(currentChar);
             } else {
                 // 구분자를 만났을 경우
-                if (delimiterParser.getDelimiters().contains(String.valueOf(currentChar))) {
+                String currentDelimiter = String.valueOf(currentChar);
+                if (delimiterParser.getDelimiters().contains(currentDelimiter)) {
                     if (curNum.length() > 0) {
                         numArr.add(Integer.parseInt(curNum.toString()));
                         curNum.setLength(0);  // 숫자 초기화
                     }
                 } else {
                     // 구분자가 아니면 예외 처리
-                    throw new IllegalArgumentException("잘못된 구분자가 포함되었습니다.");
+                    throw new IllegalArgumentException("잘못된 구분자가 포함되었습니다: " + currentChar);
                 }
             }
             letterIndex++;
@@ -43,7 +47,7 @@ public class NumberExtractor {
         return numArr;
     }
 
-    public ArrayList<Integer> getNumbers(){
+    public ArrayList<Integer> getNumbers() {
         return numArr;
     }
 }
