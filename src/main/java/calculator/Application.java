@@ -1,27 +1,24 @@
 package calculator;
 import camp.nextstep.edu.missionutils.Console;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-
 public class Application {
     public static void main(String[] args) {
-    System.out.println("덧셈할 문자열을 입력해 주세요.");
-    String input = Console.readLine();
-        try {
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        String input = Console.readLine();
         splitAndSum(input);
-    } catch (IllegalArgumentException e) {
-        System.out.println(e.getMessage()); // 예외 발생 시 메시지 출력
     }
-}
 
     public static void splitAndSum(String input) {
         if (input.isEmpty()) {
-            System.out.println("결과: 0");
+            System.out.println("결과 : 0");
             return;
         }
-        String delimiter = ",|:";
 
+        if ((!input.startsWith("//") && !input.matches("^\\d.*"))) {
+            throw new IllegalArgumentException("입력이 잘못되었습니다.");
+        }
+
+        String delimiter = ",|:";
 
         // 커스텀 구분자 처리
         if (input.startsWith("//")) {
@@ -42,10 +39,19 @@ public class Application {
         String[] strArr = input.split(delimiter);
         int sum = 0;
         for (String str : strArr) {
-            sum += Integer.parseInt(str);
+            // 숫자 이외의 값 처리
+            if (!str.isEmpty()) {
+                try {
+                    int number = Integer.parseInt(str);
+                    if (number < 0) {
+                        throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
+                    }
+                    sum += number;
+                } catch (NumberFormatException e) {
+                    throw new IllegalArgumentException("유효하지 않은 숫자가 포함되어 있습니다: " + str);
+                }
+            }
         }
-        System.out.println("결과: " + sum);
+        System.out.println("결과 : " + sum);
     }
-
-
 }
