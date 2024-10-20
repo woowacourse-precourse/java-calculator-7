@@ -5,8 +5,7 @@ import calculator.model.Calculator;
 import calculator.model.CalculatorImpl;
 import calculator.model.StringTokenizer;
 import calculator.model.Tokenizer;
-import calculator.validator.InputValidatorUtils;
-import calculator.view.CalculatorView;
+import calculator.view.ViewImpl;
 import calculator.view.View;
 
 public class ApplicationConfiguration {
@@ -24,7 +23,7 @@ public class ApplicationConfiguration {
     }
 
     private View view() {
-        return new CalculatorView();
+        return new ViewImpl();
     }
 
 }

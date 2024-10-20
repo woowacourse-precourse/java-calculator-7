@@ -23,7 +23,7 @@ public class Controller {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
 
         String input = Console.readLine();
-        List<Integer> integerList = tokenizer.InputString2IntegerList(input);
+        List<Integer> integerList = tokenizer.toTokenizedList(input);
         int sumResult = calculator.sum(integerList);
 
         view.print(sumResult);

@@ -7,11 +7,11 @@ public class InputValidatorUtils {
     public static boolean negativeValueContains(List<Integer> list) {
         for (Integer i : list) {
             if (i < 0) {
-                return false;
+                return true;
             }
         }
 
-        return true;
+        return false;
     }
 
     public static boolean customDelimiterContains(String input) {

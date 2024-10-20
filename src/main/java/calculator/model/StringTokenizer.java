@@ -40,7 +40,7 @@ public class StringTokenizer implements Tokenizer {
     }
 
     @Override
-    public List<Integer> InputString2IntegerList(String input) {
+    public List<Integer> toTokenizedList(String input) {
         if(input.isBlank() || input.isEmpty()) {
             return List.of(0);
         }
