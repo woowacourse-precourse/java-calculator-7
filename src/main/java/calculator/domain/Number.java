@@ -7,18 +7,23 @@ public class Number {
 
     private final int value;
 
+    public Number(int value) {
+        validateNonNegative(value);
+        this.value = value;
+    }
+
     public Number(String input) {
         this.value = parseAndValidate(input);
     }
 
     // 입력으로 받은 문자열을 int로 변환하고 유효성을 검사한다.
-    private int parseAndValidate(String input) throws IllegalArgumentException {
+    private int parseAndValidate(String input) {
         int result = validateParseInt(input);
         validateNonNegative(result);
         return  result;
     }
 
-    private int validateParseInt(String input) throws IllegalArgumentException {
+    private int validateParseInt(String input) {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
@@ -26,7 +31,7 @@ public class Number {
         }
     }
 
-    private void validateNonNegative(int number) throws IllegalArgumentException {
+    private void validateNonNegative(int number) {
         if(number < 0) {
             throw new IllegalArgumentException(String.format("%d 값이 0이상의 정수가 아닙니다.", number));
         }
