@@ -10,12 +10,12 @@ public class CustomInputTest {
 
     @Test
     void 생성() {
-        assertThat(CustomInput.from(CUSTOM_TEXT)).isEqualTo(CustomInput.from(CUSTOM_TEXT));
+        assertThat(CustomDelimiterInput.from(CUSTOM_TEXT)).isEqualTo(CustomDelimiterInput.from(CUSTOM_TEXT));
     }
 
     @Test
     void long_배열_생성() {
-        assertThat(CustomInput.from(CUSTOM_TEXT).createCalculationInputs())
+        assertThat(CustomDelimiterInput.from(CUSTOM_TEXT).createCalculationInputs())
                 .containsExactly(1L, 2L, 3L);
     }
 }

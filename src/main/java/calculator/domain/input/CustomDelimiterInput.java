@@ -6,19 +6,19 @@ import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CustomInput extends Input {
+public class CustomDelimiterInput extends Input {
 
     private static final String REGEX = "//(.)\\\\n(.*)";
     private static final Pattern PATTERN = Pattern.compile(REGEX);
     private static final int FIRST = 1;
     private static final int SECOND = 2;
 
-    private CustomInput(String text) {
+    private CustomDelimiterInput(String text) {
         super(text);
     }
 
     public static Input from(String text) {
-        return new CustomInput(text);
+        return new CustomDelimiterInput(text);
     }
 
     @Override

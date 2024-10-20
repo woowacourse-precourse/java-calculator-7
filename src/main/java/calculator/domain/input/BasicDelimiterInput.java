@@ -4,16 +4,16 @@ import calculator.util.InputValidator;
 import calculator.util.StringUtil;
 import java.util.Arrays;
 
-public class BasicInput extends Input {
+public class BasicDelimiterInput extends Input {
 
     private static final String BASIC_DELIMITER = "[,:]";
 
-    private BasicInput(String text) {
+    private BasicDelimiterInput(String text) {
         super(text);
     }
 
     public static Input from(String text) {
-        return new BasicInput(text);
+        return new BasicDelimiterInput(text);
     }
 
     @Override

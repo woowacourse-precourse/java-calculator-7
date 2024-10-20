@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 public class InputTypeSorterTest {
 
-    @Test
+    @Testgit
     void 빈_문자열_입력() {
         assertThat(InputTypeSorter.sort("")).isEqualTo(EmptyInput.from(""));
         assertThat(InputTypeSorter.sort(null)).isEqualTo(EmptyInput.from(null));
@@ -17,12 +17,12 @@ public class InputTypeSorterTest {
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3", "1:2:3", "1:2,3"})
     void 기본_구분자_문자열_입력(String input) {
-        assertThat(InputTypeSorter.sort(input)).isEqualTo(BasicInput.from(input));
+        assertThat(InputTypeSorter.sort(input)).isEqualTo(BasicDelimiterInput.from(input));
     }
 
     @Test
     void 커스텀_구분자_문자열_입력() {
-        assertThat(InputTypeSorter.sort("//;\\n1;2;3")).isEqualTo(CustomInput.from("//;\\n1;2;3"));
+        assertThat(InputTypeSorter.sort("//;\\n1;2;3")).isEqualTo(CustomDelimiterInput.from("//;\\n1;2;3"));
     }
 
     @Test

@@ -10,13 +10,13 @@ public class BasicInputTest {
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3", "1:2:3", "1,2:3"})
     void 생성(String input) {
-        assertThat(BasicInput.from(input)).isEqualTo(BasicInput.from(input));
+        assertThat(BasicDelimiterInput.from(input)).isEqualTo(BasicDelimiterInput.from(input));
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3", "1:2:3", "1,2:3"})
     void long_배열_생성(String input) {
-        assertThat(BasicInput.from(input).createCalculationInputs())
+        assertThat(BasicDelimiterInput.from(input).createCalculationInputs())
                 .containsExactly(1L, 2L, 3L);
     }
 }

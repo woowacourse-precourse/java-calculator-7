@@ -12,10 +12,10 @@ public class InputTypeSorter {
             return EmptyInput.from(text);
         }
         if (containsBasicDelimiter(text)) {
-            return BasicInput.from(text);
+            return BasicDelimiterInput.from(text);
         }
         if (containsCustomDelimiter(text)) {
-            return CustomInput.from(text);
+            return CustomDelimiterInput.from(text);
         }
         return OtherInput.from(text);
     }
