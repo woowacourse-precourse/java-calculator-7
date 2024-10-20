@@ -6,10 +6,14 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static void main(String[] args) {
-       System.out.println("문자열을 입력해 주세요");
+       System.out.println("덧셈할 문자열을 입력해 주세요");
         String input = Console.readLine();
+        try {
             int result = plus(input);
             System.out.printf("결과: %d%n", result);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static int plus(String input) {
@@ -27,11 +31,16 @@ public class Application {
          String[] answer = input.split(separator);
          for (int i = 0; i < answer.length; i++) {
              String number = answer[i];
+             try {
                  if (Integer.parseInt(number) > 0) {
                       sum += Integer.parseInt(number);
-                  } 
-                  
+                  } else {
+                      throw new IllegalArgumentException("잘못된 입력값이 있습니다: " + number);
+                  }
+              } catch (NumberFormatException e) {
+                  throw new IllegalArgumentException("잘못된 입력값이 있습니다: " + number);
               }
+         }
          return sum;
 
     }
