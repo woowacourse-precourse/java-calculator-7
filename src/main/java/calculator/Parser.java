@@ -1,11 +1,12 @@
 package calculator;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Parser {
-	private List<String> separators = new ArrayList<>(Arrays.asList(",", ";"));
+	private Set<String> separators = new HashSet<>(Set.of(",", ":"));
 
 	/**
 	 * 커스텀 구분자 확인
@@ -74,7 +75,7 @@ public class Parser {
 		return nums;
 	}
 
-	public List<String> getSeparators() {
+	public Set<String> getSeparators() {
 		return separators;
 	}
 }
