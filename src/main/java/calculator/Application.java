@@ -23,6 +23,8 @@ public class Application {
     }
 
     public static Long stringToLong(String str){
+        if(str.isEmpty()) throw new IllegalArgumentException();
+
         Long num = 0L;
         for(char i : str.toCharArray()){
             if(i < '0' || i>'9'){
@@ -31,6 +33,7 @@ public class Application {
             num *= 10;
             num += i-'0';
         }
+
         return num;
     }
 
@@ -43,6 +46,7 @@ public class Application {
 
         String input = Console.readLine();
         String separator = getCustomSeparator(input);
+        System.out.println("separator = " + separator);
 
         if(separator.length() != 4){
             input = input.substring(separator.length()-7);
