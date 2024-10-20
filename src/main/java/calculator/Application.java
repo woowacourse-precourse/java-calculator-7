@@ -37,6 +37,7 @@ public class Application {
                 // 이거 밖으로 던져서 한꺼번에 처리하자
             }
             sum += number;
+            // git git git git git
         }
 
         return sum;
