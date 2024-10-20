@@ -9,21 +9,15 @@ import java.util.List;
 
 public class Calculator {
 
-    public void run() {
-        String input_str = InputHandler.getInput();
-
+    public Integer calculate(String inputStr) {
         String delimiter = ",|:";
 
-        String[] result = CustomDelimeterParser.parse(input_str, delimiter);
-        input_str = result[0];
+        String[] result = CustomDelimeterParser.parse(inputStr, delimiter);
+        inputStr = result[0];
         delimiter = result[1];
 
-        try {
-            List<Integer> nums = NumberExtractor.extractNums(input_str, delimiter);
-            int sum = nums.stream().mapToInt(Integer::intValue).sum();
-            OutputHandler.printResult(sum);
-        } catch (IllegalArgumentException e) {
-            OutputHandler.printError(e.getMessage());
-        }
+        List<Integer> nums = NumberExtractor.extractNums(inputStr, delimiter);
+        int sum = nums.stream().mapToInt(Integer::intValue).sum();
+        return sum;
     }
 }
