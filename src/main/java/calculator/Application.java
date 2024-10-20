@@ -10,8 +10,6 @@ public class Application {
         String input = Console.readLine();
 
         InputManager inputManager = new InputManager(input);
-        inputManager.validate();
-
         SeparatorManager separatorManager = new SeparatorManager();
 
         if(inputManager.isCustomSeparatorCandidateExisted()) {

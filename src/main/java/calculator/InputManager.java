@@ -7,6 +7,7 @@ public class InputManager {
 
     public InputManager(String input) {
         this.input = input;
+        validate();
     }
 
     public String getSeparatorCandidate() {
