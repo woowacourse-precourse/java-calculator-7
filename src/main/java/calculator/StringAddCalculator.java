@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.Arrays;
+
 public class StringAddCalculator {
 
     private final Converter converter = new Converter();
@@ -10,15 +12,8 @@ public class StringAddCalculator {
             return "0";
         }
 
-        String[] stringArr = converter.toStringArr(input);
-
-        double sum = 0;
-
-        for (String s : stringArr) {
-            sum += Double.parseDouble(s);
-        }
-
-        return numberFormatter.format(sum);
+        return numberFormatter.format(Arrays.stream(converter.toStringArr(input))
+                .mapToDouble(Double::parseDouble)
+                .sum());
     }
-
 }

@@ -16,4 +16,4 @@
 2. validator.isInvalidFormat(numbers.replace(customDelimiter, ",")
 3. 지금 StringAddCalculator 가 너무 많은 책임이 있지 않나?
 4. 정규식에서 쓰는 연산자('.','*','{','}' 등등) 은 문자가 아닌가? 되어야 하지 않을까?
-
+5. isInvalidFormat 과 isInvalidFormatCustomPattern 의 로직 중복

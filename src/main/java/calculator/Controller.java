@@ -8,10 +8,9 @@ public class Controller {
 
     public void run() {
         promptForInputString();
-        String input = Console.readLine();
+        String input = Console.readLine().trim();
 
-        String add = calculator.add(input);
-        printResult(add);
+        printResult(calculator.add(input));
     }
 
     private void promptForInputString() {
