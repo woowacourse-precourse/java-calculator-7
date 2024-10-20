@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.regex.Pattern;
+
 public class Calculator {
 
     static double add(String input) {
@@ -13,7 +15,11 @@ public class Calculator {
         }
     }
 
-    static String[] tokenize(String input) {}
+    static String[] tokenize(String input) {
+        String delimiter = ",|:"; // 기본 구분자
+
+        return input.split(delimiter); // 구분자로 문자열 분리
+    }
 
     static double sum(String[] tokens) {}
 }
