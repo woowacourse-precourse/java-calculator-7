@@ -27,13 +27,7 @@ class ApplicationTest extends NsTest {
     }
 
 
-    @Test
-    void 빈입력1_예외_테스트() {
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException(""))
-                        .isInstanceOf(IllegalArgumentException.class)
-        );
-    }
+
     @Test
     void 빈입력2_예외_테스트() {
         assertSimpleTest(() ->

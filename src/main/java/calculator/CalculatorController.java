@@ -8,7 +8,15 @@ public class CalculatorController {
         String[] parts = input.split("\\\\n");
         String[] numbers = getSeparatedNumbers(parts);
 
+        checkNumbersNull(numbers);
+
         return calculator.getTotal(numbers);
+    }
+
+    private void checkNumbersNull(String[] numbers) {
+        if (numbers == null || numbers.length == 0) {
+            throw new IllegalArgumentException("숫자 X");
+        }
     }
 
 
