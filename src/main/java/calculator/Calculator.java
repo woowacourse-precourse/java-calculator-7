@@ -1,13 +1,22 @@
 package calculator;
 
 public class Calculator {
-    private int number = 0;
+    private int total = 0;
+    private String temporaryNumber = "";
 
-    public void add(int number) {
-        this.number += number;
+    public void temporarySaveNumber(int number) {
+        temporaryNumber += number;
     }
 
-    public int getNumber() {
-        return number;
+    public void saveNumber() {
+        total += Integer.parseInt(temporaryNumber);
+        temporaryNumber = "";
+    }
+
+    public int getTotal() {
+        if (temporaryNumber.length() != 0) {
+            saveNumber();
+        }
+        return total;
     }
 }

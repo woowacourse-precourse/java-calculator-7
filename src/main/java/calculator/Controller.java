@@ -19,19 +19,24 @@ public class Controller {
     public void run() {
         String inputText = Input.start();
         searchInputText(inputText);
-        Output.end(calculator.getNumber());
+        Output.end(calculator.getTotal());
     }
 
     private void searchInputText(String inputText) {
         for (int index = 0; index < inputText.length(); index++) {
             char currentChar = inputText.charAt(index);
+
+            if (Character.isDigit(currentChar)) {
+                calculator.temporarySaveNumber(convertToInt(currentChar));
+                continue;
+            } else {
+                calculator.saveNumber();
+            }
+
             if (separatorService.isAllowedSeparator(currentChar)) {
                 continue;
             }
-            if (Character.isDigit(currentChar)) {
-                calculator.add(convertToInt(currentChar));
-                continue;
-            }
+
             getAndSaveCustomSeparator(inputText, index);
             index = passRemainSeparator(index);
         }
