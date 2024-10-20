@@ -13,12 +13,12 @@ public class Application {
 //        System.out.println("입력한 문자 : " + inputStr);
         ArrayList<String> delimiters = getDelimiter(inputStr);
 
+        // 빈 문장일 경우 0을 반환
         if (inputStr == null || inputStr.isEmpty()) {
             System.out.println("결과 : " + 0);
         }
         String changeInputStr;
 //        System.out.println("특별 구분자 확인 "+delimiters);
-
         if (delimiters.size() > 2) {
             String regex = checkSpecialDelimiter(inputStr);
             changeInputStr = changeInputStr(regex,inputStr);
@@ -29,9 +29,9 @@ public class Application {
 
 
         // error case 확인
-        System.out.println("error check 전 ");
+//        System.out.println("error check 전 ");
         checkForErrors(changeInputStr,delimiters);
-        System.out.println("error check 후");
+//        System.out.println("error check 후");
         int sumNum = 0;
         sumNum = splitDelimiterAddNum(changeInputStr, delimiters);
         System.out.println("결과 : " + sumNum);
@@ -123,7 +123,7 @@ public class Application {
             } else if (ch == '-') {
                 newString.append(ch);
             } else {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("Error in splitDelimiterAddNum : last output = " + ch);
             }
         }
         sumNum += Integer.parseInt(newString.toString());
