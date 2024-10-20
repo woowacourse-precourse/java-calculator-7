@@ -31,10 +31,10 @@ public class SimpleParser implements Parser {
         }
 
         List<String> numbersStr = Arrays.stream(numbers.split(delimiters, -1)).toList();
-        List<Double> numbersInt = mapNumbersFromStrToDouble(numbersStr);
+        List<Double> numbersDouble = mapNumbersFromStrToDouble(numbersStr);
 
-        validateNumbers(numbersInt);
-        return numbersInt;
+        validateNumbers(numbersDouble);
+        return numbersDouble;
     }
 
     private DelimitersAndNumbers separateInput(String input) {
