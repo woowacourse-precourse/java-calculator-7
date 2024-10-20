@@ -7,6 +7,7 @@ import static calculator.model.separate.RegexPattern.customDelimiterStartConditi
 import static calculator.model.separate.RegexPattern.replaceConditionRegex;
 import static java.util.regex.Pattern.compile;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum RegexCompileCache {
@@ -22,7 +23,7 @@ public enum RegexCompileCache {
         this.pattern = pattern;
     }
 
-    public static Pattern findBy(RegexCompileCache patterType) {
-        return patterType.pattern;
+    public static Matcher buildMatcher(String source, RegexCompileCache patternType) {
+        return patternType.pattern.matcher(source);
     }
 }

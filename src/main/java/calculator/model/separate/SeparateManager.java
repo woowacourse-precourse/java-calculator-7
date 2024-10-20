@@ -7,7 +7,7 @@ import static calculator.model.separate.RegexCompileCache.CUSTOM_DELIMITER_PARSE
 import static calculator.model.separate.RegexCompileCache.CUSTOM_DELIMITER_PARSE_CONDITION;
 import static calculator.model.separate.RegexCompileCache.CUSTOM_DELIMITER_POSITION;
 import static calculator.model.separate.RegexCompileCache.REPLACE_CONDITION;
-import static calculator.model.separate.RegexCompileCache.findBy;
+import static calculator.model.separate.RegexCompileCache.buildMatcher;
 import static org.junit.platform.commons.util.StringUtils.isNotBlank;
 
 import calculator.model.exception.MultiCustomDelimiterException;
@@ -18,7 +18,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import org.junit.platform.commons.util.StringUtils;
 
 public class SeparateManager {
@@ -35,14 +34,8 @@ public class SeparateManager {
         return new SeparateManager();
     }
 
-    // Method
-    private Matcher createMatcher(String source, RegexCompileCache patternType) {
-        Pattern pattern = findBy(patternType);
-        return pattern.matcher(source);
-    }
-
     public boolean canParseCustomDelimiter(String source) {
-        Matcher matcher = createMatcher(source, CUSTOM_DELIMITER_PARSE_CONDITION);
+        Matcher matcher = buildMatcher(source, CUSTOM_DELIMITER_PARSE_CONDITION);
         return matcher.find();
     }
 
@@ -56,7 +49,7 @@ public class SeparateManager {
     public String parseCustomDelimiter(String source) {
         validateCustomDelimiterPosition(source);
         validateCustomDelimiterCount(source);
-        Matcher matcher = createMatcher(source, CUSTOM_DELIMITER_PARSE);
+        Matcher matcher = buildMatcher(source, CUSTOM_DELIMITER_PARSE);
         if (matcher.find()) {
             return matcher.group(1);
         }
@@ -64,7 +57,7 @@ public class SeparateManager {
     }
 
     public void validateCustomDelimiterCount(String source) {
-        Matcher matcher = createMatcher(source, CUSTOM_DELIMITER_COUNT);
+        Matcher matcher = buildMatcher(source, CUSTOM_DELIMITER_COUNT);
 
         int delimiterCount = 0;
         while (matcher.find()) {
@@ -76,7 +69,7 @@ public class SeparateManager {
     }
 
     public void validateCustomDelimiterPosition(String source) {
-        Matcher matcher = createMatcher(source, CUSTOM_DELIMITER_POSITION);
+        Matcher matcher = buildMatcher(source, CUSTOM_DELIMITER_POSITION);
         if (!matcher.find()) {
             throw new NotAllowedPositionException();
         }
@@ -93,7 +86,7 @@ public class SeparateManager {
     }
 
     private String processReplacing(String source) {
-        Matcher matcher = createMatcher(source, REPLACE_CONDITION);
+        Matcher matcher = buildMatcher(source, REPLACE_CONDITION);
         return matcher.replaceAll(emptyString());
     }
 
