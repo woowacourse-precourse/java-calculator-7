@@ -9,7 +9,9 @@ public class DelimiterParser {
         if (input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
             int delimiterIndex = findDelimiterIndex(input);
             String customDelimiter = input.substring(CUSTOM_DELIMITER_PREFIX.length(), delimiterIndex);
-
+            if (isNumeric(customDelimiter)) {
+                throw new IllegalArgumentException("숫자로 구분자를 지정할 수 없습니다.");
+            }
             return join(customDelimiter);
         }
         return DEFAULT_DELIMITER;
@@ -38,5 +40,9 @@ public class DelimiterParser {
 
     private String join(String customDelimiter) {
         return DEFAULT_DELIMITER + "|" + String.join("|", customDelimiter.split(""));
+    }
+
+    private boolean isNumeric(String str) {
+        return str.matches("\\d+");  // 숫자로만 이루어졌는지 확인
     }
 }
