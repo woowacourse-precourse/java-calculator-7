@@ -1,6 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
@@ -17,15 +18,115 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    @DisplayName("실제 Main 메소드에서 예외를 발생시키는 테스트")
     void 예외_테스트() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> runException("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
+    }
+
+    @Test
+    @DisplayName("정상적인 값이 들어갔을때 실제 코드에서 원하는 값이 출력되어야함")
+    void 실제코드_적용_1번() {
+        assertSimpleTest(() -> {
+            run("//>\\n1::2,3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    @DisplayName("0만 존재할때")
+    void 숫자_0() {
+        assertSimpleTest(() -> {
+            run("0");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    @DisplayName("공백으로 이루어진 배열이라도, 정상적으로 0을 리턴한다.")
+    void 공백_배열_테스트() {
+        assertSimpleTest(() -> {
+            run(" , , ");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    @DisplayName("공백이 3개이상이어도 되어야한다")
+    void 여러_개의_공백() {
+        assertSimpleTest(() -> {
+            run("     ,                ,            ");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    @DisplayName("파이프(|) 기호를 적용할 떄")
+    void 파이프_기호_적용() {
+        assertSimpleTest(() -> {
+            run("//|\\n1|2|3|4");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
+    @Test
+    @DisplayName("메서드에 숫자자리에 문자열이 들어가있을때 에러가 발생되어야함")
+    void 문자열이_숫자_자리에_있을때() {
+        assertThatThrownBy(() -> {
+            run("1,2,three");
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("양끝과 숫자사이에 공백이있을때")
+    void 양끝_숫자_공백_존재() {
+        assertSimpleTest(() -> {
+            run(" 1 , 2 : 3 ");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    @DisplayName("여러개의 구분자가 붙어있어도, 공백은 0으로 처리해서 정상작동됨")
+    void 여러_구분자가_붙어있을때() {
+        assertSimpleTest(() -> {
+            run("//;\\n1;2;3,4,;5");
+            assertThat(output()).contains("결과 : 15");
+        });
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자와 기본구분자를 섞어도 작동해야한다.")
+    void 커스텀_기본_문자_더하기() {
+        assertSimpleTest(() -> {
+            run("//&\\n1&2,3&4");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
+    @Test
+    @DisplayName("구분자 사이에 빈 문자열이 존재할때 정상작동해야함")
+    void 구분자_사이의_빈_문자열() {
+        assertSimpleTest(() -> {
+            run("//;\\n1; 2; 3; , ; 4");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
+    @Test
+    @DisplayName("지정되지 않은 기호가 들어왔을때 예외가 나타나야함")
+    void 지정되지_않은_기호() {
+        assertThatThrownBy(() -> {
+            run("//;\\n1;@2;3;4");
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Override
     public void runMain() {
         Application.main(new String[]{});
     }
+
+
 }
