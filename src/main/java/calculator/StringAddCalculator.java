@@ -54,6 +54,12 @@ public class StringAddCalculator {
                 throw new IllegalArgumentException("커스텀 구분자가 없습니다.");
             }
             String customDelimiter = input.substring(2, index);
+               if (customDelimiter.isEmpty()) {
+                    throw new IllegalArgumentException("커스텀 구분자가 없습니다.");
+                }
+               if (Character.isDigit(customDelimiter.charAt(0))) {
+                    throw new IllegalArgumentException("커스텀 구분자는 숫자로 시작할 수 없습니다.");
+                }
             return customDelimiter;
         }
         throw new IllegalArgumentException("커스텀 구분자가 없습니다.");
