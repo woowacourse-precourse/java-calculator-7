@@ -32,7 +32,7 @@ class ApplicationTest extends NsTest {
             List<String> expectedDelimiter = List.of(":", ",");
             List<String> resultDelimiter = DefaultDelimiter.getDefaultDelimiters();
             if (!expectedDelimiter.equals(resultDelimiter)) {
-                throw new Exception("다릅니다!");
+                throw new Exception("기본 구분자가 다릅니다!");
             }
         });
     }
