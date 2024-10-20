@@ -15,7 +15,9 @@ public class InputValidator {
 
     public void validateUnspecifiedCharacters(String splitResult) {
         try {
-            Integer.parseInt(splitResult);
+            if(Integer.parseInt(splitResult) < 0) {
+                throw new IllegalArgumentException("양수만 입력할 수 있습니다.");
+            }
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(e + " 숫자와 구분자만 입력할 수 있습니다.");
         }
