@@ -100,14 +100,18 @@ public class Application {
     }
 
     private static int[] parseNumbers(String[] eachNumbers) {
+        return Arrays.stream(eachNumbers)
+                .filter(Application::isNotEmpty)
+                .map(String::trim)
+                .mapToInt(Application::safeParseInt)
+                .toArray();
+    }
+
+    private static int safeParseInt(String number) {
         try {
-            return Arrays.stream(eachNumbers)
-                    .filter(Application::isNotEmpty)
-                    .map(String::trim)
-                    .mapToInt(Integer::parseInt)
-                    .toArray();
+            return Integer.parseInt(number);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자부에 문자가 입력되었습니다.", e);
+            throw new IllegalArgumentException("숫자부에 문자가 입력되었습니다. : " + number, e);
         }
     }
 
