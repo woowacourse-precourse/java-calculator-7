@@ -10,6 +10,9 @@ public class Delimiter {
     private List<String> delimiterList = new ArrayList<>();
     private String customDelimiter;
 
+    private final String startCustomDelimiter = "//";
+    private final String endCustomDelimiter = "\\n";
+
     public Delimiter(String inputString) {
         this.inputString = inputString;
         initDefaultDelimiter();
@@ -30,11 +33,11 @@ public class Delimiter {
     }
 
     private int findDelimiterEndIndex() {
-        return inputString.indexOf("\\n");
+        return inputString.indexOf(endCustomDelimiter);
     }
 
     private void checkCustomDelimiter() {
-        if (inputString.startsWith("//")) {
+        if (inputString.startsWith(startCustomDelimiter)) {
             setCustomDelimiter();
         }
     }
