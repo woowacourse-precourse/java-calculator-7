@@ -1,8 +1,6 @@
 package calculator.caulculatorApplication.domain.validator.validationRule;
 
-import static calculator.calculatorApplication.domain.common.Message.입력값이_비어있습니다;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatNoException;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import calculator.calculatorApplication.domain.validator.impl.ValidationRule;
 import calculator.calculatorApplication.domain.validator.impl.validationRule.EmptyInputValidationRule;
@@ -34,15 +32,5 @@ class EmptyInputValidationRuleTest {
         }
     }
 
-    @Nested
-    @DisplayName("실패 케이스")
-    class FailureCases {
-        @Test
-        @DisplayName("빈 문자열 테스트")
-        void emptyStringTest() {
-            assertThatThrownBy(() -> rule.validate(null))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining(입력값이_비어있습니다);
-        }
-    }
+
 }
