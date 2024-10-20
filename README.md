@@ -28,7 +28,7 @@
    - 추출된 숫자들 모두 더해서 출력함
    
 4. **예외 처리**:
-   - 음수가 포함된 경우 `IllegalArgumentException`을 발생시킴
+   - 0 혹은 음수가 포함된 경우 `IllegalArgumentException`을 발생시킴
    - 잘못된 입력 형식 또는 유효하지 않은 구분자가 입력된 경우에도 예외 발생시킴
 
 <h2 style="border-bottom: 1px solid #21262d; color: #c9d1d9;"> 👩🏻‍💻 프로그래밍 요구 사항 </h2>
