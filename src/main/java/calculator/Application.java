@@ -14,8 +14,10 @@ public class Application {
     private String inputString = "0";
     // 커스텀 구분자 사용 유무를 판단하는 플래그
     private Boolean usingCustomSeparatorFlag = null;
-
+    // 시작 위치 정보
     private Integer startIndex = null;
+
+    private List<Integer> numbersList = null;
 
     Application(String inputString) {
         if (!inputString.isEmpty()) {
@@ -39,6 +41,17 @@ public class Application {
             return usingCustomSeparatorFlag;
         }
         return usingCustomSeparatorFlag = inputString.matches(CUSTOM_SEPARATOR_PATTERN);
+    }
+
+    // 기본 구분자 리스트에 등록되어있는 구분자인지 검사하고 맞다면 true를 반환한다.
+    // 기본 구분자 리스트에 없는 구분자이면 커스텀 구분자인지 결과를 반환한다.
+    private Boolean isRegisteredSeparator(Character separator) {
+        for (Character registeredSeparator : DEFAULT_SEPARATOR_LIST) {
+            if (registeredSeparator == separator) {
+                return true;
+            }
+        }
+        return (separator == customSeparator);
     }
 
 
