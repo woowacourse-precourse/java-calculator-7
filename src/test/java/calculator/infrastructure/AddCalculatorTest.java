@@ -6,17 +6,23 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import calculator.exception.OutOfLongRangeException;
 import java.util.List;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class AddCalculatorTest {
 
+    private AddCalculator addCalculator;
+
+    @BeforeEach
+    void setUp() {
+        addCalculator = new AddCalculator();
+    }
 
     @ParameterizedTest
     @MethodSource("provideNumberListAndExpectedSum")
     void 숫자_리스트의_요소를_모두_더해_성공적으로_반환하는_테스트(List<Long> numberList, Long expectedSum) {
-        AddCalculator addCalculator = new AddCalculator();
         assertThat(addCalculator.addAllNumbers(numberList)).isEqualTo(expectedSum);
     }
 
@@ -32,7 +38,6 @@ class AddCalculatorTest {
     @ParameterizedTest
     @MethodSource("provideInvalidNumberList")
     void 숫자_리스트의_요소를_모두_더한_결과_Long_범위를_벗어나_예외를_발생시키는_테스트(List<Long> numberList) {
-        AddCalculator addCalculator = new AddCalculator();
         assertThatThrownBy(() -> addCalculator.addAllNumbers(numberList))
                 .isInstanceOf(OutOfLongRangeException.class);
     }

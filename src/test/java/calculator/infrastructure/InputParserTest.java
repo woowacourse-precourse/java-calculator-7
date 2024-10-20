@@ -6,12 +6,20 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import calculator.exception.InvalidInputStrException;
 import java.util.Set;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class InputParserTest {
+
+    private InputParser inputParser;
+
+    @BeforeEach
+    void setUp() {
+        inputParser = new InputParser();
+    }
 
     @ParameterizedTest
     @CsvSource({
@@ -21,8 +29,7 @@ class InputParserTest {
             "12345 '"
     })
     void 잘못된_사용자_입력이_들어왔을때_예외를_발생시키는_테스트(String inputStr) {
-        InputParser processor = new InputParser();
-        assertThatThrownBy(() -> processor.validateInputStr(inputStr))
+        assertThatThrownBy(() -> inputParser.validateInputStr(inputStr))
                 .isInstanceOf(InvalidInputStrException.class);
     }
 
@@ -30,7 +37,6 @@ class InputParserTest {
     @ParameterizedTest
     @MethodSource("provideInputStrAndIfContainsCustomSeparator")
     void 문자열에_커스텀_구분자가_존재하는지_확인하는_테스트(String inputStr, boolean hasCustomSeparator) {
-        InputParser inputParser = new InputParser();
         assertThat(inputParser.checkIfInputStringContainsSeparator(inputStr)).isEqualTo(hasCustomSeparator);
     }
 
@@ -52,7 +58,6 @@ class InputParserTest {
     @ParameterizedTest
     @MethodSource("provideInputStrAndExpectedSeparators")
     void 구분자_리스트를_만드는_테스트(String inputStr, boolean hasCustomSeparator, Set<Character> expectedSeparators) {
-        InputParser inputParser = new InputParser();
         assertThat(inputParser.getSeparatorList(hasCustomSeparator, inputStr)).isEqualTo(expectedSeparators);
     }
 
@@ -75,7 +80,6 @@ class InputParserTest {
     @MethodSource("provideInputStrAndExpectedSlicedStr")
     void 커스텀_문자열을_포함하는_경우_이를_제거하고_그렇지_않다면_문자열을_그대로_반환하는_테스트(String inputStr, boolean hasCustomSeparator,
                                                             String slicedStr) {
-        InputParser inputParser = new InputParser();
         assertThat(inputParser.removeSeparatorForm(hasCustomSeparator, inputStr)).isEqualTo(slicedStr);
     }
 
@@ -97,7 +101,6 @@ class InputParserTest {
     @ParameterizedTest
     @MethodSource("provideSlicedStrAndSplitStrList")
     void 문자열에서_구분자를_기준으로_자르는_테스트(String slicedStr, Set<Character> separators, String[] strList) {
-        InputParser inputParser = new InputParser();
         assertThat(inputParser.splitStrBySeparator(separators, slicedStr)).isEqualTo(strList);
     }
 

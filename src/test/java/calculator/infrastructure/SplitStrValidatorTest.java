@@ -6,17 +6,24 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import calculator.exception.InvalidSplitStrException;
 import java.util.List;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class SplitStrValidatorTest {
 
+    private SplitStrValidator splitStrValidator;
+
+    @BeforeEach
+    void setUp() {
+        splitStrValidator = new SplitStrValidator();
+    }
+
     @ParameterizedTest
     @MethodSource("provideSplitStrBySeparatorsAndExpectedNumberList")
     void 구분자로_분리된_문자열_리스트를_숫자_리스트로_변환하는_테스트(String[] splitStrBySeparators, List<Long> expectedNumberList) {
-        SplitStrValidator validator = new SplitStrValidator();
-        assertThat(validator.makeNumberList(splitStrBySeparators)).isEqualTo(expectedNumberList);
+        assertThat(splitStrValidator.makeNumberList(splitStrBySeparators)).isEqualTo(expectedNumberList);
     }
 
     private static Stream<Arguments> provideSplitStrBySeparatorsAndExpectedNumberList() {
@@ -35,7 +42,6 @@ class SplitStrValidatorTest {
     @ParameterizedTest
     @MethodSource("provideInvalidSplitStrBySeparators")
     void 구분자로_분리된_문자열_리스트를_숫자_리스트로_변환하는데_실패하여_예외를_발생시키는_테스트(String[] splitStrBySeparators) {
-        SplitStrValidator splitStrValidator = new SplitStrValidator();
         assertThatThrownBy(() -> splitStrValidator.makeNumberList(splitStrBySeparators))
                 .isInstanceOf(InvalidSplitStrException.class);
     }
