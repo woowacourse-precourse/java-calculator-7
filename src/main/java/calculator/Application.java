@@ -2,10 +2,11 @@ package calculator;
 
 public class Application {
     public static void main(String[] args) {
-        Console console = new Console();
+        ConsoleReader consoleReader = new ConsoleReader();
+        ConsoleWriter consoleWriter = new ConsoleWriter();
         Calculator calculator = new Calculator();
-        String input = console.readCalcLine();
+        String input = consoleReader.readCalcLine();
         int result = calculator.calc(input);
-        console.writeCalcResult(result);
+        consoleWriter.writeCalcResult(result);
     }
 }
