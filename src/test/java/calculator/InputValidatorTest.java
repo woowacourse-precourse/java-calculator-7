@@ -22,7 +22,7 @@ class InputValidatorTest {
 
     @Test
     void testNegativeNumberThrowsException() {
-        assertThrows(IllegalArgumentException.class, () -> validator.validate("1,-2,3"));
+        assertThrows(IllegalArgumentException.class, () -> validator.validate("-1,2,3"));
     }
 
     @Test
@@ -34,5 +34,11 @@ class InputValidatorTest {
     void testInvalidFormatThrowsException() {
         assertThrows(IllegalArgumentException.class, () -> validator.validate("//;\n1;2,-3"));
     }
+
+    @Test
+    void testSpecialCharacterAsCustomDelimiter() {
+        assertDoesNotThrow(() -> validator.validate("//.\\n1.2.3"));
+    }
+
 }
 
