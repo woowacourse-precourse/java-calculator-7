@@ -1,5 +1,7 @@
 package calculator.domain;
 
+import java.util.List;
+
 public class Calculator {
 
     int result;
@@ -15,8 +17,17 @@ public class Calculator {
     }
 
     String[] makeNumberArray(InputText inputText){
-        String separators = String.join("|",inputText.getSeparatorList());
-        return inputText.getText().split(separators);
+        List<String> separatorList = inputText.getSeparatorList();
+        String text = customSeparatorLogic(inputText.getText(),separatorList);
+        return text.split(separatorList.get(0) +"|"+separatorList.get(1));
+    }
+
+    String customSeparatorLogic(String text, List<String> separatorList){
+        if (separatorList.size()==3){
+            String cs = separatorList.get(2);
+            while (text.contains(cs)) text = text.replace(cs, ",");
+        }
+        return text;
     }
 
     void checkCondition(String number){
