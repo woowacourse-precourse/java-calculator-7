@@ -42,6 +42,24 @@ class CalculatorTest {
     }
 
     @Test
+    void 연속된_구분자_입력_예외_테스트() {
+        assertThatThrownBy(() -> calculator.splitAndSum("1,,2"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("연속된 구분자가 포함된 잘못된 입력입니다. 입력값: [1,,2]");
+
+        assertThatThrownBy(() -> calculator.splitAndSum("1,,,,2"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("연속된 구분자가 포함된 잘못된 입력입니다. 입력값: [1,,,,2]");
+
+        assertThatThrownBy(() -> calculator.splitAndSum("1,:2"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("연속된 구분자가 포함된 잘못된 입력입니다. 입력값: [1,:2]");
+        assertThatThrownBy(() -> calculator.splitAndSum("1,::,2"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("연속된 구분자가 포함된 잘못된 입력입니다. 입력값: [1,::,2]");
+    }
+
+    @Test
     void 여러_개의_커스텀_구분자_예외_테스트() {
         assertThatThrownBy(() -> calculator.splitAndSum("//;[]\\n1;[]2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
