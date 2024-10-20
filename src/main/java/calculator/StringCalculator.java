@@ -19,6 +19,7 @@ public class StringCalculator {
     List<String> dividerList;
     String regexString;
     int[] intNumbers;
+    int sum = 0;
 
     public void getUserInput() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
@@ -67,6 +68,12 @@ public class StringCalculator {
         intNumbers = new int[StringNumbers.length];
         for (int i = 0; i < StringNumbers.length; i++) {
             intNumbers[i] = Integer.parseInt(StringNumbers[i]);
+        }
+    }
+
+    public void sum() {
+        for (int number : intNumbers) {
+            sum = sum + number;
         }
     }
 }
