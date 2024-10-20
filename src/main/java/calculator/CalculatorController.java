@@ -20,7 +20,7 @@ public class CalculatorController {
         List<Integer> values = calculatorModel.splitString(input);
 
         // 결과 계산
-        int result = calculatorModel.sum(values);
+        int result = calculatorModel.calculateSum(values);
 
         // 결과 출력
         calculatorView.printOutputMessage(result);

@@ -106,7 +106,7 @@ class CalculatorModelTest {
             int expected = 6;
 
             // when
-            int result = calculatorModel.sum(values);
+            int result = calculatorModel.calculateSum(values);
 
             // then
             assertThat(result).isEqualTo(expected);

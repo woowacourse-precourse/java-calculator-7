@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 
 public class CalculatorModel {
     public static final String[] DEFAULT_DIVIDERS = {",", ":"};
-
     private List<String> dividers = new ArrayList<>(Arrays.asList(DEFAULT_DIVIDERS));
 
     public List<Integer> splitString(String input) {
@@ -61,9 +60,9 @@ public class CalculatorModel {
         }
     }
 
-
-    public int sum(List<Integer> values) {
-        // TODO: 값 더해서 반환하기
-        return 0;
+    public int calculateSum(List<Integer> values) {
+        return values.stream()
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 }
