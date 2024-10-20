@@ -83,6 +83,7 @@ public class Delimiter {
         for (int i = 2; i < index; i++) {
             char currentDelimiter = inputString.charAt(i);
             validateDelimiterIsPeriod(currentDelimiter);
+            validateDelimiterIsDigit(currentDelimiter);
             addDelimiter(currentDelimiter);
         }
     }
@@ -96,6 +97,12 @@ public class Delimiter {
     private void validateDelimiterIsPeriod(char Delimiter) {
         if (Delimiter == '.') {
             throw new IllegalArgumentException("커스텀 구분자에 '.'이 들어올 수 없습니다.");
+        }
+    }
+
+    private void validateDelimiterIsDigit(char delimiter) {
+        if (Character.isDigit(delimiter)) {
+            throw new IllegalArgumentException("커스텀 구분자로 숫자는 사용할 수 없습니다.");
         }
     }
 
