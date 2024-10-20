@@ -2,6 +2,7 @@ package calculator.util;
 
 import calculator.constants.InputValidationConstants;
 import calculator.domain.UserInput;
+import calculator.exception.InputErrorMessage;
 import java.util.regex.Pattern;
 
 public class InputValidator {
@@ -23,19 +24,19 @@ public class InputValidator {
                 + escapedDelimiter
                 + InputValidationConstants.CUSTOM_DELIMITER_PATTERN_SUFFIX;
         if (!Pattern.matches(pattern, input.substring(delimiter.length()+4))) {
-            throw new IllegalArgumentException(InputValidationConstants.INVALID_INPUT_EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(InputErrorMessage.INPUT_ERROR);
         }
     }
 
     private static void validateCustomDelimiterForm(String delimiter) {
         if (delimiter.isEmpty() || Pattern.matches(InputValidationConstants.CONTAINS_NUMBERS_PATTERN, delimiter)) {
-            throw new IllegalArgumentException(InputValidationConstants.INVALID_INPUT_EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(InputErrorMessage.INPUT_ERROR);
         }
     }
 
     private static void validateInputWithNormalDelimiter(String input) {
         if(!input.isEmpty() && !Pattern.matches(InputValidationConstants.NORMAL_DELIMITER_INPUT_PATTERN, input)) {
-            throw new IllegalArgumentException(InputValidationConstants.INVALID_INPUT_EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(InputErrorMessage.INPUT_ERROR);
         }
     }
 }
