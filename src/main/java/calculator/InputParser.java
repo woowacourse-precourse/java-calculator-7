@@ -48,4 +48,12 @@ public class InputParser {
     private static boolean isDefaultSeparator(String inputText) {
         return inputText.contains(",") || inputText.contains(":");
     }
+
+    public String getSeparator() {
+        return separator;
+    }
+
+    public String[] getNumbers() {
+        return numbers;
+    }
 }
