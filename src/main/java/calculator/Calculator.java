@@ -56,10 +56,10 @@ public class Calculator {
         System.out.println(String.format("결과 : %.0f", sum));
     }
 
-    /** 입력받은 문자열을 파싱하는 클래스 */
+    /* 입력받은 문자열을 파싱하는 클래스 */
     private class Parser {
 
-        /**
+        /*
          * DELIMITER_PREFIX: 커스텀 구분자 정의 접두사
          * DELIMITER_SUFFIX: 커스텀 구분자 정의 접미사
          * START_INDEX: StringBuilder.delete() 메서드 호출 시, 잘라낼 문자열의 시작 인덱스 값을 나타냅니다.
@@ -79,12 +79,11 @@ public class Calculator {
             if (strippedString.isEmpty()) {
                 return "0";
             }
-
             strippedStringBuilder = removeDelimiterPrefix(strippedString);
+
             if (hasCustomDelimiter) {
                 removeDelimiterSuffix(strippedStringBuilder);
             }
-
             return strippedStringBuilder.toString();
         }
 
@@ -99,18 +98,28 @@ public class Calculator {
         }
 
         private void removeDelimiterSuffix(StringBuilder targetStringBuilder) {
-            customDelimiter = Character.toString(targetStringBuilder.charAt(START_INDEX));
-            // DelimiterManager 인스턴스에 customDelimiter 전달
-            delimiterManager.addDelimiter(customDelimiter);
-            // targetStringBuilder의 customDelimiter 제거
-            targetStringBuilder.deleteCharAt(START_INDEX);
-            String stringWithSuffix = targetStringBuilder.toString();
-            // Delimiter suffix를 제거. 만약 suffix가 없다면 유효하지 않은 문자열 예외 발생
-            if (stringWithSuffix.startsWith(DELIMITER_SUFFIX)) {
-                targetStringBuilder.delete(0, DELIMITER_SUFFIX.length());
-            } else {
+            /* 커스텀 구분자를 추출 */
+            extractCustomDelimiter(targetStringBuilder);
+
+            /* Delimiter suffix를 제거. 만약 suffix가 없다면 유효하지 않은 문자열 예외 발생 */
+            if (!isDelimiterSuffix(targetStringBuilder)) {
                 throw new IllegalArgumentException("Invalid string: missing custom delimiter suffix.");
             }
+            targetStringBuilder.delete(START_INDEX, DELIMITER_SUFFIX.length());
+        }
+
+        private boolean isDelimiterSuffix(StringBuilder targetStringBuilder) {
+            String stringWithSuffix = targetStringBuilder.toString();
+
+            return stringWithSuffix.startsWith(DELIMITER_SUFFIX);
+        }
+
+        private void extractCustomDelimiter(StringBuilder targetStringBuilder) {
+            customDelimiter = Character.toString(targetStringBuilder.charAt(START_INDEX));
+            /* DelimiterManager 인스턴스에 customDelimiter 전달 */
+            delimiterManager.addDelimiter(customDelimiter);
+            /* targetStringBuilder의 customDelimiter 제거 */
+            targetStringBuilder.deleteCharAt(START_INDEX);
         }
     }
 }
