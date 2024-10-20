@@ -1,7 +1,7 @@
 package calculator.service.parser;
 
 import calculator.dto.Query;
-import calculator.service.HeaderResolver;
+import calculator.service.HeaderUtils;
 
 public class QueryParser implements Parser<String, Query> {
     @Override
@@ -13,8 +13,8 @@ public class QueryParser implements Parser<String, Query> {
     private String[] splitByNewLine(String input) {
         String[] result = new String[2];
 
-        if (HeaderResolver.hasCustomDelimiter(input)) {
-            String header = HeaderResolver.extractHeader(input);
+        if (HeaderUtils.hasCustomDelimiter(input)) {
+            String header = HeaderUtils.extractHeader(input);
             result[0] = header;
             result[1] = input.substring(header.length());
             return result;
