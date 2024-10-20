@@ -19,4 +19,9 @@ public class Calculator {
         // 기본 구분자
         return input.split("[,:]");
     }
+
+    public int sum(String input) {
+        String[] numbers = separateNumbers(input);
+        return Arrays.stream(numbers).mapToInt(Integer::parseInt).sum();
+    }
 }
