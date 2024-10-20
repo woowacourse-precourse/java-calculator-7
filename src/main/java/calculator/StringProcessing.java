@@ -52,6 +52,12 @@ public class StringProcessing {
             else
                 tempNumber.append(rawString.charAt(i));
         }
+        try{
+            numbers.add(Integer.parseInt(tempNumber.toString()));
+        }
+        catch (NumberFormatException e){
+            throw new IllegalArgumentException("구분자 뒤에 숫자를 입력해야 합니다.");
+        }
 
     }
 }
