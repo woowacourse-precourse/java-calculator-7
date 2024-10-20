@@ -5,4 +5,5 @@ public class Constants {
     public static final String RESULT_MESSAGE="결과 : ";
 
     public static final String DEFAULT_DELIMITERS = ",|:";
+    public static final String CUSTOM_DELIMITER_PATTERN = "//(.)\\\\n(.*)";
 }
