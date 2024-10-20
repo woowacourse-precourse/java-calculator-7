@@ -17,4 +17,8 @@ public class CustomDelimiterValidator {
 	public String getCustomDelimiter(String input) {
 		return input.substring(CUSTOM_DELIMITER_INDEX, CUSTOM_DELIMITER_INDEX + CUSTOM_DELIMITER_LENGTH);
 	}
+
+	public String removeCustomDelimiter(String input) {
+		return input.substring(SPECIFIED_CUSTOM_DELIMITER_LENGTH);
+	}
 }
