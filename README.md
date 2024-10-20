@@ -42,7 +42,6 @@
 
 ## Application Class
 
-- [ ] 테스트 코드 추가
 - [ ] 사용자 입력 추가
 - [ ] 사용자 Calculator 객체 생성
 - [ ] try-catch문 작성
