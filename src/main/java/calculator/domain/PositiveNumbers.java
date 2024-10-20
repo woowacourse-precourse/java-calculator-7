@@ -14,8 +14,17 @@ public class PositiveNumbers {
     }
 
     public int calculateSum() {
-        return numbers.stream()
-                .mapToInt(PositiveNumber::getNumber)
+        long result = numbers.stream()
+                .mapToLong(PositiveNumber::getNumber)
                 .sum();
+        validateIntegerRange(result);
+
+        return (int) result;
+    }
+
+    private void validateIntegerRange(long result) {
+        if (result > Integer.MAX_VALUE) {
+            throw new IllegalArgumentException("합계가 int 범위를 초과했습니다.");
+        }
     }
 }

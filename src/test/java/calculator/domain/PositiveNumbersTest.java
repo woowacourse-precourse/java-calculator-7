@@ -21,4 +21,16 @@ class PositiveNumbersTest {
         // then
         Assertions.assertThat(actual).isEqualTo(expected);
     }
+
+    @Test
+    @DisplayName("숫자 합 계산 integer 범위 초과 테스트")
+    void testPositiveNumbersFail() {
+        // given
+        List<String> numbers = List.of("2147483647", "2147483647");
+        PositiveNumbers positiveNumbers = new PositiveNumbers(numbers);
+
+        // when then
+        Assertions.assertThatThrownBy(positiveNumbers::calculateSum)
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
