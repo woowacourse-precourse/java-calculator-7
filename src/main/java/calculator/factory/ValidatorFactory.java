@@ -19,16 +19,16 @@ public class ValidatorFactory {
     public static InputValidator createInputValidator() {
         List<ValidationStrategy> validators = Arrays.asList(
 
-                // 2. DuplicateDelimiterValidator: 연속된 구분자가 있는지 검증
+                // 1. DuplicateDelimiterValidator: 연속된 구분자가 있는지 검증
                 new DuplicateDelimiterValidator(),
 
-                // 3. CustomDelimiterValidator: 커스텀 구분자가 올바르게 정의되었는지 검증
+                // 2. CustomDelimiterValidator: 커스텀 구분자가 올바르게 정의되었는지 검증
                 new CustomDelimiterValidator(),
 
-                // 4. NegativeNumberValidator: 음수가 포함되어 있는지 검증
+                // 3. NegativeNumberValidator: 음수가 포함되어 있는지 검증
                 new NegativeNumberValidator(),
 
-                // 5. NumericValidator: 숫자와 허용된 구분자만 있는지 검증
+                // 4. NumericValidator: 숫자와 허용된 구분자만 있는지 검증
                 new NumericValidator());
 
         return new InputValidator(validators);
