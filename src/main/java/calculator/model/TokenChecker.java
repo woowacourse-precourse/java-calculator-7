@@ -8,7 +8,7 @@ public class TokenChecker {
         this.delimiters = delimiters;
     }
 
-    public boolean isEndingWithDelimiter(int t) {
+    public boolean isDelimiterEnding(int t) {
         return isEven(t);
     }
 

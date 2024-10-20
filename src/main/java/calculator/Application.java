@@ -13,7 +13,7 @@ public class Application {
         ConsoleView consoleView = new ConsoleView();
         String expression = consoleView.getExpression();
 
-        // 2. custom 구분자 확인
+        // 2. 구분자 setting
         DelimiterHandler delimiterHandler = new DelimiterHandler(expression);
         String delimiters = delimiterHandler.getAllDelimiters();
         boolean customDelimiterFlag = delimiterHandler.getCustomDelimiterFlag();

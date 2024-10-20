@@ -26,7 +26,7 @@ public class TokenCalculator {
             t++;
         }
 
-        if (tokenChecker.isEndingWithDelimiter(t)) {
+        if (tokenChecker.isDelimiterEnding(t)) {
             throw new IllegalArgumentException();
         }
 
