@@ -1,10 +1,11 @@
 package calculator.model.parser;
 
 import calculator.model.validator.InputValidator;
+import static calculator.util.Constants.DelimiterNotExitsIntValue;
 
 public class Parser {
     private final InputValidator inputValidator;
-    private String Delimiter="[,:]";
+    private final String Delimiter="[,:]";
     private String finalDelimiter="";
     private String UserInput;
 
@@ -12,7 +13,7 @@ public class Parser {
         UserInput = input;
         finalDelimiter = Delimiter;
         this.inputValidator = inputValidator;
-        findCustomDelimiterAndApplyInput();
+        findFinalDelimiter();
     }
 
     public String[] parsingStringToInteger() {
@@ -20,20 +21,22 @@ public class Parser {
         return UserInput.split(finalDelimiter);
     }
 
-    private void findCustomDelimiterAndApplyInput() {
-        String CustomDelimiter = inputValidator.findCustomDelimiter(UserInput);
-        if(!CustomDelimiter.equals("")) {
-            UserInput = UserInput.substring(5);
+    private void findFinalDelimiter() {
+        Object[] result = inputValidator.findCustomDelimiter(UserInput);
+        String CustomDelimiter = (String) result[0];
+        int startInputIndex = (int) result[1];
+        if(startInputIndex!=DelimiterNotExitsIntValue) {
+            UserInput = UserInput.substring( startInputIndex);
             finalDelimiter = Delimiter + "|" + CustomDelimiter;
         }
     }
 
-    public int[] convertStringsToNumbers(String[] splitStrings) {
+    public long[] convertStringsToNumbers(String[] splitStrings) {
         inputValidator.validateNumbers(splitStrings);
 
-        int[] numbers = new int[splitStrings.length];
+        long[] numbers = new long[splitStrings.length];
         for (int i = 0; i < splitStrings.length; i++) {
-            numbers[i] = Integer.parseInt(splitStrings[i]);
+            numbers[i] = Long.parseLong(splitStrings[i]);
         }
         return numbers;
     }
