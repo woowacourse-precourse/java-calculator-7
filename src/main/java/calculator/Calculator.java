@@ -22,9 +22,16 @@ public class Calculator {
             }
         }
 
-        String[] tokens = num.split(delimiter);
+
+        String[] tokens = num.split(delimiter + "+");
         int sum = 0;
+
         for (String token : tokens) {
+            String trimmedToken = token.trim();
+            if (trimmedToken.isEmpty()) {
+                continue;
+            }
+
             try {
                 int number = Integer.parseInt(token.trim());
                 if (number < 0){
@@ -35,7 +42,6 @@ public class Calculator {
                 throw new IllegalArgumentException("잘못된 숫자 형식입니다.");
             }
         }
-        System.out.println("결과 : " + sum);
         return sum;
     }
 }
