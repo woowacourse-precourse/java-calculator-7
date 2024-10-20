@@ -3,6 +3,7 @@ package calculator.model;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -30,5 +31,16 @@ class CalculatorModelTest {
         Assertions.assertThat(cm.CustomDiscrimination(input)).isEqualTo(false);
     }
 
+    @Test
+    void 커스텀_구분자_지정_추출_O() {
+        CalculatorModel cm = new CalculatorModel();
+        Assertions.assertThat(cm.CustomExtraction("//;\\n1,2;3")).isEqualTo(";");
+    }
+
+    @Test
+    void 커스텀_구분자_지정_빈값_추출() {
+        CalculatorModel cm = new CalculatorModel();
+        Assertions.assertThat(cm.CustomExtraction("//\\n1,2;3")).isEqualTo("");
+    }
 
 }

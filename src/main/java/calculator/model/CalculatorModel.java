@@ -26,7 +26,7 @@ public class CalculatorModel {
             }
             return extraction;
         } else {
-            return null;
+            throw new IllegalArgumentException();
         }
     }
 
