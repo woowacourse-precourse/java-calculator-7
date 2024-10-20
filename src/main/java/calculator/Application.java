@@ -83,6 +83,14 @@ class ProxyParser implements Parser {
     }
 }
 
+class DefaultParser implements Parser {
+    @Override
+    public String[] parse(String input) {
+        return input.split(",|:");
+    }
+}
+
+
 
 
 class Input {
