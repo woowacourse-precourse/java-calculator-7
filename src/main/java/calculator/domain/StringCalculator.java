@@ -11,20 +11,14 @@ public class StringCalculator {
 
     private static final String DISTINGUISHED = "[,;]";
 
-    public static final String BEGIN_DATA = "//";
+    private static final String BEGIN_DATA = "//";
 
     public CustomValues extractCustomValue(String value) {
-        if (value.startsWith(BEGIN_DATA)) {
-            return new CustomValues(value.substring(2,3));
-        }
-        return new CustomValues(DISTINGUISHED);
+        return getCustomValues(value);
     }
 
     public String removeValue(String value) {
-        if (value.startsWith(BEGIN_DATA)) {
-            return value.substring(value.indexOf("n") + 1);
-        }
-        return value;
+        return getString(value);
     }
 
     public String[] createNewValue(String removeAfterValue, String separatorValue) {
@@ -32,9 +26,7 @@ public class StringCalculator {
     }
 
     public List<Integer> saveValue(String[] newValue) {
-        return Arrays.stream(newValue)
-                .map(Integer::valueOf)
-                .collect(Collectors.toList());
+        return getIntegers(newValue);
     }
 
     public int calculateSum(List<Integer> calculationValue) {
@@ -43,4 +35,24 @@ public class StringCalculator {
                 .sum();
     }
 
+    private List<Integer> getIntegers(final String[] newValue) {
+        return Arrays.stream(newValue)
+                .map(Integer::valueOf)
+                .collect(Collectors.toList());
+    }
+
+
+    private CustomValues getCustomValues(final String value) {
+        if (value.startsWith(BEGIN_DATA)) {
+            return new CustomValues(value.substring(2, 3));
+        }
+        return new CustomValues(DISTINGUISHED);
+    }
+
+    private String getString(final String value) {
+        if (value.startsWith(BEGIN_DATA)) {
+            return value.substring(value.indexOf("n") + 1);
+        }
+        return value;
+    }
 }
