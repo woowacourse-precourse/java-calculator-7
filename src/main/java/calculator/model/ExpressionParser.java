@@ -38,7 +38,11 @@ public class ExpressionParser {
 
     private Integer parseInteger(String character){
         try {
-            return Integer.parseInt(character);
+            int parseIntValue = Integer.parseInt(character);
+            if(parseIntValue < 0){
+                throw new NumberFormatException();
+            }
+            return parseIntValue;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException();
         }
