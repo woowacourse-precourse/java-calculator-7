@@ -67,7 +67,7 @@ public class Application {
 
     // 문자열을 숫자로 변환하는 메서드
     public static int stringToInt(String number) {
-        if(number.charAt(0) == '0') {
+        if (number.charAt(0) == '0') {
             throw new IllegalArgumentException("숫자는 0으로 시작할 수 없습니다.");
         }
 
@@ -84,7 +84,7 @@ public class Application {
 
     // 숫자만 더하는 메서드
     public static int StringCalculator(String input) {
-        if (input.isEmpty()||input==null) // 빈문자열 입력 시 0을 출력한다.
+        if (input.isEmpty() || input == null) // 빈문자열 입력 시 0을 출력한다.
             return 0;
         int sum = 0;
 
@@ -96,7 +96,7 @@ public class Application {
             System.out.println("Error: " + e.getMessage());
         }
 
-        if (delimiter != ",|:") { // 커스텀 구분자 사용 시, 5번째 문자부터 읽기
+        if (!delimiter.equals(",|:")) { // 커스텀 구분자 사용 시, 5번째 문자부터 읽기
             if (input.length() < 6) { // 길이가 6보다 짧은 경우 예외 처리
                 throw new IllegalArgumentException("계산할 숫자가 없습니다.");
             }
