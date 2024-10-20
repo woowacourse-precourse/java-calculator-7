@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 public class Calculator {
 
     private static final Character[] DEFAULT_DELIMITERS = {',', ':'};
+    private static final String CUSTOM_DELIMITER_PREFIX = "//";
+    private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
 
     /**
      * 구분자로 문자열을 나누어 정수로 변환한 후 합을 반환한다.
@@ -18,13 +20,23 @@ public class Calculator {
             return 0;
         }
 
-        List<Character> delimiters = List.of(DEFAULT_DELIMITERS);
-        
+        List<Character> delimiters = new ArrayList<>(List.of(DEFAULT_DELIMITERS));
+        if (hasCustomDelimiter(s)) {
+            delimiters.add(s.charAt(CUSTOM_DELIMITER_PREFIX.length()));
+            s = s.substring(CUSTOM_DELIMITER_PREFIX.length() + CUSTOM_DELIMITER_SUFFIX.length() + 1);
+        }
+
         List<Integer> numbers = parse(s, delimiters);
 
         return numbers.stream()
                 .mapToInt(Integer::intValue)
                 .sum();
+    }
+
+    private static boolean hasCustomDelimiter(String s) {
+        return s.length() >= CUSTOM_DELIMITER_PREFIX.length() + CUSTOM_DELIMITER_SUFFIX.length() + 1 &&
+                s.startsWith(CUSTOM_DELIMITER_PREFIX) &&
+                s.startsWith(CUSTOM_DELIMITER_SUFFIX, CUSTOM_DELIMITER_PREFIX.length() + 1);
     }
 
     private static List<Integer> parse(String s, List<Character> delimiters) {
