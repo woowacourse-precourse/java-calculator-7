@@ -14,12 +14,10 @@ public class Controller {
     }
 
     public void process() {
-        inputHandler.ensureCustomDelimiter();
-        inputHandler.extractNumbers();
+        inputHandler.processInputString();
     }
 
     public void display() {
-        inputHandler.getResult();
         displayResult(inputHandler);
     }
 }

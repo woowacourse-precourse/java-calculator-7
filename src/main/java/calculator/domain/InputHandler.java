@@ -12,13 +12,21 @@ import java.util.regex.Pattern;
 public class InputHandler {
     private String inputString;
     private String customDelimiter = "";
+    private int result = 0;
     private Vector<Integer> extractedNumbers = new Vector<>();
-
 
     public void setInputString() {
         this.inputString = Console.readLine();
     }
 
+    public void processInputString() {
+        if (!inputString.isEmpty()) {
+            ensureCustomDelimiter();
+            extractNumbers();
+            result = getSum(extractedNumbers);
+        }
+
+    }
 
     public void ensureCustomDelimiter() {
         Pattern pattern = Pattern.compile("^//(.)\\\\n");
@@ -29,7 +37,6 @@ public class InputHandler {
         }
 
     }
-
 
     public void extractNumbers() {
         String target = inputString;
@@ -55,7 +62,7 @@ public class InputHandler {
     }
 
     public String removeDelimiterCreator(String target) {
-        if (customDelimiter != null) {
+        if (!customDelimiter.isEmpty()) {
             String targetToDelete = "^//" + customDelimiter + "\\\\n";
             target = target.replaceFirst(targetToDelete, "");
         }
@@ -64,8 +71,6 @@ public class InputHandler {
 
 
     public int getResult() {
-        return getSum(extractedNumbers);
+        return result;
     }
-
-
 }
