@@ -25,6 +25,9 @@ public class Application {
 
         // 합 구하기
         int sum = sumNumber(numbers);
+
+        // 사용자에게 합 출력
+        System.out.println("결과 : " + sum);
     }
 
     // 구분자 확인 메소드
