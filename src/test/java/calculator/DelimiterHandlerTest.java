@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import calculator.exception.InvalidInputException;
 import org.junit.jupiter.api.Test;
 
-class DelimiterCalculatorTest {
+class DelimiterHandlerTest {
 
     @Test
     void 기본_구분자로_문자열을_계산한다() {
