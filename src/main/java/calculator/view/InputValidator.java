@@ -68,11 +68,11 @@ public class InputValidator {
         }
     }
 
-    // 커스텀 구분자 지정문자 사이에 아무것도 없을 경우
+    // 커스텀 구분자 지정문자 사이에 아무것도 없거나 공백문자를 포함할 경우
     // 커스텀 구분자 지정문자 안에 숫자가 있을 경우
     // findCustomSeparator에 추가(customValidator)
     private void checkContent(String customSeparator) {
-        if (customSeparator.isEmpty() || customSeparator.isBlank()) { // 정확한 하나만 사용하게 고치기
+        if (customSeparator.isEmpty() || customSeparator.isBlank()) {
             throwIllegalArgument("[ERROR]커스텀 구분자 선언자 안에는 한 글자 이상 선언해야 합니다.");
         }
         for (int i = 0;i < customSeparator.length();i++) {
