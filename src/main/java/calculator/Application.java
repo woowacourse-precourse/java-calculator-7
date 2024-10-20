@@ -9,7 +9,7 @@ public class Application {
             return 0;
         }
 
-        String defaultSeparator = ",|:";  // 기본 구분자 쉼표(,)와 콜론(:)
+        String defaultSeparator = "[,:]";  // 기본 구분자 쉼표(,)와 콜론(:)
         String numbers = input;
 
         // 커스텀 구분자 확인
@@ -21,7 +21,7 @@ public class Application {
             }
             // 커스텀 구분자를 추출하여 기본 구분자로 설정
             String customSeparator = input.substring(2, defaultIndex);
-            defaultSeparator = customSeparator; // 커스텀 구분자 설정
+            defaultSeparator = customSeparator + "|[,:]"; // 커스텀 구분자 설정 -> 커스텀 구분자와 기본 구분자를 둘 다 사용할 수 있도록
             numbers = input.substring(defaultIndex + 2);    // 숫자 문자열 추출
         }
 
