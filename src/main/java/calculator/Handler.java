@@ -2,48 +2,62 @@ package calculator;
 
 public class Handler {
     public int[] inputHandler(String input) {
-        if(indicateCustom(input)) {
+        String[] split;
+        if (indicateCustom(input)) {
             String custom = makeCustomSeperator(input);
-            return splitter(input, custom);
-        }else{
-            return splitter(input);
+            split = splitter(input, custom);
+        } else {
+            split = splitter(input);
         }
+        validInput(split);
+        return transToInt(split);
     }
 
     private boolean indicateCustom(String input) {
-        if(input.contains("//") || input.contains("\n")) {
+        if (input.contains("//") || input.contains("\n")) {
             return true;
         } else {
             return false;
         }
     }
 
-    private String makeCustomSeperator(String input) {
+    private String makeCustomSeperator(String input) throws IllegalArgumentException {
         String custom = input.substring(2, input.indexOf("\\"));
+        if (custom.equals("")) {
+            throw new IllegalArgumentException("커스텀 구분자 선언이 잘못되었습니다.");
+        }
         return custom;
     }
 
-    private int[] splitter(String input){
-        String[] initialSplit = input.split("[,:]");
-        int[] result = new int[initialSplit.length];
-        for(int i = 0; i < initialSplit.length; i++){
-            result[i] = Integer.parseInt(initialSplit[i]);
-        }
+    private String[] splitter(String input) {
+        String[] result = input.split("[,:]");
         return result;
     }
 
-    private int[] splitter(String input, String custom) {
-        String[] initialSplit = input.split(",|:|"+custom);
-        int[] result = new int[initialSplit.length];
-        for(int i = 0; i < initialSplit.length; i++){
-            result[i] = Integer.parseInt(initialSplit[i]);
-        }
+    private String[] splitter(String input, String custom) {
+        String[] result = input.split(",|:|" + custom);
         return result;
     }
 
-    //   //%\\n 가 들어있는지 확인해야함.
-    // 확인되면 빼내야함.
-    // 없다면 " //&1,2,3&5" 가 들어왔다고 치면
-    // 자르면 //&1 | 2 | 3&5
+    private void validInput(String[] split) throws IllegalArgumentException {
+        try {
+            for (int i = 0; i < split.length; i++) {
+                int argument = Integer.parseInt(split[i]);
+                if (argument <= 0) {
+                    throw new NumberFormatException("입력 숫자는 양수이어야 합니다.");
+                }
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("잘못된 입력입니다");
+        }
+    }
+
+    private int[] transToInt(String[] split) {
+        int[] result = new int[split.length];
+        for (int i = 0; i < split.length; i++) {
+            result[i] = Integer.parseInt(split[i]);
+        }
+        return result;
+    }
 
 }
