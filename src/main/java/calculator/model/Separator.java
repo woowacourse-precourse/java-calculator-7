@@ -11,9 +11,9 @@ public class Separator {
 
     public static String checkCustomSeparator(String input) {
         if (input.startsWith("//")) {
-        System.out.println("커스텀 있음");
-        handleCustomSeparator(input);
-        return cleanInput(input);
+            System.out.println("커스텀 있음");
+            handleCustomSeparator(input);
+            return cleanInput(input);
     }
 
         return input;
