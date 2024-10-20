@@ -21,7 +21,7 @@ public class Separator {
             if(matcher.group(1).isEmpty()) {
                 throw new IllegalArgumentException(EMPTY_CUSTOM_SEPARATOR_ERROR.getMessage());
             }
-            separators.add(Pattern.quote(matcher.group(1)));
+            separators.add(matcher.group(1));
             input = input.substring(matcher.end());
         }
         return input;
@@ -30,5 +30,9 @@ public class Separator {
     public String[] separateString(final String input) {
         String regex = String.join("|", separators);
         return input.trim().split(regex);
+    }
+
+    public List<String> getSeparators() {
+        return separators;
     }
 }
