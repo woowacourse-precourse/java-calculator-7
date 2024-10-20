@@ -12,6 +12,7 @@ public class CalculatorService {
     private static final String regex = "^//[^0-9]\\\\n.*";
 
     public Integer addCalculator(String userInput) {
+        validateNullInput(userInput);
         Calculator calculator = new Calculator();
         Delimiters delimiters = new Delimiters(Set.of(',', ':'));
         String parsedInput = extractCustomDelimiter(userInput, delimiters);
@@ -49,6 +50,11 @@ public class CalculatorService {
         return numbers;
     }
 
+    private void validateNullInput(String userInput) {
+        if(userInput == null){
+            throw new IllegalArgumentException("User input is empty");
+        }
+    }
 
     private void validateInputFormat(String userInput) {
         if(!userInput.matches(regex)){
