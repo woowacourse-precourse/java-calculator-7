@@ -1,12 +1,13 @@
 package calculator.domain;
 
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class SeparatorValidator {
     private static final String ERROR_MESSAGE_FOR_SEPARATOR = "구분자를 잘못 입력하셨습니다. 프로그램을 종료합니다.";
     private static final Pattern VALID_NUMBER_PATTERN = Pattern.compile("[-\\d,:]+");
 
-    public static void validate(String[] extractedStrings) {
+    public static void validateSeparator(List<String> extractedStrings) {
         for (String string : extractedStrings) {
             if (hasInvalidSeparatorFormat(string)) {
                 throw new IllegalArgumentException(ERROR_MESSAGE_FOR_SEPARATOR);
