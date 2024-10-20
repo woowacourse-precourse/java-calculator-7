@@ -36,19 +36,24 @@ public class Parser {
 
     private List<Integer> extractNumbers(String part) {
         List<Integer> numbers = new ArrayList<>();
-        String[] tokens = part.split(getDelimitersAsString());
+        String[] tokens = part.split(getSeparatorsString());
 
         for (String token : tokens) {
             String trimmedToken = token.trim();
-            if (!trimmedToken.isEmpty()) {
-                numbers.add(convertToNumber(trimmedToken));
-            }
+            validateToken(trimmedToken);
+            numbers.add(convertToNumber(trimmedToken));
         }
 
         return numbers;
     }
 
-    private String getDelimitersAsString() {
+    private void validateToken(String token) {
+    if (token.isEmpty()) {
+        throw new IllegalArgumentException("빈 숫자 입력이 포함되었습니다.");
+    }
+}
+
+    private String getSeparatorsString() {
         Set<Separator> separators = separatorService.findAllSeparator();
         return String.join("|", separators.stream()
                 .map(separator -> String.valueOf(separator.value()))
@@ -57,6 +62,20 @@ public class Parser {
 
     private Integer convertToNumber(String token) {
         validateNumber(token);
+        return parseToken(token);
+    }
+
+    private void validateNumber(String token) {
+        if (isNegative(token)) {
+            throw new IllegalArgumentException("음수는 허용되지 않습니다: " + token);
+        }
+    }
+
+    private boolean isNegative(String token) {
+        return token.startsWith("-");
+    }
+
+    private Integer parseToken(String token) {
         try {
             return Integer.parseInt(token);
         } catch (NumberFormatException e) {
@@ -64,9 +83,4 @@ public class Parser {
         }
     }
 
-    private void validateNumber(String token) {
-        if (token.startsWith("-")) {
-            throw new IllegalArgumentException("음수는 허용되지 않습니다: " + token);
-        }
-    }
 }

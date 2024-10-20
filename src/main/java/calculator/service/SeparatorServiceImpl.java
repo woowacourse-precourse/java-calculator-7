@@ -34,7 +34,6 @@ public class SeparatorServiceImpl implements SeparatorService{
     public String extractCustomSeparator(String input) {
         String[] parts = input.split(SeparatorConstants.CUSTOM_SEPARATOR_NEWLINE, 2);
         char customSeparator = parts[0].charAt(SeparatorConstants.CUSTOM_SEPARATOR_PREFIX.length());
-        System.out.println(customSeparator);
         validateCustomSeparator(customSeparator);
 
         join(new Separator(customSeparator));

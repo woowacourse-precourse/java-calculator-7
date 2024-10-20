@@ -71,4 +71,14 @@ class ParserTest {
 
         assertThrows(IllegalArgumentException.class, () -> parser.parse(inputString));
     }
+
+
+    @DisplayName("빈 숫자 예외")
+    @Test
+    void parseEmptyNumeric() {
+        Parser parser = appConfig.parser();
+        String inputString = ":123";
+
+        assertThrows(IllegalArgumentException.class, () -> parser.parse(inputString));
+    }
 }
