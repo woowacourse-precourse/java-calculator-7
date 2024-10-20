@@ -15,7 +15,7 @@ public class Application {
         }
 
         // 빈 문자열을 처리하는 부분
-        if (input == null || input.isEmpty()) {
+        if (input == null || input.isEmpty() || input.trim().isEmpty()) {
             System.out.println("결과 : 0");  // 빈 문자열이 입력되면 0 출력
             return;
         }
