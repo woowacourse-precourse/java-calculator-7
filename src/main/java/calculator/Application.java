@@ -7,14 +7,13 @@ public class Application {
     public static void main(String[] args) {
         int result;
         Scanner scanner = new Scanner(System.in);
-        String str = scanner.nextLine();
+        String input = scanner.nextLine();
 
         try {
-            result = makeResult(str);
+            result = calculateResult(input);
             System.out.println(result);
         } catch (IllegalArgumentException e) {
-            System.err.println("Error: " + e.getMessage());
-            System.exit(1);  // 애플리케이션 종료
+            System.err.println("입력 형식이 잘못되었습니다. ");
         }
     }
 
@@ -22,99 +21,93 @@ public class Application {
     public static boolean isNumeric(String str) {
         try {
             Integer.parseInt(str); // 문자열을 숫자로 변환 시도
-
             return true; // 변환 성공
         } catch (NumberFormatException e) {
             return false; // 변환 실패
         }
     }
 
-    // 합치는 코드 만들기
-    public static int makeResult(String str) {
+    // 숫자 변환 및 합산을 처리하는 메서드
+    // 마지막 숫자를 제외한 나머지를 더하는 과정
+    private static int parseAndSum(String str, ArrayList<Integer> arr, int startIndex) {
         int result;
-        char ndiv, ndiv1, ndiv2;
-        ArrayList<Integer> arr;
-        div whereDiv;
+        try {
+            result = Integer.parseInt(str.substring(startIndex, arr.get(0)));
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new IllegalArgumentException("입력 형식이 잘못되었습니다. " );
+        }
 
-        // 숫자만 있는 경우
-        if (isNumeric(str)) { // 문자열에 문자가 포함되어 있나?
+        for (int i = 0; i < arr.size() - 1; i++) {
+            try {
+                String substring = str.substring(arr.get(i) + 1, arr.get(i + 1));
+                int num = Integer.parseInt(substring);
+                result += num;
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("입력 형식이 잘못되었습니다." );
+            }
+        }
+
+        return result;
+    }
+
+    // 합치는 코드 만들기
+    public static int calculateResult(String str) {
+        int result;
+        char customDelimiter, delimiter1, delimiter2;
+        ArrayList<Integer> delimiterPositions;
+        DelimiterFinder delimiterFinder;
+
+        if (isNumeric(str)) {
+            // A1 숫자만 있는 경우
             return Integer.parseInt(str);
-        } // 공백만 있는 경우
-        else if (str.isEmpty() || str.trim().isEmpty()) { // 문자가 포함되어 있지만 공백만 있나?
+        } else if (str.isEmpty() || str.trim().isEmpty()) {
+            // A2 공백만 있는 경우
             return 0;
-        } // 구분 지정자(//@\n) 경우
-        else if (str.length() > 4 && str.substring(0, 2).equals("//") && str.substring(3, 5).equals("\\n")) { // //@\n 꼴의 양식인가?
-            ndiv = str.charAt(2);
-            whereDiv = new div(str, ndiv);
-            arr = whereDiv.makeArr();
+        } else if (str.length() > 4 && str.substring(0, 2).equals("//") && str.substring(3, 5).equals("\\n")) { // //@\n 꼴의 양식인가?
+            // A3 구분 지정자(//@\n) 경우
+            customDelimiter = str.charAt(2);
+            delimiterFinder = new DelimiterFinder(str, customDelimiter);
+            delimiterPositions = delimiterFinder.findDelimiterPositions();
 
             // 구분지정자를 설정했지만 뒤에 구분지정자를 생성하지 않은 경우 (#1. 숫자도 없는 경우 #2. 숫자만 있음 #3. 다른 구분자가 있음)
-            if (arr.isEmpty()) {
+            if (delimiterPositions.isEmpty()) {
                 if (str.length() == 5) { // #1
                     return 0;
                 } else if (isNumeric(str.substring(5))) { // #2
                     return Integer.parseInt(str.substring(5));
                 } else { // #3
-                    throw new IllegalArgumentException("구분자와 입력 형식이 잘못되었습니다.");
+                    throw new IllegalArgumentException("입력 형식이 잘못되었습니다.");
                 }
-            } else { //구분 지정자를 설정하고, 뒤에도 구분 지정자가 나오는 경우
+            } else {
+                //구분 지정자를 설정하고, 뒤에도 구분 지정자가 나오는 경우 -> 정상 작동
 
-                try { //구분 지정자가 정상적으로 작동하지만, 다른 문자가 나오는 경우 예외처리 (처음 부분을 더해줌)
-                    result = Integer.parseInt(str.substring(5, arr.get(0)));
-                } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                    throw new IllegalArgumentException("숫자 변환 또는 인덱스 오류 발생: " + e.getMessage(), e);
-                }
+                //마지막 숫자를 제외한 나머지를 더하는 과정
+                result = parseAndSum(str, delimiterPositions, 5);
 
-                for (int i = 0; i < arr.size() - 1; i++) {
-                    try {
-                        String substring = str.substring(arr.get(i) + 1, arr.get(i + 1));
-                        int num = Integer.parseInt(substring);
-                        result += num;
-                    } catch (NumberFormatException e) {
-                        throw new IllegalArgumentException("숫자 변환 오류 발생: " + e.getMessage(), e);
-                    }
-                }
-
-                // 마지막 구분 지정자부터 끝까지 더해줌
-                // 만약 문자로 끝나는 경우
-                if (arr.get(arr.size() - 1) == str.length() - 1) {
+                // 마지막 숫자 처리
+                if (delimiterPositions.get(delimiterPositions.size() - 1) == str.length() - 1) { // 만약 문자로 끝나는 경우
                     return result;
                 } else { //문자로 안끝나는 경우
-                    result += Integer.parseInt(str.substring(arr.get(arr.size() - 1) + 1));
+                    result += Integer.parseInt(str.substring(delimiterPositions.get(delimiterPositions.size() - 1) + 1));
                     return result;
                 }
             }
-
-
         } else {
             //구분지정자가 잘못 되었을 경우 이쪽으로 들어옴
-            //여기서 예외처리 해주면 오류 잡을 수 있음
-            // str = //@@\n1,3,2,4,5 면 여기로 들어옴 (처리 가능함)
-            ndiv1 = ',';
-            ndiv2 = ':';
-            whereDiv = new div(str, ndiv1, ndiv2);
-            arr = whereDiv.makeArr();
+            //기본지정자라면 이쪽으로 들어옴
+            delimiter1 = ',';
+            delimiter2 = ':';
+            delimiterFinder = new DelimiterFinder(str, delimiter1, delimiter2);
+            delimiterPositions = delimiterFinder.findDelimiterPositions();
 
+            //마지막 숫자를 제외한 나머지를 더하는 과정
+            result = parseAndSum(str, delimiterPositions, 0);
+
+            //마지막 숫자 처리
             try {
-                result = Integer.parseInt(str.substring(0, arr.get(0))); // 여기서 오류가 발생할 수 있음
+                result += Integer.parseInt(str.substring(delimiterPositions.get(delimiterPositions.size() - 1) + 1)); // 여기서 오류가 발생할 수 있음
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                throw new IllegalArgumentException("숫자 변환 또는 인덱스 오류 발생: " + e.getMessage(), e);
-            }
-
-            for (int i = 0; i < arr.size() - 1; i++) {
-                try {
-                    String substring = str.substring(arr.get(i) + 1, arr.get(i + 1));
-                    int num = Integer.parseInt(substring); // 숫자 변환 오류 처리
-                    result += num;
-                } catch (NumberFormatException e) {
-                    throw new IllegalArgumentException("숫자 변환 오류 발생: " + e.getMessage(), e);
-                }
-            }
-
-            try {
-                result += Integer.parseInt(str.substring(arr.get(arr.size() - 1) + 1)); // 여기서 오류가 발생할 수 있음
-            } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                throw new IllegalArgumentException("숫자 변환 또는 인덱스 오류 발생: " + e.getMessage(), e);
+                throw new IllegalArgumentException("입력 형식이 잘못되었습니다. " );
             }
 
             return result;
@@ -122,33 +115,33 @@ public class Application {
     }
 }
 
-class div { // 구분자 위치 반환
+class DelimiterFinder { // 구분자 위치 반환
     String str;
-    char std1, std2;
+    char delimiter1, delimiter2;
 
-    div(String str, char std1) {
+    DelimiterFinder(String str, char delimiter1) {
         this.str = str;
-        this.std1 = std1;
-        this.std2 = std1;
+        this.delimiter1 = delimiter1;
+        this.delimiter2 = delimiter1;
     }
 
-    div(String str, char std1, char std2) {
+    DelimiterFinder(String str, char delimiter1, char delimiter2) {
         this.str = str;
-        this.std1 = std1;
-        this.std2 = std2;
+        this.delimiter1 = delimiter1;
+        this.delimiter2 = delimiter2;
     }
 
-    public ArrayList<Integer> makeArr() { // 구분자 위치를 반환한다
+    public ArrayList<Integer> findDelimiterPositions() { // 구분자 위치를 반환한다
         ArrayList<Integer> arr = new ArrayList<>();
-        if (std1 == std2) { // 구분자 같은 경우
+        if (delimiter1 == delimiter2) { // 구분자 같은 경우
             for (int i = 5; i < str.length(); i++) {
-                if (str.charAt(i) == std1) {
+                if (str.charAt(i) == delimiter1) {
                     arr.add(i);
                 }
             }
         } else { // 구분자가 다른 경우
             for (int i = 0; i < str.length(); i++) {
-                if (str.charAt(i) == std1 || str.charAt(i) == std2) {
+                if (str.charAt(i) == delimiter1 || str.charAt(i) == delimiter2) {
                     arr.add(i);
                 }
             }
@@ -156,4 +149,3 @@ class div { // 구분자 위치 반환
         return arr;
     }
 }
-
