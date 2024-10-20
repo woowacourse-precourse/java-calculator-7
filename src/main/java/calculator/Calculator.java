@@ -5,13 +5,15 @@ public class Calculator {
     public int calculateSum(String[] splitResults) {
         var delimiterParser = new DelimiterParser();
         int result = 0;
-        for(int i = 0; i < splitResults.length; i++) {
-            if(splitResults[i].isEmpty()) {
+
+        for(String splitResult : splitResults) {
+            if(splitResult.isEmpty()) {
                 result += 0;
             } else {
-                result += delimiterParser.convertToNumber(splitResults[i]);
+                result += delimiterParser.convertToNumber(splitResult);
             }
         }
+
         return result;
     }
 }
