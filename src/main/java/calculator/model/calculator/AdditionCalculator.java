@@ -7,7 +7,7 @@ public class AdditionCalculator {
     private final NumberParser numberParser;
     private final int result;
 
-    public AdditionCalculator(String input) {
+    public AdditionCalculator(final String input) {
         this.numberParser = new NumberParser(input);
         this.result = calculate();
     }

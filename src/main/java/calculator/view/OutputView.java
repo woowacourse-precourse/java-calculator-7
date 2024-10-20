@@ -8,7 +8,7 @@ public class OutputView {
         System.out.printf(RESULT_MESSAGE + "%d", result);
     }
 
-    public static void printErrorMessage(String message) {
+    public static void printErrorMessage(final String message) {
         System.out.println(ERROR_MESSAGE + message);
     }
 }

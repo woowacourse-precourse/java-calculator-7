@@ -4,18 +4,18 @@ public class Number {
     private static final int ZERO = 0;
     private final int number;
 
-    protected Number(String number) {
+    protected Number(final String number) {
         this.number = convertNumberToInt(number);
     }
 
-    private int validateNumber(int number) {
+    private int validateNumber(final int number) {
         if (number <= ZERO) {
             throw new IllegalArgumentException("양수인 숫자를 입력해주세요.");
         }
         return number;
     }
 
-    private int convertNumberToInt(String number) {
+    private int convertNumberToInt(final String number) {
         try {
             int num = Integer.parseInt(number);
             return validateNumber(num);
