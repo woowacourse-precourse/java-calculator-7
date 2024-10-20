@@ -15,7 +15,10 @@ public class Application {
             if (str.startsWith("//")) {
                 // 커스텀 구분자가 "//"로 시작하면 구분자 찾기
                 separator = changeCustomSeparator(str);
-                str = extractNumber(str); // 구분자 이후 숫자 추출
+                // 구분자 뒤 숫자 추출
+                str = extractNumber(str);
+                // 구분자를 이스케이프 처리
+                separator = escapeCharacters(separator);
             }
             // 설정된 구분자로 문자열 분리
             String[] numbers = str.split(separator);
@@ -47,6 +50,21 @@ public class Application {
         return str.substring(separatorIndex + 2);
     }
 
+    // 특수문자에 이스케이프 처리 메소드
+    private static String escapeCharacters(String separator) {
+        String specialCharacters = "[](){}.*+?^$|\\";
+        StringBuilder escapedSeparator = new StringBuilder();
+        for (int i = 0; i < separator.length(); i++) {
+            char ch = separator.charAt(i);
+            if (specialCharacters.indexOf(ch) != -1) {
+                // 특수 문자 앞에 \를 추가하여 이스케이프 처리
+                escapedSeparator.append("\\");
+            }
+            escapedSeparator.append(ch);
+        }
+        return escapedSeparator.toString();
+    }
+
     // 유효한 문자열 입력 검사 메소드
     private static int validateInput(String number) {
         try {
@@ -65,7 +83,7 @@ public class Application {
         // TODO: 프로그램 구현
         System.out.println("덧셈할 문자열을 입력해 주세요. ");
         String str = Console.readLine();
-        // 결과 출력
+        // 계산 결과 출력
         int answer = calculateString(str);
         System.out.println("결과 : " + answer);
     }
