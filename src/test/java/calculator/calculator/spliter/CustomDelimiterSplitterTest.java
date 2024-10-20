@@ -1,9 +1,9 @@
-package calculator.calculator;
+package calculator.calculator.spliter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import calculator.CustomDelimiterSplitter;
-import calculator.SplitResult;
+import calculator.splitter.CustomDelimiterSplitter;
+import calculator.splitter.SplitResult;
 import org.junit.jupiter.api.Test;
 
 public class CustomDelimiterSplitterTest {

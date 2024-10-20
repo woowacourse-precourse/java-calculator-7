@@ -1,13 +1,13 @@
-package calculator.calculator;
+package calculator.calculator.spliter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-import calculator.AbstractDelimiterSplitter;
-import calculator.CustomDelimiterSplitter;
-import calculator.DefaultDelimiterSplitter;
-import calculator.DelegateDelimiterSplitter;
+import calculator.splitter.AbstractDelimiterSplitter;
+import calculator.splitter.CustomDelimiterSplitter;
+import calculator.splitter.DefaultDelimiterSplitter;
+import calculator.splitter.DelegateDelimiterSplitter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
