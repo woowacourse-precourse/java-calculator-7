@@ -85,7 +85,7 @@ public class Application {
                     numberBuffer.append(S.charAt(j)); // 0 부터 9 사이의 수가 아닌 경우 버퍼에 저장
                 }
 
-                if(!delimiters.contains(numberBuffer.toString())) { // 버퍼에 저장된 문자열이 구분자 집합에 존재하지 않으면  IllegalArgumentException 에러 처리
+                if(!delimiters.contains(numberBuffer.toString())) { // 버퍼에 저장된 문자열이 구분자 집합에 존재하지 않으면 IllegalArgumentException 에러 처리
                     throw new IllegalArgumentException();
                 }
 
