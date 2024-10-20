@@ -10,19 +10,22 @@ public class Calculator {
     }
 
     public int calculate(String input) {
-        int result = 0;
+
+        if (input == null || input.isBlank()) {
+            return 0;
+        }
 
         // 쉼표, 콜론으로 숫자 분리
         if (input.contains(",") || input.contains(":")) {
             String[] numbers = delimiters.defaultDelimiter(input);
-            result = adder.sumNumbers(numbers);
+            return adder.sumNumbers(numbers);
         }
 
         // 커스텀 구분자 처리
         if (input.startsWith("//")) {
             String[] numbers = delimiters.CustomDelimiter(input);
-            result = adder.sumNumbers(numbers);
+            return adder.sumNumbers(numbers);
         }
-        return result;
+        throw new IllegalArgumentException();
     }
 }
