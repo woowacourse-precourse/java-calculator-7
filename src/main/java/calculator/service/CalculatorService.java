@@ -1,15 +1,23 @@
 package calculator.service;
 
-import calculator.model.Extractor;
-import calculator.model.Calculator;
+import calculator.dto.InputRequest;
+import calculator.dto.OutputResponse;
+import calculator.model.PlusCalculator;
+import calculator.model.PlusOperator;
+import calculator.parser.CalculatorParser;
+
 import java.util.List;
 
 public class CalculatorService {
 
-    public long calculate(String input) {
-        Extractor extractor = new Extractor(input);
-        List<Long> numbers = extractor.extractNumbers(input);
-        Calculator calculator = new Calculator(numbers);
-        return calculator.sum();
+    private final PlusCalculator plusCalculator;
+
+    public CalculatorService() {
+        this.plusCalculator = new PlusCalculator(new PlusOperator());
+    }
+
+    public OutputResponse calculate(InputRequest request) {
+        List<Integer> numbers = CalculatorParser.parseForDelimiters(request);
+        return OutputResponse.of(plusCalculator.calculate(numbers));
     }
 }
