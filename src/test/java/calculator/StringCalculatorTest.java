@@ -120,7 +120,7 @@ class StringCalculatorTest {
     @Test
     @DisplayName("숫자 합계가 int 범위를 초과하는 경우")
     void testSumOverflow() {
-        assertThatThrownBy(() -> StringCalculator.calculate("1000000000,2000000000:3000000000"))
+        assertThatThrownBy(() -> StringCalculator.calculate("1000000000,2000000000"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

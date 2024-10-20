@@ -41,10 +41,12 @@ public class StringCalculator {
                 if (number <= 0) {
                     throw new IllegalArgumentException("양수가 아닌 숫자는 허용되지 않습니다.");
                 }
-                sum += number;
+                sum = Math.addExact(sum, number); // overflow 발생 시 ArithmeticException 반환
             }
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("문자를 숫자로 변환하는 과정에서 문제가 발생하였습니다.");
+        } catch (ArithmeticException e) {
+            throw new IllegalArgumentException("합계가 정수의 최대값을 초과했습니다.");
         }
 
         return sum;
