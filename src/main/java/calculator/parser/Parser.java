@@ -2,8 +2,9 @@ package calculator.parser;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Parser {
 	private static final String CUSTOM_DELIMITER_PREFIX = "//";
@@ -31,8 +32,7 @@ public class Parser {
 
 		validateStartAndEndWithDigit(pureExpression);
 
-		// TODO: 순수 식에서 구분자로 숫자 파싱
-		return Collections.emptyList();
+		return extractNumbers(pureExpression);
 	}
 
 	private boolean existsCustomDelimiter(String expression) {
@@ -69,5 +69,27 @@ public class Parser {
 		if (!Character.isDigit(expression.charAt(expression.length() - 1))) {
 			throw new IllegalArgumentException("수식은 숫자로 끝나야 합니다.");
 		}
+	}
+
+	private List<Integer> extractNumbers(String expression) {
+		String regex = toRegex(delimiters);
+
+		String[] strNumbers = expression.split(regex);
+
+		return Arrays.stream(strNumbers)
+				.map((strNumber) -> {
+					try {
+						return Integer.parseInt(strNumber);
+					} catch (NumberFormatException e) {
+						throw new IllegalArgumentException("올바른 구분자를 입력해주세요.");
+					}
+				})
+				.toList();
+	}
+
+	private String toRegex(List<String> delimiters) {
+		return delimiters.stream()
+				.map(Pattern::quote)
+				.collect(Collectors.joining("|"));
 	}
 }
