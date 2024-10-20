@@ -20,12 +20,27 @@ public class Calculator {
     /**
      * 입력 문자열이 null인지 확인합니다.
      *
-     * @param input 사용자가 입력한 문자열
+     * @param input 사용자가 입력한 문자열입니다.
      * @throws IllegalArgumentException null일 경우 IllegalArgumentException을 발생시킵니다.
      */
     private void isNull(String input) {
         if (input == null) {
             throw new IllegalArgumentException("입력값이 null입니다.");
+        }
+    }
+
+    /**
+     * 문자열을 숫자로 변환합니다.
+     *
+     * @param token 숫자로 변환할 문자를 매개변수로 받습니다.
+     * @return 변환된 숫자를 반환합니다.
+     * @throws IllegalArgumentException 숫자가 아닌 값일 경우 예외 발생시킵니다.
+     */
+    private int parseNumber(String token) {
+        try {
+            return Integer.parseInt(token);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다: " + token);
         }
     }
 
@@ -43,8 +58,12 @@ public class Calculator {
         if (isEmpty(input)) {
             return 0;
         }
+        int total = 0;
         String[] tokens = splitInput(input);
-        return 1;
+        for (String token : tokens) {
+            int number = parseNumber(token);
+        }
+        return total;
     }
 
     /**
@@ -57,4 +76,5 @@ public class Calculator {
         DelimiterParser parser = parserFactory.getParser(input);
         return parser.parse(input);
     }
+
 }
