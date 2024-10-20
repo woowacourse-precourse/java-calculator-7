@@ -25,10 +25,10 @@ public class CalculatorService {
         }
 
         String[] tokens = numbers.split(delimiter);
-        return 0;
+        return sumNumbers(tokens);
     }
 
-    public int sumNumbers(String[] tokens){
+    private int sumNumbers(String[] tokens){
         int sum = 0;
 
         for(String token : tokens){
