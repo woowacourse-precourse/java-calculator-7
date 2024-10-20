@@ -7,10 +7,7 @@ import calculator.view.CalculateView;
 public class CalculateController {
 
     // 전체 로직 실행
-    public void calculate() {
-        CalculateView calculateView = new CalculateView();
-        CalculateModel calculateModel = new CalculateModel();
-        Parser parser = new Parser();
+    public void calculate(CalculateView calculateView, CalculateModel calculateModel, Parser parser) {
 
         // 문자열 입력
         String inputString = calculateView.getInputString();
