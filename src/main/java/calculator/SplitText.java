@@ -6,7 +6,6 @@ public class SplitText {
     public static String[] textSplit(String text) {
         int firstGubunja = text.split("//").length;
         int secondGubunja = text.split("\\\\n").length;
-
         if (firstGubunja > 1 && secondGubunja > 1) {
             String[] textSplitFirst = text.split("//");
             String[] textSplitSecond = textSplitFirst[1].split("\\\\n");
