@@ -54,9 +54,9 @@ public class Calculator {
             customSeperator=addEscapeChar(customSeperator);
         }
 
-        regexBuilder.append(seperatorRegex);
-        regexBuilder.append(SPLITOR);
-        regexBuilder.append(customSeperator);
+        regexBuilder.append(seperatorRegex)
+                    .append(SPLITOR)
+                    .append(customSeperator);
 
        seperatorRegex=regexBuilder.toString();
     }
@@ -64,8 +64,8 @@ public class Calculator {
     private static String addEscapeChar(String customSeperator){
         StringBuilder seperatorBuilder=new StringBuilder();
 
-        seperatorBuilder.append(ESCAPE_CHAR);
-        seperatorBuilder.append(customSeperator);
+        seperatorBuilder.append(ESCAPE_CHAR)
+                        .append(customSeperator);
 
         return customSeperator.toString();
     }
