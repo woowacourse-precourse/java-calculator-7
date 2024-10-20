@@ -1,5 +1,7 @@
 package calculator.vaildator;
 
+import calculator.Message.VaildExceptionMessage;
+
 import java.util.regex.Pattern;
 
 public class SeparatorHandler {
@@ -9,7 +11,7 @@ public class SeparatorHandler {
         // 커스텀 구분자가 제대로 된 형식인지 확인 (//로 시작하고 구분자가 1글자 이상 뒤에 \n이 와야 함)
         if (input.startsWith("/")) {
             if (!input.matches("//.{1,}\\\\n.*")) {
-                throw new IllegalArgumentException("구분자를 정확하게 입력해주세요.");
+                throw new IllegalArgumentException(VaildExceptionMessage.INVALID_SEPARATOR_FORMAT.getMessage());
             }
 
             // 구분자 추출
@@ -54,10 +56,10 @@ public class SeparatorHandler {
     private void validateSeparator(String separator) {
         for (char c : separator.toCharArray()) {
             if (c == ',' || c == ':') {
-                throw new IllegalArgumentException("기본 구분자를 커스텀 구분자로 사용할 수 없습니다.");
+                throw new IllegalArgumentException(VaildExceptionMessage.BASIC_SEPARATOR_AS_CUSTOM.getMessage());
             }
             if (Character.isDigit(c)) {
-                throw new IllegalArgumentException("숫자는 구분자로 사용할 수 없습니다.");
+                throw new IllegalArgumentException(VaildExceptionMessage.DIGIT_AS_SEPARATOR.getMessage());
             }
         }
     }
