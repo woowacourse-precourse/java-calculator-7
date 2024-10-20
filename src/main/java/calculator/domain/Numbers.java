@@ -12,17 +12,23 @@ public class Numbers {
     }
 
     public static Numbers from(String[] split) throws NumberFormatException {
-        if(split.length==1&&split[0].isBlank()) {
+        if (split.length == 1 && split[0].isBlank()) {
             return new Numbers(new ArrayList<>());
         }
         List<Integer> integers = Stream.of(split)
                 .map(Integer::parseInt)
                 .toList();
+
+        integers.stream()
+                .filter(integer -> integer < 0)
+                .forEach(integer -> {
+                    throw new IllegalArgumentException("invalid number: number range must in positive integer");
+                });
         return new Numbers(integers);
     }
 
     public int sum() {
-        if(numbers.isEmpty()) {
+        if (numbers.isEmpty()) {
             return 0;
         }
         return numbers.stream().mapToInt(Integer::intValue).sum();
