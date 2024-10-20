@@ -7,6 +7,7 @@ public class CalculatorController {
     private final Delimiters delimiters;
     private final StringChecker stringChecker;
     private final StringSplitter stringSplitter;
+    private final SumCalculator sumCalculator;
     private String inputString;
 
     public CalculatorController(String inputString) {
@@ -14,6 +15,7 @@ public class CalculatorController {
         this.delimiters = new Delimiters();
         this.stringChecker = new StringChecker(inputString, delimiters);
         this.stringSplitter = new StringSplitter(inputString, delimiters);
+        this.sumCalculator = new SumCalculator();
         startCalculator();
     }
 
@@ -26,15 +28,7 @@ public class CalculatorController {
         stringChecker.checkBoundary();
         inputString = stringChecker.checkCustomDelimiter();
         List<Integer> numbers = stringSplitter.splitString();
-        calculate(numbers);
-    }
-
-    private void calculate(List<Integer> numbers) {
-        int sumResult = 0;
-        for (int i : numbers) {
-            sumResult += i;
-        }
-
-        calculatorView.printResult(sumResult);
+        sumCalculator.setNumbers(numbers);
+        calculatorView.printResult(sumCalculator.sumNumbers());
     }
 }
