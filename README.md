@@ -4,6 +4,22 @@
 우아한테크코스 7기 프리코스 1주차 미션, 문자열 덧셈 계산기를 구현한 저장소입니다.
 문자열 덧셈 계산기는 사용자로부터 구분자와 양수로 구성된 문자열을 입력받아 구분자를 기준으로 분리한 각 숫자의 합을 반환하는 계산기입니다.
 
+## 패키지 목록
+
+```
+main/
+└── java/
+    ├── calculator/
+    │   └── Application.java               // 실행 파일
+    └── custom/
+        ├── controller/
+        │   └── CalculatorController.java  // 컨트롤러
+        ├── service/
+        │   └── CalculatorService.java     // 모델(서비스)
+        └── view/
+            └── CalculatorView.java        // 뷰어
+```
+
 ## 기능 목록
 
 ### 1. 입력: 사용자로부터 구분자와 양수로 구성된 문자열을 입력받기
@@ -58,7 +74,6 @@
 
 **테스트 case 1**:
 
-**테스트 case 2**:
+**테스트 case 1**:
 
-**테스트 case 3**: 
-
+**테스트 case 1**:
