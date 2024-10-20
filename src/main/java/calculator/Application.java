@@ -32,4 +32,8 @@ public class Application {
         int delimiterEndIndex = input.indexOf("\\n");
         return input.substring(delimiterEndIndex + 2);
     }
+
+    private static String[] splitNumbers(String input, String delimiter) {
+        return input.split(delimiter);
+    }
 }
