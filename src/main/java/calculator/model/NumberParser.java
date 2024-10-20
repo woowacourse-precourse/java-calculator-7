@@ -29,11 +29,19 @@ public class NumberParser {
         List<Long> numbers = new ArrayList<>();
 
         for (String str : extractedStrings) {
-            numbers.add(convertToLong(str));
+            Long number=checkPositiveInteger(convertToLong(str));
+            numbers.add(number);
         }
 
         return numbers;
 
+    }
+
+    private Long checkPositiveInteger(Long number) {
+        if(number<=0){
+            throw new IllegalArgumentException("양의 정수만 입력해주세요"+number);
+        }
+        return number;
     }
 
 
