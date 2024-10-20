@@ -4,11 +4,10 @@ import java.util.Arrays;
 import camp.nextstep.edu.missionutils.Console;
 
 /**
- *  1. 문자열을 입력받는다.
- *  2. 문자열에서 커스텀 구분자를 구한다.
- *  3. 구분자들을 기준으로 숫자들을 추출한다.
- *  4. 추출한 숫자들의 합을 구한다.
- *  5. 결과값을 출력한다.
+ *  1. 문자열 입력받는 기능
+ *  2. 커스텀 구분자를 기존 구분자에 추가하는 기능
+ *  3. 문자열에서 구분자를 기준으로 숫자들을 추출하고 합을 구하는 기능
+ *  4/ 결과값을 출력하는 기능
  * */
 public class StringCalculator {
     // 입력받은 문자열
@@ -37,6 +36,10 @@ public class StringCalculator {
      * 커스텀 구분자를 구하는 기능
      * */
     public void addDelimiter(){
+        if(input.isEmpty()){
+            System.out.println(input);
+            throw new IllegalArgumentException("입력값이 없습니다.");
+        }
         if(input.length() >= 5) {
             for (int i = 0; i < input.length() - 5; i ++) {
                 char now = input.charAt(i + 2);
