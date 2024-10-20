@@ -42,17 +42,17 @@ public class Application {
             if (Character.isDigit(inputList.get(2))
                     || inputList.get(2).equals(':')
                     || inputList.get(2).equals(',')) {
-                System.out.println("구분자에 콤마, 콜론, 숫자를 사용한 경우");
+                // System.out.println("구분자에 콤마, 콜론, 숫자를 사용한 경우");
                 throw new IllegalArgumentException();
             } else if (inputList.size() == 5) {
-                System.out.println("//[커스텀 구분자]\\n만 입력한 경우");
+                // System.out.println("//[커스텀 구분자]\\n만 입력한 경우");
                 return sum;
             }
 
             dividerList.add(inputList.get(2));
-            System.out.println("커스텀 구분자 : "+inputList.get(2));
+            // System.out.println("커스텀 구분자 : "+inputList.get(2));
             inputList = inputList.subList(5, inputList.size());
-            System.out.println("분석할 문자열 : "+inputList);
+            // System.out.println("분석할 문자열 : "+inputList);
             sum = processNumbers(inputList, dividerList, tmpNum, countOfDivider);
         } else {
             throw new IllegalArgumentException();
@@ -85,7 +85,9 @@ public class Application {
                 sum += parseStringToInt(tmpNum);
                 tmpNum.clear();
                 countOfDivider++;
-                System.out.println("구분자 연속 사용 횟수 : "+countOfDivider);
+                // System.out.println("구분자 연속 사용 횟수 : "+countOfDivider);
+            } else {
+                throw new IllegalArgumentException();
             }
         }
 
