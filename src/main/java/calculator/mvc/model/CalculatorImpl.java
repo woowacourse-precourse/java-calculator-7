@@ -60,6 +60,11 @@ public class CalculatorImpl implements Calculator {
 
         regExTmp.append("[");
         for (int i = 0; i < separators.size(); i++) {
+            if (separators.get(i) == '\\') {
+                regExTmp.append('\\').append("\\");
+                continue;
+            }
+
             regExTmp.append(separators.get(i));
         }
         regExTmp.append("]");
