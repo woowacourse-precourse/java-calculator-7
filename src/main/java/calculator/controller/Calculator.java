@@ -7,13 +7,8 @@ import calculator.domain.InputText;
 import calculator.domain.Tokens;
 
 public class Calculator {
-    private final InputHandler inputHandler;
-    private final OutputHandler outputHandler;
-
-    public Calculator(InputHandler inputHandler, OutputHandler outputHandler) {
-        this.inputHandler = inputHandler;
-        this.outputHandler = outputHandler;
-    }
+    private final InputHandler inputHandler = new InputHandler();
+    private final OutputHandler outputHandler = new OutputHandler();
 
     public void calculate() {
         outputHandler.showEntryMessage();
