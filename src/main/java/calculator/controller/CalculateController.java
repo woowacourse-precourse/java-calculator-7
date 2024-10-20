@@ -2,9 +2,10 @@ package calculator.controller;
 
 import calculator.calculate.CalculateService;
 import calculator.calculate.CalculateServiceImpl;
-import calculator.handler.IOHandler;
 import calculator.separator.SeparatorService;
 import calculator.separator.SeparatorServiceImpl;
+import calculator.view.InputView;
+import calculator.view.OutputView;
 
 /**
  * 계산을 제어하는 컨트롤러 클래스.
@@ -14,8 +15,13 @@ public class CalculateController {
     private static final int LENGTH_OF_CUSTOM_SEPARATOR_HEADER = 5;
     private final SeparatorService separatorService;
     private final CalculateService calculateService;
+    private final InputView inputView;
+    private final OutputView outputView;
+
 
     public CalculateController() {
+        this.inputView = new InputView();
+        this.outputView = new OutputView();
         this.separatorService = new SeparatorServiceImpl();
         this.calculateService = new CalculateServiceImpl();
     }
@@ -26,7 +32,7 @@ public class CalculateController {
      */
     public void run() {
         // 입력 받기
-        String input = IOHandler.input();
+        String input = inputView.input();
 
         // 구분자 추출
         String separator = separatorService.getSeparator(input);
@@ -45,6 +51,6 @@ public class CalculateController {
         int result = calculateService.calculateSum(numbers);
 
         // 결과 출력
-        IOHandler.output(result);
+        outputView.output(result);
     }
 }
