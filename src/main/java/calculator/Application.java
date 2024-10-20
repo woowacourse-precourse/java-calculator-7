@@ -16,11 +16,17 @@ public class Application {
         String[] separatedInput = inputString.split(splitor);
         int sumValue = 0;
         for(int i=0; i<separatedInput.length;i++){
+            int num = 0;
             try{
-                sumValue += Integer.parseInt(separatedInput[i]);
+                num = Integer.parseInt(separatedInput[i]);
+
             }catch(Exception e){
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("잘못된 입력입니다.");
             }
+            if (num < 0){
+                throw new IllegalArgumentException("양수만을 입력해주세요.");
+            }
+            sumValue += num;
         }
         System.out.println(String.format("결과 : %d", sumValue));
     }
