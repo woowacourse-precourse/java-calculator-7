@@ -13,7 +13,10 @@ public class Application {
         Set<Character> set = new HashSet<>();
         set.add(':');
         set.add(',');
-        if (input.charAt(0) == '/') { // 커스텀 구분자가 존재할 경우
+        if (input.trim().isEmpty()) {
+            System.out.println("결과 : " + 0);
+        }
+        else if (input.charAt(0) == '/') { // 커스텀 구분자가 존재할 경우
             int st = 0;
             int tmp2 = 0;
             if (input.charAt(1) == '/') {
