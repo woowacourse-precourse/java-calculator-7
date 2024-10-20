@@ -22,6 +22,7 @@ public class InputParser {
             if (this.separator.equals("\\")) {
                 this.separator = "\\\\";
             }
+            this.separator = "[,|:|" + this.separator + "]";  // 커스텀 구분자 외에 기본 구분자도 허용
             this.numbers = inputText.substring(5).split(separator);
         } else if (isDefaultSeparator(inputText)) {
             this.separator = "[,:]";
