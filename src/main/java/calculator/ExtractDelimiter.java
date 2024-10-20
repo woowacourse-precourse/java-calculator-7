@@ -4,9 +4,10 @@ package calculator;
 public class ExtractDelimiter {
     // 구분자 추출
     static String extract_delimiter(String input) {
-        if (input.startsWith("//")) {
+        if (input.startsWith("/")) {
             // 커스텀 구분자 추출
             int delimiterEnd = input.indexOf("\n");
+            CheckValid.checkDelimiterFormat(input, delimiterEnd);
             return input.substring(2, delimiterEnd);
         }
         // 기본 구분자 ',' 또는 ':'
