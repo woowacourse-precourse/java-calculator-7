@@ -17,10 +17,18 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 기본_구분자_사용() {
+    void 기본_구분자_사용1() {
         assertSimpleTest(() -> {
             run("1");
             assertThat(output()).contains("결과 : 1");
+        });
+    }
+
+    @Test
+    void 기본_구분자_사용2() {
+        assertSimpleTest(() -> {
+            run("1:2");
+            assertThat(output()).contains("결과 : 3");
         });
     }
 
