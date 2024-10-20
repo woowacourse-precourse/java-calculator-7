@@ -17,8 +17,12 @@ public class Application {
             delimiter = getCustomDelimiter(input);
             numbers = getNumbersAfterDelimiter(input);
 
+            if (!isValidCustomPattern(numbers, delimiter)) {
+                throw new IllegalArgumentException("잘못된 입력입니다. 커스텀 구분자와 숫자만 포함되어야 합니다.");
+            }
 
-           System.out.println("Yes"+delimiter);
+
+           System.out.println("Yes"+delimiter+ "d" + numbers);
         }
 
     }
@@ -50,6 +54,14 @@ public class Application {
             return matcher.group(1);
         }
         return "";
+    }
+
+
+    private static boolean isValidCustomPattern(String numbers, String delimiter) {
+        String regex = "^[0-9" + Pattern.quote(delimiter) + "]*$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(numbers);
+        return matcher.matches();
     }
 
 
