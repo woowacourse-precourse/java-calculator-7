@@ -34,7 +34,7 @@ public class Calculator {
 
         int result = 0;
         for (String num : list) {
-            calculatorValidator.checkPositiveNumber(num);
+            calculatorValidator.validatePositiveNumber(num);
             int number = Integer.parseInt(num);
             result += number;
         }

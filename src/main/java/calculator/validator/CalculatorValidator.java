@@ -9,7 +9,7 @@ public class CalculatorValidator {
     public void validateExpression(String expression) {
 
         // 입력값이 없거나 null인 경우 예외 처리
-        if (expression.isEmpty() || expression == null) {
+        if (expression == null || expression.isEmpty()) {
             throw new IllegalArgumentException("입력값이 없습니다.");
         }
 
@@ -22,7 +22,7 @@ public class CalculatorValidator {
         }
     }
 
-    public void checkPositiveNumber(String number) {
+    public void validatePositiveNumber(String number) {
 
         if (number.contains("-")) {
             throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
