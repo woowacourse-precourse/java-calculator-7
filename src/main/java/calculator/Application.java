@@ -9,13 +9,8 @@ public class Application {
         // TODO: 프로그램 구현
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = camp.nextstep.edu.missionutils.Console.readLine();
-        try {
-            int result = add(input);
-            System.out.println("결과 : " + result);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            throw e; // 테스트 코드에서 예외를 감지하도록 다시 던짐
-        }
+        int result = add(input);
+        System.out.println("결과 : " + result);
     }
 
     // 입력된 문자열을 처리하는 메서드
