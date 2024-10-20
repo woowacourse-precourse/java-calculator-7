@@ -13,7 +13,11 @@ public class CalculateString {
 
     public int calString(String str, String delimeters) {
         String[] splitString = str.trim().split(delimeters);
-        
+
+        if (splitString.length == 0) {
+            return 0;
+        }
+
         int total = 0;
         for (int i = 0; i < splitString.length; i++) {
             total += Integer.parseInt(splitString[i].trim());
