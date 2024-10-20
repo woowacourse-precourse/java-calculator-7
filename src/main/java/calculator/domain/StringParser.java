@@ -1,6 +1,7 @@
 package calculator.domain;
 
 import calculator.dto.ParsedComponents;
+import calculator.global.constants.DelimiterConstants;
 import calculator.validator.DelimiterValidator;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +10,6 @@ public class StringParser {
 
     private static final String CUSTOM_DELIMITER_PREFIX = "//";
     private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
-    private static final char COMMA_DELIMITER = ',';
-    private static final char COLON_DELIMITER = ':';
 
     private final String inputExpression;
 
@@ -19,7 +18,8 @@ public class StringParser {
     }
 
     public ParsedComponents parse() {
-        List<Character> delimiters = new ArrayList<>(List.of(COMMA_DELIMITER, COLON_DELIMITER));
+        List<Character> delimiters = new ArrayList<>(
+                List.of(DelimiterConstants.COMMA_DELIMITER, DelimiterConstants.COLON_DELIMITER));
 
         int prefixIndex = inputExpression.indexOf(CUSTOM_DELIMITER_PREFIX);
         int suffixIndex = inputExpression.indexOf(CUSTOM_DELIMITER_SUFFIX);
