@@ -6,7 +6,25 @@ import calculator.view.OutputView;
 
 public class Calculator {
     public void run() {
-        Data data = new Data(InputView.readUserInput());
-        OutputView.printResult(data.calculateAddition());
+        String input = readInput();
+        Data data = handleInput(input);
+        int result = makeResult(data);
+        OutputView.printResult(result);
+    }
+
+    private String readInput() {
+        return InputView.readUserInput();
+    }
+
+    private Data handleInput(String input) {
+        return new Data(input);
+    }
+
+    private int makeResult(Data data) {
+        return data.calculateAddition();
+    }
+
+    private void printOutput(int result) {
+        OutputView.printResult(result);
     }
 }
