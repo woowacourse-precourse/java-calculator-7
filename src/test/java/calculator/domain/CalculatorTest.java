@@ -11,7 +11,7 @@ public class CalculatorTest {
 
     @Test
     void 숫자_하나_테스트() {
-        String[] parsedInput = {"1"};
+        ParsedInput parsedInput = new ParsedInput(new String[]{"1"});
 
         String result = calculator.calculate(parsedInput);
 
@@ -20,7 +20,7 @@ public class CalculatorTest {
 
     @Test
     void 숫자_두개_테스트() {
-        String[] parsedInput = {"1", "2"};
+        ParsedInput parsedInput = new ParsedInput(new String[]{"1", "2"});
 
         String result = calculator.calculate(parsedInput);
 
@@ -29,7 +29,7 @@ public class CalculatorTest {
 
     @Test
     void 숫자_세개_테스트() {
-        String[] parsedInput = {"1", "2", "3"};
+        ParsedInput parsedInput = new ParsedInput(new String[]{"1", "2", "3"});
 
         String result = calculator.calculate(parsedInput);
 
@@ -38,7 +38,7 @@ public class CalculatorTest {
 
     @Test
     void int_범위_초과_테스트() {
-        String[] parsedInput = {"1000000000000", "20", "3"};
+        ParsedInput parsedInput = new ParsedInput(new String[]{"1000000000000", "20", "3"});
 
         String result = calculator.calculate(parsedInput);
 
