@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Extractor {
 
-    private List<Character> delimiters = new ArrayList<>(
+    private final List<Character> delimiters = new ArrayList<>(
             Arrays.asList(DefaultDelimiter.COMMA.getKey(), DefaultDelimiter.COLON.getKey()));
     private boolean isCustomDelimiter = false;
 
