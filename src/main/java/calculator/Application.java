@@ -1,9 +1,7 @@
 package calculator;
-
 import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
-
     public static int add(String input) {
         String delimiter = "";
         String[] numbers;
@@ -25,8 +23,6 @@ public class Application {
                 String last = "" + input.charAt(input.length()-1);
                 if(first.equals(":") || first.equals(",") || first.equals(delimiter)) {
                     throw new IllegalArgumentException("구분자로 시작할 수 없습니다.");
-                } else if(last.equals(":") || last.equals(",") || last.equals(delimiter)) {
-                    throw new IllegalArgumentException("구분자로 끝날 수 없습니다.");
                 } else {
                     numbers = split(input, delimiter);
                     for(String number : numbers) {
@@ -74,19 +70,12 @@ public class Application {
 
     private static String[] split(String input) {
         String temp = input.replace(":", ",");
-        if(!temp.contains(",")) {
-            throw new IllegalArgumentException(
-                    "숫자만 입력하거나 구분자로 지정하지 않은 문자를 입력할 수 없습니다.");
-        }
         return temp.split(",");
     }
 
     private static String[] split(String input, String delimiter) {
         String temp = input.replace(delimiter, ",");
         temp = temp.replace(":", ",");
-        if(!temp.contains(",")) {
-            throw new IllegalArgumentException("숫자만 입력할 수 없습니다.");
-        }
         return temp.split(",");
     }
 
@@ -95,3 +84,4 @@ public class Application {
         String input = Console.readLine();
     }
 }
+
