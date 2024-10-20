@@ -11,6 +11,7 @@ public class StringValidator {
 	private static final int DIGIT = 0;
 	private static final int DELIMITER = 1;
 	private static final int INPUT_START_INDEX = 0;
+	private static final int DELIMITER_LENGTH = 1;
 
 	private List<String> delimiters = new ArrayList<>(Arrays.asList(COMMA_DELIMITER, COLON_DELIMITER));
 
@@ -34,5 +35,12 @@ public class StringValidator {
 			index++;
 		}
 		return index;
+	}
+
+	private int checkInputDelimiter(String input, int index) {
+		if (!delimiters.contains(input.substring(index, index + 1))) {
+			throw new IllegalArgumentException("잘못된 문자열 형식입니다.");
+		}
+		return index + DELIMITER_LENGTH;
 	}
 }
