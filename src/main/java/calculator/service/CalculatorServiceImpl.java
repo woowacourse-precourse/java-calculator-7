@@ -14,7 +14,9 @@ public class CalculatorServiceImpl implements CalculatorService {
 
     @Override
     public Integer calculate(String command) {
-        if(command.isEmpty()) return 0;
+        if (command.isEmpty()) {
+            return 0;
+        }
         CalculatorValidator.validateExpression(command);
         CalculatorDelimiterStrategy strategy = selectStrategy(command);
         return strategy.execute(command);
