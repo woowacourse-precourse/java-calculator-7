@@ -1,15 +1,39 @@
 package calculator;
 
-import java.io.*;
+import static calculator.StringConstants.ONLY_NUMBERS;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Application {
+    public static int subStringStartIndex = 0;
+    public static String delimiters = StringConstants.COLON_DELIMITER + "|" + StringConstants.COMMA_DELIMITER;
+
     public static void main(String[] args) {
         String inputString = getInputString();
-        String newDelimiter = isContainNewDelimiter(inputString) ? getNewDelimiter(inputString) : null;
+        setConditionValues(inputString);
+        checkStringContainOtherChar(inputString.substring(subStringStartIndex), delimiters);
         //입력 값 숫자로 처리
         //연산
         //결과 출력
         //System.out.println(output);
+    }
+
+    private static void setConditionValues(String inputString) {
+        if (isContainNewDelimiter(inputString)) {
+            subStringStartIndex = inputString.indexOf("\\n") + 2;
+            delimiters += "|" + getNewDelimiter(inputString);
+        }
+    }
+
+    private static void checkStringContainOtherChar(String inputString, String delimiters) {
+        String str = inputString.replaceAll(delimiters, "");
+        if (!str.matches(ONLY_NUMBERS)) {
+            System.out.println(str);
+            throw new IllegalArgumentException("구분자 외 문자가 포함되어 있습니다.");
+        }
+        System.out.println(str);
     }
 
     private static boolean isContainNewDelimiter(String inputString) {
@@ -25,7 +49,7 @@ public class Application {
     private static String getNewDelimiter(String inputString) {
         String newDelimiter;
         newDelimiter = inputString.substring(2, inputString.indexOf("\\n"));
-        if (newDelimiter.matches(".*[0-9].*")) {
+        if (newDelimiter.matches(ONLY_NUMBERS)) {
             throw new IllegalArgumentException("신규 구분자에 숫자를 포함할 수 없습니다.");
         }
         return newDelimiter;
