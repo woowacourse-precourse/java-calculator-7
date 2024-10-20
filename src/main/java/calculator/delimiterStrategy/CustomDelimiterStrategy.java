@@ -8,6 +8,13 @@ public class CustomDelimiterStrategy implements DelimiterStrategy {
 
     @Override
     public List<String> decideDelimiter(String userInput) {
-        return null;
+        String delimiter = extractDelimiter(userInput);
+        return List.of(delimiter);
+    }
+
+    private String extractDelimiter(String userInput) {
+        int start = userInput.indexOf(startDelimiterPattern) + startDelimiterPattern.length();
+        int end = userInput.indexOf(endDelimiterPattern);
+        return userInput.substring(start, end);
     }
 }
