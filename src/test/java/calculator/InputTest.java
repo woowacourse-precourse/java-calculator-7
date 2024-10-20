@@ -28,6 +28,15 @@ public class InputTest extends NsTest {
         });
     }
 
+    @Test
+    @DisplayName("숫자만 입력되는 케이스")
+    void onlyNumber() {
+        assertSimpleTest(() -> {
+            run("12345");
+            assertThat(output()).contains(OUTPUT_MESSAGE + "12345");
+        });
+    }
+
     @Override
     protected void runMain() {
         Application.main(new String[]{});
