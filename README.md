@@ -13,6 +13,7 @@
 1. 콘솔에 문자열을 입력하라는 메시지 출력하기
 2. camp.nextstep.edu.missionutils에서 제공하는 Console API를 사용하여 사용자의 입력 받기
 3. PlusCalculator 클래스 안의 함수에 input을 넘겨주고 리턴 결과 출력
+4. OutputMessage와 입력에 문제가 있어 오류가 발생할 때의 오류 메시지를 Enum으로 관리
 
 ## 2. InputValidator
 
@@ -24,3 +25,8 @@
 ## 3. PlusCalculator
 
 1. public int static calculate 함수 구현
+
+## 4. CalculatorUtil
+
+1. 입력에서 구분자를 가져오는 함수
+2. 입력에서 식을 가져오는 함수
