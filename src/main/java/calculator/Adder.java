@@ -1,27 +1,23 @@
 package calculator;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Adder {
 
-    private final Set<String> delimiters;
+    private final Delimiters delimiters;
     private final List<String> operands;
 
 
     public Adder(List<String> operands) {
-        this(Set.of(), operands);
+        this(Delimiters.of(), operands);
     }
 
-    public Adder(Set<String> delimiters, List<String> customOperands) {
-        Expression.checkDelimitersConstraints(delimiters);
+    public Adder(Delimiters delimiters, List<String> customOperands) {
+        Delimiters.check(delimiters);
         Expression.checkOperandsConstraints(customOperands);
 
-        this.delimiters = new HashSet<>(Set.of(",", ":"));
-        this.delimiters.addAll(delimiters);
-
+        this.delimiters = delimiters;
         this.operands = new ArrayList<>(customOperands);
     }
 

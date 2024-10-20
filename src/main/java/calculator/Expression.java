@@ -5,40 +5,37 @@ import java.util.regex.Pattern;
 
 public class Expression {
 
-    private static final String CUSTOM_DELIMITER_PREFIX = "//";
-    private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
-    private static final Set<String> DEFALUT_DELIMITER_SET = Set.copyOf(Set.of(",", ":"));
+    public static final Set<String> DEFAULT_DELIMITERS = Collections.unmodifiableSet(Set.of(",", ":"));
+    public static final String CUSTOM_DELIMITER_PREFIX = "//";
+    public static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
 
-    private final Set<String> delimiters;
+    private final Delimiters delimiters;
     private final List<String> operands;
 
-
-    private Expression(final Set<String> customDelimiters, final Collection<String> operands) {
-        checkDelimitersConstraints(customDelimiters);
+    private Expression(final Delimiters customDelimiters, final Collection<String> operands) {
+        Delimiters.check(customDelimiters);
         checkOperandsConstraints(operands);
 
-        this.delimiters = new HashSet<>(DEFALUT_DELIMITER_SET);
-        this.delimiters.addAll(customDelimiters);
-
+        delimiters = Delimiters.of(addDefaultDelimiters(DEFAULT_DELIMITERS));
         this.operands = new ArrayList<>(operands);
     }
 
     public static Expression of(final Collection<String> operands) {
-        return new Expression(Set.of(), operands);
+        return new Expression(Delimiters.of(), operands);
     }
 
-    public static Expression of(final Set<String> customDelimiters, final Collection<String> operands) {
+    public static Expression of(final Delimiters customDelimiters, final Collection<String> operands) {
         return new Expression(customDelimiters, operands);
     }
 
     public static Expression parse(final String expr) {
-        final Set<String> parsedDelimiters = new HashSet<>(parseCustomDelimiters(expr));
-        final List<String> parsedOperands = parseOperands(expr, parsedDelimiters);
+        final Delimiters delimiters = parseCustomDelimiters(expr);
+        final List<String> parsedOperands = parseOperands(expr, delimiters);
 
-        return Expression.of(parsedDelimiters, parsedOperands);
+        return Expression.of(delimiters, parsedOperands);
     }
 
-    private static Set<String> parseCustomDelimiters(final String expr) {
+    private static Delimiters parseCustomDelimiters(final String expr) {
         final Set<String> delimiters = new HashSet<>();
         int startIndex = 0;
 
@@ -54,12 +51,12 @@ public class Expression {
             startIndex = endIndex + CUSTOM_DELIMITER_SUFFIX.length();
         }
 
-        return delimiters;
+        return Delimiters.of(delimiters);
     }
 
-    private static List<String> parseOperands(final String expr, final Set<String> delimiters) {
+    private static List<String> parseOperands(final String expr, final Delimiters delimiters) {
         int startIndex = 0;
-        for (String delimiter : delimiters) {
+        for (String delimiter : delimiters.toSet()) {
             startIndex += delimiter.length() + CUSTOM_DELIMITER_PREFIX.length() + CUSTOM_DELIMITER_SUFFIX.length();
         }
         final String str = expr.substring(startIndex);
@@ -69,29 +66,17 @@ public class Expression {
                 .toList());
     }
 
-    private static String buildDelimiterRegex(final Set<String> delimiters) {
+    private static String buildDelimiterRegex(final Delimiters delimiters) {
         final StringBuilder sb = new StringBuilder();
-        delimiters.addAll(DEFALUT_DELIMITER_SET);
 
-        for (String delimiter : delimiters) {
+        final Set<String> delimiterSet = addDefaultDelimiters(delimiters.toSet());
+
+        for (String delimiter : delimiterSet) {
             sb.append(Pattern.quote(delimiter));
             sb.append("|");
         }
         sb.delete(sb.length() - 1, sb.length());
         return sb.toString();
-    }
-
-    public static void checkDelimitersConstraints(final Set<String> delimiters) {
-        for (String delimiter : delimiters) {
-            if (isNumeric(delimiter)) {
-                throw new IllegalArgumentException("커스텀 구분자는 숫자로만 이루어져서는 안됩니다: " + delimiter);
-            }
-
-            if (delimiter.isBlank() || delimiter.contains(CUSTOM_DELIMITER_PREFIX)
-                    || delimiter.contains(CUSTOM_DELIMITER_SUFFIX)) {
-                throw new IllegalArgumentException("올바르지 않은 커스텀 구분자입니다: " + delimiter);
-            }
-        }
     }
 
     public static void checkOperandsConstraints(final Collection<String> operands) {
@@ -102,12 +87,19 @@ public class Expression {
         }
     }
 
+    private static Set<String> addDefaultDelimiters(final Set<String> delimiters) {
+        Set<String> delimiterSet = new HashSet<>(DEFAULT_DELIMITERS);
+        delimiterSet.addAll(delimiters);
+
+        return delimiterSet;
+    }
+
     private static boolean isNumeric(final String str) {
         return str.chars().allMatch(Character::isDigit);
     }
 
-    public Set<String> getDelimiters() {
-        return new HashSet<>(delimiters);
+    public Delimiters getDelimiters() {
+        return delimiters;
     }
 
     public List<String> getOperands() {
