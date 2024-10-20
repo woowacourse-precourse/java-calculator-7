@@ -1,5 +1,7 @@
 package calculator.extractor;
 
+import calculator.exception.ExceptionMessage;
+
 public class StringSplitterImpl implements StringSplitter {
 
     @Override
@@ -14,15 +16,8 @@ public class StringSplitterImpl implements StringSplitter {
     }
 
     private String[] DefaultDelimiter(String input) {
-        if (input.matches(".*[\\|\\\\\\n\\t\\r\\f].*")) {
-            throw new IllegalArgumentException("잘못된 구분자 형식입니다. 구분자는 ','와 ':'만 가능합니다.");
-        }
-        if (input.matches(".*\\s.*")) {
-            throw new IllegalArgumentException("구분자에 공백을 포함할 수 없습니다.");
-        }
-        if (input.matches(".*[^0-9,-:|\\s].*")) {
-            throw new IllegalArgumentException("잘못된 구분자 형식입니다. 구분자는 ','와 ':'만 가능합니다.");
-        }
+        validateDelimiter(input);
+
         String[] result = input.split("[,:]");
         for (int i = 0; i < result.length; i++) {
             if (result[i] == null || result[i].isEmpty()) {
@@ -31,16 +26,26 @@ public class StringSplitterImpl implements StringSplitter {
         }
         return result;
     }
+
     private String[] CustomDelimiter(String input) {
         int delimiterEndIndex = input.indexOf("\\n");
         if (delimiterEndIndex == -1) {
-            throw new IllegalArgumentException("잘못된 구분자 형식입니다. '\\n'이 필요합니다.");
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_DELIMITER_FORMAT.getMessage());
         }
 
         String customDelimiter = input.substring(2, delimiterEndIndex);
         if (customDelimiter.isEmpty()) {
-            throw new IllegalArgumentException("잘못된 구분자 형식입니다. 구분자가 비어 있습니다.");
+            throw new IllegalArgumentException(ExceptionMessage.EMPTY_DELIMITER.getMessage());
         }
         return input.substring(delimiterEndIndex + 2).split(customDelimiter);
+    }
+
+    private void validateDelimiter(String input) {
+        boolean containsInvalidDelimiter =
+                input.matches(".*[\\|\\\\\\n\\t\\r\\f\\s].*") || input.matches(".*[^0-9a-zA-Z,:-].*");
+
+        if (containsInvalidDelimiter) {
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_DELIMITER_FORMAT.getMessage());
+        }
     }
 }

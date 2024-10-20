@@ -1,5 +1,7 @@
 package calculator.converter;
 
+import calculator.exception.ExceptionMessage;
+
 public class NumberConverterImpl implements NumberConverter {
 
     @Override
@@ -14,11 +16,12 @@ public class NumberConverterImpl implements NumberConverter {
                 }
                 int number = Integer.parseInt(stringArr[i]);
                 if (number <= 0) {
-                    throw new IllegalArgumentException("양수만 입력할 수 있습니다: " + stringArr[i]);
+                    throw new IllegalArgumentException(ExceptionMessage.NEGATIVE_NUMBER.getMessage() + stringArr[i]);
                 }
                 numberArr[i] = number;
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("잘못된 숫자 형식입니다: " + stringArr[i]);
+                throw new IllegalArgumentException(ExceptionMessage.INVALID_NUMBER_FORMAT.getMessage() + stringArr[i]
+                );
             }
         }
         return numberArr;
