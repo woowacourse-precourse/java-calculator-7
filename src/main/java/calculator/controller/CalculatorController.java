@@ -2,6 +2,7 @@ package calculator.controller;
 
 import calculator.domain.DelimiterManager;
 import calculator.domain.ExpressionSplitter;
+import calculator.domain.PositiveIntegerConverter;
 import calculator.domain.StringParser;
 import calculator.dto.AdditionInput;
 import calculator.dto.ParsedComponents;
@@ -32,5 +33,8 @@ public class CalculatorController {
         ExpressionSplitter expressionSplitter = new ExpressionSplitter(delimiterPattern,
                 parsedComponents.operationalExpression());
         List<String> splittedExpression = expressionSplitter.splitOperationalExpressionByDelimiters();
+
+        PositiveIntegerConverter positiveIntegerConverter = new PositiveIntegerConverter(splittedExpression);
+        List<Integer> positiveIntegers = positiveIntegerConverter.convertToPositiveIntegers();
     }
 }
