@@ -19,7 +19,7 @@ public class Delimiters {
     }
 
     private void checkNotDelimiter(String rawString) {
-        String regex = "[^" + String.join("", separators) + "0-9]+";
+        String regex = "[^0-9" + String.join("", separators) + "]+";
         Matcher matcher = Pattern.compile(regex).matcher(rawString);
 
         while (matcher.find()) {
@@ -30,7 +30,7 @@ public class Delimiters {
     private void findCustomSeparator(String rawString) {
         Matcher matcher = Pattern.compile("//(.*?)\\\\n").matcher(rawString);
         while (matcher.find()) {
-            separators.add(matcher.group());
+            separators.add(matcher.group(1));
         }
     }
 }
