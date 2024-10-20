@@ -15,7 +15,6 @@ public class Calculator {
         if (!input.chars().allMatch(Character::isDigit)) {
             throw new IllegalArgumentException("입력값이 숫자가 아닙니다.");
         }
-
         int sum = input.chars()
                 .map(Character::getNumericValue)
                 .sum();
