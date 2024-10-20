@@ -18,7 +18,7 @@ public class Calculator {
                 delimiters.add(str.charAt(2));
                 i = 5;
             } else {
-                throw new IllegalArgumentException("Invalid input");
+                throw new IllegalArgumentException("커스텀 구분자는 //과 \\n 사이에 위치해야합니다.");
             }
         }
 
@@ -34,7 +34,7 @@ public class Calculator {
                 int num = Integer.parseInt(numString);
                 answer += num;
             } else if (!delimiters.contains(c)){
-                throw new IllegalArgumentException("Invalid input");
+                throw new IllegalArgumentException("구분자 양수 이외의 문자는 입력할 수 없습니다.");
             }
         }
 
