@@ -19,7 +19,10 @@ public class Calculator {
         List<Long> result = new ArrayList<>();
         String expression = argument;
         String splitter = "[,:]";
-        if (argument.charAt(0) == '/') {
+        if (argument.length()==0) {
+            return result;
+        }
+        if (argument.charAt(0)=='/') {
             int idx = argument.indexOf("\n");
             if (idx == -1) {
                 throw new IllegalStateException("잘못된 형식입니다.");
