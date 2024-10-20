@@ -35,15 +35,12 @@ public class SplitController {
         String splitedString = split.splitString(delimeter.getValues());
 
         //남은 문자열의 유효성 검사
-        try{
-            validationTest.stringValidationTest(splitedString);
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-            System.exit(1);
-        }
+        validationTest.stringValidationTest(splitedString);
 
         //분리된 문자열 합 구함
         int sum = calculator.sum(splitedString);
         outputView.output(sum);
+
+
     }
 }
