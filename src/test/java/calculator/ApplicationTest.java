@@ -18,6 +18,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 매우큰_숫자_덧셈() {
+        assertSimpleTest(() -> {
+            run("1,2:9999999999999999999999999");
+            assertThat(output()).contains("결과 : 10000000000000000000000002");
+        });
+    }
+
+    @Test
     void 커스텀_구분자_사용_1() {
         assertSimpleTest(() -> {
             run("//;\\n1");
