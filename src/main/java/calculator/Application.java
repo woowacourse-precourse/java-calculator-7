@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.model.CalculationInput;
 import camp.nextstep.edu.missionutils.Console;
 import java.util.Arrays;
 import java.util.regex.Matcher;
@@ -13,18 +14,14 @@ public class Application {
 
     public static void main(String[] args) {
 
-        String[] inputStringAndDelimiters = getInputString();
-        String delim = inputStringAndDelimiters[0];
-        String inputString = inputStringAndDelimiters[1];
+        CalculationInput calculationInput = getInputString();
 
-        int[] extractedNumbers = extractNumbers(delim, inputString);
+        int[] extractedNumbers = extractNumbers(calculationInput);
         int result = calculate(extractedNumbers);
         showResult(result);
     }
 
-    private static String[] getInputString() {
-
-        String[] inputStringAndDelimiters = new String[2];
+    private static CalculationInput getInputString() {
 
         System.out.println(INPUT_GUIDE_MESSAGE);
         String userInput = Console.readLine();
@@ -33,19 +30,19 @@ public class Application {
         Matcher matcher = pattern.matcher(userInput);
 
         if (matcher.matches()) {
-            inputStringAndDelimiters[0] = makeDelimiterRegex(matcher.group(1));
-            inputStringAndDelimiters[1] = matcher.group(2);
+            String delimiter = makeDelimiterRegex(matcher.group(1));
+            String inputString = matcher.group(2);
 
-            return inputStringAndDelimiters;
+            return new CalculationInput(delimiter, inputString);
         }
 
-        inputStringAndDelimiters[0] = DEFAULT_DELIMITER_REGEX;
-        inputStringAndDelimiters[1] = userInput;
-
-        return inputStringAndDelimiters;
+        return new CalculationInput(DEFAULT_DELIMITER_REGEX, userInput);
     }
 
-    private static int[] extractNumbers(String delim, String inputString) {
+    private static int[] extractNumbers(CalculationInput calculationInput) {
+
+        String inputString = calculationInput.inputString();
+        String delim = calculationInput.delimiter();
 
         String[] extractedStringNumbers = inputString.split(delim);
         return Arrays.stream(extractedStringNumbers).mapToInt(Integer::parseInt).toArray();
