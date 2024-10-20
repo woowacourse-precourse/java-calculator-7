@@ -98,6 +98,13 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    void 커스텀_구분자가_음수표현() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//-\\n1-2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});

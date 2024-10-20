@@ -24,8 +24,8 @@ public class CalculatorService {
             if (input.charAt(3) != '\\' || input.charAt(4) != 'n') {
                 throw new IllegalArgumentException();
             }
-            // 2번 인덱스 위치에 숫자가 있는 경우 예외 처리
-            if (Character.isDigit(input.charAt(2))) {
+            // 2번 인덱스 위치에 숫자 또는 '-'가 있는 경우 예외 처리
+            if (Character.isDigit(input.charAt(2)) || input.charAt(2) == '-') {
                 throw new IllegalArgumentException();
             }
         } else { // 유효성 case 3: "//"로 시작하지 않는 경우
