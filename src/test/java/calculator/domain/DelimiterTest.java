@@ -12,25 +12,25 @@ public class DelimiterTest extends NsTest {
     void 커스텀_구분자_인식_테스트() {
         assertSimpleTest(() -> {
             Delimiter delimiter = new Delimiter("//;\\n");
-            delimiter.splitString();
+            delimiter.getSplitString();
             assertThat(delimiter.getCustomDelimiter()).isEqualTo(";");
         });
 
         assertSimpleTest(() -> {
             Delimiter delimiter = new Delimiter("///\\n");
-            delimiter.splitString();
+            delimiter.getSplitString();
             assertThat(delimiter.getCustomDelimiter()).isEqualTo("/");
         });
 
         assertSimpleTest(() -> {
             Delimiter delimiter = new Delimiter("//=\\n");
-            delimiter.splitString();
+            delimiter.getSplitString();
             assertThat(delimiter.getCustomDelimiter()).isEqualTo("=");
         });
 
         assertSimpleTest(() -> {
             Delimiter delimiter = new Delimiter("//)\\n");
-            delimiter.splitString();
+            delimiter.getSplitString();
             assertThat(delimiter.getCustomDelimiter()).isEqualTo(")");
         });
     }
@@ -39,12 +39,12 @@ public class DelimiterTest extends NsTest {
     void 공백_입력_테스트() {
         assertSimpleTest(() -> {
             Delimiter delimiter = new Delimiter("");
-            assertThat(delimiter.splitString()).isNull();
+            assertThat(delimiter.getSplitString()).isNull();
         });
 
         assertSimpleTest(() -> {
             Delimiter delimiter = new Delimiter("//;\\n");
-            assertThat(delimiter.splitString()).isNull();
+            assertThat(delimiter.getSplitString()).isNull();
         });
     }
 
@@ -52,12 +52,12 @@ public class DelimiterTest extends NsTest {
     void 문자열_분리_테스트() {
         assertSimpleTest(() -> {
             Delimiter delimiter = new Delimiter("//;\\n1;2,3:4");
-            assertThat(delimiter.splitString()).isEqualTo(new String[]{"1", "2", "3", "4"});
+            assertThat(delimiter.getSplitString()).isEqualTo(new String[]{"1", "2", "3", "4"});
         });
 
         assertSimpleTest(() -> {
             Delimiter delimiter = new Delimiter("1,2:3");
-            assertThat(delimiter.splitString()).isEqualTo(new String[]{"1", "2", "3"});
+            assertThat(delimiter.getSplitString()).isEqualTo(new String[]{"1", "2", "3"});
         });
     }
 

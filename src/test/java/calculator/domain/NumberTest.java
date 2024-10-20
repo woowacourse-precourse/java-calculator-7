@@ -12,7 +12,7 @@ public class NumberTest extends NsTest {
     void 문자열_숫자_변환() {
         Delimiter delimiter = new Delimiter("1:2,3");
         assertSimpleTest(() -> {
-            Number number = new Number(delimiter.splitString());
+            Number number = new Number(delimiter.getSplitString());
             number.convertStringToInt();
             assertThat(number.getNumbers()).isEqualTo(new int[]{1, 2, 3});
         });
@@ -22,7 +22,7 @@ public class NumberTest extends NsTest {
     void 커스텀_구분자_포함_문자열_숫자_변환() {
         Delimiter delimiter = new Delimiter("//*\\n1:2*3");
         assertSimpleTest(() -> {
-            Number number = new Number(delimiter.splitString());
+            Number number = new Number(delimiter.getSplitString());
             number.convertStringToInt();
             assertThat(number.getNumbers()).isEqualTo(new int[]{1, 2, 3});
         });
@@ -32,7 +32,7 @@ public class NumberTest extends NsTest {
     void 숫자_더하기_테스트() {
         Delimiter delimiter = new Delimiter("1:2,3");
         assertSimpleTest(() -> {
-            Number number = new Number(delimiter.splitString());
+            Number number = new Number(delimiter.getSplitString());
             assertThat(number.calculateSum()).isEqualTo(6);
         });
     }
@@ -41,7 +41,7 @@ public class NumberTest extends NsTest {
     void 커스텀_구분자_포함_문자열_숫자_더하기_테스트() {
         Delimiter delimiter = new Delimiter("//*\\n1:2*3");
         assertSimpleTest(() -> {
-            Number number = new Number(delimiter.splitString());
+            Number number = new Number(delimiter.getSplitString());
             assertThat(number.calculateSum()).isEqualTo(6);
         });
     }
@@ -50,7 +50,7 @@ public class NumberTest extends NsTest {
     void 양수_검증() {
         Delimiter delimiter = new Delimiter("//*\\n1:2*3,4:5");
         assertSimpleTest(() -> {
-            Number number = new Number(delimiter.splitString());
+            Number number = new Number(delimiter.getSplitString());
             number.convertStringToInt();
             for (int num : number.getNumbers()) {
                 assertThat(num).isGreaterThanOrEqualTo(1);

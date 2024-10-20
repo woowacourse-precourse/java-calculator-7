@@ -19,7 +19,7 @@ public class CalculatorController {
             String input = inputView.getInputString();
 
             Delimiter delimiter = new Delimiter(input);
-            String[] splitNumbers = delimiter.splitString();
+            String[] splitNumbers = delimiter.getSplitString();
 
             Number number = new Number(splitNumbers);
             int result = number.calculateSum();

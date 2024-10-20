@@ -7,6 +7,7 @@ public class Number {
 
     public Number(String[] numString) {
         this.numString = numString;
+        this.numbers = new int[]{};
         this.sum = 0;
     }
 

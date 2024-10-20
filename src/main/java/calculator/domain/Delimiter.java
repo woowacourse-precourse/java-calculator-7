@@ -12,10 +12,10 @@ public class Delimiter {
 
     public Delimiter(String inputString) {
         this.inputString = inputString;
-        setDefaultDelimiter();
+        initDefaultDelimiter();
     }
 
-    private void setDefaultDelimiter() {
+    private void initDefaultDelimiter() {
         delimiterList.addAll(DefaultDelimiter.getDefaultDelimiters());
     }
 
@@ -39,7 +39,7 @@ public class Delimiter {
         }
     }
 
-    public String[] splitString() {
+    public String[] getSplitString() {
         checkCustomDelimiter();
         if (inputString == null || inputString.trim().isEmpty()) {
             return null;
