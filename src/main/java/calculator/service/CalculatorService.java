@@ -37,14 +37,14 @@ public class CalculatorService {
 
         String specialSub = getSpecialSubstr(input);
 
-        specialProcessingResult.put("sep",findSpecialSepBySubStr(specialSub));
+        specialProcessingResult.put("sep", findSpecialSepBySubStr(specialSub));
         specialProcessingResult.put("input", modifyInputBySpecialSub(input, specialSub));
 
         return specialProcessingResult;
     }
 
-    private String modifyInputBySpecialSub(String input, String specialSub){
-        return input.substring(specialSub.length() -1);
+    private String modifyInputBySpecialSub(String input, String specialSub) {
+        return input.substring(specialSub.length() - 1);
     }
 
     public boolean hasSpecialSeparator(String input) {
@@ -63,7 +63,7 @@ public class CalculatorService {
             throw new IllegalArgumentException("커스텀 구분자 설정 형식이 잘못되었습니다");
         }
 
-        return input.substring(0, prefixLen + suffixLen + 1);
+        return input.substring(0, prefixLen + suffixLen + 2);
     }
 
     private String findSpecialSepBySubStr(String specialSubstr) {
@@ -116,19 +116,33 @@ public class CalculatorService {
 
         BigInteger result = BigInteger.ZERO;
 
-        for(String num : splitResult) {
-            result = result.add(parseBigInteger(num));
+        for (String part : splitResult) {
+            result = result.add(parseBigInteger(part));
         }
 
         return result;
     }
 
-    private BigInteger parseBigInteger(String input) {
+    private BigInteger parseBigInteger(String part) {
+
+        checkPartValid(part);
 
         try {
-            return new BigInteger(input);
+            return new BigInteger(part);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("지정된 구분자 이외의 문자가 발견되었습니다.");
         }
+    }
+
+    private void checkPartValid(String part) {
+
+        if (part.contains("-")) {
+            throw new IllegalArgumentException("음수는 연산에 사용될 수 없습니다.");
+        }
+
+        if (part.contains("+")) {
+            throw new IllegalArgumentException("+ 기호는 연산에 사용될 수 없습니다.");
+        }
+
     }
 }

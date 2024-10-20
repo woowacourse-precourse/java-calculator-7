@@ -43,7 +43,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 무입력_테스트() {
         assertSimpleTest(() -> {
-            run("\n");
+            run("");
             assertThat(output()).contains("결과 : 0");
         });
     }
