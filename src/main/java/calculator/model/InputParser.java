@@ -33,7 +33,6 @@ public class InputParser {
             }
             throw new IllegalArgumentException();
         } catch (Exception e) {
-            System.out.println(e);
             throw new IllegalArgumentException();
         }
     }
