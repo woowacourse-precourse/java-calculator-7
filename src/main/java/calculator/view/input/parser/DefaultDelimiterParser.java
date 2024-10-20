@@ -8,13 +8,15 @@ import java.util.stream.Collectors;
 public class DefaultDelimiterParser implements DelimiterParser {
     private static final String WHITESPACE = " ";
     private final NumberValidator numberValidator = new NumberValidator();
+    private final InputParser inputParser = new InputParser();
 
     public List<Integer> parseInputNumbers(String input) {
-        input = removeDelimiter(input);
+        String parsedInput = inputParser.parseEmptyInput(input);
+        String inputWithoutDelimiters = removeDelimiter(parsedInput);
 
-        numberValidator.validate(input);
+        numberValidator.validate(inputWithoutDelimiters);
 
-        return Arrays.stream(input.split(WHITESPACE))
+        return Arrays.stream(inputWithoutDelimiters.split(WHITESPACE))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
