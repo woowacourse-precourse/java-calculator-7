@@ -44,6 +44,23 @@ public class Application {
         }
     }
 
+    public static int calculator(String input) {
+        String[] nums;
+        String delimiters;
+        String customDelimiter;
+        String numString;
+
+        numString = input;
+        customDelimiter = findCustomDelimiter(input);
+        delimiters = "[,:|" + customDelimiter + "]";
+
+        if (!customDelimiter.isEmpty()) {
+            numString = input.substring(input.indexOf("\\n") + 2);
+        }
+        nums = numString.split(delimiters);
+        return add(nums);
+    }
+
     public static void main(String[] args) {
         // TODO: 프로그램 구현
     }
