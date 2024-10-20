@@ -7,7 +7,8 @@ import calculator.view.UserOutputView;
 
 public class MainController {
 
-    CalculatorController calculatorController = new CalculatorController();
+    private final CalculatorController calculatorController = new CalculatorController();
+
     public void start(){
         UserOutputView.printAddStartMessage();
         String userInput = UserInputView.readUserInput();
