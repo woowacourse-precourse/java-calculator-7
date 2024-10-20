@@ -92,7 +92,27 @@ main/
 - 입력: `10,5:201`
 - 출력: `결과 : 216`
 
-**테스트 case 5**: 정해진 구분자 이외의 문자 입력
+**테스트 case 5**: 정해진 구분자 이외의 문자 입력 (1)
 
 - 입력: `1,2a3`
+- 출력: `IllegalArgumentException` 발생 후 종료
+
+**테스트 case 6**: 정해진 구분자 이외의 문자 입력 (2)
+
+- 입력: `//b\n1b2a3,4`
+- 출력: `IllegalArgumentException` 발생 후 종료
+
+**테스트 case 7**: 커스텀 구분자가 숫자
+
+- 입력: `//1\n2,3`
+- 출력: `IllegalArgumentException` 발생 후 종료
+
+**테스트 case 8**: 커스텀 구분자가 문자열
+
+- 입력: `//AW\n2AW3,4`
+- 출력: `IllegalArgumentException` 발생 후 종료
+
+**테스트 case 9**: 커스텀 구분자 미입력
+
+- 입력: `//\n1,2,3`
 - 출력: `IllegalArgumentException` 발생 후 종료

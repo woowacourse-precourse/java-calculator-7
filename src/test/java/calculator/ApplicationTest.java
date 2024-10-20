@@ -59,9 +59,41 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 정해진_구분자_이외의_문자_입력() {
+    void 정해진_구분자_이외의_문자_입력_1() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("1,2a3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 정해진_구분자_이외의_문자_입력_2() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//b\\n1b2a3,4"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 커스텀_구분자가_숫자() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//1\\n2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 커스텀_구분자가_문자열() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//AW\\n2AW3,4"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 커스텀_구분자_미입력() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//\\n1,2,3"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
