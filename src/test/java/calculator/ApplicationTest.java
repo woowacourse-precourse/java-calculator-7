@@ -25,6 +25,15 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 커스텀_구분자와_기본_구분자_혼용_예외_테스트() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("//;\\n1,2;3"))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessageContaining("잘못된 값");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
