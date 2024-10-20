@@ -43,6 +43,32 @@ public class Application {
             //커스텀 구분자 지정이 있는 경우
             } else if (input.startsWith("//") && input.contains("\\n")) {
                 // 커스텀 구분자 추출
+                String delimiter = extractDelimiter(input);
+                System.out.println(delimiter);
+
+                // \n 이후의 숫자 부분 추출
+                String numbersPart = input.substring(input.indexOf("\\n") + 2);
+
+
+                // 커스텀 구분자로 나누어 처리
+                String[] splitInput = numbersPart.split(Pattern.quote(delimiter)); // 메타 문자 처리를 위해 Pattern.quote 사용
+
+                int sum = 0;
+
+                for (String value : splitInput) {
+                    try{
+                        int number = Integer.parseInt(value); // 문자열을 정수로 변환
+                        if (number < 1 || number > 9) { // 1~9 사이에 있는지 확인
+                            throw new IllegalStateException("1부터 9까지의 범위 외의 숫자가 포함되어 있습니다: " + number);
+                        }
+                        sum += number;
+                    }catch(Exception e){
+                        throw new IllegalStateException("잘못된 결과");
+                    }
+                }
+
+                System.out.printf("결과 : %d\n", sum);
+
 
 
 
