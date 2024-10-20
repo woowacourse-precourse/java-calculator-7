@@ -15,7 +15,13 @@ public class SeparatorHandler {
     }
 
     private boolean isCustomSeparator(String[] parts) {
-        return parts.length == 2 && parts[0].startsWith("//");
+        if (parts.length == 1) {
+            return false;
+        }
+        if (!parts[0].startsWith("//")) {
+            throw new IllegalArgumentException("커스텀 구분자 입력 형식 틀림");
+        }
+        return true;
     }
 
     private String getCustomSeparator(String part) {

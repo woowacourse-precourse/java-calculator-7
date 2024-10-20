@@ -19,6 +19,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 예외_테스트_last() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("3\\n1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("-1,2,3"))
