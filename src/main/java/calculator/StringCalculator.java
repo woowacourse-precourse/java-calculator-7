@@ -14,6 +14,7 @@ public class StringCalculator {
         String separator = findSeperator();
         List<Integer> seperatedNums = separateMachine(separator);
         int totalNum = addAllNums(seperatedNums);
+        printMachine(totalNum);
     }
 
     private String findSeperator() {
@@ -137,6 +138,10 @@ public class StringCalculator {
             totalNum += seperatedNums.get(i);
         }
         return totalNum;
+    }
+
+    private void printMachine(int totalNum) {
+        System.out.println("결과 : " + totalNum);
     }
 
 }
