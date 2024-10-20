@@ -61,6 +61,9 @@ public class Application {
         for (String number : splitNumbers) {
             try {
                 int parsedNumber = Integer.parseInt(number.trim());
+                if (parsedNumber <= 0) {
+                    throw new IllegalArgumentException("숫자는 양수여야 합니다: " + parsedNumber);
+                }
                 numbers.add(parsedNumber);
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("INVALID INPUT");
