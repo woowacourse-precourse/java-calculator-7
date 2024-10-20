@@ -74,12 +74,6 @@ public class Application {
         }
         lines = line.split("");
         chkCus();
-//        try {
-//            chkCus();
-//        } catch (IllegalArgumentException e) {
-//            System.out.println(e.getMessage());
-//            return;
-//        }
         if (isCus) {
             for (int i = x+2; i < lines.length; i++) {
                 newLine += lines[i];
@@ -89,13 +83,6 @@ public class Application {
         }
         ansLine1 = newLine.split("[,:]");
         divLine();
-//        try {
-//            divLine();
-//        } catch (IllegalArgumentException e) {
-//            System.out.println("구분자 입력형식이 잘못되었습니다.");
-//            return;
-//        }
-
         try {
             bw.write("결과 : " + ans + "\n");
             bw.flush();
