@@ -1,8 +1,12 @@
-package domain.controller.controller;
+package calculator.domain.controller;
 
-import dto.InputDTO;
-import dto.ResultDTO;
-import service.CalculateService;
+
+import static camp.nextstep.edu.missionutils.Console.readLine;
+
+import calculator.domain.dto.InputDTO;
+import calculator.domain.dto.ResultDTO;
+import calculator.domain.service.CalculateService;
+
 
 public class CalculatorController {
     private final CalculateService calculateService;
@@ -11,9 +15,13 @@ public class CalculatorController {
         this.calculateService = calculateService;
     }
 
-    public void processCalculation(String input) {
-        InputDTO inputDTO = new InputDTO(input);
+    public void processCalculation() {
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        String input = readLine();
+
+        InputDTO inputDTO  = new InputDTO(input);
+
         ResultDTO resultDTO = calculateService.calculate(inputDTO);
-        System.out.println("계산 결과: " + resultDTO.getResult());
+        System.out.println("결과 : " + resultDTO.getResult());
     }
 }
