@@ -37,5 +37,6 @@ public class CalculatorController {
         long[] numbers = numberStringConverter.convert(inputStrArr);
 
         String result = sumCalculator.calculate(numbers);
+        calculatorOutputView.printResult(result);
     }
 }
