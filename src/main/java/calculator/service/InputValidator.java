@@ -47,7 +47,7 @@ public class InputValidator {
 
         String formattingString = formattingString(inputValue);
 
-        Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_REGEX);
+        Pattern pattern = Pattern.compile(RegexPatterns.CUSTOM_DELIMITER);
         Matcher matcher = pattern.matcher(formattingString);
 
         return !matcher.find();

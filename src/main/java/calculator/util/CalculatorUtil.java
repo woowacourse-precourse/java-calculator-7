@@ -1,5 +1,6 @@
 package calculator.util;
 
+import calculator.constants.RegexPatterns;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,7 +9,6 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class CalculatorUtil {
-    public static final String CUSTOM_DELIMITER_REGEX = "^//(.*?)\\\\n";
 
     private CalculatorUtil() {};
 
@@ -19,7 +19,7 @@ public class CalculatorUtil {
     }
 
     public static List<String> extractDelimiter(String inputValue) {
-        Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_REGEX);
+        Pattern pattern = Pattern.compile(RegexPatterns.CUSTOM_DELIMITER);
         Matcher matcher = pattern.matcher(inputValue);
         List<String> delimiters = new ArrayList<>();
 
@@ -46,6 +46,6 @@ public class CalculatorUtil {
     }
 
     public static String formattingString(String inputValue) {
-        return inputValue.replaceAll(CUSTOM_DELIMITER_REGEX, "");
+        return inputValue.replaceAll(RegexPatterns.CUSTOM_DELIMITER, "");
     }
 }
