@@ -2,37 +2,37 @@ package calculator;
 
 import calculator.model.Calculator;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 class CalculatorTest {
 
     Calculator calculator = new Calculator();
 
     @Test
-    void testAddWithDefaultDelimiters() {
-        assertEquals(6, calculator.add("1,2:3"));
+    void testAddWithValidInput() {
+        String[] numbers = {"1", "2", "3"};
+        int result = calculator.add(numbers);
+        assertEquals(6, result);
     }
 
     @Test
-    void testAddWithCustomDelimiter() {
-        assertEquals(6, calculator.add("//;\\n1;2;3"));
-    }
-
-    @Test
-    void testAddWithEmptyString() {
-        assertEquals(0, calculator.add(""));
+    void testAddWithEmptyArray() {
+        String[] numbers = {};
+        int result = calculator.add(numbers);
+        assertEquals(0, result); // 빈 입력의 경우 0 반환
     }
 
     @Test
     void testAddWithSingleNumber() {
-        assertEquals(3, calculator.add("3"));
+        String[] numbers = {"5"};
+        int result = calculator.add(numbers);
+        assertEquals(5, result); // 하나의 숫자만 있는 경우
     }
 
     @Test
-    void testAddWithNegativeNumbersThrowsException() {
-        assertThrows(IllegalArgumentException.class, () -> calculator.add("1,-2,3"));
+    void testAddWithZero() {
+        String[] numbers = {"0", "0", "0"};
+        int result = calculator.add(numbers);
+        assertEquals(0, result); // 0만 있는 경우
     }
 }
-
