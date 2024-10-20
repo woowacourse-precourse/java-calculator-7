@@ -17,12 +17,16 @@ public class Application {
         if (isNullOrEmpty(userInput)) {
             return 0;
         }
-        String[] numbers = userInput.split(",|:");
+        String[] numbers = split(userInput);
         int sum = 0;
         for (String number : numbers) {
             sum += Integer.parseInt(number);
         }
         return sum;
+    }
+
+    private static String[] split(String userInput) {
+        return userInput.split(",|:");
     }
 
     private static boolean isNullOrEmpty(String userInput) {
