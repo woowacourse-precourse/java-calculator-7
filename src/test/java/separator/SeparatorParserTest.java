@@ -59,4 +59,14 @@ public class SeparatorParserTest {
         //then
         Assertions.assertThat(output).containsExactlyElementsOf(expectedOutput);
     }
+
+    @Test
+    @DisplayName("구분자가 등록 안된 경우")
+    void 구분자_등록_X() {
+        //when
+        List<String> output = parser.split("1:2\n3,4\\576");
+        List<String> expectedOutput = List.of("1:2\n3,4\\576");
+        //then
+        Assertions.assertThat(output).containsExactlyElementsOf(expectedOutput);
+    }
 }

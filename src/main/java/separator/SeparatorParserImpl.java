@@ -12,9 +12,12 @@ public class SeparatorParserImpl implements SeparatorParser {
     }
 
     @Override
-    public List<String> split(String line) {
+    public List<String> split(String line) throws NumberFormatException {
         if (line == null || line.isEmpty()) {
             return Collections.emptyList();
+        }
+        if (separator == null) {
+            return List.of(line);
         }
         Set<String> separators = separator.getAllSeparator();
 
@@ -25,24 +28,31 @@ public class SeparatorParserImpl implements SeparatorParser {
         List<String> sortedSeparators = new ArrayList<>(separators);
         sortedSeparators.sort((s1, s2) -> Integer.compare(s2.length(), s1.length()));
 
+        String regex = buildRegex(sortedSeparators);
+        String[] splitLine = line.split(regex);
+
+        checkFormat(splitLine);
+
+        return Arrays.asList(splitLine);
+    }
+
+    private String buildRegex(List<String> separators) {
         StringBuilder regexBuilder = new StringBuilder();
-        for (String sep : sortedSeparators) {
+        for (String sep : separators) {
             if (!regexBuilder.isEmpty()) {
                 regexBuilder.append("|");
             }
             regexBuilder.append(Pattern.quote(sep));
         }
+        return regexBuilder.toString();
+    }
 
-        String regex = regexBuilder.toString();
-        String[] splitLine = line.split(regex);
-
+    private void checkFormat(String[] splitLine) throws NumberFormatException {
         for (String s : splitLine) {
             int number = Integer.parseInt(s);
             if (number < 0) {
                 throw new NumberFormatException();
             }
         }
-
-        return Arrays.asList(splitLine);
     }
 }
