@@ -3,9 +3,14 @@ package calculator.numberExtractor;
 
 import calculator.dto.NumberDto;
 import calculator.repository.NumberRepository;
+import calculator.validator.Validator;
 
 public class DefaultNumberExtractor implements NumberExtractor {
+    private final Validator validator;
 
+    public DefaultNumberExtractor(Validator validator) {
+        this.validator = validator;
+    }
 
     public NumberDto extractNumbers(String input, String defaultDelimiter) {
 
@@ -21,6 +26,7 @@ public class DefaultNumberExtractor implements NumberExtractor {
         for (String splitDefault : splitDefaultDelimiter) {
 
             int parseNumber = parseNumber(splitDefault);
+            validator.validate(parseNumber);
             numberRepository.saveNumber(parseNumber);
 
         }

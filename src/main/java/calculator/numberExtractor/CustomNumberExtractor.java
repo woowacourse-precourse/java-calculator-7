@@ -7,11 +7,15 @@ import calculator.repository.NumberRepository;
 import calculator.validator.Validator;
 
 public class CustomNumberExtractor implements NumberExtractor {
+    private final Validator validator;
 
+    public CustomNumberExtractor(Validator validator) {
+        this.validator = validator;
+    }
 
     public NumberDto extractNumbers(String input, String customDelimiter) {
 
-        Validator.isHaveNextToken(input);
+        validator.isHaveNextToken(input);
         String[] nextToken = splitNextToken(input, customDelimiter);
         NumberRepository numberRepository = new NumberRepository();
         saveValidatedNumber(nextToken, numberRepository);
@@ -28,7 +32,7 @@ public class CustomNumberExtractor implements NumberExtractor {
         for (String split : splitDelimiter) {
 
             int parseNumber = parseNumber(split);
-            Validator.validate(parseNumber);
+            validator.validate(parseNumber);
             numberRepository.saveNumber(parseNumber);
         }
     }

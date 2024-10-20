@@ -2,21 +2,20 @@ package calculator.numberExtractor;
 
 
 import calculator.dto.NumberDto;
-import calculator.validator.Validator;
+import calculator.utils.ExceptionUtils;
 
 public interface NumberExtractor {
 
-
     public NumberDto extractNumbers(String input, String delimiter);
 
-    default int parseNumber(String splitDefault) {
+    default Integer parseNumber(String split) {
 
         try {
-            int parseInt = Integer.parseInt(splitDefault);
-            Validator.validate(parseInt);
+            int parseInt = Integer.parseInt(split);
             return parseInt;
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException();
+            ExceptionUtils.throwCanNotParseToNumberException();
         }
+        return null;
     }
 }
