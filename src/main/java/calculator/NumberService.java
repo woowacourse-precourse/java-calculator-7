@@ -9,10 +9,10 @@ public class NumberService {
                 .map(numString -> {
                     try {
                         if (numString.isEmpty()) {
-                            throw new IllegalArgumentException("구분자 사이에 값이 없습니다.");
+                            return BigDecimal.ZERO;
                         }
 
-                        if (numString.charAt(0) == '0' && numString.charAt(1) != '.') {
+                        if (numString.length() > 1 && numString.charAt(0) == '0' && numString.charAt(1) != '.') {
                             throw new IllegalArgumentException("숫자에 불필요한 0을 포함하지 않습니다.");
                         }
 
@@ -29,6 +29,7 @@ public class NumberService {
                 })
                 .toList();
     }
+
 
     public BigDecimal calculateSum(List<BigDecimal> numbers) {
         return numbers.stream().reduce(BigDecimal.ZERO, BigDecimal::add);
