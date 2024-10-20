@@ -29,14 +29,14 @@ public class Parser {
         while (stringTokenizer.hasMoreTokens()) {
             result.add(stringTokenizer.nextToken());
         }
-        return result.stream().map(Integer::parseInt)
-                .map(this::getPositiveNumber).toList();
+        return result.stream().map(this::getPositiveNumber).toList();
     }
 
-    private Integer getPositiveNumber(Integer number) {
-        if (number <= 0) {
+    private Integer getPositiveNumber(String number) {
+        Integer integerNumber = Integer.parseInt(number);
+        if (integerNumber <= 0) {
             throw new IllegalArgumentException(ErrorMessage.INTEGER_OUT_OF_RANGE.getMessage());
         }
-        return number;
+        return integerNumber;
     }
 }
