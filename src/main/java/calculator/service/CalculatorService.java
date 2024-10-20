@@ -44,8 +44,19 @@ public class CalculatorService {
         String formula = requestDto.formula();
         String separator = requestDto.separator();
 
+        validateSeparator(separator);
+
         for (String number : formula.split(separator)) {
             convertStringToInt(number);
+        }
+    }
+
+    // 구분자 유효성 검사
+    private void validateSeparator(String separator) {
+        for (char c : separator.toCharArray()) {
+            if (Character.isDigit(c)) {
+                throw new IllegalArgumentException("구분자는 문자만 입력 가능합니다.");
+            }
         }
     }
 
