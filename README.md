@@ -12,12 +12,14 @@
 
 **문자열이 유효한 문자열인지 검사한다. 유효하지 않다면 IllegalArgumentException 처리한다.**
 
++ 문자열이 유효한지 검사합니다.
+    + void isValidString()
 + 커스텀 구분자가 있는 문자열인지 아닌지 검사
-    + Boolean hasCustomSeparator(String)
+    + Boolean hasCustomSeparator()
 + 커스텀 구분자가 유효한지 검사
-    + Boolean isValidSeparator(Character)
+    + void isValidCustomSeparator()
 + 구분자로 등록되어있지 않은 것을 사용중인지 검사
-    + Boolean isRegisteredSeparator(Character)
+    + void isRegisteredSeparator(Character)
 
 ## 문자열 파싱
 
