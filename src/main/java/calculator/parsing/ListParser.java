@@ -5,7 +5,6 @@ import java.util.List;
 
 public class ListParser {
     private ListParser() {
-
     }
 
     public static List<Integer> parseList(String input, List<String> delimiter) {
