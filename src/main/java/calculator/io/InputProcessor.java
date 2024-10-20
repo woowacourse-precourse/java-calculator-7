@@ -20,7 +20,7 @@ public class InputProcessor {
         return instance;
     }
 
-    ExceptionHandler exceptionHandler = ExceptionHandler.getInstance();
+    private final ExceptionHandler exceptionHandler = ExceptionHandler.getInstance();
 
     public List<Integer> getInputFromUser() {
         String input = Console.readLine();
