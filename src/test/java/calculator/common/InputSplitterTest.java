@@ -59,7 +59,23 @@ class InputSplitterTest {
                 Arguments.of("// \\n1 2 3", new String[]{"1", "2", "3"}, 3),
                 Arguments.of("//\b\\n1\b2\b3", new String[]{"1", "2", "3"}, 3),
                 Arguments.of("//\n\\n1\n2\n3", new String[]{"1", "2", "3"}, 3),
-                Arguments.of("//,\\n1,2,3", new String[]{"1", "2", "3"}, 3)
+                Arguments.of("//,\\n1,2,3", new String[]{"1", "2", "3"}, 3),
+                Arguments.of("//,\\n1.2,2.3,3.4", new String[]{"1.2", "2.3", "3.4"}, 3),
+                Arguments.of("//.\\n1.2.3", new String[]{"1", "2", "3"}, 3),
+                Arguments.of("//*\\n1*2*3", new String[]{"1", "2", "3"}, 3),
+                Arguments.of("//#\\n1#2#3", new String[]{"1", "2", "3"}, 3),
+                Arguments.of("//$\\n1$2$3", new String[]{"1", "2", "3"}, 3),
+                Arguments.of("//%\\n1%2%3", new String[]{"1", "2", "3"}, 3),
+                Arguments.of("//^\\n1^2^3", new String[]{"1", "2", "3"}, 3),
+                Arguments.of("//&\\n1&2&3", new String[]{"1", "2", "3"}, 3),
+                Arguments.of("//(\\n1(2(3", new String[]{"1", "2", "3"}, 3),
+                Arguments.of("//)\\n1)2)3", new String[]{"1", "2", "3"}, 3),
+                Arguments.of("//-\\n1-2-3", new String[]{"1", "2", "3"}, 3),
+                Arguments.of("//_\\n1_2_3", new String[]{"1", "2", "3"}, 3),
+                Arguments.of("//+\\n1+2+3", new String[]{"1", "2", "3"}, 3),
+                Arguments.of("//=\\n1=2=3", new String[]{"1", "2", "3"}, 3),
+                Arguments.of("//[\\n1[2[3", new String[]{"1", "2", "3"}, 3),
+                Arguments.of("//]\\n1]2]3", new String[]{"1", "2", "3"}, 3)
         );
     }
 }
