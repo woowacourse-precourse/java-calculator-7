@@ -1,4 +1,4 @@
-package calculator.view;
+package calculator.controller;
 
 public interface InputHandler {
     String getUserInput();

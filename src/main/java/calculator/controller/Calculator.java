@@ -1,7 +1,5 @@
-package calculator;
+package calculator.controller;
 
-import calculator.view.InputHandler;
-import calculator.view.OutputHandler;
 import java.util.Arrays;
 
 public class Calculator {
@@ -22,7 +20,7 @@ public class Calculator {
         String[] inputStringNumbers = parseUserInput(extractedInput, delimiter);
         int[] inputIntegerNumbers = changeStringArrayToIntegerArray(inputStringNumbers);
         int result = sumAllNumbers(inputIntegerNumbers);
-        outputHandler.printMessage(String.valueOf(result));
+        outputHandler.displayResult(result);
     }
 
     private int sumAllNumbers(int[] inputIntegerNumbers) {
