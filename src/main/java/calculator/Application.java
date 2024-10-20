@@ -7,12 +7,32 @@ public class Application {
         // TODO: 프로그램 구현
         Application app = new Application();
 
-//        a-1b77c-33
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String input = Console.readLine();
+        String input = app.calculateSumFromInput();
 
+        int sum = app.sumInString(input);
+
+//            System.out.println("추출된 숫자: " + result.toString()); // 출력: -1, 77, -33
+        System.out.println("결과 : " + sum); // 출력 -> 결과 : 43
+    }
+
+    // 문자열에 음수가 포함된 경우 IllegalArgumentException 발생
+    public void checkForNegativeNumbers(char c, int i, String input) {
+        // 음수 기호 '-'를 확인하고, 다음 문자가 숫자인 경우 음수로 처리
+        if (c == '-' && i + 1 < input.length() && Character.isDigit(input.charAt(i + 1))) {
+            throw new IllegalArgumentException("음수가 포함된 입력: " + input);
+        }
+    }
+
+    public String calculateSumFromInput() {
+        //        a-1b77c-33
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        return Console.readLine();
+    }
+
+    public int sumInString(String input) {
         // 음수가 없으면, 숫자 추출 및 합산 로직을 수행
         // 숫자와 부호를 추출하기 위한 StringBuilder
+        Application app = new Application();
         StringBuilder currentNumber = new StringBuilder();
         StringBuilder result = new StringBuilder();
         int sum = 0;
@@ -55,24 +75,7 @@ public class Application {
             result.append(numStr);
         }
 
-//            System.out.println("추출된 숫자: " + result.toString()); // 출력: -1, 77, -33
-        System.out.println("결과 : " + sum); // 출력 -> 결과 : 43
-    }
-
-    // 문자열에 음수가 포함된 경우 IllegalArgumentException 발생
-    public void checkForNegativeNumbers(char c, int i, String input) {
-        // 음수 기호 '-'를 확인하고, 다음 문자가 숫자인 경우 음수로 처리
-        if (c == '-' && i + 1 < input.length() && Character.isDigit(input.charAt(i + 1))) {
-            throw new IllegalArgumentException("음수가 포함된 입력: " + input);
-        }
-    }
-
-    public void calculateSumFromInput() {
-
-    }
-
-    public void sumInString() {
-
+        return sum;
     }
 
     public void numFindInString() {
