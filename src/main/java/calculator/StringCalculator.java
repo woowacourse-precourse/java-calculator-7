@@ -1,6 +1,7 @@
 package calculator;
 
 import calculator.utils.InputParserUtil;
+import calculator.validation.NumberValidator;
 import camp.nextstep.edu.missionutils.Console;
 
 public class StringCalculator {
@@ -8,6 +9,14 @@ public class StringCalculator {
     private static final String INPUT_PROMPT_FORMAT = "덧셈할 문자열을 입력해 주세요.";
     private static final String OUTPUT_PROMPT_FORMAT = "결과 : ";
     private static final int DEFAULT_RESULT = 0;
+
+    private final InputParserUtil inputParserUtil;
+    private final NumberValidator numberValidator;
+
+    public StringCalculator(InputParserUtil inputParserUtil, NumberValidator numberValidator) {
+        this.inputParserUtil = inputParserUtil;
+        this.numberValidator = numberValidator;
+    }
 
     public void stringPlusCalculator() {
         System.out.println(INPUT_PROMPT_FORMAT);
@@ -20,15 +29,26 @@ public class StringCalculator {
 
         System.out.println(userInput);
 
-        String[] numberList = InputParserUtil.seperator(userInput);
-        int[] validNumbers = InputParserUtil.numberStrListToIntList(numberList);
+        String[] numberList = inputParserUtil.seperator(userInput);
+
+        numberValidator.validateNumbers(numberList);
+        int[] validNumbers = convertToNumbers(numberList);
         int result = calculateSum(validNumbers);
 
         System.out.println(OUTPUT_PROMPT_FORMAT + result);
     }
 
 
-    public static int calculateSum(int[] numbers) {
+    private int[] convertToNumbers(String[] values) {
+        int[] numbers = new int[values.length];
+        for (int i = 0; i < values.length; i++) {
+            numbers[i] = Integer.parseInt(values[i]);
+        }
+        return numbers;
+    }
+
+
+    private int calculateSum(int[] numbers) {
         int result = 0;
         for (int number : numbers) {
             result += number;
