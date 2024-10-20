@@ -49,7 +49,7 @@ class InputStringTest {
     void test5() {
         assertSimpleTest(() -> {
             InputString inputString = new InputString("//;\\n1;3;4");
-            assertThat(inputString.extractCustomSeperator()).isEqualTo(';');
+            assertThat(inputString.extractCustomSeperator().get(0)).isEqualTo(";");
         });
     }
 }

@@ -17,8 +17,7 @@ class SplitorTest {
     void test1() {
         assertSimpleTest(() -> {
             // given
-            InputString inputString = new InputString("1,3:4,23");
-            Splitor splitor = new BasicSplitor(inputString);
+            Splitor splitor = new BasicSplitor("1,3:4,23");
 
             // when
             SplittedResult splittedResult = splitor.split();
@@ -35,7 +34,7 @@ class SplitorTest {
         assertSimpleTest(() -> {
             // given
             InputString inputString = new InputString("//*\\n1*3:4,23");
-            Splitor splitor = new CustomSplitor(inputString, inputString.extractCustomSeperator());
+            Splitor splitor = new CustomSplitor("1*3:4,23", "*");
 
             // when
             SplittedResult splittedResult = splitor.split();
