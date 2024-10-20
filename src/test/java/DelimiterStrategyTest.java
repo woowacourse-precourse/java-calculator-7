@@ -19,7 +19,7 @@ public class DelimiterStrategyTest {
         //given
         DelimiterStrategy delimiterStrategy = new CustomDelimiterStrategy();
         //when
-        List<String> customDelimiter = delimiterStrategy.decideDelimiter("//;\\n1;2;3");
+        List<String> customDelimiter = delimiterStrategy.decideDelimiter("//;\n1;2;3");
         //then
         assertThat(customDelimiter).isEqualTo(List.of(";"));
     }
