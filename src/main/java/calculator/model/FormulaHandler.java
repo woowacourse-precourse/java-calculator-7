@@ -20,7 +20,7 @@ public class FormulaHandler {
     }
 
     public Integer checkCustomDelimiter(){
-        if (formula.startsWith("//")){
+        if (formula.startsWith("//")) {
             int delimiterEndIndex = formula.indexOf("\n");
             Validator.validateSeparator(delimiterEndIndex);
             return delimiterEndIndex;

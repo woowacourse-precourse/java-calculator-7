@@ -7,7 +7,7 @@ public class Splitter {
         String delimiter = ",|:";
         String numbers = formulaHandler.getNumbersPart();
         String customDelim = formulaHandler.getCustomDelimiter();
-        if(customDelim != null){
+        if (customDelim != null) {
             delimiter = delimiter + "|" + Pattern.quote(customDelim);
         }
         return numbers.split(delimiter);

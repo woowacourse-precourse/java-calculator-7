@@ -4,10 +4,10 @@ import calculator.validation.Validator;
 
 public class Calculator {
     public static String plus(FormulaHandler formulaHandler){
-        String[] splitedNumbers = Splitter.splitNumbers(formulaHandler);
+        String[] splittedNumbers = Splitter.splitNumbers(formulaHandler);
         int sumOfNumbers = 0;
 
-        for (String token : splitedNumbers) {
+        for (String token : splittedNumbers) {
             int number = Validator.parseNumber(token);
             sumOfNumbers += number;
         }

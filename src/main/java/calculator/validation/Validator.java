@@ -21,7 +21,7 @@ public class Validator {
     }
 
     public static void validateDelimiter(String determiter){
-        if (determiter.matches(".*\\d.*")){
+        if (determiter.matches(".*\\d.*")) {
             throw new IllegalArgumentException(INVALID_CUSTOM_DELIMITER);
         }
     }
