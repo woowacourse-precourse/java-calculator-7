@@ -104,6 +104,14 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 예외_테스트_양수도_음수도_아닌_정수() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("0"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
