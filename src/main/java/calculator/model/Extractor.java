@@ -12,8 +12,11 @@ public class Extractor {
 
     private final List<Character> delimiters = new ArrayList<>(
             Arrays.asList(DefaultDelimiter.COMMA.getKey(), DefaultDelimiter.COLON.getKey()));
-    private boolean isCustomDelimiter = false;
+    private boolean hasCustomDelimiter = false;
 
+    /**
+     * @param input 커스텀 구분자를 추출할 문자열 조건에 맞는 커스텀 구분자를 추출하여 delimiters 필드에 추가 hasCustomDelimiter 필드를 true 변경
+     */
     public void extractCustomDelimiter(String input) {
 
         if (input.startsWith(DelimiterMarker.PREFIX.getKey()) &&
@@ -27,9 +30,14 @@ public class Extractor {
             isNumber(delimiter);
 
             delimiters.add(delimiter);
-            isCustomDelimiter = true;
+            hasCustomDelimiter = true;
         }
     }
+
+    /**
+     * @param input 숫자를 추출할 문자열
+     * @return 추출된 숫자의 List
+     */
 
     public List<Long> extractNumbers(String input) {
 
@@ -53,6 +61,7 @@ public class Extractor {
         return numbers;
     }
 
+    //숫자인지 확인하는 메소드
     private void isNumber(char input) {
         if (Character.isDigit(input)) {
             throw new IllegalArgumentException("숫자인 구분자는 사용할 수 없습니다.");
@@ -61,7 +70,7 @@ public class Extractor {
 
     //커스텀 구분자를 제거하는 메소드
     private String removeCustomDelimiter(String input) {
-        if (isCustomDelimiter) {
+        if (hasCustomDelimiter) {
             input = input.substring(CustomDelimiterIndex.CUSTOM_DELIMITER_SUFFIX_END.getKey() + 1);
         }
         return input;
