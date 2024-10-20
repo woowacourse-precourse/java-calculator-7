@@ -8,30 +8,21 @@ import calculator.view.OutputView;
 import java.util.List;
 
 public class StringAdderController {
-    private final InputView inputView;
-    private final OutputView outputView;
-    private final AdderService adderService;
-
-    public StringAdderController() {
-        this.inputView = new InputView();
-        this.adderService = new AdderService();
-        this.outputView = new OutputView();
-    }
 
     public void run() {
-        String additionInput = inputView.getAdditionInput();
-        String delimiters = inputView.getDefaultDelimiters();
-        if(inputView.containsCustomDelimiter(additionInput)) {
-            delimiters = inputView.getCustomDelimiter(additionInput);
-            additionInput = inputView.deleteCustomDelimiter(additionInput);
+        String additionInput = InputView.getAdditionInput();
+        String delimiters = InputView.getDefaultDelimiters();
+        if(InputView.containsCustomDelimiter(additionInput)) {
+            delimiters = InputView.getCustomDelimiter(additionInput);
+            additionInput = InputView.deleteCustomDelimiter(additionInput);
         }
 
-        List<String> tokens = inputView.separateStringToList(additionInput, delimiters);
+        List<String> tokens = InputView.separateStringToList(additionInput, delimiters);
         NumberValidator.validateContainsOnlyPositiveDigits(tokens);
 
-        List<Integer> operands = inputView.getOperands(tokens);
+        List<Integer> operands = InputView.getOperands(tokens);
 
-        int sum = adderService.sumAll(operands);
-        outputView.printSumResult(sum);
+        int sum = AdderService.sumAll(operands);
+        OutputView.printSumResult(sum);
     }
 }
