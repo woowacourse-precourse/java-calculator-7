@@ -10,7 +10,7 @@ public class Application {
         }
     }
 
-    //커스텀 구분자 처리
+    //커스텀 구분자
     private static String[] split(String input) {
         String delimiter = ",|:"; // 기본 구분자 쉼표(,)와 콜론(:)
         String numbers = input;
