@@ -14,7 +14,6 @@ public class Application {
 
         String delimiter = ",|:";
 
-        // 커스텀 구분자 처리
         if (input.startsWith("//")) {
             int newlineIndex = input.indexOf("\\n");
 
@@ -24,13 +23,18 @@ public class Application {
 
             String customDelimiter = input.substring(2, newlineIndex);
             delimiter = customDelimiter + "|" + delimiter;
-            input = input.substring(newlineIndex + 2);  // 구분자 이후의 본문만 남김
+            input = input.substring(newlineIndex + 2);
         }
 
         String[] nums = input.split(delimiter);
         int result = 0;
+
         for (String num : nums) {
-            result += Integer.parseInt(num);
+            int number = Integer.parseInt(num);
+            if (number < 0) {
+                throw new IllegalArgumentException("음수가 입력 되었습니다.");
+            }
+            result += number;
         }
 
         System.out.println("결과 : " + result);
