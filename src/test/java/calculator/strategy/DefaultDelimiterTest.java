@@ -31,7 +31,8 @@ class DefaultDelimiterTest {
                 Arguments.of("1,2,3", new String[]{"1", "2", "3"}),
                 Arguments.of("2:3:4", new String[]{"2", "3", "4"}),
                 Arguments.of("1,2:3:4", new String[]{"1", "2", "3", "4"}),
-                Arguments.of("1:2:3,4", new String[]{"1", "2", "3", "4"})
+                Arguments.of("1:2:3,4", new String[]{"1", "2", "3", "4"}),
+                Arguments.of("1.2:2.3:3.4,4.5", new String[]{"1.2", "2.3", "3.4", "4.5"})
         );
     }
 }

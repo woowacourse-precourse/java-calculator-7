@@ -20,13 +20,13 @@ class CalculatorServiceTest {
 
     @ParameterizedTest(name = "입력값: {0}, 기대값: {1}")
     @MethodSource("provideInputWithDefaultDelimiterAndPositiveNumber")
-    void 입력_값이_기본_구분자이고_양수일_때_더하기(String input, long expected) {
+    void 입력_값이_기본_구분자이고_양수일_때_더하기(String input, Number expected) {
         // given
         CalculatorRequestDto requestDto = new CalculatorRequestDto(input);
 
         // when
         CalculatorResponseDto responseDto = calculatorService.sum(requestDto);
-        long sumResult = responseDto.sumResult();
+        Number sumResult = responseDto.sumResult();
 
         // then
         assertThat(sumResult).isEqualTo(expected);
@@ -34,21 +34,21 @@ class CalculatorServiceTest {
 
     @ParameterizedTest(name = "입력값: {0}, 기대값: {1}")
     @MethodSource("provideInputWithCustomDelimiterAndPositiveNumber")
-    void 입력_값이_커스텀_구분자이고_양수일_때_더하기(String input, long expected) {
+    void 입력_값이_커스텀_구분자이고_양수일_때_더하기(String input, Number expected) {
         // given
         CalculatorRequestDto requestDto = new CalculatorRequestDto(input);
 
         // when
         CalculatorResponseDto responseDto = calculatorService.sum(requestDto);
-        long sumResult = responseDto.sumResult();
+        Number sumResult = responseDto.sumResult();
 
         // then
         assertThat(sumResult).isEqualTo(expected);
     }
 
     @ParameterizedTest(name = "입력값: {0}")
-    @ValueSource(strings = {"a", "1.2", "a,b", "1,a,3", "1.2,2,3"})
-    void 예외_테스트_입력_값이_기본_구분자이고_문자_또는_실수가_포함_된_경우(String input) {
+    @ValueSource(strings = {"a", "a,b", "1,a,3"})
+    void 예외_테스트_입력_값이_기본_구분자이고_문자가_포함_된_경우(String input) {
         // given
         CalculatorRequestDto requestDto = new CalculatorRequestDto(input);
 
@@ -83,8 +83,8 @@ class CalculatorServiceTest {
     }
 
     @ParameterizedTest(name = "입력값: {0}")
-    @ValueSource(strings = {"//;\\na", "//@\\n1.2", "//#\\na#b", "//;\\n1;a;3", "// \\n1.2 2 3"})
-    void 예외_테스트_입력_값이_커스텀_구분자이고_문자_또는_실수가_포함_된_경우(String input) {
+    @ValueSource(strings = {"//;\\na", "//#\\na#b", "//;\\n1;a;3"})
+    void 예외_테스트_입력_값이_커스텀_구분자이고_문자가_포함_된_경우(String input) {
         // given
         CalculatorRequestDto requestDto = new CalculatorRequestDto(input);
 
@@ -126,10 +126,10 @@ class CalculatorServiceTest {
 
         // when
         CalculatorResponseDto responseDto = calculatorService.sum(requestDto);
-        long sumResult = responseDto.sumResult();
+        Number sumResult = responseDto.sumResult();
 
         // then
-        assertThat(sumResult).isZero();
+        assertThat(sumResult).isEqualTo(0L);
     }
 
     @Test
@@ -147,17 +147,22 @@ class CalculatorServiceTest {
     static Stream<Arguments> provideInputWithDefaultDelimiterAndPositiveNumber() {
         return Stream.of(
                 Arguments.of("1", 1L),
+                Arguments.of("1.0", 1L),
                 Arguments.of("1,2", 3L),
+                Arguments.of("1.2,2.3", 3.5),
                 Arguments.of("1:2", 3L),
+                Arguments.of("1.2:2.3", 3.5),
                 Arguments.of("1,2,3", 6L),
                 Arguments.of("1,2:3", 6L),
-                Arguments.of("1:2:3", 6L)
+                Arguments.of("1:2:3", 6L),
+                Arguments.of("1.2:2.3:3.4", 6.9)
         );
     }
 
     static Stream<Arguments> provideInputWithCustomDelimiterAndPositiveNumber() {
         return Stream.of(
                 Arguments.of("//;\\n1", 1L),
+                Arguments.of("//;\\n1.0", 1L),
                 Arguments.of("//!\\n1!2", 3L),
                 Arguments.of("//@\\n1@2@3", 6L),
                 Arguments.of("//asd\\n1asd2asd3", 6L),
@@ -165,7 +170,10 @@ class CalculatorServiceTest {
                 Arguments.of("// \\n1 2 3", 6L),
                 Arguments.of("//\b\\n1\b2\b3", 6L),
                 Arguments.of("//\n\\n1\n2\n3", 6L),
-                Arguments.of("//,\\n1,2,3", 6L)
+                Arguments.of("//,\\n1,2,3", 6L),
+                Arguments.of("//;\\n1.2;2.3;3.4", 6.9),
+                Arguments.of("//.\\n1.2.3", 6L),
+                Arguments.of("//..\\n1..2..3", 6L)
         );
     }
 }

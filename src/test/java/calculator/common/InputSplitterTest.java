@@ -45,13 +45,15 @@ class InputSplitterTest {
                 Arguments.of("1,2,3", new String[]{"1", "2", "3"}, 3),
                 Arguments.of("2:3:4", new String[]{"2", "3", "4"}, 3),
                 Arguments.of("1,2:3:4", new String[]{"1", "2", "3", "4"}, 4),
-                Arguments.of("1:2:3,4", new String[]{"1", "2", "3", "4"}, 4)
+                Arguments.of("1:2:3,4", new String[]{"1", "2", "3", "4"}, 4),
+                Arguments.of("1.2:2.3:3.4,4.5", new String[]{"1.2", "2.3", "3.4", "4.5"}, 4)
         );
     }
 
     static Stream<Arguments> provideInputWithCustomDelimiter() {
         return Stream.of(
                 Arguments.of("//;\\n1", new String[]{"1"}, 1),
+                Arguments.of("//;\\n1.0", new String[]{"1.0"}, 1),
                 Arguments.of("//!\\n1!2", new String[]{"1", "2"}, 2),
                 Arguments.of("//@\\n1@2@3", new String[]{"1", "2", "3"}, 3),
                 Arguments.of("//asd\\n1asd2asd3", new String[]{"1", "2", "3"}, 3),

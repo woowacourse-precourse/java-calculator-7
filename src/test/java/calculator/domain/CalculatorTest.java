@@ -16,20 +16,20 @@ class CalculatorTest {
 
     @ParameterizedTest(name = "입력값: {0}, 기대값: {1}")
     @MethodSource("providePositiveNumber")
-    void 양수_더하기(String[] splitInputs, long expected) {
+    void 양수_더하기(String[] splitInputs, Number expected) {
         // given
         Calculator calculator = new Calculator(splitInputs);
 
         // when
-        long result = calculator.sum();
+        Number result = calculator.sum();
 
         // then
         assertThat(result).isEqualTo(expected);
     }
 
     @ParameterizedTest(name = "입력값: {0}")
-    @ValueSource(strings = {"a", "1.2", "a,b", "1,a,3", "1.2,2,3"})
-    void 예외_테스트_문자_또는_실수가_포함된_더하기(String input) {
+    @ValueSource(strings = {"a", "a,b", "1,a,3"})
+    void 예외_테스트_문자가_포함된_더하기(String input) {
         // given
         String[] splitInputs = input.split(",", -1);
         Calculator calculator = new Calculator(splitInputs);
@@ -41,7 +41,7 @@ class CalculatorTest {
     }
 
     @ParameterizedTest(name = "입력값: {0}")
-    @ValueSource(strings = {"-1", "0", "0,1", "-1,2,3", "-1,-2,-3"})
+    @ValueSource(strings = {"-1", "0", "0,1", "-1,2,3", "-1,-2,-3", "-1.0,2,3"})
     void 예외_테스트_양수가_아닌_수가_포함된_더하기(String input) {
         // given
         String[] splitInputs = input.split(",", -1);
@@ -54,7 +54,7 @@ class CalculatorTest {
     }
 
     @ParameterizedTest(name = "입력값: {0}")
-    @ValueSource(strings = {"1,", "1,2,", "1,,"})
+    @ValueSource(strings = {"1,", "1,2,", "1,,", "1.2,,"})
     void 예외_테스트_빈_값이_포함된_더하기(String input) {
         // given
         String[] splitInputs = input.split(",", -1);
@@ -69,8 +69,11 @@ class CalculatorTest {
     static Stream<Arguments> providePositiveNumber() {
         return Stream.of(
                 Arguments.of(new String[]{"1"}, 1L),
+                Arguments.of(new String[]{"1.0"}, 1L),
                 Arguments.of(new String[]{"1", "2"}, 3L),
-                Arguments.of(new String[]{"1", "2", "3"}, 6L)
+                Arguments.of(new String[]{"1", "2", "3"}, 6L),
+                Arguments.of(new String[]{"1.2", "2.3", "3.4"}, 6.9),
+                Arguments.of(new String[]{"1.3", "2.3", "3.4"}, 7L)
         );
     }
 }
