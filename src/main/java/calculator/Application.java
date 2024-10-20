@@ -1,19 +1,26 @@
 package calculator;
 
 import java.io.BufferedReader;
+//import java.io.IOException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+
+
 public class Application {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args)  {
         // 버퍼리더 객체 생성
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        String str;
         int sum = 0;
 
         System.out.println("덧셈할 문자열을 입력해 주세요");
-        str = br.readLine();  // 한 줄 입력받기
+        String str = null;  // 한 줄 입력받기
+        try {
+            str = br.readLine();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         // 빈 문자열인 경우 합계 0 처리
         if (str.trim().isEmpty()) {
@@ -48,7 +55,14 @@ public class Application {
         // 숫자들의 합 계산
         try {
             for (String num : numbers) {
-                sum += Integer.parseInt(num.trim()); // 각 숫자를 합산
+                int number = Integer.parseInt(num.trim());
+
+                // 음수인 경우 예외 던지기
+                if (number < 0) {
+                    throw new IllegalArgumentException();
+                }
+
+                sum += number; // 숫자를 합산
             }
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException();
