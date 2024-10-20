@@ -38,6 +38,18 @@ public class Application {
         return sum;
     }
 
+    private static int convertToInt(String str) {
+        try {
+            int number = Integer.parseInt(str);
+            if (number < 0) {
+                throw new IllegalArgumentException("음수는 허용되지 않습니다.");
+            }
+            return number;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("잘못된 숫자 형식입니다.");
+        }
+    }
+
     private static String getCustomDelimiter(String input) {
         Matcher matcher = Pattern.compile("//(.*)\\\\n(.*)").matcher(input);
         if (matcher.find()) {
