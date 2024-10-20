@@ -36,6 +36,7 @@ public class Tokenizer {
         try {
             for (int i = 0; i < nums.length; i++) {
                 result[i] = Integer.parseInt(nums[i]);
+                if (result[i] < 0) throw new IllegalArgumentException();
             }
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(e.getMessage());
