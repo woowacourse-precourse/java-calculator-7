@@ -16,10 +16,10 @@ public class Application {
         try {
             // 입력된 문자열의 합 계산
             int result = calculator.calculateSum(input);
-            System.out.println("결과: " + result);
+            System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
             // 잘못된 입력이 있을 경우 예외 처리
-            ErrorHandler.handleError(e);
+            throw e;
         } finally {
             scanner.close();
         }
