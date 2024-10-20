@@ -35,7 +35,6 @@ public class Application {
         }
     }
 
-<<<<<<< HEAD
     public static String escapeSpecialRegexChars(String delimiter) {
         return delimiter.replaceAll("([\\\\.*+?^${}()|\\[\\]])", "\\\\$1");
     }
