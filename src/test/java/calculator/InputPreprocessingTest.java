@@ -35,8 +35,8 @@ class InputPreprocessingTest {
     }
 
     @Test
-    void 요소에_음수_0이_들어간_경우_오류() {
-        String input = "-1,2,3";
+    void 요소에_0이_들어간_경우_오류() {
+        String input = "0,2,3";
         Delimiter delimiter = new Delimiter(input);
         assertThatThrownBy(() -> new InputPreprocessing(delimiter).of(input))
                 .hasMessage("더하는 값은 양수만 가능합니다.");
