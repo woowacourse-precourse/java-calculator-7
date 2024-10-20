@@ -8,15 +8,13 @@ public class Application {
 
     private static final String DEFAULT_SEPERATOR_REGEX = ",|:";
     private static final String CUSTOM_SEPERATOR_REGEX = "//(.)\\\\n(.*)";
-    private static final String POSITIVE_NUMBER_REGX = "^[0-9]*$";
+    private static final String POSITIVE_NUMBER_REGX = "^[0-9]+$";
 
     public static void main(String[] args) {
 
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String expression = getExpression();
-
         validateExpression(expression);
-
         String[] numList = parseNumbersFromExpression(expression);
         System.out.println("결과 : " + getResult(numList));
     }
