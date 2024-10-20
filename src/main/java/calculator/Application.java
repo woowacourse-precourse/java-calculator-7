@@ -31,7 +31,7 @@ public class Application {
         System.out.printf("결과 : %d\n", sum);
     }
 
-    private static String[] checkDelimiter(String inputValue){
+    public static String[] checkDelimiter(String inputValue){
         String[] res = {",|:", inputValue};
 
         if(inputValue.contains("//") && inputValue.contains("\\n")){
@@ -53,7 +53,7 @@ public class Application {
         return res;
     }
 
-    private static int checkValueCorrect(String value){
+    public static int checkValueCorrect(String value){
         int intValue;
 
         try {
