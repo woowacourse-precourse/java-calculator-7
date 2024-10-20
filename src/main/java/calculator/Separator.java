@@ -15,6 +15,35 @@ public class Separator {
         nums = new ArrayList<>();
     }
 
+    public void makeNumsAndParams(String input) {
+        checkParams(input);
+        List<Integer> extractedNumbers = extractNumbers(input);
+        saveNums(extractedNumbers);
+    }
+
+    private void checkParams(String input) {
+        String processedString = checkNewParam(input);
+        //허용된 파라미터로만 이루어졌는지 체크
+        for (char ch : processedString.toCharArray()) {
+            if (!Character.isDigit(ch)){
+                if (!params.contains(ch)){
+                    throw new IllegalArgumentException();
+                }
+            }
+        }
+
+
+    }
+
+    private String checkNewParam(String input) {
+        if (input.startsWith("//")){
+            addParam(input.charAt(2));
+            System.out.println("input = " + input);
+            return input.substring(5);
+        }
+        return input;
+    }
+
     public List<Integer> extractNumbers(String input) {
         List<Integer> numbers = new ArrayList<>();
         StringBuilder currentNumber = new StringBuilder();
@@ -36,6 +65,9 @@ public class Separator {
         }
 
         return numbers;
+    }
+    private void addParam(Character param) {
+        params.add(param);
     }
 
     public List<Integer> getNums() {
