@@ -71,6 +71,10 @@ class StringCalculatorTest {
         // 끝
         assertThatThrownBy(() -> StringCalculator.calculate("1,2,3,"))
                 .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> StringCalculator.calculate("1,2,3a"))
+                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> StringCalculator.calculate("//9\\n1,2,39")) // 9가 구분자임에 유의
+                .isInstanceOf(IllegalArgumentException.class);
 
         // 시작과 끝
         assertThatThrownBy(() -> StringCalculator.calculate(",1,2,3,"))

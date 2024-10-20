@@ -63,8 +63,23 @@ public class StringCalculator {
      * @return 분리된 문자열 배열
      */
     private static String[] splitByDelimiters(String str, List<Character> delimiters) {
+        // 맨뒤 문자가 계산 대상이 맞는지 확인합니다. split 메서드는 마지막 구분자 뒤에 아무것도 없는 경우 예외를 던지지 않습니다.
+        String lastStr = str.substring(str.length() - 1);
+        if (!isNumeric(lastStr) || delimiters.contains(lastStr.charAt(0))) {
+            throw new IllegalArgumentException("문자의 형식이 잘못되었습니다.");
+        }
+
         String regex = buildDelimitersRegex(delimiters);
         return str.split(regex);
+    }
+
+    private static boolean isNumeric(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     /**
