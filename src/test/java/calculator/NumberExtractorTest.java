@@ -6,12 +6,12 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-class InputExtractorTest {
-    private static InputExtractor extractor;
+class NumberExtractorTest {
+    private static NumberExtractor extractor;
 
     @BeforeAll
     static void beforeAll() {
-        extractor = new InputExtractor();
+        extractor = new NumberExtractor();
     }
 
     @Test

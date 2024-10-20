@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class InputExtractor {
+public class NumberExtractor {
     public static final String numberRegex = "\\d+";
 
     public List<Integer> extractNumbers(String input) {
