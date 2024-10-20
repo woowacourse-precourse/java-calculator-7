@@ -27,7 +27,11 @@ public class CalculatorController {
 
         Separators separators = getSeparators(input);
         String inputWithoutCustomSeparators = customSeparatorManager.sliceCustomSeparators(input);
-        NumericString result = SeparatorCalculator.sum(inputWithoutCustomSeparators, separators);
+
+        SeparatorCalculator calculator = SeparatorCalculator.positiveCalculator(
+                inputWithoutCustomSeparators,
+                separators);
+        NumericString result = calculator.sum();
 
         outputView.printResult(result);
     }
