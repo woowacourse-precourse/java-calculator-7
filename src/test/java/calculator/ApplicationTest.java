@@ -5,7 +5,6 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -34,7 +33,7 @@ class ApplicationTest extends NsTest {
                 Arguments.of("1:2", "결과 : 3"),
                 Arguments.of("1:100", "결과 : 101"), // 한자리수 + 여러자리수
                 Arguments.of("1:10,2", "결과 : 13"), // 기본 구분자 여러개 사용
-                Arguments.of("", "결과 : 0"), // 아무것도 입력안하는 경우
+                Arguments.of("\n", "결과 : 0"), // 아무것도 입력안하는 경우
                 Arguments.of("//;\\n1;3", "결과 : 4"), // 커스텀 구분자 사용
                 Arguments.of("//;\\n", "결과 : 0"), // 커스텀 구분자 사용 & 아무것도 입력안하는 경우
                 Arguments.of("//-\\n1-3", "결과 : 4"), // 사칙연산 구분자인 경우

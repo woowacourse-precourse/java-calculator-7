@@ -15,7 +15,10 @@ public class InputUtils {
             if (delimiter.isEmpty()) {
                 throw new IllegalArgumentException();
             }
-            input = input.substring(delimiterIndex + 1);
+            input = input.substring(delimiterIndex + 2);
+        }
+        if (input.isEmpty()) {
+            input = "0";
         }
 
         validateExpression(input);
@@ -74,7 +77,7 @@ public class InputUtils {
     private static int validateNumericInput(String token) {
         try {
             // 옳바른 양수인지 확인 01은 숫자가 아님
-            if (token.charAt(0) == '0') {
+            if (token.charAt(0) == '0' && token.length() > 1) {
                 throw new IllegalArgumentException();
             }
             int number = Integer.parseInt(token); // 숫자로 변환 시도
