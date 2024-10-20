@@ -43,7 +43,8 @@ public class Application {
             	System.err.println("커스텀 구분자 사용 시 형식을 지켜주세요.");
             	throw new IllegalArgumentException();
             }
-    		arr = str.split(custom);
+            str = str.replaceAll(custom, ",");
+            arr = str.split(",|:");
     	}
     	else {
     		throw new IllegalArgumentException();
