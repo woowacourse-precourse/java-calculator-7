@@ -59,6 +59,38 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 실수_쉼표_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("1.1,2.2,3.3");
+            assertThat(output()).contains("결과 : 6.6");
+        });
+    }
+
+    @Test
+    void 실수_콜론_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("1.1:2.2:3.3");
+            assertThat(output()).contains("결과 : 6.6");
+        });
+    }
+
+    @Test
+    void 실수_커스텀_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("//;\\n1.1;2.2");
+            assertThat(output()).contains("결과 : 3.3");
+        });
+    }
+    
+    @Test
+    void ZERO_예외_테스트() {
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException("0,2,3"))
+                .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
     void 음수_예외_테스트() {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("-1,2,3"))
