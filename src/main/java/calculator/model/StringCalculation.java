@@ -2,7 +2,7 @@ package calculator.model;
 
 public class StringCalculation {
 
-    public static int calculate(String[] expression) {
+    public int calculate(String[] expression) {
         if (expression[0].isEmpty()) {
             return 0;
         }

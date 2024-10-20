@@ -18,7 +18,7 @@ public class Delimiter {
         delimiter.add(":");
     }
 
-    public static String[] splitWithCustomDelimiter(String expression) {
+    public String[] splitWithCustomDelimiter(String expression) {
         Matcher m = pattern.matcher(expression.replace("\\n", "\n"));
         if (m.find()) {
             String[] splitedExpression = splitExpression(m);
@@ -29,7 +29,7 @@ public class Delimiter {
         return splitedExpression;
     }
 
-    private static String[] splitExpression(Matcher m) {
+    private String[] splitExpression(Matcher m) {
         String customDelimiter = m.group(1);
 
         for (char c : customDelimiter.toCharArray()) {
@@ -41,14 +41,14 @@ public class Delimiter {
         return splitedExpression;
     }
 
-    private static void checkExpressionHasInvalidExpression(String[] splitedExpression) {
+    private void checkExpressionHasInvalidExpression(String[] splitedExpression) {
         Arrays.stream(splitedExpression)
                 .forEach(i -> {
                     validOperandHasInvalidDelimiter(i);
                 });
     }
 
-    private static void validOperandHasInvalidDelimiter(String i) {
+    private void validOperandHasInvalidDelimiter(String i) {
         for (char s : i.toCharArray()) {
             if (!Character.isDigit(s)) {
                 throw new NumberFormatException("허용되지 않은 구분자가 존재합니다");
@@ -56,11 +56,11 @@ public class Delimiter {
         }
     }
 
-    public static String[] splitWithDelimiter(String expression) {
+    public String[] splitWithDelimiter(String expression) {
         return expression.split(",|:");
     }
 
-    private static String customAndBasicDelimiter() {
+    private String customAndBasicDelimiter() {
         return delimiter.stream()
                 .collect(Collectors.joining("|"));
     }
