@@ -51,4 +51,20 @@ class SeparatorServiceImplTest {
         assertSame(3, allSeparator.size());
     }
 
+
+    @DisplayName("한 글자가 아닌 구분자 저장 예외")
+    @Test
+    void extractLongCustomSeparator() {
+        assertThrows(IllegalArgumentException.class, () ->
+                separatorService.extractCustomSeparator(separatorService
+                        .extractCustomSeparator("//!!\n123:123")));
+    }
+
+    @DisplayName("숫자인 구분자 저장 예외")
+    @Test
+    void extractNumericCustomSeparator() {
+        assertThrows(IllegalArgumentException.class, () ->
+                separatorService.extractCustomSeparator(separatorService
+                        .extractCustomSeparator("//3\n123:123")));
+    }
 }

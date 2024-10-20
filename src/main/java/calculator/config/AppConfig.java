@@ -1,6 +1,7 @@
 package calculator.config;
 
 import calculator.repository.MemorySeparatorRepository;
+import calculator.service.Parser;
 import calculator.service.SeparatorService;
 import calculator.service.SeparatorServiceImpl;
 import calculator.view.InputView;
@@ -24,5 +25,9 @@ public class AppConfig {
         separatorInitializer.initialize();
 
         return new SeparatorServiceImpl(repository);
+    }
+
+    public Parser parser() {
+        return new Parser(separatorService());
     }
 }
