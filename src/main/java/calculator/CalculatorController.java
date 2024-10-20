@@ -7,50 +7,30 @@ import java.util.stream.Collectors;
 public class CalculatorController {
     private static final CalculatorView calculatorView = new CalculatorView();
     private static final List<Integer> nums = new ArrayList<>();
-    private static final Delimiters delimiters = new Delimiters();
+    private final Delimiters delimiters;
+    private final StringChecker stringChecker;
+    private String inputString;
 
-    public static void run() {
+    public CalculatorController(String inputString) {
+        this.inputString = inputString;
+        this.delimiters = new Delimiters();
+        this.stringChecker = new StringChecker(inputString, delimiters);
         startCalculator();
     }
 
-    private static void startCalculator() {
-        String inputString = calculatorView.readString();
-
-        if (inputString.startsWith("//")) {
-            inputString = checkCustomDelimiter(inputString);
-        }
-
-        checkString(inputString);
-        calculate();
-    }
-
-    private static void checkString(String inputString) {
-        if (inputString.isEmpty()) {
+    private void startCalculator() {
+        if (stringChecker.checkEmpty()) {
             calculatorView.printResult(0);
             return;
         }
 
-        if (delimiters.getDelimiters().stream().anyMatch(d -> inputString.startsWith(String.valueOf(d))) ||
-                delimiters.getDelimiters().stream().anyMatch(d -> inputString.endsWith(String.valueOf(d)))) {
-            throw new IllegalArgumentException("문자열을 잘못 입력하였습니다.");
-        }
-
+        stringChecker.checkBoundary();
+        inputString = stringChecker.checkCustomDelimiter();
         splitString(inputString);
+        calculate();
     }
 
-    private static String checkCustomDelimiter(String inputString) {
-        String prefix = inputString.substring(0, 2);
-        String suffix = inputString.substring(3, 5);
-
-        if (prefix.equals("//") && suffix.equals("\\n")) {
-            delimiters.addDelimiter(inputString.substring(2, 3));
-            return inputString.substring(5);
-        }
-
-        throw new IllegalArgumentException("커스텀 문자열을 잘못 입력하였습니다.");
-    }
-
-    private static void splitString(String inputString) {
+    private void splitString(String inputString) {
         String regex = "[" + delimiters.getDelimiters().stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining()) + "]";
@@ -65,7 +45,7 @@ public class CalculatorController {
         }
     }
 
-    private static void calculate() {
+    private void calculate() {
         int sumResult = 0;
         for (int i : nums) {
             sumResult += i;
