@@ -47,7 +47,6 @@ class ApplicationTest extends NsTest {
             String input = "//[\\1[2[3";
             Pattern pattern = Pattern.compile(RegularExpression.CUSTOM_LINE.getRegularExpression());
             Matcher matcher = pattern.matcher(input);
-
             try {
                 ValidationUtils.validateCustomLineFormat(matcher);
                 throw new Exception("예외가 발생하지 않았습니다.");
@@ -88,6 +87,7 @@ class ApplicationTest extends NsTest {
             }
         });
     }
+
 
     @Override
     public void runMain() {
