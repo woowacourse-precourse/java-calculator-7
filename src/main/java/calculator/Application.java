@@ -17,6 +17,7 @@ public class Application {
             System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
+            throw e; // 테스트 코드에서 예외를 감지하도록 다시 던짐
         }
     }
 
@@ -64,11 +65,12 @@ public class Application {
         try {
             int value = Integer.parseInt(number);
             if (value < 0) {
-                throw new IllegalArgumentException("양수만 입력해주세요.");  // 음수 예외 발생
+                throw new IllegalArgumentException("양수만 입력해주세요");  // 음수 예외 발생
             }
             return value;
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("잘못된 숫자 형식입니다: " + number);
+            throw new IllegalArgumentException("잘못된 숫자 형식입니다 " +
+                    ": " + number);  // 형식 예외 발생
         }
     }
 
