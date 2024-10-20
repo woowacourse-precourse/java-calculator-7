@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 
 public class ExpressionTest{
 
+    /*
+        validation 에서 검증이 끝난 올바른 계산식들만 input 으로 들어옴
+     */
     @Test
     void 계산식_생성() {
         String input = "1,2,3";
