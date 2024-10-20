@@ -5,7 +5,7 @@ import calculator.domain.NumberStorage;
 import calculator.view.ResultOutput;
 import calculator.view.UserInput;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ApplicationController {
@@ -20,9 +20,9 @@ public class ApplicationController {
 
 
     public ApplicationController(){
-        this.userInputMessage = userInputController.getUserInputMessage();
-        this.delimiter = userInputController.getDelimiter();
-        this.numberStorage = new NumberStorage();
+        userInputMessage = userInputController.getUserInputMessage();
+        delimiter = userInputController.getDelimiter();
+        numberStorage = new NumberStorage();
         updateNumberStorage();
         totalSum = numberStorage.getTotalSum();
         resultOutput.promptResultOutput(changeResultToString(totalSum));

@@ -3,14 +3,6 @@ package calculator.domain;
 import calculator.controller.UserInputController;
 
 public class InputParser {
-    private final String userInputMessage;
-    private final Delimiter delimiter;
-
-    public InputParser(String userInputMessage, Delimiter delimiter){
-        this.delimiter = delimiter;
-        this.userInputMessage = userInputMessage;
-        checkAllowedDelimiters(userInputMessage, delimiter);
-    }
 
     public static void checkAllowedDelimiters(String userInputMessage, Delimiter delimiter){
         for(int i = 0; i < userInputMessage.length(); i++){
