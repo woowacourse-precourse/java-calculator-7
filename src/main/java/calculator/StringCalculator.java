@@ -46,4 +46,9 @@ public class StringCalculator {
 
         System.out.println("최종 구분자 리스트: " + dividerList); //메서드 기능 점검용 코드
     }
+
+    public void removeDividerSettings() {
+        this.noBlankInput = this.noBlankInput.replaceAll("//(.+)\\\\n", "");
+        System.out.println("구분자 지정 문구 제거된 문자열 : " + noBlankInput); //메서드 기능 점검용 코드
+    }
 }
