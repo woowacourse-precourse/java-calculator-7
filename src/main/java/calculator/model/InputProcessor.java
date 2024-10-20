@@ -6,7 +6,7 @@ import java.util.List;
 public class InputProcessor {
 
     private String input;
-    private List<String> delimiterList = new ArrayList<>();
+    private final List<String> delimiterList = new ArrayList<>();
     private String regex;
 
     private static final String CUSTOM_DELIM_START = "//";
