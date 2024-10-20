@@ -5,7 +5,9 @@ public class Application {
         InputHandler inputHandler = new InputHandler();
         Calculator calculator = new Calculator();
 
+        System.out.println("덧셈할 문자열을 입력해주세요.");
         String inputStr = inputHandler.getInput();
+
         calculator.parseAndAddNumbers(inputStr);
         int result = calculator.sum();
 
