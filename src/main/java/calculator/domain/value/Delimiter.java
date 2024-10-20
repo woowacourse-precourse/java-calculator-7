@@ -1,24 +1,30 @@
 package calculator.domain.value;
 
 
+import calculator.error.ErrorMessage;
+
 public class Delimiter {
+    private static final int SINGLE_CHARACTER_LENGTH = 1;
+    private static final String DIGIT_REGEX = "\\d";
+    private static final String NON_WORD_CHARACTER_REGEX = "\\W";
+
     private final String value;
 
     public Delimiter(String value) {
         if (value == null || value.isBlank()) {
-            throw new IllegalArgumentException("커스텀 구분자는 비어 있을 수 없습니다.");
+            throw new IllegalArgumentException(ErrorMessage.EMPTY_DELIMITER);
         }
-        if (value.length() != 1) {
-            throw new IllegalArgumentException("커스텀 구분자는 한 글자여야 합니다.");
+        if (value.length() != SINGLE_CHARACTER_LENGTH) {
+            throw new IllegalArgumentException(ErrorMessage.SINGLE_CHARACTER_DELIMITER);
         }
-        if (value.matches("\\d")) {
-            throw new IllegalArgumentException("커스텀 구분자에 숫자가 포함될 수 없습니다.");
+        if (value.matches(DIGIT_REGEX)) {
+            throw new IllegalArgumentException(ErrorMessage.DIGIT_NOT_ALLOWED_IN_DELIMITER);
         }
         this.value = escapeIfSpecialCharacter(value);
     }
 
     private String escapeIfSpecialCharacter(String value) {
-        if (value.matches("[\\W]")) {
+        if (value.matches(NON_WORD_CHARACTER_REGEX)) {
             return "\\" + value;
         }
         return value;

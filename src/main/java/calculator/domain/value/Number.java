@@ -1,6 +1,10 @@
 package calculator.domain.value;
 
+import calculator.error.ErrorMessage;
+
 public class Number {
+    private static final int ZERO = 0;
+
     private final int value;
 
     public Number(String value) {
@@ -9,13 +13,15 @@ public class Number {
     }
 
     private void validate(String value) {
+        int num;
         try {
-            int num = Integer.parseInt(value);
-            if (num < 0) {
-                throw new IllegalArgumentException("음수는 허용되지 않습니다.");
-            }
+            num = Integer.parseInt(value);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
+            throw new IllegalArgumentException(ErrorMessage.INVALID_NUMBER_FORMAT);
+        }
+
+        if (num < ZERO) {
+            throw new IllegalArgumentException(ErrorMessage.NEGATIVE_NUMBER_NOT_ALLOWED);
         }
     }
 

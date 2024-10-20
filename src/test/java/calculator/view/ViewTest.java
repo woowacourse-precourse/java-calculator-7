@@ -38,7 +38,7 @@ public class ViewTest {
         System.setOut(new PrintStream(outputStream));
 
         // When
-        outputView.displayInputMessage();
+        outputView.printInputMessage();
 
         // Then
         assertThat(outputStream.toString()).isEqualTo("덧셈할 문자열을 입력해 주세요.\n");
@@ -58,7 +58,7 @@ public class ViewTest {
         System.setOut(new PrintStream(outputStream));
 
         // When
-        outputView.printResult(result);
+        outputView.printResultMessage(result);
 
         // Then
         assertThat(outputStream.toString()).isEqualTo("결과 : 6\n");

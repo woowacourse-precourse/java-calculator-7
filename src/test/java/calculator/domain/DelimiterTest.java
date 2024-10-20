@@ -82,6 +82,6 @@ class DelimiterTest {
         // When, Then
         assertThatThrownBy(() -> Delimiters.of(emptyDelimiter))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("커스텀 구분자는 비어 있을 수 없습니다.");
+                .hasMessage("커스텀 구분자가 올바르게 입력되지 않았습니다.");
     }
 }

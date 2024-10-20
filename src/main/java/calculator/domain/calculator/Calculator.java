@@ -2,6 +2,7 @@ package calculator.domain.calculator;
 
 import calculator.domain.collection.Delimiters;
 import calculator.domain.collection.Numbers;
+import calculator.error.ErrorMessage;
 
 public class Calculator {
     private final Delimiters delimiters;
@@ -9,15 +10,14 @@ public class Calculator {
 
     private Calculator(String input) {
         if (input == null) {
-            throw new IllegalArgumentException("입력 값이 없습니다.");
+            throw new IllegalArgumentException(ErrorMessage.NULL_INPUT);
         }
 
-        input = deleteBlank(input);
+        input = removeWhitespace(input);
 
         this.delimiters = Delimiters.of(input);
         String processedInput = delimiters.removeDelimiterDefinition(input);
         String[] tokens = delimiters.split(processedInput);
-
 
         if (tokens.length == 0 || processedInput.isBlank()) {
             this.numbers = Numbers.empty();
@@ -30,7 +30,7 @@ public class Calculator {
         return new Calculator(input);
     }
 
-    public String deleteBlank(String input) {
+    private String removeWhitespace(String input) {
         return input.replaceAll("\\s+", "");
     }
 

@@ -1,10 +1,14 @@
 package calculator.view;
 
 public class OutputView {
-    public void displayInputMessage() {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
+    private static final String RESULT_MESSAGE = "결과 : ";
+    private static final String INPUT_PROMPT = "덧셈할 문자열을 입력해 주세요.";
+
+    public void printInputMessage() {
+        System.out.println(INPUT_PROMPT);
     }
-    public void printResult(int result) {
-        System.out.println("결과 : " + result);
+
+    public void printResultMessage(int result) {
+        System.out.println(RESULT_MESSAGE + result);
     }
 }
