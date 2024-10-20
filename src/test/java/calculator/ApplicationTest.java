@@ -33,25 +33,33 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 구분자_패턴_예외_테스트() {
+    void 문자_입력_예외_테스트() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> runException("//;\n1,2;3"))
+            assertThatThrownBy(() -> runException("1,a:3"))
                     .isInstanceOf(IllegalArgumentException.class);
         });
     }
 
     @Test
-    void 기본_구분자_쉼표_사용_테스트() {
+    void 특수_문자_입력_예외_테스트() {
         assertSimpleTest(() -> {
-            run("1,2,3");
-            assertThat(output()).contains("결과 : 6");
+            assertThatThrownBy(() -> runException("1,@:3"))
+                    .isInstanceOf(IllegalArgumentException.class);
         });
     }
 
     @Test
-    void 기본_구분자_콜론_사용_테스트() {
+    void 구분자_패턴_예외_테스트() {
         assertSimpleTest(() -> {
-            run("1:2:3");
+            assertThatThrownBy(() -> runException("//;\\n1,2!3"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+    }
+
+    @Test
+    void 기본_구분자_사용_테스트() {
+        assertSimpleTest(() -> {
+            run("1,2:3");
             assertThat(output()).contains("결과 : 6");
         });
     }
@@ -59,8 +67,16 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_사용_테스트() {
         assertSimpleTest(() -> {
-            run("//;\\n1;2;3");
-            assertThat(output()).contains("결과 : 6");
+            run("//;\\n1,2:3;4");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
+    @Test
+    void 빈_커스텀_구분자_사용_테스트() {
+        assertSimpleTest(() -> {
+            run("// \\n1 2,3:4");
+            assertThat(output()).contains("결과 : 10");
         });
     }
 
@@ -75,48 +91,34 @@ class ApplicationTest extends NsTest {
     @Test
     void 여러_줄바꿈_커스텀_구분자_사용_테스트() {
         assertSimpleTest(() -> {
-            run("//\\n\\n\\n1\\n\\n2\\n\\n3");
+            run("//\\n\\n\\n\\n1\\n\\n\\n2\\n\\n\\n3");
             assertThat(output()).contains("결과 : 6");
         });
     }
 
     @Test
-    void 빈_문자_0_처리_테스트() {
+    void 긴_커스텀_구분자_사용_테스트() {
         assertSimpleTest(() -> {
-            run("\n");
-            assertThat(output()).contains("결과 : 0");
+            run("//@$@#DR%GG#W$U^SZTGFHDTSR^T#AWZDHS%ETRAW#@\\n1@$@#DR%GG#W$U^SZTGFHDTSR^T#AWZDHS%ETRAW#@2@$@#DR%GG#W$U^SZTGFHDTSR^T#AWZDHS%ETRAW#@3");
+            assertThat(output()).contains("결과 : 6");
         });
     }
 
     @Test
-    void 큰_정수_처리_테스트() {
+    void 매우_큰_정수_처리_테스트() {
         assertSimpleTest(() -> {
-            run("1000000,2000000");
-            assertThat(output()).contains("결과 : 3000000");
+            run("1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,1");
+            assertThat(output()).contains(
+                    "결과 : 1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001");
         });
     }
 
     @Test
-    void 깊은_소수_처리_테스트() {
+    void 매우_긴_소수_처리_테스트() {
         assertSimpleTest(() -> {
-            run("0.0000001,0.0000002");
-            assertThat(output()).contains("결과 : 0.0000003");
-        });
-    }
-
-    @Test
-    void 정수_출력_테스트() {
-        assertSimpleTest(() -> {
-            run("1,2");
-            assertThat(output()).contains("결과 : 3");
-        });
-    }
-
-    @Test
-    void 소수_출력_테스트() {
-        assertSimpleTest(() -> {
-            run("1.5,2.3");
-            assertThat(output()).contains("결과 : 3.8");
+            run("0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001,0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002");
+            assertThat(output()).contains(
+                    "결과 : 0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003");
         });
     }
 
