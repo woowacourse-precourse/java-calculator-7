@@ -3,6 +3,7 @@ package calculator.model;
 import static calculator.model.Calculator.getSum;
 import static calculator.model.InputValidator.validateExtractedNumbers;
 
+import calculator.model.constants.DefaultDelimiter;
 import camp.nextstep.edu.missionutils.Console;
 import java.util.Vector;
 import java.util.regex.Matcher;
@@ -20,9 +21,7 @@ public class InputHandler {
 
 
     public void ensureCustomDelimiter() {
-        String regExp = "^//(.)\\\\n";
-
-        Pattern pattern = Pattern.compile(regExp);
+        Pattern pattern = Pattern.compile("^//(.)\\\\n");
         Matcher matcher = pattern.matcher(inputString);
 
         if (matcher.find()) {
@@ -34,17 +33,25 @@ public class InputHandler {
 
     public void extractNumbers() {
         String target = inputString;
-        String regExp = "[" + customDelimiter + ",:]+";
-
         target = removeDelimiterCreator(target);
 
+        String regExp = generateRegex();
         String[] extractedStrings = target.split(regExp);
+
         validateExtractedNumbers(extractedStrings);
 
         for (String extractedString : extractedStrings) {
             int extractedNumber = Integer.parseInt(extractedString);
             extractedNumbers.add(extractedNumber);
         }
+    }
+
+    public String generateRegex() {
+        String colon = DefaultDelimiter.COLON.getValue();
+        String comma = DefaultDelimiter.COMMA.getValue();
+
+        return "[" + String.join(customDelimiter, colon, comma) + "]+";
+
     }
 
     public String removeDelimiterCreator(String target) {
