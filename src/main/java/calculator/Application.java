@@ -12,13 +12,13 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
 
-        String pattern = "^//.\\\\n.*";
+        String pattern = "^//.+\\\\n.*";
         StringTokenizer st = null;
         BigInteger result = BigInteger.ZERO;
 
         if (input.matches(pattern)) {
-            String delim = String.valueOf(input.charAt(2));
-            st = new StringTokenizer(input.substring(5), delim);
+            String delim = input.substring(2, input.indexOf("\\n"));
+            st = new StringTokenizer(input.substring(input.indexOf("\\n") + 2), delim);
         } else {
             st = new StringTokenizer(input, ",:");
         }
