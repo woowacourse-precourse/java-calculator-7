@@ -1,6 +1,6 @@
-package calculator;
+package calculator.parser;
 
-public class InputValidator {
+public class InputParser {
     public void validateInput(String input) {
         if (input == null) {
             throw new IllegalArgumentException("Error: 문자열은 null이 될수 없습니다.");
@@ -8,5 +8,8 @@ public class InputValidator {
         if (input.matches(".*\".*\".*")) {
             throw new IllegalArgumentException("Error: 하나의 문자열만 입력해야 합니다.");
         }
+    }
+    public String parse(String input) {
+        return input.trim();
     }
 }
