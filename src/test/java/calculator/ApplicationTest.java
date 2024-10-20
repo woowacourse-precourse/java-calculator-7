@@ -17,10 +17,34 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 구분자_중복_사용() {
+        assertSimpleTest(() -> {
+            run("1::2,3,,4");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
+    @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 형식_예외_테스트_0() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("0:1,2"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 형식_예외_테스트_음수() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,2:-3"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
