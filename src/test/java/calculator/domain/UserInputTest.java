@@ -2,10 +2,47 @@ package calculator.domain;
 
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class UserInputTest {
 
+    @Test
+    void 구분자가_있는_유저_확인(){
+        UserInput userInput=new UserInput("//!\\n12!3");
+
+        UserInput actualInput=userInput.checkExtractor();
+
+        assertThat(actualInput.getInput()).isEqualTo("12!3");
+
+    }
+
+    @Test
+    void 구분자가_없는_유저_확인(){
+        UserInput userInput=new UserInput("12!3");
+
+        UserInput actualInput=userInput.checkExtractor();
+
+        assertThat(userInput.getInput()).isEqualTo("12!3");
+    }
+
+    @Test
+    void 구분자가_있는_SPLITOR_확인(){
+        UserInput userInput=new UserInput("//!\\n12!3");
+
+        UserInput actualInput=userInput.checkExtractor();
+
+        assertThat(actualInput.getSeperatorRegex()).isEqualTo(",|;|!");
+    }
+
+    @Test
+    void 구분자가_없는_SPLITOR_확인(){
+        UserInput userInput=new UserInput("12:3");
+
+        UserInput actualInput=userInput.checkExtractor();
+
+        assertThat(actualInput.getSeperatorRegex()).isEqualTo(",|;");
+    }
 
     @Test
     void 구분자가_숫자이면_예외_발생(){
