@@ -1,18 +1,17 @@
 package calculator;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 public class NumberExtractor {
-    private ArrayList<Integer> numArr;
+    private final ArrayList<Integer> numArr;
+    private final DelimiterParser delimiterParser;
 
-    public NumberExtractor() {
+    public NumberExtractor(DelimiterParser delimiterParser) {
+        this.delimiterParser = delimiterParser;
         numArr = new ArrayList<>();
     }
 
-    public ArrayList<Integer> extractNumbers(DelimiterParser delimiterParser, String input) {
-
+    public ArrayList<Integer> extractNumbers(String input) {
         // 숫자 추출 및 구분자 처리
         StringBuilder curNum = new StringBuilder();
         int letterIndex = delimiterParser.getParseIndex();
@@ -20,31 +19,42 @@ public class NumberExtractor {
         while (letterIndex < input.length()) {
             char currentChar = input.charAt(letterIndex);
 
-            // 숫자인 경우 숫자를 계속 이어붙임
-            if (Character.isDigit(currentChar)) {
-                curNum.append(currentChar);
+            if (isDigit(currentChar)) {
+                appendDigit(curNum, currentChar);
+            } else if (isDelimiter(currentChar)) {
+                addNumberIfPresent(curNum);
             } else {
-                // 구분자를 만났을 경우
-                String currentDelimiter = String.valueOf(currentChar);
-                if (delimiterParser.getDelimiters().contains(currentDelimiter)) {
-                    if (curNum.length() > 0) {
-                        numArr.add(Integer.parseInt(curNum.toString()));
-                        curNum.setLength(0);  // 숫자 초기화
-                    }
-                } else {
-                    // 구분자가 아니면 예외 처리
-                    throw new IllegalArgumentException("잘못된 구분자가 포함되었습니다: " + currentChar);
-                }
+                throw new IllegalArgumentException("잘못된 구분자가 포함되었습니다: " + currentChar);
             }
             letterIndex++;
         }
 
-        // 마지막 숫자 처리
+        addNumberIfPresent(curNum);  // 마지막 숫자 처리
+        return numArr;
+    }
+
+    // 숫자인지 확인하는 메서드
+    private boolean isDigit(char character) {
+        return Character.isDigit(character);
+    }
+
+    // 구분자인지 확인하는 메서드
+    private boolean isDelimiter(char character) {
+        String currentDelimiter = String.valueOf(character);
+        return delimiterParser.getDelimiters().contains(currentDelimiter);
+    }
+
+    // 숫자를 덧붙이는 메서드
+    private void appendDigit(StringBuilder curNum, char currentChar) {
+        curNum.append(currentChar);
+    }
+
+    // 숫자를 추가하고 초기화하는 메서드
+    private void addNumberIfPresent(StringBuilder curNum) {
         if (curNum.length() > 0) {
             numArr.add(Integer.parseInt(curNum.toString()));
+            curNum.setLength(0);  // 숫자 초기화
         }
-
-        return numArr;
     }
 
     public ArrayList<Integer> getNumbers() {
