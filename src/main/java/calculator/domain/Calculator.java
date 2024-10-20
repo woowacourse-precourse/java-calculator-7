@@ -6,7 +6,6 @@ import java.util.Optional;
 
 public class Calculator {
 
-    private String input;
     private List<Delimiter> delimiters;
     private CustomDelimiterParser customDelimiterParser;
     private String analyzingTarget;
