@@ -62,11 +62,11 @@ public class Calculator {
         for (String s : str) {
             if (isNumber(s)) {
                 num = Integer.parseInt(s);
+                if (num < 0) {
+                    throw new IllegalArgumentException("잘못된 입력입니다: " + num);
+                }
+                sum += num;
             }
-            if (num < 0) {
-                throw new IllegalArgumentException("잘못된 입력입니다: " + num);
-            }
-            sum += num;
         }
 
         return sum;
