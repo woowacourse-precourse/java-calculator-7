@@ -1,6 +1,8 @@
 package calculator.util;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ValidationUtils {
 
@@ -16,25 +18,17 @@ public class ValidationUtils {
         validateAllowedCharacters(delimiter);
     }
 
+    public static void validateInput(String input, List<String> delimiters) {
+        validateDelimiterAbsent(input, delimiters);
+        validateIncorrectDelimiterPosition(input, delimiters);
+        validateConsecutiveDelimiters(input, delimiters);
+    }
+
     public static void validateValidInteger(String value) {
         try {
             Integer.parseInt(value);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("입력된 값이 유효한 정수가 아닙니다. 문제가 되는 입력값: [" + value + "]");
-        }
-    }
-
-    private static void validateDelimiterAbsent(String input, List<String> delimiters) {
-        if (delimiters.stream().noneMatch(input::contains)) {
-            throw new IllegalArgumentException("구분자가 없습니다. 입력값은 구분자를 포함한 형식의 문자열이어야 합니다");
-        }
-    }
-
-    private static void validateIncorrectDelimiterPosition(String input, List<String> delimiters) {
-        for (String delimiter : delimiters) {
-            if (input.startsWith(delimiter) || input.endsWith(delimiter)) {
-                throw new IllegalArgumentException("구분자가 잘못된 위치에 있습니다. 입력값: [" + input + "]");
-            }
         }
     }
 
@@ -51,6 +45,31 @@ public class ValidationUtils {
         return numbers.stream()
                 .filter(number -> number <= 0)
                 .toList();
+    }
+
+    private static void validateDelimiterAbsent(String input, List<String> delimiters) {
+        if (delimiters.stream().noneMatch(input::contains)) {
+            throw new IllegalArgumentException("구분자가 없습니다. 입력값은 구분자를 포함한 형식의 문자열이어야 합니다");
+        }
+    }
+
+    private static void validateIncorrectDelimiterPosition(String input, List<String> delimiters) {
+        for (String delimiter : delimiters) {
+            if (input.startsWith(delimiter) || input.endsWith(delimiter)) {
+                throw new IllegalArgumentException("구분자가 잘못된 위치에 있습니다. 입력값: [" + input + "]");
+            }
+        }
+    }
+
+    private static void validateConsecutiveDelimiters(String input, List<String> delimiters) {
+        String delimiterPattern = String.join("", delimiters);
+
+        Pattern pattern = Pattern.compile("[" + delimiterPattern + "]{2,}");
+        Matcher matcher = pattern.matcher(input);
+
+        if (matcher.find()) {
+            throw new IllegalArgumentException("연속된 구분자가 포함된 잘못된 입력입니다. 입력값: [" + input + "]");
+        }
     }
 
     private static void validateNullOrEmpty(String delimiter) {

@@ -20,6 +20,7 @@ public class Calculator {
         }
 
         List<String> delimiters = buildDelimiters(input);
+        ValidationUtils.validateInput(input, delimiters);
         String numbers = extractNumbers(input, delimiters.size());
 
         return sumNumbers(numbers.split(String.join("|", delimiters)));
