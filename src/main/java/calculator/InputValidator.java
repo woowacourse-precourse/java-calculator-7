@@ -1,5 +1,7 @@
 package calculator;
 
+import calculator.enums.ErrorMessage;
+
 import java.util.Objects;
 
 public class InputValidator {
@@ -10,7 +12,7 @@ public class InputValidator {
     public static void validate(String input) {
 
         if (Objects.isNull(input))
-            throw new IllegalArgumentException("Invalid error : input is null");
+            throw new IllegalArgumentException(ErrorMessage.INPUT_IS_NULL.getMessage());
 
         input = input.trim();
         String expression = input;
@@ -33,14 +35,14 @@ public class InputValidator {
         String[] tokens = input.split("\\\\n");
 
         if (tokens.length > 2)
-            throw new IllegalArgumentException("Invalid syntax");
+            throw new IllegalArgumentException(ErrorMessage.INVALID_CUSTOM_SEPARATOR_SYNTAX.getMessage());
 
         String separator = tokens[0].substring(2);
         if (separator.length() != 1)
-            throw new IllegalArgumentException("Invalid error : length of custom separator is must 1");
+            throw new IllegalArgumentException(ErrorMessage.INVALID_CUSTOM_SEPARATOR_LENGTH.getMessage());
 
         if (Character.isDigit(separator.charAt(0)))
-            throw new IllegalArgumentException("Invalid error : custom separator is not number");
+            throw new IllegalArgumentException(ErrorMessage.CUSTOM_SEPARATOR_IS_NUMBER.getMessage());
     }
 
     private static void validExpression(String expression, String separatorRegex) {
@@ -51,7 +53,7 @@ public class InputValidator {
                 continue;
 
             if (!n.matches("[0-9]+"))
-                throw new IllegalArgumentException("Invalid error : invalid number");
+                throw new IllegalArgumentException(ErrorMessage.INVALID_OPERAND.getMessage());
 
         }
     }
