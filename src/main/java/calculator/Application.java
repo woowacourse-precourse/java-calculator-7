@@ -44,6 +44,14 @@ public class Application {
         return numbers.split(delimiter);
     }
 
+    private static int parseNumber(String number) {
+        try {
+            return Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException();
+        }
+    }
+
     public static void main(String[] args) {
         // TODO: 프로그램 구현
 
