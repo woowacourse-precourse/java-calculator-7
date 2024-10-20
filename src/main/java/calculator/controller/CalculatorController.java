@@ -21,7 +21,7 @@ public class CalculatorController {
         String[] tokens = splitInput(token);
         System.out.println(Arrays.toString(tokens));
         int result = calculator.sum(tokens);
-        System.out.println(result);
+        OutputPrinter.printResult(result);
 
     }
 }
