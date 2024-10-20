@@ -28,8 +28,8 @@ public class CalculatorUtil {
         if (inputValue.contains(":")) delimiters.add(":");
 
         if (matcher.find()) {
-            String customDelimiters = matcher.group(1);
-            delimiters.add(customDelimiters);
+            String customDelimiter = matcher.group(1);
+            delimiters.add(customDelimiter);
         }
 
         return delimiters;
