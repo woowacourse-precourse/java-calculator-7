@@ -48,6 +48,14 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 빈값인_입력값이_포함될때() {
+        assertSimpleTest(() -> {
+            run("");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
