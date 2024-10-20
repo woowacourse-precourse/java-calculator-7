@@ -1,73 +1,89 @@
 package calculator;
 
+import java.util.Arrays;
+import java.util.regex.Pattern;
+
 import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
-    private static final String DEFAULT_SEPARATOR = ",|:";
     private static final String CUSTOM_SEPARATOR_PREFIX = "//";
-    private static final String CUSTOM_SEPARATOR_SUFFIX = "\n";
+    private static final String NEW_LINE = "\n";
+    private static final String DEFAULT_SEPARATOR = "[,;]";
+
+    StringCalculator calculator = new Application().new StringCalculator();
 
     public static void main(String[] args) {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String input = Console.readLine();
-        System.out.println("결과 : " + calculateNum(input));
-    }
-
-    private static int calculateNum(String input) {
-        if (input == null || input.trim().isEmpty()) {
-            return 0;
-        }
-
-        String separator = DEFAULT_SEPARATOR;
-        String numbersStr = input;
-
-        if (hasCustomSeparator(input)) {
-            separator = extractCustomSeparator(input);
-            numbersStr = extractNumbers(input);
-        }
-
-        return calculateSum(numbersStr.split(separator));
-    }
-
-    private static boolean hasCustomSeparator(String input) {
-        return input.startsWith(CUSTOM_SEPARATOR_PREFIX);
-    }
-
-    private static String extractCustomSeparator(String input) {
-        char separator = input.charAt(2);
-        if (separator == '\\') {
-            return "\\" + input.charAt(3);
-        }
-        return String.valueOf(separator);
-    }
-
-    private static String extractNumbers(String input) {
-        int suffixIndex = input.indexOf(CUSTOM_SEPARATOR_SUFFIX);
-        if (suffixIndex == -1) {
-            throw new IllegalArgumentException("잘못된 커스텀 구분자 형식입니다.");
-        }
-        return input.substring(suffixIndex + 1);
-    }
-
-    private static int calculateSum(String[] numbers) {
-        int sum = 0;
-        for (String number : numbers) {
-            if (!number.trim().isEmpty()) {
-                sum += parseNumber(number.trim());
-            }
-        }
-        return sum;
-    }
-
-    private static int parseNumber(String number) {
         try {
-            int result = Integer.parseInt(number);
-            if (result < 0) {
-                throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
-            }
-            return result;
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자가 아닌 값이 입력되었습니다.");
+            System.out.println("덧셈할 문자열을 입력해 주세요.");
+            String input = Console.readLine();
+            int result = new Application().calculator.calculate(input);
+            System.out.println("결과 : " + result);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
         }
     }
+
+    public class StringCalculator {
+
+        public int calculate(String input) {
+            if (isBlankOrNull(input)) {
+                return 0;
+            }
+
+            String[] numbers = parseNumbers(input);
+            return sum(numbers);
+        }
+
+        private boolean isBlankOrNull(String input) {
+            return input == null || input.trim().isEmpty();
+        }
+
+        private String[] parseNumbers(String input) {
+            if (hasCustomDelimiter(input)) {
+                return parseWithCustomDelimiter(input);
+            }
+            return input.split(DEFAULT_SEPARATOR);
+        }
+
+        private boolean hasCustomDelimiter(String input) {
+            return input.startsWith(CUSTOM_SEPARATOR_PREFIX);
+        }
+
+        private String[] parseWithCustomDelimiter(String input) {
+            String delimiter = extractCustomDelimiter(input);
+            String numbersString = extractNumbersString(input);
+            return numbersString.split(delimiter);
+        }
+
+        private String extractCustomDelimiter(String input) {
+            int delimiterStart = CUSTOM_SEPARATOR_PREFIX.length();
+            int delimiterEnd = input.indexOf(NEW_LINE);
+            return Pattern.quote(input.substring(delimiterStart, delimiterEnd));
+        }
+
+        private String extractNumbersString(String input) {
+            int numbersStart = input.indexOf(NEW_LINE) + 1;
+            return input.substring(numbersStart);
+        }
+
+        private int sum(String[] numbers) {
+            return Arrays.stream(numbers)
+                    .map(this::parseNumber)
+                    .mapToInt(Integer::intValue)
+                    .sum();
+        }
+
+        private int parseNumber(String number) {
+            int value = Integer.parseInt(number.trim());
+            validateNonNegative(value);
+            return value;
+        }
+
+        private void validateNonNegative(int number) {
+            if (number < 0) {
+                throw new IllegalArgumentException("음수는 허용되지 않습니다.");
+            }
+        }
+    }
+
 }
