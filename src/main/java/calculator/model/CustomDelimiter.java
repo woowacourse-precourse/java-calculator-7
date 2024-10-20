@@ -2,14 +2,14 @@ package calculator.model;
 
 import java.util.Optional;
 
-public class CustomDelimiterParser {
+public class CustomDelimiter {
     private static final String PREFIX = "//";
     private static final String SUFFIX = "\\n";
 
     private static final int NO_SUFFIX_FOUND = -1;
 
-    public static CustomDelimiterParser getInstance() {
-        return new CustomDelimiterParser();
+    public static CustomDelimiter getInstance() {
+        return new CustomDelimiter();
     }
 
     public Optional<String> parse(String input) {

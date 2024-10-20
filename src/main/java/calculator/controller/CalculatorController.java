@@ -1,6 +1,6 @@
 package calculator.controller;
 
-import calculator.model.CustomDelimiterParser;
+import calculator.model.CustomDelimiter;
 import calculator.model.Delimiters;
 import calculator.model.InputParser;
 import calculator.model.NumberValidator;
@@ -29,13 +29,13 @@ public class CalculatorController {
     }
 
     private String[] parseByDelimiter(String input) {
-        CustomDelimiterParser customDelimiterParser = CustomDelimiterParser.getInstance();
-        Optional<String> customDelimiter = customDelimiterParser.parse(input);
-        Delimiters delimiters = customDelimiter
+        CustomDelimiter customDelimiter = CustomDelimiter.getInstance();
+        Optional<String> customDelimiterOrEmpty = customDelimiter.parse(input);
+        Delimiters delimiters = customDelimiterOrEmpty
                 .map(Delimiters::createWithCustomDelimiter)
                 .orElse(Delimiters.create());
-        String cutInput = customDelimiter
-                .map(delimiter -> customDelimiterParser.excludeFromPrefixToSuffixBy(input))
+        String cutInput = customDelimiterOrEmpty
+                .map(delimiter -> customDelimiter.excludeFromPrefixToSuffixBy(input))
                 .orElse(input);
         List<String> allDelimiters = delimiters.getAllDelimiters();
         InputParser inputParser = InputParser.getInstance();
