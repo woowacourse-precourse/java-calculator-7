@@ -4,10 +4,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Separator {
-    private String SEPARATOR = ",|:";
-
     public String[] separate(String input) {
-        return separate(input, SEPARATOR);
+        return separate(input, Constants.SEPARATOR);
     }
 
     public String[] separate(String input, String separator) {
@@ -39,7 +37,7 @@ public class Separator {
     }
 
     public String getSeparator(String input) {
-        String regex = SEPARATOR;
+        String regex = Constants.SEPARATOR;
 
         if (isContainsCustomSeparatorSymbol(input)) {
             Matcher match = Pattern
