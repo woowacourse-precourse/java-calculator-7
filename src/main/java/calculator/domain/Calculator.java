@@ -1,11 +1,10 @@
 package calculator.domain;
 
 public class Calculator {
-    private Separator separator;
-    private Operands operands;
+    private final Operands operands;
 
     public Calculator(String inputValue) {
-        this.separator = new Separator(inputValue);
+        Separator separator = new Separator(inputValue);
         String[] splitInput = separator.splitBySeparator(inputValue);
         this.operands = new Operands(splitInput);
     }

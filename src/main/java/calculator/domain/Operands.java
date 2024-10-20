@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Operands {
-    private List<Operand> operands = new ArrayList<>();
+    private final List<Operand> operands = new ArrayList<>();
 
     public Operands(String[] splitInput) {
         for (String elem : splitInput) {
