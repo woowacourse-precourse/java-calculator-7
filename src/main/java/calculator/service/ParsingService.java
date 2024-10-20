@@ -19,7 +19,6 @@ public class ParsingService {
         }
         errorCheck(operandStr);
         operandStr = parseCustomDelimiter(operandStr, delimiters);
-
         parse(operandStr, delimiters, operandList);
 
         return new OperandDTO(operandList);
@@ -38,22 +37,12 @@ public class ParsingService {
 
     //구분자에 따라 문자열을 분리하는 기능
     private static void parse(String operandStr, ArrayList<Character> delimiters, ArrayList<Integer> operandList){
-        StringBuilder sb = new StringBuilder();
-        //구분자로 구분
-        for(char ch : operandStr.toCharArray()){
-            if(delimiters.contains(ch) && !sb.isEmpty()){
-                operandList.add(Integer.parseInt(sb.toString()));
-                sb.setLength(0);
-            }
-            else if(delimiters.contains(ch) && sb.isEmpty()){
-                throw new IllegalArgumentException();
-            }
-            else {
-                checkInteger(ch);
-                sb.append(ch);
-            }
+        String regex = createRegexFromDelimiters(delimiters);
+
+        String[] tokens = operandStr.split(regex);
+        for (String token : tokens) {
+
         }
-        operandList.add(Integer.parseInt(sb.toString()));
     }
 
     private static String parseCustomDelimiter(String operandStr, ArrayList<Character> delimiters){
@@ -74,8 +63,5 @@ public class ParsingService {
         return regexBuilder.toString();
     }
 
-    private static void checkInteger(char ch){
-        if(!Character.isDigit(ch))
-            throw new IllegalArgumentException();
-    }
+
 }
