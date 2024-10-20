@@ -7,6 +7,7 @@ public class InputProcessor {
 
     private String input;
     private List<String> delimiterList = new ArrayList<>();
+    private String regex;
 
     private static final String CUSTOM_DELIM_START = "//";
     private static final String CUSTOM_DELIM_END = "\n";
@@ -33,6 +34,33 @@ public class InputProcessor {
 
             input = input.substring(input.indexOf(CUSTOM_DELIM_END) + CUSTOM_DELIM_END.length());
         }
+    }
+
+    public boolean isValidInput() {
+        if (input.isEmpty()) {
+            input = "0";
+            return true;
+        } else if (this.isDefaultCase()) {
+            if (!input.replaceAll(regex + "|[0-9]", "").isEmpty()) {
+                throw new IllegalArgumentException("잘못된 입력입니다. 입력 문자열은 " +
+                        "커스텀 구분자 외 다른 문자를 포함할 수 없습니다.");
+            }
+            return true;
+        } else if (this.isCustomCase()) {
+            getCustomDelimiter();
+            regex = String.join("|", delimiterList);
+            if (delimiterList.contains("")) {
+                throw new IllegalArgumentException("잘못된 입력입니다. 빈칸(\"\")은 커스텀 구분자가 될 수 없습니다.");
+            } else if (regex.matches(".*[0-9].*")) {
+                throw new IllegalArgumentException("잘못된 입력입니다. 커스텀 구분자에는 숫자를 포함할 수 없습니다.");
+            } else if (!input.replaceAll(regex + "|[0-9]", "").isEmpty()) {
+                throw new IllegalArgumentException("잘못된 입력입니다. 입력 문자열은 " +
+                        "커스텀 구분자 외 다른 문자를 포함할 수 없습니다.");
+            }
+
+            return true;
+        }
+        throw new IllegalArgumentException("잘못된 입력입니다. 입력 포맷을 확인해주세요.");
     }
 
 }
