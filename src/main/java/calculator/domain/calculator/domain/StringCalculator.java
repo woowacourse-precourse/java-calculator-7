@@ -1,9 +1,5 @@
 package calculator.domain.calculator.domain;
 
-import static calculator.global.exception.ErrorMessage.INPUT_NULL;
-
-import calculator.global.exception.ErrorMessage;
-
 public class StringCalculator {
     private final String input;
     private final Delimiter delimiter;
@@ -26,7 +22,8 @@ public class StringCalculator {
         }
 
         if (input == null) {
-            throw new IllegalArgumentException(INPUT_NULL.getMessage());
+            //INPUT_NULL.getMessage()
+            throw new IllegalArgumentException();
         }
 
         return input;

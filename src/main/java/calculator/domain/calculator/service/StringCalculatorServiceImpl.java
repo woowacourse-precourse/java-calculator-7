@@ -1,8 +1,5 @@
 package calculator.domain.calculator.service;
 
-import static calculator.global.exception.ErrorMessage.NEGATIVE_NUMBER_NOT_ALLOWED;
-import static calculator.global.exception.ErrorMessage.NON_NUMERIC_INPUT;
-
 import calculator.domain.calculator.domain.StringCalculator;
 import java.util.Arrays;
 
@@ -41,11 +38,13 @@ public class StringCalculatorServiceImpl implements StringCalculatorService {
         try {
             int number = Integer.parseInt(str);
             if (number < 0) {
-                throw new IllegalArgumentException(NEGATIVE_NUMBER_NOT_ALLOWED.getMessage());
+                //NEGATIVE_NUMBER_NOT_ALLOWED.getMessage()
+                throw new IllegalArgumentException();
             }
             return number;
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(NON_NUMERIC_INPUT.getMessage());
+            //NON_NUMERIC_INPUT.getMessage()
+            throw new IllegalArgumentException();
         }
     }
 }
