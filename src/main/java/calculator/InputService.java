@@ -6,14 +6,17 @@ public class InputService {
 
     public static String readLine() {
         System.out.println("숫자가 포함된 문자열을 입력하세요: ");
-        String input = changeEmptyToZero(Console.readLine());
-        String result = changeStrNlToNl(input);
+        try {
+            String input = Console.readLine();
 
-        return result;
-    }
+            String result = changeStrNlToNl(input);
+            return result;
 
-    private static String changeEmptyToZero(String input) {
-        return input.isEmpty() ? "0" : input;
+        } catch (Exception e) {
+            throw new IllegalArgumentException(e);
+
+        }
+
     }
 
     private static String changeStrNlToNl(String input) {
