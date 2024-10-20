@@ -6,6 +6,8 @@ import java.util.List;
 public class Application {
     // 커스텀 구분자를 지정한 문자열의 패턴
     private final String CUSTOM_SEPARATOR_PATTERN = "^//.\\\\n.*";
+
+    private final Integer CUSTOM_SEPARATOR_POS = 2;
     // 기본 구분자 리스트
     private final List<Character> DEFAULT_SEPARATOR_LIST = List.of(':', ',');
     // 커스텀 구분자
@@ -45,13 +47,15 @@ public class Application {
 
     // 기본 구분자 리스트에 등록되어있는 구분자인지 검사하고 맞다면 true를 반환한다.
     // 기본 구분자 리스트에 없는 구분자이면 커스텀 구분자인지 결과를 반환한다.
-    private Boolean isRegisteredSeparator(Character separator) {
+    private void isRegisteredSeparator(Character separator) {
         for (Character registeredSeparator : DEFAULT_SEPARATOR_LIST) {
             if (registeredSeparator == separator) {
-                return true;
+                return;
             }
         }
-        return (separator == customSeparator);
+        if (separator != customSeparator) {
+            throw new IllegalArgumentException();
+        }
     }
 
     private Boolean isValidCustomSeparator() {
