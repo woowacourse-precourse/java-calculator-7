@@ -1,7 +1,7 @@
 package calculator.controller;
 
-import calculator.input.Input;
-import calculator.staticValue.StaticValue;
+import calculator.input.InputValidator;
+import calculator.staticValue.RegexPatterns;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,71 +11,70 @@ import java.util.regex.Pattern;
 
 public class CalculatorService {
 
-    private static final Input input = new Input();
+    private static final InputValidator inputValidator = new InputValidator();
 
 
-    public String[] SplitStringUsingSeparators(String inputString) {
-        Map<List<String>, String> separatorsAndString = findSeparatorsAndRemove(inputString);
+    public String[] SplitInputBySeparators(String input) {
+        Map<List<String>, String> separatorsAndString = parseCustomSeparators(input);
 
         List<String> Separators = separatorsAndString.keySet().iterator().next();
-        //String beforeCaculateString = separatorsAndString.values().iterator().next();
         String beforeCaculateString = separatorsAndString.values().stream().findFirst().orElse("");
 
         String separatorsRegex = Separators.stream().map(Pattern::quote).reduce((a, b) -> a + "|" + b).orElse("");
 
-        String customAndBasicSeparatorsRegex = separatorsRegex + "|" + StaticValue.BASIC_SEPARATORS_REGEX.getValue();
+        String customAndBasicSeparatorsRegex = separatorsRegex + "|" + RegexPatterns.BASIC_SEPARATORS.getValue();
         return beforeCaculateString.split(customAndBasicSeparatorsRegex);
     }
 
-    private static Map<List<String>, String> findSeparatorsAndRemove(String inputString) {
+    private static Map<List<String>, String> parseCustomSeparators(String input) {
         List<String> customizedSeparators = new ArrayList<>();
-        String updatedInputString = processSeparators(inputString, customizedSeparators);
+        String updatedInputString = removeSeparatorDeclarationRecursively(input, customizedSeparators);
 
-        return createSeparatorAndStringMap(customizedSeparators, updatedInputString);
+        return mapSeparatorsToString(customizedSeparators, updatedInputString);
     }
 
-    private static String processSeparators(String inputString, List<String> separators) { // 여기 이름 수정
+    private static String removeSeparatorDeclarationRecursively(String input, List<String> separators) {
         try {
-            String customizedSeparator = extractCustomizedSeparator(inputString);
+            String customizedSeparator = extractCustomSeparator(input);
             separators.add(customizedSeparator);
 
-            String updatedInputString = generateStringOfRemovingCustom(inputString, customizedSeparator);
+            String updatedInputString = removeCustomSeparatorDeclaration(input, customizedSeparator);
             System.out.println("구분자: " + customizedSeparator);
             System.out.println("구분자가 삭제된 문자열: " + updatedInputString);
 
-            return processSeparators(updatedInputString, separators);
+            return removeSeparatorDeclarationRecursively(updatedInputString, separators);
         } catch (IllegalArgumentException e) {
-            return inputString;
+            return input;
         }
     }
 
-    private static Map<List<String>, String> createSeparatorAndStringMap(List<String> customizedSeparators,
-                                                                         String updatedInputString) {
+    private static Map<List<String>, String> mapSeparatorsToString(List<String> customizedSeparators,
+                                                                   String processedInputString) {
         Map<List<String>, String> SeparatorAndString = new HashMap<>();
-        SeparatorAndString.put(customizedSeparators, updatedInputString);
+        SeparatorAndString.put(customizedSeparators, processedInputString);
         return SeparatorAndString;
     }
 
-    private static String extractCustomizedSeparator(String inputString) {
-        Matcher matcher = input.findCustomizedSeparator(inputString);
+    private static String extractCustomSeparator(String input) {
+        Matcher matcher = inputValidator.findCustomizedSeparator(input);
         return matcher.group(1);
     }
 
-    private static String generateStringOfRemovingCustom(String inputString, String customizedSeparator) {
-        return inputString.replaceAll(
-                StaticValue.CUSTOM_SEPARATOR_PREFIX.getValue()
+    private static String removeCustomSeparatorDeclaration(String input, String customizedSeparator) {
+        return input.replaceAll(
+                RegexPatterns.CUSTOM_SEPARATOR_PREFIX.getValue()
                         + Pattern.quote(customizedSeparator)
-                        + StaticValue.CUSTOM_SEPARATOR_SUFFIX.getValue(), "");
+                        + RegexPatterns.CUSTOM_SEPARATOR_SUFFIX.getValue(), "");
     }
 
 
-    public int calculateSum(String[] inputNumberString) {
+    public int calculateSum(String[] splitInputNumbers) {
         int sum = 0;
-        for (String s : inputNumberString) {
-            if (input.hasEmptyInput(s)) {
+        for (String number : splitInputNumbers) {
+            if (inputValidator.isInputEmpty(number)) {
                 return 0;
             }
-            sum += Integer.parseInt(s);
+            sum += Integer.parseInt(number);
         }
         return sum;
     }
