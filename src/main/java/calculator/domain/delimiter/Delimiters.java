@@ -25,7 +25,7 @@ public class Delimiters {
         return new Delimiters(concatDelimiters(delimiter));
     }
 
-    public Regex makeDelimiterAreaRegex() {
+    public Regex makeDelimitersRegex() {
         Regex regex = new Regex(CUSTOM_DELIMITER.getRegex());
         for (Delimiter delimiter : delimiters) {
             regex.addContinuously(delimiter.delimiter());

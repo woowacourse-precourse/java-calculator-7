@@ -9,7 +9,7 @@ import java.util.List;
 public class Splitter {
 
     public List<String> splitByDelimiters(final String input, final Delimiters delimiters) {
-        Regex regex = delimiters.makeDelimiterAreaRegex();
+        Regex regex = delimiters.makeDelimitersRegex();
 
         return Arrays.stream(CUSTOM_DELIMITER.getPattern().split(input))
                 .flatMap(s -> Arrays.stream(s.split(regex.getRegex())))
