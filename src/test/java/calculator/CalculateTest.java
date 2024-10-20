@@ -18,6 +18,15 @@ public class CalculateTest extends NsTest {
         });
     }
 
+    @Test
+    @DisplayName("문자열의 덧셈 중 오버플로우가 발생하는 케이스")
+    void overflowSum() {
+        assertSimpleTest(() -> {
+            run("9223372036854775807,123");
+            assertThat(output()).contains(OVERFLOW_SUM_MESSAGE);
+        });
+    }
+
     @Override
     protected void runMain() {
         Application.main(new String[]{});

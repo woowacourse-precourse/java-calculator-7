@@ -60,10 +60,17 @@ public class CalculatorService {
                 if (number.isEmpty())
                     continue;
                 sum += Long.parseLong(number);
+
+                if (sum < 0)
+                    throw new Exception(OVERFLOW_SUM_MESSAGE);
             }
         }
         catch (NumberFormatException e) {
             System.out.println(OVERFLOW_NUMBER_MESSAGE);
+            sum = -1L;
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
             sum = -1L;
         }
     }
