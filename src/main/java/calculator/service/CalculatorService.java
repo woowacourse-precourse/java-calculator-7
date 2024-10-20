@@ -48,6 +48,19 @@ public class CalculatorService {
     }
 
 
+    public void mainController(String input) {
+        if (checkZero(input)) {
+            return;
+        }
+        input=checkSeperate(input);
+        String[] onlyNumber=splitInput(input);
+
+        exceptionFirst(onlyNumber);
+        CalculatorView.printResult(answer);
+
+    }
+
+
 
 
 }
