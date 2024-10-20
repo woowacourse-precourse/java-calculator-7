@@ -27,6 +27,10 @@ public class Calculator {
         addCustomDelimiter();
         splitInput();
 
+        if (parts.isEmpty()) {
+            throw new IllegalArgumentException("숫자가 없습니다.");
+        }
+
         for (String num : parts) {
             double number = Double.parseDouble(num);
 
@@ -59,6 +63,10 @@ public class Calculator {
         String combinedDelimiters = String.join("|", escapeDelimiters(delimiters));
         parts = Arrays.asList(input.split(combinedDelimiters));
         parts = filterEmptyParts(parts);
+
+        if (parts.isEmpty()) {
+            throw new IllegalArgumentException("숫자가 없습니다.");
+        }
 
         for (String part : parts) {
             if (!part.matches("^[0-9.]+$")) {
