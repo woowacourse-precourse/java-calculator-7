@@ -1,6 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.Arrays;
 
 public class StringCalculator {
 
@@ -11,7 +12,7 @@ public class StringCalculator {
         String input = Console.readLine();
         UserInput userInput = new UserInput(input);
 
-        boolean isCustomDelimiter = userInput.isCustom();
+        boolean isCustomDelimiter = userInput.hasCustomDelimiter();
 
         DefaultDelimiter defaultDelimiters = new DefaultDelimiter(defaultDelimiter);
         DelimiterResult delimiterResult = new DelimiterResult(defaultDelimiters.getDefaultDelimiter());
@@ -39,8 +40,8 @@ public class StringCalculator {
     }
 
     private DelimiterResult generateDelimiterResult(UserInput userInput, DelimiterResult delimiterResult) {
-        String combineDelimiter = generateCombineDelimiter(userInput, delimiterResult);
-        return new DelimiterResult(combineDelimiter);
+        String combineDelimiters = combineDelimiters(userInput, delimiterResult);
+        return new DelimiterResult(combineDelimiters);
     }
 
     private int calculateTotalSum(Numbers numbers) {
@@ -52,7 +53,7 @@ public class StringCalculator {
         return sum;
     }
 
-    private String generateCombineDelimiter(UserInput userInput, DelimiterResult delimiterResult) {
+    private String combineDelimiters(UserInput userInput, DelimiterResult delimiterResult) {
         String extractCustomDelimiter = userInput.extractCustomDelimiter();
         CustomDelimiter customDelimiter = new CustomDelimiter(extractCustomDelimiter);
         return combineDelimiter(delimiterResult, customDelimiter.getCustomDelimiter());
@@ -70,20 +71,16 @@ public class StringCalculator {
 
     private String[] findFilterNumbers(String[] split) {
         int validCount = 0;
+
+        String[] filteredNumbers = new String[split.length];
+
         for (String number : split) {
             if (!number.isBlank()) {
-                validCount++;
+                filteredNumbers[validCount++] = number;
             }
         }
 
-        String[] filteredNumbers = new String[validCount];
-        int index = 0;
-        for (String number : split) {
-            if (!number.isBlank()) {
-                filteredNumbers[index++] = number;
-            }
-        }
-        return filteredNumbers;
+        return Arrays.copyOf(filteredNumbers, validCount);
     }
-    
+
 }
