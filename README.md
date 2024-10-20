@@ -29,7 +29,7 @@
 4. Output View
    - [X] 결과를 요구 사항에 명시된 출력 형식에 맞게 출력
 5. Split Controller
-   - [ ] Model, View 결합
+   - [X] Model, View 결합
 6. Delimeter Model
    - [X] 구분자 관리
    - [X] 커스텀 구분자를 포함한 경우, 커스텀 구분자를 찾기
