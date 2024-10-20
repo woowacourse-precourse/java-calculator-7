@@ -12,7 +12,7 @@ public class Calculator {
         numbers.addAll(numberList);
     }
 
-    public Integer calculateSum() {
+    public Integer sum() {
         Integer result = 0;
         Iterator<Integer> iterator = numbers.iterator();
         while (iterator.hasNext()) {

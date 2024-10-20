@@ -18,7 +18,7 @@ public class CalculatorService {
         Delimiters delimiters = new Delimiters(DEFAULT_DELIMITERS);
         String parsedInput = extractCustomDelimiter(userInput, delimiters);
         calculator.addNumbers(splitNumbers(parsedInput, delimiters));
-        return calculator.calculateSum();
+        return calculator.sum();
     }
 
     public String extractCustomDelimiter(String userInput, Delimiters delimiters) {
