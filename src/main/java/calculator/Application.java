@@ -9,7 +9,7 @@ public class Application {
        System.out.println("문자열을 입력해 주세요");
         String input = Console.readLine();
             int result = plus(input);
-            System.out.printf("result: %d%n", result);
+            System.out.printf("결과: %d%n", result);
     }
 
     public static int plus(String input) {
@@ -18,13 +18,20 @@ public class Application {
         }
         int sum = 0;
         String separator = "[,:]";  
+        if(input.startsWith("//")) {
+            separator = input.substring(2, input.indexOf("\\n"));
+            input = input.substring(input.indexOf("\\n")+2);
+         }
+
+         
          String[] answer = input.split(separator);
          for (int i = 0; i < answer.length; i++) {
              String number = answer[i];
                  if (Integer.parseInt(number) > 0) {
                       sum += Integer.parseInt(number);
                   } 
-         }
+                  
+              }
          return sum;
 
     }
