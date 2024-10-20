@@ -12,10 +12,12 @@ public class Calculator {
     private final CalculatorValidator calculatorValidator;
 
     private Calculator() {
+
         this.calculatorValidator = new CalculatorValidator();
     }
 
     public static Calculator getCalculator() {
+
         if (calculator == null) {
             calculator = new Calculator();
         }
