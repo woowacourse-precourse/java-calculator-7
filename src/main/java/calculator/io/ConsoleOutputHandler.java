@@ -1,5 +1,7 @@
 package calculator.io;
 
+import camp.nextstep.edu.missionutils.Console;
+
 public class ConsoleOutputHandler implements OutputHandler {
 
     @Override
@@ -10,5 +12,6 @@ public class ConsoleOutputHandler implements OutputHandler {
     @Override
     public void printResult(int result) {
         System.out.println("결과 : " + result);
+        Console.close();
     }
 }

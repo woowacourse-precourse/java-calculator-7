@@ -12,6 +12,7 @@ public class Application {
         InputHandler inputHandler = new ConsoleInputHandler();
         OutputHandler outputHandler = new ConsoleOutputHandler();
         Adder adder = new Adder();
+        InputValidator inputValidator = new InputValidator();
 
         DelimiterStrategy defaultDelimiterStrategy = new DefaultDelimiterStrategy();
         DelimiterStrategy customDelimiterStrategy = new CustomDelimiterStrategy();
@@ -20,6 +21,7 @@ public class Application {
                 inputHandler,
                 outputHandler,
                 adder,
+                inputValidator,
                 Arrays.asList(defaultDelimiterStrategy, customDelimiterStrategy)
         );
 
