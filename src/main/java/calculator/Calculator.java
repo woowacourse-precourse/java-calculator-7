@@ -10,15 +10,18 @@ public class Calculator {
         if (input == null || input.isEmpty()) {
             return 0;
         }
-        input = input.replace("\\n","\n");
+
+        input = input.replace("\\n", "\n"); // 이스케이프 문자열을 실제 줄바꿈으로 변환
 
         String[] numbers;
+
         if (input.startsWith("//")) {
+            // 커스텀 구분자 처리
             Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
             if (matcher.matches()) {
                 String customDelimiter = matcher.group(1);
                 String numbersPart = matcher.group(2);
-                numbers = numbersPart.split(Pattern.quote(customDelimiter));
+                numbers = numbersPart.split(Pattern.quote(customDelimiter) + "|,|:");
             } else {
                 throw new IllegalArgumentException("잘못된 형식입니다.");
             }
@@ -32,12 +35,13 @@ public class Calculator {
 
     private static int sumNumbers(String[] numbers) {
         int sum = 0;
-        for(String number : numbers){
+        for (String number : numbers) {
             int num = parseNumber(number);
             sum += num;
         }
         return sum;
     }
+
     private static int parseNumber(String number) {
         try {
             int num = Integer.parseInt(number);
