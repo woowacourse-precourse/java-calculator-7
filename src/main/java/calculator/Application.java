@@ -15,4 +15,8 @@ public class Application {
     private static String[] parseInput(String input) {
         return splitNumbers(input, ",|;");
     }
+
+    private static boolean hasCustomDelimiter(String input) {
+        return input.startsWith("//");
+    }
 }
