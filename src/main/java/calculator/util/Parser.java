@@ -18,7 +18,7 @@ public class Parser {
         return intList;
     }
 
-    public static List<String> splitByDelimiter(String str) {
+    private static List<String> splitByDelimiter(String str) {
         checkAndApplyCustomDelimiter();
 
         return Arrays.asList(str.split(DELIMITERS));
@@ -41,6 +41,4 @@ public class Parser {
 
         return intList;
     }
-
-
 }
