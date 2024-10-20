@@ -1,5 +1,8 @@
 package calculator.domain;
 
+import static calculator.error.ErrorType.INPUT_FORMAT_ERROR;
+import static calculator.error.ErrorType.INPUT_NEGATIVE_NUMBER_ERROR;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -8,19 +11,28 @@ public class Expression {
     private final int result;
 
     public Expression(final String[] input) {
-        validate();
         this.numbers = convertToIntegers(input);
+        validate();
         this.result = calculate();
     }
 
-    //TODO 검증 과정 추가
     private void validate() {
+        numbers.forEach(number -> {
+            if (number < 0) {
+                throw new IllegalArgumentException(INPUT_NEGATIVE_NUMBER_ERROR.getMessage());
+            }
+        });
+
     }
 
     private List<Integer> convertToIntegers(final String[] strings) {
-        return Arrays.stream(strings)
-                .map(s -> Integer.parseInt(s.trim()))
-                .toList();
+        try {
+            return Arrays.stream(strings)
+                    .map(s -> (s == null || s.trim().isEmpty()) ? 0 : Integer.parseInt(s.trim()))
+                    .toList();
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(INPUT_FORMAT_ERROR.getMessage());
+        }
     }
 
     private int calculate() {
