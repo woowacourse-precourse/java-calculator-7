@@ -33,7 +33,7 @@ public class Application {
         int result;
         char ndiv, ndiv1, ndiv2;
         ArrayList<Integer> arr;
-        int flag = 0;
+        div whereDiv;
 
         // 숫자만 있는 경우
         if (isNumeric(str)) { // 문자열에 문자가 포함되어 있나?
@@ -41,8 +41,50 @@ public class Application {
         } //공백만 있는 경우
         else if (str.isEmpty() || str.trim().isEmpty()) { // 문자가 포함되어 있지만 공백만 있나?
             return 0;
+        } // 구분 지정자(//@\n) 경우
+        else if (str.length() > 4 && str.substring(0, 2).equals("//") && str.substring(3, 5).equals("\\n")) { // //@\n 꼴의 양식인가?
+            ndiv = str.charAt(2);
+            whereDiv = new div(str, ndiv);
+            arr = whereDiv.makeArr();
+
+            // 구분지정자를 설정했지만 뒤에 구분지정자를 생성하지 않은 경우 (#1. 숫자도 없는 경우 #2. 숫자만 있음 #3. 다른 구분자가 있음)
+            if (arr.isEmpty()) {
+                if (str.length() == 5) { // #1
+                    return 0;
+                } else if (isNumeric(str.substring(5))) { // #2
+                    return Integer.parseInt(str.substring(5));
+                } else { // #3
+                    throw new IllegalArgumentException("구분자와 입력 형식이 잘못되었습니다.");
+                }
+            }else { //구분 지정자를 설정하고, 뒤에도 구분 지정자가 나오는 경우
+
+                try { //구분 지정자가 정상적으로 작동하지만, 다른 문자가 나오는 경우 예외처리 (처음 부분을 더해줌)
+                    result = Integer.parseInt(str.substring(5, arr.get(0)));
+                } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                    throw new IllegalArgumentException("숫자 변환 또는 인덱스 오류 발생: " + e.getMessage(), e);
+                }
+
+                for (int i = 0; i < arr.size() - 1; i++) {
+                    try {
+                        String substring = str.substring(arr.get(i) + 1, arr.get(i + 1));
+                        int num = Integer.parseInt(substring);
+                        result += num;
+                    } catch (NumberFormatException e) {
+                        throw new IllegalArgumentException("숫자 변환 오류 발생: " + e.getMessage(), e);
+                    }
+                }
+                // 마지막 구분 지정자부터 끝까지 더해줌
+                // 만약 문자로 끝나는 경우
+                if (arr.get(arr.size() - 1) == str.length() - 1) {
+                    return result;
+                } else { //문자로 안끝나는 경우
+                    result += Integer.parseInt(str.substring(arr.get(arr.size() - 1) + 1));
+                    return result;
+                }
+            }
         }
-        return 0;
+            return 0;
+
     }
 }
 
