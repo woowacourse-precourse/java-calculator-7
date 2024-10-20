@@ -7,7 +7,7 @@ public class Application {
         String[] nums;
         String separator = ",|:";
 
-        System.out.println("덧셈할 문자열을 입력해주세요.");
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
 
         String string = Console.readLine();
         if (string.startsWith("//")) {
