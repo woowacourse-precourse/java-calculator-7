@@ -1,5 +1,6 @@
 package calculator.model;
 
+import calculator.exception.ExceptionMessages;
 import java.util.regex.Pattern;
 
 public class StringProcessor {
@@ -9,11 +10,11 @@ public class StringProcessor {
             if (delimiterEndIndex != -1) {
                 String customDelimiter = input.substring(2, delimiterEndIndex);
                 if (customDelimiter.isEmpty()) {
-                    throw new IllegalArgumentException("커스텀 구분자를 입력해 주세요.");
+                    throw new IllegalArgumentException(ExceptionMessages.CUSTOM_DELIMITER_ERROR);
                 }
                 return Pattern.quote(customDelimiter);
             } else {
-                throw new IllegalArgumentException("잘못된 구분자 형식입니다.");
+                throw new IllegalArgumentException(ExceptionMessages.INVALID_DELIMITER_FORMAT);
             }
         }
         return null;
@@ -36,13 +37,13 @@ public class StringProcessor {
         }
 
         if (!numbers.matches("[-\\d" + delimiter + "]+")) {
-            throw new IllegalArgumentException("올바르지 않은 구분자입니다.");
+            throw new IllegalArgumentException(ExceptionMessages.INVALID_DELIMITER_ERROR);
         }
 
         String[] splitNumbers = numbers.split(delimiter);
 
         if (splitNumbers.length == 0 || numbers.matches(delimiter + "+")) {
-            throw new IllegalArgumentException("구분자를 쓸 때는 숫자를 입력해 주세요.");
+            throw new IllegalArgumentException(ExceptionMessages.MISSING_NUMBER_ERROR);
         }
 
         return splitNumbers;
