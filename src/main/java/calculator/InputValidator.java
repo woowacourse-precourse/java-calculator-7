@@ -53,8 +53,6 @@ public class InputValidator {
             if (!n.matches("[0-9]+"))
                 throw new IllegalArgumentException("Invalid error : invalid number");
 
-            if (n.charAt(0) == '0')
-                throw new IllegalArgumentException("Invalid error : first char of a number cannot be 0");
         }
     }
 }
