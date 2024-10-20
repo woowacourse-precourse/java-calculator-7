@@ -4,51 +4,27 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
 	private static final String INPUT_REQUEST_MESSAGE = "덧셈할 문자열을 입력해 주세요.";
-	private static final String DEFAULT_DELIMETERS = ",|:";
-	private static final String CUSTOM_DELIMETERS_PREFIX = "//";
-	private static final String CUSTOM_DELIMETERS_SUFFIX = "\\n";
-	
+
     public static void main(String[] args) {
-        int sum = 0;
-        
         System.out.println(INPUT_REQUEST_MESSAGE);
-        String input = Console.readLine();
         
-        if(input.isEmpty() || input.trim().isEmpty()) {
-        	System.out.println(0);
-        	return;
-        }
+        // InputHandler로 입력 처리
+        InputHandler inputHandler = new InputHandler();
+        String input = inputHandler.getInput();
         
-        String delimiters = DEFAULT_DELIMETERS;
-        String defaultInput = input;
+        // 구분자 추출 및 문자열 추출
+        String delimiters = inputHandler.getDelimiters(input);
+        String processedInput = inputHandler.getProcessedInput(input);
         
-        if(input.startsWith(CUSTOM_DELIMETERS_PREFIX)) {
-        	int delimiterStartIndex = CUSTOM_DELIMETERS_PREFIX.length();
-        	int delimiterEndIndex = input.indexOf(CUSTOM_DELIMETERS_SUFFIX, delimiterStartIndex);   
-        	
-        	if (delimiterEndIndex == -1) {
-        		throw new IllegalArgumentException("구분자가 잘못 설정되었습니다.");
-        	}
-        	delimiters = input.substring(delimiterStartIndex, delimiterEndIndex);
-        	defaultInput = input.substring(delimiterEndIndex + 2);
-        } 
+        // 문자열을 구분자로 분리
+        StringSplitter splitter = new StringSplitter();
+        String[] tokens = splitter.split(processedInput, delimiters);
         
+        // 숫자 계산 및 예외 처리
+        Calculator calculator = new Calculator();
+        int sum = calculator.calculateSum(tokens);
         
-        String[] tokens = defaultInput.split(delimiters);
-        
-        for(int i=0; i<tokens.length; i++) {
-        	try {
-        		int number = Integer.parseInt(tokens[i]);
-        		if(number < 0) {
-        			throw new IllegalArgumentException("음수 값이 포함되어 있습니다. : " + tokens[i]);
-        		}
-        		sum += number;
-        	} catch (NumberFormatException e) {
-        		throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
-        	}
-        	
-        }
-        
+        // 결과 출력
         System.out.println("결과 : " + sum);
     }
 }
