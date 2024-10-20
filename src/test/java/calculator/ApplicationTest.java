@@ -27,33 +27,60 @@ class ApplicationTest extends NsTest {
 
     @Test
     void 예외_테스트_255자_이상() {
-        //Todo: 길이가 225이상인 문자열을 입력했을 경우 예외
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("123;123;123;123;123;123;123;123;123;123,123,123," +
+                        "123,12,31,23,123,1,23,123,2,32,32,2,2,2,,3,23,23,2,3,2,3,2,,3,1,23,1,23,123,1,23," +
+                        "1,23,12312;12;31;23;123;123;12;3;123;1;23;12;3;12;3;12;3;123;1;23;1;23;123;1;23;1;" +
+                        "23;12;3;12;3;123;1;23;12;31;23;12;31;2;31;23;1;23;12;3;12;31;2;31;2;31;2;31;2;31;2;31" +
+                        ";2;31;23;1;23;12;3;12312;31;231;2;"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
     }
 
     @Test
     void 예외_테스트_커스텀_구분자를_가진_문자열을_위한_최소길이_미충족() {
-        //Todo: "//"로 시작하는 문자열 중에서 길이가 5 이하인 문자열일 경우 예외처리
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
 
     }
 
     @Test
     void 예외_테스트_커스텀_구분자를_가진_문자열_올바르지않은_형식(){
-        //Todo: "//"로 시작하는 문자열이 "//<구분자>\n" 형식이 아니면 예외처리
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;;n6"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+
     }
 
     @Test
     void 예외_테스트_커스텀_구분자가_숫자일_경우(){
-        //Todo: 커스텀 구분자가 숫자일 경우 예외처리
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//4\\n6"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+
     }
 
     @Test
     void 예외_테스트_덧셈_결과값이_10억_이상일_경우(){
         //Todo: 덧셈 결과값이 10억 이상일 경우 예외처리
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("500000000:500000001:3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+
     }
 
     @Test
     void 예외_테스트_입력한_숫자가_10억_이상일_경우(){
         //Todo: 입력한 숫자가 10억 이상일 경우 예외처리
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1000000000:500000001:3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
     }
 
 
