@@ -8,14 +8,14 @@ public class Application {
 
         System.out.println("덧셈할 문자열을 입력해주세요.");
         String input = Console.readLine();
-        boolean isCustomDelimiter = false;
+        String validTarget = input;
 
         if (isCustomDelimiterDefined(input)) {
             delimiters = getCustomDelimiter(input);
-            isCustomDelimiter = true;
+            validTarget = input.substring(input.indexOf("\\n") + 2);
         }
 
-        if (!isValidInput(input, delimiters, isCustomDelimiter)) {
+        if (!isValidInput(validTarget, delimiters)) {
             throw new IllegalArgumentException("입력값이 유효하지 않습니다.");
         }
 
@@ -24,15 +24,9 @@ public class Application {
         System.out.println("결과 : " + sumResult);
     }
 
-    private static boolean isValidInput(String input, String delimiters, boolean isCustomDelimiter) {
-        if (input.isBlank()) {
+    private static boolean isValidInput(String validTarget, String delimiters) {
+        if (validTarget.isBlank()) {
             return true;
-        }
-
-        String validTarget = input;
-
-        if (isCustomDelimiter) {
-            validTarget = input.substring(input.indexOf("\n") + 1);
         }
 
         String regex = "^\\d+(" + "[" + delimiters + "]" + "\\d+)*$";
@@ -41,13 +35,13 @@ public class Application {
     }
 
     private static boolean isCustomDelimiterDefined(String input) {
-        return input.startsWith("//") && (input.indexOf("\n") == input.indexOf("//") + 3);
+        return input.startsWith("//") && (input.indexOf("\\n") == input.indexOf("//") + 3);
     }
 
     private static String getCustomDelimiter(String input) {
 
         int startIndex = input.indexOf("//") + 2;
-        int endIndex = input.indexOf("\n");
+        int endIndex = input.indexOf("\\n");
 
         String customDelimiter = input.substring(startIndex, endIndex);
 
