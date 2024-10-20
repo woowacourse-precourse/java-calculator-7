@@ -1,1 +1,30 @@
 # java-calculator-precourse
+## 기능 목록
+- 전체 과정 관리
+    - CalculatorApp
+- 문자열 입력
+    - InputView
+- 문자열의 유효성 검사
+    - ExpressionValidator
+        - 표현식의 유효성 판단
+        - 커스텀 구분자 추출
+- 전처리
+    - Preprocessor
+        - 유효성 통과 후 계산을 수행하기 위한 전처리 수행
+            - 연산자 등록
+            - 커스텀 구분자 포맷(”//”, “\n”) 제거
+- 계산 수행
+    - PostfixConverter
+        - 수식을 후위표기식으로 변환
+    - Calculator
+        - 후위표기식을 바탕으로 계산 수행
+    - Operator
+        - 연산자 인터페이스
+        - 다양한 연산자 확장성 고려
+    - AddOperator
+        - 덧셈 수행
+    - OperatorRepository
+        - 구분자와 연산자 매핑 정보 저장
+        - 다양한 연산자 확장성 고려
+- 계산 결과 출력
+    - OutputView
