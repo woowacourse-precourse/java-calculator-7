@@ -4,14 +4,30 @@ import java.util.ArrayList;
 
 public class Validator {
 
+    public void validateInput(String input, ArrayList<String> separators) {
+        if (!checkIsEmpty(input) && !checkHasNumber(input)) {
+            System.out.println("0");
+            return;
+        }
+        if (!checkCustomSeparator(input, separators)) {
+            throw new IllegalArgumentException("커스텀 구분자를 잘못 입력하였습니다.");
+        }
+        if (checkHasNegative(input, separators)) {
+            throw new IllegalArgumentException("음수를 입력하였습니다.");
+        }
+        if (!checkIsCorrectString(input, separators)) {
+            throw new IllegalArgumentException("올바른 문자열이 아닙니다.");
+        }
+    }
+
     //문자열이 비어있는지 검사
-    public boolean checkIsEmpty(String input) {
+    private boolean checkIsEmpty(String input) {
         //문장이 비어있으면 false, 존재하면 true
         return !input.isEmpty();
     }
 
     //문자열에 숫자가 존재하는지 검사
-    public boolean checkHasNumber(String input) {
+    private boolean checkHasNumber(String input) {
         for (int i = 0; i < input.length(); i++) {
             //숫자가 하나라도 있으면 true
             if (Character.isDigit(input.charAt(i))) {
@@ -22,7 +38,7 @@ public class Validator {
     }
 
     //커스텀 구분자를 사용하였는지 검사
-    public boolean checkCustomSeparator(String input, ArrayList<String> separators) {
+    private boolean checkCustomSeparator(String input, ArrayList<String> separators) {
         // "//"로 시작안하면 커스텀 구분자를 사용안하기 때문에 리턴
         if (!input.startsWith("//")) {
             return true;
@@ -37,7 +53,7 @@ public class Validator {
     }
 
     //구분자가 아닌 다른 문자가 있는지 검사
-    public boolean checkIsCorrectString(String input, ArrayList<String> separators) {
+    private boolean checkIsCorrectString(String input, ArrayList<String> separators) {
         // 커스텀 구분자가 있는지 확인
         input = getStringAfterCustomSeparator(input);
         int i = 0;
@@ -66,7 +82,7 @@ public class Validator {
     }
 
     //음수가 있는지 검사
-    public boolean checkHasNegative(String  input, ArrayList<String> separators) {
+    private boolean checkHasNegative(String  input, ArrayList<String> separators) {
         // 커스텀 구분자가 있을 경우 처리
         input = getStringAfterCustomSeparator(input);
         boolean hasMinus = false; //구분자에 "-" 존재여부
@@ -91,7 +107,7 @@ public class Validator {
     }
 
     //커스텀 구분자 이후의 문자열 반환
-    public String getStringAfterCustomSeparator(String input) {
+    private String getStringAfterCustomSeparator(String input) {
         if (input.startsWith("//")) {
             // "\n"의 위치 찾기
             int newlineIndex = input.indexOf("\\n");
