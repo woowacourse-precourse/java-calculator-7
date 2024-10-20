@@ -11,24 +11,23 @@ public class Number {
     private BigInteger value;
 
     private Number(final String value) {
-        validate(value);
-        this.value = new BigInteger(value);
+        this.value = parseValue(value);
     }
 
-    protected void validate(final String value) {
+    private BigInteger parseValue(final String value) {
         if (value == null || value.isEmpty()) {
-            throw new IllegalArgumentException();
+            return BigInteger.ZERO;
         }
 
         try {
             BigInteger number = new BigInteger(value);
             if (number.compareTo(BigInteger.ZERO) < ZERO.getValue()) {
-	throw new IllegalArgumentException(NEGATIVE_NUMBER.getMessage());
+                throw new IllegalArgumentException(NEGATIVE_NUMBER.getMessage());
             }
+            return number;
         } catch (NumberFormatException exception) {
             throw new IllegalArgumentException(INVALID_NUMBER.getMessage());
         }
-
     }
 
     public static Number from(final String value) {
@@ -41,11 +40,10 @@ public class Number {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Number)) {
-            return false;
-        }
+        if (this == o) return true;
+        if (!(o instanceof Number)) return false;
         Number number = (Number) o;
-        return this.value.equals(number.value);
+        return Objects.equals(value, number.value);
     }
 
     @Override
@@ -57,5 +55,4 @@ public class Number {
     public String toString() {
         return value.toString();
     }
-
 }

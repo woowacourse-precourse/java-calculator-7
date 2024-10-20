@@ -65,6 +65,7 @@ class NumbersTest {
 
     private static Stream<Arguments> customDelimiterTestCases() {
         return Stream.of(
+            Arguments.of("//;\\n", BigInteger.valueOf(0)),
             Arguments.of("//*\\n1*2*3", BigInteger.valueOf(6)),
             Arguments.of("//A\\n1A2A3A4", BigInteger.valueOf(10)),
             Arguments.of("//;\\n1;2;10", BigInteger.valueOf(13))

@@ -15,18 +15,6 @@ class InputValidatorTest {
     private final InputValidator inputValidator = new InputValidator();
 
     @Test
-    void 입력_값이_비어있을때_예외를_발생() {
-        // given
-        String input = "";
-        CalculationRequest calculationRequest = new CalculationRequest(input);
-
-        // when & then
-        Assertions.assertThatThrownBy(() -> inputValidator.validate(calculationRequest))
-            .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage(INPUT_IS_EMPTY.getMessage());
-    }
-
-    @Test
     void 입력_값이_앞뒤로_공백이_있을때_예외를_발생() {
         // given
         String input = " 1,2,3 ";
@@ -87,7 +75,7 @@ class InputValidatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"//@\\n1@2@3", "//*\\n1*2*3", "1,2:3"})
+    @ValueSource(strings = {"//@\\n1@2@3", "//*\\n1*2*3", "1,2:3", "", "//;\\n"})
     void 제대로된_입력값이_주어졌을때_예외가_발생하지_않는다(String input) {
         // given
         CalculationRequest calculationRequest = new CalculationRequest(input);
