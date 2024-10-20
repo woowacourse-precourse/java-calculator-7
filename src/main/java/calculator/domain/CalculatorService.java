@@ -6,16 +6,17 @@ import calculator.infrastructure.SplitStrListValidator;
 import java.util.List;
 import java.util.Set;
 
-public class StringSeparatorService {
+public class CalculatorService {
 
     private final InputStringProcessor inputStringProcessor;
     private final SplitStrListValidator splitStrListValidator;
     private final NumberAddProcessor numberAddProcessor;
 
-    public StringSeparatorService() {
-        inputStringProcessor = new InputStringProcessor();
-        splitStrListValidator = new SplitStrListValidator();
-        numberAddProcessor = new NumberAddProcessor();
+    public CalculatorService(InputStringProcessor inputStringProcessor, SplitStrListValidator splitStrListValidator,
+                             NumberAddProcessor numberAddProcessor) {
+        this.inputStringProcessor = inputStringProcessor;
+        this.splitStrListValidator = splitStrListValidator;
+        this.numberAddProcessor = numberAddProcessor;
     }
 
     public List<String> splitStrBySeparators(String inputStr) {
