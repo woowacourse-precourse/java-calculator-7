@@ -33,9 +33,17 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 구분자만_있는_경우() {
+    void 구분자만_있는_경우1() {
         assertSimpleTest(() ->{
             assertThatThrownBy(() -> runException(",:,"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+    }
+
+    @Test
+    void 구분자만_있는_경우2() {
+        assertSimpleTest(() ->{
+            assertThatThrownBy(() -> runException(","))
                     .isInstanceOf(IllegalArgumentException.class);
         });
     }
@@ -51,7 +59,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 공백() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> run(" "))
+            assertThatThrownBy(() -> runException(" "))
                     .isInstanceOf(IllegalArgumentException.class);
         });
     }
@@ -75,7 +83,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 공백을_포함하는_입력값1() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> run("//;\\n1;2 "))
+            assertThatThrownBy(() -> runException("//;\\n1;2 "))
                     .isInstanceOf(IllegalArgumentException.class);
         });
     }
@@ -83,7 +91,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 공백을_포함하는_입력값2() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> run("//;\\n 1;2"))
+            assertThatThrownBy(() -> runException("//;\\n 1;2"))
                     .isInstanceOf(IllegalArgumentException.class);
         });
     }
@@ -107,7 +115,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 숫자가_한개2() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> run("0"))
+            assertThatThrownBy(() -> runException("0"))
                     .isInstanceOf(IllegalArgumentException.class);
         });
     }
@@ -115,7 +123,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 숫자형태가_잘못된_경우1() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> run("0123"))
+            assertThatThrownBy(() -> runException("0123"))
                     .isInstanceOf(IllegalArgumentException.class);
         });
     }
@@ -123,7 +131,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 숫자형태가_잘못된_경우2() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> run("//;\\n012;24;3"))
+            assertThatThrownBy(() -> runException("//;\\n012;24;3"))
                     .isInstanceOf(IllegalArgumentException.class);
         });
     }
@@ -131,7 +139,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_이스케이프_문자X() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> run("//;\n1"))
+            assertThatThrownBy(() -> runException("//;\n1"))
                     .isInstanceOf(IllegalArgumentException.class);
         });
     }
@@ -139,7 +147,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_형식이_아닌_경우1() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> run(";\\n1"))
+            assertThatThrownBy(() -> runException(";\\n1"))
                     .isInstanceOf(IllegalArgumentException.class);
         });
     }
@@ -147,7 +155,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_형식이_아닌_경우2() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> run("//;1"))
+            assertThatThrownBy(() -> runException("//;1"))
                     .isInstanceOf(IllegalArgumentException.class);
         });
     }
@@ -155,7 +163,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_형식이_아닌_경우3() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> run("///^\\n1"))
+            assertThatThrownBy(() -> runException("///^\\n1"))
                     .isInstanceOf(IllegalArgumentException.class);
         });
     }
@@ -163,7 +171,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_형식이_아닌_경우4() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> run("//;\\\n1"))
+            assertThatThrownBy(() -> runException("//;\\\n1"))
                     .isInstanceOf(IllegalArgumentException.class);
         });
     }
@@ -171,7 +179,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자가_숫자인_경우() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> run("//3\\n333333"))
+            assertThatThrownBy(() -> runException("//3\\n333333"))
                     .isInstanceOf(IllegalArgumentException.class);
         });
     }
@@ -179,7 +187,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자가_1개가_아닌_경우() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> run("//^^\\n1"))
+            assertThatThrownBy(() -> runException("//^^\\n1"))
                     .isInstanceOf(IllegalArgumentException.class);
         });
     }
@@ -195,7 +203,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_지정이_빈_문자열인_경우2() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> run("//  \\n1,2;4 5"))
+            assertThatThrownBy(() -> runException("//  \\n1,2;4 5"))
                     .isInstanceOf(IllegalArgumentException.class);
         });
     }
@@ -203,7 +211,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_지정이_공백인_경우3() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> run("// \\n1 2  4"))
+            assertThatThrownBy(() -> runException("// \\n1 2  4"))
                     .isInstanceOf(IllegalArgumentException.class);
         });
     }
@@ -211,7 +219,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_지정이_빈_문자열인_경우() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> run("//\\n1"))
+            assertThatThrownBy(() -> runException("//\\n1"))
                     .isInstanceOf(IllegalArgumentException.class);
         });
     }
@@ -219,14 +227,14 @@ class ApplicationTest extends NsTest {
     @Test
     void 구분자_이외에_문자가_들어간_경우1() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> run("1,3;4:5"))
+            assertThatThrownBy(() -> runException("1,3;4:5"))
                     .isInstanceOf(IllegalArgumentException.class);
         });
     }
     @Test
     void 구분자_이외에_문자가_들어간_경우2() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> run("1;2;3;4"))
+            assertThatThrownBy(() -> runException("1;2;3;4"))
                     .isInstanceOf(IllegalArgumentException.class);
         });
     }
@@ -234,7 +242,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 구분자_이외에_문자가_들어간_경우3() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> run("//^\\n1,3^4:5n"))
+            assertThatThrownBy(() -> runException("//^\\n1,3^4:5n"))
                     .isInstanceOf(IllegalArgumentException.class);
         });
     }
@@ -242,7 +250,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 구분자_이외에_문자가_들어간_경우4() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> run("1,n:2"))
+            assertThatThrownBy(() -> runException("1,n:2"))
                     .isInstanceOf(IllegalArgumentException.class);
         });
     }
@@ -250,7 +258,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 구분자_이외에_문자가_들어간_경우5() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> run("1,ㅏ:2"))
+            assertThatThrownBy(() -> runException("1,ㅏ:2"))
                     .isInstanceOf(IllegalArgumentException.class);
         });
     }
@@ -258,7 +266,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 숫자를_구분하지_못하는_구분자의_경우1() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> run(",1,34:5"))
+            assertThatThrownBy(() -> runException(",1,34:5"))
                     .isInstanceOf(IllegalArgumentException.class);
         });
     }
@@ -266,7 +274,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 숫자를_구분하지_못하는_구분자의_경우2() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> run("1,34:5:"))
+            assertThatThrownBy(() -> runException("1,34:5:"))
                     .isInstanceOf(IllegalArgumentException.class);
         });
     }
@@ -274,7 +282,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 구분자가_연속으로_입력된_경우() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> run("1,3::4:5"))
+            assertThatThrownBy(() -> runException("1,3::4:5"))
                     .isInstanceOf(IllegalArgumentException.class);
         });
     }
@@ -282,7 +290,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 입력된_숫자가_Integer_MAX_VALUE를_벗어나는_경우() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> run("2222222222:1:4"))
+            assertThatThrownBy(() -> runException("2222222222:1:4"))
                     .isInstanceOf(IllegalArgumentException.class);
         });
     }
