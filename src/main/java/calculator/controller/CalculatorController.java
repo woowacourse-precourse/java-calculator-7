@@ -16,18 +16,13 @@ public class CalculatorController {
     }
 
     public String greeting() {
-        return applicationView.printRequestInputMessage();
+        return applicationView.requestInputMessage();
     }
 
     public String calculate(String input) {
         validateInput(input);
         BigDecimal result = calculatorService.parseInputAndCalculate(input);
-
-        if (result.compareTo(BigDecimal.ZERO) >= 0) {
-            return "성공";
-        } else {
-            return "실패";
-        }
+        return applicationView.responseInputMessage(result);
     }
 
     private void validateInput(String input) {

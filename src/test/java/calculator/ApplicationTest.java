@@ -4,9 +4,7 @@ import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import calculator.controller.CalculatorController;
 import camp.nextstep.edu.missionutils.test.NsTest;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class ApplicationTest extends NsTest {
@@ -16,6 +14,14 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             run("//;\\n1");
             assertThat(output()).contains("결과 : 1");
+        });
+    }
+
+    @Test
+    void 소수_계산() {
+        assertSimpleTest(() -> {
+            run("1,1.1,1.2");
+            assertThat(output()).contains("결과 : 3.3");
         });
     }
 
