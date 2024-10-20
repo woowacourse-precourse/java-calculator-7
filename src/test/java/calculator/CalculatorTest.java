@@ -42,4 +42,11 @@ public class CalculatorTest {
                 new BigInteger("10000000000000000000"),
                 calculator.sumFromString("9999999999999999999,1"));
     }
+
+    @Test
+    void 공백_포함_숫자_계산() {
+        assertEquals(
+                new BigInteger("13"),
+                calculator.sumFromString(" 1 , 2 , 10 "));
+    }
 }

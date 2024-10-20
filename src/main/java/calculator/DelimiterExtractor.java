@@ -4,6 +4,7 @@ import java.util.regex.Pattern;
 
 public class DelimiterExtractor {
     private static final String DEFAULT_DELIMITER = "[,:]";
+
     private final String inputString;
     private final String delimiter;
 
