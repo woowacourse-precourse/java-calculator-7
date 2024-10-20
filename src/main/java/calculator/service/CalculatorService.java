@@ -22,7 +22,17 @@ public class CalculatorService {
         cal = inputString.split(delim);
 
         for(String num : cal){
-            sum += Integer.parseInt(num);
+            try{
+                int number = Integer.parseInt(num);
+
+                if(number<0){
+                    throw new IllegalStateException("양수를 입력해주세요");
+                }
+                sum+=number;
+
+            }catch (NumberFormatException e){
+                throw new IllegalStateException("숫자를 입력해주세요.");
+            }
         }
 
         return sum;
