@@ -31,4 +31,9 @@ public class Application {
         }
         System.out.print(sb);
     }
+
+    private static boolean checkCustom(String str) {
+        return str.startsWith("//") && str.indexOf("\n") > 2;
+    }
+
 }
