@@ -31,6 +31,13 @@ class CalculatorTest {
     }
 
     @Test
+    void 공백이_포함된_문자열_입력_테스트() {
+        assertThat(calculator.splitAndSum("1 , 2 , 3")).isEqualTo(6);
+        assertThat(calculator.splitAndSum("1 , 2: 3")).isEqualTo(6);
+        assertThat(calculator.splitAndSum("//;\\n1: 2 , 3 ; 4; 5")).isEqualTo(15);
+    }
+
+    @Test
     void 구분자가_잘못된_위치에_있는_경우_예외_테스트() {
         assertThatThrownBy(() -> calculator.splitAndSum(",1,2"))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -89,7 +96,7 @@ class CalculatorTest {
     }
 
     @Test
-    void 숫자가_아닌_값이_포함된_경우_테스트() {
+    void 숫자가_아닌_값이_포함된_경우_예외_테스트() {
         assertThatThrownBy(() -> calculator.splitAndSum("1,a,2"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("입력된 값이 유효한 정수가 아닙니다.");
