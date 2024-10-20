@@ -20,10 +20,12 @@ public class CalculatorController {
     public void run() {
         try {
             String input = view.getInput();
-            validator.validate(input);
 
-            //모델에서 계산된 결과를 받아 뷰에 전달
-            int result = calculator.add(input);
+            // 입력 검증 후 숫자 배열 반환
+            String[] numbers = validator.validate(input);
+
+            // 계산된 값을 받아 ConsoleView에 전달
+            int result = calculator.add(numbers);
             view.printResult(result);
 
         }catch (IllegalArgumentException e) {
