@@ -8,6 +8,36 @@ public class StringCalculator {
             return 0;
         }
 
-        return -1;
+        String[] numbers = parseInput(input);
+        return calculateSum(numbers);
+    }
+
+    private String[] parseInput(String input) {
+        String delimiter = ",|:";
+
+        if (input.startsWith("//")) {
+            int delimiterIndex = input.indexOf("\\n");
+
+            if (delimiterIndex == -1) {
+                throw new IllegalArgumentException("잘못된 입력 형식입니다. \\n이 필요합니다.");
+            }
+
+            delimiter = input.substring(2, delimiterIndex);
+            input = input.substring(delimiterIndex + 2);
+        }
+
+        return input.split(delimiter);
+    }
+
+    private int calculateSum(String[] numbers) {
+        int sum = 0;
+        for (String number : numbers) {
+            int num = Integer.parseInt(number.trim());
+            if (num < 0) {
+                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + num);
+            }
+            sum += num;
+        }
+        return sum;
     }
 }
