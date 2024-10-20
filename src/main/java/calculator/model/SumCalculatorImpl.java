@@ -1,12 +1,20 @@
 package calculator.model;
 
+import calculator.view.Message;
 import java.util.Arrays;
 
 public class SumCalculatorImpl implements SumCalculator {
 
     @Override
     public String calculate(long[] numbers) {
-        long sum = Arrays.stream(numbers).sum();
+        long sum = Arrays.stream(numbers)
+                .reduce(0L, (currentSum, number) -> {
+                    if (willOverflow(currentSum, number)) {
+                        throw new IllegalArgumentException(Message.SUM_LONG_OVERFLOW.getMessage());
+                    }
+                    return currentSum + number;
+                });
+
         return String.valueOf(sum);
     }
 
