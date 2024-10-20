@@ -7,8 +7,8 @@ public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
 
-        int Result;
         int StartIndex;
+        long Result;
 
         boolean PatternEnable;
 
@@ -32,8 +32,8 @@ public class Application {
         resultPrint(Result);
     }
 
-    public static int SumNumericValues(String[] NumberList) {
-        int Result = Constant.ZERO;
+    public static long SumNumericValues(String[] NumberList) {
+        long Result = Constant.ZERO;
         for (String s : NumberList) {
             if (s.matches(Constant.MATCHER_CHECK)) {
                 Result += Integer.parseInt(s);
@@ -80,7 +80,7 @@ public class Application {
         }
     }
 
-    static void resultPrint(int AllCombinedValues) {
+    static void resultPrint(long AllCombinedValues) {
         System.out.println(Constant.END_MESSAGE + AllCombinedValues);
     }
 }

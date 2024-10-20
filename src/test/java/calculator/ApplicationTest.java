@@ -84,6 +84,7 @@ class ApplicationTest extends NsTest {
         });
     }
 
+
     @Test
     void 생각보다_많은_계산() {
         assertSimpleTest(() -> {
