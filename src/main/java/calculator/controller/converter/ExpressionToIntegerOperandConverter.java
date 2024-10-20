@@ -26,7 +26,7 @@ public class ExpressionToIntegerOperandConverter implements Converter<Expression
 
     private int parseInteger(final String numberStr) {
         try {
-            return Integer.parseInt(numberStr);
+            return Integer.parseInt(numberStr.trim());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자로 변환할 수 없는 입력 값이 포함되어 있습니다: " + numberStr, e);
         }
