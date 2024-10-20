@@ -18,7 +18,7 @@ public class DefaultStringSplitterTest {
             "'12,34,56', '12', '34', '56'",
             "'100:200,300', '100', '200', '300'",
     })
-    void 다양한_구분자_문자열_나누기(String input, String expected1, String expected2, String expected3) {
+    void 기본_문자열_나누기(String input, String expected1, String expected2, String expected3) {
         List<String> strings = stringSplitter.splitString(input);
 
         Assertions.assertTrue(strings.contains(expected1));
