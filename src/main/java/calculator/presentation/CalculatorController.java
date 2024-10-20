@@ -1,5 +1,6 @@
 package calculator.presentation;
 
+import calculator.business.CalculatorService;
 import camp.nextstep.edu.missionutils.Console;
 
 public class CalculatorController {
@@ -9,7 +10,6 @@ public class CalculatorController {
 
         String validUserInput = new Validator().valid(Console.readLine());
 
-        // TODO: Service 수행 후 반환값 붙이기
-        System.out.println("결과 : " + 6);
+        System.out.println("결과 : " + new CalculatorService().run(validUserInput));
     }
 }
