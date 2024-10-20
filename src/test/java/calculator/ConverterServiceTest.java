@@ -1,13 +1,15 @@
 package calculator;
 
-import calculator.service.ConverterService;
-import org.junit.jupiter.api.Test;
-import java.util.Arrays;
-import java.util.List;
-
+import static calculator.exception.Exception.INVALID_NEGATIVE_NUMBER;
+import static calculator.exception.Exception.INVALID_NUMBER_FORMAT;
 import static org.junit.jupiter.api.Assertions.*;
 
-class StringConverterTest {
+import calculator.service.ConverterService;
+import java.util.Arrays;
+import java.util.List;
+import org.junit.jupiter.api.Test;
+
+class ConverterServiceTest {
 
     @Test
     void shouldThrowExceptionForInvalidCharacterInInput() {
@@ -17,9 +19,10 @@ class StringConverterTest {
         List<String> input = Arrays.asList("1", "2", "abc", "4");
 
         // 유효하지 않은 문자가 포함되어 있을 때 예외가 발생하는지 확인
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> converterService.toNumbers(input));
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->
+                converterService.toNumbers(input));
 
-        assertEquals("유효하지 않은 형식입니다: abc", exception.getMessage());
+        assertEquals(INVALID_NUMBER_FORMAT.getMessage() + "abc", exception.getMessage());
     }
 
     @Test
@@ -30,9 +33,10 @@ class StringConverterTest {
         List<String> input = Arrays.asList("1", "-2", "3", "4");
 
         // 음수가 포함되어 있을 때 예외가 발생하는지 확인
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> converterService.toNumbers(input));
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->
+                converterService.toNumbers(input));
 
-        assertEquals("양수만 허용됩니다: -2", exception.getMessage());
+        assertEquals(INVALID_NEGATIVE_NUMBER.getMessage() + "-2", exception.getMessage());
     }
 
     @Test

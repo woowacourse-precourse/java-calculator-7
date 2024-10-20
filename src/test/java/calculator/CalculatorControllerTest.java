@@ -1,15 +1,16 @@
 package calculator;
 
+import static calculator.exception.Exception.INVALID_NEGATIVE_NUMBER;
+import static calculator.exception.Exception.INVALID_NUMBER_FORMAT;
+import static org.junit.jupiter.api.Assertions.*;
+
 import calculator.controller.CalculatorController;
 import calculator.domain.Separator;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class SumCalculatorTest {
+class CalculatorControllerTest {
     Separator separator = new Separator();
     CalculatorController calculatorController = new CalculatorController(separator);
-
 
     @Test
     void shouldReturnSumWithCustomSeparatorAndValidInput() {
@@ -26,9 +27,10 @@ class SumCalculatorTest {
         // 커스텀 구분자가 있고, 입력에 문자가 있을 때
         String input = "//;\\n1;2;a";
 
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> calculatorController.run(input));
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->
+                calculatorController.run(input));
 
-        assertEquals("유효하지 않은 형식입니다: a", exception.getMessage());
+        assertEquals(INVALID_NUMBER_FORMAT.getMessage() + "a", exception.getMessage());
     }
 
     @Test
@@ -36,9 +38,10 @@ class SumCalculatorTest {
         // 커스텀 구분자가 있고, 입력에 음수가 있을 때
         String input = "//;\\n1;-2;3";
 
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> calculatorController.run(input));
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->
+                calculatorController.run(input));
 
-        assertEquals("양수만 허용됩니다: -2", exception.getMessage());
+        assertEquals(INVALID_NEGATIVE_NUMBER.getMessage() + "-2", exception.getMessage());
     }
 
     @Test
@@ -56,9 +59,10 @@ class SumCalculatorTest {
         // 커스텀 구분자가 없고, 입력에 문자가 있을 때
         String input = "1,2,a";
 
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> calculatorController.run(input));
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->
+                calculatorController.run(input));
 
-        assertEquals("유효하지 않은 형식입니다: a", exception.getMessage());
+        assertEquals(INVALID_NUMBER_FORMAT.getMessage() + "a", exception.getMessage());
     }
 
     @Test
@@ -66,8 +70,9 @@ class SumCalculatorTest {
         // 커스텀 구분자가 없고, 입력에 음수가 있을 때
         String input = "1,-2,3";
 
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> calculatorController.run(input));
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->
+                calculatorController.run(input));
 
-        assertEquals("양수만 허용됩니다: -2", exception.getMessage());
+        assertEquals(INVALID_NEGATIVE_NUMBER.getMessage() + "-2", exception.getMessage());
     }
 }

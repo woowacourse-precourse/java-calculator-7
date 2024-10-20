@@ -1,11 +1,11 @@
 package calculator;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import calculator.domain.Separator;
 import calculator.service.SeparatorService;
-import org.junit.jupiter.api.Test;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class SeparatorTest {
 

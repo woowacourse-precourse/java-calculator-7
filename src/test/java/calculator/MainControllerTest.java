@@ -1,11 +1,13 @@
 package calculator;
 
+import static calculator.exception.Exception.INVALID_NEGATIVE_NUMBER;
+import static calculator.exception.Exception.INVALID_NUMBER_FORMAT;
+import static org.junit.jupiter.api.Assertions.*;
+
 import calculator.controller.MainController;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class StringCalculatorTest {
+class MainControllerTest {
 
     @Test
     void shouldReturnSumWithCustomSeparatorAndValidInput() {
@@ -25,9 +27,10 @@ class StringCalculatorTest {
         String input = "//;\\n1;2;a";
 
         // IllegalArgumentException이 발생해야 함
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> mainController.runWithInput(input));
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->
+                mainController.runWithInput(input));
 
-        assertEquals("유효하지 않은 형식입니다: a", exception.getMessage());
+        assertEquals(INVALID_NUMBER_FORMAT.getMessage() + "a", exception.getMessage());
     }
 
     @Test
@@ -38,9 +41,10 @@ class StringCalculatorTest {
         String input = "//;\\n1;-2;3";
 
         // IllegalArgumentException이 발생해야 함
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> mainController.runWithInput(input));
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->
+                mainController.runWithInput(input));
 
-        assertEquals("양수만 허용됩니다: -2", exception.getMessage());
+        assertEquals(INVALID_NEGATIVE_NUMBER.getMessage() + "-2", exception.getMessage());
     }
 
     @Test
@@ -61,9 +65,10 @@ class StringCalculatorTest {
         String input = "1,2,a";
 
         // IllegalArgumentException이 발생해야 함
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> mainController.runWithInput(input));
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->
+                mainController.runWithInput(input));
 
-        assertEquals("유효하지 않은 형식입니다: a", exception.getMessage());
+        assertEquals(INVALID_NUMBER_FORMAT.getMessage() + "a", exception.getMessage());
     }
 
     @Test
@@ -74,8 +79,9 @@ class StringCalculatorTest {
         String input = "1,-2,3";
 
         // IllegalArgumentException이 발생해야 함
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> mainController.runWithInput(input));
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->
+                mainController.runWithInput(input));
 
-        assertEquals("양수만 허용됩니다: -2", exception.getMessage());
+        assertEquals(INVALID_NEGATIVE_NUMBER.getMessage() + "-2", exception.getMessage());
     }
 }

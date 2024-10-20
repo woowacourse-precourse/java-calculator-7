@@ -1,23 +1,23 @@
 package calculator;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import calculator.domain.Separator;
 import calculator.service.SeparatorService;
 import calculator.service.SplitterService;
-import org.junit.jupiter.api.Test;
 import java.util.List;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class SplitControllerTest {
+class SplitterServiceTest {
 
     @Test
     void shouldSplitStringWithoutCustomSeparator() {
-        Separator sepManager = new Separator();
+        Separator separator = new Separator();
         SplitterService splitterService = new SplitterService();
 
         // 기본 구분자만 있는 문자열
         String input = "1,2:3";
-        List<String> separators = sepManager.getSeparators(); // 기본 구분자 리스트 (쉼표, 콜론)
+        List<String> separators = separator.getSeparators(); // 기본 구분자 리스트 (쉼표, 콜론)
 
         // split 메서드 실행
         List<String> result = splitterService.split(input, separators);

@@ -1,22 +1,24 @@
 package calculator;
 
-import calculator.domain.InputValidator;
-import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
-import java.util.List;
-
+import static calculator.exception.Exception.INVALID_NEGATIVE_NUMBER;
+import static calculator.exception.Exception.INVALID_NUMBER_FORMAT;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class InputValidatorServiceTest {
+import calculator.domain.InputValidator;
+import java.util.Arrays;
+import java.util.List;
+import org.junit.jupiter.api.Test;
+
+public class InputValidatorTest {
     @Test
     void shouldThrowExceptionForNonIntegerValues() {
         InputValidator inputValidator = new InputValidator();
         List<String> input = Arrays.asList("1", "2", "a", "4");
 
         // 정수가 아닌 값("a")이 있을 때 예외가 발생하는지 확인
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> inputValidator.validate(input));
-        assertEquals("유효하지 않은 형식입니다: a", exception.getMessage());
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->
+                inputValidator.validate(input));
+        assertEquals(INVALID_NUMBER_FORMAT.getMessage() + "a", exception.getMessage());
     }
 
     @Test
@@ -25,8 +27,9 @@ public class InputValidatorServiceTest {
         List<String> input = Arrays.asList("1", "-2", "3");
 
         // 음수 값("-2")이 있을 때 예외가 발생하는지 확인
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> inputValidator.validate(input));
-        assertEquals("양수만 허용됩니다: -2", exception.getMessage());
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->
+                inputValidator.validate(input));
+        assertEquals(INVALID_NEGATIVE_NUMBER.getMessage() + "-2", exception.getMessage());
     }
 
     @Test
