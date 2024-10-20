@@ -2,6 +2,7 @@ package calculator.parser;
 
 import static org.assertj.core.api.Assertions.*;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -10,9 +11,18 @@ class ParserTest {
 
 	Parser parser = new Parser();
 
+	@DisplayName("여러 성공 시나리오의 값이 예외없이 성공하는지 확인한다.")
+	@ParameterizedTest
+	@ValueSource(strings = {"//;\\n1;2", "// \\n1 2,3:4", "1,2:3"})
+	void 수식_파싱_성공(String input) {
+		assertThatNoException().isThrownBy(() -> parser.parse(input));
+	}
+
+	@DisplayName("의도한 결과가 올바르게 나오는지 확인한다.")
 	@Test
-	void 커스텀_구분자_추출_성공() {
-		assertThatNoException().isThrownBy(() -> parser.parse("//;\n1;2"));
+	void 수식_파싱_성공_올바른_값_리턴() {
+		assertThat(parser.parse("//;\\n1,2;3:4,5"))
+				.containsExactlyInAnyOrder(1, 2, 3, 4, 5);
 	}
 
 	@ParameterizedTest
@@ -64,5 +74,11 @@ class ParserTest {
 	void 순수_식_만들기_실패_숫자로_끝나지_않음(String input) {
 		assertThatIllegalArgumentException()
 				.isThrownBy(() -> parser.parse(input));
+	}
+
+	@Test
+	void 숫자_추출_실패_잘못된_구분자_포함() {
+		assertThatIllegalArgumentException()
+				.isThrownBy(() -> parser.parse("//;\\n1;2,3:4.5"));
 	}
 }
