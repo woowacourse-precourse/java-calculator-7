@@ -28,4 +28,14 @@ public class Parser {
         }
     }
 
+    public int[] convertStringsToNumbers(String[] splitStrings) {
+        inputValidator.validateNumbers(splitStrings);
+
+        int[] numbers = new int[splitStrings.length];
+        for (int i = 0; i < splitStrings.length; i++) {
+            numbers[i] = Integer.parseInt(splitStrings[i]);
+        }
+        return numbers;
+    }
+
 }

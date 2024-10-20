@@ -13,8 +13,15 @@ public class DefaultValidator implements InputValidator {
     }
 
     @Override
-    public int[] parseNumbers(String[] splitStrings) {
-        return validateStringToNumber(splitStrings);
+    public void validateNumbers(String[] splitStrings) {
+        for (String str : splitStrings) {
+            try {
+                int num = Integer.parseInt(str);
+                validateIsMinusNumber(num); // 음수 여부 검증
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("올바른 형식으로 입력해주세요!");
+            }
+        }
     }
 
     @Override
@@ -26,23 +33,6 @@ public class DefaultValidator implements InputValidator {
 
     private boolean isBlank(String input){
         return input.equals("") ? true : false;
-    }
-
-    private int[] validateStringToNumber (String [] splitStrings) {
-        int [] parseIntArr = new int[splitStrings.length];
-
-        try{
-            for(int i=0; i<splitStrings.length; i++){
-                int num = Integer.parseInt(splitStrings[i]);
-                validateIsMinusNumber(num);
-                parseIntArr[i] = num;
-            }
-
-        } catch (NumberFormatException e){
-            throw new IllegalArgumentException("올바른 형식으로 입력해주세요!");
-        }
-
-        return parseIntArr;
     }
 
     private void validateIsMinusNumber(int number){
