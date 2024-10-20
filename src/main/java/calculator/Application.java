@@ -13,6 +13,10 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
 
         String input = Console.readLine();
+        if(input.equals("")){
+            System.out.println("결과 : 0");
+            return;
+        }
 
         if (input.startsWith("//")) {
             endex = input.indexOf("\\n");
@@ -34,7 +38,8 @@ public class Application {
         if (value.length == 0) {
             System.out.println("결과 : 0");
             return;
-        } else {
+        }
+        else {
             for (String v : value) {
                 try {
                     if(Integer.parseInt(v) < 0){
