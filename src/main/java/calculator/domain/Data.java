@@ -9,8 +9,7 @@ public class Data {
     private static final String SEPARATOR_COLON = ":";
     private final String firstInputData;
     private List<String> separators;
-    private String[] extractedStrings;
-    private List<Integer> numbersForSum;
+    private final List<Integer> numbersForSum;
 
     public Data(String firstInputData) {
         this.firstInputData = firstInputData;
@@ -34,7 +33,7 @@ public class Data {
             return numbersForSum;
         }
         separators = SeparatorValidator.extractCustomSeparator(separators, firstInputData);
-        extractedStrings = SeparatorValidator.removeSeparator(separators, firstInputData);
+        String[] extractedStrings = SeparatorValidator.removeSeparator(separators, firstInputData);
         return NumberValidator.convertNumbers(extractedStrings);
     }
 
