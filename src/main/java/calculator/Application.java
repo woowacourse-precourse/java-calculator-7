@@ -86,7 +86,6 @@ public class Application {
     public static int StringCalculator(String input) {
         if (input.isEmpty() || input == null) // 빈문자열 입력 시 0을 출력한다.
             return 0;
-        int sum = 0;
 
         String delimiter = ",|:";
 
@@ -98,7 +97,7 @@ public class Application {
 
         if (!delimiter.equals(",|:")) { // 커스텀 구분자 사용 시, 5번째 문자부터 읽기
             if (input.length() < 6) { // 길이가 6보다 짧은 경우 예외 처리
-                throw new IllegalArgumentException("계산할 숫자가 없습니다.");
+                return 0;
             }
             input = input.substring(5);
         }
@@ -108,9 +107,7 @@ public class Application {
         if (numbers.length == 0) // 구분자로만 이루어져있는 경우
             return 0;
 
-        sum = addString(numbers);
-
-        return sum;
+        return addString(numbers);
     }
 
 
