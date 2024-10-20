@@ -16,11 +16,10 @@ class InputStringProcessorTest {
 
     @ParameterizedTest
     @CsvSource({
-            "' '",
-            "'      '",
-            "''",
             " 1 3",
-            "123 5"
+            "123 5",
+            "'        '",
+            "12345 '"
     })
     void 잘못된_사용자_입력이_들어왔을때_예외를_발생시키는_테스트(String inputStr) {
         InputStringProcessor processor = new InputStringProcessor();

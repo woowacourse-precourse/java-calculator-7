@@ -19,7 +19,6 @@ public class InputStringProcessor {
     private static final int INIT_SIZE_IN_SPLIT_STR = 0;
 
     public void validateInputStr(String inputStr) {
-        validateInputStrIsNotEmpty(inputStr);
         validateInputStrHasNoSpaces(inputStr);
     }
 
@@ -68,12 +67,6 @@ public class InputStringProcessor {
     }
 
     private void validateInputStrHasNoSpaces(String inputStr) {
-        if (inputStr == null || inputStr.isEmpty()) {
-            throw new InvalidInputStrException(inputStr);
-        }
-    }
-
-    private void validateInputStrIsNotEmpty(String inputStr) {
         if (inputStr.contains(" ")) {
             throw new InvalidInputStrException(inputStr);
         }

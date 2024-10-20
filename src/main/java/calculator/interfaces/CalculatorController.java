@@ -10,7 +10,14 @@ public class CalculatorController {
         this.calculatorService = calculatorService;
     }
 
-    public Long calculate(String inputStr) {
+    public Long startCalculator(String userInputStr) {
+        if (userInputStr == null || userInputStr.isEmpty()) {
+            return 0L;
+        }
+        return calculate(userInputStr);
+    }
+
+    private Long calculate(String inputStr) {
         calculatorService.validateUserInput(inputStr);
         List<String> splitStrBySeparators = calculatorService.splitStrBySeparators(inputStr);
         List<Long> numberList = calculatorService.makeNumberList(splitStrBySeparators);
