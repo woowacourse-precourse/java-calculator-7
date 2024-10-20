@@ -5,12 +5,11 @@ public class DelimeterParser {
     private static final String DEFAULT_DELIMITERS = "[,|:]";
     private static final String CUSTOM_DELIMITER_START = "//";
     private static final String CUSTOM_DELIMITER_END = "\\n";
-    private static final String CUSTOM_DELIMITER_PREFIX = "//.*\n";
+    private static final String CUSTOM_DELIMITER_PREFIX = "//(.*)\\\\n";
 
     public static String[] parse(String input) {
         String delimiters = getDelimiter(input);
         String numbers = removeCustomDelimiterPrefix(input);
-        System.out.println("delimiters = " + delimiters);
         return numbers.split(delimiters);
     }
 
@@ -27,7 +26,6 @@ public class DelimeterParser {
     }
 
     private static String removeCustomDelimiterPrefix(String input) {
-        input = input.replace("\\n", "\n"); // to convert escape character to new line
         return input.replaceFirst(CUSTOM_DELIMITER_PREFIX, "");
     }
 }
