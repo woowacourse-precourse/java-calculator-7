@@ -7,7 +7,7 @@ import java.util.List;
 public class Application {
     public static void main(String[] args) {
         try{
-            System.out.println("Please enter the string to be added.");
+            System.out.println("덧셈할 문자열을 입력해 주세요.");
             String input = Console.readLine();
 
             String[] result = extractCustomDelimiter(input);
@@ -17,7 +17,7 @@ public class Application {
             List<Integer> numbers = parseNumbers(numberString, delimiter);
             int sum = add(numbers);
 
-            System.out.println("Result: " + sum);
+            System.out.println("결과 : " + sum);
         } catch (IllegalArgumentException e){
             System.out.println(e.getMessage());
         }
