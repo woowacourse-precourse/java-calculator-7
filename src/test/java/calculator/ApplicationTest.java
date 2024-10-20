@@ -11,8 +11,24 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
-            run("//;\\n1");
-            assertThat(output()).contains("결과 : 1");
+            run("//;\\n1;2,3:4");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
+    @Test
+    void 공백_입력_테스트() {
+        assertSimpleTest(() -> {
+            run(" ");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void long_범위_이상_덧셈_테스트() {
+        assertSimpleTest(() -> {
+            run("9223372036854775807,9223372036854775807:5");
+            assertThat(output()).contains("결과 : 18446744073709551619");
         });
     }
 
@@ -21,6 +37,14 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 미확인_구분자_사용() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("15,8,12|4"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
