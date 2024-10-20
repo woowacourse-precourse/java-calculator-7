@@ -1,6 +1,7 @@
 package calculator.domain;
 
 public enum DefaultDelimiter {
+
     FIRST(","),
     SECOND(":");
 

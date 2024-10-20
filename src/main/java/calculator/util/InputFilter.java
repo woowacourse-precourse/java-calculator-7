@@ -1,5 +1,6 @@
 package calculator.util;
 
+import calculator.exception.ErrorMessage;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,7 +14,7 @@ public class InputFilter {
 
     public static void doOutWrong(String input) {
         if (doNotMatchWithAnyPatterns(input)) {
-            throw new IllegalArgumentException("올바르지 않은 입력 형식입니다.");
+            throw new IllegalArgumentException(ErrorMessage.INCORRECT_REGEX.getMessage());
         }
     }
 
