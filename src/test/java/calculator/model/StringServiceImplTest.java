@@ -180,7 +180,4 @@ class StringServiceImplTest {
         assertThatThrownBy(() -> stringService.toIntegerList(stringList)).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @Test
-    void
-
 }
