@@ -47,14 +47,6 @@ public class DigitParser {
         return new StringTokenizer(input, BASIC_DELIMITER_PATTERN);
     }
 
-    public static void validateInput(String input) {
-        String regex = "^(//|\\d|;|:)";
-
-        if(input == null || !input.matches(regex)) {
-            throw new IllegalArgumentException("잘못된 입력 값이 포함되었습니다.");
-        }
-    }
-
     private static boolean hasCustomDelimiter(String input) {
         int startIdx = input.indexOf(CUSTOM_DELIMITER_START_COMMAND);
         int endIdx = input.indexOf(CUSTOM_DELIMITER_END_COMMAND);
