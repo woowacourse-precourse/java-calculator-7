@@ -18,6 +18,23 @@
 - 아무 입력이 없을 시 0을 반환한다.
 - 구분자 없이 숫자만 입력했을 경우 그대로 반환한다.
 
+### 시퀀스 다이어그램
+
+```mermaid
+sequenceDiagram
+    actor User
+    User ->>+ Application: request
+    Application ->> UserInput: main
+    UserInput ->>+ FormulaSeparator: createFormula
+    FormulaSeparator ->>+ FormatValidator: validateFormula
+    FormatValidator -->>- FormulaSeparator: return result
+    FormulaSeparator ->> FormulaSeparator: parseNumbers
+    FormulaSeparator -->>- UserInput: getNumbers
+    UserInput ->>+ Calculator: List of Number
+    Calculator -->>- Application: sum
+    Application -->>- User: response
+```
+
 ### 커밋 규칙
 
 - [AngularJS Git Commit Message Conventions](https://gist.github.com/stephenparish/9941e89d80e2bc58a153#allowed-type)을 참고한다.
