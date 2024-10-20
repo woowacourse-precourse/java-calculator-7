@@ -6,7 +6,7 @@ import calculator.model.separator.DefaultSeparator;
 import calculator.model.separator.Separator;
 
 public class CalculatorService {
-    private static final int MIN_NUMBER = 1;
+    private static final int NON_POSITIVE_THRESHOLD = 0;
 
     private static void validateInput(String input) {
         if (input == null || input.trim().isEmpty()) {
@@ -30,7 +30,7 @@ public class CalculatorService {
             if (!number.trim().isEmpty()) {
                 try {
                     int num = Integer.parseInt(number.trim());
-                    if (num < MIN_NUMBER) {
+                    if (num < NON_POSITIVE_THRESHOLD) {
                         throw new IllegalArgumentException(ErrorCode.NON_POSITIVE_NUMBER.getMessage());
                     }
                     sum += num;
