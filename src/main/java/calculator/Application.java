@@ -2,21 +2,22 @@ package calculator;
 
 import calculator.model.CalculationInput;
 import camp.nextstep.edu.missionutils.Console;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Application {
 
     private static final String INPUT_GUIDE_MESSAGE = "덧셈할 문자열을 입력해 주세요.";
-    private static final String DEFAULT_DELIMITER_REGEX = "[,:]";
+    private static final String DEFAULT_DELIMITER = ",:";
     private static final String CUSTOM_DELIMITER_INPUT_REGEX = "^//(.*?)\\\\n(.*)";
 
     public static void main(String[] args) {
 
         CalculationInput calculationInput = getCalculationInput();
 
-        int[] extractedNumbers = extractNumbers(calculationInput);
+        ArrayList<Integer> extractedNumbers = extractNumbers(calculationInput);
         int result = calculate(extractedNumbers);
         showResult(result);
     }
@@ -29,13 +30,13 @@ public class Application {
         Matcher matcher = pattern.matcher(userInput);
 
         if (matcher.matches()) {
-            String delimiter = makeDelimiterRegex(matcher.group(1));
+            String delimiter = matcher.group(1);
             String inputString = matcher.group(2);
 
             return new CalculationInput(delimiter, inputString);
         }
 
-        return new CalculationInput(DEFAULT_DELIMITER_REGEX, userInput);
+        return new CalculationInput(DEFAULT_DELIMITER, userInput);
     }
 
     private static String getUserInput() {
@@ -43,20 +44,22 @@ public class Application {
         return Console.readLine();
     }
 
-    private static int[] extractNumbers(CalculationInput calculationInput) {
+    private static ArrayList<Integer> extractNumbers(CalculationInput calculationInput) {
 
         String inputString = calculationInput.inputString();
         String delim = calculationInput.delimiter();
 
-        String[] extractedStringNumbers = inputString.split(delim);
-        return Arrays.stream(extractedStringNumbers).mapToInt(Integer::parseInt).toArray();
+        ArrayList<Integer> numbersToSum = new ArrayList<>();
+        StringTokenizer stringTokenizer = new StringTokenizer(inputString, delim);
+
+        while (stringTokenizer.hasMoreTokens()) {
+            numbersToSum.add(Integer.valueOf(stringTokenizer.nextToken()));
+        }
+
+        return numbersToSum;
     }
 
-    private static String makeDelimiterRegex(String DelimString) {
-        return "[" + DelimString + "]";
-    }
-
-    private static int calculate(int[] numbersToSum) {
+    private static int calculate(ArrayList<Integer> numbersToSum) {
 
         int sum = 0;
         for (int number : numbersToSum) {

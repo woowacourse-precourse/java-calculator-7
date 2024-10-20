@@ -24,6 +24,22 @@ class StringAdditionCalculatorTest extends NsTest {
         });
     }
 
+    @Test
+    void 기본구분자_연속구분자_테스트() {
+        assertSimpleTest(() -> {
+            run(",1,:,:2::3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 커스텀구분자_연속구분자_테스트() {
+        assertSimpleTest(() -> {
+            run("//;\\n;1;;9;");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
     @Override
     protected void runMain() {
         Application.main(new String[]{});
