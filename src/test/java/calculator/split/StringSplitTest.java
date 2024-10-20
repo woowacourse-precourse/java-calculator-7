@@ -1,8 +1,8 @@
 package calculator.split;
 
-import static calculator.split.StringSplit.getCustomCalFormula;
-import static calculator.split.StringSplit.getCustomSeparator;
-import static calculator.split.StringSplit.getDefaultSeparator;
+import static calculator.split.StringSplit.DEFAULT_SEPARATOR;
+import static calculator.split.StringSplit.getCalFormula;
+import static calculator.split.StringSplit.getSeparator;
 import static calculator.split.StringSplit.splitCalFormulaBySeparator;
 import static calculator.split.StringSplit.stringToNumber;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
@@ -18,7 +18,7 @@ class StringSplitTest {
         String string = "//abc\n123";
         String customSeparator = "abc,:";
 
-        assertEquals(customSeparator, getCustomSeparator(string));
+        assertEquals(customSeparator, getSeparator(string));
     }
 
     @Test
@@ -27,7 +27,7 @@ class StringSplitTest {
         String string = "//abc\\n123";
         String customSeparator = "abc,:";
 
-        assertEquals(customSeparator, getCustomSeparator(string));
+        assertEquals(customSeparator, getSeparator(string));
     }
 
     @Test
@@ -36,7 +36,7 @@ class StringSplitTest {
         String string = "//abc\n123";
         String calFormula = "123";
 
-        assertEquals(calFormula, getCustomCalFormula(string));
+        assertEquals(calFormula, getCalFormula(string));
     }
 
     @Test
@@ -45,7 +45,7 @@ class StringSplitTest {
         String string = "//abc\\n123";
         String calFormula = "123";
 
-        assertEquals(calFormula, getCustomCalFormula(string));
+        assertEquals(calFormula, getCalFormula(string));
     }
 
     @Test
@@ -55,8 +55,8 @@ class StringSplitTest {
         String customSeparator = "abc,:";
         String calFormula = "\n123";
 
-        assertEquals(customSeparator, getCustomSeparator(string));
-        assertEquals(calFormula, getCustomCalFormula(string));
+        assertEquals(customSeparator, getSeparator(string));
+        assertEquals(calFormula, getCalFormula(string));
     }
 
     @Test
@@ -65,7 +65,7 @@ class StringSplitTest {
         String string = "//abc\n";
         String calFormula = "";
 
-        assertEquals(calFormula, getCustomCalFormula(string));
+        assertEquals(calFormula, getCalFormula(string));
     }
 
     @Test
@@ -74,15 +74,15 @@ class StringSplitTest {
         String string = "//abc\\n";
         String calFormula = "";
 
-        assertEquals(calFormula, getCustomCalFormula(string));
+        assertEquals(calFormula, getCalFormula(string));
     }
 
     @Test
     @DisplayName("기본 구분자 검증")
     void testDefaultSeparator() {
-        String defaultSeparator = ",:";
+        String string = "1:2,3";
 
-        assertEquals(defaultSeparator, getDefaultSeparator());
+        assertEquals(DEFAULT_SEPARATOR, getSeparator(string));
     }
 
     @Test
