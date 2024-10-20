@@ -77,34 +77,29 @@ public class Adder {
     }
 
     public boolean isValidated(ArrayList<String> calculationFormula) {
-        try {
-            Stack<String> numberStack = new Stack<>();
-            Stack<String> separatorStack = new Stack<>();
-            Stack<String> garbageStack = new Stack<>();
 
-            for(String element: calculationFormula){
-                if(isNumber(element)){
-                    numberStack.push(element);
-                    if(!separatorStack.isEmpty()){
-                        separatorStack.pop();
-                    }
-                } else if(isSeparator(element)){
-                    separatorStack.push(element);
-                    numberStack.pop();
-                } else {
-                    garbageStack.push(element);
+        Stack<String> numberStack = new Stack<>();
+
+        for(String element: calculationFormula){
+            if (isNumber(element)) {
+                numberStack.push(element);
+
+            } else if (isSeparator(element)) {
+                if (numberStack.isEmpty()) {
+                    return false;
                 }
-            }
 
-            if(separatorStack.isEmpty() && garbageStack.isEmpty()){
-                return true;
-            }
+                numberStack.pop();
 
-            return false;
-        } catch (EmptyStackException e){
-            return false;
+            } else {
+                return false;
+            }
         }
 
+        if (numberStack.isEmpty()) {
+            return false;
+        }
+        return true;
     }
 
     public ArrayList<Integer> parseOnlyNumbers(ArrayList<String> calculationFormula){
