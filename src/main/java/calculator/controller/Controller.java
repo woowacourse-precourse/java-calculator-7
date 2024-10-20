@@ -25,4 +25,20 @@ public class Controller {
     public void startWithDelimiterInitialization() {
         calculator.init();
     }
+
+    public int processUserInputAndCalculate() {
+        String s = inputView.startCalculatorWithInput();
+        if (validators.validateDelimiterDeclaration(s)) {
+            utils.addCustomDelimiters(calculator, s);
+            s = utils.extractCalculationString(s);
+        }
+
+        validators.validateAllowedCharacters(calculator.delimiters, s);
+
+        validators.validateDelimiterSurroundings(calculator, s);
+
+        int[] lists = utils.convertStringToIntList(s, calculator);
+
+        return utils.sumIntList(lists);
+    }
 }
