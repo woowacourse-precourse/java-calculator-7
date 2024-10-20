@@ -1,7 +1,12 @@
 package calculator;
 
+import calculator.controller.CalculatorController;
+
 public class Application {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         // TODO: 프로그램 구현
+        CalculatorController calculatorController = new CalculatorController();
+        calculatorController.run();
     }
 }
+
