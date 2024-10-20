@@ -29,7 +29,11 @@ class StringCalculatorTest extends NsTest {
             assertThat(output()).contains("결과 : 6");
         });
         assertSimpleTest(() -> {
-            run("//@\\n1@2@3");
+            run("//@\\n1,2@3");
+            assertThat(output()).contains("결과 : 6");
+        });
+        assertSimpleTest(() -> {
+            run("//@\\n1,2,3");
             assertThat(output()).contains("결과 : 6");
         });
     }
