@@ -26,13 +26,17 @@ public class StringCalculatorController {
         return new InputData(input);
     }
 
-    public void runApplication(){
-        outputView.printMessage(Message.INTRO.getSentence());
-
+    public Arithmetic createArithmetic(){
         InputData inputData = handoverInput();
         Delimiter delimiter = delimiterController.createDelimiterPart(inputData);
 
-        Arithmetic arithmetic = new Arithmetic(delimiter, inputData);
+        return new Arithmetic(delimiter, inputData);
+    }
+
+    public void runApplication(){
+        outputView.printMessage(Message.INTRO.getSentence());
+
+        Arithmetic arithmetic = createArithmetic();
 
         outputView.printMessage(Message.RESULT.getSentence() + sumCalculator.calculate(arithmetic));
     }
