@@ -8,21 +8,24 @@ public class Application {
         String input = Console.readLine();
 
         String customDelimiter = extractCustomDelimiter(input); // 커스텀 구분자 추출
-        // 커스텀 구분자가 있다면, 커스텀 구분자 지정 문자 제외한 부분 추출
-        if (customDelimiter != "") {
-            System.out.println("worked!!");
-            String numbersPart = extractNumbersPart(input);
-            System.out.println("nums: " + numbersPart);
-        }
+        String numbersPart = extractNumbersPart(input); // 커스텀 구분자 지정 문자 제외한 부분 추출
+        System.out.println("nums: " + numbersPart);
 
+        String regex = "[," + customDelimiter + ":]";
+        String[] numbers = numbersPart.split(regex);
+        for (String number : numbers) {
+            System.out.println(number);
+        }
     }
 
     public static String extractNumbersPart(String input) {
-        int delimiterEndIndex = input.indexOf("\\n");
-        if (delimiterEndIndex != -1) {
-            return input.substring(delimiterEndIndex + 2);
-        } else {
-            return input; // \n이 없으면 전체 문자열을 반환
+        if (input.startsWith("//")) {
+            int delimiterEndIndex = input.indexOf("\\n");
+            if (delimiterEndIndex != -1 && delimiterEndIndex > 2) {
+                return input.substring(delimiterEndIndex + 2);
+            } else {
+                return input; // \n이 없으면 전체 문자열을 반환
+            }
         }
     }
 
