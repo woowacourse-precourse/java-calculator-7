@@ -9,7 +9,19 @@ public class Application {
             return 0;
         }
 
-        String[] tokens = input.split(",|:");
+        String delimiter = ",|:";
+        String numbers = input;
+
+        if (input.startsWith("//")) {
+            int delimiterIndex = input.indexOf("\n");
+            if (delimiterIndex == -1) {
+                throw new IllegalArgumentException();
+            }
+            delimiter = input.substring(2, delimiterIndex);
+            numbers = input.substring(delimiterIndex + 1);
+        }
+
+        String[] tokens = numbers.split(delimiter);
         int sum = 0;
 
         for (String token : tokens) {
