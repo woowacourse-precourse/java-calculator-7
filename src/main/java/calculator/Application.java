@@ -1,12 +1,15 @@
 package calculator;
 
+import camp.nextstep.edu.missionutils.Console;
+
 public class Application {
     public static void main(String[] args) {
+
         Calculator cal = new Calculator();
 
-        cal.Calculation("1:2,3"); // 계산기 호출
-        cal.Calculation("1,2,3"); // 계산기 호출
-        cal.Calculation("1:2:3"); // 계산기 호출
-        cal.Calculation("//;\\n1;2;3"); // 계산기 호출
+        String str = Console.readLine();  // 사용자가 콘솔에 입력한 값 읽기
+        Validate.check(str); // 입력 값 검증
+
+        System.out.println("결과 : " + cal.Calculation(str));
     }
 }

@@ -2,19 +2,19 @@ package calculator;
 
 public class Calculator {
 
-    public void Calculation(String str) {
+    Integer sum = 0;
 
-        String start = str.substring(0, 2); // 첫 시작 문자
+    public int Calculation(String str) {
 
-        if(start.equals("//")) custom(str.substring(5), str.substring(2, 3)); // 커스텀 구분자(?)를 사용하는 커스텀 계산기
-        else basic(str); // 기본 구분자를 사용하는 기본 계산기
+        if(str.startsWith("//")) return custom(str.substring(5), str.substring(2, 3)); // 커스텀 구분자(?)를 사용하는 커스텀 계산기
+        else return basic(str); // 기본 구분자를 사용하는 기본 계산기
 
     }
 
     // 기본 구분자(, :)를 사용하는 기본 계산기
-    public static void basic(String str) {
+    public int basic(String str) {
 
-        Integer sum = 0;
+        sum = 0;
 
         String[] numbers = str.split("[,:]+"); // 콤마(,), 콜론(:)을 구분자로 지정
 
@@ -22,13 +22,13 @@ public class Calculator {
             sum += Integer.parseInt(number);
         }
 
-        System.out.println(sum);
+        return sum;
     }
 
     // 커스텀 구분자(?)를 사용하는 커스텀 계산기
-    public void custom(String str, String sep) {
+    public int custom(String str, String sep) {
 
-        Integer sum = 0;
+        sum = 0;
 
         String[] numbers = str.split(sep); // 콤마(,), 콜론(:)을 구분자로 지정
 
@@ -36,7 +36,7 @@ public class Calculator {
             sum += Integer.parseInt(number);
         }
 
-        System.out.println(sum);
+        return sum;
 
     }
 }
