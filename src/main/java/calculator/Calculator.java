@@ -63,12 +63,10 @@ public class Calculator {
          * DELIMITER_PREFIX: 커스텀 구분자 정의 접두사
          * DELIMITER_SUFFIX: 커스텀 구분자 정의 접미사
          * START_INDEX: StringBuilder.delete() 메서드 호출 시, 잘라낼 문자열의 시작 인덱스 값을 나타냅니다.
-         * strippedStringBuilder: String의 가변 객체로, 구분자 섹션을 잘라내기 위해 사용합니다.
          */
         private static final String DELIMITER_PREFIX = "//";
         private static final String DELIMITER_SUFFIX = "\\n";
         private static final int START_INDEX = 0;
-        StringBuilder strippedStringBuilder;
 
         public Parser() {
         }
@@ -79,7 +77,7 @@ public class Calculator {
             if (strippedString.isEmpty()) {
                 return "0";
             }
-            strippedStringBuilder = removeDelimiterPrefix(strippedString);
+            StringBuilder strippedStringBuilder = removeDelimiterPrefix(strippedString);
 
             if (hasCustomDelimiter) {
                 removeDelimiterSuffix(strippedStringBuilder);
