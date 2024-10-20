@@ -4,8 +4,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class SplitResult {
-    private List<String> result;
-    private boolean success;
+    private final List<String> result;
+    private final boolean success;
 
     SplitResult(List<String> result, boolean success) {
         this.result = result;
