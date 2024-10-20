@@ -12,12 +12,32 @@ public class InputParser {
             throw new IllegalArgumentException("Error: 하나의 문자열만 입력해야 합니다.");
         }
     }
-    public String processSpace(String input) {
-        String trimmedInput = input.trim();
 
-        if (trimmedInput.contains(" ")) {
-            throw new IllegalArgumentException("Error: 커스텀 구분자가 아닌 공백은 불가능합니다.");
+    public String processSpace(String input) {
+        return input.trim();
+    }
+
+    public List<Integer> parse(String input) {
+        String[] splitInput = input.split("[,:]");
+        List<Integer> numbers = new ArrayList<>();
+
+        for (String str : splitInput) {
+            if (str.isEmpty()) {
+                numbers.add(0);
+            } else {
+                if (str.contains(" ")) {
+                    throw new IllegalArgumentException("Error: 입력 값에 불필요한 공백이 있습니다.");
+                }
+                if (!str.matches("\\d+")) {
+                    throw new IllegalArgumentException("Error: 입력 값은 숫자여야 합니다.");
+                }
+                int number = Integer.parseInt(str);
+                if (number < 0) {
+                    throw new IllegalArgumentException("Error: 입력 값은 음수일 수 없습니다.");
+                }
+                numbers.add(number);
+            }
         }
-        return trimmedInput;
+        return numbers;
     }
 }

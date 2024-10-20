@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class InputParserTest {
     private InputParser parser;
@@ -40,5 +41,14 @@ public class InputParserTest {
                 assertThatThrownBy(() -> parser.processSpace(hasSpacesInput))
                 .isInstanceOf(IllegalArgumentException.class)
         );
+    }
+
+    @Test
+    void 구분자_처리_테스트() {
+        String seperatedString = "1,2:3,4:";
+        List<Integer> numbers = parser.parse(seperatedString);
+        List<Integer> expectedNumbers = List.of(1, 2, 3, 4);
+
+        assertEquals(expectedNumbers, numbers, "두 리스트가 같지 않습니다.");
     }
 }
