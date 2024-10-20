@@ -13,23 +13,22 @@ public class Application {
             System.out.println("결과: "+0);
             return;
         }
-
-        if(isCustom(input)){
-            splitString += getCustom(input);
-        }
-
-        String[] tmp = input.split("\\\\n");
-        input = tmp[tmp.length-1];
         int sum=0;
 
         try{
+            if(isCustom(input)){
+                splitString += getCustom(input);
+            }
+            String[] tmp = input.split("\\\\n");
+            input = tmp[tmp.length-1];
+
+
             String[] numArr = input.split(splitString);
             sum = calSum(numArr);
         }catch(IllegalArgumentException e){
-            return;
-        }finally{
-            System.out.println("결과: "+sum);
+            return ;
         }
+        System.out.println("결과: "+sum);
 
     }
 
@@ -54,9 +53,14 @@ public class Application {
         String customCommand="";
         String[] tmpStr = input.split("\\\\n");
 
-        for(String s: tmpStr) if(isCustom(s)) customCommand += "|"+s.split("//")[1];
+        for(String s: tmpStr){
+            if(isCustom(s)){
+                String[] command = s.split("//");
+                if(command.length==0) throw new IllegalArgumentException();
+                customCommand += "|"+command[1];
+            }
+        }
 
         return customCommand;
     }
-
 }
