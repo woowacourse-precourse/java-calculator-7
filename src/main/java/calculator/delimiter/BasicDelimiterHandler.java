@@ -4,7 +4,7 @@ import calculator.DelimiterHandler;
 
 public class BasicDelimiterHandler implements DelimiterHandler {
 
-    private static final String DEFAULT_DELIMITERS = ",|:";
+    private static final String DEFAULT_DELIMITERS = "[,:]";
 
     @Override
     public String[] split(String input) {
