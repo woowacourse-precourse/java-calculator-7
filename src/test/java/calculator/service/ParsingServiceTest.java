@@ -1,4 +1,4 @@
-package calculator.util;
+package calculator.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -6,8 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
-public class StringParserTest {
-    private final StringParser parser = new StringParser();
+public class ParsingServiceTest {
+    private final ParsingService parser = new ParsingService();
 
     @Test
     void 기본_구분자_검증() {
@@ -16,7 +16,7 @@ public class StringParserTest {
         List<String> expected = Arrays.asList("1", "2", "3");
 
         // 실제 결과
-        List<String> result = parser.parse("1,2:3");
+        List<String> result = parser.stringParse("1,2:3");
 
         // 예상 결과와 실제 결과 비교
         assertEquals(expected, result);
@@ -29,7 +29,7 @@ public class StringParserTest {
         List<String> expected = Arrays.asList("1", "2", "3");
 
         // 실제 결과
-        List<String> result = parser.parse("//;\\n1;2;3");
+        List<String> result = parser.stringParse("//;\\n1;2;3");
 
         /// 예상 결과와 실제 결과 비교
         assertEquals(expected, result);
@@ -42,7 +42,7 @@ public class StringParserTest {
         List<String> expected = Arrays.asList("1", "2", "3", "4");
 
         // 실제 결과
-        List<String> result = parser.parse("//;\\n1;2,3;4");
+        List<String> result = parser.stringParse("//;\\n1;2,3;4");
 
         // 예상 결과와 실제 결과 비교
         assertEquals(expected, result);
@@ -55,7 +55,7 @@ public class StringParserTest {
         List<String> expected = Arrays.asList("1", "2", "3");
 
         // 실제 결과
-        List<String> result = parser.parse("//|\\n1|2|3");
+        List<String> result = parser.stringParse("//|\\n1|2|3");
 
         // 예상 결과와 실제 결과 비교
         assertEquals(expected, result);
@@ -68,7 +68,7 @@ public class StringParserTest {
         List<String> expected = List.of("");
 
         // 실제 결과
-        List<String> result = parser.parse("");
+        List<String> result = parser.stringParse("");
 
         // 예상 결과와 실제 결과 비교
         assertEquals(expected, result);
@@ -81,7 +81,7 @@ public class StringParserTest {
         List<String> expected = List.of("");
 
         // 실제 결과
-        List<String> result = parser.parse("//;\\n");
+        List<String> result = parser.stringParse("//;\\n");
 
         // 예상 결과와 실제 결과 비교
         assertEquals(expected, result);
