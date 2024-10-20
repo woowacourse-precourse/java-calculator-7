@@ -36,7 +36,6 @@ public class Separator {
 
     public List<Integer> extractionNumbers(String inputString) {
         List<Integer> numberCollection = new ArrayList<>();
-
         StringBuilder currentNumber = new StringBuilder();
         boolean isSeparator;
 
@@ -48,7 +47,11 @@ public class Separator {
             }
             if (isSeparator) {
                 if (!currentNumber.isEmpty()) {
-                    numberCollection.add(Integer.parseInt(currentNumber.toString()));
+                    int number = Integer.parseInt(currentNumber.toString());
+                    if (number <= 0) {
+                        throw new IllegalArgumentException("0 이하의 숫자는 입력할 수 없습니다.");
+                    }
+                    numberCollection.add(number);
                     currentNumber.setLength(0);
                 }
             }
@@ -57,7 +60,11 @@ public class Separator {
             }
         }
         if (!currentNumber.isEmpty()) {
-            numberCollection.add(Integer.parseInt(currentNumber.toString()));
+            int number = Integer.parseInt(currentNumber.toString());
+            if (number <= 0) {
+                throw new IllegalArgumentException("0 이하의 숫자는 입력할 수 없습니다.");
+            }
+            numberCollection.add(number);
         }
         return numberCollection;
     }
