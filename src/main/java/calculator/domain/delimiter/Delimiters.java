@@ -1,9 +1,8 @@
-package delimiter;
+package calculator.domain.delimiter;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class Delimiters {
 
@@ -21,13 +20,6 @@ public class Delimiters {
         validateDelimiters(delimiter);
 
         delimiters.add(delimiter);
-    }
-
-    public Delimiters merge(final Delimiters other) {
-        return new Delimiters(Stream.of(this.delimiters, other.getDelimiters())
-                .flatMap(List::stream)
-                .distinct()
-                .toList());
     }
 
     private void validateDelimiters(final Delimiter delimiter) {

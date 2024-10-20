@@ -1,17 +1,14 @@
-package delimiter;
+package calculator.domain.delimiter;
 
 import java.util.Objects;
 
-public class Delimiter {
+public record Delimiter(String delimiter) {
 
     private static final String POSITIVE_NUMBER_REGEX = "^(\\+?)\\d*$";
 
-    private final String delimiter;
-
-    public Delimiter(final String delimiter) {
+    public Delimiter {
         validateDelimiter(delimiter);
 
-        this.delimiter = delimiter;
     }
 
     public boolean matches(final String totalRegex) {
@@ -28,10 +25,6 @@ public class Delimiter {
         }
     }
 
-    public String getDelimiter() {
-        return delimiter;
-    }
-
     @Override
     public boolean equals(final Object o) {
         if (this == o) {
@@ -44,8 +37,4 @@ public class Delimiter {
         return Objects.equals(delimiter, delimiter1.delimiter);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(delimiter);
-    }
 }

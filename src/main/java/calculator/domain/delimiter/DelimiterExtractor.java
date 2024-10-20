@@ -1,9 +1,7 @@
-package calculator.util;
+package calculator.domain.delimiter;
 
-import static delimiter.DelimiterPattern.CUSTOM_DELIMITER;
+import static calculator.domain.delimiter.DelimiterPattern.CUSTOM_DELIMITER;
 
-import delimiter.Delimiter;
-import delimiter.Delimiters;
 import java.util.regex.Matcher;
 
 public class DelimiterExtractor {

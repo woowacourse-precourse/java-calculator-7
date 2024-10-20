@@ -1,15 +1,15 @@
 package calculator;
 
-import calculator.adder.Addable;
-import calculator.adder.IntegerAdder;
-import calculator.converter.IntegerConvertible;
-import calculator.converter.NumberConvertible;
+import calculator.domain.adder.Addable;
+import calculator.domain.adder.IntegerAdder;
+import calculator.domain.delimiter.DelimiterExtractor;
+import calculator.domain.delimiter.Delimiters;
 import calculator.io.ConsoleInputHandler;
 import calculator.io.ConsoleOutputHandler;
-import calculator.regex.RegexGenerator;
-import calculator.util.DelimiterExtractor;
-import calculator.util.Splitter;
-import delimiter.Delimiters;
+import calculator.util.converter.IntegerConvertible;
+import calculator.util.converter.NumberConvertible;
+import calculator.util.regex.RegexGenerator;
+import calculator.util.regex.Splitter;
 
 public class Application {
 

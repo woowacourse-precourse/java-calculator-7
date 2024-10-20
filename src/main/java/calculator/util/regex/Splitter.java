@@ -1,7 +1,6 @@
-package calculator.util;
+package calculator.util.regex;
 
-import calculator.regex.Regex;
-import delimiter.DelimiterPattern;
+import calculator.domain.delimiter.DelimiterPattern;
 import java.util.Arrays;
 import java.util.List;
 

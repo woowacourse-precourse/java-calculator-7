@@ -1,15 +1,15 @@
 package calculator;
 
-import calculator.adder.Addable;
-import calculator.converter.NumberConvertible;
+import calculator.domain.adder.Addable;
+import calculator.domain.delimiter.Delimiter;
+import calculator.domain.delimiter.DelimiterExtractor;
+import calculator.domain.delimiter.Delimiters;
 import calculator.io.ConsoleInputHandler;
 import calculator.io.ConsoleOutputHandler;
-import calculator.regex.Regex;
-import calculator.regex.RegexGenerator;
-import calculator.util.DelimiterExtractor;
-import calculator.util.Splitter;
-import delimiter.Delimiter;
-import delimiter.Delimiters;
+import calculator.util.converter.NumberConvertible;
+import calculator.util.regex.Regex;
+import calculator.util.regex.RegexGenerator;
+import calculator.util.regex.Splitter;
 import java.util.Arrays;
 import java.util.List;
 

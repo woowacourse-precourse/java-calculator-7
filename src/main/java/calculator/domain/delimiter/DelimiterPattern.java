@@ -1,4 +1,4 @@
-package delimiter;
+package calculator.domain.delimiter;
 
 import java.util.regex.Pattern;
 
