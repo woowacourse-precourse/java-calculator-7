@@ -21,6 +21,6 @@ public class DelimiterParser {
         }
         String customDelimiter = matcher.group(1);
         String calculation = input.substring(matcher.end());
-        return CalculatorRequest.of(DEFAULT_DELIMITERS + "|" + Pattern.quote(customDelimiter), calculation);
+        return CalculatorRequest.of(Pattern.quote(customDelimiter), calculation);
     }
 }

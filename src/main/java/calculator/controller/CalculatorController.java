@@ -1,6 +1,7 @@
 package calculator.controller;
 
 import calculator.dto.CalculatorRequest;
+import calculator.dto.CalculatorResponse;
 import calculator.service.CalculatorService;
 
 public class CalculatorController {
@@ -11,7 +12,7 @@ public class CalculatorController {
         this.calculatorService = calculatorService;
     }
 
-    public void calculate(CalculatorRequest request) {
-        calculatorService.calculateSum(request);
+    public CalculatorResponse calculate(CalculatorRequest request) {
+        return calculatorService.calculateSum(request);
     }
 }
