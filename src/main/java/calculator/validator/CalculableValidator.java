@@ -9,7 +9,9 @@ import java.util.stream.Collectors;
 public class CalculableValidator {
     private static final String DELIMITER_REGEX_OR_OPERATOR = "|";
     private static final String VALID_PATTERN_TEMPLATE = "^[0-9%s]+$";
-    private static final String VALID_PATTERN_DELIMITER_BETWEEN_NUMBERS_TEMPLATE = "^(\\d+[%s])+\\d+$";
+    private static final String NUMBER_PATTERN = "\\d+";
+    private static final String OPEN_PARENTHESIS = "(";
+    private static final String CLOSE_PARENTHESIS = ")";
 
 
     private CalculableValidator() {
@@ -36,7 +38,16 @@ public class CalculableValidator {
             return;
         }
 
-        String positionPattern = String.format(VALID_PATTERN_DELIMITER_BETWEEN_NUMBERS_TEMPLATE, delimiterPattern);
+        StringBuilder positionPatternBuilder = new StringBuilder(NUMBER_PATTERN);
+        for (int i = 0; i < numbers.length - 1; i++) {
+            positionPatternBuilder
+                    .append(OPEN_PARENTHESIS)
+                    .append(delimiterPattern)
+                    .append(CLOSE_PARENTHESIS)
+                    .append(NUMBER_PATTERN);
+        }
+
+        String positionPattern = positionPatternBuilder.toString();
         if (!Pattern.matches(positionPattern, input)) {
             throw new IllegalArgumentException(ErrorMessage.DELIMITER_MUST_BE_BETWEEN_NUMBERS.getMessage());
         }
