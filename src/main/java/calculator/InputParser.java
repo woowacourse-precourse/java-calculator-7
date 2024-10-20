@@ -12,10 +12,14 @@ public class InputParser {
 
         ArrayList<Integer> numbers = new ArrayList<>();
 
-        String[] values = inputData.split(regex);
+        if (inputData.length() == 0) {
+            numbers.add(0);
+        } else {
+            String[] values = inputData.split(regex);
 
-        for (String i : values) {
-            numbers.add(Integer.parseInt(i));
+            for (String i : values) {
+                numbers.add(Integer.parseInt(i));
+            }
         }
 
         return numbers;
