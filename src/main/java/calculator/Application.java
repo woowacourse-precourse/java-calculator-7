@@ -48,6 +48,7 @@ public class Application {
     // 숫자 합산 계산
     private static int calculateSum(String numbers, String delimiter) {
         return Arrays.stream(numbers.split(delimiter))
+                .filter(num -> !num.isBlank())
                 .mapToInt(Application::parseNumber)
                 .sum();
     }
