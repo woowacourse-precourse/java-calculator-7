@@ -23,12 +23,22 @@ public class Application {
         return true;
     }
 
+    public boolean isSpecialRegexChar(char c) {
+        String specialChars = ".^$*+?()[]{}\\|/";
+        return specialChars.indexOf(c) != -1;
+    }
+
     // 커스텀 구분자 찾는 메서드, 유효하지 않을 시 기본 구분자 반환
     public static String findCustomDelimiter(String input) {
         String delimiter = ",|:";
+
         if(validCustomDelimiter(input)){
-            delimiter = String.valueOf(input.charAt(2));
+            delimiter += "|";
+            if()
+            delimiter+= input.charAt(2);
         }
+
+        System.out.println(delimiter);
         return delimiter;
     }
 
@@ -43,6 +53,7 @@ public class Application {
         int sum = 0;
         for(String number: numbers){
             int num = stringToInt(number);
+            System.out.println(number);
             if(num<0)
                 return -1;
             sum+=num;
@@ -68,7 +79,7 @@ public class Application {
         String[] numbers = splitString(input,delimiter);
 
         sum = addString(numbers);
-        
+
         return sum;
     }
 
@@ -77,6 +88,8 @@ public class Application {
 
     public static void main(String[] args) {
         String input = Console.readLine();
-
+//        String input = "-1,2,3";
+        int sum = StringCalculator(input);
+        System.out.println("결과 : "+sum);
     }
 }
