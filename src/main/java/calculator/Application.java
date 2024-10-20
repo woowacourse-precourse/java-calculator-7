@@ -10,13 +10,11 @@ public class Application {
         String input = Console.readLine();
     }
 
-    public static int numberSum(String[] numbers) {
-        int sum = 0;
-        for (String number : numbers) {
-            int num = makeInt(number);
-            checkMinus(num);
-            sum += num;
+    public static int makeInt(String number) {
+        try {
+            return Integer.parseInt(number.trim());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException();
         }
-        return sum;
     }
 }
