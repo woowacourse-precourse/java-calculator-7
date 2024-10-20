@@ -59,6 +59,10 @@ public class StringCalculator {
      */
     public int calculate(String input) {
 
+        if (input.isEmpty()){
+            throw new IllegalArgumentException("Invalid input. Please provide a non-empty string");
+        }
+
         String separators;
 
         if (input.startsWith("//")) {
@@ -75,11 +79,11 @@ public class StringCalculator {
             try {
                 int num = Integer.parseInt(number);
                 if (num <= 0) {
-                    throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+                    throw new IllegalArgumentException("Invalid input. Please enter a positive number only");
                 }
                 sum += num;
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("구분자가 올바르지 않습니다.");
+                throw new IllegalArgumentException("Invalid delimiter.");
             }
         }
 
