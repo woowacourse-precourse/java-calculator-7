@@ -1,25 +1,26 @@
 package calculator.controller;
 
-import camp.nextstep.edu.missionutils.Console;
 import calculator.service.CalculationService;
+import calculator.view.CalculationView;
 
 public class CalculationController {
 
     private final CalculationService calculationService;
+    private final CalculationView calculationView;
 
     public CalculationController() {
         this.calculationService = new CalculationService();
+        this.calculationView = new CalculationView();
     }
 
     public void run() {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String input = Console.readLine();
+        String input = calculationView.getInput();
 
         try {
             int result = calculationService.calculate(input);
-            System.out.println("결과 : " + result);
+            calculationView.getResult(result);
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            calculationView.displayError(e.getMessage());
         }
     }
 }
