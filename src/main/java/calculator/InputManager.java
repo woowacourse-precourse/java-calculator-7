@@ -8,7 +8,7 @@ public class InputManager {
     private String operandCandidates;
 
     public InputManager() {
-        this.input = DEFAULT_INPUT;
+        input = DEFAULT_INPUT;
     }
 
     public void save(String input) {
@@ -22,7 +22,7 @@ public class InputManager {
             int endIndex = input.lastIndexOf(CUSTOM_SEPARATOR_POSTFIX);
             separatorCandidate = input.substring(startIndex, endIndex);
         }
-        return this.separatorCandidate;
+        return separatorCandidate;
     }
 
     public String getOperandCandidates() {
@@ -33,7 +33,7 @@ public class InputManager {
             }
             operandCandidates = input.substring(startIndex);
         }
-        return this.operandCandidates;
+        return operandCandidates;
     }
 
 
@@ -47,6 +47,6 @@ public class InputManager {
     }
 
     public boolean isSeparatorCandidateExisted() {
-        return this.input.startsWith(CUSTOM_SEPARATOR_PREFIX);
+        return input.startsWith(CUSTOM_SEPARATOR_PREFIX);
     }
 }
