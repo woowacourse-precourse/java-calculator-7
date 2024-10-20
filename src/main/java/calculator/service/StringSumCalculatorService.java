@@ -33,23 +33,35 @@ public class StringSumCalculatorService implements SumCalculatorService{
 
       if(number instanceof Long){
         long lValue = (Long)number;
-        if(biSum == null){
-          if (isOverFlow(lsum, lValue)) {
-            biSum = BigInteger.valueOf(lsum).add(BigInteger.valueOf(lValue));
+        if(bdSum != null){
+          bdSum = bdSum.add(BigDecimal.valueOf(lValue));
+        }
+        else {
+          if(biSum == null){
+            if (isOverFlow(lsum, lValue)) {
+              biSum = BigInteger.valueOf(lsum).add(BigInteger.valueOf(lValue));
+            }
+            else{
+              lsum += lValue;
+            }
           }
           else{
-            lsum += lValue;
+            biSum = biSum.add(BigInteger.valueOf(lValue));
           }
-        }
-        else{
-          biSum = biSum.add(BigInteger.valueOf(lValue));
         }
       }
       else if (number instanceof BigInteger) {
-        if(biSum == null){
-          biSum = BigInteger.valueOf(lsum);
+        if(bdSum != null){
+          bdSum = bdSum.add(new BigDecimal((BigInteger) number));
         }
-        biSum = biSum.add((BigInteger)number);
+        else {
+          if(biSum == null){
+            biSum = BigInteger.valueOf(lsum).add((BigInteger) number);
+          }
+          else{
+            biSum = biSum.add((BigInteger)number);
+          }
+        }
       }
       else if (number instanceof BigDecimal) {
         bdSum = createBigDecimalSum(bdSum, lsum, biSum);
@@ -58,6 +70,12 @@ public class StringSumCalculatorService implements SumCalculatorService{
     }
 
     if(bdSum!= null){
+      if(biSum != null){
+        bdSum = bdSum.add(new BigDecimal(biSum));
+      }
+      if(lsum != 0){
+        bdSum = bdSum.add(BigDecimal.valueOf(lsum));
+      }
       return bdSum.stripTrailingZeros().toPlainString();
     }
     if(biSum != null){
