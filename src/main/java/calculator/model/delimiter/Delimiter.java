@@ -13,6 +13,10 @@ public class Delimiter {
         delimiters.addAll(DefaultDelimiter.getDefaultDelimiters());
     }
 
+    private Delimiter() {
+        this.delimiters = DefaultDelimiter.getDefaultDelimiters();
+    }
+
     public List<String> getDelimiters() {
         return delimiters;
     }
@@ -21,5 +25,9 @@ public class Delimiter {
         DuplicatedCharacterValidator.validate(customDelimiter);
         IllegalNumericDelimiterValidator.validate(customDelimiter);
         return new Delimiter(customDelimiter);
+    }
+
+    public static Delimiter createDelimiter() {
+        return new Delimiter();
     }
 }

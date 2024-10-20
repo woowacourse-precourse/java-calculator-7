@@ -18,7 +18,7 @@ public class DefaultAndCustomDelimiterCalculationStrategy implements Calculation
     @Override
     public Long calculate(CalculationRequestDTO calculationRequestDTO) {
         String inputString = calculationRequestDTO.getInputString();
-        PositiveNumber positiveNumber = positiveNumberExtractor.getPositiveNumberWithCustomDelimiter(
+        PositiveNumber positiveNumber = positiveNumberExtractor.extractPositiveNumber(
                 customDelimiterExtractor.extractCustomDelimiter(inputString), inputString);
         return positiveNumber.getPositiveNumberSum();
     }

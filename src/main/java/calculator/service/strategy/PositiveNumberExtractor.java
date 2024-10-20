@@ -6,29 +6,22 @@ import calculator.model.PositiveNumber;
 import calculator.model.delimiter.Delimiter;
 
 public class PositiveNumberExtractor {
-    private final SplitPatternGenerator splitStringMaker;
+    private final SplitPatternGenerator splitPatternGenerator;
     private final PatternMatcherUtil patternMatcherUtil;
 
-    public PositiveNumberExtractor(SplitPatternGenerator splitStringMaker, PatternMatcherUtil patternMatcherUtil) {
-        this.splitStringMaker = splitStringMaker;
+    public PositiveNumberExtractor(SplitPatternGenerator splitPatternGenerator, PatternMatcherUtil patternMatcherUtil) {
+        this.splitPatternGenerator = splitPatternGenerator;
         this.patternMatcherUtil = patternMatcherUtil;
     }
 
-    public PositiveNumber getPositiveNumberWithCustomDelimiter(Delimiter customDelimiter,
-                                                               String inputString) {
-        String numberLine = getPositiveNumberLine(inputString);
+    public PositiveNumber extractPositiveNumber(Delimiter delimiter, String inputString) {
+        String numberLine = extractPositiveNumberLine(inputString);
         String[] positiveNumberString = numberLine.split(
-                splitStringMaker.generateSplitPatternWithCustomDelimiter(customDelimiter));
+                splitPatternGenerator.generateSplitPattern(delimiter));
         return createPositiveNumber(positiveNumberString);
     }
 
-    public PositiveNumber getPositiveNumber(String inputString) {
-        String numberLine = getPositiveNumberLine(inputString);
-        String[] positiveNumberString = numberLine.split(splitStringMaker.generateSplitPattern());
-        return createPositiveNumber(positiveNumberString);
-    }
-
-    private String getPositiveNumberLine(String inputString) {
+    private String extractPositiveNumberLine(String inputString) {
         return patternMatcherUtil.match(NUMBER_LINE.getRegularExpression(), inputString);
     }
 
