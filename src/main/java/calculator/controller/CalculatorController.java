@@ -4,22 +4,26 @@ import calculator.delimiterExtractor.DelimiterExtractor;
 import calculator.extractorProvider.ExtractorProvider;
 import calculator.numberExtractor.NumberExtractor;
 import calculator.service.Service;
+import calculator.validator.Validator;
 import java.util.ArrayList;
 
 public class CalculatorController {
     Service service;
+    Validator validator;
 
-    public CalculatorController(Service service) {
+    public CalculatorController(Service service, Validator validator) {
         this.service = service;
+        this.validator = validator;
     }
 
     public void execute() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = camp.nextstep.edu.missionutils.Console.readLine();
 
-        String inputType = service.checkTypeOfInput(input);
-        DelimiterExtractor delimiterExtractor = ExtractorProvider.getDelimiterExtractor(inputType);
-        NumberExtractor numberExtractor = ExtractorProvider.getNumberExtractor(inputType);
+        ExtractorProvider extractorProvider = new ExtractorProvider(validator);
+        String inputType = service.checkTypeOfInput(input, validator);
+        DelimiterExtractor delimiterExtractor = extractorProvider.getDelimiterExtractor(inputType);
+        NumberExtractor numberExtractor = extractorProvider.getNumberExtractor(inputType);
 
         String extractedDelimiter = service.extractDelimiter(delimiterExtractor, input);
         ArrayList<Integer> extractNumbers = service.extractNumbers(extractedDelimiter, numberExtractor, input);
