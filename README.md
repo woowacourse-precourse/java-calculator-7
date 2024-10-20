@@ -1,6 +1,6 @@
 # java-calculator-precourse
 ## 구현할 기능 목록
-- String getCommand(String, int)
+- String getCommand(String)
   - \n을 기준으로 나눈 문자열을 순서대로 반환
   - 더이상 문자열이 없을 경우 null을 반환
 - boolean isCommand(String)
