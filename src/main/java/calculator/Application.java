@@ -4,6 +4,15 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.StringTokenizer;
 
 public class Application {
+    //분리한 문자열을 숫자로 변환하여 더하기
+    public static int calculate(String[] nums) {
+        int sum = 0;
+        for (String num : nums) {
+            sum += Integer.parseInt(num);
+        }
+        return sum;
+    }
+
     public static void main(String[] args) {
         // 문자열 입력받기
         System.out.println("덧셈할 문자열을 입력해 주세요.");
