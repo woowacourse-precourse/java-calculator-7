@@ -28,13 +28,13 @@ public class SplitNumbers {
     }
 
     public static SplitNumbers from(String inputValue) {
-        String delimiter = getDelimiter(inputValue);
+        String delimiter = extractDelimiter(inputValue);
         String numberString = removeDelimiterDeclaration(inputValue);
         List<Integer> numbers = splitNumberString(numberString, delimiter);
         return of(numbers);
     }
 
-    private static String getDelimiter(String inputValue) {
+    private static String extractDelimiter(String inputValue) {
         int firstCustomDelimiterIndex = inputValue.indexOf(CUSTOM_DELIMITER_PREFIX);
         int secondCustomDelimiterIndex = inputValue.indexOf(CUSTOM_DELIMITER_SUFFIX);
 
@@ -42,9 +42,7 @@ public class SplitNumbers {
             return NORMAL_DELIMITER;
         }
 
-        if (firstCustomDelimiterIndex >= secondCustomDelimiterIndex) {
-            throw new IllegalArgumentException("잘못된 입력입니다. 커스텀 구분자는 //와 \\n 사이에 위치해야 합니다.");
-        }
+        ensureValidCustomDelimiter(firstCustomDelimiterIndex, secondCustomDelimiterIndex);
 
         String customDelimiter = getCustomDelimiter(inputValue, firstCustomDelimiterIndex, secondCustomDelimiterIndex);
         return getFinalDelimiter(customDelimiter);
@@ -52,6 +50,12 @@ public class SplitNumbers {
 
     private static boolean isNotCustomDelimiter(int firstCustomDelimiterIndex) {
         return firstCustomDelimiterIndex == -1;
+    }
+
+    private static void ensureValidCustomDelimiter(int firstCustomDelimiterIndex, int secondCustomDelimiterIndex) {
+        if (firstCustomDelimiterIndex >= secondCustomDelimiterIndex) {
+            throw new IllegalArgumentException("잘못된 입력입니다. 커스텀 구분자는 //와 \\n 사이에 위치해야 합니다.");
+        }
     }
 
     private static String getCustomDelimiter(String inputValue, int firstCustomDelimiter, int secondCustomDelimiter) {
