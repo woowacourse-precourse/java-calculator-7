@@ -32,7 +32,7 @@ public class Calculator {
         for (char c : strippedInput.toCharArray()) {
             if (Character.isDigit(c) || (!customDelimiter.equals(".") && c == '.')) {
                 digitString += Character.toString(c);
-            } else if (delimiterManager.delimiters.indexOf(c) != -1) {
+            } else if (delimiterManager.isDelimiter(c)) {
                 add(digitString);
                 digitString = "";
             } else {
@@ -46,20 +46,15 @@ public class Calculator {
         sum += Double.valueOf(digitString);
     }
 
-    /**
-     * 지정된 메시지를 프롬프트에 출력하는 메서드
-     */
+    /** 지정된 메시지를 프롬프트에 출력하는 메서드 */
     public void displayPrompt() {
         System.out.println(PROMPT_MESSAGE);
     }
 
-    /**
-     * 지정된 형식으로 문자열에서 추출한 숫자를 더한 값을 출력하는 메서드
-     */
+    /** 지정된 형식으로 문자열에서 추출한 숫자를 더한 값을 출력하는 메서드 */
     public void printSum() {
         System.out.println(String.format("결과 : %.0f", sum));
     }
-
 
     /** 입력받은 문자열을 파싱하는 클래스 */
     private class Parser {
@@ -75,7 +70,7 @@ public class Calculator {
         private static final int START_INDEX = 0;
         StringBuilder strippedStringBuilder;
 
-        private Parser() {
+        public Parser() {
         }
 
         private String parseString(String inputString) {
@@ -116,47 +111,6 @@ public class Calculator {
             } else {
                 throw new IllegalArgumentException("Invalid string: missing custom delimiter suffix.");
             }
-        }
-    }
-
-    /**
-     * 구분자를 관리하는 클래스.
-     * 커스텀 구분자 지정 시, 예외 처리와 커스텀 구분자 저장을 담당합니다.
-     */
-    private class DelimiterManager {
-
-        /**
-         * MAX_CUSTOM_DELIMITERS: 커스텀 구분자를 포함한 구분자 문자열의 최대 길이
-         * delimiters: 구분자 문자열
-         * count: 현재 구분자 문자열의 길이
-         */
-
-        private static final int MAX_CUSTOM_DELIMITERS = 3;
-        private String delimiters;
-        private int count;
-
-        private DelimiterManager() {
-            delimiters = ",:";
-            count = 2;
-        }
-
-        /**
-         * @param delimiter 기존의 구분자 문자열에 추가할 새로운 커스텀 구분자
-         * @throws IllegalArgumentException 커스텀 구분자의 개수는 1개를 초과할 수 없습니다.
-         * @throws IllegalArgumentException 기존의 구분자(",", ":")와 동일한 구분자는 커스텀 구분자가 될 수 없습니다.
-         */
-        public void addDelimiter(String delimiter) {
-
-            if (count >= MAX_CUSTOM_DELIMITERS) {
-                throw new IllegalArgumentException("Only one custom delimiter is allowed.");
-            }
-
-            if (delimiters.contains(delimiter)) {
-                throw new IllegalArgumentException("Custom delimiter cannot be a default delimiter (',' or ':').");
-            }
-
-            delimiters += delimiter;
-            count++;
         }
     }
 }
