@@ -1,7 +1,22 @@
 package calculator;
 
+import camp.nextstep.edu.missionutils.Console;
+import java.util.HashSet;
+
 public class Application {
+    private static int sum;
+
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        System.out.println("덧셈할 문자열을 입력해주세요.");
+        String input = Console.readLine();
+
+        try {
+            HashSet<String> delimiters = new HashSet<>();
+            String processedString = CalculaterSeparator.process(input, delimiters);
+            sum = CalculaterSum.calculateSum(processedString, delimiters);
+            System.out.println("결과 : " + sum);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
