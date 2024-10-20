@@ -13,7 +13,6 @@
     - 숫자 추출
 
 3. 예외 처리
-    - 음수 입력 시 IllegalArgumentException
     - 잘못된 형식 입력 시 IllegalArgumentException
 
 4. 덧셈 연산
