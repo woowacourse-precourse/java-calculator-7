@@ -1,4 +1,4 @@
-package calculator;
+package calculator.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,15 @@ public class Separator {
         nums = new ArrayList<>();
     }
 
-    public void makeNumsAndParams(String input) {
+    public List<Character> getParams() {
+        return params;
+    }
+
+    public List<Integer> getNums() {
+        return nums;
+    }
+
+    /*public void makeNumsAndParams(String input) {
         checkParams(input);
         List<Integer> extractedNumbers = extractNumbers(input);
         saveNums(extractedNumbers);
@@ -76,6 +84,6 @@ public class Separator {
 
     private void saveNums(List<Integer> inputs){
         nums.addAll(inputs);
-    }
+    }*/
 
 }

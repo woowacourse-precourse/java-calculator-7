@@ -1,8 +1,8 @@
 package calculator;
 
+import calculator.domain.Calculator;
+import calculator.domain.Separator;
 import camp.nextstep.edu.missionutils.Console;
-
-import java.util.Scanner;
 
 public class Application {
     public static void main(String[] args) {
