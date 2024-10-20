@@ -1,22 +1,22 @@
 package calculator.domain.constant;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 public enum DefaultDelimiter {
-    COMMA(","), COLON(":");
-
-    private final String delimiter;
-
-    DefaultDelimiter(String delimiter) {
-        this.delimiter = delimiter;
-    }
+    COMMA,
+    COLON;
 
     public String getDelimiter() {
-        return delimiter;
+        return switch (this) {
+            case COMMA -> ",";
+            case COLON -> ":";
+        };
     }
 
     public static List<String> getDefaultDelimiters() {
-        return Arrays.asList(COMMA.getDelimiter(), COLON.getDelimiter());
+        return Stream.of(values())
+                .map(DefaultDelimiter::getDelimiter)
+                .toList();
     }
 }

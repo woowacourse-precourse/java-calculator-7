@@ -2,18 +2,23 @@ package calculator.domain;
 
 import calculator.domain.constant.DefaultDelimiter;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Delimiter {
     private String inputString;
-    private ArrayList<String> delimiterList = new ArrayList<>();
+    private List<String> delimiterList = new ArrayList<>();
     private String customDelimiter;
 
     public Delimiter(String inputString) {
         this.inputString = inputString;
+        setDefaultDelimiter();
+    }
+
+    private void setDefaultDelimiter() {
         delimiterList.addAll(DefaultDelimiter.getDefaultDelimiters());
     }
 
-    public void setCustomDelimiter() {
+    private void setCustomDelimiter() {
         int delimiterEndIndex = inputString.indexOf("\\n");
 
         if (delimiterEndIndex == -1) {
@@ -37,8 +42,6 @@ public class Delimiter {
         }
     }
 
-
-    // Controller 에서 Delimiter 객체 생성 후 사용 (커스텀 구분자 존재 여부 확인)
     private void checkCustomDelimiter() {
         if (inputString.startsWith("//")) {
             setCustomDelimiter();
