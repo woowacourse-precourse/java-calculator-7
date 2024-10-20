@@ -4,11 +4,33 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.regex.Pattern;
 
 // model
-class SumModel {
-    private final int count;
+class PositiveNumberModel {
+    private final String REGEXP_ONLY_NUM = "^[\\d]*$";
+    private final String EMPTY_NUMBER = "";
 
-    public SumModel(int count) {
+    private int count;
+
+    public PositiveNumberModel(int count) {
         this.count = count;
+    }
+
+    public void plus(String numberAdded) {
+        if (!Pattern.matches(REGEXP_ONLY_NUM, numberAdded)) {
+            throw new IllegalArgumentException("잘못된 구분자를 포함합니다.");
+        }
+        if (numberAdded.equals(EMPTY_NUMBER)) {
+            return;
+        }
+
+        int number = Integer.parseInt(numberAdded);
+        if (number <= 0) {
+            throw new IllegalArgumentException("양수가 아닌 수를 포함합니다.");
+        }
+        this.count += number;
+    }
+
+    public int getCount() {
+        return this.count;
     }
 }
 
@@ -19,7 +41,7 @@ class ExpressionModel {
         this.expression = expression;
     }
 
-    public boolean hasCustomDelimiter(String expression) {
+    public boolean hasCustomDelimiter() {
         return expression.startsWith("//");
     }
 
@@ -33,6 +55,10 @@ class ExpressionModel {
         int startIdx = expression.indexOf("\\n") + 2;
         return expression.substring(startIdx);
     }
+
+    public String getExpression() {
+        return expression;
+    }
 }
 
 class DelimiterModel {
@@ -42,9 +68,9 @@ class DelimiterModel {
         this.delimiter = ",|:";
     }
 
-    public void registerDelimiter(String delimiterRange) {
-        for (int nowDelimiterIdx = 0; nowDelimiterIdx < delimiterRange.length(); nowDelimiterIdx++) {
-            this.delimiter += ("|\\" + delimiterRange.charAt(nowDelimiterIdx));
+    public void registerDelimiter(String delimiterSection) {
+        for (int nowDelimiterIdx = 0; nowDelimiterIdx < delimiterSection.length(); nowDelimiterIdx++) {
+            this.delimiter += ("|\\" + delimiterSection.charAt(nowDelimiterIdx));
         }
     }
 
@@ -54,16 +80,26 @@ class DelimiterModel {
 }
 
 class CalculatorModel {
-    private DelimiterModel delimiter;
+    private final DelimiterModel delimiter = new DelimiterModel();
 
     public int calculate(ExpressionModel expressionModel) {
         // 커스텀 구분자 등록
+        String nonDelimiterSection = expressionModel.getExpression();
+
+        if (expressionModel.hasCustomDelimiter()) {
+            delimiter.registerDelimiter(expressionModel.delimiterSection());
+            nonDelimiterSection = expressionModel.nonDelimiterSection();
+        }
 
         // 구분자로 문자열 자르기
+        String[] numbers = nonDelimiterSection.split(delimiter.getDelimiter());
 
-        int sum = 0;
+        PositiveNumberModel sum = new PositiveNumberModel(0);
         // 숫자 합 계산
-        return sum;
+        for (String nowNum : numbers) {
+            sum.plus(nowNum);
+        }
+        return sum.getCount();
     }
 
 }
