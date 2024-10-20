@@ -137,7 +137,11 @@ class CalculatorController {
 
 public class Application {
     public static void main(String[] args) {
+        CalculatorModel model = new CalculatorModel();
+        CalculateView view = new CalculateView();
+        CalculatorController controller = new CalculatorController(model, view);
 
+        controller.run();
     }
 }
 
