@@ -1,5 +1,7 @@
 package calculator.model;
 
+import calculator.message.Message;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -33,8 +35,7 @@ public class Calculator {
         try {
             return Integer.parseInt(token);
         } catch (NumberFormatException e) {
-            //TODO 오류 메시지 출력
-            return 0;
+            throw new IllegalArgumentException(Message.ILLEGAL_ARGUMENT_ERROR.toString());
         }
     }
 }

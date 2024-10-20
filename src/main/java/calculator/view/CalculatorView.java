@@ -6,8 +6,12 @@ import camp.nextstep.edu.missionutils.Console;
 public class CalculatorView {
 
     public static String getInput(){
-        System.out.println(Message.INPUT_PROMPT);
+        System.out.println(Message.GET_INPUT);
         String input = Console.readLine();
         return input;
+    }
+
+    public static void printError(String message){
+        System.out.println(message);
     }
 }

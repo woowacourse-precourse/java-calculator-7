@@ -1,5 +1,6 @@
 package calculator.controller;
 
+import calculator.model.Calculator;
 import calculator.view.CalculatorView;
 
 public class CalculatorController {
@@ -9,7 +10,7 @@ public class CalculatorController {
             String input = CalculatorView.getInput();
         }
         catch (IllegalArgumentException e){
-            //Todo 에러메시지 출력
+            CalculatorView.printError(e.getMessage());
         }
     }
 }
