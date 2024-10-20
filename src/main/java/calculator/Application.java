@@ -1,7 +1,6 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.util.logging.Logger;
 
 /*
  * 입력한 문자열에서 숫자를 추출하여 더하는 계산기를 구현한다.
@@ -12,7 +11,6 @@ public class Application {
     public static final char BASIC_SEP_TWO = ',';
     private static final char NO_CUSTOM_SEP = '1';
     public static char customSep  = NO_CUSTOM_SEP;
-    private static final Logger logger = Logger.getLogger(Application.class.getName());
 
     // BASIC_SEP, CustomSep, 숫자인지 유효성 검사
     public static boolean isValidChar(char c){
@@ -66,6 +64,6 @@ public class Application {
         System.out.println("PLEASE_ENTER_THE_STRING_TO_BE_ADDED");
         String input = Console.readLine();
         isValid(input);
-        logger.info("결과 : " + calculate(input));
+        System.out.println("결과 : " + calculate(input));
     }
 }
