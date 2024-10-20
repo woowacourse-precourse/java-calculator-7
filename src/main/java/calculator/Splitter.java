@@ -3,11 +3,8 @@ package calculator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Splitter {
-    private static final String PATTERN = "^//(.*?)\\n";
 
     public List<Operand> split(String text) {
         String delimiters = extractDelimiters(text);
@@ -19,7 +16,11 @@ public class Splitter {
     }
 
     private String removeCustomDelimiter(String text) {
-        return text.replaceFirst(PATTERN, "");
+        if (containedCustomDelimiter(text)) {
+            return text.substring(text.indexOf("\\n") + 2);
+        }
+
+        return text;
     }
 
     private String extractDelimiters(String text) {
@@ -30,11 +31,13 @@ public class Splitter {
     }
 
     private void addCustomDelimiter(String text, List<String> delimiters) {
-        Pattern pattern = Pattern.compile(PATTERN);
-        Matcher matcher = pattern.matcher(text);
-
-        if (matcher.find()) {
-            delimiters.add(matcher.group(1));
+        if (containedCustomDelimiter(text)) {
+            String customDelimiter = text.substring(2, text.indexOf("\\n"));
+            delimiters.add(customDelimiter);
         }
+    }
+
+    private boolean containedCustomDelimiter(String text) {
+        return text.startsWith("//") && text.contains("\\n");
     }
 }
