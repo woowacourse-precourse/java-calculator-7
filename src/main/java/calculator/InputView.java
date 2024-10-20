@@ -8,6 +8,7 @@ public class InputView {
         DelimiterExtractor delimiterExtractor = new DelimiterExtractor();
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = delimiterExtractor.extractDelimiter(Console.readLine());
+        FormatValidator.validateInput(input, delimiterExtractor.getDelimiter());
         return List.of(input.split(delimiterExtractor.getDelimiter()));
     }
 }
