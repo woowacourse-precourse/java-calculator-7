@@ -1,5 +1,6 @@
 package calculator.numberStrategy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SimpleNumberStrategy implements NumberStrategy {
@@ -13,7 +14,7 @@ public class SimpleNumberStrategy implements NumberStrategy {
         if (!isCorrectlySplit(splitResults)) {
             throw new IllegalArgumentException("구분자는 2개의 문자열을 분리해야 한다");
         }
-        return null;
+        return parseInt(splitResults);
     }
 
     private boolean isCorrectlySplit(String[] splitResults) {
@@ -23,5 +24,14 @@ public class SimpleNumberStrategy implements NumberStrategy {
             }
         }
         return true;
+    }
+
+    private List<Integer> parseInt(String[] splitResults) {
+        List<Integer> operands = new ArrayList<>();
+        for (String splitResult : splitResults) {
+            Integer operand = Integer.parseInt(splitResult);
+            operands.add(operand);
+        }
+        return operands;
     }
 }
