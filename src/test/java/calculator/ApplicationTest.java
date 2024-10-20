@@ -24,6 +24,21 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 이상한_입력값() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("asdf"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 커스텀_구분자_사용2() {
+        assertSimpleTest(() -> {
+            run("//;\\n1,2:3;4");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
 
     @Override
     public void runMain() {
