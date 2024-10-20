@@ -14,7 +14,6 @@ public class NumberParser {
         delimiterList.add(":");
         extractDelimiter();
         extractNum();
-        System.out.println(getSum());
     }
 
     // 커스텀 구분자 추출
@@ -55,5 +54,9 @@ public class NumberParser {
                 throw new IllegalArgumentException("유효하지 않은 숫자가 포함되어 있습니다: " + numberString);
             }
         }
+    }
+
+    public List<Integer> getExtractedNumList() {
+        return extractedNumList;
     }
 }
