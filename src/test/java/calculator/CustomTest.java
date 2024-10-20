@@ -23,6 +23,6 @@ public class CustomTest {
     @Test
     void 커스텀_구분자가_백슬래시인_경우() {
         String CUSTOM_DELIMITER_FORMAT = "//.\\\\n.*";
-        assertThat(Pattern.matches(CUSTOM_DELIMITER_FORMAT, "//\\\n2:3,2")).isTrue();
+        assertThat(Pattern.matches(CUSTOM_DELIMITER_FORMAT, "//\\\\n2:3,2")).isTrue();
     }
 }
