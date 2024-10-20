@@ -1,5 +1,3 @@
-# java-calculator-precourse
-
 # Simple Calculator
 
 This Java application is a simple calculator that performs addition of numbers entered as a string by the user. It's designed to demonstrate basic Java programming concepts such as loops, conditionals, and string manipulation.
