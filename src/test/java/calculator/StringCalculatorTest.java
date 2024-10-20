@@ -34,7 +34,7 @@ public class StringCalculatorTest {
 
         assertThatThrownBy(() -> calculator.calculate(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("잘못된 구분자 형식입니다. 구분자는 ','와 ':'만 가능합니다.");
+                .hasMessage("잘못된 구분자 형식입니다.");
     }
 
     @Test
@@ -71,7 +71,7 @@ public class StringCalculatorTest {
 
         assertThatThrownBy(() -> calculator.calculate(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("잘못된 구분자 형식입니다. 구분자는 ','와 ':'만 가능합니다.");
+                .hasMessage("잘못된 구분자 형식입니다.");
     }
 
     @Test
@@ -80,6 +80,6 @@ public class StringCalculatorTest {
 
         assertThatThrownBy(() -> calculator.calculate(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("잘못된 구분자 형식입니다. 구분자는 ','와 ':'만 가능합니다.");
+                .hasMessage("잘못된 구분자 형식입니다.");
     }
 }

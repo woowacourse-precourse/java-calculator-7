@@ -70,7 +70,7 @@ public class StringSplitterImplTest {
 
         assertThatThrownBy(() -> stringSplitter.split(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("잘못된 구분자 형식입니다. '\\n'이 필요합니다.");
+                .hasMessage("잘못된 구분자 형식입니다.");
     }
 
     @Test
@@ -79,7 +79,7 @@ public class StringSplitterImplTest {
 
         assertThatThrownBy(() -> stringSplitter.split(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("잘못된 구분자 형식입니다. 구분자가 비어 있습니다.");
+                .hasMessage("구분자가 비어 있습니다.");
     }
 
     @Test
@@ -87,7 +87,7 @@ public class StringSplitterImplTest {
         String input = "1!2,3";
         assertThatThrownBy(() -> stringSplitter.split(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("잘못된 구분자 형식입니다. 구분자는 ','와 ':'만 가능합니다.");
+                .hasMessage("잘못된 구분자 형식입니다.");
     }
 
     @Test
@@ -95,6 +95,6 @@ public class StringSplitterImplTest {
         String input = "1|2,3";
         assertThatThrownBy(() -> stringSplitter.split(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("잘못된 구분자 형식입니다. 구분자는 ','와 ':'만 가능합니다.");
+                .hasMessage("잘못된 구분자 형식입니다.");
     }
 }
