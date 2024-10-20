@@ -44,20 +44,20 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    @DisplayName("정수값 범위를 넘어서 커스텀 구분자 사용")
+    @DisplayName("64비트 정수값 범위를 넘어서 커스텀 구분자 사용")
     void 커스텀_구분자_사용_큰_정수값() {
         assertSimpleTest(() -> {
-            run("//;\\n2100000000;210000000");
-            assertThat(output()).contains("결과 : 0");
+            assertThatThrownBy(()->runException("//;\\n2100000000000000000000;21000000000000000000"))
+                    .isInstanceOf(IllegalArgumentException.class);
         });
     }
 
     @Test
-    @DisplayName("정수값 범위를 넘어서 기본 구분자 사용")
+    @DisplayName("64비트 정수값 범위를 넘어서 기본 구분자 사용")
     void 기본_구분자_사용_큰_정수값() {
         assertSimpleTest(() -> {
-            run("2100000000:210000000");
-            assertThat(output()).contains("결과 : 0");
+            assertThatThrownBy(()->runException("2100000000000000000000;21000000000000000000"))
+                    .isInstanceOf(IllegalArgumentException.class);
         });
     }
 
@@ -69,6 +69,20 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 기본_구분자_중복_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,2,,3,"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+    @Test
+    void 커스텀_구분자_중복_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;\\n1;;"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
     @Override
     public void runMain() {
         Application.main(new String[]{});
