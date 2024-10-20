@@ -24,6 +24,15 @@ public class ValidationUtils {
         validateWhitespaceBetweenDelimiters(input, delimiters);
     }
 
+    public static void validateMultipleCustomDelimiters(String input) {
+        Pattern pattern = Pattern.compile("(//.+\\\\n){2,}");
+        Matcher matcher = pattern.matcher(input);
+
+        if (matcher.find()) {
+            throw new IllegalArgumentException("여러 개의 커스텀 구분 문자 추출 문자열이 포함된 잘못된 입력입니다. 입력값: [" + input + "]");
+        }
+    }
+
     public static void validateValidInteger(String value) {
         try {
             long parsedLong = Long.parseLong(value.trim());

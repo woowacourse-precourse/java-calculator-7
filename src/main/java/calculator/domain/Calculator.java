@@ -40,6 +40,8 @@ public class Calculator {
 
     private List<String> getCustomDelimiters(String input) {
         List<String> delimiters = new ArrayList<>();
+
+        ValidationUtils.validateMultipleCustomDelimiters(input);
         Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(input);
 
         if (matcher.find()) {
