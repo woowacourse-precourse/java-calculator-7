@@ -100,11 +100,15 @@ public class Application {
     }
 
     private static int[] parseNumbers(String[] eachNumbers) {
-        return Arrays.stream(eachNumbers)
-                .filter(Application::isNotEmpty)
-                .map(String::trim)
-                .mapToInt(Integer::parseInt)
-                .toArray();
+        try {
+            return Arrays.stream(eachNumbers)
+                    .filter(Application::isNotEmpty)
+                    .map(String::trim)
+                    .mapToInt(Integer::parseInt)
+                    .toArray();
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자부에 문자가 입력되었습니다.", e);
+        }
     }
 
     private static void validateNoNegativeNumbers(int[] numbers) {
