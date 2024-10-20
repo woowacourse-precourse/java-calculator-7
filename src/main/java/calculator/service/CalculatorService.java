@@ -4,25 +4,30 @@ import calculator.exception.ExceptionMessage;
 import calculator.model.Calculator;
 
 public class CalculatorService {
+    private static final String DEFAULT_DELIMITERS = ",|:";
+    private static final String NEW_LINE = "\n";
+
     public int calculate(String input) {
         validateInput(input);
-        input = input.replace("\\n", "\n");
+        input = input.replace("\\n", NEW_LINE);
         Calculator calculator = new Calculator();
         if (input.isEmpty()) {
             calculator.setNumbers(new int[]{0});
         } else {
-            String delimiters = "[,|:]";
-            if (input.startsWith("//") && input.contains("\n")) {
-                String[] split = input.split("\n", 2);
-                delimiters = addCustomDelimiter(split, delimiters);
+            String delimiters = DEFAULT_DELIMITERS;
+            if (input.startsWith("//") && input.contains(NEW_LINE)) {
+                String[] split = input.split(NEW_LINE, 2);
+                delimiters = addCustomDelimiter(split, DEFAULT_DELIMITERS);
                 input = split[1];
             }
+            System.out.println(delimiters);
 
             String[] splitInput = input.split(delimiters);
+            validateSplitString(splitInput);
+
             int[] splitNum = new int[splitInput.length];
 
             for (int i = 0; i < splitInput.length; i++) {
-                validateSplitString(splitInput, i);
                 splitNum[i] = Integer.parseInt(splitInput[i]);
             }
             calculator.setNumbers(splitNum);
@@ -36,10 +41,6 @@ public class CalculatorService {
         if (input.contains(" ")) {
             throw new IllegalArgumentException(ExceptionMessage.EMPTY_INPUT.getMessage());
         }
-        //'0' 입력되면 예외발생
-        if (input.contains("0")) {
-            throw new IllegalArgumentException(ExceptionMessage.MINUS_OR_ZERO_INPUT.getMessage());
-        }
     }
 
     private static String addCustomDelimiter(String[] split, String delimiters) {
@@ -49,29 +50,31 @@ public class CalculatorService {
             throw new IllegalArgumentException(ExceptionMessage.FORBIDDEN_WORDS_IN_DELIMITER.getMessage());
         }
 
-        delimiters = "[" + delimiters.substring(1, 4) + "|" + customDelimiter + "]";
+        delimiters = delimiters + "|" + customDelimiter;
         return delimiters;
     }
 
-    private static void validateSplitString(String[] splitInput, int i) {
-        // 경계에 구분자가 있는지, 중복된 구분자인지 판단해서 예외 발생
-        // 공백이 존재한다는 것은 구분자가 중복되어 split 할 때 ""값이 들어왔다는 뜻
-        if (splitInput[i].isEmpty()) {
-            if (i == 0 || i == splitInput.length - 1) {
-                throw new IllegalArgumentException(ExceptionMessage.BOUNDARY_DELIMITER.getMessage());
-            } else {
-                throw new IllegalArgumentException(ExceptionMessage.DUPLICATE_DELIMITER.getMessage());
+    private static void validateSplitString(String[] splitInput) {
+        // 빈 문자열이 있는지 확인
+        for (int i = 0; i < splitInput.length; i++) {
+            if (splitInput[i].isEmpty()) {
+                // 첫 번째나 마지막에 구분자가 있을 때 예외 발생
+                if (i == 0 || i == splitInput.length - 1) {
+                    throw new IllegalArgumentException(ExceptionMessage.BOUNDARY_DELIMITER.getMessage());
+                } else {
+                    throw new IllegalArgumentException(ExceptionMessage.DUPLICATE_DELIMITER.getMessage());
+                }
             }
-        }
 
-        // 숫자가 아닌 문자 들어왔을 때 예외 발생
-        if (!splitInput[i].matches("-?\\d+")) {
-            throw new IllegalArgumentException(ExceptionMessage.NOT_DELIMITER_OR_NUMBER.getMessage());
-        }
+            // 숫자가 아닌 값이 있을 때 예외 발생
+            if (!splitInput[i].matches("-?\\d+")) {
+                throw new IllegalArgumentException(ExceptionMessage.NO_DELIMITER_OR_NUMBER.getMessage());
+            }
 
-        // 음수일 때 예외 발생
-        if (Integer.parseInt(splitInput[i]) < 0) {
-            throw new IllegalArgumentException(ExceptionMessage.MINUS_OR_ZERO_INPUT.getMessage());
+            // 음수나 0일 때 예외 발생
+            if (Integer.parseInt(splitInput[i]) <= 0) {
+                throw new IllegalArgumentException(ExceptionMessage.MINUS_OR_ZERO_INPUT.getMessage());
+            }
         }
     }
 }
