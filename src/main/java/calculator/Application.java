@@ -1,15 +1,19 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.Arrays;
 
 public class Application {
+    private final CustomParser customParser;
 
     public Application() {
+        this.customParser = new CustomParser();
     }
 
     public void run() {
         String input = getInput();
-        System.out.println("결과 : " + input);
+        int[] numbers = this.customParser.parse(input);
+        System.out.println("결과 : " + Arrays.toString(numbers));
     }
 
     private String getInput() {
