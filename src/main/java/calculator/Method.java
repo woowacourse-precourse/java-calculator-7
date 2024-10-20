@@ -3,8 +3,9 @@ package calculator;
 public class Method {
 
     public String changeString(String input){
-        input= input.substring(4);
+
         String index= input.substring(2,3);
+        input= input.substring(4);
         input=input.replace(index,",");
 
         return input;
