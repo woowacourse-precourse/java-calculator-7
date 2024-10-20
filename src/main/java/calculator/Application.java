@@ -15,9 +15,8 @@ public class Application {
 
         // 인자로 보내진 문자열과 구분자로 숫자 추출 후 더함. 더해진 값 반환
         int calculatedInt = CalculatorService.extractAndCalculate(extractedMap);
-        System.out.println(calculatedInt);
 
-        // TODO: 반환된 결과값 출력
-        OutputService outputService = new OutputService();
+        // 반환된 결과값 출력
+        OutputService.print(calculatedInt);
     }
 }
