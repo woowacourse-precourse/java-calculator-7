@@ -102,7 +102,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 생각보다_복잡한_구분자_추가된_계산() {
         assertSimpleTest(() -> {
-            run("//;\\n1:1,1,1,1:1,1,1,1,1,1,1:1,1,1,1,1;1,1,1;1,1,1,1,1,1");
+            run("//;\\n1,1,1,1,1,1,1,1,1,1;1,1,1,1,1:1,1,1,1,1,1:1,1:1,1,1");
             assertThat(output()).contains("결과 : 26");
         });
     }

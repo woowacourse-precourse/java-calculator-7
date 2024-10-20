@@ -56,7 +56,7 @@ public class Application {
 
     private static String SeparatorSetting(String UserInput, boolean patternEnable) {
         if (patternEnable) {
-            return Constant.PATTERN_ENABLE + UserInput.substring(Constant.CUSTOM_PATTERN_INDEX);
+            return Constant.PATTERN_ENABLE + UserInput.charAt(Constant.CUSTOM_PATTERN_INDEX);
         } else {
             return Constant.PATTERN_DISABLE;
         }
