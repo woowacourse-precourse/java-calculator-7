@@ -5,7 +5,9 @@ import calculator.view.InputView;
 // 리턴값은 분리된 숫자를 출력
 public class StringSplitter {
     public static int[] splitString(String input, String delimiter){
-
+        if (delimiter!=",|:"){
+            input=input.substring(5);
+        }
         String[] parts= input.split(delimiter);
 
         int[] numbers=Arrays.stream(parts)
@@ -23,7 +25,7 @@ public class StringSplitter {
                 throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
             }
         }
-//;\n1;2;3
+
         return numbers;
     }
     // 문자열이 숫자인지 확인하는 메서드
