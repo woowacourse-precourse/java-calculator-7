@@ -10,24 +10,29 @@ public class Preprocessing {
     private final InputValidator inputValidator = new InputValidator();
     private static final List<String> DEFAULT_SEPARATORS = Arrays.asList(",", ":");
 
-    public List<String> processInput (String input) {
-        List<String> separated = new ArrayList<>();
-
+    public List<String> processInput(String input) {
         if (firstLetter(input)) { // 첫글자가 `/`일 경우
-            // 커스텀 구분자 추출
-            List<String> customAndLeft = findCustomSeparator(input);
-
-            // 기본 구분자를 새로운 리스트에 복사하여 사용
-            List<String> separators = new ArrayList<>(DEFAULT_SEPARATORS);
-            separators.add(customAndLeft.get(0));
-
-            // 숫자 - !숫자 구분
-            separated = separation(customAndLeft.get(1), separators);
+            return customPresence(input);
         } else { // 첫글자가 숫자일 경우
-            // 숫자 - !숫자 구분
-            separated = separation(input, DEFAULT_SEPARATORS);
+            return customAbsence(input);
         }
-        return separated;
+    }
+
+    private List<String> customPresence(String input) {
+        // 커스텀 구분자 추출
+        List<String> customAndLeft = findCustomSeparator(input);
+
+        // 기본 구분자를 새로운 리스트에 복사하여 사용
+        List<String> separators = new ArrayList<>(DEFAULT_SEPARATORS);
+        separators.add(customAndLeft.get(0));
+
+        // 숫자 - !숫자 구분
+        return separation(customAndLeft.get(1), separators);
+    }
+
+    private List<String> customAbsence(String input) {
+        // 숫자 - !숫자 구분
+        return separation(input, DEFAULT_SEPARATORS);
     }
 
     // 첫 글자가 "/"로 시작하는지 아닌지에 따라 메소드 실행
@@ -48,9 +53,9 @@ public class Preprocessing {
         List<String> separated = new ArrayList<>();
 
         // 0번째 주소에 있는 원소 temp에 저장
-        String temp = given.substring(0,1); // String??
+        String temp = given.substring(0, 1); // String??
 
-        for (int i = 1;i < given.length(); i++) {
+        for (int i = 1; i < given.length(); i++) {
             if (Character.isDigit(given.charAt(i)) == Character.isDigit(given.charAt(i - 1))) {
                 temp += given.substring(i, i + 1);
             } else {
