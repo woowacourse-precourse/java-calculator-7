@@ -1,13 +1,9 @@
 package calculator.service;
 
-import calculator.cotroller.UserApiController;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class NumValidService extends Service{
-    UserApiController userApiController = new
-            UserApiController();
+
     //입력 받은 문자열의 유효성 판단 (1)커스텀형식 (2)커스텀형식+기본구분자 (3)기본구분자 (4)예외
     public boolean inputValid(String input, List<String> separators) {
         //custom 구분자

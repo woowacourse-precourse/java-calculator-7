@@ -31,10 +31,6 @@ public class UserApiController {
         }
     }
 
-    public void saveSeparator(String dt){
-        extractionData.setSeparators(dt);
-    }
-
     public List<String> getSeparators(){
         return extractionData.getSeparators();
     }

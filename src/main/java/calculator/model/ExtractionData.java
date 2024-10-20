@@ -16,9 +16,5 @@ public class ExtractionData {
         return Separators;
     }
 
-    public void setSeparators(String separator){
-        Separators.add(separator);
-    }
-
 
 }
