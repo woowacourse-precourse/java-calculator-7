@@ -1,18 +1,16 @@
 package calculator.domain;
 
-import calculator.exception.InvalidInputException;
-import calculator.validation.MessageType;
-
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Calculator {
     private static final Pattern CUSTOM_SEPERATOR_PATTERN=Pattern.compile("^//(.)\\\\n{1}(.*)");
-
-    private static String seperatorRegex=",|:";
     private static final String SPLITOR="|";
     private static final String ESCAPE_CHAR="\\";
+    private static final String BLANK="";
+
+    private static String seperatorRegex=",|:";
 
     public static int inputCalculate(String input){
         //커스텀 구분자 패턴이 존재하는지 확인한다
@@ -37,7 +35,7 @@ public class Calculator {
 
     private static int calculate(String input) {
         int result= Arrays.stream(input.split(seperatorRegex))
-                .filter(num->!isSpace(num))
+                .filter(num->!isBlank(num))
                 .peek(num->Validator.validateCustomSeperator(num))
                 .mapToInt(Integer::parseInt)
                 .sum();
@@ -45,8 +43,8 @@ public class Calculator {
         return result;
     }
 
-    private static boolean isSpace(String num) {
-        return num.equals("");
+    private static boolean isBlank(String num) {
+        return num.equals(BLANK);
     }
 
     private static void addRegex(String customSeperator) {
