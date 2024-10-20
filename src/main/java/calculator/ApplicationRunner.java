@@ -25,7 +25,7 @@ public class ApplicationRunner {
             separatorManager.save(inputManager.getSeparatorCandidate());
         }
         operandManager.save(inputManager.getOperandCandidates());
-        BigInteger result = operator.add(operandManager.getOperands());
-        userInteractionManager.printOutput(result);
+        int result = operator.add(operandManager.getOperands());
+        userInteractionManager.printOutput(result + "");
     }
 }
