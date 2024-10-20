@@ -19,10 +19,21 @@ public class Number {
 
     public int getCustomDelimiterEndIndex(String rawText) {
         int lastIndex = rawText.indexOf("\\n");
-        while (lastIndex > 0 && rawText.substring(lastIndex+2, lastIndex+4).equals("\\n")) {
+        while (hasNextIndexOfNewLine(lastIndex, rawText)) {
             lastIndex += 2;
         }
         return lastIndex;
+    }
+
+    public boolean hasNextIndexOfNewLine(int lastIndex, String rawText) {
+        int textLength = rawText.length();
+        if (lastIndex+2 >= textLength || lastIndex+4 >= textLength) {
+            return false;
+        }
+        if (lastIndex > 0 && rawText.substring(lastIndex+2, lastIndex+4).equals("\\n")) {
+            return true;
+        }
+        return false;
     }
 
     public int checkHasCustomDelimiter(String rawText) {
@@ -79,6 +90,9 @@ public class Number {
 
     public void registerNumber(String numberString) {
         int number = parseInt(numberString);
+        if (number == 0) {
+            throw  new IllegalArgumentException("0은 입력할 수 없습니다.");
+        }
         if (!checkValidNumber(number)) {
             throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
         }
