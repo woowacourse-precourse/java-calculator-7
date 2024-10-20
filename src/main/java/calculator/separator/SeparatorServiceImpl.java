@@ -37,9 +37,24 @@ public class SeparatorServiceImpl implements SeparatorService{
         return true;
     }
 
+    /**
+     * 커스텀 구분자를 반환합니다.
+     * @param input 사용자 입력 문자열
+     * @return 커스텀 구분자 또는 기본 구분자 반환
+     */
     @Override
     public String getSeparator(String input) {
-        return null;
+        String separator = DEFAULT_SEPARATOR;
+
+        if (checkCustomSeparator(input)) {
+            char customSeparator = input.charAt(INDEX_OF_CUSTOM_SEPARATOR);
+            if (META_CHARACTERS.indexOf(customSeparator) < 0) {
+                separator = DEFAULT_SEPARATOR + "|" + customSeparator;
+            } else {
+                separator = DEFAULT_SEPARATOR + "|" + "\\" + customSeparator;
+            }
+        }
+        return separator;
     }
 
     @Override
