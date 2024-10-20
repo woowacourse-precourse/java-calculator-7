@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class DefaultDelimitersFactoryTest {
 
     private static final String rightDelimiter = ";";
-    private static DefaultDelimitersFactory defaultDelimitersFactory;
+    private static final DefaultDelimitersFactory defaultDelimitersFactory = new DefaultDelimitersFactory();
 
     @Test
     void 매개변수_없이_기본_구분자를_포함한_구분자들을_생산한다() {

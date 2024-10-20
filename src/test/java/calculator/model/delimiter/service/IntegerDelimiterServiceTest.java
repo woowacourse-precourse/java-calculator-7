@@ -2,7 +2,7 @@ package calculator.model.delimiter.service;
 
 import calculator.common.di.IntegerCalculatorDependencyRegistry;
 import calculator.model.custom_delimiter.service.CustomDelimiterService;
-import calculator.model.delimiter.factory.DelimiterFactory;
+import calculator.model.delimiter.factory.DelimitersFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -16,12 +16,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @DisplayName("IntegerDelimiterService 클래스")
 public class IntegerDelimiterServiceTest {
 
-    private final DelimiterFactory delimiterFactory =
-            IntegerCalculatorDependencyRegistry.getInstance().getDelimiterFactory();
+    private final DelimitersFactory delimitersFactory =
+            IntegerCalculatorDependencyRegistry.getInstance().getDelimitersFactory();
     private final CustomDelimiterService customDelimiterService =
             IntegerCalculatorDependencyRegistry.getInstance().getCustomDelimiterService();
     private final IntegerDelimiterService integerDelimiterService =
-            new IntegerDelimiterService(delimiterFactory, customDelimiterService);
+            new IntegerDelimiterService(delimitersFactory, customDelimiterService);
     private final String EMPTY_STRING = "";
 
     static List<Arguments> provideValidInput() {
