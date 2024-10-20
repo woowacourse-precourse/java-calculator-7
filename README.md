@@ -20,7 +20,7 @@
     - [X] 1. 문자열 입력받기
     - [X] 2. 결과 출력하기
 - [X] B. Calculation의 함수
-    - ~~ [ ] 0. getter, setter~~
+    - ~~[ ] 0. getter, setter~~
     - [X] 1. 입력 받은 문자열 분석하고 필드에 저장하기
         - public void splitInputString(String input)
         - private void checkCustomSperator()
