@@ -17,10 +17,15 @@ public class Application {
 
     public static void inputValidationCheck(String input){
         checkBlankExist(input);
+        checkMinusExist(input);
         if (checkCustomSeparatorExist(input)){
-            System.out.println("맞았습니다.");
+
         }
 
+    }
+
+    public static void checkMinusExist(String input) {
+        if (input.contains("-")) throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
     }
 
     public static boolean checkCustomSeparatorExist(String input) {
