@@ -12,6 +12,7 @@ public class StringSumCalculator {
 
         int sum = 0;
         for (String number : numbers) {
+            validateInput(number);
             sum += parsePositiveNumber(number);
         }
         return sum;
@@ -43,7 +44,7 @@ public class StringSumCalculator {
     }
 
     private void validateInput(String input) {
-        if (!input.matches("//d+")) {
+        if (!input.matches("\\d+")) {
             throw new IllegalArgumentException("잘못된 값 입력됨. 다시 실행하시오.");
         }
     }
