@@ -1,7 +1,6 @@
 package calculator.tokenizer;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
 
 import org.junit.jupiter.api.Test;
@@ -39,8 +38,8 @@ public class DelimitersTest {
 
         // when & then
         assertSoftly(softly -> {
-            assertThatThrownBy(() -> delimiters.addCustomDelimiter(null)).isInstanceOf(IllegalArgumentException.class);
-            assertThatThrownBy(() -> delimiters.addCustomDelimiter("")).isInstanceOf(IllegalArgumentException.class);
+            softly.assertThatThrownBy(() -> delimiters.addCustomDelimiter(null)).isInstanceOf(IllegalArgumentException.class);
+            softly.assertThatThrownBy(() -> delimiters.addCustomDelimiter("")).isInstanceOf(IllegalArgumentException.class);
         });
     }
 
@@ -51,8 +50,8 @@ public class DelimitersTest {
 
         // when & then
         assertSoftly(softly -> {
-            assertThatThrownBy(() -> delimiters.addCustomDelimiter("123")).isInstanceOf(IllegalArgumentException.class);
-            assertThatThrownBy(() -> delimiters.addCustomDelimiter("-200")).isInstanceOf(IllegalArgumentException.class);
+            softly.assertThatThrownBy(() -> delimiters.addCustomDelimiter("123")).isInstanceOf(IllegalArgumentException.class);
+            softly.assertThatThrownBy(() -> delimiters.addCustomDelimiter("-200")).isInstanceOf(IllegalArgumentException.class);
         });
     }
 
