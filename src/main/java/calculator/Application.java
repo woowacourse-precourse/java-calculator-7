@@ -3,11 +3,13 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
+    private static final String READ_INPUT_STATEMENT = "덧셈할 문자열을 입력해 주세요.";
     private static final String RESULT_STATEMENT = "결과 : ";
     private static final String DEFAULT_REGEX = ",|:";
     private static final String CUSTOM_DELIMITER_FORMAT = "//#\\n";
 
     public static void main(String[] args) {
+        System.out.println(READ_INPUT_STATEMENT);
         String input = Console.readLine();
 
         // 빈 문자열이 입력되었을 경우 0을 출력하고 프로그램 실행 종료
