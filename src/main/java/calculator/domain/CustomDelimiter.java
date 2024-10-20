@@ -1,6 +1,7 @@
 package calculator.domain;
 
 import calculator.exception.ErrorMessage;
+import java.util.regex.Pattern;
 
 public class CustomDelimiter {
 
@@ -36,6 +37,6 @@ public class CustomDelimiter {
     }
 
     public String getDelimiter() {
-        return delimiter;
+        return Pattern.quote(delimiter);
     }
 }
