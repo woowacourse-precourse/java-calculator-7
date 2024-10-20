@@ -13,7 +13,7 @@
     - [ ] StringCalculator
 - Test
     - [ ] CustomDelimiterValidatorTest
-    - [ ] InputValidatorTest
+    - [ ] StringValidatorTest
     - [ ] NumberExtractorTest
     - [ ] SumCalculatorTest
 
