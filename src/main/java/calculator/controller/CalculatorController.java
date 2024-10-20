@@ -1,7 +1,7 @@
 package calculator.controller;
 
 import calculator.common.Delimiters;
-import calculator.util.DelimiterExtractor;
+import calculator.util.CustomDelimiterExtractor;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 import java.util.Set;
@@ -20,7 +20,7 @@ public class CalculatorController {
     }
 
     private Delimiters initializeDelimiters(String calculationInput) {
-        Set<String> customDelimiters = DelimiterExtractor.parse(calculationInput);
+        Set<String> customDelimiters = CustomDelimiterExtractor.parse(calculationInput);
         Delimiters delimiters = new Delimiters();
         delimiters.addCustomDelimiters(customDelimiters);
 

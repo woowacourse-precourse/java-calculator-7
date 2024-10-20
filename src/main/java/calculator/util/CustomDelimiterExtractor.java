@@ -5,12 +5,12 @@ import calculator.enums.RegexPattern;
 import java.util.HashSet;
 import java.util.Set;
 
-public class DelimiterExtractor {
+public class CustomDelimiterExtractor {
     public static final String DELIMITER_PREFIX = "//";
     public static final String DELIMITER_SUFFIX = "\\n";
 
 
-    private DelimiterExtractor() {
+    private CustomDelimiterExtractor() {
     }
 
     public static Set<String> parse(String input) {

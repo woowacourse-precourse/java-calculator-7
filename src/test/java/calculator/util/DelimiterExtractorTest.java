@@ -20,7 +20,7 @@ class DelimiterExtractorTest {
             String input = "//;1,2,3";
 
             // when & then
-            assertThatThrownBy(() -> DelimiterExtractor.parse(input))
+            assertThatThrownBy(() -> CustomDelimiterExtractor.parse(input))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(ErrorMessage.DELIMITER_SUFFIX_NOT_FOUND.getMessage());
         }
@@ -31,7 +31,7 @@ class DelimiterExtractorTest {
             String input = "//;\\n1;2;3";
 
             // when & then
-            assertThatNoException().isThrownBy(() -> DelimiterExtractor.parse(input));
+            assertThatNoException().isThrownBy(() -> CustomDelimiterExtractor.parse(input));
         }
 
         @Test
@@ -40,7 +40,7 @@ class DelimiterExtractorTest {
             String input = "//\\n1,2,3";
 
             // when & then
-            assertThatThrownBy(() -> DelimiterExtractor.parse(input))
+            assertThatThrownBy(() -> CustomDelimiterExtractor.parse(input))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(ErrorMessage.CUSTOM_DELIMITER_NOT_FOUND.getMessage());
         }
@@ -51,7 +51,7 @@ class DelimiterExtractorTest {
             String input = "//;\\n1;2;3";
 
             // when & then
-            assertThatNoException().isThrownBy(() -> DelimiterExtractor.parse(input));
+            assertThatNoException().isThrownBy(() -> CustomDelimiterExtractor.parse(input));
         }
 
         @Test
@@ -60,7 +60,7 @@ class DelimiterExtractorTest {
             String input = "//1\\n1,2,3";
 
             // when & then
-            assertThatThrownBy(() -> DelimiterExtractor.parse(input))
+            assertThatThrownBy(() -> CustomDelimiterExtractor.parse(input))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(ErrorMessage.CUSTOM_DELIMITER_CANNOT_CONTAIN_NUMERIC.getMessage());
         }
@@ -71,7 +71,7 @@ class DelimiterExtractorTest {
             String input = "// \\n1 2 3";
 
             // when & then
-            assertThatNoException().isThrownBy(() -> DelimiterExtractor.parse(input));
+            assertThatNoException().isThrownBy(() -> CustomDelimiterExtractor.parse(input));
         }
     }
 }
