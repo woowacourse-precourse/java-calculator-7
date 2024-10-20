@@ -7,25 +7,21 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class PreprocessFilter extends CalculatorFilter
-{
+public class PreprocessFilter extends CalculatorFilter {
     private final String regex = "//([^0-9])\\\\n";
     private final String regex_all = regex + ".*";
     private CalculatorConfig configuration;
     private Pattern pattern;
 
-    public PreprocessFilter()
-    {
+    public PreprocessFilter() {
         this.configuration = CalculatorConfig.getInstance();
         this.pattern = Pattern.compile(regex_all);
     }
 
     @Override
-    public Optional<String> run(String input)
-    {
+    public Optional<String> run(String input) {
         Matcher matcher = pattern.matcher(input);
-        if (input.startsWith("//") && matcher.matches())
-        {
+        if (input.startsWith("//") && matcher.matches()) {
             String splitter = matcher.group(1);
             configuration.setSplitter(splitter);
             input = input.replaceAll(regex, "");

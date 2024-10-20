@@ -5,10 +5,8 @@ import calculator.filter.FormatCheckFilter;
 import calculator.filter.PreprocessFilter;
 import calculator.filter.SplitCheckFilter;
 
-public class BasicPipeline extends CalculatorPipeline
-{
-    public BasicPipeline()
-    {
+public class BasicPipeline extends CalculatorPipeline {
+    public BasicPipeline() {
         super();
         CalculatorFilter first = new PreprocessFilter();
         CalculatorFilter second = new FormatCheckFilter();

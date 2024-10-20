@@ -1,7 +1,6 @@
 package calculator.configuration;
 
-public interface Delimiters
-{
+public interface Delimiters {
     String GROUP = ":";
     String DEFAULT_SPLITTER = ",";
 }

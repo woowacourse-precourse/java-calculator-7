@@ -2,17 +2,14 @@ package calculator.filter;
 
 import java.util.Optional;
 
-public abstract class CalculatorFilter
-{
+public abstract class CalculatorFilter {
     protected CalculatorFilter nextStrategy;
 
-    public CalculatorFilter()
-    {
+    public CalculatorFilter() {
         this.nextStrategy = null;
     }
 
-    public void setNextStrategy(CalculatorFilter nextStrategy)
-    {
+    public void setNextStrategy(CalculatorFilter nextStrategy) {
         this.nextStrategy = nextStrategy;
     }
 
