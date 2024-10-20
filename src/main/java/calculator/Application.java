@@ -8,7 +8,6 @@ public class Application {
         // TODO: 프로그램 구현
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = camp.nextstep.edu.missionutils.Console.readLine();
-
         try {
             int result = add(input);
             System.out.println("결과 : " + result);
@@ -70,5 +69,4 @@ public class Application {
                     ": " + number);  // 형식 예외 발생
         }
     }
-
 }
