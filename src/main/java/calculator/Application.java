@@ -56,7 +56,9 @@ public class Application {
         }
 
         String str = inputString.replaceAll(",|:", "");
-        str = str.replaceAll(aNewDelimiter, "");
+        if (aNewDelimiter != null) {
+            str = str.replaceAll(aNewDelimiter, "");
+        }
 
         int afterLength = str.length();
         if (beforeLength - afterLength >= beforeLength / 2) {
