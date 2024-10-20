@@ -15,6 +15,6 @@ public class Calculator {
         outputView.printCalculatorStartMessage();
         Result result = inputView.readText();
         int total = result.getTotal();
-        outputView.printCalculatorsRESULTMessage(total);
+        outputView.printCalculatorsResultMessage(total);
     }
 }
