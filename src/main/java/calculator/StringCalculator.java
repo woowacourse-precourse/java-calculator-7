@@ -42,10 +42,15 @@ public class StringCalculator {
     private static int sum(String[] numbers) {
         int total = 0;
         for (String number : numbers) {
-            if (number.matches("\\d+")) {
-                total += Integer.parseInt(number);
-            }
+            total += parseAndValidateNumber(number);
         }
         return total;
+    }
+
+    private static int parseAndValidateNumber(String number) {
+        if (number.matches("\\d+")) {
+            return Integer.parseInt(number);
+        }
+        return 0; // Return 0 for invalid numbers instead of ignoring
     }
 }
