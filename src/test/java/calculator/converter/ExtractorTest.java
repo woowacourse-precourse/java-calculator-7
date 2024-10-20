@@ -12,7 +12,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class ExtractorTest {
 
     @ParameterizedTest
-    @MethodSource("providerDelimiterExtraction")
+    @MethodSource("provideDelimiterExtraction")
     void 구분자_추출_테스트(String value, String expectedDelimiter) {
         String delimiter = Extractor.extractDelimiter(value, DELIMITER_REGEX, CUSTOM_DELIMITER_PREFIX, CUSTOM_DELIMITER_SUFFIX);
 
@@ -20,14 +20,14 @@ public class ExtractorTest {
     }
 
     @ParameterizedTest
-    @MethodSource("providerNumberPartExtraction")
+    @MethodSource("provideNumberPartExtraction")
     void 숫자_추출_테스트(String value, String expectedNumberPart) {
         String numberPart = Extractor.extractNumberPart(value, CUSTOM_DELIMITER_PREFIX, CUSTOM_DELIMITER_SUFFIX);
 
         assertThat(numberPart).isEqualTo(expectedNumberPart);
     }
 
-    static Stream<Arguments> providerDelimiterExtraction() {
+    static Stream<Arguments> provideDelimiterExtraction() {
         return Stream.of(
                 Arguments.of("//+\\n1,2,3", "[,:+]"),
                 Arguments.of("//_\\n1_2,3", "[,:_]"),
@@ -35,7 +35,7 @@ public class ExtractorTest {
         );
     }
 
-    static Stream<Arguments> providerNumberPartExtraction() {
+    static Stream<Arguments> provideNumberPartExtraction() {
         return Stream.of(
                 Arguments.of("//+\\n1,2,3", "1,2,3"),
                 Arguments.of("//_\\n1", "1"),
