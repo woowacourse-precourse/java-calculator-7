@@ -3,11 +3,13 @@ package calculator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class Calculator {
 
     private static final String CUSTOM_DELIMITER_PREFIX = "//";
     private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
+    private static final String DEFAULT_DELIMITER = ",";
 
     public long calculate(String input){
         if (isEmpty(input)) {
@@ -23,6 +25,9 @@ public class Calculator {
             String customDelimiter = extractCustomDelimiter(delimiterPattern);
             delimiters.add(customDelimiter);
         }
+
+        input = normalizeDelimiters(input, delimiters);
+        List<Long> numbers = splitToNumbers(input);
 
         return 0;
     }
@@ -52,5 +57,39 @@ public class Calculator {
             throw new IllegalArgumentException("유효하지 않은 커스텀 구분자입니다.");
         }
         return delimiter;
+    }
+
+    // 구분자를 하나로 통일
+    private String normalizeDelimiters(String input, List<String> delimiters) {
+        for (String delimiter : delimiters) {
+            input = input.replace(delimiter, DEFAULT_DELIMITER);
+        }
+        return input;
+    }
+
+    private List<Long> splitToNumbers(String input) {
+        String[] segments = input.split(DEFAULT_DELIMITER);
+        List<Long> numbers = new ArrayList<>();
+        for (String segment : segments) {
+            long number = parseToNumber(segment);
+            numbers.add(number);
+        }
+
+        return numbers;
+    }
+
+    private long parseToNumber(String number) {
+        if (!Pattern.matches("^[1-9]\\d*|$", number)) {
+            throw new IllegalArgumentException("잘못된 숫자입니다.");
+        }
+        if (number.isBlank()) {
+            return 0;
+        }
+
+        try {
+            return Long.parseLong(number);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("범위를 초과하는 입력입니다.");
+        }
     }
 }
