@@ -8,7 +8,7 @@ public class CustomDelimiterStrategy implements DelimiterStrategy {
     private static final List<String> metaChar = List.of("+", "^", "*", "?");
 
     @Override
-    public List<String> decideDelimiter(String userInput) throws IllegalArgumentException {
+    public List<String> setUpDelimiter(String userInput) throws IllegalArgumentException {
         String delimiter = extractDelimiter(userInput);
         if (isNumber(delimiter)) {
             throw new IllegalArgumentException("커스텀 구분자는 숫자를 포함하면 안 된다");

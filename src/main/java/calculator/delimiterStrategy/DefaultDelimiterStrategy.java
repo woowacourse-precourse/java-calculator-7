@@ -7,7 +7,7 @@ public class DefaultDelimiterStrategy implements DelimiterStrategy {
     public static final List<String> defaultDelimiters = List.of(",", ":");
 
     @Override
-    public List<String> decideDelimiter(String userInput) {
+    public List<String> setUpDelimiter(String userInput) {
         List<String> results = new ArrayList<>();
         results.add(userInput);
         results.addAll(defaultDelimiters);

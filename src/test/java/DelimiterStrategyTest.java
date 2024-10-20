@@ -19,7 +19,7 @@ public class DelimiterStrategyTest {
         //given
         DelimiterStrategy delimiterStrategy = new CustomDelimiterStrategy();
         //when
-        List<String> customDelimiter = delimiterStrategy.decideDelimiter("//;\n1;2;3");
+        List<String> customDelimiter = delimiterStrategy.setUpDelimiter("//;\n1;2;3");
         //then
         assertThat(customDelimiter).isEqualTo(List.of("1;2;3", ";"));
     }
@@ -29,7 +29,7 @@ public class DelimiterStrategyTest {
         //given
         DelimiterStrategy delimiterStrategy = new CustomDelimiterStrategy();
         //when
-        List<String> customDelimiter = delimiterStrategy.decideDelimiter("//+\n1+2+3");
+        List<String> customDelimiter = delimiterStrategy.setUpDelimiter("//+\n1+2+3");
         //then
         assertThat(customDelimiter).isEqualTo(List.of("1+2+3", "\\+"));
     }
@@ -40,7 +40,7 @@ public class DelimiterStrategyTest {
         DelimiterStrategy delimiterStrategy = new CustomDelimiterStrategy();
         //when //then
         IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
-                () -> delimiterStrategy.decideDelimiter("//6\n1"));
+                () -> delimiterStrategy.setUpDelimiter("//6\n1"));
         assertThat(e.getMessage()).isEqualTo("커스텀 구분자는 숫자를 포함하면 안 된다");
     }
 
@@ -52,7 +52,7 @@ public class DelimiterStrategyTest {
         //when
         //then
         IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
-                () -> delimiterStrategy.decideDelimiter(userInput));
+                () -> delimiterStrategy.setUpDelimiter(userInput));
         assertThat(e.getMessage()).isEqualTo("하나의 문자만 커스텀 구분자로 지정한다");
     }
 }

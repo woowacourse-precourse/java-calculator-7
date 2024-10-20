@@ -3,5 +3,5 @@ package calculator.delimiterStrategy;
 import java.util.List;
 
 public interface DelimiterStrategy {
-    public List<String> decideDelimiter(String userInput);
+    public List<String> setUpDelimiter(String userInput);
 }
