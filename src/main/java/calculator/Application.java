@@ -5,7 +5,7 @@ import model.CalculatorModel;
 import model.Parser;
 import view.CalculatorView;
 
-public class CalculatorMain {
+public class Application {
     public static void main(String[] args) {
         CalculatorController controller = Configurator.configure();
         controller.startCalculator();

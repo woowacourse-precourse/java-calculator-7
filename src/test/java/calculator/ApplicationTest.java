@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
-class CalculatorMainTest extends NsTest {
+class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
@@ -26,6 +26,6 @@ class CalculatorMainTest extends NsTest {
 
     @Override
     public void runMain() {
-        CalculatorMain.main(new String[]{});
+        Application.main(new String[]{});
     }
 }

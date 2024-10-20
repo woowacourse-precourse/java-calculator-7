@@ -17,6 +17,6 @@ class EmptyInputTest extends NsTest {
 
     @Override
     public void runMain() {
-        CalculatorMain.main(new String[]{});
+        Application.main(new String[]{});
     }
 }
