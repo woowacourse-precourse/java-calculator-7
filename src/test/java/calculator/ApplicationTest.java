@@ -44,7 +44,7 @@ class ApplicationTest extends NsTest {
 
         // ==== ValueSource 적용해보기 ====
         @ParameterizedTest
-        @ValueSource(strings = { "//;\\n1;2;3", "//ㅎ\\n1ㅎ2ㅎ3", "//ㄱ\\n1ㄱ2:3", "//n\\n1n2:2,1", "//-\\n1-2-2,1"})
+        @ValueSource(strings = { "//;\\n1;2;3", "//ㅎ\\n1ㅎ2ㅎ3", "//ㄱ\\n1ㄱ2:3", "//n\\n1n2:2,1", "//-\\n1-2-2,1", "//\"\\n1\"2\"3"})
         void 가능한_커스텀_구분자_사용(String input) {
             assertSimpleTest(() -> {
                 run(input);
@@ -61,6 +61,7 @@ class ApplicationTest extends NsTest {
                     Arguments.of("숫자 구분자 사용", "//2\\n12325", ExceptionMessages.CUSTOM_SEPARATOR_CANNOT_BE_NUMBER)
             );
         }
+
         @ParameterizedTest(name = "{index} - {0}")
         @MethodSource("customInputs")
         void 불가능한_커스텀_구분자_사용(String description, String input, String exceptionMessage) {
@@ -128,6 +129,28 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             run("");
             assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void 숫자_하나_입력() {
+        assertSimpleTest(() -> {
+            run("1");
+            assertThat(output()).contains("결과 : 1");
+        });
+    }
+
+    @Test
+    void 공백을_구분자로_입력() {
+        assertSimpleTest(() -> {
+            run("// \\n1 2 3");
+            assertThat(output()).contains("결과 : 6");
+        });
+
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("// \\n 1 2 3"))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage(ExceptionMessages.NON_NUMERIC_VALUE);
         });
     }
 
