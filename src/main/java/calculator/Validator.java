@@ -4,23 +4,34 @@ import java.util.List;
 
 public class Validator {
 
+    private static final String CUSTOM = "custom";
+    private static final String DEFAULT = "default";
     private static final String PREFIX_CUSTOM_START = "//";
     private static final String PREFIX_CUSTOM_LAST = "\\n";
     private static final String WRONG_INPUT_MESSAGE = "입력값이 잘못되었습니다.";
     private static final String WRONG_CUSTOM_SEPARATOR_FORM_MESSAGE = "custom 구분자의 형식이 잘못되었습니다.";
     private static final String IS_BEYOND_COMPUTE_MESSAGE = "계산할 수 없는 범위입니다.";
 
-    public static void validateCustomSeparator(String input) {
-        String separatorString = Parser.getSeparatorString(input);
-        isCorrectPair(separatorString);
+    public static String validateType(String input) {
+        if (input.startsWith(PREFIX_CUSTOM_START)) {
+            validateCustomSeparatorInput(input);
+            return CUSTOM;
+        }
+        validateDefaultInput(input);
+        return DEFAULT;
     }
 
-    public static void isCorrectDefaultInput(String input) {
+    public static void validateDefaultInput(String input) {
         for (int i = 0; i < input.length(); i++) {
             if (!(input.charAt(i) == ',' || input.charAt(i) == ':' || Character.isDigit(input.charAt(i)))) {
                 throw new IllegalArgumentException(WRONG_INPUT_MESSAGE);
             }
         }
+    }
+
+    public static void validateCustomSeparatorInput(String input) {
+        String separatorString = Parser.getSeparatorString(input);
+        isCorrectPair(separatorString);
     }
 
     public static void isIntegerRangeSum(int sum, List<Integer> input) {
