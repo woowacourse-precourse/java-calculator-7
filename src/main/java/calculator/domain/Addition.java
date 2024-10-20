@@ -19,9 +19,6 @@ public class Addition implements Operation{
         if (a > 0 && b > 0 && a > Integer.MAX_VALUE - b) {
             throw new IllegalArgumentException("덧셈 중 오버플로우가 발생했습니다.");
         }
-        if (a < 0 && b < 0 && a < Integer.MIN_VALUE - b) {
-            throw new IllegalArgumentException("덧셈 중 오버플로우가 발생했습니다.");
-        }
         return a + b;
     }
 }

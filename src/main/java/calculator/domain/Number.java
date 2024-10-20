@@ -1,5 +1,7 @@
 package calculator.domain;
 
+import java.util.Objects;
+
 /**
  * 입력 받은 문자열 중 숫자를 랩핑하는 클래스
  */
@@ -39,5 +41,21 @@ public class Number {
 
     public int getValue() {
         return value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Number number)) {
+            return false;
+        }
+        return value == number.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 }

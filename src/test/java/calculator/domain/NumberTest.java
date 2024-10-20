@@ -68,12 +68,12 @@ class NumberTest {
     {
         // given
         String input = "1";
-        int result = 1;
+        int expected = 1;
 
         // when
-        Number number = new Number(input);
+        Number actual = new Number(input);
 
         // then
-        assertEquals(number.getValue(), result);
+        assertEquals(expected, actual.getValue());
     }
 }
