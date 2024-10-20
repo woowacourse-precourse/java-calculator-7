@@ -18,7 +18,7 @@ class ArrayFunction {
                 customSymbol = matcher.group(1);
             }
 
-            inputVal = inputVal.replaceAll("//.*?\\\\n", "");
+            inputVal = inputVal.replace("//.*?\\\\n", "");
         }
 
         if (customSymbol.isEmpty()) {
@@ -41,9 +41,11 @@ class ArrayFunction {
                 int idNum =  Integer.parseInt(value.replace(" ", ""));
                 if (idNum > 0) {
                     return idNum;
-                } else {
+                } else if(idNum < 0) {
                     throw new IllegalArgumentException("숫자 중 음수가 존재하면 안됩니다.");
                 }
+
+                return 0;
             } catch (NumberFormatException nfe) {
                 throw new IllegalArgumentException("지정되지 않은 기호가 문자열에 있습니다.");
             }
