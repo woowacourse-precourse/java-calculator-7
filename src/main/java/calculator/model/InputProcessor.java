@@ -10,7 +10,7 @@ public class InputProcessor {
     private String regex;
 
     private static final String CUSTOM_DELIM_START = "//";
-    private static final String CUSTOM_DELIM_END = "\n";
+    private static final String CUSTOM_DELIM_END = "\\n";
 
     public InputProcessor(String input) {
         this.input = input;
@@ -29,7 +29,7 @@ public class InputProcessor {
     public void getCustomDelimiter() {
         while (input.indexOf(CUSTOM_DELIM_START) == 0) {
             String customDelimiter = input.substring((input.indexOf(CUSTOM_DELIM_START) + CUSTOM_DELIM_START.length()),
-                    (input.indexOf(CUSTOM_DELIM_END) - CUSTOM_DELIM_END.length() + 1));
+                    (input.indexOf(CUSTOM_DELIM_END)));
             delimiterList.add(customDelimiter);
 
             input = input.substring(input.indexOf(CUSTOM_DELIM_END) + CUSTOM_DELIM_END.length());
