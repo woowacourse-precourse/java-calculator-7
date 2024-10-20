@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 public class InputParser {
 
     public static final String DEFAULT_DELIMITER_REGEX = "^([1-9]\\d*)((,|:)([1-9]\\d*))*$";
-    public static final String CUSTOM_DELIMITER_REGEX = "//(.)\\\\n(.+)";
+    public static final String CUSTOM_DELIMITER_REGEX = "//(.)\\\\n(.*)";
     public static final int CUSTOM_DELIMITER_GROUP = 1;
     public static final int INPUT_NUM_GROUP = 2;
     public static final String COMMA_DELIMITER = ",";
@@ -33,6 +33,7 @@ public class InputParser {
             }
             throw new IllegalArgumentException();
         } catch (Exception e) {
+            System.out.println(e);
             throw new IllegalArgumentException();
         }
     }
@@ -51,8 +52,12 @@ public class InputParser {
     }
 
     private static List<Integer> splitAndConvert(String customDelimiter, String inputNum) {
+        if (inputNum.isEmpty()) {
+            return List.of(0, 0);
+        }
         String[] split = inputNum.split(customDelimiter);
         List<Integer> list = convertToIntList(split);
+        checkPositiveNumber(list);
         return list;
     }
 
@@ -62,7 +67,7 @@ public class InputParser {
             .toList();
     }
 
-    public void checkPositiveNumber(List<Integer> list) throws IllegalArgumentException {
+    public static void checkPositiveNumber(List<Integer> list) throws IllegalArgumentException {
         for (Integer integer : list) {
             if (integer <= 0) {
                 throw new IllegalArgumentException();

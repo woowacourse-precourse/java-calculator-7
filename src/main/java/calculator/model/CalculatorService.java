@@ -21,7 +21,6 @@ public class CalculatorService {
             return inputParser.convertDefaultDelimiter(input);
         }
         List<Integer> list = inputParser.convertCustomDelimiter(input);
-        inputParser.checkPositiveNumber(list);
         return list;
     }
 
