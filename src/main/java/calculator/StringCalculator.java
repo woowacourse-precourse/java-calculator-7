@@ -14,9 +14,9 @@ public class StringCalculator {
         String input = askForStringInput();
 
         String[] splitedInput = splitInputByDelimiter(input);
+        NumberList numberList = extractNumbersFrom(splitedInput);
 
-        int sum = extractNumbersFrom(splitedInput).getSum();
-
+        int sum = numberList.getSum();
         showSum(sum);
 
         close();
