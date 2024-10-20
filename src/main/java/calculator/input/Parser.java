@@ -18,7 +18,6 @@ public class Parser {
             DELIMITER += "|" + customDelimiter; // 기본 구분자에 커스텀 구분자 추가
             inputString = inputString.substring(inputString.indexOf("\\n")+2);
         }
-        System.out.println(DELIMITER);
     }
 
     public List<Integer> extractNumber(){ //숫자 추출
