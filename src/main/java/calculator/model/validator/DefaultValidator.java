@@ -1,6 +1,6 @@
 package calculator.model.validator;
 
-import static calculator.util.Constants.InputIsNull;
+import static calculator.util.Constants.*;
 
 public class DefaultValidator implements InputValidator {
 
@@ -25,10 +25,16 @@ public class DefaultValidator implements InputValidator {
     }
 
     @Override
-    public String findCustomDelimiter(String input) {
-        if(input.charAt(0) != '/') return ""; //커스텀 구분자 존재 여부 확인
-        validateCustomDividerFormat(input); //커스텀 구분자 형식 체크
-        return String.valueOf(input.charAt(2)); //커스텀 구분자 반환
+    public Object[] findCustomDelimiter(String input) {
+        if (!input.startsWith(DelimiterPrefix)) return new Object[]{"", DelimiterNotExitsIntValue}; // 커스텀 구분자 존재 여부 확인
+
+        int delimiterEndIndex = input.lastIndexOf(DelimiterSuffix); // 구분자 정의 끝나는 지점 찾기
+        if (delimiterEndIndex == DelimiterNotExitsIntValue) {
+            throw new IllegalArgumentException("커스텀 구분자를 올바르게 입력해주세요!"); // DelimiterSuffix가 없을 경우 예외 처리
+        }
+        String delimiter = input.substring(2, delimiterEndIndex); // 구분자 부분 추출
+
+        return new Object[]{delimiter, delimiterEndIndex+DelimiterSuffix.length()}; // 구분자와 인덱스 반환
     }
 
     private boolean isBlank(String input){
@@ -38,12 +44,6 @@ public class DefaultValidator implements InputValidator {
     private void validateIsMinusNumber(int number){
         if(number<0){
             throw new IllegalArgumentException("음수를 입력하셨습니다.");
-        }
-    }
-
-    private static void validateCustomDividerFormat(String input){
-        if (input.charAt(1) != '/' || !(input.charAt(3) == '\\' && input.charAt(4) == 'n')) {
-            throw new IllegalArgumentException("커스텀 구분자를 올바르게 입력해주세요!");
         }
     }
 }
