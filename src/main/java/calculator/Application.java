@@ -2,6 +2,8 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.regex.Pattern;
+
 public class Application {
 
     static StringBuilder sb;
@@ -34,6 +36,13 @@ public class Application {
 
     private static boolean checkCustom(String str) {
         return str.startsWith("//") && str.indexOf("\n") > 2;
+    }
+
+    private static void addCustom(String regex, String str) {
+        int newlineIndex = str.indexOf("\\n");
+        String customRegex = str.substring(2, newlineIndex);
+        Application.regex = "[,:]" + Pattern.quote(customRegex);
+        Application.str = str.substring(newlineIndex + 2);
     }
 
 }
