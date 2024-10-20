@@ -22,7 +22,6 @@ public class CalculatorController {
 	public void run() {
 		String input = inputView.readInput();
 		inputView.closeRead();
-		inputValidator.validateInput(input);
 
 		InputParser inputParser = new InputParser(input);
 		List<Integer> numbers = inputParser.extractNumbers(input);
