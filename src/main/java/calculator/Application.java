@@ -8,6 +8,11 @@ public class Application {
         String inputStr;
         String convertedStr;
         inputStr = camp.nextstep.edu.missionutils.Console.readLine();
+        // 문자열이 ""인 경우 0 출력
+        if (inputStr==""){
+            System.out.println("결과 : 0");
+            System.exit(0);
+        }
 
         // 구분자 1차 병합 (":" -> ",")
         convertedStr = inputStr.replace(":",",");
