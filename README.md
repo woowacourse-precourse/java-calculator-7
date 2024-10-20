@@ -16,7 +16,7 @@
 ### To-Do
 
 - [X] 사용자의 입력 받기
-- [ ] (사용자가 잘못된 값 입력 시,) `IllegalArgumentException` 발생
+- [X] (사용자가 잘못된 값 입력 시,) `IllegalArgumentException` 발생
 - [X] 기본 구분자 로직 구현
 - [X] 커스텀 구분자 로직 구현
 - [ ] 구분자 및 커스텀 구분자 기준 분리 후 더하기
