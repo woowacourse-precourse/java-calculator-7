@@ -21,4 +21,9 @@ public class DelimiterManagerImpl implements DelimiterManager {
             delimiters.add(delimiter);
         }
     }
+
+    @Override
+    public List<String> getDelimiters() {
+        return new ArrayList<>(delimiters);
+    }
 }
