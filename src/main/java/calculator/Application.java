@@ -36,7 +36,7 @@ public class Application {
             arrayUserInput = splitDelimiters(numberLine);
         }
 
-        System.out.println(arrSum(arrayUserInput));
+        System.out.printf("결과 : %d",arrSum(arrayUserInput));
 
     }
 
