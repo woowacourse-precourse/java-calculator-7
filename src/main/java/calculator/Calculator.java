@@ -1,6 +1,11 @@
 package calculator;
 
+import calculator.parser.DelimiterParser;
+import calculator.parser.DelimiterParserFactory;
+
 public class Calculator {
+
+    private final DelimiterParserFactory parserFactory = new DelimiterParserFactory();
 
     /**
      * 문자열이 빈 문자열인지 확인합니다.
@@ -38,6 +43,18 @@ public class Calculator {
         if (isEmpty(input)) {
             return 0;
         }
+        String[] tokens = splitInput(input);
         return 1;
+    }
+
+    /**
+     * 입력된 문자열을 적절한 구분자에 따라 분리합니다.
+     *
+     * @param input 사용자가 입력한 문자열입니다.
+     * @return 적절한 파서에 의해 파싱된 배열을 반환합니다.
+     */
+    private String[] splitInput(String input) {
+        DelimiterParser parser = parserFactory.getParser(input);
+        return parser.parse(input);
     }
 }
