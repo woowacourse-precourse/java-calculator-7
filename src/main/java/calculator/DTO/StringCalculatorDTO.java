@@ -5,6 +5,7 @@ import java.util.List;
 public class StringCalculatorDTO {
     String input;
     List<String> detachedInput;
+    int sum = 0;
 
     public StringCalculatorDTO(String input) {
         this.input = input;
@@ -20,5 +21,9 @@ public class StringCalculatorDTO {
 
     public void setDetachedInput(List<String> detachedInput) {
         this.detachedInput = detachedInput;
+    }
+
+    public void setSum(int sum) {
+        this.sum = sum;
     }
 }
