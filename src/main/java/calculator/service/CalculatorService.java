@@ -40,7 +40,7 @@ public class CalculatorService {
                 numbers.add(temp);
                 temp = 0;
             } else {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("잘못된 문자가 존재합니다.");
             }
         }
 
@@ -52,7 +52,7 @@ public class CalculatorService {
 
     private void validateInputFormat(String userInput) {
         if(!userInput.matches(regex)){
-            throw new IllegalArgumentException("Invalid user input");
+            throw new IllegalArgumentException("잘못된 형식입니다.");
         }
     }
 }
