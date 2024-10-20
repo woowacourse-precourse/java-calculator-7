@@ -1,11 +1,12 @@
 package calculator;
 
-import camp.nextstep.edu.missionutils.test.NsTest;
-import org.junit.jupiter.api.Test;
-
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import calculator.controller.Parser;
+import camp.nextstep.edu.missionutils.test.NsTest;
+import org.junit.jupiter.api.Test;
 
 class ApplicationTest extends NsTest {
     @Test
@@ -19,8 +20,8 @@ class ApplicationTest extends NsTest {
     @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> runException("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
@@ -28,4 +29,19 @@ class ApplicationTest extends NsTest {
     public void runMain() {
         Application.main(new String[]{});
     }
+
+    @Test
+    void 커스텀_구분자_파싱_테스트() {
+        // given
+        String inputString = "//;\\n2///!2//*\\n";
+        Parser parser = new Parser();
+
+        // when
+        parser.parsingCustomSeparators(inputString);
+
+        // then
+        assertThat(parser.getSeparators())
+                .containsExactly(';', '*');  // ;와 *가 제대로 파싱되었는지 확인
+    }
+
 }
