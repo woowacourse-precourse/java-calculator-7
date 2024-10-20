@@ -4,7 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class IOHandler {
     public void printStartMsg(){
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        System.out.println("Please enter a string to add.");
     }
 
     public String getInputString(){
@@ -12,6 +12,6 @@ public class IOHandler {
     }
 
     public void printResultMsg(int result){
-        System.out.println("결과 :"+Integer.toString(result));
+        System.out.println("Result :"+Integer.toString(result));
     }
 }
