@@ -33,13 +33,13 @@ class CalculatorTest {
     String input = "1, 2, 3";
     System.setIn(new ByteArrayInputStream(input.getBytes()));
     Scanner scanner = new Scanner(System.in);
-    String string = scanner.nextLine();
+    String readLine = scanner.nextLine();
 
     // when
     int actual = 0;
-    for (int i = 0; i < string.length(); i++) {
+    for (int i = 0; i < readLine.length(); i++) {
 
-      char index = string.charAt(i);
+      char index = readLine.charAt(i);
 
       // [x] 문자열이 구분자인 경우 건너뛰고
       if (index == ',' || index == ':') {
@@ -49,7 +49,7 @@ class CalculatorTest {
       // //;\n
 
       // [x] charArray 인덱스0부터 5까지의 값이 "//;\n" 인지 체크
-      boolean validCustomSeparator = string.substring(0, 5) == "//;\\n";
+      boolean validCustomSeparator = readLine.startsWith("//;\\n");
       if (validCustomSeparator) {
         // 맞다면 커스텀 구분자 ';'인지 체크하고 건너뛰거나
         if (index == ';') {
@@ -118,7 +118,7 @@ class CalculatorTest {
   public void validInput() throws Exception{
       //given
       char[] delimeters = new char[]{',', ':', ';'};
-      char[] custom = new char[]{'/','/', ';', '\', '\', 'n'};
+
       boolean expect = true;
       for (char element : delimeters) {
         //then

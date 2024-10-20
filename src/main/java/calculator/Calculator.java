@@ -36,6 +36,7 @@ public class Calculator {
 
   // 문자열 유효 체크
   private void checkException(char index) {
+    // [] 디버깅 :  first type:  boolean,  second type: char
     if (index != ',' && index && ':' && !isDigit(index)) {
       // [] 비정상 입력 예외 처리
       throw new IllegalArgumentException("입력 가능한 문자열인지 확인해주세요. ',', ':'");

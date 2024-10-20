@@ -33,7 +33,7 @@ class FrontendTest {
       int actual = frontend.accessTarget();
 
     //then
-      assertEquals(expect, actual.toString.trim());
+      assertEquals(expect, actual);
   }
 
 //  @DisplayName("조회된 계산결과를 출력한다")
