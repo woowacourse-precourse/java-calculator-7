@@ -10,7 +10,7 @@ public class StringAddCalculator {
         //입력값이 1개일 경우
         if (input.length() == 1) {
             if (!Character.isDigit(input.charAt(0))) {
-                throw new IllegalArgumentException("숫자만 입력해주세요.");
+                throw new IllegalArgumentException("하나만 입력하시려면 숫자만 입력해주세요.");
             }
             return StringToInt(input);
         }
