@@ -1,6 +1,6 @@
-package calculator.calculator;
+package calculator.calculate;
 
-public interface CalculatorService {
+public interface CalculateService {
     int calculateSum(int[] numbers);
     int[] parseIntArray(String[] inputString);
 }
