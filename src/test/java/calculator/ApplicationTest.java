@@ -48,6 +48,42 @@ class ApplicationTest extends NsTest {
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
+    @Test
+    void 예외_테스트_커스텀구분자가_비어있는_경우() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//\\n2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+ @Test
+    void 예외_테스트_0이_들어가있는_경우() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("0,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+ @Test
+    void 예외_테스트_커스텀구분자가_숫자인_경우() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//1\\n3,2"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+ @Test
+    void 예외_테스트_커스텀구분자가_기본구분자인_경우() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//,\\n3,2"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+    @Test
+    void 예외_테스트_커스텀구분자가_2글자_이상인_경우() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//[]\\n3,2"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
 
 
     @Override
