@@ -25,6 +25,41 @@ class ApplicationTest extends NsTest {
         );
     }
 
+
+    @Test
+    void 예외_테스트2_마지막에구분자추가() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,2,3,"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트3_구분자추가형식엇나감() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//:n1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트4_기본구분자연속두개들어감() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+
+    @Test
+    void 예외_테스트5_커스텀구분자연속두개들어감() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;a\n1;a2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+
     @Test
     void 테스트케이스_구분자에n이들어가는경우(){
         assertSimpleTest(() -> {
