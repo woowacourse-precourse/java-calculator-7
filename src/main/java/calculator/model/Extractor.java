@@ -10,8 +10,12 @@ public class Extractor {
     private boolean isCustomDelimiter = false;
 
     public void extractCustomDelimiter(String input) {
-        if(input.startsWith("//") && input.substring(3,5).equals("\\n")){
-            delimiters.add(input.charAt(2));
+        if (input.startsWith("//") && input.substring(3, 5).equals("\\n")) {
+            char delimiter = input.charAt(2);
+
+            isNumber(delimiter);
+
+            delimiters.add(delimiter);
             isCustomDelimiter = true;
         }
     }
@@ -34,9 +38,15 @@ public class Extractor {
         }
     }
 
+    private void isNumber(char input) {
+        if (Character.isDigit(input)) {
+            throw new IllegalArgumentException("숫자인 구분자는 사용할 수 없습니다.");
+        }
+    }
+
     //커스텀 구분자를 제거하는 메소드
     private String removeCustomDelimiter(String input) {
-        if(isCustomDelimiter) {
+        if (isCustomDelimiter) {
             input = input.substring(5);
         }
         return input;
@@ -55,7 +65,7 @@ public class Extractor {
 
     //분리한 문자열이 숫자인지 확인하는 메소드
     private Long validateIsNumber(String input) {
-        try{
+        try {
             return Long.parseLong(input);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("잘못된 입력입니다.");
@@ -64,7 +74,7 @@ public class Extractor {
 
     //음수인지 확인하는 메소드
     private void validateNegativeNumber(Long number) {
-        if(number < 0) {
+        if (number < 0) {
             throw new IllegalArgumentException("음수가 포함되어 있습니다.");
         }
     }
