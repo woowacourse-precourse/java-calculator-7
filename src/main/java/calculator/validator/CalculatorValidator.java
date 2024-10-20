@@ -8,11 +8,6 @@ public class CalculatorValidator {
 
     public void validateExpression(String expression) {
 
-        // 입력값이 없거나 null인 경우 예외 처리
-        if (expression == null || expression.isEmpty()) {
-            throw new IllegalArgumentException("입력값이 없습니다.");
-        }
-
         // 커스텀 구분자가 존재하는 경우
         if (expression.startsWith("//")) {
             Matcher matcher = Pattern.compile(CalculatorRegex.CUSTOM_SEPERATOR_REGEX).matcher(expression);

@@ -45,6 +45,10 @@ public class Calculator {
 
     private String[] parseNumbersFromExpression(String expression) {
 
+        if (expression == null || expression.isEmpty() || expression.isBlank()) {
+            return new String[]{"0"};
+        }
+
         Matcher matcher = Pattern.compile(CalculatorRegex.CUSTOM_SEPERATOR_REGEX).matcher(expression);
         if (matcher.find()) {
             String customSeperator = matcher.group(1);
