@@ -1,13 +1,20 @@
 package calculator;
 
-import camp.nextstep.edu.missionutils.test.NsTest;
-import org.junit.jupiter.api.Test;
-
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import camp.nextstep.edu.missionutils.test.NsTest;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 class ApplicationTest extends NsTest {
+
+    @BeforeEach
+    void setUp() {
+        Application.delim = new StringBuilder(",:");
+    }
+
     @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
@@ -19,10 +26,43 @@ class ApplicationTest extends NsTest {
     @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> runException("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
+
+    @Test
+    void 구분자_여러_문자_포함() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;-(\\n1;-(2"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 커스텀_구분자로_분리() {
+        assertSimpleTest(() -> {
+            run("1,2//;\\n3;4;5");
+            assertThat(output()).contains("결과 : 15");
+        });
+    }
+
+    @Test
+    void 기본_구분자와_커스텀_구분자_혼재() {
+        assertSimpleTest(() -> {
+            run("1,2:3//;\\n4;5:6,7//$\\n8:9;10,11$12");
+            assertThat(output()).contains("결과 : 78");
+        });
+    }
+
+    @Test
+    void 오버플로우_테스트() {
+        assertSimpleTest(() -> {
+            run("9223372036854775807,1//-\\n2-3:4");
+            assertThat(output()).contains("결과 : 9223372036854775817");
+        });
+    }
+
 
     @Override
     public void runMain() {
