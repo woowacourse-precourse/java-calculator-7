@@ -1,5 +1,6 @@
 package calculator.model;
 
+import calculator.error.ErrorMessage;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -40,7 +41,7 @@ public class PlainText {
     private void validate(String value) {
         Matcher matcher = NEGATIVE_OR_ZERO_PATTERN.matcher(value);
         if (matcher.find()) {
-            throw new IllegalArgumentException("구분자를 제외한 문자에서 음수, 0 은 허용되지 않습니다.");
+            throw new IllegalArgumentException(ErrorMessage.UNSUPPORTED_NUMBER_EXCLUDE_POSITIVE.getDescription());
         }
     }
 }

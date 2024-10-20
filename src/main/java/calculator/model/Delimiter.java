@@ -1,5 +1,6 @@
 package calculator.model;
 
+import calculator.error.ErrorMessage;
 import java.util.regex.Pattern;
 
 public class Delimiter {
@@ -28,7 +29,7 @@ public class Delimiter {
 
     private void validate(String value) {
         if (isNumber(value)) {
-            throw new IllegalArgumentException("커스텀 구분자는 숫자일 수 없습니다.");
+            throw new IllegalArgumentException(ErrorMessage.UNSUPPORTED_CUSTOM_DELIMITER_NUMBER.getDescription());
         }
     }
 

@@ -1,5 +1,7 @@
 package calculator.model;
 
+import calculator.error.ErrorMessage;
+
 public class InputText {
     private final Delimiter delimiter;
     private final PlainText plainText;
@@ -16,7 +18,7 @@ public class InputText {
 
     private void validateAfterInitialize(Delimiter delimiter, PlainText plainText) {
         if (plainText.hasCharExcluding(delimiter)) {
-            throw new IllegalArgumentException("구분자와 동일하지 않은 문자는 지원하지 않습니다.");
+            throw new IllegalArgumentException(ErrorMessage.UNSUPPORTED_CHAR_EXCLUDE_DELIMITER.getDescription());
         }
     }
 }

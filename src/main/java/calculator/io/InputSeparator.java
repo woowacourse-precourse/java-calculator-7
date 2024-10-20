@@ -1,5 +1,6 @@
 package calculator.io;
 
+import calculator.error.ErrorMessage;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -31,10 +32,10 @@ public class InputSeparator {
 
     private void validateDelimiterAndString(String delimiter, String string) {
         if (delimiterIsEmpty(delimiter) && !stringIsEmpty(string)) {
-            throw new IllegalArgumentException("구분자는 공백일 수 없습니다.");
+            throw new IllegalArgumentException(ErrorMessage.CANNOT_EMPTY_DELIMITER.getDescription());
         }
         if (!delimiterIsEmpty(delimiter) && stringIsEmpty(string)) {
-            throw new IllegalArgumentException("문자열은 공백일 수 없습니다.");
+            throw new IllegalArgumentException(ErrorMessage.CANNOT_EMPTY_TEXT.getDescription());
         }
     }
 
@@ -54,7 +55,7 @@ public class InputSeparator {
             List<String> availableStrings = Arrays.stream(input.split(quotedDelimiters))
                     .toList();
             if (availableStrings.isEmpty()) {
-                throw new IllegalArgumentException("문자열은 공백일 수 없습니다.");
+                throw new IllegalArgumentException(ErrorMessage.CANNOT_EMPTY_TEXT.getDescription());
             }
         }
     }
