@@ -35,6 +35,7 @@ public class InputView {
     public List<Integer> getOperands(List<String> separatedInput) {
         List<Integer> operands = new ArrayList<>();
         for(String token : separatedInput) {
+            if(token.length() == 0) continue;
             operands.add(Integer.parseInt(token));
         }
         return operands;
