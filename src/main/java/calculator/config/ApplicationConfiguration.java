@@ -2,9 +2,11 @@ package calculator.config;
 
 import calculator.controller.Controller;
 import calculator.model.Calculator;
-import calculator.model.StringCalculator;
+import calculator.model.CalculatorImpl;
 import calculator.model.StringTokenizer;
 import calculator.model.Tokenizer;
+import calculator.validator.InputValidator;
+import calculator.validator.Validator;
 import calculator.view.CalculatorView;
 import calculator.view.View;
 
@@ -15,14 +17,16 @@ public class ApplicationConfiguration {
     }
 
     private Calculator calculator() {
-        return new StringCalculator();
+        return new CalculatorImpl();
     }
 
     private Tokenizer tokenizer() {
-        return new StringTokenizer(new StringBuilder());
+        return new StringTokenizer(new StringBuilder(), validator());
     }
 
     private View view() {
         return new CalculatorView();
     }
+
+    private Validator validator() {return new InputValidator(); }
 }
