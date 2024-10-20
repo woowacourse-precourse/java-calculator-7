@@ -8,14 +8,10 @@ public class Calculator {
 
     public void calculate() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-        try {
-            Input input = new Input(Console.readLine());
-            String[] splitString = splitManager.splitString(input);
-            int result = sum(splitString);
-            System.out.println("결과 : " + result);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
+        Input input = new Input(Console.readLine());
+        String[] splitString = splitManager.splitString(input);
+        int result = sum(splitString);
+        System.out.println("결과 : " + result);
     }
 
     private int sum(String[] splitString) {
