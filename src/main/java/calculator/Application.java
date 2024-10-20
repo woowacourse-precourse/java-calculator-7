@@ -11,9 +11,12 @@ public class Application {
     }
 
     private String extractCustomSymbols(String input) {
-        if (input.indexOf("/") == 0) {
-            int startIndex = input.indexOf("/") + 2;
-            int endIndex = input.indexOf("\\");
+        boolean isCustom1 = input.indexOf("//") == 0 ;
+        boolean isCustom2 = input.indexOf("\\n") == 3 ;
+
+        if (isCustom1 && isCustom2) {
+            int startIndex = input.indexOf("//") + 2;
+            int endIndex = input.indexOf("\\n");
             return input.substring(startIndex, endIndex);
         }
         return "";
