@@ -1,7 +1,5 @@
 package calculator.domain;
 
-import calculator.exception.InvalidInputException;
-
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,7 +17,6 @@ public class Calculator {
     public static int inputCalculate(String input){
         //커스텀 구분자 패턴이 존재하는지 확인한다
        return checkExtractor(input);
-
     }
 
     private static int checkExtractor(String input){
@@ -51,7 +48,7 @@ public class Calculator {
     //존재하지 않는 커스텀 구분자 예외발생
     private static void validateCustomSeperator(String num){
         if (!(num.matches(NUMBER_REGEX))){
-            throw new InvalidInputException(MessageType.INVALID_SEPERATOR);
+            throw new IllegalArgumentException(INVALID_SEPERATOR);
         }
     }
 
@@ -59,7 +56,7 @@ public class Calculator {
         try{
             Integer.parseInt(num);
         }catch(IllegalArgumentException e){
-            throw new IllegalArgumentException(MessageType.OVERFLOW_NUMBER.getMessage());
+            throw new IllegalArgumentException(OVERFLOW_NUMBER);
         }
     }
 

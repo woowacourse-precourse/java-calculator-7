@@ -1,7 +1,5 @@
 package calculator.domain;
 
-import calculator.exception.InvalidInputException;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,7 +29,7 @@ public class UserInput {
         Matcher matcher=NEGATIVE.matcher(input);
 
         if (matcher.find()) {
-            throw new InvalidInputException(MessageType.NEGATIVE_INPUT);
+            throw new IllegalArgumentException(NEGATIVE_INPUT);
         }
     }
 
@@ -39,7 +37,7 @@ public class UserInput {
         Matcher matcher=MINUS_SEPERATOR.matcher(input);
 
         if (matcher.find()){
-            throw new InvalidInputException(MessageType.MINUS_SEPERATOR);
+            throw new IllegalArgumentException(MINUS_SEPERATOR_INPUT);
         }
     }
 
@@ -47,7 +45,7 @@ public class UserInput {
         Matcher matcher=NUMBER_SEPERATOR.matcher(input);
 
         if (matcher.find()){
-            throw new InvalidInputException(MessageType.NUMBER_SEPERATOR);
+            throw new IllegalArgumentException(NUMBER_SEPERATOR_INPUT);
         }
     }
 }
