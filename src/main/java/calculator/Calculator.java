@@ -53,9 +53,12 @@ public class Calculator {
         Matcher matcher = pattern.matcher(input);
 
         if (matcher.find()) {
-            String customDelimiter = matcher.group(1);
+            String customDelimiters = matcher.group(1);
             input = matcher.group(2);
-            delimiters.add(Pattern.quote(customDelimiter));
+
+            for (String delimiter : customDelimiters.split("\\|")) {
+                delimiters.add(Pattern.quote(delimiter));
+            }
         }
     }
 
@@ -98,10 +101,14 @@ public class Calculator {
     }
 
     public boolean doubleCheck(String part) {
-        return (part.startsWith(".") || part.endsWith(".") || part.contains(".."));
+        return part.startsWith(".") || part.endsWith(".") || part.contains("..") || part.chars().filter(ch -> ch == '.').count() > 1;
     }
 
     private String formatResult(double sum) {
-        return "결과 : " + sum;
+        if (sum == (long) sum) {
+            return "결과 : " + (long) sum;
+        } else {
+            return "결과 : " + sum;
+        }
     }
 }
