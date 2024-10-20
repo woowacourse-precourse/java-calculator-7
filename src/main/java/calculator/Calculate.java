@@ -14,7 +14,6 @@ public class Calculate {
     }
 
     private static int customChar(String input) {
-
         int start = input.indexOf("//") + 2;
         int end = input.indexOf("\\n");
         if (end == -1) {

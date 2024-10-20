@@ -2,7 +2,6 @@ package calculator;
 
 public class Application {
     public static void main(String[] args) {
-
         try {
             System.out.println("write number. (. or :)");
             String input = camp.nextstep.edu.missionutils.Console.readLine();
