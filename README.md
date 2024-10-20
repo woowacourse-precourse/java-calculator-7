@@ -12,7 +12,7 @@
     - 숫자가 아닌 예외 경우가 포함된다면 `IllegalArgumentException`을 발생시킨다.
 5. 최종적으로 `sum` 값을 반환한다.
 
-## 기능별 구현 객체 설정
+## 1차 기능별 구현 객체 설정
 
 1. **Calculator**
     - 문자열을 입력받아 계산을 수행하고, 결과를 반환한다.
@@ -32,3 +32,16 @@
     - 정수로 변화할 수 없는 숫자가 들어와도 예외를 터트린다.
     - 구분자가 연속으로 들어오면 예외를 터트린다.
     - 음수가 들어왔을 때 -를 음수가 아닌 잘못된 구분자로 인식해야한다.
+
+
+## 2차 구현
+1. 객체지향으로 전환
+   - Calculator : 계산기
+   - Delimiter : 구분자
+   - Number : 숫자
+   - CustomDelimiterParser : 커스텀 구분자 파서 (인터페이스)
+     - SingleCustomDelimiterParser : 단일 커스텀 구분자 파서 (구현체)
+   - DelimiterSplitter : 구분자 분리기
+   - Adder : 덧셈기 (인터페이스)
+     - PositiveAdder : 양수 덧셈기 (구현체)
+   - AppConfig : 객체 생성 및 의존성 주입
