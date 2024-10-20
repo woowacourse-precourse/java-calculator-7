@@ -1,7 +1,8 @@
 package calculator.model;
 
 import static calculator.common.exception.ErrorMessage.INPUT_NOT_SUPPORTED_CHAR_ERROR;
-import static calculator.common.exception.ErrorMessage.INPUT_ZERO_OR_NEGATIVE_VALUE_ERROR;
+import static calculator.common.exception.ErrorMessage.OPERAND_EMPTY_ERROR;
+import static calculator.common.exception.ErrorMessage.OPERAND_ZERO_OR_NEGATIVE_VALUE_ERROR;
 
 public record Operand(int number) {
 
@@ -11,9 +12,16 @@ public record Operand(int number) {
 
     private static class Validator {
         private static int validate(String operand) {
+            validateBlank(operand);
             int number = validateInteger(operand);
             validatePositive(number);
             return number;
+        }
+
+        private static void validateBlank(String message) {
+            if (message.isEmpty()) {
+                throw new IllegalArgumentException(OPERAND_EMPTY_ERROR);
+            }
         }
 
         private static int validateInteger(String operand) {
@@ -26,7 +34,7 @@ public record Operand(int number) {
 
         private static void validatePositive(int operand) {
             if (operand < 1) {
-                throw new IllegalArgumentException(INPUT_ZERO_OR_NEGATIVE_VALUE_ERROR);
+                throw new IllegalArgumentException(OPERAND_ZERO_OR_NEGATIVE_VALUE_ERROR);
             }
         }
     }
