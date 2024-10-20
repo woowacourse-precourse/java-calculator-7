@@ -8,15 +8,20 @@ public class StringCalculator {
 
         int sum = 0;
         for (String token : tokens) {
-            sum += Integer.parseInt(token); // 숫자로 변환 후 합산
+            sum += parseNumber(token); // 숫자로 변환 후 합산
         }
         return sum;
     }
+
     private int parseNumber(String token) {
         try {
-            return Integer.parseInt(token);
+            int number = Integer.parseInt(token); // 숫자로 변환
+            if (number < 0) {
+                throw new IllegalArgumentException("잘못된 입력 값입니다."); // 음수일 경우 예외 발생
+            }
+            return number;
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("잘못된 입력 값입니다.");
+            throw new IllegalArgumentException("잘못된 입력 값입니다."); // 숫자로 변환 불가 시 예외 발생
         }
     }
 }
