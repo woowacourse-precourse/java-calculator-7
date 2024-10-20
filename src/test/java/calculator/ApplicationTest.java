@@ -1,11 +1,12 @@
 package calculator;
 
-import camp.nextstep.edu.missionutils.test.NsTest;
-import org.junit.jupiter.api.Test;
-
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import calculator.exception.ErrorCode;
+import camp.nextstep.edu.missionutils.test.NsTest;
+import org.junit.jupiter.api.Test;
 
 class ApplicationTest extends NsTest {
     @Test
@@ -61,6 +62,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException(" "))
                         .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage(ErrorCode.EMPTY_INPUT.getMessage())
         );
     }
 
@@ -69,6 +71,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("1//;\\\n2,3"))
                         .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage(ErrorCode.INVALID_CUSTOM_SEPARATOR.getMessage())
         );
     }
 
@@ -77,6 +80,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("-1,2,3"))
                         .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage(ErrorCode.NON_POSITIVE_NUMBER.getMessage())
         );
     }
 
@@ -85,6 +89,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//;;\\n1;2;3"))
                         .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage(ErrorCode.INVALID_CUSTOM_SEPARATOR_LENGTH.getMessage())
         );
     }
 
@@ -93,6 +98,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//1\\n1;2;3"))
                         .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage(ErrorCode.NUMERIC_CUSTOM_SEPARATOR.getMessage())
         );
     }
 
@@ -101,6 +107,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//\\n1;2;3"))
                         .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage(ErrorCode.BLANK_CUSTOM_SEPARATOR.getMessage())
         );
     }
 
@@ -109,6 +116,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("1,2,a"))
                         .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage(ErrorCode.INVALID_NUMBER_FORMAT.getMessage())
         );
     }
 
