@@ -32,6 +32,9 @@ public class Application {
 
             /** 커스텀 구분자 초기화 */
             String customDelimiter = inputData.substring(2, index);
+
+            /** (\n) 뒤에 있는 입력값만 분리해 realData 에 저장 */
+            String realData = inputData.substring(index + 2);
         }
     }
 }
