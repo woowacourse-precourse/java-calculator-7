@@ -33,6 +33,7 @@ public class Application {
                 }
                 if(num<=0)
                     throw new IllegalArgumentException("양의 정수가 아닙니다.");
+                sum += num;
             } catch (IllegalArgumentException e){
                 System.out.println("error: " + e.getMessage());
             }
