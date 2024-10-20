@@ -68,10 +68,16 @@ class ApplicationTest extends NsTest {
                         .isInstanceOf(IllegalArgumentException.class)
                         .hasMessage("잘못된 커스텀 구분자입니다."),
 
-                //커스텀 구분자로만 이루어져 있는 경우 0으로 계산한다.
+                // 커스텀 구분자로만 이루어져 있는 경우 0으로 계산한다.
                 () -> assertSimpleTest(() -> {
                     run("//;\\n;");
                     assertThat(output()).contains("0");
+                }),
+
+                // 커스텀 구분자는 여러 개 작성할 수 있다.
+                () -> assertSimpleTest(() -> {
+                    run("// \\n//temp\\n1temp2 3");
+                    assertThat(output()).contains("6");
                 })
         );
     }

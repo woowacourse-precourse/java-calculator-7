@@ -33,7 +33,8 @@ public class CustomDelimiter extends Delimiter {
             String group = matcher.group(1);
 
             if (!isNull(s)) {
-                delimiters.add(isDelimiterRightThenTrim(group));
+                validateDelimiterRight(group);
+                delimiters.add(group);
                 s = removeCustomDelimiter(s);
             }
 
@@ -69,14 +70,10 @@ public class CustomDelimiter extends Delimiter {
         return String.join("|", delimiters);
     }
 
-    private String isDelimiterRightThenTrim(String delimiter) {
-        delimiter = delimiter.trim();
-
+    private void validateDelimiterRight(String delimiter) {
         if (hasCustomDelimiter(delimiter) || delimiter.isEmpty()) {
             CalculatorException.causeException("잘못된 커스텀 구분자입니다.");
         }
-
-        return delimiter;
     }
 
     private String removeCustomDelimiter(String s) {

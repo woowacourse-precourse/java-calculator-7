@@ -23,7 +23,7 @@ public class Input {
     }
 
     private boolean isInputBlank(String input) {
-        return input != null && input.contains(" ");
+        return input != null && input.equals(" ");
     }
 
     private boolean isNull(String input) {
