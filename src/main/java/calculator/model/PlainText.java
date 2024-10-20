@@ -28,12 +28,13 @@ public class PlainText {
         return false;
     }
 
-    public List<Token> tokenizedBy(Delimiter delimiter) {
-        return Arrays.stream(value.split(delimiter.getValue()))
+    public Tokens tokenizedBy(Delimiter delimiter) {
+        List<Token> tokens = Arrays.stream(value.split(delimiter.getValue()))
                 .map(String::valueOf)
                 .filter(string -> !string.isEmpty())
                 .map(Token::new)
                 .toList();
+        return Tokens.of(tokens);
     }
 
     private void validate(String value) {

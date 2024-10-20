@@ -1,7 +1,5 @@
 package calculator.model;
 
-import java.util.List;
-
 public class InputText {
     private final Delimiter delimiter;
     private final PlainText plainText;
@@ -12,7 +10,7 @@ public class InputText {
         validateAfterInitialize(this.delimiter, this.plainText);
     }
 
-    public List<Token> tokenize() {
+    public Tokens tokenize() {
         return plainText.tokenizedBy(delimiter);
     }
 
