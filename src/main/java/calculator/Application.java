@@ -28,10 +28,16 @@ public class Application {
         String numberString = input;
 
         if (input.startsWith("//")) {
-            int delimiterIndex = input.indexOf("\n");
-            if (delimiterIndex != -1) {
-                delimiter = input.substring(2, delimiterIndex);
-                numberString = input.substring(delimiterIndex + 1);
+            int newLineIndex = -1;
+            for (int i = 2; i < input.length() - 1; i++) {
+                if (input.startsWith("\\n", i)) {
+                    newLineIndex = i;
+                    break;
+                }
+            }
+            if (newLineIndex != -1) {
+                delimiter = input.substring(2, newLineIndex);
+                numberString = input.substring(newLineIndex + 2);
             }
         }
 
@@ -40,13 +46,17 @@ public class Application {
 
     public static List<Integer> parseNumbers(String input, String delimiter) {
         List<Integer> numbers = new ArrayList<>();
-        String[] splitNumbers = input.split(delimiter);
+
+        System.out.println(input);
+        System.out.println(delimiter);
 
         // input이 0일때 예외 처리
         if (input.isEmpty()) {
             numbers.add(0);
             return numbers;
         }
+
+        String[] splitNumbers = input.split(delimiter);
 
         for (String number : splitNumbers) {
             try {
