@@ -17,11 +17,6 @@ public class CalculatorController {
         calculatorView.displayInputPrompt();
         String input = Console.readLine();
 
-        if (input.isEmpty()) {
-            calculatorView.displayResult(0);
-            return;
-        }
-
         try {
             int result = calculatorService.calculate(input);
             calculatorView.displayResult(result);

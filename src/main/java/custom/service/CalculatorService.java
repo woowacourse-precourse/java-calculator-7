@@ -2,13 +2,20 @@ package custom.service;
 
 public class CalculatorService {
     public int calculate(String input) {
-        validateInput(input);
+        int empty = validateInput(input);
+        if (empty == 1) {
+            return 0;
+        }
         int[] numbers = extractNumbers(input);
         return addNumbers(numbers);
     }
 
-    private void validateInput(String input) {
-        // 유효성 case 1: "//"로 시작하는 경우
+    private int validateInput(String input) {
+        // 유효성 case 1
+        if (input.isEmpty()) {
+            return 1;
+        }
+        // 유효성 case 2: "//"로 시작하는 경우
         if (input.startsWith("//")) {
             if (input.length() < 5) { // 최소 길이 체크
                 throw new IllegalArgumentException();
@@ -21,13 +28,14 @@ public class CalculatorService {
             if (Character.isDigit(input.charAt(2))) {
                 throw new IllegalArgumentException();
             }
-        } else { // 유효성 case 2: "//"로 시작하지 않는 경우
+        } else { // 유효성 case 3: "//"로 시작하지 않는 경우
             for (char c : input.toCharArray()) {
                 if (!Character.isDigit(c) && c != ',' && c != ':') {
                     throw new IllegalArgumentException();
                 }
             }
         }
+        return 0;
     }
 
     private int[] extractNumbers(String input) {
