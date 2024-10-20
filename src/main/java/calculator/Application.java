@@ -14,12 +14,25 @@ public class Application {
                 String target = inputStr.substring((inputStr.indexOf("n") + 1));
 
                 String[] split = target.split(pivot);
+                for (String s : split){
+                    if (s.contains("-")) throw new IllegalArgumentException("잘못된 입력입니다. 자연수만 입력해주세요.");
+                }
+
 
                 for (String s : split) {
-                    int num = Integer.parseInt(s);
-                    result += num;
+                    if (!s.isEmpty()){
+                        int num = Integer.parseInt(s);
+                        result += num;
+                    }
                 }
-            } else {
+            }
+
+            else {
+
+                if (inputStr.contains("-")){
+                    throw new IllegalArgumentException("잘못된 입력입니다. 자연수만 입력해주세요.");
+                }
+
                 String[] split = inputStr.split(":|,");
                 for (String s : split) {
                     int s1 = Integer.parseInt(s);
@@ -27,18 +40,10 @@ public class Application {
                 }
             }
 
-            if (inputStr.contains("-")){
-                throw new IllegalArgumentException("잘못된 입력입니다. 자연수만 입력해주세요.");
-            }
         } catch (StringIndexOutOfBoundsException e) {
             result = 0;
-        } catch (IllegalArgumentException e){
-            System.out.print(e.getMessage());
-            return;
         }
-
         System.out.print("결과 : "+ result);
-
     }
 
 }
