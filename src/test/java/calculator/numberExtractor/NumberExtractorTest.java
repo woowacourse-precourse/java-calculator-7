@@ -53,4 +53,16 @@ class NumberExtractorTest {
         //then
         Assertions.assertThat(result).containsExactly(1, 2, 3);
     }
+
+    @Test
+    void 입력_범위를_넘는_숫자가_입력되면_예외가_발생한다() {
+        //given
+        NumberExtractorImpl sut = new NumberExtractorImpl();
+
+        //expected
+        Assertions.assertThatThrownBy(() ->
+                        sut.extract("21474836478:10", List.of(':')))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("입력된 문자열에 입력 최대값을 넘는 숫자가 포함되어 있습니다.");
+    }
 }

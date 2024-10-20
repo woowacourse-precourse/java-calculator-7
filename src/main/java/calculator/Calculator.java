@@ -16,6 +16,10 @@ public class Calculator {
     public int add(List<Integer> numberList) {
         int result = 0;
         for (int number : numberList) {
+            if (result > Integer.MAX_VALUE - number) {
+                throw new IllegalArgumentException("덧셈 결과가 최대값을 넘습니다.");
+            }
+
             result += number;
         }
         return result;

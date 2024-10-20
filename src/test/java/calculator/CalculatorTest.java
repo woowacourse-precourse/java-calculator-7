@@ -29,4 +29,16 @@ class CalculatorTest {
         //then
         Assertions.assertThat(result).isEqualTo(0);
     }
+
+    @Test
+    void 덧셈결과가_최대값을_넘어서면_예외가_발생한다() {
+        //given
+        Calculator sut = new Calculator();
+
+        //expected
+        Assertions.assertThatThrownBy(() ->
+                        sut.add(List.of(Integer.MAX_VALUE, 1)))
+                .isExactlyInstanceOf(IllegalArgumentException.class)
+                .hasMessage("덧셈 결과가 최대값을 넘습니다.");
+    }
 }

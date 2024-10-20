@@ -20,8 +20,13 @@ public class NumberExtractorImpl implements NumberExtractor {
                 if (!Character.isDigit(currentChar)) {
                     throw new IllegalArgumentException("입력된 문자열에 구분자와 숫자가 아닌 문자가 포함되어 있습니다.");
                 }
-                currentNumber *= 10;
-                currentNumber += Character.getNumericValue(currentChar);
+
+                int digit = Character.getNumericValue(currentChar);
+                if (currentNumber > (Integer.MAX_VALUE - digit) / 10) {
+                    throw new IllegalArgumentException("입력된 문자열에 입력 최대값을 넘는 숫자가 포함되어 있습니다.");
+                }
+
+                currentNumber = currentNumber * 10 + digit;
             }
         }
 
