@@ -29,6 +29,3 @@
         NormalCalculator와 SpecialCalculator를 각각 사용함.
     9.  controller 디렉토리 생성
     10.  CalculatorController 생성 -> 문자열을 입력으로 받으면 해당 문자열을 구분자로 분석해서 덧셈 결과를 리턴
-
-    test 태그
-    11. testcase 추가
