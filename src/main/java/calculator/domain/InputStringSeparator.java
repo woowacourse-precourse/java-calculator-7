@@ -1,6 +1,7 @@
 package calculator.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -88,13 +89,13 @@ public class InputStringSeparator {
     }
 
     private void changeToInt() {
-        for (String num : inputNumberString) {
-            int parseInt = Integer.parseInt(num);
-            if (parseInt < 0) {
-                throw new IllegalArgumentException("숫자는 양수를 입력해야 합니다.");
-            }
-            this.inputNumberInt.add(parseInt);
-        }
+        Arrays.stream(inputNumberString).map(Integer::parseInt)
+                .peek(parseInt -> {
+                    if (parseInt < 0) {
+                        throw new IllegalArgumentException("숫자는 양수를 입력해야 합니다.");
+                    }
+                })
+                .forEach(inputNumberInt::add);
     }
 
     public List<Integer> getInputNumber() {
