@@ -14,7 +14,11 @@ public class InputValidation { // 입력의 유효성을 확인하는 클래스�
             if (start != 0 || start > end || end - start > 3) {
                 throw new IllegalArgumentException();
             }
-            checkResult[0] = input.substring(start + 2, end); // 커스텀 구분자
+            String customDelimiter = input.substring(start + 2, end);
+            if (customDelimiter.isEmpty()) {
+                throw new IllegalArgumentException(); // 빈 구분자 예외 처리
+            }
+            checkResult[0] = customDelimiter; // 커스텀 구분자
             checkResult[1] = input.substring(end + 2); // 커스텀구분자와 지정문자 이후의 input으로 업데이트한다.
             return checkResult;
         }
@@ -35,9 +39,7 @@ public class InputValidation { // 입력의 유효성을 확인하는 클래스�
 
         String[] tokens = input.split(delimiter); // 구분자를 바탕으로 문자열을 분류한다.
         for (String token : tokens) {
-            if (token.isEmpty()) {
-                continue;  // 빈 문자열 건너뛰기
-            }
+
             CheckNumber(token);
         }
 
