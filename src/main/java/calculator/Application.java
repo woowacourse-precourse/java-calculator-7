@@ -19,8 +19,17 @@ public class Application {
             return 0;
         }
 
+        // 기본 구분자 지정
+        String delimiter = "[,:]";
+
+        // 커스텀 구분자 확인 하기
+        if (input.startsWith("//")) {
+            delimiter = input.substring(2, 3);
+            input = input.substring(5);
+        }
+
         // 입력값 나누기
-        String[] numbers = input.split("[:,]");
+        String[] numbers = input.split(delimiter);
 
         // 분리된 String을 int로 변환 후 더하기
         int sum = 0;
@@ -28,7 +37,6 @@ public class Application {
             sum += Integer.parseInt(numbers[i]);
         }
 
-        // 값 반환
         return sum;
     }
 }
