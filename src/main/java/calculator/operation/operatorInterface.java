@@ -2,6 +2,6 @@ package calculator.operation;
 
 import java.util.List;
 
-public interface operatorInterface {
+public interface OperatorInterface {
     int operate(List<Integer> numbers);
 }
