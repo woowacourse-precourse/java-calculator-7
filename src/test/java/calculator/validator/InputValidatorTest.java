@@ -1,6 +1,6 @@
-package calculator;
+package calculator.validator;
 
-import calculator.InputValidator;
+import calculator.validator.InputValidator;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

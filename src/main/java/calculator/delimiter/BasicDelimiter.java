@@ -1,4 +1,4 @@
-package calculator;
+package calculator.delimiter;
 
 public class BasicDelimiter implements Delimiter {
     private static final String BASIC_DELIMITER = "[,:]"; // 기본 구분자

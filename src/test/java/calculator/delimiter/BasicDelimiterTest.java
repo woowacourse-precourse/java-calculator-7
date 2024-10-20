@@ -1,6 +1,6 @@
-package calculator;
+package calculator.delimiter;
 
-import calculator.BasicDelimiter;
+import calculator.delimiter.BasicDelimiter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

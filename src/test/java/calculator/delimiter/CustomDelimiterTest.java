@@ -1,7 +1,7 @@
-package calculator;
+package calculator.delimiter;
 
 import calculator.Calculator;
-import calculator.CustomDelimiter;
+import calculator.delimiter.CustomDelimiter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
