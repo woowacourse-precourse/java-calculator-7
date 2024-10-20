@@ -5,6 +5,7 @@ import calculator.view.CalculatorView;
 import camp.nextstep.edu.missionutils.Console;
 import java.math.BigInteger;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Map;
 
 public class CalculatorController {
@@ -20,19 +21,21 @@ public class CalculatorController {
 
     public void start() {
 
+        //입력
         calcView.printStartMsg();
         String userInput = calcView.getUserInput();
 
+        //처리
         ArrayDeque<String> sepStack = calcService.detectNormalSeparator(userInput);
         if(calcService.hasSpecialSeparator(userInput)) {
             Map<String, String> specialResult = calcService.specialSepProcessing(userInput);
             sepStack.addLast(specialResult.get("sep"));
             userInput = specialResult.get("input");
         }
-//        calcService.splitInputBySepStack(userInput, sepStack);
-
-        BigInteger result = calcService.calcInput(userInput);
-
+        ArrayList<String> splitResult = calcService.processingInputBySepStack(userInput, sepStack);
+        BigInteger result = calcService.calcSplitResult(splitResult);
+        
+        //출력
         calcView.printResultMsg(result);
     }
 }

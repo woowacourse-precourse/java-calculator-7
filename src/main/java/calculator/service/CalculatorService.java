@@ -5,6 +5,7 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class CalculatorService {
 
@@ -76,11 +77,48 @@ public class CalculatorService {
         return specialSep;
     }
 
-    public BigInteger calcInput(String input) {
+    public ArrayList<String> processingInputBySepStack(String input, ArrayDeque<String> sepStack) {
+
+        ArrayList<String> resultList = new ArrayList<>();
+        resultList.add(input);
+
+        while (!sepStack.isEmpty()) {
+            String sep = sepStack.removeLast();
+            resultList = splitStrListBySep(resultList, sep);
+        }
+
+        return resultList;
+    }
+
+    static ArrayList<String> splitStrListBySep(ArrayList<String> strList, String separator) {
+
+        ArrayList<String> tempList = new ArrayList<>();
+
+        for (String str : strList) {
+            if (str.contains(separator)) {
+                String[] split = str.split(Pattern.quote(separator));
+                for (String s : split) {
+                    if (!s.isEmpty()) {
+                        tempList.add(s);
+                    }
+                }
+            } else {
+                if (!str.isEmpty()) {
+                    tempList.add(str);
+                }
+            }
+        }
+
+        return tempList;
+    }
+
+    public BigInteger calcSplitResult(ArrayList<String> splitResult) {
 
         BigInteger result = BigInteger.ZERO;
 
-        result = result.add(parseBigInteger(input));
+        for(String num : splitResult) {
+            result = result.add(parseBigInteger(num));
+        }
 
         return result;
     }
