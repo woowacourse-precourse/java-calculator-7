@@ -1,4 +1,4 @@
-package calculator;
+package calculator.domain;
 
 public class Delimiter {
     private String value;

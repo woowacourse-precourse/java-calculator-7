@@ -1,4 +1,4 @@
-package calculator;
+package calculator.domain;
 
 import camp.nextstep.edu.missionutils.Console;
 import java.util.ArrayList;
@@ -11,29 +11,25 @@ public class Calculator {
     private List<Delimiter> delimiters;
     private SingleCustomDelimiterParser singleCustomDelimiterParser;
     private String analyzingTarget;
+    private Adder adder;
     private DelimiterSplitter delimiterSplitter;
 
     public Calculator() {
         printStartMessage();
         this.delimiters = new ArrayList<>(List.of(new Delimiter(","), new Delimiter(":")));
         this.singleCustomDelimiterParser = new SingleCustomDelimiterParser(input);
+        this.adder = new PositiveAdder();
         this.analyzingTarget = "";
     }
 
     public void start() {
         parsingCustomDelimiter();
-        List<Number> numbers = getNumbers();
-        int sum = calculateSum(numbers);
+        List<Number> sumTargets = getSumTargets();
+        int sum = adder.calculateSum(sumTargets);
         System.out.println("결과 : " + sum);
     }
 
-    private int calculateSum(List<Number> numbers) {
-        return numbers.stream()
-                .mapToInt(Number::getValue)
-                .sum();
-    }
-
-    private List<Number> getNumbers() {
+    private List<Number> getSumTargets() {
         delimiterSplitter = new DelimiterSplitter(analyzingTarget, delimiters);
         return delimiterSplitter.splitByDelimiter();
     }

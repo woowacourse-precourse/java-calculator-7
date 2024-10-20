@@ -2,6 +2,9 @@ package calculator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import calculator.domain.Delimiter;
+import calculator.domain.DelimiterSplitter;
+import calculator.domain.Number;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
@@ -43,7 +46,7 @@ class DelimiterSplitterTest {
                 delimiterSplitter::splitByDelimiter);
 
         // then
-        assertEquals("정수로 변환할 수 있는 양수만 계산할 수 있습니다", exception.getMessage().split(":")[0]);
+        assertEquals("정수로 변환할 수 있는 숫자만 가능합니다", exception.getMessage().split(":")[0]);
     }
 
     @Test
@@ -89,19 +92,4 @@ class DelimiterSplitterTest {
         // then
         assertEquals("구분자 사이에는 1개 이상의 숫자를 넣어야합니다.", exception.getMessage());
     }
-
-    @Test
-    void 음수가_들어왔을_때_실패() {
-        // given
-        String target = "1,-2:3";
-        DelimiterSplitter delimiterSplitter = new DelimiterSplitter(target, List.of(new Delimiter(","), new Delimiter(":")));
-
-        // when
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                delimiterSplitter::splitByDelimiter);
-
-        // then
-        assertEquals("정수로 변환할 수 있는 양수만 계산할 수 있습니다", exception.getMessage().split(":")[0]);
-    }
-
 }

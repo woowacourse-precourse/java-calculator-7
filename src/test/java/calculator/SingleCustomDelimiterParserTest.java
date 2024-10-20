@@ -3,6 +3,7 @@ package calculator;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import calculator.domain.SingleCustomDelimiterParser;
 import org.junit.jupiter.api.Test;
 
 public class SingleCustomDelimiterParserTest {
