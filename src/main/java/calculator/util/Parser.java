@@ -15,7 +15,7 @@ public class Parser {
     }
 
     private char parseIdentifier(Calculator calculator, String input) {
-        if(input.matches("^//.\\\\n.*")) {
+        if(input.matches("^//.\\n.*")) {
             calculator.addIdentifier(input.charAt(2));
             return input.charAt(2);
         }
