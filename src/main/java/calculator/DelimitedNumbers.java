@@ -11,7 +11,7 @@ public class DelimitedNumbers {
     }
 
     private void validate(String stringNumbers, DelimiterResult regex) {
-        if (stringNumbers.equals(Constants.ZERO_STRING)) {
+        if (stringNumbers.equals(Constants.EMPTY_STRING)) {
             return;
         }
         validateContainsDelimiter(stringNumbers, regex);
@@ -19,7 +19,7 @@ public class DelimitedNumbers {
     }
 
     private void validateContainsDelimiter(String stringNumbers, DelimiterResult regex) {
-        if (stringNumbers.contains(Constants.ZERO_STRING)) {
+        if (stringNumbers.contains(Constants.EMPTY_STRING)) {
             return;
         }
 

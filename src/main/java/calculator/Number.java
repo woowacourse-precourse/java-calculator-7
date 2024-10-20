@@ -4,7 +4,7 @@ public class Number {
     private final String number;
 
     public Number(String number) {
-        if (number.equals(Constants.ZERO_STRING)) {
+        if (number.equals(Constants.EMPTY_STRING)) {
             number = "0";
         }
         validate(number);
