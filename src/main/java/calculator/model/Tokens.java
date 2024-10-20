@@ -18,5 +18,4 @@ public class Tokens {
                 .mapToInt(Token::getCost)
                 .sum();
     }
-
 }
