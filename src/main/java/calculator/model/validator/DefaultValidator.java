@@ -26,14 +26,16 @@ public class DefaultValidator implements InputValidator {
 
     @Override
     public Object[] findCustomDelimiter(String input) {
-        if (!input.startsWith(DelimiterPrefix)) return new Object[]{"", DelimiterNotExitsIntValue}; // 커스텀 구분자 존재 여부 확인
+        // 커스텀 구분자 존재 여부 확인
+        if (!input.startsWith(DelimiterPrefix)) return new Object[]{"", DelimiterNotExitsIntValue};
 
         int delimiterEndIndex = input.lastIndexOf(DelimiterSuffix); // 구분자 정의 끝나는 지점 찾기
-        if (delimiterEndIndex == DelimiterNotExitsIntValue) {
-            throw new IllegalArgumentException("커스텀 구분자를 올바르게 입력해주세요!"); // DelimiterSuffix가 없을 경우 예외 처리
-        }
-        String delimiter = input.substring(2, delimiterEndIndex); // 구분자 부분 추출
 
+        if (delimiterEndIndex == DelimiterNotExitsIntValue) {  // DelimiterSuffix가 없을 경우 예외 처리
+            throw new IllegalArgumentException("커스텀 구분자를 올바르게 입력해주세요!");
+        }
+
+        String delimiter = input.substring(2, delimiterEndIndex); // 구분자 부분 추출
         return new Object[]{delimiter, delimiterEndIndex+DelimiterSuffix.length()}; // 구분자와 인덱스 반환
     }
 
