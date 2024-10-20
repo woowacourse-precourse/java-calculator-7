@@ -8,6 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
+
     @Test
     void 빈_문자열_입력_결과0_성공() {
         assertSimpleTest(() -> {
@@ -83,7 +84,23 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_단독_사용() {
         assertSimpleTest(() -> {
-            run("//;\n1;2;3");
+            run("//;\\n1");
+            assertThat(output()).contains("결과 : 1");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_공백_허용() {
+        assertSimpleTest(() -> {
+            run("// \\n1");
+            assertThat(output()).contains("결과 : 1");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_공백_사용() {
+        assertSimpleTest(() -> {
+            run("// \\n1 2 3");
             assertThat(output()).contains("결과 : 6");
         });
     }
@@ -91,7 +108,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀구분자와_기본구분자_섞어서_사용() {
         assertSimpleTest(() -> {
-            run("//;\n1;2,3:4");
+            run("//;\\n1;2,3:4");
             assertThat(output()).contains("결과 : 10");
         });
     }
@@ -99,7 +116,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_숫자이면_예외() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("//1\n1;2,3:4"))
+                assertThatThrownBy(() -> runException("//1\\n1;2,3:4"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
@@ -107,7 +124,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 여러_개의_커스텀_구분자_예외() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("//!@\n1;2,3:4"))
+                assertThatThrownBy(() -> runException("//!@\\n1;2,3:4"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
@@ -115,7 +132,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_공백이면_예외() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("// \n1;2,3:4"))
+                assertThatThrownBy(() -> runException("// \\n1;2,3:4"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
