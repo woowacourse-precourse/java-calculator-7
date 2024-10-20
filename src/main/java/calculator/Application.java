@@ -1,8 +1,22 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.StringTokenizer;
 
 public class Application {
+    // 구분자들을 기준으로 문자열 분리
+    public static String[] seperateString(String str, String seperators) {
+        StringTokenizer st = new StringTokenizer(str, seperators);
+        String[] nums = new String[st.countTokens()];
+        int i = 0;
+        while (st.hasMoreTokens()) {
+            nums[i] = st.nextToken();
+            i++;
+        }
+        return nums;
+    }
+
+    // 문자열을 분리하기 위해 구분자들을 모아놓은 문자열 생성
     public static String makeSeperators(String str) {
         String seperators = ",:";
         // 커스텀 구분자가 있는 경우, 커스텀 구분자를 찾아 문자열을 분리할 구분자들(seperators)에 추가
@@ -14,7 +28,7 @@ public class Application {
         return seperators;
     }
 
-    //기본 구분자와 커스텀 구분자를 제외한 다른 구분자를 포함하고 있는지 검사
+    // 기본 구분자와 커스텀 구분자를 제외한 다른 구분자를 포함하고 있는지 검사
     public static boolean isInvalidSeperator(String[] nums) {
         for (String num : nums) {
             if (!num.chars().allMatch(Character::isDigit)) {
@@ -24,7 +38,7 @@ public class Application {
         return true;
     }
 
-    //분리한 문자열이 모두 양수인지 검사
+    // 분리한 문자열이 모두 양수인지 검사
     public static boolean isPositiveNumber(String[] nums) {
         for (String num : nums) {
             if (Integer.parseInt(num) <= 0) {
@@ -34,7 +48,7 @@ public class Application {
         return true;
     }
 
-    //분리한 문자열을 숫자로 변환하여 더하기
+    // 분리한 문자열을 숫자로 변환하여 더하기
     public static int calculate(String[] nums) {
         int sum = 0;
         for (String num : nums) {
@@ -59,5 +73,6 @@ public class Application {
         }
 
         String seperators = makeSeperators(str);
+        String[] nums = seperateString(str, seperators);
     }
 }
