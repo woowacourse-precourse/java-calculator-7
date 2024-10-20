@@ -1,5 +1,7 @@
 package calculator;
 
+import static calculator.Constants.*;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -8,8 +10,8 @@ public class SeparatorManager {
 
     public SeparatorManager() {
         this.separators = new HashSet<>();
-        this.separators.add(",");
-        this.separators.add(":");
+        this.separators.add(DEFAULT_SEPARATOR_COMMA);
+        this.separators.add(DEFAULT_SEPARATOR_COLON);
     }
 
     public Set<String> getSeparators() {
@@ -23,28 +25,28 @@ public class SeparatorManager {
 
     public void validate(String separatorCandidate) {
         if (separatorCandidate == null || separatorCandidate.isEmpty()) {
-            throw new IllegalArgumentException("커스텀 구분자는 빈 문자열이어서는 안 됩니다.");
+            throw new IllegalArgumentException(ERROR_EMPTY_SEPARATOR);
         }
 
         if (separatorCandidate.length() != 1) {
-            throw new IllegalArgumentException("커스텀 구분자는 한자리여야 합니다.");
+            throw new IllegalArgumentException(ERROR_ONE_CHAR_SEPARATOR);
         }
 
         char separator = separatorCandidate.charAt(0);
-        if ((int) separator > 127) {
-            throw new IllegalArgumentException("커스텀 구분자는 아스키 문자여야 합니다.");
+        if ((int) separator > ASCII_MAX) {
+            throw new IllegalArgumentException(ERROR_ASCII_ONLY);
         }
 
-        if ((int) separator <= 31 || (int) separator == 127) {
-            throw new IllegalArgumentException("커스텀 구분자는 아스키 제어 문자가 될 수 없습니다.");
+        if ((int) separator <= CONTROL_CHAR_MAX || (int) separator == DEL_CHAR) {
+            throw new IllegalArgumentException(ERROR_CONTROL_CHAR);
         }
 
-        if (Character.isWhitespace(separator) && (int) separator != 32) {
-            throw new IllegalArgumentException("커스텀 구분자의 공백은 스페이스(Space)만 허용합니다.");
+        if (Character.isWhitespace(separator) && (int) separator != SPACE_CHAR) {
+            throw new IllegalArgumentException(ERROR_WHITESPACE);
         }
 
-        if (separator >= '1' && separator <= '9') {
-            throw new IllegalArgumentException("커스텀 구분자는 숫자 1~9가 될 수 없습니다.");
+        if ((int) separator >= DIGIT_MIN && (int) separator <= DIGIT_MAX) {
+            throw new IllegalArgumentException(ERROR_NUMERIC_SEPARATOR);
         }
     }
 }
