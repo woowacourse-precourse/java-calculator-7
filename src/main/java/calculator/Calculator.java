@@ -5,14 +5,14 @@ import java.util.Scanner;
 public class Calculator {
     Scanner scanner;
     String input;
-    String separator;
 
     Calculator() {
         scanner = new Scanner(System.in);
-        separator = ",|:";
     }
 
     public void run() {
+        String separator = ",|:";
+
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         input = scanner.nextLine();
         input = input.trim();
