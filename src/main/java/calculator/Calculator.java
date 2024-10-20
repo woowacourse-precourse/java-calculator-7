@@ -1,26 +1,20 @@
 package calculator;
 
-import camp.nextstep.edu.missionutils.Console;
-
-public class Calculator implements AutoCloseable {
+public class Calculator {
 
     public static final String PROMPT_MESSAGE = "덧셈할 문자열을 입력해 주세요.";
     private String input;
     private String output;
     private double sum;
     private boolean hasCustomDelimiter;
-    private String customDelimiter;
+    //    private String customDelimiter;
     private final Parser parser;
     private final DelimiterManager delimiterManager;
 
     public Calculator() {
-        customDelimiter = "";
+//        customDelimiter = "";
         parser = new Parser();
         delimiterManager = new DelimiterManager();
-    }
-
-    public void displayPrompt() {
-        System.out.println(PROMPT_MESSAGE);
     }
 
     public void readInput(String input) {
@@ -31,6 +25,9 @@ public class Calculator implements AutoCloseable {
 
     public void sum(String strippedInput) {
         String digitString = "";
+        if (Character.isDigit(strippedInput.charAt(0)) != true) {
+            throw new IllegalArgumentException();
+        }
 
         for (char c : strippedInput.toCharArray()) {
             if (Character.isDigit(c)) {
@@ -49,20 +46,19 @@ public class Calculator implements AutoCloseable {
         sum += Double.valueOf(digitString);
     }
 
-    public void printSum() {
-        System.out.println(String.format("결과 : %.0f", sum));
+    public void displayPrompt() {
+        System.out.println(PROMPT_MESSAGE);
     }
 
-    @Override
-    public void close() throws Exception {
-        Console.close();
+    public void printSum() {
+        System.out.println(String.format("결과 : %.0f", sum));
     }
 
     private class Parser {
 
         private static final String DELIMITER_PREFIX = "//";
         private static final String DELIMITER_SUFFIX = "\\n";
-        private static final int CUSTOM_DELIMITER = 0;
+        private static final int START_INDEX = 0;
         StringBuilder strippedStringBuilder;
 
         private Parser() {
@@ -95,11 +91,11 @@ public class Calculator implements AutoCloseable {
         }
 
         private void removeDelimiterSuffix(StringBuilder targetStringBuilder) {
-            customDelimiter = Character.toString(targetStringBuilder.charAt(CUSTOM_DELIMITER));
+            String customDelimiter = Character.toString(targetStringBuilder.charAt(START_INDEX));
             // DelimiterManager 인스턴스에 customDelimiter 전달
             delimiterManager.addDelimiter(customDelimiter);
             // targetStringBuilder의 customDelimiter 제거
-            targetStringBuilder.deleteCharAt(CUSTOM_DELIMITER);
+            targetStringBuilder.deleteCharAt(START_INDEX);
             String stringWithSuffix = targetStringBuilder.toString();
             // Delimiter suffix를 제거. 만약 suffix가 없다면 유효하지 않은 문자열 예외 발생
             if (stringWithSuffix.startsWith(DELIMITER_SUFFIX)) {
@@ -110,10 +106,14 @@ public class Calculator implements AutoCloseable {
         }
     }
 
+    /* 구분자를 관리하는 클래스. 커스텀 구분자 지정 시, 예외처리와 커스텀 구분자 저장을 담당합니다. */
     private class DelimiterManager {
 
+        /* 커스텀 구분자를 포함한 구분자 문자열의 최대 길이 */
         private static final int MAX_CUSTOM_DELIMITERS = 3;
+        /* 구분자 문자열 */
         private String delimiters;
+        /* 현재 구분자 문자열의 길이 */
         private int count;
 
         private DelimiterManager() {
@@ -121,6 +121,11 @@ public class Calculator implements AutoCloseable {
             count = 2;
         }
 
+        /**
+         * @param delimiter 기존의 구분자 문자열에 추가할 새로운 커스텀 구분자
+         * @throws IllegalArgumentException 커스텀 구분자의 개수는 1개를 초과할 수 없습니다.
+         * @throws IllegalArgumentException 기존의 구분자(",", ":")와 동일한 구분자는 커스텀 구분자가 될 수 없습니다.
+         */
         public void addDelimiter(String delimiter) {
 
             if (count >= MAX_CUSTOM_DELIMITERS) {
@@ -133,10 +138,6 @@ public class Calculator implements AutoCloseable {
 
             delimiters += delimiter;
             count++;
-        }
-
-        public String getDelimiters() {
-            return delimiters;
         }
     }
 }
