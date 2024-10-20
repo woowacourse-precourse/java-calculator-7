@@ -3,5 +3,5 @@ package choose;
 import divide.Divide;
 
 public interface Choose {
-	Divide choose(String str);
+	Divide chooseStrategy(final String str);
 }
