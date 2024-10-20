@@ -2,25 +2,26 @@ package calculator;
 
 import java.math.BigInteger;
 
-public class ApplicationContext {
+public class ApplicationRunner {
     private final UserInteractionManager userInteractionManager;
     private final InputManager inputManager;
     private final SeparatorManager separatorManager;
     private final OperandManager operandManager;
     private final Operator operator;
 
-    public ApplicationContext() {
-        this.userInteractionManager = new UserInteractionManager();
-        this.inputManager = new InputManager();
-        this.separatorManager = new SeparatorManager();
-        this.operandManager = new OperandManager(separatorManager);
-        this.operator = new Operator();
+    public ApplicationRunner(ApplicationContext context) {
+        this.userInteractionManager = context.getUserInteractionManager();
+        this.inputManager = context.getInputManager();
+        this.separatorManager = context.getSeparatorManager();
+        this.operandManager = context.getOperandManager();
+        this.operator = context.getOperator();
     }
 
     public void run() {
         String input = userInteractionManager.readInput();
         inputManager.save(input);
-        if(inputManager.isCustomSeparatorCandidateExisted()) {
+
+        if (inputManager.isCustomSeparatorCandidateExisted()) {
             separatorManager.save(inputManager.getSeparatorCandidate());
         }
         operandManager.save(inputManager.getOperandCandidates());
