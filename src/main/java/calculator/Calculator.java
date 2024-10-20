@@ -6,13 +6,6 @@ public class Calculator {
         String delimiter = ",|:";
         String numbers = input;
 
-        // 커스텀 구분자가 있는지 확인
-        if (input.startsWith("//")) {
-            int delimiterIndex = input.indexOf("\n");
-            delimiter = input.substring(2, delimiterIndex);
-            numbers = input.substring(delimiterIndex + 1);
-        }
-
         String[] tokens = numbers.split(delimiter);
         int sum = 0;
 
