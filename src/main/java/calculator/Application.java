@@ -4,18 +4,26 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Application {
+    private static final String SEPARATOR_PATTERN = "//(.+)\\\\n";
+    private static final String DEFAULT_SEPARATOR = "[,:]";
+
     public static void main(String[] args) throws IOException {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         String input = bufferedReader.readLine();
-        String[] lines = input.split("\\\\n");
 
-        String separator = getSeparator(lines[0]);
-        int[] numbers =  getNumbers(lines[1], separator);
+        boolean customSeparatorDefined = Pattern.compile(SEPARATOR_PATTERN)
+                .matcher(input)
+                .find();
+        String separator = customSeparatorDefined ? getSeparator(input) : DEFAULT_SEPARATOR;
+        String numbersString = customSeparatorDefined ? input.split("\\\\n", 2)[1] : input;
 
+        int[] numbers =  getNumbers(numbersString, separator);
         int result = Arrays.stream(numbers)
                 .sum();
 
@@ -40,11 +48,14 @@ public class Application {
         }
     }
 
-    private static String getSeparator(String header) {
-        if (header.startsWith("//")) {
-            return header.substring(2);
+    private static String getSeparator(String input) {
+        Matcher matcher = Pattern.compile(SEPARATOR_PATTERN)
+                .matcher(input);
+
+        if (matcher.find()) {
+            return matcher.group(1);
         }
 
-        return "[,:]";
+        return DEFAULT_SEPARATOR;
     }
 }
