@@ -1,8 +1,8 @@
 package calculator.domain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import calculator.domain.parser.InputParser.ParsedInput;
 import org.junit.jupiter.api.Test;
 
 public class CalculatorTest {
@@ -10,32 +10,39 @@ public class CalculatorTest {
     private final Calculator calculator = new Calculator();
 
     @Test
-    void 빈문자열_테스트() {
-        assertEquals("0", calculator.add(""));
+    void 숫자_하나_테스트() {
+        String[] parsedInput = {"1"};
+
+        String result = calculator.calculate(parsedInput);
+
+        assertEquals("1", result);
     }
 
     @Test
-    void 기본구분자_테스트() {
-        assertEquals("6", calculator.add("1,2:3"));
+    void 숫자_두개_테스트() {
+        String[] parsedInput = {"1", "2"};
+
+        String result = calculator.calculate(parsedInput);
+
+        assertEquals("3", result);
     }
 
     @Test
-    void 커스텀구분자_단일_테스트() {
-        assertEquals("6", calculator.add("//;\n1;2;3"));
+    void 숫자_세개_테스트() {
+        String[] parsedInput = {"1", "2", "3"};
+
+        String result = calculator.calculate(parsedInput);
+
+        assertEquals("6", result);
     }
 
     @Test
-    void 커스텀구분자_다중_테스트() {
-        assertEquals("6", calculator.add("//*%\n1*2%3"));
+    void int_범위_초과_테스트() {
+        String[] parsedInput = {"1000000000000", "20", "3"};
+
+        String result = calculator.calculate(parsedInput);
+
+        assertEquals("1000000000023", result);
     }
 
-    @Test
-    void 음수_입력_예외_테스트() {
-        assertThrows(IllegalArgumentException.class, () -> calculator.add("-1,2,3"));
-    }
-
-    @Test
-    void 숫자가_아닌_입력_예외_테스트() {
-        assertThrows(IllegalArgumentException.class, () -> calculator.add("1,2,문자열"));
-    }
 }
