@@ -1,8 +1,6 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.util.ArrayList;
-import java.util.HashSet;
 
 public class Application {
     public static void main(String[] args) {
@@ -10,16 +8,13 @@ public class Application {
         // 입력 받기
         String input = Console.readLine();
 
-
         // 구분자 파싱
         DelimiterParser delimiterParser = new DelimiterParser();
-        delimiterParser.addDelimiters(":");
-        delimiterParser.addDelimiters(",");
         delimiterParser.parse(input);
 
         // 숫자 추출
-        NumberExtractor numberExtractor = new NumberExtractor();
-        numberExtractor.extractNumbers(delimiterParser, input);
+        NumberExtractor numberExtractor = new NumberExtractor(delimiterParser);
+        numberExtractor.extractNumbers(input);
 
         // 계산
         Calculator calculator = new Calculator();
