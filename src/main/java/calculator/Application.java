@@ -81,14 +81,15 @@ public class Application {
         try {
             delimiter = findCustomDelimiter(input); // 커스텀 구분자 찾기
         } catch (IllegalArgumentException e) {
-            System.out.println("Error: " + e.getMessage()); // 예외 발생 시 에러 메시지 출력
+            System.out.println("Error: " + e.getMessage());
         }
 
         if(delimiter!=",|:"){
             input = input.substring(5);
         }
         String[] numbers = splitString(input,delimiter);
-
+        if(numbers.length==0)
+            throw new IllegalArgumentException("계산할 숫자가 없습니다.");
         sum = addString(numbers);
 
         return sum;
@@ -99,7 +100,12 @@ public class Application {
 
     public static void main(String[] args) {
         String input = Console.readLine();
-        int sum = StringCalculator(input);
+        int sum=0;
+        try{
+            sum = StringCalculator(input);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
 
         System.out.println("결과 : "+sum);
     }
