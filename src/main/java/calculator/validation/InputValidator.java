@@ -18,7 +18,7 @@ public class InputValidator {
     // 사용자 정의 구분자가 포함된 입력을 검증
     public static Matcher validateCustomDelimiter(String input) {
         return Optional.of(input)
-                .map(InputPattern.CUSTOM_DELIMITER_PATTERN.getPattern()::matcher)
+                .map(ValidationPattern.CUSTOM_DELIMITER_PATTERN.getPattern()::matcher)
                 .filter(Matcher::find)
                 .orElseThrow(() -> CustomException.from(ErrorMessage.MISSING_CUSTOM_DELIMITER_END));
     }
@@ -26,7 +26,7 @@ public class InputValidator {
     // 구분자에 숫자가 포함된 경우 유효성 검증
     public static void validateDelimiter(String customDelimiter) {
         Optional.of(customDelimiter)
-                .filter(delimiter -> InputPattern.INTEGER_PATTERN.getPattern().matcher(delimiter).find())
+                .filter(delimiter -> ValidationPattern.INTEGER_PATTERN.getPattern().matcher(delimiter).find())
                 .ifPresent(delimiter -> {
                     throw CustomException.from(ErrorMessage.MISSING_CUSTOM_DELIMITER_END);
                 });
