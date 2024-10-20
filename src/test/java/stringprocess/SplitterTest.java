@@ -1,14 +1,16 @@
-package calculator;
-
-import org.junit.jupiter.api.Test;
-import java.util.ArrayList;
-import java.util.List;
+package calculator.stringprocess;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class SplitterTest {
+import java.util.ArrayList;
+import java.util.List;
+import org.junit.jupiter.api.Test;
 
-    private final Splitter splitter = new Splitter();
+class SplitterTest {
+    List<String> customSeparator = new ArrayList<>();
+
+    private final Splitte splitter = new Splitter();
+
 
     @Test
     void 기본구분자로_쪼개기() {
@@ -27,7 +29,7 @@ class SplitterTest {
     void 커스텀구분자_쪼개기() {
         //given
         String input = "1--3;4--8;7&&&8&&&9";
-        List<String> customSeparator = new ArrayList<>();
+
         customSeparator.add(";");
         customSeparator.add("--");
         customSeparator.add("&&&");

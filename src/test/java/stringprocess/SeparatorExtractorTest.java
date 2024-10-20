@@ -1,11 +1,13 @@
-package calculator;
+package calculator.stringprocess;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import constant.Constant;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import stringprocess.SeparatorExtractor;
 
 class SeparatorExtractorTest {
     private final SeparatorExtractor extractor = new SeparatorExtractor(Constant.EXTRACT_REGEX_TEST);

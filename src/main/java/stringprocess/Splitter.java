@@ -1,17 +1,26 @@
-package calculator;
+package stringprocess;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class Splitter {
+class Splitter {
+
+    private final String basicSeparatorRegex;
+
+    private List<String> customSeparators;
+
+    public Splitter(String basicSeparatorRegex, List<String> customSeparators) {
+        this.basicSeparatorRegex = basicSeparatorRegex;
+        this.customSeparators = customSeparators;
+    }
 
     public List<String> splitByBasicSeparator(String value) {
-        return Arrays.stream(value.split("[,:]")).toList();
+        return Arrays.stream(value.split(basicSeparatorRegex)).toList();
 
     }
 
-    public List<String> splitByCustomSeparator(String value, List<String> customSeparators) {
+    public List<String> splitByCustomSeparator(String value) {
         if (customSeparators.isEmpty()) {
             return List.of(value);
         }

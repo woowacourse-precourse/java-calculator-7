@@ -1,20 +1,22 @@
-package calculator;
+package stringprocess;
 
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class SeparatorExtractor {
+class SeparatorExtractor {
 
     private final String regex;
+    private List<String> customSeparators;
 
 
     //테스트환경에서는 \n가 문자열로 인식되지만 실제 런타입에서는 개행문자로 인식되는 문제가 있어 정규식을 상황에 맞게 받도록함
-    public SeparatorExtractor(String regex) {
+    public SeparatorExtractor(String regex, List<String> customSeparators) {
         this.regex = regex;
+        this.customSeparators = customSeparators;
     }
 
-    public String extractCustomSeparator(String value, List<String> customSeparators) {
+    public String extractCustomSeparator(String value) {
         if (!value.contains("//")) {
             return value;
         }

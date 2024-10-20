@@ -1,6 +1,6 @@
-package calculator;
+package stringprocess;
 
-public class Validator {
+class Validator {
 
     private final String customSeparatorEndString;
 
@@ -17,10 +17,11 @@ public class Validator {
 
     //문자열의 시작 확인
     private void checkBeginOfValue(String value) {
-
-        if (!value.startsWith("//") && !isPositiveNum(value.charAt(0))) {
-            throw new IllegalArgumentException("문자열의 시작은 커스텀 구분자 선언 또는 양수여야 합니다");
+        if (value.startsWith("//") || isPositiveNum(value.charAt(0))) {
+            return;
         }
+
+        throw new IllegalArgumentException("문자열의 시작은 커스텀 구분자 선언 또는 양수여야 합니다");
     }
 
     //문자열의 끝 확인

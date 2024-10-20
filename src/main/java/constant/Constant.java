@@ -1,6 +1,8 @@
 package calculator;
 
 public class Constant {
+    public static final String BASIC_SEPARATOR_REGEX = "[,:]";
+
     public static final String EXTRACT_REGEX_APP = "\\/\\/(.*?)\\\\n";
 
     public static final String EXTRACT_REGEX_TEST = "\\/\\/(.+?)\n";
