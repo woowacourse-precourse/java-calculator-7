@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import static calculator.Message.Message.OUTPUT_MESSAGE;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class InputTest extends NsTest {
 
@@ -73,6 +74,16 @@ public class InputTest extends NsTest {
             assertThat(output()).contains(OUTPUT_MESSAGE + "12");
         });
     }
+
+    @Test
+    @DisplayName("구분자, 숫자가 아닌 값이 입력된 케이스")
+    void noneSepAndNum() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,2:3*4?5"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
 
     @Override
     protected void runMain() {
