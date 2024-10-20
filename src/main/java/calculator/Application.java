@@ -7,12 +7,12 @@ import java.util.regex.Pattern;
 
 // model
 class ExpressionModel {
-    private final String delimeter;
+    private final String delimiter;
     private final int cntData;
     private final List<String> operand;
 
     public ExpressionModel() {
-        this.delimeter = ",|:";
+        this.delimiter = ",|:";
         this.cntData = 0;
         this.operand = new ArrayList<>();
     }
@@ -21,8 +21,14 @@ class ExpressionModel {
         return expression.indexOf("//");
     }
 
-    boolean isLastDelimeterIdx(String expression, int idx) {
+    boolean isLastDelimiterIdx(String expression, int idx) {
         return expression.startsWith("\\n", idx);
+    }
+
+    void registerDelimiter(String delimiterRange) {
+        for (int nowDelimiterIdx = 0; nowDelimiterIdx < delimiterRange.length(); nowDelimiterIdx++) {
+
+        }
     }
 
     int plusData() {
@@ -61,7 +67,7 @@ class CalculatorController {
 }
 
 public class Application {
-    static String delimeter = ",|:";
+    static String delimiter = ",|:";
     static String inputExpression;
 
     static int hasCustom(String str) {
@@ -75,7 +81,7 @@ public class Application {
             if (str.startsWith("\\n", i)) {
                 String tmp = str.substring(customStart + 2, i);
                 for (int j = 0; j < tmp.length(); j++) {
-                    delimeter += "|\\" + tmp.charAt(j);
+                    delimiter += "|\\" + tmp.charAt(j);
                 }
                 inputExpression = inputExpression.substring(i + 2);
                 break;
@@ -94,7 +100,7 @@ public class Application {
         }
 
         // 구분자로 문자열 자르기
-        String[] numbers = inputExpression.split(delimeter);
+        String[] numbers = inputExpression.split(delimiter);
 
         // 추출된 숫자들의 합 구하기
         int cnt = 0;
