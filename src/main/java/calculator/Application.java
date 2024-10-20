@@ -21,7 +21,7 @@ public class Application {
 
     private void validateInput(String input, String custom) {
         if (!custom.isEmpty()) {
-            if (custom.matches("^[0-9]*$")) {
+            if (custom.matches("^[a-zA-Z0-9]*$")) {
                 throw new IllegalArgumentException("커스텀 구분자는 숫자나 문자를 포함할 수 없습니다.");
             }
             String subInput = input.substring(5);
