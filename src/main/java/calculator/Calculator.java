@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
 
 public class Calculator {
 
-    private final Delimiter delimiter = new Delimiter();
+    private final Delimiters delimiters = new Delimiters();
     private final Converter converter = new Converter();
 
     public void startCalculate() {
@@ -20,7 +20,7 @@ public class Calculator {
             return;
         }
 
-        String[] numList = delimiter.getNumList(inputString);
+        String[] numList = delimiters.getNumList(inputString);
 
         double sum = 0;
 
