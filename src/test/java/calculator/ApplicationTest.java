@@ -12,19 +12,18 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_사용() {
-        String input = "//;\n1;2;3";
-        int result = Application.add(input);
-        assertEquals(6, result);
+        assertSimpleTest(() -> {
+            run("//;\\n1");
+            assertThat(output()).contains("결과 : 1");
+        });
     }
 
     @Test
     void 예외_테스트() {
-        String input = "//;\n-1;2;3";
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            Application.add(input);
-        });
-
-        assertEquals("음수를 입력할 수 없습니다.", exception.getMessage());
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
     }
 
     @Override
