@@ -10,17 +10,16 @@ public class Application {
             return 0;
         }
 
-        String delimiter = ",|\n";
+        String delimiter = ",|:";
 
         // 커스텀 구분자 처리
         if (text.startsWith("//")) {
-            int delimiterIndex = text.indexOf("\n");
-            if (delimiterIndex == -2) {
+            int delimiterIndex = text.indexOf("\\n");
+            if (delimiterIndex == -1) {
                 throw new IllegalArgumentException("Invalid input: " + text);
             }
-
             delimiter = text.substring(2, delimiterIndex); // 커스텀 구분자 추출
-            text = text.substring(delimiterIndex + 1); // 숫자 부분 추출
+            text = text.substring(delimiterIndex + 2); // 숫자 부분 추출
         }
 
         // 구분자에 맞춰 숫자 분리
