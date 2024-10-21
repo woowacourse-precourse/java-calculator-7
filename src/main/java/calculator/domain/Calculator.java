@@ -39,9 +39,9 @@ public class Calculator {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
 
-        List<Number> numbers = converter.convertWordsToString(input);
+        List<Number> numbers = converter.convertWordsToNumberList(input);
 
-        Number number = addNumbers(numbers);
+        addNumbers(numbers);
         System.out.println(showCurrentStatus());
     }
 }

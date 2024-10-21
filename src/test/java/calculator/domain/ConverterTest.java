@@ -43,7 +43,7 @@ public class ConverterTest {
         Converter converter = Converter.getInstance();
 
         //when
-        List<Number> numbers = converter.convertWordsToString(str);
+        List<Number> numbers = converter.convertWordsToNumberList(str);
 
         //then
         assertThat(numbers.get(0)).isEqualTo(new Number(0));
@@ -56,7 +56,7 @@ public class ConverterTest {
         Converter converter = Converter.getInstance();
 
         //when
-        List<Number> numbers = converter.convertWordsToString(str);
+        List<Number> numbers = converter.convertWordsToNumberList(str);
 
         //then
         assertThat(numbers.get(0)).isEqualTo(new Number(1));
@@ -74,7 +74,7 @@ public class ConverterTest {
 
         //then
         assertThrows(IllegalArgumentException.class, () -> {
-            converter.convertWordsToString(str);
+            converter.convertWordsToNumberList(str);
         });
     }
 }

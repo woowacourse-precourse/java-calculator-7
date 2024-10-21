@@ -18,27 +18,18 @@ public class Converter {
         return CONVERTER;
     }
 
-    public List<Number> convertWordsToString(String words) {
-        List<String> dirtyWords = separateWords(words);
-        List<String> cleanWords = dirtyWords.stream()
-                .map(String::trim)
-                .toList();
-        return cleanWords.stream()
-                .map(this::parsingNumber)
-                .collect(Collectors.toList());
+    public List<Number> convertWordsToNumberList(String words) {
+        List<String> dirtyStringList = separateWords(words);
+        List<String> cleanStringLIst = cleanWordList(dirtyStringList);
+
+        return castStringListToNumberList(cleanStringLIst);
     }
 
     public List<String> separateWords(String words) {
-        String cleanWord = findCustomerDelimiter(words);
+        String cleanStrings = findCustomerDelimiter(words);
+        String delimiterRegex = getDelimiterRegex();
 
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < delimiterList.size(); i++) {
-            sb.append(delimiterList.get(i));
-            if (i != delimiterList.size() - 1)
-                sb.append("|");
-        }
-        String delimiterRegex = sb.toString();
-        return List.of(cleanWord.split(delimiterRegex));
+        return List.of(cleanStrings.split(delimiterRegex));
     }
 
 
@@ -59,7 +50,19 @@ public class Converter {
             delimiterList.add(word.substring(2, 3));
     }
 
-    private Number parsingNumber(String word) {
+    private List<String> cleanWordList(List<String> dirtyWords) {
+        return dirtyWords.stream()
+                .map(String::trim)
+                .toList();
+    }
+
+    private List<Number> castStringListToNumberList(List<String> wordList) {
+        return wordList.stream()
+                .map(this::castStringToNumber)
+                .collect(Collectors.toList());
+    }
+
+    private Number castStringToNumber(String word) {
         try {
             if (word.isEmpty())
                 return new Number(0);
@@ -74,6 +77,16 @@ public class Converter {
     private void validatePositiveNumber(Integer integer) throws NumberFormatException {
         if (integer < 0)
             throw new NumberFormatException();
+    }
+
+    private String getDelimiterRegex() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < delimiterList.size(); i++) {
+            sb.append(delimiterList.get(i));
+            if (i != delimiterList.size() - 1)
+                sb.append("|");
+        }
+        return sb.toString();
     }
 
 
