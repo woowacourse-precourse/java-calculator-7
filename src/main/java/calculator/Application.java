@@ -21,13 +21,15 @@ public class Application {
 
 //         ; ,가 구분자 그리고 //과 \n 사이에 있는 문자열이 커스텀 구분자
 //         정규식 패턴 설정
-        Pattern pattern = Pattern.compile("//(.*?)\\\\n");
+//        Pattern pattern = Pattern.compile("//(.*)\\\\n");
+        Pattern pattern = Pattern.compile("//(.+)\\\\n");
         Matcher matcher = pattern.matcher(s);
 
         // 패턴 매칭 확인
         if (matcher.find()) { // 빈 문자열
 //            // 매칭된 그룹(사이의 문자열) 추출
             String delimeter = matcher.group(1);
+//            System.out.println(delimeter);
             String[] delimeters = delimeter.split(",");
             s = s.replace(matcher.group(0), ""); // delete custom
             s = s.trim();
