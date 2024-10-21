@@ -63,15 +63,6 @@ src
  └── test
      └── java
          └── calculator
-             ├── controller
-             │   └── CalculatorControllerTest.java
-             ├── model
-             │   └── CalculatorTest.java
-             ├── service
-             │   └── CalculatorServiceTest.java
-             │   └── InputServiceTest.java
-             ├── view
-             │   └── CalculatorViewTest.java
              └── ApplicationTest
 
 ```
@@ -111,5 +102,5 @@ src
         - [x] 숫자가 Long 범위를 초과하는 경우
 - [x] 결과 출력
     - 덧셈 결과를 콘솔에 출력
-- [ ] 테스트 케이스 작성
+- [x] 테스트 케이스 작성
     - 다양한 입력 케이스에 대해 동작하는지 테스트
