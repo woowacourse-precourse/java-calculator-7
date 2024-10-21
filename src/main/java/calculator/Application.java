@@ -13,7 +13,21 @@ public class Application {
     }
 
     public static int sum(String input) {
-        String[] nums = input.split("[,:]");
+
+        String base = "[,:]";
+
+        // 커스텀 구분자가 있는지 확인
+        int customStart = input.indexOf("//");
+        if (customStart == 0) {
+            int customLast = input.indexOf("\\n");
+//            System.out.println(customLast);
+            base = String.valueOf(input.charAt(customStart + 2));
+//            System.out.println(base);
+            input = input.substring(customLast + 2);
+//            System.out.println(input);
+        }
+
+        String[] nums = input.split(base);
 
         int total = 0;
         for (String n : nums) {
