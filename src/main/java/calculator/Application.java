@@ -24,6 +24,13 @@ public class Application {
         System.out.println("사용된 구분자: " + delimiter);
         System.out.println("파싱할 숫자 문자열: " + numbers);
 
+        // 3. 분리된 문자열에서 숫자를 추출하는 기능
+        String[] numberArray = numbers.split(delimiter);
+        System.out.println("추출된 숫자들: ");
+        for (String num : numberArray) {
+            System.out.println(num);
+        }
+
         // TODO: 나머지 기능 구현
     }
 }
