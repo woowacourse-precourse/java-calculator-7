@@ -9,14 +9,11 @@ import calculator.model.delimiter.Delimiters;
 import calculator.validation.InputValidator;
 
 public class InputFilter {
-	private InputFilter() {
-	}
-
 	/**
 	 * 핵심 로직
 	 */
 	// 1차 가공된 입력값에서 숫자를 추출
-	public static List<Integer> extractNumbers(String processedInput, Delimiters delimiters) {
+	public List<Integer> extractNumbers(String processedInput, Delimiters delimiters) {
 		if (processedInput.isBlank()) {
 			return List.of();
 		}
@@ -26,7 +23,7 @@ public class InputFilter {
 	}
 
 	// 구분자들을 이용해 정규식을 만들고, 이를 이용해 입력값을 분리
-	private static String[] splitInput(String processedInput, Delimiters delimiters) {
+	private String[] splitInput(String processedInput, Delimiters delimiters) {
 		InputValidator.validateInvalidDelimiter(processedInput, delimiters);
 
 		String regex = String.join("|",
@@ -39,7 +36,7 @@ public class InputFilter {
 	}
 
 	// 분리된 각 부분에서 숫자로 변환하여 리스트에 추가
-	private static List<Integer> saveNumbers(String[] splitParts) {
+	private List<Integer> saveNumbers(String[] splitParts) {
 		List<Integer> numbers = new ArrayList<>();
 		Arrays.stream(splitParts)
 			.map(String::trim)
