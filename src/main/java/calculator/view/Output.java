@@ -6,7 +6,7 @@ public class Output {
     private Output() {
     }
 
-    public static void end(int number) {
+    public static void end(Number number) {
         System.out.println(RESULT + number);
     }
 }

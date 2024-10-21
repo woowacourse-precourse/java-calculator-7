@@ -1,6 +1,7 @@
 package calculator;
 
 import calculator.extract.ExtractService;
+import calculator.number.Calculator;
 import calculator.separator.SeparatorService;
 import calculator.view.Input;
 import calculator.view.Output;
@@ -27,7 +28,7 @@ public class Controller {
             char currentChar = inputText.charAt(index);
 
             if (Character.isDigit(currentChar)) {
-                calculator.temporarySaveNumber(convertToInt(currentChar));
+                calculator.temporarySaveNumber(currentChar);
                 continue;
             } else {
                 calculator.saveNumber();
@@ -50,9 +51,5 @@ public class Controller {
     private int passRemainSeparator(int index) {
         index += extractService.getSeparatorLength();
         return index;
-    }
-
-    private int convertToInt(char currentChar) {
-        return currentChar - '0';
     }
 }

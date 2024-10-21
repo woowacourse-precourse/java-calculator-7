@@ -38,7 +38,7 @@ public class SeparatorService {
         return extractRepository
                 .getExtracts()
                 .stream()
-                .noneMatch(extract -> extract.startSeparators()
+                .anyMatch(extract -> extract.startSeparators()
                         .contains(Character.toString(separator)));
     }
 }
