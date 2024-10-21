@@ -28,11 +28,13 @@ public class InputProcessor {
 
     public void getCustomDelimiter() {
         while (input.indexOf(CUSTOM_DELIM_START) == 0) {
-            String customDelimiter = input.substring((input.indexOf(CUSTOM_DELIM_START) + CUSTOM_DELIM_START.length()),
-                    (input.indexOf(CUSTOM_DELIM_END)));
+            int customDelimiterStartIdx = input.indexOf(CUSTOM_DELIM_START) + CUSTOM_DELIM_START.length();
+            int customDelimiterEndIdx = input.indexOf(CUSTOM_DELIM_END);
+            String customDelimiter = input.substring(customDelimiterStartIdx, customDelimiterEndIdx);
             delimiterList.add(customDelimiter);
 
-            input = input.substring(input.indexOf(CUSTOM_DELIM_END) + CUSTOM_DELIM_END.length());
+            int nextCustomDelimiterStartIdx = customDelimiterEndIdx + CUSTOM_DELIM_END.length();
+            input = input.substring(nextCustomDelimiterStartIdx);
         }
     }
 
