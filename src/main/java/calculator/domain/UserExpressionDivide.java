@@ -1,0 +1,11 @@
+package calculator.domain;
+
+public class UserExpressionDivide {
+    private static UserExpression userExpression;
+    private static String rawExpression;
+    private static final int CUSTOM_DELIM_LENGTH = 5;
+
+    private static Boolean enoughLengthToDivide(String rawExpression) {
+        return rawExpression.length() >= CUSTOM_DELIM_LENGTH;
+    }
+}
