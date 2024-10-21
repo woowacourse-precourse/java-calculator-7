@@ -53,7 +53,6 @@ public class Application {
             for (int j : intArr) { //배열의 값 모두 출력
                 sum += j;
             }
-            System.out.print("The Sum is : ");
             System.out.println(sum);
         }
     }
