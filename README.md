@@ -121,7 +121,7 @@ separatorPart, separators, numberPart, numbers 필드를 갖고, processInput, g
 
 StringCalculator는 프로그램 전체 흐름을 관리한다. numbers, result 필드를 갖고, run, addNumbers, getResult 메서드를 구현해 입력부터 결과 반환까지의 과정이 이루어진다.
 
--   [ ] run(): 사용자의 입력을 받아 InputProcessor에 전달, 유효한 숫자를 추출한다.
+-   [x] run(): 사용자의 입력을 받아 InputProcessor에 전달, 유효한 숫자를 추출한다.
 -   [ ] addNumbers(): 유효한 숫자를 추출하여 더한 결과를 반환한다.
 -   [ ] getResult(): 저장된 결과를 반환한다.
 
