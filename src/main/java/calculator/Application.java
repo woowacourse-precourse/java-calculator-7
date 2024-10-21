@@ -8,11 +8,16 @@ public class Application {
     static String input;
 
     public static void main(String[] args) {
-        input = Console.readLine(); // 문자열 입력
-        List<String> delimiters = getDelimiters(); // 커스텀 구분자 확인
-        List<Integer> numbers = splitNumbers(delimiters); // 구분자에 맞춰 숫자 분리
-        int sum = calculateSum(numbers);
-        System.out.println("결과 : " + sum);
+        try {
+            input = Console.readLine(); // 문자열 입력
+            List<String> delimiters = getDelimiters(); // 커스텀 구분자 확인
+            List<Integer> numbers = splitNumbers(delimiters); // 구분자에 맞춰 숫자 분리
+            int sum = calculateSum(numbers);
+            System.out.println("결과 : " + sum);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException();
+        }
+
     }
 
     private static List<String> getDelimiters() {
@@ -51,8 +56,15 @@ public class Application {
         String[] tokens = input.split(regex);
         for (String token : tokens) {
             if (!token.trim().isEmpty()) {
-                int number = Integer.parseInt(token.trim());
-                numbers.add(number);
+                try {
+                    int number = Integer.parseInt(token.trim());
+                    if (number < 0) {
+                        throw new IllegalArgumentException();
+                    }
+                    numbers.add(number);
+                } catch (NumberFormatException e) {
+                    throw new IllegalArgumentException();
+                }
             }
         }
 
