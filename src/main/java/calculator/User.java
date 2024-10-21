@@ -35,7 +35,6 @@ public class User {
             validateNumberRange(input);
             validateHasDefaultSeparator(input);
         }
-        //throw new IllegalArgumentException(Constants.ERROR_INVALID_VALUES);
     }
 
     private void validateNumberRange(String input) {
@@ -56,7 +55,10 @@ public class User {
         if (isDefaultFormat(input)) {
             return defaultSplit(input);
         }
-        return customSplit(input);
+        if (isCustomFormat(input)) {
+            return customSplit(input);
+        }
+        return null;
     }
 
     private List<String> defaultSplit(String input) {
@@ -69,6 +71,9 @@ public class User {
             String customSeparator = matcher.group(1);
             String content = matcher.group(2);
             validateCustomFormatInput(customSeparator, content);
+            if (content.matches("(?=.*[,:]).*")) {
+                content = content.replaceAll("[,:]", customSeparator);
+            }
             return Arrays.asList(content.split(Pattern.quote(customSeparator), -1));
         }
         throw new IllegalArgumentException(Constants.ERROR_INVALID_CUSTOM_FORMAT);
