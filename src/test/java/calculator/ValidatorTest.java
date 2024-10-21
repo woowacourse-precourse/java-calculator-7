@@ -15,7 +15,14 @@ class ValidatorTest {
     @Test
     @DisplayName("custom 구분자를 추출해낸다.")
     void customDelimiter() {
-        String str = "//+:\n1:2:3";
-        assert(findCustomDelimiter(str)).equals("+:");
+        String str = "//:\n1:2:3";
+        assert(findCustomDelimiter(str)).equals(":");
+    }
+
+    @Test
+    @DisplayName("음수가 입력값에 포함되어서는 안된다")
+    void negativeInput() {
+        String str = "-1, -2, 3";
+        assertThrows(IllegalArgumentException.class, () -> findCustomDelimiter(str));
     }
 }
