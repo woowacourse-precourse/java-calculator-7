@@ -7,7 +7,7 @@ public class PositiveNumber {
 
     private static final int MAX_LENGTH_THRESHOLD = 15;
     private static final String DEFAULT_NUMBER = "0";
-    private static final String MINUS_SIGN = "-";
+    private static final String MINUS = "-";
     private static final PositiveNumber DEFAULT_POSITIVE_NUMBER = new PositiveNumber();
 
     private final BigInteger value;
@@ -49,7 +49,7 @@ public class PositiveNumber {
     }
 
     private static boolean isNegative(final String number) {
-        return number.startsWith(MINUS_SIGN);
+        return number.startsWith(MINUS);
     }
 
     private static void validateOnlyDigits(final String number) {
