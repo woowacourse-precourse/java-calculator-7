@@ -28,6 +28,10 @@ public class StringCalculator {
         return calculateSum(input, DEFAULT_DELIMITERS);
     }
 
+    void runException(String input) {
+        StringCalculator.add(input);  // add 메서드를 호출하여 예외를 발생시킴
+    }
+
     private static int calculateSum(String input, String delimiter) {
         String[] tokens = input.split(delimiter);  // 구분자로 문자열을 나눔
         int sum = 0;
@@ -35,7 +39,7 @@ public class StringCalculator {
             if (!token.trim().isEmpty()) {  // 빈 문자열 무시
                 int number = parseNumber(token.trim());  // 공백 제거 후 숫자로 변환
                 if (number < 0) {
-                    throw new IllegalArgumentException("음수는 입력할 수 없습니다: " + number);
+                    throw new IllegalArgumentException("음수는 불가능 합니다.");
                 }
                 sum += number;
             }
@@ -47,7 +51,7 @@ public class StringCalculator {
         try {
             return Integer.parseInt(token);  // 문자열을 숫자로 변환
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("잘못된 입력 값: " + token);  // 변환 실패 시 예외 처리
+            throw new IllegalArgumentException("숫자가 아닙니다.");  // 변환 실패 시 예외 처리
         }
     }
 }

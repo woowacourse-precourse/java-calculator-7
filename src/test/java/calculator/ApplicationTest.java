@@ -18,10 +18,18 @@ class ApplicationTest extends NsTest {
 
     @Test
     void 예외_테스트() {
-        assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
-        );
+        assertThatThrownBy(() -> {
+            StringCalculator.add("-1,2,3");  // 음수 입력
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("음수는 불가능 합니다");
+    }
+
+    @Test
+    void 잘못된_숫자_예외_테스트() {
+        assertThatThrownBy(() -> {
+            StringCalculator.add("1,a,3");  // 숫자가 아닌 값 포함
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("숫자가 아닙니다");
     }
 
     @Override
