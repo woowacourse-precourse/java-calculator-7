@@ -24,6 +24,30 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 파라미터_개수_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1:2::3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 파라미터_종결_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1:2:3:"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 숫자_시작_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException(":1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
