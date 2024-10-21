@@ -20,9 +20,18 @@ public class Application {
         sc.close();
     }
 
-    class StringCalculator {
+    static class StringCalculator {
         public int calculate(String input) {
-            return 0;
+            if(input.isEmpty()){
+                return 0;
+            }
+
+            String[] numbers = input.split("[,:]");
+            int sum = 0;
+            for(String number : numbers){
+                sum += Integer.parseInt(number.trim());
+            }
+            return sum;
         }
     }
 }
