@@ -11,7 +11,6 @@ public class InputView {
         try {
             String input = Console.readLine();
             if (input.isBlank()) {
-                System.out.println("빈 문자열을 입력했습니다.");
                 return "";
             }
             return input;

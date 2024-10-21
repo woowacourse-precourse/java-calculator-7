@@ -1,6 +1,6 @@
 package calculator;
 
-import calculator.controller.StringCalculator;
+import calculator.stringcalculator.StringCalculator;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 import java.io.PrintStream;
