@@ -16,10 +16,10 @@ public class TextCalculatorServiceImpl implements TextCalculatorService {
     }
 
     @Override
-    public Long calculateSumTotal(final CalculateCommand calculateCommand) {
+    public Long calculateSumTotal(final CalculateCommand command) {
 
-        Translator translator = new Translator(calculateCommand.customSeparators);
-        List<PositiveNumber> positiveNumbers = translator.translate(calculateCommand.majorData);
+        Translator translator = new Translator(command.customSeparators);
+        List<PositiveNumber> positiveNumbers = translator.translate(command.majorData);
         return calculator.getSum(positiveNumbers);
     }
 }

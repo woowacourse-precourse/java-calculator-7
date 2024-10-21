@@ -15,7 +15,7 @@ public class TextCalculatorController {
 
     public Long getSumTotal(final InputData userInput) {
 
-        CalculateCommand calculateCommand = new CalculateCommand(userInput);
-        return textCalculatorService.calculateSumTotal(calculateCommand);
+        CalculateCommand command = new CalculateCommand(userInput);
+        return textCalculatorService.calculateSumTotal(command);
     }
 }
