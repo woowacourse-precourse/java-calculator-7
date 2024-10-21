@@ -9,7 +9,7 @@ public class Application {
             int result = StringAddCalculator.splitInput(input);
             System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
-            System.out.println("잘못된 입력입니다: " + e.getMessage());
+            System.out.println("잘못된 입력입니다. " + e.getMessage());
         }
     }
 }
