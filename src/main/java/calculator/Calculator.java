@@ -14,7 +14,7 @@ public class Calculator {
                 }
                 sum += number;
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
+                throw new IllegalArgumentException("입력 문자열에 숫자가 아닌 값이 포함되어 있습니다.");
             }
         }
 
