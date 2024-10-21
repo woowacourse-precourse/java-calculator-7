@@ -11,7 +11,28 @@ public class Application {
     static Pattern pattern = Pattern.compile("\\/\\/(.+?)\\\\n");
 
     public static void main(String[] args) {
-
+        System.out.println("계산을 수행할 문자열을 입력해주세요.");
+        String input = Console.readLine();
+        // 입력한 문자열에 \n이 포함된 경우, 즉 커스텀 구분자가 존재하는 경우
+        int index = input.indexOf("\\n");
+        // 커스텀 구분자 이후 구간으로 문자열 범위 좁힘 ( 커스텀 구분자 없는 경우 그대로 사용 )
+        String refinedInput = index >= 0 ? input.substring(index + 2) : input;
+        // 구문자 문자열을 입력값으로 부터 추출해, 이스케이핑 시킨다
+        String newDelimiter = escapeAllSpecials(extractDelimiter(input));
+        // 커스텀 구분자를 구분자들(,와:)에 추가시킨다
+        String delimiter = ",|:" + (newDelimiter.equals("") ?  "" : "|" + newDelimiter);
+        int[] arr;
+        try{
+            // 구분자들을 기준으로 문자열을 나눈 뒤 각각 int 값으로 변환해 배열에 담는다 
+            arr = splitWithDelimiter(refinedInput, delimiter);
+        } catch (NumberFormatException e) {
+            // 만약 사용자가 잘못된 값을 입력해 String -> int 변환 과정에 문제가 생긴 경우
+            // IllegalArgumentException을 발생시킨다
+            throw new IllegalArgumentException();
+        }
+        // int 배열에 담긴 모든 값을 합산한다
+        int result = sumAllIntegers(arr);
+        System.out.printf("결과 : %d\n", result);
     }
     public static String extractDelimiter(String str) {
         // 정규표현식에 인자로 주어진 str를 적용한다.
