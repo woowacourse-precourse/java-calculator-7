@@ -23,7 +23,7 @@ class StringAddCalculatorTest {
 
     @Test
     void 문자열_계산_커스텀_구분자() {
-        String input = "//;\n1;2;3";
+        String input = "//;\\n1;2;3";
         int result = calculator.calculate(input);
         assertThat(result).isEqualTo(6);
     }

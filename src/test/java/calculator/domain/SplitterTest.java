@@ -18,7 +18,7 @@ class SplitterTest {
     @Test
     void 커스텀_구분자를_사용한_문자열_분리() {
         // given
-        String input = "//;\n1;2;3";
+        String input = "//;\\n1;2;3";
         // when
         List<String> result = splitter.splitInputByDelimiter(input);
         // then

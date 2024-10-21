@@ -23,7 +23,7 @@ public class CalculatorController {
             int result = calculator.calculate(input);
             printResult(result);
         } catch (IllegalArgumentException e) {
-            System.out.println("[ERROR] " + e.getMessage());
+            throw e;
         }
 
     }
