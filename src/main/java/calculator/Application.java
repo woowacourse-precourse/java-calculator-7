@@ -12,5 +12,6 @@ public class Application {
         //결과 출력하기
         int result = calculator.add(input);
         System.out.println("결과 : " + result);
+        Console.close();
     }
 }
