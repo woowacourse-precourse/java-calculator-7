@@ -6,6 +6,7 @@ import java.util.List;
 public class NumberList {
 
     private final List<Integer> numbers;
+    private static final String DEFAULT_DELIMITER = "[,:]";
 
     public NumberList(String input) {
         this.numbers = inputToList(input);
@@ -51,7 +52,7 @@ public class NumberList {
             }
             return delimiter;
         }
-        return "[,:]";
+        return DEFAULT_DELIMITER;
     }
 
     public int getSum() {
