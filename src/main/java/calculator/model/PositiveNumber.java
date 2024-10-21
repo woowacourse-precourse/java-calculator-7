@@ -12,10 +12,14 @@ public class PositiveNumber {
         this.count = count;
     }
 
-    public void plus(String numberAdded) {
+    public void validateIsNumber(String numberAdded) {
         if (!Pattern.matches(REGEXP_ONLY_NUM, numberAdded)) {
             throw new IllegalArgumentException("잘못된 구분자를 포함합니다.");
         }
+    }
+
+    public void plus(String numberAdded) {
+        validateIsNumber(numberAdded);
         if (numberAdded.equals(EMPTY_NUMBER)) {
             return;
         }
