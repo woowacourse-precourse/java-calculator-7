@@ -28,6 +28,41 @@
 결과 : 6
 ```
 
+## 패키지 구조
+
+```angular2html
+└─calculator
+│  Application.java
+│
+├─controller
+│      CalculatorController.java
+│
+├─domain
+│      Delimiters.java
+│      Operands.java
+│
+├─dto
+│      ResultDTO.java
+│      UserInputDTO.java
+│
+├─service
+│      CalculateService.java
+│      ParsingService.java
+│
+├─utils
+│      Constants.java
+│
+├─validators
+│      InvalidCalculationException.java
+│      InvalidInputStringFormatException.java
+│      InvalidOperandFormatException.java
+│
+└─view
+InputView.java
+OutputView.java
+ViewMessages.java
+```
+
 ## 요구사항 정리(기능 목록)
 
 - 문자열 입력 기능
@@ -40,6 +75,7 @@
 
 - 구분자에 따라 문자를 분리하는 기능
     - 구분자를 추출하는 기능(커스텀 구분자 포함)
+        - 여러 글자로 이루어진 커스텀 구분자 지원
     - 구분자에 따라 숫자를 분리하는 기능
 
 - 추출한 숫자를 계산하는 기능
