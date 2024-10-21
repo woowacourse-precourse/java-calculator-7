@@ -15,10 +15,10 @@ public class Application {
         ExtractNumber en = new ExtractNumber(input);
         numbers = en.split();
 
-        System.out.println("결과" + " : " + sum(numbers));
+        System.out.println("결과" + " : " + sumsplitnumber(numbers));
     }
 
-    private static int sum(String[] numbers) {
+    private static int sumsplitnumber(String[] numbers) {
         return Arrays.stream(numbers)
                 .peek(word -> {
                     if (!word.matches("\\d+")) {
