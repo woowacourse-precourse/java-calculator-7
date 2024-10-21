@@ -17,7 +17,15 @@ public class Validator {
         Matcher matcher = pattern.matcher(input);
         String[] ret = new String[2];
         if (matcher.find()) {
-            ret[0] = matcher.group(1);
+            // 커스텀 구분자
+            String customSep = matcher.group(1);
+
+            // 정규식 특수문자 이스케이프 처리
+            if ("+*?[](){}|.^$".contains(customSep)) {
+                customSep = "\\" + customSep;
+            }
+
+            ret[0] = customSep;
             ret[1] = matcher.group(2);
             return ret;
         }
