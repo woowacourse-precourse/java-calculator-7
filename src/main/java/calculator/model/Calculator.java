@@ -16,16 +16,17 @@ public class Calculator {
         int sum = 0;
         List<String> errors = new ArrayList<>();
 
-        // 음수 값 검사
+        // 음수 값 검사 및 숫자 유효성 검사
         for (String number : numbers) {
-            if (!number.matches("-?\\d+")) { // 숫자 유효성 검사
+            if (!number.matches("-?\\d+")) {
                 errors.add("숫자가 아닌 값이 포함되어 있습니다: " + number);
             } else {
                 int num = Integer.parseInt(number);
                 if (num < 0) {
                     errors.add("음수는 허용되지 않습니다: " + number);
+                } else {
+                    sum += num;
                 }
-                sum += num;
             }
         }
 
