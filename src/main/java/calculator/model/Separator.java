@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Separator {
     private final String regex;
-    private final List<Character> chars = new ArrayList<>(List.of('.', ':'));
+    private final List<Character> chars = new ArrayList<>(List.of(',', ':'));
     public Separator() {
         this.regex = buildRegex();
     }
