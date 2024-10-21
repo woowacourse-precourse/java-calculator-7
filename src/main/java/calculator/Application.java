@@ -82,7 +82,11 @@ public class Application {
     public static int calculateSum(String[] numbers) {
         int total = 0;
         for (String number : numbers) {
-            total += Integer.parseInt(number);
+            try {
+                total += Integer.parseInt(number);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Error: Invalid number");
+            }
         }
         return total;
     }
