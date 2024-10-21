@@ -7,10 +7,7 @@ public class Application {
         System.out.println("구분자와 양수로 구성된 문자열을 입력해 주세요.");
         String input = Console.readLine();
 
-        try {
-            InputValidator.validate(input);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
+        int result = StringCalculator.calculate(input);
+        System.out.println("결과 : " + result);
     }
 }

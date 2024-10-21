@@ -23,8 +23,7 @@ dependencies {
 
 test {
     useJUnitPlatform()
-}
-
-application {
-    mainClass = 'calculator.Application' // Application 클래스의 경로 지정
+    testLogging {
+        showStandardStreams = true // 테스트 중 출력되는 표준 출력을 콘솔에 표시
+    }
 }

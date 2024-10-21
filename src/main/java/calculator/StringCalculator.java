@@ -12,8 +12,8 @@ public class StringCalculator {
         // 2. InputValidator로 검증
         InputValidator.validate(input);
 
-         // 3. DelimeterParser로 문자열을 구분한 배열 생성 -> 추후 구현 예정
-         String[] numbers = DelimiterParser.split(input);
+        // 3. DelimeterParser로 문자열을 구분한 배열 생성 -> 추후 구현 예정
+        String[] numbers = DelimiterParser.split(input);
 
         return sum(numbers);
     }
