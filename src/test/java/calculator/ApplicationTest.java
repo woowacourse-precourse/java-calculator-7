@@ -40,6 +40,22 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 예외_테스트_2() {
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException("1,2,3;;5"))
+                .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_3() {
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException("//;432n1;4328:46,23"))
+                .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
