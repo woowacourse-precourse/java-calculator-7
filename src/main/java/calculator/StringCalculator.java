@@ -48,7 +48,7 @@ public class StringCalculator {
             }
 
             int num = Integer.parseInt(str);
-            if (num < 0) { // 음수일 경우
+            if (num <= 0) { // 양수가 아닌 경우
                 throw new IllegalArgumentException("Invalid input: not allow negative");
             }
             return num;
