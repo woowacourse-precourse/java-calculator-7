@@ -15,8 +15,13 @@ public class Application {
                 break;
             }
 
-            int result = StringCalculator.add(input);
-            System.out.println("결과 : " + result);
+            try {
+                int result = StringCalculator.add(input);
+                System.out.println("결과 : " + result);
+            } catch (IllegalArgumentException e) {
+                System.out.println("입력 형식이 올바르지 않습니다.");
+                return;
+            }
         }
 
         scanner.close();
@@ -28,12 +33,15 @@ class StringCalculator {
         String[] numbers;
         String delimiters = ",:"; // 기본 구분자
 
+        // 입력 값 검증
+        validateInput(input);
+
         // 커스텀 구분자
         if (input.startsWith("//")) {
             if (input.contains("\\n")) {
                 String customDelimiter = input.substring(2, input.indexOf("\\n"));
-                delimiters += customDelimiter; // 기본 구분자에 커스텀 구분자 추가
-                input = input.substring(input.indexOf("\\n") + 2); // \n 뒤의 문자열만 남김
+                delimiters += customDelimiter;
+                input = input.substring(input.indexOf("\\n") + 2);
             }
         }
 
@@ -43,17 +51,42 @@ class StringCalculator {
         // 각 숫자를 합산
         int sum = 0;
         for (String number : numbers) {
-            number = number.trim(); // 공백 제거
+            number = number.trim();
 
-            // 숫자로 변환 후 합산
-            sum += Integer.parseInt(number);
+            sum += Integer.parseInt(number); // 숫자로 변환 후 합산
         }
         return sum;
     }
 
-    // 숫자를 분리하는 메서드
     private static String[] splitNumbers(String input, String delimiters) {
-        return input.split("[" + delimiters + "]"); // 정규 표현식으로 구분자 처리
+        return input.split("[" + delimiters + "]");
+    }
+
+    private static void validateInput(String input) {
+        // 입력 값 길이 확인
+        if (input.length() >= 100) {
+            throw new IllegalArgumentException();
+        }
+
+        // 커스텀 구분자 형식 확인
+        if (input.startsWith("//")) {
+            if (!input.contains("\\n")) {
+                throw new IllegalArgumentException();
+            }
+        }
+
+        // 숫자가 아닌 문자 포함한 경우
+        String[] numbers = splitNumbers(input, ",:");
+        for (String number : numbers) {
+            if (!number.trim().isEmpty() && !number.matches("\\d+")) {
+                throw new IllegalArgumentException();
+            }
+        }
+
+        // 구분자만 입력한 경우
+        if (numbers.length == 0) {
+            throw new IllegalArgumentException();
+        }
+
     }
 }
-
