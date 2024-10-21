@@ -1,8 +1,15 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Calculator {
+    static final String regex = "//(.*?)\\\\n";
+    static Set<String> separators = new HashSet<>(Arrays.asList(",", ":"));
 
     public String input() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
@@ -11,7 +18,27 @@ public class Calculator {
 
     public void run() {
         String inputValue = input();
-        System.out.println(inputValue);
+        boolean hasCustom = extractCustomSeparators(inputValue);
+        System.out.println(hasCustom);
     }
 
+    static boolean extractCustomSeparators(String input) {
+        boolean flag = false;
+
+        if (input == null) {
+            System.out.println("빈문자열");
+            return flag;
+        }
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(input);
+        while (matcher.find()) {
+            flag = true;
+            updateSeperator(matcher.group(1).trim());
+        }
+        return flag;
+    }
+
+    static void updateSeperator(String str) {
+        separators.add(str);
+    }
 }
