@@ -128,5 +128,22 @@ class InputConsoleHandlerTest {
         Console.close();
     }
 
+    @Test
+    @DisplayName("아무 값도 전달하지 않으면 빈 문자열을 반환한다")
+    void blankInput() {
+        // given
+        String input = System.lineSeparator();
+
+        // when
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        // then
+        String[] inputSplit = INPUT_CONSOLE_HANDLER.getUserInput();
+        assertThat(inputSplit.length).isEqualTo(0);
+
+        System.setIn(System.in);
+        Console.close();
+    }
+
 
 }
