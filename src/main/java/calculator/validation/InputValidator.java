@@ -15,4 +15,8 @@ public class InputValidator {
         }
     }
 
+    public static void checkPositiveNumber(long num){
+        if(num<0) throw new IllegalArgumentException("잘못된 입력입니다.");
+    }
+
 }
