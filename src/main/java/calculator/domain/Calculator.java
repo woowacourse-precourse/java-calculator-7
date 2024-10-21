@@ -32,11 +32,11 @@ public class Calculator {
 
     public String identifiersToString() {
         StringBuilder joinString = new StringBuilder();
-        joinString.append('[');
         for (char c : identifiers) {
             joinString.append(c);
+            joinString.append('|');
         }
-        joinString.append(']');
+        joinString.deleteCharAt(joinString.length() - 1);
         return joinString.toString();
     }
 }

@@ -22,7 +22,9 @@ public class Parser {
             if(identifier >= '0' && identifier <= '9') {
                 throw new IllegalArgumentException("구분자는 숫자일 수 없습니다.");
             }
-            calculator.addIdentifier(input.charAt(2));
+            if(identifier != ',' && identifier != ':'){
+                calculator.addIdentifier(input.charAt(2));
+            }
             return input.charAt(2);
         }
         return '\0';
@@ -30,7 +32,7 @@ public class Parser {
 
     private String parseExpression(char identifier, String input) {
         if(identifier != '\0') {
-            return input.substring(4);
+            return input.substring(5);
         }
         return input;
     }
@@ -62,7 +64,7 @@ public class Parser {
     }
 
     private boolean matches(String input) {
-        Pattern pattern = Pattern.compile("^//.\\n.*");
+        Pattern pattern = Pattern.compile("^//.\\\\n.*");
         Matcher matcher = pattern.matcher(input);
         return matcher.matches();
     }
