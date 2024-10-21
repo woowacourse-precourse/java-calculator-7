@@ -10,9 +10,14 @@ public class InputParser {
                 throw new IllegalArgumentException("잘못된 형식입니다. 구분자 다음에 줄바꿈이 필요합니다.");
             }
             delimiter = input.substring(2, delimiterEndIndex);
+            delimiter = escapeSpecialCharacters(delimiter);
             input = input.substring(delimiterEndIndex + 2);
         }
 
         return input.split(delimiter);
+    }
+
+    private static String escapeSpecialCharacters(String delimiter) {
+        return java.util.regex.Pattern.quote(delimiter);
     }
 }
