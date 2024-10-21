@@ -4,6 +4,9 @@ import static calculator.constant.ExceptionMessage.DELIMITER_NULL_OR_EMPTY;
 import static calculator.constant.ExceptionMessage.DELIMITER_RESERVED_CHARACTER;
 
 public class Delimiter {
+    private static final String RESERVED_PREFIX = "//";
+    private static final String RESERVED_SUFFIX = "\n";
+
     private final String value;
 
     private Delimiter(String value) {
@@ -23,7 +26,7 @@ public class Delimiter {
     }
 
     private static void validateNotReservedCharacters(String value) {
-        if ("//".equals(value) || "\n".equals(value)) {
+        if (value.contains(RESERVED_PREFIX) || value.contains(RESERVED_SUFFIX)) {
             throw new IllegalArgumentException(DELIMITER_RESERVED_CHARACTER.message());
         }
     }
