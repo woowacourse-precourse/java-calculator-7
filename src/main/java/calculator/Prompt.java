@@ -1,6 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.math.BigDecimal;
 
 public class Prompt {
 
@@ -11,7 +12,7 @@ public class Prompt {
         return input;
     }
 
-    public static void output(long sum) {
+    public static void output(BigDecimal sum) {
         System.out.println("결과 : " + sum);
     }
 }

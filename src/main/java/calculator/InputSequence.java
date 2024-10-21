@@ -1,22 +1,17 @@
 package calculator;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class InputSequence {
-    public static final long SUM_INITIAL_VALUE = 0L;
-    private final List<Long> sequence;
+    public static final BigDecimal SUM_INITIAL_VALUE = BigDecimal.valueOf(0);
+    private final List<BigDecimal> sequence;
 
-    public InputSequence(List<Long> sequence) {
+    public InputSequence(List<BigDecimal> sequence) {
         this.sequence = sequence;
     }
 
-    public Long sum() {
-        return sequence.stream().reduce(SUM_INITIAL_VALUE, (a,b) -> {
-            long sum = a + b;
-            if (sum < 0) {
-                throw new IllegalArgumentException("더한 값이 너무 큽니다.");
-            }
-            return sum;
-        });
+    public BigDecimal sum() {
+        return sequence.stream().reduce(SUM_INITIAL_VALUE, BigDecimal::add);
     }
 }
