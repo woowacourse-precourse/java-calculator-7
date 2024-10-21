@@ -32,15 +32,15 @@ public class StringValidator {
 	public void validate() {
 		int index = INPUT_START_INDEX;
 		while (index < input.length()) {
-			index = checkInputStatus(input, index);
+			index = this.checkInputStatus(input, index);
 		}
 	}
 
 	private int checkInputStatus(String input, int index) {
-		int currentStatus = checkStatus(input, index);
+		int currentStatus = this.checkStatus(input, index);
 		return switch (currentStatus) {
-			case DIGIT -> checkInputDigit(input, index);
-			case DELIMITER -> checkInputDelimiter(input, index);
+			case DIGIT -> this.checkInputDigit(input, index);
+			case DELIMITER -> this.checkInputDelimiter(input, index);
 			default -> throw new IllegalArgumentException(ERROR_MESSAGE);
 		};
 	}
