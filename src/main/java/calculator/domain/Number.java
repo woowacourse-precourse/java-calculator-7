@@ -9,15 +9,14 @@ public class Number {
     public Number() {
         numbers = new ArrayList<>();
     }
-
-    // TODO: 메서드명 다시 생각해보기
-    public void validateNumber(String n) {
-        if (!n.isEmpty()) {
+    
+    public void addValidNumber(String n) {
+        if (!n.trim().isEmpty()) {
             try {
                 Integer value = Integer.valueOf(n);
                 addNumber(value);
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("잘못된 입력입니다.");
+                throw new IllegalArgumentException("숫자만 계산할 수 있습니다."); // 에러 메시지 수정
             }
         }
     }
@@ -27,7 +26,7 @@ public class Number {
         numbers.add(value);
     }
 
-    private void validatePositiveNumber(Integer value) {
+    public void validatePositiveNumber(Integer value) {
         if (value < 0) {
             throw new IllegalArgumentException("양수만 입력할 수 있습니다.");
         }

@@ -16,7 +16,7 @@ public class NumberTest {
         //when & then
         assertThatThrownBy(() -> {
             for (String string : strings) {
-                number.validateNumber(string);
+                number.addValidNumber(string);
             }
         })
                 .isInstanceOf(IllegalArgumentException.class)
@@ -32,7 +32,7 @@ public class NumberTest {
         //when & then
         assertThatThrownBy(() -> {
             for (String string : strings) {
-                number.validateNumber(string);
+                number.addValidNumber(string);
             }
         })
                 .isInstanceOf(IllegalArgumentException.class)
@@ -48,7 +48,7 @@ public class NumberTest {
         //when & then
         assertThatThrownBy(() -> {
             for (String string : strings) {
-                number.validateNumber(string);
+                number.addValidNumber(string);
             }
         })
                 .isInstanceOf(IllegalArgumentException.class)

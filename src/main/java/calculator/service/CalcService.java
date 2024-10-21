@@ -15,7 +15,7 @@ public class CalcService {
     public void addNumberToList(String[] numbers) {
         // 문자열의 각 요소가 숫자인지 판별하고 리스트에 저장
         for (String n : numbers) {
-            number.validateNumber(n);
+            number.addValidNumber(n);
         }
     }
 
