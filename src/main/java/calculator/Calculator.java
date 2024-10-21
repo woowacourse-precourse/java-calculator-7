@@ -30,4 +30,14 @@ public class Calculator {
         }
         return -1;
     }
+
+    // 5. 음수,문자열 예외 처리
+    private void checkExclusive(String token) {
+        try {
+            int num = Integer.parseInt(token);
+            if (num < 0) throw new IllegalArgumentException("음수 오류");
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("문자 오류");
+        }
+    }
 }
