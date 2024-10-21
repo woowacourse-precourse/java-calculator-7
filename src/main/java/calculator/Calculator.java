@@ -8,7 +8,6 @@ public class Calculator {
 
     private static final List<String> basicDelimiters = new ArrayList<>(Arrays.asList(",", ":")); // 추가 구분자
     private final String[] checkingDelimiters = {"//", "\\n"};
-    private String customDelimiter;
 
     public Calculator() {
 
@@ -55,7 +54,7 @@ public class Calculator {
             try {
                 int secondDelimiterIndex = input.indexOf(checkingDelimiters[1]);
                 if (secondDelimiterIndex != -1) {
-                    customDelimiter = input.substring(checkingDelimiters[0].length(), secondDelimiterIndex);
+                    String customDelimiter = input.substring(checkingDelimiters[0].length(), secondDelimiterIndex);
                     basicDelimiters.add(customDelimiter);
                     return input.substring(secondDelimiterIndex + checkingDelimiters[1].length());
                 } else {
