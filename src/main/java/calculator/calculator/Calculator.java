@@ -1,4 +1,4 @@
-package calculator.domain;
+package calculator.calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
@@ -47,9 +47,18 @@ public class Calculator {
         // 커스텀 구분자가 있다면
         int customDelimiterIndex = input.indexOf("\\n");
 
+        // "//"은 있지만 "\n"이 없다면
+        if (customDelimiterIndex == -1) {
+            throw new IllegalArgumentException("커스텀 구분자 형식이 잘못되었습니다. \\n이 필요합니다.");
+        }
+        // "//"은 있지만 커스텀 구분자가 없다면
+        if (customDelimiterIndex == 2) {
+            throw new IllegalArgumentException("커스텀 구분자가 입력되지 않았습니다.");
+        }
+
         String customDelimiter = input.substring(2, customDelimiterIndex);
         customDelimiter = Pattern.quote(customDelimiter);
-        String delimiters = defaultDelimiter + "|" + customDelimiter;
+        String delimiters = customDelimiter + "|" + defaultDelimiter;
         String numbers = input.substring(customDelimiterIndex + 2);
         return new String[]{delimiters, numbers};
     }
@@ -62,8 +71,27 @@ public class Calculator {
     // 분리한 숫자를 더해서 결과를 반환하는 함수
     private int sum(String[] numbers) {
         return Arrays.stream(numbers)
-                .mapToInt(Integer::parseInt)
+                .mapToInt(this::toPositiveInt)
                 .sum();
+    }
+
+    private int toPositiveInt(String number) {
+
+        if (number.trim().isEmpty()) {
+            throw new IllegalArgumentException("구분자 뒤에 바로 구분자가 올 수 없습니다.");
+        }
+
+        for (char ch : number.toCharArray()) {
+            if (!Character.isDigit(ch)) {
+                throw new IllegalArgumentException("숫자(양수)가 아닌 값이 포함되어 있습니다.");
+            }
+        }
+
+        int value = Integer.parseInt(number);
+        if (value <= 0) {
+            throw new IllegalArgumentException("양수만 입력가능합니다." + value + "이(가) 입력되었습니다.");
+        }
+        return value;
     }
 
 }
