@@ -21,6 +21,15 @@ public class StringCalculator {
             for (String n : nums) {
                 total += Integer.parseInt(n);
             }
+        } else if (delimMatcher.matches()) {
+            String delim = delimMatcher.group(1);
+            String[] nums = delimMatcher.group(2).split(delim);
+            for (String n : nums) {
+                total += Integer.parseInt(n);
+            }
+        } else {
+            throw new IllegalArgumentException("잘못된 입력 형식입니다.");
         }
+
     }
 }
