@@ -1,21 +1,13 @@
 # java-calculator-precourse
 
-### 구현할 기능 목록
+## 구현할 기능 목록
 
 </br>
 </br>
 
-> Calculator
-   * 사용자로부터 입력받은 문자열에서 구분자로부터 숫자를 분리해내 합을 계산하는 기능
-   
-    기본 구분자 : 쉼표(,), 콜론(:)
-    커스텀 구분자 : 문자열 앞 "//"와 "\n" 사이에 위치하는 문자
-
-</br>
-</br>
-
-> InputView
-   * 사용자에게 문자 입력을 안내하는 기능
+### InputView
+   * 사용자에게 문자 입력 안내 메시지 출력
+   * 사용자 입력을 받아 Controller로 전달
 
     (예시)
     덧셈할 문자열을 입력해 주세요.
@@ -24,8 +16,8 @@
 </br>
 </br>
 
-> OutputView
-   * 사용자에게 계산 결과를 출력하는 기능 
+### OutputView
+   * 계산 결과를 출력
 
     (예시)
     결과 : 6
@@ -33,19 +25,34 @@
 </br>
 </br>
 
-> CalCulatorController
-   * Calculator와 View(Input, Output)가 상호작용할 수 있도록 돕는 기능
-   
-    1. View 출력 지시
-    2. Calculator 계산 지시
-    3. 유효성 검사
+### CalCulatorController
+   * InputView로부터 전달 받은 사용자 입력을 StringCalculatorValidator에게 전달
+   * InputView로부터 전달 받은 사용자 입력을 StringCalculator에게 전달
+   * Calculator로부터 전달받은 결과 값을 OutputView에게 전달
 
 </br>
 </br>
 
-> Validator
-   * 사용자 입력이 올바른지 유효성을 검사하는 기능
+### StringCalculatorValidator
+   * 사용자 입력이 올바른지 유효성을 검사
+
+   > 커스텀 구분자
+
+      1. 커스텀 구분자 양식이 올바른지 검사
+      2. 커스텀 구분자를 사용하여 입력했는지 검사
+      3. 양수만을 입력했는지 검사
    
-    1. 입력한 숫자가 양수인지 확인
-    2. 입력한 기본 구분자가 올바른지 확인
-    3. 입력한 커스텀 구분자 양식이 올바른지 확인
+   > 일반 구분자
+
+      1. 올바른 일반 구분자를 입력했는지 검사
+      2. 양수만을 입력했는지 검사
+
+### StringCalculator
+   * 사용자로부터 입력받은 문자열에서 구분자로부터 숫자를 분리
+   * 분리한 숫자의 합 계산
+   
+    기본 구분자 : 쉼표(,), 콜론(:)
+    커스텀 구분자 : 문자열 앞 "//"와 "\n" 사이에 위치하는 문자
+
+</br>
+</br>
