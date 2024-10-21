@@ -24,6 +24,22 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 빈_문자열_입력() {
+        assertSimpleTest(() -> {
+            run("\n");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void 구분자가_아닌_문자입력() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;1;2;3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
