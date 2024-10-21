@@ -20,7 +20,7 @@ public class Application {
 
             String customDelimiter = input.substring("//".length(), startOfCustomDelimiter);
 
-            if (customDelimiter.matches(".*[0-9].*") || customDelimiter.length() > 1) {
+            if (customDelimiter.matches(".*[0-9].*") || customDelimiter.length() != 1) {
                 throwException();
             }
 
@@ -53,7 +53,7 @@ public class Application {
     public static void main(String[] args) {
         String delimiter = ",|:";
         int result = 0;
-
+        
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
 
