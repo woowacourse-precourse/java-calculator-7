@@ -20,6 +20,7 @@ public class Processor {
         }
 
         String[] splitInput = Splitter.splitByDelimiters(input, delimiters);
+        int[] numbers = Converter.toIntArray(splitInput);
 
         return Calculator.calculateSum(numbers);
     }
