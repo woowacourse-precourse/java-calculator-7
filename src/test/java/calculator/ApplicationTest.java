@@ -177,6 +177,20 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void testInputMustEndWithNumber() {
+        assertSimpleTest(() -> {
+            // Given
+            StringCalculator calculator = new StringCalculator();
+            String input = "1,2,3,";
+
+            // When & Then
+            assertThatThrownBy(() -> calculator.add(input))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessageContaining("입력은 반드시 숫자로 끝나야합니다.");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
