@@ -53,15 +53,15 @@ public class Handler {
     }
 
     private List<String> splitter(String input, String custom) {
-        String separator = String.format(",|:|&s", custom);
-        StringTokenizer st = new StringTokenizer(input, separator);
+        String message = input.substring(input.indexOf("n") + 1, input.length());
+        StringTokenizer st = new StringTokenizer(message, ",:" + custom);
         List<String> result = new ArrayList<>();
         while (st.hasMoreTokens()) {
             result.add(st.nextToken());
         }
         return result;
     }
-
+자
     private void validInput(List<String> split) throws IllegalArgumentException {
         try {
             for (int i = 0; i < split.size(); i++) {
