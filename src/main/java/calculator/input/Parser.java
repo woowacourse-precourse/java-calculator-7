@@ -32,8 +32,6 @@ public class Parser {
 
         extractCustomSeparator(); //커스텀 구분자 추출
 
-        if(inputString.isEmpty()) throw new IllegalArgumentException("양수와 구분자가 포함된 문자열을 입력해주세요.");
-
         String[] tokens = inputString.split(DELIMITER);
         List<Integer> numbers = convertNumbers(tokens);
 
@@ -46,11 +44,11 @@ public class Parser {
             if(isStringInteger(token)){
                 Integer number = Integer.parseInt(token);
                 if (number < 0) {
-                    throw new IllegalArgumentException("1 이상의 양의 정수만 입력 가능합니다.");
+                    throw new IllegalArgumentException("잘못된 입력 형식 입니다.");
                 }
                 else numbers.add(number);
             }
-            else throw new IllegalArgumentException("지정되지 않은 구분자입니다.");
+            else throw new IllegalArgumentException("잘못된 입력 형식 입니다.");
         }
         return numbers;
     }

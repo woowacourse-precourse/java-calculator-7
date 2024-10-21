@@ -1,6 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
@@ -17,25 +18,29 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 커스텀_구분자_여러개_지정(){
+    @DisplayName("커스텀 구분자 여러 개 지정")
+    void manyCustomDelimiter(){
         run("//;\\n//!\\n1,2;3!4");
         assertThat(output()).contains("결과 : 10");
     }
 
     @Test
-    void 구분자_여러개_지정(){
+    @DisplayName("구분자 여러개 사용")
+    void many_Delimiter(){
         run("//;\\n1,2;3");
         assertThat(output()).contains("결과 : 6");
     }
 
     @Test
-    void 숫자만_사용(){
+    @DisplayName("숫자만 사용")
+    void onlyNumber(){
         run("123");
         assertThat(output()).contains("결과 : 123");
     }
 
     @Test
-    void 지정되지_않은_구분자_사용(){
+    @DisplayName("지정되지 않은 구분자 사용")
+    void notAssignDelimiter(){
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("1,2;3"))
                         .isInstanceOf(IllegalArgumentException.class)
@@ -43,7 +48,8 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 숫자없이_구분자_사용(){
+    @DisplayName("숫자 없이 구분자만 사용")
+    void withoutNumber(){
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//;\\n"))
                         .isInstanceOf(IllegalArgumentException.class)
@@ -51,10 +57,47 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 예외_테스트() {
+    @DisplayName("음수 사용")
+    void negativeNumber() {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    @DisplayName("//만 사용")
+    void notEndDelimiter() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    @DisplayName("\\n만 사용")
+    void notStartDelimiter() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("\\n1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    @DisplayName("구분자로 문자열 시작")
+    void startDelimiter() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException(",1,2:3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    @DisplayName("숫자로 문자열 안 끝나는 경우")
+    void notEndNumber() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,2:3,"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
