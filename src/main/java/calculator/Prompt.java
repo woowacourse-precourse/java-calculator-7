@@ -13,6 +13,6 @@ public class Prompt {
     }
 
     public static void output(BigDecimal sum) {
-        System.out.println("결과 : " + sum.stripTrailingZeros());
+        System.out.println("결과 : " + sum);
     }
 }
