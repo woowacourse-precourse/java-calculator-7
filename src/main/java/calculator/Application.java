@@ -46,12 +46,12 @@ public class Application {
         // 커스텀 구분자가 존재하는지 확인하는 조건문
         if (existCustomSeparator(input)) {
 
+            // 커스텀 구분자가 숫자인지 검증하는 메서드 호출
+            isNumber(findCustomSeparator(input));
+
             // 커스텀 구분자가 존재한다면 구분자를 추출해서 separator 변수에 저장
             // 기본 구분자와 커스텀 구분자를 같이 사용할 수 있게 "|" 추가
             separator += "|" + findCustomSeparator(input);
-
-            // 커스텀 구분자가 숫자인지 검증하는 메서드 호출
-            isNumber(separator);
 
             // 커스텀 구분자 생성하는 부분 자르고 문자열 가져오기
             numberPart = input.substring(input.lastIndexOf("n") + 1);
