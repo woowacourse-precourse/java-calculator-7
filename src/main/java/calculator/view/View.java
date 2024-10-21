@@ -3,7 +3,7 @@ package calculator.view;
 import camp.nextstep.edu.missionutils.Console;
 import calculator.global.constants.MessageType;
 import static calculator.global.constants.MessageType.STRING_REQUEST_MESSAGE;
-
+import calculator.global.validator.Validator;
 
 public final class View {
     public static String requestString() {
@@ -23,20 +23,7 @@ public final class View {
     /* Input View */
     private static String enterMessage() {
         String message = Console.readLine();
-        Validator.validate(message);
+        Validator.validateNotEmpty(message);
         return message;
-    }
-
-    /* Validator */
-    private static class Validator {
-        private static void validate(String message) {
-            if (isBlank(message)) {
-                throw new IllegalArgumentException("빈 문자열이 입력되었습니다.");
-            }
-        }
-
-        private static boolean isBlank(String message) {
-            return message.isBlank();
-        }
     }
 }
