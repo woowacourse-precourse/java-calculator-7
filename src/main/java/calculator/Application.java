@@ -21,10 +21,19 @@ public class Application {
                 separator = input.substring(2, newlineIndex); //줄바꿈 전까지의 문자열을 구분자로 설정
                 numbers_string = input.substring(newlineIndex + 1);
             }
-            // 숫자 배열 생성
-            String[] tokens = numbers_string.split(separator);
-            int[] numbers = getNumbers(tokens);
+
         }
+        // 숫자 배열 생성
+        String[] tokens = numbers_string.split(separator);
+        int[] numbers = getNumbers(tokens);
+        // 결과 계산
+        int result = 0;
+        for (int number : numbers) {
+            result += number;
+        }
+
+        // 결과 출력
+        System.out.println("결과 : " + result);
 
 
     }
