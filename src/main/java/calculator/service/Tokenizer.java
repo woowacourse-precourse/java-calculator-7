@@ -9,16 +9,16 @@ class Tokenizer {
     private final List<NumberSeparator> numberSeparators = new ArrayList<>();
     private String targetNumberInput;
 
-    public Tokenizer(final String inputNumbers, final SeparatorFactory separatorFactory) {
+    Tokenizer(final String inputNumbers, final SeparatorFactory separatorFactory) {
         targetNumberInput = inputNumbers;
         numberSeparators.addAll(separatorFactory.getSeparators());
     }
 
-    public Tokenizer(final String inputNumbers) {
+    Tokenizer(final String inputNumbers) {
         targetNumberInput = inputNumbers;
     }
 
-    public Numbers tokenize() {
+    Numbers tokenize() {
         final List<Number> numbers = new ArrayList<>();
 
         final int nextSeparatorIndex = findNextSeparatorIndex(this.targetNumberInput);
@@ -73,7 +73,7 @@ class Tokenizer {
         return selectedSeparator;
     }
 
-    public void addSeparator(final NumberSeparator numberSeparator) {
+    void addSeparator(final NumberSeparator numberSeparator) {
         this.numberSeparators.add(numberSeparator);
     }
 }

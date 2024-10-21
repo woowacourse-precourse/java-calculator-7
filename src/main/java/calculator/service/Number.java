@@ -29,11 +29,11 @@ class Number {
         return number;
     }
 
-    public Number add(final Number number) {
+    Number add(final Number number) {
         return new Number(addLargeNumbers(number.number, this.number));
     }
 
-    public String addLargeNumbers(String num1, String num2) {
+    String addLargeNumbers(String num1, String num2) {
         final int maxLength = Math.max(num1.length(), num2.length());
         num1 = padWithZeros(num1, maxLength);
         num2 = padWithZeros(num2, maxLength);
@@ -56,7 +56,7 @@ class Number {
         return result.reverse().toString();
     }
 
-    private String padWithZeros(final String str, int length) {
+    String padWithZeros(final String str, int length) {
         final StringBuilder padded = new StringBuilder(str);
         while (padded.length() < length) {
             padded.insert(0, '0');

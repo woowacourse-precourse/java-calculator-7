@@ -4,7 +4,7 @@ class CharacterSequenceSeparator implements NumberSeparator {
 
     private final String separateCharacterSequence;
 
-    public CharacterSequenceSeparator(final String separateCharacterSequence) {
+    CharacterSequenceSeparator(final String separateCharacterSequence) {
         this.separateCharacterSequence = separateCharacterSequence;
     }
 

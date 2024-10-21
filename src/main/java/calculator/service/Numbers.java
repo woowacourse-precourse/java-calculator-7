@@ -7,7 +7,7 @@ class Numbers {
 
     private final List<Number> numbers;
 
-    public Numbers(final List<Number> numbers) {
+    Numbers(final List<Number> numbers) {
         this.numbers = numbers;
     }
 
@@ -30,7 +30,7 @@ class Numbers {
         return Objects.equals(numbers, numbers1.numbers);
     }
 
-    public String getSum() {
+    String getSum() {
         Number number = new Number("0");
         for (final Number tempNumber : numbers) {
             number = number.add(tempNumber);

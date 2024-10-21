@@ -16,11 +16,11 @@ public class UserInputNumbers {
         return new UserInputNumbers(message);
     }
 
-    public Tokenizer getTokenizer(final SeparatorFactory separatorFactory) {
+    Tokenizer getTokenizer(final SeparatorFactory separatorFactory) {
         return new Tokenizer(this.numbers, separatorFactory);
     }
 
-    public Tokenizer getTokenizer() {
+    Tokenizer getTokenizer() {
         return new Tokenizer(this.numbers);
     }
 

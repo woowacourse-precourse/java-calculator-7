@@ -4,7 +4,7 @@ public class UserOutputController {
 
     private final OutputUi outputUi;
 
-    public UserOutputController(final OutputUi outputUi) {
+    UserOutputController(final OutputUi outputUi) {
         this.outputUi = outputUi;
     }
 

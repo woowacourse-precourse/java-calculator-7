@@ -4,7 +4,7 @@ public class UserInputController {
 
     private final InputUi inputUi;
 
-    public UserInputController(final InputUi inputUi) {
+    UserInputController(final InputUi inputUi) {
         this.inputUi = inputUi;
     }
 

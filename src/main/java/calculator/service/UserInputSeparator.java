@@ -8,7 +8,7 @@ public class UserInputSeparator {
         this.separator = userInputMessage;
     }
 
-    public String getSeparator() {
+    String getSeparator() {
         return separator;
     }
 

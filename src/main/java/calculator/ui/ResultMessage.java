@@ -9,7 +9,7 @@ public class ResultMessage {
         this.result = result;
     }
 
-    public String getResult() {
+    String getResult() {
         return prefix + result;
     }
 }
