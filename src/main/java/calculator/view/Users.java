@@ -9,4 +9,11 @@ public class Users {
         return readLine();
     }
 
+    public static void resultOfMatchingOutputFormat(Long result) {
+        System.out.println(matchingOutputFormat(result));
+    }
+
+    private static String matchingOutputFormat(Long result) {
+        return String.format("%s%d", Message.RESULT_FORMAT, result);
+    }
 }
