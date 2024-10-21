@@ -27,6 +27,6 @@ public class StringSpliter {
             }
         }
 
-        return values.split(delimiter);
+        return values.split(delimiter, -1);
     }
 }
