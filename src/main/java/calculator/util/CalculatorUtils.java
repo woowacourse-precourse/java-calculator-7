@@ -2,12 +2,12 @@ package calculator.util;
 
 public class CalculatorUtils {
 
-  public static int calculateSum(String[] numbers) {
-    int sum = 0;
+  public static double calculateSum(String[] numbers) {
+    double sum = 0;
     for (String number : numbers) {
-      int addNum = Integer.parseInt(number);
-      if (addNum < 0) {
-        throw new IllegalArgumentException("음수는 넣을 수 없습니다.");
+      double addNum = Double.parseDouble(number);
+      if (addNum <= 0) {
+        throw new IllegalArgumentException("음수나 0은 넣을 수 없습니다.");
       }
       sum += addNum;
     }

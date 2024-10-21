@@ -15,7 +15,7 @@ public class CaculatorModelTest {
   @ValueSource(strings = {"", "   "})
   void testEmptyOrBlankInput(String input) {
     CalculatorModel calculator = new CalculatorModel();
-    int result = calculator.sum(input);
+    double result = calculator.sum(input);
     assertEquals(0, result);
   }
 
@@ -25,7 +25,7 @@ public class CaculatorModelTest {
   @MethodSource("provideBasicSeperatorInputs")
   void testBasicSeperator(String input, int expected) {
     CalculatorModel calculator = new CalculatorModel();
-    int result = calculator.sum(input);
+    double result = calculator.sum(input);
     assertEquals(expected, result);
   }
 
@@ -42,7 +42,7 @@ public class CaculatorModelTest {
   @MethodSource("provideCustomCustomInputs")
   void testCustomSeperator(String input, int expected) {
     CalculatorModel calculator = new CalculatorModel();
-    int result = calculator.sum(input);
+    double result = calculator.sum(input);
     assertEquals(expected, result);
   }
 
@@ -51,6 +51,23 @@ public class CaculatorModelTest {
         Arguments.of("//;\\n1;2;3", 6),
         Arguments.of("//|\\n1|2|3", 6),
         Arguments.of("//#\\n1#2#3", 6)
+    );
+  }
+
+  @DisplayName("실수를 포함하는 경우")
+  @ParameterizedTest
+  @MethodSource("provideFloatInputs")
+  void testFloatInputs(String input, double expected) {
+    CalculatorModel calculator = new CalculatorModel();
+    double result = calculator.sum(input);
+    assertEquals(expected, result);
+  }
+
+  static Stream<Arguments> provideFloatInputs() {
+    return Stream.of(
+        Arguments.of("1.5,2.5", 4),
+        Arguments.of("1.2:3.8", 5),
+        Arguments.of("//;\\n1.1;2.2;3.3", 6.6)
     );
   }
 

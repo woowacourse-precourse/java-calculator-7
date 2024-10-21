@@ -7,7 +7,7 @@ public class CalculatorModel {
 
   private static final String DEFAULT_DELIMITER = ",|:";
 
-  public int sum(String input) {
+  public double sum(String input) {
     if (input.isBlank()) {
       return 0;
     }
