@@ -35,6 +35,10 @@ public class Number {
         return new Number(this.value + number.value);
     }
 
+    public int value() {
+        return value;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
