@@ -19,6 +19,9 @@ public class StringParser {
 
     public int[] parse(String input) {
 
+        input = input.replace(Delimiter.COMMA.getValue(), " ");
+        input = input.replace(Delimiter.COLON.getValue(), " ");
+
         String[] separatedInputs = input.split("\\s+");
 
         return Arrays.stream(separatedInputs).mapToInt(this::parseInt).toArray();
