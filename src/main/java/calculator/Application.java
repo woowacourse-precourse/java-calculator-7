@@ -14,7 +14,7 @@ public class Application {
         String input = application.getInputString();
         PatternType patternType = validator.validate(input);
         List<Integer> numbers = parser.parseToInt(input, patternType);
-        application.printResult(1);
+        application.printResult(application.sumNumbers(numbers));
     }
 
     private String getInputString() {
@@ -24,5 +24,13 @@ public class Application {
 
     private void printResult(int result) {
         System.out.print("결과 : " + result);
+    }
+
+    public int sumNumbers(List<Integer> numbers) {
+        int sum = 0;
+        for (int number : numbers) {
+            sum += number;
+        }
+        return sum;
     }
 }
