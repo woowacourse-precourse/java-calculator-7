@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import calculator.validator.InputValidator;
-import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -23,29 +22,46 @@ class StringCalculatorServiceTest {
         calculator = new StringCalculatorService(inputValidator, stringSplitter);
     }
 
-    @DisplayName("추가된 기능 테스트")
-    @ParameterizedTest(name = "{index} {displayName} message={0}")
-    @MethodSource("calculatorTestProvider")
-    void checkCalculatorExtendedFeatures(String input, Integer expectedResult,
-                                         Class<? extends Exception> expectedException) {
-        if (expectedException != null) {
-            assertThrows(expectedException, () -> calculator.calculate(input));
-        } else {
-            assertThat(calculator.calculate(input)).isEqualTo(expectedResult);
-        }
+    @DisplayName("빈 문자열 입력 테스트")
+    @ParameterizedTest(name = "{index} 빈 문자열 결과는 0")
+    @MethodSource("emptyStringTestProvider")
+    void checkEmptyStringInput(String input, Integer expectedResult) {
+        assertThat(calculator.calculate(input)).isEqualTo(expectedResult);
     }
 
-    static List<Arguments> calculatorTestProvider() {
-        List<Arguments> argumentsList = new ArrayList<>();
+    @DisplayName("정상적인 문자열 입력 테스트")
+    @ParameterizedTest(name = "{index} 정규 입력 {0}")
+    @MethodSource("normalStringTestProvider")
+    void checkNormalStringInput(String input, Integer expectedResult) {
+        assertThat(calculator.calculate(input)).isEqualTo(expectedResult);
+    }
 
-        argumentsList.add(Arguments.arguments("", 0, null));
-        argumentsList.add(Arguments.arguments(" ", 0, null));
-        argumentsList.add(Arguments.arguments("1,2,3", 6, null));
-        argumentsList.add(Arguments.arguments("1,,2", 3, null));
-        argumentsList.add(Arguments.arguments("1," + "9".repeat(1000), null, IllegalArgumentException.class));
-        argumentsList.add(Arguments.arguments("//abc\\n1abc2abc3", 6, null));
-        argumentsList.add(Arguments.arguments("//@\\n1@2@3", 6, null));
+    @DisplayName("잘못된 형식 문자열 입력 테스트")
+    @ParameterizedTest(name = "{index} 잘못된 형식 예외 발생 테스트 {0}")
+    @MethodSource("invalidFormatTestProvider")
+    void checkInvalidFormatInput(String input, Class<? extends Exception> expectedException) {
+        assertThrows(expectedException, () -> calculator.calculate(input));
+    }
 
-        return argumentsList;
+    static List<Arguments> emptyStringTestProvider() {
+        return List.of(
+                Arguments.arguments("", 0),
+                Arguments.arguments("1,,2", 3, null),
+                Arguments.arguments(" ", 0)
+        );
+    }
+
+    static List<Arguments> normalStringTestProvider() {
+        return List.of(
+                Arguments.arguments("1,2,3", 6),
+                Arguments.arguments("//abc\\n1abc2abc3", 6),
+                Arguments.arguments("//@\\n1@2@3", 6)
+        );
+    }
+
+    static List<Arguments> invalidFormatTestProvider() {
+        return List.of(Arguments.arguments("1," + "9".repeat(1000), IllegalArgumentException.class),
+                // "abc"는 하나의 구분자로 취급되지만, "a"는 개별 구분자로 사용할 수 없으므로 예외 발생
+                Arguments.arguments("//abc\\n1a2a3", IllegalArgumentException.class));
     }
 }
