@@ -7,6 +7,8 @@ import java.util.StringTokenizer;
 public class DataCleaner {
     private static final String INVALID_NUMBER_MESSAGE = "잘못된 입력 값";
     private static final String INVALID_CUSTOM_MESSAGE = "잘못된 입력 값, 구분자 다음에 줄바꿈이 필요합니다.";
+    private static final String NEGATIVE_NOT_ALLOWED_MESSAGE = "음수 비허용: ";
+
 
     public static int[] cleanData(String input) {
         String delimiter = ",|:";
@@ -34,7 +36,11 @@ public class DataCleaner {
 
     private static int parseNumber(String token) {
         try {
-            return Integer.parseInt(token);
+            int number = Integer.parseInt(token);
+            if (number < 0) {
+                throw new IllegalArgumentException(NEGATIVE_NOT_ALLOWED_MESSAGE + token);
+            }
+            return number;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(INVALID_NUMBER_MESSAGE + token);
         }
