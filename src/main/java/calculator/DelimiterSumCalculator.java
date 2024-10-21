@@ -2,7 +2,7 @@ package calculator;
 
 import java.util.List;
 
-public class NumberExtractor {
+public class DelimiterSumCalculator {
 
     public static Long sumParsedNumbers(String input, List<Character> delimiters) {
 

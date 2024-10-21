@@ -1,7 +1,7 @@
 package calculator;
 
 import static calculator.DelimiterGenerator.generateDelimiterInputDTO;
-import static calculator.NumberExtractor.sumParsedNumbers;
+import static calculator.DelimiterSumCalculator.sumParsedNumbers;
 import static calculator.OutputWriter.writeOutput;
 import static calculator.UserInputReader.readInput;
 
