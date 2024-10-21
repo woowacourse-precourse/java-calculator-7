@@ -48,7 +48,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    @DisplayName("")
+    @DisplayName("커스텀 구분자를 사용해 문자열에 포함된 숫자를 배열로 반환한다.")
     void should_returnDigitArray_when_CustomDelimiterSeparatedString() {
         List<Integer> result = Application.parseInput("//;\\n1;2");
         assertThat(result).isEqualTo(List.of(1, 2));
