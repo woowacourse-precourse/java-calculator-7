@@ -15,7 +15,7 @@ public class CalculateController {
         Calculator calculator = new Calculator();
 
         String input = inputView.strInput();
-        validator.validateInput(input);
+        input = validator.validateInput(input);
 
         List<Integer> convertedInput = validator.getConvertedInput(input);
         int result = calculator.calculate(convertedInput);
