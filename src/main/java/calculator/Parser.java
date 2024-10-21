@@ -11,7 +11,21 @@ public class Parser {
     private static final String CUSTOM_DELIMITER_PREFIX = "//";
     private static final String CUSTOM_DELIMITER_SUFFIX = "\n";
 
-    public static String processCustomDelimiter(String input, List<String> delimiters) {
+    public static String[] parse(String input) {
+        List<String> delimiters = new ArrayList<>();
+        addDefaultDelimiters(delimiters);
+        addCustomDelimiter(input, delimiters);
+        input = adjustCustomDelimiterPart(input);
+
+        return splitInput(input, delimiters);
+    }
+
+    private static void addDefaultDelimiters(List<String> delimiters) {
+        delimiters.add(DEFAULT_DELIMITER_COMMA);
+        delimiters.add(DEFAULT_DELIMITER_COLON);
+    }
+
+    private static void addCustomDelimiter(String input, List<String> delimiters) {
         if (input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
             int delimiterEndIndex = input.indexOf(CUSTOM_DELIMITER_SUFFIX);
             if (delimiterEndIndex == -1)
@@ -19,22 +33,16 @@ public class Parser {
 
             String customDelimiter = input.substring(CUSTOM_DELIMITER_PREFIX.length(), delimiterEndIndex);
             delimiters.add(customDelimiter);
-
-            return input.substring(delimiterEndIndex + 1);
         }
-
-        return input;
     }
 
-    public static List<String> getDefaultDelimiters() {
-        List<String> delimiters = new ArrayList<>();
-        delimiters.add(DEFAULT_DELIMITER_COMMA);
-        delimiters.add(DEFAULT_DELIMITER_COLON);
+    private static String adjustCustomDelimiterPart(String input) {
+        int delimiterEndIndex = input.indexOf(CUSTOM_DELIMITER_SUFFIX);
 
-        return delimiters;
+        return input.substring(delimiterEndIndex + 1);
     }
 
-    public static String[] splitInput(String input, List<String> delimiters) {
+    private static String[] splitInput(String input, List<String> delimiters) {
         List<String> quoteDelimiters = new ArrayList<>();
         for (String delimiter: delimiters)
             quoteDelimiters.add(Pattern.quote(delimiter));
