@@ -2,17 +2,17 @@ package calculator.model.implement;
 
 
 import static calculator.common.DelimiterConstant.DELIMITER_CREATOR_BACK;
+import static calculator.common.DelimiterConstant.DELIMITER_GROUP_BACK_PREFIX;
+import static calculator.common.DelimiterConstant.DELIMITER_GROUP_FRONT_PREFIX;
 import static calculator.common.DelimiterConstant.DELIMITER_SEPERATOR;
 
+import calculator.common.DelimiterConstant;
 import calculator.model.domain.CustomNumber;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
 public class StringParser {
-
-    private static final String GROUP_FRONT_PREFIX = "[";
-    private static final String GROUP_BACK_PREFIX = "]";
 
     private final DelimiterStore delimiterStore;
 
@@ -34,6 +34,6 @@ public class StringParser {
     private String getAllSpliterator() {
         Set<String> delimiters = delimiterStore.getAllDelimiters();
         String spliterators = String.join(DELIMITER_SEPERATOR, delimiters);
-        return GROUP_FRONT_PREFIX + spliterators + GROUP_BACK_PREFIX;
+        return DELIMITER_GROUP_FRONT_PREFIX + spliterators + DELIMITER_GROUP_BACK_PREFIX;
     }
 }
