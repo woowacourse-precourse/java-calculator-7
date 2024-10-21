@@ -2,8 +2,6 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
-import java.sql.SQLOutput;
-
 public class Application {
     public static void main(String[] args) {
         // 사용자에게 값 받기
@@ -28,19 +26,10 @@ public class Application {
         // 기본 구분자 지정
         String delimiter = "[,:]";
 
-        // 커스텀 구분자 확인 하기
+        // 커스텀 구분자가 있을 경우
         if (input.startsWith("//")) {
-            // \\의 index 확인 후, 커스텀 구분자 추출
-            int newlineIndex = input.indexOf("\\n");
-
-            if (newlineIndex == -1) {
-                throw new IllegalStateException("잘못된 형식입니다. 커스텀 구분자는 //와 \n 사이에 있어야 합니다.");
-            }
-
-            delimiter = input.substring(2, newlineIndex);
-            if (delimiter.matches(".*[?*+()\\[\\]{}].*")) {
-                delimiter = delimiter.replaceAll("([?*+()\\[\\]{}])", "\\\\$1");
-            }
+            int newlineIndex = checkForCustomDelimiter(input);
+            delimiter = extractCustomDelimiter(input, newlineIndex);
             input = input.substring(newlineIndex + 2);
         }
 
@@ -57,6 +46,34 @@ public class Application {
             sum += num;
         }
         return sum;
+    }
+
+    /*
+        커스텀 구분자가 올바른 형태로 주어졌는지 확인한다.
+       커스텀 구분자의 마지막 index를 return한다.
+   */
+    private static int checkForCustomDelimiter(String input) {
+
+        int newlineIndex = input.indexOf("\\n");
+
+        if (newlineIndex == -1) {
+            throw new IllegalStateException("잘못된 형식입니다. 커스텀 구분자는 //와 \n 사이에 있어야 합니다.");
+        }
+        return newlineIndex;
+    }
+
+    /*
+        입력값에서 커스텀 구분자를 추출한다.
+        특수문자가 포함된 경우, escape 처리한다.
+     */
+    private static String extractCustomDelimiter(String input, int newlineIndex) {
+
+        String delimiter = input.substring(2, newlineIndex);
+        if (delimiter.matches(".*[?*+()\\[\\]{}].*")) {
+            delimiter = delimiter.replaceAll("([?*+()\\[\\]{}])", "\\\\$1");
+        }
+
+        return delimiter;
     }
 
 }
