@@ -11,7 +11,7 @@ public class InputHandler {
 		return input;
 	}
 
-	private void validateIsInputEmpty(String input) {
+	public void validateIsInputEmpty(String input) {
 		if (input == null || input.isEmpty()) {
 			throw new IllegalArgumentException("올바르지 않은 입력값 입니다.");
 		}
