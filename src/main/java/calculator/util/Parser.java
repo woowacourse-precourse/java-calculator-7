@@ -44,7 +44,11 @@ public class Parser {
 
         try {
             for (String number : numbers) {
-                operands.add(Long.parseLong(number));
+                long num = Long.parseLong(number);
+                if(num < 0) {
+                    throw new IllegalArgumentException("음수는 입력이 안됩니다.");
+                }
+                operands.add(num);
             }
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("식에는 숫자와 구분자만 입력 가능합니다.");
