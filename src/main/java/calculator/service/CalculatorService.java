@@ -59,7 +59,7 @@ public class CalculatorService {
         String regexInput = input.replaceAll(NUMBER_REGEX, ""); // 숫자와 음수 기호만 남기기
 
         try {
-            return Integer.parseInt(regexInput.trim());
+            return Integer.parseInt(regexInput);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Illegal Input input: " + input);
         }
