@@ -1,5 +1,6 @@
 package calculator.separator;
 
+import calculator.utils.ListConverterUtil;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -66,5 +67,10 @@ public class StringSeparator {
             tokens.add(st.nextToken());
         }
         return tokens;
+    }
+
+    public List<String> separate() {
+        separateCustomDelimiter();
+        return splitBasicStringWithDelimiters();
     }
 }

@@ -95,4 +95,34 @@ class StringSeparatorTest {
         assertThat(result).isEqualTo(strings);
     }
 
+
+    @Test
+    public void 문자열을_기본_구분자를_기준으로_문자열_리스트로_분할() throws Exception {
+        //given
+        List<String> strings = Arrays.asList("3", "4", "2");
+        String inputString = "3:4,2";
+        stringSeparator = new StringSeparator(inputString);
+
+        //when
+        List<String> separatedIntegers = stringSeparator.separate();
+
+        //then
+        assertThat(separatedIntegers).isEqualTo(strings);
+    }
+
+
+    @Test
+    public void 문자열을_커스텀_구분자를_추가하여_문자열_리스트로_분할() throws Exception {
+        //given
+        List<String> strings = Arrays.asList("3", "4", "2");
+        String inputString = "//?\\n3?4,2";
+        stringSeparator = new StringSeparator(inputString);
+
+        //when
+        List<String> separatedIntegers = stringSeparator.separate();
+
+        //then
+        assertThat(separatedIntegers).isEqualTo(strings);
+    }
+
 }
