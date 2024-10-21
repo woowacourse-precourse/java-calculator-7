@@ -5,8 +5,6 @@ import java.util.regex.Pattern;
 
 public class CustomDelimiterParser extends DefaultDelimiterParser {
 
-    //    private static final String CUSTOM_DELIMITER_PATTERN = "//(.*)\\\\n(.*)";
-
     private static final String CUSTOM_DELIMITER_PATTERN = "//(.*)\\\\n(.*)";
 
     /**
@@ -22,9 +20,6 @@ public class CustomDelimiterParser extends DefaultDelimiterParser {
         if (matcher.find()) {
             String delimiterPart = matcher.group(1);
             String numbers = matcher.group(2);
-            if (numbers.contains("-")) {
-                throw new IllegalArgumentException("입력값이 음수입니다");
-            }
             String customDelimiters = extractDelimiters(delimiterPart);
             String combinedDelimiters = DEFAULT_DELIMITERS.replace("]", customDelimiters + "]");
             return numbers.split(combinedDelimiters);
