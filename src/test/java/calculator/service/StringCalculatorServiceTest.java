@@ -19,7 +19,7 @@ class StringCalculatorServiceTest {
     @BeforeEach
     void setUp() {
         InputValidator inputValidator = new InputValidator();
-        StringSplitter stringSplitter = new StringSplitter();
+        StringSplitterService stringSplitter = new StringSplitterService();
         calculator = new StringCalculatorService(inputValidator, stringSplitter);
     }
 

@@ -7,9 +7,9 @@ import java.util.List;
 
 public class StringCalculatorService {
     private final InputValidator inputValidator;
-    private final StringSplitter stringSplitter;
+    private final StringSplitterService stringSplitter;
 
-    public StringCalculatorService(InputValidator inputValidator, StringSplitter stringSplitter) {
+    public StringCalculatorService(InputValidator inputValidator, StringSplitterService stringSplitter) {
         this.inputValidator = inputValidator;
         this.stringSplitter = stringSplitter;
     }

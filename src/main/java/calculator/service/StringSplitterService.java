@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class StringSplitter {
+public class StringSplitterService {
     public List<String> split(String input) {
         if (input.startsWith(CalculatorConstants.CUSTOM_DELIMITER_PREFIX)) {
             return splitWithCustomDelimiter(input);
