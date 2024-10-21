@@ -3,6 +3,9 @@ package calculator;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+
 import static calculator.SumController.checkValue;
 import static calculator.SumController.sum;
 import static calculator.View.outputValue;
@@ -27,12 +30,18 @@ class ApplicationTest extends NsTest {
         );
     }
 
-    @Override
+    @Test
     public void runMain() {
+        String input = "1,2,3\n";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
         try {
             Application.main(new String[]{});
         } catch (Exception e) {
             throw new RuntimeException(e);
+        } finally {
+            System.setIn(System.in);
         }
     }
 }
