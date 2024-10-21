@@ -2,10 +2,7 @@ package calculator.model;
 
 
 
-public class Validator {
-
-
-
+public class SeparatorValidator {
 
     public static void validateCustomDelimiter(String input) {
         if (input.startsWith("//") && !input.matches("//(.)\\\\n.*")) {
@@ -25,9 +22,7 @@ public class Validator {
 
 
     public static void validateNoConsecutiveDelimiters(String input, String separator) {
-
         String[] separators = separator.split("|");
-
 
         for (String seperator : separators) {
             if (input.contains(seperator + seperator)) {
@@ -38,24 +33,16 @@ public class Validator {
 
 
     public static void validateCustomDelimiterLength(String customSeparator) {
-        if (customSeparator.length() <= 1) {
+        if (customSeparator.length() != 1) {
             throw new IllegalArgumentException("구분자는 한 글자여야 합니다: " + customSeparator);
         }
     }
 
-    public static void validateOnlyCustomDelimiterUsed(String input, String customSeparator) {
+    public static void validateOnlyCustomDelimiterUsed(String input) {
         if (input.contains(",") || input.contains(":")) {
             throw new IllegalArgumentException("기본 구분자(쉼표 또는 콜론)와 커스텀 구분자를 혼용할 수 없습니다.");
         }
     }
-
-    public static void validateContainsAtLeastOneNumber(String[] tokens) {
-        if (tokens.length == 0) {
-            throw new IllegalArgumentException("숫자가 하나 이상 포함되어야 합니다.");
-        }
-    }
-
-
 
 
 
