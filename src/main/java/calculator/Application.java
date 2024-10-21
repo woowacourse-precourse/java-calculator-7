@@ -7,12 +7,11 @@ import view.OutputView;
 public class Application {
     public static void main(String[] args) {
 
-        Calculator calculator = new Calculator();
-        InputView inputView = new InputView();
-        OutputView outputView = new OutputView();
-
-        Controller controller = new Controller(calculator, inputView, outputView);
-
+        Controller controller = new Controller(
+                new Calculator(),
+                new InputView(),
+                new OutputView()
+        );
         controller.processUserInput();
     }
 }
