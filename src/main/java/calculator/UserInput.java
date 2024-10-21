@@ -4,7 +4,11 @@ import camp.nextstep.edu.missionutils.Console;
 import java.text.NumberFormat;
 
 public class UserInput {
+
+    String delimiter = "[,;]";
+
     public String getInput() {
+
 
         System.out.println(
                 "덧셈할 문자열을 입력해주세요. " +
@@ -14,7 +18,10 @@ public class UserInput {
         String input = Console.readLine();
 
         if (input.startsWith("//")) {
-            String customDelimiter = input.substring(2, input.indexOf('\n'));
+            String customDelimiter = input.substring(2, input.indexOf("\\n"));
+
+//            System.out.println("커스텀구분자: "+customDelimiter);
+
 
             if (customDelimiter.length() >= 2) {
                 throw new IllegalArgumentException("커스텀 구분자는 하나의 문자로 입력해주세요.");
@@ -24,12 +31,19 @@ public class UserInput {
                 throw new IllegalArgumentException("커스텀 구분자는 숫자가 아닌 문자로 입력해주세요.");
             }
 
+            this.delimiter = "[,;" + customDelimiter + "]";
+
             System.out.println("덧셈할 문자열을 입력해주세요.");
-            input = Console.readLine();
+            input = input.substring(input.indexOf("\\n") + 2);
+
 
         }
 
         return input;
+    }
+
+    public String getDelimiter() {
+        return delimiter;  // 구분자 반환
     }
 
     private boolean isNumeric(String delimiter) {
