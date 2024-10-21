@@ -13,6 +13,10 @@ public class Calculator {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String str = Console.readLine();
 
+        if(str.isEmpty()){
+            System.out.println("결과: 0");
+            return;
+        }
         // 구분자로 문자열 분리, 저장
         String[] splitNumbers = str.split(delimiter.toString());
 
