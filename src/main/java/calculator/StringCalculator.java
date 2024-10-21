@@ -11,4 +11,16 @@ public class StringCalculator {
     public static int calculate(String input) {
         Pattern numPattern = Pattern.compile("^\\d+([,:]\\d+)*$");
         Pattern delimPattern = Pattern.compile(CUSTOM_DELIMITER_REGEX);
+
+        Matcher numMatcher = numPattern.matcher(input);
+        Matcher delimMatcher = delimPattern.matcher(input);
+        int total = 0;
+
+        if (numMatcher.matches()) {
+            String[] nums = input.split("[,:]");
+            for (String n : nums) {
+                total += Integer.parseInt(n);
+            }
+        }
+    }
 }
