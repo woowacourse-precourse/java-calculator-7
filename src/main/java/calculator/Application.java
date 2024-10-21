@@ -16,22 +16,18 @@ public class Application {
     }
 
     private static int processInput(String input) {
-        if (input == null || input.isEmpty()) {
-            return 0;
-        }
 
         int sum;
         int[] numbers;
         String delimiter = ",|:";  // 기본 구분자
 
-
         // 커스텀 구분자가 있는지 확인하고 처리
         if (checkCustomDelimiter(input)) {
             delimiter = addCustomDelimiter(delimiter, input);  // 기본 구분자에 커스텀 구분자 추가
             input = handleInputWithDelimiter(input);
-            if (input == null || input.isEmpty()) {
-                return 0;
-            }
+        }
+        if (input == null || input.isEmpty()) {
+            return 0;
         }
         // 문자열을 구분자로 분리하여 숫자 배열 추출
         numbers = extractNumbers(input, delimiter);
