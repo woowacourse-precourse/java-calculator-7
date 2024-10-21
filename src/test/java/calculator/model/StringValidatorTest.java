@@ -46,4 +46,15 @@ class StringValidatorTest {
 		// when, then
 		assertThatCode(stringValidator::validate).doesNotThrowAnyException();
 	}
+
+	@ParameterizedTest
+	@DisplayName("구분자가 존재하지 않는 문자열이 입력되었을 때 에러 없이 이를 검증한다.")
+	@ValueSource(strings = {"1", "12", "123"})
+	void 구분자가_존재하지_않는_문자열이_입력되었을_때_검증한다(String input) {
+		// given
+		StringValidator stringValidator = new StringValidator(input);
+
+		// when, then
+		assertThatCode(stringValidator::validate).doesNotThrowAnyException();
+	}
 }
