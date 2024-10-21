@@ -2,6 +2,7 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 
 import java.util.Arrays;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Application {
@@ -12,6 +13,7 @@ public class Application {
             System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
+            throw e;  // 예외를 다시 던져서 프로그램을 종료합니다.
         }
     }
 
@@ -24,15 +26,15 @@ public class Application {
         String numbers = input;
 
         if (input.startsWith("//")) {
-            int delimiterIndex = input.indexOf("\n");
-            if (delimiterIndex == -1) {
-                throw new IllegalArgumentException("커스텀 구분자 형식이 잘못되었습니다.");
+            Matcher matcher = Pattern.compile("//(.)\\\\n(.*)").matcher(input);
+            if (matcher.find()) {
+                delimiter = Pattern.quote(matcher.group(1));
+                numbers = matcher.group(2);
             }
-            delimiter = Pattern.quote(input.substring(2, delimiterIndex));
-            numbers = input.substring(delimiterIndex + 1);
         }
 
         return Arrays.stream(numbers.split(delimiter))
+                .filter(s -> !s.isEmpty())
                 .mapToInt(Application::parseNumber)
                 .sum();
     }
