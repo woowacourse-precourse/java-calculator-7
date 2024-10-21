@@ -5,20 +5,31 @@ import camp.nextstep.edu.missionutils.Console;
 public class Application {
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String input = Console.readLine();
+        try{
+            String input = Console.readLine();
 
-        int sum;
-        if (nullCheck(input)){
-            sum = 0;
-            System.out.println("결과 : " + sum);
-        } else {
-            String[] inputs = stringSplit(input);
-            int[] numbers = isPositiveNum(inputs);
-            for (int number : numbers) {
-                System.out.println(number);
-            }
-        }//if end
+            int sum;
+            if (nullCheck(input)){
+                sum = 0;
+                System.out.println("결과 : " + sum);
+            } else {
+                sum = addNumbers(isPositiveNum(stringSplit(input)));
+                System.out.println("결과 : " + sum);
+            }//if end
+        } catch(java.util.NoSuchElementException e){
+            System.out.println("결과 : 0");
+        }
+
     }//main() end
+
+    private static int addNumbers(int[] numbers){
+        int sum = 0;
+
+        for (int number : numbers) {
+            sum += number;
+        }//for end
+        return sum;
+    }//addNumbers() end
 
     private static int[] isPositiveNum(String[] inputs) {
         int[] numbers = new int[inputs.length];
