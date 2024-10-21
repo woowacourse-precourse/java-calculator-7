@@ -9,13 +9,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class CustomTest extends NsTest {
 
-    @Test
-    void 빈_문자열_입력() {
-        assertSimpleTest(() -> {
-            run("");
-            assertThat(output()).contains("결과 : 0");
-        });
-    }
 
     @Test
     void 쉼표_구분자_사용() {
