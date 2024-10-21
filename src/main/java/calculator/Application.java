@@ -1,7 +1,16 @@
 package calculator;
 
+import calculator.common.config.CalculatorConfig;
+import calculator.controller.CalculatorController;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+
+        CalculatorConfig calculatorConfig = new CalculatorConfig();
+        CalculatorController calculator = new CalculatorController(
+                calculatorConfig.calculatorService(), calculatorConfig.view(), calculatorConfig.inputValidator());
+
+        calculator.executeCalculation();
     }
 }
+
