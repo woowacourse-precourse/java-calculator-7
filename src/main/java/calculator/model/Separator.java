@@ -22,4 +22,8 @@ public class Separator {
         characters.add(character);
         return true;
     }
+
+    public List<String> getCharacters() {
+        return characters;
+    }
 }
