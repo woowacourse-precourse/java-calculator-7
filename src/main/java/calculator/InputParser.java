@@ -32,6 +32,13 @@ public class InputParser {
         }
 
         String[] tokens = input.split(delimiter);
+
+        for (String token : tokens) {
+            if (!token.matches("-?\\d+")) {
+                throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다: " + token);
+            }
+        }
+
         int[] numbers = new int[tokens.length];
 
         for (int i = 0; i < tokens.length; i++) {
