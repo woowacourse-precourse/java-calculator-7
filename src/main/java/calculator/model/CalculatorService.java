@@ -34,6 +34,9 @@ public class CalculatorService {
         if (customDelimiter.length() != 1) {
             throw new IllegalArgumentException("커스텀 구분자는 단일 문자여야 합니다.");
         }
+        if (Character.isDigit(customDelimiter.charAt(0))) {
+            throw new IllegalArgumentException("커스텀 구분자는 숫자일 수 없습니다.");
+        }
         return customDelimiter;
     }
 

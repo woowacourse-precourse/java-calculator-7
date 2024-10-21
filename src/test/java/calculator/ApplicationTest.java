@@ -4,6 +4,7 @@ import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import calculator.model.CalculatorService;
 import camp.nextstep.edu.missionutils.test.NsTest;
@@ -156,7 +157,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             // Given
             CalculatorService calculator = new CalculatorService();
-            String input = "//;;\n1;2;3";
+            String input = "//;;\n1;;2;;3";
 
             // When & Then
             assertThatThrownBy(() -> calculator.add(input))
@@ -220,6 +221,20 @@ class ApplicationTest extends NsTest {
             // Then
             assertEquals(0, result);
         });
+    }
+
+    @Test
+    void testCustomSeparatorWithNumberThrowsException() {
+        // Given
+        CalculatorService calculator = new CalculatorService();
+        String input = "//1\n1,2";
+
+        // When & Then
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            calculator.add(input);
+        });
+
+        assertEquals("커스텀 구분자는 숫자일 수 없습니다.", exception.getMessage());
     }
 
     @Override
