@@ -33,3 +33,5 @@ out/
 
 ### Mac OS ###
 .DS_Store
+
+build.gradle
