@@ -1,8 +1,9 @@
 package calculator.service.operation;
 
-import calculator.domain.Numbers;
+import calculator.service.dto.NumbersDto;
+import calculator.service.dto.SumDto;
 
 public interface OperationService {
 
-    int operate(Numbers numbers);
+    SumDto operate(NumbersDto numbersDto);
 }
