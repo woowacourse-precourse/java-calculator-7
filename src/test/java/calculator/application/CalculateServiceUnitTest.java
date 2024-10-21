@@ -17,10 +17,10 @@ class CalculateServiceUnitTest {
         String any = "";
 
         // when
-        BigInteger result = calculateService.splitAndSum(any);
+        String result = calculateService.splitAndSum(any);
 
         // then
-        assertThat(result).isEqualTo(6);
+        assertThat(result).isEqualTo("6");
     }
 
 }

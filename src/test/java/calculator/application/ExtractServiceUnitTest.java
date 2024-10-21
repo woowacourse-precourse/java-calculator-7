@@ -31,7 +31,7 @@ class ExtractServiceUnitTest {
     @DisplayName("한개의 리스트 정보가 주어질 시, 하나의 추출된 정보를 반환한다.")
     void givenHasOneNumberList_whenExtractNumbers_thenReturnListSizeIsOne() {
         // given
-        List<String> numberStrings = List.of("1");
+        List<String> numberStrings = List.of("0");
 
         // when
         List<BigInteger> result = extractService.extractNumbers(numberStrings);

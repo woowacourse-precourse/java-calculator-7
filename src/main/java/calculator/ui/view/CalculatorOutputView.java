@@ -6,7 +6,7 @@ public class CalculatorOutputView {
 
     private static final StringBuilder BUFFER = new StringBuilder();
 
-    public void splitAndSumOutput(BigInteger result) {
+    public void splitAndSumOutput(String result) {
         BUFFER.append("결과 : ").append(result).append('\n');
         System.out.println(BUFFER);
         bufferClear();

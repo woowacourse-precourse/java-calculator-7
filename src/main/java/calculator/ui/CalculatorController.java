@@ -23,7 +23,7 @@ public class CalculatorController {
 
     public void stringAdditionCalculate() {
         String command = calculatorInputView.splitAndSumInput();
-        BigInteger result = calculateService.splitAndSum(command);
+        String result = calculateService.splitAndSum(command);
         calculatorOutputView.splitAndSumOutput(result);
     }
 

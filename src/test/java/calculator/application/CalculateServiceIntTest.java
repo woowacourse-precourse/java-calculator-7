@@ -23,10 +23,10 @@ class CalculateServiceIntTest {
         String command = "1,2:3";
 
         // when
-        BigInteger sum = calculateService.splitAndSum(command);
+        String sum = calculateService.splitAndSum(command);
 
         // then
-        assertThat(sum).isEqualTo(6);
+        assertThat(sum).isEqualTo("6");
     }
 
     @Test

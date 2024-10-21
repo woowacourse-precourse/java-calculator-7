@@ -17,11 +17,12 @@ public class CalculateService {
         this.extractService = extractService;
     }
 
-    public BigInteger splitAndSum(String command) {
+    public String splitAndSum(String command) {
         List<String> separated = separatorService.separate(command);
         List<BigInteger> numbers = extractService.extractNumbers(separated);
 
-        return new Calculator().sum(numbers);
+        return new Calculator().sum(numbers)
+                .toString();
     }
 
 }
