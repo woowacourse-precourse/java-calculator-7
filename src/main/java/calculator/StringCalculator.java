@@ -30,6 +30,7 @@ public class StringCalculator {
         } else {
             throw new IllegalArgumentException("잘못된 입력 형식입니다.");
         }
+
         return total;
     }
 }
