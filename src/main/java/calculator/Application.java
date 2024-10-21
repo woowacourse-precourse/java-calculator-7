@@ -1,7 +1,6 @@
 package calculator;
 
 
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,20 +11,12 @@ import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class Application {
     public static void main(String[] args) {
-        try{
-            // 0. 문자열 입력받기
-            System.out.println("덧셈할 문자열을 입력해 주세요.");
-            String input = readLine();
+        // 0. 문자열 입력받기
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        String input = readLine();
 
-            Calc calc = new Calc(input);
+        Calc calc = new Calc(input);
 
-            int result = calc.calcSum();
-
-            System.out.println("결과 : " + result);
-
-        } catch (IllegalArgumentException e) {
-            throw e;
-        }
     }
 }
 
@@ -39,6 +30,24 @@ class Calc {
         setSepAndInput();
     }
 
+    // 1. 구분자 저장 및 input에서 커스텀 구분자 분리하기
+    private void setSepAndInput() {
+        sep.add(",");
+        sep.add(":");
+
+        // "//" "\n" 사이 단어 추출
+        Pattern pattern = Pattern.compile("//(.*?)(?=\\\\n)");
+        Matcher matcher = pattern.matcher(input);
+
+        if(matcher.find()) {
+            String customSep = matcher.group(1);
+            sep.add(escapeRegexSpecialChars(customSep)); // 이스케이프 처리 후 추가
+            this.input = input.replace(matcher.group(0), "").replace("\\n", "").trim(); // 첫 번째 매칭된 문자열 제거
+
+        }
+    }
+
+    // 정규 표현식 특수 문자 앞에 "\\" 붙이기
     private String escapeRegexSpecialChars(String input) {
         String[] specialChars = {"\\", "[", "]", "(", ")", "{", "}", "^", "$", ".", "|", "*", "+", "?"};
 
@@ -58,23 +67,6 @@ class Calc {
             }
         }
         return escapedString.toString();
-    }
-
-    // 1. 구분자 저장 및 input에서 커스텀 구분자 분리하기
-    private void setSepAndInput() {
-        sep.add(",");
-        sep.add(":");
-
-        // "//" "\n" 사이 단어 추출
-        Pattern pattern = Pattern.compile("//(.*?)(?=\\\\n)");
-        Matcher matcher = pattern.matcher(input);
-
-        if(matcher.find()) {
-            String customSep = matcher.group(1);
-            sep.add(escapeRegexSpecialChars(customSep)); // 이스케이프 처리 후 추가
-            this.input = input.replace(matcher.group(0), "").replace("\\n", "").trim(); // 첫 번째 매칭된 문자열 제거
-
-        }
     }
 
     // 2. 숫자 구분하기
@@ -108,12 +100,6 @@ class Calc {
         return numArr;
     }
 
-    // 3. 숫자 합 구하기
-    public int calcSum() {
-        int[] numArr = getNumArr();
-        if (numArr != null) {
-            return Arrays.stream(numArr).sum();
-        }
-        return 0;
-    }
+
 }
+
