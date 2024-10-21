@@ -21,4 +21,5 @@ public class Calculator {
         String[] numbers = delimiterParser.parse(input);
         return numberParser.sum(numbers); // NumberParser의 sum 메서드 호출
     }
+
 }
