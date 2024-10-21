@@ -87,7 +87,7 @@ public class StringAddCalculatorTest {
 
     @Test
     void 커스텀_구분자가_두_자리_이상이면_예외가_발생한다() {
-        // given: 두 자리 커스텀 구분자가 포함된 문자열 입력
+        // given
         String input = "//##\n1##2##3";
 
         // when, then: 예외 발생 여부 확인
@@ -121,7 +121,7 @@ public class StringAddCalculatorTest {
 
     @Test
     void 커스텀_구분자가_두_개_연속으로_사용되면_예외가_발생한다() {
-        // given: 두 자리 커스텀 구분자가 포함된 문자열 입력
+        // given
         String input = "//#\n1##2#3";
 
         // when, then: 예외 발생 여부 확인
@@ -139,5 +139,17 @@ public class StringAddCalculatorTest {
         assertThatThrownBy(() -> StringAddCalculator.add(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("계산 대상 문자열에는 숫자와 구분자 외의 문자가 포함될 수 없습니다.");
+    }
+
+    @Test
+    void 기본_구분자로_숫자_합산이_정상_작동한다() {
+        // given
+        String input = "1,2:3";
+
+        // when
+        int result = StringAddCalculator.add(input);
+
+        // then
+        assertThat(result).isEqualTo(6);
     }
 }

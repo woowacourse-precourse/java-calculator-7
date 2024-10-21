@@ -33,11 +33,16 @@ public class StringAddCalculator {
         // 숫자나 구분자를 제외한 문자가 포함되어 있는지 검증
         InputValidator.validateNonNumericCharacters(numbers);
 
+        // 기본 구분자 처리
+        if (delimiter.equals(",|:")) {
+            return sumWithDefaultDelimiters(numbers);
+        }
+
         // 연속된 구분자를 하나의 구분자로 치환
         String finalInput = numbers.replaceAll("[" + delimiter + "]+", delimiter);
 
         // 숫자 합산
-        return sum(finalInput, delimiter);
+        return sumWithCustomDelimiter(finalInput, delimiter);
     }
 
     private static String extractNumbers(String input) {
@@ -47,7 +52,7 @@ public class StringAddCalculator {
         return input;
     }
 
-    private static int sum(String input, String delimiter) {
+    private static int sumWithCustomDelimiter(String input, String delimiter) {
         String[] numbers = input.split(delimiter);
 
         int sum = 0;
@@ -58,10 +63,10 @@ public class StringAddCalculator {
         }
         return sum;
     }
-    
+
     private static int sumWithDefaultDelimiters(String input) {
         // 기본 구분자 쉼표와 콜론을 사용하여 숫자 합산
-        String[] numbers = input.split("[,:]"); // 쉼표와 콜론을 구분자로 사용
+        String[] numbers = input.split("[,:]");
 
         int sum = 0;
         for (String number : numbers) {
