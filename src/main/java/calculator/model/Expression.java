@@ -1,6 +1,10 @@
 package calculator.model;
 
 public class Expression {
+    private static final String EMPTY_SECTION = "";
+    private static final String FIRST_DELIMITER = "//";
+    private static final String LAST_DELIMITER = "\\n";
+
     private final String expression;
 
     public Expression(String expression) {
@@ -8,21 +12,23 @@ public class Expression {
     }
 
     public boolean hasCustomSeparator() {
-        return expression.startsWith("//");
+        return expression.startsWith(FIRST_DELIMITER);
     }
 
     public String separatorSection() {
-        int startIdx = expression.indexOf("//") + 2;
-        int endIdx = expression.indexOf("\\n");
+        if (!hasCustomSeparator()) {
+            return EMPTY_SECTION;
+        }
+        int startIdx = expression.indexOf(FIRST_DELIMITER) + 2;
+        int endIdx = expression.indexOf(LAST_DELIMITER);
         return expression.substring(startIdx, endIdx);
     }
 
     public String nonSeparatorSection() {
-        int startIdx = expression.indexOf("\\n") + 2;
+        if (!hasCustomSeparator()) {
+            return expression;
+        }
+        int startIdx = expression.indexOf(FIRST_DELIMITER) + 2;
         return expression.substring(startIdx);
-    }
-
-    public String getExpression() {
-        return expression;
     }
 }

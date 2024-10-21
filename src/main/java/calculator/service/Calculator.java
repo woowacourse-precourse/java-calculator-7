@@ -8,7 +8,7 @@ public class Calculator {
     private final Separator separator = new Separator();
 
     public int calculate(Expression expressionModel) {
-        String nonSeparatorSection = expressionModel.getExpression();
+        String nonSeparatorSection = expressionModel.nonSeparatorSection();
 
         if (expressionModel.hasCustomSeparator()) {
             separator.registerSeparator(expressionModel.separatorSection());
