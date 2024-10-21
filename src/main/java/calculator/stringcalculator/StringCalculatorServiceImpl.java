@@ -21,9 +21,13 @@ public class StringCalculatorServiceImpl implements StringCalculatorService {
         List<String> delimiters = new ArrayList<>(Arrays.asList(";", ","));
 
         String delimiter =  extractDelimiter(input);
+        delimiters.add(delimiter);
 
+        String[] stringNumbers = extractNumber(input, delimiters);
 
-        return "";
+        String result = addStringNumbers(stringNumbers);
+
+        return result;
     }
 
     @Override
