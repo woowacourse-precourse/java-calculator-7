@@ -18,7 +18,7 @@ public class Parser {
                 throw new IllegalArgumentException("잘못된 커스텀 구분자 형식입니다.");
 
             String customDelimiter = input.substring(CUSTOM_DELIMITER_PREFIX.length(), delimiterEndIndex);
-            delimiters.add(Pattern.quote(customDelimiter));
+            delimiters.add(customDelimiter);
 
             return input.substring(delimiterEndIndex + 1);
         }
@@ -32,5 +32,14 @@ public class Parser {
         delimiters.add(DEFAULT_DELIMITER_COLON);
 
         return delimiters;
+    }
+
+    public static String[] splitInput(String input, List<String> delimiters) {
+        List<String> quoteDelimiters = new ArrayList<>();
+        for (String delimiter: delimiters)
+            quoteDelimiters.add(Pattern.quote(delimiter));
+
+        String splitPattern = String.join("|", quoteDelimiters);
+        return input.split(splitPattern);
     }
 }
