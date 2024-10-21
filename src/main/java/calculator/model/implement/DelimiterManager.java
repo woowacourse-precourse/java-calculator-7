@@ -1,7 +1,5 @@
 package calculator.model.implement;
 
-import java.util.List;
-
 public class DelimiterManager {
 
     private final DelimiterChecker delimiterChecker;
@@ -16,8 +14,8 @@ public class DelimiterManager {
     }
 
     public void registerCustomDelimiters(String value) {
-        List<String> customDelimiters = delimiterExtractor.extractCustom(value);
-        delimiterStore.addDelimiters(customDelimiters);
+        String customDelimiter = delimiterExtractor.extractCustom(value);
+        delimiterStore.addDelimiter(customDelimiter);
     }
 
     public boolean existCustomDelimiter(String value) {

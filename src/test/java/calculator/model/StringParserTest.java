@@ -27,8 +27,8 @@ class StringParserTest {
     void splitTarget() {
 
         assertSimpleTest(() -> {
-            String splitedTarget = stringParser.splitTarget("//;\\n//;\\n1.2.3");
-            assertThat(splitedTarget).contains("1.2.3");
+            String splitedTarget = stringParser.splitTarget("//;\\n1,2,3");
+            assertThat(splitedTarget).contains("1,2,3");
         });
     }
 
@@ -36,8 +36,8 @@ class StringParserTest {
     @Test
     void parseToNumbers() {
         assertSimpleTest(() -> {
-            delimiterStore.addDelimiters(List.of(";","/"));
-            List<CustomNumber> numbers = stringParser.parseToNumbers("1;2/3");
+            System.out.println(delimiterStore.getAllDelimiters());
+            List<CustomNumber> numbers = stringParser.parseToNumbers("1,2:3");
             assertThat(numbers).extracting(CustomNumber::getNumber).containsExactly(1, 2, 3);
         });
     }
