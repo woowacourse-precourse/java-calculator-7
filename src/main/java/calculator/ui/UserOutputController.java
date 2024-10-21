@@ -13,6 +13,6 @@ public class UserOutputController {
     }
 
     public void printResult(final ResultMessage resultMessage) {
-        outputUi.printMessage(resultMessage.getResult());
+        outputUi.printResult(resultMessage.getResult());
     }
 }
