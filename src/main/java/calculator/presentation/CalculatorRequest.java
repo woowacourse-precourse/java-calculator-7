@@ -1,6 +1,6 @@
 package calculator.presentation;
 
-public class CalculatorRequest {
+public final class CalculatorRequest {
 
     private final String tokens;
     private final String customDelimiter;
