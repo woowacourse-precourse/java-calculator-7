@@ -55,9 +55,20 @@ public class Application {
         if (input.startsWith("//")) {
             int ender = input.indexOf("\n");
             String newSpliter = input.substring(2, ender);
-            spliter = "["  + newSpliter + "]";
+
+            // 정규식 특수문자 이스케이프 처리
+            String escapedSpliter = "";
+            for (int i = 0; i < newSpliter.length(); i++) {
+                char c = newSpliter.charAt(i);
+                if ("\\.^$|?*+()[]{}".indexOf(c) != -1) {
+                    escapedSpliter += "\\";
+                }
+                escapedSpliter += c;
+            }
+            spliter = escapedSpliter;
             input = input.substring(ender + 1);
         }
+        
         String[] nums = input.split(spliter);
         for (String num : nums) {
             if (!num.isEmpty()) {
