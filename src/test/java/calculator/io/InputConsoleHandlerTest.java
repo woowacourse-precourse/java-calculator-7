@@ -181,5 +181,22 @@ class InputConsoleHandlerTest {
         Console.close();
     }
 
+    @Test
+    @DisplayName("계산할 숫자 데이터를 전달하지 않으면 애플리케이션을 종료한다")
+    void throwExceptionBadOperandsData() {
+        // given
+        String input = "asdf";
+
+        // when
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        // then
+        assertThatThrownBy(INPUT_CONSOLE_HANDLER::getUserInput)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("허용되지 않은 입력입니다. 애플리케이션을 종료합니다.");
+
+        System.setIn(System.in);
+        Console.close();
+    }
 
 }
