@@ -11,7 +11,8 @@ public class Calculator {
     private final String REGEX = "//(.)\\\\n";
 
     public Calculator(String input) {
-        INPUT = InputValidationException.isEmpty(input);
+        InputValidationException.isEmpty(input);
+        INPUT = input;
         TOKEN = checkCustomToken(INPUT);
     }
 
