@@ -27,17 +27,14 @@ public class StringAdditionCalculator {
                 .sum();
     }
 
-private static int[] getNumbers(String input, String separator) {
-    String[] tokens = input.split(separator);
-    int[] numbers = new int[tokens.length];
+    private static int[] getNumbers(String input, String separator) {
+        String[] tokens = input.split(separator);
 
-    for (int i = 0; i < tokens.length; i++) {
-        validateNumber(tokens[i]);
-        numbers[i] = Integer.parseInt(tokens[i]);
+        return Arrays.stream(tokens)
+                .peek(StringAdditionCalculator::validateNumber)
+                .mapToInt(Integer::parseInt)
+                .toArray();
     }
-
-    return numbers;
-}
 
     private static void validateNumber(String number) {
         if (!number.matches(NUMBER_PATTERN)) {
