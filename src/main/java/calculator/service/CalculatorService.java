@@ -28,7 +28,6 @@ public class CalculatorService {
      * @return 더해진 결과값
      */
     private static int sum(List<String> values) {
-        int sum = 0;
 
         List<Integer> intValues = values.stream()
                 .filter(value -> !value.isEmpty())
@@ -37,7 +36,7 @@ public class CalculatorService {
 
         checkNegativeNumbers(intValues);
 
-        return sum;
+        return intValues.stream().mapToInt(Integer::intValue).sum();
     }
 
     /**
