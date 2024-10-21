@@ -6,7 +6,9 @@ public class SumCalculator {
     private int result = 0;
 
     public int getResult(List<Integer> inputNumber) {
-        calculateResult(inputNumber);
+        if (inputNumber != null) {
+            calculateResult(inputNumber);
+        }
         return result;
     }
 

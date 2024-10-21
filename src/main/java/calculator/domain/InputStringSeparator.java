@@ -90,7 +90,6 @@ public class InputStringSeparator {
 
     private void changeToInt() {
         if (inputNumberString == null) {
-            inputNumberInt.add(0);
             return;
         }
 
