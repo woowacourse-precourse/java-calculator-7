@@ -2,8 +2,8 @@ package calculator;
 
 import calculator.numberExtractor.NumberExtractor;
 import calculator.separatorProvider.SeparatorProvider;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 문자열을 통해 숫자 리스트를 분리하는 역할
@@ -29,10 +29,8 @@ public class StringParser {
      * @return 분리된 숫자 리스트
      */
     public List<Integer> parse(String customSeparatorString, String numberString) {
-        List<Character> separatorList = new ArrayList<>();
-        separatorList.addAll(separatorProvider.getDefaultSeparator());
-        separatorList.addAll(separatorProvider.extractCustomSeparator(customSeparatorString));
+        Set<Character> separator = separatorProvider.getSeparator(customSeparatorString);
 
-        return numberExtractor.extract(numberString, separatorList);
+        return numberExtractor.extract(numberString, separator);
     }
 }

@@ -5,14 +5,8 @@ import java.util.Set;
 
 public class SeparatorProviderStub implements SeparatorProvider {
 
-
     @Override
-    public Set<Character> extractCustomSeparator(String str) {
-        return Set.of('(', ')');
-    }
-
-    @Override
-    public Set<Character> getDefaultSeparator() {
+    public Set<Character> getSeparator(String separatorPart) {
         return Set.of(':', ',');
     }
 }

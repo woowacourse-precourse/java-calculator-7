@@ -8,7 +8,15 @@ public class SeparatorProviderImpl implements SeparatorProvider {
     private static final Set<Character> defaultSeparators = Set.of(':', ',');
 
     @Override
-    public Set<Character> extractCustomSeparator(String str) {
+    public Set<Character> getSeparator(String separatorPart) {
+        if (separatorPart != null && !separatorPart.isBlank()) {
+            return extractCustomSeparator(separatorPart);
+        } else {
+            return getDefaultSeparator();
+        }
+    }
+
+    private Set<Character> extractCustomSeparator(String str) {
         Set<Character> extractedSeparators = new HashSet<>();
 
         if (str != null && !str.isBlank()) {
@@ -20,8 +28,7 @@ public class SeparatorProviderImpl implements SeparatorProvider {
         return extractedSeparators;
     }
 
-    @Override
-    public Set<Character> getDefaultSeparator() {
+    private Set<Character> getDefaultSeparator() {
         return defaultSeparators;
     }
 }

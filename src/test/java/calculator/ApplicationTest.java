@@ -76,7 +76,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀구분자를_사용한다() {
         assertSimpleTest(() -> {
-            run("//;\\n1:2;3,4");
+            run("//;\\n1;2;3;4");
             assertThat(output()).contains("결과 : 10");
         });
     }
@@ -84,7 +84,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀구분자를_사용할때_두자리_이상의_숫자를_사용한다() {
         assertSimpleTest(() -> {
-            run("//;\\n1:2;3,10");
+            run("//;\\n1;2;3;10");
             assertThat(output()).contains("결과 : 16");
         });
     }
@@ -92,7 +92,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 여러개의_커스텀구분자를_사용한다() {
         assertSimpleTest(() -> {
-            run("//;^\\n1:2;3,4^5");
+            run("//;^\\n1^2;3;4^5");
             assertThat(output()).contains("결과 : 15");
         });
     }
@@ -100,7 +100,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 여러개의_커스텀구분자를_사용할때_두자리_이상의_숫자를_사용한다() {
         assertSimpleTest(() -> {
-            run("//;^\\n1:2;3,4^10");
+            run("//;^\\n1;2;3^4^10");
             assertThat(output()).contains("결과 : 20");
         });
     }

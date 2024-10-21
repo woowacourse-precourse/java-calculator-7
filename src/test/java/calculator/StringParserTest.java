@@ -32,7 +32,7 @@ class StringParserTest {
         StringParser sut = new StringParser(separatorExtractor, numberExtractor);
 
         //when
-        List<Integer> result = sut.parse(";", "1:2;3,4");
+        List<Integer> result = sut.parse(";", "1;2;3;4");
 
         //then
         Assertions.assertThat(result).containsExactly(1, 2, 3, 4);

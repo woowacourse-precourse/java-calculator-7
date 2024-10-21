@@ -7,15 +7,15 @@ import org.junit.jupiter.api.Test;
 class SeparatorProviderTest {
 
     @Test
-    void 추출할_커스텀구분자가_없다면_빈_리스트를_반환한다() {
+    void 추출할_커스텀구분자가_없다면_기본_구분자를_반환한다() {
         //given
         SeparatorProviderImpl sut = new SeparatorProviderImpl();
 
         //when
-        Set<Character> result = sut.extractCustomSeparator("");
+        Set<Character> result = sut.getSeparator("");
 
         //then
-        Assertions.assertThat(result).isEmpty();
+        Assertions.assertThat(result).containsExactlyInAnyOrder(':', ',');
     }
 
     @Test
@@ -24,7 +24,7 @@ class SeparatorProviderTest {
         SeparatorProviderImpl sut = new SeparatorProviderImpl();
 
         //when
-        Set<Character> result = sut.extractCustomSeparator(";");
+        Set<Character> result = sut.getSeparator(";");
 
         //then
         Assertions.assertThat(result).containsExactly(';');
@@ -36,21 +36,9 @@ class SeparatorProviderTest {
         SeparatorProviderImpl sut = new SeparatorProviderImpl();
 
         //when
-        Set<Character> result = sut.extractCustomSeparator(";^&");
+        Set<Character> result = sut.getSeparator(";^&");
 
         //then
         Assertions.assertThat(result).containsExactlyInAnyOrder(';', '^', '&');
-    }
-
-    @Test
-    void 기본구분자를_반환한다() {
-        //given
-        SeparatorProviderImpl sut = new SeparatorProviderImpl();
-
-        //when
-        Set<Character> result = sut.getDefaultSeparator();
-
-        //then
-        Assertions.assertThat(result).containsExactlyInAnyOrder(':', ',');
     }
 }
