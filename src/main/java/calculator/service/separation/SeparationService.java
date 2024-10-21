@@ -1,6 +1,6 @@
 package calculator.service.separation;
 
-import calculator.domain.Numbers;
+import calculator.service.dto.NumbersDto;
 
 public interface SeparationService {
 
@@ -8,7 +8,7 @@ public interface SeparationService {
 
     boolean hasCustomSeparator(String input);
 
-    Numbers getNumbers(String input, String... separators);
+    NumbersDto getNumbers(String input, String... separators);
 
     default String[] split(String input, String separatorOrRegex) {
         if (input.isBlank()) {
