@@ -24,26 +24,39 @@ public class Calculator {
             return;
         }
 
-        List<String> strings = new ArrayList<>();
+        List<String> strings;
         String regex = COMMA + "|" + COLON;
 
         if (division != null) {
+            List<String> tokens = new ArrayList<>();
             StringTokenizer tokenizer = new StringTokenizer(inputString, division);
 
             while (tokenizer.hasMoreTokens()) {
-                strings.add(tokenizer.nextToken());
+                tokens.add(tokenizer.nextToken());
             }
 
-            for (String string : strings) {
-                List<String> lists =  Arrays.asList(string.split(regex));
-                for (String list : lists) {
-                    int number = Integer.parseInt(list);
+            for (String token : tokens) {
+                strings = Arrays.asList(token.split(regex));
+                for (String string : strings) {
+                    int number = Integer.parseInt(string);
                     if (number < 1) {
                         throw new IllegalArgumentException();
                     }
                     numbers.add(number);
                 }
             }
+            return;
+        }
+
+        strings = Arrays.asList(inputString.split(regex));
+        for (String string : strings) {
+            int number = Integer.parseInt(string);
+
+            if (number < 1) {
+                throw new IllegalArgumentException();
+            }
+
+            numbers.add(number);
         }
     }
 
@@ -78,7 +91,11 @@ public class Calculator {
     }
 
     public boolean isValid(String inputString) {
-        inputString = inputString.replace(COMMA, "").replace(division, "").replace(COLON, "");
+        if (division != null) {
+            inputString = inputString.replace(division, "");
+        }
+
+        inputString = inputString.replace(COMMA, "").replace(COLON, "");
 
         char[] inputChars = inputString.toCharArray();
         for (char inputChar : inputChars) {
