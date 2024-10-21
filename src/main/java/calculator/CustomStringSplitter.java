@@ -7,8 +7,8 @@ import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CustomStringSplitter implements StringSplitter{
-    
+public class CustomStringSplitter implements StringSplitter {
+
     private static final String CUSTOM_DELIMITER_HEADER = "\\/\\/";
     private static final String CUSTOM_DELIMITER_FOOTER = "\\\n";
 
@@ -26,7 +26,7 @@ public class CustomStringSplitter implements StringSplitter{
     }
 
     @Override
-    public List<String> splitString (String str) {
+    public List<String> splitString(String str) {
         String patternRegex = generatePatternRegex();
         Pattern pattern = Pattern.compile(patternRegex);
         Matcher matcher = pattern.matcher(str);
@@ -73,7 +73,7 @@ public class CustomStringSplitter implements StringSplitter{
         }
         return strings;
     }
-    
+
     private void validateContinuousDelimiter(List<String> split, String str) {
         boolean hasContinuousDelimiter = split.stream()
                 .anyMatch(s -> s.isEmpty());

@@ -7,7 +7,7 @@ import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class DefaultStringSplitter implements StringSplitter{
+public class DefaultStringSplitter implements StringSplitter {
 
     @Override
     public boolean canSupport(String str) {
@@ -17,7 +17,7 @@ public class DefaultStringSplitter implements StringSplitter{
     }
 
     @Override
-    public List<String> splitString (String str) {
+    public List<String> splitString(String str) {
         StringTokenizer stringTokenizer = new StringTokenizer(str, DEFAULT_DELIMITER);
         List<String> strings = new ArrayList<>();
         while (stringTokenizer.hasMoreTokens()) {

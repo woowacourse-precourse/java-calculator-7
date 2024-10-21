@@ -8,6 +8,7 @@ public interface StringSplitter {
     static final String INVALID_DELIMITER = "+-.";
 
     boolean canSupport(String str);
+
     List<String> splitString(String str);
 
 }

@@ -9,6 +9,7 @@ import java.util.List;
 class CustomStringSplitterTest {
 
     StringSplitter stringSplitter = new CustomStringSplitter();
+
     @ParameterizedTest
     @CsvSource({
             "'//*\n2*23*4', '2', '23', '4'",
