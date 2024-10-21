@@ -3,19 +3,15 @@ package calculator.service;
 import java.math.BigInteger;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.StringTokenizer;
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class CalculatorService {
 
     private final String SPECIAL_PREFIX = "//";
     private final String SPECIAL_SUFFIX = "\\n";
-    private final StringTokenizer NORMAL_SEPARATORS = new StringTokenizer(", :");
+    private final ArrayList<String> NORMAL_SEPARATORS = new ArrayList<>(Arrays.asList(",", ":"));
     private ArrayDeque<String> separatorQueue = new ArrayDeque<>();
-
-    public ArrayDeque<String> getSeparatorQueue() {
-        return separatorQueue;
-    }
 
     public String detectSeparators(String input) {
 
@@ -32,9 +28,7 @@ public class CalculatorService {
 
     private void detectNormalSeparators(String input) {
 
-        while (NORMAL_SEPARATORS.hasMoreTokens()) {
-            String separator = NORMAL_SEPARATORS.nextToken();
-
+        for(String separator : NORMAL_SEPARATORS) {
             if (input.contains(separator)) {
                 separatorQueue.addLast(separator);
             }
@@ -69,8 +63,11 @@ public class CalculatorService {
         int endIndex = input.indexOf(SPECIAL_SUFFIX);
         String specialSeparator = input.substring(startIndex, endIndex);
 
-        if (separatorQueue.contains(specialSeparator)) {
-            throw new IllegalArgumentException("일반 구분자 (쉼표,콜론) 는 특수 구분자로 사용할 수 없습니다.");
+
+        for(String separator : NORMAL_SEPARATORS) {
+            if(specialSeparator.equals(separator)) {
+                throw new IllegalArgumentException("일반 구분자 (쉼표,콜론) 는 특수 구분자로 사용할 수 없습니다.");
+            }
         }
 
         return specialSeparator;

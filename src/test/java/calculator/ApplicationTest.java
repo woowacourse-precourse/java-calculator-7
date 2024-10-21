@@ -180,7 +180,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 구분자가_아닌_문자_입력() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> runException("//?!\\n1:2,3?!5"))
+            assertThatThrownBy(() -> runException("//?\\n1:2,3?!5"))
                     .isInstanceOf(IllegalArgumentException.class);
         });
     }
