@@ -3,7 +3,6 @@ package calculator.mvc.controller;
 import calculator.mvc.model.Calculator;
 import calculator.mvc.model.CalculatorImpl;
 import calculator.mvc.view.CalculatorView;
-import java.util.NoSuchElementException;
 
 public class CalculatorController {
     private Calculator model;
@@ -22,9 +21,9 @@ public class CalculatorController {
     public void calculateAdd() {
         view.showInitMsg();
 
-        try {
-            String userInput = view.getUserInput();
+        String userInput = view.getUserInput();
 
+        try {
             model.findCustomSeparator(userInput);
 
             model.parseNumbersFromString(userInput);
@@ -32,8 +31,6 @@ public class CalculatorController {
             long result = model.addNumbers();
 
             view.showResultMsg(result);
-        } catch (NoSuchElementException e) {
-            view.showResultMsg(0);
         } catch (IllegalArgumentException e) {
             view.showResultMsg(e);
             throw e;

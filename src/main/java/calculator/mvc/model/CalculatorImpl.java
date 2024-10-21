@@ -54,14 +54,18 @@ public class CalculatorImpl implements Calculator {
 
     @Override
     public void parseNumbersFromString(String input) throws IllegalStateException {
+        if (input.isEmpty()) {
+            return;
+        }
+
         boolean hasCustomSeparator = existCustomSeparator(input);
 
         StringBuilder regExTmp = new StringBuilder();
 
         regExTmp.append("[");
         for (int i = 0; i < separators.size(); i++) {
-            if (separators.get(i) == '\\') {
-                regExTmp.append('\\').append("\\");
+            if (separators.get(i) == '\\' || separators.get(i) == '[' || separators.get(i) == ']') {
+                regExTmp.append('\\').append(separators.get(i));
                 continue;
             }
 
@@ -72,9 +76,7 @@ public class CalculatorImpl implements Calculator {
         if (hasCustomSeparator) {
             input = input.substring(5);
         }
-
-        //여기서 오류가 계속 남
-        // //[\n1,2[3
+        
         String[] tokens = input.split(regExTmp.toString());
 
         for (String s : tokens) {
