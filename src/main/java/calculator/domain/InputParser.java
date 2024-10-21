@@ -3,8 +3,7 @@ package calculator.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import static calculator.constant.DelimiterConstants.CUSTOM_DELIMITER_DEFINITION_SIZE;
-import static calculator.constant.DelimiterConstants.CUSTOM_DELIMITER_START_SEPARATOR;
+import static calculator.constant.DelimiterConstants.*;
 import static calculator.constant.ErrorMessages.*;
 
 
@@ -18,7 +17,8 @@ public class InputParser {
     public List<Double> parse(String input){
         List<Double> numbers = new ArrayList<>();
 
-        String delimiterRegex = delimiters.getDelimiterRegex(input);
+        delimiters.addDelimiter(input);
+        String delimiterRegex = delimiters.getDelimiterRegex();
         input = removeDelimiterDefinition(input);
 
         for(String number : input.split(delimiterRegex)) {
@@ -53,7 +53,7 @@ public class InputParser {
 
     private String removeDelimiterDefinition(String input){
         if(input.startsWith(CUSTOM_DELIMITER_START_SEPARATOR)){
-            return input.substring(CUSTOM_DELIMITER_DEFINITION_SIZE);
+            return input.substring(CUSTOM_DELIMITER_DEFINITION_LENGTH);
         }
         return input;
     }
