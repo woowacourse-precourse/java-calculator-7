@@ -30,6 +30,11 @@ public class Application {
             }catch(Exception e) {
                 throw new IllegalArgumentException("구분자 사이에 정상적인 숫자를 입력해야 합니다.");
             }
+
+            int answer = 0;
+            for(int number:nums){
+                answer+=number;
+            }
         }else{
             System.out.println("결과 : 0");
         }
