@@ -1,6 +1,6 @@
 package calculator;
 
-public class DelimiterParser {
+public class DelimiterHandler {
     public String[] extractNumbers(String input) {
         String delimiter = ",|:";
         String numbers = input;
