@@ -22,9 +22,11 @@ public class Validations {
     public static void validateCorrectCustomDelimiter(String customDeli) {
         for (String resWord : RESERVED_WORDS) {
             if (customDeli.contains(resWord)
-                    || customDeli.matches(NUMBER_REGEX)
-                    || customDeli.isEmpty()) {
+                    || customDeli.matches(NUMBER_REGEX)) {
                 throw new IllegalArgumentException(WRONG_CUSTOM_DELIMITER.getMsg());
+            }
+            if (customDeli.isEmpty()) {
+                throw new IllegalArgumentException(EMPTY_CUSTOM_DELIMITER.getMsg());
             }
         }
     }

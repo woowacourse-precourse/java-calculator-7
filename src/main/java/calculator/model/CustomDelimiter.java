@@ -42,7 +42,7 @@ public class CustomDelimiter {
     }
 
     private boolean endsWithSignal(int idx, String inputValue, int valueLength) {
-        if (idx <= CUSTOM_DELI_START_SIGNAL.length() || idx >= valueLength - 1) {
+        if (idx < CUSTOM_DELI_START_SIGNAL.length() || idx >= valueLength - 1) {
             return false;
         }
         for (int d=0; d<CUSTOM_DELI_END_SIGNAL.length(); d++) {
