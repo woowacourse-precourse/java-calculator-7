@@ -70,6 +70,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 기본_구분자와_커스텀_구분자_이외의_문자가_발견될_경우_예외가_발생한다() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//$\\n1*"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
     void 커스텀_구분자를_포함하고_있을_경우_정상적으로_결과값을_출력한다() {
         assertSimpleTest(() -> {
             run("//^\\n1,2:3^1");
@@ -147,14 +155,6 @@ class ApplicationTest extends NsTest {
             assertThatThrownBy(() -> runException("//\\t\\n1"))
                     .isInstanceOf(IllegalArgumentException.class);
         });
-    }
-
-    @Test
-    void 기본_구분자와_커스텀_구분자_이외의_문자가_발견될_경우_예외가_발생한다() {
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("//$\\n1*"))
-                        .isInstanceOf(IllegalArgumentException.class)
-        );
     }
 
     @Test
