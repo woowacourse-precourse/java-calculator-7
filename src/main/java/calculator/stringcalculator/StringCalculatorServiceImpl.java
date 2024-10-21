@@ -3,21 +3,22 @@ package calculator.stringcalculator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class StringCalculatorServiceImpl implements StringCalculatorService {
 
     @Override
     public void validateInputForm(String input) {
-        if (input.matches("//(.*)\\n(.*)$") || input.matches("^[0-9:,]*$")) {
-            return;
+        int startIndex = input.lastIndexOf("//");
+        int endIndex = input.lastIndexOf("\\n");
+        if (input.charAt(0) == '/') {
+            if (startIndex == -1 || endIndex == -1) {
+                throw new IllegalArgumentException();
+            }
         }
-        throw new IllegalArgumentException();
     }
 
     @Override
-    public String calculate(String input) {
+    public long calculate(String input) {
         List<String> delimiters = new ArrayList<>(Arrays.asList(":", ","));
 
         String delimiter =  extractDelimiter(input);
@@ -25,7 +26,7 @@ public class StringCalculatorServiceImpl implements StringCalculatorService {
 
         String[] stringNumbers = extractNumber(input, delimiters);
 
-        String result = addStringNumbers(stringNumbers);
+        long result = addStringNumbers(stringNumbers);
 
         return result;
     }
@@ -33,11 +34,12 @@ public class StringCalculatorServiceImpl implements StringCalculatorService {
     @Override
     public String extractDelimiter(String input) {
         String delimiter = "";
-        if(input.matches("//(.*)\\n(.*)$")) {
-            Pattern pattern = Pattern.compile("//(.*)\\n(.*)$");
-            Matcher matcher = pattern.matcher(input);
-
-            delimiter = matcher.group(1);
+        if (input.charAt(0) == '/') {
+            int startIndex = input.lastIndexOf("//");
+            int endIndex = input.lastIndexOf("\\n");
+            if (startIndex < endIndex) {
+                delimiter = input.substring(startIndex + 2, endIndex).trim();
+            }
         }
 
         return delimiter;
@@ -47,10 +49,10 @@ public class StringCalculatorServiceImpl implements StringCalculatorService {
     public String[] extractNumber(String input, List<String> delimiters) {
         String str = input;
 
-        if(input.matches("//(.*)\\n(.*)$")) {
-            Pattern pattern = Pattern.compile("//(.*)\\n(.*)$");
-            Matcher matcher = pattern.matcher(input);
-            str = matcher.group(2);
+        if (input.charAt(0) == '/') {
+            int startIndex = input.lastIndexOf("\\n");
+            str = input.substring(startIndex + 2).trim();
+
         }
 
         StringBuilder regex = new StringBuilder();
@@ -79,8 +81,11 @@ public class StringCalculatorServiceImpl implements StringCalculatorService {
     }
 
     @Override
-    public String addStringNumbers(String[] stringNumbers) {
-        String result = "";
+    public long addStringNumbers(String[] stringNumbers) {
+        long result = 0L;
+        for (int i = 0; i < stringNumbers.length; i++) {
+            result += Long.parseLong(stringNumbers[i]);
+        }
 
         return result;
     }
