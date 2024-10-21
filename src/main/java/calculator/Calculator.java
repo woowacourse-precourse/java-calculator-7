@@ -18,10 +18,11 @@
                 if (regExIndex == -1) {
                     throw new IllegalArgumentException("커스텀 구분자 선언 후 개행이 필요 합니다.");
                 }
-                regEx = input.substring(2, regExIndex);
-                if(regEx.isEmpty()){
+                String customDelimiter = input.substring(2, regExIndex-1);
+                if(customDelimiter.isEmpty()){
                     throw new IllegalArgumentException();
                 }
+                regEx += "|" + Pattern.quote(customDelimiter);
                 numbers = input.substring(regExIndex + 1);
             }
             return returnSum(splitNumbers(numbers, regEx));
@@ -31,7 +32,7 @@
             if(regEx.equals(DEFAULT_REGEX)){
                 return numbers.split("[,:]");
             }
-            return numbers.split(Pattern.quote(regEx));
+            return numbers.split(regEx);
         }
 
         // 숫자의 합을 계산 해준다
@@ -39,9 +40,13 @@
             List<Integer> parsedNumbers = new ArrayList<>();
 
             int sum = 0;
+            if(numbers == null || numbers.length == 0){
+                return 0;
+            }
+
             for (String num: numbers){
                 if(num.trim().isEmpty()){
-                    return 0;
+                    throw new IllegalArgumentException("숫자가 존재 하지 않는다.");
                 }
                 try{
                     int n = Integer.parseInt(num.trim());
@@ -50,7 +55,7 @@
                     }
                     parsedNumbers.add(n);
                 } catch (NumberFormatException e){
-                    throw new IllegalArgumentException("유효하지 않은 숫자 형식입니다.");
+                    throw new IllegalArgumentException("a유효하지 않은 숫자 형식입니다.");
                 }
 
             }
