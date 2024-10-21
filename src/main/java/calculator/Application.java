@@ -17,7 +17,6 @@ public class Application {
     public static void main(String[] args) {
 
 
-        try{
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String userInput = Console.readLine();
         String delimiter = "[,:]"; //기본 구분자
@@ -59,10 +58,6 @@ public class Application {
 
         System.out.println("결과 : "+sum);
 
-        }catch (IllegalArgumentException e){
-            System.err.println(e.getMessage());
-
-        }
 
 
     }
