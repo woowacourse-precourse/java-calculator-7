@@ -6,6 +6,7 @@ public class Application {
     public static void main(String[] args) {
         // 입력받기
         String input = Console.readLine();
+        add(input);
     }
     // 커스텀 구분자를 추가하는지 확인하는 함수
     private static boolean exist_custon_delimiter(String input) {
@@ -24,7 +25,19 @@ public class Application {
     }
     // 문자열 검증하는 함수
     private static void validate_str(String delimiter, String str) {
-
+        for(int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            if((c-'0'<0 || c-'0'>9) && !is_delimiter(c, delimiter)) {
+                throw new IllegalArgumentException("입력값을 다시 입력해주세요.");
+            }
+        }
+    }
+    // 특정 문자가 지정된 구분자들 중 하나인지 확인하는 함수
+    private static boolean is_delimiter(char c, String delimiter) {
+        for(int i = 0; i < delimiter.length(); i++) {
+            if(c==delimiter.charAt(i)) return true;
+        }
+        return false;
     }
     // 덧셈 연산을 하는 함수
     private static void add(String input) {
@@ -41,5 +54,7 @@ public class Application {
             delimiter = ",:";
             str_for_add = input;
         }
+        //문자열 검증하기
+        validate_str(delimiter, str_for_add);
     }
 }
