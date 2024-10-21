@@ -11,36 +11,36 @@ public class InputView {
     private InputView() {}
 
     public static String[] inputString() {
-        String customSeperator = "";
+        String customDelimiter = "";
         System.out.print(ViewMessage.INPUT_STRING);
         String input = Console.readLine();
         Console.close();
-        customSeperator = validate(input);
+        customDelimiter = validate(input);
 
-        return new String[]{input, customSeperator};
+        return new String[]{input, customDelimiter};
     }
 
     private static String validate(String input) {
-        String customSeperator = "";
+        String customDelimiter = "";
         StartWithCharacter.validate(input);
         EndWithCharacter.validate(input);
-        customSeperator = getCustomSeperator(input);
-        CheckCustomSeperatorPos.validate(input);
-        HasMultiCustomSeperators.validate(input, customSeperator);
-        HasNegativeNumber.validate(input, customSeperator);
+        customDelimiter = getCustomDelimiter(input);
+        CheckCustomDelimiterPos.validate(input);
+        HasMultiCustomDelimiters.validate(input, customDelimiter);
+        HasNegativeNumber.validate(input, customDelimiter);
 
-        return customSeperator;
+        return customDelimiter;
     }
 
-    private static String getCustomSeperator(String input) {
-        String seperator = "";
+    private static String getCustomDelimiter(String input) {
+        String delimiter = "";
         Pattern pattern = Pattern.compile("//(.+)\\\\n");
         Matcher matcher = pattern.matcher(input);
 
         if(matcher.find()) {
-            seperator = matcher.group(1);
+            delimiter = matcher.group(1);
         }
 
-        return seperator;
+        return delimiter;
     }
 }

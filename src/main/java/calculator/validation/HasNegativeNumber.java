@@ -6,8 +6,8 @@ import java.util.regex.Pattern;
 public class HasNegativeNumber {
     private HasNegativeNumber() {}
 
-    public static void validate(String input, String customSeperator) {
-        if(customSeperator.equals("-")) {
+    public static void validate(String input, String customDelimiter) {
+        if(customDelimiter.equals("-")) {
             return;
         }
 

@@ -8,8 +8,8 @@ public class AdderController {
     public void run() {
         String[] resultOfInput = getInputString();
         String input = resultOfInput[0];
-        String customSeperator = resultOfInput[1];
-        int result = calculate(input, customSeperator);
+        String customDelimiter = resultOfInput[1];
+        int result = calculate(input, customDelimiter);
         printResult(result);
     }
 
@@ -17,8 +17,8 @@ public class AdderController {
         return InputView.inputString();
     }
 
-    private int calculate(String input, String customSeperator) {
-        return Adder.makeResult(input, customSeperator);
+    private int calculate(String input, String customDelimiter) {
+        return Adder.makeResult(input, customDelimiter);
     }
 
     private void printResult(int result) {

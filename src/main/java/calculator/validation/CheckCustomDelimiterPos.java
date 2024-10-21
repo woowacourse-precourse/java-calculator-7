@@ -3,19 +3,19 @@ package calculator.validation;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CheckCustomSeperatorPos {
-    private CheckCustomSeperatorPos() {}
+public class CheckCustomDelimiterPos {
+    private CheckCustomDelimiterPos() {}
 
     public static void validate(String input) {
-        String seperator = "";
+        String delimiter = "";
         Pattern pattern = Pattern.compile("//(.+)\\\\n");
         Matcher matcher = pattern.matcher(input);
 
         if(matcher.find()) {
-            seperator = matcher.group(1);
+            delimiter = matcher.group(1);
         }
 
-        if(!seperator.equals("") && !input.substring(0, 5).equals("//" + seperator + "\\n")) {
+        if(!delimiter.equals("") && !input.substring(0, 5).equals("//" + delimiter + "\\n")) {
             throw new IllegalArgumentException();
         }
     }
