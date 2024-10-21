@@ -36,41 +36,16 @@
 
 # 클래스 및 구조 설계
 
-├───.gradle
-│   ├───8.7
-│   │   ├───checksums
-│   │   ├───dependencies-accessors
-│   │   ├───executionHistory
-│   │   ├───expanded
-│   │   ├───fileChanges
-│   │   ├───fileHashes
-│   │   └───vcsMetadata
-│   ├───buildOutputCleanup
-│   └───vcs-1
-├───.idea
-│   └───inspectionProfiles
-├───gradle
-│   └───wrapper
-├───out
-│   ├───production
-│   │   └───classes
-│   │       └───calculator
-│   │           ├───controller
-│   │           ├───model
-│   │           └───view
-│   └───test
-│       └───classes
-│           └───calculator
-└───src
-    ├───main
-    │   └───java
-    │       └───calculator
-    │           ├───controller
-    │           ├───model
-    │           └───view
-    └───test
-        └───java
-            └───calculator
+src
+├───main
+│   └───java
+│       └───calculator
+│           ├───controller
+│           ├───model
+│           └───view
+└───test
+    └───java
+        └───calculator
 
 
 
