@@ -52,4 +52,21 @@ public class StringAddCalculator {
             "\n")) // 빈 문자열과 '//' 제거
         .toArray(String[]::new);
   }
+
+  // 추출한 숫자 덧셈
+  private int sumNumbers(String[] numbers) {
+    int sum = 0;
+    for (String number : numbers) {
+      try {
+        int num = Integer.parseInt(number);
+        if (num < 0) {
+          throw new IllegalArgumentException("음수는 허용되지 않습니다.");
+        }
+        sum += num;
+      } catch (NumberFormatException e) {
+        throw new IllegalArgumentException("잘못된 숫자 형식입니다: " + number);
+      }
+    }
+    return sum;
+  }
 }
