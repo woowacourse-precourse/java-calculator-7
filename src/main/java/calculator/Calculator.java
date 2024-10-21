@@ -17,14 +17,21 @@ public class Calculator {
             System.out.println("결과: 0");
             return;
         }
-        // 구분자로 문자열 분리, 저장
-        String[] splitNumbers = str.split(delimiter.toString());
 
-        // 하나씩 합산
-        for (int i = 0; i < splitNumbers.length; i++) {
-            sum += Integer.parseInt(splitNumbers[i]);
+        try {
+
+            // 구분자로 문자열 분리, 저장
+            String[] splitNumbers = str.split(delimiter.toString());
+
+            // 하나씩 합산
+            for (int i = 0; i < splitNumbers.length; i++) {
+                sum += Integer.parseInt(splitNumbers[i]);
+            }
+
+            // 출력
+            System.out.println("결과: " + sum);
+        } catch (NumberFormatException e){
+            throw new IllegalArgumentException("형식이 잘못되었습니다");
         }
-        // 출력
-        System.out.println("결과: " + sum);
     }
 }
