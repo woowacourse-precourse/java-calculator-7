@@ -6,16 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = readLine();
-        input = input.isEmpty() ? "0" : input;
-        String delimiter = "";
-
+        String delimiter;
 
         if(input.contains("\\n")) {
             delimiter = getDelimiter(input.substring(0, input.indexOf("\\n") + 2) );
@@ -24,7 +21,7 @@ public class Application {
         } else {
            delimiter = getDelimiter("");
         }
-
+        input = input.isEmpty() ? "0" : input;
         int answer = 0;
         String[] nums = input.split(delimiter);
 
