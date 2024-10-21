@@ -72,10 +72,6 @@
 
     → String을 regex을 바탕으로 split해서 return한다.
 
-  - String `createDelimiterRegex`(String input)
-
-    → String을 regex에서 사용가능한 형태로 변환해서 return 한다.
-
   - String `removeCustomDelimiterFromOriginal` (String input)
 
     → String중에서 customDelimiter가 있다면 제거해서 return한다.
