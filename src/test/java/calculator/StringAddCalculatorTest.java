@@ -73,4 +73,15 @@ public class StringAddCalculatorTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("소수는 허용되지 않습니다: 2.5");
     }
+
+    @Test
+    void 잘못된_구분자_포맷_사용시_예외가_발생한다() {
+        // given
+        String input = "//;1;2;3";
+
+        // when, then
+        assertThatThrownBy(() -> StringAddCalculator.add(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("잘못된 구분자 포맷입니다. 형식은 //[구분자]\\n 입니다.");
+    }
 }

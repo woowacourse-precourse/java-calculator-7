@@ -9,6 +9,9 @@ public class StringAddCalculator {
             return 0;
         }
 
+        // 구분자 포맷 확인 후 추출
+        String delimiter = DelimiterProcessor.extractDelimiter(input);
+
         // 커스텀 구분자 사용 시 길이 검증
         if (input.startsWith("//")) {
             InputValidator.validateCustomDelimiterInputLength(input);
