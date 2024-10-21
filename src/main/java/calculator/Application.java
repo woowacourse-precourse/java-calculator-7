@@ -13,11 +13,24 @@ public class Application {
             System.out.println("결과 : " + sum);
         } else {
             String[] inputs = stringSplit(input);
-            for (String str : inputs) {
-                System.out.println(str);
+            int[] numbers = isPositiveNum(inputs);
+            for (int number : numbers) {
+                System.out.println(number);
             }
         }//if end
     }//main() end
+
+    private static int[] isPositiveNum(String[] inputs) {
+        int[] numbers = new int[inputs.length];
+        for (int i = 0; i < inputs.length; i++) {
+            int num = Integer.parseInt(inputs[i]);
+            if (num < 0) {
+                throw new IllegalArgumentException("음수는 입력하실 수 없습니다");
+            }//if end
+            numbers[i] = num;
+        }//for end
+        return numbers;
+    }//isPositiveNum() end
 
     private static String[] stringSplit(String input){
         if(input.startsWith("//")){
