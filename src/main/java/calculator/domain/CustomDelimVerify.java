@@ -1,11 +1,12 @@
 package calculator.domain;
 
 import calculator.domain.constant.CustomDelimBracket;
+import calculator.domain.constant.Unit;
 
 public class CustomDelimVerify {
 
     private static Boolean suitableLength(String candidate) {
-        return candidate.length() >= 5;
+        return candidate.length() >= Unit.CUSTOM_DELIM_EXPRESSION_LENGTH.getValue();
     }
 
     public static Boolean coveredBracket(String candidate) {
