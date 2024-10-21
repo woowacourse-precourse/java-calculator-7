@@ -66,6 +66,7 @@ public class Application {
     }
 
     public static void main(String[] args) {
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
         String str = Console.readLine();
         long result = 0;
         List<Integer> nums;
@@ -75,7 +76,8 @@ public class Application {
             result = plusNums(nums);
         }
 
-        System.out.println(result);
+        System.out.println("결과 : " + result);
+
 
     }
 }
