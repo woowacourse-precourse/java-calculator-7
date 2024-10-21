@@ -2,6 +2,7 @@ package calculator.command;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import calculator.service.command.SumCommand;
 import org.junit.jupiter.api.Test;
 
 class SumCommandTest {

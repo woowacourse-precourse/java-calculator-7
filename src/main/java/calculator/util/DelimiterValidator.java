@@ -1,5 +1,6 @@
 package calculator.util;
 
+import static calculator.util.Constants.CUSTOM_DELIMITER_PATTERN;
 import static calculator.util.Constants.DELIMITER_END_PATTERN;
 import static calculator.util.Constants.DELIMITER_START_PATTERN;
 
@@ -22,6 +23,13 @@ public class DelimiterValidator {
         validate();
     }
 
+    public static void isIncorrectlyPlacedDelimiter(String input) {
+        Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(input);
+        if (matcher.find()) {
+            throw new IllegalArgumentException(Exception.INCORRECT_DELIMITER_PLACEMENT.getMessage());
+        }
+    }
+
     public void validate() {
         if (invalidCustomDelimiterPattern()) {
             throw new IllegalArgumentException(Exception.INVALID_CUSTOM_DELIMITER.getMessage());
@@ -31,9 +39,6 @@ public class DelimiterValidator {
         }
         if (hasNumericCharacter()) {
             throw new IllegalArgumentException(Exception.NUMERIC_CUSTOM_DELIMITER.getMessage());
-        }
-        if (isIncorrectlyPlacedDelimiter()) {
-            throw new IllegalArgumentException(Exception.INCORRECT_DELIMITER_PLACEMENT.getMessage());
         }
         if (delimiter.length() > 1) {
             throw new IllegalArgumentException(Exception.CUSTOM_DELIMITER_TOO_LONG.getMessage());
@@ -45,20 +50,10 @@ public class DelimiterValidator {
     }
 
     private boolean hasNumericCharacter() {
-        return matcher.start() == 0 && delimiter.matches(".*"+DIGIT_PATTERN+".*");
-    }
-
-    private boolean isIncorrectlyPlacedDelimiter() {
-        int firstDigitIndex = findFirstDigitIndex();
-        return firstDigitIndex != -1 && firstDigitIndex < matcher.end();
+        return matcher.start() == 0 && delimiter.matches(".*" + DIGIT_PATTERN + ".*");
     }
 
     private boolean isDelimiterEndPattern(int endIndex) {
         return input.length() >= endIndex + 2 && input.startsWith(DELIMITER_END_PATTERN, endIndex);
-    }
-
-    private int findFirstDigitIndex() {
-        Matcher digitMatcher = DIGIT_PATTERN.matcher(input);
-        return digitMatcher.find() ? digitMatcher.start() : -1;
     }
 }

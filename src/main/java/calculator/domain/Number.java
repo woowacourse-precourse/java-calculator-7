@@ -27,7 +27,7 @@ public class Number {
     private long parseLong(String number) {
         try {
             return Long.parseLong(number);
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             throw new IllegalArgumentException(INVALID_FORMAT.getMessage());
         }
     }
