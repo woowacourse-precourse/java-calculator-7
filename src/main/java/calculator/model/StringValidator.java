@@ -8,8 +8,6 @@ public class StringValidator {
 	private static final String COMMA_DELIMITER = ",";
 	private static final String COLON_DELIMITER = ":";
 	private static final String ERROR_MESSAGE = "잘못된 문자열 형식입니다.";
-	private static final int DIGIT = 0;
-	private static final int DELIMITER = 1;
 	private static final int INPUT_START_INDEX = 0;
 	private static final int DELIMITER_LENGTH = 1;
 
