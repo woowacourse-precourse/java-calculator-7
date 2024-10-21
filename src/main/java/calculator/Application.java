@@ -23,15 +23,17 @@ public class Application {
         String delimiters = ",|:";
         String regex = "^[\\D]+$";
 
+        int i = 0;
+        int start = 0;
+        int end = 0;
+
         // 3-1. 커스텀 구분자가 지정되었다면 그 값이 유효한지 확인 후 구분자에 추가
         if (words.startsWith("//")) {
-            int i = 0;
-            int start = 0;
 
             // while문으로 여러 개의 커스텀 구분자를 탐색할 수 있도록 함
             while (i < words.length()) {
                 if (words.startsWith("//", start)) {
-                    int end = words.indexOf("\\n", start);
+                    end = words.indexOf("\\n", start);
                     if (end == -1) {
                         throw new IllegalArgumentException();
                     }
