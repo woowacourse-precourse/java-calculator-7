@@ -59,6 +59,14 @@ class StringAdditionCalculator {
     }
 
     private int parseAndValidateNumber(String piece) {
-        return 0;
+        try {
+            int num = Integer.parseInt(piece);
+            if (num < 0) {
+                throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+            }
+            return num;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("유효하지 않은 숫자 형식입니다.");
+        }
     }
 }
