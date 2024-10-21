@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 
 public class InputHandler {
     private String inputText;
+    private String separators = ",;";
 
     private void read() {
         inputText = "";
@@ -21,6 +22,13 @@ public class InputHandler {
 
     private boolean haveCustomSeparator(String text) {
         return Pattern.matches("^//.*\\\\n.*$", text);
+    }
+
+    private void addCustomSeparator(String separatorText) {
+        separatorText = separatorText.substring(2);
+        for (char separator : separatorText.toCharArray()) {
+            separators = separators + separator;
+        }
     }
 
 }
