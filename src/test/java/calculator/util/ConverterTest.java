@@ -16,7 +16,7 @@ class ConverterTest {
     @MethodSource("numbers")
     void convertToInteger(List<String> input, List<Integer> expected) {
         Converter converter = new Converter();
-        List<Integer> numbers = converter.convert(input);
+        List<Integer> numbers = converter.convertToInteger(input);
         assertEquals(expected, numbers);
     }
 
@@ -32,6 +32,6 @@ class ConverterTest {
     @Test
     void checkInvalidNumbers() {
         Converter converter = new Converter();
-        assertThrows(IllegalArgumentException.class, () -> converter.convert(List.of("1a", "2b", "[3c")));
+        assertThrows(IllegalArgumentException.class, () -> converter.convertToInteger(List.of("1a", "2b", "[3c")));
     }
 }
