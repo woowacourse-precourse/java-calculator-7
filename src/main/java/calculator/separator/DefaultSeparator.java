@@ -29,12 +29,12 @@ public class DefaultSeparator {
 
     private static boolean containsInvalidDelimiter(String input, DelimiterStorage delimiterStorage) {
 
-        String allowedSeparators = delimiterStorage.getDelimiters()
+        String allowedDelimiters = delimiterStorage.getDelimiters()
                 .stream()
                 .map(Pattern::quote)
                 .collect(Collectors.joining("|"));
 
-        String regex = "^[\\d" + allowedSeparators + "]+$";
+        String regex = "^[\\d" + allowedDelimiters + "]+$";
 
         return !Pattern.matches(regex, input);
     }
