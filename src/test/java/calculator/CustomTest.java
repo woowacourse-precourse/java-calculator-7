@@ -71,8 +71,8 @@ public class CustomTest extends NsTest {
     void 커스텀_구분자_숫자로_지정() {
         // 커스텀 구분자로 숫자를 사용한 경우 예외 없이 처리
         assertSimpleTest(() -> {
-            run("//1\\n11231");
-            assertThat(output()).contains("결과 : 6");
+            run("//1\\n3151231");
+            assertThat(output()).contains("결과 : 31");
         });
     }
 
