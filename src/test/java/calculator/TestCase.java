@@ -48,6 +48,14 @@ public class TestCase extends NsTest {
         });
     }
 
+    @Test
+    void 정수_커스텀_작동_테스트() {
+        assertSimpleTest(() -> {
+            run("//3\\n13233");
+            assertThat(output()).contains("결과 : 3");
+        });
+    }
+
 
     @Override
     protected void runMain() {
