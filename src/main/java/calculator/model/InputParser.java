@@ -5,19 +5,19 @@ import java.util.List;
 
 public class InputParser {
     private final String delimiterRegex;
-    private final String numbers;
+    private final String numbersAndDelimiters;
 
-    public InputParser(String delimiterRegex, String numbers) {
+    public InputParser(String delimiterRegex, String numbersAndDelimiters) {
         this.delimiterRegex = delimiterRegex;
-        this.numbers = numbers;
+        this.numbersAndDelimiters = numbersAndDelimiters;
     }
 
     public List<String> parse() {
-        if (numbers.isEmpty()) {
+        if (numbersAndDelimiters.isEmpty()) {
             return List.of();
         }
 
-        String[] parsedNumbers = numbers.split(delimiterRegex, -1);
+        String[] parsedNumbers = numbersAndDelimiters.split(delimiterRegex, -1);
         validateTokens(parsedNumbers);
 
         return List.of(parsedNumbers);

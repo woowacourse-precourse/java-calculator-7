@@ -13,16 +13,16 @@ public class UserInput {
 
     public List<Long> parser() {
         String delimiterRegex = extractDelimiterRegex(input);
-        String numbers = extractNumbers(delimiterRegex);
+        String numbersAndDelimiters = filterNumbersAndDelimiters(delimiterRegex);
 
-        return convertToLongList(new InputParser(delimiterRegex, numbers).parse());
+        return convertToLongList(new InputParser(delimiterRegex, numbersAndDelimiters).parse());
     }
 
     private String extractDelimiterRegex(String userInput) {
         return new Delimiter(userInput).getDelimiterRegex();
     }
 
-    private String extractNumbers(String delimiterRegex) {
+    private String filterNumbersAndDelimiters(String delimiterRegex) {
         if (delimiterRegex.equals(Delimiter.DEFAULT_DELIMITERS)) {
             return input;
         }
@@ -30,7 +30,7 @@ public class UserInput {
         String pattern = String.join("", Delimiter.CUSTOM_DELIMITERS_START, "(.)", Delimiter.CUSTOM_DELIMITERS_END,
                 "(.*)");
         Matcher m = Pattern.compile(pattern).matcher(input);
-        
+
         return m.find() ? m.group(2) : "";
     }
 
