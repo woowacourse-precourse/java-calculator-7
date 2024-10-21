@@ -1,4 +1,4 @@
-package calculator;
+package calculator.util;
 
 import calculator.exception.InvalidDelimiterException;
 

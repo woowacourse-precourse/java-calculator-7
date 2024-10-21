@@ -1,5 +1,9 @@
 package calculator;
 
+import calculator.service.CalculatorManager;
+import calculator.view.CalculatorInput;
+import calculator.view.CalculatorOutput;
+
 public class Calculator {
     private final CalculatorInput calculatorInput;
     private final CalculatorOutput calculatorOutput;
