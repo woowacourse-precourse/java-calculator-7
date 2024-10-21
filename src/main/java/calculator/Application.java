@@ -43,6 +43,9 @@ public class Application {
 
         int sum = 0;
         for (String number : numbers) {
+            if(Integer.parseInt(number)<0){
+                throw new IllegalArgumentException("음수를 입력했습니다.");
+            }
             try {
                 sum += Integer.parseInt(number);
             } catch (NumberFormatException e) {
