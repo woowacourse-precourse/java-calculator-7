@@ -32,7 +32,7 @@ public class Processor {
         return numbers.calculateSum();
     }
 
-    public String extractCustomDelimiter() {
+    private String extractCustomDelimiter() {
         int startIndexOfCustomDelimiter = CUSTOM_DELIMITER_PREFIX.length();
         int endIndexOfCustomDelimiter = input.indexOf(CUSTOM_DELIMITER_SUFFIX);
         String customDelimiter = input.substring(startIndexOfCustomDelimiter, endIndexOfCustomDelimiter);
