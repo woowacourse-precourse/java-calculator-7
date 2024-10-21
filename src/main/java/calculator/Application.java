@@ -35,11 +35,15 @@ public class Application {
         int sum = 0;
         for (String token : tokens) {
             if (!token.isEmpty()) {
-                int number = Integer.parseInt(token.trim());
-                if (number < 0) {
-                    throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
+                try {
+                    int number = Integer.parseInt(token.trim());
+                    if (number < 0) {
+                        throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
+                    }
+                    sum += number;
+                } catch (NumberFormatException e) {
+                    throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다: " + token);
                 }
-                sum += number;
             }
         }
         return sum;
