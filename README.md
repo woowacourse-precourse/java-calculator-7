@@ -8,4 +8,4 @@
 - [x] 커스텀 구분자를 지정하는 부분이 문자열 앞부분에 위치하지 않을 경우 IllegalArgumentException을 발생시킨 후 애플리케이션은 종료되어야 한다.
 - [x] 커스텀 구분자가 숫자일 경우 IllegalArgumentException을 발생시킨 후 애플리케이션은 종료되어야 한다.
 - [x] 구분자로 구분된 각 숫자 값 중 음수를 전달하는 경우 IllegalArgumentException을 발생시킨 후 애플리케이션은 종료되어야 한다.
-- [ ] 커스텀 구분자는 한 글자를 초과할 경우 IllegalArgumentException을 발생시킨 후 애플리케이션은 종료되어야 한다.
+- [x] 커스텀 구분자는 한 글자를 초과할 경우 IllegalArgumentException을 발생시킨 후 애플리케이션은 종료되어야 한다.
