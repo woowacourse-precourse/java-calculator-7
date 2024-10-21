@@ -61,10 +61,10 @@ public class Application {
 
             System.out.println("결과 : " + total);
         } catch (IllegalArgumentException e) {
-            //throw new IllegalArgumentException();
+            throw new IllegalArgumentException();
 
 
-            System.out.println("입력이 올바르지 않습니다." + e.getMessage());
+           //  System.out.println("입력이 올바르지 않습니다." + e.getMessage());
         }
     }
 }
