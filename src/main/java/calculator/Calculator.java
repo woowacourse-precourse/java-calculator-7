@@ -20,7 +20,7 @@ public class Calculator {
         delimeterList.add(':');
 
         String calculateZone = input;
-        if (hasCustomDelimeter(input)) {
+        if (hasCustomDelimiter(input)) {
             delimeterList.add(input.charAt(2));
 
             if (input.length() <= 5) {
@@ -60,7 +60,7 @@ public class Calculator {
         delimeterList.add(':');
 
         String calculateZone = input;
-        if (hasCustomDelimeter(input)) {
+        if (hasCustomDelimiter(input)) {
             delimeterList.add(input.charAt(2));
             calculateZone = input.substring(5);
         }
@@ -78,7 +78,7 @@ public class Calculator {
         return total;
     }
 
-    private boolean hasCustomDelimeter(String input) {
+    private boolean hasCustomDelimiter(String input) {
         if (input.length() < 5) {
             return false;
         }

@@ -35,6 +35,10 @@
 + 덧셈 기능 결과를 출력한다.
 
 ## 업데이트 노트
+### v.3.0.1 hasCustomDelimiter 메서드 이름 수정
+- As is : hasCustomDelimeter
+- To be : hasCustomDelimiter
+
 ### v.3.0.0 Application, Calculator 클래스 역할 분리
 - Application 클래스는 사용자 입력 처리 및 결과 출력만 담당하도록 역할 분리
 - Calculator 클래스는 입력 유효성 검사 및 덧셈 계산 로직을 담당하도록 역할 분리
