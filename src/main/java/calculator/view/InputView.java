@@ -5,15 +5,14 @@ import camp.nextstep.edu.missionutils.Console;
 public class InputView {
 
     public String read() {
-        String input;
         try {
             System.out.println("덧셈할 문자열을 입력해 주세요.");
-            input = Console.readLine();
+            String input = Console.readLine();
             validate(input);
+            return input;
         } finally {
             Console.close();
         }
-        return input;
     }
 
     private void validate(final String input) {
