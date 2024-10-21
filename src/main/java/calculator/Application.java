@@ -27,11 +27,11 @@ public class Application {
 
             if (matcher.find()) {
                 String customDelimiter = matcher.group(1).trim();
+                if (customDelimiter.isEmpty()) throw new IllegalArgumentException("커스텀 구분자가 필요합니다.");
                 String numbers = matcher.group(2);
                 return numbers.split(Pattern.quote(customDelimiter));
-            } else {
-                throw new IllegalArgumentException("입력된 구분자 뒤 숫자가 존재하지 않습니다.");
             }
+            else throw new IllegalArgumentException("입력한 구분자 뒤 숫자가 존재하지 않습니다.");
         }
         return input.split(",|;");
     }
