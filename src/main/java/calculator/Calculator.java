@@ -15,7 +15,7 @@ public class Calculator {
             // 구분자 설정 인덱스 찾기
             int endIndex = str.indexOf("\\n");
             if (endIndex == -1) {
-                throw new IllegalArgumentException("구분자 입력이 잘못되었습니다.");
+                throw new IllegalArgumentException("커스텀 구분자 형식이 올바르지 않습니다.");
             }
 
             // 커스텀 구분자를 구분자 리스트에 추가
@@ -38,7 +38,7 @@ public class Calculator {
         String str = Console.readLine();
 
         if(str.isEmpty()){
-            System.out.println("결과: 0");
+            System.out.println("결과 : 0");
             return;
         }
 
@@ -56,7 +56,7 @@ public class Calculator {
             }
 
             // 출력
-            System.out.println("결과: " + sum);
+            System.out.println("결과 : " + sum);
         } catch (NumberFormatException e){
             throw new IllegalArgumentException("형식이 잘못되었습니다");
         }
@@ -65,7 +65,7 @@ public class Calculator {
 
     // 유효성 검사 메소드
     public void isvalidNumber(int splitNumber){
-        if(splitNumber<0) throw new IllegalArgumentException("음수는 들어올수없습니다.");
+        if(splitNumber<0) throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
         // 추가적인 예외처리
     }
 }
