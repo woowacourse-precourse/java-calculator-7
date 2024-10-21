@@ -46,9 +46,15 @@ public class Application {
 
             if (s.trim().isEmpty()) {
                 throw new IllegalArgumentException("빈 값이 포함되어 있습니다.");
+            }//;\n1;2;3
+
+            int number = Integer.parseInt(s);
+
+            if(number<0){
+                throw new IllegalArgumentException("음수는 입력할 수 없습니다");
             }
 
-            sum += Integer.parseInt(s);
+            sum += number;
         }
 
         System.out.println("결과 : "+sum);
