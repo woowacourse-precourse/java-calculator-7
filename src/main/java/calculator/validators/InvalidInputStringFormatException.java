@@ -14,27 +14,27 @@ public class InvalidInputStringFormatException {
     //스페이스만 입력되었는지 확인
     public static void checkIfStringWhiteSpace(String operandStr){
         if(!operandStr.isEmpty() && operandStr.trim().isEmpty()){
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("공백만 입력되었습니다.");
         }
     }
 
     // 문자열의 처음이 숫자이거나 //인지 확인
     public static void checkStartingPoint(String operandStr){
         if(!(operandStr.startsWith(CUSTOM_DELIMITER_START_WRAPPER) || Character.isDigit(operandStr.charAt(0))))
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("문자열의 처음 형식이 올바르지 않습니다.");
     }
 
     //문자열의 마지막이 숫자로 끝나는지 확인
     public static void checkEndPoint(String operandStr){
         char endOfString = operandStr.charAt(operandStr.length() - 1);
         if(!Character.isDigit(endOfString))
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("문자열의 마지막이 숫자가 아닙니다.");
     }
 
     // 커스텀 문자를 구분하는 //뒤에 \\n이 오는지 확인 + 구분자 사이에 문자가 입력되었는지 확인
     public static void checkFrontAndBackOfCustomDelimiter(String operandStr){
         if(operandStr.startsWith(CUSTOM_DELIMITER_START_WRAPPER) && !operandStr.startsWith(CUSTOM_DELIMITER_END_WRAPPER, 3)){
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("커스텀 문자를 입력하는 형식이 잘못되었습니다.");
         }
     }
 }
