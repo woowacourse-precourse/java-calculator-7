@@ -19,7 +19,7 @@ public class Application {
     public static String validating(String input) {
 
         // 빈 입력 검사
-        if (input == "") {
+        if (input == null || input.trim().isEmpty()) {
             return  "";
         }
 
