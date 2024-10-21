@@ -7,6 +7,7 @@ import java.util.List;
 
 public class Application {
     private static final String MSG_GUIDE_INPUT = "덧셈할 문자열을 입력해 주세요.\n";
+    private static final String MSG_GUIDE_OUTPUT = "결과 : ";
 
     public static void main(String[] args) {
         int inputNum = 0;
@@ -64,5 +65,10 @@ public class Application {
         for (Integer i : inputNumbers) {
             result += i;
         }
+
+        // 4. 출력
+        // 4-1. 출력 안내 메시지 출력
+        // 4-2. 계산 결과 출력
+        System.out.println(MSG_GUIDE_OUTPUT + result);
     }
 }
