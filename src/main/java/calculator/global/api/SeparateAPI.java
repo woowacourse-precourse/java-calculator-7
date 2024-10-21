@@ -4,6 +4,7 @@ import calculator.domain.Number;
 import calculator.domain.Separator;
 import calculator.global.config.BeanFactory;
 
+import static calculator.global.constants.StaticString.ERROR_MESSAGE;
 import static calculator.global.constants.StaticString.REGEX_PATTERN;
 
 public class SeparateAPI {
@@ -54,7 +55,7 @@ public class SeparateAPI {
 			} else if(validSeparator(sentence.charAt(idx))) {
 				idx++;
 			} else {
-				throw new IllegalArgumentException("올바른 구분자가 아닙니다: " + sentence.charAt(idx));
+				throw new IllegalArgumentException(ERROR_MESSAGE.getString() + sentence.charAt(idx));
 			}
 		}
 	}
