@@ -30,4 +30,11 @@ public class StringCalculator {
         }
         return sum;
     }
+
+    private int changeNumber(String token) {
+        if (token.isEmpty()) {
+            return 0;
+        }
+        return Integer.parseInt(token);
+    }
 }
