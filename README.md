@@ -32,3 +32,17 @@
 
 2. 매개변수로 데이터를 넘길때 객체 단위로 넘기는 것이 좋은지? 최대한 매개변수 타입을 정해서(int, String) 보내주는 것이 좋은지
 
+<br>
+
+
+### 발생 오류 기록
+
+1. 기존 구문자 `;` 인줄 알았으나 `:`
+2. 만약 `//;\\n1` 이와 같은값 들어왔을때 `\n` 개행으로 착각했어서 에러남
+
+3. `Exception in thread "main" java.util.regex.PatternSyntaxException: Unescaped trailing backslash near index 6
+   :|,|;\`
+
+정규표현식을 사용하는데 있어, 만약 입력값에 \\ 와 같은 백슬래시가 있다면 문자로서 처리하기 위해 (\\\\) 를 정규표현식에 넣어줘야 한다
+
+
