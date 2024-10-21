@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class HasNegativeNumber {
-    private HasNegativeNumber() {};
+    private HasNegativeNumber() {}
 
     public static void validate(String input, String customSeperator) {
         if(customSeperator.equals("-")) {

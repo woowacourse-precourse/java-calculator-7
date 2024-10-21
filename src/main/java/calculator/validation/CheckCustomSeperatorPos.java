@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CheckCustomSeperatorPos {
-    private CheckCustomSeperatorPos() {};
+    private CheckCustomSeperatorPos() {}
 
     public static void validate(String input) {
         String seperator = "";

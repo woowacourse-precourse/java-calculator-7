@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class EndWithCharacter {
-    private EndWithCharacter() {};
+    private EndWithCharacter() {}
 
     public static void validate(String input) {
         Pattern pattern = Pattern.compile(".*[^0-9]$");

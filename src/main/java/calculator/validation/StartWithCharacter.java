@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StartWithCharacter {
-    private StartWithCharacter() {};
+    private StartWithCharacter() {}
 
     public static void validate(String input) {
         Pattern pattern = Pattern.compile("^(?!//(.)\\\\n)(?!\\d).*");
