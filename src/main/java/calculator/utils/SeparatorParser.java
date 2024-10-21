@@ -8,12 +8,12 @@ public class SeparatorParser {
     private final List<String> separator = new ArrayList<>();
     private String removedString = "";
 
-    private void addBasicSeparator() {
+    public void addBasicSeparator() {
         separator.add(",");
         separator.add(":");
     }
 
-    private void parseCustomSeparator(String inputString) {
+    public void parseCustomSeparator(String inputString) {
         Stack<String> buffer = new Stack<>();
         boolean flag = false;
         int idx = 0;

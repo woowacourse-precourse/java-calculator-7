@@ -18,7 +18,7 @@ public class OperandParser {
         return -1;
     }
 
-    private void parseOperand(String removedString, List<String> separator) {
+    public void parseOperand(String removedString, List<String> separator) {
         String tmpOperand = "";
 
         for (int i = 0; i < removedString.length(); i++) {
