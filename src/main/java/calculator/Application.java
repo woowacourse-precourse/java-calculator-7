@@ -12,9 +12,17 @@ public class Application {
             sum = 0;
             System.out.println("결과 : " + sum);
         } else {
-            System.out.println("공백이 아닙니다.");
+            String[] inputs = stringSplit(input);
+            for (String str : inputs) {
+                System.out.println(str);
+            }
         }//if end
     }//main() end
+
+    private static String[] stringSplit(String input){
+            return input.split(",|:");
+    }//stringSplit() end
+
 
     private static boolean nullCheck(String input) {
         return input.isEmpty() || input.trim().isEmpty();
