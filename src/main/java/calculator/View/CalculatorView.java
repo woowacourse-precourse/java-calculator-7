@@ -25,8 +25,12 @@ public class CalculatorView {
         }
     }
 
+    /**
+     * 계산한 결과를 출력합니다.
+     * @param result
+     */
     public void showResult(int result) {
-        // TODO: 계산 결과를 출력
+        System.out.println("결과 : " + result);
     }
 
     /**

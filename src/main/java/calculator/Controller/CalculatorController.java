@@ -1,5 +1,6 @@
 package calculator.Controller;
 
+import calculator.Model.Calculator;
 import calculator.Utils.StringUtils;
 import calculator.View.CalculatorView;
 
@@ -7,8 +8,10 @@ import java.io.Console;
 
 public class CalculatorController {
     private CalculatorView view;
+    private Calculator model;
 
-    public CalculatorController(CalculatorView view) {
+    public CalculatorController(Calculator model, CalculatorView view) {
+        this.model = model;
         this.view = view;
     }
 
@@ -18,7 +21,8 @@ public class CalculatorController {
         validateInput(input);
 
         try {
-            //TODO: 입력 받은 내용 더하기
+            int result = model.add(input);
+            view.showResult(result);
         } catch (IllegalArgumentException e) {
             view.showError("잘못된 입력입니다. 다시 시도해주세요.");
         }
