@@ -1,7 +1,5 @@
 package calculator;
 
-import java.util.Arrays;
-
 import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
@@ -21,24 +19,31 @@ public class Application {
             return 0;
         }
         int sum = 0;
-        String separator = "[,:]";  
-        if(input.startsWith("//")) {
+        String separator = "";
+        if(Character.isDigit(input.charAt(0))) {
+        	separator = "[,:]";  
+        	
+        }
+        else if(input.startsWith("//")) {
             separator = input.substring(2, input.indexOf("\\n"));
             input = input.substring(input.indexOf("\\n")+2);
-         }
+         }else {
+     		throw new IllegalArgumentException();
+     	}
 
          
          String[] answer = input.split(separator);
          for (int i = 0; i < answer.length; i++) {
-             String number = answer[i];
              try {
-                 if (Integer.parseInt(number) > 0) {
-                      sum += Integer.parseInt(number);
-                  } else {
-                      throw new IllegalArgumentException("잘못된 입력값이 있습니다: " + number);
+                 if (answer[i] == null || answer[i].isEmpty()) {
+                	 sum+=0;
+                  } else if(Integer.parseInt(answer[i]) >= 0){
+                	  sum += Integer.parseInt(answer[i]);
+                  }else {
+                      throw new IllegalArgumentException("잘못된 입력값이 있습니다: " + answer[i]);
                   }
               } catch (NumberFormatException e) {
-                  throw new IllegalArgumentException("잘못된 입력값이 있습니다: " + number);
+                  throw new IllegalArgumentException("잘못된 입력값이 있습니다: " + answer[i]);
               }
          }
          return sum;
