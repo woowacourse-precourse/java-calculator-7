@@ -4,18 +4,14 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Application {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IllegalArgumentException {
         Application app = new Application();
         Calculate calculate = new Calculate();
 
         String input = app.getInputString();
 
-        try{
-            int sum = calculate.calculate(input);
-            app.printResult(sum);
-        }catch (IllegalArgumentException e){
-            System.out.println("에러 : "+e.getMessage());
-        }
+        int sum = calculate.calculate(input);
+        app.printResult(sum);
     }
 
     private String getInputString() {
@@ -34,7 +30,7 @@ public class Application {
 }
 
 
-class Calculate{
+class Calculate {
     public int calculate(String input) {
         String[] slice;
         if (input.startsWith("/")) {
