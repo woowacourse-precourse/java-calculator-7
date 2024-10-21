@@ -32,4 +32,9 @@ public class UserExpressionDivide {
         }
     }
 
+    public static UserExpression setDivideCustomDelimDisappear() {
+        userExpression.setEssentialExpression(userExpression.getRawExpression());
+        return userExpression;
+    }
+
 }
