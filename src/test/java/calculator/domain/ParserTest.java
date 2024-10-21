@@ -1,6 +1,7 @@
 package calculator.domain;
 
 import static calculator.domain.constant.errorMessage.ValueError.INVALID_VALUE_FORMAT;
+import static calculator.domain.constant.errorMessage.ValueError.MINUS_VALUE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -29,6 +30,17 @@ class ParserTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> parser.parseInput(input));
         assertEquals(INVALID_VALUE_FORMAT.getMessage(), exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("음수 값이 있으면 예외를 발생시킨다")
+    void throwsExceptionForNegativeNumbers() {
+        Parser parser = new Parser();
+        String input = "1,-2,3";
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> parser.parseInput(input));
+        assertEquals(MINUS_VALUE.getMessage(), exception.getMessage());
     }
 
 
