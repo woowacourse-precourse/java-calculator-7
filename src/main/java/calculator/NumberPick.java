@@ -2,15 +2,18 @@ package calculator;
 
 public class NumberPick {
     public static int[] pickNumbers(String[] numbers) {
-        int[] pickedNumbers = new int[numbers.length]; // 최대 숫자 개수로 초기화
-        int count = 0; // 실제 숫자의 개수 카운트
+        int[] pickedNumbers = new int[numbers.length];
+        int count = 0;
 
         for (String numberStr : numbers) {
             String trimmedNumber = numberStr.trim(); // 공백 제거
             if (!trimmedNumber.isEmpty()) {
-                System.out.println("추출된 문자열: " + trimmedNumber); // 추출된 문자열 확인
                 try {
-                    pickedNumbers[count++] = Integer.parseInt(trimmedNumber); // 문자열을 정수로 변환
+                    int number = Integer.parseInt(trimmedNumber); // 문자열을 정수로 변환
+                    if (number < 0) { // 음수 체크
+                        throw new IllegalArgumentException("음수는 입력할 수 없습니다: " + number);
+                    }
+                    pickedNumbers[count++] = number;
                 } catch (NumberFormatException e) {
                     throw new IllegalArgumentException("잘못된 숫자가 입력되었습니다: " + trimmedNumber);
                 }
