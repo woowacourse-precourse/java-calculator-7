@@ -6,12 +6,12 @@ import calculator.exception.InvalidInputException;
 import calculator.exception.SystemException;
 import java.util.function.Supplier;
 
-public class UserConsoleView {
+public class CalculatorSystem {
 	private final InputView inputView;
 	private final OutputView outputView;
 	private final Calculator calculator;
 
-	public UserConsoleView() {
+	public CalculatorSystem() {
 		inputView = new InputView();
 		outputView = new OutputView();
 		calculator = new Calculator();
