@@ -1,0 +1,20 @@
+- refactor(Input): 검증 로직 메서드로 분리
+- chore(Output): default 스펠링 수정
+- chore(CalculatorService): Calculator -> CalculatorService으로 이름 변경
+- docs(README): 테스트 코드 관련 체크리스트 수정
+- refactor(Numbers): 검증로직 private 변경 및 테스트 코드 작성
+- refactor(ALL): 가독성 좋게 패키지 구조 변경
+- docs(README): 구현된 기능 체크리스트에 반영
+- test(Application): 빈 문자열의 경우, 0 반환하는 테스트
+- refactor(DIContainer): DIContainer config 패키지 내부로 이동
+- feat(Application): DIContainer 적용
+- feat(CalculatorController): 입출력 로직 호출 및 덧셈 호출 로직 구현
+- feat(Calculator): 덧셈 호출 로직 구현
+- feat(Input): 입력값에서 숫자를 추출하는 기능 구현
+- feat(Input): 입력 받을 수 있는 기능 구현
+- feat(Output): 기본 출력값 출력하는 기능 추가
+- feat(DIContainer): DI 컨테이너를 통한 비즈니스 로직과 의존성 주입 로직 분리
+- feat(Output): 모든 출력에 관한 기능 구현
+- feat(Numbers): 숫자 목록 일급컬렉션 구현
+- docs(README): 기능 명세서 작성
+- feat: setup project
