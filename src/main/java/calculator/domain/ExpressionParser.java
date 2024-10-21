@@ -1,6 +1,6 @@
 package calculator.domain;
 
-import static calculator.constants.AppConstants.fixDelimiter;
+import static calculator.constants.AppConstants.FIX_DELIMITER;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -32,7 +32,7 @@ public class ExpressionParser {
     }
 
     private Set<Character> findDelimiters(String userExpression) {
-        Set<Character> delimiters = new HashSet<>(fixDelimiter);
+        Set<Character> delimiters = new HashSet<>(FIX_DELIMITER);
         if (!userExpression.startsWith("//")) {
             return delimiters;
         }

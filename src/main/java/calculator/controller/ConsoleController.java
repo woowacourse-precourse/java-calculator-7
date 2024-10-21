@@ -24,7 +24,7 @@ public class ConsoleController implements UserController {
     }
 
     private String getExpressionFromUser() {
-        userView.showMessage(AppConstants.requestMessage);
+        userView.showMessage(AppConstants.REQUEST_MESSAGE);
         try {
             return Console.readLine();
         } catch (NoSuchElementException e) {
@@ -33,7 +33,7 @@ public class ConsoleController implements UserController {
     }
 
     private void showResult() {
-        userView.showMessage(AppConstants.responseMessage + calculatorService.getExpressionResult());
+        userView.showMessage(AppConstants.RESPONSE_MESSAGE + calculatorService.getExpressionResult());
     }
 
     private void saveUserExpression(String expression) {
