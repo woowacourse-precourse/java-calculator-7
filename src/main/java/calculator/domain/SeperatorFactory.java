@@ -25,6 +25,6 @@ public class SeperatorFactory {
         seperatorBuilder.append(ESCAPE_CHAR)
                         .append(customSeperator);
 
-        return customSeperator.toString();
+        return seperatorBuilder.toString();
     }
 }
