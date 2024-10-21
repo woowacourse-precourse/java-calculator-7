@@ -33,4 +33,19 @@ class StringCalculatorServiceTest {
     void add_중복구분자_테스트() {
         assertEquals(6, calculatorService.add("1:2:3")); // 구분자가 중복되는 경우
     }
+
+    @Test
+    void add_커스텀_구분자_테스트_세미콜론() {
+        assertEquals(6, calculatorService.add("//;\n1;2;3")); // 커스텀 구분자 세미콜론 처리
+    }
+
+    @Test
+    void add_커스텀_구분자_테스트_파이프() {
+        assertEquals(10, calculatorService.add("//|\n2|3|5")); // 커스텀 구분자 파이프 처리
+    }
+
+    @Test
+    void add_기본_구분자와_커스텀_구분자_동시_테스트() {
+        assertEquals(12, calculatorService.add("//;\n3;4:5")); // 기본 구분자와 커스텀 구분자를 동시에 사용하는 경우
+    }
 }
