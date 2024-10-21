@@ -1,6 +1,6 @@
 package calculator;
 
-import util.Constants;
+import calculator.util.Constants;
 
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;

@@ -1,7 +1,7 @@
-package view;
+package calculator.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import util.Constants;
+import calculator.util.Constants;
 
 public class InputView {
 

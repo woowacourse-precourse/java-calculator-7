@@ -1,9 +1,9 @@
-package controller;
+package calculator.controller;
 
 import calculator.StringCalculator;
-import util.StringValidator;
-import view.InputView;
-import view.OutputView;
+import calculator.util.StringValidator;
+import calculator.view.InputView;
+import calculator.view.OutputView;
 
 public class CalculateController {
     public static void run(){

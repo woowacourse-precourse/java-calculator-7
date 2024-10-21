@@ -1,4 +1,4 @@
-package util;
+package calculator.util;
 
 public final class Constants {
     private Constants() {}
