@@ -110,9 +110,19 @@ public class CalculatorService {
                 number = "0";
             }
 
-            sum += Integer.parseInt(number);
+            sum = getSum(sum, number);
+
         }
 
+        return sum;
+    }
+
+    private static int getSum(int sum, String number) {
+        try {
+            sum += Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            throw new CalculatorException("잘못된 숫자 형식 입니다");
+        }
         return sum;
     }
 
