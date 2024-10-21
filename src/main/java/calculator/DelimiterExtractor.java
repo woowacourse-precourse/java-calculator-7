@@ -73,4 +73,7 @@ public class DelimiterExtractor {
         return extractCustomDelimiter();
     }
 
+    public String getText() {
+        return text;
+    }
 }

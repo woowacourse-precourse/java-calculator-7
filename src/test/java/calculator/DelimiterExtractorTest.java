@@ -72,19 +72,22 @@ public class DelimiterExtractorTest {
 
     @Test
     void 문자열에_구분자가_없으면_문자열을_그대로_반환한다() {
-        String input = "";
-        DelimiterExtractor delimiterExtractor = new DelimiterExtractor(input);
+        String inputEmpty = "";
+        DelimiterExtractor extractor1 = new DelimiterExtractor(inputEmpty);
+        extractor1.validate();
+        String emptyText = extractor1.getText();
 
-        String result = "1:2,3";
-        if (!delimiterExtractor.hasDelimiter()) {
-            result = input;
-        }
+        String inputOnlyNumber = "1";
+        DelimiterExtractor extractor2 = new DelimiterExtractor(inputOnlyNumber);
+        extractor2.validate();
+        String onlyNumberText = extractor2.getText();
 
-        assertEquals(input, result);
+        assertEquals("", emptyText);
+        assertEquals("1", onlyNumberText);
     }
 
     @Test
-    void 문자열에_구분자가_없는_경우() {
+    void 문자열에_구분자가_있는지_확인한다() {
         String empty = "";
         DelimiterExtractor delimiterExtractorA = new DelimiterExtractor(empty);
 
