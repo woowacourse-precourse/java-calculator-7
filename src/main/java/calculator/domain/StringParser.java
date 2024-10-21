@@ -11,6 +11,7 @@ public class StringParser {
 
     private static final String CUSTOM_DELIMITER_PREFIX = "//";
     private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
+    private static final String INITIAL_VALUE_FOR_EMPTY_INPUT = "0";
 
     private final int prefixIndex;
     private final int suffixIndex;
@@ -32,7 +33,6 @@ public class StringParser {
             delimiters.add(new Delimiter(customDelimiter.charAt(0)));
 
             operationalExpression = extractOperationalExpression();
-            System.out.println(operationalExpression);
             return new ParsedComponents(delimiters, operationalExpression);
         }
 
@@ -58,39 +58,18 @@ public class StringParser {
     }
 
     private String extractCustomDelimiter() {
-        System.out.println(
-                "extractCustomDelimiter : " + inputExpression.substring(prefixIndex + CUSTOM_DELIMITER_PREFIX.length(),
-                        suffixIndex));
         return inputExpression.substring(prefixIndex + CUSTOM_DELIMITER_PREFIX.length(), suffixIndex);
     }
 
     private String extractOperationalExpression() {
-        if (isCustomDelimiterUsed()) {
-            System.out.println("isCustomDelimiterUsed = true");
-            return getFullExpressionWithDelimiter();
+        String operationalExpression =
+                inputExpression.substring(0, prefixIndex) + inputExpression.substring(prefixIndex + 2, suffixIndex)
+                        + inputExpression.substring(suffixIndex + 2);
+
+        if (operationalExpression.startsWith(extractCustomDelimiter())) {
+            return INITIAL_VALUE_FOR_EMPTY_INPUT + operationalExpression;
         }
 
-        return getBaseExpression();
-    }
-
-    private boolean isCustomDelimiterUsed() {
-        String customDelimiter = extractCustomDelimiter();
-        String withoutCustomDelimiterPart = getBaseExpression();
-        return withoutCustomDelimiterPart.contains(customDelimiter);
-    }
-
-    private String getBaseExpression() {
-        System.out.println(
-                "getBaseExpression : " + inputExpression.substring(0, prefixIndex) + inputExpression.substring(
-                        suffixIndex + 2));
-        return inputExpression.substring(0, prefixIndex) + inputExpression.substring(suffixIndex + 2);
-    }
-
-    private String getFullExpressionWithDelimiter() {
-        System.out.println("getFullExpressionWithDelimiter" + inputExpression.substring(0, prefixIndex)
-                + inputExpression.substring(prefixIndex + 2, suffixIndex)
-                + inputExpression.substring(suffixIndex + 2));
-        return inputExpression.substring(0, prefixIndex) + inputExpression.substring(prefixIndex + 2, suffixIndex)
-                + inputExpression.substring(suffixIndex + 2);
+        return operationalExpression;
     }
 }
