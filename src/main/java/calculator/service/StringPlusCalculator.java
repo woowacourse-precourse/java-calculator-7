@@ -4,7 +4,17 @@ import calculator.data.InputString;
 
 public class StringPlusCalculator {
 
-    private Calculation calculation = new Calculation();
+    private static StringPlusCalculator singleInstance;
+    private final Calculation calculation = new Calculation();
+
+    private StringPlusCalculator() {}
+
+    public static StringPlusCalculator getInstance() {
+        if (singleInstance == null) {
+            singleInstance = new StringPlusCalculator();
+        }
+        return singleInstance;
+    }
 
     public Integer plusCalculate(InputString inputString) {
 
