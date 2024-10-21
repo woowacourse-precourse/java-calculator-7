@@ -1,6 +1,7 @@
 package calculator.domain;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.assertj.core.api.Assertions;
@@ -20,4 +21,16 @@ class DelimiterTest {
                 .doesNotThrowAnyException();;
     }
 
+    @DisplayName("validateNotNullOrEmpty() : 구분자가 빈 문자열인 경우")
+    @ParameterizedTest
+    @ValueSource(strings = {"", " ", "  "})
+    void validateNotNullOrEmpty_delimiter_fail(String symbol) throws Exception{
+        //given
+        String errorMessage = "[ERROR] 구분자가 빈 문자열일 수 없습니다.";
+
+        //when & then
+        assertThatThrownBy(() -> new Delimiter(symbol))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(errorMessage);
+    }
 }
