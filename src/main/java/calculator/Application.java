@@ -1,7 +1,11 @@
 package calculator;
 
+import calculator.Manager.CalculatorManager;
+
 public class Application {
+
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        CalculatorManager manager = CalculatorManager.getInstance();
+        manager.run();
     }
 }
