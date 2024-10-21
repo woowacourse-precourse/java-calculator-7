@@ -22,27 +22,27 @@ public class Separator {
     }
 
     private int[] basicSeparate(String content) {
-        validateContent(content);
+        content = validateAndNormalizeContent(content);
         String[] splitedContent = content.replaceAll(BASIC_SEPARATOR_COLON, BASIC_SEPARATOR_COMMA)
                 .split(BASIC_SEPARATOR_COMMA);
         return Arrays.stream(splitedContent).mapToInt(this::convertToNumber).toArray();
     }
 
-    private void validateContent(String content) {
+    private String validateAndNormalizeContent(String content) {
         if (content.isEmpty()) {
-            throw new IllegalArgumentException("[ERROR] 비어있는 문자열 입니다.");
+            return "0";
         }
         if (!Character.isDigit(content.charAt(0)) || !Character.isDigit(content.charAt(content.length() - 1))) {
             throw new IllegalArgumentException("[ERROR] 시작과 끝은 숫자여야 합니다.");
         }
+        return content;
     }
 
     private int[] customSeparate(String contentWithCustomSeparator) {
         Matcher matcher = CUSTOM_SEPARATOR_PATTERN.matcher(contentWithCustomSeparator);
         if (matcher.find()) {
             String customSeparator = matcher.group(1);
-            String content = contentWithCustomSeparator.substring(matcher.end());
-            validateContent(content);
+            String content = validateAndNormalizeContent(contentWithCustomSeparator.substring(matcher.end()));
             String[] splitedContent = splitByCustomSeparator(content, customSeparator);
             return Arrays.stream(splitedContent).mapToInt(this::convertToNumber).toArray();
         }
