@@ -42,5 +42,12 @@ public class SumCalculator {
         result = Integer.parseInt(userInput);
         return result;
     }
+    private int isPositive(String userNumber){
+        int number = Integer.parseInt(userNumber);
+        if(number<0) {
+            throw new IllegalArgumentException();
+        }
+        return number;
+    }
 
 }
