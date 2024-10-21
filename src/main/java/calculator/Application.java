@@ -43,12 +43,19 @@ public class Application {
     }
 
     private void addNumbers(String[] numbers) {
-        Stream.of(numbers).forEach(this::addNumber);
+        try {
+            Stream.of(numbers).forEach(this::addNumber);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("잘못된 값이 포함되었습니다.");
+        }
     }
 
-
     private void addNumber(String number) {
-        answer += Integer.parseInt(number);
+        int value = Integer.parseInt(number);
+        if (value <= 0) {
+            throw new IllegalArgumentException("음수는 허용되지 않습니다.");
+        }
+        answer += value;
     }
 
     private boolean isCustomDelimiter(String input) {
