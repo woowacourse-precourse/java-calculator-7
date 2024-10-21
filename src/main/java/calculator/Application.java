@@ -11,7 +11,7 @@ public class Application {
 
         if (str.isEmpty()) {
             System.out.print("결과 : 0");
-            Console.close();
+            return;
         }
 
         ArrayList<String> delimiters = new ArrayList<>(List.of(",", ":"));
