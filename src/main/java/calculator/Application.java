@@ -13,7 +13,9 @@ public class Application {
 
         String input = inputService.getInput();
         Delimiter delimiter = isCustomDelimiter(input);
-        InputValidator inputValidator = new InputValidator(delimiter);
+
+        Parser parser = new Parser();
+        InputValidator inputValidator = new InputValidator(delimiter, parser);
 
         outputService.printResult(inputValidator.validate(input));
     }

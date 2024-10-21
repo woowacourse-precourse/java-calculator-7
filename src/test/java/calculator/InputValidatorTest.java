@@ -13,11 +13,13 @@ import org.junit.jupiter.api.Test;
 class InputValidatorTest {
     private Delimiter delimiter;
     private InputValidator inputValidator;
+    private Parser parser;
 
     @BeforeEach
     void setUp() {
         delimiter = new DefaultDelimiter();
-        inputValidator = new InputValidator(delimiter);
+        parser = new Parser();
+        inputValidator = new InputValidator(delimiter, parser);
     }
 
     @Test
@@ -36,7 +38,7 @@ class InputValidatorTest {
     void testStartsWithCustomDelimiter() {
         //given
         delimiter = new CustomDelimiter();
-        inputValidator = new InputValidator(delimiter);
+        inputValidator = new InputValidator(delimiter, parser);
         String input = "//.\\n1:2,3.4";
         //when
         String result = inputValidator.validate(input);

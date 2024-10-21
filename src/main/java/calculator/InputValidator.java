@@ -6,9 +6,9 @@ public class InputValidator {
     private final Delimiter delimiter;
     private final Parser parser;
 
-    public InputValidator(Delimiter delimiter) {
+    public InputValidator(Delimiter delimiter, Parser parser) {
         this.delimiter = delimiter;
-        this.parser = new Parser();
+        this.parser = parser;
     }
 
     public String validate(String input) {
