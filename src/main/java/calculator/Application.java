@@ -7,6 +7,9 @@ public class Application {
         CalculatorOutput calculatorOutput = new CalculatorOutput();
         CalculatorController controller = new CalculatorController(calculator, calculatorInput, calculatorOutput);
 
-        controller.run();
+        try {
+            controller.run();
+        } catch (IllegalArgumentException e) {
+        }
     }
 }
