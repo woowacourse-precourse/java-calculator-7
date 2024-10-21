@@ -12,17 +12,18 @@ public class Input {
         return input;
     }
     public String[] inputSplit(){
+
         String delimiter = "[,:]";
         input = input.replaceAll("\\s","");
-        if (input.startsWith("//")) {
 
+        if (input.startsWith("//")) {
             int delimiterIndex = input.indexOf("\\n");
-            System.out.println(delimiterIndex);
             delimiter = (input.substring(2,delimiterIndex));
             System.out.println(delimiter);
             input = input.substring(delimiterIndex+2);
 
         }
+
         tokens = input.split(delimiter);
         isValidNumber();
         return tokens;
