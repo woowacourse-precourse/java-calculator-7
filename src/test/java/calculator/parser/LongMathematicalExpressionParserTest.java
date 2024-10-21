@@ -13,6 +13,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import calculator.Application;
+import calculator.model.LongCalculatorModel;
 import camp.nextstep.edu.missionutils.test.NsTest;
 
 public class LongMathematicalExpressionParserTest extends NsTest {
@@ -38,12 +39,14 @@ public class LongMathematicalExpressionParserTest extends NsTest {
 			// given
 			String input = "10,2:5,3:10";
 			separators.addAll(BASIC_SEPARATORS);
+			LongCalculatorModel model = new LongCalculatorModel(input, separators);
+			model.setMathematicalExpression(input);
 
 			// when
-			long[] numbers = longMathematicalExpressionParser.parse(input, separators);
+			longMathematicalExpressionParser.parse(model);
 
 			// then
-			assertThat(numbers)
+			assertThat(model.getNumbers())
 				.contains(10, 2, 5, 3, 10);
 		});
 	}
@@ -56,13 +59,14 @@ public class LongMathematicalExpressionParserTest extends NsTest {
 			String input = "10;2,5:1-3]10";
 			separators.addAll(BASIC_SEPARATORS);
 			separators.addAll(Arrays.asList(new Character[] {';', '-', ']'}));
-			System.out.println(separators);
+			LongCalculatorModel model = new LongCalculatorModel(input, separators);
+			model.setMathematicalExpression(input);
 
 			// when
-			long[] numbers = longMathematicalExpressionParser.parse(input, separators);
+			longMathematicalExpressionParser.parse(model);
 
 			// then
-			assertThat(numbers)
+			assertThat(model.getNumbers())
 				.contains(10, 2, 5, 1, 3, 10);
 		});
 	}
@@ -75,9 +79,11 @@ public class LongMathematicalExpressionParserTest extends NsTest {
 			// given
 			String input = "10,2:3;4,5";
 			separators.addAll(BASIC_SEPARATORS);
+			LongCalculatorModel model = new LongCalculatorModel(input, separators);
+			model.setMathematicalExpression(input);
 
 			// when
-			assertThatThrownBy(() -> longMathematicalExpressionParser.parse(input, separators))
+			assertThatThrownBy(() -> longMathematicalExpressionParser.parse(model))
 
 				// then
 				.isInstanceOf(IllegalArgumentException.class);

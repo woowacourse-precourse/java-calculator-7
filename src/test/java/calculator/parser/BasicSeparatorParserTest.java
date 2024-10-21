@@ -3,7 +3,6 @@ package calculator.parser;
 import static camp.nextstep.edu.missionutils.test.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,6 +11,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import calculator.Application;
+import calculator.model.CalculatorModel;
+import calculator.model.LongCalculatorModel;
 import camp.nextstep.edu.missionutils.test.NsTest;
 
 public class BasicSeparatorParserTest extends NsTest {
@@ -25,7 +26,7 @@ public class BasicSeparatorParserTest extends NsTest {
 
 	@BeforeEach
 	public void initSeparators() {
-		separators = new HashSet<>();
+		separators = basicSeparatorParser.getSeparators();
 	}
 
 	// 성공
@@ -35,9 +36,11 @@ public class BasicSeparatorParserTest extends NsTest {
 		assertSimpleTest(() -> {
 				// given
 				String input = "///\\n//;\\n";
+				CalculatorModel model = new LongCalculatorModel(input, separators);
+				model.setSeparatorExpression(input);
 
 				// when
-				basicSeparatorParser.parse(input, separators);
+				basicSeparatorParser.parse(model);
 
 				// then
 				assertThat(separators)
@@ -55,9 +58,11 @@ public class BasicSeparatorParserTest extends NsTest {
 		assertSimpleTest(() -> {
 			// given
 			String input = "//;\\n//;\\n";
+			CalculatorModel model = new LongCalculatorModel(input, separators);
+			model.setSeparatorExpression(input);
 
 			// when
-			assertThatThrownBy(() -> basicSeparatorParser.parse(input, separators))
+			assertThatThrownBy(() -> basicSeparatorParser.parse(model))
 
 				// then
 				.isInstanceOf(IllegalArgumentException.class);
@@ -70,9 +75,11 @@ public class BasicSeparatorParserTest extends NsTest {
 		assertSimpleTest(() -> {
 			// given
 			String input = "n";
+			CalculatorModel model = new LongCalculatorModel(input, separators);
+			model.setSeparatorExpression(input);
 
 			//when
-			assertThatThrownBy(() -> basicSeparatorParser.parse(input, separators))
+			assertThatThrownBy(() -> basicSeparatorParser.parse(model))
 
 				//then
 				.isInstanceOf(IllegalArgumentException.class);
@@ -85,9 +92,11 @@ public class BasicSeparatorParserTest extends NsTest {
 		assertSimpleTest(() -> {
 			// given
 			String input = "\\n";
+			CalculatorModel model = new LongCalculatorModel(input, separators);
+			model.setSeparatorExpression(input);
 
 			// when
-			assertThatThrownBy(() -> basicSeparatorParser.parse(input, separators))
+			assertThatThrownBy(() -> basicSeparatorParser.parse(model))
 
 				// then
 				.isInstanceOf(IllegalArgumentException.class);
@@ -100,9 +109,11 @@ public class BasicSeparatorParserTest extends NsTest {
 		assertSimpleTest(() -> {
 			// given
 			String input = ";\\n";
+			CalculatorModel model = new LongCalculatorModel(input, separators);
+			model.setSeparatorExpression(input);
 
 			// when
-			assertThatThrownBy(() -> basicSeparatorParser.parse(input, separators))
+			assertThatThrownBy(() -> basicSeparatorParser.parse(model))
 
 				// then
 				.isInstanceOf(IllegalArgumentException.class);
@@ -115,9 +126,11 @@ public class BasicSeparatorParserTest extends NsTest {
 		assertSimpleTest(() -> {
 			// given
 			String input = "/;\\n";
+			CalculatorModel model = new LongCalculatorModel(input, separators);
+			model.setSeparatorExpression(input);
 
 			// when
-			assertThatThrownBy(() -> basicSeparatorParser.parse(input, separators))
+			assertThatThrownBy(() -> basicSeparatorParser.parse(model))
 
 				// then
 				.isInstanceOf(IllegalArgumentException.class);
@@ -130,9 +143,11 @@ public class BasicSeparatorParserTest extends NsTest {
 		assertSimpleTest(() -> {
 			// given
 			String input = "\\n\\n";
+			CalculatorModel model = new LongCalculatorModel(input, separators);
+			model.setSeparatorExpression(input);
 
 			//when
-			assertThatThrownBy(() -> basicSeparatorParser.parse(input, separators))
+			assertThatThrownBy(() -> basicSeparatorParser.parse(model))
 
 				// then
 				.isInstanceOf(IllegalArgumentException.class);
@@ -145,9 +160,11 @@ public class BasicSeparatorParserTest extends NsTest {
 		assertSimpleTest(() -> {
 			// given
 			String input = "//,\\n";
+			CalculatorModel model = new LongCalculatorModel(input, separators);
+			model.setSeparatorExpression(input);
 
 			//when
-			assertThatThrownBy(() -> basicSeparatorParser.parse(input, separators))
+			assertThatThrownBy(() -> basicSeparatorParser.parse(model))
 
 				// then
 				.isInstanceOf(IllegalArgumentException.class);
