@@ -123,8 +123,8 @@
 
 ## 3. 여러 의존성 관리 방법
 
-- `DelimiterFactory`, `CustomDelimiterService`, `DelimiterService` 는 여러 인터페이스들에 대한 의존성이 있다.
-- 의존성 역전 원칙을 지키기 위해 위 클래스들에서 필요한 의존성은 인터페이스로 구현되어 있다.
+- `DelimiterFactory`, `CustomDelimiterService`, `DelimiterService` 는 여러 클래스에 대한 의존성이 있다.
+- 의존성 역전 원칙을 지키기 위해 위 클래스들에서 필요한 의존성은 인터페이스로 추상화되어 있다.
 - 이를 통해, 의존성을 주입할 때, 인터페이스를 사용하여 의존성을 주입할 수 있다.
 - 하지만, 어떤 클래스에 어떤 구현체를 주입할 지 결정해야 한다.
 - `Application` 에서 구현체를 주입할 수도 있지만, 다음과 같은 문제점이 있다고 판단했다.
@@ -132,7 +132,7 @@
     - `Application` 이 구현체에 대한 의존성을 가지게 되면, 구현체를 변경할 때, `Application` 의 코드를 변경해야 한다.
     - `Application` 은 애플리케이션을 실행하는 책임을 가진 클래스이므로, 구현체에 대한 의존성을 가지면 안된다.
 - 이 문제점을 해결하기 위해, 의존성 주입을 책임지는 `CalculatorDependencyRegistry` 인터페이스를 만들었다.
-- `CalculatorDependencyRegistry` 는 일종의 애플리케이션 템플릿으로, 애플리케이션 구동에 필요한 클래스들 간의 구현체를 주입하는 역할을 한다.
+- `CalculatorDependencyRegistry` 는 일종의 의존성 템플릿으로, 애플리케이션 구동에 필요한 클래스들 간의 구현체를 주입하는 역할을 한다.
 - 만약, 특정 클래스의 구현체를 변경하고 싶다면, `CalculatorDependencyRegistry` 에서 구현체를 변경하면 된다.
 - 현재는 정수 계산기를 구현했으므로, `IntegerCalculatorDependencyRegistry` 를 사용하도록 한다.
 
@@ -198,4 +198,4 @@
 - 결과적으로, **옵션 B**를 선택했다.
     - 현재 입출력 메서드가 많지 않으므로, 한 클래스에 모든 메서드를 넣어도 괜찮다고 판단했다.
     - "책임" 의 관점에서 보면, 입력, 출력을 각각 하나의 책임으로 볼 수 있기 때문에, 한 클래스에 모든 메서드를 넣어도 괜찮다고 판단했다.
-    - 만약, 입출력 메서드가 많아진다면, `InputView`, `OutputView` 를 분리할 수 있다 (예: `SumInputView`, `SumResultOutputView` 등).
+    - 만약, 입출력 메서드가 많아진다면, 옵션 A 로 변경할 수 있지만, 비용이 발생할 수 있다.
