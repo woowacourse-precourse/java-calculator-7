@@ -38,5 +38,9 @@ public class SumCalculator {
         }
         return nonDelimiterCalculator(userInput);
     }
+    private int nonDelimiterCalculator(String userInput){
+        result = Integer.parseInt(userInput);
+        return result;
+    }
 
 }
