@@ -13,5 +13,5 @@
 - [X] 추출된 피연산자를 모두 더한 값을 결과로 반환한다.
 
 ### 4. 예외 처리
-- [ ] 음수가 입력된 경우, `IllegalArgumentException`을 발생시킨다.
+- [X] 음수가 입력된 경우, `IllegalArgumentException`을 발생시킨다.
 - [X] 숫자가 아닌 입력이 들어온 경우, `IllegalArgumentException`을 발생시킨다.
