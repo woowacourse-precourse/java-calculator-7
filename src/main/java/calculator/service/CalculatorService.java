@@ -47,7 +47,7 @@ public class CalculatorService {
             try {
                 item = Integer.parseInt(number);
             } catch (Exception e) {
-                throw new IllegalArgumentException("구분된 문자열이 숫자가 아닙니다.");
+                throw new IllegalArgumentException("구분된 문자열이 숫자가 아니거나 int범위를 넘었습니다.");
             }
             numbers.add(item);
         }
