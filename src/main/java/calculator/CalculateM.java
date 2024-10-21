@@ -71,7 +71,7 @@ public class CalculateM {
             }
             long number = Long.parseLong(numberStr.trim());
             if (number > MAX_NUMBER) {
-                throw new IllegalArgumentException("입력 숫자가 너무 큽니다 (최대 " + MAX_NUMBER + "): "
+                throw new IllegalArgumentException("수가 너무 큽니다 (최대 " + MAX_NUMBER + "): "
                         + number);
             }
             return (int) number;
