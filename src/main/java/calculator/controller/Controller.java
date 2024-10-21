@@ -1,5 +1,6 @@
 package calculator.controller;
 
+import calculator.util.Validator;
 import calculator.view.View;
 
 import java.util.ArrayList;
@@ -24,14 +25,8 @@ public class Controller {
         if (!text.contains(CUSTOM_REG_START)) {
             return regex;
         }
-        validateCustomReg(text);
+        Validator.validateCustomRegex(text);
         return regex + "|" + text.substring(2, text.indexOf(CUSTOM_REG_END));
-    }
-
-    private void validateCustomReg(String text) {
-        if (!text.contains(CUSTOM_REG_END)) {
-            throw new IllegalArgumentException();
-        }
     }
 
     private String[] splitNumbers(String text, String regex) {
@@ -44,25 +39,10 @@ public class Controller {
     private List<Integer> convertInt(String[] numbers) {
         List<Integer> list = new ArrayList<>();
         for (String number : numbers) {
-            validateIsWrongInteger(number);
-            validateIsMinus(number);
+            Validator.validateWrongNumber(number);
             list.add(Integer.parseInt(number));
         }
         return list;
-    }
-
-    private void validateIsWrongInteger(String number) {
-        try {
-            Integer.parseInt(number);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    private void validateIsMinus(String number) {
-        if (Integer.parseInt(number) < 0) {
-            throw new IllegalArgumentException();
-        }
     }
 
     public int sum(List<Integer> numbers) {
