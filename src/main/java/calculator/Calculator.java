@@ -18,7 +18,8 @@ public class Calculator {
         }
 
         String delimiter = DEFAULT_DELIMITER; // 기본 구분자를 사용
-        String numbers = input.replace("\\n", "\n");
+        String numbers = input;
+        input = input.replace("\\n", "\n");
         // 커스텀 구분자 처리
         if (input.startsWith("//")) {
             Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(input);

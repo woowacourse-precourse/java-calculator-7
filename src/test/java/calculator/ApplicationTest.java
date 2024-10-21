@@ -55,6 +55,14 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 연속_구분자1() {
+        assertSimpleTest(() -> {
+            run("//;\\n1");
+            assertThat(output()).contains("결과 : 1");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
