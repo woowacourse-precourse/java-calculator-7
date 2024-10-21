@@ -17,12 +17,12 @@ public class CalculatorController {
     }
 
     public void run() {
-        try {
-            String input = inputView.getInput();
-            int result = calculator.add(input);
-            outputView.printResult(result);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
+        //try {
+        String input = inputView.getInput();
+        int result = calculator.add(input);
+        outputView.printResult(result);
+//        } catch (IllegalArgumentException e) {
+//            System.out.println(e.getMessage());
+//        }
     }
 }
