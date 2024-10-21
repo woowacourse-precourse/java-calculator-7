@@ -7,10 +7,10 @@ import java.util.Set;
 
 import calculator.validation.InputValidator;
 
-public class Delimiter {
+public class Delimiters {
 	private final Set<String> delimiters = new HashSet<>();
 
-	public Delimiter() {
+	public Delimiters() {
 		initDefaultDelimiters();
 	}
 

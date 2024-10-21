@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import calculator.model.Calculator;
 import calculator.model.delimiter.CustomDelimiterProcessor;
-import calculator.model.delimiter.Delimiter;
+import calculator.model.delimiter.Delimiters;
 import calculator.model.InputFilter;
 import calculator.view.InputView;
 import calculator.view.OutputView;
@@ -24,10 +24,10 @@ public class CalculatorController {
 	public void run() {
 		String input = readInput();
 
-		Delimiter delimiter = new Delimiter();
-		addCustomDelimiter(input, delimiter);
+		Delimiters delimiters = new Delimiters();
+		addCustomDelimiter(input, delimiters);
 
-		List<Integer> numbers = extractNumbers(input, delimiter);
+		List<Integer> numbers = extractNumbers(input, delimiters);
 
 		int result = calculate(numbers);
 		printResult(result);
@@ -41,15 +41,15 @@ public class CalculatorController {
 		return input;
 	}
 
-	private void addCustomDelimiter(String input, Delimiter delimiter) {
+	private void addCustomDelimiter(String input, Delimiters delimiters) {
 		Optional<String> customDelimiter = customDelimiterProcessor.extractCustomDelimiter(input);
-		customDelimiter.ifPresent(delimiter::addCustomDelimiter);
+		customDelimiter.ifPresent(delimiters::addCustomDelimiter);
 	}
 
-	private List<Integer> extractNumbers(String input, Delimiter delimiter) {
+	private List<Integer> extractNumbers(String input, Delimiters delimiters) {
 		String processedInput = customDelimiterProcessor.removeCustomDelimiterPattern(input);
 
-		return InputFilter.extractNumbers(processedInput, delimiter);
+		return InputFilter.extractNumbers(processedInput, delimiters);
 	}
 
 	private int calculate(List<Integer> numbers) {

@@ -4,14 +4,14 @@ import static calculator.exception.ErrorMessage.*;
 
 import java.util.regex.Pattern;
 
-import calculator.model.delimiter.Delimiter;
+import calculator.model.delimiter.Delimiters;
 
 public class InputValidator {
 	private InputValidator() {
 	}
 
-	public static void validateInvalidDelimiter(String input, Delimiter delimiter) {
-		String regex = "[\\d" + String.join("", delimiter.getDelimiters().stream()
+	public static void validateInvalidDelimiter(String input, Delimiters delimiters) {
+		String regex = "[\\d" + String.join("", delimiters.getDelimiters().stream()
 			.map(Pattern::quote) // 구분자를 정규식에 안전하게 포함
 			.toArray(String[]::new)) + "]*";
 		String filteredInput = input.replaceAll(regex, "");
