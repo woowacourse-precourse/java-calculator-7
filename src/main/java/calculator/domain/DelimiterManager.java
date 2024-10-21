@@ -9,6 +9,16 @@ public class DelimiterManager {
     private final List<Delimiter> delimiters;
 
     public DelimiterManager(List<Delimiter> delimiters) {
-        this.delimiters = delimiters;
+        this.delimiters = uniqueDelimiters(delimiters);
+    }
+
+    private List<Delimiter> uniqueDelimiters(List<Delimiter> delimiters) {
+        return delimiters.stream()
+                .distinct()
+                .collect(Collectors.toList());
+    }
+
+    public List<Delimiter> getDelimiters() {
+        return delimiters;
     }
 }
