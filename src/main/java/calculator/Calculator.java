@@ -32,4 +32,17 @@ public class Calculator {
         return delimiters;
     }
 
+    // 4. 문자열에서 숫자 추출 기능
+    public String[] extractNumbers(String input, List<String> delimiters) {
+        if (input.startsWith("//")) {
+            int delimiterIndex = input.indexOf("\\n");
+            input = input.substring(delimiterIndex + 2); // 구분자 이후의 문자열 추출
+        }
+
+        // 여러 구분자를 하나의 정규식으로 결합
+        String delimiterRegex = String.join("|", delimiters);
+        // 정규식을 기준으로 문자열 분리
+        return input.split(delimiterRegex);
+    }
+
 }
