@@ -11,6 +11,6 @@ public class ErrorHandler {
     }
 
     private static void logError(ErrorMessage errorMessage) {
-        System.out.println("에러 메세지 : " + errorMessage);
+        System.out.println("에러 메세지 : " + errorMessage.getMessage());
     }
 }

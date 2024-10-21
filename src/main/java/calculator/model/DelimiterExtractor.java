@@ -13,13 +13,15 @@ public class DelimiterExtractor {
     public String getDelimiters(String input) {
 
     if(input.startsWith("//")) {
-        int delimiterEndIndex = input.indexOf("\n");
+        int delimiterEndIndex = input.indexOf("\\n");
         if (delimiterEndIndex == -1) {
             throw new IllegalArgumentException(ErrorMessage.CUSTOM_DELIMITER_IS_NOT_DEFINED_PROPERLY.getMessage());
         }
         // 구분자 부분 추출 및 설정
         String delimitersPart = input.substring(2, delimiterEndIndex);
-        return extractCustomDelimiters(delimitersPart);
+        String delimiters = extractCustomDelimiters(delimitersPart);
+        String combinedDelimiters = delimiters + "|" + DEFAULT_DELIMITERS;
+        return combinedDelimiters;
     }
     return DEFAULT_DELIMITERS;
 

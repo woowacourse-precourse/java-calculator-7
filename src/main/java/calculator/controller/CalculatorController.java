@@ -30,7 +30,7 @@ public class CalculatorController {
 
     private ErrorMessage matchErrorMessage(String message) {
         for(ErrorMessage errorMessage : ErrorMessage.values()){
-            if(errorMessage.getMessage().equals(errorMessage)){
+            if(!errorMessage.getMessage().equals(message)){
                 return errorMessage;
             }
         }

@@ -2,9 +2,6 @@ package calculator.model;
 
 import calculator.global.error.ErrorMessage;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Pattern;
 
 
 public class StringCalculator {
@@ -25,10 +22,8 @@ public class StringCalculator {
         // 구분자를 추출하고 입력에서 숫자 부분을 분리
         String delimiters = delimiterExtractor.getDelimiters(input);
         String numbersPart = getNumbersPart(input);
-
         // 구분자로 숫자를 분리하고 합산
         String[] numbers = numbersPart.split(delimiters);
-
         if (areAllEmpty(numbers)) {
             throw new IllegalArgumentException(ErrorMessage.ALL_NUMBERS_ARE_EMPTY.getMessage());
         }
@@ -37,10 +32,7 @@ public class StringCalculator {
     }
 
     private String getNumbersPart(String input) {
-        if (input.startsWith("//")) {
-            return input.substring(input.indexOf("\n") + 1); // 구분자 이후 숫자 부분 반환
-        }
-        return input;
+            return input.substring(input.indexOf("n") + 1); // 구분자 이후 숫자 부분 반환
     }
 
     // 숫자 배열에 빈 값만 있을 경우 true를 반환
