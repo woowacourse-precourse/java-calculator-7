@@ -15,6 +15,9 @@ public class CalculatorModel {
             if (Character.isWhitespace(additionalDelimiter)) {
                 throw new IllegalArgumentException("커스텀 구분자에 공백이 포함될 수 없습니다.");
             }
+            if (Character.isDigit(additionalDelimiter)) {
+                throw new IllegalArgumentException("커스텀 구분자에 숫자가 포함될 수 없습니다.");
+            }
         }
 
         String substringToCheck = extendedMode && input.length() > 5 ? input.substring(5) : input;
