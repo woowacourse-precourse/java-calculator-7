@@ -27,6 +27,7 @@ public class Application {
         if(input.contains("//") && input.contains("\\n")){
             int i = input.indexOf("//");
             String s = "" + input.charAt(i+2);
+            input = input.replace("//"+s+"\\n", "");
             arr = input.split(s);
         } else {
             arr = input.split(",|:");
