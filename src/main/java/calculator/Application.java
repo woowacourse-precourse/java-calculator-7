@@ -13,19 +13,18 @@ public class Application {
         // TODO: 프로그램 구현
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = readLine();
-        String delimiter;
+        int sum = calculateStringSum(input);
+        System.out.printf("결과 : %d\n", sum);
+    }
 
-        if (input.contains("\\n")) {
-            delimiter = getDelimiter(input.substring(0, input.indexOf("\\n") + 2));
-            input = input.substring(input.indexOf("\\n") + 2);
-        } else {
-            delimiter = getDelimiter("");
-        }
-        input = input.isEmpty() ? "0" : input;
-        int answer = 0;
-        String[] nums = input.split(delimiter);
+    private static int calculateStringSum(String input) {
+        String[] nums = getNums(input);
+        return getSum(nums);
+    }
 
+    private static int getSum(String[] nums) {
         try {
+            int answer = 0;
             for (String str : nums) {
                 int i = Integer.parseInt(str);
                 if (i < 0) {
@@ -33,14 +32,27 @@ public class Application {
                 }
                 answer += i;
             }
-            System.out.printf("결과 : %d\n", answer);
+            return answer;
+
         } catch (Exception e) {
             System.out.println("잘못된 값을 입력하셨습니다");
             throw new IllegalArgumentException();
         }
     }
 
-    // 여기 matcher 오류 났던거 있었음 => match find안해서
+    private static String[] getNums(String input) {
+        String delimiter;
+        if (input.contains("\\n")) {
+            delimiter = getDelimiter(input.substring(0, input.indexOf("\\n") + 2));
+            input = input.substring(input.indexOf("\\n") + 2);
+        } else {
+            delimiter = getDelimiter("");
+        }
+        input = input.isEmpty() ? "0" : input;
+        return input.split(delimiter);
+    }
+
+
     public static String getDelimiter(String input) {
 
         List<String> delimiters = new ArrayList<>(List.of(",", ":"));
