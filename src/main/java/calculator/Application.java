@@ -4,7 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
 
-    public static int calculator_7(String str) {
+    public static int calculator_7(String str) throws IllegalArgumentException {
         if (str.trim().isEmpty()) return 0;
 
         if (str.substring(0, 2).equals("//")) {
@@ -13,7 +13,7 @@ public class Application {
                 str = str.substring(5).replace(customDelimiter, ",");
             }
             else {
-                throw new IllegalArgumentException("잘못된 입력입니다.");
+                throw new IllegalArgumentException();
             }
             if (str.trim().isEmpty()) return 0;
         }
@@ -21,8 +21,11 @@ public class Application {
         String[] numbers = str.split("[,:]");
         int sum = 0;
         for (String number : numbers) {
+
             int num = Integer.parseInt(number.trim());
-            if (num < 0) throw new IllegalArgumentException("잘못된 입력입니다.");
+            if (num < 0) {
+                throw new IllegalArgumentException();
+            }
             sum += num;
         }
 
@@ -35,8 +38,8 @@ public class Application {
         try {
             int result = calculator_7(input);
             System.out.println("결과 : " + result);
-        } catch (IllegalArgumentException e){
-            System.out.println("오류: " + e.getMessage());
+        } catch (IllegalArgumentException e) {
+            return;
         }
     }
 }
