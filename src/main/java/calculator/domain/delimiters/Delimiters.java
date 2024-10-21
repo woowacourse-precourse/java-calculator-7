@@ -7,6 +7,11 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+/**
+ * 구분자들을 담은 클래스
+ * 구분자 생성기를 통해서만 객체를 만들 수 있음
+ * 구분자로 문자열을 나누는 데 필요한 값을 반환하는 메서드들을 정의함
+ */
 public class Delimiters {
 
     private final List<Delimiter> delimiters;

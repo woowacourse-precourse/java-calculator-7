@@ -2,6 +2,10 @@ package calculator.domain.delimiter;
 
 import calculator.util.Constants;
 
+/**
+ * 구분자 중에서 미리 정해지 않은 구분자를 나타낸 클래스로
+ * 입력된 문자열 맨 앞 "//" 와 "\n" 문자열 사이에 위치한 문자로 정의한다.
+ */
 public class CustomDelimiter implements Delimiter {
 
     public static final String headSpecifierOfCustomDelimiter = "//";

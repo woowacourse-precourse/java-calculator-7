@@ -12,6 +12,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+/**
+ * 구분자들을 만들기 위한 클래스 입력된 문자열에서 커스텀 구분자를 추출한 다음
+ * 문자열이 올바른 형식(양수와 구분자로만 이루어짐)인지 검증한 다음 구분자들 객체를
+ * 생성해서 반환한다.
+ */
 public class DelimitersFactory {
 
     public Delimiters getFromStringAfterValidate(InputtedString inputtedString) {

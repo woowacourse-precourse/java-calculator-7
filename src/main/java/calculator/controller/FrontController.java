@@ -10,6 +10,9 @@ import calculator.view.ConsoleOutputView;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
+/**
+ * 기능의 처음부터 끝까지 전체적인 흐름을 제어하는 클래스
+ */
 public class FrontController {
     public static void run() {
 
