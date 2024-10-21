@@ -18,6 +18,7 @@ public class StringSplitter {
         }
 
         customDelimiter = Pattern.quote(customDelimiter);
-        return input.substring(5).split("[" + DEFAULT_DELIMITERS + customDelimiter + "]", -1);
+        String numbersSection = input.substring(delimiterValidator.getDelimiterCommandLength());
+        return numbersSection.split("[" + DEFAULT_DELIMITERS + customDelimiter + "]", -1);
     }
 }

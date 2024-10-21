@@ -5,6 +5,14 @@ public class DelimiterValidator {
     private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
     private static final int CUSTOM_DELIMITER_LIMIT = 1;
 
+    public int getDelimiterCommandLength() {
+        int length = CUSTOM_DELIMITER_PREFIX.length();
+        length += CUSTOM_DELIMITER_LIMIT;
+        length += CUSTOM_DELIMITER_SUFFIX.length();
+
+        return length;
+    }
+
     public boolean hasCustomDelimiter(String input) {
         int start = input.indexOf(CUSTOM_DELIMITER_PREFIX);
         int end = input.indexOf(CUSTOM_DELIMITER_SUFFIX);
