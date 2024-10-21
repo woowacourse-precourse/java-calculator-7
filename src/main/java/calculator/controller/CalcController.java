@@ -20,5 +20,11 @@ public class CalcController {
         Validation.overTheLongRangeNumberElements(numbers);
     }
 
+    private List<Long> prepToCalc(List<String> dicedExpression) {
+        List<Long> inputNums = Prep.convertToNumbers(dicedExpression);
+        checkingNumbers(inputNums);
+        return inputNums;
+    }
+
 
 }
