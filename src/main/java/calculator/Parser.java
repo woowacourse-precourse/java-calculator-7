@@ -8,7 +8,7 @@ public class Parser {
     String input;
 
     Parser(String input) {
-        this.input = input;
+        this.input = input.replace("\\n", "\n");
     }
 
     String findCustomSeparator() {
