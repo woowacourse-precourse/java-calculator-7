@@ -1,11 +1,11 @@
 package calculator;
 
 // 입력을 처리하고 구분자를 추출하는 클래스
-public class InputProcessor {
+public class DelimiterParser {
     private static final String DEFAULT_DELIMITERS = ",|:";
     private final String input;
 
-    public InputProcessor(String input) {
+    public DelimiterParser(String input) {
         this.input = input;
     }
 
@@ -19,7 +19,7 @@ public class InputProcessor {
             numberSection = extractNumbersSection();
         }
 
-        return new NumberSplitter().splitNumbers(numberSection, delimiters);
+        return new NumberExtractor().splitNumbers(numberSection, delimiters);
     }
 
     public boolean hasCustomDelimiter() {

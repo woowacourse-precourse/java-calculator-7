@@ -8,11 +8,11 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String userInput = Console.readLine();
 
-        InputProcessor inputProcessor = new InputProcessor(userInput);
-        String[] numbers = inputProcessor.processInput();
+        DelimiterParser delimiterParser = new DelimiterParser(userInput);
+        String[] numbers = delimiterParser.processInput();
 
-        Calculator calculator = new Calculator();
-        int sumResult = calculator.sum(numbers);
+        StringCalculator stringCalculator = new StringCalculator();
+        int sumResult = stringCalculator.sum(numbers);
 
         System.out.println("결과 : " + sumResult);
     }

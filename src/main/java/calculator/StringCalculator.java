@@ -1,6 +1,6 @@
 package calculator;
 
-public class Calculator {
+public class StringCalculator {
     public int sum(String[] numbers) {
         int sum = 0;
         for (String number : numbers) {
