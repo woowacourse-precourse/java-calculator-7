@@ -3,6 +3,7 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 
 import java.util.Arrays;
+import java.util.NoSuchElementException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,8 +11,12 @@ public class Application {
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해주세요.");
         String input;
-        input = Console.readLine();
-        int result = add(input); // 숫자 더하는 함수
+        try {
+            input = Console.readLine();
+        } catch (NoSuchElementException e) {
+            input = "";
+        }
+        int result = add(input);
         System.out.println("결과 : " + result);
     }
 
