@@ -3,9 +3,8 @@ package calculator;
 public class InputValidator {
     private Delimiter delimiter;
 
-    // 생성자를 통한 Delimiter 의존성 주입
-    public InputValidator() {
-        this.delimiter = new Delimiter();
+    public InputValidator(Delimiter delimiter) {
+        this.delimiter = delimiter;
     }
 
     public String validate(String input) {

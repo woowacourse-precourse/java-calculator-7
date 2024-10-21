@@ -20,7 +20,8 @@ class InputValidatorTest {
     void properResultStartsFromNumber() {
         //given
         String input = "1:2,3";
-        InputValidator inputValidator = new InputValidator();
+        Delimiter delimiter = new Delimiter();
+        InputValidator inputValidator = new InputValidator(delimiter);
         //when
         inputValidator.validate(input);
         //then
@@ -32,7 +33,8 @@ class InputValidatorTest {
     void properResultStartsFromCustomDelimiter() {
         //given
         String input = "//.\\n1:2,3.4";
-        InputValidator inputValidator = new InputValidator();
+        Delimiter delimiter = new CustomDelimiter();
+        InputValidator inputValidator = new InputValidator(delimiter);
         //when
         inputValidator.validate(input);
         //then
@@ -44,7 +46,8 @@ class InputValidatorTest {
     void testEmptyString() {
         // given
         String input = "";
-        InputValidator inputValidator = new InputValidator();
+        Delimiter delimiter = new Delimiter();
+        InputValidator inputValidator = new InputValidator(delimiter);
 
         // when, then: 정상 동작 => 예외 미동작
         String result = inputValidator.validate(input);  // validate 메서드에서 0을 반환하도록 처리
@@ -60,7 +63,8 @@ class InputValidatorTest {
     void testStartsWithDelimiter() {
         // given
         String input = "//?\\n";
-        InputValidator inputValidator = new InputValidator();
+        Delimiter delimiter = new Delimiter();
+        InputValidator inputValidator = new InputValidator(delimiter);
 
         // when, then: 정상 동작 => 예외 미동작
         assertDoesNotThrow(() -> inputValidator.validate(input));
@@ -72,7 +76,8 @@ class InputValidatorTest {
     void testInvalidNonCustomDelimiter() {
         // given: 첫 시작이 문자이지만 커스텀 구분자가 아닌 경우
         String input1 = "abc,1,2,3";
-        InputValidator inputValidator = new InputValidator();
+        Delimiter delimiter = new Delimiter();
+        InputValidator inputValidator = new InputValidator(delimiter);
         // when, then: 커스텀 구분자로 시작하지 않으면 예외 발생
         assertThrows(IllegalArgumentException.class, () -> inputValidator.validate(input1));
         String input2 = "-abc,1,2,3";
@@ -105,7 +110,8 @@ class InputValidatorTest {
     @Test
     void testisNotNegativeNumber() {
         String input = "-1,2,3";
-        InputValidator inputValidator = new InputValidator();
+        Delimiter delimiter = new Delimiter();
+        InputValidator inputValidator = new InputValidator(delimiter);
         // when, then: 음수는 예외 발생
         assertThrows(IllegalArgumentException.class, () -> inputValidator.validate(input));
 
