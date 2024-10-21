@@ -39,7 +39,7 @@ public class Application {
             return str.substring(2, 3);
         }
 
-        return ":|,";
+        return "[:,,]";
     }
 
     public static List<Integer> extractNum(String str){
@@ -48,15 +48,15 @@ public class Application {
         str = isCustomLetter ? sliceCustomStr(str) : str;
         List<Integer> nums = new ArrayList<>();
 
-        StringTokenizer st = new StringTokenizer(str, letter);
+        String[] tokens = str.split(letter);
 
-        while(st.hasMoreTokens()){
-            String token = st.nextToken();
-
+        for (String token : tokens) {
+            // 숫자인지 체크
             if (!token.matches("-?\\d+")) {
                 throw new IllegalArgumentException("숫자가 아닌 값이 입력되었습니다: " + token);
             }
 
+            // 숫자로 변환 후 리스트에 추가
             nums.add(Integer.parseInt(token));
         }
 
