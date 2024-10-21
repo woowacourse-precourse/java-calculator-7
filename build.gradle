@@ -2,8 +2,15 @@ plugins {
     id 'java'
 }
 
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
 group = 'camp.nextstep.edu'
 version = '1.0-SNAPSHOT'
+
+sourceCompatibility = '17'
+targetCompatibility = '17'
 
 java {
     toolchain {
@@ -17,7 +24,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.woowacourse-projects:mission-utils:1.2.0'
+    implementation 'com.github.woowacourse-projects:mission-utils:1.1.0'
 }
 
 test {
