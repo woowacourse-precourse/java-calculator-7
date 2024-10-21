@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'application'
 }
 
 group = 'camp.nextstep.edu'
@@ -22,4 +23,7 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    testLogging {
+        showStandardStreams = true // 테스트 중 출력되는 표준 출력을 콘솔에 표시
+    }
 }
