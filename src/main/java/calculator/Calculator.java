@@ -1,6 +1,8 @@
 package calculator;
 
 import java.util.Set;
+import java.util.StringTokenizer;
+import java.util.stream.Collectors;
 
 public class Calculator {
     private Set<String> delimiters;
@@ -9,7 +11,15 @@ public class Calculator {
         this.delimiters = delimiters;
     }
 
-    public int add(String s) {
-        return 0;
+    public int addition(String s) {
+        if (s.startsWith("//")) {
+            s = s.substring(4);
+        }
+        StringTokenizer st = new StringTokenizer(s, delimiters.stream().collect(Collectors.joining()));
+        int sum = 0;
+        while (st.hasMoreTokens()) {
+            sum += Integer.valueOf(st.nextToken());
+        }
+        return sum;
     }
 }

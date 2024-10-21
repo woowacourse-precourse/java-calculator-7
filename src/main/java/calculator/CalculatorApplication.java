@@ -21,6 +21,6 @@ public class CalculatorApplication {
         inputValidator.validate(s);
         Set<String> delimiters = delimiterExtractor.extract(s);
         Calculator calculator = new Calculator(delimiters);
-        outputView.printResult(calculator.add(s));
+        outputView.printResult(calculator.addition(s));
     }
 }
