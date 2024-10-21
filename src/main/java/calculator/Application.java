@@ -12,23 +12,25 @@ public class Application {
     }
 
     public String calculator() {
+        // Scanner로 사용자 입력 받기
         Scanner scanner = new Scanner(System.in);
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String input = scanner.nextLine();
+        String input = scanner.nextLine(); // 사용자 입력 받기
 
+        // 2️⃣ 빈 문자열 또는 null 입력 시 0 반환
         if (isEmptyOrNull(input)) {
             scanner.close();
             return "결과 : 0";
         }
 
-        if (isCustomDelimiter(input)) {
-            addWithCustomDelimiter(input);
-        } else {
-            addWithDefaultDelimiters(input);
+        // 3️⃣ 쉼표(,) 또는 콜론(:) 구분자 처리
+        if (!isCustomDelimiter(input)) {
+            addWithDefaultDelimiters(input); // 쉼표, 콜론 구분자로 숫자 처리
         }
-
-        addWithDefaultDelimiters(input);
-
+        // 4️⃣ 커스텀 구분자 지원
+        else {
+            addWithCustomDelimiter(input); // 커스텀 구분자 처리
+        }
         scanner.close();
         return "결과 : " + answer;
     }
@@ -51,11 +53,16 @@ public class Application {
     }
 
     private void addNumber(String number) {
-        int value = Integer.parseInt(number);
-        if (value <= 0) {
-            throw new IllegalArgumentException("음수는 허용되지 않습니다.");
+        try {
+            int value = Integer.parseInt(number); // 문자열을 int로 변환
+            // int 범위를 넘어가거나 음수일 경우 예외 처리
+            if (value <= 0) {
+                throw new IllegalArgumentException("음수는 허용되지 않습니다.");
+            }
+            answer += value;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자가 아니거나 범위를 초과하였습니다.");
         }
-        answer += value;
     }
 
     private boolean isCustomDelimiter(String input) {
