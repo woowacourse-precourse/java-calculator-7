@@ -13,6 +13,10 @@ public class StringCalculator {
         String delimiter = ",|:";  // 기본 구분자 (쉼표와 콜론)
         String numbers = input;
 
+        if (input.endsWith(",") || input.endsWith(":")) {
+            throw new IllegalArgumentException("구분자 뒤에 숫자가 없습니다.");
+        }
+
         // 커스텀 구분자가 있는 경우 처리
         if (input.startsWith("//")) {
             String[] result = extractCustomDelimiter(input);
@@ -35,7 +39,7 @@ public class StringCalculator {
             if (token.isEmpty()) {
                 throw new IllegalArgumentException("잘못된 형식: 숫자가 누락되었습니다.");
             }
-        }`
+        }
 
         try {
             for (String token : tokens) {
@@ -62,11 +66,17 @@ public class StringCalculator {
         }
 
         String delimiter = input.substring(2, delimiterIndex);
+
+        if (input.endsWith(delimiter)) {
+            throw new IllegalArgumentException("구분자 뒤에 숫자가 없습니다.");
+        }
+
         if (delimiter.isEmpty()) {
             throw new IllegalArgumentException("구분자가 비어있습니다.");
         }
 
         String numbers = input.substring(delimiterIndex + 2);
+
         return new String[]{delimiter, numbers};
     }
 
