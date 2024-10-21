@@ -8,10 +8,32 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class ParsingUtil {
-    private static final String DEFAULT_DELIMITER = ",|:";
+    private static final String DEFAULT_DELIMITER_1 = ",";
+    private static final String DEFAULT_DELIMITER_2 = ":";
+    private static final String DEFAULT_DELIMITER_REGEX = ",|:";
     private static final String CUSTOM_DELIMITER_REGEX = "//\\s*(.)\\s*\\n";
 
     private ParsingUtil() {
+    }
+
+    public static List<String> parseWithCustomDelimiter(String input) {
+        List<String> delimiters = extractCustomDelimiter(input);
+        String[] split = input.split("\n");
+        String numbers = split[split.length - 1];
+
+        for (String delimiter : delimiters) {
+            numbers = numbers.replace(delimiter, DEFAULT_DELIMITER_1);
+        }
+
+        return parseWithDefault(numbers);
+    }
+
+    public static List<String> parseWithDefault(String input) {
+        if (isInputIsNullOrEmpty(input)) {
+            throw new IllegalArgumentException(CalculatorError.INPUT_IS_NULL_OR_EMPTY.getMessage());
+        }
+
+        return Arrays.asList(input.split(DEFAULT_DELIMITER_REGEX));
     }
 
     public static List<String> extractCustomDelimiter(String input) {
@@ -30,14 +52,6 @@ public final class ParsingUtil {
         Matcher matcher = pattern.matcher(input);
 
         return matcher.find();
-    }
-
-    public static List<String> parseWithDefault(String input) {
-        if (isInputIsNullOrEmpty(input)) {
-            throw new IllegalArgumentException(CalculatorError.INPUT_IS_NULL_OR_EMPTY.getMessage());
-        }
-
-        return Arrays.asList(input.split(DEFAULT_DELIMITER));
     }
 
     private static boolean isInputIsNullOrEmpty(String input) {
