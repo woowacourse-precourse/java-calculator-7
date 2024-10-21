@@ -35,6 +35,7 @@ public class SeparatorExtractor {
     }
 
     public static class ExtractResult {
+
         private String expression;
         private Optional<Character> separator;
 

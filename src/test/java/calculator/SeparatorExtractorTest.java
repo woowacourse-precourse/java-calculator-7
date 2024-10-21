@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class SeparatorExtractorTest {
 
     @ParameterizedTest
-    @ValueSource(chars = {'a', 'z' ,'!', ';', '/', '?', ','})
+    @ValueSource(chars = {'a', 'z', '!', ';', '/', '?', ','})
     void 문자로_된_커스텀_구분자를_추출할_수_있다(char separator) {
         String arg = "//" + separator + "\\n";
         SeparatorExtractor extractor = new SeparatorExtractor();
@@ -21,7 +21,7 @@ public class SeparatorExtractorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(chars = {'\b', '\n' ,' ', '\t'})
+    @ValueSource(chars = {'\b', '\n', ' ', '\t'})
     void 공백으로_된_커스텀_구분자를_추출할_수_있다(char separator) {
         String arg = "//" + separator + "\\n";
         SeparatorExtractor extractor = new SeparatorExtractor();
@@ -38,7 +38,7 @@ public class SeparatorExtractorTest {
         SeparatorExtractor extractor = new SeparatorExtractor();
 
         assertThatThrownBy(() -> extractor.extract(arg))
-                .isInstanceOf(IllegalArgumentException.class);
+            .isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
@@ -48,6 +48,6 @@ public class SeparatorExtractorTest {
         SeparatorExtractor extractor = new SeparatorExtractor();
 
         assertThatThrownBy(() -> extractor.extract(arg))
-                .isInstanceOf(IllegalArgumentException.class);
+            .isInstanceOf(IllegalArgumentException.class);
     }
 }
