@@ -5,8 +5,9 @@ import java.util.regex.Pattern;
 
 public class CustomDelimiterParser extends DefaultDelimiterParser {
 
+    //    private static final String CUSTOM_DELIMITER_PATTERN = "//(.*)\\\\n(.*)";
+
     private static final String CUSTOM_DELIMITER_PATTERN = "//(.*)\\\\n(.*)";
-    //private static final String CUSTOM_DELIMITER_PATTERN = "//(.*?)\\\\n(.*)";
 
     /**
      * 커스텀 구분자를 사용하여 문자열을 분리합니다.
@@ -38,10 +39,11 @@ public class CustomDelimiterParser extends DefaultDelimiterParser {
      * @return 구분자를 정규식으로 결합한 문자열
      */
     private String extractDelimiters(String delimiterPart) {
-        String result = "";
-        for (String delimiter : delimiterPart.split("")) {
-            result += "|" + delimiter;
+        String[] delimiters = delimiterPart.split("\\|");
+        StringBuilder result = new StringBuilder();
+        for (String delimiter : delimiters) {
+            result.append("|").append(Pattern.quote(delimiter));
         }
-        return result;
+        return result.toString();
     }
 }

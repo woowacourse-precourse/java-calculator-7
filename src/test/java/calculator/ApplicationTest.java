@@ -108,13 +108,13 @@ class ApplicationTest extends NsTest {
                 .hasMessageContaining("입력값이 음수입니다");
     }
 
-//    @Test
-//    void 예외_테스트() {
-//        assertSimpleTest(() ->
-//                assertThatThrownBy(() -> runException("-1,2,3"))
-//                        .isInstanceOf(IllegalArgumentException.class)
-//        );
-//    }
+    @Test
+    void 예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
 
     @Override
     public void runMain() {

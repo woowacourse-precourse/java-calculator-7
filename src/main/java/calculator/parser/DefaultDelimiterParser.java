@@ -12,9 +12,6 @@ public class DefaultDelimiterParser implements DelimiterParser {
      */
     @Override
     public String[] parse(String input) {
-        if (input.contains("-")) {
-            throw new IllegalArgumentException("입력값이 음수입니다");
-        }
         return input.split(DEFAULT_DELIMITERS);
     }
 }

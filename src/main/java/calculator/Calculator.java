@@ -38,7 +38,9 @@ public class Calculator {
      */
     private int parseNumber(String token) {
         try {
-            return Integer.parseInt(token);
+            int number = Integer.parseInt(token);
+            isNegativeNumber(number);
+            return number;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다" + token);
         }
@@ -75,7 +77,6 @@ public class Calculator {
         String[] tokens = splitInput(input);
         for (String token : tokens) {
             int number = parseNumber(token);
-            isNegativeNumber(number);
             total += number;
         }
         return total;
