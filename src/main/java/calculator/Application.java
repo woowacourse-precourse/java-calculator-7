@@ -13,6 +13,9 @@ public class Application {
 
         // 3. 계산식에서 split() 으로 숫자를 구분하기 편하도록 계산식의 커스텀 구분자와 콜론(:)을 쉼표(,)로 통일한다.
         expression = unifySeparator(expression, customSeparator);
+
+        // 4. 계산식이 올바른 형식의 계산식인지 확인한다.
+        isValidExpression(expression);
     }
 
     // 문자열을 입력 받아 입력 받은 문자열을 반환하는 메소드
@@ -42,5 +45,16 @@ public class Application {
         if(!customSeparator.equals("")) expression = expression.replace(customSeparator, ",");
 
         return expression;
+    }
+
+    // 계산식이 올바른 형식인지 확인하는 메소드
+    private static void isValidExpression(String expression){
+        // 모든 구분자를 쉼표로 치환한 계산식이 숫자, 쉼표(,)로만 구성되어 있지 않으면 입력 오류
+        if(!expression.matches("[0-9,]+"))
+            throw new IllegalArgumentException("계산식은 양수의 숫자와 콜론(:), 쉼표(,), 커스텀 구분자로만 입력할 수 있습니다.");
+
+        // 숫자로 시작해서 숫자로 끝나지 않거나, 구분자를 연속으로 사용 할 경우 입력 오류
+        if(!expression.matches("^[0-9]$|^[0-9].*[0-9]$") || expression.contains(",,"))
+            throw new IllegalArgumentException("입력 양식을 지켜주세요. ex) 1,2:3, //*\\n1:2*3");
     }
 }
