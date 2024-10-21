@@ -10,7 +10,6 @@ public class Application {
 
         // Console.readLine()으로 사용자로부터 입력 받기
         String input = Console.readLine();
-
         String separator = "[,:]";
         String numbers_string = input;
 
@@ -33,8 +32,15 @@ public class Application {
     private static int[] getNumbers(String[] tokens) {
         int[] numbers = new int[tokens.length];
         for (int i = 0; i < tokens.length; i++) {
+            validateNumber(tokens[i]);
             numbers[i] = Integer.parseInt(tokens[i]);
         }
         return numbers;
+    }
+
+    private static void validateNumber(String number) {
+        if (!number.matches("[0-9]+")) {
+            throw new IllegalArgumentException("잘못된 값을 입력했습니다!(양수를 입력해주세요)");
+        }
     }
 }
