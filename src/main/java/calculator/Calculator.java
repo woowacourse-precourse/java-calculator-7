@@ -18,8 +18,7 @@ public class Calculator {
         String customDelimiter = extractCustomDelimiter(userInput);
         String[] splitNumbers = splitByDelimiter(userInput, customDelimiter);
         List<Integer> numbers = extractValidNumbers(splitNumbers);
-        int sum = sumNumbers(numbers);
-        return sum;
+        return sumNumbers(numbers);
     }
 
     public int sumNumbers(List<Integer> numbers) {
@@ -45,15 +44,13 @@ public class Calculator {
         String numbersPart = extractNumbersPart(userInput, customDelimiter);
         String delimiter = determineDelimiter(customDelimiter);
         Validator.validateAllowedCharacters(numbersPart, customDelimiter);
-        String[] splitNumbers = numbersPart.split(delimiter);
-        return splitNumbers;
+        return numbersPart.split(delimiter);
     }
 
     // 커스텀 구분자가 있는 경우 기본 구분자와 커스텀 구분자 결합
     public String determineDelimiter(String customDelimiter) {
         if (!customDelimiter.isEmpty()) {
-            String CustomAndDefaultDelimiter = Pattern.quote(customDelimiter) + "|" + DEFAULT_DELIMITER;
-            return CustomAndDefaultDelimiter;
+            return Pattern.quote(customDelimiter) + "|" + DEFAULT_DELIMITER;
         }
         return DEFAULT_DELIMITER;
     }
@@ -63,8 +60,7 @@ public class Calculator {
         if (!customDelimiter.isEmpty()) {
             int customDelimiterEndIndex = userInput.indexOf(CUSTOM_DELIMITER_SUFFIX);
             int numberPartLength = customDelimiterEndIndex + CUSTOM_DELIMITER_SUFFIX.length();
-            String numberPart = userInput.substring(numberPartLength);
-            return numberPart;
+            return userInput.substring(numberPartLength);
         }
         return userInput;
     }
