@@ -10,6 +10,22 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class ApplicationTest extends NsTest {
 
     @Test
+    void 구분자_미사용_숫자만() {
+        assertSimpleTest(() -> {
+            run("3");
+            assertThat(output()).contains("결과 : 3");
+        });
+    }
+
+    @Test
+    void 구분자_미사용_문자포함() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("3("))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
     void 기본_구분자_사용() {
         assertSimpleTest(() -> {
             run("1,2:3");
@@ -39,6 +55,14 @@ class ApplicationTest extends NsTest {
             run("//;\\n1;5;7");
             assertThat(output()).contains("결과 : 13");
         });
+    }
+
+    @Test
+    void 커스텀_구분자_위치오류() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1//;\\n;7"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
     }
 
     @Test
