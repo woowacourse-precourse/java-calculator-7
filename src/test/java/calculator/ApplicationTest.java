@@ -3,6 +3,8 @@ package calculator;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayInputStream;
+
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -22,6 +24,31 @@ class ApplicationTest extends NsTest {
             assertThatThrownBy(() -> runException("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
         );
+    }
+
+    @Test
+    void 빈_입력값_테스트() {
+        System.setIn(new ByteArrayInputStream(" \n".getBytes())); // Simulate empty input
+
+        assertThatThrownBy(Input::getInput)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("잘못된 형식의 입력값입니다.");
+    }
+
+    @Test
+    void 구분자만_존재하는_입력값() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;\\n;;;"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContaining("숫자가 입력되지 않았습니다.")
+        );
+    }
+
+    @Test
+    void 숫자만_존재하는_입력값() {
+        assertThatThrownBy(() -> DelimiterExtractor.extractNumbers("24"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("구분자가 입력되지 않았습니다.");
     }
 
     @Override
