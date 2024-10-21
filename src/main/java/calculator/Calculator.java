@@ -12,6 +12,7 @@ public class Calculator {
             System.out.println("결과 : " + result);
         } catch(IllegalArgumentException e) {
             System.out.println("올바르지 않은 입력입니다.");
+            throw new IllegalArgumentException();
         }
     }
 
@@ -39,7 +40,6 @@ public class Calculator {
 
         for(String xstr : numstr) {
             try {
-                System.out.println(xstr);
                 int x = Integer.parseInt(xstr);
                 if(x < 0) {
                     throw new IllegalArgumentException();
