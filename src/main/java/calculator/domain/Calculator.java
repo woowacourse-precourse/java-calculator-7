@@ -11,7 +11,7 @@ public class Calculator {
     private List<Long> operands;
 
     public Calculator() {
-        this.identifiers = new ArrayList<>(Arrays.asList('.', ':'));
+        this.identifiers = new ArrayList<>(Arrays.asList(',', ':'));
     }
 
     public void addIdentifier(char identifier) {
