@@ -17,7 +17,7 @@ public class StringAddCalculator {
     }
 
     private int splitAndSumNumber(String input) {
-        return Arrays.stream(splitString(input)).mapToInt(Integer::parseInt).sum();
+        return Arrays.stream(convertToIntArray(splitString(input))).sum();
     }
 
     private String[] splitString(String input) {
@@ -30,6 +30,22 @@ public class StringAddCalculator {
         }
 
         return input.split(pattern);
+    }
+
+    private int[] convertToIntArray(String[] inputArray) {
+        int[] numArray = new int[inputArray.length];
+
+        for (int i = 0; i < inputArray.length; i++) {
+            try {
+                int num = Integer.parseInt(inputArray[i]);
+
+                numArray[i] = num;
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException();
+            }
+        }
+
+        return numArray;
     }
 
     private boolean validateEmptyValue(String input) {
