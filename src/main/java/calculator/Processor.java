@@ -21,6 +21,7 @@ public class Processor {
 
         String[] splitInput = Splitter.splitByDelimiters(input, delimiters);
         int[] numbers = Converter.toIntArray(splitInput);
+        Validator.isAllPositiveNumbers(numbers);
 
         return Calculator.calculateSum(numbers);
     }
