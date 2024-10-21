@@ -6,14 +6,14 @@ public class Calculator {
     public String[] extractNumbers(String input) {
         String separator = "[,:]";
         if (input.startsWith("//")) {
-            int endIndex = input.indexOf("\n");
+            int endIndex = input.indexOf("\\n");
             // 커스텀 구분자 추출시 오류 처리
             if (endIndex != -1) {
                 separator = input.substring(2, endIndex);
                 if (separator.isEmpty()) {
                     throw new IllegalArgumentException("커스텀 구분자가 비어있습니다.");
                 }
-                input = input.substring(endIndex + 1);
+                input = input.substring(endIndex + 2);
             } else {
                 throw new IllegalArgumentException("커스텀 구분자가 잘못된 형식입니다.");
             }
