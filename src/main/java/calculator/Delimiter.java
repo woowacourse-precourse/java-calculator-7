@@ -20,24 +20,28 @@ public class Delimiter {
             throw new IllegalArgumentException("구분자에 아라비아 숫자가 포함되면 안됩니다.");
         }
     }
-    
+
     private boolean containsDigit(String delimiter) {
         for (char c : delimiter.toCharArray()) {
-            if ('0'<=c && c<='9') {
+            if ('0' <= c && c <= '9') {
                 return true;
             }
         }
-        return false;        
+        return false;
     }
-    
+
     public boolean matchesAt(String input, int index) {
         if (index + delimiter.length() > input.length()) {
             return false;
         }
         return input.startsWith(delimiter, index);
     }
-    
+
     public int length() {
         return delimiter.length();
+    }
+
+    public boolean isDot() {
+        return delimiter.equals(".");
     }
 }

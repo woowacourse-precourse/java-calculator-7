@@ -5,11 +5,11 @@ public class InputProcessor {
         //인스턴스 생성 불가
     }
     
-    static public String[] process(String input) {
+    static public NumberTokens process(String input) {
         DelimiterExtractor delimiterExtractor = new DelimiterExtractor();
         Delimiters delimiters = delimiterExtractor.extractDelimiters(input);
         String numbersPart = delimiterExtractor.getNumbersPart();
         String[] tokens = TokenSplitter.split(numbersPart, delimiters);
-        return tokens;
+        return TokenParser.parseTokens(tokens, delimiters.containsDotDelimiter());
     }
 }

@@ -8,7 +8,7 @@ public class TokenParser {
         //인스턴스 생성 안됨
     }
     
-    public NumberTokens parseTokens(String[] tokens, boolean decimalAllowed) {
+    static public NumberTokens parseTokens(String[] tokens, boolean decimalAllowed) {
         List<NumberToken> numberTokens = new ArrayList<>();
         for (String tokenStr : tokens) {
             NumberToken token = new NumberToken(tokenStr, decimalAllowed);

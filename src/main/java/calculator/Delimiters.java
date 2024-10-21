@@ -30,4 +30,9 @@ public class Delimiters {
         }
         return null;
     }
+    
+    public boolean containsDotDelimiter() {
+        return delimiters.stream().anyMatch(Delimiter::isDot);
+    }
+    
 }
