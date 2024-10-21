@@ -83,7 +83,7 @@ public class Parser {
                 integers.add(number);
             }
         } catch (Exception e) {
-            throw new IllegalArgumentException("올바르지 않은 문법입니다.");
+            throw new IllegalArgumentException(e.getMessage());
         }
 
         return integers;
