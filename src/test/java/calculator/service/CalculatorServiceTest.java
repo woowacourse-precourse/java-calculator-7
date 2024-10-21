@@ -1,5 +1,6 @@
 package calculator.service;
 
+import calculator.common.ErrorMessage;
 import calculator.model.Calculator;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -78,16 +79,37 @@ class CalculatorServiceTest {
     public void 커스텀_구분자_중복시_예외_발생() {
         // given
         List<String> inputs = new ArrayList<>();
-        inputs.add("//,\\n1,2,3");
+        inputs.add("//..\\n1,2,3");
         inputs.add("////\\n6/6,3");
         inputs.add("//|#|\\n92475293847592734598234579235325|3124349872313549723498579127349");
-        inputs.add("//\":\\n1:2\"3,");
+        inputs.add("//\"\"\\n1:2\"3,");
 
         // when, then
         inputs.forEach((rawInput) -> {
             Assertions.assertThatThrownBy(() -> {
-                calculatorService.calculate(rawInput);
-            }).isInstanceOf(IllegalArgumentException.class);
+                        calculatorService.calculate(rawInput);
+                    })
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage(ErrorMessage.DUPLICATE_DELIMITER.getMessage());
+        });
+    }
+
+    @Test
+    public void 기본_구분자_커스텀_구분자로_설정시_예외_발생() {
+        // given
+        List<String> inputs = new ArrayList<>();
+        inputs.add("//,\\n1,2,3");
+        inputs.add("//:\\n6/6,3");
+        inputs.add("//|#,\\n92475293847592734598234579235325|3124349872313549723498579127349");
+        inputs.add("//\"\":\\n1:2\"3,");
+
+        // when, then
+        inputs.forEach((rawInput) -> {
+            Assertions.assertThatThrownBy(() -> {
+                        calculatorService.calculate(rawInput);
+                    })
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage(ErrorMessage.DUPLICATE_DEFAULT_DELIMITER.getMessage());
         });
     }
 
@@ -98,13 +120,15 @@ class CalculatorServiceTest {
         inputs.add("//1\\n1,2,3");
         inputs.add("//|0#\\n6/6,3");
         inputs.add("//0\\n92475293847592734598234579235325|3124349872313549723498579127349");
-        inputs.add("//1234\":\\n1:2\"3,");
+        inputs.add("//1234\"\\n1:2\"3,");
 
         // when, then
         inputs.forEach((rawInput) -> {
             Assertions.assertThatThrownBy(() -> {
-                calculatorService.calculate(rawInput);
-            }).isInstanceOf(IllegalArgumentException.class);
+                        calculatorService.calculate(rawInput);
+                    })
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage(ErrorMessage.NUMERIC_DELIMITER_NOT_ALLOWED.getMessage());
         });
     }
 
@@ -113,15 +137,34 @@ class CalculatorServiceTest {
         // given
         List<String> inputs = new ArrayList<>();
         inputs.add("1.1241,2.4324.3,3");
-        inputs.add("-1,324:213");
-        inputs.add("-132414.3124,31341");
+        inputs.add("1324.14.3124,31341");
         inputs.add("12.31.34");
 
         // when, then
         inputs.forEach((rawInput) -> {
             Assertions.assertThatThrownBy(() -> {
-                calculatorService.calculate(rawInput);
-            }).isInstanceOf(IllegalArgumentException.class);
+                        calculatorService.calculate(rawInput);
+                    })
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage(ErrorMessage.INVALID_NUMBER_FORMAT.getMessage());
+        });
+    }
+
+    @Test
+    public void 음수_입력시_예외_발생() {
+        // given
+        List<String> inputs = new ArrayList<>();
+        inputs.add("1.1241,-24324.3,3");
+        inputs.add("-132414.3124,31341");
+        inputs.add("12.31,-34");
+
+        // when, then
+        inputs.forEach((rawInput) -> {
+            Assertions.assertThatThrownBy(() -> {
+                        calculatorService.calculate(rawInput);
+                    })
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage(ErrorMessage.INVALID_INPUT.getMessage());
         });
     }
 }

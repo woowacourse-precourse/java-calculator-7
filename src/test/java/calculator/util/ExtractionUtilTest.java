@@ -1,5 +1,6 @@
 package calculator.util;
 
+import calculator.common.ErrorMessage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -85,7 +86,7 @@ class ExtractionUtilTest {
         inputs.forEach((input) -> {
             Assertions.assertThatThrownBy(() -> ExtractionUtil.extractDelimiter(input))
                     .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage("커스텀 구분자로 숫자를 지정할 수 없습니다.");
+                    .hasMessage(ErrorMessage.NUMERIC_DELIMITER_NOT_ALLOWED.getMessage());
         });
     }
 

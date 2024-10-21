@@ -1,5 +1,6 @@
 package calculator.model;
 
+import calculator.common.ErrorMessage;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
@@ -35,7 +36,9 @@ class NumbersTest {
 
         // when, then
         Assertions.assertThatThrownBy(() -> {
-            Numbers.of(expression, delimiters).getNumbers();
-        }).isInstanceOf(IllegalArgumentException.class);
+                    Numbers.of(expression, delimiters).getNumbers();
+                })
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.INVALID_NUMBER_FORMAT.getMessage());
     }
 }

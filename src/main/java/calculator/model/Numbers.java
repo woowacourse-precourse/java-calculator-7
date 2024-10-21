@@ -1,5 +1,6 @@
 package calculator.model;
 
+import calculator.common.ErrorMessage;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collections;
@@ -26,9 +27,9 @@ public class Numbers {
                     .toList();
             return new Numbers(numbers);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자의 형식이 잘못되었습니다");
+            throw new IllegalArgumentException(ErrorMessage.INVALID_NUMBER_FORMAT.getMessage());
         } catch (PatternSyntaxException e) {
-            throw new IllegalArgumentException("정규 표현식이 잘못되었습니다");
+            throw new IllegalArgumentException(ErrorMessage.INVALID_REGEX.getMessage());
         }
     }
 }

@@ -1,5 +1,6 @@
 package calculator.util;
 
+import calculator.common.ErrorMessage;
 import calculator.model.Delimiters;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,16 +51,18 @@ class InputValidatorTest {
 
         rawInputs.forEach(rawInput -> {
             Assertions.assertThatThrownBy(() -> {
-                String expression = ExtractionUtil.extractExpression(rawInput);
-                Delimiters delimiters = Delimiters.from(rawInput);
+                        String expression = ExtractionUtil.extractExpression(rawInput);
+                        Delimiters delimiters = Delimiters.from(rawInput);
 
-                System.out.println("rawInput = " + rawInput);
-                System.out.println("Expression = " + expression);
-                System.out.println("Delimiters = " + delimiters.getDelimiters());
-                System.out.println();
+                        System.out.println("rawInput = " + rawInput);
+                        System.out.println("Expression = " + expression);
+                        System.out.println("Delimiters = " + delimiters.getDelimiters());
+                        System.out.println();
 
-                InputValidator.validateExpression(expression, delimiters.getDelimiters());
-            }).isInstanceOf(IllegalArgumentException.class);
+                        InputValidator.validateExpression(expression, delimiters.getDelimiters());
+                    })
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage(ErrorMessage.INVALID_INPUT.getMessage());
         });
     }
 
@@ -75,16 +78,18 @@ class InputValidatorTest {
 
         rawInputs.forEach(rawInput -> {
             Assertions.assertThatThrownBy(() -> {
-                String expression = ExtractionUtil.extractExpression(rawInput);
-                Delimiters delimiters = Delimiters.from(rawInput);
+                        String expression = ExtractionUtil.extractExpression(rawInput);
+                        Delimiters delimiters = Delimiters.from(rawInput);
 
-                System.out.println("rawInput = " + rawInput);
-                System.out.println("Expression = " + expression);
-                System.out.println("Delimiters = " + delimiters.getDelimiters());
-                System.out.println();
+                        System.out.println("rawInput = " + rawInput);
+                        System.out.println("Expression = " + expression);
+                        System.out.println("Delimiters = " + delimiters.getDelimiters());
+                        System.out.println();
 
-                InputValidator.validateExpression(expression, delimiters.getDelimiters());
-            }).isInstanceOf(IllegalArgumentException.class);
+                        InputValidator.validateExpression(expression, delimiters.getDelimiters());
+                    })
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage(ErrorMessage.INVALID_INPUT.getMessage());
         });
     }
 }

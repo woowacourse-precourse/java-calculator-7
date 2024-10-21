@@ -1,5 +1,6 @@
 package calculator.model;
 
+import calculator.common.ErrorMessage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -47,9 +48,11 @@ class DelimitersTest {
         // when, then
         inputs.forEach((input) -> {
             Assertions.assertThatThrownBy(() -> {
-                System.out.println("input = " + input);
-                Delimiters.from(input);
-            }).isInstanceOf(IllegalArgumentException.class);
+                        System.out.println("input = " + input);
+                        Delimiters.from(input);
+                    })
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage(ErrorMessage.DUPLICATE_DELIMITER.getMessage());
         });
     }
 }
