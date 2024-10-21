@@ -4,7 +4,8 @@ readInput() // 입력을 위한 기능. string 형식으로 input을 받고 retu
 
 parseInput() // string으로 받은 입력을 구분하고 배열에 저장한다. 배열을 return한다.   
 &emsp;isCustomDivider() // 구분자가 default인지 custom인지 구분한다.   
-&emsp;parseDivider() // 만약 커스텀 구분자라면, 어떤 문자인지 파싱한다.   
+&emsp;parseDivider() // 만약 커스텀 구분자라면, 어떤 문자인지 파싱한다.
+&emsp;&emsp;handleEscapeSequence() // 커스템 구분자에 escape character '\'가 있다면, '\\'로 처리하여 오류를 방지한다.  
 &emsp;normalizeInput() // 만약 커스텀 구분자라면, 입력에서 커스텀 구분자 부분을 제외한다. 정수로 형변환하기 용이하도록 하기 위해서이다.   
 &emsp;divideInput() // 구분자로 입력을 구분하고, 구분된 string들을 string 배열에 저장한다.   
 
