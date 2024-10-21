@@ -18,6 +18,10 @@ public class Application {
     }
 
     public static void processInput(String input) {
+        if (input.trim().isEmpty()) {
+            throw new IllegalArgumentException("입력값이 올바르지 않습니다. 빈 문자열을 입력할 수 없습니다.");
+        }
+
         List<Long> numbers = new ArrayList<>();
         String delimiter;
 
@@ -42,6 +46,8 @@ public class Application {
                 throw new IllegalArgumentException("입력된 값이 숫자가 아닙니다: '" + s.trim() + "'");
             }
         });
+
+        checkForNegativeNumbers(numbers);
     }
 
     private static String getCustomDelimiter(String input) {
@@ -54,5 +60,17 @@ public class Application {
             throw new IllegalArgumentException("입력값이 올바르지 않습니다. 쉼표 또는 세미콜론을 포함해야 합니다.");
         }
         return input.contains(";") ? ";" : ",";
+    }
+
+    public static void checkForNegativeNumbers(List<Long> numbers) {
+        for (Long number : numbers) {
+            if (number < 0) {
+                throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+            }
+        }
+    }
+
+    public static long calculateSum(List<Long> numbers) {
+        return numbers.stream().mapToLong(Long::longValue).sum();
     }
 }
