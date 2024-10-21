@@ -63,7 +63,7 @@ class InputValidatorTest {
     void testStartsWithDelimiter() {
         // given
         String input = "//?\\n";
-        delimiter = new Delimiter();
+        delimiter = new CustomDelimiter();
         InputValidator inputValidator = new InputValidator(delimiter);
 
         // when, then: 정상 동작 => 예외 미동작

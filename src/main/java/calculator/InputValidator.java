@@ -1,7 +1,7 @@
 package calculator;
 
 public class InputValidator {
-    private Delimiter delimiter;
+    private final Delimiter delimiter;
     private final Parser parser;
 
     public InputValidator(Delimiter delimiter) {
@@ -11,7 +11,6 @@ public class InputValidator {
 
     public String validate(String input) {
         if (input.startsWith("//")) {
-            this.delimiter = new CustomDelimiter(); // 커스텀 구분자가 있으면 CustomDelimiter로 변경
             input = delimiter.parseDelimiter(input);
         }
 
