@@ -24,24 +24,21 @@ public class StringSumCalculator {
     private String[] splitNumbers(String input) {
         input = input.replace("\\n", "\n");
 
-        String[] splitNumbers;
-
-        if (input.startsWith("//") && input.contains("\n")) {
-            int delimiterIdx = input.indexOf("\n");
-            String customDelimiters = input.substring(2, delimiterIdx);
-            String numbersWithDelimiter = input.substring(delimiterIdx + 1);
-
-            if (customDelimiters.startsWith("[") && customDelimiters.endsWith("]")) {
-                String[] delimiters = customDelimiters.substring(1, customDelimiters.length() - 1).split("]\\[");
-                String delimiterPattern = String.join("|", Pattern.quote(delimiters[0]), Pattern.quote(delimiters[1]));
-                splitNumbers = numbersWithDelimiter.split(delimiterPattern);
-            } else {
-                splitNumbers = numbersWithDelimiter.split(Pattern.quote(customDelimiters));
-            }
-        } else {
-            splitNumbers = input.split(",|:");
+        if (!input.startsWith("//") || !input.contains("\n")) {
+            return input.split(",|:");
         }
-        return splitNumbers;
+
+        int delimiterIdx = input.indexOf("\n");
+        String customDelimiters = input.substring(2, delimiterIdx);
+        String numbersWithDelimiter = input.substring(delimiterIdx + 1);
+
+        if (customDelimiters.startsWith("[") && customDelimiters.endsWith("]")) {
+            String[] delimiters = customDelimiters.substring(1, customDelimiters.length() - 1).split("]\\[");
+            String delimiterPattern = String.join("|", Pattern.quote(delimiters[0]), Pattern.quote(delimiters[1]));
+            return numbersWithDelimiter.split(delimiterPattern);
+        } else {
+            return numbersWithDelimiter.split(Pattern.quote(customDelimiters));
+        }
     }
 
     private int positiveNumber(Integer input) {
