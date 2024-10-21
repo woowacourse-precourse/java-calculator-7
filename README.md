@@ -122,6 +122,10 @@
 
 <img alt="빌드 테스트" src="./test.png" style="width: 850px" />
 
+- 테스트 코드 실행 결과
+
+<img alt="테스트 코드 결과" src="./testresult.png" style="width:270px" />
+
 
 
 
