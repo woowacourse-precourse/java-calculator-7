@@ -1,18 +1,16 @@
 package calculator.service;
 
-import java.util.List;
-
 public interface Service {
 
-    List<String> createSeparators();
+    void createSeparators();
 
     boolean isCustomSeparator(String input);
 
-    String saveCustomSeparator(String input);
+    void saveCustomSeparator(String input);
 
     String removeCustomPart(String input);
 
-    String[] separateInput(String input, List<String> separators);
+    String[] separateInput(String input);
 
     int calculate(String[] nums);
 }

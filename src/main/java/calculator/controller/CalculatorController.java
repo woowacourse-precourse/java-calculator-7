@@ -3,7 +3,6 @@ package calculator.controller;
 import calculator.service.Service;
 import calculator.view.InputView;
 import calculator.view.OutputView;
-import java.util.List;
 
 public class CalculatorController {
 
@@ -21,14 +20,13 @@ public class CalculatorController {
         outputView.inputString();
         String input = inputView.inputString();
 
-        List<String> separators = service.createSeparators();
+        service.createSeparators();
         if (service.isCustomSeparator(input)) {
-            String customSeparator = service.saveCustomSeparator(input);
-            separators.add(customSeparator);
+            service.saveCustomSeparator(input);
             input = service.removeCustomPart(input);
         }
 
-        String[] nums = service.separateInput(input, separators);
+        String[] nums = service.separateInput(input);
         int result = service.calculate(nums);
 
         outputView.outputResult(result);
