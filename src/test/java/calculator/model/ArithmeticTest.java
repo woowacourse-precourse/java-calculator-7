@@ -3,9 +3,14 @@ package calculator.model;
 import calculator.util.ErrorMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
@@ -14,103 +19,125 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @DisplayName("연산부분 테스트")
 class ArithmeticTest {
 
-    @ParameterizedTest
-    @ValueSource(strings = {"1,2,3!4", "a1,2:3", "1,가,2,3"})
-    @DisplayName("기본 구분자를 사용할 때 숫자와 기본구분자 이외의 문자가 있으면 예외가 발생한다")
-    void isInvalidCalculatorWithDefaultDelimiter(String input) {
-        InputData inputData = new InputData(input);
-        assertThatThrownBy(() -> new Arithmetic(new DefaultDelimiter(), inputData))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.INPUT_DATA_WITH_DEFAULT_DELIMITER_FORMAT.getError());
+    private static Stream<Arguments> splitTestData() {
+        return Stream.of(
+                Arguments.of(
+                        new InputData("1,2,3,4"),
+                        new DefaultDelimiter(),
+                        List.of(1,2,3,4),
+                        "기본 구분자 단독 사용"),
+                Arguments.of(
+                        new InputData("10,20:30,40"),
+                        new DefaultDelimiter(),
+                        List.of(10,20,30,40),
+                        "기본 구분자 혼합 사용"),
+                Arguments.of(
+                        new InputData("//;\\n7;8;9;4"),
+                        new CustomDelimiter(";"),
+                        List.of(7,8,9,4),
+                        "커스텀 구분자 단독 사용"),
+                Arguments.of(
+                        new InputData("//.;\\n998.41;3.487"),
+                        new CustomDelimiter(".;"),
+                        List.of(998,41,3,487),
+                        "커스텀 구분자 다수 사용"),
+                Arguments.of(
+                        new InputData("//^?!\\n18^62?300!483:40,5"),
+                        new CustomDelimiter("^?!"),
+                        List.of(18,62,300,483,40,5),
+                        "구분자 혼합 최대치 사용")
+
+        );
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"1,2,3,4,", "1:2:3", "1:2,3"})
-    @DisplayName("기본 구분자를 사용할 때 숫자와 기본구분자만 있으면 예외가 발생하지 않는다")
-    void isValidCalculatorWithDefaultDelimiter(String input) {
-        InputData inputData = new InputData(input);
+    @ParameterizedTest(name = "{3}")
+    @MethodSource("splitTestData")
+    @DisplayName("숫자 분리 테스트")
+    void splitCalculatorPart(InputData inputData, Delimiter delimiter,
+                                                 List<Integer> numbers, String testCase) {
+        assertThat(new Arithmetic(delimiter, inputData).getArithmetic()).isEqualTo(numbers);
+    }
+
+    private static Stream<Arguments> exceptionTestData() {
+        return Stream.of(
+                Arguments.of(new InputData("1,2,3!4"),
+                        new DefaultDelimiter(),
+                        ErrorMessage.INPUT_DATA_WITH_DEFAULT_DELIMITER_FORMAT.getError(),
+                        "기본 구분자 이외의 특수기호"),
+                Arguments.of(new InputData("a1,2:3"),
+                        new DefaultDelimiter(),
+                        ErrorMessage.INPUT_DATA_WITH_DEFAULT_DELIMITER_FORMAT.getError(),
+                        "기본 구분자 이외의 문자"),
+                Arguments.of(new InputData("//;\\n1?2;3;4"),
+                        new CustomDelimiter(";"),
+                        ErrorMessage.ARITHMETIC_WITH_CUSTOM_DELIMITER_FORMAT.getError(),
+                        "커스텀,기본 구분자 이외의 특수기호"),
+                Arguments.of(new InputData("//a\\n1a2,3a가4"),
+                        new CustomDelimiter("a"),
+                        ErrorMessage.ARITHMETIC_WITH_CUSTOM_DELIMITER_FORMAT.getError(),
+                        "커스텀,기본 구분자 이외의 문자"),
+                Arguments.of(new InputData(IntStream.range(1, 32)
+                                .mapToObj(i -> "1")
+                                .collect(Collectors.joining(","))),
+                        new DefaultDelimiter(),
+                        ErrorMessage.ARITHMETIC_LENGTH_LIMIT.getError(),
+                        "길이 초과"),
+                Arguments.of(new InputData("-1,0,1,2,3"),
+                        new DefaultDelimiter(),
+                        ErrorMessage.ARITHMETIC_RANGE_LIMIT.getError(),
+                        "음수 입력"),
+                Arguments.of(new InputData("998,999,1000,1001"),
+                        new DefaultDelimiter(),
+                        ErrorMessage.ARITHMETIC_RANGE_LIMIT.getError(),
+                        "1000 초과 입력")
+        );
+    }
+
+    @ParameterizedTest(name = "{3}")
+    @MethodSource("exceptionTestData")
+    @DisplayName("예외 발생 테스트")
+    void isInvalidArithmetic(InputData inputData, Delimiter delimiter,
+                                                 String error, String testCase) {
+        assertThatThrownBy(() -> new Arithmetic(delimiter, inputData))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(error);
+    }
+
+    private static Stream<Arguments> normalTestData() {
+        return Stream.of(
+                Arguments.of(
+                        new InputData("1,2,3,4,"),new DefaultDelimiter(), "기본 구분자가 마지막"),
+                Arguments.of(
+                        new InputData("1:2:3"), new DefaultDelimiter(),"숫자가 마지막"),
+                Arguments.of(
+                        new InputData(":1:2:3"), new DefaultDelimiter(),"기본 구분자가 시작"),
+                Arguments.of(
+                        new InputData("1:2,3"), new DefaultDelimiter(),"기본 구분자 혼합 사용"),
+                Arguments.of(
+                        new InputData("//;\\n1;2;3;4"), new CustomDelimiter(";"),"커스텀 구분자 1개 사용"),
+                Arguments.of(
+                        new InputData("//a\\n1a2,3a4"), new CustomDelimiter("a"),"구분자 혼합 사용"),
+                Arguments.of(
+                        new InputData("//가*\\n1*2가3"), new CustomDelimiter("가*"),"커스텀 구분자 여러개 사용"),
+                Arguments.of(new InputData(""), new DefaultDelimiter(), "숫자 0개"),
+                Arguments.of(new InputData("1"), new DefaultDelimiter(), "숫자 1개"),
+                Arguments.of(new InputData(IntStream.range(1, 30)
+                                .mapToObj(i -> "1")
+                                .collect(Collectors.joining(","))),
+                        new DefaultDelimiter(),
+                        "숫자 30개"),
+                Arguments.of(new InputData("0,1,2,3"), new DefaultDelimiter(), "최솟값 0"),
+                Arguments.of(new InputData("998,999,1000"), new DefaultDelimiter(), "최댓값 1000")
+        );
+    }
+
+    @ParameterizedTest(name = "{2}")
+    @MethodSource("normalTestData")
+    @DisplayName("정상 작동 테스트")
+    void isValidArithmetic(InputData inputData, Delimiter delimiter, String testCase) {
         assertThatCode(() -> new Arithmetic
-                (new DefaultDelimiter(), inputData))
+                (delimiter, inputData))
                 .doesNotThrowAnyException();
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"//;\\n1?2;3;4", "//a\\n1a2,3ab4", "//가*\\n1*2가3다4"})
-    @DisplayName("커스텀 구분자를 사용할 때 숫자와 기본구분자 이외의 문자가 있으면 예외가 발생한다")
-    void isInvalidCalculatorWithCustomDelimiter(String input) {
-        InputData inputData = new InputData(input);
-        assertThatThrownBy(() -> new Arithmetic(new CustomDelimiter(inputData.convertDelimiterPart()), inputData))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.ARITHMETIC_WITH_CUSTOM_DELIMITER_FORMAT.getError());
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"//;\\n1;2;3;4", "//a\\n1a2,3a4", "//가*\\n1*2가3"})
-    @DisplayName("커스텀 구분자를 사용할 때 숫자와 기본구분자만 있으면 예외가 발생하지 않는다")
-    void isValidCalculatorWithCustomDelimiter(String input) {
-        InputData inputData = new InputData(input);
-        assertThatCode(() -> new Arithmetic
-                (new CustomDelimiter(inputData.convertDelimiterPart()), inputData))
-                .doesNotThrowAnyException();
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"1,2,3,4", "1:2:3:4", "1,2:3,4", "1:2:3,4"})
-    @DisplayName("기본 구분자를 사용해서 연산 부분의 숫자를 낱개로 분리한다")
-    void splitCalculatorPartWithDefaultDelimiter(String input) {
-        InputData inputData = new InputData(input);
-        assertThat(new Arithmetic(new DefaultDelimiter(), inputData).getArithmetic()).isEqualTo(List.of(1, 2, 3, 4));
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"//;\\n1;2;3;4", "//.;\\n1.2;3.4", "//^?!\\n1^2?3!4"})
-    @DisplayName("커스텀 구분자를 사용해서 연산 부분의 숫자를 낱개로 분리한다")
-    void splitCalculatorPartWithCustomDelimiter(String input) {
-        InputData inputData = new InputData(input);
-        assertThat(new Arithmetic
-                (new CustomDelimiter(inputData.convertDelimiterPart()), inputData)
-                .getArithmetic()).isEqualTo(List.of(1, 2, 3, 4));
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"",
-            "1",
-            "1,2:3,4",
-            "1:2:3,4,5,6,7,8:9:10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30"})
-    @DisplayName("입력된 숫자의 개수가 0개 이상 30개 이하이면 예외가 발생하지 않는다")
-    void arithmeticWithValidCount(String input) {
-        InputData inputData = new InputData(input);
-        assertThatCode(() -> new Arithmetic(new DefaultDelimiter(), inputData))
-                .doesNotThrowAnyException();
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {
-            "1:2:3,4,5,6,7,8:9:10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31"})
-    @DisplayName("입력된 숫자의 개수가 30개 초과하면 예외가 발생한다")
-    void arithmeticWithInvalidCount(String input) {
-        InputData inputData = new InputData(input);
-        assertThatThrownBy(() -> new Arithmetic(new DefaultDelimiter(), inputData))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.ARITHMETIC_LENGTH_LIMIT.getError());
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"0,1,2,3", "998,999,1000"})
-    @DisplayName("입력된 숫자가 0 이상 1000 이하이면 예외가 발생하지 않는다")
-    void arithmeticWithValidDigit(String input) {
-        InputData inputData = new InputData(input);
-        assertThatCode(() -> new Arithmetic(new DefaultDelimiter(), inputData))
-                .doesNotThrowAnyException();
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"-1,0,1,2,3", "998,999,1000,1001"})
-    @DisplayName("입력된 숫자가 음수이거나 1000을 초과하면 예외가 발생한다")
-    void arithmeticWithInvalidDigit(String input) {
-        InputData inputData = new InputData(input);
-        assertThatThrownBy(() -> new Arithmetic(new DefaultDelimiter(), inputData))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.ARITHMETIC_RANGE_LIMIT.getError());
-    }
 }
