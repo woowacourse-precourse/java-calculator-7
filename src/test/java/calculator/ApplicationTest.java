@@ -1,5 +1,6 @@
 package calculator;
 
+import static calculator.ErrorMessages.*;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
@@ -131,10 +132,10 @@ class ApplicationTest extends NsTest {
     @Test
     void validateInput_ContainingPositive_Delimiter() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> runException(";,kk333333")).isInstanceOf(IllegalArgumentException.class).hasMessage("피연산자에 숫자가 아닌 다른 문자가 있습니다");
+            assertThatThrownBy(() -> runException(";,kk333333")).isInstanceOf(IllegalArgumentException.class).hasMessage(ERROR_BASIC_DELIMITER_OPERAND_CONTAIN_OTHER_CHAR);
         });
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> runException("1 000;1,55")).isInstanceOf(IllegalArgumentException.class).hasMessage("피연산자에 숫자가 아닌 다른 문자가 있습니다");
+            assertThatThrownBy(() -> runException("1 000;1,55")).isInstanceOf(IllegalArgumentException.class).hasMessage(ERROR_BASIC_DELIMITER_OPERAND_CONTAIN_OTHER_CHAR);
         });
     }
 
@@ -178,40 +179,40 @@ class ApplicationTest extends NsTest {
     @Test
     void validateInputOnlyContaining_CustomDelimiter() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> runException("//??\\n")).isInstanceOf(IllegalArgumentException.class).hasMessage("커스텀 구분자 이후로 수식이 없습니다");
+            assertThatThrownBy(() -> runException("//??\\n")).isInstanceOf(IllegalArgumentException.class).hasMessage(ERROR_NO_EXPRESSION_CUSTOM_DELIMITER);
         });
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> runException("//??\\n//!!\\n ")).isInstanceOf(IllegalArgumentException.class).hasMessage("커스텀 구분자 이후로 수식이 없습니다");
+            assertThatThrownBy(() -> runException("//??\\n//!!\\n ")).isInstanceOf(IllegalArgumentException.class).hasMessage(ERROR_NO_EXPRESSION_CUSTOM_DELIMITER);
         });
     }
 
     @Test
     void validateOverTwoCustomDelimiter() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> runException("//??\\n//!!\\n33??")).isInstanceOf(IllegalArgumentException.class).hasMessage("커스텀 구분자가 2개이상 있습니다");
+            assertThatThrownBy(() -> runException("//??\\n//!!\\n33??")).isInstanceOf(IllegalArgumentException.class).hasMessage(ERROR_CUSTOM_DELIMITER_OVER_TWO);
         });
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> runException("//??\\n//!!  \\n33??")).isInstanceOf(IllegalArgumentException.class).hasMessage("커스텀 구분자가 2개이상 있습니다");
+            assertThatThrownBy(() -> runException("//??\\n//!!  \\n33??")).isInstanceOf(IllegalArgumentException.class).hasMessage(ERROR_CUSTOM_DELIMITER_OVER_TWO);
         });
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> runException("//??\\n//!!  \\n//!1231  \\n33??")).isInstanceOf(IllegalArgumentException.class).hasMessage("커스텀 구분자가 2개이상 있습니다");
+            assertThatThrownBy(() -> runException("//??\\n//!!  \\n//!1231  \\n33??")).isInstanceOf(IllegalArgumentException.class).hasMessage(ERROR_CUSTOM_DELIMITER_OVER_TWO);
         });
     }
 
     @Test
     void validateContaining_OtherCharInFrontDelimiter() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> runException("~~~//??\\n33")).isInstanceOf(IllegalArgumentException.class).hasMessage("커스텀 구분자의 형식인 //로 시작하지 않습니다");
+            assertThatThrownBy(() -> runException("~~~//??\\n33")).isInstanceOf(IllegalArgumentException.class).hasMessage(ERROR_CUSTOM_DELIMITER_NOT_START_WITH_FORMAT);
         });
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> runException("     //??\\n33")).isInstanceOf(IllegalArgumentException.class).hasMessage("커스텀 구분자의 형식인 //로 시작하지 않습니다");
+            assertThatThrownBy(() -> runException("     //??\\n33")).isInstanceOf(IllegalArgumentException.class).hasMessage(ERROR_CUSTOM_DELIMITER_NOT_START_WITH_FORMAT);
         });
     }
 
     @Test
     void validateCustomDelimiterIsNumber() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> runException("//3\\n11394")).isInstanceOf(IllegalArgumentException.class).hasMessage("구분자에 숫자가 들어있습니다");
+            assertThatThrownBy(() -> runException("//3\\n11394")).isInstanceOf(IllegalArgumentException.class).hasMessage(ERROR_CUSTOM_DELIMITER_CONTAIN_NUMBER);
         });
         assertSimpleTest(() -> {
             assertThatNoException().isThrownBy(() -> runException("//dd\\n33"));
@@ -229,27 +230,27 @@ class ApplicationTest extends NsTest {
     @Test
     void validateCustomDelimiterNotContainZero() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> runException("//!!!\\n12!!!345!!!0 ")).isInstanceOf(IllegalArgumentException.class).hasMessage("커스텀 구분자부분의 피연산자에서 0을 포함합니다");
+            assertThatThrownBy(() -> runException("//!!!\\n12!!!345!!!0 ")).isInstanceOf(IllegalArgumentException.class).hasMessage(ERROR_CUSTOM_DELIMITER_CONTAIN_ZERO);
         });
     }
 
     @Test
     void validateCustomDelimiterNotContainMinus() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> runException("//!!!\\n12!!!345!!!-1")).isInstanceOf(IllegalArgumentException.class).hasMessage("커스텀 구분자부분의 피연산자에서 음수를 포함합니다");
+            assertThatThrownBy(() -> runException("//!!!\\n12!!!345!!!-1")).isInstanceOf(IllegalArgumentException.class).hasMessage(ERROR_CUSTOM_DELIMITER_CONTAIN_MINUS);
         });
     }
 
     @Test
     void validateCustomDelimiterExpressionOnlyContaining_Positive_Delimiter() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> runException("//?\\n33kk3333?")).isInstanceOf(IllegalArgumentException.class).hasMessage("피연산자에 커스텀 구분자가 아닌 문자가 있습니다");
+            assertThatThrownBy(() -> runException("//?\\n33kk3333?")).isInstanceOf(IllegalArgumentException.class).hasMessage(ERROR_CUSTOM_DELIMITER_OPERANDS_CONTAIN_OTHER_CHAR);
         });
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> runException("//kk?\\n33kk?3333?")).isInstanceOf(IllegalArgumentException.class).hasMessage("피연산자에 커스텀 구분자가 아닌 문자가 있습니다");
+            assertThatThrownBy(() -> runException("//kk?\\n33kk?3333?")).isInstanceOf(IllegalArgumentException.class).hasMessage(ERROR_CUSTOM_DELIMITER_OPERANDS_CONTAIN_OTHER_CHAR);
         });
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> runException("//???\\n33?3333")).isInstanceOf(IllegalArgumentException.class).hasMessage("피연산자에 커스텀 구분자가 아닌 문자가 있습니다");
+            assertThatThrownBy(() -> runException("//???\\n33?3333")).isInstanceOf(IllegalArgumentException.class).hasMessage(ERROR_CUSTOM_DELIMITER_OPERANDS_CONTAIN_OTHER_CHAR);
         });
     }
 
