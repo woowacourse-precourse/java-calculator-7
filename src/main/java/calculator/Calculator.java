@@ -67,7 +67,7 @@ public class Calculator {
         //양의 정수 정규식
         String numberRegex = "^[1-9][0-9]*$";
         for (String data : numbers) {
-            if (data == null) {
+            if (data == null || data.trim().isEmpty()) {
                 continue;
             }
             //해당 문자가 숫자형인지
