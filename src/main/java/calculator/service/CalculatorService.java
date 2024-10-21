@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 public class CalculatorService {
 
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("^//(.*)\\n.*$");
+    private static final String NUMBER_REGEX = "[^0-9-]";
     private static final int CUSTOM_DELIMITER_INDEX = 2;
     private static final int CUSTOM_INPUT_START_INDEX = 4;
     private static final String NORMAL_DELIMITER = "[,:]";
@@ -17,6 +18,7 @@ public class CalculatorService {
             throw new IllegalArgumentException("Input cannot be null or blank");
         }
         List<Number> numbers = convertToNumbers(input);
+        validateNegativeValue(numbers);
 
         int sum = numbers.stream()
                          .mapToInt(Number::value)
@@ -44,24 +46,36 @@ public class CalculatorService {
     }
 
     private List<String> splitCustom(final String input) {
-        String numberExpression = input.substring(CUSTOM_INPUT_START_INDEX);
+        String number = input.substring(CUSTOM_INPUT_START_INDEX);
 
-        return Arrays.stream(
-                             numberExpression.split(input.substring(CUSTOM_DELIMITER_INDEX, CUSTOM_DELIMITER_INDEX + 1)))
+        return Arrays.stream(number.split(input.substring(CUSTOM_DELIMITER_INDEX, CUSTOM_DELIMITER_INDEX + 1)))
                      .toList();
     }
 
     private List<String> splitNormal(final String input) {
+
         return Arrays.stream(input.split(NORMAL_DELIMITER))
                      .toList();
+    }
+
+    private void validateNegativeValue(final List<Number> numbers) {
+        boolean isNegativeValue = numbers.stream()
+                                         .map(Number::value)
+                                         .anyMatch(value -> value < 0);
+        if (isNegativeValue) {
+            throw new IllegalArgumentException("Negative values are not allowed");
+        }
     }
 
     private int parseInt(final String input) {
         if (input == null || input.isBlank()) {
             return 0;
         }
+
+        String regexInput = input.replaceAll(NUMBER_REGEX, "");
+
         try {
-            return Integer.parseInt(input.trim());
+            return Integer.parseInt(regexInput.trim());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Illegal Input input : " + input);
         }
