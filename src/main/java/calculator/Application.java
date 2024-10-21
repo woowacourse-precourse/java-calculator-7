@@ -8,9 +8,21 @@ public class Application {
             return 0;
         }
 
-        // 기본 구분자(쉼표(,) 또는 콜론(:))를 이용한 문자열 계산기 구현
         String delimiter = "[,:]";
-        String[] numbers = input.split(delimiter);
+        String numbersPart = input;
+
+        // 커스텀 구분자 기능 구현
+        if (input.startsWith("//")) {
+            int delimiterEndIndex = input.indexOf("\n");
+            if (delimiterEndIndex != -1) {
+                delimiter = input.substring(2, delimiterEndIndex);
+                numbersPart = input.substring(delimiterEndIndex + 1);
+            }
+        }
+
+        // 기본 구분자(쉼표(,) 또는 콜론(:))를 이용한 문자열 계산기 구현
+        delimiter = delimiter.replace("|", "\\|");
+        String[] numbers = numbersPart.split(delimiter);
         int sum = 0;
 
         // 합계 계산
