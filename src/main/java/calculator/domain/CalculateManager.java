@@ -33,7 +33,7 @@ public class CalculateManager {
         printReadLettersMessage();
         String letters = readLetters();
         String[] customSeparators = extractCustomSeparator(letters);
-        String newLetters = ReplaceCustomSeparatorToSeparator(letters, customSeparators);
+        String newLetters = replaceCustomSeparatorToSeparator(letters, customSeparators);
         registerCustomSeparator(customSeparators);
         String[] extractedNumbers = getNumbersFromLetters(newLetters);
         registerNumbers(extractedNumbers);
@@ -49,7 +49,7 @@ public class CalculateManager {
         return numberSplitter.getNumbersFromLetters(newLetters, separators);
     }
 
-    private String ReplaceCustomSeparatorToSeparator(String letters, String[] customSeparators) {
+    private String replaceCustomSeparatorToSeparator(String letters, String[] customSeparators) {
         return letterManager.replaceCustomSeparatorToSeparator(letters, customSeparators);
     }
 
