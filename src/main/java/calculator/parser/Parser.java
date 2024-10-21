@@ -77,7 +77,7 @@ public class Parser {
 		String[] strNumbers = expression.split(regex);
 
 		return Arrays.stream(strNumbers)
-				.map((strNumber) -> {
+				.map(strNumber -> {
 					try {
 						return Integer.parseInt(strNumber);
 					} catch (NumberFormatException e) {
