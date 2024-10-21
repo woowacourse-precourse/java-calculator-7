@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 public class OutputHandlerTest {
 
-	OutputHandler outputHandler = new OutputHandler();
+	private final OutputHandler outputHandler = new OutputHandler();
 
 	@Test
 	void 올바른_출력일경우() {
