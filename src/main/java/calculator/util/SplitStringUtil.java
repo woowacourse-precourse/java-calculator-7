@@ -22,14 +22,14 @@ public class SplitStringUtil {
      * @return 구분자 문자열과 숫자 문자열 배열 [separator, numbers]
      */
     private static String[] handleCustomSeparatorString(String input) {
-        StringBuilder separator = new StringBuilder();
-        int i = 0;
-        while (i < input.length() && !Character.isDigit(input.charAt(i))) {
-            separator.append(input.charAt(i));
-            i++;
+        StringBuilder separatorString = new StringBuilder();
+        int index = 0;
+        while (index < input.length() && !Character.isDigit(input.charAt(index))) {
+            separatorString.append(input.charAt(index));
+            index++;
         }
-        String numbers = input.substring(i);
-        return new String[]{separator.toString(), numbers};
+        String numberString = input.substring(index);
+        return new String[]{separatorString.toString(), numberString};
     }
 
     /**
