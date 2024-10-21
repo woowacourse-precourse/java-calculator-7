@@ -30,8 +30,12 @@ public class Calculator {
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("입력이 잘못되었습니다.");
             }
+            if (result + n > Integer.MAX_VALUE) {
+                throw new IllegalArgumentException("오버플로 발생했습니다.");
+            }
             result += n;
         }
+
         return result;
     }
 }
