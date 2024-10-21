@@ -22,6 +22,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("3("))
                 .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("구분자를 지정해 주세요")
         );
     }
 
@@ -62,6 +63,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("1//;\\n1;7"))
                 .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("커스텀 구분자는 제일 앞에 설정해 주세요")
         );
     }
 
@@ -78,6 +80,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("양수로 구성된 숫자를 입력해 주세요.")
         );
     }
 
