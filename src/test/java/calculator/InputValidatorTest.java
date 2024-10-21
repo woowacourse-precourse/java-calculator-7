@@ -2,6 +2,7 @@ package calculator;
 
 import static calculator.exception.Exception.INVALID_NEGATIVE_NUMBER;
 import static calculator.exception.Exception.INVALID_NUMBER_FORMAT;
+import static calculator.exception.Exception.INVALID_NUMBER_SIZE;
 import static org.junit.jupiter.api.Assertions.*;
 
 import calculator.domain.InputValidator;
@@ -39,5 +40,16 @@ public class InputValidatorTest {
 
         // 모두 양수일 때는 예외가 발생하지 않아야 함
         assertDoesNotThrow(() -> inputValidator.validate(input));
+    }
+    @Test
+    void shouldThrowExceptionForIntegerOverflow() {
+        InputValidator inputValidator = new InputValidator();
+        // 정수 범위를 넘어서는 값
+        List<String> input = Arrays.asList("1", "2147483648"); // 2147483648는 Integer.MAX_VALUE(2147483647)보다 큰 값
+
+        // 정수 범위를 넘는 값이 있을 때 예외가 발생하는지 확인
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->
+                inputValidator.validate(input));
+        assertEquals(INVALID_NUMBER_SIZE.getMessage() + "2147483648", exception.getMessage());
     }
 }
