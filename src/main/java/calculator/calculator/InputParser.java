@@ -1,5 +1,7 @@
 package calculator.calculator;
 
+import java.util.regex.Pattern;
+
 public class InputParser {
     public static String[] parse(String input) {
         String delimiter = ",|:";
@@ -9,15 +11,25 @@ public class InputParser {
             if (delimiterEndIndex == -1) {
                 throw new IllegalArgumentException();
             }
-            delimiter = input.substring(2, delimiterEndIndex);
-            delimiter = escapeSpecialCharacters(delimiter);
+            String delimiterPart = input.substring(2, delimiterEndIndex);
+            delimiter = extractMultipleDelimiters(delimiterPart);
             input = input.substring(delimiterEndIndex + 2);
         }
 
         return input.split(delimiter);
     }
 
-    private static String escapeSpecialCharacters(String delimiter) {
-        return java.util.regex.Pattern.quote(delimiter);
+    private static String extractMultipleDelimiters(String delimiterPart) {
+        StringBuilder delimiterBuilder = new StringBuilder();
+
+        for (char c : delimiterPart.toCharArray()) {
+            delimiterBuilder.append(Pattern.quote(String.valueOf(c))).append("|");
+        }
+
+        if (delimiterBuilder.length() > 0) {
+            delimiterBuilder.setLength(delimiterBuilder.length() - 1);
+        }
+
+        return delimiterBuilder.toString();
     }
 }
