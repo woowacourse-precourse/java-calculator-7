@@ -1,6 +1,7 @@
 package calculator;
 
 import java.math.BigInteger;
+import java.util.regex.Pattern;
 
 
 public class CalculatorModel {
@@ -60,7 +61,8 @@ public class CalculatorModel {
             if (additionalDelimiter == '\\') {
                 delimiters = "[,:\\\\]";
             } else {
-                delimiters = "[,:" + additionalDelimiter + "]";
+                String escapedDelimiter = Pattern.quote(String.valueOf(additionalDelimiter));
+                delimiters = "[,:" + escapedDelimiter + "]";
             }
         }
 
