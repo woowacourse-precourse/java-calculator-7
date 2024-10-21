@@ -1,12 +1,13 @@
 package calculator;
 
-import java.util.ArrayList;
+import java.util.Set;
 import java.util.HashSet;
 import java.util.List;
+import java.util.ArrayList;
 
 class Splitter {
 
-    private final HashSet<Character> separators = new HashSet<>();
+    private final Set<Character> separators = new HashSet<>();
     private static final String prefix = "//";
     private static final String suffix = "\\n";
 
