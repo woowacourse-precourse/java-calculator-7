@@ -7,8 +7,8 @@ public class Application {
         // TODO: 프로그램 구현
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
-        NumberTokens tokens = (InputProcessor.process(input));
-        System.out.println(tokens.sum());
+        double result = StringAddCalculator.calculate(input);
+        System.out.println(result);
         
     }
 }
