@@ -47,6 +47,19 @@ class CaculatorMachineTest {
         assertThat(result).isEqualTo(8);
     }
 
+    @DisplayName("공백이 입력된 경우 0을 출력한다.")
+    @Test
+    void EmptyTest() {
+        // given
+        CalculatorMachine calculatorMachine = new CalculatorMachine();
+        String userInput = "";
+        // when
+        int result = calculatorMachine.calculate(userInput);
+
+        // then
+        assertThat(result).isEqualTo(0);
+    }
+
     @DisplayName("정해진 구분자가 아닌 다른 문자가 입력된 경우")
     @Test
     void OtherDelimiterTest() {
