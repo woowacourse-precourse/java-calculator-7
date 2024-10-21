@@ -9,7 +9,7 @@ public class Application {
     }
 
     private static String getInput() {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        System.out.println("덧셈할 문자열을 입력해 주세요 : ");
         return Console.readLine();
     }
 
@@ -25,5 +25,17 @@ public class Application {
             }
         }
         return number.split(delimiter);
+    }
+
+    private static int parseNumber(String token) {
+        try {
+            int number = Integer.parseInt(token.trim());
+            if(number < 0) {
+                throw new IllegalArgumentException(number + "은 음수이므로 허용되지 않습니다");
+            }
+            return number;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(token + "은 유효하지 않은 숫자입니다");
+        }
     }
 }
