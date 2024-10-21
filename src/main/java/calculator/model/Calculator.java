@@ -8,12 +8,13 @@ import java.math.BigInteger;
 public class Calculator {
 
     private BigDecimal result = new BigDecimal(BigInteger.ZERO);
+    private final Parser parser = new Parser();
 
     public void calculateSum(String delimiter, String numberContent) {
         String[] numbers = splitNumber(delimiter, numberContent);
         for (String number : numbers) {
             validateNumber(number);
-            result = result.add(new Parser().parseToBigDecimal(number));
+            result = result.add(parser.parseToBigDecimal(number));
         }
     }
 
