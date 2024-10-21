@@ -8,8 +8,6 @@ import org.junit.jupiter.api.Test;
 
 public class DelimiterTest {
 
-    private static final String COLON = ":";
-    private static final String COMMA = ",";
     private Delimiter delimiter;
 
     @BeforeEach
@@ -21,18 +19,18 @@ public class DelimiterTest {
     void 기본_구분자를_사용할_수_있다() {
         String expression = "1:2:3";
 
-        delimiter.choose(expression);
+        delimiter.chooseFrom(expression);
 
-        assertTrue(delimiter.concatDelimiters().contains(":"));
+        assertTrue(delimiter.getRegex().contains(":"));
     }
 
     @Test
     void 커스텀_구분자를_사용할_수_있다() {
         String expression = "//k\\n1k2k3";
 
-        delimiter.choose(expression);
+        delimiter.chooseFrom(expression);
 
-        assertTrue(delimiter.concatDelimiters().contains("k"));
+        assertTrue(delimiter.getRegex().contains("k"));
     }
 
     @Test

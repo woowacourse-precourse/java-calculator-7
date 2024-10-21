@@ -14,27 +14,29 @@ public class Delimiter {
         this.delimiters = new ArrayList<>();
     }
 
-    public void choose(String expression) {
-        if (isCustomDelimiterExist(expression)) {
+    public void chooseFrom(String expression) {
+        if (isCustomDelimiterExists(expression)) {
             createCustomDelimiter(expression);
         } else {
             delimiters = List.of(COLON, COMMA);
         }
     }
 
-    public String removeAffix(String expression) {
-        if (isCustomDelimiterExist(expression)) {
-            int end = expression.indexOf(CUSTOM_DELIMITER_SUFFIX);
-            return expression.substring(end + CUSTOM_DELIMITER_SUFFIX.length());
+    public String removeAffix(String before) {
+        if (isCustomDelimiterExists(before)) {
+            int end = before.indexOf(CUSTOM_DELIMITER_SUFFIX);
+
+            String after = before.substring(end + CUSTOM_DELIMITER_SUFFIX.length());
+            return after;
         }
-        return expression;
+        return before;
     }
 
-    public String concatDelimiters() {
+    public String getRegex() {
         return String.join("|", delimiters);
     }
 
-    private boolean isCustomDelimiterExist(String expression) {
+    private boolean isCustomDelimiterExists(String expression) {
         return expression.startsWith(CUSTOM_DELIMITER_PREFIX);
     }
 

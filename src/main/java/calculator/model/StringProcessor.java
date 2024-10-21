@@ -13,13 +13,13 @@ public class StringProcessor {
     }
 
     public List<Number> interpret(String expression) {
-        delimiter.choose(expression);
-        String cleanedExpression = delimiter.removeAffix(expression);
-        return splitAndConvert(cleanedExpression);
+        delimiter.chooseFrom(expression);
+        String removed = delimiter.removeAffix(expression);
+        return convertToNumbers(removed);
     }
 
-    private List<Number> splitAndConvert(String expression) {
-        return Arrays.stream(expression.split(delimiter.concatDelimiters()))
+    private List<Number> convertToNumbers(String expression) {
+        return Arrays.stream(expression.split(delimiter.getRegex()))
                 .map(Number::of)
                 .toList();
     }
