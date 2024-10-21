@@ -14,7 +14,7 @@ public class DelimiterParserTest {
     void 기본_구분자_반환() {
         assertSimpleTest(() -> {
             String input = "1,2,3:4";
-            String expected = "[,:]";
+            String expected = ",|:";
             CalculatorRequest request = DelimiterParser.parseDelimiters(input);
             assertThat(request.delimiters()).isEqualTo(expected);
         });
@@ -24,7 +24,7 @@ public class DelimiterParserTest {
     void 빈문자열_입력_시_기본_구분자_반환() {
         assertSimpleTest(() -> {
             String input = "";
-            String expected = "[,:]";
+            String expected = ",|:";
             CalculatorRequest request = DelimiterParser.parseDelimiters(input);
             assertThat(request.delimiters()).isEqualTo(expected);
         });

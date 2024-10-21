@@ -6,9 +6,8 @@ import java.util.regex.Pattern;
 
 public class DelimiterParser {
 
-    private static final String CUSTOM_DELIMITER_PREFIX = "//";
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("^//(.*)\\\\n");
-    private static final String DEFAULT_DELIMITERS = "[,:]";
+    private static final String DEFAULT_DELIMITERS = DefaultDelimiters.INSTANCE.getDefaultDelimiters();
 
     public static CalculatorRequest parseDelimiters(String input) {
         if (input.isEmpty() || Character.isDigit(input.charAt(0))) {
