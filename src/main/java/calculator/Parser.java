@@ -78,7 +78,7 @@ public class Parser {
             for (String integerStr : integerStrs) {
                 int number = Integer.parseInt(integerStr);
                 if (number <= 0) {
-                    throw new IllegalArgumentException("음수는 불가능합니다.");
+                    throw new IllegalArgumentException("양의 정수가 아닌 수는 불가능합니다.");
                 }
                 integers.add(number);
             }
