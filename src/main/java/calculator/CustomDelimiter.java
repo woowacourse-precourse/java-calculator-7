@@ -12,9 +12,21 @@ public class CustomDelimiter {
     private static void extractValues(String customDelimiterAssign) {
         Matcher matcher = PATTERN.matcher(customDelimiterAssign);
 
-        // 정규식 패턴에 매칭되는 모든 문자열을 리스트에 추가
+        // 정규식 패턴에 매칭되는 모든 문자열을 찾음
         while (matcher.find()) {
-            customDelimiterList.add(matcher.group(1)); // customDelimiter
+            String delimiter = matcher.group(1);
+            validateDelimiter(delimiter); // 구분자 유효성 검사
+            customDelimiterList.add(delimiter);
+        }
+    }
+
+    private static void validateDelimiter(String delimiter) {
+        if (delimiter.matches("\\d+")) {
+            throw new IllegalArgumentException("숫자를 커스텀 구분자로 사용할 수 없습니다.");
+        }
+
+        if (delimiter.length() != 1) {
+            throw new IllegalArgumentException("커스텀 구분자는 한 글자로 입력되어야 합니다.");
         }
     }
 
