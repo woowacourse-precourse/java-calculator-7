@@ -19,7 +19,11 @@ public class DelimiterExtractor {
         int endIndex = input.indexOf(customDelimiterEnd);
 
         if (startIndex != -1 && endIndex != -1) {
-            return input.substring(startIndex + customDelimiterStart.length(), endIndex);
+            if (startIndex < endIndex) {
+                return input.substring(startIndex + customDelimiterStart.length(), endIndex);
+            } else {
+                return input.substring(endIndex + customDelimiterEnd.length(), startIndex);
+            }
         }
         return "";
     }
