@@ -17,10 +17,20 @@ public class StringCalculator {
     private static int sum(String[] numbers) {
         int result = 0;
         for (String number : numbers) {
-            result += Integer.parseInt(number);
+            int num = toPositiveInt(number);
+            result += num;
         }
         return result;
     }
 
+    // 숫자들이 음수인지 확인하는 메소드
+    // 만약 음수라면 -> IllegalArgumentException
+    private static int toPositiveInt(String number) {
+        int num = Integer.parseInt(number);
+        if (num < 0) {
+            throw new IllegalArgumentException();
+        }
+        return num;
+    }
 
 }
