@@ -12,10 +12,19 @@ public class Application {
         if(isNull(inputStr)){
             displayResult(answer);
         }else{
-            //사용자 입력 문자열 분리하기 with 기본 구분자
-            splitBasic(inputStr);
+            if (inputStr.startsWith("//")) {//사용자 입력 문자열 분리하기 with 커스텀 구분자
+                splitCustom(inputStr);
+            }else{//사용자 입력 문자열 분리하기 with 기본 구분자
+                splitBasic(inputStr);
+            }
         }
         Console.close();
+    }
+    private static String[] splitCustom(String inputStr) {
+        int endDelimeter = inputStr.indexOf("\n");
+        String delimiter = inputStr.substring(2, endDelimeter);//\n전까지 커스텀 구분자 지정
+        inputStr = inputStr.substring(endDelimeter + 1);//구분자 적용 대상 문자열로 분리
+        return inputStr.split(delimiter);
     }
     private static String[] splitBasic(String inputStr) {
         return inputStr.split(",|:");
