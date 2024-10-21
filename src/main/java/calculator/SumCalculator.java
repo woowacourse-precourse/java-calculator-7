@@ -13,4 +13,13 @@ public class SumCalculator {
         basicCalculator(userInput);
         System.out.println("결과 : " + result);
     }
+    private int basicCalculator(String userInput){
+        if(userInput.contains(",")||userInput.contains(":")) {
+            String[] userNumbers = userInput.split(",|:");
+            result = sum(userNumbers);
+        }else{
+            customDelimiterCalculator(userInput);
+        }
+        return result;
+    }
 }
