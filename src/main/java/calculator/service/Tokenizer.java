@@ -25,10 +25,8 @@ class Tokenizer {
 
         final List<Number> numbers = new ArrayList<>();
 
-        final int nextSeparatorIndex = findNextSeparatorIndex(this.targetNumberInput);
-        final String startNumber = targetNumberInput.substring(0, nextSeparatorIndex);
-        targetNumberInput = targetNumberInput.substring(nextSeparatorIndex);
-        numbers.add(new Number(startNumber));
+        final Number firstNumber = findFirstNumber();
+        numbers.add(firstNumber);
 
         while (true) {
             final Number number = next();
@@ -40,7 +38,14 @@ class Tokenizer {
         return new Numbers(numbers);
     }
 
-    Number next() {
+    private Number findFirstNumber() {
+        final int nextSeparatorIndex = findNextSeparatorIndex(this.targetNumberInput);
+        final String startNumber = targetNumberInput.substring(0, nextSeparatorIndex);
+        targetNumberInput = targetNumberInput.substring(nextSeparatorIndex);
+        return new Number(startNumber);
+    }
+
+    private Number next() {
         if (targetNumberInput.isBlank()) {
             return null;
         }
