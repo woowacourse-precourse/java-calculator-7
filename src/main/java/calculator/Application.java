@@ -44,25 +44,24 @@ public class Application {
 
     // 덧셈 메소드
     public static int adding(String input) {
+        // 0안 경우 0 반환
         if (input.trim().isEmpty()) {
             return 0;
         }
-
         String spliter = "[:|,]";
         int sum = 0;
 
+        // 커스텀 구분자 검사
         if (input.startsWith("//")) {
             int ender = input.indexOf("\n");
             String newSpliter = input.substring(2, ender);
             spliter = "[" + ":|," + "|" + newSpliter + "]";
             input = input.substring(ender + 1);
         }
-
         String[] nums = input.split(spliter);
         for (String num : nums) {
             sum += Integer.parseInt(num.trim());
         }
-
         return sum;
     }
 }
