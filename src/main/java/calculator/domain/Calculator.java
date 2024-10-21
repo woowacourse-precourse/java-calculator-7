@@ -24,9 +24,6 @@ public class Calculator {
 
     private Boolean IsEqualRegexAndCustomSeparator(String regex, String text, String customSeparator) {
         return text.matches(".*[^0-9" + regex + "\\.\\s].*");
-
-        //return text.matches(".*[^0-9" + regex + "\\.].*");
-                //text.matches(".*[^0-9" + regex + "].*");
     }
 
     public String findCustomSeparator(String inputText) {
@@ -38,12 +35,10 @@ public class Calculator {
     }
 
 
-
     public Number sum(String[] extractNumberArr) {
         Double sum = 0.0;
         for (String str : extractNumberArr) {
             try {
-                //sum += validateNumber(Integer.parseInt(str));
                 sum += validateNumber(Double.parseDouble(str));
             } catch (NumberFormatException e) {
                 if (isInputBlank(extractNumberArr)) {
