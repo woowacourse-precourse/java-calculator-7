@@ -11,12 +11,11 @@ public class Delimiter {
 
     public static final String CUSTOM_DELIMITER = "//(.*)\n(.*)";
     public static final String BASIC_DELIMITER = ",|:";
-    public static final String INVALID_DELIMITER = "허용되지 않은 구분자가 존재합니다";
-
-    private static final Pattern pattern = Pattern.compile(CUSTOM_DELIMITER);
     public static final String STRING_BETWEEN_DELIMITER = "|";
     public static final String COMMA = ",";
     public static final String COLON = ":";
+    public static final String INVALID_DELIMITER = "허용되지 않은 구분자가 존재합니다";
+    private static final Pattern pattern = Pattern.compile(CUSTOM_DELIMITER);
 
     private static Set<String> delimiter;
 
@@ -47,10 +46,6 @@ public class Delimiter {
         return splitedExpression;
     }
 
-    public String[] splitWithDelimiter(String expression) {
-        return expression.split(BASIC_DELIMITER);
-    }
-
     private String customAndBasicDelimiter() {
         return delimiter.stream()
                 .collect(Collectors.joining(STRING_BETWEEN_DELIMITER));
@@ -58,7 +53,7 @@ public class Delimiter {
 
     private void checkExpressionHasInvalidExpression(String[] splitedExpression) {
         Arrays.stream(splitedExpression)
-                .forEach(i -> validOperandHasInvalidDelimiter(i));
+                .forEach(this::validOperandHasInvalidDelimiter);
     }
 
     private void validOperandHasInvalidDelimiter(String i) {
@@ -67,6 +62,10 @@ public class Delimiter {
                 throw new IllegalArgumentException(INVALID_DELIMITER);
             }
         }
+    }
+
+    public String[] splitWithDelimiter(String expression) {
+        return expression.split(BASIC_DELIMITER);
     }
 
 }

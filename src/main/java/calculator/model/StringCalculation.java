@@ -16,6 +16,17 @@ public class StringCalculation {
         return sum;
     }
 
+    private int calculateExpression(String[] expression, int sum) {
+        int result = 0;
+        for (String s : expression) {
+            int operand = Integer.parseInt(s);
+            validNegative(operand);
+            validOverFlow(operand, result);
+            result += operand;
+        }
+        return result;
+    }
+
     private void validNegative(int operand) {
         if (operand < ZERO) {
             throw new IllegalArgumentException(NEGATIVE_INTEGER_ERROR_MESSAGE);
@@ -26,16 +37,6 @@ public class StringCalculation {
         if (operand + sum < INTEGER_OVERFLOW_IS_NEGATIVE) {
             throw new IllegalArgumentException(INTEGER_OVERFLOW);
         }
-    }
-
-    private int calculateExpression(String[] expression, int sum) {
-        for (String s : expression) {
-            int operand = Integer.parseInt(s);
-            validNegative(operand);
-            validOverFlow(operand, sum);
-            sum += operand;
-        }
-        return sum;
     }
 
 }
