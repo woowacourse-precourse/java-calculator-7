@@ -2,11 +2,13 @@ package calculator.domain.model.value;
 
 import java.util.Objects;
 
+import static calculator.global.ErrorConst.NEED_POSITIVE_NUMBER;
+
 public record PositiveNumber(long value) {
 
     public PositiveNumber {
         if (value <= 0) {
-            throw new IllegalArgumentException("양수를 입력해야 합니다.");
+            throw new IllegalArgumentException(NEED_POSITIVE_NUMBER);
         }
     }
 
