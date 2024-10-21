@@ -25,7 +25,7 @@ public class Calculator {
 
         o.output(result);
 
-        separator.separators.clear();
+        Separator.separators.clear();
     }
 
 

@@ -8,7 +8,7 @@ public class Parser {
 
         Separator separator = new Separator();
 
-        if (!separator.validateCustomSeparatorForParsing(input)) {
+        if (!separator.isvalidatedCustomSeparatorForParsing(input)) {
             return input;
         }
 

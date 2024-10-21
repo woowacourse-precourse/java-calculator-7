@@ -35,7 +35,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_포함_정상_계산_2() {
         assertSimpleTest(() -> {
-            run("///\\n1/1/1");
+            run("///\\n1/1/1/");
             assertThat(output()).contains("결과 : 3");
         });
     }

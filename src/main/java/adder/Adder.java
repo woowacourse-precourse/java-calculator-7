@@ -57,6 +57,7 @@ public class Adder {
     }
 
     public boolean isAllPositiveInteger(ArrayList<Integer> numbers) {
+        
         for (int number : numbers) {
             if (number < 0) {
                 return false;
@@ -65,14 +66,14 @@ public class Adder {
         return true;
     }
 
-    public ArrayList<String> parseStringWithSeparators(String calculationFormula) {
+    public ArrayList<String> parseStringWithSeparators(String stringToCalculate) {
 
         ArrayList<String> parsedString = new ArrayList<>();
         StringBuilder number = new StringBuilder();
 
-        for (int i = 0; i < calculationFormula.length(); i++) {
+        for (int i = 0; i < stringToCalculate.length(); i++) {
 
-            char element = calculationFormula.charAt(i);
+            char element = stringToCalculate.charAt(i);
             String separator = String.valueOf(element);
 
             if (isSeparator(separator)) {
@@ -95,9 +96,9 @@ public class Adder {
         return parsedString;
     }
 
-    public boolean isValidated(ArrayList<String> calculationFormula) {
-        System.out.println("calculationFormula = " + calculationFormula);
-        for (String element : calculationFormula) {
+    public boolean isValidated(ArrayList<String> stringToCalculate) {
+
+        for (String element : stringToCalculate) {
             if (!isNumber(element) && !isSeparator(element)) {
                 return false;
             }
@@ -106,13 +107,10 @@ public class Adder {
         return true;
     }
 
-    public ArrayList<Integer> parseOnlyNumbers(ArrayList<String> calculationFormula) {
-        if (!isValidated(calculationFormula)) {
-            throw new IllegalArgumentException();
-        }
+    public ArrayList<Integer> parseOnlyNumbers(ArrayList<String> stringToCalculate) {
 
         ArrayList<Integer> numbers = new ArrayList<>();
-        for (String element : calculationFormula) {
+        for (String element : stringToCalculate) {
             if (isNumber(element) && !isSeparator(element)) {
                 int number = Integer.parseInt(element);
                 numbers.add(number);

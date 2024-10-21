@@ -11,7 +11,7 @@ public class Separator {
     }
 
     public void saveSeparator(String input) {
-        if (!validateCustomSeparatorForParsing(input)) {
+        if (!isvalidatedCustomSeparatorForParsing(input)) {
             return;
         }
 
@@ -38,7 +38,7 @@ public class Separator {
         return customSeparator;
     }
 
-    public boolean validateCustomSeparatorForParsing(String string) {
+    public boolean isvalidatedCustomSeparatorForParsing(String string) {
 
         if (string.length() < 4) {
             return false;
@@ -54,8 +54,10 @@ public class Separator {
         }
 
         separatorWithPadding = string.substring(0, 5);
+
         boolean hasStartPadding = separatorWithPadding.substring(0, 2).equals("//");
         boolean hasEndPadding = separatorWithPadding.substring(3, 5).equals("\\n");
+
         if (hasStartPadding && hasEndPadding) {
             return true;
         }
