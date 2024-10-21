@@ -9,7 +9,8 @@ public class Check {
     }
 
     public char check_custom(String str) {
-        if (str.length() >= 5 && str.charAt(0) == '/' && str.charAt(1) == '/' && str.charAt(3) == '\\' && str.charAt(4) == 'n') {
+        if (str.startsWith("//") && str.substring(3).startsWith("\\n")
+        ) {
             return str.charAt(2);
         }
         return '\0';
