@@ -12,8 +12,8 @@ public class CustomTest extends NsTest {
     @Test
     void 커스텀_구분자_및_공백_처리() {
         assertSimpleTest(() -> {
-            run("//; \\n1 ; 2 ; 3 ");
-            assertThat(output()).contains("결과 : 6");
+            run("//; \\n1 ; 22342 ; 3 ");
+            assertThat(output()).contains("결과 : 22346");
         });
     }
 
@@ -46,6 +46,33 @@ public class CustomTest extends NsTest {
         assertSimpleTest(() -> {
             run(" ");
             assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_순서_바뀜_예외처리() {
+        // 커스텀 구분자 선언이 잘못된 경우, 예를 들어 \n이 먼저 온 경우
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("\\n//1;2;3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 커스텀_구분자_사이에_숫자_예외처리() {
+        // 커스텀 구분자 위치에 숫자가 있는 경우
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//1\\n1;2;3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 커스텀_구분자_숫자로_지정() {
+        // 커스텀 구분자로 숫자를 사용한 경우 예외 없이 처리
+        assertSimpleTest(() -> {
+            run("//1\\n11231");
+            assertThat(output()).contains("결과 : 6");
         });
     }
 
