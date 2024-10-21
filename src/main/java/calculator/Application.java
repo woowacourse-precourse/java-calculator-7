@@ -57,6 +57,7 @@ public class Application {
 
         String str = inputString.replaceAll(",|:", "");
         if (aNewDelimiter != null) {
+            aNewDelimiter = Pattern.quote(aNewDelimiter);
             str = str.replaceAll(aNewDelimiter, "");
         }
 
