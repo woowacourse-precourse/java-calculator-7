@@ -5,7 +5,6 @@ import static calculator.service.CustomSeparatorsRegex.END_SEPARATOR;
 import static calculator.service.CustomSeparatorsRegex.START_REGEX;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class CalculatorService implements Service {
@@ -49,6 +48,14 @@ public class CalculatorService implements Service {
         if (nums[0].isEmpty()) {
             return 0;
         }
-        return Arrays.stream(nums).mapToInt(Integer::parseInt).sum();
+
+        int result = 0;
+        for (String num : nums) {
+            if (!num.matches("0|[1-9][0-9]*")) {
+                throw new IllegalArgumentException();
+            }
+            result += Integer.parseInt(num);
+        }
+        return result;
     }
 }
