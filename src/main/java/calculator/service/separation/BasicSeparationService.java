@@ -2,8 +2,8 @@ package calculator.service.separation;
 
 import static calculator.service.validation.SeparationValidator.validate;
 
-import calculator.domain.Number;
-import calculator.domain.Numbers;
+import calculator.service.dto.NumberDto;
+import calculator.service.dto.NumbersDto;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,15 +20,15 @@ public class BasicSeparationService implements SeparationService {
     }
 
     @Override
-    public Numbers getNumbers(String input, String... separators) {
+    public NumbersDto getNumbers(String input, String... separators) {
         validate(input, COMMA, COLON);
 
         String[] split = split(input, BASIC_SEPARATOR_REGEX);
-        List<Number> values = Arrays.stream(split)
+        List<NumberDto> values = Arrays.stream(split)
                 .map(Integer::parseInt)
-                .map(Number::from)
+                .map(NumberDto::from)
                 .collect(Collectors.toList());
 
-        return Numbers.from(values);
+        return NumbersDto.from(values);
     }
 }

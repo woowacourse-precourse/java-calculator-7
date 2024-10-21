@@ -3,8 +3,8 @@ package calculator.service.separation;
 import static calculator.service.exception.SeparationExceptionType.NOT_EXIST_CUSTOM_SEPARATOR;
 import static calculator.service.validation.SeparationValidator.validate;
 
-import calculator.domain.Number;
-import calculator.domain.Numbers;
+import calculator.service.dto.NumberDto;
+import calculator.service.dto.NumbersDto;
 import calculator.service.exception.SeparationException;
 import java.util.Arrays;
 import java.util.List;
@@ -21,19 +21,19 @@ public class CustomSeparationService implements SeparationService {
     }
 
     @Override
-    public Numbers getNumbers(String input, String... separators) {
+    public NumbersDto getNumbers(String input, String... separators) {
         String inputWithoutNotation = removeNotation(input);
         String customSeparator = extractCustomSeparator(input);
 
         validate(inputWithoutNotation, customSeparator);
 
         String[] split = split(inputWithoutNotation, customSeparator);
-        List<Number> values = Arrays.stream(split)
+        List<NumberDto> values = Arrays.stream(split)
                 .map(Integer::parseInt)
-                .map(Number::from)
+                .map(NumberDto::from)
                 .collect(Collectors.toList());
 
-        return Numbers.from(values);
+        return NumbersDto.from(values);
     }
 
     private String extractCustomSeparator(String input) {
