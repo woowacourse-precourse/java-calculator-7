@@ -8,7 +8,7 @@ public class InputValidator {
 
     public static void validateExpression(String expression, Set<Character> delimiters) {
         for (Character c : expression.toCharArray()) {
-            if (!delimiters.contains(c) && !Character.isDigit(c) && c != '.') {
+            if (!delimiters.contains(c) && !Character.isDigit(c) && c != '.' && c != '-') {
                 throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT.getMessage());
             }
         }

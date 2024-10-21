@@ -24,12 +24,19 @@ public class Numbers {
             List<BigDecimal> numbers = Arrays.stream(rawElements)
                     .filter(element -> (element != null && !element.isEmpty()))
                     .map(BigDecimal::new)
+                    .peek(Numbers::validatePositive)
                     .toList();
             return new Numbers(numbers);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_NUMBER_FORMAT.getMessage());
         } catch (PatternSyntaxException e) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_REGEX.getMessage());
+        }
+    }
+
+    private static void validatePositive(BigDecimal number) {
+        if (number.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new IllegalArgumentException(ErrorMessage.NON_POSITIVE_NUMBER.getMessage());
         }
     }
 }

@@ -139,6 +139,7 @@ class CalculatorServiceTest {
         inputs.add("1.1241,2.4324.3,3");
         inputs.add("1324.14.3124,31341");
         inputs.add("12.31.34");
+        inputs.add("-12-31.34");
 
         // when, then
         inputs.forEach((rawInput) -> {
@@ -151,12 +152,13 @@ class CalculatorServiceTest {
     }
 
     @Test
-    public void 음수_입력시_예외_발생() {
+    public void 양수가_아닌_요소_입력시_예외_발생() {
         // given
         List<String> inputs = new ArrayList<>();
         inputs.add("1.1241,-24324.3,3");
         inputs.add("-132414.3124,31341");
         inputs.add("12.31,-34");
+        inputs.add("12,0");
 
         // when, then
         inputs.forEach((rawInput) -> {
@@ -164,7 +166,7 @@ class CalculatorServiceTest {
                         calculatorService.calculate(rawInput);
                     })
                     .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(ErrorMessage.INVALID_INPUT.getMessage());
+                    .hasMessage(ErrorMessage.NON_POSITIVE_NUMBER.getMessage());
         });
     }
 }
