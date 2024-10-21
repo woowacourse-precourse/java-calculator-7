@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.enums.ErrorMessage;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -65,7 +66,7 @@ public class Calculator {
      */
     private void registerCustomSeparator(char customSeparator) {
         if (Character.isDigit(customSeparator)) {
-            throw new IllegalArgumentException("숫자는 커스텀 구분자로 등록 불가");
+            throw new IllegalArgumentException(ErrorMessage.CAN_NOT_REGISTER_CUSTOM_SEPARATOR_BY_NUMBER.getMessage());
         }
 
         separatorProcessor.addSeparator(customSeparator);
@@ -78,13 +79,13 @@ public class Calculator {
      */
     private long convertStrToNum(String rawNum) {
         if (rawNum.matches(MINUS_DIGIT_REGEX)) {
-            throw new IllegalArgumentException("음수 계산 불가");
+            throw new IllegalArgumentException(ErrorMessage.CAN_NOT_CALC_MINUS_NUMBER.getMessage());
         }
         if (!rawNum.matches(DIGIT_REGEX)) {
-            throw new IllegalArgumentException("숫자 이외의 값은 계산 불가");
+            throw new IllegalArgumentException(ErrorMessage.ONLY_CALC_DIGIT.getMessage());
         }
         if (rawNum.length() >= MAX_NUM_LENGTH) {
-            throw new IllegalArgumentException("18자리까지만 입력할 수 있음");
+            throw new IllegalArgumentException(ErrorMessage.EXCEED_MAX_NUM_LENGTH.getMessage());
         }
 
         return Long.parseLong(rawNum);
