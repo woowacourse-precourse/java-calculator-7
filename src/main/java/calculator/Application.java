@@ -11,8 +11,10 @@ public class Application {
     private static final String START_DELIMITER = "//";
     private static final String END_DELIMITER = "\\n";
     private static final char[] DEFAULT_DELIMITERS = {',', ':'};
+    private static final String ERROR_MESSAGE = "[Error] 올바르지 않는 형식의 문자열 입력입니다.";
 
     private static String numberInputString = null;
+
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         String inputValue = Console.readLine();
@@ -22,11 +24,12 @@ public class Application {
             long result = calcNumbers(delimiters);
             System.out.println("결과 : " + result);
         } catch (IllegalArgumentException expected) {
+            System.out.println(expected.getMessage());
             throw expected;
         } finally {
+            System.out.println("프로그램을 종료합니다.");
             Console.close();
         }
-
     }
 
     /**
@@ -55,10 +58,10 @@ public class Application {
         } else if (startIdx > 0) {
             // 구분자 정의를 시작하는 "//"의 위치가 0이 아닌 경우.
             // 즉, "//"의 앞에 다른 문자가 있는 경우 에러를 반환한다.
-            throw new IllegalArgumentException("올바르지 않는 형식의 문자열 입력입니다.");
+            throw new IllegalArgumentException(ERROR_MESSAGE);
         } else if ((startIdx != -1 && endIdx == -1) || (startIdx == -1 && endIdx != -1)) {
             // 구분자의 시작과 끝을 정의하는 문자가 둘 중 하나만 있는 경우 에러를 반환한다.
-            throw new IllegalArgumentException("올바르지 않는 형식의 문자열 입력입니다.");
+            throw new IllegalArgumentException(ERROR_MESSAGE);
         }
 
         String delimiterString = inputValue.substring(startIdx + START_DELIMITER.length(), endIdx);
@@ -69,7 +72,7 @@ public class Application {
 
             // 구분자로 숫자가 입력되었을 경우
             if (Character.isDigit(delimiter)) {
-                throw new IllegalArgumentException("올바르지 않는 형식의 문자열 입력입니다.");
+                throw new IllegalArgumentException(ERROR_MESSAGE);
             } else {
                 delimiterSet.add(delimiter);
             }
@@ -129,7 +132,7 @@ public class Application {
                 }
                 stringBuilder = initStringBuilder();
             } else {
-                throw new IllegalArgumentException("올바르지 않는 형식의 문자열 입력입니다.");
+                throw new IllegalArgumentException(ERROR_MESSAGE);
             }
         }
 
