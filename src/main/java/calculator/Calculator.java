@@ -52,4 +52,18 @@ public class Calculator {
         return pattern.matcher(str);
     }
 
+    // 덧셈 기능
+    public static int sum(String delimiter, String numberFormula) {
+        if (numberFormula.isEmpty()) {
+            return 0;
+        }
+
+        String[] numberArray = numberFormula.split(delimiter);
+        int result = 0;
+        for (String number : numberArray) {
+            result += Integer.parseInt(number);
+        }
+        return result;
+    }
+
 }
