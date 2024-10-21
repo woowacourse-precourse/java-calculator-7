@@ -18,7 +18,7 @@ public class CalculatorService {
     }
 
     public static CalculatorService getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new CalculatorService();
         }
 
