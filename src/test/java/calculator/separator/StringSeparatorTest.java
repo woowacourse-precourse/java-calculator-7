@@ -2,6 +2,8 @@ package calculator.separator;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Arrays;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class StringSeparatorTest {
@@ -77,4 +79,20 @@ class StringSeparatorTest {
         //then
         assertThat(resultCalculatableString).isEqualTo(calculatableString);
     }
+
+
+    @Test
+    public void 입력된_문자열을_지정된_구분자를_기준으로_분리() throws Exception {
+        //given
+        List<String> strings = Arrays.asList("3", "4", "2");
+        String inputString = "3:4,2";
+        stringSeparator = new StringSeparator(inputString);
+
+        //when
+        List<String> result = stringSeparator.splitBasicStringWithDelimiters();
+
+        //then
+        assertThat(result).isEqualTo(strings);
+    }
+
 }

@@ -1,5 +1,8 @@
 package calculator.separator;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -52,5 +55,14 @@ public class StringSeparator {
         String customDelimiters = extractCustomDelimiters();
         addCustomDelimiters(customDelimiters);
         return splitCustomDelimiters();
+    }
+
+    public List<String> splitBasicStringWithDelimiters() {
+        StringTokenizer st = new StringTokenizer(basicString, delimiters);
+        List<String> tokens = new ArrayList<>();
+        while (st.hasMoreTokens()) {
+            tokens.add(st.nextToken());
+        }
+        return tokens;
     }
 }
