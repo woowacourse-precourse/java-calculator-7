@@ -40,11 +40,36 @@ class Extraction {
     public void empty() {
     }
 
+    // 쉼표(,)와 콜론(:)으로 구분된 숫자들을 처리하는 메서드
     public void commaColon(String input, Calculator calculator) {
+        String[] tokens = input.split("[,:]");
+        int[] numbers = new int[tokens.length];
+        for (int i = 0; i < tokens.length; i++) {
+            numbers[i] = Integer.parseInt(tokens[i].trim());
+        }
+
+        // 추출된 숫자들을 Calculator의 add 메서드로 넘겨 덧셈 처리
+        int result = calculator.add(numbers);
     }
 
-    public void custom(String input, Calculator calculator){
+    // 커스텀 구분자 처리하는 메서드
+    public void custom(String input, Calculator calculator) {
+        String[] parts = input.split("\\\\n", 2);  // 첫 번째 줄은 구분자, 두 번째 줄은 숫자들
+        if (parts.length != 2) {
+            throw new IllegalArgumentException();
+        }
+
+        String customDelimiter = parts[0].substring(2);  // 구분자 추출
+        String[] tokens = parts[1].split(customDelimiter);  // 구분자로 숫자 분리
+        int[] numbers = new int[tokens.length];
+        for (int i = 0; i < tokens.length; i++) {
+            numbers[i] = Integer.parseInt(tokens[i].trim());
+        }
+
+        // 추출된 숫자들을 Calculator의 add 메서드로 넘겨 덧셈 처리
+        int result = calculator.add(numbers);
     }
+}
 
     public class Application {
         public static void main(String[] args) {
