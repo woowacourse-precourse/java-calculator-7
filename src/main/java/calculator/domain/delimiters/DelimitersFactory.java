@@ -85,7 +85,6 @@ public class DelimitersFactory {
 
     private String getRegexOnlyDigitsDelimitersFrom(List<Delimiter> delimiters) {
         String startWithDigitsOrEmpty = "^([1-9][0-9]*)*(((";
-        // String endWithDigitsOrEmpty = "))[1-9][0-9]*)*$";
         String endWithDigitsOrEmpty = "))([1-9][0-9]*)*)*$";
         String orBetweenGrouping = ")|(";
         return delimiters.stream()
