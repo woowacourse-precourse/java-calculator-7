@@ -5,7 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CalculatorService {
-    private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)";
+    private static final String CUSTOM_DELIMITER_PATTERN = "//(.)"+"\\n"+"(.*)";
     private static final String DEFAULT_DELIMITERS = "[,:]";
 
     public int calculate(String input) {
@@ -32,7 +32,7 @@ public class CalculatorService {
         Matcher matcher = pattern.matcher(input);
 
         if (!matcher.matches()) {
-            throw new IllegalArgumentException("Àß¸øµÈ ±¸ºĞÀÚ Çü½ÄÀÔ´Ï´Ù.");
+            throw new IllegalArgumentException("ì˜ëª»ëœ êµ¬ë¶„ì í˜•ì‹ì…ë‹ˆë‹¤.");
         }
 
         String delimiter = Pattern.quote(matcher.group(1));
@@ -44,11 +44,11 @@ public class CalculatorService {
         try {
             int value = Integer.parseInt(number);
             if (value < 0) {
-                throw new IllegalArgumentException("À½¼ö´Â »ç¿ëÇÒ ¼ö ¾ø½À´Ï´Ù: " + value);
+                throw new IllegalArgumentException("ìŒìˆ˜ëŠ” ì‚¬ìš©í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤: " + value);
             }
             return value;
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("À¯È¿ÇÏÁö ¾ÊÀº ¼ıÀÚ Çü½ÄÀÔ´Ï´Ù: " + number);
+            throw new IllegalArgumentException("ìœ íš¨í•˜ì§€ ì•Šì€ ìˆ«ì í˜•ì‹ì…ë‹ˆë‹¤: " + number);
         }
     }
 }
