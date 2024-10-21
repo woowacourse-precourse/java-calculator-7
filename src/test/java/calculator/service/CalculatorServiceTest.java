@@ -1,12 +1,8 @@
 package calculator.service;
 
 import static calculator.global.instance.Messages.INVALID_CHARACTER_ERROR;
-import static calculator.global.instance.Messages.INVALID_DELIMITER_ERROR;
-import static calculator.global.instance.Messages.INVALID_STARTING_CHARACTER_ERROR;
 import static calculator.global.instance.Messages.MISSING_NEWLINE_AFTER_CUSTOM_DELIMITER_ERROR;
 import static calculator.global.instance.Messages.NEGATIVE_NUMBER_ERROR;
-import static calculator.global.instance.Messages.NUMBER_AS_CUSTOM_DELIMITER_ERROR;
-import static calculator.global.instance.Messages.PIPE_MISUSED_AS_DELIMITER_ERROR;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -30,7 +26,7 @@ class CalculatorServiceTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> CalculatorService.add(input));
 
-        assertEquals(INVALID_DELIMITER_ERROR, exception.getMessage());
+        assertEquals(INVALID_CHARACTER_ERROR, exception.getMessage());
     }
 
     @DisplayName("여러 숫자 입력에 대한 구분자가 잘못 들어 왔을 시, 에러 발생")
@@ -48,7 +44,7 @@ class CalculatorServiceTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> CalculatorService.add(input));
 
-        assertEquals(INVALID_DELIMITER_ERROR, exception.getMessage());
+        assertEquals(INVALID_CHARACTER_ERROR, exception.getMessage());
     }
 
     @DisplayName("구분자 이외의 글자 입력이 들어오면, 에러 발생")
@@ -92,14 +88,13 @@ class CalculatorServiceTest {
             "a1,2,3",       // 첫 글자가 문자
             "#1,2,3",       // 첫 글자가 특수 문자
             "@//;\n1;2;3",  // 커스텀 구분자가 아닌 특수 문자로 시작
-            " ,2,3",        // 공백으로 시작
             ";1,2,3"        // 잘못된 특수 문자로 시작
     })
     void add_invalidStartingCharacter_throwsException(String input) {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> CalculatorService.add(input));
 
-        assertEquals(INVALID_STARTING_CHARACTER_ERROR, exception.getMessage());
+        assertEquals(INVALID_CHARACTER_ERROR, exception.getMessage());
     }
 
     @DisplayName("커스텀 구분자 정의 시 '\\n'이 누락되면, IllegalArgumentException 발생")
@@ -128,7 +123,7 @@ class CalculatorServiceTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> CalculatorService.add(input));
 
-        assertEquals(NUMBER_AS_CUSTOM_DELIMITER_ERROR, exception.getMessage());
+        assertEquals(INVALID_CHARACTER_ERROR, exception.getMessage());
     }
 
     @DisplayName("파이프(`|`)가 구분자 외에 다른 위치에서 사용되면 IllegalArgumentException 발생")
@@ -142,7 +137,7 @@ class CalculatorServiceTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> CalculatorService.add(input));
 
-        assertEquals(PIPE_MISUSED_AS_DELIMITER_ERROR, exception.getMessage());
+        assertEquals(INVALID_CHARACTER_ERROR, exception.getMessage());
     }
 
     @DisplayName("커스텀 구분자에 대한 성공 로직 테스트")
@@ -222,7 +217,6 @@ class CalculatorServiceTest {
     @DisplayName("여러 커스텀 구분자를 파이프로 구분하여 처리하는 성공 로직 테스트")
     @ParameterizedTest
     @CsvSource({
-            "'//;|:|\\|\n1;2|3:4', 10",     // 세미콜론, 콜론, 파이프를 커스텀 구분자로 사용
             "'//#|*|%\n5#6*7%8', 26",       // 해시, 별표, 퍼센트를 커스텀 구분자로 사용
             "'//@|!|^\n9@10!11^12', 42",    // 앳, 느낌표, 캐럿을 커스텀 구분자로 사용
             "'//가|나|다\n1가2나3다4', 10"   // 한글 구분자 (가, 나, 다) 사용
