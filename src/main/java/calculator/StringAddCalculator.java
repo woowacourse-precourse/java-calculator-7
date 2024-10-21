@@ -40,12 +40,12 @@ public class StringAddCalculator {
                 int num = Integer.parseInt(inputArray[i]);
 
                 if (num < 0) {
-                    throw new IllegalArgumentException();
+                    throw new IllegalArgumentException(ErrorSubstance.NEGATIVE_NUM_AVAILABLE.getMessage());
                 }
 
                 numArray[i] = num;
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException(ErrorSubstance.INVALID_STRING.getMessage());
             }
         }
 
