@@ -6,6 +6,10 @@ public class InputParser {
             throw new IllegalArgumentException("입력 값이 null 일 수 없습니다.");
         }
 
+        if (input.isEmpty()) {
+            return new int[]{0};  // 빈 문자열일 경우 0 반환
+        }
+
         String delimiter = "[,|:]"; // 기본 구분자
         String[] tokens = input.split(delimiter);
         int[] numbers = new int[tokens.length];
