@@ -12,7 +12,6 @@ public class CustomStringSplitter implements StringSplitter{
     private static final String CUSTOM_DELIMITER_HEADER = "\\/\\/";
     private static final String CUSTOM_DELIMITER_FOOTER = "\\\n";
 
-
     @Override
     public boolean canSupport(String str) {
         String patternRegex = generatePatternRegex();

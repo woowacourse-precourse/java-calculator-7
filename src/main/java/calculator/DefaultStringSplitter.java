@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 
 public class DefaultStringSplitter implements StringSplitter{
 
-
     @Override
     public boolean canSupport(String str) {
         Pattern pattern = Pattern.compile("^[0-9]+([" + DEFAULT_DELIMITER + "][0-9]+)?");
