@@ -181,7 +181,7 @@
 
 - **책임**:
     - 구분자가 없는 경우 기본 구분자(쉼표, 콜론)를 사용해 문자열을 분리한다.
-    - 커스텀 구분자가 있으면 이를 추출하고, 구분자를 기준으로 숫자를 분리하여 **NumberProcessor**에게 전달할 준비를 한다.
+    - 커스텀 구분자가 있으면 이를 추출하고, 구분자를 기준으로 숫자를 분리하여 **NumberService**에게 전달할 준비를 한다.
 
 ---
 
@@ -190,7 +190,7 @@
 - **역할**: 숫자를 처리하고 계산하는 역할을 맡는다.
 
 - **책임**:
-    - **DelimiterManager**로부터 전달받은 숫자 배열을 `BigDecimal`로 변환하여 덧셈 연산을 수행한다.
+    - **DelimiterService**로부터 전달받은 숫자 배열을 `BigDecimal`로 변환하여 덧셈 연산을 수행한다.
     - 숫자가 유효한지 검사하고, 음수나 0이 있으면 예외를 발생시킨다.
     - 최종 계산 결과를 반환한다.
 
@@ -198,9 +198,9 @@
 
 ### 4. **Coordinator**
 
-- **역할**: **InputOutputHandler**, **DelimiterManager**, **NumberProcessor** 간의 조정 역할을 맡는다.
+- **역할**: **IOService**, **DelimiterService**, **NumberService** 간의 조정 역할을 맡는다.
 
 - **책임**:
-    - **InputOutputHandler**로부터 입력을 받아 **DelimiterManager**에 구분자 처리를 요청한다.
-    - 구분자 처리 후, **NumberProcessor**에게 숫자 처리와 계산을 요청한다.
-    - 계산된 결과를 **InputOutputHandler**에 전달하여 출력을 수행하게 한다.
+    - **IOService**로부터 입력을 받아 **DelimiterService**에 구분자 처리를 요청한다.
+    - 구분자 처리 후, **NumberService**에게 숫자 처리와 계산을 요청한다.
+    - 계산된 결과를 **IOService**에 전달하여 출력을 수행하게 한다.
