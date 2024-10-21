@@ -74,4 +74,32 @@ class ParsingUtilTest {
         // then
         assertThat(result).isTrue();
     }
+
+    @Test
+    @DisplayName("커스텀 구분자 추출 테스트")
+    void extractCustomDelimiter() {
+        // given
+        final String input = "//; \n1;2;3";
+        final List<String> expected = List.of(";");
+
+        // when
+        var result = ParsingUtil.extractCustomDelimiter(input);
+
+        // then
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("여러 커스텀 구분자 추출 테스트")
+    void extractCustomDelimiter_Multiple() {
+        // given
+        final String input = "//;\n//|\n1;2|3";
+        final List<String> expected = List.of(";", "|");
+
+        // when
+        var result = ParsingUtil.extractCustomDelimiter(input);
+
+        // then
+        assertThat(result).isEqualTo(expected);
+    }
 }
