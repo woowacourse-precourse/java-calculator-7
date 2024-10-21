@@ -15,7 +15,7 @@ public class StringCalculator {
         for (String number : numbers) {
             int num = Integer.parseInt(number);
             if (num < 0) {
-                throw new IllegalArgumentException("음수는 입력할 수 없습니다: " + number);
+                throw new IllegalArgumentException("음수는 입력할 수 없습니다: " + num);
             }
             sum += num;
         }
