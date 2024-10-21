@@ -5,6 +5,7 @@ import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.util.ArrayList;
 import java.util.List;
 import java.lang.String;
+import java.util.StringTokenizer;
 
 public class Application {
     public static void main(String[] args) {
@@ -52,15 +53,21 @@ public class Application {
     public static List<Integer> getNumbers(String input, char[] delims) {
         List<Integer> numbersList = new ArrayList<Integer>();
         String splitter = "";
+
         for (char c: delims) {
             String str = String.valueOf(c);
-            splitter += (str+"|");
+            splitter += str;
         }
-        splitter = splitter.substring(0, splitter.length()-1);
         if (delims.length == 3) {
             input = input.substring(5);
         }
-        String[] splArr = input.split(splitter);
+        StringTokenizer st = new StringTokenizer(input, splitter);
+        List<String> splArr = new ArrayList<String>();
+
+        while (st.hasMoreTokens()) {
+            String token = st.nextToken();
+            splArr.add(token);
+        }
         for (String strNum: splArr) {
             int num = Integer.parseInt(strNum);
             numbersList.add(num);
