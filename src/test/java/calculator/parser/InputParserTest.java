@@ -1,11 +1,10 @@
-package calculator.Parser;
+package calculator.parser;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import calculator.dto.InputRequest;
-import calculator.parser.InputParser;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
