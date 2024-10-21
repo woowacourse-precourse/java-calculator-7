@@ -6,9 +6,8 @@ import java.util.regex.Pattern;
 public class InputParser {
 
     public static String extractCustomDelimiter(String input) {
-        Pattern pattern = Pattern.compile("//(.)\\n(.*)");
+        Pattern pattern = Pattern.compile("^//(.)\\\\n.*$");
         Matcher matcher = pattern.matcher(input);
-
         if (matcher.matches()) {
             return matcher.group(1);
         } else {
@@ -17,8 +16,19 @@ public class InputParser {
     }
 
     public static String extractNumbersSection(String input) {
+        // 이스케이프된 줄바꿈을 실제 줄바꿈으로 변환
+        if (input.contains("\\n")) {
+            input = input.replace("\\n", "\n");
+        }
+
         if (input.startsWith("//")) {
-            return input.split("\n", 2)[1];
+            String[] parts = input.split("\n", 2);
+
+            if (parts.length > 1) {
+                return parts[1];
+            } else {
+                throw new IllegalArgumentException("올바르지 않은 형식의 입력입니다. 줄바꿈 문자가 없습니다.");
+            }
         }
         return input;
     }
