@@ -1,6 +1,8 @@
 package calculator.view;
 
+import calculator.dto.CalculatorResultDTO;
 import camp.nextstep.edu.missionutils.Console;
+import java.math.BigDecimal;
 import java.util.NoSuchElementException;
 
 public class StringCalculatorView implements CalculatorView{
@@ -20,6 +22,11 @@ public class StringCalculatorView implements CalculatorView{
 
     @Override
     public void displayOutput(String output) {
-        System.out.printf(OUTPUT_MESSAGE_FORMAT, output);
+        CalculatorResultDTO<BigDecimal> result = new CalculatorResultDTO<>(new BigDecimal(output));
+        System.out.printf(OUTPUT_MESSAGE_FORMAT, result.getTotal());
+    }
+
+    public void displayOutput(CalculatorResultDTO<BigDecimal> total) {
+        System.out.printf("전체 " + OUTPUT_MESSAGE_FORMAT, total.getTotal());
     }
 }

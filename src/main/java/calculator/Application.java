@@ -4,7 +4,6 @@ import calculator.controller.CalculatorController;
 import calculator.dto.CalculatorResultDTO;
 import calculator.dto.ExpressionDTO;
 import calculator.view.StringCalculatorView;
-import camp.nextstep.edu.missionutils.Console;
 import java.math.BigDecimal;
 
 public class Application {
@@ -12,23 +11,22 @@ public class Application {
     private static final StringCalculatorView view = new StringCalculatorView();
 
     public static void main(String[] args) {
-        BigDecimal currentValue = BigDecimal.ZERO;
+        BigDecimal totalSum = BigDecimal.ZERO;
         while (true) {
-            ExpressionDTO expression;
+            String input;
             try {
-                expression = new ExpressionDTO(view.displayInput());
+                input = view.displayInput();
             } catch (IllegalArgumentException e) {
                 e.printStackTrace();
                 return;
             }
-            CalculatorResultDTO<BigDecimal> totalSum = CalculatorController.sum(currentValue, expression);
-            view.displayOutput(totalSum.getTotal());
-            if (totalSum.getTotal().equals("0")) {
-                view.displayOutput(currentValue.toString());
+            BigDecimal currentSum = CalculatorController.sum(BigDecimal.ZERO, new ExpressionDTO(input));
+            view.displayOutput(new CalculatorResultDTO<>(currentSum).getTotal());
+            if (currentSum.equals(BigDecimal.ZERO)) {
+                view.displayOutput(new CalculatorResultDTO<>(totalSum));
                 break;
             }
-            currentValue = new BigDecimal(totalSum.getTotal());
+            totalSum = totalSum.add(currentSum);
         }
-        Console.close();
     }
 }
