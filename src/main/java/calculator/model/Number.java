@@ -23,4 +23,8 @@ public class Number {
             throw new IllegalArgumentException(ErrorCode.NUMBER_RANGE_ERROR.getMessage());
         }
     }
+
+    public Long getValue() {
+        return this.value;
+    }
 }
