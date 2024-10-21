@@ -51,8 +51,9 @@ public final class ParsingUtil {
         List<String> delimiters = new ArrayList<>();
         for (int index = 0; index < splitInput.length - 1; index++) {
             var customDelimiter = splitInput[index].replace(CUSTOM_DELIMITER_START_REGEX, "");
+            customDelimiter = customDelimiter.trim();
             checkDelimiter(customDelimiter);
-            delimiters.add(customDelimiter.trim());
+            delimiters.add(customDelimiter);
         }
         return delimiters;
     }
