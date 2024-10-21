@@ -9,7 +9,7 @@ public class CalculationView {
         return Console.readLine();
     }
 
-    public void getResult(int result) {
+    public void displayResult(int result) {
         System.out.println("결과 : " + result);
     }
 

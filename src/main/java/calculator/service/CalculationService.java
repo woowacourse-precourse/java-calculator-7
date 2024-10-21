@@ -4,6 +4,7 @@ package calculator.service;
 
 import calculator.domain.Calculator;
 import calculator.domain.Separator;
+import calculator.exception.InvalidInputException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,15 +21,16 @@ public class CalculationService {
 
     public int calculate(String input) {
         checkParams(input);
-        List<Integer> numbers = extractNumbers(input);
-        return calculator.calculate(numbers);
+        extractNumbers(input);
+        List<Integer> nums = separator.getNums();
+        return calculator.calculate(nums);
     }
 
     private void checkParams(String input) {
         String processedString = checkNewParam(input);
         for (char ch : processedString.toCharArray()) {
             if (!Character.isDigit(ch) && !separator.getParams().contains(ch)) {
-                throw new IllegalArgumentException("허용되지 않는 파라미터입니다.");
+                throw new InvalidInputException("허용되지 않는 문자입니다.");
             }
         }
     }
@@ -42,8 +44,7 @@ public class CalculationService {
         return input;
     }
 
-    private List<Integer> extractNumbers(String input) {
-        List<Integer> numbers = new ArrayList<>();
+    private void extractNumbers(String input) {
         StringBuilder currentNumber = new StringBuilder();
 
         for (char ch : input.toCharArray()) {
@@ -51,16 +52,16 @@ public class CalculationService {
                 currentNumber.append(ch);
             } else {
                 if (!currentNumber.isEmpty()) {
-                    numbers.add(Integer.parseInt(currentNumber.toString()));
+                    separator.addNum(Integer.parseInt(currentNumber.toString()));
                     currentNumber.setLength(0);
                 }
             }
         }
 
         if (!currentNumber.isEmpty()) {
-            numbers.add(Integer.parseInt(currentNumber.toString()));
+            separator.addNum(Integer.parseInt(currentNumber.toString()));
         }
 
-        return numbers;
+
     }
 }
