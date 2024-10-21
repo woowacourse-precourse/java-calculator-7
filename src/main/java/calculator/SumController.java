@@ -29,9 +29,6 @@ public class SumController {
                 }
             } else {
                 if(text.charAt(i) != separator[0] && text.charAt(i) != separator[1]) {
-                    System.out.println("2");
-                    System.out.println(separator);
-                    System.out.println(text.charAt(i));
                     throw new IllegalArgumentException();
                 }
             }
