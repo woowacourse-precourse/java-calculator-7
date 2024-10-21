@@ -43,13 +43,16 @@ public class Application {
         int result = 0;
 
         for (String number : numbers) {
-            // 숫자가 아닌 경우 예외 발생 추가해야됨.
+            // 숫자가 아닌 경우 예외 발생
             if (!number.chars().allMatch(Character::isDigit)) {
                 throw new IllegalArgumentException("숫자를 입력해야 합니다.");
             }
 
             int num = Integer.parseInt(number);
-            // 숫자가 음수인 경우 예외 발생 추가해야됨.
+            // 숫자가 음수인 경우 예외 발생
+            if (num <= -1) {
+                throw new IllegalArgumentException("음수가 아닌 정수를 입력해야 합니다.");
+            }
             result += num;
         }
 
