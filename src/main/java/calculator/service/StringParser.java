@@ -15,7 +15,15 @@ public class StringParser {
 
     private String findCustomDelimiter(String input) {
         int endIndex = input.indexOf("\\n");
-        return input.substring(2, endIndex);
+        String customDelimiter = input.substring(2, endIndex);
+
+        try {
+            Integer.parseInt(customDelimiter);
+            throw new IllegalArgumentException("구분자는 숫자일 수 없습니다.");
+        } catch (NumberFormatException ignored) {
+        }
+
+        return customDelimiter;
     }
 
     private String[] splitString(String input, String delimiters) {
