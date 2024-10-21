@@ -88,6 +88,16 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 빈_문자열_포함_입력() {
+        assertSimpleTest(() -> {
+            String input = "1,,2";
+            System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+            runMain();
+            assertThat(output()).contains("결과 : 3");
+        });
+    }
 
     @Override
     public void runMain() {
