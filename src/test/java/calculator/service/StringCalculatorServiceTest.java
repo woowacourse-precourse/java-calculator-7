@@ -69,6 +69,7 @@ class StringCalculatorServiceTest {
     static List<Arguments> invalidFormatTestProvider() {
         return List.of(Arguments.arguments("1," + "9".repeat(1000), IllegalArgumentException.class),
                 // "abc"는 하나의 구분자로 취급되지만, "a"는 개별 구분자로 사용할 수 없으므로 예외 발생
+                Arguments.arguments("//abc\\n1a2b3", IllegalArgumentException.class),
                 Arguments.arguments("//abc\\n1a2a3", IllegalArgumentException.class));
     }
 
