@@ -1,9 +1,9 @@
-package calculator;
+package calculator.domain;
+
+import static calculator.domain.Expression.CUSTOM_DELIMITER_PREFIX;
+import static calculator.domain.Expression.CUSTOM_DELIMITER_SUFFIX;
 
 import java.util.Set;
-
-import static calculator.Expression.CUSTOM_DELIMITER_PREFIX;
-import static calculator.Expression.CUSTOM_DELIMITER_SUFFIX;
 
 public class Delimiters {
 

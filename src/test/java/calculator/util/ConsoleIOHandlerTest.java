@@ -1,10 +1,12 @@
-package calculator;
-
-import org.junit.jupiter.api.*;
-
-import java.io.ByteArrayInputStream;
+package calculator.util;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.io.ByteArrayInputStream;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
+import org.junit.jupiter.api.Test;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class ConsoleIOHandlerTest {
