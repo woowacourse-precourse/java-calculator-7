@@ -2,10 +2,6 @@ package calculator;
 public class Calculate {
 
     public static int sum(String input) {
-        if (input == null || input.isEmpty()) {
-            return 0;
-        }
-
         if (input.startsWith("//")) {
             return customChar(input);
         }
