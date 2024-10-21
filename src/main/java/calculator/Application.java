@@ -24,7 +24,15 @@ public class Application {
 
         String[] tokens = input.split(delimiter);
         return Arrays.stream(tokens)
-                .mapToInt(Integer::parseInt)
+                .mapToInt(Application::toPositiveInt)
                 .sum();
+    }
+
+    private static int toPositiveInt(String value) {
+        int number = Integer.parseInt(value);
+        if (number < 0) {
+            throw new IllegalArgumentException("Negative numbers are not allowed: " + value);
+        }
+        return number;
     }
 }
