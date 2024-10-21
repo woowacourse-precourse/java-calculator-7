@@ -13,7 +13,7 @@ public class Application {
             System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            throw e;  // 예외를 다시 던져서 프로그램을 종료합니다.
+            throw e;  // 오류가 발생했을 경우 예외처리
         }
     }
 
