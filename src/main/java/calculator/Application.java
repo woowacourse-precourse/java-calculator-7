@@ -20,6 +20,6 @@ public class Application {
             sum += number;
         }
 
-        System.out.println("결과: " + sum);
+        System.out.println("결과 : " + sum);
     }
 }
