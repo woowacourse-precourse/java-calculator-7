@@ -1,6 +1,7 @@
 package calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.Test;
 
@@ -51,5 +52,21 @@ public class AdderTest {
         int result = adder.run(input);
 
         assertThat(result).isEqualTo(6);
+    }
+
+    @Test
+    void 음수를_전달하는경우_예외처리() {
+        String input = "1,2,-3";
+
+        assertThatThrownBy(() -> adder.run(input))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 영0을_전달하는경우_예외처리() {
+        String input = "1,2,0";
+
+        assertThatThrownBy(() -> adder.run(input))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

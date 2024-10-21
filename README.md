@@ -19,7 +19,7 @@
 ---
 > 사용자가 잘못된 값을 입력할 경우 IllegalArgumentException을 발생시킨 후 애플리케이션은 종료되어야 한다.
 
-- [ ] 양수가 아닌 정수를 전달하는 경우, IllegalArgumentException을 발생시킨다.
+- [x] 양수가 아닌 정수를 전달하는 경우, IllegalArgumentException을 발생시킨다.
 - [ ] 숫자와 지정된 구분자 이외의 문자를 전달하는 경우, IllegalArgumentException을 발생시킨다.
 - [ ] 커스텀 구분자를 지정할 때 "//"로 시작하지 않거나 "\n"으로 끝나지 않는 경우, IllegalArgumentException을 발생시킨다.
 - [ ] 커스텀 구분자가 빈 문자열인 경우, IllegalArgumentException을 발생시킨다.

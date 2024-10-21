@@ -25,6 +25,9 @@ public class Adder {
 
         for (String stringNumber : stringNumbers) {
             int number = Integer.parseInt(stringNumber);
+            if (number <= 0) {
+                throw new IllegalArgumentException("전달된 숫자는 0보다 작거나 같을 수 없습니다.");
+            }
             sum += number;
         }
         return sum;
