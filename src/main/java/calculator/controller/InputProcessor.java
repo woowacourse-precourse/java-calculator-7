@@ -57,4 +57,22 @@ public class InputProcessor {
         }
         separators = String.valueOf(ch);
     }
+
+    private void setNumbers() throws NumberFormatException {
+        if (numberPart.isEmpty()) {
+            numbers.add(0);
+            return;
+        }
+
+        String[] tokens = numberPart.split(separators);
+
+        for (String token : tokens) {
+            int number = Integer.parseInt(token);
+            if (number < 0) {
+                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
+            }
+            numbers.add(number);
+        }
+    }
+
 }

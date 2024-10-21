@@ -114,7 +114,7 @@ separatorPart, separators, numberPart, numbers 필드를 갖고, processInput, g
 
 -   [x] processInput(): 사용자의 입력을 처리해 separatorPart, separators, numberPart, numbers 필드에 저장한다.
 -   [x] setSeparator(): 유효한 separator인지 확인한 후, separators 필드에 저장한다.
--   [ ] setNumbers(): 유효한 숫자인지 확인한 후, numbers 필드에 저장 후 반환한다.
+-   [x] setNumbers(): 유효한 숫자인지 확인한 후, numbers 필드에 저장 후 반환한다.
 -   [x] getNumbers(): 각 필드를 반환한다.
 
 ## StringCalculator
