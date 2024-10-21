@@ -14,6 +14,7 @@ public class Parser {
     // 구분자 파싱 중 사용될 임시 배열
     private Stack<Character> buffer = new Stack<>();
 
+    // 커스텀 구분자 조건 구간 삭제된 문자열
     private String removedString = "";
 
     // 기본 구분자 배열에 추가
@@ -76,7 +77,7 @@ public class Parser {
             } else if (currentChar == '-') {
                 throw new IllegalArgumentException("입력 문자열에 음수가 존재합니다.");
 
-            } else { // 구분자도 숫자도 아니면 skip?
+            } else { // 구분자도 숫자도 아니면 skip
                 throw new IllegalArgumentException("등록되지 않은 구분자가 포함되어있습니다.");
             }
         }
