@@ -79,7 +79,22 @@ class ApplicationTest extends NsTest {
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
-    
+
+    @Test
+    void 커스텀_구분자를_감싸는_값이_없을떄_예외_테스트1() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("+\\n1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 커스텀_구분자를_감싸는_값이_없을떄_예외_테스트2() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//+1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
 
     @Test
     void 공백만_입력_예외_테스트() {
