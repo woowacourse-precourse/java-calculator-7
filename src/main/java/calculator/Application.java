@@ -15,6 +15,7 @@ public class Application {
         } catch (IllegalArgumentException e) {
             // 잘못된 문자열 입력 시 오류 메시지 출력
             System.out.println(e.getMessage());
+            throw e;
         }
     }
 }
