@@ -31,6 +31,11 @@ class ApplicationTest extends NsTest {
             run("//;\n1;2");
             assertThat(output()).contains("결과: 3");
         });
+
+        // 잘못된 형식의 커스텀 구분자 테스트
+        assertThatThrownBy(() -> run("//;\n1;2;"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("잘못된 숫자 형식입니다");
     }
 
     @Test
