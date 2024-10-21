@@ -11,6 +11,10 @@ public class Calculator {
             return 0;
         }
 
+        if (text.contains("-")) {  // 음수 포함 여부 확인
+            throw new IllegalArgumentException("음수는 허용되지 않습니다.");
+        }
+
         // 입력 문자열에서 '\n'을 실제 개행 문자로 변환
         text = text.replace("\\n", "\n");
 
