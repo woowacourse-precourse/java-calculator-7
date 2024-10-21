@@ -13,7 +13,7 @@ public class DefaultStringSplitter implements StringSplitter{
         List<String> strings = new ArrayList<>();
         while (stringTokenizer.hasMoreTokens()) {
             strings.add(stringTokenizer.nextToken());
-        };
+        }
         return strings;
     }
 }
