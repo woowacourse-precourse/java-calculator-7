@@ -1,5 +1,5 @@
 package calculator;
-
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
@@ -22,6 +22,7 @@ class ApplicationTest extends NsTest {
             assertThatThrownBy(() -> runException("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
         );
+
     }
 
     @Override
