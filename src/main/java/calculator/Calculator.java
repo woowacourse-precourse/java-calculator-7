@@ -44,8 +44,11 @@ public class Calculator {
 
     private static long calculateListSum(String[] nums, long sum) {
         for (String num : nums) {
+            if (isNotDigit(num)) {
+                throw new IllegalArgumentException("정확한 숫자들을 입력해 주세요");
+            }
             if (Long.parseLong(num) < 0) {
-                throw new IllegalArgumentException("양수로 구성된 문자열을 입력해 주세요.");
+                throw new IllegalArgumentException("양수로 구성된 숫자를 입력해 주세요.");
             }
             sum += Long.parseLong(num);
         }
@@ -53,8 +56,12 @@ public class Calculator {
     }
 
     private static String findSeparator(String userInput) {
-        return userInput.substring(userInput.indexOf("//") + 2,
-            userInput.indexOf("\\n"));
+        int startIndex = userInput.indexOf("//");
+        int endIndex = userInput.indexOf("\\n");
+        if (startIndex != 0) {
+            throw new IllegalArgumentException("커스텀 구분자는 제일 앞에 설정해 주세요");
+        }
+        return userInput.substring(startIndex + 2, endIndex);
     }
 
     private static String getSeparatorRemovedSubstring(String userInput) {
@@ -74,8 +81,12 @@ public class Calculator {
     }
 
     private static void notHaveSeparator(String userInput) {
-        if (!userInput.matches("[+-]?\\d*(\\.\\d+)?")) {
+        if (isNotDigit(userInput)) {
             throw new IllegalArgumentException("구분자를 지정해 주세요");
         }
+    }
+
+    private static boolean isNotDigit(String userInput) {
+        return !userInput.matches("[+-]?\\d*(\\.\\d+)?");
     }
 }
