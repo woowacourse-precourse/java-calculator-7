@@ -25,6 +25,10 @@ public class CustomExtractor {
      * @return 커스텀 구분자
      */
     public Optional<ExtractedCharAndString> extractCustomDelimiter(String input) {
+
+        if (input.isBlank()) {
+            throw new IllegalArgumentException("구분자와 숫자를 입력하세요.");
+        }
         if (!input.startsWith(customPrefix)) {
             return Optional.empty();
         }
