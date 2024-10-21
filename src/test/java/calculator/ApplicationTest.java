@@ -57,7 +57,6 @@ class ApplicationTest extends NsTest {
         );
     }
 
-
     @Test
     @DisplayName("음수 포함 시 예외 발생")
     void 음수_포함_예외_테스트() {
