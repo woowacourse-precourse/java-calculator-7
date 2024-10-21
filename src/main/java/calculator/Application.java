@@ -7,7 +7,7 @@ public class Application {
         String input = Console.readLine();
 
         try {
-            input= validating(input);
+            input = validating(input);
             int sum = adding(input);
             System.out.println("결과 : " + sum);
         } catch (IllegalArgumentException e) {
@@ -19,7 +19,7 @@ public class Application {
     public static String validating(String input) {
 
         // 빈 입력 검사
-        if (input == null) {
+        if (input == "") {
             return  "";
         }
 
@@ -38,7 +38,7 @@ public class Application {
             }
         } else if (!input.matches("^[0-9,:]+$")) {
                 throw new IllegalArgumentException();
-            }
+        }
         return input;
     }
 
