@@ -22,14 +22,15 @@ public class Application {
 
         //구분자를 기준으로 추출한 숫자를 실수 배열에 담는 클래스 호출
         NumberExtractor numberExtractor = new NumberExtractor(enter, customDelimiter);
-
-
-        //numbers=
+        numbers=numberExtractor.getNumbers();
 
         //출력
         //배열에 담긴 숫자를 모두 합산
-//        result=sum(numbers);
-//        System.out.println("결과 : "+result);
+        for (float number : numbers) {
+            result += number;
+        }
+
+        System.out.println("결과 : "+result);
 
     }
 }
