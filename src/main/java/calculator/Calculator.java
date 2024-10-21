@@ -17,7 +17,20 @@ public class Calculator {
             delimiter = m.group(1);
             numbers = m.group(2);
         }
+        String[] tokens = numbers.split(delimiter);
 
+        int sum = 0;
 
+        for (String token : tokens) {
+            if (token.trim().isEmpty()) {
+                continue;
+            }
+
+            int num = Integer.parseInt(token.trim());
+
+            sum += num;
+            }
+
+        return sum;
     }
 }
