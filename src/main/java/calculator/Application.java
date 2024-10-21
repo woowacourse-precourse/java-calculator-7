@@ -39,7 +39,7 @@ public class Application {
             return str.substring(2, 3);
         }
 
-        return "[:,,]";
+        return "[:,]";
     }
 
     public static List<Integer> extractNum(String str){
