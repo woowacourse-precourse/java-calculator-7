@@ -27,6 +27,6 @@ public class StringCalculatorView implements CalculatorView{
     }
 
     public void displayOutput(CalculatorResultDTO<BigDecimal> total) {
-        System.out.printf(OUTPUT_MESSAGE_FORMAT, total);
+        System.out.printf("누적 합 계산 " + OUTPUT_MESSAGE_FORMAT, total);
     }
 }
