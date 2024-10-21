@@ -31,8 +31,12 @@ public class Application {
             }
         }
 
-
-
+        // 3. 입력값에서 커스텀 구분자를 통해 숫자를 추출하는 기능
+        if (nums.length>0){
+            for (String value: nums){
+                System.out.println("value"+ value);
+            }
+        }
 
 
 
