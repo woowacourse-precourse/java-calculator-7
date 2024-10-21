@@ -17,26 +17,27 @@
 
 - [x] sum(int... numbers)
     - 배열에 저장된 값들을 순서대로 더합니다.
-- [ ] private 생성자
+- [x] private 생성자
 
 ### StringCalculator.class
 
-- [ ] StringCalculator() 싱글톤
-- [ ] parseSeparator(String line, String separator)
+- [x] StringCalculator() 싱글톤
+- [ ] private parseNumber(String line)
+    - line을 잘라 int 배열에 넣는다.
+    - 정규화를 이용하여 separator에 대해 모두 자를 수 있게 준비한다.
+- [] private parseSeparator(String line, String separator)
     - line에 저장된 값을 순서대로 잘라 멤버변수(배열)로 가지고, 구분자를 추가합니다.
 - [ ] IllegalArgumentException 판단 메소드
     - 정의되지 않은 값 입력 시 예외를 발생시킵니다.
-- [ ] sum(String line)
+- [ ] private getCustomSeparator(String line)
+    - 커스텀 구분자를 가져옵니다. 없다면 null을 반환합니다.
+- [x] sum(String line)
     - 코드중복을 줄이기 위하여 super.sum을 불러와서 구현한다.
 
 ### Application.class
 
 - [ ] getInput()
     - ReadLine으로 입력받을 메소드입니다.
-- [ ] isCustomSeparator(String line)
-    - 커스텀 구분자가 존재한다면 true, 없다면 false를 반환합니다.
-- [ ] getCustomSeparator(String line)
-    - 커스텀 구분자를 가져옵니다. 없다면 null을 반환합니다.
 - [ ] print(Long number)
     - 최종 정답을 출력합니다.
 
