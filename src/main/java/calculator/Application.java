@@ -18,6 +18,15 @@ public class Application {
             nums = inputValue.split(",|;");
         }
 
+        // 2-1. 입력값이 비어있을 경우 0만 추출
+        if (nums.length==0){
+            result.add(0);
+        } else{
+            for (String num: nums) {
+                result.add(Integer.parseInt(num));
+            }
+        }
+
 
 
     }
