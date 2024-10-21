@@ -12,10 +12,8 @@ public class Application {
     private static final String SEMICOLON = ";";
     private static final String COMMA_OR_SEMICOLON = COMMA + "|" + SEMICOLON;
     private static final String EMPTY = "";
-    private static final String REX_ONLY_NUMBER = "\\d+";
     private static final String CUSTOM_DELIMITER_START = "//";
     private static final String CUSTOM_DELIMITER_END = "\\\\n";
-    private static final String REX_CUSTOM_DELIMITER_FORMAT = ".*//(.+)\\\\n.*";
     private static final String ERROR_NO_EXPRESSION_CUSTOM_DELIMITER = "커스텀 구분자 이후로 수식이 없습니다";
     private static final String ERROR_CUSTOM_DELIMITER_OVER_TWO = "커스텀 구분자가 2개이상 있습니다";
     private static final String ERROR_CUSTOM_DELIMITER_NOT_START_WITH_FORMAT = "커스텀 구분자의 형식인 //로 시작하지 않습니다";
@@ -43,7 +41,7 @@ public class Application {
         if (input.isEmpty()) {
             return BigInteger.valueOf(0);
         }
-        if (input.matches(REX_CUSTOM_DELIMITER_FORMAT)) {
+        if (input.matches(".*//(.+)\\\\n.*")) {
             List<String> customDelimiterInputs = Arrays.stream(input.split(CUSTOM_DELIMITER_END))
                     .filter(letter -> !letter.isBlank())
                     .toList();
@@ -106,7 +104,7 @@ public class Application {
 
         } catch (NumberFormatException e) {
             for (String stringInput : stringInputs) {
-                boolean isNumeric = stringInput.matches(REX_ONLY_NUMBER);
+                boolean isNumeric = stringInput.matches("\\d+");
                 if (!isNumeric) {
                     throw new IllegalArgumentException(ERROR_BASIC_DELIMITER_OPERAND_CONTAIN_OTHER_CHAR);
                 }
