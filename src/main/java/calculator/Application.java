@@ -7,10 +7,10 @@ public class Application {
         // TODO: 프로그램 구현
         System.out.println("덧셈할 문자열을 입력해 주세요.");
 
-        Spliter spliter = new Spliter(Console.readLine());
-        spliter.calculate();
+        Splitter splitter = new Splitter(Console.readLine());
+        splitter.calculate();
 
-        spliter.printResult();
+        splitter.printResult();
 
     }
 }

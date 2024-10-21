@@ -1,12 +1,13 @@
 package calculator;
 
-public class Spliter {
+public class Splitter {
     private String inputString;
     private char customSeparator;
     private int resultValue = 0;
+    private String[] result;
 
     // 생성자
-    public Spliter(String inputString){
+    public Splitter(String inputString){
         this.inputString = inputString;
     }
 
@@ -16,8 +17,6 @@ public class Spliter {
     }
 
     public void calculate() {
-        String[] result;
-
         // 커스텀 구분자 있으면 추가
         if(isNum(inputString.charAt(0))) { // 문자열 시작이 숫자이면
             result = inputString.split(":|,");
