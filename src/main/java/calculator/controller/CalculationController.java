@@ -3,7 +3,6 @@ package calculator.controller;
 import static calculator.container.SeparationServiceType.BASIC;
 
 import calculator.container.SeparationServiceContainer;
-import calculator.domain.Numbers;
 import calculator.service.dto.NumbersDto;
 import calculator.service.dto.SumDto;
 import calculator.service.operation.AddOperationService;

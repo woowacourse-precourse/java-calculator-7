@@ -10,8 +10,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import calculator.domain.Number;
-import calculator.domain.Numbers;
 import calculator.service.dto.NumberDto;
 import calculator.service.dto.NumbersDto;
 import calculator.service.exception.SeparationException;
