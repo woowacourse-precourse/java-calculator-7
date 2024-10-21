@@ -5,7 +5,7 @@ import camp.nextstep.edu.missionutils.Console;
 public class Application {
     public static void main(String[] args) {
         String input;
-        String[] numbers;
+        String[] tokens;
 
         System.out.println("덧셈할 문자열을 입력해주세요.");
         input = Console.readLine();
@@ -18,35 +18,36 @@ public class Application {
             int customIndex = input.indexOf("\\n");
 
             String customSeparator = input.substring(2, customIndex);
-            String numbersRest = input.substring(customIndex + 2);
+            String tokenPart = input.substring(customIndex + 2);
 
-            numbers = numbersRest.split(customSeparator + "|,|:");
+            tokens = tokenPart.split(customSeparator + "|,|:");
         } else {
-            numbers = input.split("[,:]");
+            tokens = input.split("[,:]");
         }
 
-        int sum = getSum(numbers);
+        int sum = getSum(tokens);
         System.out.println("결과 : " + sum);
     }
 
-    private static int getSum(String[] numbers) {
+    private static int getSum(String[] tokens) {
         int sum = 0;
-        for (String number : numbers) {
-            if (number.contains(" ")) {
-                throw new IllegalArgumentException("잘못된 입력입니다. 숫자에 공백을 포함할 수 없습니다.");
+        for (String token  : tokens) {
+            if (token.contains(" ")) {
+                throw new IllegalArgumentException("잘못된 입력입니다. 토큰에 공백을 포함할 수 없습니다.");
             } else {
                 try {
-                    int parsedNumber = Integer.parseInt(number.trim());
+                    int parsedNumber = Integer.parseInt(token.trim());
 
                     if (parsedNumber <= 0) {
-                        throw new IllegalArgumentException("입력은 양수만 사용 가능합니다.");
+                        throw new IllegalArgumentException("잘못된 숫자입니다. 숫자는 양수만 사용 가능합니다.");
                     }
                     sum += parsedNumber;
                 } catch (NumberFormatException e) {
-                    throw new IllegalArgumentException("잘못된 입력입니다. 입력은 숫자로만 이루어집니다.");
+                    throw new IllegalArgumentException("잘못된 입력입니다. 토큰은 숫자로만 이루어집니다.");
                 }
             }
         }
         return sum;
     }
 }
+
