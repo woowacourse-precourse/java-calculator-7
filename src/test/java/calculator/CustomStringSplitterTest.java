@@ -56,10 +56,10 @@ class CustomStringSplitterTest {
     @CsvSource({
             "'//-\n12:34'",
             "'//.\n12:34'",
-            "'//*-\n12:34'"
+            "'//*-\n12:34'",
+            "'//+\n1245'"
     })
-    void 허용되지_않는_커스텀_구분자2(String input) {
-        System.out.println(input);
+    void 허용되지_않는_커스텀_구분자_canSupport_메소드_통과(String input) {
         Assertions.assertTrue(stringSplitter.canSupport(input));
     }
 
@@ -67,9 +67,10 @@ class CustomStringSplitterTest {
     @CsvSource({
             "'//-\n12:34'",
             "'//.\n12:34'",
-            "'//*-\n12:34'"
+            "'//*-\n12:34'",
+            "'//+\n1245'"
     })
-    void 허용되지_않는_커스텀_구분자(String input) {
+    void 허용되지_않는_커스텀_구분자_예외_발생(String input) {
         Assertions.assertThrows(IllegalArgumentException.class, () -> stringSplitter.splitString(input));
     }
 }
