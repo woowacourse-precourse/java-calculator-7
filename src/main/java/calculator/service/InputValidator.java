@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class InputValidator {
+
     public Boolean isValidInput(String input) {
         if (isEmptyInput(input)) return false;
 
@@ -16,6 +17,7 @@ public class InputValidator {
         if (!isOnlyOneCustomDeclare(input)) return false;
 
         if (isContainInvalidChar(input)) return false;
+
         return true;
     }
 
@@ -32,7 +34,7 @@ public class InputValidator {
     }
 
     public Boolean isEmptyInput(String input) {
-        return input.length() == 0;
+        return input.isEmpty();
     }
 
     public Boolean isOnlyOneCustomDeclare(String inputValue) {

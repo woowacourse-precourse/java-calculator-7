@@ -4,11 +4,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class InputValidatorTest {
 
     @Test
+    @DisplayName("빈 입력을 확인합니다.")
     void isEmptyInput() {
         // given
         InputValidator inputValidator = new InputValidator();
