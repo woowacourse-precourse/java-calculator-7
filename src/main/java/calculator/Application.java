@@ -10,9 +10,9 @@ import java.util.stream.Collectors;
 
 public class Application {
     public static void main(String[] args) {
-        String input = Console.readLine(); // 사용자로부터 입력 받기
-        int result = calculateSum(input);   // 입력된 문자열을 계산
-        System.out.println("결과 : " + result); // 결과 출력
+        String input = Console.readLine();
+        int result = calculateSum(input);
+        System.out.println("결과 : " + result);
     }
 
     private static int calculateSum(String input) {
@@ -26,6 +26,29 @@ public class Application {
         return sumNumbers(numbers);
     }
 
+    private static String determineDelimiter(String input) {
+        if (hasCustomDelimiter(input)) {
+            return extractCustomDelimiter(input);
+        }
+        return ",|:"; // 기본 구분자
+    }
+
+    private static boolean hasCustomDelimiter(String input) {
+        return input.startsWith("//");
+    }
+
+    private static String extractCustomDelimiter(String input) {
+        Matcher matcher = Pattern.compile("//(.*?)\\\\n").matcher(input);
+        if (matcher.find()) {
+            return Pattern.quote(matcher.group(1)); // 커스텀 구분자 반환
+        }
+        throw new IllegalArgumentException("커스텀 구분자가 잘못되었습니다.");
+    }
+
+    private static String removeDelimiterHeader(String input) {
+        return input.contains("\\n") ? input.split("\\\\n", 2)[1] : input;
+    }
+
     private static List<Integer> parseNumbers(String input, String delimiter) {
         return Arrays.stream(input.split(delimiter))
                 .map(Application::convertToInteger)
@@ -35,33 +58,26 @@ public class Application {
     private static int sumNumbers(List<Integer> numbers) {
         return numbers.stream()
                 .mapToInt(Integer::intValue)
-                .sum(); // 숫자 합산
+                .sum();
     }
 
     private static int convertToInteger(String s) {
-        return Integer.parseInt(s); // 문자열을 정수로 변환
+        int number = parseInteger(s);
+        validateNonNegative(number, s);
+        return number;
     }
 
-    private static String determineDelimiter(String input) {
-        if (hasCustomDelimiter(input)) {
-            return extractCustomDelimiter(input); // 커스텀 구분자 추출
+    private static int parseInteger(String s) {
+        try {
+            return Integer.parseInt(s);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자가 아닌 값이 포함되었습니다: " + s);
         }
-        return ",|:"; // 기본 구분자
     }
 
-    private static boolean hasCustomDelimiter(String input) {
-        return input.startsWith("//"); // 커스텀 구분자 확인
-    }
-
-    private static String extractCustomDelimiter(String input) {
-        Matcher matcher = Pattern.compile("//(.*?)\\\\n").matcher(input);
-        if (matcher.find()) {
-            return Pattern.quote(matcher.group(1)); // 커스텀 구분자 반환
+    private static void validateNonNegative(int number, String originalInput) {
+        if (number < 0) {
+            throw new IllegalArgumentException("음수는 허용되지 않습니다: " + originalInput);
         }
-        throw new IllegalArgumentException("커스텀 구분자가 잘못되었습니다."); // 잘못된 경우 예외 처리
-    }
-
-    private static String removeDelimiterHeader(String input) {
-        return input.contains("\\n") ? input.split("\\\\n", 2)[1] : input; // 구분자 헤더 제거
     }
 }
