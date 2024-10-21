@@ -18,6 +18,12 @@ public class PositiveNumber {
         }
     }
 
+    public void validatePositiveNumber(int number) {
+        if (number <= 0) {
+            throw new IllegalArgumentException("양수가 아닌 수를 포함합니다.");
+        }
+    }
+
     public void plus(String numberAdded) {
         validateIsNumber(numberAdded);
         if (numberAdded.equals(EMPTY_NUMBER)) {
@@ -25,9 +31,7 @@ public class PositiveNumber {
         }
 
         int number = Integer.parseInt(numberAdded);
-        if (number <= 0) {
-            throw new IllegalArgumentException("양수가 아닌 수를 포함합니다.");
-        }
+        validatePositiveNumber(number);
         this.count += number;
     }
 
