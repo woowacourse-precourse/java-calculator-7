@@ -35,6 +35,9 @@ public class Parser {
         if(expression.isEmpty()) {
             return new ArrayList<>(0);
         }
+        if(expression.charAt(expression.length()-1) < '0' || expression.charAt(expression.length()-1) > '9') {
+            throw new IllegalArgumentException("식은 구분자로 끝날 수 없습니다.");
+        }
 
         List<Long> operands = new ArrayList<>();
         String[] numbers = expression.split(calculator.identifiersToString());
