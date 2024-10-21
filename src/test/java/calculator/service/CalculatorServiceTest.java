@@ -79,7 +79,7 @@ class CalculatorServiceTest {
         // when & then
         assertThatThrownBy(() -> calculatorService.sum(requestDto))
                 .isInstanceOf(CalculatorException.class)
-                .hasMessage(ErrorMessage.NEGATIVE_VALUE_NOT_ALLOWED.getMessage());
+                .hasMessage(ErrorMessage.INVALID_NON_POSITIVE_VALUE.getMessage());
     }
 
     @ParameterizedTest(name = "입력값: {0}")
@@ -115,7 +115,7 @@ class CalculatorServiceTest {
         // when & then
         assertThatThrownBy(() -> calculatorService.sum(requestDto))
                 .isInstanceOf(CalculatorException.class)
-                .hasMessage(ErrorMessage.NEGATIVE_VALUE_NOT_ALLOWED.getMessage());
+                .hasMessage(ErrorMessage.INVALID_NON_POSITIVE_VALUE.getMessage());
     }
 
     @Test

@@ -1,7 +1,7 @@
 package calculator.domain;
 
 import static calculator.exception.constants.ErrorMessage.INVALID_INPUT_VALUE;
-import static calculator.exception.constants.ErrorMessage.NEGATIVE_VALUE_NOT_ALLOWED;
+import static calculator.exception.constants.ErrorMessage.INVALID_NON_POSITIVE_VALUE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -50,7 +50,7 @@ class CalculatorTest {
         // when & then
         assertThatThrownBy(calculator::sum)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(NEGATIVE_VALUE_NOT_ALLOWED.getMessage());
+                .hasMessage(INVALID_NON_POSITIVE_VALUE.getMessage());
     }
 
     @ParameterizedTest(name = "입력값: {0}")

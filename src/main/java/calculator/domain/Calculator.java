@@ -1,7 +1,7 @@
 package calculator.domain;
 
 import static calculator.exception.constants.ErrorMessage.INVALID_INPUT_VALUE;
-import static calculator.exception.constants.ErrorMessage.NEGATIVE_VALUE_NOT_ALLOWED;
+import static calculator.exception.constants.ErrorMessage.INVALID_NON_POSITIVE_VALUE;
 
 import calculator.exception.CalculatorException;
 import java.util.Arrays;
@@ -40,7 +40,7 @@ public class Calculator {
 
     private boolean validatePositiveNumber(double number) {
         if (number <= 0) {
-            throw new CalculatorException(NEGATIVE_VALUE_NOT_ALLOWED.getMessage());
+            throw new CalculatorException(INVALID_NON_POSITIVE_VALUE.getMessage());
         }
         return true;
     }
