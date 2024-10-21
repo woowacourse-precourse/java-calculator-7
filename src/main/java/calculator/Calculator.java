@@ -3,11 +3,13 @@ package calculator;
 import java.util.List;
 
 public class Calculator {
-    public static int numberSum(List<String> userInput) {
-        return userInput.stream()
-                .peek(Calculator::validateNumber)
-                .mapToInt(Integer::parseInt)
-                .sum();
+    public static int numberSum(List<String> numbers) {
+        int sum = 0;
+        for (String value : numbers) {
+            validateNumber(value);
+            sum += Integer.parseInt(value);
+        }
+        return sum;
     }
 
     private static void validateNumber(String num) {
