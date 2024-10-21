@@ -2,14 +2,14 @@ package calculator.common.io;
 
 import camp.nextstep.edu.missionutils.Console;
 
-public class InputHandler {
+public class InputProcessor {
 
     private static final String MESSAGE = "덧셈할 문자열을 입력해 주세요.";
 
     public String getUserInput() {
         System.out.println(MESSAGE);
         String userInput = Console.readLine();
-        if (userInput.isBlank()){
+        if (userInput == null || userInput.isBlank()){
             return "";
         }
         StringBuilder stringBuilder = new StringBuilder();

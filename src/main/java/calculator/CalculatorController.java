@@ -1,22 +1,22 @@
 package calculator;
 
-import calculator.common.io.InputHandler;
+import calculator.common.io.InputProcessor;
 import calculator.common.io.OutputHandler;
 
 public class CalculatorController {
 
-    private final InputHandler inputHandler;
+    private final InputProcessor inputProcessor;
     private final OutputHandler outputHandler;
     private final CalculatorService calculatorService;
 
-    public CalculatorController(InputHandler inputHandler, OutputHandler outputHandler, CalculatorService calculatorService) {
-        this.inputHandler = inputHandler;
+    public CalculatorController(InputProcessor inputProcessor, OutputHandler outputHandler, CalculatorService calculatorService) {
+        this.inputProcessor = inputProcessor;
         this.outputHandler = outputHandler;
         this.calculatorService = calculatorService;
     }
 
     public void sum() {
-        String input = inputHandler.getUserInput();
+        String input = inputProcessor.getUserInput();
         if (input.isEmpty()) {
             outputHandler.printSumResult(0);
             return;
