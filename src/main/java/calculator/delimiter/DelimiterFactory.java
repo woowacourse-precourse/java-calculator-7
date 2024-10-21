@@ -5,7 +5,6 @@ import calculator.global.ErrorMessage;
 import java.util.List;
 
 public class DelimiterFactory {
-
     /**
      * 반드시 Custom -> Regular -> Fallback 순서로 제공되어야 한다.
      */

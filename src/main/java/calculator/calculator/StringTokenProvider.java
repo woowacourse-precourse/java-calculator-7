@@ -7,9 +7,9 @@ import java.util.List;
 
 public class StringTokenProvider implements TokenProvider {
 
-    private final DelimiterFactory delimiterFactory;
-
     private static final String POSITIVE_INTEGER_OR_SPACE_REGEX = "\\s*\\d*\\s*";
+
+    private final DelimiterFactory delimiterFactory;
 
     public StringTokenProvider(DelimiterFactory delimiterFactory) {
         this.delimiterFactory = delimiterFactory;

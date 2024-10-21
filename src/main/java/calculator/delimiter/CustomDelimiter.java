@@ -9,7 +9,6 @@ import java.util.List;
 public class CustomDelimiter implements Delimiter {
 
     private static final String CUSTOM_DELIMITER_PREFIX = "//";
-
     private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
 
     @Override
@@ -37,13 +36,12 @@ public class CustomDelimiter implements Delimiter {
                 .toList();
     }
 
-    private String extractContent(String rawInput) {
-        int delimiterEndPosition = rawInput.indexOf(CUSTOM_DELIMITER_SUFFIX);
-        return rawInput.substring(delimiterEndPosition + 2);
-    }
-
     private String extractDelimiter(String rawInput) {
         return rawInput.substring(CUSTOM_DELIMITER_PREFIX.length(), rawInput.indexOf(CUSTOM_DELIMITER_SUFFIX));
     }
 
+    private String extractContent(String rawInput) {
+        int delimiterEndPosition = rawInput.indexOf(CUSTOM_DELIMITER_SUFFIX);
+        return rawInput.substring(delimiterEndPosition + 2);
+    }
 }

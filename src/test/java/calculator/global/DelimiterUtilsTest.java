@@ -48,5 +48,4 @@ class DelimiterUtilsTest {
         String result = DelimiterUtils.replaceSpecialCharacters(input);
         assertThat(result).isEqualTo(expected);
     }
-
 }

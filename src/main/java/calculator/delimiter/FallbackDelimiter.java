@@ -13,17 +13,17 @@ public class FallbackDelimiter implements Delimiter {
     private static final String INTEGER_REGEX = "\\d+";
 
     @Override
+    public boolean applicable(String rawInput) {
+        String removedSpaces = DelimiterUtils.removeSpaces(rawInput);
+        return removedSpaces.isEmpty() || removedSpaces.matches(INTEGER_REGEX);
+    }
+
+    @Override
     public List<String> tokenize(String rawInput) {
         if (rawInput.isEmpty()) {
             return List.of();
         }
 
         return List.of(rawInput);
-    }
-
-    @Override
-    public boolean applicable(String rawInput) {
-        String removedSpaces = DelimiterUtils.removeSpaces(rawInput);
-        return removedSpaces.isEmpty() || removedSpaces.matches(INTEGER_REGEX);
     }
 }

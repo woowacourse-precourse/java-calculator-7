@@ -27,13 +27,13 @@ public class StringCalculator implements Calculator {
                 .reduce(BigInteger.ZERO, BigInteger::add);
     }
 
-    private boolean isAllBlank(List<String> tokens) {
-        return tokens.stream().allMatch(String::isBlank);
-    }
-
     private void validateInput(String input) {
         if (Objects.isNull(input)) {
             throw new IllegalArgumentException(ErrorMessage.NULL_NOT_ALLOWED.getMessage());
         }
+    }
+
+    private boolean isAllBlank(List<String> tokens) {
+        return tokens.stream().allMatch(String::isBlank);
     }
 }

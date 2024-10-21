@@ -5,7 +5,6 @@ import java.math.BigInteger;
 
 public class CalculatorController {
     private static final String INITIAL_COMMENT = "덧셈할 문자열을 입력해 주세요.";
-
     private static final String RESULT = "결과 : ";
 
     private final Calculator calculator;
