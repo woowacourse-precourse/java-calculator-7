@@ -1,4 +1,4 @@
-package calculator;
+package calculator.input;
 
 public class InputRulePrinter {
 

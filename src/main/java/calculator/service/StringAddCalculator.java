@@ -1,4 +1,6 @@
-package calculator;
+package calculator.service;
+
+import calculator.input.InputValidator;
 
 public class StringAddCalculator {
 
@@ -34,7 +36,7 @@ public class StringAddCalculator {
         InputValidator.validateOnlyNumericAndDelimiters(numbers, delimiter);
 
         // 기본 구분자 처리
-        if (delimiter.equals(",|:")) {
+        if (isUsingDefaultDelimiters(delimiter)) {
             return sumWithDefaultDelimiters(numbers);
         }
 
@@ -50,6 +52,10 @@ public class StringAddCalculator {
             return input.split("\n", 2)[1];
         }
         return input;
+    }
+
+    private static boolean isUsingDefaultDelimiters(String delimiter) {
+        return delimiter.equals(",|:");
     }
 
     private static int sumWithCustomDelimiter(String input, String delimiter) {
