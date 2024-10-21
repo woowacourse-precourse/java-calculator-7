@@ -74,7 +74,7 @@ public class Parsing {
     }
 
     private boolean checkStart(String str){
-        if(str.startsWith("//")) return true;
+        if(str.startsWith("//") && str.length() >= 5 && str.substring(3,5).equals("\\n")) return true;
         return false;
-    };
+    }
 }
