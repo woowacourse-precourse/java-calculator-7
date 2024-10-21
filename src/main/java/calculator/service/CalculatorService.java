@@ -5,7 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CalculatorService {
-    private static final String CUSTOM_DELIMITER_PATTERN = "//(.)"+"\\n"+"(.*)";
+    private static final Pattern CUSTOM_PATTERN = Pattern.compile("//(.)\n(.*)");
     private static final String DEFAULT_DELIMITERS = "[,:]";
 
     public int calculate(String input) {
@@ -28,16 +28,15 @@ public class CalculatorService {
     }
 
     private String[] splitWithCustomDelimiter(String input) {
-        Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_PATTERN);
-        Matcher matcher = pattern.matcher(input);
+        Matcher matcher = CUSTOM_PATTERN.matcher(input);
 
         if (!matcher.matches()) {
             throw new IllegalArgumentException("잘못된 구분자 형식입니다.");
         }
 
-        String delimiter = Pattern.quote(matcher.group(1));
+        String delimiter = matcher.group(1);
         String numbers = matcher.group(2);
-        return numbers.split(delimiter);
+        return numbers.split(Pattern.quote(delimiter));
     }
 
     private int parseNumber(String number) {
