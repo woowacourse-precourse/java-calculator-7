@@ -2,9 +2,11 @@ package calculator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -61,6 +63,25 @@ public class ValidTest {
         assertEquals("1,24:3", inputValue);
         assertFalse(isCustomValue);
     }
+
+    @Test
+    @DisplayName("Custom 구분자가 형식이 잘못된 경우")
+    public void testWrongCustomDivider() throws Exception {
+
+        //Given
+        CalculationUtil calculationUtil = new CalculationUtil("////tt\\n");
+
+        // When
+        InvocationTargetException thrownException = assertThrows(InvocationTargetException.class, () -> {
+            invokePrivateMethod(calculationUtil, "checkCustomDivider");
+        });
+
+        //Then
+        assertTrue(thrownException.getCause() instanceof IllegalArgumentException);
+        assertEquals("Custom Divider format is wrong", thrownException.getCause().getMessage());
+
+    }
+
 
     /**
      * private 메서드 호출
