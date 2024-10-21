@@ -3,13 +3,21 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputHandler {
-    static String inputData;
+    String inputData;
 
-    public static void input() {
+    InputHandler() {
+
+    }
+
+    public void input() {
         inputData = Console.readLine();
     }
 
-    public static String getInputData() {
+    public String getInputData() {
         return inputData;
+    }
+
+    public void setInputData(String inputData) {
+        this.inputData = inputData;
     }
 }

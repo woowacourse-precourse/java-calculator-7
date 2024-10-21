@@ -1,46 +1,68 @@
 package calculator;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class InputParser {
 
-    final static String basicSeparators = ":,";
-    static String regex = "[:,]";
+    List<String> separators;
+    String regex;
+    InputHandler inputHandler;
 
-    public static void buildRegex(String customSeparator) {
+    public InputParser(InputHandler inputHandler) {
+        this.inputHandler = inputHandler;
+        separators = new ArrayList<>();
+        separators.add(":");
+        separators.add(",");
+    }
+
+    public void buildRegex() {
         StringBuilder sb = new StringBuilder();
         sb.append("[");
-        sb.append(basicSeparators);
-        sb.append(customSeparator);
+        sb.append(concatSeparactor());
         sb.append("]");
         regex = sb.toString();
     }
 
-
-    public static String customParse(String data) {
-        StringBuilder sb = new StringBuilder(data);
-        int endIndex = sb.indexOf("n");
-        String customData = sb.delete(0, endIndex + 1).toString();
-        return customData;
+    public String concatSeparactor() {
+        StringBuilder sb = new StringBuilder();
+        for (String separator : separators) {
+            sb.append(separator);
+        }
+        return sb.toString();
     }
 
-    public static String parseSeparator(String data) {
+    public void addSeparactor(String customSeparator) {
+        separators.add(customSeparator);
+    }
+
+
+    public String removeCustomSeparactor(String data) {
+        StringBuilder sb = new StringBuilder(data);
+        int endIndex = sb.indexOf("n");
+        String dataWithoutCustomSeparator = sb.delete(0, endIndex + 1).toString();
+        inputHandler.setInputData(dataWithoutCustomSeparator);
+        return dataWithoutCustomSeparator;
+    }
+
+    public String parseCustomSeparator(String data) {
         StringBuilder sb = new StringBuilder(data);
         int endIndex = sb.indexOf("\\");
         String customSeparator = sb.substring(2, endIndex);
-        buildRegex(customSeparator);
         return customSeparator;
     }
 
-    public static ArrayList<Integer> parse() {
-        String inputData = InputHandler.getInputData();
+    public ArrayList<Integer> parse() {
+        String data = inputHandler.getInputData();
 
         ArrayList<Integer> numbers = new ArrayList<>();
 
-        if (inputData.isEmpty()) {
+        if (data.isEmpty()) {
             numbers.add(0);
         } else {
-            String[] values = inputData.split(regex);
+            buildRegex();
+
+            String[] values = data.split(regex);
 
             for (String i : values) {
                 numbers.add(Integer.parseInt(i));

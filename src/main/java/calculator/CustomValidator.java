@@ -2,7 +2,13 @@ package calculator;
 
 public class CustomValidator {
 
-    public static boolean validate(String inputData) {
+    InputParser inputParser;
+
+    public CustomValidator(InputParser inputParser) {
+        this.inputParser = inputParser;
+    }
+
+    public boolean validate(String inputData) {
         if (inputData.matches("\\d*")) {
             return false;
         } else if (inputData.matches("^(\\d+([,:]\\d+)*)*$")) {
@@ -12,12 +18,13 @@ public class CustomValidator {
         }
     }
 
-    public static boolean customValidate(String inputData) {
+    public boolean customValidate(String inputData) {
         if (inputData.matches("^//(.*?)\\\\n.*")) {
-            String customSeparator = InputParser.parseSeparator(inputData);
-            String newData = InputParser.customParse(inputData);
-            InputHandler.inputData = newData;
-            if (newData.matches("\\d*") || newData.matches(String.format("(\\d+([\\d,:%s]*)*)$", customSeparator))) {
+            inputParser.addSeparactor(inputParser.parseCustomSeparator(inputData));
+            String separators = inputParser.concatSeparactor();
+            String dataWithoutCustomSeparator = inputParser.removeCustomSeparactor(inputData);
+            if (dataWithoutCustomSeparator.matches("\\d*") || dataWithoutCustomSeparator.matches(
+                    String.format("(\\d+([\\d%s]*)*)$", separators))) {
                 return true;
             } else {
                 throw new IllegalArgumentException("잘못된 값 입력");
