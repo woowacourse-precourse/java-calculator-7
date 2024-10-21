@@ -7,18 +7,25 @@ public class Application {
     	String input = Console.readLine();
     	
         String delimiter = ",|:";
+        
+        if (input.startsWith("//")) {
+            int customDelimiter = input.indexOf("\\n");
 
-        String[] numbers = input.split(delimiter);
-        int sum = 0;
-        for (String number : numbers) {
-            if (number.isEmpty()) {
-                throw new IllegalArgumentException();
-            }
-            try {
-            int num = Integer.parseInt(number);
-
-            }
+            delimiter = input.substring(2, customDelimiter);
+            input = input.substring(customDelimiter + 2);
         }
 
-        System.out.println("결과 : " + sum);}
+        String[] numbers = input.split(delimiter);
+        
+        int sum = 0;
+        
+        for (String number : numbers) {       
+            int num = Integer.parseInt(number);
+            
+            sum += num;
+            } 
+            
+        }
+
+        System.out.println("결과 : " + sum);
 }
