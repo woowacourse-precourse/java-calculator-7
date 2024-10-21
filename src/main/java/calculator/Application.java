@@ -46,5 +46,8 @@ public class Application {
         
         // 3. 덧셈 계산
         int result = sumNumbers(numbers);
+        
+        // 4. 결과 출력
+        System.out.println("결과: " + result);
     }
 }
