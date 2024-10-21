@@ -8,11 +8,16 @@ public class Application {
         String input = Console.readLine();
 
         int sum;
-        if (input.isEmpty() || input.trim().isEmpty()){
+        if (nullCheck(input)){
             sum = 0;
             System.out.println("결과 : " + sum);
         } else {
             System.out.println("공백이 아닙니다.");
         }//if end
-    }
-}
+    }//main() end
+
+    private static boolean nullCheck(String input) {
+        return input.isEmpty() || input.trim().isEmpty();
+    }//nullCheck() end
+
+}//class end
