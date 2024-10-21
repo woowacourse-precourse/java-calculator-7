@@ -31,6 +31,14 @@ public class Application {
             System.out.println(num);
         }
 
+        // 4. 추출된 숫자들의 합을 계산하는 기능
+        int sum = 0;
+        for (String num : numberArray) {
+            sum += Integer.parseInt(num);  // 숫자로 변환하여 합 계산
+        }
+
+        System.out.println("숫자들의 합: " + sum);
+
         // TODO: 나머지 기능 구현
     }
 }
