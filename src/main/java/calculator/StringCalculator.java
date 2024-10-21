@@ -10,6 +10,9 @@ public class StringCalculator {
 
         if (input.startsWith("//")) {
             int delimiterEndIndex = input.indexOf("\n");
+            if (delimiterEndIndex == -1) {
+                throw new IllegalArgumentException("잘못된 구분자 형식입니다.");
+            }
             delimiter = input.substring(2, delimiterEndIndex);
             input = input.substring(delimiterEndIndex + 1);
         }
@@ -17,6 +20,9 @@ public class StringCalculator {
         String[] tokens = input.split(delimiter);
         int sum = 0;
         for (String token : tokens) {
+            if (token.isEmpty()) {
+                continue; // 빈 문자열 무시
+            }
             int number = Integer.parseInt(token);
             if (number < 0) {
                 throw new IllegalArgumentException("음수는 입력할 수 없습니다: " + number);
@@ -26,6 +32,3 @@ public class StringCalculator {
         return sum;
     }
 }
-
-
-
