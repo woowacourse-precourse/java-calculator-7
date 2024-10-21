@@ -2,26 +2,24 @@ package calculator.service;
 
 import calculator.domain.Delimiters;
 import calculator.domain.Operands;
-import java.util.ArrayList;
 
 import static calculator.utils.Constants.*;
 import static calculator.validators.InvalidInputStringFormatException.errorCheck;
-import static calculator.validators.InvalidOperandFormatException.validateToken;
 
 public class ParsingService {
     public static Operands parseOperandStr(String operandStr) {
         Delimiters delimiters = new Delimiters();
-        ArrayList<Integer> operandList = new ArrayList<>();
+        Operands operands = new Operands();
 
         if(checkIFStringEmpty(operandStr)){
-            operandList.add(0);
-            return new Operands(operandList);
+            operands.addOperand("0");
+            return operands;
         }
         errorCheck(operandStr);
         operandStr = parseCustomDelimiter(operandStr, delimiters);
-        parse(operandStr, delimiters, operandList);
+        parse(operandStr, delimiters, operands);
 
-        return new Operands(operandList);
+        return operands;
     }
 
     //입력받은 문자열이 없을 때 true return
@@ -41,12 +39,12 @@ public class ParsingService {
     }
 
     //구분자에 따라 문자열을 분리하는 기능
-    private static void parse(String operandStr, Delimiters delimiters, ArrayList<Integer> operandList){
+    private static void parse(String operandStr, Delimiters delimiters, Operands operands){
         String regex = delimiters.createRegexFromDelimiters();
 
         String[] tokens = operandStr.split(regex);
         for (String token : tokens) {
-            operandList.add(validateToken(token));
+            operands.addOperand(token);
         }
     }
 }
