@@ -18,6 +18,10 @@ public class JavaCalculator {
             return 0;
         }
 
+        if (isNumeric(input)) {
+            return Integer.parseInt(input);
+        }
+
         List<Integer> numbers = new ArrayList<>();
         splitAndAddNumbers(input, numbers);
 
