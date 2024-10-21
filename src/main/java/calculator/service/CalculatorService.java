@@ -21,8 +21,8 @@ public class CalculatorService {
         if(input.startsWith("//")){
             Matcher matcher = Pattern.compile("//(.*?)\\\\n(.*)").matcher(input);
             if(matcher.matches()){
-                String customDelimiter = matcher.group(1);  // 커스텀 구분자를 추출
-                delimiter =  DEFAULT_DELIMITERS + "|" + customDelimiter;  // 기본 구분자에 커스텀 구분자 추가
+                String customDelimiter = matcher.group(1);
+                delimiter =  DEFAULT_DELIMITERS + "|" + customDelimiter;
                 numbers = matcher.group(2);
             }else{
                 throw new IllegalArgumentException("잘못된 구분자 형식입니다.");
