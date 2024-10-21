@@ -8,10 +8,6 @@ import calculator.model.delimiter.Delimiters;
 import calculator.validation.InputValidator;
 
 public class InputFilter {
-	/**
-	 * 핵심 로직
-	 */
-	// 1차 가공된 입력값에서 숫자를 추출
 	public List<Integer> extractNumbers(String processedInput, Delimiters delimiters) {
 		if (processedInput.isBlank()) {
 			return List.of();
@@ -22,7 +18,6 @@ public class InputFilter {
 		return Collections.unmodifiableList(getExtractedNumbers(splitParts));
 	}
 
-	// 구분자들을 이용해 정규식을 만들고, 이를 이용해 입력값을 분리
 	private String[] splitInput(String processedInput, Delimiters delimiters) {
 		InputValidator.validateInvalidDelimiter(processedInput, delimiters);
 		String regex = String.join("|", delimiters.getRegex());

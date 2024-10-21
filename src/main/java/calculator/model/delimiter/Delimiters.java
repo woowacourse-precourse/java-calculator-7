@@ -27,7 +27,7 @@ public class Delimiters {
 
 	public String[] getRegex() {
 		return delimiters.stream()
-			.map(Pattern::quote) // 구분자를 정규식에 안전하게 포함
+			.map(Pattern::quote)
 			.toArray(String[]::new);
 	}
 
