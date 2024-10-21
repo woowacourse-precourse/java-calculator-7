@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.model.Calculator;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
@@ -43,11 +44,13 @@ class ApplicationTest extends NsTest {
 
     @Test
     void 음수_입력_예외_테스트() {
-        assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
+        assertThatThrownBy(() -> {
+            Calculator.calculate("-1,2,3");
+        })
                 .isInstanceOf(IllegalArgumentException.class)
-        );
+                .hasMessageContaining("음수는 입력할 수 없습니다");
     }
+
 
     @Test
     void 커스텀_구분자_예외_테스트() {
