@@ -16,7 +16,7 @@ public class SeparatorManager {
         }
     }
 
-    public static String extractDelimiter(String input) {
+    public String extractDelimiter(String input) {
         String[] parts = input.split(customSeparatorEnd, 2);
         return parts[0].substring(2);
     }
