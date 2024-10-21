@@ -22,12 +22,12 @@ class DelimiterExtractor {
     }
 
     private void extractDelimiterAndNumbers() {
-        if (input.startsWith("\\")) {
+        if (input.startsWith("//")) {
             int customDelimiterEndIndex = input.indexOf("\n");
             if (customDelimiterEndIndex == -1) {
                 throw new IllegalArgumentException(INVALID_CUSTOM_DELIMITER);
             }
-            int customDelimiterStartIndex = input.indexOf("\\");
+            int customDelimiterStartIndex = input.indexOf("//");
             this.delimiter = input.substring(customDelimiterStartIndex, customDelimiterEndIndex).trim();
             this.numbers = input.substring(customDelimiterEndIndex + 1);
         } else {
