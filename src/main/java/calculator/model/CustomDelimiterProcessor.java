@@ -8,12 +8,13 @@ import calculator.validation.InputValidator;
 
 public class CustomDelimiterProcessor {
 	public String removeCustomDelimiterPattern(String input) {
-		if (!hasCustomDelimiterPattern(input)) {
-			return input;
-		}
-		int endIndex = findEndIndex(input);
+		if (hasCustomDelimiterPattern(input)) {
+			int endIndex = findEndIndex(input);
 
-		return input.substring(endIndex + END.getPatternLength());
+			return input.substring(endIndex + END.getPatternLength());
+		}
+
+		return input;
 	}
 
 	public Optional<String> extractCustomDelimiter(String input) {
