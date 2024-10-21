@@ -7,13 +7,22 @@ import calculator.view.OutputView;
 import java.util.List;
 
 public class CalculateController {
+    private final StringParser stringParser;
+    private final CalculateService calculateService;
+
+    public CalculateController(StringParser stringParser, CalculateService calculateService
+    ) {
+        this.stringParser = stringParser;
+        this.calculateService = calculateService;
+    }
+
     public void calculator() {
         //input
         String userInput = new InputView().getUserInput();
-        List<Integer> numbers = new StringParser().extractNumbers(userInput);
+        List<Integer> numbers = stringParser.extractNumbers(userInput);
 
         //calculate
-        Integer result = new CalculateService().calculateNumbers(numbers);
+        Integer result = calculateService.calculateNumbers(numbers);
 
         //output
         new OutputView().printResult(result);
