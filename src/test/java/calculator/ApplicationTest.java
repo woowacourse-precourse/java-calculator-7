@@ -49,6 +49,14 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 커스텀_구분자_2개_사용() {
+        assertSimpleTest(() ->{
+            run("1//{\\n3{2//#\\n5#6");
+            assertThat(output()).contains("결과 : 17");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});

@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdditionCalculator {
-    private UserUtil userUtil;
-    private List<Character> additionDelimiters = new ArrayList<>();
-    private List<Integer> additionNumbers = new ArrayList<>();
+    private final UserUtil userUtil;
+    private final List<Character> additionDelimiters = new ArrayList<>();
+    private final List<Integer> additionNumbers = new ArrayList<>();
     private String inputString;
 
     public AdditionCalculator() {
@@ -38,11 +38,10 @@ public class AdditionCalculator {
             return;
         }
 
+        // 순회용으로 index 사용
         int index = 0;
         while (index < inputString.length()) {
             char currentChar = inputString.charAt(index);
-
-            // Custom delimiter 설정
             if (currentChar == '/' && index + 1 < inputString.length() && inputString.charAt(index + 1) == '/') {
                 if (index + 4 < inputString.length() && inputString.substring(index + 3, index + 5).equals("\\n")) {
                     additionDelimiters.add(inputString.charAt(index + 2));
@@ -51,13 +50,17 @@ public class AdditionCalculator {
                 }
             }
 
+            // 등록된 구분자인 경우
             if (isDelimiter(currentChar)) {
                 index++;
             } else if (Character.isDigit(currentChar) || currentChar == '-') {
                 StringBuilder number = new StringBuilder();
-                while (index < inputString.length() && !isDelimiter(inputString.charAt(index))) {
+
+                // 구분자가 아닐 때까지
+                while (index < inputString.length() && !isDelimiter(inputString.charAt(index)) && !isStartCustomDelimiter(index)) {
                     number.append(inputString.charAt(index++));
                 }
+
                 int num = Integer.parseInt(number.toString());
                 if (num < 0) {
                     throw new IllegalArgumentException("잘못된 입력입니다.");
@@ -67,6 +70,12 @@ public class AdditionCalculator {
                 index++;
             }
         }
+    }
+
+    private boolean isStartCustomDelimiter(int index) {
+        if (inputString.charAt(index) == '/' && inputString.charAt(index + 1) == '/') {
+            return true;
+        } else return false;
     }
 
     // 등록된 구분자인가요?
