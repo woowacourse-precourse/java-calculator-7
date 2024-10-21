@@ -54,10 +54,6 @@ public class CustomDelimiterParserImpl implements CustomDelimiterParser {
 
     @Override
     public boolean isNumeric(String strNum) {
-        if (strNum == null || strNum.isEmpty()) {
-            return false;
-        }
-
         try {
             double d = Double.parseDouble(strNum);
         } catch (NumberFormatException nfe) {
