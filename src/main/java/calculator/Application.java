@@ -12,6 +12,7 @@ public class Application {
             System.out.println("결과 : " + sum);
         } catch (IllegalArgumentException e) {
             System.out.println("잘못된 입력입니다");
+            throw e;
         }
     }
 
