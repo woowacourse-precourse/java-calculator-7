@@ -2,6 +2,10 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Application {
 
     private static final String NEGATIVE_NUMBER_EXCEPTION_MESSAGE = "숫자는 양수 값이어야 합니다.";
@@ -11,6 +15,8 @@ public class Application {
     private static final String CUSTOM_DELIMITER_START_STR = "//";
     private static final String CUSTOM_DELIMITER_END_STR = "\\n";
 
+
+    static List<Long> numberList;
 
     public static void inputMessage(){
         System.out.println("덧셈할 문자열을 입력해 주세요.");
@@ -31,6 +37,14 @@ public class Application {
             }
             else delimiter = parserDelimiter(input);
             String[] inputArray = input.split(delimiter);
+            Arrays.stream(inputArray).forEach(s -> {
+                try {
+                    System.out.println("현재 값 : " + Long.valueOf(s));
+                    numberList.add(Long.valueOf(s));
+                }catch (NumberFormatException e){
+                    throw new IllegalArgumentException(INPUT_VALIDATION_EXCEPTION_MESSAGE);
+                }
+            });
         }   catch (Exception e){
             throw new IllegalArgumentException(INPUT_VALIDATION_EXCEPTION_MESSAGE);
         }
