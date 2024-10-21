@@ -1,16 +1,17 @@
 package calculator.model;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 import calculator.validation.InputValidator;
 
 public class Delimiters {
-	private final Set<String> delimiters;
+	private final Set<String> delimiters = new HashSet<>();
 	private final InputValidator inputValidator;
 
 	public Delimiters() {
-		this.delimiters = new HashSet<>(Set.of(",", ":"));
+		initDefaultDelimiters();
 		this.inputValidator = new InputValidator();
 	}
 
@@ -22,5 +23,10 @@ public class Delimiters {
 
 	public boolean isRegisteredDelimiter(String delimiter) {
 		return delimiters.contains(delimiter);
+	}
+
+	private void initDefaultDelimiters() {
+		Arrays.stream(DefaultDelimiters.values())
+			.forEach(delimiter -> this.delimiters.add(delimiter.getDelimiter()));
 	}
 }
