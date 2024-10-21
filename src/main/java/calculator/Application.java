@@ -14,6 +14,7 @@ public class Application {
             System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
+            throw new IllegalArgumentException(); // 제출용으로 한번 더 던짐
         }
 
     }
