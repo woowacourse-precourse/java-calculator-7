@@ -11,11 +11,7 @@ public class Converter {
             if (element.isEmpty()) {
                 continue;
             }
-            try {
-                convertedList.add(Integer.parseInt(element));
-            }catch (NumberFormatException e) {
-                throw new IllegalArgumentException("양수와 구분자만 입력 가능합니다.");
-            }
+            convertedList.add(Integer.parseInt(element));
         }
 
         return convertedList;
