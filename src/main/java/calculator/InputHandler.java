@@ -3,6 +3,7 @@ package calculator;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class InputHandler {
@@ -57,4 +58,17 @@ public class InputHandler {
             throw new IllegalArgumentException("주어진 문자열이 구분자와 양수로 이루어져 있지 않습니다.");
         }
     }
+
+    public ArrayList<Double> generatePositiveList() {
+        ArrayList<Double> positiveList = new ArrayList<>();
+        read();
+        splitInputText();
+        String[] splitPositiveText = positiveText.split(separators);
+        for (String positiveNumber : splitPositiveText) {
+            positiveList.add(parsePositiveNumber(positiveNumber));
+        }
+        return positiveList;
+
+    }
+
 }
