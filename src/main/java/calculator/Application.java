@@ -14,4 +14,9 @@ public class Application {
             throw e;
         }
     }
+    private static int calculateSum(String input) {
+        if (input == null || input.trim().isEmpty()) {
+            return 0; // 빈 입력일 경우 0 반환
+        }
+    }
 }
