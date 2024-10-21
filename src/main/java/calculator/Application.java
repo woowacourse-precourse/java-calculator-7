@@ -36,7 +36,13 @@ public class Application {
 
     public static List<Integer> parseIntegers(String[] input) {
         try {
-            return Arrays.stream(input).map(Integer::parseInt).toList();
+            return Arrays.stream(input).map(string -> {
+                int number = Integer.parseInt(string);
+                if (number < 0) {
+                    throw new NumberFormatException();
+                }
+                return number;
+            }).toList();
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException();
         }
