@@ -1,10 +1,10 @@
 package calculator;
 
 public class NumberExtractor {
-    private static final String DELIMITER = "[,:]";
+    private static final String DEFAULT_DELIMITER = "[,:]";
 
     public static int[] extractNumbers(String inputData) {
-        String[] splitNumbers = inputData.split(DELIMITER);
+        String[] splitNumbers = inputData.split(DEFAULT_DELIMITER);
         int[] extractedNumbers = new int[splitNumbers.length];
 
         int extractedIndex = 0;
