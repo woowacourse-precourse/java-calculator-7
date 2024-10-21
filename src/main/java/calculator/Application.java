@@ -22,6 +22,20 @@ public class Application {
         return new String[]{delimiter, numbers};
     }
 
+    public static String[] numberSplit(String numbers, String delimiter) {
+        return numbers.split(delimiter);
+    }
+
+    public static int totalSum(String[] tokens) {
+        int sum = 0;
+        for (String token: tokens) {
+            int number = Integer.parseInt(token);
+            sum += number;
+        }
+        return sum;
+
+    }
+
     public static int add(String input) {
         int result = emptyInput(input);
         if (result != -1) {
@@ -33,11 +47,11 @@ public class Application {
 
         String[] tokens = numbers.split(delimiter);
 
-        return tokens.length;
+        return totalSum(tokens);
     }
 
     public static void main(String[] args) {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        System.out.println("덧셈할 문자열을 입력해 주세요 : ");
         String input = Console.readLine();
         try {
             int result = add(input);
