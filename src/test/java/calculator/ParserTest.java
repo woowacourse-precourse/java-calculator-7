@@ -1,9 +1,7 @@
 package calculator;
 
-
-import calculator.delimiter.CustomDelimiter;
-import calculator.delimiter.DefaultDelimiter;
 import calculator.delimiter.Delimiter;
+import calculator.delimiter.DelimiterFactory;
 import calculator.parser.Parser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,11 +22,12 @@ class ParserTest {
     @DisplayName("커스텀 구분자로 시작하는 입력은 업데이트된 구분자로 파싱됩니다.")
     void startsWithCustomDelimiter() {
         //given
-        delimiter = new CustomDelimiter();
-        String input = delimiter.parseDelimiter("//?\\n1,2?3");
-        String require = "6";
+        String input = "//?\\n1,2?3";
+        delimiter = DelimiterFactory.createDelimiter(input);
+        input = delimiter.parseDelimiter(input);
         //when
         String result = parser.parse(input, delimiter);
+        String require = "6";
         //then
         Assertions.assertEquals(require, result);
     }
@@ -37,11 +36,12 @@ class ParserTest {
     @DisplayName("숫자로 시작하는 입력은 기본 구분자로 파싱됩니다.")
     void startsWithPositiveNumber() {
         ///given
-        delimiter = new DefaultDelimiter();
-        String input = delimiter.parseDelimiter("1,2,3:4");
-        String require = "10";
+        String input = "1,2,3:4";
+        delimiter = DelimiterFactory.createDelimiter(input);
+        input = delimiter.parseDelimiter(input);
         //when
         String result = parser.parse(input, delimiter);
+        String require = "10";
         //then
         Assertions.assertEquals(require, result);
     }

@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import calculator.delimiter.CustomDelimiter;
 import calculator.delimiter.DefaultDelimiter;
 import calculator.delimiter.Delimiter;
+import calculator.delimiter.DelimiterFactory;
 import calculator.parser.Parser;
 import calculator.validation.InputValidator;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,9 +40,9 @@ class InputValidatorTest {
     @DisplayName("커스텀 구분자가 있으면 정상 동작")
     void testStartsWithCustomDelimiter() {
         //given
-        delimiter = new CustomDelimiter();
-        inputValidator = new InputValidator(delimiter, parser);
         String input = "//.\\n1:2,3.4";
+        Delimiter delimiter = DelimiterFactory.createDelimiter(input);
+        inputValidator = new InputValidator(delimiter, parser);
         //when
         String result = inputValidator.validate(input);
         //then

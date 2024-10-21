@@ -9,7 +9,7 @@ public class CustomDelimiter implements Delimiter {
 
     private String delimiters = ",|:";
 
-    public CustomDelimiter() {
+    CustomDelimiter() {
         super();
     }
 

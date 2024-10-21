@@ -21,7 +21,6 @@ public class Parser {
     }
 
     public String parse(String input, Delimiter delimiter) {
-
         int result = 0;
         ArrayList<Integer> numbers = parseNumbers(input, delimiter);
         result = sumNumbers(numbers, result);
