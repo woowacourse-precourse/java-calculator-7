@@ -3,10 +3,10 @@ public class NumberParser {
     // 입력 문자열을 구분자로 분리하여 숫자로 변환하는 메서드
     public static int[] parse(String input, String delimiter) {
         if (input.trim().isEmpty()) {
-            return new int[0]; // 입력이 비어있으면 빈 배열 반환
+            return new int[0];
         }
 
-        String[] tokens = input.split(delimiter); // 구분자로 숫자를 분리
+        String[] tokens = input.split(delimiter);
         int[] numbers = new int[tokens.length];
 
         for (int i = 0; i < tokens.length; i++) {
@@ -16,7 +16,7 @@ public class NumberParser {
             }
 
             try {
-                numbers[i] = toPositiveInteger(token); // 각 토큰을 숫자로 변환
+                numbers[i] = toPositiveInteger(token);
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("Invalid number" + token);
             }
@@ -25,13 +25,10 @@ public class NumberParser {
         return numbers;
     }
 
-
-
-    // 문자열을 정수로 변환하고 음수일 경우 예외 발생
     private static int toPositiveInteger(String token) {
         int number = Integer.parseInt(token);
         if (number < 0) {
-            throw new IllegalArgumentException("negative number is not allowed" + number); // "음수는 입력할 수 없습니다: " + number
+            throw new IllegalArgumentException("negative number is not allowed" + number);
         }
         return number;
     }
