@@ -3,8 +3,8 @@ package calculator.model;
 public enum Status {
 	DIGIT, DELIMITER;
 
-	public static Status checkStatus(char input) {
-		if (Character.isDigit(input)) {
+	public static Status checkStatus(String input) {
+		if (input.isEmpty() || Character.isDigit(input.charAt(0))) {
 			return DIGIT;
 		}
 		return DELIMITER;
