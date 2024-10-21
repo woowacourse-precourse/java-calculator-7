@@ -23,6 +23,7 @@
 	0. 문자열이 여러 개면? -> invalid input으로 판단
 	1. 문자열 앞부분-> 앞부분 != 맨 앞. 맨 앞이 아니어도 되는지 명확하지 않음 ->  맨 앞이라고 판단
 	2. nested, 즉 "////[]\n\n"가 주어질 경우 -> valid input으로 판단
+	3. 입력은 구분자와 양수로 구분되기 때문에 그 이외의 문자는 invalid input으로 판단
 
 #### 0. identify delimiter
 	- identify delimiter from given input
@@ -48,12 +49,19 @@
 	output : valid input? Ture : False
 
 #### 2. parse input 
-	-store all numbers from input and return a list of numbers
+	- store all numbers from input and return a list of numbers
 	
 	input : a valid input string (delimiter + digits)
 	output : a list of numbers
 
-#### 3. calculator -> sum all given numbers and return the sum value
+#### 3. calculator
+	- sum all given numbers and return the sum value
 
 	input : a list of numbers
 	output : sum value
+
+#### 4. main function
+	- if input is valid, print sum of given digit if not, throw IllegalArgumentExceptions
+	
+	input : a valid input
+	output : N/A
