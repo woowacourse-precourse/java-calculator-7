@@ -1,13 +1,14 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 
 public class Calculator {
     private String userInput;
     private String customDelimiter;
-    private Integer calculateResult;
+    private BigInteger calculateResult;
     private final CalculatorDelimiter calculatorDelimiter;
     private static final String INVALID_INPUT_ERROR = "[ERROR] Invalid input format : ";
     private static final String RESULT_HEADER_MESSAGE = "결과 : ";
@@ -46,21 +47,21 @@ public class Calculator {
             throw new IllegalArgumentException(INVALID_INPUT_ERROR);
         }
     }
-    public Integer getSumByCalculate() {
+    public BigInteger getSumByCalculate() {
         String targetNumbersWithDelimiter = this.userInput;
-        String delimiter = this.calculatorDelimiter.getCustomDelimiterIfPresent(targetNumbersWithDelimiter,this.customDelimiter);
+        String delimiter = this.calculatorDelimiter.getCustomDelimiterIfPresent(targetNumbersWithDelimiter, this.customDelimiter);
         targetNumbersWithDelimiter = this.calculatorDelimiter.stripCustomDelimiterFromInput(targetNumbersWithDelimiter);
         this.calculateResult = Arrays.stream(targetNumbersWithDelimiter.split(delimiter))
                 .filter(this.calculatorDelimiter::isContainNumber)
-                .mapToInt(this::parsePositiveInt)
-                .sum();
+                .map(this::parsePositiveBigInteger)
+                .reduce(BigInteger.ZERO, BigInteger::add);
         return this.calculateResult;
     }
-    private int parsePositiveInt(String str) {
+    private BigInteger parsePositiveBigInteger(String str) {
         try {
-            int num = Integer.parseInt(str);
-            if (num < 0) {
-                throw new IllegalArgumentException(INVALID_INPUT_ERROR+"Negative numbers are not allowed");
+            BigInteger num = new BigInteger(str);
+            if (num.compareTo(BigInteger.ZERO) < 0) {
+                throw new IllegalArgumentException(INVALID_INPUT_ERROR + "Negative numbers are not allowed");
             }
             return num;
         } catch (NumberFormatException e) {
