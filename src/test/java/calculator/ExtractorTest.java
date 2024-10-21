@@ -124,4 +124,24 @@ class ExtractorTest {
         //when & then
         assertThrows(IllegalArgumentException.class, () -> ex.extractCustomDelimiter(input));
     }
+
+    @Test
+    public void 커스텀_구분자는_1자리여야_한다() {
+        //given
+        Extractor ex = new Extractor();
+        String input = "//?@\\n1?2?3";
+
+        //when & then
+        assertThrows(IllegalArgumentException.class, () -> ex.extractCustomDelimiter(input));
+    }
+
+    @Test
+    public void 올바른_형식으로_기분_구분자를_사용해야한다() {
+        //given
+        Extractor ex = new Extractor();
+        String input = "1,2, 3";
+
+        //when & then
+        assertFalse(ex.isDefaultDelimiterUsed(input));
+    }
 }

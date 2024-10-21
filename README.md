@@ -1,7 +1,7 @@
 # java-calculator-precourse
 
 ![Static Badge](https://img.shields.io/badge/precourse-week1-green)
-![Static Badge](https://img.shields.io/badge/test_passed-0%2F12-blue)
+![Static Badge](https://img.shields.io/badge/test_passed-2%2F2-blue)
 
 ---
 우아한테크코스의 1주차 프리코스 미션으로 `문자열 덧셈 계산기`를 구현합니다. <br>
@@ -34,8 +34,8 @@
 
 ### 예외처리
 
-- [ ] 사용자가 잘못된 값을 입력한 경우 `IllegalArgumentException`을 발생시킨다.
+- [x] 사용자가 잘못된 값을 입력한 경우 `IllegalArgumentException`을 발생시킨다.
 
     - [x] 숫자는 양수여야 한다.
-    - [ ] 커스텀 구분자는 1자리 문자여야 한다.
-    - [ ] 커스텀 구분자는 "//"와 "\n" 사이에 위치해야한다.
+    - [x] 커스텀 구분자는 1자리 문자여야 한다.
+    - [x] 커스텀 구분자는 "//"와 "\n" 사이에 위치해야한다.

@@ -22,7 +22,7 @@ public class CalcController {
         int[] nums;
 
         Extractor ex = new Extractor();
-        if (ex.hasCustomDelimiter(numsWithDelimiter)) {
+        if (ex.isDefaultDelimiterUsed(numsWithDelimiter)) {
             String customDelimiter = ex.extractCustomDelimiter(numsWithDelimiter);
             nums = ex.extractNumbersWithCustomDelimiter(numsWithDelimiter, customDelimiter);
         } else {
