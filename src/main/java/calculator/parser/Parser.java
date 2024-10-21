@@ -28,7 +28,7 @@ public class Parser {
 			String delimiter = extractCustomDelimiter(expression);
 			delimiters.add(delimiter);
 
-			pureExpression = changeToPureExpression(expression);
+			pureExpression = expression.substring(PURE_EXPRESSION_START_INDEX);
 		}
 
 		validateStartAndEndWithDigit(pureExpression);
@@ -56,10 +56,6 @@ public class Parser {
 
 	private String extractCustomDelimiter(String expression) {
 		return String.valueOf(expression.charAt(CUSTOM_DELIMITER_INDEX));
-	}
-
-	private String changeToPureExpression(String expression) {
-		return expression.substring(PURE_EXPRESSION_START_INDEX);
 	}
 
 	private void validateStartAndEndWithDigit(String expression) {
