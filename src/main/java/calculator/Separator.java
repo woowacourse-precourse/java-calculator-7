@@ -17,22 +17,22 @@ public class Separator {
     }
 
     public void extractSeparatorFromInput() {
-        while (hasSeparator(string)) {
-            char separator = string.charAt(2);
-            if (isWrongSeparator(separator)) {
+        while (hasCustomSeparator(string)) {
+            char customSeparator = string.charAt(2);
+            if (isWrongSeparator(customSeparator)) {
                 throw new IllegalArgumentException();
             }
-            separators.add(separator);
+            separators.add(customSeparator);
             string = string.substring(5);
         }
     }
 
-    private boolean hasSeparator(String string) {
+    private boolean hasCustomSeparator(String string) {
         return string.indexOf("//") == 0 && string.indexOf("\\n") == 3;
     }
 
     private boolean isWrongSeparator(char separator) {
-        return separator == '/' || separator == '\\' || separator == 'n';
+        return separator == '/' || separator == '\\' || separator == 'n' || (separator >= 48 && separator <= 57);
     }
 
     public boolean isValidFormula() {
@@ -62,7 +62,7 @@ public class Separator {
     private int getFirstSeparatorIndex() {
         int idx = 0;
         for (; idx < string.length(); idx++) {
-            if (!(string.charAt(idx) - '0' >= 0 && string.charAt(idx) - '0' <= 9)) {
+            if (!(string.charAt(idx) >= 48 && string.charAt(idx) <= 57)) {
                 break;
             }
         }
