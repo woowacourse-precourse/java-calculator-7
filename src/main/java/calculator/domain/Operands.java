@@ -1,5 +1,7 @@
 package calculator.domain;
 
+import static calculator.util.ExpressionUtils.isNumeric;
+
 import java.util.List;
 
 public class Operands {
@@ -32,11 +34,6 @@ public class Operands {
                 throw new IllegalArgumentException("피연산자는 숫자로만 이루어져야 합니다: " + operand);
             }
         }
-    }
-
-    // TODO: 분리 필요
-    private static boolean isNumeric(final String str) {
-        return str.chars().allMatch(Character::isDigit);
     }
 
     public List<String> toList() {

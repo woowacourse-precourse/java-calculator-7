@@ -90,10 +90,6 @@ public class Expression {
         return delimiterSet;
     }
 
-    private static boolean isNumeric(final String str) {
-        return str.chars().allMatch(Character::isDigit);
-    }
-
     public Delimiters getDelimiters() {
         return delimiters;
     }

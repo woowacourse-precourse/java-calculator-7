@@ -2,6 +2,7 @@ package calculator.domain;
 
 import static calculator.domain.Expression.CUSTOM_DELIMITER_PREFIX;
 import static calculator.domain.Expression.CUSTOM_DELIMITER_SUFFIX;
+import static calculator.util.ExpressionUtils.isNumeric;
 
 import java.util.Set;
 
@@ -41,10 +42,6 @@ public class Delimiters {
                 throw new IllegalArgumentException("올바르지 않은 커스텀 구분자입니다: " + delimiter);
             }
         }
-    }
-
-    private static boolean isNumeric(final String str) {
-        return str.chars().allMatch(Character::isDigit);
     }
 
     public Set<String> toSet() {
