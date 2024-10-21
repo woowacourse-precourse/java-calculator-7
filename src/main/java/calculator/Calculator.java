@@ -6,7 +6,7 @@ public class Calculator {
     public Calculator() {}
 
     public void run(){
-        Output.printUserInput();
+        Output.printInputRequest();
         String inputData = Input.getUserInput();
         this.result = Calculation.getCalculationResult(inputData);
     }
