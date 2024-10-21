@@ -16,4 +16,4 @@
 5) Validator
 - 입력 문자열과 구분자 형식이 올바르지 않을 경우 IllegalArgumentException을 발생시킨다
 - 문자열이 숫자가 아닐 경우 IllegalArgumentException을 발생시킨다
-
+- 커스텀 구분자가 숫자일 경우 IllegalArgumentException을 발생시킨다
