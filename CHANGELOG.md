@@ -1,0 +1,25 @@
+- Merge branch 'service' into kiwoook
+- refactor: 함수 처리, 관심사 분리
+- refactor: 함수 처리
+- feat: 버전 관리 생성
+- fix: Index + Searator 변경
+- docs: README.md 업데이트
+- test: 커스텀 구분자
+- refactor: 지정자 이름 변경
+- fix: refineInput, input 변경
+- docs: README.md파일 수정
+- refactor: 메서드 순서 및 이름 변경
+- test: 0에 대한 테스트
+- feat: 양수 처리 강화
+- refactor: 주석 처리 + 메소드 위치 변경
+- feat: Constants 클래스 생성
+- refactor : 디미터 법칙 + 패키지 분리
+- fix: 빈 값 처리
+- refactor: 객체 포장
+- feat: RefinedInput, Index, RegexStr, Input
+- refactor: 일급컬렉션 포장
+- feat: SeparatorSet, IndexQueue, NumList 생성
+- test: SeparatorServiceTest 구현
+- feat: Service 인터페이스, Separtor, Num
+- docs: README.md 업데이트
+- feat: setup project
