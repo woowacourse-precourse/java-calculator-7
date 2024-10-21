@@ -29,4 +29,15 @@ public class Delimiter {
         }
         return false;        
     }
+    
+    public boolean matchesAt(String input, int index) {
+        if (index + delimiter.length() > input.length()) {
+            return false;
+        }
+        return input.startsWith(delimiter, index);
+    }
+    
+    public int length() {
+        return delimiter.length();
+    }
 }

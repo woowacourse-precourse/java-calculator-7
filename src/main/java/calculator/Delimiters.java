@@ -21,4 +21,13 @@ public class Delimiters {
     public void add(Delimiter delimiter) {
         delimiters.add(delimiter);
     }
+    
+    public Delimiter matchDelimiter(String input, int index) {
+        for (Delimiter delimiter : delimiters) {
+            if (delimiter.matchesAt(input, index)) {
+                return delimiter;
+            }
+        }
+        return null;
+    }
 }
