@@ -30,21 +30,26 @@ public class StringProcessorController {
 
     // 전체 프로세스 조율
     public void process() {
-        // 입력을 받아서 DTO 생성
-        StringCalculatorDTO inputDTO = inputReader.read();
+        try {
+            // 입력을 받아서 DTO 생성
+            StringCalculatorDTO inputDTO = inputReader.read();
 
-        // 문자열을 기본 구분자를 기준으로 분리하는 로직 호출
-        List<String> afterDefaultExtractor = delimiterExtractor.extractDelimiter(inputDTO);
-        inputDTO.setDetachedInput(afterDefaultExtractor);
+            // 문자열을 기본 구분자를 기준으로 분리하는 로직 호출
+            List<String> afterDefaultExtractor = delimiterExtractor.extractDelimiter(inputDTO);
+            inputDTO.setDetachedInput(afterDefaultExtractor);
 
-        // 기본 구분자로 분리된 문자열을 커스텀 구분자를 기준으로 또 다시 분리하는 로직 호출
-        List<String> afterCustomExtractor = customDelimiterExtractor.extractDelimiter(inputDTO);
-        inputDTO.setDetachedInput(afterCustomExtractor);
+            // 기본 구분자로 분리된 문자열을 커스텀 구분자를 기준으로 또 다시 분리하는 로직 호출
+            List<String> afterCustomExtractor = customDelimiterExtractor.extractDelimiter(inputDTO);
+            inputDTO.setDetachedInput(afterCustomExtractor);
 
-        // 구분자들로 분리된 문자열들을 계산해주는 로직 호출
-        sumCalculator.sum(inputDTO);
+            // 구분자들로 분리된 문자열들을 계산해주는 로직 호출
+            sumCalculator.sum(inputDTO);
 
-        // View를 호출해 결과 출력
-        stringCalculatorView.displayResult(inputDTO);
+            // View를 호출해 결과 출력
+            stringCalculatorView.displayResult(inputDTO);
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+            throw e;
+        }
     }
 }
