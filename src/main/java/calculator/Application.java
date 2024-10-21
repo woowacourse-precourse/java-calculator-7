@@ -8,6 +8,18 @@ public class Application {
         throw new IllegalArgumentException();
     }
 
+    public static boolean isSpecialCharacter(String customDelimiter) {
+        String[] specialCharaters = {".", "*", "?", "^", "$", "(", ")", "{", "}", "[", "]", "|", "\\"};
+
+        for (String specialCharacter : specialCharaters) {
+            if (customDelimiter.equals(specialCharacter)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public static String extractCustomDelimiter(String input) {
         if (!input.startsWith("//")) {
             return "";
@@ -22,6 +34,10 @@ public class Application {
 
             if (customDelimiter.matches(".*[0-9].*") || customDelimiter.length() != 1) {
                 throwException();
+            }
+
+            if (isSpecialCharacter(customDelimiter)) {
+                customDelimiter = "\\" + customDelimiter;
             }
 
             return customDelimiter;
@@ -53,7 +69,7 @@ public class Application {
     public static void main(String[] args) {
         String delimiter = ",|:";
         int result = 0;
-        
+
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
 
