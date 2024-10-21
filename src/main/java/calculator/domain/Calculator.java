@@ -35,7 +35,7 @@ public class Calculator {
         return result;
     }
 
-    public static boolean isInteger(double result) {
+    public boolean isInteger(double result) {
         return result % 1 == 0;
     }
 }
