@@ -1,6 +1,7 @@
 package calculator.model;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 public class StringValidator {
 
@@ -13,16 +14,20 @@ public class StringValidator {
 	private static final int DELIMITER_LENGTH = 1;
 
 	private final String input;
-	private final List<String> delimiters;
+	private final List<Delimiter> delimiters;
 
 	public StringValidator(String input) {
 		this.input = input;
-		this.delimiters = List.of(COMMA_DELIMITER, COLON_DELIMITER);
+		this.delimiters = Stream.of(COMMA_DELIMITER, COLON_DELIMITER)
+			    .map(Delimiter::new)
+			    .toList();
 	}
 
 	public StringValidator(String input, String customDelimiter) {
 		this.input = input;
-		this.delimiters = List.of(COMMA_DELIMITER, COLON_DELIMITER, customDelimiter);
+		this.delimiters = Stream.of(COMMA_DELIMITER, COLON_DELIMITER, customDelimiter)
+		        .map(Delimiter::new)
+			    .toList();
 	}
 
 	public String getInput() {
@@ -64,9 +69,15 @@ public class StringValidator {
 	}
 
 	private int checkInputDelimiter(String input, int index) {
-		if (!delimiters.contains(input.substring(index, index + DELIMITER_LENGTH))) {
-			throw new IllegalArgumentException(ERROR_MESSAGE);
+		String inputDelimiter = input.substring(index, index + DELIMITER_LENGTH);
+		if (checkDelimiterIsExist(inputDelimiter)) {
+			return index + DELIMITER_LENGTH;
 		}
-		return index + DELIMITER_LENGTH;
+		throw new IllegalArgumentException(ERROR_MESSAGE);
+	}
+
+	private boolean checkDelimiterIsExist(String input) {
+		return delimiters.stream()
+			    .anyMatch(delimiter -> delimiter.compare(input));
 	}
 }
