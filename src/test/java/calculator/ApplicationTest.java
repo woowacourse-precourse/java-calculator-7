@@ -105,7 +105,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 숫자가_10억_초과() {
+    void 숫자가_10억_이상() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("1000000000"))
                         .isInstanceOf(IllegalArgumentException.class)
