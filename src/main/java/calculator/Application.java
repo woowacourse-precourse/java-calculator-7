@@ -24,7 +24,7 @@ public class Application {
         String numbersString = getNumbersString(input, delimiter);  // 숫자 문자열 추출
         List<Integer> numbers = parseNumbers(numbersString, delimiter);  // 숫자 분리 및 리스트 변환
         // 더미 메서드로 표현
-        return 0;
+        return sumNumbers(numbers);
     }
 
     private static String getDelimiter(String input) {
@@ -58,11 +58,18 @@ public class Application {
     }
 
     private static int parseInt(String s) {
-        // 더미 메서드로 표현
-        return 0;
+        validateNumber(s);  // 숫자 유효성 검사
+        return Integer.parseInt(s);
     }
 
     private static void validateNumber(String s) {
-        // 더미 메서드로 표현
+        try {
+            int number = Integer.parseInt(s);
+            if (number < 0) {
+                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + s);
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자가 아닌 값이 포함되었습니다: " + s);
+        }
     }
 }
