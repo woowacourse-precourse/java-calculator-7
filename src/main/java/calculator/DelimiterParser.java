@@ -33,7 +33,8 @@ public class DelimiterParser {
             if (substr.length == 1 || addedDelimiter.isEmpty()) {
                 throw new IllegalArgumentException("Invalid input: there is no valid custom delimiter.");
             }
-            if (Pattern.matches("^\\d.*\\d$", addedDelimiter)) {
+            // 숫자로 시작하거나 끝나는 구분자 regex
+            if (Pattern.matches("^\\d.*|.*\\d$", addedDelimiter)) {
                 throw new IllegalArgumentException("Invalid input: can't use delim start or end with num.");
             }
 
