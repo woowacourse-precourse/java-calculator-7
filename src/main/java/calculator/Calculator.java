@@ -143,7 +143,7 @@ public class Calculator {
                 return;
             }
             checkValidInput(strippedInput);
-            delimiterManager.setCustomChar(
+            delimiterManager.setCustomDelimiter(
                     strippedInput.charAt(delimiterManager.getLenOfPrefix()));
         }
 
