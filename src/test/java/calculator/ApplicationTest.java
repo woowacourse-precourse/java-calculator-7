@@ -45,6 +45,21 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void testSingleNumberReturnsValue() {
+        assertSimpleTest(() -> {
+            // Given
+            StringCalculator calculator = new StringCalculator();
+            String input = "1";
+
+            // When
+            int result = calculator.add(input);
+
+            // Then
+            assertEquals(1, result);
+        });
+    }
+
 //    @Test
 //    void 예외_테스트() {
 //        assertSimpleTest(() ->
