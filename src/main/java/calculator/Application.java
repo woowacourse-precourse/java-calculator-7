@@ -10,21 +10,21 @@ public class Application {
 	private static char getCustomDelimiter(String inputString) {
 		//1.
 		//커스텀 구분자를 가질 수 없는 경우
-		if (inputString.length() < 4)
+		if (inputString.length() < 5)
 			return 0;
 		
 		//2.
 		//커스텀 구분자를 가지는 경우
 		char customDelimiter = inputString.charAt(2);
-		String inputFormat = inputString.substring(0, 4);
-		String correctFormat = String.format("//%c\n", customDelimiter);
+		String inputFormat = inputString.substring(0, 5);
+		String correctFormat = String.format("//%c\\n", customDelimiter);
 		if (inputFormat.equals(correctFormat))
 			return customDelimiter;
 
 		//3.
 		//입력이 잘못된 경우
 		char inputCharacter;
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 5; i++) {
 			inputCharacter = inputFormat.charAt(i);
 			if (('0' <= inputCharacter && inputCharacter <= '9') ||
 					inputCharacter == DELIMITER_COMMA ||
@@ -45,7 +45,7 @@ public class Application {
 	private static String[] splitString(String inputString, char customDelimiter) {
 		//커스텀 구분자가 있을 경우, 해당 포맷을 제외한 부분부터 Split
 		if (customDelimiter != 0)
-			inputString = inputString.substring(4);
+			inputString = inputString.substring(5);
 		
 		//쉼표, 콜론, 커스텀 구분자를 기준으로 Split
 		String[] stringArray = inputString.split(String.format("[%c%c%c]",
@@ -85,13 +85,19 @@ public class Application {
 		return sum;
 	}
 	
+	//메인 입출력
     public static void main(String[] args) {
-        String testCase1 = "//-\n1231--2309";
-        String[] testCase1_array = splitString(testCase1, getCustomDelimiter(testCase1));
-        System.out.println(calculateSum(testCase1_array));
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
         
-        String testCase2 = "1230::12123,1";
-        String[] testCase2_array = splitString(testCase2, getCustomDelimiter(testCase2));
-        System.out.println(calculateSum(testCase2_array));
+        //1. 입력값을 저장
+        //2. 커스텀 구분자를 식별
+        //3. 입력값을 분할
+        //4. 계산
+        String inputString = camp.nextstep.edu.missionutils.Console.readLine();
+        char customDelimiter = getCustomDelimiter(inputString);
+        String[] inputStringArray = splitString(inputString, customDelimiter);
+        long result = calculateSum(inputStringArray);
+        
+        System.out.println("결과 : " + result);
     }
 }
