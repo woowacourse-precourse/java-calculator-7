@@ -11,4 +11,11 @@ public class StringUtil {
         }
         return null;
     }
+
+    public static String extractString(String str) {
+        if (str.startsWith("//")) {
+            return str.substring(5);
+        }
+        return str;
+    }
 }
