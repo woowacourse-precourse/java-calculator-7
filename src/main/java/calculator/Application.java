@@ -2,6 +2,8 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.sql.SQLOutput;
+
 public class Application {
     public static void main(String[] args) {
         // 사용자에게 값 받기
@@ -12,7 +14,8 @@ public class Application {
             int result = add(input);
             System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
-            System.out.println("잘못된 형식입니다.");
+            System.out.println(e.getMessage());
+            throw e;
         }
     }
 
@@ -27,8 +30,18 @@ public class Application {
 
         // 커스텀 구분자 확인 하기
         if (input.startsWith("//")) {
-            delimiter = input.substring(2, 3);
-            input = input.substring(5);
+            // \\의 index 확인 후, 커스텀 구분자 추출
+            int newlineIndex = input.indexOf("\\n");
+
+            if (newlineIndex == -1) {
+                throw new IllegalStateException("잘못된 형식입니다. 커스텀 구분자는 //와 \n 사이에 있어야 합니다.");
+            }
+
+            delimiter = input.substring(2, newlineIndex);
+            if (delimiter.matches(".*[?*+()\\[\\]{}].*")) {
+                delimiter = delimiter.replaceAll("([?*+()\\[\\]{}])", "\\\\$1");
+            }
+            input = input.substring(newlineIndex + 2);
         }
 
         // 입력값 나누기
@@ -36,10 +49,14 @@ public class Application {
 
         // 분리된 String을 int로 변환 후 더하기
         int sum = 0;
-        for (int i = 0; i < numbers.length; i++) {
-            sum += Integer.parseInt(numbers[i]);
+        for (String number: numbers) {
+            int num = Integer.parseInt(number);
+            if (num < 0) {
+                throw new IllegalArgumentException("0 이하의 숫자는 입력할 수 없습니다.");
+            }
+            sum += num;
         }
-
         return sum;
     }
+
 }
