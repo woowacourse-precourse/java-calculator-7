@@ -14,7 +14,7 @@ public class Application {
         getSeparatorAndNumbers(input);
     }
 
-    public static void getSeparatorAndNumbers(String input) {
+    public static String[] getSeparatorAndNumbers(String input) {
         String delimiter = ",|:";
         String numbers = input;
 
@@ -23,6 +23,12 @@ public class Application {
             delimiter = Pattern.quote(matcher.group(1));
             numbers = matcher.group(2);
         }
+
+        return separateNumber(numbers, delimiter);
+    }
+
+    private static String[] separateNumber(String numbers, String delimiter) {
+        return numbers.split(delimiter);
     }
 
     private static void validateIsInputEmpty(String input) {
