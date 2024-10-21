@@ -19,9 +19,14 @@ public class CalculatorController {
 
     public void execute() {
         String input = View.getInput();
-        if (View.showIfInputIsEmptyResult(input)) {
+
+        if (BasicInputValidator.showIfInputIsEmptyResult(input)) {
             return;
         }
+        if (BasicInputValidator.isOnlyNumberWithoutDelimiter(input)) {
+            return;
+        }
+
         ExtractorProvider extractorProvider = new ExtractorProvider(validator);
         String inputType = service.checkTypeOfInput(input, validator);
         DelimiterExtractor delimiterExtractor = extractorProvider.getDelimiterExtractor(inputType);
