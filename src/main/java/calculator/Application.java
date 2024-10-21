@@ -8,15 +8,15 @@ public class Application {
         System.out.print("덧셈할 문자열을 입력해 주세요 : ");
         String input = Console.readLine();
 
-        int result = add(5, 7, 8, 20);  // 단순 덧셈 예시
+        int result = add(input);
         System.out.println("결과: " + result);
     }
 
-    public static int add(int... numbers) {
-        int sum = 0;
-        for (int number : numbers) {
-            sum += number;
+    public static int add(String input) {
+        if (input == null || input.isEmpty()) {
+            return 0;  // 빈 문자열 또는 null 입력 시 0 반환
         }
-        return sum;
+
+        return 0;  // 이후 단계에서 추가 구현 예정
     }
 }
