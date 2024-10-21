@@ -19,10 +19,10 @@ public class Application {
         String delimiter = ",|:";
         String numbers = input;
         if (input.startsWith("//")) {
-            int delimiterEndIndex = input.indexOf("\n");
+            int delimiterEndIndex = input.indexOf("\\n");
             if (delimiterEndIndex != -1) {
                 String customDelimiters = input.substring(2, delimiterEndIndex); // //과 \n 사이의 구분자들 추출
-                numbers = input.substring(delimiterEndIndex + 1); // 실제 숫자 부분
+                numbers = input.substring(delimiterEndIndex + 2); // 실제 숫자 부분
 
                 // 구분자를 순회하여 각 구분자를 delimiter에 추가
                 for (int i = 0; i < customDelimiters.length(); i++) {
