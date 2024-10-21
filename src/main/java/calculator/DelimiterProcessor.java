@@ -11,7 +11,14 @@ public class DelimiterProcessor {
 
             // 커스텀 구분자 추출
             int newlineIndex = input.indexOf("\n");
-            return input.substring(2, newlineIndex);
+            String substring = input.substring(2, newlineIndex);
+
+            // 커스텀 구분자가 한 자리만 입력되었는지 확인
+            if (substring.length() > 1) {
+                throw new IllegalArgumentException("커스텀 구분자는 한 자리만 입력 가능합니다.");
+            }
+
+            return substring;
         }
         // 반환할 커스텀 구분자가 없으면 기본 구분자만 반환
         return ",|:";

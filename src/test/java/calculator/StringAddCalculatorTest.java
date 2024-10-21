@@ -84,4 +84,15 @@ public class StringAddCalculatorTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("잘못된 구분자 포맷입니다. 형식은 //[구분자]\\n 입니다.");
     }
+
+    @Test
+    void 커스텀_구분자가_두_자리_이상이면_예외가_발생한다() {
+        // given: 두 자리 커스텀 구분자가 포함된 문자열 입력
+        String input = "//##\n1##2##3";
+
+        // when, then: 예외 발생 여부 확인
+        assertThatThrownBy(() -> StringAddCalculator.add(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("커스텀 구분자는 한 자리만 입력 가능합니다.");
+    }
 }
