@@ -11,6 +11,17 @@ import java.util.regex.Pattern;
 public class CalculatorController {
     private final Pattern customPattern = Pattern.compile(Constants.REGEX_CUSTOM_FORMAT);
 
+    public void run() {
+        printStartText();
+        String userInput = removeWhiteSpace(inputData());
+        Validator validator = new Validator();
+        validator.validateUserInput(userInput);
+        List<String> splitedUserInput = splitUserInput(userInput);
+        List<Integer> numbers = parseInputNumbers(splitedUserInput);
+        int result = performAddition(numbers);
+        printResult(result);
+    }
+
     private void printStartText() {
         System.out.println(Constants.MESSAGE_START_INPUT);
     }
