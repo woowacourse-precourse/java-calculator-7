@@ -36,13 +36,13 @@ public class CustomSeparator implements Separator {
 
     private void validateEdgeSeparator(String value) {
         if (hasEdgeSeparator(value)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("[ERROR]올바른 형식이 아닙니다.");
         }
     }
 
     private void validateContinuousSeparator(String value) {
         if (isContinuousSeparator(value)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("[ERROR]구분자가 연속으로 올 수 없습니다.");
         }
     }
 

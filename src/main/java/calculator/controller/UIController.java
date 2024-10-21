@@ -13,6 +13,10 @@ public class UIController {
         return InputView.readValue();
     }
 
+    public static void printError(String message) {
+        OutputView.print(message);
+    }
+
     public static void printSumResult(Number number) {
         OutputView.print(fitFormat(number));
     }

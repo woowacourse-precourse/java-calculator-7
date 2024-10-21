@@ -25,7 +25,7 @@ public class Number {
 
     private Double validate(String value) {
         if (isNotPositiveNumber(value)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("[ERROR]양수만 입력 가능합니다.");
         }
         return Double.parseDouble(value);
     }

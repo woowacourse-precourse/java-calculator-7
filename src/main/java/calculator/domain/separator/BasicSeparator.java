@@ -42,7 +42,7 @@ public class BasicSeparator implements Separator {
 
     private void validateEdgeSeparator(String value) {
         if (hasEdgeSeparator(value, COMMA) || hasEdgeSeparator(value, COLON)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("[ERROR]올바른 형식이 아닙니다.");
         }
     }
 
@@ -52,7 +52,7 @@ public class BasicSeparator implements Separator {
 
     private void validateContinuousSeparator(String value) {
         if (isContinuousSeparator(value, COMMA) || isContinuousSeparator(value, COLON)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("[ERROR]구분자가 연속으로 올 수 없습니다.");
         }
     }
 

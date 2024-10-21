@@ -16,9 +16,14 @@ public class Calculator {
     }
 
     public void run() {
-        UIController.printSumResult(
-                calculatorService.operate(Operator.PLUS,
-                        separatorHandler.process(UIController.receive()))
-        );
+        try {
+            UIController.printSumResult(
+                    calculatorService.operate(Operator.PLUS,
+                            separatorHandler.process(UIController.receive()))
+            );
+        } catch (IllegalArgumentException e) {
+            UIController.printError(e.getMessage());
+            throw e;
+        }
     }
 }
