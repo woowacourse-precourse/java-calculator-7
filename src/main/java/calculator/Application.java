@@ -8,7 +8,7 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
 
-        if (input.equals("")) {
+        if (input.trim().isEmpty()) {
             System.out.println("결과 : 0");
             return;
         }
@@ -16,7 +16,7 @@ public class Application {
         String[] numbers = input.split("[,:]");
         int sum = 0;
         for (String number : numbers) {
-            int num = Integer.parseInt(number);
+            int num = Integer.parseInt(number.trim());
             sum += num;
         }
 
