@@ -2,6 +2,13 @@ package calculator;
 
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+
+        IOController ioController = new IOController();
+        Parser parser = new Parser();
+        Calculator calculator = new Calculator();
+
+        Executor executor = new Executor(ioController, parser, calculator);
+
+        executor.executeApplication();
     }
 }
