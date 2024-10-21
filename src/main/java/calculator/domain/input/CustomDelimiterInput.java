@@ -13,6 +13,8 @@ public class CustomDelimiterInput extends Input {
     private static final int FIRST = 1;
     private static final int SECOND = 2;
 
+    private final Matcher matcher = getMatcher();
+
     private CustomDelimiterInput(String text) {
         super(text);
     }
@@ -23,15 +25,9 @@ public class CustomDelimiterInput extends Input {
 
     @Override
     public Long[] createCalculationInputs() {
-        Matcher matcher = getMatcher();
+        checkCustomFormat();
 
-        InputValidator.validateCustomFormat(matcher);
-
-        String[] strings = StringUtil.splitText(
-                findString(matcher), findCustom(matcher)
-        );
-        
-        return Arrays.stream(strings)
+        return Arrays.stream(StringUtil.splitText(findString(), findCustom()))
                 .map(InputValidator::validateOnlyPlainNumber)
                 .peek(InputValidator::validatePositive)
                 .toArray(Long[]::new);
@@ -41,11 +37,15 @@ public class CustomDelimiterInput extends Input {
         return PATTERN.matcher(text);
     }
 
-    private String findString(Matcher matcher) {
+    private void checkCustomFormat() {
+        InputValidator.validateCustomFormat(matcher);
+    }
+
+    private String findString() {
         return matcher.group(SECOND);
     }
 
-    private String findCustom(Matcher matcher) {
+    private String findCustom() {
         return matcher.group(FIRST);
     }
 
