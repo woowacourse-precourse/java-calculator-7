@@ -15,7 +15,7 @@ public class CustomParser {
             return parse(input, this.BASIC_SEPARATOR);
         }
 
-        if (input.matches("//.\\\\n.*")) { // 커스텀 구분자를 사용할 경우
+        if (input.matches("//.[^0-9]\\\\n.*")) { // 커스텀 구분자를 사용할 경우
             String separator = processSeparator(input.charAt(2) + "");
             String temp = input.substring(5);
             return parse(temp, this.BASIC_SEPARATOR + "|" + separator);
