@@ -3,6 +3,7 @@ package calculator.controller;
 import calculator.model.CalculatorModel;
 import calculator.utils.Parser;
 import calculator.view.CalculatorView;
+import java.util.List;
 
 public class CalculatorController {
     private final CalculatorModel model;
@@ -17,8 +18,8 @@ public class CalculatorController {
 
     public void run() {
         String inputString = view.getUserInput();
-        parser.parse(inputString);
-        model.setOperand(parser.getOperand());
+        List<Integer> operand = parser.parse(inputString);
+        model.setOperand(operand);
         int sumResult = model.calculateSum();
         view.printResult(sumResult);
     }

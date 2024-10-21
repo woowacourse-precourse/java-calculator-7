@@ -1,5 +1,7 @@
 package calculator.utils;
 
+import java.util.List;
+
 public class Parser {
     private SeparatorParser separatorParser;
     private OperandParser operandParser;
@@ -9,9 +11,11 @@ public class Parser {
         operandParser = new OperandParser();
     }
 
-    public void parse(String inputString) {
+    public List<Integer> parse(String inputString) {
         separatorParser.parseCustomSeparator(inputString);
         separatorParser.addBasicSeparator();
         operandParser.parseOperand(separatorParser.getRemovedString(), separatorParser.getSeparator());
+
+        return operandParser.getOperand();
     }
 }
