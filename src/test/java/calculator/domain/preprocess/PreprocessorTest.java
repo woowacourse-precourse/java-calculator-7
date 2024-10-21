@@ -23,11 +23,11 @@ class PreprocessorTest {
 
     @Test
     @DisplayName("preprocessDelimeter 예외 발생 테스트")
-    void preprocessDelimeter_test_o() {
+    void preprocessDelimeter_Segment_test_o() {
 
         String given = "//3\n2,3,4";
         IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> {
-            preprocessor.preprocessDelimeter(given);
+            preprocessor.preprocessDelimeterSegment(given);
         });
 
         assertEquals(e.getMessage(), "구분자로 숫자를 입력했습니다");
@@ -35,10 +35,10 @@ class PreprocessorTest {
 
     @Test
     @DisplayName("preprocessDelimeter 기능 테스트")
-    void preprocessDelimeter_test_x() {
+    void preprocessDelimeter_Segment_test_x() {
 
         String given = "//;\n2,3,4";
-        assertEquals(preprocessor.preprocessDelimeter(given), Arrays.asList(",", ":", ";"));
+        assertEquals(preprocessor.preprocessDelimeterSegment(given), Arrays.asList(",", ":", ";"));
     }
 
     @Test

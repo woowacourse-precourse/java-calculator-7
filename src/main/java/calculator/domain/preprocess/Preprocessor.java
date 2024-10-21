@@ -14,7 +14,7 @@ public class Preprocessor {
         this.calculationSegmentProcessor = calculationSegmentProcessor;
     }
 
-    public List<String> preprocessDelimeter(String input) {
+    public List<String> preprocessDelimeterSegment(String input) {
         List<String> delimeterList = new ArrayList<>(Arrays.asList(",", ":"));
 
         if (delimeterSegmentProcessor.checkCustomDelimeterRequest(input)) {
