@@ -93,7 +93,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 유효하지_않은_구분자_형식_예외_테스트() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> runException("//\n456n4"))
+            assertThatThrownBy(() -> runException("//\\\n456n4"))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessageContaining("유효하지 않은 구분자 형식입니다");
         });
