@@ -4,6 +4,7 @@ import static calculator.domain.constant.Delimiter.CUSTOM_END;
 import static calculator.domain.constant.Delimiter.CUSTOM_START;
 import static calculator.domain.constant.errorMessage.ParseError.INCORRECT_POSITION;
 import static calculator.domain.constant.errorMessage.ParseError.INVALID_FORMAT;
+import static calculator.domain.constant.errorMessage.ValueError.INVALID_VALUE_FORMAT;
 
 import calculator.global.exception.CalculatorException;
 
@@ -15,6 +16,12 @@ public class InputValidator {
     public void validateFormat(String inputString) {
         checkStartDelimiter(inputString);
         checkDelimiterPosition(inputString);
+    }
+
+    public static void validateNoInternalWhitespace(String token) {
+        if (token.contains(" ")) {
+            throw new CalculatorException(INVALID_VALUE_FORMAT);
+        }
     }
 
     private void checkStartDelimiter(String inputString) {

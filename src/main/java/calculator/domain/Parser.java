@@ -7,6 +7,7 @@ import static calculator.domain.constant.errorMessage.ValueError.INVALID_VALUE_F
 import static calculator.domain.constant.errorMessage.ValueError.MINUS_VALUE;
 import static calculator.domain.constant.errorMessage.ValueError.OUT_OF_RANGE_VALUE;
 
+import calculator.domain.validator.InputValidator;
 import calculator.global.exception.CalculatorException;
 import java.util.Arrays;
 import java.util.List;
@@ -46,7 +47,7 @@ public class Parser {
 
         return Arrays.stream(tokens)
                 .map(String::trim)
-                .peek(this::validateNoInternalWhitespace)
+                .peek(InputValidator::validateNoInternalWhitespace)  // static 메서드 호출
                 .map(this::parseValue)
                 .collect(Collectors.toList());
     }
