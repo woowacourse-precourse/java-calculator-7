@@ -1,13 +1,13 @@
 package calculator.model;
 
 import calculator.view.Message;
+import java.math.BigInteger;
 import java.util.Arrays;
 
 public class NumberStringConverterImpl implements NumberStringConverter {
 
     @Override
     public long[] convert(String[] numberStrings) {
-        String LongMaxValue = String.valueOf(Long.MAX_VALUE);
 
         return Arrays.stream(numberStrings)
                 .mapToLong(numberString -> {
@@ -23,7 +23,8 @@ public class NumberStringConverterImpl implements NumberStringConverter {
                         if (numberString.isEmpty()) {
                             return 0L;
                         }
-                        if (numberString.compareTo(LongMaxValue) > 0) {
+
+                        if (canConvertToBigInteger(numberString)) {
                             throw new IllegalArgumentException(Message.TOO_BIG_NUMBER.getMessage() + numberString);
                         }
 
@@ -31,5 +32,15 @@ public class NumberStringConverterImpl implements NumberStringConverter {
                     }
                 })
                 .toArray();
+    }
+
+    @Override
+    public boolean canConvertToBigInteger(String numberString) {
+        try {
+            new BigInteger(numberString);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }
