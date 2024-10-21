@@ -15,12 +15,14 @@ public class Calculator {
 
     public int add(String input) {
         int sum = 0;
-        input = input.trim();
-        input = checkUseCustomDelimiter(input);
-        checkValidInput(input);
-        int[] numbers = splitToNumbers(input);
-        for (int number : numbers) {
-            sum += number;
+        if (!input.isEmpty()) {
+            input = input.trim();
+            input = checkUseCustomDelimiter(input);
+            checkValidInput(input);
+            int[] numbers = splitToNumbers(input);
+            for (int number : numbers) {
+                sum += number;
+            }
         }
 
         return sum;
