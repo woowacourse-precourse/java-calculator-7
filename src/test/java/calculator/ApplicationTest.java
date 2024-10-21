@@ -1,26 +1,26 @@
-//package calculator;
-//
-//import calculator.domain.Calculator;
-//import calculator.error.ExceptionHandler;
-//import calculator.service.CalculatorService;
-//import camp.nextstep.edu.missionutils.test.NsTest;
-//import org.junit.jupiter.api.BeforeEach;
-//import org.junit.jupiter.api.Test;
-//
-//import java.io.IOException;
-//import java.util.ArrayList;
-//import java.util.Arrays;
-//import java.util.List;
-//
-//import static org.assertj.core.api.Assertions.assertThat;
-//import static org.junit.jupiter.api.Assertions.assertThrows;
-//
-//class ApplicationTest extends NsTest {
-//
-//    private Calculator calculator;
-//    private ExceptionHandler exceptionHandler;
-//    private CalculatorService service;
-//
+package calculator;
+
+import calculator.domain.Calculator;
+import calculator.error.ExceptionHandler;
+import calculator.service.CalculatorService;
+import camp.nextstep.edu.missionutils.test.NsTest;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+class ApplicationTest extends NsTest {
+
+    private Calculator calculator;
+    private ExceptionHandler exceptionHandler;
+    private CalculatorService service;
+
 //    @BeforeEach
 //    void setUp() {
 //        calculator = new Calculator();
@@ -31,14 +31,14 @@
 //    @Test
 //    void 입력_받기() {
 //        // given
-//        String input = "//;\\n1";
+//        String input = "//;\n1";
 //
 //        // when
 //        // Calculation 객체를 넣으면 -> rawValue 값을 인풋값으로 설정
 //        service.getInputValues(input);
 //
 //        // then
-//        String expectedValue = "//;\\n1";
+//        String expectedValue = "//;\n1";
 //        assertThat(calculator.getRawValue()).isEqualTo(expectedValue);
 //    }
 //
@@ -57,7 +57,7 @@
 //
 //
 //        // when
-//        String[] wrongInputCases = new String[] {"/;\n1;1", "//;\n1;2", "//t\n1+1", "1+1:", "1--1", "1(1"};
+//        String[] wrongInputCases = new String[] {"/;\\n1;1", "//;\\n1;2", "//t\\n1+1", "1+1:", "1--1", "1(1"};
 //
 //        // then
 //        for (String wrongInputCase : wrongInputCases) {
@@ -71,7 +71,7 @@
 //    @Test
 //    void 에러_구분_및_출력() {
 //        // given
-//        String wrongInput = "//;\\n1+2";
+//        String wrongInput = "//;\n1+2";
 //        calculator.setRawValue(wrongInput);
 //
 //        // when
@@ -123,13 +123,13 @@
 //        // then
 //        assertThat(output).isEqualTo("결과 : 10");
 //    }
-//
-//    @Override
-//    public void runMain() {
-//        try {
-//            Application.main(new String[]{});
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
-//}
+
+    @Override
+    public void runMain() {
+        try {
+            Application.main(new String[]{});
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
