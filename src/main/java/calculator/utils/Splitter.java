@@ -63,7 +63,7 @@ public class Splitter {
     }
 
     private void validateDelimiter(String delimiter) {
-        if (Validator.isNumeric(delimiter)) {
+        if (StringUtils.isNumeric(delimiter)) {
             throw new IllegalArgumentException(ErrorMessage.CAN_USE_ONLY_STRING.getMessage());
         }
     }
