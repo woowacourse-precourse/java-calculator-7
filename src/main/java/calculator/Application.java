@@ -21,6 +21,13 @@ public class Application {
             if (input.startsWith("//")) {
                 startParsingIdx = input.indexOf("\\n") + 2;
             }
+            // 기능 3. 문자열 파싱 (만약 유효하지 않은 연산자가 들어있을 경우 에러처리)
+            int totalSum = parsingString(input, setOperator, startParsingIdx);
+            if (totalSum == -1) {
+                throw new IllegalArgumentException();
+            }
+            // 기능 4. 결과 출력
+            System.out.println("결과 : " + totalSum);
         } catch (IllegalArgumentException e) {
             System.out.println("잘못된 입력입니다.");
         }
