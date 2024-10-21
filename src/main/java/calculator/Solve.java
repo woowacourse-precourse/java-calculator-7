@@ -11,7 +11,6 @@ public class Solve {
 
         // 입력 받아서 String에 저장
         String string = Console.readLine();
-        string = Console.readLine();
 
         // custom 구분자를 저장할 char 변수 선언 후 임의의 문자 1로 초기화
         char custom = '1';
@@ -57,6 +56,6 @@ public class Solve {
         }
 
         // 결과값 출력
-        System.out.println(answer);
+        System.out.println("결과 : " + answer);
     }
 }
