@@ -4,6 +4,8 @@ import static calculator.container.SeparationServiceType.BASIC;
 
 import calculator.container.SeparationServiceContainer;
 import calculator.domain.Numbers;
+import calculator.service.dto.NumbersDto;
+import calculator.service.dto.SumDto;
 import calculator.service.operation.AddOperationService;
 import calculator.service.operation.OperationService;
 import calculator.view.InputView;
@@ -22,12 +24,12 @@ public class CalculationController {
     public void run() {
         OutputView.printMessage();
         String input = InputView.input();
-        Numbers numbers = getNumbers(input);
-        int sum = operate(numbers);
-        OutputView.printResult(sum);
+        NumbersDto numbersDto = getNumbers(input);
+        SumDto sumDto = operate(numbersDto);
+        OutputView.printResult(sumDto);
     }
 
-    private Numbers getNumbers(String input) {
+    private NumbersDto getNumbers(String input) {
         return separationServiceContainer.getSeparationServices().values().stream()
                 .filter(service -> service.hasCustomSeparator(input))
                 .findFirst()
@@ -35,8 +37,8 @@ public class CalculationController {
                 .orElseGet(() -> separationServiceContainer.getSeparationService(BASIC).getNumbers(input));
     }
 
-    private int operate(Numbers numbers) {
-        return addOperationService.operate(numbers);
+    private SumDto operate(NumbersDto numbersDto) {
+        return addOperationService.operate(numbersDto);
     }
 }
 
