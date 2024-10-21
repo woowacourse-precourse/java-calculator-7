@@ -1,6 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.NoSuchElementException;
 
 public class Application {
     public static void main(String[] args) {
@@ -10,7 +11,13 @@ public class Application {
 
     private static void playGame() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String input = Console.readLine();
+        String input;
+
+        try {
+            input = Console.readLine();
+        } catch (NoSuchElementException e) {
+            input = "";
+        }
 
         // 큰따옴표, 작은따옴표, 백틱 제거
         input = input.replace("\"", "")
