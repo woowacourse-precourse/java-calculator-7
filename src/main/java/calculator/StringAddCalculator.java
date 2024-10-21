@@ -14,14 +14,23 @@ public class StringAddCalculator {
         return sum(tokens);
     }
 
-    private static String[] tokenize(String input) {
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
-        if (m.find()) {
-            String customDelimiter = Pattern.quote(m.group(1));
-            String numbers = m.group(2);
-            return numbers.split(customDelimiter);
+	private static String[] tokenize(String input) {
+		Matcher m = Pattern.compile("//(.*)\n(.*)").matcher(input);
+		if (m.find()) {
+			String customDelimiter = Pattern.quote(m.group(1));
+			String numbers = m.group(2);
+			return numbers.split(customDelimiter);
+		}
+		return input.split(DEFAULT_DELIMITERS);
+	}
+
+    private static int sum(String[] tokens) {
+        int total = 0;
+        for (String token : tokens) {
+            int number = toInt(token);
+            total += number;
         }
-        return input.split(DEFAULT_DELIMITERS);
+        return total;
     }
 
 	private static int toInt(String token) {
@@ -34,14 +43,5 @@ public class StringAddCalculator {
 		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
 		}
-	}
-
-	private static int sum(String[] tokens) {
-		int total = 0;
-		for (String token : tokens) {
-			int number = toInt(token);
-			total += number;
-		}
-		return total;
 	}
 }
