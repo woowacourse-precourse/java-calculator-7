@@ -11,7 +11,7 @@ public class InputProcessor {
     }
 
     public static InputProcessor getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new InputProcessor();
         }
         return instance;
@@ -21,7 +21,7 @@ public class InputProcessor {
         System.out.println("덧셈할 문자열을 입력해주세요.");
         String input = Console.readLine().trim();
 
-        if(input.isEmpty()) {
+        if (input.isEmpty()) {
             throw new IllegalStateException(ErrorMessage.EMPTY_INPUT.getValue());
         }
 
