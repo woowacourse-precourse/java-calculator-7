@@ -33,7 +33,8 @@ class StringCalculator {
             numbers = extractNumbersAfterDelimiter(input);
         }
 
-        return 0;
+        // 5. 구분자에 따라 숫자 추출 및 합계 계산
+        return calculateSum(numbers, delimiters);
     }
 
     /**
@@ -86,4 +87,37 @@ class StringCalculator {
         throw new IllegalArgumentException("커스텀 구분자 이후에 숫자가 올바르게 입력되지 않았습니다.");
     }
 
+    /**
+     * 주어진 문자열을 구분자를 기준으로 분리하고 숫자를 더한 결과를 반환
+     *
+     * @param input      입력 문자열 (숫자들)
+     * @param delimiters 사용되는 구분자들
+     * @return 숫자들의 합
+     */
+    private static int calculateSum(String input, String delimiters) {
+        String[] tokens = input.split(delimiters);
+        int sum = 0;
+
+        for (String token : tokens) {
+            if (!token.isEmpty()) {
+                validateToken(token); // 6. 입력 숫자 유효성 검사
+                int number = Integer.parseInt(token);
+                sum += number;
+            }
+        }
+
+        return sum;
+    }
+
+    /**
+     * 입력 값이 양의 정수인지 검증 (숫자가 아닌 경우, 음수인 경우 예외 발생)
+     *
+     * @param token 입력 문자열
+     */
+    private static void validateToken(String token) {
+        // 양의 정수로 구성되어 있는지 확인
+        if (!token.matches("\\d+")) {
+            throw new IllegalArgumentException("입력 값에 숫자 외의 허용되지 않은 문자가 포함되어 있습니다: " + token);
+        }
+    }
 }
