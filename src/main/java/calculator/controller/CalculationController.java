@@ -25,17 +25,17 @@ public class CalculationController {
     public void calculate() {
 
         String input = calculationView.getInput();
+        
+        DelimiterGroup delimiterGroup = tokenizationService.makeDelimiterGroup(input);      
 
-        DelimiterGroup delimiterGroup = tokenizationService.makeDelimiterGroup(input);
+        String[] operandStrings = tokenizationService.tokenize(input, delimiterGroup);      // 구분자를 기준으로 수식에서 피연산자 파싱
 
-        String[] operandStrings = tokenizationService.tokenize(input, delimiterGroup);
-
-        Operand[] operands = new Operand[operandStrings.length];
+        Operand[] operands = new Operand[operandStrings.length];                            // 피연산자
         for (int i = 0; i < operandStrings.length; i++) {
             operands[i] = converter.convertToOperand(operandStrings[i]);
         }
 
-        Result sum = calculationService.sum(operands);
+        Result sum = calculationService.sum(operands);                                      // 계산
 
         calculationView.displayResult(sum);
     }
