@@ -24,6 +24,6 @@ public class CalculatorController {
         String[] numbers = numberParser.parse(input, delimiters);
 
         int result = calculator.sum(numbers);
-
+        View.printResult(result);
     }
 }

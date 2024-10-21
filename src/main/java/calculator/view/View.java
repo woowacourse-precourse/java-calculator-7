@@ -16,6 +16,10 @@ public final class View {
         System.out.println(messageType.getMessage());
     }
 
+    public static void printResult(int result) {
+        System.out.println("결과 : " + result);
+    }
+
     /* Input View */
     private static String enterMessage() {
         String message = Console.readLine();
