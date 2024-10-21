@@ -86,4 +86,14 @@ public class CalculationUtil {
             return divider == colon || divider == rest;
         }
     }
+
+    public char validInput() {
+        checkCustomDivider();
+        checkDivider();
+        return customDivider;
+    }
+
+    public List<Integer> getNumbers() {
+        return this.numbers;
+    }
 }
