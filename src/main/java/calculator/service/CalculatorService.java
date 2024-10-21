@@ -39,7 +39,7 @@ public class CalculatorService {
             }
             return result;
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("잘못된 형식입니다: " + number);
+            throw new IllegalArgumentException("숫자열이 잘못된 형식입니다: " + number);
         }
     }
 }
