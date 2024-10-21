@@ -2,28 +2,34 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.Arrays;
+
 public class Application {
+    public static String[] arr;
+
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
 
-        if(checkInput(input)) {
-            int result = getSum(parseInteger(seperator(input)));
+        try {
+            checkInput(input);
+            int result = getSum(parseInteger());
             System.out.println("결과 : " + result);
-        } else {
+        } catch(IllegalArgumentException e) {
             throw new IllegalArgumentException();
         }
 
         Console.close();
     }
 
-    public static boolean checkInput(String input){
-        return input != null && !input.isEmpty();
+    public static void checkInput(String input){
+        if (input != null && !input.isEmpty())
+            seperator(input);
+        else
+            throw new IllegalArgumentException();
     }
 
-    public static String[] seperator(String input){
-        String[] arr;
-
+    public static void seperator(String input){
         if(input.contains("//") && input.contains("\\n")){
             int i = input.indexOf("//");
             String s = "" + input.charAt(i+2);
@@ -32,15 +38,13 @@ public class Application {
         } else {
             arr = input.split(",|:");
         }
-
-        return arr;
     }
 
-    public static int[] parseInteger(String[] arr){
+    public static int[] parseInteger(){
         int[] numbers = new int[arr.length];
 
         for(int i = 0; i < arr.length; i++){
-            numbers[i] = Integer.parseInt(arr[i].replaceAll(" ", ""));
+                numbers[i] = Integer.parseInt(arr[i].replaceAll(" ", ""));
         }
 
         return numbers;
