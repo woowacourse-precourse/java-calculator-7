@@ -1,9 +1,7 @@
 package calculator.controller;
 
-import java.util.List;
+import java.math.BigInteger;
 
-import calculator.domain.PositiveNumber;
-import calculator.domain.PositiveNumbers;
 import calculator.service.AdditionService;
 import calculator.view.InputView;
 import calculator.view.OutputView;
@@ -19,7 +17,7 @@ public class AdditionController {
     public void run() {
         String input = readInput();
 
-        PositiveNumber total = additionService.calculate(input);
+        BigInteger total = additionService.calculate(input);
 
         printResult(total);
     }
@@ -29,14 +27,9 @@ public class AdditionController {
         return inputView.read();
     }
 
-    private PositiveNumber sum(final List<String> numbers) {
-        PositiveNumbers positiveNumbers = PositiveNumbers.from(numbers);
-        return positiveNumbers.sum();
-    }
-
-    private void printResult(final PositiveNumber sum) {
+    private void printResult(final BigInteger total) {
         OutputView outputView = new OutputView();
-        outputView.printResult(sum.value().toString());
+        outputView.printResult(total);
     }
 
 }
