@@ -5,10 +5,11 @@
 - CalculatorDependencyConfig를 통해 의존성 주입을 설정한다.
 - 사용자는 CalculatorController를 갖는다.
 - 사용자는 Calculator를 이용할 수 있는 View를 갖는다.
+- View에 input함으로 시작하고, 중간에 에러 나거나, 계산 결과 반환하면 종료한다.
 
 # 2. Controller
 
-## CalculatorContoller
+## CalculatorController
 
 - 사용자가 요청할 수 있는 계산기 컨트롤러이다.
 - CalculatorService에 계산(사용자 요청 값)을 요청한다.
@@ -24,7 +25,7 @@
 ## CalculationStrategySelector
 
 - 전략 선택기이다.
-- DTO에서 사용자 요청 값을 가져와 요청 값 형식을 분석한다.(예외처리 가능)
+- DTO에서 사용자 요청 값을 가져와 요청 값 형식을 분석한다.
 - //의 유무를 통해 커스텀 구분자 방식, 기본 구분자 방식 중 하나를 선택한다.
 
 ## DefaultDelimiterCalculationStrategy
@@ -40,13 +41,13 @@
 
 ## CustomDelmiterExtractor
 
-- PatternMatcherUtil을 이용해 커스텀 라인에서 String으로 구분자를 뽑아낸다.
+- PatternMatcher를 이용해 커스텀 라인에서 String으로 구분자를 뽑아낸다.
 - `(예시: "//$\n1$2$2" => "$")`
 - 커스텀 구분자를 뽑아낸다.
 
 ## PositiveNumberExtractor
 
-- 양수 라인을 PatternMatcherUtil을 이용해 뽑아낸다.
+- 양수 라인을 PatternMatcher를 이용해 뽑아낸다.
 - `(예시: "//$\n1$2$2" => "1$2$2")`
 - 구분자 분리 표현식 생성기에 구분자 분리 표현식을 요청
 - 구분자 분리 표현식을 통해 양추 추출
@@ -56,7 +57,7 @@
 - 커스텀 구분자 + 기본 구분자를 포함한 구분자 분리 표현식 생성
 - 기본 구분자를 포함한 구분자 분리 표현식 생성
 
-## PatternMatcherUtil
+## PatternMatcher
 
 - PositiveNumber, CustomDelimiter에서 PatternMatcher가 반복되어 사용됨
 - 리팩터링으로, 새로운 클래스를 만들어 책임 분산
@@ -64,10 +65,10 @@
 
 # 4.Model
 
-## CustomDelmiter
+## Delmiter
 
-- 커스텀 구분자를 리스트 형식으로 저장(일급 컬렉션)
-- 정적 팩토리 패턴으로 생성
+- 구분자들을 리스트 형식으로 저장(일급 컬렉션)
+- 정적 팩토리 메서드 패턴으로 생성
 
 ## DefaultDelmiter
 
@@ -94,6 +95,7 @@
 # 6. Validator
 
 - 모두 IllegalArgumentException을 Throw
+- test에서 테스트 케이스로 검증해볼 것
 
 ## 방식을 선택할때, "//"로 시작하지 않는 경우
 
@@ -107,8 +109,6 @@
 - 설정하지 않은 구분자가 있을 경우(숫자로 변환할때 자동으로 Exception 발생)
 - 숫자로 시작하지 않을 경우
 
-## `Exception 계속 추가 예정`
-
 # 7. DTO
 
 ## CalculationRequestDTO
@@ -120,3 +120,7 @@
 
 - 출력할(Response)를 저장
 - 정적 팩토리 방식 생성
+
+# 8. View
+
+- OutputView, InputView로 이뤄져있으며, 입력 출력을 담당함
