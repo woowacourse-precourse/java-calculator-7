@@ -20,7 +20,7 @@ public class Application {
 
         // 빈 입력 검사
         if (input == null || input.trim().isEmpty()) {
-            throw new IllegalArgumentException();
+            return  "";
         }
 
         // 구분자 추가 검사
@@ -44,13 +44,18 @@ public class Application {
 
     // 덧셈 메소드
     public static int adding(String input) {
+        if (input.trim().isEmpty()) {
+            return 0;
+        }
+
         String spliter = "[:|,]";
         int sum = 0;
+
         if (input.startsWith("//")) {
             int ender = input.indexOf("\n");
             String newSpliter = input.substring(2, ender);
-            spliter = "[" + ":|," + "|" + newSpliter + "]";  // 커스텀 구분자 추가
-            input = input.substring(ender + 1);  // 숫자 부분 추출
+            spliter = "[" + ":|," + "|" + newSpliter + "]";
+            input = input.substring(ender + 1);
         }
 
         String[] nums = input.split(spliter);
@@ -59,9 +64,5 @@ public class Application {
         }
 
         return sum;
-    }
-
-    public static void addSpliter(String newSpliter) {
-
     }
 }
