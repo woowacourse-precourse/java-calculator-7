@@ -10,21 +10,19 @@ class StringCalculatorTest {
         StringCalculator calculator = new StringCalculator();
         String input = "1:2,3";
         //when
-        int add = calculator.add(input);
+        int add = calculator.calculate(input);
         //then
         Assertions.assertEquals(6, add);
     }
+
     @Test
     void test_customDelimiter() {
         //given
         StringCalculator calculator = new StringCalculator();
         String input = "//;\\n1;2;3";
         //when
-        int add = calculator.add(input);
+        int add = calculator.calculate(input);
         //then
         Assertions.assertEquals(6, add);
     }
-
-
-
 }
