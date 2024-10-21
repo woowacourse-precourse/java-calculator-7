@@ -23,7 +23,11 @@ public class StringCalculator {
     private int sumNumbers(String[] numbers) {
         int sum = 0;
         for (String number : numbers) {
-            sum += Integer.parseInt(number);
+            int num = Integer.parseInt(number);
+            if (num < 0) {
+                throw new IllegalArgumentException("음수가 포함되어 계산불가: " + num);
+            }
+            sum += num;
         }
         return sum;
     }

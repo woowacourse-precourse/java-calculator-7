@@ -1,6 +1,7 @@
 package calculator;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
@@ -135,13 +136,18 @@ class ApplicationTest extends NsTest {
         });
     }
 
-//    @Test
-//    void 예외_테스트() {
-//        assertSimpleTest(() ->
-//                assertThatThrownBy(() -> runException("-1,2,3"))
-//                        .isInstanceOf(IllegalArgumentException.class)
-//        );
-//    }
+    @Test
+    void testNegativeNumberThrowsException() {
+        assertSimpleTest(() -> {
+            // Given
+            StringCalculator calculator = new StringCalculator();
+            String input = "-1,-2,3";
+
+            // When & Then
+            assertThatThrownBy(() -> calculator.add(input))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+    }
 
     @Override
     public void runMain() {
