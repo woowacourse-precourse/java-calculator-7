@@ -9,7 +9,6 @@ public class CalculatorController {
     private final Calculator calculator;
     private final CalculatorService calculatorService;
 
-
     public CalculatorController() {
         this.calculator = new Calculator();
         this.calculatorService = new CalculatorService();
@@ -20,20 +19,44 @@ public class CalculatorController {
     }
 
     private void play() {
-        String expression = InputView.expression();
-        String customSeparator = calculatorService.getCustomSeparator(expression);
+        String expression = getInputExpression();
+        expression = handleCustomSeparator(expression);
 
-        if (customSeparator != null) {
-            calculator.addSeparator(customSeparator);
-            expression = calculatorService.removeCustomSeparatorDefinition(expression);
-        }
+        int[] numbers = parseExpressionToNumbers(expression);
+        calculator.setNumber(numbers);
 
-        String[] totkens = calculatorService.separate(calculator.getSeparators(), expression);
-        int[] number = calculatorService.convertToIntArray(totkens);
-
-        calculator.setNumber(number);
-        
         calculator.calc();
         OutputView.executionResult(calculator.getResult());
+
+    }
+
+    private String getInputExpression() {
+        return InputView.expression();
+    }
+
+    private String handleCustomSeparator(String expression) {
+        String customSeparator = getCustomSeparator(expression);
+        if (customSeparator != null) {
+            addCustomSeparator(customSeparator);
+            return getRemovedCustomSeparator(expression);
+        }
+        return expression;
+    }
+
+    private String getCustomSeparator(String expression) {
+        return calculatorService.getCustomSeparator(expression);
+    }
+
+    private void addCustomSeparator(String separator) {
+        calculator.addSeparator(separator);
+    }
+
+    private String getRemovedCustomSeparator(String expression) {
+        return calculatorService.removeCustomSeparatorDefinition(expression);
+    }
+
+    private int[] parseExpressionToNumbers(String expression) {
+        String[] tokens = calculatorService.separate(calculator.getSeparators(), expression);
+        return calculatorService.convertToIntArray(tokens);
     }
 }
