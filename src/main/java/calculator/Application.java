@@ -10,6 +10,7 @@ public class Application {
             System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
             System.out.println("잘못된 입력입니다: " + e.getMessage());
+            throw e;
         }
     }
 
@@ -29,7 +30,7 @@ public class Application {
         String[] tokens = input.split(delimiter);
         int sum = 0;
         for (String token : tokens) {
-            sum += parseAndValidateNumber(token);
+            sum += parseAndValidateNumber(token);  // 여기서 발생한 예외는 잡지 않고 그대로 던짐
         }
         return sum;
     }
@@ -45,4 +46,5 @@ public class Application {
             throw new IllegalArgumentException("숫자 형식이 잘못되었습니다.");
         }
     }
+
 }
