@@ -45,5 +45,16 @@ class SeparatorExtractorTest {
                 ErrorMessage.CUSTOM_SEPARATOR__DECLARATION_ORDER_ERROR);
 
     }
+    
+
+    @Test
+    void 커스텀_구분자에_숫자_포함() {
+        //given
+        String input = "1,2:3//-0-\n-0-4";
+
+        //then
+        assertThrows(IllegalArgumentException.class, () -> extractor.extractCustomSeparator(input),
+                ErrorMessage.CUSTOM_SEPARATOR_CONTAINS_NUM);
+    }
 
 }
