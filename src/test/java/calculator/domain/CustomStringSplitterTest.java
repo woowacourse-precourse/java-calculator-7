@@ -1,4 +1,4 @@
-package calculator;
+package calculator.domain;
 
 import calculator.domain.stringsplitter.CustomStringSplitter;
 import calculator.domain.stringsplitter.StringSplitter;

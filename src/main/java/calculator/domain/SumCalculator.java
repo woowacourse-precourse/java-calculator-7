@@ -23,9 +23,12 @@ public class SumCalculator {
         if (str.equals("0")) {
             throw new IllegalArgumentException(strings.toString());
         }
-        if (!str.matches("^[+]?[0-9]+([.][0-9]+)?")) {
+
+        String positiveNumberPattern = "^[+]?[0-9]+([.][0-9]+)?";
+        if (!str.matches(positiveNumberPattern)) {
             throw new IllegalArgumentException(strings.toString());
         }
+
         return new BigDecimal(str);
     }
 }
