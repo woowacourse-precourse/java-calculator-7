@@ -20,11 +20,7 @@ public class Application {
             final String[] words = line.split(regex);
             List<BigDecimal> bigDecimalList = Arrays.stream(words).parallel().map(BigDecimal::new)
                                             .collect(Collectors.toList());
-            for (final BigDecimal x : bigDecimalList) {
-                if (x.compareTo(BigDecimal.ZERO) < 0) {
-                    throw new Exception();
-                }
-            }
+            assert bigDecimalList.parallelStream().allMatch(x -> x.compareTo(BigDecimal.ZERO) > 0);
 
             final BigDecimal answer = bigDecimalList.parallelStream().reduce(BigDecimal.ZERO, BigDecimal::add);
             System.out.print("결과 : ");
