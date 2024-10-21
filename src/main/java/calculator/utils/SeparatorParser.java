@@ -13,7 +13,7 @@ public class SeparatorParser {
         separator.add(":");
     }
 
-    public void parseCustomSeparator(String inputString) {
+    public void parse(String inputString) {
         Stack<String> buffer = new Stack<>();
         boolean flag = false;
         int idx = 0;

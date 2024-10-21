@@ -12,9 +12,9 @@ public class Parser {
     }
 
     public List<Integer> parse(String inputString) {
-        separatorParser.parseCustomSeparator(inputString);
+        separatorParser.parse(inputString);
         separatorParser.addBasicSeparator();
-        operandParser.parseOperand(separatorParser.getRemovedString(), separatorParser.getSeparator());
+        operandParser.parse(separatorParser.getRemovedString(), separatorParser.getSeparator());
 
         return operandParser.getOperand();
     }
