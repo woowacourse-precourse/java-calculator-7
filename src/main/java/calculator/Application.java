@@ -1,41 +1,25 @@
 package calculator;
 
-import calculator.controller.Divider;
-import calculator.controller.Validation;
-import calculator.model.Calculator;
-import calculator.view.Input;
-import calculator.view.Output;
 
+import calculator.controller.CalculatorController;
+import calculator.model.Calculator;
+import calculator.model.Validator;
+import calculator.view.ConsoleView;
+
+/*
+-fix 사항: 오류 사유를 명확히 출력할 수 있도록 Validation 수정하기
+-test: customTest로 edge case 확인하기 
+-refac
+ */
 public class Application {
     public static void main(String[] args) {
-        Input input = new Input();
-        Output output = new Output();
-        Validation validation = new Validation();
-        Divider divider = new Divider();
+        ConsoleView view = new ConsoleView();
         Calculator calculator = new Calculator();
+        Validator validator = new Validator();
+        CalculatorController controller = new CalculatorController(calculator, validator, view);
 
-        // 사용자로부터 문자열 입력 받기
-        String userInput = input.getInput();
+        controller.run();
 
-        // 문자열 유효성 검사
-        if (validation.formValidate(userInput)) {
-            throw new IllegalArgumentException("유효하지 않은 입력입니다.");
-        }
-
-        // 구분자 찾기
-        char delimiter = validation.findDelimiter(userInput);
-
-        // 문자열을 구분자로 분리
-        String[] strArray = divider.spliter(userInput, delimiter);
-
-        // 문자열 배열을 정수 배열로 변환
-        int[] numArray = divider.strToNum(strArray);
-
-        // 합계 계산
-        int result = calculator.calculate(numArray);
-
-        // 결과 출력
-        output.showOutput(result);
     }
 }
 
