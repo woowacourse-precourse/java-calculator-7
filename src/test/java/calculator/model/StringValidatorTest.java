@@ -86,4 +86,17 @@ class StringValidatorTest {
 			    .isInstanceOf(IllegalArgumentException.class)
 			    .hasMessage(errorMessage);
 	}
+
+	@ParameterizedTest
+	@DisplayName("존재하지 않는 구분자가 포함된 문자열이 입력되었을 때 에러를 발생시킨다.")
+	@ValueSource(strings = {"1;2", "1,2;3", "1,2:3#4"})
+	void 존재하지_않는_구분자가_포함된_문자열이_입력되었을_때_에러를_발생시킨다(String input) {
+		// given
+		StringValidator stringValidator = new StringValidator(input);
+
+		// when, then
+		assertThatThrownBy(stringValidator::validate)
+				.isInstanceOf(IllegalArgumentException.class)
+				.hasMessage(errorMessage);
+	}
 }
