@@ -14,11 +14,8 @@ public class Calculation {
 
     public Integer addOperands(InputString inputString){
         List<Integer> operands = inputString.getOperands();
-        Integer result = 0;
 
-        for(Integer operand : operands){
-            result += operand;
-        }
-        return result;
+        return operands.stream()
+                .reduce(0, (a,b) -> a+b);
     }
 }
