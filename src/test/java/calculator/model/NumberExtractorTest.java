@@ -3,6 +3,7 @@ package calculator.model;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
+import calculator.constant.ExceptionMessage;
 import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
@@ -24,13 +25,15 @@ public class NumberExtractorTest {
     void 숫자_아닌_문자_시작시_예외() {
         assertThatThrownBy(() ->
                 numberExtractor.extractNumber(",5,3", delimiters))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ExceptionMessage.EXPRESSION_PREFIX_EXCEPTION);
     }
 
     @Test
     void 구분자_숫자_제외한_문자_포함시_예외() {
         assertThatThrownBy(() ->
                 numberExtractor.extractNumber("5+5,13-3", delimiters))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ExceptionMessage.EXPRESSION_FORMAT_EXCEPTION);
     }
 }
