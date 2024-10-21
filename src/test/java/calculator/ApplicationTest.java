@@ -25,20 +25,11 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 잘못된_커스텀_구분자_형식() {
-        // given
-        String input = "//;\n1;2;3";
-        StringCalculator calculator = new StringCalculator(input);
-
-        // when
-        String wrongInput = "//;1n2n3";
-
-        // then
-        assertThatThrownBy(() -> {
-            StringCalculator wrongCalculator = new StringCalculator(wrongInput);
-            wrongCalculator.calculate();
-        }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("\\n으로 끝나지 않았다는 exception 구현 예정");
+    void 공백_커스텀_구분자가_주어졌을_경우() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//\n1;2;3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContaining("// \\n 사이 문자가 존재하지 않습니다. 커스텀 구분자를 넣어주세요."));
     }
 
     @Override
