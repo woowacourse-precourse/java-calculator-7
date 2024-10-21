@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class UserRequest {
-    private static final String CUSTOM_DELIMITER_PATTERN = "^//(.*)\\\\n.*";
+    private static final String CUSTOM_DELIMITER_PATTERN = "^//([^0-9]*)\\\\n.*";
 
     private String input;
 
@@ -39,7 +39,6 @@ public class UserRequest {
         if (input.contains("-")) {
             throw new IllegalArgumentException();
         }
-
         input = input.replace(":", ",");
     }
 }

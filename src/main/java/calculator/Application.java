@@ -12,9 +12,7 @@ public class Application {
 
     private static void run() {
         CustomWriter.printInitMessage();
-        String userInput = CustomReader.readLine();
-        UserRequest userRequest = new UserRequest(userInput);
-
+        UserRequest userRequest = new UserRequest(CustomReader.readLine());
         Calculator calculator = new Calculator();
         CustomWriter.printResultMessage(calculator.sum(userRequest.extractNumbers()));
     }
