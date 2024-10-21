@@ -41,26 +41,10 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 빈_문자열_사용() {
+    void 숫자_구분자_사용() {
         assertSimpleTest(() -> {
-            run("");
-            assertThat(output()).contains("결과 : 0");
-        });
-    }
-
-    @Test
-    void 예외_테스트_다른_구분자_사용() {
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("//-\\n1-2?3"))
-                        .isInstanceOf(IllegalArgumentException.class)
-        );
-    }
-
-    @Test
-    void 한자리_초과_숫자() {
-        assertSimpleTest(() -> {
-            run("11:3,5:7");
-            assertThat(output()).contains("결과 : 26");
+            run("//3\\n11,3:537,10");
+            assertThat(output()).contains("결과 : 33");
         });
     }
 
@@ -68,6 +52,22 @@ class ApplicationTest extends NsTest {
     void 문자커스텀_기본_모두_사용() {
         assertSimpleTest(() -> {
             run("//a\\n11:3,5:7a10");
+            assertThat(output()).contains("결과 : 36");
+        });
+    }
+
+    @Test
+    void 예외_테스트_커스텀외_구분자_사용() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//-\\n1-2?3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 구분자_구분용으로_사용한_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("//|\\n11,3:5|7,10");
             assertThat(output()).contains("결과 : 36");
         });
     }
@@ -81,23 +81,23 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 숫자_구분자_사용() {
+    void 빈_문자열_사용() {
         assertSimpleTest(() -> {
-            run("//3\\n11,3:537,10");
-            assertThat(output()).contains("결과 : 33");
+            run("");
+            assertThat(output()).contains("결과 : 0");
         });
     }
 
     @Test
-    void 구분용으로_사용한_구분자_사용() {
+    void 한자리_초과_숫자() {
         assertSimpleTest(() -> {
-            run("//|\\n11,3:5|7,10");
-            assertThat(output()).contains("결과 : 36");
+            run("11:3,5:7");
+            assertThat(output()).contains("결과 : 26");
         });
     }
 
     @Test
-    void 실수_사용() {
+    void 소수점_사용() {
         assertSimpleTest(() -> {
             run("1,2.2,3");
             assertThat(output()).contains("결과 : 6.2");
@@ -105,11 +105,35 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 공백_아닌_0_사용() {
+    void 유리수_사용() {
+        assertSimpleTest(() -> {
+            run("1,1/4,3/4");
+            assertThat(output()).contains("결과 : 2");
+        });
+    }
+
+    @Test
+    void 무리수_사용() {
+        assertSimpleTest(() -> {
+            run("e,pi");
+            assertThat(output()).contains("결과 : 5.8598744820488382067935617669");
+        });
+    }
+
+    @Test
+    void 예외_테스트_0_사용() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("1,0,3"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
+    }
+
+    @Test
+    void 구분자_마무리() {
+        assertSimpleTest(() -> {
+            run("1:5,4:");
+            assertThat(output()).contains("결과 : 10");
+        });
     }
 
 
