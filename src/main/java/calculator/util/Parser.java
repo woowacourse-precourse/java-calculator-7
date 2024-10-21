@@ -15,18 +15,8 @@ public class Parser {
             return false;
         }
 
-        int endIndex = 2;
-        for(; endIndex < string.length()-1; endIndex++){
-            if(string.startsWith(DelimiterConstants.CUSTOM_DELIMITER_SUFFIX, endIndex)) {
-                break;
-            }
-        }
-
-        if(endIndex == 2 || endIndex == string.length()-1) {
-            return false;
-        }
-
-        return true;
+        int endIndex = string.indexOf(DelimiterConstants.CUSTOM_DELIMITER_SUFFIX, 2);
+        return endIndex > 2;
     }
 
     public static String extractCustomDelimiter(String string){
