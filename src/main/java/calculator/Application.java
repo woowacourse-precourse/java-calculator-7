@@ -17,7 +17,7 @@ public class Application {
             }
             System.out.println("결과 : " + result);
             Console.close();
-        } catch (RuntimeException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
     }
