@@ -22,7 +22,7 @@ public class Application {
                 sep = text.substring(2, sepIdx);  // 커스텀 구분자 추출
                 text = text.substring(sepIdx + 2); // 문자열에서 구분자 부분 제거
                 System.out.println("사용된 구분자: " + sep);
-            } else {
+            } else { // 예외 : //로 시작하되, 커스텀 구분자가 아닌 경우
                 throw new IllegalArgumentException();
             }
         }
@@ -32,7 +32,12 @@ public class Application {
         int result = 0;
         for (String number:num){
             if(!number.isEmpty()){ // 비었을 경우, 0처럼 처리
-                result += Integer.parseInt(number);
+                int temp = Integer.parseInt(number);
+                // 예외 : 숫자에 음수가 있는 경우
+                if(temp<0){
+                    throw new IllegalArgumentException();
+                }
+                result += temp;
             }
         }
         System.out.println(result);
