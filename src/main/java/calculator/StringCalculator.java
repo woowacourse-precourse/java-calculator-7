@@ -1,7 +1,7 @@
 package calculator;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 
 public class StringCalculator {
 
@@ -10,6 +10,11 @@ public class StringCalculator {
             return 0;
         }
 
+        String[] numbers = splitInput(input);
+        return calculateSum(numbers);
+    }
+
+    private static String[] splitInput(String input) {
         String delimiter = ",|:";
         if (input.startsWith("//")) {
             Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
@@ -20,9 +25,7 @@ public class StringCalculator {
                 throw new IllegalArgumentException("잘못된 형식의 커스텀 구분자입니다.");
             }
         }
-
-        String[] numbers = input.split(delimiter);
-        return calculateSum(numbers);
+        return input.split(delimiter);
     }
 
     private static int calculateSum(String[] numbers) {
