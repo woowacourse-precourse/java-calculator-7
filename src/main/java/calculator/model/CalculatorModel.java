@@ -18,7 +18,7 @@ public class CalculatorModel {
         InputValidator.validateNumber(input);
     }
 
-    public int sum() {
+    public int calculateSum() {
         return numbers.stream().mapToInt(Integer::intValue).sum();
     }
 

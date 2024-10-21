@@ -35,8 +35,8 @@ public class Application {
     }
 
     public static String[] parseNumbers(String input, List<String> dividers) {
-        String combinedDividers = String.join("|", dividers);
-        return input.split(combinedDividers);
+        String dividerPattern = String.join("|", dividers);
+        return input.split(dividerPattern);
     }
 
     private static void processInput(String inputString, CalculatorModel model, CalculatorView view) {
@@ -49,13 +49,13 @@ public class Application {
 
         if (customDivider != null) {
             model.addDivider(customDivider);
-            String numberPart = inputString.substring(inputString.indexOf("\\n") + 2);
-            String[] numbers = parseNumbers(numberPart, model.getDividers());
+            String numberString = inputString.substring(inputString.indexOf("\\n") + 2);
+            String[] numbers = parseNumbers(numberString, model.getDividers());
             addNumbersToModel(numbers, model);
         } else {
             String[] numbers = parseNumbers(inputString, model.getDividers());
             addNumbersToModel(numbers, model);
         }
-        view.displayResult(model.sum());
+        view.displayResult(model.calculateSum());
     }
 }
