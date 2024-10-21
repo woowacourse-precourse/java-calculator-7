@@ -16,12 +16,17 @@ public class CalculatorService {
 
     public Numbers extractNumbers(String input) {
         InputFilter.doOutWrong(input);
-        String[] elements = Parser.splitOutByCustomStyle(input);
-
-        List<String> numberInputs = splitWithDelimiter(elements);
+        List<String> numberInputs = splitNumberInputs(input);
         Numbers numbers = validateAndParse(numberInputs);
 
         return numbers;
+    }
+
+    private List<String> splitNumberInputs(String input) {
+        String[] elements = Parser.splitOutByCustomStyle(input);
+        List<String> numberInputs = splitWithDelimiter(elements);
+
+        return numberInputs;
     }
 
     private Numbers validateAndParse(List<String> splitNumbers) {
