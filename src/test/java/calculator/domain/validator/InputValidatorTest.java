@@ -12,6 +12,8 @@ public class InputValidatorTest {
     void 양수가_아닌_문자_테스트() {
         assertThat(inputValidator.isNonPositiveNumber("1")).isFalse();
         assertThat(inputValidator.isNonPositiveNumber("-1")).isTrue();
+        assertThat(inputValidator.isNonPositiveNumber("0")).isTrue();
+        assertThat(inputValidator.isNonPositiveNumber("000000000")).isTrue();
     }
 
     @Test
