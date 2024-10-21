@@ -6,7 +6,7 @@ public class StringCalculator {
         for (String token : tokens) {
             int number = parseToken(token);
             if (number < 0) {
-                throw new IllegalArgumentException("음수는 허용되지 않습니다.(" + number + ")");
+                throw new IllegalArgumentException("음수는 허용되지 않습니다.");
             }
             sum += number;
         }
@@ -17,7 +17,7 @@ public class StringCalculator {
         try {
             return Integer.parseInt(token);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("유효하지 않은 값입니다.(" + token + ")");
+            throw new IllegalArgumentException("유효하지 않은 값입니다.");
         }
     }
 }

@@ -28,7 +28,7 @@ public class StringCalculatorTest {
         IllegalArgumentException exception
                 = assertThrows(IllegalArgumentException.class,
                 () -> calculator.calculateSum(tokens));
-        assertEquals("음수는 허용되지 않습니다.(-2)", exception.getMessage());
+        assertEquals("음수는 허용되지 않습니다.", exception.getMessage());
     }
 
     @Test
@@ -37,6 +37,6 @@ public class StringCalculatorTest {
         IllegalArgumentException exception
                 = assertThrows(IllegalArgumentException.class,
                 () -> calculator.calculateSum(tokens));
-        assertEquals("유효하지 않은 값입니다.(a)", exception.getMessage());
+        assertEquals("유효하지 않은 값입니다.", exception.getMessage());
     }
 }
