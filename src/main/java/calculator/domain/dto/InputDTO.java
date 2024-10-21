@@ -6,11 +6,11 @@ public class InputDTO {
     public InputDTO(String input) {
         this.input = input;
     }
-
+    //getter
     public String getInput() {
         return input;
     }
-
+    //setter
     public void setInput(String input) {
         this.input = input;
     }

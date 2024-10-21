@@ -10,6 +10,7 @@ public class Application {
         CalculatorService calculatorService = new CalculatorService(new NormalCalculatorImpl(), new SpecialCalculatorImpl());
         CalculatorController controller = new CalculatorController(calculatorService);
 
+        //controller를 통해 문자열 덧셈 계산기 실행
         controller.processCalculation();
 
     }

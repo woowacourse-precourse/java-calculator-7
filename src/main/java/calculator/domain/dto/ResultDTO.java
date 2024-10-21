@@ -6,9 +6,11 @@ public class ResultDTO {
     public ResultDTO(int result) {
         this.result = result;
     }
+    //getter
     public int getResult() {
         return result;
     }
+    //setter
     public void setResult(int result) {
         this.result = result;
     }

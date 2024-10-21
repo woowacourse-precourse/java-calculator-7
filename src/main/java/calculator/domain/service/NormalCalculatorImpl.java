@@ -25,6 +25,7 @@ public class NormalCalculatorImpl implements NormalCalculator {
                 }
                 sum += num;
             } catch (NumberFormatException e) {
+                //정수가 아닌 다른 값이 들어와서 parseInt의 에러가 발생하는 경우 예외처리
                 throw new IllegalArgumentException("정수를 입력해야 합니다.");
             }
 

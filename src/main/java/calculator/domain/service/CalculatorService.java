@@ -13,7 +13,7 @@ public class CalculatorService  {
         this.normalCalculator = normalCalculator;
         this.specialCalculator = specialCalculator;
     }
-
+    //계산하는 기능
     public ResultDTO calculate(InputDTO inputDTO) {
         String input = inputDTO.getInput();
         if (input.startsWith("//")) {
@@ -21,15 +21,17 @@ public class CalculatorService  {
             char checkChar =input.charAt(3);
             char checkChar2 =input.charAt(4);
             if (checkChar == '\\' && checkChar2 == 'n') {
+                //checkChar가 \이고 그 뒤에 n이 오는지 확인하여 그 앞의 문자가 delimter로 설정
                 char delimiter = input.charAt(2);
                 String delimiters = ",|:|" + delimiter;
-                // "\n" 이후의 값을 input으로 넣어줘야 한다.
-                int delimeterIndex = input.indexOf('n');
 
-                String numbersArray = input.substring( delimeterIndex+ 1);
+                int delimeterIndex = input.indexOf('n'); // "\n" 이후의 값을 input으로 넣어줌
+
+                String numbersArray = input.substring( delimeterIndex+ 1); // n의 위치를 구해 substring으로 자름
                 int result = specialCalculator.calculate(new InputDTO(numbersArray), delimiters);
                 return new ResultDTO(result);
             }else{
+                // //새로운 구분자\n 의 형식이 지켜지지 않을 경우에 대한 예외처리
                 throw new IllegalArgumentException("잘못된 구분자 입력입니다.");
             }
 
