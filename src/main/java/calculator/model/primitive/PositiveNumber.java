@@ -34,7 +34,7 @@ public class PositiveNumber {
 
     private void validateOverflow(long sum) {
         if (isSumOverflow(sum)) {
-            throw new ArithmeticException(SUM_OVERFLOW_EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(SUM_OVERFLOW_EXCEPTION_MESSAGE);
         }
     }
 
