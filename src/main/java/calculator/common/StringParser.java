@@ -1,5 +1,6 @@
 package calculator.common;
 
+import calculator.common.CustomExceptions.InvalidDelimiterFormatException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -9,9 +10,15 @@ public class StringParser {
         Pattern pattern = Pattern.compile("^//(.)\\\\n.*$");
         Matcher matcher = pattern.matcher(input);
         if (!matcher.matches()) {
-            throw new CustomExceptions.InvalidDelimiterFormatException("커스텀 구분자의 형식이 잘못되었습니다.");
+            throw new InvalidDelimiterFormatException("커스텀 구분자의 형식이 잘못되었습니다.");
         }
-        return matcher.group(1);
+        String delimiter = matcher.group(1);
+
+        if (Character.isDigit(delimiter.charAt(0))) {
+            throw new InvalidDelimiterFormatException("커스텀 구분자는 숫자가 될 수 없습니다.");
+        }
+
+        return delimiter;
     }
 
 

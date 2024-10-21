@@ -19,7 +19,7 @@ public class InputValidator {
                 }
             }
         } catch (NumberFormatException e) {
-            throw new InvalidNumberException("유효하지 않은 숫자 형식입니다.");
+            throw new InvalidNumberException("입력값 형식이 잘못되었습니다.");
         }
     }
 
@@ -27,7 +27,7 @@ public class InputValidator {
         String trimmedToken = token.trim();
 
         if (trimmedToken.isEmpty()) {
-            throw new InvalidNumberException("입력값에 연속된 구분자 또는 공백만 포함된 부분이 있습니다.");
+            throw new InvalidNumberException("입력값 형식이 잘못되었습니다.");
         }
 
         if (!trimmedToken.matches("-?\\d+")) {

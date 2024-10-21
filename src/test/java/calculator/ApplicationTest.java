@@ -72,11 +72,29 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    @DisplayName("커스텀 구분자가 숫자인 경우 예외가 발생한다")
+    void 커스텀_구분자_숫자_테스트() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> run("//1\\n1,2,3"))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessageContaining("커스텀 구분자는 숫자가 될 수 없습니다.");
+        });
+    }
+
+    @Test
     void 음수_입력_테스트() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("-1,2,3"))
                         .isInstanceOf(IllegalArgumentException.class)
                         .hasMessageContaining("음수 입력값은 허용되지 않습니다.")
+        );
+    }
+
+    @Test
+    void 입력_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException(";"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
@@ -106,7 +124,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("1,,3"))
                         .isInstanceOf(IllegalArgumentException.class)
-                        .hasMessageContaining("입력값에 연속된 구분자 또는 공백만 포함된 부분이 있습니다.")
+                        .hasMessageContaining("입력값 형식이 잘못되었습니다.")
         );
     }
 
