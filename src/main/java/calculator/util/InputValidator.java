@@ -27,8 +27,10 @@ public class InputValidator {
     }
 
     private static void validDelimiters(String input) {
-        String defaultDelimiter = ",|:";
+        String defaultDelimiter = "^(\\d+([,:]\\d+)*)$";
         String customDelimiter = "//(.*)\\\\n(.*)";
+
+        System.out.println(input.matches(defaultDelimiter));
 
         if (!input.matches(defaultDelimiter) && !input.matches(customDelimiter)) {
             throw new IllegalArgumentException("입력 문자열이 유효한 구분자를 포함하지 않습니다.");
