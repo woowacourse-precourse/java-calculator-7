@@ -1,5 +1,4 @@
 package calculator.parser;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -71,7 +70,7 @@ public class InputParserTest {
     }
     @Test
     void 잘못된_커스텀_구분자_처리_테스트() {
-        String wrongDelimiterString = "//;1;2;3";
+        String wrongDelimiterString = "//\\n1;2;3";
 
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> parser.parse(wrongDelimiterString))

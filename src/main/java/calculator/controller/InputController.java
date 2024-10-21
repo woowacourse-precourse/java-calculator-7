@@ -10,7 +10,6 @@ public class InputController {
     public InputController(InputParser parser) {
         this.parser = parser;
     }
-
     public void processInput(String input) {
         parser.validateInput(input);
         String trimmedInput = parser.processSpace(input);
