@@ -16,6 +16,9 @@ public class StringAddCalculator {
         // 기본 구분자 사용 시 길이 검증
         InputValidator.validateInputLength(input);
 
+        // 음수 입력 검증
+        InputValidator.validateNoNegativeNumbers(input);
+
         return -1; // 추후 로직 추가 예정
     }
 }

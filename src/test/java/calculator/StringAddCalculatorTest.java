@@ -51,4 +51,15 @@ public class StringAddCalculatorTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("계산 대상 문자열의 길이가 9자를 초과했습니다.");
     }
+
+    @Test
+    void 음수_입력시_예외가_발생한다() {
+        // given
+        String input = "1,-2,3,-5";
+
+        // when, then: 예외 발생 여부 확인 및 모든 음수 값 포함 여부 확인
+        assertThatThrownBy(() -> StringAddCalculator.add(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("음수는 허용되지 않습니다: -2, -5");
+    }
 }
