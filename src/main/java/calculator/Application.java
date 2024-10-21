@@ -17,9 +17,13 @@ public class Application {
             if (startOfCustomDelimiter == -1) {
                 throwException();
             }
-            
+
             String customDelimiter = input.substring("//".length(), startOfCustomDelimiter);
 
+            if (customDelimiter.matches(".*[0-9].*")) {
+                throwException();
+            }
+            
             return customDelimiter;
         }
     }
