@@ -12,7 +12,7 @@ public class ApplicationCustomTest extends NsTest {
     @Test
     void 빈_문자열_입력() {
         assertSimpleTest(() -> {
-            run("");
+            run("\n");
             assertThat(output()).contains("결과 : 0");
         });
     }
@@ -70,7 +70,7 @@ public class ApplicationCustomTest extends NsTest {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("-1,2,3"))
                         .isInstanceOf(IllegalArgumentException.class)
-                        .hasMessageContaining("음수")
+                        .hasMessageContaining("음수 입력")
         );
     }
 

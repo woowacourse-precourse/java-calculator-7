@@ -29,7 +29,7 @@ public class InputParser {
             int delimiterEnd = input.indexOf("\\n");
 
             if (delimiterEnd == -1) {
-                throw new IllegalArgumentException("커스텀 구분자 형식이 올바르지 않습니다: " + input);
+                throw new IllegalArgumentException("커스텀 구분자 형식이 올바르지 않습니다");
             }
             delimiter = Pattern.quote(input.substring(2, delimiterEnd));
             numbers = input.substring(delimiterEnd + 2); // \\n은 2개의 문자 임으로 +2 해줘야함

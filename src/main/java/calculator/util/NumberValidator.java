@@ -13,7 +13,7 @@ public class NumberValidator {
             int value = Integer.parseInt(number.trim());
             if (value <= 0) {
                 // 들어온 값이 음수라면 사용자 입력 오류 발생
-                throw new IllegalArgumentException("숫자는 양수여야 합니다: " + number);
+                throw new IllegalArgumentException("음수 입력");
             }
         } catch (NumberFormatException e) {
             //변환하는 값이 숫자가 아니라면? 오류 발생
