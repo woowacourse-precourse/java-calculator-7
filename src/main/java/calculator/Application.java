@@ -23,4 +23,14 @@ public class Application {
         }
         return "";
     }
+    public static int[] splitWithDelimiter(String input, String delimiters) {
+        // 인자로 받은 구분자들을 기준으로 input을 나눈다
+        String[] splitString = input.split(delimiters);
+        int[] result = new int[splitString.length];
+        for(int i=0; i<splitString.length; i++) {
+            // 나눠진 input의 각 문자들을 int형으로 변환하고, result 배열에 담는다
+            result[i] = Integer.parseInt(splitString[i]);
+        }
+        return result;
+    }
 }
