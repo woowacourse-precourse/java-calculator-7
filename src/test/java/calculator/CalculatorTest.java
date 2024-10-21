@@ -3,23 +3,26 @@ package calculator;
 import static java.lang.String.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import camp.nextstep.edu.missionutils.test.NsTest;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.util.Scanner;
-import java.util.Stack;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class CalculatorTest {
 
+  private PrintStream standardOut;
+  private OutputStream captor;
 
-
-  /**
-   *
-   * @BeforeEach
-   *   void setUp() {
-   *     calculator = new Calculator();
-   *   }
-   */
+  @BeforeEach
+  protected final void init() {
+    this.standardOut = System.out;
+    this.captor = new ByteArrayOutputStream();
+    System.setOut(new PrintStream(this.captor));
+  }
 
 
   public static InputStream setReadLine(String readLine) {
@@ -125,6 +128,7 @@ class CalculatorTest {
     // "calculator.Calculator.calculating(String)" because "this.calculator" is null
     Calculator customCalculator = new Calculator(customDelimeter);
     Calculator defaultCalculator = new Calculator(defaultDelimeter);
+
     int calculateCustom = customCalculator.calculating(customDelimeter);
     int calculateDefault = defaultCalculator.calculating(defaultDelimeter);
 

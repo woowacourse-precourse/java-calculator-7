@@ -15,6 +15,7 @@ public class Calculator {
   public int calculating(String readLine) {
 
     // [] 입력 문자열 탐색중
+    // find why readline could be null
     for (int i = 0; i < readLine.length(); i++) {
 
       processCustomDelimeter(readLine, i);
@@ -49,10 +50,6 @@ public class Calculator {
   private static char convertToNumber(String numeric) {
     return (char) parseInt(numeric);
   }
-
-
-
-
 
   private void addNumbers(char index) {
     // [] 입력 문자열 탐색 중 인덱스가 정수 변환 가능한 경우
