@@ -2,7 +2,7 @@ package calculator.calculator;
 
 import calculator.domain.Numbers;
 
-public class Calculator {
+public class CalculatorService {
 	public int sum(Numbers numbers){
 		return numbers.sumNumbers();
 	}

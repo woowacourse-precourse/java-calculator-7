@@ -40,7 +40,7 @@
 - [x] 빈 문자열의 경우, 0를 출력한다.
 - [x] 계산 결과값을 출력한다.
 
-### Calculator
+### CalculatorService
 - [x] 덧셈 기능을 호출한다.
 
 ### Numbers 일급컬렉션

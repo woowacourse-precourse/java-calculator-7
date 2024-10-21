@@ -7,10 +7,10 @@ import calculator.view.Input;
 import calculator.view.Output;
 
 public class CalculatorController {
-	private Calculator calculator;
+	private CalculatorService calculatorService;
 
-	public CalculatorController(Calculator calculator) {
-		this.calculator = calculator;
+	public CalculatorController(CalculatorService calculatorService) {
+		this.calculatorService = calculatorService;
 	}
 
 	public CalculatorController() {
@@ -26,7 +26,7 @@ public class CalculatorController {
 
 		List<Integer> extractNumbers = Input.extractNumbers(input);
 		Numbers numbers = new Numbers(extractNumbers);
-		int result = calculator.sum(numbers);
+		int result = calculatorService.sum(numbers);
 		Output.printResult(result);
 	}
 }
