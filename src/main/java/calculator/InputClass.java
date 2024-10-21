@@ -1,7 +1,5 @@
 package calculator;
 
-import calculator.domain.Calculator;
-
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -54,7 +52,6 @@ public class InputClass {
                 throw new IllegalArgumentException();
             }
         }
-
         return false;
     }
 }

@@ -21,7 +21,7 @@ public class CustomSeparatorStrategy implements CalculatorStrategy {
     }
 
     private Boolean checkFloatingPoint(Double totalSum) {
-        if (totalSum.intValue() == totalSum){
+        if (totalSum.intValue() == totalSum) {
             return false;
         }
         return true;

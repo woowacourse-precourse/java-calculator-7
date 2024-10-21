@@ -57,23 +57,6 @@ class ApplicationTest extends NsTest {
     }
 
 
-
-//    @Test
-//    void 숫자_컴마() {
-//        assertSimpleTest(() -> {
-//            run("1,");
-//            assertThat(output()).contains("결과 : 1");
-//        });
-//    }
-//
-//    @Test
-//    void 컴마_숫자() {
-//        assertSimpleTest(() -> {
-//            run(",1");
-//            assertThat(output()).contains("결과 : 1");
-//        });
-//    }
-
     @Test
     void 입력_공백() {
         assertSimpleTest(() -> {
@@ -84,7 +67,7 @@ class ApplicationTest extends NsTest {
 
     @Test
     void 일반_구분자() {
-        assertSimpleTest(()->{
+        assertSimpleTest(() -> {
             run("1,2:3");
             assertThat(output()).contains("결과 : 6");
         });
@@ -92,7 +75,7 @@ class ApplicationTest extends NsTest {
 
     @Test
     void 커스텀_구분자() {
-        assertSimpleTest(()->{
+        assertSimpleTest(() -> {
             run("//^\\n1^3^3");
             assertThat(output()).contains("결과 : 7");
         });
@@ -101,8 +84,8 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_입력_문자열() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("//;;\\n1;;4;;2"))
-                    .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> runException("//;;\\n1;;4;;2"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
@@ -149,8 +132,8 @@ class ApplicationTest extends NsTest {
     @Test
     void 예외_테스트_메인() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> runException("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
