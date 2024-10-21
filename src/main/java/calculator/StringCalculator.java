@@ -10,7 +10,7 @@ public class StringCalculator {
         String numbers = DelimiterParser.extractNumbers(input);
 
         int[] parsedNumbers = NumberParser.parse(numbers, delimiter);
-        Validator.validate(parsedNumbers);
+        // Validator.validate(parsedNumbers);
 
         return sum(parsedNumbers);
     }
