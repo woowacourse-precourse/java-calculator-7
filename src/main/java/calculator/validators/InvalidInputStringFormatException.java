@@ -1,5 +1,8 @@
 package calculator.validators;
 
+import static calculator.utils.Constants.CUSTOM_DELIMITER_END_WRAPPER;
+import static calculator.utils.Constants.CUSTOM_DELIMITER_START_WRAPPER;
+
 public class InvalidInputStringFormatException {
     public static void errorCheck(String operandStr){
         checkIfStringWhiteSpace(operandStr);
@@ -16,7 +19,7 @@ public class InvalidInputStringFormatException {
 
     // 문자열의 처음이 숫자이거나 // 가 아니라면 에러 발생
     public static void checkStartingPoint(String operandStr){
-        if(!(operandStr.startsWith("//") || Character.isDigit(operandStr.charAt(0))))
+        if(!(operandStr.startsWith(CUSTOM_DELIMITER_START_WRAPPER) || Character.isDigit(operandStr.charAt(0))))
             throw new IllegalArgumentException();
     }
 
@@ -28,7 +31,7 @@ public class InvalidInputStringFormatException {
     }
 
     public static void checkFrontAndBackOfCustomDelimiter(String operandStr){
-        if(operandStr.startsWith("//") && !operandStr.startsWith("\\n", 3)){
+        if(operandStr.startsWith(CUSTOM_DELIMITER_START_WRAPPER) && !operandStr.startsWith(CUSTOM_DELIMITER_END_WRAPPER, 3)){
             throw new IllegalArgumentException();
         }
     }

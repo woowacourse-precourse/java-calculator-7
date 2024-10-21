@@ -32,7 +32,7 @@ public class ParsingService {
     //구분자 관련해서 해결해야 할 듯;; ㅜㅜ 이거 해결해야만 돼. ㅜ
     private static String parseCustomDelimiter(String operandStr, Delimiters delimiters){
         //custom 구분자 추출
-        if(operandStr.startsWith("//")){
+        if(operandStr.startsWith(CUSTOM_DELIMITER_START_WRAPPER)){
             delimiters.addCustomDelimiter(operandStr.charAt(CUSTOM_DELIMITER_INDEX));
             operandStr = operandStr.substring(EXCEPT_CUSTOM_DELIMITER_INDEX);
         }
