@@ -13,11 +13,10 @@ public class Application {
             System.out.println("잘못된 입력: " + e.getMessage());
         } catch (Exception e) {
             System.out.println("알 수 없는 오류가 발생했습니다: " + e.getMessage());
-            e.printStackTrace(); // 스택 트레이스를 출력하여 디버깅에 도움을 줌
+            e.printStackTrace();
         }
     }
 
-    // 구분자로 잘라서 계산 결과를 반환하는 코드
     static int add(String input) {
         if (input == null || input.isEmpty()) {
             return 0;
@@ -27,14 +26,24 @@ public class Application {
 
         // 커스텀 구분자가 있는지 확인
         if (input.contains("//")) {
-            int delimiterStartIndex = input.indexOf("//") + 2;
-            int delimiterEndIndex = input.indexOf("\n");
+            int delimiterStartIndex = input.indexOf("//") + 2; // "//" 이후의 구분자 시작 위치
+            int delimiterEndIndex = input.indexOf("\n"); // \n의 위치
+
+            // 디버깅용 출력: 인덱스가 정확한지 확인
+            System.out.println("delimiterStartIndex: " + delimiterStartIndex);
+            System.out.println("delimiterEndIndex: " + delimiterEndIndex);
+
+            // \n이 없으면 오류 발생
+            if (delimiterEndIndex == -1) {
+                throw new IllegalArgumentException("잘못된 형식: \\n이 필요합니다.");
+            }
+
             String customDelimiter = input.substring(delimiterStartIndex, delimiterEndIndex); // 커스텀 구분자 추출
             delimiter = customDelimiter + "|" + delimiter; // 커스텀 구분자와 기본 구분자 결합
             input = input.substring(delimiterEndIndex + 1); // 숫자 부분만 남김
         }
 
-        String[] numbers = input.split(delimiter);
+        String[] numbers = input.split(delimiter); // 구분자로 숫자 분리
         int sum = 0;
 
         for (String number : numbers) {
@@ -50,3 +59,4 @@ public class Application {
         return sum;
     }
 }
+
