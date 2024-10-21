@@ -21,17 +21,17 @@ public class Application {
             if(input.contains("//")) {
                 Pattern pattern = Pattern.compile("//(.*?)\\\\n");
                 Matcher matcher = pattern.matcher(input);
-                StringBuilder customDelimiter = new StringBuilder("[,;");
+                StringBuilder customDelimiters = new StringBuilder("[,;");
 
                 int count = 0;
 
                 while(matcher.find()) {
-                    customDelimiter.append(matcher.group(), 2, matcher.group().length()-2);
+                    customDelimiters.append(matcher.group(), 2, matcher.group().length()-2);
                     count += matcher.group().length();
                 }
 
-                customDelimiter.append("]");
-                delimiter = customDelimiter.toString();
+                customDelimiters.append("]");
+                delimiter = customDelimiters.toString();
                 input = input.substring(count);
             }
 
