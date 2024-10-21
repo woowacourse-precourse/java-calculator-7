@@ -20,11 +20,18 @@ public static int sum(String input) {
         return 0;  // 빈 문자열이면 0 반환
     }
 
-    if (input.matches("\\d+")) {
-        return Integer.parseInt(input);  // 숫자 하나만 입력 시 그 숫자 반환
+    if (input.startsWith("//")) {
+        String customDelimiter = String.valueOf(input.charAt(2));  // 커스텀 구분자 추출
+        input = input.substring(4);  // "//[구분자]\n" 형식이므로 구분자와 개행 문자 제거
+        String[] numbers = input.split(customDelimiter);  // 커스텀 구분자로 숫자 분리
+        int sum = 0;
+        for (String number : numbers) {
+            sum += Integer.parseInt(number);  // 각 숫자를 더함
+        }
+        return sum;  // 합 반환
     }
 
-    String[] numbers = input.split("[,:]");  // 쉼표 또는 콜론으로 숫자 분리
+    String[] numbers = input.split("[,:]");  // 기본 구분자로 숫자 분리
     int sum = 0;
     for (String number : numbers) {
         sum += Integer.parseInt(number);  // 각 숫자를 더함
