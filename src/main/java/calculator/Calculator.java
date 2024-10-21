@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Calculator {
+    private static final int CUSTOM_DELIMITER_POS = 2;
+    private static final int CUSTOM_DELIMITER_LENGTH = 5;
+
     public boolean isValidInput(String input) {
         if (input.isEmpty()) {
             return true;
@@ -21,13 +24,13 @@ public class Calculator {
 
         String calculateZone = input;
         if (hasCustomDelimiter(input)) {
-            delimeterList.add(input.charAt(2));
+            delimeterList.add(input.charAt(CUSTOM_DELIMITER_POS));
 
-            if (input.length() <= 5) {
+            if (input.length() <= CUSTOM_DELIMITER_LENGTH) {
                 return false;
             }
 
-            calculateZone = input.substring(5);
+            calculateZone = input.substring(CUSTOM_DELIMITER_LENGTH);
         }
 
         for (int i = 0; i < calculateZone.length(); i++) {
@@ -61,8 +64,8 @@ public class Calculator {
 
         String calculateZone = input;
         if (hasCustomDelimiter(input)) {
-            delimeterList.add(input.charAt(2));
-            calculateZone = input.substring(5);
+            delimeterList.add(input.charAt(CUSTOM_DELIMITER_POS));
+            calculateZone = input.substring(CUSTOM_DELIMITER_LENGTH);
         }
 
         int startIndex = 0;
@@ -79,12 +82,12 @@ public class Calculator {
     }
 
     private boolean hasCustomDelimiter(String input) {
-        if (input.length() < 5) {
+        if (input.length() < CUSTOM_DELIMITER_LENGTH) {
             return false;
         }
 
-        String substring1 = input.substring(0, 2);
-        String substring2 = input.substring(3, 5);
+        String substring1 = input.substring(0, CUSTOM_DELIMITER_POS);
+        String substring2 = input.substring(CUSTOM_DELIMITER_POS + 1, CUSTOM_DELIMITER_LENGTH);
 
         return (substring1.equals("//") && substring2.equals("\\n"));
     }

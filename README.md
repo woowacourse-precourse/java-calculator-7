@@ -35,6 +35,9 @@
 + 덧셈 기능 결과를 출력한다.
 
 ## 업데이트 노트
+### v.3.0.3 CUSTOM_DELIMITER 상수 추가
+- CUSTOM_DELIMITER_POS(2), CUSTOM_DELIMITER_LENGTH(5) 를 상수화하여 코드 유지보수성 향상 
+
 ### v.3.0.2 Console.close() 호출 추가
 - Console.close() 호출 추가하여 콘솔 리소스 해제
 
