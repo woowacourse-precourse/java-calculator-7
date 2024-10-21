@@ -217,4 +217,16 @@ class InputConsoleHandlerTest {
         Console.close();
     }
 
+    @Test
+    @DisplayName("재실행 메시지에 허용되지 않은 숫자를 입력하면 애플리케이션을 종료한다.")
+    void test() {
+
+        String input = "6";
+
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        assertThatThrownBy(INPUT_CONSOLE_HANDLER::isAppEnd)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("허용되지 않은 동작입니다. 애플리케이션을 종료합니다.");
+    }
+
 }
