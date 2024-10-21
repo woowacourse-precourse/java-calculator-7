@@ -5,23 +5,10 @@ import camp.nextstep.edu.missionutils.Console;
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
-        char customChar;
-        String[] numbers;
         String inputString = getUserInput();
-        if (isCustom(inputString)) {
-            customChar = inputString.charAt(2);
-            inputString = inputString.substring(5);
-            numbers = inputString.split(String.valueOf(customChar));
-        }
-        else {
-            //쉼표를 콜론으로 변경
-            inputString = inputString.replace(',', ':');
-            numbers = inputString.split(":");
-        }
-        //확인용 출력
-        for(int i=0; i<inputString.length();i++){
-            System.out.println(numbers[i]);
-        }
+        String[] numbers = extractNumbers(inputString);
+        int sum = addNumbers(numbers);
+        System.out.println("결과: " + sum);
     }
 
     public static String getUserInput() {
@@ -32,5 +19,29 @@ public class Application {
 
     public static boolean isCustom(String inputString) {
         return inputString.charAt(0) == '/';
+    }
+
+    public static String[] extractNumbers(String inputString){
+        char customChar;
+        if (isCustom(inputString)) {
+            customChar = inputString.charAt(2);
+            inputString = inputString.substring(5);
+            return inputString.split(String.valueOf(customChar));
+        }
+        else {
+            //쉼표를 콜론으로 변경
+            inputString = inputString.replace(',', ':');
+            return inputString.split(":");
+        }
+    }
+
+    public static int addNumbers(String[] numbers) {
+        int sum = 0;
+        for (int i = 0; i < numbers.length; i++) {
+            sum += Integer.parseInt(numbers[i]);
+            //확인용 출력
+            System.out.println(sum);
+        }
+        return sum;
     }
 }
