@@ -1,5 +1,6 @@
 package calculator;
 
+import static calculator.FormatValidator.DECIMAL_ZERO;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
@@ -19,6 +20,6 @@ class CalculatorTest {
     void 전달받은_숫자가_없으면_0_반환() {
         long sum = calculator.sum(List.of());
 
-        assertThat(sum).isEqualTo(0);
+        assertThat(sum).isEqualTo(DECIMAL_ZERO);
     }
 }
