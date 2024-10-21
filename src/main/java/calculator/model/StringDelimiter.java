@@ -33,7 +33,9 @@ public class StringDelimiter {
     // 커스텀 구분자로 분리하는 메서드
     private static String[] splitWithCustomDelimiter(String input) {
         Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(input);
-        matcher.matches();
+        if (!matcher.find()) {
+            throw new IllegalArgumentException("잘못된 구분자 형식입니다.");
+        }
 
         String customDelimiter = Pattern.quote(matcher.group(1));
         String numbersPart = matcher.group(2);

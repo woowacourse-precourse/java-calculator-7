@@ -31,7 +31,7 @@ public class InputValidator {
     // 커스텀 구분자가 올바른 형식인지 확인
     private static void validateCustomDelimiterFormat(String input) {
         if (!input.contains(NEW_LINE)) {
-            throw new IllegalArgumentException("잘못된 구분자 형식입니다.");
+            throw new IllegalArgumentException("잘못된 구분자 형식입니다. 구분자와 숫자 부분을 구분하는 \\n이 필요합니다.");
         }
 
         String delimiterPart = input.substring(2, input.indexOf(NEW_LINE));
