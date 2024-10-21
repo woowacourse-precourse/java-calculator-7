@@ -8,5 +8,11 @@ public class Application {
         String input = Console.readLine();
 
         if(input.isEmpty()) throw new IllegalArgumentException("빈 문자열 입니다.");
+        else try { //출력
+            int result = StringCalculator.add(input);
+            System.out.println("결과 : " + result);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
