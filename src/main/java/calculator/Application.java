@@ -18,7 +18,12 @@ public class Application {
                 if (input.startsWith("//") && input.charAt(3) == 92 && input.charAt(4) == 'n') {
                     char customSeperatorChar = input.charAt(2);
 
+                    if (48 <= customSeperatorChar && customSeperatorChar <= 57) {
+                        throw new IllegalArgumentException();
+                    }
+
                     customSeperator = Character.toString(customSeperatorChar);
+//                    System.out.println("customSeperatorChar = '" + customSeperatorChar + "'");
                 }
 
                 if (StringUtils.isBlank(customSeperator)) {
@@ -31,8 +36,8 @@ public class Application {
 
                 if (StringUtils.isNotBlank(customSeperator)) {
                     String subInput = input.substring(5);
-                    if (input.length() > 5) {
-                        String[] splitedInput = subInput.split(customSeperator + "|,|:");
+                    if (StringUtils.isNotBlank(subInput)) {
+                        String[] splitedInput = subInput.split(customSeperator);
                         for (String inputNumber : splitedInput) {
                             int number = Integer.parseInt(inputNumber);
                             result += number;
