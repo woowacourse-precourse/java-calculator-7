@@ -4,12 +4,13 @@ import calculator.utils.StringParser;
 
 public class Calculator {
     public int add(String input) {
-        StringParser parser = new StringParser();
-        int[] numbers = parser.parse(input);
+        String[] numbers = StringParser.parse(input);
         int sum = 0;
-        for (int number : numbers) {
-            sum += number;
+
+        for (String number : numbers) {
+            sum += Integer.parseInt(number);
         }
+
         return sum;
     }
 }

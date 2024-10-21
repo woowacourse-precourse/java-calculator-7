@@ -15,11 +15,11 @@ public class CalculatorController {
         this.calculator = new Calculator();
     }
     public void start() {
-        String input = inputView.getInput();
         try {
+            String input = inputView.getInput();
             int result = calculator.add(input);
             outputView.displayResult(result);
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             outputView.displayErrorMessage(e.getMessage());
         }
     }

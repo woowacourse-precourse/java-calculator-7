@@ -1,20 +1,34 @@
 package calculator.utils;
 
-import calculator.model.InputValidator;
+import java.util.regex.Pattern;
 
 public class StringParser {
-    private final InputValidator validator;
+    public static String[] parse(String input) {
+        input = input.trim();
+        String delimiter = "[,:]";
 
-    public StringParser() {
-        this.validator = InputValidator.getInstance();
-    }
-    public int[] parse(String input) {
-        validator.validate(input);
-        String[] parts = input.split(",");
-        int[] numbers = new int[parts.length];
-        for (int i = 0; i < parts.length; i++) {
-            numbers[i] = Integer.parseInt(parts[i].trim());
+        // 커스텀 구분자 처리
+        if (input.startsWith("//")) {
+            // 줄바꿈 문자를 문자로 인식하도록 "\n"을 "\\\\n"으로 변경
+            String[] parts = input.split("\\\\n", 2);
+
+            if (parts.length != 2) {
+                throw new IllegalArgumentException("잘못된 입력 형식입니다.");
+            }
+
+            String customDelimiter = parts[0].substring(2);
+            delimiter += "|" + Pattern.quote(customDelimiter);
+            input = parts[1];
         }
+
+        String[] numbers = input.split(delimiter);
+
+        for (String number : numbers) {
+            if (!number.matches("\\d+")) {
+                throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다: " + number);
+            }
+        }
+
         return numbers;
     }
 }
