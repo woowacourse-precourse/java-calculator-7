@@ -16,7 +16,7 @@ public class StringParser {
 
 
     public static String extractNumbersSection(String input) {
-        // 이스케이프된 줄바꿈을 실제 줄바꿈으로 변환
+        // 커스텀 구분자와 숫자 부분을 파싱하기 위해 줄바꿈 문자("\\n")를 실제 줄바꿈("\n")으로 변환
         if (input.contains("\\n")) {
             input = input.replace("\\n", "\n");
         }
