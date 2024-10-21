@@ -23,8 +23,15 @@ public class Application {
         if (input.startsWith("//")) {
             int delimiterIndex = input.indexOf("\\n");
             delimiter = input.substring(2, delimiterIndex);
+
+            // 구분자가 특수 문자일 경우 이스케이프 처리
+            delimiter = delimiter.replaceAll("([.^$|?*+()\\[\\]{}\\\\])", "\\\\$1");
+
+
             input = input.substring(delimiterIndex + 2);
         }
+
+
 
         String[] tokens = input.split(delimiter);
         return Arrays.stream(tokens)
