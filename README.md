@@ -52,7 +52,8 @@
 1. Calculator 생성
     - **Console.readLine()** 호출 (사용자가 문자를 입력)
     - 입력된 문자를 **Calculator** 생성자 매개변수로 전달
-    - **InputValidationException.isEmpty** 입력된 문자 유효성 검사 및 문자 반환
+    - **InputValidationException.isEmpty** 입력된 문자 유효성 검사
+    - 문자가 유효할 시 INPUT 변수에 input 값 대입
     - **checkCustomToken(String input)** 호출 (커스텀 구분자가 있는지 확인) <br>
       **커스텀 구분자 유무에 따라 아래 상황 진행**
 ```
@@ -103,8 +104,8 @@ ParsingInput 실행 기능
 ## 추가 기능 구현
 ***
 ### _**InputValidationException Class**_
-#### ✅ void isEmpty(String input)
+#### ✅ boolean isEmpty(String input)
 공백 입력시 예외처리 기능 구현
-#### ✅ void isPositiveNumber(int value)
+#### ✅ boolean isPositiveNumber(int value)
 음수 입력시 예외처리 기능 구현
 ***
