@@ -12,7 +12,7 @@ public class PositiveIntegerConverter {
         this.splittedExpression = splittedExpression;
     }
 
-    public List<Double> convertToPositiveNumbers() {
+    public List<Double> convertStringToPositiveNumbers() {
         return splittedExpression.stream()
                 .map(Double::parseDouble).toList();
     }
