@@ -1,5 +1,6 @@
 package calculator.controller;
 
+import calculator.domain.InputNumber;
 import calculator.domain.StringCalculator;
 import calculator.domain.StringParser;
 import calculator.view.InputView;
@@ -18,7 +19,8 @@ public class StringCalculatorController {
 
     public void startCalculator() {
         outputView.getString();
-        StringParser parser = new StringParser(inputView.getString());
+        InputNumber inputNumber = new InputNumber(inputView.getString());
+        StringParser parser = new StringParser(inputNumber.getInputStrings());
         String delimiter = parser.extractDelimiter();
         List<String> numbers = parser.parseStrings(delimiter);
         StringCalculator calculator = new StringCalculator(numbers);
