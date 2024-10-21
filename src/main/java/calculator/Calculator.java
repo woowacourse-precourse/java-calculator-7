@@ -1,5 +1,10 @@
 package calculator;
 
+import calculator.domain.SumCalculator;
+import calculator.domain.stringsplitter.CustomStringSplitter;
+import calculator.domain.stringsplitter.DefaultStringSplitter;
+import calculator.domain.StringSplitterManager;
+
 import java.util.List;
 
 public class Calculator {

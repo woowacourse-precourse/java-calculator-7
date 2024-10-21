@@ -1,4 +1,6 @@
-package calculator;
+package calculator.domain;
+
+import calculator.domain.stringsplitter.StringSplitter;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package calculator;
+package calculator.domain.stringsplitter;
 
 import java.util.List;
 
