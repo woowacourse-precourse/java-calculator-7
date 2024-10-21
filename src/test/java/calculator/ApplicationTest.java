@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
     @Test
-    void 기본_구분자_사용(){
+    void 기본_구분자_사용() {
         assertSimpleTest(() -> {
             run("1,2,3");
             assertThat(output()).contains("결과 : 6");
@@ -17,7 +17,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 기본_구분자_사용2(){
+    void 기본_구분자_사용2() {
         assertSimpleTest(() -> {
             run("1,2:3");
             assertThat(output()).contains("결과 : 6");
@@ -25,7 +25,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 기본_구분자_사용3(){
+    void 기본_구분자_사용3() {
         assertSimpleTest(() -> {
             run("2");
             assertThat(output()).contains("결과 : 2");
@@ -59,8 +59,8 @@ class ApplicationTest extends NsTest {
     @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> runException("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
@@ -71,6 +71,15 @@ class ApplicationTest extends NsTest {
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
+
+    @Test
+    void 커스텀_구분자가_없을떄_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//\\n1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+    
 
     @Test
     void 공백만_입력_예외_테스트() {
@@ -95,9 +104,6 @@ class ApplicationTest extends NsTest {
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
-
-
-
 
     @Override
     public void runMain() {

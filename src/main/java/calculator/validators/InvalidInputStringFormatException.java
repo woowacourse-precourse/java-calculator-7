@@ -31,7 +31,7 @@ public class InvalidInputStringFormatException {
             throw new IllegalArgumentException();
     }
 
-    // 커스텀 문자를 구분하는 //뒤에 \\n이 오는지 확인
+    // 커스텀 문자를 구분하는 //뒤에 \\n이 오는지 확인 + 구분자 사이에 문자가 입력되었는지 확인
     public static void checkFrontAndBackOfCustomDelimiter(String operandStr){
         if(operandStr.startsWith(CUSTOM_DELIMITER_START_WRAPPER) && !operandStr.startsWith(CUSTOM_DELIMITER_END_WRAPPER, 3)){
             throw new IllegalArgumentException();
