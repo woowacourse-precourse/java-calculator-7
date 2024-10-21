@@ -54,25 +54,45 @@ class CalculatorModelTest {
     }
 
     @Test
-    void 문자열_연산_올바른_세팅() {
+    void 문자열_연산_올바른_분리() {
         CalculatorModel cm = new CalculatorModel();
         ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(",", ":"));
         Assertions.assertThat(cm.operationSetting("1,2:3", arrayList)).isEqualTo(new String[]{"1", "2", "3"});
     }
 
     @Test
-    void 문자열_연산_올바른_세팅_2() {
+    void 문자열_연산_올바른_분리_2() {
         CalculatorModel cm = new CalculatorModel();
         ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(",", ":", ";"));
         Assertions.assertThat(cm.operationSetting("1,2:3;4", arrayList)).isEqualTo(new String[]{"1", "2", "3", "4"});
     }
 
     @Test
-    void 문자열_연산_올바른_세팅_3() {
+    void 문자열_연산_올바른_분리_3() {
         CalculatorModel cm = new CalculatorModel();
         ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(",", ":", ";"));
         Assertions.assertThat(cm.operationSetting("1,2:3;a4", arrayList)).isEqualTo(new String[]{"1", "2", "3", "a4"});
     }
 
+    @Test
+    void 분리된_문자열_정상_연산() {
+        CalculatorModel cm = new CalculatorModel();
+        ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(",", ":", ";"));
+        Assertions.assertThat(cm.sumCalculator("1,2:3;4", arrayList)).isEqualTo(10);
+    }
 
+    @Test
+    void 분리된_문자열_정상_연산_2() {
+        CalculatorModel cm = new CalculatorModel();
+        ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(",", ":", ";"));
+        Assertions.assertThat(cm.sumCalculator("1,2:;4", arrayList)).isEqualTo(7);
+    }
+
+    @Test
+    void 분리된_문자열_연산_예외처리() {
+        CalculatorModel cm = new CalculatorModel();
+        ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(",", ":", ";"));
+        assertThatThrownBy(() -> cm.sumCalculator("1,2:3;a4", arrayList))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
