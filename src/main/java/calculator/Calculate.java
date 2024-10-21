@@ -17,7 +17,7 @@ public class Calculate {
         int start = input.indexOf("//") + 2;
         int end = input.indexOf("\\n");
         if (end == -1) {
-            throw new IllegalArgumentException("no \\n.");
+            throw new IllegalArgumentException();
         }
 
         String customDelimiter = input.substring(start, end);
@@ -42,11 +42,11 @@ public class Calculate {
         try {
             int number = Integer.parseInt(value);
             if (number < 0) {
-                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
+                throw new IllegalArgumentException();
             }
             return number;
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("유효하지 않은 숫자입니다: " + value);
+            throw new IllegalArgumentException();
         }
     }
 }
