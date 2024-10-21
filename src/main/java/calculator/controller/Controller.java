@@ -23,6 +23,6 @@ public class Controller {
         // 숫자 합 계산
         int sumVal = Sum.doSummation(delimitedValues);
         // 결과 반환
-
+        Output.printOutMessage(sumVal);
     }
 }
