@@ -29,5 +29,35 @@ public class Calculator {
             numberString=input;
     }
 
+    public long getSum() throws IllegalArgumentException {
+        if(numberString.length()==0)
+            return 0;
+
+        // 숫자들 구분해서 numArr에 넣기
+        String separator = "\\";
+        for (int i = 0; i < separatorList.size(); i++) {
+            separator = separator + separatorList.get(i);
+            if(i<separatorList.size()-1)
+                separator+="|\\";
+        }
+        String[] numArr = numberString.split(separator); // 구문자에 따라 숫자들 분리
+
+        // 구분된 숫자들의 합 구하기
+        long sum = 0;
+        try {
+            for (int i = 0; i < numArr.length; i++) {
+                long val = Long.parseLong(numArr[i]);
+//            System.out.println("val:"+val);
+                if (val <= 0)
+                    throw new IllegalArgumentException();
+                sum += val;
+            }
+        } catch (Exception e) {
+            throw new IllegalArgumentException();
+        }
+        return sum;
+    }
+
+
 
 }
