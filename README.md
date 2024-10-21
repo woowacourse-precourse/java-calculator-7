@@ -53,3 +53,8 @@ first week woowa pre-course
 3. ouput() : 결과 출력
 4. controller() : model과 input/output(view)의 제어
 5. model() : 실제 계산
+
+### 세부 사항
+
+- 기본 구분자에서 "1,,2"처럼 구분자가 2개 이상 연달아 나오거나, "1:2,"처럼 마지막에 구분자가 와도 정상 입력으로 처리
+- 커스텀 구분자도 위와 같은 형식으로 처리.
