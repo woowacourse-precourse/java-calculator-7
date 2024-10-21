@@ -31,7 +31,11 @@ public class StringCalculator {
     private int sumNumbers(String[] tokens) {
         int sum = 0;
         for (String token : tokens) {
-            sum += validateNumber(token);
+            int number = validateNumber(token);
+            if(number < 0){
+                throw new IllegalArgumentException();
+            }
+            sum += number;
         }
         return sum;
     }

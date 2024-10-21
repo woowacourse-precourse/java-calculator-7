@@ -12,9 +12,9 @@ public class Application {
 
         try{
             int result = calculator.add(input);
-            System.out.println("결과: "+result);
+            System.out.println("결과 : "+result);
         }catch(IllegalArgumentException e){
-            System.err.println("오류: "+e.getMessage());
+            throw new IllegalArgumentException();
         }
     }
 }
