@@ -1,28 +1,26 @@
 package calculator;
 
-import calculator.utils.InputUtils;
-import calculator.utils.PrintUtils;
-import calculator.utils.Splitter;
-import calculator.utils.Validator;
+import calculator.utils.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Calculator {
     private final Splitter splitter;
+    private final Validator validator;
+    private final StringSumCalculator stringSumCalculator;
     private String userInput;
-    private List<String> numbers = new ArrayList<>();
-    private int total = 0;
 
-    public Calculator(Splitter splitter) {
+    public Calculator(Splitter splitter, Validator validator, StringSumCalculator stringSumCalculator) {
         this.splitter = splitter;
+        this.validator = validator;
+        this.stringSumCalculator = stringSumCalculator;
     }
 
     public void run() {
         userInput = InputUtils.getInput("덧셈할 문자열을 입력해 주세요.");
 
         if (userInput.isEmpty()) {
-            PrintUtils.print("결과 : " + total);
+            PrintUtils.print("결과 : " + 0);
             return;
         }
 
@@ -30,21 +28,11 @@ public class Calculator {
     }
 
     private void calculating() {
-        numbers = splitter.getCalculationSectionSplitByDelimiter(userInput);
-        checkEachInputIsValid();
-        getTotal();
+        List<String> strings = splitter.getCalculationSectionSplitByDelimiter(userInput);
+        validator.checkEachInputIsValid(strings);
+        int total = stringSumCalculator.getTotal(strings);
         PrintUtils.print("결과 : " + total);
     }
 
-    private void checkEachInputIsValid() {
-        for (String number : numbers) {
-            Validator.checkIsNumberValid(number);
-        }
-    }
 
-    private void getTotal() {
-        for (String number : numbers) {
-            total += Integer.parseInt(number);
-        }
-    }
 }
