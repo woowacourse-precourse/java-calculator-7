@@ -3,10 +3,11 @@ package calculator;
 import java.util.Arrays;
 import java.util.List;
 
-public class InputString {
+public class NumberList {
+
     private final List<Integer> numbers;
 
-    public InputString(String input) {
+    public NumberList(String input) {
         this.numbers = inputToList(input);
     }
 
@@ -39,7 +40,7 @@ public class InputString {
         if (input.startsWith("//")) {
             var frontInput = input.split("\n")[0];
 
-            if(frontInput.length() != 3) {
+            if (frontInput.length() != 3) {
                 throw new IllegalArgumentException("커스텀 구분자가 한 글자 이상입니다.");
             }
 
@@ -55,8 +56,7 @@ public class InputString {
 
     public int getSum() {
         return numbers.stream()
-                .mapToInt(Integer::intValue)
-                .sum();
+            .mapToInt(Integer::intValue)
+            .sum();
     }
-
 }

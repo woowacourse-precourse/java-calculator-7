@@ -5,15 +5,15 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-public class InputStringTest {
+public class NumberListTest {
 
     @Test
     void 빈_문자열() {
         // given
-        var inputString = new InputString("");
+        var numberList = new NumberList("");
 
         // when
-        var result = inputString.getSum();
+        var result = numberList.getSum();
 
         // then
         assertThat(result).isEqualTo(0);
@@ -22,10 +22,10 @@ public class InputStringTest {
     @Test
     void NULL_문자열() {
         // given
-        var inputString = new InputString(null);
+        var numberList = new NumberList(null);
 
         // when
-        var result = inputString.getSum();
+        var result = numberList.getSum();
 
         // then
         assertThat(result).isEqualTo(0);
@@ -34,10 +34,10 @@ public class InputStringTest {
     @Test
     void 숫자_하나() {
         // given
-        var inputString = new InputString("1");
+        var numberList = new NumberList("1");
 
         // when
-        var result = inputString.getSum();
+        var result = numberList.getSum();
 
         // then
         assertThat(result).isEqualTo(1);
@@ -46,10 +46,10 @@ public class InputStringTest {
     @Test
     void 쉼표_구분자() {
         // given
-        var inputString = new InputString("1,2,3");
+        var numberList = new NumberList("1,2,3");
 
         // when
-        var result = inputString.getSum();
+        var result = numberList.getSum();
 
         // then
         assertThat(result).isEqualTo(6);
@@ -58,10 +58,10 @@ public class InputStringTest {
     @Test
     void 콜론_구분자() {
         // given
-        var inputString = new InputString("1:2:3");
+        var numberList = new NumberList("1:2:3");
 
         // when
-        var result = inputString.getSum();
+        var result = numberList.getSum();
 
         // then
         assertThat(result).isEqualTo(6);
@@ -70,10 +70,10 @@ public class InputStringTest {
     @Test
     void 쉼표_콜론_구분자() {
         // given
-        var inputString = new InputString("1,2:3");
+        var numberList = new NumberList("1,2:3");
 
         // when
-        var result = inputString.getSum();
+        var result = numberList.getSum();
 
         // then
         assertThat(result).isEqualTo(6);
@@ -82,10 +82,10 @@ public class InputStringTest {
     @Test
     void 커스텀_구분자_여러_숫자() {
         // given
-        var inputString = new InputString("//;\n1;2;3");
+        var numberList = new NumberList("//;\n1;2;3");
 
         // when
-        var result = inputString.getSum();
+        var result = numberList.getSum();
 
         // then
         assertThat(result).isEqualTo(6);
@@ -94,10 +94,10 @@ public class InputStringTest {
     @Test
     void 커스텀_구분자_단일_숫자() {
         //given
-        var inputString = new InputString("//;\n1");
+        var numberList = new NumberList("//;\n1");
 
         //when
-        var result = inputString.getSum();
+        var result = numberList.getSum();
 
         //then
         assertThat(result).isEqualTo(1);
@@ -109,7 +109,7 @@ public class InputStringTest {
         String input = "1//;\n1";
 
         //when, then
-        assertThrows(IllegalArgumentException.class, () -> new InputString(input));
+        assertThrows(IllegalArgumentException.class, () -> new NumberList(input));
     }
 
     @Test
@@ -118,7 +118,7 @@ public class InputStringTest {
         String input = "-1,2,3";
 
         //when, then
-        assertThrows(IllegalArgumentException.class, () -> new InputString(input));
+        assertThrows(IllegalArgumentException.class, () -> new NumberList(input));
     }
 
     @Test
@@ -127,7 +127,7 @@ public class InputStringTest {
         String input = "//1\n1";
 
         //when, then
-        assertThrows(IllegalArgumentException.class, () -> new InputString(input));
+        assertThrows(IllegalArgumentException.class, () -> new NumberList(input));
     }
 
     @Test
@@ -136,7 +136,7 @@ public class InputStringTest {
         String input = "//;;\n1;2;3";
 
         //when, then
-        assertThrows(IllegalArgumentException.class, () -> new InputString(input));
+        assertThrows(IllegalArgumentException.class, () -> new NumberList(input));
     }
 
 }
