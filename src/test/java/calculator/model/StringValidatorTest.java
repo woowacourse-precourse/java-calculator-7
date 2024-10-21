@@ -73,4 +73,17 @@ class StringValidatorTest {
 		        .isInstanceOf(IllegalArgumentException.class)
 				.hasMessage(errorMessage);
 	}
+
+	@ParameterizedTest
+	@DisplayName("구분자가 중복된 문자열이 입력되었을 때 에러를 발생시킨다.")
+	@ValueSource(strings = {"1,,2", "1::2", "1,2:3,:4"})
+	void 구분자가_중복된_문자열이_입력되었을_때_에러를_발생시킨다(String input) {
+		// given
+		StringValidator stringValidator = new StringValidator(input);
+
+		// when, then
+		assertThatThrownBy(stringValidator::validate)
+			    .isInstanceOf(IllegalArgumentException.class)
+			    .hasMessage(errorMessage);
+	}
 }
