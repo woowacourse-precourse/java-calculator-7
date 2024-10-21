@@ -29,6 +29,37 @@ public class Calculator {
         this.dTList = new ArrayList<>(Arrays.asList(",", ":"));
     }
 
+    private String updateDTListAndReturnStr(String inputData) {
+        // 인덱스를 가진 list를 통해 구분자의 시작 인덱스 + 끝 인덱스를 파악
+        ListNode node = findCustomDTIdx(inputData);
+        List<Integer> startIdxList = node.startDTIndexList;
+        List<Integer> endIdxList = node.endDTIndexList;
+
+        // substring을 통해 시작 인덱스에서 끝 인덱스 + 1까지 str을 구하기 -> 구분자 가져오기
+        if (startIdxList.size() == endIdxList.size()) {
+            int size = node.startDTIndexList.size();
+            for (int i = 0; i < size; i++) {
+                if (startIdxList.get(i) <= endIdxList.get(i)) {
+                    dTList.add(inputData.substring(startIdxList.get(i), endIdxList.get(i) + 1));
+                } else {
+                    throw new IllegalArgumentException();
+                }
+            }
+        } else {
+            throw new IllegalArgumentException();
+        }
+
+        // 이제 '//'과 '\n' -> ""으로 변경 후 return
+        for(int i = 0; i < inputData.length() - 1; i++) {
+            if(inputData.charAt(i) == '/' && inputData.charAt(i + 1) == '/' || inputData.charAt(i) == '\\' && inputData.charAt(i + 1) == 'n') {
+                inputData = inputData.substring(0, i) + inputData.substring(i + 2);
+                i--;
+            }
+        }
+
+        return inputData;
+    }
+
     private ListNode findCustomDTIdx(String inputData) {
         //시작 인덱스를 저장할 리스트
         List<Integer> startDTIdxList = new ArrayList<>();
