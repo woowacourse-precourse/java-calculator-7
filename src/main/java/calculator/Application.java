@@ -33,14 +33,9 @@ public class Application {
         return input == null || input.isEmpty();
     }
 
-    // 구분자(쉼표 or 콜론)을 올바르게 사용했는지 확인하는 함수
-    public static void validateBasicSeparator(String input) {
-        // 처음에 숫자가 나왔는지 확인
-        if (!Character.isDigit(input.charAt(0))) {
-            throw new IllegalArgumentException("숫자부터 입력해야 합니다.");
-        }
 
-        // 숫자 사이에 하나의 구분자만 있는지 확인
+    // 숫자 사이에 하나의 구분자만 있는지 확인하는 함수
+    public static void validateSeparatorBetweenNumber(String input) {
         String[] st = input.split("[" + basicSeparators[0] + basicSeparators[1] + customSeparators[0] + "]");
         for (String s : st) {
             if (s == null || s.isEmpty()) {
@@ -48,6 +43,14 @@ public class Application {
             }
         }
     }
+
+    // 처음에 숫자가 나왔는지 확인하는 함수
+    public static void validateStartWithDigit(String input) {
+        if (!Character.isDigit(input.charAt(0))) {
+            throw new IllegalArgumentException("숫자부터 입력해야 합니다.");
+        }
+    }
+
 
     // 문자열 개수로 구분자 외에 다른 문자가 있는지 확인
     public static void validateNotSeparator(String input) {
@@ -77,14 +80,14 @@ public class Application {
     // 입력 유효성 검사 함수
     public static void validInput(String input) {
         validateBlankInput(input);
+        validateStartWithDigit(input);
         validateNotSeparator(input);
-        if (validateEmptyInput(userInput)) {
+        if (validateEmptyInput(input)) {
             System.out.println("결과 : " + 0);
             return;
         }
-        validateNotSeparator(userInput);
-        validateBasicSeparator(userInput);
-        validateEndWithNumber(userInput);
+        validateSeparatorBetweenNumber(input);
+        validateEndWithNumber(input);
     }
 
     public static void main(String[] args) {
