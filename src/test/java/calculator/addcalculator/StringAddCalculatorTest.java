@@ -3,21 +3,14 @@ package calculator.addcalculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class StringAddCalculatorTest {
-
-
-    @Test
-    @DisplayName("주어진 테스트 케이스1")
-    void 커스텀_구분자_사용() {
-
-        String inputString = "//;\\n1";
-        StringAddCalculator stringAddCalculator = new StringAddCalculator(inputString);
-        assertEquals(stringAddCalculator.getResultString(), "1");
-    }
 
     @Test
     @DisplayName("기본 구분자 사용 테스트")

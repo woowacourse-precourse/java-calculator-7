@@ -99,9 +99,10 @@ public class StringAddCalculator {
         if(delimeterEndIdx == -1){
             delimeterEndIdx = inputString.indexOf('n');
             if(inputString.charAt(delimeterEndIdx-1) == '\\'){
-                delimeterEndIdx = delimeterEndIdx - 1;
+                delimeterCharters.add('\\');
             }
-            throw new IllegalArgumentException("구분자 오류");           //FIXME
+            else
+                throw new IllegalArgumentException("구분자 오류");           //FIXME
         }
         for(int i = 2; i<delimeterEndIdx; i++){
             char delimeter = inputString.charAt(i);
