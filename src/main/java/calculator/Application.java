@@ -1,7 +1,6 @@
 package calculator;
 import camp.nextstep.edu.missionutils.Console;
 
-
 public class Application {
     public static void main(String[] args) {
     	
@@ -22,8 +21,12 @@ class StringCalculator{
             return 0;
         } //빈 문자열을 입력할 경우 0 반환
 
-        else if(input.matches("\\d+")){
-            return Integer.parseInt(input);
+        else if(input.matches("-?\\d+")){
+            int num = Integer.parseInt(input);
+
+            checkNum(num);
+
+            return num;
         } //하나의 숫자만 입력할 경우 그 숫자를 반환
 
         else if(input.startsWith("//")){
@@ -34,7 +37,11 @@ class StringCalculator{
 
             int sum = 0;
             for(String number : numbers){
-                sum+= Integer.parseInt(number);
+                int num = Integer.parseInt(number);
+
+                checkNum(num);
+
+                sum+= num;
             }
             return sum;
         } // 커스텀 구분자 지정
@@ -44,9 +51,19 @@ class StringCalculator{
         int sum = 0;
 
         for (String number : numbers) {
-            sum += Integer.parseInt(number);
+            int num = Integer.parseInt(number);
+
+            checkNum(num);
+
+            sum += num;
         }
         return sum; // 분리한 숫자를 합해 결과 출력
+    }
+
+    private void checkNum(int num){
+        if(num<0){
+            throw new IllegalArgumentException("입력이 잘못되었습니다.");
+        }
     }
 }
 
