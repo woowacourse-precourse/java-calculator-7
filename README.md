@@ -10,7 +10,7 @@
 
 문자열 덧셈 계산기
 
-```
+```markdown
 # requirement 
 - , 또는 :을 구분자로 가지는 문자열을 전달하는 경우 구분자를 기준으로 분리한 각 숫자의 합을 반환
 - 커스텀 기본자를 지정가능 문자열 앞부문 //와 \n 사이에 위치하는 문자를 커스텀 구분자로 사용한다
@@ -27,10 +27,10 @@
 
 ## 기능
 
-- 사용자의 입력을 받아 값에 담고 출력한다. 
-- 구분자를 담고 앞에서부터 구분자와 비교해서 더한다. 
-- 커스텀 구분자를 추가한다. 
-- 예외사항발생시 exception을 던진다.
+- 사용자의 입력을 받아 값에 담고 출력한다.             (완료)
+- 구분자를 담고 앞에서부터 구분자와 비교해서 더한다.      (완료)
+- 커스텀 구분자를 추가한다.                        (완료)
+- 예외사항발생시 exception을 던진다.               (완료)
 
 ## 의도
 
@@ -61,7 +61,7 @@
 - 프로그램 종료 시 System.exit()를 호출하지 않는다.
 - 프로그래밍 요구 사항에서 달리 명시하지 않는 한 파일, 패키지 등의 이름을 바꾸거나 이동하지 않는다.
 - 자바 코드 컨벤션을 지키면서 프로그래밍한다.
-- 기본적으로 ![[https://github.com/woowacourse/woowacourse-docs/tree/main/styleguide/java|Java Style Guide]]를 원칙으로 한다.
+- 기본적으로 [[https://github.com/woowacourse/woowacourse-docs/tree/main/styleguide/java | Java Style Guide]]를 원칙으로 한다.
 
 ## 추가사항
 - 제출방법과 양식 
@@ -72,3 +72,9 @@ TDD
 Junit을 사용해서 문제가 생길만한 것 테스트하기 
 
 
+## 안보고 지나쳐서 수정한 사항들
+1. 디렉토리 파일구조 잘못해서 다시 생성
+2. 과제 명세 제대로 읽지 않음
+    camp.nextstep.edu.missionutils에서 제공하는 Console API를 사용하여 구현해야 한다.
+    사용자가 입력하는 값은 camp.nextstep.edu.missionutils.Console의 readLine()을 활용한다.
+3. git config email 설정 안해서 또 다른계정으로 진행하다가 마지막에 교체 
