@@ -1,5 +1,7 @@
 package calculator;
 
+import camp.nextstep.edu.missionutils.Console;
+
 import java.util.*;
 
 public class Application {
@@ -8,9 +10,8 @@ public class Application {
 
         String delimiters = ",:";  // 커스텀 문자열까지 받기 위해 열어둔다.
 
-        Scanner sc = new Scanner(System.in);
-        String inputStr = sc.nextLine();
-        sc.close();
+        String inputStr = Console.readLine();
+        Console.close();
 
         // 커스텀 문자열이 존재하는 경우, 그것을 찾아서 포함시켜준다.
         if (inputStr.substring(0, 2).equals("//")) {
@@ -56,11 +57,16 @@ public class Application {
         pureStr = inputStr.split("["+delimiters+"]+");
 
         for(String s : pureStr) {
+
+            // 사용자가 0을 입력하는 경우 `IllegalArgumentException`을 발생시킴
+            if(Integer.parseInt(s) == 0)
+                throw new IllegalArgumentException("구분자와 양수로 구성된 문자열을 입력해야 합니다.");
+
             char[] charArr = s.toCharArray();
 
-            // 사용자가 잘못된 값을 입력하는 경우 `IllegalArgumentException`을 발생시킴
+            // 사용자가 문자나 잘못된 구분자를 입력하는 경우 `IllegalArgumentException`을 발생시킴
             for (char c : charArr) {
-                if ( !Character.isDigit(c) || c == '0' )
+                if ( !Character.isDigit(c) )
                     throw new IllegalArgumentException("구분자와 양수로 구성된 문자열을 입력해야 합니다.");
             }
         }
