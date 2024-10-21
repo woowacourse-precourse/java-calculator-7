@@ -28,7 +28,8 @@ public class Application {
 
                 // 커스텀 구분자 처리
                 int index = 0;
-                while (index < customDelimiterParts.length && customDelimiterParts[index].startsWith("//")) {
+                while (index < customDelimiterParts.length &&
+                        customDelimiterParts[index].startsWith("//")) {
                     // 구분자 스트링에 커스텀 구분자 추가 (정규식 특수 문자 이스케이프 처리)
                     String customDelimiter = customDelimiterParts[index].substring(2);
 
