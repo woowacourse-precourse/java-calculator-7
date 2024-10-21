@@ -11,12 +11,12 @@ public class StringCalculator {
 
 	// 문자열을 입력 받아서 합계를 반환하는 메서드
 	public int add(String input) {
-		// 1. 빈 문자열 또는 null 체크
+		// 빈 문자열 또는 null 체크
 		if (input == null || input.isEmpty()) {
 			return 0;
 		}
 
-		// 2. 커스텀 구분자 정의 여부 확인
+		// 커스텀 구분자 정의 여부 확인
 		if (input.startsWith("//")) {
 			return handleCustomDelimiter(input);
 		} else {
@@ -27,36 +27,40 @@ public class StringCalculator {
 
 	// 커스텀 구분자를 처리하는 메서드
 	private int handleCustomDelimiter(String input) {
-		// 3. 커스텀 구분자가 올바르게 정의되었는지 확인
-		Pattern pattern = Pattern.compile("//(.)\n(.*)");
+		// 커스텀 구분자가 올바르게 정의되었는지 확인
+		Pattern pattern = Pattern.compile("//(.)\\\\n(.*)|//(.)\n(.*)");
 		Matcher matcher = pattern.matcher(input);
 
 		if (!matcher.matches()) {
 			throw new IllegalArgumentException("잘못된 커스텀 구분자 정의입니다.");
 		}
 
-		String delimiter = matcher.group(1); // 커스텀 구분자 추출
-		String numbers = matcher.group(2); // 숫자 부분
+		String delimiter;
+		String numbers;
 
-		// 4. 커스텀 구분자가 들어가야 할 위치에 숫자가 있는 경우 처리
+		if (matcher.group(1) != null) {
+			delimiter = matcher.group(1); // 이스케이프된 \\n 처리
+			numbers = matcher.group(2);
+		} else {
+			delimiter = matcher.group(3); // 실제 \n 처리
+			numbers = matcher.group(4);
+		}
+
+		// 커스텀 구분자가 들어가야 할 위치에 숫자가 있는 경우 처리
 		if (!numbers.matches("^[0-9" + Pattern.quote(delimiter) + "]+$")) {
 			throw new IllegalArgumentException("구분자 위치에 숫자가 들어갔습니다.");
 		}
 
-		// 5. 여러 개의 구분자가 연속으로 사용된 경우 처리
+		// 여러 개의 구분자가 연속으로 사용된 경우 처리
 		if (numbers.contains(delimiter + delimiter)) {
 			throw new IllegalArgumentException("연속된 구분자가 사용되었습니다.");
 		}
 
-		// 6. 구분자가 맨 앞이나 맨 뒤에 있는 경우 처리
+		// 구분자가 맨 앞이나 맨 뒤에 있는 경우 처리
 		if (numbers.startsWith(delimiter) || numbers.endsWith(delimiter)) {
 			throw new IllegalArgumentException("구분자가 맨 앞이나 맨 뒤에 위치할 수 없습니다.");
 		}
 
-		// 7. 커스텀 구분자로 정의한 구분자를 사용했는지 확인
-		if (!numbers.contains(delimiter)) {
-			throw new IllegalArgumentException("정의된 구분자가 사용되지 않았습니다.");
-		}
 
 		// 커스텀 구분자로 문자열을 분리하고 합계 계산
 		String[] tokens = numbers.split(Pattern.quote(delimiter));
@@ -85,6 +89,12 @@ public class StringCalculator {
 		int sum = 0;
 		for (String token : tokens) {
 			int num = Integer.parseInt(token);
+
+			// 음수 값을 체크하여 예외 발생
+			if (num < 0) {
+				throw new IllegalArgumentException("음수는 입력할 수 없습니다: " + num);
+			}
+
 			sum += num;
 		}
 		return sum;
