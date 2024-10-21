@@ -3,12 +3,11 @@ package calculator;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import java.util.List;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
-import java.util.List;
 
 class ApplicationTest extends NsTest {
     @Test
@@ -46,6 +45,13 @@ class ApplicationTest extends NsTest {
     void should_returnDigitArray_when_ColonSeparatedString() {
         List<Integer> result = Application.parseInput("1:2: 15");
         assertThat(result).isEqualTo(List.of(1, 2, 15));
+    }
+
+    @Test
+    @DisplayName("")
+    void should_returnDigitArray_when_CustomDelimiterSeparatedString() {
+        List<Integer> result = Application.parseInput("//;\\n1;2");
+        assertThat(result).isEqualTo(List.of(1, 2));
     }
 
     @Override
