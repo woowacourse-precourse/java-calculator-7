@@ -26,7 +26,7 @@ public class CalculatorService {
         if (input.startsWith("//")) {
             int delimiterIndex = input.indexOf("\\n");
             if (delimiterIndex == -1) {
-                throw new IllegalArgumentException("Invalid custom delimiter format.");
+                throw new IllegalArgumentException();
             }
             String customDelimiter = Pattern.quote(input.substring(2, delimiterIndex));
             return defaultDelimiter + "|" + customDelimiter;
