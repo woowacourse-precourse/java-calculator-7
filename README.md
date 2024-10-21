@@ -1,17 +1,4 @@
-#기능 구현 목록
----
-## 입력값 분류
-
-## 계산
-
-
-
-
-
-
-
-
-<!--# 학습 목표
+# 학습 목표
 - Git, GitHub, IDE 등 실제 개발을 위한 환경에 익숙해진다.
 - 교육 분야에 맞는 프로그래밍 언어를 사용하여 간단한 문제를 해결한다.
 
@@ -96,4 +83,4 @@ BUILD SUCCESSFUL in 0s
 
 ## 라이브러리
 - `camp.nextstep.edu.missionutils`에서 제공하는 `Console` API를 사용하여 구현해야 한다.
-  - 사용자가 입력하는 값은 `camp.nextstep.edu.missionutils.Console`의 `readLine()`을 활용한다.-->
+  - 사용자가 입력하는 값은 `camp.nextstep.edu.missionutils.Console`의 `readLine()`을 활용한다.
