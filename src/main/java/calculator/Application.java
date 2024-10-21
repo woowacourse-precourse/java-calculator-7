@@ -1,7 +1,19 @@
 package calculator;
+class Printer{}
+class Extraction{}
+class Calculator{}
+
 
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        // Printer 객체 생성
+        Printer printer = new Printer();
+
+        // 객체 생성
+        Extraction extraction = new Extraction();
+        Calculator calculator = new Calculator();
+
+
     }
+
 }
