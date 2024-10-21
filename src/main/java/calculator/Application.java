@@ -14,27 +14,27 @@ public class Application {
             Console.close();
         }
 
-        ArrayList<String> delimeters = new ArrayList<>(List.of(",", ":"));
+        ArrayList<String> delimiters = new ArrayList<>(List.of(",", ":"));
 
         if (str.substring(0, 2).equals("//")) {
-            int delimeterIndex = -1;
-            delimeterIndex = str.indexOf("\\n");
-            if (delimeterIndex != -1) {
-                String customDelimeter = str.substring(2, delimeterIndex);
-                delimeters.add(customDelimeter);
-                str = str.substring(delimeterIndex + 2, str.length());
+            int delimiterIndex = -1;
+            delimiterIndex = str.indexOf("\\n");
+            if (delimiterIndex != -1) {
+                String customDelimiter = str.substring(2, delimiterIndex);
+                delimiters.add(customDelimiter);
+                str = str.substring(delimiterIndex + 2, str.length());
             } else {
                 throw new IllegalStateException();
             }
         }
 
-        String splitDelimeters = "";
+        String splitDelimiters = "";
 
-        for (int i = 0; i < delimeters.size(); i++) {
-            if (i == delimeters.size() - 1) {
-                splitDelimeters += delimeters.get(i);
+        for (int i = 0; i < delimiters.size(); i++) {
+            if (i == delimiters.size() - 1) {
+                splitDelimiters += delimiters.get(i);
             }
-            splitDelimeters += delimeters.get(i) + "|";
+            splitDelimiters += delimiters.get(i) + "|";
         }
     }
 }
