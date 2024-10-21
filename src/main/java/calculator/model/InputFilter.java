@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import calculator.model.delimiter.Delimiter;
 import calculator.validation.InputValidator;
 
 public class InputFilter {

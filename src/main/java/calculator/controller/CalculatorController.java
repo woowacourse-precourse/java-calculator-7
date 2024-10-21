@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import calculator.model.Calculator;
-import calculator.model.CustomDelimiterProcessor;
-import calculator.model.Delimiter;
+import calculator.model.delimiter.CustomDelimiterProcessor;
+import calculator.model.delimiter.Delimiter;
 import calculator.model.InputFilter;
 import calculator.view.InputView;
 import calculator.view.OutputView;

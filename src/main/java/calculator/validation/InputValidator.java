@@ -4,7 +4,7 @@ import static calculator.exception.ErrorMessage.*;
 
 import java.util.regex.Pattern;
 
-import calculator.model.Delimiter;
+import calculator.model.delimiter.Delimiter;
 
 public class InputValidator {
 	private InputValidator() {
