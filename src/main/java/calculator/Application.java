@@ -14,6 +14,7 @@ public class Application {
             System.out.println("결과 : " + sum);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
+            throw e; // 에러 던지기
         }
     }
 }
