@@ -11,6 +11,7 @@ public class Adder {
             if (number.isBlank()) {
                 continue;
             }
+            validateNumber(number);
             long element = Long.parseLong(number);
             validateOverflow(element);
             answer += element;
@@ -25,6 +26,14 @@ public class Adder {
     private void validateOverflow(long number) {
         if (number < 0) {
             throw new IllegalArgumentException("허용 범위를 초과하였습니다.");
+        }
+    }
+
+    private void validateNumber(String number) {
+        for (int i = 0; i < number.length(); i++) {
+            if (!Character.isDigit(number.charAt(i))) {
+                throw new IllegalArgumentException("숫자만 더할 수 있습니다.");
+            }
         }
     }
 }

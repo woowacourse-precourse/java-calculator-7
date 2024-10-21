@@ -29,6 +29,7 @@ public class Controller {
                     rawNumbers);
             adder.add(numbers);
             output.printResult(adder.getAnswer());
+            return;
         }
 
         if (validator.isStartWithDigit(userInput)) {
@@ -38,6 +39,8 @@ public class Controller {
             );
             adder.add(numbers);
             output.printResult(adder.getAnswer());
+            return;
         }
+        output.printResult(adder.getAnswer());
     }
 }
