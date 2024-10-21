@@ -35,7 +35,7 @@ class Splitter {
                     throw new IllegalArgumentException("구분자는 연속으로 올 수 없습니다.");
 
                 tokens.add(token.toString());
-                token.delete(0, token.length());
+                token.setLength(0);
             }
             else if (Character.isDigit(ch))
                 token.append(ch);
