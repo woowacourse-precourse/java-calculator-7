@@ -2,6 +2,8 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.Arrays;
+
 public class Application {
     public static void main(String[] args) {
         String input = Console.readLine();
@@ -12,7 +14,10 @@ public class Application {
         if (input == null || input.isEmpty()) {
             return 0;
         }
-        // 이후 단계에서 추가 코드 작성
-        return 0;
+
+        String[] tokens = input.split("[,|:]");
+        return Arrays.stream(tokens)
+                .mapToInt(Integer::parseInt)
+                .sum();
     }
 }
