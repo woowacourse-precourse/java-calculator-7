@@ -1,0 +1,49 @@
+package calculator.model;
+
+import java.util.regex.Pattern;
+
+public class PositiveNumber {
+    private final String REGEXP_ONLY_NUM = "^[\\d]*$";
+    private final String EMPTY_NUMBER = "";
+
+    private int count;
+
+    public PositiveNumber(int count) {
+        this.count = count;
+    }
+
+    public void validateIsNumber(String numberAdded) {
+        if (!Pattern.matches(REGEXP_ONLY_NUM, numberAdded)) {
+            throw new IllegalArgumentException("잘못된 구분자를 포함합니다.");
+        }
+    }
+
+    public void validatePositiveNumber(int number) {
+        if (number <= 0) {
+            throw new IllegalArgumentException("양수가 아닌 수를 포함합니다.");
+        }
+    }
+
+    public void plus(String numberAdded) {
+        validateIsNumber(numberAdded);
+        if (numberAdded.equals(EMPTY_NUMBER)) {
+            return;
+        }
+
+        int number = Integer.parseInt(numberAdded);
+        validatePositiveNumber(number);
+        this.count += number;
+
+        validateIsResultPositive();
+    }
+
+    public void validateIsResultPositive() {
+        if (this.count < 0) {
+            throw new IllegalArgumentException("결과값이 양수가 아닙니다. 큰 수를 더했을 수 있습니다.");
+        }
+    }
+
+    public int getCount() {
+        return this.count;
+    }
+}
