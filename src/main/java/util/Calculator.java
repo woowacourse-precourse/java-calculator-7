@@ -23,11 +23,11 @@ public class Calculator {
         OutputView.printResult(result);
     }
 
-    private static String getNoSpaceInput(String input) {
+    protected static String getNoSpaceInput(String input) {
         return input.replaceAll("\\s+", "");
     }
 
-    private static int getSum(int[] numbers) {
+    public static int getSum(int[] numbers) {
         int sum = 0;
         for (int i : numbers) {
             sum += i;
