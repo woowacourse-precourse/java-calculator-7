@@ -34,18 +34,10 @@
 - mvc 동작 구조
 
 
-# 클래스 및 구조 설계
+# 클래스 구조
 
-src
-├───main
-│   └───java
-│       └───calculator
-│           ├───controller
-│           ├───model
-│           └───view
-└───test
-    └───java
-        └───calculator
+![image](https://github.com/user-attachments/assets/a10c997f-e974-4231-b448-107566b8f8b5)
+
 
 
 
