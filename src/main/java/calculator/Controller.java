@@ -16,5 +16,7 @@ public class Controller {
         String input = inputHandler.getUserInput();
 
         input = separatorHandler.checkCustomSeparator(input);
+
+        inputHandler.validateInput(input);
     }
 }

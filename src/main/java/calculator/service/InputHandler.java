@@ -14,4 +14,11 @@ public class InputHandler {
 
         return input;
     }
+
+    public void validateInput(String input) {
+        String regex = "^[0-9,]+$";
+        if (!input.matches(regex)) {
+            throw new IllegalArgumentException("구분자와 양수로 구성된 입력이 아닙니다.");
+        }
+    }
 }
