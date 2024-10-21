@@ -9,15 +9,13 @@ public class Application {
 
         // 기본 요구사항 : 사용자가 입력하는 값은 camp.nextstep.edu.missionutils.Console의 readLine()을 활용한다.
         StringCalculator calculator = new StringCalculator();
-        try {
-            System.out.println("덧셈할 문자열을 입력해 주세요.");
-            String input = Console.readLine();
 
-            Number result = calculator.calculate(input);
-            System.out.println("결과 : " + result.getValue());
-        } catch (IllegalArgumentException e) {
-            System.out.println("error: " + e.getMessage());
-        }
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        String input = Console.readLine();
+
+        Number result = calculator.calculate(input);
+        System.out.println("결과 : " + result.getValue());
+
 
     }
 }
