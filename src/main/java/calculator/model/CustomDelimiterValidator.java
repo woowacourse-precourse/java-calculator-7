@@ -10,7 +10,7 @@ public class CustomDelimiterValidator {
 	private static final int CUSTOM_DELIMITER_LENGTH = 1;
 
 	public StringValidator validCustomDelimiter(String input) {
-		if (hasCustomDelimiter(input)) {
+		if (this.hasCustomDelimiter(input)) {
 			String customDelimiter = this.getCustomDelimiter(input);
 			input = this.removeCustomDelimiter(input);
 			return new StringValidator(input, customDelimiter);
