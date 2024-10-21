@@ -16,12 +16,13 @@ public class Application {
     private static String numberInputString = null;
 
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
-        String inputValue = Console.readLine();
         try {
             System.out.println("덧셈할 문자열을 입력해 주세요.");
+            String inputValue = Console.readLine();
+
             Set<Character> delimiters = extractDelimiter(inputValue);
             long result = calcNumbers(delimiters);
+
             System.out.println("결과 : " + result);
         } catch (IllegalArgumentException expected) {
             System.out.println(expected.getMessage());
