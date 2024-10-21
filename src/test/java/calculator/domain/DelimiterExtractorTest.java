@@ -36,5 +36,13 @@ class DelimiterExtractorTest {
         assertEquals(",|:|\\Q;\\E", result);  // 커스텀 구분자가 없으면 기본 구분자만 포함
     }
 
+    @Test
+    @DisplayName("구분자가 없을 때 기본 구분자를 반환한다")
+    void noDelimitersReturnsDefaultDelimiters() {
+        String input = "123";
+        String result = extractor.extractDelimiters(input, ",|:", "//", "\n");
+
+        assertEquals(",|:", result);
+    }
 
 }
