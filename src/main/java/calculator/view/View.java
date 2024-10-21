@@ -18,6 +18,21 @@ public final class View {
 
     /* Input View */
     private static String enterMessage() {
-        return Console.readLine();
+        String message = Console.readLine();
+        Validator.validate(message);
+        return message;
+    }
+
+    /* Validator */
+    private static class Validator {
+        private static void validate(String message) {
+            if (isBlank(message)) {
+                throw new IllegalArgumentException("빈 문자열이 입력되었습니다.");
+            }
+        }
+
+        private static boolean isBlank(String message) {
+            return message.isBlank();
+        }
     }
 }
