@@ -10,4 +10,7 @@ public class Output {
         printString("덧셈할 문자열을 입력해 주세요.");
     }
 
+    public static void printCalculationResult(int sum) {
+        printString("결과 : " + sum);
+    }
 }
