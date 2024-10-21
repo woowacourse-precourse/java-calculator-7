@@ -32,7 +32,7 @@ class ParserTest {
     @Test
     void startsWithPositiveNumber() {
         ///given
-        Delimiter delimiter = new Delimiter();
+        Delimiter delimiter = new DefaultDelimiter();
         String input = delimiter.parseDelimiter("1,2,3:4");
         String require= "10";
         //when

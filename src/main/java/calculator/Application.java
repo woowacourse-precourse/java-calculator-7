@@ -15,10 +15,9 @@ public class Application {
     }
 
     private static Delimiter isCustomDelimiter(String input) {
-        Delimiter delimiter= new Delimiter();
         if (input.startsWith("//")) {
-            delimiter = new CustomDelimiter();
+            return new CustomDelimiter();
         }
-        return delimiter;
+        return new DefaultDelimiter();
     }
 }

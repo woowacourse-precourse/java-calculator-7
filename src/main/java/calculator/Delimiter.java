@@ -1,13 +1,7 @@
 package calculator;
 
-public class Delimiter {
-    protected String delimiters = ",|:";
+public interface Delimiter {
+    String getDelimiters();
 
-    public String getDelimiters() {
-        return delimiters;
-    }
-
-    public String parseDelimiter(String input) {
-        return input;
-    }
+    String parseDelimiter(String input);
 }

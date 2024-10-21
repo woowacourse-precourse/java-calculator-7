@@ -16,7 +16,7 @@ class CustomDelimiterTest {
         //when
         //then
         assertEquals("11", delimiter.parseDelimiter(input));
-        assertEquals(",|:"+"|"+"\\\\", delimiter.delimiters);
+        assertEquals(",|:"+"|"+"\\\\", delimiter.getDelimiters());
     }
 
     @DisplayName("커스텀 구분자를 바르게 추출하는가?")
@@ -28,6 +28,6 @@ class CustomDelimiterTest {
         //when
         //then
         assertEquals("11", delimiter.parseDelimiter(input));
-        assertEquals(",|:"+"|"+"!", delimiter.delimiters);
+        assertEquals(",|:"+"|"+"!", delimiter.getDelimiters());
     }
 }
