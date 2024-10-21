@@ -26,10 +26,19 @@ public class Application {
         String[] tokens = input.split(delimiter);
         int sum = 0;
         for (String token : tokens) {
-            int number = Integer.parseInt(token);
+            int number = parsePositiveNumber(token);
             sum += number;
         }
 
         return sum;
+    }
+
+    public static int parsePositiveNumber(String token) {
+        try {
+            int number = Integer.parseInt(token);
+            return number;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자 형식이 잘못되었습니다.");
+        }
     }
 }
