@@ -2,6 +2,7 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.math.BigInteger;
 import java.util.*;
 
 public class Application {
@@ -23,7 +24,10 @@ public class Application {
         // 정규표현식 활용해서 연속으로 구분자가 들어오는 경우도 처리해준다.
         String[] numStrArr = getNumStrArr(inputStr, delimiters);
 
-        int result = Arrays.stream(numStrArr).mapToInt(Integer::parseInt).sum();
+        // 오버플로우가 발생하지 않는 BigInteger 타입을 사용하여 합연산 안정성 보장
+        BigInteger result = Arrays.stream(numStrArr).map(BigInteger::new)
+                            .reduce(BigInteger.ZERO, BigInteger::add);
+
         System.out.println("결과 : "+result);
     }
 

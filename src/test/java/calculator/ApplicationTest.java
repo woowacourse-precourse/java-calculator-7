@@ -3,6 +3,8 @@ package calculator;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigInteger;
+
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -37,6 +39,14 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             run("1,20,300:4000");
             assertThat(output()).contains("결과 : 4321");
+        });
+    }
+
+    @Test
+    void 오버플로우_무시_합연산() {
+        assertSimpleTest(() -> {
+            run(String.valueOf(Integer.MAX_VALUE)+",2:3");
+            assertThat(output()).contains("결과 : "+BigInteger.valueOf(Long.sum(Integer.MAX_VALUE, 5)));
         });
     }
 
