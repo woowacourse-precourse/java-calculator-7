@@ -3,10 +3,6 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 import org.junit.platform.commons.util.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class Application {
     public static void main(String[] args) {
 
