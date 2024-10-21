@@ -4,7 +4,17 @@ import camp.nextstep.edu.missionutils.Console;
 
 class Printer{}
 class Extraction{}
-class Calculator{}
+class Calculator {
+    // 덧셈을 수행하는 메서드
+    public int add(int[] numbers) {
+        int sum = 0;  // 초기화
+        for (int num : numbers) {
+            sum += num;
+        }
+        return sum;
+    }
+}
+
 
 
 public class Application {
