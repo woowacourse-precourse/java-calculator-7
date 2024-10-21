@@ -17,7 +17,7 @@ public class Application {
         String[] numbers;
         if(input.startsWith("/")){
             int delimiterIndex=input.indexOf("n");
-            if (delimiterIndex == -1) {
+            if (delimiterIndex == -1||delimiterIndex==2) {
                 throw new IllegalArgumentException("커스텀 구분자 형식이 잘못되었습니다.");
             }
             String custom=input.substring(2,delimiterIndex-1);
@@ -29,11 +29,16 @@ public class Application {
         }
         return sumNumbers(numbers);
     }
-
     private static int sumNumbers(String[] numbers) {
         int sum=0;
         for (String num : numbers) {
-            sum += Integer.parseInt(num.trim());
+            if (!num.trim().isEmpty()) {
+                try {
+                    sum += Integer.parseInt(num.trim());
+                } catch (NumberFormatException e) {
+                    throw new IllegalArgumentException("잘못된 값: " + num);
+                }
+            }
         }
         return sum;
     }
