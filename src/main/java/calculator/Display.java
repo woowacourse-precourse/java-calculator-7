@@ -7,4 +7,8 @@ public class Display {
         System.out.println("덧셈할 문자열을 입력해주세요.");
         return Console.readLine();
     }
+
+    public static void displayInputResult(String inputString) {
+        System.out.println(inputString);
+    }
 }
