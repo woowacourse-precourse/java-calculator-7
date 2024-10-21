@@ -35,7 +35,7 @@ public class Calculator {
         return sum.toString();
     }
 
-    // 정수가 아닌 실수가 포함돼 있을 때, 합을 구해 반환하는 메소드
+    // 유리수가 포함돼 있을 때, 합을 구해 반환하는 메소드
     public static String calculateRationalNumber(String[] numbers){
         BigDecimal sum = BigDecimal.ZERO;
 
