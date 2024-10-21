@@ -13,16 +13,18 @@ public class UserInput {
         this.input = input;
     }
 
-    public String getInput() {
-        return input;
-    }
-
-    public boolean isInputEmpty() {
-        return input.isEmpty();
-    }
-
     public List<Long> parser(String userInput) {
         String delimiterRegex = extractDelimiterRegex(userInput);
+        String numbers = extractNumbers(delimiterRegex);
+
+        return convertToLongList(new InputParser(delimiterRegex, numbers).parse());
+    }
+
+    private String extractDelimiterRegex(String userInput) {
+        return new Delimiter(userInput).getDelimiterRegex();
+    }
+
+    private String extractNumbers(String delimiterRegex) {
         String numbers = "";
 
         if (delimiterRegex.equals(",|:")) {
@@ -35,11 +37,8 @@ public class UserInput {
             }
 
         }
-        return convertToLongList(new InputParser(delimiterRegex, numbers).parse());
-    }
 
-    private String extractDelimiterRegex(String userInput) {
-        return new Delimiter(userInput).getDelimiterRegex();
+        return numbers;
     }
 
     private List<Long> convertToLongList(List<String> userInputNumbers) {
@@ -49,5 +48,13 @@ public class UserInput {
                     Number number = new Number(token);
                     return number.getInputNumber();
                 }).toList();
+    }
+
+    public String getInput() {
+        return input;
+    }
+
+    public boolean isInputEmpty() {
+        return input.isEmpty();
     }
 }
