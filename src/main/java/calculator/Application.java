@@ -65,6 +65,10 @@ public class Application {
 
     // "//" 와 "\n" 사이에 있는 문자를 커스텀 구분자로 추가
     public static void addSeparator(String str, List<Character> separatorList) {
+        // 기본 구분자 추가
+        separatorList.add(',');
+        separatorList.add(':');
+
         int startIdx = -1;
 
         for (int i = 0; i < str.length(); i++) {
