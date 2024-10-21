@@ -16,8 +16,11 @@ public class Converter {
     }
 
     public List<Number> convertWordsToString(String words){
-        List<String> stringList = separateWords(words);
-        return stringList.stream()
+        List<String> dirtyWords = separateWords(words);
+        List<String> cleanWords = dirtyWords.stream()
+                .map(String::trim)
+                .toList();
+        return cleanWords.stream()
                 .map(this::parsingNumber)
                 .collect(Collectors.toList());
     }

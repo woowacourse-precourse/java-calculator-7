@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ConverterTest {
     @Test
@@ -60,5 +61,20 @@ public class ConverterTest {
         //then
         assertThat(numbers.get(0)).isEqualTo(new Number(1));
         assertThat(numbers.get(1)).isEqualTo(new Number(2));
+    }
+
+    @Test
+    void 숫자와_구분자로_구별할_수_없는_경우_옳지_않은_입력으로_간주한다() {
+        //given
+        Converter converter = new Converter();
+
+        //when
+        String str = " 1 ";
+
+
+        //then
+        assertThrows(IllegalArgumentException.class, () -> {
+            converter.convertWordsToString(str);
+        });
     }
 }
