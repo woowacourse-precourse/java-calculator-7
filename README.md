@@ -480,6 +480,6 @@ class ApplicationTest extends NsTest {
 
 `JUnit5`의 `ParameterizedTest`를 사용하여 중복된 패턴을 제거하고 유사한 테스트를 그룹화하였다.
 
-![스크린샷 2024-10-18 231131](https://gist.github.com/user-attachments/assets/f73a0ea5-b1fb-43e0-89c5-ece92b117de2)
+![스크린샷 2024-10-18 231131.png](https://media.discordapp.net/attachments/1143115360279728159/1297839390680416326/2024-10-18_231131.png?ex=6717629f&is=6716111f&hm=c941ae00280daa0e3d578d686dcc111feebc3df1e338f5da00b95385dfbd561a&=&format=webp&quality=lossless&width=911&height=574)
 
 모든 테스트 케이스를 통과하였다 ~~~~~~~~~ !!
