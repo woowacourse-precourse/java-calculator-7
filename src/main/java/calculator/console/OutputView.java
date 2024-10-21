@@ -1,15 +1,16 @@
 package calculator.console;
 
-import calculator.system.SystemMessages;
+import static calculator.console.ConsolePrefix.INPUT_REQUEST_PREFIX;
+import static calculator.console.ConsolePrefix.RESULT_RESPONSE_PREFIX;
 
 public class OutputView {
 
 	public void printOperationResult(Long operationResult) {
-		printMessage(SystemMessages.RESULT_RESPONSE_PREFIX.getMessage() + operationResult);
+		printMessage(RESULT_RESPONSE_PREFIX.getMessage() + operationResult);
 	}
 
 	public void printExpressionRequestMessage() {
-		printMessage(SystemMessages.INPUT_REQUEST_PREFIX.getMessage());
+		printMessage(INPUT_REQUEST_PREFIX.getMessage());
 	}
 
 	private void printMessage(String message) {
