@@ -20,6 +20,8 @@ public class Caculator {
         for (String number : numbers) {
             total += Integer.parseInt(number);
         }
+
+        System.out.println("결과 : " + total);
     }
 
     private void setInputString() {
