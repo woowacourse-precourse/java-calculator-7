@@ -33,11 +33,11 @@ public class Calculator {
     }
 
     private Boolean isCustomDelimiterFormat() {
-        return this.userInput.startsWith(CalculatorDelimiter.DEFINE_CUSTOM_DELIMITER_HEAD);
+        return this.userInput.startsWith(CalculatorDelimiter.CUSTOM_DELIMITER_HEAD);
     }
 
     private void processCustomDelimiter() {
-        String normalizedInput = this.userInput.replace("\\n", CalculatorDelimiter.DEFINE_CUSTOM_DELIMITER_LAST);
+        String normalizedInput = this.userInput.replace(CalculatorDelimiter.BACKSLASH_WITH_CUSTOM_DELIMITER_LAST, CalculatorDelimiter.CUSTOM_DELIMITER_LAST);
         Matcher matcher = CalculatorDelimiter.CUSTOM_DELIMITER_PATTERN.matcher(normalizedInput);
 
         if (!matcher.matches()) {
@@ -67,10 +67,10 @@ public class Calculator {
         String delimiter = CalculatorDelimiter.DEFAULT_DELIMITER;
         String targetNumbersWithDelimiter = this.userInput;
 
-        if (this.userInput.startsWith(CalculatorDelimiter.DEFINE_CUSTOM_DELIMITER_HEAD)) {
+        if (this.userInput.startsWith(CalculatorDelimiter.CUSTOM_DELIMITER_HEAD)) {
             delimiter = Pattern.quote(this.customDelimiter) + "|" + CalculatorDelimiter.DEFAULT_DELIMITER;
-            targetNumbersWithDelimiter = this.userInput.substring(this.userInput.indexOf("\\n")
-                    + CalculatorDelimiter.DEFINE_CUSTOM_DELIMITER_LAST_SIZE);
+            targetNumbersWithDelimiter = this.userInput.substring(this.userInput.indexOf(CalculatorDelimiter.BACKSLASH_WITH_CUSTOM_DELIMITER_LAST)
+                    + CalculatorDelimiter.CUSTOM_DELIMITER_LAST_SIZE);
         }
 
         this.calculateResult = Arrays.stream(targetNumbersWithDelimiter.split(delimiter))
