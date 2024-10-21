@@ -9,6 +9,13 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
     @Test
+    void common_case() {
+        assertSimpleTest(() -> {
+            run("123,13:5");
+            assertThat(output()).contains("결과 : 141");
+        });
+    }
+    @Test
     void custom_case() {
         assertSimpleTest(() -> {
             run("//;\\n1");
@@ -17,7 +24,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void exception_case_anotherString() {
+    void exception_case_wrongCharacter() {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -25,11 +32,19 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void exception_case_null() {
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("\0"))
-                        .isInstanceOf(IllegalArgumentException.class)
-        );
+    void exception_case_Null() {
+        assertSimpleTest(() -> {
+            run("\0");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void exception_case_Empty() {
+        assertSimpleTest(() -> {
+            run("\n");
+            assertThat(output()).contains("결과 : 0");
+        });
     }
 
     @Override
