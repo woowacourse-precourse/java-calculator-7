@@ -29,9 +29,17 @@ public class Application {
         int sum = 0;
 
         try {
-            for (String number : numbers) {
-                int num = Integer.parseInt(number.trim());
-                sum += num;
+            try {
+                for (String number : numbers) {
+                    int num = Integer.parseInt(number.trim());
+
+                    if (num < 0) {
+                        throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+                    }
+                    sum += num;
+                }
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
             }
         } catch (NumberFormatException e) {
             System.out.println("유효하지 않은 입력입니다. 숫자만 포함해야 합니다.");
