@@ -40,7 +40,28 @@ public class Application {
 		return 0;
 	}
 	
+	private static String[] splitString(String inputString, char customDelimiter) {
+		//커스텀 구분자가 /0인 경우는 없음으로 간주한 바
+		//커스텀 구분자가 있을 경우, 해당 포맷을 제외한 부분부터 Split
+		if (customDelimiter != 0)
+			inputString = inputString.substring(4);
+		
+		//쉼표, 콜론, 커스텀 구분자를 기준으로 Split
+		String[] stringArray = inputString.split(String.format("[%c%c%c]",
+				DELIMITER_COMMA, DELIMITER_COLON, customDelimiter));
+		
+		return stringArray;
+	}
+	
     public static void main(String[] args) {
-        System.out.println(getCustomDelimiter("//a\n001230,0456:08792"));
+        String testCase1 = "//a\n123a123a09a";
+        String[] testCase1_array = splitString(testCase1, getCustomDelimiter(testCase1));
+        for(String s : testCase1_array)
+        	System.out.println(s);
+        
+        String testCase2 = "123012;123,1";
+        String[] testCase2_array = splitString(testCase2, getCustomDelimiter(testCase2));
+        for(String s : testCase2_array)
+        	System.out.println(s);
     }
 }
