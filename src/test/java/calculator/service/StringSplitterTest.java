@@ -5,21 +5,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 import calculator.domain.delimeter.Delimiter;
 import calculator.domain.delimeter.Delimiters;
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 class StringSplitterTest {
 
-    private StringSplitter stringSplitter;
-
-    @BeforeEach
-    void setUp() {
-        Delimiters delimiters = Delimiters.createWithCustom(
-                List.of(Delimiter.from(","), Delimiter.from(":"), Delimiter.from(";"))
-        );
-        stringSplitter = new StringSplitter(delimiters);
-    }
+    private StringSplitter stringSplitter = new StringSplitter();
+    private static Delimiters delimiters = Delimiters.createWithCustom(
+            List.of(Delimiter.from(","), Delimiter.from(":"), Delimiter.from(";"))
+    );
 
     @Nested
     class 정상_케이스 {
@@ -30,7 +24,7 @@ class StringSplitterTest {
             String input = "1,2,3";
 
             // When
-            List<String> result = stringSplitter.split(input);
+            List<String> result = stringSplitter.split(input, delimiters);
 
             // Then
             assertThat(result).containsExactly("1", "2", "3");
@@ -42,7 +36,7 @@ class StringSplitterTest {
             String input = "1,2:3;4";
 
             // When
-            List<String> result = stringSplitter.split(input);
+            List<String> result = stringSplitter.split(input, delimiters);
 
             // Then
             assertThat(result).containsExactly("1", "2", "3", "4");
@@ -54,7 +48,7 @@ class StringSplitterTest {
             String input = "1,,2:3;;4";
 
             // When
-            List<String> result = stringSplitter.split(input);
+            List<String> result = stringSplitter.split(input, delimiters);
 
             // Then
             assertThat(result).containsExactly("1", "", "2", "3", "", "4");
@@ -66,7 +60,7 @@ class StringSplitterTest {
             String input = "";
 
             // When
-            List<String> result = stringSplitter.split(input);
+            List<String> result = stringSplitter.split(input, delimiters);
 
             // Then
             assertThat(result).isEmpty();
@@ -78,7 +72,7 @@ class StringSplitterTest {
             String input = null;
 
             // When
-            List<String> result = stringSplitter.split(input);
+            List<String> result = stringSplitter.split(input, delimiters);
 
             // Then
             assertThat(result).isEmpty();
@@ -90,7 +84,7 @@ class StringSplitterTest {
             String input = "123";
 
             // When
-            List<String> result = stringSplitter.split(input);
+            List<String> result = stringSplitter.split(input, delimiters);
 
             // Then
             assertThat(result).containsExactly("123");

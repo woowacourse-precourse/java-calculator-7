@@ -5,13 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StringSplitter {
-    private final Delimiters delimiters;
-
-    public StringSplitter(Delimiters delimiters) {
-        this.delimiters = delimiters;
-    }
-
-    public List<String> split(String input) {
+    public List<String> split(String input, Delimiters delimiters) {
         if (input == null || input.isEmpty()) {
             return new ArrayList<>();
         }

@@ -15,25 +15,33 @@ public class Calculator {
     private final InputView inputView;
     private final OutputView outputView;
     private final DelimiterExtractor delimiterExtractor;
+    private final StringSplitter stringSplitter;
 
     public Calculator() {
         this.inputView = new InputView();
         this.outputView = new OutputView();
         this.delimiterExtractor = new DelimiterExtractor();
+        this.stringSplitter = new StringSplitter();
     }
 
     public void run() {
         String userInput = inputView.readStringToAdd();
+        long result = calculateSum(userInput);
 
-        ExtractionResult extractionResult = delimiterExtractor.extract(userInput);
+        outputView.printResult(result);
+    }
+
+    private long calculateSum(String input) {
+        List<String> numbers = extractNumbers(input);
+        CalculatorNumbers calculatorNumbers = CalculatorNumberFactory.createCalculatorNumbersFrom(numbers);
+
+        return calculatorNumbers.sum();
+    }
+
+    private List<String> extractNumbers(String input) {
+        ExtractionResult extractionResult = delimiterExtractor.extract(input);
         Delimiters delimiters = DelimiterFactory.createDelimitersFrom(extractionResult.delimiters());
 
-        StringSplitter stringSplitter = new StringSplitter(delimiters);
-        List<String> splitRemainingInput = stringSplitter.split(extractionResult.remainingInput());
-
-        CalculatorNumbers calculatorNumbers = CalculatorNumberFactory.createCalculatorNumbersFrom(splitRemainingInput);
-
-        long result = calculatorNumbers.sum();
-        outputView.printResult(result);
+        return stringSplitter.split(extractionResult.remainingInput(), delimiters);
     }
 }
