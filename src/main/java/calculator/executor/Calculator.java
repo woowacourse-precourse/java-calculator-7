@@ -20,11 +20,11 @@ public class Calculator {
     }
 
     public Long addAll() {
+        Long sum = 0L;
         if (operands.isEmpty()) {
-            return 0L;
+            return sum;
         }
         List<Long> numbers = operands.getOperands();
-        Long sum = 0L;
         for (Long number : numbers) {
             sum += number;
         }
