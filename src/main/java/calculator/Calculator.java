@@ -26,7 +26,7 @@ public class Calculator {
         if (division != null) {
             regex = ",|" + division + "|:";
         } else {
-            regex = ",|;";
+            regex = ",|:";
         }
         List<String> strings = Arrays.asList(inputString.split(regex));
 
