@@ -38,6 +38,20 @@ public class Calculator {
         }
     }
 
+    // 구분자로 숫자 나눠서 출력하기
+    public String inputList() {
+        int result = 0;
+        String[] strs;
+        if (!isDefault) {
+            strs = inputData.split(separator);
+        } else {
+            strs = inputData.split(separator);
+        }
+        for(String str:strs){
+            result+=Integer.parseInt(str);
+        }
+        return "결과 : "+result;
+    }
 
 
 
