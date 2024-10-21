@@ -4,5 +4,5 @@ public interface ICalculatorDisplay {
 
     String getPromptInput();
 
-    void printResult(int result);
+    void printResult(long result);
 }

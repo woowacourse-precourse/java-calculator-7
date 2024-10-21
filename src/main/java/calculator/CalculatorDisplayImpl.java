@@ -19,7 +19,7 @@ public class CalculatorDisplayImpl implements ICalculatorDisplay {
     }
 
     @Override
-    public void printResult(int result) {
+    public void printResult(long result) {
         System.out.printf(outputMessage, result);
     }
 }

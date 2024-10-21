@@ -32,7 +32,7 @@ public class Calculator {
         }
 
         // 계산
-        int result = sum(cmd);
+        long result = sum(cmd);
 
         calculatorDisplay.printResult(result);
     }
@@ -42,18 +42,18 @@ public class Calculator {
      *
      * @return 구분자로 분리된 숫자의 합
      */
-    private int sum(String cmd) {
+    private long sum(String cmd) {
         if (cmd.isEmpty()) {
             return 0;
         }
 
         // 합 계산
-        int result = 0;
+        long result = 0;
         String[] rawNumbers = separatorProcessor.split(cmd);
         for (String rawNum : rawNumbers) {
             validateNumber(rawNum);
 
-            result += Integer.parseInt(rawNum);
+            result += Long.parseLong(rawNum);
         }
 
         return result;
