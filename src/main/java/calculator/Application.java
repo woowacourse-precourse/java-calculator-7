@@ -19,6 +19,8 @@ public class Application {
                 throw new IllegalArgumentException("음수는 허용되지 않습니다.");
             }
             sum += num; 
-        }    
+        }  
+        System.out.println(input);
+        System.out.println("결과 : " + sum);
     }
 }
