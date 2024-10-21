@@ -13,13 +13,15 @@ public class Application {
             return 0;
         }
 
+        input = input.replace("\\n", "\n"); // 줄바꿈을 제대로 인식되게 하기
+
         String delimiter = ",|:"; // 기본 구분자
         String numbers = input;
 
         // 커스텀 구분자가 있을 경우 이를 처리
         if (input.startsWith("//")) {
             int delimiterIndex = input.indexOf("\n");
-
+            System.out.println("delimiterIndex = " + delimiterIndex);
             // "\n"이 없다면 잘못된 입력 형식으로 판단하지 않고 그대로 반환
             if (delimiterIndex == -1) {
                 return 0;
