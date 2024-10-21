@@ -5,19 +5,13 @@ import java.util.regex.Pattern;
 
 public class InputProcessor {
     private String input;
-    private String delimiter = ",:";
+    private String delimiter = "[,:]";
 
     public InputProcessor(String input) {
         this.input = input;
         checkCustomDelimiter();
         validateInput();
     }
-
-    //1. 구분자와 양수로 이뤄진 문자열인가(숫자인지, 음수가 아닌지)
-    //2. 문자열이 비어있을 경우
-    //3. 입력받은 구분자가 사용자 정의 구분 기호 형식과 다를 경우
-    //4. 설정도된 구분자가 두개 연속으로 입력된 경우
-    //=> `IllegalArgumentException` 발생
 
     private void checkCustomDelimiter() {
         if (input.startsWith("//")) {
@@ -35,5 +29,13 @@ public class InputProcessor {
     }
 
     private void validateInput() {
+        checkInputNotNull();
+
+    }
+
+    private void checkInputNotNull(){
+        if (input.isEmpty()) {
+            input = String.valueOf(0);
+        }
     }
 }
