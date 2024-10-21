@@ -26,17 +26,21 @@ public class Application {
         }
         Console.close();
     }
-    private static int sumNum(String[] numbers) {
+    private static int sumNum(String[] numbers) {//분리 된 숫자 합산하기
         return Arrays.stream(numbers).mapToInt(Integer::parseInt).sum();
     }
     private static String[] splitCustom(String inputStr) {
         int endDelimeter = inputStr.indexOf("\\n");//이스케이프문 \ 포함
         String delimiter = inputStr.substring(2, endDelimeter);//\n전까지 커스텀 구분자 지정
         inputStr = inputStr.substring(endDelimeter + 2);//구분자 적용 대상 문자열로 분리
-        return inputStr.split(delimiter);
+        return Arrays.stream(inputStr.split(delimiter))
+                .map(s -> isNull(s) ? "0" : s) // null 또는 빈 문자열이면 "0"으로 변환
+                .toArray(String[]::new);
     }
     private static String[] splitBasic(String inputStr) {
-        return inputStr.split(",|:");
+        return Arrays.stream(inputStr.split(",|:"))
+                .map(s -> isNull(s) ? "0" : s) // null 또는 빈 문자열이면 "0"으로 변환
+                .toArray(String[]::new);
     }
     private static void displayResult(int result) {
         System.out.println("결과: " + result);
