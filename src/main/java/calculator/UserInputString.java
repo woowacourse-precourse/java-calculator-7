@@ -21,8 +21,10 @@ public class UserInputString {
         return input.isEmpty();
     }
 
-    public List<Long> parser(String delimiterRegex) {
+    public List<Long> parser(String userInput) {
+        String delimiterRegex = extractDelimiterRegex(userInput);
         String numbers = "";
+
         if (delimiterRegex.equals(",|:")) {
             numbers = input;
         } else {
@@ -34,6 +36,10 @@ public class UserInputString {
 
         }
         return convertToLongList(new InputParser(delimiterRegex, numbers).parse());
+    }
+
+    private String extractDelimiterRegex(String userInput) {
+        return new Delimiter(userInput).getDelimiterRegex();
     }
 
     private List<Long> convertToLongList(List<String> userInputNumbers) {
