@@ -10,16 +10,14 @@ public class Calculator {
     private static String input;
     private static String delimiters;
     private static String[] numbers;
-    private static int sum;
 
-    public static void run(String inputValue) {
+    public static int run(String inputValue) {
         setInput(inputValue);
         setDelimiter();
         validateInput();
         parseInput();
         validateNumbers();
-        addNumbers();
-        printResult();
+        return addNumbers();
     }
 
     private static void setInput(String inputValue) {
@@ -58,15 +56,12 @@ public class Calculator {
         }
     }
 
-    private static void addNumbers() {
-        sum = 0;
+    private static int addNumbers() {
+        int sum = 0;
 
         for (String number : numbers) {
             sum += Integer.parseInt(number);
         }
-    }
-
-    private static void printResult() {
-        System.out.println("결과 : " + sum);
+        return sum;
     }
 }
