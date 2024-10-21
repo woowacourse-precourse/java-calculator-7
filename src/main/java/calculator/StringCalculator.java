@@ -43,11 +43,15 @@ public class StringCalculator {
 
     private Integer parseInt(String str) {
         try {
-            // 비어 있는 문자열 처리
-            if (str.isEmpty()) {
+            if (str.isEmpty()) { // 입력이 빈 경우 처리
                 return 0;
             }
-            return Integer.parseInt(str);
+
+            int num = Integer.parseInt(str);
+            if (num < 0) { // 음수일 경우
+                throw new IllegalArgumentException("Invalid input: not allow negative");
+            }
+            return num;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Invalid input: should be Integer.");
         }
