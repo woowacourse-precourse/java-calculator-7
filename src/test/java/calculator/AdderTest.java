@@ -101,4 +101,12 @@ public class AdderTest {
         assertThatThrownBy(() -> adder.run(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void 커스텀_구분자가_빈문자열인경우_예외처리() {
+        String input = "//\n1,2,3";
+
+        assertThatThrownBy(() -> adder.run(input))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }

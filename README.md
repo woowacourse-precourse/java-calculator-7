@@ -22,5 +22,5 @@
 - [x] 양수가 아닌 정수를 전달하는 경우, IllegalArgumentException을 발생시킨다.
 - [x] 숫자와 지정된 구분자 이외의 문자를 전달하는 경우, IllegalArgumentException을 발생시킨다.
 - [x] 커스텀 구분자를 지정할 때 "//"로 시작하지 않거나 "\n"으로 끝나지 않는 경우, IllegalArgumentException을 발생시킨다.
-- [ ] 커스텀 구분자가 빈 문자열인 경우, IllegalArgumentException을 발생시킨다.
+- [x] 커스텀 구분자가 빈 문자열인 경우, IllegalArgumentException을 발생시킨다.
 - [ ] 입력한 구분자의 개수가 숫자의 개수보다 같거나 많은 경우, IllegalArgumentException을 발생시킨다. 
