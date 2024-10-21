@@ -31,7 +31,7 @@ public class Application {
         try {
             String input = app.inputHandler.getInput();
             int result = app.calculateSum(input);
-            System.out.println(result);
+            System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
         }
