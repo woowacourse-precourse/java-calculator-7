@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 
 public class Calculator {
 
-    public String calculate(ParsedInput parsedInput) {
+    public String adder(ParsedInput parsedInput) {
         BigDecimal result = BigDecimal.ZERO;
         for (String numStr : parsedInput.numbers()) {
             BigDecimal num = new BigDecimal(numStr);

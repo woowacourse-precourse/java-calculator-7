@@ -21,7 +21,7 @@ public class CalculatorController {
     private CalculatorResponseDto calculate(CalculatorRequestDto calculatorRequestDto) {
         ParsedInput parsedInput = inputParser.parse(calculatorRequestDto.input());
 
-        return new CalculatorResponseDto(calculator.calculate(parsedInput));
+        return new CalculatorResponseDto(calculator.adder(parsedInput));
     }
 
     public void run() {
