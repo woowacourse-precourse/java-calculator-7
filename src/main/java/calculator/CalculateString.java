@@ -20,7 +20,7 @@ public class CalculateString {
     }
 
     public int basicString(String str) {
-        int finalValue = calString(str, "[;,]");
+        int finalValue = calString(str, "[:,]");
         if (finalValue == 0) {
             return 0;
         }
@@ -48,3 +48,6 @@ public class CalculateString {
 
 
 }
+
+
+
