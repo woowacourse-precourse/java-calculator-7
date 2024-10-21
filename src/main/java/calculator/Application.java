@@ -21,6 +21,12 @@ public class Application {
             return "결과 : 0";
         }
 
+        if (isCustomDelimiter(input)) {
+            addWithCustomDelimiter(input);
+        } else {
+            addWithDefaultDelimiters(input);
+        }
+
         addWithDefaultDelimiters(input);
 
         scanner.close();
@@ -43,5 +49,15 @@ public class Application {
 
     private void addNumber(String number) {
         answer += Integer.parseInt(number);
+    }
+
+    private boolean isCustomDelimiter(String input) {
+        return input.startsWith("//");
+    }
+
+    private void addWithCustomDelimiter(String input) {
+        String delimiter = String.valueOf(input.charAt(2));
+        String numbers = input.substring(5);
+        addNumbers(numbers.split(Pattern.quote(delimiter)));
     }
 }
