@@ -7,6 +7,8 @@ public class StringDelimiterParser implements Parser {
 
     private final String defaultDelimiters;
     private final String customRegex;
+    private static final int CUSTOM_DELIMITER_GROUP = 1;
+    private static final int NUMBERS_GROUP = 2;
 
     public StringDelimiterParser(DelimiterConfig config) {
         this.defaultDelimiters = config.getDefaultDelimiters();
@@ -25,10 +27,10 @@ public class StringDelimiterParser implements Parser {
 
         Matcher matcher = Pattern.compile(customRegex).matcher(correctInput);
         if (matcher.matches()) {
-            String customDelimiter = matcher.group(1);
+            String customDelimiter = matcher.group(CUSTOM_DELIMITER_GROUP);
             validateCustomDelimiter(customDelimiter);
             delimiters = delimiters + "|" + Pattern.quote(customDelimiter);
-            numbers = matcher.group(2);
+            numbers = matcher.group(NUMBERS_GROUP);
         }
 
         return numbers.split(delimiters);
