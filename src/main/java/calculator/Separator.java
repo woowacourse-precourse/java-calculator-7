@@ -40,14 +40,19 @@ public class Separator {
         String regex = Constants.SEPARATOR;
 
         if (isContainsCustomSeparatorSymbol(input)) {
-            Matcher match = Pattern
-                    .compile(Constants.REGEX_CUSTOM_SEPARATOR_PATTERN)
-                    .matcher(input);
+            regex = findAndAddCustomSeparator(input, regex);
+        }
+        return regex;
+    }
 
-            while (match.find()) {
-                String customSeparator = match.group(1);
-                regex = addCustomSeparator(regex, customSeparator);
-            }
+    public String findAndAddCustomSeparator(String input, String regex) {
+        Matcher match = Pattern
+                .compile(Constants.REGEX_CUSTOM_SEPARATOR_PATTERN)
+                .matcher(input);
+
+        while (match.find()) {
+            String customSeparator = match.group(1);
+            regex = addCustomSeparator(regex, customSeparator);
         }
         return regex;
     }
