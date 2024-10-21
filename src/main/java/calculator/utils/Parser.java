@@ -1,13 +1,10 @@
 package calculator.utils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
 public class Parser {
-    private final List<String> separator = new ArrayList<>();
-    private final List<Integer> operand = new ArrayList<>();
-    private String removedString = "";
+
 
     /**
      * 커스텀 구분자 유뮤 커스텀 구분자 짝 맞는지 확인 후 파싱
