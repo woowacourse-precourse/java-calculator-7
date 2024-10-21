@@ -18,9 +18,9 @@ public class Extractor {
 
     public List<String> extractNumbers(String input) {
         String extractedInput = extractDelimiter(input);
-        formatValidator.validateInput(extractedInput, delimiter);
+        formatValidator.validateCharactersOrThrow(extractedInput, delimiter);
         List<String> extractedNumbers = Arrays.asList(extractedInput.split(delimiter));
-        formatValidator.validateNoLeadingZero(extractedNumbers);
+        formatValidator.validateNoLeadingZeroOrThrow(extractedNumbers);
         return extractedNumbers;
     }
 
