@@ -24,11 +24,11 @@ public class Application {
             if (userInput.startsWith("//")) {
                 String[] parts = userInput.split("\\\\n");
                 String customDelimiter = parts[0].substring(2); // 커스텀 구분자 추출
-                numberPart = parts[1]; // 숫자 부분 추출
+                numberPart = parts[1]; // 계산식 부분 추출
 
                 delimiters.add(Pattern.quote(customDelimiter)); // 커스텀 구분자 추가
             } else {
-                numberPart = userInput; // 그냥 입력된 숫자 부분
+                numberPart = userInput; // 계산식 부분
             }
 
             // 2. 덧셈 및 결과 출력
@@ -43,13 +43,18 @@ public class Application {
         int sum = 0; // 합계를 저장할 변수
 
         String regex = String.join("|", delimiters); // 구분자 리스트를 정규식으로 변환
-        String[] numbers = numberPart.split(regex); // 구분자를 기준으로 문자열 나누기
+        String[] numbers = numberPart.split(regex); // 구분자를 기준으로 숫자 나누기
 
-        // 숫자를 더해 합계 계산
         for (String number : numbers) {
-            sum += Integer.parseInt(number); // 공백 제거 후 정수로 변환하여 더함
+            String trimmedNumber = number.trim(); // 공백 제거
+
+            // 숫자 형식 검증 (음수를 포함한 숫자)
+            if (!trimmedNumber.matches("\\d+")) {
+                throw new IllegalArgumentException("유효하지 않은 입력: " + trimmedNumber + "은 양수가 아닙니다.");
+            }
+            sum += Integer.parseInt(number);
         }
 
-        return sum; // 계산된 합계 반환
+        return sum;
     }
 }
