@@ -33,7 +33,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 커스텀_구분자만_사용() {
+    void 커스텀_구분자만_입력() {
         assertSimpleTest(() -> {
             run("//-\\n");
             assertThat(output()).contains("결과 : 0");
@@ -65,7 +65,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 문자커스텀_기본_모두_사용() {
+    void 문자커스텀_기본_구분자_사용() {
         assertSimpleTest(() -> {
             run("//a\\n11:3,5:7a10");
             assertThat(output()).contains("결과 : 36");
