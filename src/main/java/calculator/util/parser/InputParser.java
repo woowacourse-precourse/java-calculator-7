@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class InputParser {
     private static final String DEFAULT_DELIMITERS_PATTERN = "^\\d+([,:]\\d+)*$";
-    private static final String CUSTOM_DELIMITERS_PATTERN = "^//(.+)\\\\n(\\d+\\1)*\\d+$";
+    private static final String CUSTOM_DELIMITERS_PATTERN = "^//(.)\\\\n(\\d+\\1)*\\d+$";
     private InputParser() {
 
     }
