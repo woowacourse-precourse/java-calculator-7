@@ -46,15 +46,6 @@ public class InputParserTest {
     }
 
     @Test
-    void 빈문자열_테스트() {
-        final String input = "";
-
-        final ParsedInput parsedInput = inputParser.parse(input);
-
-        assertThat(parsedInput.numbersToken()).containsExactly("0");
-    }
-
-    @Test
     void 커스텀_구분자에_개행_및_중복_종결_테스트() {
         final String input = "//\n\\n2\n\\n2\\n3";
 

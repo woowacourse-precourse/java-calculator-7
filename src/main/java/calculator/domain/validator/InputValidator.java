@@ -1,17 +1,11 @@
 package calculator.domain.validator;
 
-import static calculator.domain.CalculatorConstants.CUSTOM_DELIMITER_PREFIX;
-import static calculator.domain.CalculatorConstants.CUSTOM_DELIMITER_SUFFIX;
-
 public class InputValidator {
+
+    private static final String REGEX_NUMERIC = "\\d+";
 
     public boolean isNegativeNumber(String input) {
         return input.contains("-");
-    }
-
-    public boolean containCustomDelimiter(String input) {
-        return input.startsWith(CUSTOM_DELIMITER_PREFIX.getValue())
-                && input.contains(CUSTOM_DELIMITER_SUFFIX.getValue());
     }
 
     public boolean checkInputEmpty(String input) {
@@ -19,7 +13,7 @@ public class InputValidator {
     }
 
     public boolean isValidNumber(String str) {
-        return str.matches("\\d+");
+        return str.matches(REGEX_NUMERIC);
     }
 
 }

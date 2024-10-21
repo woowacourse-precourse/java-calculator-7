@@ -15,12 +15,6 @@ public class InputValidatorTest {
     }
 
     @Test
-    void containCustomDelimiter() {
-        assertThat(inputValidator.containCustomDelimiter("//;\\n13;21")).isTrue();
-        assertThat(inputValidator.containCustomDelimiter("1,2:3")).isFalse();
-    }
-
-    @Test
     void checkInputEmpty() {
         assertThat(inputValidator.checkInputEmpty("")).isTrue();
         assertThat(inputValidator.checkInputEmpty("1")).isFalse();

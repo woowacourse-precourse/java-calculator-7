@@ -1,9 +1,9 @@
 package calculator.domain.parser;
 
+import static calculator.domain.CalculatorConstants.CUSTOM_DELIMITER_PREFIX;
 import static calculator.domain.CalculatorConstants.CUSTOM_DELIMITER_SUFFIX;
 import static calculator.domain.CalculatorConstants.DEFAULT_DELIMITER_COLON;
 import static calculator.domain.CalculatorConstants.DEFAULT_DELIMITER_COMMA;
-import calculator.domain.validator.InputValidator;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -13,17 +13,11 @@ import java.util.regex.Pattern;
 
 public class InputParser {
 
-    private final InputValidator inputValidator = new InputValidator();
-
     public ParsedInput parse(String input) {
-        if (inputValidator.checkInputEmpty(input)) {
-            return new ParsedInput(new String[]{"0"});
-        }
-
         Set<String> delimiters = initializeDefaultDelimiters();
         String stringNumbers = input;
 
-        if (inputValidator.containCustomDelimiter(input)) {
+        if (containCustomDelimiter(input)) {
             stringNumbers = processCustomDelimiter(input, delimiters);
         }
 
@@ -42,10 +36,6 @@ public class InputParser {
 
     private String processCustomDelimiter(String input, Set<String> delimiters) {
         int lastDelimiterIndex = input.lastIndexOf(CUSTOM_DELIMITER_SUFFIX.getValue());
-
-        if (lastDelimiterIndex == -1) {
-            throw new IllegalArgumentException("커스텀 구분자 지정이 잘못되었습니다.");
-        }
 
         String customDelimiterSection = input.substring(2, lastDelimiterIndex);
         String numbers = input.substring(lastDelimiterIndex + 2);
@@ -77,6 +67,11 @@ public class InputParser {
 
         return delimiters;
      }
+
+    public boolean containCustomDelimiter(String input) {
+        return input.startsWith(CUSTOM_DELIMITER_PREFIX.getValue())
+                && input.contains(CUSTOM_DELIMITER_SUFFIX.getValue());
+    }
 
     public record ParsedInput(String[] numbersToken) { }
 
