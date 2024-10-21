@@ -1,7 +1,7 @@
 package calculator;
 
+import calculator.io.InputHandler;
 import calculator.service.Calculator;
-import calculator.util.InputHandler;
 
 public class Application {
     public static void main(String[] args) {

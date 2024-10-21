@@ -1,9 +1,9 @@
 package calculator.service;
 
-import calculator.InputValidator;
+import calculator.common.InputValidator;
+import calculator.common.StringParser;
 import calculator.domain.Delimiter;
 import calculator.domain.Operands;
-import calculator.util.InputParser;
 import java.util.List;
 
 public class Calculator {
@@ -12,11 +12,11 @@ public class Calculator {
     public void parseAndAddNumbers(String input) {
         Delimiter delimiter = new Delimiter();
         if (input.startsWith("//")) {
-            String customDelimiter = InputParser.extractCustomDelimiter(input);
+            String customDelimiter = StringParser.extractCustomDelimiter(input);
             delimiter.addCustomDelimiter(customDelimiter);
         }
 
-        String numbersSection = InputParser.extractNumbersSection(input);
+        String numbersSection = StringParser.extractNumbersSection(input);
         String[] tokens = delimiter.split(numbersSection);
         InputValidator.validateNumbers(tokens);
 

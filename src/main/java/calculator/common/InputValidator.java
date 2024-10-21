@@ -1,13 +1,6 @@
-package calculator;
+package calculator.common;
 
-public class InputValidator {
-
-    public static String handleBlankInput(String input) {
-        if (input.isBlank()) {
-            return "0";
-        }
-        return input;
-    }
+public class ValidationUtil {
 
     public static void validateNumbers(String[] tokens) {
         try {

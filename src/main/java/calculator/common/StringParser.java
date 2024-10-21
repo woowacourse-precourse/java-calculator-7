@@ -1,9 +1,9 @@
-package calculator.util;
+package calculator.common;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class InputParser {
+public class StringParser {
 
     public static String extractCustomDelimiter(String input) {
         Pattern pattern = Pattern.compile("^//(.)\\\\n.*$");
