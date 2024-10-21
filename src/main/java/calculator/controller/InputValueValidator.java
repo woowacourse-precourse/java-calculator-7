@@ -29,7 +29,6 @@ public class InputValueValidator {
                 + "]";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(input);
-
         if (matcher.find()) {
             throw new IllegalArgumentException();
         }

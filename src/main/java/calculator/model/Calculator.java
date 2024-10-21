@@ -16,7 +16,7 @@ public class Calculator {
     private String input;
     private String customDelimiter;
     private List<Long> inputNumbers = new ArrayList<>();
-    private boolean usingCustomDelimiter;
+    private boolean usingCustomDelimiter = false;
 
     public Calculator(NumberConverter numberConverter, StringParser stringParser,
                       InputSyntaxValidator inputSyntaxValidator, InputValueValidator inputValueValidator) {
@@ -31,7 +31,7 @@ public class Calculator {
             this.usingCustomDelimiter = true;
             this.customDelimiter = stringParser.customDelimiter(input);
         }
-        this.input = input.substring(input.indexOf("\n") + 1);
+        this.input = input.substring(input.indexOf("\\n") + 2).trim();
         validateInput();
     }
 
