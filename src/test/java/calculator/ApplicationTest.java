@@ -4,6 +4,7 @@ import static calculator.common.exception.ErrorMessage.INPUT_BLANK_ERROR;
 import static calculator.common.exception.ErrorMessage.INPUT_NOT_SUPPORTED_CHAR_ERROR;
 import static calculator.common.exception.ErrorMessage.OPERAND_EMPTY_ERROR;
 import static calculator.common.exception.ErrorMessage.OPERAND_ZERO_OR_NEGATIVE_VALUE_ERROR;
+import static calculator.common.exception.ErrorMessage.SEPARATOR_DUPLICATION_ERROR;
 import static calculator.common.exception.ErrorMessage.SEPARATOR_FORMAT_ERROR;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -42,11 +43,38 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 기본_구분자와_동일한_커스텀_구분자를_입력하는_경우_예외_처리한다() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("//:\\n1,3:3"))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage(SEPARATOR_DUPLICATION_ERROR);
+        });
+    }
+
+    @Test
     void 커스텀_구분자외의_특수문자가_입력되는_경우_예외_처리한다() {
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> runException("//;\\n1.;3"))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(INPUT_NOT_SUPPORTED_CHAR_ERROR);
+        });
+    }
+
+    @Test
+    void 구분자_사이에_숫자가_입력되지_않은_경우_예외_처리한다() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("1,2,,3"))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage(OPERAND_EMPTY_ERROR);
+        });
+    }
+
+    @Test
+    void 문자열이_구분자로_끝나는_경우_예외_처리한다() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("//.\\n1.2,43:"))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage(OPERAND_EMPTY_ERROR);
         });
     }
 
@@ -85,7 +113,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 커스텀_구분자가_dollar_sign인_경우_숫자들의_합을_출력한다() {
+    void 커스텀_구분자가_정규표현식의_메타문자인_경우_숫자들의_합을_출력한다() {
         assertSimpleTest(() -> {
             run("//$\\n1$34$2");
             assertThat(output()).contains("결과 : 37");
@@ -96,14 +124,6 @@ class ApplicationTest extends NsTest {
     void 기본_구분자와_커스텀_구분자로_구분한_숫자들의_합을_출력한다() {
         assertSimpleTest(() -> {
             run("//.\\n1.2,43");
-            assertThat(output()).contains("결과 : 46");
-        });
-    }
-
-    @Test
-    void 문자열이_구분자로_끝나는_경우() {
-        assertSimpleTest(() -> {
-            run("//.\\n1.2,43:");
             assertThat(output()).contains("결과 : 46");
         });
     }

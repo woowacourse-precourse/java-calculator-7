@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 
 public class OperandExtractor {
 
+    private static final int TRAILING_SEPARATOR_REMOVE_OPTION_OFF = -1;
+
     private final Separators separators;
 
     public OperandExtractor(Separators separators) {
@@ -18,7 +20,7 @@ public class OperandExtractor {
     }
 
     public List<Operand> extractOperands(String message) {
-        List<String> operandCandidates = List.of(message.split(makeSplitRegex()));
+        List<String> operandCandidates = List.of(message.split(makeSplitRegex(), TRAILING_SEPARATOR_REMOVE_OPTION_OFF));
         return operandCandidates.stream()
                 .map(Operand::from)
                 .toList();
