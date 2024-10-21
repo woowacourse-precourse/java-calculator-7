@@ -22,5 +22,6 @@ class InputViewTest {
         //then
         Assertions.assertThat(input)
                 .isEqualTo(targetInput);
+        System.setIn(System.in);
     }
 }
