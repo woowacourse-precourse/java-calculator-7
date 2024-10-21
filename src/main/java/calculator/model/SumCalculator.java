@@ -12,6 +12,9 @@ public class SumCalculator {
         for (String token : tokens) {
             if (!token.isEmpty()) {
                 BigDecimal number = parseToBigDecimal(token);
+                if (number.compareTo(BigDecimal.ZERO) < 0) {
+                    throw new IllegalArgumentException("음수는 허용되지 않습니다.");
+                }
                 sumResult = sumResult.add(number);
             }
         }
