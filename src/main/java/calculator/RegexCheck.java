@@ -36,7 +36,7 @@ public abstract class RegexCheck {
     }
 
     private void inputMatchesAndInsert() {
-        String delimiter = matcher.group(2) != null ? matcher.group(2) : "[,:]";
+        String delimiter = matcher.group(2) != null ? Pattern.quote(matcher.group(2)) : "[,:]";
         String numericString = matcher.group(3) != null ? matcher.group(3) : "";
 
         if (numericString.isEmpty()) return;
@@ -44,7 +44,7 @@ public abstract class RegexCheck {
         stringNumbers = matchDelimiter(delimiter, numericString);
     }
 
-    protected String[] matchDelimiter(String delimiter, String numericString) throws IllegalArgumentException {
+    protected String[] matchDelimiter(String delimiter, String numericString) {
 
         Matcher matcher = Pattern.compile(setRegex(delimiter)).matcher(numericString);
 

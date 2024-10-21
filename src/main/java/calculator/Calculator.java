@@ -17,7 +17,7 @@ public class Calculator extends RegexCheck {
         return strNumber.isEmpty() ? 0 : Integer.parseInt(strNumber);
     }
 
-    public Calculator allPositiveNumber() throws IllegalArgumentException {
+    public Calculator allPositiveNumber() {
         numbers = new int[getStringNumbers().length];
 
         for (int i = 0; i < getStringNumbers().length; i++) {
