@@ -15,7 +15,7 @@ public class Application {
                 char ch = input.charAt(i);
                 if (ch == customSeparator) {
                     continue;
-                } else if (Character.isDigit(ch)) {
+                } else if (Character.isDigit(ch) && Character.getNumericValue(ch) > 0) {
                     result += Character.getNumericValue(ch);
                 } else {
                     throw new IllegalArgumentException();
@@ -26,7 +26,7 @@ public class Application {
                 char ch = input.charAt(i);
                 if (ch == ',' || ch == ':') {
                     continue;
-                } else if (Character.isDigit(ch)) {
+                } else if (Character.isDigit(ch) && Character.getNumericValue(ch) > 0) {
                     result += Character.getNumericValue(ch);
                 } else {
                     throw new IllegalArgumentException();
