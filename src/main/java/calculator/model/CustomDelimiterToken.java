@@ -1,4 +1,4 @@
-package calculator.model.token;
+package calculator.model;
 
 public class CustomDelimiterToken {
 

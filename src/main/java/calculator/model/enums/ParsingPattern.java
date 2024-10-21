@@ -1,4 +1,4 @@
-package calculator.model.token;
+package calculator.model.enums;
 
 public enum ParsingPattern {
     DEFAULT_DELIMITER_PATTERN(",|:"),

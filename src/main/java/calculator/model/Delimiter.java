@@ -1,8 +1,8 @@
 package calculator.model;
 
-import static calculator.model.ExceptionMessage.DELIMITER_SIZE_EXCEPTION;
-import static calculator.model.ExceptionMessage.EMPTY_DELIMITER_EXCEPTION;
-import static calculator.model.token.ParsingPattern.DEFAULT_DELIMITER_PATTERN;
+import static calculator.model.enums.ExceptionMessage.DELIMITER_SIZE_EXCEPTION;
+import static calculator.model.enums.ExceptionMessage.EMPTY_DELIMITER_EXCEPTION;
+import static calculator.model.enums.ParsingPattern.DEFAULT_DELIMITER_PATTERN;
 
 public class Delimiter {
 

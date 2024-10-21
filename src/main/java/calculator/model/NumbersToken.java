@@ -1,10 +1,7 @@
-package calculator.model.token;
+package calculator.model;
 
-import static calculator.model.token.ParsingPattern.NUMBER_SPLIT_LIMIT;
+import static calculator.model.enums.ParsingPattern.NUMBER_SPLIT_LIMIT;
 
-import calculator.model.Delimiter;
-import calculator.model.Number;
-import calculator.model.Numbers;
 import java.util.Arrays;
 
 public class NumbersToken {

@@ -1,4 +1,4 @@
-package calculator.model;
+package calculator.model.enums;
 
 public enum ExceptionMessage {
     NUMERIC_EXCEPTION("입력 값이 숫자가 아닙니다."),

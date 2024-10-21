@@ -1,7 +1,7 @@
 package calculator.model;
 
-import static calculator.model.ExceptionMessage.NUMERIC_EXCEPTION;
-import static calculator.model.ExceptionMessage.RANGE_EXCEPTION;
+import static calculator.model.enums.ExceptionMessage.NUMERIC_EXCEPTION;
+import static calculator.model.enums.ExceptionMessage.RANGE_EXCEPTION;
 
 public class Number {
     private final int number;
