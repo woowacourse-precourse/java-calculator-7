@@ -17,19 +17,23 @@ public class Application {
         if (input == null || input.isEmpty()) {
             return 0;
         }
-        String delimiter = ",|:"; // 기본 구분자
+
+        String delimiter = ",|:";
         if (input.startsWith("//")) {
             int delimiterEndIndex = input.indexOf("\n");
-            delimiter = input.substring(2, delimiterEndIndex); // 커스텀 구분자 추출
-            input = input.substring(delimiterEndIndex + 1);    // 구분자 이후 문자열 추출
+            delimiter = input.substring(2, delimiterEndIndex);
+            input = input.substring(delimiterEndIndex + 1);
         }
 
         String[] numbers = input.split(delimiter);
         int sum = 0;
         for (String number : numbers) {
-            sum += Integer.parseInt(number);
+            try {
+                sum += toPositiveInt(number);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("잘못된 숫자 형식: " + number);
+            }
         }
         return sum;
     }
-
 }
