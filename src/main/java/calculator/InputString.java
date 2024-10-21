@@ -37,7 +37,14 @@ public class InputString {
 
     private String findDelimiter(String input) {
         if (input.startsWith("//")) {
-            var delimiter = input.substring(2, 3);
+            var frontInput = input.split("\n")[0];
+
+            if(frontInput.length() != 3) {
+                throw new IllegalArgumentException("커스텀 구분자가 한 글자 이상입니다.");
+            }
+
+            var delimiter = frontInput.substring(2);
+
             if (delimiter.matches("\\d+")) {
                 throw new IllegalArgumentException("커스텀 구분자가 잘못되었습니다.");
             }
