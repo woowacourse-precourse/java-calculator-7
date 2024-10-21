@@ -121,4 +121,13 @@ public class InputStringTest {
         assertThrows(IllegalArgumentException.class, () -> new InputString(input));
     }
 
+    @Test
+    void 커스텀_구분자가_숫자() {
+        //given
+        String input = "//1\n1";
+
+        //when, then
+        assertThrows(IllegalArgumentException.class, () -> new InputString(input));
+    }
+
 }
