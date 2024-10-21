@@ -16,4 +16,8 @@ public class NumberService {
     public void addNumbers(String str, Delimiter delimiter, Number number) {
         number.addAll(List.of(str.split(delimiter.toString())));
     }
+
+    public int getSum(Number number) {
+        return number.getSum();
+    }
 }

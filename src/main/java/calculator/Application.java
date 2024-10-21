@@ -23,9 +23,8 @@ public class Application {
 
         str = StringUtil.extractString(str);
         numberService.addNumbers(str, delimiter, number);
+        int result = numberService.getSum(number);
 
-        System.out.println("delimiter.toString() = " + delimiter.toString());
-        number.print();
-        System.out.println("결과 : " + str);
+        System.out.println("결과 : " + result);
     }
 }
