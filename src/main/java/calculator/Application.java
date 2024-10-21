@@ -19,6 +19,7 @@ public class Application {
             System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage() + "으로 인하여 애플리케이션 종료합니다.");
+            throw e;
         }
     }
 
