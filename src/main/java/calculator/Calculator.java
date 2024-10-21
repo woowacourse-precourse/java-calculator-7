@@ -1,6 +1,8 @@
 package calculator;
 
 public class Calculator {
+    private boolean calculatorStatus = true;
+
 
     public double sum(String[] inputs) {
 
@@ -24,6 +26,15 @@ public class Calculator {
 
     private boolean isEmptyArray(String[] inputs) {
         return inputs.length == 0;
+    }
+
+    public boolean isInProgress() {
+        return calculatorStatus;
+    }
+
+
+    public void changeStatusToEnd() {
+        calculatorStatus = false;
     }
 
 }

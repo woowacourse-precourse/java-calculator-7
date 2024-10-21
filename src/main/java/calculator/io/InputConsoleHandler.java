@@ -95,4 +95,18 @@ public class InputConsoleHandler {
         return !userInput.matches("-?\\d+([,|:]-?\\d+)*");
     }
 
+    public boolean isAppEnd() {
+        String userAction = Console.readLine();
+
+        if ("1".equals(userAction)) {
+            return false;
+        }
+
+        if ("2".equals(userAction)) {
+            return true;
+        }
+
+        throw new IllegalArgumentException("허용되지 않은 동작입니다. 애플리케이션을 종료합니다.");
+    }
+
 }
