@@ -27,6 +27,14 @@ public class Number {
         return value.trim();
     }
 
+    public static Number zero() {
+        return ZERO;
+    }
+
+    public Number sum(Number number) {
+        return new Number(this.value + number.value);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
