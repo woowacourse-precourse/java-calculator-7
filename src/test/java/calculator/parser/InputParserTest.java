@@ -60,4 +60,13 @@ public class InputParserTest {
 
         assertEquals(expectedNumbers, numbers, "두 리스트가 같지 않습니다.");
     }
+
+    @Test
+    void 커스텀구분자_처리_테스트() {
+        String customDelimiterString = "//;\n1;2;3";
+        List<Integer> numbers = parser.parse(customDelimiterString);
+        List<Integer> expectedNumbers = List.of(1, 2, 3);
+
+        assertEquals(expectedNumbers, numbers);
+    }
 }
