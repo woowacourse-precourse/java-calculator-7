@@ -15,12 +15,15 @@ public class InputValidator {
         if (newLineIndex == -1 || newLineIndex <= CalculatorConstants.CUSTOM_DELIMITER_PREFIX.length()) {
             throw new IllegalArgumentException(ExceptionMessageConstants.INVALID_CUSTOM_DELIMITER);
         }
+
         String customSeparator = input.substring(CalculatorConstants.CUSTOM_DELIMITER_PREFIX.length(), newLineIndex);
+
         if (customSeparator.isEmpty()) {
             throw new IllegalArgumentException(ExceptionMessageConstants.INVALID_CUSTOM_DELIMITER);
         }
-        // 구분자 뒤에 숫자가 있는지 확인
+
         String restOfInput = input.substring(newLineIndex + CalculatorConstants.CUSTOM_DELIMITER_SUFFIX.length());
+        
         if (restOfInput.isEmpty()) {
             throw new IllegalArgumentException(ExceptionMessageConstants.MISSING_NUMBER_AFTER_DELIMITER);
         }
