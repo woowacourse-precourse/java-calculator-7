@@ -1,11 +1,10 @@
-package calculator;
+package calculator.model;
 
 
-import camp.nextstep.edu.missionutils.Console;
-import exception.ErrorMessage;
+import calculator.exception.ErrorMessage;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-public class Calculator {
+public class CalculatorModel {
 
     private static final String DEFAULT_DELIMITER_REGEX = "^(|([1-9][0-9]*([,:][1-9][0-9]*)*))$";
     private static final String CUSTOM_DELIMITER_REGEX = "^//([^0-9]*)\\\\n(|([1-9][0-9]*(\\1[1-9][0-9]*)*))$";
