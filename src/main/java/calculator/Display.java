@@ -11,4 +11,8 @@ public class Display {
     public static void displayInputResult(String inputString) {
         System.out.println(inputString);
     }
+
+    public static void displayOutputResult(int result) {
+        System.out.println("결과 : " + result);
+    }
 }
