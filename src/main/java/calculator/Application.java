@@ -51,6 +51,9 @@ public class Application {
         for(int i=0; i<splitString.length; i++) {
             // 나눠진 input의 각 문자들을 int형으로 변환하고, result 배열에 담는다
             result[i] = Integer.parseInt(splitString[i]);
+            // 입력 값은 구분자와 양수로 구성된 문자열이므로
+            // 문자가 만약 음수, 즉 -를 포함하고 있는 경우 올바르지 않은 값이라 IllegalArgumentException 발생시킴
+            if(result[i] < 0) throw new IllegalArgumentException();
         }
         return result;
     }
