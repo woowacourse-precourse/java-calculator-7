@@ -19,6 +19,9 @@ public class StringAddCalculator {
         // 음수 입력 검증
         InputValidator.validateNoNegativeNumbers(input);
 
+        // 소수 입력 검증
+        InputValidator.validateNoDecimalNumbers(input);
+
         return -1; // 추후 로직 추가 예정
     }
 }

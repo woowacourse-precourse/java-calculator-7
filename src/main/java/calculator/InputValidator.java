@@ -51,4 +51,18 @@ public class InputValidator {
             throw new IllegalArgumentException("음수는 허용되지 않습니다: " + String.join(", ", negativeNumbers));
         }
     }
+
+    public static void validateNoDecimalNumbers(String input) {
+        // 소수 값 찾기
+        Matcher matcher = Pattern.compile("\\d+\\.\\d+").matcher(input);
+        List<String> decimalNumbers = new ArrayList<>();
+        while (matcher.find()) {
+            decimalNumbers.add(matcher.group());
+        }
+
+        // 소수 값이 하나라도 있으면 예외 발생
+        if (!decimalNumbers.isEmpty()) {
+            throw new IllegalArgumentException("소수는 허용되지 않습니다: " + String.join(", ", decimalNumbers));
+        }
+    }
 }

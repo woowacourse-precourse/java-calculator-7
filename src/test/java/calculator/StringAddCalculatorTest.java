@@ -62,4 +62,15 @@ public class StringAddCalculatorTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("음수는 허용되지 않습니다: -2, -5");
     }
+
+    @Test
+    void 소수_입력시_예외가_발생한다() {
+        // given
+        String input = "1,2.5,3";
+
+        // when, then
+        assertThatThrownBy(() -> StringAddCalculator.add(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("소수는 허용되지 않습니다: 2.5");
+    }
 }
