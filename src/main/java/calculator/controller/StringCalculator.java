@@ -45,8 +45,8 @@ public class StringCalculator {
 	}
 
 	private int getAnswer(List<Integer> numbers) {
-		SumCalculator sumCalculator = new SumCalculator();
-		return sumCalculator.calculate(numbers);
+		SumCalculator sumCalculator = new SumCalculator(numbers);
+		return sumCalculator.calculate();
 	}
 
 	private void printAnswer(int answer) {
