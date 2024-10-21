@@ -3,9 +3,8 @@ package calculator;
 import java.util.ArrayList;
 
 public class Parser {
-    private int result = 0;
-
     public String parse(String input, Delimiter delimiter) {
+        int result = 0;
         String delimiters = delimiter.getDelimiters();
         ArrayList<Integer> numbers = new ArrayList<>();
 
@@ -19,5 +18,4 @@ public class Parser {
 
         return String.valueOf(result);
     }
-
 }
