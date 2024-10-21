@@ -1,7 +1,6 @@
 package calculator.exception;
 
 public enum ErrorMessage {
-
 	// prefix
 	ERROR_PREFIX("[ERROR] "),
 
