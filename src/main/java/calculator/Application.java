@@ -6,8 +6,7 @@ public class Application {
     public static void main(String[] args) {
         // TODO: JAVA 21 에서 테스트
         String input = Console.readLine();
-        String result = add(input);
-        System.out.println(result);
+        add(input);
         Console.close();
     }
 
@@ -21,6 +20,22 @@ public class Application {
 
         // 기본 구분자 (쉼표, 콜론)
         String seperator = ",|:";
+
+        // 이스케이프 문자 '\\n'을 '\n'으로 변환
+        input = input.replace("\\n", "\n");
+
+        // 커스텀 구분자 (문자열 앞부분의 "//"와 "\n" 사이에 위치하는 문자를 커스텀 구분자로 사용)
+        if (input.startsWith("//")) {
+
+            int endIndex = input.indexOf("\n");
+
+            if (endIndex == -1) { // \n 을 입력하지 않았을 경우 예외처리
+                throw new IllegalArgumentException("\\n을 입력하세요");
+            }
+            seperator = input.substring(2, endIndex); // 커스텀 구분자
+            input = input.substring(endIndex + 1);
+
+        }
 
         // 입력에서 구분자를 기준으로 숫자 추출
         String[] numbers = input.split(seperator);
@@ -37,6 +52,10 @@ public class Application {
                 sum += num;
             }
         }
+
+        System.out.println(String.format("seperator: %s", seperator));
+        System.out.println(String.format("입력 : %s", input));
+        System.out.println(String.format("결과 : %s", sum));
 
         return "결과 : " + sum;
     }
