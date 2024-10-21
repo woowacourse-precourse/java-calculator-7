@@ -4,7 +4,13 @@ import java.util.List;
 
 public class SumCalculator {
 
-	public int calculate(List<Integer> numbers) {
-		return numbers.stream().mapToInt(n -> n).sum();
+	private final List<Integer> numbers;
+
+	public SumCalculator(List<Integer> numbers) {
+		this.numbers = numbers;
+	}
+
+	public int calculate() {
+		return this.numbers.stream().mapToInt(number -> number).sum();
 	}
 }
