@@ -10,25 +10,14 @@ import java.util.Set;
 public class CalculatorService {
 
     private static final Set<Character> DEFAULT_DELIMITERS = Set.of(',', ':');
-    private static final String regex = "^//[^0-9]\\\\n.*";
 
     public Integer addCalculator(String userInput) {
         validateNullInput(userInput);
         Calculator calculator = new Calculator();
         Delimiters delimiters = new Delimiters(DEFAULT_DELIMITERS);
-        String parsedInput = extractCustomDelimiter(userInput, delimiters);
+        String parsedInput = delimiters.extractCustomDelimiter(userInput);
         calculator.addNumbers(splitNumbers(parsedInput, delimiters));
         return calculator.sum();
-    }
-
-    public String extractCustomDelimiter(String userInput, Delimiters delimiters) {
-        if(userInput.startsWith("/")){
-            validateInputFormat(userInput);
-            delimiters.addDelimiter(userInput.charAt(2));
-            return userInput.substring(5);
-        }
-
-        return userInput;
     }
 
     public List<Integer> splitNumbers(String parsedInput, Delimiters delimiters) {
@@ -54,12 +43,6 @@ public class CalculatorService {
     private void validateNullInput(String userInput) {
         if(userInput == null){
             throw new IllegalArgumentException("User input is empty");
-        }
-    }
-
-    private void validateInputFormat(String userInput) {
-        if(!userInput.matches(regex)){
-            throw new IllegalArgumentException("잘못된 형식입니다.");
         }
     }
 }
