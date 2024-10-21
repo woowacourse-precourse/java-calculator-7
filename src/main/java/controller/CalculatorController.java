@@ -7,7 +7,11 @@ import view.OutputView;
 public class CalculatorController {
     public void run() {
         String input = InputView.getInput();
-        int result = StringCalculator.add(input);
-        OutputView.printResult(result);
+        try {
+            int result = StringCalculator.add(input);
+            OutputView.printResult(result);
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+        }
     }
 }
