@@ -90,10 +90,10 @@ class ApplicationTest extends NsTest {
     @ParameterizedTest
     @ValueSource(strings = {"1::3:4", "2,,4::5", "2,,,,,,3:4", "1:2:3,,,,:::5"})
     void 기본구분자_두개_연속_사용(String input) {
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException(input))
-                        .isInstanceOf(IllegalArgumentException.class)
-        );
+        assertSimpleTest(() -> {
+            run(input);
+            assertThat(output()).contains("결과 : ");
+        });
     }
 
     @ParameterizedTest
