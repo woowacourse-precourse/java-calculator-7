@@ -1,9 +1,10 @@
 package calculator;
 
 public class CustomDelimiter implements Delimiter {
-
-    private static final int CUSTOM_DELIMITER_START_INDEX = 2; // 커스텀 구분자가 시작하는 인덱스
-    private static final int CUSTOM_DELIMITER_END_INDEX = 3;   // 커스텀 구분자가 끝나는 인덱스
+    private static final String ERROR_INVALID_DELIMITER_EXPRESSION = "유효하지 않은 커스텀 구분자 표현입니다.";
+    private static final String ERROR_NUMBER_AS_DELIMITER = "커스텀 구분자로 숫자가 입력되었습니다.";
+    private static final int CUSTOM_DELIMITER_START_INDEX = 2; // 커스텀 구분자 시작 인덱스
+    private static final int CUSTOM_DELIMITER_END_INDEX = 3;   // 커스텀 구분자 종료 인덱스
     private static final int CUSTOM_DELIMITER_EXPRESSION_LENGTH = 4; // "//?\n" 표현의 길이
     private static final String[] META_CHARACTERS = {".", "*", "+", "?", "|", "^", "$", "(", ")", "[", "]", "{", "}",
             "\\"};
@@ -30,9 +31,8 @@ public class CustomDelimiter implements Delimiter {
 
             String customDelimiter = input.substring(CUSTOM_DELIMITER_START_INDEX, CUSTOM_DELIMITER_END_INDEX);
 
-            // 숫자가 구분자로 입력된 경우 예외 처리
             if (Character.isDigit(customDelimiter.charAt(0))) {
-                throw new IllegalArgumentException("커스텀 구분자로 숫자가 입력되었습니다.");
+                throw new IllegalArgumentException(ERROR_NUMBER_AS_DELIMITER);
             }
 
             customDelimiter = escapeMetaCharacters(customDelimiter);
@@ -40,18 +40,17 @@ public class CustomDelimiter implements Delimiter {
             return input.substring(CUSTOM_DELIMITER_EXPRESSION_LENGTH + 1); // 커스텀 구분자를 제외한 나머지 문자열 반환
         }
 
-        throw new IllegalArgumentException("유효하지 않은 커스텀 구분자 표현입니다.");
+        throw new IllegalArgumentException(ERROR_INVALID_DELIMITER_EXPRESSION);
     }
 
     private boolean isValidExpression(String input) {
-        // 커스텀 구분자 표현이 "//"로 시작하고 "\n"을 포함하는지 확인
         return input.startsWith("//") && input.contains("\\n");
     }
 
     private String escapeMetaCharacters(String customDelimiter) {
         for (String metaChar : META_CHARACTERS) {
             if (customDelimiter.equals(metaChar)) {
-                return "\\" + customDelimiter;  // 메타 문자가 있다면 이스케이프 처리
+                return "\\" + customDelimiter;
             }
         }
         return customDelimiter;
