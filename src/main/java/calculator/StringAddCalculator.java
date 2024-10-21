@@ -30,6 +30,20 @@ public class StringAddCalculator {
     return ",|:"; // 기본 구분자만 반환
   }
 
+  // 구분자로 숫자 분리
+  private String[] splitNumbers(String userInput, String delimiter) {
+    if (userInput.startsWith("//")) {
+      int delimiterIndex = userInput.indexOf("\\n");
+      if (delimiterIndex == -1) {
+        throw new IllegalArgumentException("커스텀 구분자 형식이 올바르지 않습니다.");
+      }
+      userInput = userInput.substring(delimiterIndex + 2); // "\\n" 이후의 문자열
+    }
+
+    String[] splitNumbers = userInput.split(delimiter);
+    return removeInvalidNumbers(splitNumbers);
+  }
+
   // 커스텀 구분자 정의 시 //와 \n 제거
   private String[] removeInvalidNumbers(String[] numbers) {
     return Arrays.stream(numbers)
