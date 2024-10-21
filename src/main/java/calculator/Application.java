@@ -13,8 +13,7 @@ public class Application {
 
     public static String getUserInput() {
         System.out.print("덧셈할 문자열을 입력하세요: ");
-        String inputString = Console.readLine();
-        return inputString;
+        return Console.readLine();
     }
 
     public static boolean isCustom(String inputString) {
@@ -22,6 +21,9 @@ public class Application {
     }
 
     public static String[] extractNumbers(String inputString){
+        if (inputString.isEmpty()){
+            return new String[0];
+        }
         char customChar;
         if (isCustom(inputString)) {
             customChar = inputString.charAt(2);
