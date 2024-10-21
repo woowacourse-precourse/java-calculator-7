@@ -9,11 +9,9 @@ import java.util.List;
 
 public class StringCalculator {
 
-    private Parser parser;
-    private CalculatorInterface calculatorInterface;
-    private Calculator calculator;
-
-    private String userInput;
+    private final Parser parser;
+    private final CalculatorInterface calculatorInterface;
+    private final Calculator calculator;
 
     public StringCalculator() {
         parser = new Parser();
@@ -22,7 +20,7 @@ public class StringCalculator {
     }
 
     public void start() {
-        userInput = calculatorInterface.getUserInput();
+        String userInput = calculatorInterface.getUserInput();
         List<Long> numberList = parser.parse(userInput);
         long result = calculator.sum(numberList);
         calculatorInterface.printResult(result);
