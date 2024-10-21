@@ -16,9 +16,10 @@ public class CalculatorService {
     public String detectSeparators(String input) {
 
         if (hasSpecialSeparator(input)) {
+            checkSpecialSeparatorForm(input);
             String specialSeparator = extractSpecialSeparator(input);
             separatorQueue.addLast(specialSeparator);
-            input = modifyInputBySpecialSeparator(input, specialSeparator);
+            input = modifyInput(input);
         }
 
         detectNormalSeparators(input);
@@ -27,15 +28,14 @@ public class CalculatorService {
     }
 
     private void detectNormalSeparators(String input) {
-
-        for(String separator : NORMAL_SEPARATORS) {
+        for (String separator : NORMAL_SEPARATORS) {
             if (input.contains(separator)) {
                 separatorQueue.addLast(separator);
             }
         }
     }
 
-    private String modifyInputBySpecialSeparator(String input, String specialSeparator) {
+    private String modifyInput(String input) {
         return input.substring(input.indexOf(SPECIAL_SUFFIX) + SPECIAL_SUFFIX.length());
     }
 
@@ -43,19 +43,17 @@ public class CalculatorService {
         return input.contains(SPECIAL_PREFIX) && input.contains(SPECIAL_SUFFIX);
     }
 
-//    private String getSpecialSubstr(String input) {
-//
-//        int prefixLen = SPECIAL_PREFIX.length();
-//        int suffixLen = SPECIAL_SUFFIX.length();
-//        String prefixSub = input.substring(0, prefixLen);
-//        String suffixSub = input.substring(prefixLen + 1, prefixLen + suffixLen + 1);
-//
-//        if (!prefixSub.equals(SPECIAL_PREFIX) || !suffixSub.equals(SPECIAL_SUFFIX)) {
-//            throw new IllegalArgumentException("커스텀 구분자 설정 형식이 잘못되었습니다");
-//        }
-//
-//        return input.substring(0, prefixLen + suffixLen + 2);
-//    }
+    private void checkSpecialSeparatorForm(String input) {
+
+        int prefixLen = SPECIAL_PREFIX.length();
+        int suffixLen = SPECIAL_SUFFIX.length();
+        String prefixSub = input.substring(0, prefixLen);
+        String suffixSub = input.substring(prefixLen + 1, prefixLen + suffixLen + 1);
+
+        if (!prefixSub.equals(SPECIAL_PREFIX) || !suffixSub.equals(SPECIAL_SUFFIX)) {
+            throw new IllegalArgumentException("커스텀 구분자 설정 형식이 잘못되었습니다");
+        }
+    }
 
     private String extractSpecialSeparator(String input) {
 
@@ -63,9 +61,8 @@ public class CalculatorService {
         int endIndex = input.indexOf(SPECIAL_SUFFIX);
         String specialSeparator = input.substring(startIndex, endIndex);
 
-
-        for(String separator : NORMAL_SEPARATORS) {
-            if(specialSeparator.equals(separator)) {
+        for (String separator : NORMAL_SEPARATORS) {
+            if (specialSeparator.equals(separator)) {
                 throw new IllegalArgumentException("일반 구분자 (쉼표,콜론) 는 특수 구분자로 사용할 수 없습니다.");
             }
         }
@@ -136,12 +133,11 @@ public class CalculatorService {
     private void checkPartValid(String part) {
 
         if (part.contains("-")) {
-            throw new IllegalArgumentException("음수는 연산에 사용될 수 없습니다.");
+            throw new IllegalArgumentException("- 기호는 연산에 사용될 수 없습니다.");
         }
 
         if (part.contains("+")) {
             throw new IllegalArgumentException("+ 기호는 연산에 사용될 수 없습니다.");
         }
-
     }
 }
