@@ -40,4 +40,10 @@ class StringCalculatorTest {
     void 쉼표_구분_두숫자_더하기() {
         assertThat(calculator.add("1,2")).isEqualTo(3);
     }
+
+    @Test
+    void 쉼표로_구분_여러숫자_더하기() {
+        assertThat(calculator.add("1,2,3")).isEqualTo(6);
+        assertThat(calculator.add("1,2,3,4,5")).isEqualTo(15);
+    }
 }
