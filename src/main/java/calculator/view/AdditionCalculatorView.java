@@ -9,11 +9,11 @@ public class AdditionCalculatorView implements CalculatorView {
     private static final String OUTPUT_STRING = "결과 : ";
 
     @Override
-    public String input() {
+    public void input(CalculatorModel model) {
         System.out.println(INPUT_STRING);
         try {
             String input = Console.readLine();
-            return input;
+            model.setInput(input);
         } finally {
             Console.close();
         }

@@ -50,10 +50,10 @@ public class LongCalculator implements Calculator {
 
     @Override
     public void startCalculation() {
-        String input = calculatorView.input();
-        LongCalculatorModel model = new LongCalculatorModel(input, defaultSeparators);
+        LongCalculatorModel model = new LongCalculatorModel(defaultSeparators);
+        calculatorView.input(model);
 
-        if (!input.equals("")) {
+        if (!model.getInput().equals("")) {
             expressionSplitter.isValid(model);
             calculate(model);
         }

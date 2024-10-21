@@ -8,8 +8,7 @@ public class LongCalculatorModel extends CalculatorModel {
     private long resultNumber;
 
 
-    public LongCalculatorModel(String input, Set separators) {
-        this.input = input;
+    public LongCalculatorModel(Set separators) {
         this.separators = separators;
         this.resultNumber = 0;
     }

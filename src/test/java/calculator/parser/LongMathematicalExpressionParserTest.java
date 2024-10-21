@@ -38,7 +38,7 @@ public class LongMathematicalExpressionParserTest extends NsTest {
             // given
             String input = "10,2:5,3:10";
             separators.addAll(BASIC_SEPARATORS);
-            LongCalculatorModel model = new LongCalculatorModel(input, separators);
+            LongCalculatorModel model = new LongCalculatorModel(separators);
             model.setMathematicalExpression(input);
 
             // when
@@ -58,7 +58,7 @@ public class LongMathematicalExpressionParserTest extends NsTest {
             String input = "10;2,5:1-3]10";
             separators.addAll(BASIC_SEPARATORS);
             separators.addAll(Arrays.asList(new Character[]{';', '-', ']'}));
-            LongCalculatorModel model = new LongCalculatorModel(input, separators);
+            LongCalculatorModel model = new LongCalculatorModel(separators);
             model.setMathematicalExpression(input);
 
             // when
@@ -78,7 +78,7 @@ public class LongMathematicalExpressionParserTest extends NsTest {
             // given
             String input = "10,2:3;4,5";
             separators.addAll(BASIC_SEPARATORS);
-            LongCalculatorModel model = new LongCalculatorModel(input, separators);
+            LongCalculatorModel model = new LongCalculatorModel(separators);
             model.setMathematicalExpression(input);
 
             // when

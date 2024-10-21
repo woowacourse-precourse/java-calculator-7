@@ -3,7 +3,7 @@ package calculator.view;
 import calculator.model.CalculatorModel;
 
 public interface CalculatorView {
-    public String input();
+    public void input(CalculatorModel model);
 
     public void output(CalculatorModel model);
 }

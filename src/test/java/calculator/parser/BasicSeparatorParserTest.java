@@ -34,7 +34,7 @@ public class BasicSeparatorParserTest extends NsTest {
         assertSimpleTest(() -> {
                     // given
                     String input = "///\\n//;\\n";
-                    CalculatorModel model = new LongCalculatorModel(input, separators);
+                    CalculatorModel model = new LongCalculatorModel(separators);
                     model.setSeparatorExpression(input);
 
                     // when
@@ -56,7 +56,7 @@ public class BasicSeparatorParserTest extends NsTest {
         assertSimpleTest(() -> {
             // given
             String input = "//;\\n//;\\n";
-            CalculatorModel model = new LongCalculatorModel(input, separators);
+            CalculatorModel model = new LongCalculatorModel(separators);
             model.setSeparatorExpression(input);
 
             // when
@@ -73,7 +73,7 @@ public class BasicSeparatorParserTest extends NsTest {
         assertSimpleTest(() -> {
             // given
             String input = "n";
-            CalculatorModel model = new LongCalculatorModel(input, separators);
+            CalculatorModel model = new LongCalculatorModel(separators);
             model.setSeparatorExpression(input);
 
             //when
@@ -90,7 +90,7 @@ public class BasicSeparatorParserTest extends NsTest {
         assertSimpleTest(() -> {
             // given
             String input = "\\n";
-            CalculatorModel model = new LongCalculatorModel(input, separators);
+            CalculatorModel model = new LongCalculatorModel(separators);
             model.setSeparatorExpression(input);
 
             // when
@@ -107,7 +107,7 @@ public class BasicSeparatorParserTest extends NsTest {
         assertSimpleTest(() -> {
             // given
             String input = ";\\n";
-            CalculatorModel model = new LongCalculatorModel(input, separators);
+            CalculatorModel model = new LongCalculatorModel(separators);
             model.setSeparatorExpression(input);
 
             // when
@@ -124,7 +124,7 @@ public class BasicSeparatorParserTest extends NsTest {
         assertSimpleTest(() -> {
             // given
             String input = "/;\\n";
-            CalculatorModel model = new LongCalculatorModel(input, separators);
+            CalculatorModel model = new LongCalculatorModel(separators);
             model.setSeparatorExpression(input);
 
             // when
@@ -141,7 +141,7 @@ public class BasicSeparatorParserTest extends NsTest {
         assertSimpleTest(() -> {
             // given
             String input = "\\n\\n";
-            CalculatorModel model = new LongCalculatorModel(input, separators);
+            CalculatorModel model = new LongCalculatorModel(separators);
             model.setSeparatorExpression(input);
 
             //when
@@ -158,7 +158,7 @@ public class BasicSeparatorParserTest extends NsTest {
         assertSimpleTest(() -> {
             // given
             String input = "//,\\n";
-            CalculatorModel model = new LongCalculatorModel(input, separators);
+            CalculatorModel model = new LongCalculatorModel(separators);
             model.setSeparatorExpression(input);
 
             //when
