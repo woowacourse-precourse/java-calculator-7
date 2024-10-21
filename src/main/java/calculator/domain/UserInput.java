@@ -39,7 +39,11 @@ public class UserInput {
     }
 
     private boolean isContainCustomDelimiter() {
-        return input.startsWith("//") && CUSTOM_DELIMITER_REGEX.matcher(input).find();
+        if (input.startsWith("//") && CUSTOM_DELIMITER_REGEX.matcher(input.replace("\\n", "\n")).find()) {
+            input = input.replace("\\n", "\n");
+            return true;
+        }
+        return false;
     }
 
     private String getInput() {
