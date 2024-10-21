@@ -9,11 +9,14 @@ public class Calculator {
     private String userInput;
     private String customDelimiter;
     private Integer calculateResult;
+    private final CalculatorDelimiter calculatorDelimiter;
     private static final String INVALID_INPUT_ERROR = "[ERROR] Invalid input format : ";
     private static final String RESULT_HEADER_MESSAGE = "결과 : ";
 
 
-    public Calculator() {}
+    public Calculator() {
+        this.calculatorDelimiter = new CalculatorDelimiter();
+    }
 
     public Boolean checkInputByRule() {
         if (isUserInputEmpty()) {
@@ -33,12 +36,12 @@ public class Calculator {
     }
 
     private Boolean isCustomDelimiterFormat() {
-        return this.userInput.startsWith(CalculatorDelimiter.CUSTOM_DELIMITER_HEAD);
+        return this.calculatorDelimiter.checkDelimiterHead(this.userInput);
     }
 
     private void processCustomDelimiter() {
-        String normalizedInput = this.userInput.replace(CalculatorDelimiter.BACKSLASH_WITH_CUSTOM_DELIMITER_LAST, CalculatorDelimiter.CUSTOM_DELIMITER_LAST);
-        Matcher matcher = CalculatorDelimiter.CUSTOM_DELIMITER_PATTERN.matcher(normalizedInput);
+        String normalizedInput = this.calculatorDelimiter.changeToNormalizedInput(this.userInput);
+        Matcher matcher = this.calculatorDelimiter.getMatcherByCheckPattern(normalizedInput);
 
         if (!matcher.matches()) {
             throw new IllegalArgumentException(INVALID_INPUT_ERROR);
@@ -52,12 +55,12 @@ public class Calculator {
         }
     }
 
-    private Boolean containsNumbers(String input) {
-        return CalculatorDelimiter.CONTAINS_NUMBERS_PATTERN.matcher(input).matches();
+    private Boolean containsNumbers(String givenInput) {
+        return this.calculatorDelimiter.isContainNumber(givenInput);
     }
 
     private void validateDefaultDelimiterFormat() {
-        if (!CalculatorDelimiter.DEFAULT_DELIMITER_PATTERN.matcher(this.userInput).matches()) {
+        if (this.calculatorDelimiter.isNotDefaultDelimiter(this.userInput)) {
             throw new IllegalArgumentException(INVALID_INPUT_ERROR);
         }
     }
@@ -66,16 +69,12 @@ public class Calculator {
     public Integer getSumByCalculate() {
         String delimiter = CalculatorDelimiter.DEFAULT_DELIMITER;
         String targetNumbersWithDelimiter = this.userInput;
-
-        if (this.userInput.startsWith(CalculatorDelimiter.CUSTOM_DELIMITER_HEAD)) {
+        if (this.calculatorDelimiter.checkDelimiterHead(this.userInput)) {
             delimiter = Pattern.quote(this.customDelimiter) + "|" + CalculatorDelimiter.DEFAULT_DELIMITER;
-            targetNumbersWithDelimiter = this.userInput.substring(this.userInput.indexOf(CalculatorDelimiter.BACKSLASH_WITH_CUSTOM_DELIMITER_LAST)
-                    + CalculatorDelimiter.CUSTOM_DELIMITER_LAST_SIZE);
+            targetNumbersWithDelimiter = this.calculatorDelimiter.subStringCustomDelimiterInput(this.userInput);
         }
-
         this.calculateResult = Arrays.stream(targetNumbersWithDelimiter.split(delimiter))
-                .filter(slicedString -> !slicedString.trim().isEmpty())
-                .filter(slicedString -> CalculatorDelimiter.CONTAINS_NUMBERS_PATTERN.matcher(slicedString).matches())
+                .filter(this.calculatorDelimiter::isContainNumber)
                 .mapToInt(this::parsePositiveInt)
                 .sum();
 
