@@ -33,7 +33,7 @@ public class DelimiterExtractor {
             return remove(POSITIVE_NUMBER_PATTERN_REGEX, remove(MINUS, this.text));
         }
 
-        return remove(POSITIVE_NUMBER_PATTERN_REGEX, this.text.split(LINE_BREAK)[OPERATION_FORMULA_LOCATION]);
+        return remove(POSITIVE_NUMBER_PATTERN_REGEX, remove(MINUS, this.text.split(LINE_BREAK)[OPERATION_FORMULA_LOCATION]));
     }
 
     private String remove(String regex, String target) {

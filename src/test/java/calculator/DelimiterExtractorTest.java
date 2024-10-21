@@ -8,6 +8,14 @@ import org.junit.jupiter.api.Test;
 public class DelimiterExtractorTest {
 
     @Test
+    void 커스텀_구분자_문자열에_음수가_있는_경우_마이너스가_구분자로_인식되지_않게한다() {
+        String input = "//;\n1;2;-3";
+        DelimiterExtractor delimiterExtractor = new DelimiterExtractor(input);
+
+        assertDoesNotThrow(delimiterExtractor::validate);
+    }
+
+    @Test
     void 기본_구분자_문자열에_음수가_있는_경우_마이너스가_구분자로_인식되지_않게한다() {
         String input = "1,2,-3";
         DelimiterExtractor delimiterExtractor = new DelimiterExtractor(input);
