@@ -2,6 +2,9 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Application {
     public static void main(String[] args) {
         String input = Console.readLine();
@@ -12,6 +15,15 @@ public class Application {
         if (input.isEmpty()) {
             return 0;
         }
+        List<Integer> parsedNumbers = parseInput(input);
         return -1;
+    }
+
+    public static List<Integer> parseInput(String input) {
+        List<Integer> parsedNumbers = new ArrayList<>();
+        for (String number : input.split(",")) {
+            parsedNumbers.add(Integer.parseInt(number.trim()));
+        }
+        return parsedNumbers;
     }
 }
