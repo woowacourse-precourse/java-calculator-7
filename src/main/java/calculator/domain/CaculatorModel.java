@@ -36,9 +36,7 @@ public class CaculatorModel {
 
     String[] numbers = input.split(seperator);
     int sum = 0;
-    System.out.println(Arrays.toString(numbers));
     for (String number : numbers) {
-      System.out.println(number);
       int addNum = Integer.parseInt(number);
       if (addNum < 0) {
         throw new IllegalArgumentException("음수는 넣을 수 없습니다.");
@@ -47,5 +45,9 @@ public class CaculatorModel {
     }
 
     return sum;
+  }
+
+  public void printResult(int result) {
+    System.out.println("결과: " + result);
   }
 }
