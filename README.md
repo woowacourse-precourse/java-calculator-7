@@ -1,5 +1,7 @@
 # java-calculator-precourse
 
+## 기능 목록
+
 ### 입력 처리
 -[ ] 사용자 입력을 받아서 문자열로 반환
 
