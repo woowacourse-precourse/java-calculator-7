@@ -5,9 +5,20 @@ public class CalculatorService {
         if (input == null || input.isEmpty()) {
             return 0;
         }
+        if (input.startsWith("//")) {
+            return customSum(input);
+        }
         String[] numbers = splitString(input);
         return calculateSum(numbers);
     }
+
+    private int customSum(String input) {
+        String delimiter = input.substring(2, input.indexOf("\n"));
+        String numbersPart = input.substring(input.indexOf("\n") + 1);
+        String[] numbers = numbersPart.split(delimiter);
+        return calculateSum(numbers);
+    }
+
     private String[] splitString(String input) {
         return input.split(",|:");
     }
