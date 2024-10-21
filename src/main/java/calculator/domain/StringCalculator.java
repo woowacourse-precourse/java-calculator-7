@@ -1,25 +1,22 @@
 package calculator.domain;
 
+import calculator.global.Validator;
 import java.util.ArrayList;
 import java.util.List;
 
 public class StringCalculator {
     public int calculate(String input) {
-        // 빈 문자열 처리
-        if (input == null || input.isEmpty()) {
+        Validator validator = new Validator();
+        if (validator.isEmptyOrBlank(input)) {
             return 0;
         }
 
-        // 빈 문자열이 오는 경우는 모두 처리했기 때문에 문자열 속 공백 제거
         String trimmedInput = input.replaceAll("\\s", "");
 
-        // 구분자 전략 설정 (커스텀 구분자 또는 기본 구분자)
         DelimiterStrategy delimiterStrategy = DelimiterStrategyFactory.create(trimmedInput);
 
-        // 구분자로 문자열 분리하기
         List<String> tokens = delimiterStrategy.split(trimmedInput);
 
-        // 숫자 검증 및 덧셈 계산
         List<Integer> numbers = validateAndParseNumbers(tokens);
         return sum(numbers);
     }
