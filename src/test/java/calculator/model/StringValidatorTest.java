@@ -3,6 +3,7 @@ package calculator.model;
 import static org.assertj.core.api.Assertions.assertThatCode;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -30,6 +31,17 @@ class StringValidatorTest {
 		String customDelimiter = input.substring(customDelimiterIndex, customDelimiterIndex + customDelimiterLength);
 		String customDelimiterRemovedInput = input.substring(specifiedCustomDelimiterLength);
 		StringValidator stringValidator = new StringValidator(customDelimiterRemovedInput, customDelimiter);
+
+		// when, then
+		assertThatCode(stringValidator::validate).doesNotThrowAnyException();
+	}
+
+	@Test
+	@DisplayName("빈 문자열이 입력되었을 때 에러 없이 이를 검증한다.")
+	void 빈_문자열이_입력되었을_때_검증한다() {
+		// given
+		String input = "";
+		StringValidator stringValidator = new StringValidator(input);
 
 		// when, then
 		assertThatCode(stringValidator::validate).doesNotThrowAnyException();
