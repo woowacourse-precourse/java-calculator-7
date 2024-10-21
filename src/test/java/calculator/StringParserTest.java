@@ -65,7 +65,7 @@ public class StringParserTest {
     }
 
     @Test
-    void 커스텀_구분자와_기본_구분자가_혼합된_경우에도_문자열을_분리한다() {
+    void 커스텀_구분자와_기본_구분자가_혼합된_경우에도_문자열을_ㅆ리한다() {
         String input = "//;\\n1;2:3,4";
         List<BigDecimal> expected = List.of(BigDecimal.ONE, BigDecimal.TWO, BigDecimal.valueOf(3),
                 BigDecimal.valueOf(4));
@@ -91,5 +91,12 @@ public class StringParserTest {
                 -> stringParser.parse(input));
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"", " ", "\n"})
+    void 빈_문자열_입력_시_BigDecimal_0을_반환한다(String input) {
+        List<BigDecimal> expected = List.of(BigDecimal.ZERO);
+        List<BigDecimal> numbers = stringParser.parse(input);
+        assertEquals(expected, numbers);
+    }
 
 }
