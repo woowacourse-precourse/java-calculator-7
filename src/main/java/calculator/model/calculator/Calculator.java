@@ -35,6 +35,9 @@ public class Calculator {
             addDelimiter(customDelimiter);
             return new Expression(userInput.substring(index + 1 + 1));
         } else {
+            if (!userInput.matches("^[0-9].*")) {
+                throw new IllegalArgumentException("입력의 시작은 커스텀 구분자 or 숫자여야 합니다.");
+            }
             return new Expression(userInput);
         }
     }

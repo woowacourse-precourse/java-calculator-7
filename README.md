@@ -45,5 +45,7 @@
 - 입력값이 유효한지 확인하는 기능
 
 
-- 사용자의 입력이 양수인지 확인하는 기능 -> illegalArgumentException()
-- 이미 등록된 연산자를 중복적으로 등록하려는 경우
+- 사용자의 입력이 양수인지 확인하는 기능 -> IllegalArgumentException()
+- 등록되지 않은 구분자를 입력한 경우 -> IllegalArgumentException()
+- ~~이미 등록된 연산자를 중복적으로 등록하려는 경우~~ -> 허용
+- 커스텀 구분자의 규칙을 지켜 입력하지 않은 경우 -> IllegalArgumentException()
