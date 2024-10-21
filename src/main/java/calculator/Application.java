@@ -1,7 +1,52 @@
 package calculator;
 
+import camp.nextstep.edu.missionutils.Console;
+
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        long result = 0L;
+
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        String input = Console.readLine();
+
+
+        // 공백이 입력된 경우(입력값이 없는 경우)
+        if (input.isBlank()){
+            System.out.println("결과 : "+result);
+            return;
+        }
+
+        // 단일 숫자가 입력된 경우
+        if (input.matches("[0-9]+")){
+            System.out.println("결과 : "+Long.parseLong(input));
+            return;
+        }
+
+        // 커스텀 구분자 확인 및 변환
+        if (input.startsWith("//")) {
+            int index = input.indexOf("\\n");
+            if (index == -1) {
+                throw new IllegalArgumentException("입력 문자열에 \\n 문자가 포함돼있지 않습니다.");
+            }
+            String new_delimiter = input.substring(2, index);
+            input = input.substring(index + 2).replace(new_delimiter, ",");
+        }
+
+        // 마지막에 구분자 뒤에 값이 오지 않을 경우 예외처리 (ex. "3,4:5,")
+        if (input.endsWith(",") || input.endsWith(":")){
+            throw new IllegalArgumentException("마지막 구분자 뒤에 값이 오지 않았습니다.");
+        }
+        String[] arr = input.split("[,:]"); // ,와 :를 기준으로 분리함
+
+        for (String a : arr) {
+            if (!a.matches("[0-9]+")) {
+                throw new IllegalArgumentException("잘못된 숫자 형식:" + a); // 분리된 arr 안에 값들이 정수인지 확인
+            }
+            result += Long.parseLong(a);
+        }
+        System.out.println("결과 : "+result); // 결과 출력!(성공)
+
+
     }
 }
