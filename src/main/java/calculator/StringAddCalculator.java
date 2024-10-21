@@ -24,15 +24,6 @@ public class StringAddCalculator {
         return input.split(DEFAULT_DELIMITERS);
     }
 
-	private static int sum(String[] tokens) {
-        int total = 0;
-        for (String token : tokens) {
-            int number = toInt(token);
-            total += number;
-        }
-        return total;
-    }
-
 	private static int toInt(String token) {
 		try {
 			int number = Integer.parseInt(token);
@@ -45,4 +36,12 @@ public class StringAddCalculator {
 		}
 	}
 
+	private static int sum(String[] tokens) {
+		int total = 0;
+		for (String token : tokens) {
+			int number = toInt(token);
+			total += number;
+		}
+		return total;
+	}
 }
