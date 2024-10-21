@@ -29,7 +29,7 @@ public class CustomDelimiter implements Delimiter {
         if (CUSTOM.matcher(input)
                 .matches()
         ) {
-            List<String> splitInput = splitByCustomDelimiterEnd();
+            List<String> splitInput = splitByCustomDelimiterSuffix();
             String customDelimiter = getCustomDelimiter(splitInput);
             return isInRange(customDelimiter);
         }
@@ -37,13 +37,13 @@ public class CustomDelimiter implements Delimiter {
     }
 
     private boolean isInRange(final String customDelimiter) {
-        int wordCount = getCustomDelimiterLength(customDelimiter);
-        return MIN_LENGTH_THRESHOLD <= wordCount && wordCount <= MAX_LENGTH_THRESHOLD;
+        int customDelimiterLength = getCustomDelimiterLength(customDelimiter);
+        return MIN_LENGTH_THRESHOLD <= customDelimiterLength && customDelimiterLength <= MAX_LENGTH_THRESHOLD;
     }
 
     @Override
     public List<String> split() {
-        List<String> splitInput = splitByCustomDelimiterEnd();
+        List<String> splitInput = splitByCustomDelimiterSuffix();
         String customDelimiter = getCustomDelimiter(splitInput);
         if (hasOnlyDelimiter(splitInput)) {
             return Collections.emptyList();
@@ -51,7 +51,7 @@ public class CustomDelimiter implements Delimiter {
         return splitByCustomDelimiter(splitInput.getLast(), customDelimiter);
     }
 
-    private List<String> splitByCustomDelimiterEnd() {
+    private List<String> splitByCustomDelimiterSuffix() {
         return Arrays.stream(input.split(CUSTOM_DELIMITER_SUFFIX))
                 .toList();
     }
@@ -62,28 +62,28 @@ public class CustomDelimiter implements Delimiter {
     }
 
     private int getCustomDelimiterLength(final String customDelimiter) {
-        return calculateTotalCount(customDelimiter) - calculateQuoteCount(customDelimiter);
+        return calculateTotalCharacterCount(customDelimiter) - calculateQuoteAffixCount(customDelimiter);
     }
 
-    private int calculateTotalCount(final String customDelimiter) {
+    private int calculateTotalCharacterCount(final String customDelimiter) {
         BreakIterator breakIterator = BreakIterator.getCharacterInstance(Locale.KOREA);
         breakIterator.setText(customDelimiter);
-        int totalWordCount = 0;
+        int totalCharacterCount = 0;
         while (breakIterator.next() != BreakIterator.DONE) {
-            totalWordCount++;
+            totalCharacterCount++;
         }
-        return totalWordCount;
+        return totalCharacterCount;
     }
 
-    private int calculateQuoteCount(final String customDelimiter) {
-        int quoteCount = 0;
+    private int calculateQuoteAffixCount(final String customDelimiter) {
+        int quoteAffixCount = 0;
         if (customDelimiter.contains(QUOTE_PREFIX)) {
-            quoteCount += QUOTE_PREFIX.length();
+            quoteAffixCount += QUOTE_PREFIX.length();
         }
         if (customDelimiter.contains(QUOTE_SUFFIX)) {
-            quoteCount += QUOTE_SUFFIX.length();
+            quoteAffixCount += QUOTE_SUFFIX.length();
         }
-        return quoteCount;
+        return quoteAffixCount;
     }
 
     private boolean hasOnlyDelimiter(final List<String> numbers) {

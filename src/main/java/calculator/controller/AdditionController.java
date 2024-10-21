@@ -19,7 +19,7 @@ public class AdditionController {
 
         BigInteger total = additionService.calculate(input);
 
-        printResult(total);
+        printAdditionResult(total);
     }
 
     private String readInput() {
@@ -27,9 +27,9 @@ public class AdditionController {
         return inputView.read();
     }
 
-    private void printResult(final BigInteger total) {
+    private void printAdditionResult(final BigInteger total) {
         OutputView outputView = new OutputView();
-        outputView.printResult(total);
+        outputView.printTotal(total);
     }
 
 }

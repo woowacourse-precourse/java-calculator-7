@@ -74,10 +74,10 @@ public class PositiveNumber {
     }
 
     public PositiveNumber add(final PositiveNumber otherOperand) {
-        String resultNumber = value.add(otherOperand.value)
+        String total = value.add(otherOperand.value)
                 .toString();
-        validateLength(resultNumber);
-        return new PositiveNumber(resultNumber);
+        validateLength(total);
+        return new PositiveNumber(total);
     }
 
     public BigInteger value() {
