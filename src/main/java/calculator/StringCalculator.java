@@ -12,7 +12,7 @@ public class StringCalculator {
         String numberString = input;
 
         if (input.startsWith("//")) {
-            if (input.charAt(3) == '\\' && input.charAt(4) == 'n') {
+            if (input.length() >= 5 && input.charAt(3) == '\\' && input.charAt(4) == 'n') {
                 String customDelimiter = Pattern.quote(String.valueOf(input.charAt(2)));
                 delimiter = delimiter + "|" + customDelimiter;
                 numberString = input.substring(5);
