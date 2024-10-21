@@ -4,80 +4,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CalculatorImpl implements Calculator {
-    private List<Character> separators = new ArrayList<>();
-    private List<String> customSeparators = List.of("//", "\\n");
     private List<Long> numbers = new ArrayList<>();
     private static Calculator instance = new CalculatorImpl();
 
     private CalculatorImpl() {
-        separators.add(',');
-        separators.add(':');
     }
 
     public static Calculator getInstance() {
         return instance;
     }
 
-    public static Calculator reset() {
-        return new CalculatorImpl();
-    }
-
-    public void findCustomSeparator(String input) throws IllegalStateException {
-        int idx = 2;
-
-        if (existCustomSeparator(input)) {
-            if ('0' <= input.charAt(idx) && input.charAt(idx) <= '9') {
-                throw new IllegalArgumentException("커스텀 구분자로 숫자를 입력할 수 없습니다.");
-            }
-
-            separators.add(input.charAt(idx));
-        }
-    }
-
-    private boolean existCustomSeparator(String input) throws IllegalStateException {
-        if (input.startsWith(customSeparators.get(0))) {
-            if (input.indexOf(customSeparators.get(1)) == -1) {
-                throw new IllegalArgumentException("\"\\n\"가 문자열에 존재하지 않습니다.");
-            }
-
-            if (input.indexOf(customSeparators.get(1)) > 3) {
-                throw new IllegalArgumentException("길이 1인 커스텀 구분자를 입력하지 않았습니다.");
-            }
-
-            if (input.indexOf(customSeparators.get(1)) == 3) {
-                return true;
-            }
-        }
-
-        return false;
+    public static void reset() {
+        instance = new CalculatorImpl();
     }
 
     @Override
-    public void parseNumbersFromString(String input) throws IllegalStateException {
+    public void parseNumbersFromString(String input, String expression) throws IllegalStateException {
         if (input.isEmpty()) {
             return;
         }
 
-        boolean hasCustomSeparator = existCustomSeparator(input);
-
-        StringBuilder regExTmp = new StringBuilder();
-
-        regExTmp.append("[");
-        for (int i = 0; i < separators.size(); i++) {
-            if (separators.get(i) == '\\' || separators.get(i) == '[' || separators.get(i) == ']') {
-                regExTmp.append('\\').append(separators.get(i));
-                continue;
-            }
-
-            regExTmp.append(separators.get(i));
-        }
-        regExTmp.append("]");
-
-        if (hasCustomSeparator) {
+        if (expression.length() >= 5 && expression.length() <= 6) {
             input = input.substring(5);
         }
-        
-        String[] tokens = input.split(regExTmp.toString());
+
+        String[] tokens = input.split(expression);
 
         for (String s : tokens) {
             try {

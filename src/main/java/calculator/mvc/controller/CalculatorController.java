@@ -2,6 +2,7 @@ package calculator.mvc.controller;
 
 import calculator.mvc.model.Calculator;
 import calculator.mvc.model.CalculatorImpl;
+import calculator.mvc.model.CustomExpression;
 import calculator.mvc.view.CalculatorView;
 
 public class CalculatorController {
@@ -23,10 +24,10 @@ public class CalculatorController {
 
         String userInput = view.getUserInput();
 
-        try {
-            model.findCustomSeparator(userInput);
+        String customExpression = new CustomExpression().makeExpression(userInput);
 
-            model.parseNumbersFromString(userInput);
+        try {
+            model.parseNumbersFromString(userInput, customExpression);
 
             long result = model.addNumbers();
 
@@ -40,6 +41,7 @@ public class CalculatorController {
     }
 
     public void reset() {
-        model = CalculatorImpl.reset();
+        CalculatorImpl.reset();
+        model = CalculatorImpl.getInstance();
     }
 }
