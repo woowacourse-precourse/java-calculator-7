@@ -1,7 +1,5 @@
 package calculator;
 
-import java.util.Arrays;
-
 public class StringAddCalculator {
     public static int splitInput(String input){
         if(isNullOrEmpty(input)){
