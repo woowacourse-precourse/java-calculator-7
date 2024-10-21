@@ -10,6 +10,6 @@ public class Application {
         String input = Console.readLine();
 
         int result = calculator.calculator(input);
-        System.out.println("결과 :" + result);
+        System.out.println("결과 : " + result);
     }
 }

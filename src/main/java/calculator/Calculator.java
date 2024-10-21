@@ -14,12 +14,13 @@ public class Calculator {
 
         // "//"로 시작하고 "\n"으로끝나는 문자열일 시 그 사이값 구하기
         if (input.startsWith("//")) {
-            int delimiterIndex = input.indexOf("\n");
+
+            int delimiterIndex = input.indexOf("\\n");
             if (delimiterIndex == -1) {
                 throw new IllegalArgumentException("커스텀 구분자 형식이 잘못되었습니다.");
             }
             delimiter = input.substring(2, delimiterIndex);
-            numberString = input.substring(delimiterIndex + 1);
+            numberString = input.substring(delimiterIndex + 2);
         }
 
         //String delimiter로 자르기
