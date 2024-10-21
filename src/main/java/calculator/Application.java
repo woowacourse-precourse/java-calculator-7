@@ -9,6 +9,10 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
         List<String> numbers = parser(input);
+
+        if (numbers.isEmpty()){
+            throw new IllegalArgumentException("빈 문자열은 허용되지 않습니다.");
+        }
     
         int sum = 0;
         for (String number : numbers) {
@@ -18,13 +22,13 @@ public class Application {
                     throw new IllegalArgumentException("음수는 허용되지 않습니다.");
                 }
                 sum += num; 
-            }  
+            }
         }
         System.out.println("결과 : " + sum);   
     }
     public static List<String> parser(String input) {
         if (input == null || input.trim().isEmpty()) {
-            return List.of();
+            throw new IllegalArgumentException("빈 문자열은 허용되지 않습니다.");
         }
 
         String delimiter = ",|:";
