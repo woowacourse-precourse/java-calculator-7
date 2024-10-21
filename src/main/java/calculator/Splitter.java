@@ -1,6 +1,7 @@
-package calculator.utils;
+package calculator;
 
 import calculator.constant.ErrorMessage;
+import calculator.utils.StringUtils;
 
 import java.util.List;
 
