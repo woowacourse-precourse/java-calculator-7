@@ -35,7 +35,7 @@ public class IntegerExtractorTest {
     void testExtractIntegerWithCustomDelimiter() {
         // 커스텀 구분자 ";"을 사용하는 경우
         calculatorValues.setExpression("1;2;3");
-        calculatorValues.setDelimiter("[,:]");
+        calculatorValues.setDelimiter(";");
 
         IntegerExtractor.extractIntegerFromExpression(calculatorValues);
 
