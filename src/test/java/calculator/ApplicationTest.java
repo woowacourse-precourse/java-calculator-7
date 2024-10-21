@@ -1,7 +1,5 @@
 package calculator;
 
-import calculator.model.CalculationModel;
-import calculator.view.OutputView;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
@@ -108,18 +106,6 @@ class ApplicationTest extends NsTest {
                 assertThatThrownBy(() -> runException("//;1"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
-    }
-
-    private void runException(String input) {
-        CalculationModel model = new CalculationModel();
-        OutputView outputView = new OutputView();
-        try {
-            outputView.printInput();
-            model.parseInput(input);
-        } catch (IllegalArgumentException e) {
-            outputView.printError(e.getMessage()); // 예외 메시지 출력
-            throw e; // 예외 다시 던지기
-        }
     }
 
     @Override
