@@ -15,10 +15,10 @@ public class StringAddCalculator {
     }
 
 	private static String[] tokenize(String input) {
-		Matcher m = Pattern.compile("//(.*)\n(.*)").matcher(input);
+		Matcher m = Pattern.compile("//(.*?)(\\\\n|\n)(.*)").matcher(input);
 		if (m.find()) {
 			String customDelimiter = Pattern.quote(m.group(1));
-			String numbers = m.group(2);
+			String numbers = m.group(3);
 			return numbers.split(customDelimiter);
 		}
 		return input.split(DEFAULT_DELIMITERS);
