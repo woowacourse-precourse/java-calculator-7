@@ -8,11 +8,7 @@ public class Application {
         int sum = 0;
 
         //문자열 입력받기
-        try {
-            str = camp.nextstep.edu.missionutils.Console.readLine();
-        } catch (IOException e) {
-            throw new IllegalArgumentException(e);
-        }
+        str = camp.nextstep.edu.missionutils.Console.readLine();
 
         //커스텀 구분자
         if(str.matches("^//.{1}\\\\n.*")) {
