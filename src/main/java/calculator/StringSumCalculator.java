@@ -2,8 +2,6 @@ package calculator;
 
 import org.junit.platform.commons.util.StringUtils;
 
-import java.util.regex.Pattern;
-
 public class StringSumCalculator {
     private final InputValidator validator;
     private final StringParser parser;
