@@ -9,10 +9,12 @@
     사용자로부터 입력을 받아 `String`을 반환한다.
 - Parser  
   `String` 문자열을 구분자로 나누고 `String` 배열로 바꾼다.
-  - replace
-    - 문자열에서 특수문자를 모두 `;`로 바꾼다.
+  - findCustomSeparator
+    - `//` 와 `\n` 사이에 있는 커스텀 구분자를 찾는다.
+  - removeCustomSeparator
+    - 커스텀 구분자 제거
   - split
-    - `;`를 기준으로 문자열을 분리하여 `String` 배열로 바꾼다.
+    - `,:` + 커스텀 구분자를 기준으로 문자열을 분리하여 `String` 배열로 바꾼다.
 - Validate  
   `String` 배열에 적합하지 않은 문자열이 있는지 검사한다.
   - validate  
