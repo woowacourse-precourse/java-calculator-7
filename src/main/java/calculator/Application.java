@@ -36,10 +36,11 @@ public class Application {
             if(n.isEmpty()){
                 continue;
             }
-            if(Integer.parseInt(n) < 0) {
+            int num = Integer.parseInt(n);
+            if(num < 0) {
                 throw new IllegalArgumentException("invaild error");
             }
-            sum += Integer.parseInt(n);
+            sum += num;
         }
         System.out.println("결과 : "+sum);
     }
