@@ -1,6 +1,6 @@
-package calculator.application;
+package calculator;
 
-import calculator.Application;
+import calculator.application.Application;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
@@ -27,8 +27,6 @@ class ApplicationTest extends NsTest {
 
     @Override
     public void runMain() {
-
             Application.main(new String[]{});
-
     }
 }
