@@ -15,6 +15,4 @@ public class StringToNumberConverter {
         }
         return result;
     }
-
-
 }
