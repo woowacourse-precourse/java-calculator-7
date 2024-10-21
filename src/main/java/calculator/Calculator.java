@@ -33,7 +33,7 @@ public class Calculator {
      *
      * @param str 분리할 문자열
      * @return 구분자로 분리된 문자열
-     * @throws IllegalArgumentException 커스텀 구분자에서 "\n"이 없는 경우
+     * @throws IllegalArgumentException 커스텀 구분자에서 "\n"이 없는 경우, 구분자가 숫자인 경우
      */
     private String[] splitStr(String str) {
         String delimiter = ",|:";
