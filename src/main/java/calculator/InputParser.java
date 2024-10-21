@@ -10,6 +10,12 @@ public class InputParser {
             return new int[]{0};  // 빈 문자열일 경우 0 반환
         }
 
+        input = input.trim();
+
+        if (input.contains(" ")) {
+            input = input.replaceAll("\\s+", "");
+        }
+
         String delimiter = "[,|:]"; // 기본 구분자
         if (input.startsWith("//")) {
             int delimiterEnd = input.indexOf("\\n");
