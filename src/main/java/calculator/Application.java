@@ -6,8 +6,8 @@ import java.util.regex.Pattern;
 
 public class Application {
 
-    // 커스텀 구분자 관련해서 여러 번 사용하기 때문에 필드값을 지정
-    private static final String CUSTOM_SEPARATOR = "//(.)\\\\n(.*)";
+    // 커스텀 구분자를 생성하고 검증하는 단계에서 여러 번 사용하기 때문에 필드값으로 지정
+    private static final String CUSTOM_SEPARATOR_REGEX = "//(.)\\\\n(.*)";
 
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
@@ -15,57 +15,59 @@ public class Application {
         // 덧셈할 문자열 입력
         String input = Console.readLine();
 
-        // 기본 구분자로 초기화
-        String separator = ",|:";
-
-        // 아무것도 입력하지 않으면 결과는 0으로 출력
-        if (input.isEmpty()) {
-            System.out.println("결과: 0");
-            return;
-        }
-
         try {
-            if (existCustomSeparator(input)) {
-                // 커스텀 구분자가 존재한다면 구분자를 추출해서 separator 변수에 저장
-                separator = findCustomSeparator(input);
+            // 검증하고 계산까지 된 결과를 result 변수에 저장
+            int result = calculateProcess(input);
 
-                // 커스텀 구분자가 숫자인지 검증하는 함수 호출
-                isNumber(separator);
+            // 결과 출력
+            System.out.println("결과 : " + result);
 
-                // 커스텀 구분자 생성하는 부분 자르고 문자열 가져오기
-                String cutString = input.substring(input.lastIndexOf("n") + 1);
-
-                // 구분자를 이용해 문자열 분리
-                String[] cutStringArr = cutString.split(separator);
-
-                // 문자열배열에 있는 문자열을 검증하는 함수 호출
-                validateInput(cutStringArr);
-
-                // 계산
-                addCalc(cutStringArr);
-
-            } else {
-                // 커스텀 구분자가 아닌 기본 구분자를 사용했을 때
-
-                // 구분자를 이용해 문자열 분리
-                String[] cutStringArr = input.split(separator);
-
-                // 문자열 배열에 있는 문자열을 검증하는 함수 호출
-                validateInput(cutStringArr);
-
-                // 계산
-                addCalc(cutStringArr);
-            }
         } catch (IllegalArgumentException e) {
 
             // 검증 실패하면 에러 메시지 출력
             System.err.println(e.getMessage());
         }
-
     }
 
-    // 사용자 입력을 검증하는 함수
-    private static void validateInput(String[] inputArr) {
+    // 입력된 문자열을 받아 검증하고 계산하는 메서드
+    public static int calculateProcess(String input) {
+
+        // 아무것도 입력하지 않으면 결과는 0으로 출력
+        if (input.isEmpty()) {
+            return 0;
+        }
+
+        // 기본 구분자로 초기화
+        String separator = ",|:";
+
+        // 사용자 입력에서 숫자(문자열)
+        String numberPart = input;
+
+        // 커스텀 구분자가 존재하는지 확인하는 조건문
+        if (existCustomSeparator(input)) {
+
+            // 커스텀 구분자가 존재한다면 구분자를 추출해서 separator 변수에 저장
+            separator = findCustomSeparator(input);
+
+            // 커스텀 구분자가 숫자인지 검증하는 메서드 호출
+            isNumber(separator);
+
+            // 커스텀 구분자 생성하는 부분 자르고 문자열 가져오기
+            numberPart = input.substring(input.lastIndexOf("n") + 1);
+        }
+
+        // 구분자를 이용해 숫자(문자열) 분리
+        String[] cutNumberPartArr = numberPart.split(separator);
+
+        // 문자열 배열에 있는 숫자(문자열)를 검증하는 메서드 호출
+        validateInputNumberPart(cutNumberPartArr);
+
+        // 계산 후 결과 값을 리턴
+        return addCalc(cutNumberPartArr);
+    }
+
+    // 사용자 입력에서 숫자(문자열)를 검증하는 메서드
+    private static void validateInputNumberPart(String[] inputArr) {
         for (String str : inputArr) {
             // 0보다 큰지 확인. 그리고 숫자 형식인지 확인
             if (!str.matches("^[1-9]\\d*$")) {
@@ -74,16 +76,16 @@ public class Application {
         }
     }
 
-    // 커스텀 구분자가 존재하는지 검증하는 함수
+    // 커스텀 구분자가 존재하는지 검증하는 메서드
     private static boolean existCustomSeparator(String input) {
-        return input.matches(CUSTOM_SEPARATOR);
+        return input.matches(CUSTOM_SEPARATOR_REGEX);
     }
 
-    // 커스텀 구분자를 찾는 함수
+    // 커스텀 구분자를 찾는 메서드
     private static String findCustomSeparator(String input) {
 
         // 정규 표현식을 컴파일하고, 입력 문자열에 대해 매처를 생성
-        Matcher m = Pattern.compile(CUSTOM_SEPARATOR).matcher(input);
+        Matcher m = Pattern.compile(CUSTOM_SEPARATOR_REGEX).matcher(input);
 
         // 입력 문자열에서 패턴과 일치하는 부분이 있는지 확인
         if (m.find()) {
@@ -94,7 +96,7 @@ public class Application {
         }
     }
 
-    // 커스텀 구분자가 숫자인지 검증하는 함수
+    // 커스텀 구분자가 숫자인지 검증하는 메서드
     private static void isNumber(String input) {
         // 숫자 형식인지 확인
         if (input.matches("^\\d*$")) {
@@ -102,14 +104,15 @@ public class Application {
         }
     }
 
-    // 문자열을 덧셈하는 함수
-    private static void addCalc(String[] cutStringArr) {
+    // 문자열을 덧셈하는 메서드
+    private static int addCalc(String[] cutStringArr) {
         int result = 0;
 
+        // 문자열에서 정수로 변환 후 result에 합계를 저장
         for (String str : cutStringArr) {
             result += Integer.parseInt(str);
         }
 
-        System.out.println("결과 : " + result);
+        return result;
     }
 }
