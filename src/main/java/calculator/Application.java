@@ -2,12 +2,11 @@ package calculator;
 
 import java.util.StringTokenizer;
 
-import static camp.nextstep.edu.missionutils.Console.readLine;
+import static calculator.ConsoleIO.*;
 
 public class Application {
     public static void main(String[] args) {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String inputStr = readLine();
+        String inputStr = readInput();
 
         String separators = getSeparator(inputStr);
         String numbers = inputStr;
@@ -26,7 +25,7 @@ public class Application {
             answer += Integer.parseInt(st.nextToken());
         }
 
-        System.out.printf("결과 : %d\n", answer);
+        printOutput(answer);
     }
 
     public static String getSeparator(String inputStr) {
