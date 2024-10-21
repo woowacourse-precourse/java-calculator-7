@@ -24,5 +24,10 @@ public static int sum(String input) {
         return Integer.parseInt(input);  // 숫자 하나만 입력 시 그 숫자 반환
     }
 
-    return 0;  // 기본 반환 값
+    String[] numbers = input.split("[,:]");  // 쉼표 또는 콜론으로 숫자 분리
+    int sum = 0;
+    for (String number : numbers) {
+        sum += Integer.parseInt(number);  // 각 숫자를 더함
+    }
+    return sum;  // 합 반환
 }
