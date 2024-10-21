@@ -22,6 +22,10 @@ public class Application {
                 String customDelimiter = str.substring(2, delimiterIndex);
                 delimiters.add(customDelimiter);
                 str = str.substring(delimiterIndex + 2);
+                if (str.isEmpty()) {
+                    System.out.print("결과 : 0");
+                    return;
+                }
             } else {
                 throw new IllegalArgumentException();
             }
