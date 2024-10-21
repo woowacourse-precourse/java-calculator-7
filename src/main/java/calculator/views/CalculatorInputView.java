@@ -1,0 +1,20 @@
+package calculator.views;
+
+import camp.nextstep.edu.missionutils.Console;
+
+public class CalculatorInputView {
+
+    private static final String INPUT_PROMPT = "덧셈할 문자열을 입력해 주세요.";
+    private static final String RESULT_MESSAGE = "결과 : ";
+
+    public static String readInput() {
+        return Console.readLine();
+    }
+    public static void displayInputPrompt() {
+        System.out.println(INPUT_PROMPT);
+    }
+
+    public static void displayResult(String result) {
+        System.out.println(RESULT_MESSAGE + result);
+    }
+}
