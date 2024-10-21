@@ -4,7 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static void main(String[] args) {
-        // TODO: JAVA 21 에서 테스트
+
         String input = Console.readLine();
         add(input);
         Console.close();
@@ -15,8 +15,6 @@ public class Application {
         if (input.isEmpty()) {
             return "결과 : 0";
         }
-
-        // TODO : 잘못된 값을 입력할 경우 IllegalArgumentException을 발생시킨 후 애플리케이션은 종료
 
         // 기본 구분자 (쉼표, 콜론)
         String seperator = ",|:";
@@ -52,10 +50,6 @@ public class Application {
                 sum += num;
             }
         }
-
-        System.out.println(String.format("seperator: %s", seperator));
-        System.out.println(String.format("입력 : %s", input));
-        System.out.println(String.format("결과 : %s", sum));
 
         return "결과 : " + sum;
     }
