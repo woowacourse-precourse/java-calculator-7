@@ -11,7 +11,7 @@ public class UserInputController {
     public UserInputController(UserInput userInput){
         this.userInputMessage = userInput.promptUserInput();
 
-        checkDelimiterAndNumber(userInputMessage);
+        checkOnedelimiterAndOnenumber(userInputMessage);
         this.delimiter = updateDelimiter(userInputMessage);
     }
 
@@ -23,7 +23,7 @@ public class UserInputController {
         return userInputMessage;
     }
 
-    private void checkDelimiterAndNumber(String userInputMessage){
+    private void checkOnedelimiterAndOnenumber(String userInputMessage){
         boolean hasDelimiter = false;
         boolean hasNumber = false;
         for(int i = 0; i < userInputMessage.length(); i++){
