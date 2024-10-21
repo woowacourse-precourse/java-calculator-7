@@ -25,6 +25,10 @@ public class Application {
                     sep += input_split[i];
                 }
             }
+
+            for (int i = 4 + sep.length(); i < input.length(); i++) {
+                str = str + input_split[i];
+            }
         }
     }
 }
