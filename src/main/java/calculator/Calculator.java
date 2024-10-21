@@ -9,13 +9,21 @@ public class Calculator {
     public static void run() {
 
         String userInput = ioHandler.getUserInput();
-        System.out.println("userInput : " + userInput);
+        long sum = calculateUserInput(userInput);
+        ioHandler.printCalculatedOutput(sum);
+
+        Console.close();
+    }
+
+    private static long calculateUserInput(String userInput) {
 
         long sum = 0;
 
-        if (userInput == "") {
-            sum = 0;
-        } else if (userInput.contains(",") || userInput.contains(":")) {
+        if (isNothing(userInput)) {
+            return sum;
+        }
+
+        if (isDefaultSeparator(userInput)) {
             if (userInput.contains(",")) {
                 String[] nums = userInput.trim().split("[,:]");
                 for (String num : nums) {
@@ -25,7 +33,10 @@ public class Calculator {
                     sum += Long.parseLong(num);
                 }
             }
-        } else if (userInput.contains("//") && userInput.contains("\\n")) {
+            return sum;
+        }
+
+        if (isCustomSeparator(userInput)) {
             String separator = userInput.substring(userInput.indexOf("//") + 2,
                     userInput.indexOf("\\n"));
             String[] nums = userInput.substring(userInput.indexOf("\\n") + 2).split(separator);
@@ -35,12 +46,21 @@ public class Calculator {
                 }
                 sum += Long.parseLong(num);
             }
-        } else {
-            throw new IllegalArgumentException("구분자와 양수로 구성된 문자열을 입력해 주세요.");
+            return sum;
         }
 
-        ioHandler.printCalculatedOutput(sum);
-        Console.close();
+        throw new IllegalArgumentException("구분자와 양수로 구성된 문자열을 입력해 주세요.");
+    }
 
+    private static boolean isCustomSeparator(String userInput) {
+        return userInput.contains("//") && userInput.contains("\\n");
+    }
+
+    private static boolean isDefaultSeparator(String userInput) {
+        return userInput.contains(",") || userInput.contains(":");
+    }
+
+    private static boolean isNothing(String userInput) {
+        return userInput.isEmpty();
     }
 }
