@@ -1,9 +1,8 @@
 package calculator.core;
 
-import java.util.HashSet;
 import java.util.Set;
-import java.util.regex.Pattern;
 
+import calculator.model.LongCalculatorModel;
 import calculator.operation.AdditionalLongCalculatorOperation;
 import calculator.operation.LongCalculatorOperation;
 import calculator.parser.BasicLongMathematicalExpressionParser;
@@ -20,6 +19,7 @@ public class LongCalculator implements Calculator {
 	private final CalculatorView calculatorView;
 	private final LongCalculatorOperation longCalculatorOperation;
 	private final ExpressionSplitter expressionSplitter;
+	private final Set defaultSeparators;
 
 	public LongCalculator() {
 		this(new BasicSeparatorParser(), new BasicLongMathematicalExpressionParser(),
@@ -39,30 +39,28 @@ public class LongCalculator implements Calculator {
 		this.expressionSplitter = new ExpressionSplitter(
 			separatorParser.getVALID_CUSTOM_SEPARATOR_PATTERN(),
 			mathematicalExpressionParser.getVALID_MATHEMATICAL_EXPRESSION_PATTERN());
+		this.defaultSeparators = separatorParser.getSeparators();
 	}
 
-	private long calculate(String expression, Set<Character> separators) {
-		String[] expressions = expressionSplitter.splitExpression(expression);
-
-		separatorParser.parse(expressions[0], separators);
-
-		long[] numbers = mathematicalExpressionParser.parse(expressions[1], separators);
-		long result = longCalculatorOperation.operate(numbers);
-
-		return result;
+	private void calculate(LongCalculatorModel model) {
+		expressionSplitter.splitExpression(model);
+		separatorParser.parse(model);
+		mathematicalExpressionParser.parse(model);
+		longCalculatorOperation.operate(model);
 	}
 
 	@Override
 	public void startCalculation() {
 		String input = calculatorView.input();
+		LongCalculatorModel model = new LongCalculatorModel(input, defaultSeparators);
 
-		long result = 0;
 		if (!input.equals("")) {
-			expressionSplitter.isValid(input);
-			result = calculate(input, new HashSet<>());
+			expressionSplitter.isValid(model);
+			calculate(model);
 		}
 
-		calculatorView.output(Long.toString(result));
+		model.generateResult();
+		calculatorView.output(model);
 	}
 
 }

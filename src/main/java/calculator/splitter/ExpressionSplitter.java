@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import calculator.core.CalculatorError;
+import calculator.model.CalculatorModel;
 
 public class ExpressionSplitter {
 
@@ -16,19 +17,21 @@ public class ExpressionSplitter {
 		VALID_PATTERN = Pattern.compile(VALID_EXPRESSION_PATTERN);
 	}
 
-	public String[] splitExpression(String expression) {
-		Matcher matcher = VALID_PATTERN.matcher(expression);
+	public void splitExpression(CalculatorModel model) {
+		Matcher matcher = VALID_PATTERN.matcher(model.getInput());
 		if (matcher.find()) {
 			String separatorExpression = matcher.group(1);
 			String mathematicalExpression = matcher.group(3);
-			return new String[] {separatorExpression, mathematicalExpression};
+
+			model.setSeparatorExpression(separatorExpression);
+			model.setMathematicalExpression(mathematicalExpression);
 		} else {
 			throw new IllegalArgumentException(CalculatorError.INVALID_INPUT.getMessage());
 		}
 	}
 
-	public void isValid(String expression) {
-		if (!VALID_PATTERN.matcher(expression).matches()) {
+	public void isValid(CalculatorModel model) {
+		if (!VALID_PATTERN.matcher(model.getInput()).matches()) {
 			throw new IllegalArgumentException(CalculatorError.INVALID_INPUT.getMessage());
 		}
 	}

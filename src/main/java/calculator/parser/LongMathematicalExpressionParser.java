@@ -1,10 +1,11 @@
 package calculator.parser;
 
-import java.util.Set;
+import calculator.model.CalculatorModel;
+import calculator.model.LongCalculatorModel;
 
 public interface LongMathematicalExpressionParser {
 
-	public long[] parse(String expression, Set<Character> separators);
+	public void parse(LongCalculatorModel model);
 
 	public String getVALID_MATHEMATICAL_EXPRESSION_PATTERN();
 }

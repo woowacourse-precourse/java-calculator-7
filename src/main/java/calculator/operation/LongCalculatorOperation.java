@@ -1,6 +1,8 @@
 package calculator.operation;
 
+import calculator.model.LongCalculatorModel;
+
 @FunctionalInterface
 public interface LongCalculatorOperation {
-	public long operate(long[] numbers);
+	public void operate(LongCalculatorModel model);
 }

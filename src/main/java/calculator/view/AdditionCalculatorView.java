@@ -1,5 +1,6 @@
 package calculator.view;
 
+import calculator.model.CalculatorModel;
 import camp.nextstep.edu.missionutils.Console;
 
 public class AdditionCalculatorView implements CalculatorView {
@@ -19,7 +20,7 @@ public class AdditionCalculatorView implements CalculatorView {
 	}
 
 	@Override
-	public void output(String result) {
-		System.out.println(OUTPUT_STRING + result);
+	public void output(CalculatorModel model) {
+		System.out.println(OUTPUT_STRING + model.getResult());
 	}
 }

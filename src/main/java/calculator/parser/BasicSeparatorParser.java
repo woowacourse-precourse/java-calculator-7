@@ -1,10 +1,13 @@
 package calculator.parser;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import calculator.model.CalculatorModel;
 
 public class BasicSeparatorParser implements SeparatorParser {
 
@@ -25,15 +28,19 @@ public class BasicSeparatorParser implements SeparatorParser {
 	}
 
 	@Override
-	public void parse(String expression, Set<Character> separators) {
-		isValid(expression);
-		Matcher matcher = PATTERN.matcher(expression);
-		separators.addAll(BASIC_SEPARATORS);
+	public Set getSeparators() {
+		return new HashSet<Character>(BASIC_SEPARATORS);
+	}
+
+	@Override
+	public void parse(CalculatorModel model) {
+		isValid(model.getSeparatorExpression());
+		Matcher matcher = PATTERN.matcher(model.getSeparatorExpression());
 
 		while (matcher.find()) {
 			char customSeparator = matcher.group(2).charAt(0);
 
-			if (!separators.add(customSeparator)) {
+			if (!model.getSeparators().add(customSeparator)) {
 				throw new IllegalArgumentException(ParserError.DUPLICATION_SEPARATOR.getMessage());
 			}
 		}

@@ -4,14 +4,16 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import calculator.model.CalculatorModel;
+import calculator.model.LongCalculatorModel;
+
 public class BasicLongMathematicalExpressionParser implements LongMathematicalExpressionParser {
 	private final String VALID_MATHEMATICAL_EXPRESSION_PATTERN = "(\\d+\\D)*\\d+$";
-	private  final Pattern VALID_PATTERN = Pattern.compile(VALID_MATHEMATICAL_EXPRESSION_PATTERN);
+	private final Pattern VALID_PATTERN = Pattern.compile(VALID_MATHEMATICAL_EXPRESSION_PATTERN);
 
-	public String getVALID_MATHEMATICAL_EXPRESSION_PATTERN(){
+	public String getVALID_MATHEMATICAL_EXPRESSION_PATTERN() {
 		return this.VALID_MATHEMATICAL_EXPRESSION_PATTERN;
 	}
-
 
 	private long stringNumberToNumber(String stringNumber) {
 		try {
@@ -47,14 +49,16 @@ public class BasicLongMathematicalExpressionParser implements LongMathematicalEx
 	}
 
 	@Override
-	public long[] parse(String expression, Set<Character> separators) {
-		isValid(expression);
-		String separatorRegex = generateRegex(separators);
-		String[] stringNumbers = expression.split(separatorRegex);
+	public void parse(LongCalculatorModel model) {
+		isValid(model.getMathematicalExpression());
+		String separatorRegex = generateRegex(model.getSeparators());
+		String[] stringNumbers = model.getMathematicalExpression().split(separatorRegex);
 
-		return Arrays.stream(stringNumbers)
+		long[] result = Arrays.stream(stringNumbers)
 			.mapToLong(this::stringNumberToNumber)
 			.toArray();
+
+		model.setNumbers(result);
 	}
 
 }
