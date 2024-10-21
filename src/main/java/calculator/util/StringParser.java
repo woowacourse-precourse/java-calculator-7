@@ -27,6 +27,7 @@ public class StringParser {
     }
 
     private boolean isInputEmpty(String input) {
+
         return input == null || input.isEmpty();
     }
 
@@ -34,12 +35,16 @@ public class StringParser {
     private String extractCustomDelimiter(String input) {
         Validator.validateCustomDelimiterFormat(input);
         int delimiterEndIndex = input.indexOf("\\n");
-        return Pattern.quote(input.substring(2, delimiterEndIndex));
+        String customDelimiter = input.substring(2, delimiterEndIndex);
+        Validator.validateCustomDelimiterIsNotNumber(customDelimiter);
+
+        return Pattern.quote(customDelimiter);
     }
 
     // 숫자 추출하는 메서드
     private String extractNumbers(String input) {
         int delimiterEndIndex = input.indexOf("\\n");
+
         return input.substring(delimiterEndIndex + 2);
     }
 
