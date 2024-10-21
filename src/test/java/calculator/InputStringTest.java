@@ -1,6 +1,7 @@
 package calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -100,6 +101,24 @@ public class InputStringTest {
 
         //then
         assertThat(result).isEqualTo(1);
+    }
+
+    @Test
+    void 커스텀_구분자_뒤에_위치() {
+        //given
+        String input = "1//;\n1";
+
+        //when, then
+        assertThrows(IllegalArgumentException.class, () -> new InputString(input));
+    }
+
+    @Test
+    void 숫자가_음수() {
+        //given
+        String input = "-1,2,3";
+
+        //when, then
+        assertThrows(IllegalArgumentException.class, () -> new InputString(input));
     }
 
 }
