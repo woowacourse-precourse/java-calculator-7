@@ -55,5 +55,15 @@ class ParserTest {
         assertEquals(OUT_OF_RANGE_VALUE.getMessage(), exception.getMessage());
     }
 
+    @Test
+    @DisplayName("구분자가 공백인 경우 정상출력")
+    void parsesCorrectlyForValidInput() {
+        Parser parser = new Parser();
+        String input = "// \\n1 2 3";
+
+        List<Integer> result = parser.parseInput(input);
+        assertEquals(List.of(1, 2, 3), result);
+    }
+
 
 }
