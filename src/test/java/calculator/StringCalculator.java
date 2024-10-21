@@ -12,6 +12,9 @@ public class StringCalculator {
 
         int sum = 0;
         for (int num : numbers) {
+            if (num < 0) {
+                throw new IllegalArgumentException("음수는 입력할 수 없습니다");
+            }
             sum += num;
         }
         return sum;
