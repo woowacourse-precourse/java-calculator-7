@@ -16,9 +16,9 @@
   -[X] 배열의 크기가 0일 경우 0 반환
 
 ### 출력 처리
--[ ] 연산 결과를 출력
+-[X] 연산 결과를 출력
 
 ### 예외 처리
--[ ] 에러 상황별 메시지 정의
--[ ] 에러 발생 시 IllegalArgumentException 반환
+-[X] 에러 상황별 메시지 정의
+-[X] 에러 발생 시 IllegalArgumentException 반환
 
