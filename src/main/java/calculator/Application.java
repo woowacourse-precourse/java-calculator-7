@@ -4,10 +4,14 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static void main(String[] args) {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String input = Console.readLine();
-        int result = calculate(input);  // 계산 실행
-        System.out.println("결과 : " + result);  // 결과 출력
+        try {
+            System.out.println("덧셈할 문자열을 입력해 주세요.");
+            String input = Console.readLine();
+            int result = calculate(input);  // 계산 실행
+            System.out.println("결과 : " + result);  // 결과 출력
+        } catch (IllegalArgumentException e) {
+            System.out.println("잘못된 입력입니다: " + e.getMessage());  // 잘못된 입력 처리
+        }
     }
 
     public static int calculate(String input) {
@@ -31,7 +35,12 @@ public class Application {
         String[] tokens = numbers.split(delimiter);  // 구분자로 문자열 분리
         int sum = 0;
         for (String token : tokens) {
-            sum += Integer.parseInt(token.trim());  // 숫자로 변환하고 합산
+            try {
+                int number = Integer.parseInt(token.trim());  // 숫자 변환 시도
+                sum += number;
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");  // 예외 처리
+            }
         }
 
         return sum;
