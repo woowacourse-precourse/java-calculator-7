@@ -3,6 +3,7 @@ package calculator.domain;
 import calculator.domain.constant.CustomDelimBracket;
 
 public class CustomDelimExtract {
+
     private static String lining;
 
     public static String getEssence(String coveredCustomDelim) {

@@ -1,9 +1,12 @@
 package calculator.domain;
 
+import calculator.domain.constant.Unit;
+
 public class UserExpressionDivide {
+
     private static UserExpression userExpression;
     private static String rawExpression;
-    private static final int CUSTOM_DELIM_LENGTH = 5;
+    private static final int CUSTOM_DELIM_LENGTH = Unit.CUSTOM_DELIM_EXPRESSION_LENGTH.getValue();
 
     private static void setting(UserExpression expression) {
         userExpression = expression;
@@ -29,8 +32,8 @@ public class UserExpressionDivide {
     }
 
     private static void assignRemainingPart(String rawExpression) {
-        userExpression.setEssentialExpression(rawExpression
-                .replace(userExpression.getCustomDelimExpressionCandidate(),""));
+        userExpression.setEssentialExpression(rawExpression.replace
+                (userExpression.getCustomDelimExpressionCandidate(),""));
         onlyCustomDelimExistInRawExpression();
     }
 

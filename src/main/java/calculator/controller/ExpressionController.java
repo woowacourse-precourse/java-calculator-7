@@ -16,8 +16,7 @@ public class ExpressionController {
     private DelimiterRepository delimiterRepository;
 
     public List<String> init(UserExpression userExpression) {
-        this.userExpression = userExpression;
-        delimiterRepository = new DelimiterRepository();
+        createExpression(userExpression);
         divideUserExpression();
         customDelimProcess();
         String unified = unifyAllDelim(userExpression.getEssentialExpression(),
@@ -30,15 +29,16 @@ public class ExpressionController {
         delimiterRepository = new DelimiterRepository();
     }
 
-    private void divideUserExpression() {
-        UserExpressionDivide.dividePart(userExpression);
-    }
-
     private void customDelimProcess() {
-        userExpression= UserExpressionDivide.setDivideCustomDelimDisappear();
+        userExpression = UserExpressionDivide.setDivideCustomDelimDisappear();
         if(CustomDelimVerify.exist(userExpression.getCustomDelimExpressionCandidate())){
             customDelimTreatment(userExpression.getCustomDelimExpressionCandidate());
+            divideUserExpression();
         }
+    }
+
+    private void divideUserExpression() {
+        UserExpressionDivide.dividePart(userExpression);
     }
 
     private void customDelimTreatment(String customDelimCandidate) {

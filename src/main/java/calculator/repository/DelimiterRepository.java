@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DelimiterRepository {
-    private final List<String> delimiters;
+
+    private List<String> delimiters;
 
     public DelimiterRepository() {
         delimiters = new ArrayList<>();
