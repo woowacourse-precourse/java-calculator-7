@@ -1,5 +1,8 @@
 package calculator;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class StringCalculator {
     private final String userInput;
     private String delimiter;
@@ -11,7 +14,17 @@ public class StringCalculator {
         this.delimiter = "[,:]";
         this.string = userInput;
 
+        allowCustomDelimiter("//", "\\n");
         this.substrings = string.split(delimiter);
+    }
+
+    private void allowCustomDelimiter(String from, String to) {
+        String regex = String.format("(^%s)(.+?)(%s)(.*)", Pattern.quote(from), Pattern.quote(to));
+        Matcher matcher = Pattern.compile(regex).matcher(string);
+        if (matcher.find()) {
+            delimiter = Pattern.quote(matcher.group(2));
+            string = matcher.group(4);
+        }
     }
 
     public int stringSum() {
