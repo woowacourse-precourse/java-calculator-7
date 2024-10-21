@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class CustomDelimiterSplitter extends AbstractDelimiterSplitter {
 
-    private static final Pattern compile = Pattern.compile("//(.+)\\n(.*)");
+    private static final Pattern PATTERN = Pattern.compile("//(.+)\\\\n(.*)");
 
     public CustomDelimiterSplitter() {
         this(0);
@@ -17,7 +17,7 @@ public class CustomDelimiterSplitter extends AbstractDelimiterSplitter {
 
     @Override
     protected boolean splitValue(Container container, String value) {
-        Matcher matcher = compile.matcher(value);
+        Matcher matcher = PATTERN.matcher(value);
         if (isNotMatch(matcher)) {
             return false;
         }

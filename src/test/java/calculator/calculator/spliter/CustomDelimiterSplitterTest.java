@@ -12,7 +12,7 @@ public class CustomDelimiterSplitterTest {
     public void 커스텀_구분자() {
         CustomDelimiterSplitter splitter = new CustomDelimiterSplitter();
 
-        SplitResult result = splitter.split("//.\n1.1.3");
+        SplitResult result = splitter.split("//.\\n1.1.3");
 
         assertThat(result.isSuccess()).isTrue();
         assertThat(result.result()).containsExactlyInAnyOrder("1", "1", "3");

@@ -23,7 +23,7 @@ public class AccumulatorTest {
 
     static Stream<Arguments> patternAndSum() {
         return Stream.of(
-                arguments("//.\n1.2.3", 1 + 2 + 3),
+                arguments("//.\\n1.2.3", 1 + 2 + 3),
                 arguments("1,1,2", 1 + 1 + 2),
                 arguments("1:1:3", 1 + 1 + 3),
                 arguments("1:3,2", 1 + 3 + 2),

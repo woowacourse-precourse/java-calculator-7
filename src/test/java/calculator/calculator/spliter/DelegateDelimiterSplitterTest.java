@@ -27,7 +27,7 @@ public class DelegateDelimiterSplitterTest {
     }
 
     static Stream<Arguments> patternAndResultList() {
-        return Stream.of(arguments("//.\n1.2.3", Arrays.asList("1", "2", "3")),
+        return Stream.of(arguments("//.\\n1.2.3", Arrays.asList("1", "2", "3")),
                 arguments("1,1,2", Arrays.asList("1", "1", "2")), arguments("1:1:3", Arrays.asList("3", "1", "1")),
                 arguments("1:3,2", Arrays.asList("1", "2", "3")));
     }
