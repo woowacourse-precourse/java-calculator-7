@@ -1,7 +1,7 @@
 package calculator;
 
 public class DelimiterHandler {
-    public String[] extractNumbers(String input) {
+    public String[] splitNumbers(String input) {
         String delimiter = ",|:";
         String numbers = input;
 
