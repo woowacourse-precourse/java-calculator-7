@@ -9,16 +9,25 @@ import calculator.view.OutputView;
 
 public class Application {
     public static void main(String[] args) {
-        CalculatorDependencyConfig calculatorDependencyConfig = new CalculatorDependencyConfig();
-        CalculatorController calculatorController = calculatorDependencyConfig.calculatorController();
+        CalculatorController calculatorController = setupCalculatorController();
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
         try {
-            outputView.outputCalculationResponseDTO(
-                    calculatorController.runCalculator(inputView.inputCalculationString()));
+            String inputString = inputView.inputCalculationString();
+            outputView.outputCalculationResponseDTO(calculatorController.runCalculator(inputString));
         } catch (Exception e) {
+            handleError();
+        } finally {
             close();
-            throw new IllegalArgumentException("잘못된 값을 입력하셨습니다.");
         }
+    }
+
+    private static void handleError() {
+        throw new IllegalArgumentException("잘못된 값을 입력하셨습니다.");
+    }
+
+    private static CalculatorController setupCalculatorController() {
+        CalculatorDependencyConfig calculatorDependencyConfig = new CalculatorDependencyConfig();
+        return calculatorDependencyConfig.calculatorController();
     }
 }
