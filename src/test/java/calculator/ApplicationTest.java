@@ -40,6 +40,13 @@ class ApplicationTest extends NsTest {
         List<Integer> result = Application.parseInput("1,2, 15");
         assertThat(result).isEqualTo(List.of(1, 2, 15));
     }
+    
+    @Test
+    @DisplayName("콜론을 구분자로 사용해 문자열에 포함된 숫자를 배열로 반환한다.")
+    void should_returnDigitArray_when_ColonSeparatedString() {
+        List<Integer> result = Application.parseInput("1:2: 15");
+        assertThat(result).isEqualTo(List.of(1, 2, 15));
+    }
 
     @Override
     public void runMain() {

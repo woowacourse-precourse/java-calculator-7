@@ -7,6 +7,7 @@ import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
         int result = calculateSum(input);
     }
@@ -21,7 +22,7 @@ public class Application {
 
     public static List<Integer> parseInput(String input) {
         List<Integer> parsedNumbers = new ArrayList<>();
-        for (String number : input.split(",")) {
+        for (String number : input.split("[,:]")) {
             parsedNumbers.add(Integer.parseInt(number.trim()));
         }
         return parsedNumbers;
