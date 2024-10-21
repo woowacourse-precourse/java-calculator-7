@@ -13,7 +13,6 @@ public class Application {
             System.out.println(e.getMessage());
         }
     }
-
     public static int plus(String input) {
         if (input == null || input.isEmpty()) {
             return 0;
@@ -47,6 +46,5 @@ public class Application {
               }
          }
          return sum;
-
     }
 }
