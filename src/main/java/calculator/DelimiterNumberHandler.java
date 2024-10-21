@@ -8,15 +8,6 @@ public record DelimiterNumberHandler(String delimiters, String numbersString) {
         InputValidator.validateStart(this.numbersString, this.delimiters);
     }
 
-    private boolean startsWithDelimiter(String input, String delimiters) {
-        for (String delimiter : delimiters.split("\\|")) {
-            if (input.startsWith(delimiter)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public String[] splitNumbers() {
         String[] splitNumbers = this.numbersString.split(this.delimiters);
         if (Arrays.stream(splitNumbers).anyMatch(String::isEmpty)) {
