@@ -2,7 +2,9 @@ package calculator.model;
 
 import static calculator.model.enums.ExceptionMessage.NUMERIC_EXCEPTION;
 import static calculator.model.enums.ExceptionMessage.RANGE_EXCEPTION;
+import static calculator.util.Converter.convertToInteger;
 
+// 문자열에서 분리된 각 숫자를 담는 객체
 public class Number {
     private final int number;
 
@@ -13,13 +15,8 @@ public class Number {
         this.number = convertToInteger(number);
     }
 
-
     public int getNumber() {
         return number;
-    }
-
-    private int convertToInteger(String number) {
-        return Integer.parseInt(number);
     }
 
     private void validate(String number) {
@@ -27,6 +24,7 @@ public class Number {
         validateRange(number);
     }
 
+    // 숫자가 아니라면 예외를 던지는 메서드
     private void validateNumeric(String number) {
         try {
             Integer.parseInt(number);
@@ -35,6 +33,7 @@ public class Number {
         }
     }
 
+    // 양의 정수가 아니라면 예외를 던지는 메서드
     private void validateRange(String number) {
         if (Integer.parseInt(number) < NUMBER_RANGE_CONDITION) {
             throw new IllegalArgumentException(RANGE_EXCEPTION.getMessage());

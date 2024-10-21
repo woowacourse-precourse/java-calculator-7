@@ -1,9 +1,6 @@
 package calculator.model;
 
-import static calculator.model.enums.ParsingPattern.NUMBER_SPLIT_LIMIT;
-
-import java.util.Arrays;
-
+// 문자열에서 숫자가 적혀있는 부분을 담는 토큰 객체
 public class NumbersToken {
     private final String token;
 
@@ -11,26 +8,17 @@ public class NumbersToken {
         this.token = token;
     }
 
+    // 토큰 값이 비어있는지 확인하는 메서드
     public boolean isEmpty() {
         return token.isEmpty();
     }
 
-    public Numbers convertToNumbers(Delimiter delimiter) {
-        String[] extractNumbers = extractNumbers(delimiter);
-
-        Numbers numbers = new Numbers();
-
-        Arrays.stream(extractNumbers).map(Number::new).forEach(numbers::add);
-
-        return numbers;
+    public String getToken() {
+        return token;
     }
 
     @Override
     public String toString() {
         return token;
-    }
-
-    private String[] extractNumbers(Delimiter delimiter) {
-        return token.split(delimiter.getDelimiter(), NUMBER_SPLIT_LIMIT.getNumber());
     }
 }

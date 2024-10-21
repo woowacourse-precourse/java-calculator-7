@@ -3,6 +3,7 @@ package calculator.model;
 import static calculator.model.Calculator.Mode.CUSTOM;
 import static calculator.model.Calculator.Mode.DEFAULT;
 import static calculator.model.enums.ParsingPattern.DEFAULT_DELIMITER_PATTERN;
+import static calculator.util.Converter.convertToNumbersFromNumbersToken;
 import static calculator.util.Tokenizer.createCustomDelimiterToken;
 import static calculator.util.Tokenizer.createNumbersToken;
 import static calculator.util.Tokenizer.isExistsCustomDelimiterToken;
@@ -17,14 +18,12 @@ public class Calculator {
     }
 
     private Mode mode;
-//    private final Tokenizer tokenizer;
 
     private static final int EMPTY_RESULT = 0;
 
     // Calculator 생성 시 tokenizer 할당 및 mode 값 초기화
     // tokenizer -> static으로 이용해도 되지 않을까??
     public Calculator() {
-//        this.tokenizer = new Tokenizer();
         this.mode = DEFAULT;
     }
 
@@ -40,15 +39,15 @@ public class Calculator {
             return EMPTY_RESULT;
         }
 
-        Numbers numbers = numbersToken.convertToNumbers(delimiter);
-
-        return sum(numbers);
+        return sum(convertToNumbersFromNumbersToken(delimiter, numbersToken));
     }
 
+    // 계산 결과을 더합니다.
     private int sum(Numbers numbers) {
         return numbers.sum();
     }
 
+    // mode를 확인하여 문자열 분리에 사용할 Delimiter를 선택합니다.
     private Delimiter selectDelimiter(String input) {
         if (mode == DEFAULT) {
             return new Delimiter(DEFAULT_DELIMITER_PATTERN.getPattern());
@@ -58,6 +57,7 @@ public class Calculator {
         return new Delimiter(customDelimiterToken.extractDelimiter());
     }
 
+    // CustomDelimiter 존재 여부에 따란 Mode 설정
     private void setMode(String input) {
         if (isExistsCustomDelimiterToken(input)) {
             mode = CUSTOM;
