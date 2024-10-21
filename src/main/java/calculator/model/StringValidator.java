@@ -36,26 +36,18 @@ public class StringValidator {
 
 	public void validate() {
 		int index = INPUT_START_INDEX;
+		Status status = Status.checkStatus(input.charAt(index));
 		while (index < input.length()) {
-			index = this.checkInputStatus(input, index);
+			index = this.checkInputStatus(input, index, status);
+			status = Status.changeStatus(status);
 		}
 	}
 
-	private int checkInputStatus(String input, int index) {
-		int currentStatus = this.checkStatus(input, index);
-		return switch (currentStatus) {
+	private int checkInputStatus(String input, int index, Status status) {
+		return switch (status) {
 			case DIGIT -> this.checkInputDigit(input, index);
 			case DELIMITER -> this.checkInputDelimiter(input, index);
-			default -> throw new IllegalArgumentException(ERROR_MESSAGE);
 		};
-	}
-
-	private int checkStatus(String input, int index) {
-		char start = input.charAt(index);
-		if (Character.isDigit(start)) {
-			return DIGIT;
-		}
-		return DELIMITER;
 	}
 
 	private int checkInputDigit(String input, int index) {
