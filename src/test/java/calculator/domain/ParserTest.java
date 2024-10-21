@@ -4,6 +4,7 @@ import static calculator.domain.constant.errorMessage.ValueError.INVALID_VALUE_F
 import static calculator.domain.constant.errorMessage.ValueError.MINUS_VALUE;
 import static calculator.domain.constant.errorMessage.ValueError.OUT_OF_RANGE_VALUE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
@@ -62,6 +63,19 @@ class ParserTest {
         String input = "// \\n1 2 3";
 
         List<Integer> result = parser.parseInput(input);
+        assertEquals(List.of(1, 2, 3), result);
+    }
+
+    @Test
+    @DisplayName("추출한 값이 정수인 경우 정상 출력되고, 모든 값이 Integer 타입인지 확인한다")
+    void parsesCorrectlyIntegerValue() {
+        Parser parser = new Parser();
+        String input = "// \\n1 2 3";
+
+        List<Integer> result = parser.parseInput(input);
+
+        result.forEach(value -> assertInstanceOf(Integer.class, value));
+
         assertEquals(List.of(1, 2, 3), result);
     }
 
