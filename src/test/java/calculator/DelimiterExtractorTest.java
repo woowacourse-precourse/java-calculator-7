@@ -7,6 +7,14 @@ import org.junit.jupiter.api.Test;
 public class DelimiterExtractorTest {
 
     @Test
+    void 커스텀_구분자로_대시를_사용하면_IllegalArgumentException_예외가_발생한다() {
+        String input = "//-\n1-2-3";
+        DelimiterExtractor delimiterExtractor = new DelimiterExtractor(input);
+
+        assertThrows(IllegalArgumentException.class, delimiterExtractor::validate);
+    }
+
+    @Test
     void 커스텀_구분자로_온점을_사용하면_IllegalArgumentException_예외가_발생한다() {
         String input = "//.\n1.2.3";
         DelimiterExtractor delimiterExtractor = new DelimiterExtractor(input);

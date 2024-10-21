@@ -67,8 +67,11 @@ public class DelimiterExtractor {
 
     private void validateCustomDelimiter() {
         final String PERIOD = ".";
-        if (PERIOD.equals(createRegularExpression())) {
-            throw new IllegalArgumentException("[" + type() + "] " + " 온점(.)은 사용할 수 없는 구분자예요!");
+        final String DASH = "-";
+
+        String regex = createRegularExpression();
+        if (PERIOD.equals(regex) || DASH.equals(regex)) {
+            throw new IllegalArgumentException("[" + type() + "] " + PERIOD + " 혹은 " + DASH  +" 는 사용할 수 없는 구분자예요!");
         }
     }
 
