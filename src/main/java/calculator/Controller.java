@@ -20,6 +20,11 @@ public class Controller {
 
         input = separatorHandler.checkCustomSeparator(input);
 
+        if (input.isEmpty()){
+            System.out.println("결과 : " + 0);
+            return;
+        }
+
         inputHandler.validateInput(input);
 
         int result = calculator.calculate(input);

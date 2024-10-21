@@ -6,13 +6,7 @@ public class InputHandler {
     public String getUserInput() {
         System.out.println("덧셈할 문자열을 입력해 주세요.\n");
 
-        String input = Console.readLine();
-
-        if (input == null || input.trim().isEmpty()) {
-            throw new IllegalArgumentException("사용자의 입력이 비어있습니다.");
-        }
-
-        return input;
+        return Console.readLine();
     }
 
     public void validateInput(String input) {
