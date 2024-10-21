@@ -15,8 +15,8 @@ public class StringCalculator {
                 try {
                     int number = Integer.parseInt(token);
                     sum += number;
-                } catch (NumberFormatException e) {
-                    throw new IllegalArgumentException("유효하지 않은 숫자 형식입니다: " + token);
+                } catch (Exception e) {
+                    throw new IllegalArgumentException();
                 }
             }
         }

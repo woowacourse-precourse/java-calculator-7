@@ -10,8 +10,8 @@ public class MainCalculator {
         try {
             int result = StringCalculator.calculate(input);
             OutputHandler.printResult(result);
-        } catch (IllegalArgumentException e) {
-            OutputHandler.printError(e.getMessage());
+        } catch (Exception e) {
+            throw new IllegalArgumentException();
         }
     }
 }
