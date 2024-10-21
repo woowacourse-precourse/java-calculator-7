@@ -16,7 +16,7 @@ public class InputParserTest {
 
         ParsedInput parsedInput = inputParser.parse(input);
 
-        assertThat(parsedInput.numbers()).containsExactly("1", "2", "3");
+        assertThat(parsedInput.numbersToken()).containsExactly("1", "2", "3");
     }
 
     @Test
@@ -25,7 +25,7 @@ public class InputParserTest {
 
         ParsedInput parsedInput = inputParser.parse(input);
 
-        assertThat(parsedInput.numbers()).containsExactly("13","21");
+        assertThat(parsedInput.numbersToken()).containsExactly("13","21");
     }
 
     @Test
@@ -34,7 +34,7 @@ public class InputParserTest {
 
         ParsedInput parsedInput = inputParser.parse(input);
 
-        assertThat(parsedInput.numbers()).containsExactly("13","21","3");
+        assertThat(parsedInput.numbersToken()).containsExactly("13","21","3");
     }
 
     @Test
@@ -43,7 +43,7 @@ public class InputParserTest {
 
         ParsedInput parsedInput = inputParser.parse(input);
 
-        assertThat(parsedInput.numbers()).containsExactly("13","21","3","4","5","6","7","8");
+        assertThat(parsedInput.numbersToken()).containsExactly("13","21","3","4","5","6","7","8");
     }
 
     @Test
@@ -52,7 +52,7 @@ public class InputParserTest {
 
         final ParsedInput parsedInput = inputParser.parse(input);
 
-        assertThat(parsedInput.numbers()).containsExactly("0");
+        assertThat(parsedInput.numbersToken()).containsExactly("0");
     }
 
     @Test
@@ -61,7 +61,7 @@ public class InputParserTest {
 
         final ParsedInput parsedInput = inputParser.parse(input);
 
-        assertThat(parsedInput.numbers()).containsExactly("3");
+        assertThat(parsedInput.numbersToken()).containsExactly("3");
     }
 
     @Test
@@ -70,7 +70,7 @@ public class InputParserTest {
 
         ParsedInput parsedInput = inputParser.parse(input);
 
-        assertThat(parsedInput.numbers()).containsExactly("13","21","3");
+        assertThat(parsedInput.numbersToken()).containsExactly("13","21","3");
     }
 
     @Test
@@ -97,7 +97,7 @@ public class InputParserTest {
 
         ParsedInput parsedInput = inputParser.parse(input);
 
-        assertThat(parsedInput.numbers()).containsExactly("1","2","3");
+        assertThat(parsedInput.numbersToken()).containsExactly("1","2","3");
     }
 
     @Test
@@ -106,7 +106,7 @@ public class InputParserTest {
 
         ParsedInput parsedInput = inputParser.parse(input);
 
-        assertThat(parsedInput.numbers()).containsExactly("1");
+        assertThat(parsedInput.numbersToken()).containsExactly("1");
     }
 
 }

@@ -7,8 +7,8 @@ public class NumberAdder {
 
     public String adder(ParsedInput parsedInput) {
         BigDecimal result = BigDecimal.ZERO;
-        for (String numStr : parsedInput.numbers()) {
-            BigDecimal num = new BigDecimal(numStr);
+        for (String numberToken : parsedInput.numbersToken()) {
+            BigDecimal num = new BigDecimal(numberToken);
             result = result.add(num);
         }
 

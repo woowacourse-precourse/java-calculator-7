@@ -21,16 +21,16 @@ public class InputParser {
         }
 
         Set<String> delimiters = initializeDefaultDelimiters();
-        String numbers = input;
+        String stringNumbers = input;
 
         if (inputValidator.containCustomDelimiter(input)) {
-            numbers = processCustomDelimiter(input, delimiters);
+            stringNumbers = processCustomDelimiter(input, delimiters);
         }
 
-        String[] filteredNumberTokens = tokenizeNumbers(numbers, delimiters);
-        validateNumbers(filteredNumberTokens);
+        String[] numbersTokens = tokenizeNumbers(stringNumbers, delimiters);
+        validateNumbers(numbersTokens);
 
-        return new ParsedInput(filteredNumberTokens);
+        return new ParsedInput(numbersTokens);
     }
 
     private Set<String> initializeDefaultDelimiters() {
@@ -58,9 +58,9 @@ public class InputParser {
 
     private String[] tokenizeNumbers(String numbers, Set<String> delimiters) {
         String regex = String.join("|", delimiters);
-        String[] numberTokens = numbers.split(regex);
+        String[] numbersTokens = numbers.split(regex);
 
-        return filterEmptyString(numberTokens);
+        return filterEmptyString(numbersTokens);
     }
 
     private String[] filterEmptyString(String[] numbers) {
@@ -69,12 +69,12 @@ public class InputParser {
                 .toArray(String[]::new);
     }
 
-    private void validateNumbers(String[] numbers) {
-        for (String number : numbers) {
-            if (inputValidator.isMinus(number)) {
+    private void validateNumbers(String[] numbersToken) {
+        for (String numberToken : numbersToken) {
+            if (inputValidator.isMinus(numberToken)) {
                 throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
             }
-            if (!inputValidator.isNumeric(number)) {
+            if (!inputValidator.isNumeric(numberToken)) {
                 throw new IllegalArgumentException("숫자 이외의 값은 입력할 수 없습니다.");
             }
         }
@@ -90,6 +90,6 @@ public class InputParser {
         return delimiters;
      }
 
-    public record ParsedInput(String[] numbers) { }
+    public record ParsedInput(String[] numbersToken) { }
 
 }
