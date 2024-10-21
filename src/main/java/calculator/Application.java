@@ -2,6 +2,7 @@ package calculator;
 
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        Parser parser = new Parser();
+        OutputHandler.printResult(Calculator.add(parser.parse(InputHandler.getInput())));
     }
 }
