@@ -11,8 +11,11 @@ public class Calculator {
         numbers = new ArrayList<>();
     }
 
-    public void run(String inputWord, Division division) {
-        String[] numberWords = inputWord.split(division.regularExpression());
+    /*
+    * 매개변수를 객체 단위로 남길지, 그 안에 세부적인 값 형태로 넘길지 고민
+    * */
+    public void run(Input inputWord, Division division) {
+        String[] numberWords = stringNumbers(inputWord).split(getRegularExpression(division));
         try {
             for (String numberWord : numberWords) {
                 numbers.add(Integer.parseInt(numberWord));
@@ -22,6 +25,14 @@ public class Calculator {
         } catch (Exception e) {
             System.out.println("예기치 않은 문제가 발생했습니다. 해결해야 합니다");
         }
+    }
+
+    private static String stringNumbers(Input inputWord) {
+        return inputWord.numbers();
+    }
+
+    private static String getRegularExpression(Division division) {
+        return division.regularExpression();
     }
 
     public int result() {

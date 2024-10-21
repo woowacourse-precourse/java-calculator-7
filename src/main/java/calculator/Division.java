@@ -23,7 +23,9 @@ public class Division {
                 regularWord.append("|");
             }
         }
+        // 정규표현식 사용하는데 있어서, 정규표현식을 사용할 문자열 안에 \ 백슬래시를 온전히 문자로 보기위함
         regularWord.append("\\\\");
         return String.valueOf(regularWord);
     }
+
 }
