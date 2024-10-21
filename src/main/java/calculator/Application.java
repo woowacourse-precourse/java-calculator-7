@@ -11,7 +11,11 @@ public class Application {
         }
         // 기본 구분자 쉼표와 콜론으로 문자열 분리
         String[] numbers = input.split(",|:");
-        return -1;  // TODO: 나머지 로직 추가
+        int sum = 0;
+        for (String number : numbers) {
+            sum += Integer.parseInt(number);
+        }
+        return sum;
     }
 
 }
