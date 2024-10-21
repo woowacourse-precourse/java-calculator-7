@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class DelimiterExtractor {
+public class Extractor {
     private static final String DEFAULT_DELIMITER = "[,:]";
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("^//(.)\\\\n");
     private String delimiter;
     private final FormatValidator formatValidator;
 
-    public DelimiterExtractor() {
+    public Extractor() {
         delimiter = DEFAULT_DELIMITER;
         formatValidator = new FormatValidator();
     }

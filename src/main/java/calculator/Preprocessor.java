@@ -3,13 +3,13 @@ package calculator;
 import java.util.List;
 
 public class Preprocessor {
-    private final DelimiterExtractor delimiterExtractor;
+    private final Extractor extractor;
 
     public Preprocessor() {
-        this.delimiterExtractor = new DelimiterExtractor();
+        this.extractor = new Extractor();
     }
 
     public List<Integer> preprocess(String input) {
-        return new StringToNumberConverter().convert(delimiterExtractor.extractNumbers(input));
+        return new StringToNumberConverter().convert(extractor.extractNumbers(input));
     }
 }
