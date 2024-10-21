@@ -75,15 +75,23 @@ public class Parser {
         List<Integer> integers = new ArrayList<>();
         try {
             String[] integerStrs = integersAndDelimiters.split(DelimiterRegex);
-            for (String integerStr : integerStrs) {
-                int number = Integer.parseInt(integerStr);
-                if (number <= 0) {
-                    throw new IllegalArgumentException("양의 정수가 아닌 수는 불가능합니다.");
-                }
-                integers.add(number);
-            }
+            integers = makeIntegers(integerStrs, DelimiterRegex);
         } catch (Exception e) {
             throw new IllegalArgumentException(e.getMessage());
+        }
+
+        return integers;
+    }
+
+    private List<Integer> makeIntegers(String[] integerStrs, String delimiterRegex) {
+        List<Integer> integers = new ArrayList<>();
+
+        for (String integerStr : integerStrs) {
+            int number = Integer.parseInt(integerStr);
+            if (number <= 0) {
+                throw new IllegalArgumentException("양의 정수가 아닌 수는 불가능합니다.");
+            }
+            integers.add(number);
         }
 
         return integers;
