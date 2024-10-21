@@ -2,6 +2,7 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,13 +11,18 @@ public class Application {
     private static String delimiter = ",|:"; // 정규식 구분자 모음
 
     public static void main(String[] args) {
-        String operand = inPut();
+        try {
+            String operand = inPut();
 
-        ArrayList<Integer> operandList = extractIntFromString(operand);
+            ArrayList<Integer> operandList = extractIntFromString(operand);
 
-        int result = iterateCalculation(operandList);
+            int result = iterateCalculation(operandList);
 
-        System.out.println("결과 : " + result);
+            System.out.println("결과 : " + result);
+        } catch (IllegalArgumentException e) {
+            System.out.println("입력에 오류가 있습니다: " + e.getMessage());
+            throw e;
+        }
     }
 
     public static String inPut() {
@@ -47,14 +53,28 @@ public class Application {
     public static ArrayList<Integer> extractIntFromString(String input) {
         String[] tmp = input.split(delimiter);
 
-        // split된 값에 정수 이외의 값이 있는지 확인하는 로직 필요.
+        if (!isPositiveInt(tmp)) {
+            throw new IllegalArgumentException("입력된 값이 양의 정수가 아닙니다.");
+        }
 
         ArrayList<Integer> operandList = new ArrayList<>();
         for (String stringValue : tmp) {
+            if (Objects.equals(stringValue, "")) {
+                continue;
+            }
             int intValue = Integer.parseInt(stringValue);
             operandList.add(intValue);
         }
         return operandList;
+    }
+
+    public static boolean isPositiveInt(String[] input) {
+        for (String value : input) {
+            if (!value.matches("[1-9]\\d*")) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public static String addCustomDelimiter(String input) {
