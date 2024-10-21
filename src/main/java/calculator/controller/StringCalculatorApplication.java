@@ -6,17 +6,17 @@ import calculator.view.ApplicationView;
 public class StringCalculatorApplication implements CalculatorApplication {
 
     private final ApplicationView applicationView;
-    private final Calculator caculator;
+    private final Calculator calculator;
 
-    public StringCalculatorApplication(ApplicationView applicationView, Calculator caculator) {
+    public StringCalculatorApplication(ApplicationView applicationView, Calculator calculator) {
         this.applicationView = applicationView;
-        this.caculator = caculator;
+        this.calculator = calculator;
     }
 
     @Override
     public void run() {
             String responseValue = applicationView.requestValue();
-            int result = caculator.calculate(responseValue);
+            int result = calculator.calculate(responseValue);
             applicationView.printResult(result);
     }
 }
