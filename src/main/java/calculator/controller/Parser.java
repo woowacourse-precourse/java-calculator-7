@@ -12,7 +12,7 @@ public class Parser {
     private List<Character> separators = new ArrayList<>();
 
     // 구분자 파싱 중 사용될 임시 배열
-    private Stack<Character> buffer = new Stack<>();
+    private Stack<Character> separatorBuffer = new Stack<>();
 
     private String removedString = "";
 
@@ -29,18 +29,18 @@ public class Parser {
 
             // 첫 번째 조건
             if (inputString.charAt(i) == '/' && inputString.charAt(i + 1) == '/') {
-                buffer.add(inputString.charAt(i + 2)); // 버퍼에 커스텀 구분자 후보 저장
+                separatorBuffer.add(inputString.charAt(i + 2)); // 버퍼에 커스텀 구분자 후보 저장
 
                 // 두 번째 조건
                 // 백슬래시 2개 해야 백슬래시 1개로 인식됨
                 if (inputString.charAt(i + 3) == '\\' && inputString.charAt(i + 4) == 'n') {
                     // 충족 시 구분자 배열에 추가 후 버퍼에서 삭제
-                    separators.add(buffer.pop());
+                    separators.add(separatorBuffer.pop());
                     i += 4; // 커스텀 구분자 조건에 포함되는 부분 skip
 
                 } else {
                     // 버퍼에 저장된 커스텀 구분자 후보 삭제
-                    buffer.pop();
+                    separatorBuffer.pop();
                 }
             } else {
                 removedString += inputString.charAt(i);
@@ -57,21 +57,21 @@ public class Parser {
     public void parsingOperands() {
 
         // 피연산자 파싱 중 사용될 임시 문자열
-        String tmpOperand = "";
+        String operandBuffer = "";
 
         for (int i = 0; i < removedString.length(); i++) {
             Character currentChar = removedString.charAt(i);
             boolean isSeparator = isSeparator(removedString.charAt(i));
 
             if (isSeparator) { // 구분자면
-                if (!tmpOperand.isEmpty()) { // 문자열이 비어있으면 skip
+                if (!operandBuffer.isEmpty()) { // 문자열이 비어있으면 skip
                     // 지금까지 저장된 문자 숫자로 변환하여 피연산자 배열에 추가
-                    operands.add(Integer.parseInt(tmpOperand));
-                    tmpOperand = ""; // 문자열 초기화
+                    operands.add(Integer.parseInt(operandBuffer));
+                    operandBuffer = ""; // 문자열 초기화
                 }
 
             } else if (Character.isDigit(currentChar)) { // 숫자면
-                tmpOperand += currentChar; // 임시 문자열에 누적 저장
+                operandBuffer += currentChar; // 임시 문자열에 누적 저장
 
             } else if (currentChar == '-') {
                 throw new IllegalArgumentException("입력 문자열에 음수가 존재합니다.");
@@ -82,8 +82,8 @@ public class Parser {
         }
 
         // 문자열에 숫자가 존재하면 피연산자 배열에 추가
-        if (!tmpOperand.isEmpty()) {
-            operands.add(Integer.parseInt(tmpOperand));
+        if (!operandBuffer.isEmpty()) {
+            operands.add(Integer.parseInt(operandBuffer));
         }
     }
 
