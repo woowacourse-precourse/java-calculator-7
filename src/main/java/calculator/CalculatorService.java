@@ -56,13 +56,13 @@ public class CalculatorService {
      * @return 연산식
      */
     private String extractExpression(String input) {
-        Pattern pattern = Pattern.compile("(?<=\\n).*");
-        Matcher matcher = pattern.matcher(input);
-        if (matcher.find()) {
-            return matcher.group();
+        String[] split = input.split(Pattern.quote("\\n"));
+        if (split.length > 1) {
+            return split[1];
         }
         return "";
     }
+
 
     /**
      * 추출한 숫자로 덧셈 연산한다.

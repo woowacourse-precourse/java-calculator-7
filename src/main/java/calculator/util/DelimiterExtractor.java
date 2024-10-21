@@ -7,7 +7,6 @@ import java.util.regex.Pattern;
 
 public class DelimiterExtractor {
 
-    private static final String REGEX_CUSTOM_DELIMITER_PATTERN = "//([^\s]+)\\n";
     private static final String INVALID_REGEX_CUSTOM_DELIMITER_PATTERN = "//.*[\\s]+.*\\n";
     private static final String REGEX_DEFAULT_DELIMITER_PATTERN = "^[0-9,:]+$";
 
@@ -29,13 +28,11 @@ public class DelimiterExtractor {
      */
     public String extractCustomDelimiter(String input) {
         validateCustomDelimiter(input);
-        Pattern pattern = Pattern.compile(REGEX_CUSTOM_DELIMITER_PATTERN);
-        Matcher matcher = pattern.matcher(input);
-        if (matcher.find()) {
-            return matcher.group(1);
-        } else {
-            return "";
+        String[] split = input.split(Pattern.quote("\\n"), 2);
+        if (split.length > 1) {
+            return split[0].substring(2);
         }
+        return "";
     }
 
     /**
