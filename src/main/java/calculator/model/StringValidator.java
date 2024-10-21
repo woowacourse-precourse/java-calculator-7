@@ -28,6 +28,10 @@ public class StringValidator {
 			    .toList();
 	}
 
+	public List<Delimiter> getDelimiters() {
+		return this.delimiters;
+	}
+
 	public String getInput() {
 		return this.input;
 	}
