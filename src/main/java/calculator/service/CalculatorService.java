@@ -1,7 +1,6 @@
 package calculator.service;
 
-import calculator.model.AddOperator;
-import calculator.model.Operator;
+import calculator.model.Calculator;
 import calculator.parser.Parser;
 
 import java.util.List;
@@ -9,11 +8,11 @@ import java.util.List;
 public class CalculatorService {
 
     private final Parser parser;
-    private final Operator operator;
+    private final Calculator calculator;
 
     public CalculatorService(){
         this.parser = new Parser();
-        this.operator = new AddOperator();
+        this.calculator = new Calculator();
     }
 
     /**
@@ -23,6 +22,6 @@ public class CalculatorService {
      */
     public int calculator(String input) {
         List<Integer> numberList = parser.parser(input);
-        return operator.operate(numberList);
+        return calculator.add(numberList);
     }
 }
