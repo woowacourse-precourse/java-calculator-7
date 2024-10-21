@@ -10,6 +10,34 @@ import org.junit.jupiter.api.Test;
 class ApplicationTest extends NsTest {
 
     @Test
+    void 커스텀_구분자로_문자열_분리() {
+        String input = "//;\\n1;2;3";
+
+        String[] result = Application.parseInput(input);
+
+        assertThat(result).isEqualTo(new String[]{"1", "2", "3"});
+    }
+
+    @Test
+    void 기본_구분자로_문자열_분리() {
+        String input = "1,2:3";
+
+        String[] result = Application.parseInput(input);
+
+        assertThat(result).isEqualTo(new String[]{"1", "2", "3"});
+    }
+
+    @Test
+    void 잘못된_구분자_형식_예외처리() {
+        String input = "//\\n123";
+
+        assertThatThrownBy(() -> {
+            Application.parseInput(input);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("구분자가 비어 있습니다. 구분자를 입력하세요.");
+    }
+
+    @Test
     void 기본_구분자로_숫자_분리() {
         Application application = new Application();
         String input = "1,2:3";
