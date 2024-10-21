@@ -12,24 +12,13 @@ public class Application {
 
         String customDelimiter = getCustomDelimiter(inputString);
 
-        String[] splitStrings;
-        if (customDelimiter == null) {
-            splitStrings = inputString.split("[,:]");
-        } else {
-            inputString = inputString.substring(5);
-            splitStrings = inputString.split("[,:" + customDelimiter + "]");
-        }
+        String[] splitStrings = getSplitStrings(inputString, customDelimiter);
 
         List<String> stringList = new ArrayList<>(Arrays.asList(splitStrings));
         stringList.removeIf(String::isEmpty);
         List<Integer> integerList = convertStringsToIntegers(stringList);
-        if (integerList != null) {
-            int sum = 0;
-            for (int i : integerList) {
-                sum += i;
-            }
-            System.out.println("결과 : " + sum);
-        }
+
+        System.out.println("결과 : " + getSumOfIntegerList(integerList));
     }
 
     private static String getCustomDelimiter(String string) throws IllegalArgumentException {
@@ -64,5 +53,21 @@ public class Application {
             return integerList;
         }
         throw new IllegalArgumentException();
+    }
+
+    private static String[] getSplitStrings(String inputString, String customDelimiter) {
+        if (customDelimiter == null) {
+            return inputString.split("[,:]");
+        }
+        inputString = inputString.substring(5);
+        return inputString.split("[,:" + customDelimiter + "]");
+    }
+
+    private static int getSumOfIntegerList(List<Integer> integerList) {
+        int sum = 0;
+        for (int i : integerList) {
+            sum += i;
+        }
+        return sum;
     }
 }
