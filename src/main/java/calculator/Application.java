@@ -7,5 +7,9 @@ public class Application {
         // TODO: 프로그램 구현
         CalculatorController controller = new CalculatorController();
         controller.start();
+
+//        //@#$\n1:2@3#4
+//        1,2:3
+//        1:2:3:4,5
     }
 }

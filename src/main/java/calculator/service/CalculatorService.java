@@ -15,13 +15,13 @@ public class CalculatorService {
     static String seperate = ":|,";
 
     public String checkSeperate(String input) {
-        if (input.startsWith("\"//") && input.contains("\\n")) {
+        if (input.startsWith("//") && input.contains("\\n")) {
             int index = input.indexOf("\\n");
-            for (int i = 3; i < index; i++) {
+            for (int i = 2; i < index; i++) {
                 String ch = input.substring(i, i + 1);
                 seperate = seperate + "|" + ch;
             }
-            input = input.substring(index + 2, input.length()-1);
+            input = input.substring(index + 2, input.length());
         }
         return input;
     }
