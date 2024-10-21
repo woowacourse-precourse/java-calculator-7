@@ -14,4 +14,15 @@ public class Converter {
         return target.substring(index).replaceAll(" ", "");
     }
 
+    static String[] convertToArray(String target) {
+        StringBuilder sb = new StringBuilder();
+        for (Character del : DELIMITERS) {
+            sb.append(del);
+            sb.append('|');
+        }
+        sb.deleteCharAt(sb.length()-1);
+
+        return target.split(sb.toString());
+    }
+
 }
