@@ -24,6 +24,14 @@ public class TestCase extends NsTest {
         });
     }
 
+    @Test
+    void 빈구분자_테스트() {
+        assertSimpleTest(() -> {
+            run("//\\n1");
+            assertThat(output()).contains("결과 : 1");
+        });
+    }
+
 
     @Override
     protected void runMain() {
