@@ -5,14 +5,11 @@ public class SeparatorManager {
     private static final String customSeparatorEnd = "\\\\n";
 
     public Separator getSeparator(String originString) {
+        Separator separator = new Separator();
         if (originString.startsWith(customSeparatorStart)) {
-            Separator separator = new Separator();
             separator.addSeparator(extractDelimiter(originString));
-
-            return separator;
-        } else {
-            return new Separator();
         }
+        return separator;
     }
 
     public String extractDelimiter(String input) {
@@ -34,6 +31,9 @@ public class SeparatorManager {
 
     public String separateCustomSeparator(String originString) {
         String[] parts = originString.split(customSeparatorEnd);
+        if (parts.length < 2) {
+            throw new IllegalArgumentException();
+        }
         return parts[1];
     }
 }
