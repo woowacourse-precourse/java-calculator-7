@@ -14,9 +14,11 @@ public class Application {
             String delimiterRemovedInput = input.substring(customDelimiter.length() + 5);
             String[] splitInput = delimiterRemovedInput.split(customDelimiter + "|" + "," + "|" + ":");
             List<Integer> numbers = parseIntegers(splitInput);
+            int sum = numbers.stream().mapToInt(Integer::intValue).sum();
         } else {
             String[] splitInput = input.split("[,:]");
             List<Integer> numbers = parseIntegers(splitInput);
+            int sum = numbers.stream().mapToInt(Integer::intValue).sum();
         }
     }
 
