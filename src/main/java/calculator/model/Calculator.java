@@ -31,5 +31,32 @@ public class Calculator {
             this.usingCustomDelimiter = true;
             this.customDelimiter = stringParser.customDelimiter(input);
         }
+        this.input = input.substring(input.indexOf("\n") + 1);
+        validateInput();
+    }
+
+    public void extractNumber() {
+        String[] extract;
+        if (usingCustomDelimiter) {
+            extract = stringParser.parseNumber(this.input, this.customDelimiter);
+        } else {
+            extract = stringParser.parseNumber(this.input);
+        }
+
+        this.inputNumbers = numberConverter.convert(extract);
+    }
+
+    public Long sum() {
+        return this.inputNumbers.stream()
+                .mapToLong(Long::longValue)
+                .sum();
+    }
+
+    private void validateInput() {
+        if (usingCustomDelimiter) {
+            inputValueValidator.validate(this.input, customDelimiter);
+        } else {
+            inputValueValidator.validate(this.input);
+        }
     }
 }
