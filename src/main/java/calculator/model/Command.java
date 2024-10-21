@@ -6,8 +6,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public record Command(
-    String header,
-    String content
+        String header,
+        String content
 ) {
     private static final String CONTAINS_DIGIT_REGEX = ".*\\d.*";
     private static final String CUSTOM_DELIMITER_REGEX = "^//(.+?)\\\\n";

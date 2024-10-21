@@ -4,12 +4,10 @@ import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.math.BigInteger;
-
-import org.junit.jupiter.api.Test;
-
 import calculator.model.Number;
 import camp.nextstep.edu.missionutils.test.NsTest;
+import java.math.BigInteger;
+import org.junit.jupiter.api.Test;
 
 class NumberTest extends NsTest {
 
@@ -17,7 +15,7 @@ class NumberTest extends NsTest {
     void 문자를_Number로_변환하면_예외가_발생한다() {
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> Number.from("one"))
-                .isInstanceOf(IllegalArgumentException.class);
+                    .isInstanceOf(IllegalArgumentException.class);
         });
     }
 
@@ -25,7 +23,7 @@ class NumberTest extends NsTest {
     void 음수를_Number로_변환하면_예외가_발생한다() {
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> Number.from("-1"))
-                .isInstanceOf(IllegalArgumentException.class);
+                    .isInstanceOf(IllegalArgumentException.class);
         });
     }
 
@@ -33,7 +31,7 @@ class NumberTest extends NsTest {
     void 소수_Number로_변환하면_예외가_발생한다() {
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> Number.from("1.231"))
-                .isInstanceOf(IllegalArgumentException.class);
+                    .isInstanceOf(IllegalArgumentException.class);
         });
     }
 

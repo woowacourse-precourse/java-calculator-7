@@ -3,7 +3,7 @@ package calculator.model;
 import java.math.BigInteger;
 
 public record Number(
-    BigInteger number
+        BigInteger number
 ) {
     public static Number from(String number) {
         if (number.isBlank()) {
@@ -15,7 +15,7 @@ public record Number(
                 throw new IllegalArgumentException("값은 양수로 입력해주세요.");
             }
             return new Number(bigInteger);
-        } catch(NumberFormatException numberFormatException) {
+        } catch (NumberFormatException numberFormatException) {
             throw new IllegalArgumentException("입력 양식을 확인해주세요.");
         }
     }

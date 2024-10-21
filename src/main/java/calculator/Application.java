@@ -11,9 +11,9 @@ public class Application {
         OutputView outputView = new OutputView();
         Calculator calculator = new Calculator();
         CalculatorController calculatorController = new CalculatorController(
-            inputView,
-            outputView,
-            calculator
+                inputView,
+                outputView,
+                calculator
         );
         calculatorController.run();
     }

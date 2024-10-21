@@ -1,13 +1,12 @@
 package calculator.controller;
 
-import java.math.BigInteger;
-import java.util.List;
-
 import calculator.model.Calculator;
 import calculator.model.Command;
 import calculator.model.Number;
 import calculator.view.InputView;
 import calculator.view.OutputView;
+import java.math.BigInteger;
+import java.util.List;
 
 public class CalculatorController {
 

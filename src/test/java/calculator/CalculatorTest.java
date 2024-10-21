@@ -3,14 +3,12 @@ package calculator;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.math.BigInteger;
-import java.util.List;
-
-import org.junit.jupiter.api.Test;
-
 import calculator.model.Calculator;
 import calculator.model.Number;
 import camp.nextstep.edu.missionutils.test.NsTest;
+import java.math.BigInteger;
+import java.util.List;
+import org.junit.jupiter.api.Test;
 
 class CalculatorTest extends NsTest {
 
@@ -19,12 +17,12 @@ class CalculatorTest extends NsTest {
         assertSimpleTest(() -> {
             Calculator calculator = new Calculator();
             BigInteger result = calculator.sum(List.of(
-                new Number(new BigInteger("2")),
-                new Number(new BigInteger("1")),
-                new Number(new BigInteger("3"))
+                    new Number(new BigInteger("2")),
+                    new Number(new BigInteger("1")),
+                    new Number(new BigInteger("3"))
             ));
             BigInteger expect = new BigInteger("6");
-           assertThat(result).isEqualTo(expect);
+            assertThat(result).isEqualTo(expect);
         });
     }
 
@@ -33,8 +31,8 @@ class CalculatorTest extends NsTest {
         assertSimpleTest(() -> {
             Calculator calculator = new Calculator();
             BigInteger result = calculator.sum(List.of(
-                new Number(new BigInteger("200000000000000000000000000000")),
-                new Number(new BigInteger("200000000000000000000000000000"))
+                    new Number(new BigInteger("200000000000000000000000000000")),
+                    new Number(new BigInteger("200000000000000000000000000000"))
             ));
             BigInteger expect = new BigInteger("400000000000000000000000000000");
             assertThat(result).isEqualTo(expect);

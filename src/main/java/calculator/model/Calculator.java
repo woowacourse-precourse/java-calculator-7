@@ -7,7 +7,7 @@ public class Calculator {
 
     public BigInteger sum(List<Number> numbers) {
         BigInteger sum = BigInteger.ZERO;
-        for (Number number: numbers) {
+        for (Number number : numbers) {
             sum = sum.add(number.number());
         }
         return sum;

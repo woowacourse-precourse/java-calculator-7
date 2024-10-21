@@ -4,14 +4,12 @@ import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.math.BigInteger;
-import java.util.List;
-
-import org.junit.jupiter.api.Test;
-
 import calculator.model.Command;
 import calculator.model.Number;
 import camp.nextstep.edu.missionutils.test.NsTest;
+import java.math.BigInteger;
+import java.util.List;
+import org.junit.jupiter.api.Test;
 
 class CommandTest extends NsTest {
 
@@ -46,7 +44,7 @@ class CommandTest extends NsTest {
     void 커스텀_구분자가_숫자인_경우_예외가_발생한다() {
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> Command.from("//1\\n1,1,3,4"))
-                .isInstanceOf(IllegalArgumentException.class);
+                    .isInstanceOf(IllegalArgumentException.class);
         });
     }
 
@@ -56,9 +54,9 @@ class CommandTest extends NsTest {
             Command command = Command.from("//-\\n1-3-4");
             List<Number> numbers = command.extractNumbers();
             List<Number> expect = List.of(
-                new Number(new BigInteger("1")),
-                new Number(new BigInteger("3")),
-                new Number(new BigInteger("4"))
+                    new Number(new BigInteger("1")),
+                    new Number(new BigInteger("3")),
+                    new Number(new BigInteger("4"))
             );
             assertThat(numbers).isEqualTo(expect);
         });
@@ -70,10 +68,10 @@ class CommandTest extends NsTest {
             Command command = Command.from("//-\\n1-3--4");
             List<Number> numbers = command.extractNumbers();
             List<Number> expect = List.of(
-                new Number(new BigInteger("1")),
-                new Number(new BigInteger("3")),
-                new Number(new BigInteger("0")),
-                new Number(new BigInteger("4"))
+                    new Number(new BigInteger("1")),
+                    new Number(new BigInteger("3")),
+                    new Number(new BigInteger("0")),
+                    new Number(new BigInteger("4"))
             );
             assertThat(numbers).isEqualTo(expect);
         });
@@ -85,7 +83,7 @@ class CommandTest extends NsTest {
             Command command = Command.from("");
             List<Number> numbers = command.extractNumbers();
             List<Number> expect = List.of(
-                new Number(new BigInteger("0"))
+                    new Number(new BigInteger("0"))
             );
             assertThat(numbers).isEqualTo(expect);
         });
