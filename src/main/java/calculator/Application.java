@@ -13,7 +13,7 @@ import camp.nextstep.edu.missionutils.Console;
  * @version 2024/10/21
  */
 public class Application {
-    private static final String IN_STRING = "덧셈할 문자열을 입력해 주세요.\n";
+    private static final String IN_STRING = "덧셈할 문자열을 입력해 주세요.";
     private static final String OUT_STRING = "결과 : ";
 
     /**
