@@ -2,12 +2,12 @@ package calculator.domain;
 
 public class Separator {
 
-    private String seperator;
+    private String separator;
 
     public Separator(String seperator) {
         validateSeparatorIsChar(seperator);
         validateSeparatorIsNotNumber(seperator);
-        this.seperator = seperator;
+        this.separator = seperator;
     }
 
     private void validateSeparatorIsChar(String s) {
@@ -20,5 +20,9 @@ public class Separator {
         if (Character.isDigit(s.charAt(0))) {
             throw new IllegalArgumentException("[ERROR] 숫자는 구분자가 될 수 없습니다.");
         }
+    }
+
+    public String getSeparator() {
+        return separator;
     }
 }
