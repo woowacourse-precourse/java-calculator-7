@@ -55,7 +55,7 @@ public class Application {
             try {
                 new BigInteger(customDelimiter);
             } catch (NumberFormatException e) {
-                return calculatePositiveNumber(Arrays.stream(expression.split(Pattern.quote(customDelimiter))).toList(), ERROR_CUSTOM_DELIMITER_OPERANDS_CONTAIN_OTHER_CHAR, ERROR_CUSTOM_DELIMITER_CONTAIN_ZERO, ERROR_CUSTOM_DELIMITER_CONTAIN_MINUS);
+                return calculatePositiveNumber(Arrays.stream(expression.split(Pattern.quote(customDelimiter))).toList());
             }
 
             throw new IllegalArgumentException(ERROR_CUSTOM_DELIMITER_CONTAIN_NUMBER);
@@ -74,18 +74,18 @@ public class Application {
                 .filter(letter -> !letter.equals(EMPTY))
                 .toList();
 
-        return calculatePositiveNumber(stringOperands, ERROR_BASIC_DELIMITER_OPERAND_CONTAIN_OTHER_CHAR, ERROR_BASIC_DELIMITER_CONTAIN_ZERO, ERROR_BASIC_DELIMITER_CONTAIN_MINUS);
+        return calculatePositiveNumber(stringOperands);
     }
 
-    private static BigInteger calculatePositiveNumber(List<String> stringOperands, String errorBasicDelimiterOperandContainOtherChar, String errorBasicDelimiterContainZero, String errorBasicDelimiterContainMinus) {
-        List<BigInteger> bigIntegerOperands = validateOperandIsNumber(stringOperands, errorBasicDelimiterOperandContainOtherChar);
-        validatePositive(bigIntegerOperands, errorBasicDelimiterContainZero, errorBasicDelimiterContainMinus);
+    private static BigInteger calculatePositiveNumber(List<String> stringOperands) {
+        List<BigInteger> bigIntegerOperands = validateOperandIsNumber(stringOperands);
+        validatePositive(bigIntegerOperands);
 
         return bigIntegerOperands.stream()
                 .reduce(BigInteger.valueOf(0), BigInteger::add);
     }
 
-    private static List<BigInteger> validateOperandIsNumber(List<String> stringOperands, String errorBasicDelimiterOperandContainOtherChar) {
+    private static List<BigInteger> validateOperandIsNumber(List<String> stringOperands) {
         List<BigInteger> bigIntegerOperands;
         try {
             bigIntegerOperands = stringOperands.stream()
@@ -93,26 +93,27 @@ public class Application {
                     .map(BigInteger::new)
                     .toList();
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(errorBasicDelimiterOperandContainOtherChar);
+            throw new IllegalArgumentException(ERROR_OPERANDS_CONTAIN_OTHER_CHAR);
         }
 
         return bigIntegerOperands;
     }
 
-    private static void validatePositive(List<BigInteger> operands, String errorCustomDelimiterContainZero, String errorCustomDelimiterContainMinus) {
+    private static void validatePositive(List<BigInteger> operands) {
         for (BigInteger inputNumber : operands) {
             if (inputNumber.compareTo(BigInteger.ZERO) == 0) {
-                throw new IllegalArgumentException(errorCustomDelimiterContainZero);
+                throw new IllegalArgumentException(ERROR_OPERANDS_CONTAIN_ZERO);
             }
 
             if (inputNumber.compareTo(BigInteger.ZERO) < 0) {
-                throw new IllegalArgumentException(errorCustomDelimiterContainMinus);
+                throw new IllegalArgumentException(ERROR_OPERANDS_CONTAIN_MINUS);
             }
         }
     }
 
     private static void validateOnlyDelimiter(String input, String delimiter) {
-        List<String> inputs = Arrays.stream(input.split(delimiter)).toList();
+        List<String> inputs = Arrays.stream(input.split(delimiter))
+                .toList();
         if (inputs.isEmpty()) {
             throw new IllegalArgumentException(delimiter + ERROR_BASIC_DELIMITER_ONLY_DELIMITER_SUPPORT);
         }
