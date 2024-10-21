@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 public class Calculator {
     private String division;
@@ -19,25 +20,30 @@ public class Calculator {
     }
 
     public void getNumbers(String inputString) {
-        String regex;
-
         if (inputString.isBlank()) {
             return;
         }
 
-        if (division != null) {
-            regex = COMMA + "|" + division + "|" + COLON;
-        } else {
-            regex = COMMA + "|" + COLON;
-        }
-        List<String> strings = Arrays.asList(inputString.split(regex));
+        List<String> strings = new ArrayList<>();
+        String regex = COMMA + "|" + COLON;
 
-        for (String string : strings) {
-            int number = Integer.parseInt(string);
-            if (number < 1) {
-                throw new IllegalArgumentException();
+        if (division != null) {
+            StringTokenizer tokenizer = new StringTokenizer(inputString, division);
+
+            while (tokenizer.hasMoreTokens()) {
+                strings.add(tokenizer.nextToken());
             }
-            numbers.add(number);
+
+            for (String string : strings) {
+                List<String> lists =  Arrays.asList(string.split(regex));
+                for (String list : lists) {
+                    int number = Integer.parseInt(list);
+                    if (number < 1) {
+                        throw new IllegalArgumentException();
+                    }
+                    numbers.add(number);
+                }
+            }
         }
     }
 
@@ -57,7 +63,7 @@ public class Calculator {
         if (inputString.startsWith("//")) {
             int index = inputString.indexOf("\\n");
 
-            if(index == -1) {
+            if (index == -1) {
                 throw new IllegalArgumentException();
             }
 
@@ -72,8 +78,7 @@ public class Calculator {
     }
 
     public boolean isValid(String inputString) {
-        String regex = "[" + COLON + division + COMMA + "]";
-        inputString = inputString.replaceAll(regex, "");
+        inputString = inputString.replace(COMMA, "").replace(division, "").replace(COLON, "");
 
         char[] inputChars = inputString.toCharArray();
         for (char inputChar : inputChars) {
