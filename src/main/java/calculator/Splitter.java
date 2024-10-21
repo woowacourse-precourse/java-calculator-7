@@ -39,11 +39,11 @@ public class Splitter {
         }
     }
 
-    public boolean isNum(int num) {
+    private boolean isNum(int num) {
         return num > 47 && num < 58;
     }
 
-    public void generateCustomSeparator() {
+    private void generateCustomSeparator() {
         if(inputString.length() >= 5) {
             char[] inputArray = inputString.toCharArray();
 
@@ -57,7 +57,7 @@ public class Splitter {
         }
     }
 
-    public boolean inspectionValue(String[] result) {
+    private boolean inspectionValue(String[] result) {
         for(String iter : result) {
             for(int i = 0; i < iter.length(); i++) {
                 if(iter.charAt(i) < 48 || iter.charAt(i) > 57) {
@@ -68,7 +68,7 @@ public class Splitter {
         return true;
     }
 
-    public void sum(String[] result) {
+    private void sum(String[] result) {
         for(String iter : result) {
             resultValue += Integer.parseInt(iter);
         }
