@@ -1,16 +1,36 @@
 package calculator;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Parser {
-    String SEPERATOR = ";";
+    String SEPARATOR = "[,:]";
     String input;
 
     Parser(String input) {
         this.input = input;
     }
-    void replace() {
-        input = input.replaceAll("[^0-9a-zA-Z]+", SEPERATOR);
+
+    String findCustomSeparator() {
+        Pattern pat = Pattern.compile("//(.+?)\n");
+        Matcher matcher = pat.matcher(input);
+        if (matcher.find()) {
+            return matcher.group(1);
+        }
+        return "";
     }
+
+    void removeCustomSeparator() {
+        Pattern pat = Pattern.compile("//(.+?)\n");
+        Matcher matcher = pat.matcher(input);
+        this.input = matcher.replaceAll("");
+    }
+
     String[] split() {
-        return input.split(SEPERATOR);
+        String customSeparator = findCustomSeparator();
+        removeCustomSeparator();
+        this.input = input.replace(customSeparator, ",");
+        return Pattern.compile(SEPARATOR).split(this.input);
     }
+
 }
