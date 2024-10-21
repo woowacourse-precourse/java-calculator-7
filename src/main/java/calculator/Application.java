@@ -39,6 +39,7 @@ public class Application {
         return calculate(num);
     }
     
+    
     private static int calculate(String[] num) {
         int sum = 0;
         for (String n : num) {
