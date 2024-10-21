@@ -2,6 +2,8 @@ package calculator.model;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SumCalculator {
 
@@ -20,6 +22,20 @@ public class SumCalculator {
         }
 
         return sumResult.setScale(0, RoundingMode.DOWN);
+    }
+
+    private String[] splitNumbers(String input) {
+        String delimiter = ",|:";
+        String numbers = input;
+
+        Matcher matcher = Pattern.compile("//(.*)\\\\n(.*)").matcher(input);
+        if (matcher.matches()) {
+            String customDelimiter = matcher.group(1);
+            delimiter += "|" + Pattern.quote(customDelimiter);
+            numbers = matcher.group(2);
+        }
+
+        return numbers.split(delimiter);
     }
 
     private BigDecimal parseToBigDecimal(String token) {
