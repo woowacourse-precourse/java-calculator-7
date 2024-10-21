@@ -7,6 +7,12 @@ public class Application {
         // TODO: 프로그램 구현
         String input = Console.readLine();
         String customDelimiter = getCustomDelimiter(input);
+        if (customDelimiter != null) {
+            String delimiterRemovedInput = input.substring(customDelimiter.length() + 5);
+            String[] splitInput = delimiterRemovedInput.split(customDelimiter + "|" + "," + "|" + ":");
+        } else {
+            String[] splitInput = input.split("[,:]");
+        }
     }
 
     public static String getCustomDelimiter(String input) {
