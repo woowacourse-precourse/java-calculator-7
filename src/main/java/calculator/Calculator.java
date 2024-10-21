@@ -13,6 +13,7 @@ public class Calculator {
     private static final int CUSTOM_DELIMITER_START_INDEX = 2;
     private static final String DEFAULT_DELIMITER = "[,|:]";
     private static final int SUM_ZERO = 0;
+    private static final String NO_DELIMITER = "";
 
     public int processInputAndSum(String userInput) {
         String customDelimiter = extractCustomDelimiter(userInput);
@@ -67,7 +68,7 @@ public class Calculator {
 
     private String extractCustomDelimiter(String userInput) {
         Validator.validateDelimiterDeclaration(userInput, CUSTOM_DELIMITER_PREFIX, CUSTOM_DELIMITER_SUFFIX);
-        String customDelimiter = "";
+        String customDelimiter = NO_DELIMITER;
         if (userInput.startsWith(CUSTOM_DELIMITER_PREFIX) && userInput.contains(CUSTOM_DELIMITER_SUFFIX)) {
             int delimiterEndIndex = userInput.indexOf(CUSTOM_DELIMITER_SUFFIX);
             customDelimiter = userInput.substring(CUSTOM_DELIMITER_START_INDEX, delimiterEndIndex);
