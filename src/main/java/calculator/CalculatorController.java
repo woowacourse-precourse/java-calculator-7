@@ -54,4 +54,12 @@ public class CalculatorController {
         }
         return numbers;
     }
+
+    private int performAddition(List<Integer> numbers) {
+        int result = 0;
+        for (int number : numbers) {
+            result += number;
+        }
+        return result;
+    }
 }
