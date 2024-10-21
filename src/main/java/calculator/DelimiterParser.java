@@ -7,7 +7,7 @@ import java.util.List;
 public class DelimiterParser {
 
     private static final String CUSTOM_DELIMITER_PREFIX = "//"; // 커스텀 구분자 접두사
-    private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
+    private static final String CUSTOM_DELIMITER_SUFFIX = "\\n"; // 커스텀 구분자 접미사
 
     public String[] parseNumbers(String input) {
         List<String> delimiterList = new ArrayList<>(Arrays.asList(",", ":"));
