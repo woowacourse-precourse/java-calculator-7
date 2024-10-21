@@ -5,6 +5,7 @@ import calculator.model.Separator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Parser {
 
@@ -48,16 +49,17 @@ public class Parser {
     }
 
     private void validateToken(String token) {
-    if (token.isEmpty()) {
-        throw new IllegalArgumentException("빈 숫자 입력이 포함되었습니다.");
+        if (token.isEmpty()) {
+            throw new IllegalArgumentException("빈 숫자 입력이 포함되었습니다.");
+        }
     }
-}
 
     private String getSeparatorsString() {
         Set<Separator> separators = separatorService.findAllSeparator();
-        return String.join("|", separators.stream()
-                .map(separator -> String.valueOf(separator.value()))
-                .toArray(String[]::new));
+        return separators.stream()
+                .map(Separator::value)
+                .map(String::valueOf)
+                .collect(Collectors.joining("|"));
     }
 
     private Integer convertToNumber(String token) {

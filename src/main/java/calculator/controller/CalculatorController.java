@@ -3,7 +3,6 @@ package calculator.controller;
 import calculator.service.CalculatorService;
 import calculator.service.Parser;
 import calculator.view.OutputView;
-import java.util.List;
 
 public class CalculatorController {
     private final CalculatorService calculatorService;
@@ -17,11 +16,10 @@ public class CalculatorController {
     }
 
     public void run(String input) {
-        List<Integer> numbers = parser.parse(input);
-
-        int result = calculatorService.sum(numbers)
-                .orElse(0);
-
-        outputView.printResult(result);
+        calculatorService.sum(parser.parse(input))
+                .ifPresentOrElse(
+                        outputView::printResult,
+                        () -> outputView.printResult(0)
+                );
     }
 }

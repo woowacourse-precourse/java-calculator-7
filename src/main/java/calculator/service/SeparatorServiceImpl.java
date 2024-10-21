@@ -33,12 +33,16 @@ public class SeparatorServiceImpl implements SeparatorService{
     @Override
     public String extractCustomSeparator(String input) {
         String[] parts = input.split(SeparatorConstants.CUSTOM_SEPARATOR_NEWLINE, 2);
-        char customSeparator = parts[0].charAt(SeparatorConstants.CUSTOM_SEPARATOR_PREFIX.length());
-        validateCustomSeparator(customSeparator);
+        char customSeparator = extractCustomSeparatorChar(parts[0]);
 
+        validateCustomSeparator(customSeparator);
         join(new Separator(customSeparator));
 
         return parts.length > 1 ? parts[1] : "";
+    }
+
+    private char extractCustomSeparatorChar(String part) {
+        return part.charAt(SeparatorConstants.CUSTOM_SEPARATOR_PREFIX.length());
     }
 
     private void validateCustomSeparator(char customDelimiter) {
