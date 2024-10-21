@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import calculator.validators.Validators;
+import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -34,5 +35,16 @@ public class ValidatorTest {
         assertThrows(IllegalArgumentException.class, () -> validators.validateDelimiterDeclaration("//;1;2"));
     }
 
-    
+    @Test
+    void testValidateAllowedCharacters_Success() {
+        validators.validateAllowedCharacters(Arrays.asList(':', ','), "1:2,3");
+    }
+
+    @Test
+    void testValidateAllowedCharacters_Fail_InvalidCharacter() {
+        assertThrows(IllegalArgumentException.class,
+                () -> validators.validateAllowedCharacters(Arrays.asList(':', ','), "1;2,3"));
+    }
+
+
 }
