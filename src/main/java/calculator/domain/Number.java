@@ -18,7 +18,7 @@ public record Number(int value) {
     /**
      * Number 객체의 값을 문자열로 변환
      *
-     * @return
+     * @return 객체의 값을 나타내는 문자열
      */
     @Override
     public String toString() {
@@ -28,7 +28,7 @@ public record Number(int value) {
     /**
      * 현재 객체의 값 반환
      *
-     * @return
+     * @return 객체가 나타내는 정수 값
      */
     public int getValue() {
         return value;

@@ -2,10 +2,14 @@ package calculator.util;
 
 public class NumberValidator {
 
+
     /**
-     * StringCalculator 에서 숫자 검증 부분 책임 분리
+     * 주어진 문자열이 유효한 양의 정수인지 검증
+     * <p>
+     * 검증 : 1. 입력된 문자열이 정수로 변환 가능한지 2. 변환된 정수가 양수인지
      *
-     * @param number
+     * @param number 검증할 숫자 문자열
+     * @throws IllegalArgumentException 다음의 경우에 발생: 입력된 문자열이 정수로 변환할 수 없는 경우, 변환된 정수가 0 이하인 경우
      */
     public void validate(String number) {
         System.out.println("NumberValidator - 검증 대상 숫자: " + number);

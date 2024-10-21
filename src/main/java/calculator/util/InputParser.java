@@ -5,14 +5,18 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
+/**
+ * InputParser 클래스 :  StringCalculator에서 사용되는 문자열 파싱 로직을 담당, 기본 구분자와 커스텀 구분자를 처리
+ */
 public class InputParser {
 
-
     /**
-     * StringCalculator 에서 문자열 파싱 부분 책임 분리
+     * 주어진 입력 문자열을 파싱하여 숫자 문자열 리스트로 반환 다음과 같은 입력을 처리할 수 있습니다: 1. 기본 구분자(',', ':')를 사용한 입력 2. 커스텀 구분자를 사용한 입력 (예:
+     * "//;\n1;2;3")
      *
-     * @param input
-     * @return
+     * @param input 파싱할 입력 문자열
+     * @return 파싱된 숫자 문자열의 리스트
+     * @throws IllegalArgumentException 커스텀 구분자 형식이 올바르지 않은 경우
      */
     public List<String> parse(String input) {
 
