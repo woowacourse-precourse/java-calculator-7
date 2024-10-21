@@ -67,7 +67,11 @@ public class Application {
         int sum = 0;
         for (String number : numbers) {
             try {
-                sum += Integer.parseInt(number.trim());
+                int num = Integer.parseInt(number.trim());
+                if (num < 0) {
+                    throw new IllegalArgumentException("0이나 양의 정수를 입력해주세요.");
+                }
+                sum += num;
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("잘못된 숫자 형식입니다.");
             }
