@@ -21,7 +21,7 @@ public class Application {
 
         }
 
-        System.out.println(result);
+        System.out.println("결과 : " + result);
 
         scan.close();
     }
