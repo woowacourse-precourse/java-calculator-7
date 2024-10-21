@@ -9,7 +9,7 @@ public class AddOperationService implements OperationService {
     public SumDto operate(NumbersDto numbersDto) {
         int value = numbersDto.values()
                 .stream()
-                .mapToInt(number -> number.value())
+                .mapToInt(numberDto -> numberDto.value())
                 .sum();
 
         return SumDto.from(value);
