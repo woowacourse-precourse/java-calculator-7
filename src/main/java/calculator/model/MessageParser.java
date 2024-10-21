@@ -1,5 +1,6 @@
 package calculator.model;
 
+import calculator.errors.InputError;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,14 +24,28 @@ public class MessageParser {
         String[] splitNumbers = message.split(delimiter.getRegexString());
 
         for (String number : splitNumbers) {
-            int num = Integer.parseInt(number);
-            if (num < 0) {
-                throw new IllegalArgumentException("Invalid number: " + num);
-            }
-
-            numbers.add(num);
+            numbers.add(parseNumber(number));
         }
 
         return numbers;
+    }
+
+    private int parseNumber(String number) {
+        try {
+            int num = Integer.parseInt(number);
+            if (num < 0) {
+                throw new IllegalArgumentException(InputError.NEGATIVE.getMessage() + num); // 음수일 때
+            }
+            return num;
+        } catch (NumberFormatException e) {
+            try {
+                Long.parseLong(number);
+                throw new IllegalArgumentException(
+                        InputError.OUT_OF_RANGE.getMessage() + number); // int 범위를 벗어났을 때
+            } catch (NumberFormatException e2) {
+                throw new IllegalArgumentException(
+                        InputError.INVALID_FORMAT.getMessage() + number); // 숫자 형식이 잘못되었을 때
+            }
+        }
     }
 }
