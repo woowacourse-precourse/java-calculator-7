@@ -1,8 +1,10 @@
-package calculator;
+package calculator.strategy;
+
+import calculator.strategy.Calculate;
 
 import java.util.List;
 
-public class Add implements Calculate{
+public class Add implements Calculate {
     @Override
     public int computeOperation(List<Integer> numbers) {
         int result = 0;
