@@ -2,6 +2,8 @@ package calculator.model;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -50,4 +52,27 @@ class CalculatorModelTest {
         assertThatThrownBy(() -> cm.CustomExtraction(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void 문자열_연산_올바른_세팅() {
+        CalculatorModel cm = new CalculatorModel();
+        ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(",", ":"));
+        Assertions.assertThat(cm.operationSetting("1,2:3", arrayList)).isEqualTo(new String[]{"1", "2", "3"});
+    }
+
+    @Test
+    void 문자열_연산_올바른_세팅_2() {
+        CalculatorModel cm = new CalculatorModel();
+        ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(",", ":", ";"));
+        Assertions.assertThat(cm.operationSetting("1,2:3;4", arrayList)).isEqualTo(new String[]{"1", "2", "3", "4"});
+    }
+
+    @Test
+    void 문자열_연산_올바른_세팅_3() {
+        CalculatorModel cm = new CalculatorModel();
+        ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(",", ":", ";"));
+        Assertions.assertThat(cm.operationSetting("1,2:3;a4", arrayList)).isEqualTo(new String[]{"1", "2", "3", "a4"});
+    }
+
+
 }
