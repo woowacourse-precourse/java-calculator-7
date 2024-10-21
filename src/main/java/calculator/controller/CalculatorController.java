@@ -6,7 +6,7 @@ import java.util.Optional;
 import calculator.model.Calculator;
 import calculator.model.CustomDelimiterProcessor;
 import calculator.model.Delimiter;
-import calculator.model.InputParser;
+import calculator.model.InputFilter;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -30,7 +30,7 @@ public class CalculatorController {
 		customDelimiter.ifPresent(delimiter::addCustomDelimiter);
 
 		String processedInput = customDelimiterProcessor.removeCustomDelimiterPattern(input);
-		List<Integer> numbers = InputParser.extractNumbers(processedInput, delimiter);
+		List<Integer> numbers = InputFilter.extractNumbers(processedInput, delimiter);
 
 		Calculator calculator = new Calculator(numbers);
 		outputView.printResult(calculator.sum());

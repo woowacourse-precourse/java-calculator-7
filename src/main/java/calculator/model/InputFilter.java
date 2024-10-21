@@ -7,8 +7,8 @@ import java.util.regex.Pattern;
 
 import calculator.validation.InputValidator;
 
-public class InputParser {
-	private InputParser() {
+public class InputFilter {
+	private InputFilter() {
 	}
 
 	/**

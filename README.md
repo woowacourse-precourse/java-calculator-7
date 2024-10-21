@@ -51,7 +51,7 @@
 ### 2️⃣ 입력값 검증과 파싱 로직이 혼용되는 문제 발생 → 확실하게 책임을 분리
 
 - [x] 입력값 검증과 관련된 메서드들은 모두 `InputValidator`에서 관리하도록 이동시킨다.
-- [x] 입력값 파싱 과정에서 쓰이는 검증 메서드들은 `InputParser` 내에서 `InputValidator`를 참조하여 사용하도록 수정한다.
+- [x] 입력값 파싱 과정에서 쓰이는 검증 메서드들은 `InputFilter` 내에서 `InputValidator`를 참조하여 사용하도록 수정한다.
 
 ### 3️⃣ 매직 넘버 및 리터럴 사용으로 인한 추후 유지보수에서의 어려움 예상 → 클래스 및 상수로서 관리
 
@@ -78,6 +78,6 @@
 
 - [x] `Delimiters` 클래스를 생성하여, 구분자 목록을 관리하도록 수정한다.
 
-### 8️⃣ 커스텀 구분자에 대한 처리를 `InputParser` 클래스에서 전담하고 있는 상황 → `CustomDelimiterProcessor` 클래스 생성을 통한 책임 분리
+### 8️⃣ 커스텀 구분자에 대한 처리를 `InputFilter` 클래스에서 전담하고 있는 상황 → `CustomDelimiterProcessor` 클래스 생성을 통한 책임 분리
 
-- [ ] 기존 `InputParser` 클래스에 있던 커스텀 구분자 처리 로직을 `CustomDelimiterProcessor` 클래스로 이동시킨다.
+- [ ] 기존 `InputFilter` 클래스에 있던 커스텀 구분자 처리 로직을 `CustomDelimiterProcessor` 클래스로 이동시킨다.
