@@ -71,6 +71,11 @@ public class Application {
 
             // 각 숫자 합산 도출
             for (String token : tokens) {
+                // 숫자인지 사전 검증
+                if (!isNumber(token)) {
+                    throw new IllegalArgumentException("Invalid non-number input included '" + token.trim() + "'");
+                }
+
                 int number = Integer.parseInt(token.trim()); // 문자열을 정수로 변환하여 합산
                 // 음수일 경우 해당 배열에 추가
                 if (number < 0) {
@@ -114,6 +119,10 @@ public class Application {
         private static String buildNegativeNumbersExceptionMessage(List<Integer> negativeNumbers) {
             // 음수 값들을 포함하는 배열을 읽고 예외 발생
             return "Negative numbers are not allowed: " + negativeNumbers.toString();
+        }
+
+        private static boolean isNumber(String str) {
+            return str != null && str.matches("-?\\d+");
         }
     }
 }
