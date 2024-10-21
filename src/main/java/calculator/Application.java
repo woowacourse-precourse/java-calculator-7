@@ -36,9 +36,7 @@ class StringCalculator {
                         "Invalid input format. Expected delimiter definition followed by newline.");
             }
             delimiter = input.substring(2, delimiterIndex);
-            System.out.println(delimiter);
             input = input.substring(delimiterIndex + 2);
-            System.out.println(input);
         }
 
         String[] numbers = input.split(delimiter);
@@ -54,4 +52,6 @@ class StringCalculator {
         }
         return sum;
     }
+
+
 }
