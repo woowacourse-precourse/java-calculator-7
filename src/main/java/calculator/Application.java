@@ -8,5 +8,6 @@ public class Application {
         String input = GetInput.getInput();
         long ret = parse.calculate(input);
 
+        System.out.println(ret);
     }
 }

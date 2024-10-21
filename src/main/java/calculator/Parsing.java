@@ -18,7 +18,9 @@ public class Parsing {
         checkSeparator.add(',');
         checkSeparator.add(':');
 
-        String[] numbers = splitString(input);
+        String[] numbers;
+
+        numbers = splitString(input);
         return sum(numbers);
     }
 
@@ -26,9 +28,16 @@ public class Parsing {
         List<String> numbers = new ArrayList<>();
         StringBuilder currentNumber = new StringBuilder();
 
-        for (char c : input.toCharArray()) {
+        int idx = 0;
+        if(checkStart(input)){
+            idx = 5;
+            checkSeparator.add(input.charAt(2));
+        }
+
+        for (;  idx<input.length(); ++idx) {
+            char c = input.charAt(idx);
             if (checkSeparator.contains(c)) {
-                if (currentNumber.length() > 0) {
+                if (!currentNumber.isEmpty()) {
                     numbers.add(currentNumber.toString());
                     currentNumber = new StringBuilder();
                 }
@@ -37,7 +46,7 @@ public class Parsing {
             }
         }
 
-        if (currentNumber.length() > 0) {
+        if (!currentNumber.isEmpty()) {
             numbers.add(currentNumber.toString());
         }
 
@@ -64,4 +73,8 @@ public class Parsing {
         }
     }
 
+    private boolean checkStart(String str){
+        if(str.startsWith("//")) return true;
+        return false;
+    };
 }
