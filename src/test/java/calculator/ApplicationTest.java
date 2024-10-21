@@ -9,19 +9,20 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
     @Test
-    void 커스텀_구분자_사용() {
+    void 커스텀_구분자_사용_테스트() {
         assertSimpleTest(() -> {
             run("//;\\n1");
             assertThat(output()).contains("결과 : 1");
         });
     }
     @Test
-    void 커스텀_구분자_긴_배열() {
+    void 커스텀_구분자_긴_배열_테스트() {
         assertSimpleTest(() -> {
             run("//;\\n1;3;56;6;78;3;1;");
             assertThat(output()).contains("결과 : 148");
         });
     }
+
     @Test
     void 커스텀_구분자_복잡한_형태() {
         assertSimpleTest(() -> {
@@ -39,7 +40,15 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 예외_테스트_잘못된_구분자_입력_형식() {
+    void 커스텀_구분자_테스트_예외_양수가_아닌_경우() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("//;\\n1;3;56;6;78;3;-1;"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_테스트_예외_잘못된_형식() {
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> runException("//*@#$%@#$&%@#$%\\4*@#$%@#$&%@#$%4*@#$%@#$&%@#$%5"))
                     .isInstanceOf(IllegalArgumentException.class);
