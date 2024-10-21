@@ -1,8 +1,10 @@
 package calculator;
 
-import java.util.NoSuchElementException;
-
 import camp.nextstep.edu.missionutils.Console;
+
+import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Application {
     public static void main(String[] args) {
@@ -11,4 +13,25 @@ public class Application {
         input = Console.readLine();
         int result = add(input); // 숫자 더하는 함수
         System.out.println("결과 : " + result);
+    }
+
+    public static String[] parseDelimiter(String input) {
+        if (input.contains("//") && !input.startsWith("//")) {
+            throw new IllegalArgumentException("잘못된 형식의 입력: " + input);
+        }
+
+        String[] delimiters = {",", ":"};
+
+        if (input.startsWith("//")) {
+            Matcher matcher = Pattern.compile("//(.?)\\\\n.*").matcher(input);
+            if (matcher.find()) {
+                String customDelimiter = matcher.group(1);
+                delimiters = new String[]{",", ":", customDelimiter};
+                input = input.substring(5);
+            }
+        }
+
+        String delimiter = "[" + Arrays.stream(delimiters).reduce("", String::concat) + "]";
+        return input.split(delimiter);
+    }
 }
