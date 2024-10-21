@@ -29,10 +29,10 @@
 ### Parser
 
 - `parseString()` : 입력된 문자열이 유효한 문자열인지 검사히고 문자열을 재조립합니다.
-- `removeDelimiterPrefix()` : 해당 문자열이 커스텀 구분자 정의 문자열로 시작하는지 확인하고 삭제합니다.
-- `removeDelimiterSuffix()` : 해당 문자열이 커스텀 구분자 정의 문자열로 끝나는지 확인하고 삭제합니다.
-- `extractCustomDelimiter()` : 커스텀 구분자를 멤버 변수 customDelimiter에 저장한 뒤 제거합니다.
-- `isDelimiterSuffix()` : 해당 문자열이 커스텀 구분자 정의 접미사로 시작하는지 확인합니다.
+- `hasDelimiterSection()` : 사용자 입력 문자열에 구분자 섹션이 있는지 확인합니다.
+- `checkValidInput()` : 유효한 형식을 갖춘 문자열인지 확인합니다.
+- `splitByDelimiterChar()` : 커스텀 구분자를 기준으로 문자열을 쪼개 커스텀 구분자를 포함하지 않은 뒤 문자열을 반환합니다.
+- `compareToSuffix()` : 해당 문자열이 커스텀 구분자 정의 접미사로 시작하는지 확인합니다.
 
 ### DelimeterManager
 
