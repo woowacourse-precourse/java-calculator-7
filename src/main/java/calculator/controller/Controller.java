@@ -20,7 +20,6 @@ public class Controller {
 
     public Integer execute(String input) {
         List<String> defaultDelimiters = delimiter.getDefaultDelimiters();
-        System.out.println(defaultDelimiters);
         List<Integer> inputNumbers = extractor.extractNumbers(input, defaultDelimiters.toArray(new String[0]));
 
         numbers.addNumber(inputNumbers.toArray(new Integer[0]));
