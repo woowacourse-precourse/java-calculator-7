@@ -22,10 +22,10 @@
 ### StringCalculator.class
 
 - [x] StringCalculator() 싱글톤
-- [ ] private parseNumber(String line)
+- [x] private parseNumber(String line)
     - line을 잘라 int 배열에 넣는다.
     - 정규화를 이용하여 separator에 대해 모두 자를 수 있게 준비한다.
-- [] private parseSeparator(String line, String separator)
+- [ ] private parseSeparator(String line)
     - line에 저장된 값을 순서대로 잘라 멤버변수(배열)로 가지고, 구분자를 추가합니다.
 - [ ] IllegalArgumentException 판단 메소드
     - 정의되지 않은 값 입력 시 예외를 발생시킵니다.
