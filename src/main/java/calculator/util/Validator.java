@@ -5,7 +5,7 @@ public class Validator {
         if (isEmpty(input)) {
             return false;
         }
-        return input.startsWith("//") && input.contains("\\n");
+        return input.startsWith(Constants.CUSTOM_PREFIX) && input.contains(Constants.CUSTOM_SUFFIX);
     }
 
     public boolean isStartWithDigit(String input) {
@@ -20,13 +20,10 @@ public class Validator {
     }
 
     public void validateSeparator(String separator) {
-        if (separator.length() != 1) {
+        if (separator.length() != Constants.SEPARATOR_LENGTH) {
             throw new IllegalArgumentException("구분자의 길이는 1이어야 합니다.");
         }
-        if (separator.equals(",") || separator.equals(":")) {
-            throw new IllegalArgumentException("이미 구분자로 등록 되어 있습니다.");
-        }
-        if (separator.equals(".")) {
+        if (separator.equals(Constants.DECIMAL_POINT)) {
             throw new IllegalArgumentException(".은 구분자가 될 수 없습니다.");
         }
         if (isStartWithDigit(separator)) {
@@ -41,8 +38,10 @@ public class Validator {
         if (hasCustomSeparator(input)) {
             return;
         }
-        if (isStartWithDigit(input) && (!input.contains("//") && !input.contains("\\n"))) {
-            return;
+        if (isStartWithDigit(input)) {
+            if ((!input.contains(Constants.CUSTOM_PREFIX) && !input.contains(Constants.CUSTOM_SUFFIX))) {
+                return;
+            }
         }
         throw new IllegalArgumentException("포멧에 맞게 입력해 주세요.(ex://@\\n1@2:3,4)");
     }

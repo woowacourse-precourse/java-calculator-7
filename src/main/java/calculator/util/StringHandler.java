@@ -6,26 +6,35 @@ import java.util.List;
 
 public class StringHandler {
     public String extractSeparator(String input) {
-        int start = "//".length() ;
-        int end = input.indexOf("\\n");
+        int start = Constants.CUSTOM_PREFIX.length() ;
+        int end = input.indexOf(Constants.CUSTOM_SUFFIX);
         return input.substring(start, end);
     }
 
     public List<String> getNumbers(List<String> separators, String input) {
-        List<String> splitInput = new ArrayList<>(Arrays.asList(input));
+        List<String> splitInput = new ArrayList<>();
+        splitInput.add(input);
 
         for (String separator : separators) {
-            List<String> tempResult = new ArrayList<>();
-            for (String part : splitInput) {
-                tempResult.addAll(Arrays.asList(part.split(separator)));
-            }
-            splitInput = tempResult;
+            splitInput = splitBySeparator(splitInput, separator);
         }
+
         return splitInput;
     }
 
+    private List<String> splitBySeparator(List<String> inputList, String separator) {
+        List<String> result = new ArrayList<>();
+
+        for (String part : inputList) {
+            String[] splitParts = part.split(separator);
+            result.addAll(Arrays.asList(splitParts));
+        }
+
+        return result;
+    }
+
     public String removeCustom(String input) {
-        int end = input.indexOf("\\n") + 2;
-        return input.substring(end);
+        int numberIndex = input.indexOf(Constants.CUSTOM_SUFFIX) + 2;
+        return input.substring(numberIndex);
     }
 }

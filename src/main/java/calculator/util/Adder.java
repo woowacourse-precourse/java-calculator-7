@@ -32,7 +32,7 @@ public class Adder {
     private void validateNumber(String number) {
         for (int i = 0; i < number.length(); i++) {
             if (!Character.isDigit(number.charAt(i))) {
-                throw new IllegalArgumentException("숫자만 더할 수 있습니다.");
+                throw new IllegalArgumentException("등록된 구분자가 아닙니다.");
             }
         }
     }

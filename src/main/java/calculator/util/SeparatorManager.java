@@ -9,7 +9,7 @@ public class SeparatorManager {
     List<String> separators;
 
     public SeparatorManager() {
-        this.separators = new ArrayList<>(Arrays.asList(",", ":"));
+        this.separators = new ArrayList<>(Constants.DEFAULT_SEPARATORS);
     }
 
     private boolean exists(String separator) {
