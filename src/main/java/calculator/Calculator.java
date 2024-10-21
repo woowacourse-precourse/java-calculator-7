@@ -34,7 +34,7 @@ public class Calculator {
         }
 
         try {
-            String parsedInput = DelimiterAdder.addCustomSeparator(userInput);
+            String parsedInput = DelimiterAdder.addCustomDelimiter(userInput);
 
             NumberWrapper[] toSumArrays = defaultSeparator.separateStringToSum(parsedInput, DELIMITER_STORAGE);
             NumberWrapper sum = calculateComposition.makeSum(toSumArrays);

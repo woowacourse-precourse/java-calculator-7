@@ -7,7 +7,7 @@ public class DelimiterAdder {
 
     private static final String regex = "//(.)\\\\n(.*)";
     private static DelimiterStorage delimiterStorage = new DelimiterStorage();
-    public static String addCustomSeparator(String userInput) {
+    public static String addCustomDelimiter(String userInput) {
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(userInput);
