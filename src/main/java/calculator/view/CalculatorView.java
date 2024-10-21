@@ -11,7 +11,9 @@ public class CalculatorView {
     public String getUserInput() {
         System.out.println(INPUT_REQUEST_MESSAGE);
 
-        return Console.readLine();
+        return Console
+                .readLine()
+                .strip();
     }
 
     public void showResult(Numbers numbers) {
