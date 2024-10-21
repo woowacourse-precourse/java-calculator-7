@@ -23,4 +23,9 @@ public final class Number {
             throw new IllegalArgumentException("양수만 입력하여야 합니다.");
         }
     }
+
+    @Override
+    public String toString() {
+        return value.toString();
+    }
 }
