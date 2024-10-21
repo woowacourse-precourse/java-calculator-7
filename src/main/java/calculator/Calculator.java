@@ -19,11 +19,42 @@ public class Calculator {
     // [] 입력 문자열 탐색중
     for (int i = 0; i < readLine.length(); i++) {
 
-      if (calculateCustom(i)) {
-        continue;
+      if (readLine.startsWith("//;\\n")) {
+        char index = readLine.charAt(i);
+
+        // 커스텀 구분자는 건너뛰고
+        if (index == '/' || index == '\\' || index == ';' || index == 'n') {
+          continue;
+        }
+
+        if (index != '/' && index != '\\' && !validIsDigit(index) && index != 'n') {
+          // 커스텀 구분자 또는 정수가 아닌 경우는 예외 처리한다
+          throw new IllegalArgumentException(
+              "커스텀 구분자를 입력하려면 문자열 맨앞에 '//;\\n'를 붙인 다음 사용해주세요 (예시 //;\\n1;2;3)");
+        }
+
+        if (isDigit(index)) {
+          // 정수는 target에 합산한다
+          addNumbers(readLine.charAt(i));
+          break;
+        }
       }
 
-      calculateDefault(i);
+      //  인덱스가 기본 구분자 ‘,’ , ‘:’ 인 경우
+      if (readLine.charAt(i) == ',' || readLine.charAt(i) == ':') {
+        // 다음 인덱스 탐색으로 넘어간다
+        continue;
+      }
+      // 예외 체크
+      checkException(readLine.charAt(i));
+      if (readLine.charAt(i) != ',' && readLine.charAt(i) != ':' && !validIsDigit(readLine.charAt(i)) && readLine.charAt(i) != ' ') {
+        // [x] 비정상 입력 예외 처리
+        throw new IllegalArgumentException("입력 가능한 문자열인지 확인해주세요. ',', ':' 를 포함한 0-9의 정수 (예시 : 1, 2, 3 또는 1,2:3)");
+      }
+      // 인덱스가 정수면 합산한다
+      if (isDigit(readLine.charAt(i))) {
+        addNumbers(readLine.charAt(i));
+      }
     }
 
     // 전달
@@ -43,8 +74,10 @@ public class Calculator {
       // [x] 비정상 입력 예외 처리
       throw new IllegalArgumentException("입력 가능한 문자열인지 확인해주세요. ',', ':' 를 포함한 0-9의 정수 (예시 : 1, 2, 3 또는 1,2:3)");
     }
-    // 처리 : 정수 요소의 덧셈 결과를 합산한다
-    addNumbers(index);
+    // 인덱스가 정수면 합산한다
+    if (isDigit(index)) {
+      addNumbers(index);
+    }
   }
 
   private boolean calculateCustom(int i) {

@@ -7,7 +7,7 @@ public class Frontend {
   private int target;
   public Frontend(int target) {
 
-    target = this.target;
+    this.target = target;
   }
 
   // 전달받은 계산 결과를 출력한다
