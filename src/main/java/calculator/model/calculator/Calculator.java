@@ -26,11 +26,11 @@ public class Calculator {
     }
 
     private Expression extractCustomDelimiter(String userInput) {
-        
         if (userInput.startsWith("//")) {
-            String customDelimiter = userInput.substring(2, 3);
+            int index = userInput.indexOf("\\n");
+            String customDelimiter = userInput.substring(2, index);
             addDelimiter(customDelimiter);
-            return new Expression(userInput.substring(4 + 1));
+            return new Expression(userInput.substring(index + 1 + 1));
         } else {
             return new Expression(userInput);
         }
