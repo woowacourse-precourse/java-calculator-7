@@ -22,24 +22,23 @@ public class DelimiterExtractor {
         return appropriateDelimiter(matcher);
     }
 
-    // 커스텀 구분자에 \가 포함된 경우 적절한 \개수를 설정해주기 위한 메소드
+    // 커스텀 구분자에 들어가는 특수한 케이스들에 대해 백슬래시를 더해주기 위한 메소드
     public static String appropriateDelimiter(Matcher matcher) {
         String appropriateDelimiter = "";
+
+        // 그냥 넣으면 에러가 발생하는 특수 케이스들
+        String specialChars = "\\[]{}()|^*$?+";
+
         // matcher.group(2)는 커스텀 구분자를 의미함
         char[] charArray = matcher.group(2).toCharArray();
 
-        // 커스텀 구분자에 들어가는 특수한 케이스들에 대해 백슬래시를 더해준다
-        for(int i = 0; i < charArray.length; i++){
-            // \가 들어가는 경우 앞에 백슬래시를 하나씩 더해준다
-            if(charArray[i] == '\\'){
-                appropriateDelimiter += "\\\\";
-            }
-            // [ 또는 ]가 들어가는 경우 앞에 백슬래시를 더해준다
-            else if(charArray[i] == '[' || charArray[i] == ']'){
+        for (int i = 0; i < charArray.length; i++) {
+            // 만약 특수 케이스에 해당 한다면 앞에 백슬래시를 더해 제대로 인식하게 함
+            if (specialChars.indexOf(charArray[i]) != -1) {
                 appropriateDelimiter += "\\" + charArray[i];
             }
-            // 이외의 경우는 그냥 더한다
-            else{
+            // 그 이외의 경우엔 그냥 더한다
+            else {
                 appropriateDelimiter += charArray[i];
             }
         }
