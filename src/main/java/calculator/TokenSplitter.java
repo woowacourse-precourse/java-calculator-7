@@ -10,7 +10,7 @@ public class TokenSplitter {
 
     }
 
-    public String[] split(String input, Delimiters delimiters) {
+    static public String[] split(String input, Delimiters delimiters) {
         List<String> tokens = new ArrayList<>();
         StringBuilder token = new StringBuilder();
         
