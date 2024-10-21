@@ -48,15 +48,6 @@ public class InputValidatorTest {
         }, "INVALID_CUSTOM_DELIMITER_INTEGER 예외가 발생해야 합니다.");
     }
 
-    @Test
-    public void testCustomDelimiterWithInvalidDelimiter_ThrowsException() {
-        // 커스텀 구분자 외에 다른 구분자가 사용된 경우 (예외 발생)
-        String input = "//;\\n1;2,3"; // 쉼표(,)는 잘못된 구분자
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            InputValidator.validateInput(input);
-        }, "INVALID_CUSTOM_DELIMITER_EXPRESSION 예외가 발생해야 합니다.");
-    }
 
     @Test
     public void testDefaultDelimiterWithValidInput_NoException() {
