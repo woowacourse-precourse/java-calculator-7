@@ -17,10 +17,138 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 커스텀_구분자_사용1() {
+        assertSimpleTest(() -> {
+            run("////\\n1//2//3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용2() {
+        assertSimpleTest(() -> {
+            run("//**\\n1**2**3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용3() {
+        assertSimpleTest(() -> {
+            run("//*@\\n1*@2*@3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용4() {
+        assertSimpleTest(() -> {
+            run("//*@*\\n1*@*2*@*3,4:5");
+            assertThat(output()).contains("결과 : 15");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용5() {
+        assertSimpleTest(() -> {
+            run("// \\n1 2 3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용6() {
+        assertSimpleTest(() -> {
+            run("// * * \\n1 * * 2 * * 3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 기본_구분자_사용1() {
+        assertSimpleTest(() -> {
+            run("// * * \\n1,2:3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 기본_구분자_사용2() {
+        assertSimpleTest(() -> {
+            run("// \\n1,2:3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 구분자만_입력() {
+        assertSimpleTest(() -> {
+            run(",");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void 구분자로_시작1() {
+        assertSimpleTest(() -> {
+            run(",1");
+            assertThat(output()).contains("결과 : 1");
+        });
+    }
+
+    @Test
+    void 구분자로_시작2() {
+        assertSimpleTest(() -> {
+            run(",1,2");
+            assertThat(output()).contains("결과 : 3");
+        });
+    }
+
+    @Test
+    void 구분자로_끝() {
+        assertSimpleTest(() -> {
+            run("1,2:");
+            assertThat(output()).contains("결과 : 3");
+        });
+    }
+
+    @Test
+    void 구분자로_시작하고_끝() {
+        assertSimpleTest(() -> {
+            run(",1,2:");
+            assertThat(output()).contains("결과 : 3");
+        });
+    }
+
+    @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트1() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//\\n1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트2() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("\"\""))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트3() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException(" "))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
