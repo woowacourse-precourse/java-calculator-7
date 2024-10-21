@@ -62,7 +62,7 @@ public class Parser {
     }
 
     private boolean matches(String input) {
-        Pattern pattern = Pattern.compile("^//.*\\\\n");
+        Pattern pattern = Pattern.compile("^//.\\n.*");
         Matcher matcher = pattern.matcher(input);
         return matcher.matches();
     }
