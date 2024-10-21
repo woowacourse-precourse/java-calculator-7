@@ -6,17 +6,6 @@ import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
-        // 입력받은 문자열 한 글자씩 검사해서 그게 숫자나 구분자가 아니거나 구분자가 2개 이상 연속으로 나오면 IllegalArgumentException 던지기 - isValidInput 메서드
-
-        // 1. 커스텀 구분자가 있는 경우
-        //    해당 커스텀 구분자를 indexers에 추가
-        //    isValidInput 메서드 실행해서 입력받은 문자열이 정상적인지 체크 -> 유효성 검사
-        //    문자열이 정상적인 입력이면 입력받은 문자열을 구분자로 구분하여 숫자들의 합산을 출력
-        // 2. 커스텀 구분자가 없는 경우
-        //    isValidInput 메서드 실행해서 입력받은 문자열이 정상적인지 체크 -> 유효성 검사
-        //    문자열이 정상적인 입력이면 입력받은 문자열을 구분자로 구분하여 숫자들의 합산을 출력
-
         List<Character> indexers = new ArrayList<>(); // 구분자들을 저장할 ArrayList 생성
         indexers.add(','); // 기본 구분자 추가
         indexers.add(':'); // 기본 구분자 추가
