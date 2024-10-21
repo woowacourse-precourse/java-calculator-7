@@ -15,7 +15,13 @@ public class InputView {
         System.out.print(ViewMessage.INPUT_STRING);
         String input = Console.readLine();
         Console.close();
+        customSeperator = validate(input);
 
+        return new String[]{input, customSeperator};
+    }
+
+    private static String validate(String input) {
+        String customSeperator = "";
         StartWithCharacter.validate(input);
         EndWithCharacter.validate(input);
         customSeperator = getCustomSeperator(input);
@@ -23,8 +29,9 @@ public class InputView {
         HasMultiCustomSeperators.validate(input, customSeperator);
         HasNegativeNumber.validate(input, customSeperator);
 
-        return new String[]{input, customSeperator};
+        return customSeperator;
     }
+
     private static String getCustomSeperator(String input) {
         String seperator = "";
         Pattern pattern = Pattern.compile("//(.+)\\\\n");
