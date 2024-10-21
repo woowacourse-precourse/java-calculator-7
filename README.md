@@ -36,7 +36,7 @@
 
 - [x]  기능 1 : 실행흐름을 담당할 main메서드 구현
 - [x]  기능 2 : 구분자와 타깃 문자열을 추출하는 메서드 extractDelimiterAndTargetString 구현
-- [ ]  기능 3 : 타깃 문자열에서 구분자로 구분되는 숫자들이 저장된 배열을 반환하는 splitTargetStringToNumArray 메서드 구현
+- [x]  기능 3 : 타깃 문자열에서 구분자로 구분되는 숫자들이 저장된 배열을 반환하는 splitTargetStringToNumArray 메서드 구현
 - [ ]  기능 4 : 숫자 배열을 매개변수로 받아 전체 합을 반환하는 sum메서드 구현
 
 **기능 3 (예외처리)**
