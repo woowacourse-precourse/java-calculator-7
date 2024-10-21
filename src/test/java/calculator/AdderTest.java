@@ -16,4 +16,13 @@ public class AdderTest {
 
         assertThat(result).isEqualTo(6);
     }
+
+    @Test
+    void 구분자_콜론_테스트() {
+        String input = "1:2:3";
+
+        int result = adder.run(input);
+
+        assertThat(result).isEqualTo(6);
+    }
 }

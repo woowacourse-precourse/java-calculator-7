@@ -2,7 +2,7 @@ package calculator;
 
 public class Adder {
     public int run(String input) {
-        String[] stringNumbers = input.split(",");
+        String[] stringNumbers = input.split("[,:]");
         int sum = 0;
 
         for (String stringNumber : stringNumbers) {
