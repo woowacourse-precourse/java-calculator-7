@@ -65,6 +65,23 @@ public class ValidTest {
     }
 
     @Test
+    @DisplayName("식에 구분자가 연속될 경우")
+    public void testWrongFormula() throws Exception {
+
+        //Given
+        CalculationUtil calculationUtil = new CalculationUtil("1,2,,3");
+
+        //Then
+        InvocationTargetException thrownException = assertThrows(InvocationTargetException.class, () -> {
+            invokePrivateMethod(calculationUtil, "checkDivider");
+        });
+
+        //Then
+        assertTrue(thrownException.getCause() instanceof IllegalArgumentException);
+        assertEquals("Expression is wrong", thrownException.getCause().getMessage());
+    }
+
+    @Test
     @DisplayName("Custom 구분자가 형식이 잘못된 경우")
     public void testWrongCustomDivider() throws Exception {
 
