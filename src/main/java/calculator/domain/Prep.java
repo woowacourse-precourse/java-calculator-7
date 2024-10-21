@@ -9,4 +9,7 @@ public class Prep {
         return Arrays.stream(input.split(delimiter)).filter(s ->!s.isEmpty()).toList();
     }
 
+    public static List<Long> convertToNumbers(List<String> dicedExpression) {
+        return dicedExpression.stream().map(Long::parseLong).toList();
+    }
 }
