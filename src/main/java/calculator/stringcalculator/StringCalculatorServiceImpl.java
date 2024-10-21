@@ -70,7 +70,12 @@ public class StringCalculatorServiceImpl implements StringCalculatorService {
 
     @Override
     public void validateInputDelimiter(String[] stringNumbers) {
-
+        for (String stringNumber : stringNumbers) {
+            if (stringNumber.matches("^[0-9]*$")) {
+                continue;
+            }
+            throw new IllegalArgumentException();
+        }
     }
 
     @Override
