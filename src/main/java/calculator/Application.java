@@ -21,6 +21,15 @@ public class Application {
         if (input == null || input.isEmpty()) {
             return 0;
         }
+        String delimiter = ",|:"; // 기본 구분자: 쉼표와 콜론
 
+        String[] numbers = input.split(delimiter);
+
+        int sum = 0;
+        for (String number : numbers) {
+            sum += Integer.parseInt(number);
+        }
+
+        return sum;
     }
 }
