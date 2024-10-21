@@ -20,8 +20,6 @@ public class CalculatorController {
         String input = consoleView.getInput();
         String delimiter = validator.getDelimiter(input);
         String userInput = validator.getValidInput(input);
-        System.out.println("userInput:" + userInput);
-        System.out.println("delimiter:" + delimiter);
         int result = calculator.calculate(userInput, delimiter);
         consoleView.showOutput(result);
     }
