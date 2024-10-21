@@ -15,13 +15,12 @@ public class Application {
             return;
         }
 
-        input = input.replace("\\n", "\n");
         String delimiter = DEFAULT_DELIMITER;
 
         if (input.startsWith("//")) {
-            int delimiterEndIndex = input.indexOf("\n");
+            int delimiterEndIndex = input.indexOf("\\n");
             delimiter = "[" + input.substring(2, delimiterEndIndex) + "]";
-            input = input.substring(delimiterEndIndex + 1);
+            input = input.substring(delimiterEndIndex + 2);
         }
 
         List<String> numbers = List.of(input.split(delimiter));
@@ -37,7 +36,6 @@ public class Application {
                 throw new IllegalArgumentException("음수는 허용되지 않습니다.");
             }
         }
-
 
         int result = numbers.stream()
                 .mapToInt(Integer::parseInt)
