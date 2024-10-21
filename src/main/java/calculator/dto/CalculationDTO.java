@@ -3,6 +3,8 @@ package calculator.dto;
 import calculator.model.CalculationResult;
 import java.util.Arrays;
 
+import static calculator.utils.CalculationUtils.inputDataToArray;
+
 public class CalculationDTO {
 
   private int calculatedNumber;
@@ -10,9 +12,12 @@ public class CalculationDTO {
   public CalculationDTO() {}
 
   public void calculate(String inputData) {
-    int[] numberArray = Arrays.stream(inputData.split("[,:]"))
-        .filter(number -> !number.isEmpty())
-        .mapToInt(Integer::parseInt).toArray();
+
+    String[] separatedInputData = inputDataToArray(inputData);
+
+    int[] numberArray = Arrays.stream(separatedInputData)
+        .mapToInt(Integer::parseInt)
+        .toArray();
 
     this.calculatedNumber = sumNumberArray(numberArray);
   }
