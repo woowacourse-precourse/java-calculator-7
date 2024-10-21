@@ -6,20 +6,18 @@ import org.junit.jupiter.api.Test;
 
 public class DelimiterExtractorTest {
 
-    private final String positiveNumberPattern = "[0-9]+\\.?[0-9]*";
-
     @Test
     void 잘못된_커스텀_구분자가_있으면_IllegalArgumentException_예외가_발생한다() {
         DelimiterExtractor delimiterExtractor = new DelimiterExtractor("//;\n1;2$3");
 
-        assertThrows(IllegalArgumentException.class, () -> delimiterExtractor.validate(positiveNumberPattern));
+        assertThrows(IllegalArgumentException.class, delimiterExtractor::validate);
     }
 
     @Test
     void 잘못된_기본_구분자가_있으면_IllegalArgumentException_예외가_발생한다() {
         DelimiterExtractor delimiterExtractor = new DelimiterExtractor("1,2:3-4");
 
-        assertThrows(IllegalArgumentException.class, () -> delimiterExtractor.validate(positiveNumberPattern));
+        assertThrows(IllegalArgumentException.class, delimiterExtractor::validate);
     }
 
     @Test
@@ -39,7 +37,7 @@ public class DelimiterExtractorTest {
         String input = "//;\n1;2;3";
         DelimiterExtractor delimiterExtractor = new DelimiterExtractor(input);
 
-        String delimiterLeft = delimiterExtractor.remove(positiveNumberPattern);
+        String delimiterLeft = delimiterExtractor.remove();
 
         String expected = " ; ; ";
         assertEquals(expected, delimiterLeft);
@@ -49,7 +47,7 @@ public class DelimiterExtractorTest {
     void 기본_구분자_문자열에_사용된_구분자를_추출한다() {
         DelimiterExtractor delimiterExtractor = new DelimiterExtractor("1,2:3-4");
 
-        String delimiterLeft = delimiterExtractor.remove(positiveNumberPattern);
+        String delimiterLeft = delimiterExtractor.remove();
         String expected = " , : - ";
         assertEquals(expected, delimiterLeft);
     }
@@ -75,9 +73,10 @@ public class DelimiterExtractorTest {
     @Test
     void 문자열에_구분자가_없으면_문자열을_그대로_반환한다() {
         String input = "";
+        DelimiterExtractor delimiterExtractor = new DelimiterExtractor(input);
 
         String result = "1:2,3";
-        if (!DelimiterExtractor.hasDelimiter(positiveNumberPattern, input)) {
+        if (!delimiterExtractor.hasDelimiter()) {
             result = input;
         }
 
@@ -87,9 +86,12 @@ public class DelimiterExtractorTest {
     @Test
     void 문자열에_구분자가_없는_경우() {
         String empty = "";
-        String positiveNumber = "12.345";
+        DelimiterExtractor delimiterExtractorA = new DelimiterExtractor(empty);
 
-        assertFalse(DelimiterExtractor.hasDelimiter(positiveNumberPattern, empty));
-        assertFalse(DelimiterExtractor.hasDelimiter(positiveNumberPattern, positiveNumber));
+        String positiveNumber = "12.345";
+        DelimiterExtractor delimiterExtractorB = new DelimiterExtractor(positiveNumber);
+
+        assertFalse(delimiterExtractorA.hasDelimiter());
+        assertFalse(delimiterExtractorB.hasDelimiter());
     }
 }

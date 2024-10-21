@@ -42,8 +42,7 @@ public class AddCalculatorProcess {
     }
 
     private static void validateDelimiterExtractor() {
-        final String positiveNumberPattern = "[0-9]+\\.?[0-9]*";
-        delimiterExtractor.validate(positiveNumberPattern);
+        delimiterExtractor.validate();
     }
 
     private static void requestInput() {
