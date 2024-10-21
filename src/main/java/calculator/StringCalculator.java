@@ -5,6 +5,24 @@ import java.util.Arrays;
 public class StringCalculator {
     private final DelimiterParser delimiterParser = new DelimiterParser();
 
+    private int[] expression;
+
+    /**
+     * 계산을 위한 문자열을 받아들인다.
+     *
+     * <p>{@link DelimiterParser#parseInput(String)}을 이용하여 문자열을 분리하고
+     * {@code int[]}로 변환하여 저장한다.</p>
+     * @param input 계산을 원하는 문자열.
+     */
+    public void getInput(String input) {
+        preprocessOnInput(input);
+    }
+
+    private void preprocessOnInput(String input) {
+        String[] stringExpression = makeStringToExpression(input);
+        expression = stringToIntegerArray(stringExpression);
+    }
+
     private int[] stringToIntegerArray(String[] arr) {
         return Arrays.stream(arr).mapToInt(this::parseInt).toArray();
     }
