@@ -13,7 +13,7 @@ public class Calculator {
     private Integer result = 0;
     private String delimiters = ":|,";
     private final String REGEX = "//(.*?)\\n(.*)";
-    private final String RESULT_MESSAGE = "결과: ";
+    private final String RESULT_MESSAGE = "결과 : ";
 
     Calculator() {
     }
@@ -23,7 +23,7 @@ public class Calculator {
         this.inputValue = Console.readLine();
 
         if (!inputValue.contains(",") && !inputValue.contains(":")
-                && !(inputValue.contains("//") && inputValue.contains("\n"))) {
+                && !(inputValue.contains("//") && inputValue.contains("\\n"))) {
             throw new IllegalArgumentException(INVALID_INPUT_VALUE.getMessage());
         }
 
