@@ -2,7 +2,6 @@ package calculator.service;
 
 import static calculator.service.CustomSeparatorsRegex.END_REGEX;
 import static calculator.service.CustomSeparatorsRegex.END_SEPARATOR;
-import static calculator.service.CustomSeparatorsRegex.MIDDLE_REGEX;
 import static calculator.service.CustomSeparatorsRegex.START_REGEX;
 
 import java.util.ArrayList;
@@ -35,8 +34,8 @@ public class CalculatorService implements Service {
 
     @Override
     public String removeCustomPart(String input) {
-        return input.replaceAll(
-                START_REGEX.getRegex() + MIDDLE_REGEX.getRegex() + END_REGEX.getRegex(), "");
+        int endRegexIndex = input.indexOf(END_SEPARATOR.getRegex()) + END_SEPARATOR.getRegex().length();
+        return input.substring(endRegexIndex);
     }
 
     @Override
@@ -47,6 +46,9 @@ public class CalculatorService implements Service {
 
     @Override
     public int calculate(String[] nums) {
+        if (nums[0].isEmpty()) {
+            return 0;
+        }
         return Arrays.stream(nums).mapToInt(Integer::parseInt).sum();
     }
 }

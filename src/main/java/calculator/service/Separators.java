@@ -1,7 +1,7 @@
 package calculator.service;
 
 public enum Separators {
-    COMMA(","), COLON(";");
+    COMMA(","), COLON(":");
 
     private String separator;
 
