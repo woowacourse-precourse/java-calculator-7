@@ -5,28 +5,48 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
+/**
+ * 문자열 덧셈 계산기를 구현하는 클래스입니다.
+ */
 public class StringAddCalculator {
 
+  /**
+   * 프로그램 실행의 시작점입니다.
+   */
   public void run() {
     String input = readInput();
     int result = calculate(input);
     System.out.println("결과 : " + result);
   }
 
-  // 사용자 입력 받기
+  /**
+   * 사용자로부터 문자열을 입력받습니다.
+   *
+   * @return 입력받은 문자열
+   */
   private String readInput() {
     System.out.println("덧셈할 문자열을 입력해 주세요.");
     return Console.readLine();
   }
 
-  // 계산 수행
+  /**
+   * 입력된 문자열을 바탕으로 계산을 수행합니다.
+   *
+   * @param userInput 입력된 문자열
+   * @return 계산 결과
+   */
   public int calculate(String userInput) {
     String delimiter = getDelimiter(userInput);
     String[] numbers = splitNumbers(userInput, delimiter);
     return sumNumbers(numbers);
   }
 
-  // 입력 문자열에서 구분자를 추출하기
+  /**
+   * 문자열에서 구분자를 추출합니다.
+   *
+   * @param userInput 입력된 문자열
+   * @return 추출된 구분자
+   */
   private String getDelimiter(String userInput) {
     if (userInput.startsWith("//")) {
       int delimiterIndex = userInput.indexOf("\\n");
@@ -39,7 +59,13 @@ public class StringAddCalculator {
     return ",|:"; // 기본 구분자만 반환
   }
 
-  // 구분자로 숫자 분리
+  /**
+   * 구분자로 숫자를 분리합니다.
+   *
+   * @param userInput 입력된 문자열
+   * @param delimiter 구분자
+   * @return 분리된 숫자 배열
+   */
   private String[] splitNumbers(String userInput, String delimiter) {
     if (userInput.startsWith("//")) {
       int delimiterIndex = userInput.indexOf("\\n");
@@ -53,7 +79,12 @@ public class StringAddCalculator {
     return removeInvalidNumbers(splitNumbers);
   }
 
-  // 커스텀 구분자 정의 시 //와 \n 제거
+  /**
+   * 유효하지 않은 숫자를 제거합니다.
+   *
+   * @param numbers 숫자 배열
+   * @return 유효한 숫자 배열
+   */
   private String[] removeInvalidNumbers(String[] numbers) {
     return Arrays.stream(numbers)
         .map(String::trim)
@@ -62,7 +93,12 @@ public class StringAddCalculator {
         .toArray(String[]::new);
   }
 
-  // 추출한 숫자 덧셈
+  /**
+   * 추출한 숫자의 합을 계산합니다.
+   *
+   * @param numbers 숫자 배열
+   * @return 합계
+   */
   private int sumNumbers(String[] numbers) {
     int sum = 0;
     for (String number : numbers) {
