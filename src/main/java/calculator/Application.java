@@ -29,4 +29,18 @@ public class Application {
         String[] sentence = input.split(delimiters);
         return addNumbers(sentence);
     }
+
+    // 숫자들의 합산
+    private static int addNumbers(String[] sentence) {
+        int sum = 0;
+
+        for (String number : sentence) {
+            number = number.trim();
+            if (!number.isEmpty()) {
+                sum += checkSentence(number);
+            }
+        }
+
+        return sum;
+    }
 }
