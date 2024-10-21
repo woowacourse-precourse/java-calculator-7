@@ -1,5 +1,8 @@
 package calculator;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,4 +33,16 @@ public record DelimiterStringSplitter(
 
         return new DelimiterStringSplitter(targetString, delimiter);
     }
+
+    public List<Integer> splitTargetStringToNumArray() {
+        String regex = String.join("|", delimiters);
+        if ("".equals(targetString)) {
+            return new ArrayList<>();
+        }
+        return Arrays.stream(targetString.split(regex))
+                .mapToInt(Integer::parseInt)
+                .boxed()
+                .toList();
+    }
+
 }
