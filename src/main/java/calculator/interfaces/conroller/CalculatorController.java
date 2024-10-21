@@ -1,6 +1,7 @@
 package calculator.interfaces.conroller;
 
 import calculator.domain.CalculatorService;
+import calculator.domain.Number;
 import calculator.interfaces.view.InputView;
 import calculator.interfaces.view.OutputView;
 import java.util.List;
@@ -34,7 +35,7 @@ public class CalculatorController {
     private Long calculate(String inputStr) {
         calculatorService.validateUserInput(inputStr);
         String[] splitStrBySeparators = calculatorService.splitStrBySeparators(inputStr);
-        List<Long> numberList = calculatorService.makeNumberList(splitStrBySeparators);
+        List<Number> numberList = calculatorService.makeNumberList(splitStrBySeparators);
         return calculatorService.sum(numberList);
     }
 

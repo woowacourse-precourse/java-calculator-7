@@ -1,7 +1,7 @@
 package calculator.domain;
 
 import calculator.infrastructure.InputParser;
-import calculator.infrastructure.SplitStrValidator;
+import calculator.infrastructure.NumberValidator;
 import calculator.infrastructure.SumCalculator;
 import java.util.List;
 import java.util.Set;
@@ -9,13 +9,13 @@ import java.util.Set;
 public class CalculatorService {
 
     private final InputParser inputParser;
-    private final SplitStrValidator splitStrValidator;
+    private final NumberValidator numberValidator;
     private final SumCalculator sumCalculator;
 
-    public CalculatorService(InputParser inputParser, SplitStrValidator splitStrValidator,
+    public CalculatorService(InputParser inputParser, NumberValidator numberValidator,
                              SumCalculator sumCalculator) {
         this.inputParser = inputParser;
-        this.splitStrValidator = splitStrValidator;
+        this.numberValidator = numberValidator;
         this.sumCalculator = sumCalculator;
     }
 
@@ -36,12 +36,12 @@ public class CalculatorService {
         return inputParser.splitStrBySeparator(separators, strRemovedSeparatorForm);
     }
 
-    public List<Long> makeNumberList(String[] splitStrBySeparators) {
+    public List<Number> makeNumberList(String[] splitStrBySeparators) {
         // 리스트의 각 요소를 검증하고,  Long 타입으로 변환하여 반환한다.
-        return splitStrValidator.makeNumberList(splitStrBySeparators);
+        return numberValidator.makeNumberList(splitStrBySeparators);
     }
 
-    public long sum(List<Long> numberList) {
+    public long sum(List<Number> numberList) {
         return sumCalculator.addAllNumbers(numberList);
     }
 }

@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import calculator.common.exception.InvalidateArithmeticNumberException;
 import calculator.common.exception.OutOfLongRangeException;
+import calculator.domain.Number;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,19 +14,21 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-class SplitStrValidatorTest {
+class NumberValidatorTest {
 
-    private SplitStrValidator splitStrValidator;
+    private NumberValidator numberValidator;
 
     @BeforeEach
     void setUp() {
-        splitStrValidator = new SplitStrValidator();
+        numberValidator = new NumberValidator();
     }
 
     @ParameterizedTest
     @MethodSource("provideSplitStrBySeparatorsAndExpectedNumberList")
     void 구분자로_분리된_문자열_리스트를_숫자_리스트로_변환하는_테스트(String[] splitStrBySeparators, List<Long> expectedNumberList) {
-        assertThat(splitStrValidator.makeNumberList(splitStrBySeparators)).isEqualTo(expectedNumberList);
+        assertThat(numberValidator.makeNumberList(splitStrBySeparators).stream()
+                .map(Number::getNumberValue)
+                .toList()).isEqualTo(expectedNumberList);
     }
 
     private static Stream<Arguments> provideSplitStrBySeparatorsAndExpectedNumberList() {
@@ -44,7 +47,7 @@ class SplitStrValidatorTest {
     @ParameterizedTest
     @MethodSource("provideInvalidSplitStrBySeparators")
     void 구분자로_분리된_문자열_리스트에_숫자가_아닌_문자가_포함되어_예외를_발생시키는_테스트(String[] splitStrBySeparators) {
-        assertThatThrownBy(() -> splitStrValidator.makeNumberList(splitStrBySeparators))
+        assertThatThrownBy(() -> numberValidator.makeNumberList(splitStrBySeparators))
                 .isInstanceOf(InvalidateArithmeticNumberException.class);
     }
 
@@ -60,7 +63,7 @@ class SplitStrValidatorTest {
     @Test
     void 구분자로_분리된_문자열_리스트의_숫자가_범위를_벗어나_예외를_발생시키는_테스트() {
         String[] numbers = new String[]{"12345678901234567890", "1234567890987654321"};
-        assertThatThrownBy(() -> splitStrValidator.makeNumberList(numbers))
+        assertThatThrownBy(() -> numberValidator.makeNumberList(numbers))
                 .isInstanceOf(OutOfLongRangeException.class);
     }
 }
