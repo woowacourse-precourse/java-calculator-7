@@ -49,7 +49,7 @@ public class StringParser<T> implements Parser<T> {
         try {
             return typeToChange.apply(token);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(String.format("%s : 소수점은 1개만 사용 가능합니다", token), e.fillInStackTrace());
+            throw new IllegalArgumentException(e.getMessage(), e.fillInStackTrace());
         }
     }
 }
