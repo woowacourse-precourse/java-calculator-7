@@ -2,7 +2,7 @@ package calculator;
 
 public class Application {
     public static void main(String[] args) {
-        String separator = "[,;]";
+        String separator = "[,:]";
         String str;
         String[] operand;
         int sum = 0;
@@ -13,6 +13,12 @@ public class Application {
             str = reader.readLine();
         } catch (IOException e) {
             throw new IllegalArgumentException(e);
+        }
+
+        //커스텀 구분자
+        if(str.matches("^//.{1}\\\\n.*")) {
+            separator = separator.substring(0, separator.length()-1) + str.charAt(2) + "]";
+            str = str.substring(5);
         }
 
         //구분자 분리
@@ -29,6 +35,6 @@ public class Application {
         }
 
         //결과 출력하기
-        System.out.println("결과: " + sum);
+        System.out.println("결과 : " + sum);
     }
 }
