@@ -11,6 +11,9 @@ public class Application {
     }
 
     public static int calculate(String input) {
+        if (input == null || input.isEmpty()) {
+            return 0;  // 빈 문자열은 0으로 처리
+        }
         String delimiter = ",|:";  // 기본 구분자 쉼표와 콜론
         String[] tokens = input.split(delimiter);  // 구분자로 문자열 분리
 
