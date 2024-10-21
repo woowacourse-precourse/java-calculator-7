@@ -8,6 +8,10 @@ public class Calculator {
     private String userInput;
     private String customDelimiter;
     private Integer calculateResult;
+    private static final String INVALID_INPUT_ERROR = "[ERROR] Invalid input format";
+
+    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.+?)\\n(.*)");
+
 
     public Calculator() {}
 
@@ -18,8 +22,7 @@ public class Calculator {
 
         if (userInput.startsWith("//")) {
             String normalizedInput = userInput.replace("\\n", "\n");
-            Pattern pattern = Pattern.compile("//(.+?)\\n(.*)");
-            Matcher matcher = pattern.matcher(normalizedInput);
+            Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(normalizedInput);
 
             if (!matcher.matches()) {
                 throw new IllegalArgumentException("[ERROR] Invalid custom delimiter format");
@@ -29,11 +32,11 @@ public class Calculator {
             String numbers = matcher.group(2);
 
             if (!numbers.matches(".*\\d+.*")) {
-                throw new IllegalArgumentException("[ERROR] Invalid input format");
+                throw new IllegalArgumentException(INVALID_INPUT_ERROR);
             }
         } else {
             if (!userInput.matches("^[0-9,:,\\s]*$")) {
-                throw new IllegalArgumentException("[ERROR] Invalid input format");
+                throw new IllegalArgumentException(INVALID_INPUT_ERROR);
             }
         }
         return true;
