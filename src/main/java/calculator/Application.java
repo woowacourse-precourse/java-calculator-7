@@ -101,7 +101,7 @@ public class Application {
 
     private static void validatePositive(List<BigInteger> operands) {
         for (BigInteger inputNumber : operands) {
-            if (inputNumber.compareTo(BigInteger.ZERO) == 0) {
+            if (inputNumber.equals(BigInteger.ZERO)) {
                 throw new IllegalArgumentException(ERROR_OPERANDS_CONTAIN_ZERO);
             }
 
