@@ -6,19 +6,29 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Expression {
-    private static final Pattern PATTERN = Pattern.compile("\\d+"); // 숫자 패턴을 상수로 정의
-    private static final List<Integer> numberList = new ArrayList<>();
+    private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
 
-    private static void extractNumbers(String expression) {
-        Matcher matcher = PATTERN.matcher(expression);
+    public static List<Integer> getNumberList(String expression, List<String> delimiters) {
+        List<Integer> numberList = new ArrayList<>();
+        validateExpression(expression, delimiters);
+        extractNumbers(expression, numberList);
+        return numberList;
+    }
 
-        // 정규식 패턴에 매칭되는 모든 숫자를 리스트에 추가
+    private static void validateExpression(String expression, List<String> delimiters) {
+        for (char ch : expression.toCharArray()) {
+            String character = String.valueOf(ch);
+            if (!Character.isDigit(ch) && !delimiters.contains(character) && ch != ':' && ch != ',') {
+                throw new IllegalArgumentException("\""+ character + "\" 는 유효한 구분자가 아닙니다." );
+            }
+        }
+    }
+
+    private static void extractNumbers(String expression, List<Integer> numberList) {
+        Matcher matcher = NUMBER_PATTERN.matcher(expression);
+
         while (matcher.find()) {
             numberList.add(Integer.parseInt(matcher.group()));
         }
-    }
-    public static List<Integer> getNumberList(String expression){
-        extractNumbers(expression);
-        return numberList;
     }
 }
