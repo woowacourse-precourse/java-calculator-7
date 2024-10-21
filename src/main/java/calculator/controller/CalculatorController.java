@@ -1,5 +1,6 @@
 package calculator.controller;
 
+import calculator.Calculator;
 import calculator.UserInput;
 import calculator.view.InputView;
 import calculator.view.OutputView;
@@ -17,9 +18,8 @@ public class CalculatorController {
         }
 
         List<Long> inputNumbers = userInput.parser(userInput.getInput());
+        long result = new Calculator().sum(inputNumbers);
 
-        long result = inputNumbers.stream().mapToLong(Long::longValue).sum();
         OutputView.printResult("결과 : " + result);
-
     }
 }
