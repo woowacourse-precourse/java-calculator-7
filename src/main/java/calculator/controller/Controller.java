@@ -33,7 +33,11 @@ public class Controller {
         if (!text.contains(CUSTOM_REG_END)) {
             return text.split(regex);
         }
-        return text.substring(text.indexOf(CUSTOM_REG_END) + CUSTOM_REG_END.length()).split(regex);
+        return substringText(text).split(regex);
+    }
+
+    private String substringText(String text) {
+        return text.substring(text.indexOf(CUSTOM_REG_END) + CUSTOM_REG_END.length());
     }
 
     private List<Integer> convertInt(String[] numbers) {
