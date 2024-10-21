@@ -1,17 +1,19 @@
 package calculator;
 
 public class DelimiterParser {
-    public int[] extractNumbers(String input) {
-        String[] stringNumbers = input.split("[,;]");
-        int[] numbers = new int[stringNumbers.length];
+    public String[] extractNumbers(String input) {
+        String delimiter = ",|:";
+        String numbers = input;
 
-        for (int i = 0; i < stringNumbers.length; i++) {
-            try {
-                numbers[i] = Integer.parseInt(stringNumbers[i]);
-            } catch (NumberFormatException e) {
-                    throw new IllegalArgumentException("잘못된 숫자 형식입니다: " + stringNumbers[i]);
+        if (input.startsWith("//")) {
+            int newlineIndex = input.indexOf('\n');
+            if (newlineIndex == -1) {
+                throw new IllegalArgumentException("Invalid input format: " + input);
             }
+            delimiter += "|" + input.substring(2, newlineIndex);
+            numbers = input.substring(newlineIndex + 1);
         }
-        return numbers;
+
+        return numbers.split(delimiter);
     }
 }
