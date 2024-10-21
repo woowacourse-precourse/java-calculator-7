@@ -1,7 +1,8 @@
 package calculator.view;
 
 public enum Output {
-    INPUT_STRING("덧셈할 문자열을 입력해 주세요.");
+    INPUT_STRING("덧셈할 문자열을 입력해 주세요."),
+    RESULT("결과 : ");
 
     private String message;
 

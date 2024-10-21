@@ -1,6 +1,7 @@
 package calculator.view;
 
 import static calculator.view.Output.INPUT_STRING;
+import static calculator.view.Output.RESULT;
 
 public class CalculatorOutputView implements OutputView {
 
@@ -11,6 +12,6 @@ public class CalculatorOutputView implements OutputView {
 
     @Override
     public void outputResult(int result) {
-
+        System.out.println(RESULT.getMessage() + result);
     }
 }
