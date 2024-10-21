@@ -16,6 +16,7 @@ public class ExpressionSplitter {
     }
 
     public void splitExpression(CalculatorModel model) {
+        isValid(model.getInput());
         Matcher matcher = VALID_PATTERN.matcher(model.getInput());
         if (matcher.find()) {
             String separatorExpression = matcher.group(1);
@@ -28,8 +29,8 @@ public class ExpressionSplitter {
         }
     }
 
-    public void isValid(CalculatorModel model) {
-        if (!VALID_PATTERN.matcher(model.getInput()).matches()) {
+    private void isValid(String input) {
+        if (!VALID_PATTERN.matcher(input).matches()) {
             throw new IllegalArgumentException(ExpressionSplitterError.INVALID_EXPRESSION.getMessage());
         }
     }

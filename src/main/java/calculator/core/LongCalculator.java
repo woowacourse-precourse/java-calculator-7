@@ -54,7 +54,6 @@ public class LongCalculator implements Calculator {
         calculatorView.input(model);
 
         if (!model.getInput().equals("")) {
-            expressionSplitter.isValid(model);
             calculate(model);
         }
 
