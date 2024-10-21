@@ -47,3 +47,4 @@ class ApplicationTest extends NsTest {
         Application.main(new String[]{});
     }
 }
+
