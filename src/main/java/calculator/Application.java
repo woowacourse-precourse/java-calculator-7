@@ -2,6 +2,8 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.List;
+
 public class Application {
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
@@ -11,6 +13,9 @@ public class Application {
     }
 
     private static int calculateSum(String input) {
+        if (input.isEmpty()) {
+            return 0;  // 빈 문자열 처리
+        }
         // 더미 메서드로 표현
         return 0;
     }
