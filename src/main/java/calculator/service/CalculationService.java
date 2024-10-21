@@ -1,13 +1,10 @@
 package calculator.service;
 
-
-
 import calculator.domain.Calculator;
 import calculator.domain.Separator;
 import calculator.exception.InvalidInputException;
 import calculator.exception.ParamCountException;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CalculationService {
@@ -39,7 +36,7 @@ public class CalculationService {
     private String checkNewParam(String input) {
         if (input.startsWith("//")) {
             char newParam = input.charAt(2);
-            separator.getParams().add(newParam);
+            separator.addParam(newParam);
             return input.substring(5);
         }
         return input;

@@ -11,9 +11,6 @@ public class CalculationView {
 
     public void displayResult(int result) {
         System.out.println("결과 : " + result);
-    }
-
-    public void displayError(String message) {
-        System.out.println(message);
+        Console.close();
     }
 }

@@ -15,11 +15,8 @@ public class CalculationController {
 
     public void run() {
         String input = calculationView.getInput();
-        try {
-            int result = calculationService.calculate(input);
-            calculationView.displayResult(result);
-        } catch (IllegalArgumentException e) {
-            calculationView.displayError(e.getMessage());
-        }
+        int result = calculationService.calculate(input);
+        calculationView.displayResult(result);
+
     }
 }
