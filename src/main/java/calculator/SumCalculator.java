@@ -6,6 +6,11 @@ public class SumCalculator {
 
     public int calculateSum(String input, String delimiter) {
 
+        // 입력값이 0이나 null이면 0 반환
+        if (input == null || input.isEmpty()) {
+            return 0;
+        }
+
         // 구분자를 기준으로 split
         String[] numbers = input.split(delimiter);
 
