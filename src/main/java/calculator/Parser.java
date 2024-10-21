@@ -1,6 +1,16 @@
 package calculator;
 
 public class Parser {
+    public int[] parse(String input) {
+        if (input == null) {
+            throw new IllegalArgumentException(ErrorMessages.NULL_INPUT.getMessage());
+        }
+
+        String delimiter = getDelimiter(input);
+
+        return parseNumbers(input, delimiter);
+    }
+
     private static final String DEFAULT_DELIMITER_PREFIX = "//";
     private static final String DEFAULT_DELIMITER_SUFFIX = "\\n";
     private static final String DEFAULT_DELIMITER = ",:";
@@ -37,5 +47,36 @@ public class Parser {
             throw new IllegalArgumentException(ErrorMessages.MULTI_CUSTOM_DELIMITER.getMessage());
         }
         return indexOfSuffix;
+    }
+
+    private String getDelimiter(String input) {
+        return DEFAULT_DELIMITER + getCustomDelimiter(input);
+    }
+
+    private void validateNumber(String number) {
+            for (char c : number.toCharArray()) {
+                if (!Character.isDigit(c)) {
+                    throw new IllegalArgumentException(ErrorMessages.INVALID_NUMBER.getMessage());
+                }
+            }
+    }
+
+    private int[] convertToIntArray(String[] numbers) {
+        int[] result = new int[numbers.length];
+        for (int i = 0; i < numbers.length; i++) {
+            validateNumber(numbers[i]);
+            result[i] = Integer.parseInt(numbers[i]);
+        }
+        return result;
+    }
+
+    private static String escapeForRegex(String str) {
+        String regexSpecialChars = "([\\^$.|?*+(){}])";
+        return str.replaceAll(regexSpecialChars, "\\\\$1");
+    }
+
+    private int[] parseNumbers(String input, String delimiter) {
+        String[] numbers = input.substring(inputIndex).split("[" + escapeForRegex(delimiter) + "]");
+        return convertToIntArray(numbers);
     }
 }
