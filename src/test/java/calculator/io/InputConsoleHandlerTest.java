@@ -76,4 +76,22 @@ class InputConsoleHandlerTest {
         System.setIn(System.in);
         Console.close();
     }
+
+    @Test
+    @DisplayName("커스텀 구분자를 포함한 입력도 정상적으로 반환한다")
+    void inputSplitWithCustomSeparator() {
+        // given
+        String input = "//;\\n1;2;3";
+
+        // when
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        // then
+        String[] inputSplit = INPUT_CONSOLE_HANDLER.getUserInput();
+        assertThat(inputSplit).containsExactly("1", "2", "3");
+
+        System.setIn(System.in);
+        Console.close();
+    }
+
 }
