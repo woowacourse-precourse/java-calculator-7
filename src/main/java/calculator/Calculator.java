@@ -45,4 +45,17 @@ public class Calculator {
         return input.split(delimiterRegex);
     }
 
+    // 5. 숫자를 변환하고 검증하는 기능
+    private int toIntAndValidate(String number) {
+        try {
+            int num = Integer.parseInt(number); // 숫자로 변환
+            if (num < 0) {
+                // 음수일 경우 예외 발생
+                throw new IllegalArgumentException("음수는 입력할 수 없습니다: " + num);
+            }
+            return num;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자 형식이 잘못되었습니다: " + number);
+        }
+    }
 }
