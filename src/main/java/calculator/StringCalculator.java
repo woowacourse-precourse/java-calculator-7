@@ -15,6 +15,8 @@ public class StringCalculator {
         String[] tokens = split(string);
 
         validate(tokens);
+
+        return sum(tokens);
     }
 
     private String[] split(String string) {
@@ -29,14 +31,25 @@ public class StringCalculator {
     }
 
     private void validate(String[] tokens) {
-        for(String token : tokens) {
+        for (String token : tokens) {
             validatePositiveInteger(token);
         }
     }
 
-    private void validatePositiveInteger(String string){
+    private void validatePositiveInteger(String string) {
         if (!string.matches("[0-9]\\d*")) {
             throw new IllegalArgumentException("양수가 아닌 값이 입력되었습니다.");
         }
+    }
+
+    private int sum(String[] numbers) {
+        int sum = 0;
+
+        for (String number : numbers) {
+            int num = Integer.parseInt(number);
+            sum += num;
+        }
+
+        return sum;
     }
 }
