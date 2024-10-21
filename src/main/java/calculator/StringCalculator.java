@@ -21,7 +21,7 @@ public class StringCalculator {
 
     public int calculate(String input) {
 
-        if (input.matches("\"\"")) {
+        if (input.isEmpty()) {
             return 0;
         }
 
