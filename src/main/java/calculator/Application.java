@@ -56,5 +56,21 @@ public class Application {
         }
         //문자열 검증하기
         validate_str(delimiter, str_for_add);
+        //덧셈하기
+        int sum = 0;
+        String number = "";
+        for(int i = 0; i < str_for_add.length(); i++) {
+            char c = str_for_add.charAt(i);
+            //숫자가 아닌경우
+            if(c-'0'<0 || c-'0'>9) {
+                sum += Integer.parseInt(number);
+                number = "";
+            }
+            else {
+                number += c;
+            }
+        }
+        sum += Integer.parseInt(number);
+        System.out.println("결과 : "+sum);
     }
 }
