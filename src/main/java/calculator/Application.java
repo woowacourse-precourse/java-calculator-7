@@ -22,8 +22,8 @@ public class Application {
         System.out.println("결과 : " + answer);
     }
 
-    public static ArrayList<String> getNumberTextFromInputDividedBySeparators(String input,
-                                                                              Set<Character> separatorList) {
+    private static ArrayList<String> getNumberTextFromInputDividedBySeparators(String input,
+                                                                               Set<Character> separatorList) {
         boolean hasValidSeparatorStart = checkCustomSeparatorStartKeyword(input, customSeparatorKeywordStart);
         boolean hasValidSeparatorEnd = checkCustomSeparatorEndKeyWord(input, customSeparatorKeywordEnd);
 
@@ -43,22 +43,22 @@ public class Application {
         return getNumberTexts(input.substring(customSeparatorKeywordEndIndex + 2), separatorList);
     }
 
-    public static boolean checkCustomSeparatorStartKeyword(String input, String customSeparatorKeywordStart) {
+    private static boolean checkCustomSeparatorStartKeyword(String input, String customSeparatorKeywordStart) {
         return input.startsWith(customSeparatorKeywordStart);
     }
 
-    public static boolean checkCustomSeparatorEndKeyWord(String input, String customSeparatorKeyword) {
+    private static boolean checkCustomSeparatorEndKeyWord(String input, String customSeparatorKeyword) {
         return input.indexOf(customSeparatorKeyword) == customSeparatorKeywordEndIndex;
     }
 
-    public static char extractCustomSeparator(String input) {
+    private static char extractCustomSeparator(String input) {
         validateKeywordIncludeOnce(input, customSeparatorKeywordStart);
         validateKeywordIncludeOnce(input, customSeparatorKeywordEnd);
 
         return input.charAt(customSeparatorKeywordEndIndex - 1);
     }
 
-    public static ArrayList<String> getNumberTexts(String input, Set<Character> separatorList) {
+    private static ArrayList<String> getNumberTexts(String input, Set<Character> separatorList) {
         ArrayList<String> numberTexts = new ArrayList<>();
         StringBuilder currentNumberBuilder = new StringBuilder();
 
@@ -87,20 +87,20 @@ public class Application {
         return numberTexts;
     }
 
-    public static void validateKeywordIncludeOnce(String input, String keyword) {
+    private static void validateKeywordIncludeOnce(String input, String keyword) {
         if (input.indexOf(keyword) != input.lastIndexOf(keyword)) {
             throw new IllegalArgumentException("//와 \\n는 한 번만 사용될 수 있습니다.");
         }
     }
 
-    public static String getUserInput() {
+    private static String getUserInput() {
         String input = Console.readLine();
         Console.close();
         return input;
     }
 
 
-    public static String getSumOfNumberTexts(ArrayList<String> userNumList) {
+    private static String getSumOfNumberTexts(ArrayList<String> userNumList) {
         BigInteger answer = BigInteger.ZERO;
         for (String numberText : userNumList) {
             answer = answer.add(new BigInteger(numberText));
