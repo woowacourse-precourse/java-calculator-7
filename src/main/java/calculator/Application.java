@@ -29,16 +29,21 @@ public class Application {
         return input.startsWith("//");
     }
 
-    public static String extractCustomDelimiter(String input) {
+    public static int findDelimiterEndIndex(String input) {
         int delimiterEndIndex = input.indexOf("\\n");
         if (delimiterEndIndex == -1) {
             throw new IllegalArgumentException("잘못된 입력 형식입니다. 커스텀 구분자는 //과 \\n을 포함해야 합니다.");
         }
+        return delimiterEndIndex;
+    }
+
+    public static String extractCustomDelimiter(String input) {
+        int delimiterEndIndex = findDelimiterEndIndex(input);
         return escapeSpecialCharactersInDelimiter(input.substring(2, delimiterEndIndex));
     }
 
     public static String extractNumbersSection(String input) {
-        int delimiterEndIndex = input.indexOf("\\n");
+        int delimiterEndIndex = findDelimiterEndIndex(input);
         return input.substring(delimiterEndIndex + 2);
     }
 
