@@ -15,6 +15,9 @@ public class StringCalculator {
         String separator = ",|:";
         if (input.startsWith("//")) {
             int delimiterEndIndex = input.indexOf("\n");
+            if (delimiterEndIndex == -1) {
+                throw new IllegalArgumentException("커스텀 구분자 지정이 잘못되었습니다. '//구분자\\n숫자' 형식으로 입력해야 합니다.");
+            }
             String customDelimiter = input.substring(2, delimiterEndIndex);
             if (customDelimiter.length() != 1) {
                 throw new IllegalArgumentException("커스텀 구분자는 단일 문자여야 합니다.");

@@ -191,6 +191,20 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void testInvalidCustomSeparatorFormatThrowsException() {
+        assertSimpleTest(() -> {
+            // Given
+            StringCalculator calculator = new StringCalculator();
+            String input = "//;1;2;3";
+
+            // When & Then
+            assertThatThrownBy(() -> calculator.add(input))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessageContaining("커스텀 구분자 지정이 잘못되었습니다. '//구분자\\n숫자' 형식으로 입력해야 합니다.");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
