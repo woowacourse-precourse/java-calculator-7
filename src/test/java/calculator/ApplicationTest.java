@@ -48,6 +48,14 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 추후_수정사항_테스트() {
+        assertSimpleTest(() -> {
+            run("//;\\n1//]\\n1:6");
+            assertThat(output()).contains("결과 : 8");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
