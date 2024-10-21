@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.regex.Pattern;
+
 public class StringCalculator {
     public int add(String input) {
         if (input == null || input.isEmpty()) {
@@ -17,7 +19,7 @@ public class StringCalculator {
             if (customDelimiter.length() != 1) {
                 throw new IllegalArgumentException("커스텀 구분자는 단일 문자여야 합니다.");
             }
-            separator = customDelimiter + "|,|:";
+            separator = Pattern.quote(customDelimiter) + "|,|:";
             input = input.substring(delimiterEndIndex + 1);
         }
         return input.split(separator);
