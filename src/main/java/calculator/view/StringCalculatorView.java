@@ -1,6 +1,7 @@
 package calculator.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.NoSuchElementException;
 
 public class StringCalculatorView implements CalculatorView{
 
@@ -10,7 +11,11 @@ public class StringCalculatorView implements CalculatorView{
     @Override
     public String displayInput() {
         System.out.println(INPUT_MESSAGE);
-        return Console.readLine();
+        try {
+            return Console.readLine();
+        } catch (NoSuchElementException e) {
+            throw new IllegalArgumentException(e.getMessage(), e);
+        }
     }
 
     @Override
