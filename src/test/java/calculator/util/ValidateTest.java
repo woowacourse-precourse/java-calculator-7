@@ -25,6 +25,9 @@ class ValidateTest {
     void customDelimiterValidationTest() {
         Assertions.assertThatThrownBy(() -> Converter.stringToNumbers("//\\1,2,3,4"))
                 .isInstanceOf(IllegalArgumentException.class);
+
+        Assertions.assertThatThrownBy(() -> Converter.stringToNumbers("//\\n1,2,3,4"))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -33,6 +36,9 @@ class ValidateTest {
                 .isInstanceOf(IllegalArgumentException.class);
 
         Assertions.assertThatThrownBy(() -> Converter.stringToNumbers("1:a:3"))
+                .isInstanceOf(IllegalArgumentException.class);
+
+        Assertions.assertThatThrownBy(() -> Converter.stringToNumbers("0,1:2"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
