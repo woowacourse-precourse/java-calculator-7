@@ -35,6 +35,8 @@ public class Application {
             for(int number:nums){
                 answer+=number;
             }
+
+            System.out.println("결과 : " + answer);
         }else{
             System.out.println("결과 : 0");
         }
