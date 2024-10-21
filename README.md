@@ -35,7 +35,7 @@
 
 ```bash
 BUILD SUCCESSFUL in 0s
-'''
+```
 
 # 문자열 덧셈 계산기
 
