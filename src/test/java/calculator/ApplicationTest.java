@@ -109,6 +109,14 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 커스텀_구분자_오버플로우() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("//[]{}\\n1[7}99999999999999999999999"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
