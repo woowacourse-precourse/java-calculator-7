@@ -42,7 +42,7 @@ public class InputParser {
             return input;
         }
 
-        int endIndex = input.indexOf(startIndex + CUSTOM_DELIMITER_SUFFIX.length());
-        return input.substring(endIndex + 1);
+        int endIndex = startIndex + CUSTOM_DELIMITER_SUFFIX.length();
+        return input.substring(endIndex);
     }
 }
