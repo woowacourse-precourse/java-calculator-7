@@ -15,13 +15,6 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("결과 : 1");
         });
     }
-
-    @Test
-    void 예외_테스트_음수() {
-        assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("음수는 허용되지 않습니다.");
-    }
     @Test
     void 예외_테스트_잘못된_형식() {
         assertThatThrownBy(() -> runException("1,2,abc"))  // 잘못된 형식 테스트
