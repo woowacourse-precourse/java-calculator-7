@@ -1,5 +1,7 @@
-package calculator;
+package calculator.Controller;
 
+import calculator.Model.CalculateM;
+import calculator.View.CalculateV;
 import camp.nextstep.edu.missionutils.Console;
 
 public class CalculateC {

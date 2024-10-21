@@ -1,4 +1,4 @@
-package calculator;
+package calculator.Model;
 
 public class CalculateM {
     private static final int MAX_NUMBER = Integer.MAX_VALUE;
