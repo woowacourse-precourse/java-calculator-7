@@ -27,6 +27,14 @@ public class Application {
             }
         }
         String[] num = text.split("["+sep+"]");
-        System.out.println(Arrays.toString(num));
+
+        // 3. 숫자 합 반환
+        int result = 0;
+        for (String number:num){
+            if(!number.isEmpty()){ // 비었을 경우, 0처럼 처리
+                result += Integer.parseInt(number);
+            }
+        }
+        System.out.println(result);
     }
 }
