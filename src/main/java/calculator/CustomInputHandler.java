@@ -15,7 +15,7 @@ public class CustomInputHandler {
             String capturedContent = matcher.group(1).trim();
             List<Character> charList = new ArrayList<>();
             for (char ch : capturedContent.toCharArray()) {
-                if (!charList.contains(ch)) { // 중복된 구분자를 방지
+                if (!charList.contains(ch)) {
                     charList.add(ch);
                 }
             }
