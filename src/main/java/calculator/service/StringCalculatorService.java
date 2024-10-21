@@ -22,7 +22,7 @@ public class StringCalculatorService {
         if (input.length() > CalculatorConstants.MAX_INPUT_LENGTH) {
             throw new IllegalArgumentException(
                     String.format(ExceptionMessageConstants.INPUT_TOO_LONG,
-                            CalculatorConstants.MAX_INPUT_LENGTH)); // 상수 사용
+                            CalculatorConstants.MAX_INPUT_LENGTH));
         }
 
         inputValidator.validate(input);
@@ -43,11 +43,11 @@ public class StringCalculatorService {
     private void validateNumberRange(long num) {
         if (num < 0) {
             throw new IllegalArgumentException(
-                    String.format(ExceptionMessageConstants.NEGATIVE_NOT_ALLOWED, num)); // 상수 사용
+                    String.format(ExceptionMessageConstants.NEGATIVE_NOT_ALLOWED, num));
         }
         if (num > CalculatorConstants.MAX_NUMBER) {
             throw new IllegalArgumentException(
-                    String.format(ExceptionMessageConstants.NUMBER_TOO_LARGE, CalculatorConstants.MAX_NUMBER)); // 상수 사용
+                    String.format(ExceptionMessageConstants.NUMBER_TOO_LARGE, CalculatorConstants.MAX_NUMBER));
         }
     }
 }
