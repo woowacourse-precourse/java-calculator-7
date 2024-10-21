@@ -32,19 +32,21 @@ public class Parsing {
 
         int i = 0;
         while (i < input.length()) {
-            boolean isDelimiter = false;
+            String matchedDelimiter = null;
             for (String delimiter : checkSeparator) {
                 if (input.startsWith(delimiter, i)) {
-                    if (!currentNumber.isEmpty()) {
-                        numbers.add(currentNumber.toString());
-                        currentNumber = new StringBuilder();
-                    }
-                    i += delimiter.length();
-                    isDelimiter = true;
+                    matchedDelimiter = delimiter;
                     break;
                 }
             }
-            if (!isDelimiter) {
+
+            if (matchedDelimiter != null) {
+                if (!currentNumber.isEmpty() || numbers.isEmpty()) {
+                    numbers.add(currentNumber.toString());
+                    currentNumber = new StringBuilder();
+                }
+                i += matchedDelimiter.length();
+            } else {
                 currentNumber.append(input.charAt(i));
                 i++;
             }
