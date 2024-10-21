@@ -2,9 +2,11 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Application {
     public static void main(String[] args) {
@@ -20,6 +22,7 @@ public class Application {
         }
         String delimiter = getDelimiter(input);  // 구분자 결정
         String numbersString = getNumbersString(input, delimiter);  // 숫자 문자열 추출
+        List<Integer> numbers = parseNumbers(numbersString, delimiter);  // 숫자 분리 및 리스트 변환
         // 더미 메서드로 표현
         return 0;
     }
@@ -44,8 +47,9 @@ public class Application {
     }
 
     private static List<Integer> parseNumbers(String input, String delimiter) {
-        // 더미 메서드로 표현
-        return List.of();
+        return Arrays.stream(input.split(delimiter))  // 구분자로 문자열 분리
+                .map(Application::parseInt)  // 정수로 변환
+                .collect(Collectors.toList());
     }
 
     private static int sumNumbers(List<Integer> numbers) {
