@@ -49,8 +49,8 @@ public class Parser {
         try {
             for (String number : numbers) {
                 long num = Long.parseLong(number);
-                if(num < 0) {
-                    throw new IllegalArgumentException("음수는 입력이 안됩니다.");
+                if(num <= 0) {
+                    throw new IllegalArgumentException("양수이어야 합니다.");
                 }
                 operands.add(num);
             }
