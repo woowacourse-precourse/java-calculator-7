@@ -31,7 +31,7 @@ public class StringCalculator {
                 }
                 numbers.add(number);
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("숫자 형식이 잘못되었습니다: " + token);
+                throw new IllegalArgumentException("잘못된 숫자 형식입니다.");
             }
         }
         return numbers;
