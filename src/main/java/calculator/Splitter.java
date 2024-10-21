@@ -52,8 +52,10 @@ class Splitter {
             return inputValue;
 
         int suffixIndex = inputValue.indexOf(suffix);
-        for (Character token : inputValue.substring(prefix.length(), suffixIndex).toCharArray())
-            separators.add(token);
+        if (suffixIndex != prefix.length() + 1)
+            throw new IllegalArgumentException("커스텀 구분자는 한 글자여야 합니다.");
+
+        separators.add(inputValue.charAt(prefix.length()));
 
         return inputValue.substring(suffixIndex + suffix.length());
     }
