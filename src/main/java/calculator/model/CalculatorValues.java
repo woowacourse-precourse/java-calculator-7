@@ -1,11 +1,12 @@
 package calculator.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CalculatorValues {
 
-    private final List<Integer> numbers = new ArrayList<>();
+    private final List<BigDecimal> numbers = new ArrayList<>();
 
     private String delimiter;
 
@@ -14,16 +15,16 @@ public class CalculatorValues {
     public CalculatorValues() {
     }
 
-    public List<Integer> getNumbers() {
+    public List<BigDecimal> getNumbers() {
         return numbers;
     }
 
     public void addNumbersFromInputByDelimiter(String token) {
         if(token.isEmpty()) {
-            numbers.add(0);
+            numbers.add(BigDecimal.valueOf(0));
             return;
         }
-        numbers.add(Integer.parseInt(token));
+        numbers.add(new BigDecimal(token));
     }
 
     public String getDelimiter() {

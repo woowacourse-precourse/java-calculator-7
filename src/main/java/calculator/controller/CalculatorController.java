@@ -4,6 +4,7 @@ import calculator.model.Calculator;
 import calculator.model.CalculatorImpl;
 import calculator.utils.InputValidator;
 import calculator.view.OutputView;
+import java.math.BigDecimal;
 
 public class CalculatorController {
 
@@ -21,7 +22,7 @@ public class CalculatorController {
         calculator.insertValues(input);
         calculator.extract();
 
-        int result = calculator.sum();
+        BigDecimal result = calculator.sum();
         OutputView.getOutputMessage(result);
     }
 

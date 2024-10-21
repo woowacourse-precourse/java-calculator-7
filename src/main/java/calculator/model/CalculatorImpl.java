@@ -3,6 +3,8 @@ package calculator.model;
 import calculator.utils.IntegerExtractor;
 import calculator.utils.SumExpression;
 
+import java.math.BigDecimal;
+
 public class CalculatorImpl implements Calculator{
 
     private final CalculatorValues calculatorValues;
@@ -29,7 +31,7 @@ public class CalculatorImpl implements Calculator{
     }
 
     @Override
-    public int sum() {
+    public BigDecimal sum() {
         return SumExpression.sum(calculatorValues);
     }
 }
