@@ -1,4 +1,8 @@
-package calculator.model;
+package calculator.service;
+
+import calculator.model.Delimiter;
+import calculator.model.Expression;
+import calculator.model.PositiveNumber;
 
 public class Calculator {
     private final Delimiter delimiter = new Delimiter();

@@ -1,7 +1,7 @@
 package calculator.controller;
 
-import calculator.model.Calculator;
 import calculator.model.Expression;
+import calculator.service.Calculator;
 import calculator.view.CalculateView;
 
 public class CalculatorController {
