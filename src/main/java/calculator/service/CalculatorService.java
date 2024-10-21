@@ -28,6 +28,7 @@ public class CalculatorService {
     private Numbers validateAndParse(List<String> splitNumbers) {
         List<Integer> numberList = splitNumbers
                 .stream()
+                .filter(str -> !str.trim().isEmpty())
                 .map(numberInputValidator::validateOnlyNumeric)
                 .toList();
 

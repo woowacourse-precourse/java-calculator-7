@@ -64,4 +64,12 @@ public class CalculatorServiceTest {
 
         Assertions.assertEquals(calculatorService.extractNumbers(input).getSummary(), 0);
     }
+
+    @Test
+    @DisplayName(("아무것도 입력하지 않으면 0을 반환"))
+    void return_zero_when_input_is_blank() {
+        String input = "";
+
+        Assertions.assertEquals(calculatorService.extractNumbers(input).getSummary(), 0);
+    }
 }
