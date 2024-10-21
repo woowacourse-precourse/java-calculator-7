@@ -17,6 +17,9 @@ public class Application {
 
     public static int checkString(String input) {
         int answer = 0;
+        if (input.equals("")) {
+            return 0;
+        }
         //구분자 파악하여 저장, 구분자 목록 배열 리턴
         char[] delims = getDelim(input);
         // 문자열에서 숫자들 분류해내서 배열에 저장하기
