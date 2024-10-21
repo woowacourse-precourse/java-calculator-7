@@ -30,6 +30,8 @@ public class Application {
                     String[] splitedInput = input.split(",|:");
                     for (String inputNumber : splitedInput) {
                         int number = Integer.parseInt(inputNumber);
+                        if (number < 0)
+                            throw new IllegalArgumentException();
                         result += number;
                     }
                 }
@@ -40,6 +42,8 @@ public class Application {
                         String[] splitedInput = subInput.split(customSeperator);
                         for (String inputNumber : splitedInput) {
                             int number = Integer.parseInt(inputNumber);
+                            if (number < 0)
+                                throw new IllegalArgumentException();
                             result += number;
                         }
                     }
