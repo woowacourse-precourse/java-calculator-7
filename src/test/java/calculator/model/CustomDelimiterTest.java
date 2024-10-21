@@ -1,6 +1,7 @@
 package calculator.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -14,10 +15,10 @@ class CustomDelimiterTest {
         String input = "//;\\n1;2;3";
 
         // when
-        CustomDelimiter customDelimiter = CustomDelimiter.extractCustomDelimiter(input);
+        CustomDelimiter customDelimiter = new CustomDelimiter(input);
 
         // then
-        assertEquals(customDelimiter.get(), ";");
+        assertEquals(customDelimiter.getValue(), ";");
     }
 
     @Test
@@ -26,7 +27,8 @@ class CustomDelimiterTest {
         String input = "//;\\n1;2;3";
 
         /// when
-        input = CustomDelimiter.extractInput(input);
+        CustomDelimiter customDelimiter = new CustomDelimiter(input);
+        input = customDelimiter.getInputWithoutCustomDelimiter();
 
         // then
         assertEquals("1;2;3", input);
@@ -35,10 +37,10 @@ class CustomDelimiterTest {
     @Test
     void 기본_구분자와_같은_커스텀_구분자_입력시_예외_발생() {
         // given
-        String input = "//,\\n1;2;3";
+        String input = "//,\\n1,2,3";
 
         // when & then
-        assertThrows(IllegalArgumentException.class, () -> CustomDelimiter.extractCustomDelimiter(input));
+        assertThrows(IllegalArgumentException.class, () -> new CustomDelimiter(input));
     }
 
     @Test
@@ -47,7 +49,7 @@ class CustomDelimiterTest {
         String input = "// \\n1 2 3";
 
         // when
-        assertThrows(IllegalArgumentException.class, () -> CustomDelimiter.extractCustomDelimiter(input));
+        assertThrows(IllegalArgumentException.class, () -> new CustomDelimiter(input));
     }
 
     // 특정 문자열: \n
@@ -57,7 +59,7 @@ class CustomDelimiterTest {
         String input = "//,1;2;3";
 
         // when & then
-        assertThrows(IllegalArgumentException.class, () -> CustomDelimiter.extractCustomDelimiter(input));
+        assertThrows(IllegalArgumentException.class, () -> new CustomDelimiter(input));
     }
 
     @Test
@@ -66,18 +68,18 @@ class CustomDelimiterTest {
         String input = "//a\\n//b\\n1a2b3";
 
         // when & then
-        assertThrows(IllegalArgumentException.class, () -> CustomDelimiter.extractCustomDelimiter(input));
+        assertThrows(IllegalArgumentException.class, () -> new CustomDelimiter(input));
     }
 
     @Test
-    void 커스텀_구분자가_없는_경우_null_반환() {
+    void 커스텀_구분자가_없는_경우_exists는_False() {
         // given
         String input = "1,2,3";
 
         // when
-        CustomDelimiter customDelimiter = CustomDelimiter.extractCustomDelimiter(input);
+        CustomDelimiter customDelimiter = new CustomDelimiter(input);
 
         // then
-        assertNull(customDelimiter);
+        assertFalse(customDelimiter.exists());
     }
 }
