@@ -45,6 +45,7 @@ class CustomStringSplitterTest {
             "'//i\n2345678590', '2345678590'"
     })
     void 나누어진_크기가_1인_문자열(String input, String expected1) {
+        System.out.println(input);
         List<String> strings = stringSplitter.splitString(input);
 
         Assertions.assertTrue(strings.contains(expected1));
@@ -53,9 +54,20 @@ class CustomStringSplitterTest {
 
     @ParameterizedTest
     @CsvSource({
-            "'//-\n12:34",
-            "'//.\n12:34",
-            "'//*-\n12:34"
+            "'//-\n12:34'",
+            "'//.\n12:34'",
+            "'//*-\n12:34'"
+    })
+    void 허용되지_않는_커스텀_구분자2(String input) {
+        System.out.println(input);
+        Assertions.assertTrue(stringSplitter.canSupport(input));
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "'//-\n12:34'",
+            "'//.\n12:34'",
+            "'//*-\n12:34'"
     })
     void 허용되지_않는_커스텀_구분자(String input) {
         Assertions.assertThrows(IllegalArgumentException.class, () -> stringSplitter.splitString(input));
