@@ -3,7 +3,7 @@ package calculator;
 public class SumController {
     public static Character[] separator = new Character[3];
 
-    public static int checkValue(String text) throws Exception {
+    public static int checkValue(String text) throws IllegalArgumentException {
         if (text.isEmpty()) {
             return 0;
         }
