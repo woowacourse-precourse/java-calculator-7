@@ -8,27 +8,27 @@ public class CalculatorManager {
     private List<Character> delimiter;
     private int sum;
 
-    public void makeUserInput(InputHandler inputHandler){
+    public void makeUserInput(InputHandler inputHandler) {
         this.userInput = inputHandler.getUserIntput();
     }
 
-    public void makeDelimiter(DelimiterParser delimiterParser){
+    public void makeDelimiter(DelimiterParser delimiterParser) {
         this.delimiter = delimiterParser.parseDelimiter(userInput);
     }
 
-    public void parseMarker(DelimiterParser delimiterParser){
+    public void parseMarker(DelimiterParser delimiterParser) {
         this.parsedUserInput = delimiterParser.parseMarker(userInput);
     }
 
-    public void checkCompatibility(CheckCompatibility checkCompatibility){
+    public void checkCompatibility(CheckCompatibility checkCompatibility) {
         checkCompatibility.checkInvalidInput(parsedUserInput, delimiter);
     }
 
-    public void calculateSum(Calculator calculator){
-        this.sum = calculator.getSum(parsedUserInput,delimiter);
+    public void calculateSum(Calculator calculator) {
+        this.sum = calculator.getSum(parsedUserInput, delimiter);
     }
 
-    public void printAnswer(OutputHandler outputHandler){
+    public void printAnswer(OutputHandler outputHandler) {
         outputHandler.printAnswer(sum);
     }
 }

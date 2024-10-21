@@ -10,7 +10,6 @@ public class DelimiterParser {
         addBasicDelimiter(delimiter);
         addSpecialDelimiter(delimiter, userInput);
 
-
         return delimiter;
     }
 

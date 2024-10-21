@@ -8,7 +8,7 @@ public class Controller {
     OutputHandler outputHandler = new OutputHandler();
     Calculator calculator = new Calculator();
 
-    public void startProcess(){
+    public void startProcess() {
         calculatorManager.makeUserInput(inputHandler);
         calculatorManager.makeDelimiter(delimiterParser);
         calculatorManager.parseMarker(delimiterParser);
