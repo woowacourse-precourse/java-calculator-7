@@ -1,8 +1,7 @@
-package calculator.domain;
+package calculator.domain.adder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import calculator.domain.adder.NumberAdder;
 import calculator.domain.parser.InputParser.ParsedInput;
 import org.junit.jupiter.api.Test;
 
