@@ -19,28 +19,13 @@ public class DelimiterParser {
 	}
 
 	public List<Long> extractTerms(String expression) {
+		String origin = expression.startsWith("//") ? expression.substring(expression.indexOf("\\n") + 2) : expression;
 		List<String> delimiters = getDelimiters(expression);
-		return expression.startsWith("//") ?
-				parseByUserDefinedDelimiter(expression, delimiters) :
-				parseByDefaultDelimiter(expression);
-	}
-
-	private List<Long> parseByUserDefinedDelimiter(String expression, List<String> delimiters) {
-		String origin = expression.substring(expression.indexOf("\\n") + 2);
 		String delimiterRegex = createDelimiterRegex(delimiters);
 		return Arrays.stream(origin.split(delimiterRegex))
 				.map(Long::parseLong)
 				.map(this::validateNegative)
 				.collect(Collectors.toList());
-	}
-
-	private List<Long> parseByDefaultDelimiter(String expression) {
-		List<String> delimiters = getDelimiters(expression);
-		String delimiterRegex = createDelimiterRegex(delimiters);
-		return Arrays.stream(expression.split(delimiterRegex))
-				.map(Long::parseLong)
-				.map(this::validateNegative)
-				.toList();
 	}
 
 	private Long validateNegative(Long term) {
