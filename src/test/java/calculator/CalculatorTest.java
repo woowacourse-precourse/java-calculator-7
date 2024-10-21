@@ -78,6 +78,13 @@ class CalculatorTest {
     }
 
     @Test
+    void 빈_커스텀_구분자_입력_예외_테스트() {
+        assertThatThrownBy(() -> calculator.splitAndSum("//\\n"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("유효하지 않은 커스텀 구분자입니다. 문제가 되는 입력값: [null]");
+    }
+
+    @Test
     void 커스텀_구분자로_숫자가_입력된_경우_예외_테스트() {
         assertThatThrownBy(() -> calculator.splitAndSum("//2\\n123,4"))
                 .isInstanceOf(IllegalArgumentException.class)

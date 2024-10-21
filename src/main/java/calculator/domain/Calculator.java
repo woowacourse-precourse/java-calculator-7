@@ -11,7 +11,7 @@ public class Calculator {
 
     private static final String DEFAULT_DELIMITER_COMMA = ",";
     private static final String DEFAULT_DELIMITER_COLON = ":";
-    private static final String CUSTOM_DELIMITER_PATTERN = "//(.+)\\\\n";
+    private static final String CUSTOM_DELIMITER_PATTERN = "//(.+)?\\\\n";
     private static final int DEFAULT_DELIMITER_COUNT = 2;
 
     public int splitAndSum(String input) {
