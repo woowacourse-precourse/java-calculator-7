@@ -13,18 +13,12 @@ public class Application {
         String[] splitedNumber;
         //  //;\n1;2;3
 
-        if (input.startsWith("//")) {
-            String[] section = input.split("\n", 2);
-            if (section.length < 2) {
-                throw new IllegalArgumentException("잘못된 포맷입니다.");
-            }
-            String delimiter = section[0].substring(2);
-            if (delimiter.isEmpty()) {
-                throw new IllegalArgumentException("커스텀 구분자가 없습니다.");
-            }
-            splitedNumber = section[1].split(delimiter);
+        if (input.startsWith("//") && input.startsWith("\\n", 3)) {
+            char sperator = input.charAt(2);
+            String sparatorString = String.valueOf(sperator);
+            splitedNumber = input.substring(5).split(sparatorString);
             checkNegative(splitedNumber);
-        } else {
+        }else {
             splitedNumber = input.split("[:,]");
             checkNegative(splitedNumber);
         }
