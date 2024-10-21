@@ -20,7 +20,7 @@ public class CalculatorController {
         InputProcessor inputProcessor = new InputProcessor(input);
         DelimiterCalculator delimiterCalculator = new DelimiterCalculator(inputProcessor);
 
-        int sum = delimiterCalculator.sum();
+        int sum = delimiterCalculator.getResult();
 
         outputView.printResult(sum);
     }
