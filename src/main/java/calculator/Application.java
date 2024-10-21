@@ -2,7 +2,7 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 
 /**
- * Application 클래스는 StringCalculator 프로그램을 실행하는 메인 클래스로,
+ * Application 클래스는 StringCalculator 프로그램을 실행하는 메인 클래스
  * 사용자 입력을 받아 처리하고 결과를 출력합니다.
  */
 public class Application {
