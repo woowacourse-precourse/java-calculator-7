@@ -34,6 +34,12 @@ public class Calculator {
 
         if (parts[0].startsWith("//")) {
             String customDelimiterPart = parts[0].substring(2);
+
+            // 커스텀 구분자에 알파벳, 숫자를 포함할 수 없도록 예외 처리
+            if (!customDelimiterPart.matches("[^0-9a-zA-Z]+")) {
+                throw new IllegalArgumentException("커스텀 구분자에 알파벳과 숫자를 포함할 수 없음");
+            }
+
             for (String delimiter : customDelimiterPart.split("")) {
                 delimiters.add("\\" + delimiter);
             }
