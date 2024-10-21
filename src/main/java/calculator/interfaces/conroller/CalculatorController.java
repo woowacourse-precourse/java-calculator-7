@@ -17,6 +17,11 @@ public class CalculatorController {
         this.outputView = outputView;
     }
 
+    /*
+     * 계산기를 시작합니다.
+     * 사용자 입력을 받고, 문자열 덧셈 계산기를 실행시킵니다.
+     * 결과를 화면에 출력합니다.
+     */
     public void startCalculator() {
         String userInputStr = inputView.readUserInput();
         long result = 0L;

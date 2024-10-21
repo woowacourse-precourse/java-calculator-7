@@ -35,11 +35,16 @@ public class CalculatorService {
         return inputParser.splitStrBySeparator(separators, strRemovedSeparatorForm);
     }
 
+    /*
+     * 리스트의 각 요소를 검증하고, Number 타입으로 변환하여 반환한다.
+     */
     public List<Number> makeNumberList(String[] splitStrBySeparators) {
-        // 리스트의 각 요소를 검증하고,  Long 타입으로 변환하여 반환한다.
         return numberValidator.makeNumberList(splitStrBySeparators);
     }
 
+    /*
+     * Number 리스트 안의 각 요소를 모두 더하여 반환한다.
+     */
     public long sum(List<Number> numberList) {
         return sumCalculator.addAllNumbers(numberList);
     }

@@ -11,15 +11,25 @@ public class Separators {
     private Set<Character> separators;
     private String delimiter;
 
+    /*
+     * 기본 구분자를 정의합니다.
+     */
     public Separators() {
         separators = new HashSet<>(Arrays.asList(':', ','));
     }
 
+    /*
+     * 커스텀 구분자가 있을 경우 커스텀 구분자를 구분자 리스트에 추가합니다.
+     * 이때 커스텀 구분자가 올바른지 검증합니다.
+     */
     public void addCustomSeparator(Character customSeparator) {
         validateSeparator(customSeparator);
         separators.add(customSeparator);
     }
 
+    /*
+     * 구분자 리스트로 정규 표현식을 만들어 반환합니다.
+     */
     public String getDelimiter() {
         if (delimiter == null) {
             makeDelimiter();
