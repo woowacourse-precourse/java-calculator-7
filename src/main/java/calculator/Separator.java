@@ -34,6 +34,11 @@ public class Separator {
 
             try {
                 BigInteger num = new BigInteger(separatedStr);
+                if(num.compareTo(new BigInteger("0")) < 0) {
+                    throw new IllegalArgumentException(
+                        "음수가 입력되었습니다. 양수만 입력해야 합니다: " + num
+                    );
+                }
                 numList.add(num);
             } catch (NumberFormatException e) {
                 // 숫자 변환 실패 시 예외 발생 후 프로그램 종료
