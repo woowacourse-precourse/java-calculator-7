@@ -2,6 +2,11 @@ package calculator;
 
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        Parser parser = new Parser();
+        Reader reader = new Reader();
+        Writer writer = new Writer();
+        Calculator calculator = new Calculator(parser, reader, writer);
+
+        calculator.run();
     }
 }
