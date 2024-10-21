@@ -25,6 +25,8 @@ public class Application {
         while (st.hasMoreTokens()) {
             answer += Integer.parseInt(st.nextToken());
         }
+
+        System.out.printf("결과 : %d\n", answer);
     }
 
     public static String getSeparator(String inputStr) {
