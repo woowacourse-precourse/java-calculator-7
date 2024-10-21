@@ -39,7 +39,12 @@ public class Application {
     private static int calculateSum(String[] numbers) {
         int sum = 0;
         for (String number : numbers) {
+            if (number.isEmpty()) throw new IllegalArgumentException("입력된 문자열이 유효하지 않습니다.");
+
             int num = Integer.parseInt(number);
+
+            if (num < 0) throw new IllegalArgumentException("입력된 문자열에 양수가 아닌 수가 포함돼 있습니다.");
+
             sum += num;
         }
         return sum;
