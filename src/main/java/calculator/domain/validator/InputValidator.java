@@ -5,7 +5,7 @@ import static calculator.domain.CalculatorConstants.CUSTOM_DELIMITER_SUFFIX;
 
 public class InputValidator {
 
-    public boolean isMinus(String input) {
+    public boolean isNegativeNumber(String input) {
         return input.contains("-");
     }
 
@@ -18,7 +18,7 @@ public class InputValidator {
         return input == null || input.isEmpty();
     }
 
-    public boolean isNumeric(String str) {
+    public boolean isValidNumber(String str) {
         return str.matches("\\d+");
     }
 

@@ -10,8 +10,8 @@ public class InputValidatorTest {
 
     @Test
     void isMinus() {
-        assertThat(inputValidator.isMinus("1")).isFalse();
-        assertThat(inputValidator.isMinus("-1")).isTrue();
+        assertThat(inputValidator.isNegativeNumber("1")).isFalse();
+        assertThat(inputValidator.isNegativeNumber("-1")).isTrue();
     }
 
     @Test
@@ -28,10 +28,10 @@ public class InputValidatorTest {
 
     @Test
     void isNumeric() {
-        assertThat(inputValidator.isNumeric("1")).isTrue();
-        assertThat(inputValidator.isNumeric("a")).isFalse();
-        assertThat(inputValidator.isNumeric("\\")).isFalse();
-        assertThat(inputValidator.isNumeric("\n")).isFalse();
+        assertThat(inputValidator.isValidNumber("1")).isTrue();
+        assertThat(inputValidator.isValidNumber("a")).isFalse();
+        assertThat(inputValidator.isValidNumber("\\")).isFalse();
+        assertThat(inputValidator.isValidNumber("\n")).isFalse();
     }
 
 }
