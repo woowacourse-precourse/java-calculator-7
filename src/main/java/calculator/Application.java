@@ -9,9 +9,7 @@ public class Application {
         String input = Console.readLine();
 
         StringCalculator calculator = new StringCalculator();
-        int result = calculator.addNumbers(input);
+        int result = calculator.calculate(input);
         System.out.println("결과 : " + result);
     }
 }
-
-
