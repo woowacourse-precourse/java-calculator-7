@@ -44,4 +44,3 @@
 - `addDelimeter()` : 기존의 구분자(",", ":")에 커스텀 구분자를 더합니다.
 - `isDelimiterLimitExceeded` : 구분자의 최대 개수를 초과하는지 확인합니다.
 - `isDelimiterExists` : 이미 존재하는 구분자("," 또는 ":")인지 확인합니다.
-- `isDelimiters` : 매개변수 c가 구분자인지 확인합니다.
