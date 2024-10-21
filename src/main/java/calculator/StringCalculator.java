@@ -14,6 +14,7 @@ public class StringCalculator {
         String delimiter = ",|:";
         String numbers = text;
 
+        // 커스텀 구분자 처리
         if (text.startsWith("//")) {
             int delimiterEndIndex = text.indexOf("\\n");
             if (delimiterEndIndex == -1) {
@@ -23,6 +24,10 @@ public class StringCalculator {
             String customDelimiter = text.substring(2, delimiterEndIndex);
             if (customDelimiter.length() != 1) {
                 throw new IllegalArgumentException("커스텀 구분자는 한 개의 문자여야 합니다.");
+            }
+
+            if (Character.isDigit(customDelimiter.charAt(0))) {
+                throw new IllegalArgumentException("커스텀 구분자는 숫자가 아닌 문자여야 합니다.");
             }
 
             delimiter = ",|:|" + java.util.regex.Pattern.quote(customDelimiter);
