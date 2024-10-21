@@ -8,26 +8,54 @@ public class Separator {
     private ArrayList<String> separators = new ArrayList<>(List.of(",", ":"));
 
     public String addCustomParser(String input) {
-        String processedString = "";
         if (input.startsWith("//")) {
-            int limitIndex = input.indexOf("\\n");
-            if (limitIndex != -1) {
-                String customSeperator = input.substring(2, limitIndex);
-                if(containsDigit(customSeperator)){
-                    throw new IllegalArgumentException();
-                }
-                if(!customSeperator.isEmpty()) separators.add(customSeperator);
-                processedString = input.substring(limitIndex + 2);
-                return processedString;
-            } else {
-                throw new IllegalArgumentException();
-            }
+            return processCustomSeparator(input);
         }
         return input;
     }
+
+    private String processCustomSeparator(String input) {
+        int limitIndex = findLimitIndex(input);
+
+        String customSeparator = extractCustomSeparator(input, limitIndex);
+        validateCustomSeparator(customSeparator);
+        addSeparator(customSeparator);
+
+        return extractProcessedString(input, limitIndex);
+    }
+
+    private int findLimitIndex(String input) {
+        int limitIndex = input.indexOf("\\n");
+        if (limitIndex == -1) {
+            throw new IllegalArgumentException();
+        }
+        return limitIndex;
+    }
+
+    private String extractCustomSeparator(String input, int limitIndex) {
+        return input.substring(2, limitIndex);
+    }
+
+    private void validateCustomSeparator(String customSeparator) {
+        if (containsDigit(customSeparator)) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private void addSeparator(String customSeparator) {
+        if (!customSeparator.isEmpty()) {
+            separators.add(customSeparator);
+        }
+    }
+
+    private String extractProcessedString(String input, int limitIndex) {
+        return input.substring(limitIndex + 2);
+    }
+
     public String createDelimiterRegex() {
         return String.join("|", separators);
     }
+
     private static boolean containsDigit(String str) {
         for (char c : str.toCharArray()) {
             if (Character.isDigit(c)) {
