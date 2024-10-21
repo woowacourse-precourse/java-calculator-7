@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 class StringCalculator {
     private static final String DEFAULT_DELIMITERS = ",|:";
-    private static final String REGEX = "//(.)\\s*(.*)";
+    private static final String REGEX = "//(.)\\n*(.*)";
 
     /**
      * 문자열에서 숫자를 추출하고 더한 결과를 반환하는 메서드
