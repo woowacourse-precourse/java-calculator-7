@@ -9,12 +9,31 @@ public class Application {
         return -1; // 정상적인 값을 넣었다면,
     }
 
+    public static String[] customSep(String input) {
+        String delimiter = ",|:";
+        String numbers = input;
+
+        if (input.startsWith("//")) {
+            input = input.replace("\\n", "\n");
+            String[] splitStr = input.split("\n", 2);
+            delimiter = splitStr[0].substring(2);
+            numbers = splitStr[1];
+        }
+        return new String[]{delimiter, numbers};
+    }
+
     public static int add(String input) {
         int result = emptyInput(input);
         if (result != -1) {
             return result; // 빈 문자열이면 0 반환
         }
-        return 1;
+        String[] customResult = customSep(input);
+        String delimiter = customResult[0];
+        String numbers = customResult[1];
+
+        String[] tokens = numbers.split(delimiter);
+
+        return tokens.length;
     }
 
     public static void main(String[] args) {
