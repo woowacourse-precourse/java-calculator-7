@@ -4,6 +4,7 @@ import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import calculator.exception.ErrorCode;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
@@ -42,6 +43,8 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("a,b"))
                         .isInstanceOf(IllegalArgumentException.class)
+                        .extracting("errorCode")
+                        .isEqualTo(ErrorCode.INVALID_INPUT)
         );
     }
 
@@ -50,6 +53,8 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("1,,2"))
                         .isInstanceOf(IllegalArgumentException.class)
+                        .extracting("errorCode")
+                        .isEqualTo(ErrorCode.INVALID_OPERATOR)
         );
     }
 
