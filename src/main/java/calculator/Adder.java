@@ -6,10 +6,10 @@ import static calculator.Constants.BLANK_AS_ZERO;
 
 public class Adder {
 
-    private final EmptyStringHandler emptyStringHandler = new EmptyStringHandler();
+    private final EmptyInputHandler emptyInputHandler = new EmptyInputHandler();
 
     public int add(String[] seperatedNumbers) {
-        if (emptyStringHandler.isEmptyString(seperatedNumbers)) {
+        if (emptyInputHandler.isEmptyString(seperatedNumbers)) {
             return BLANK_AS_ZERO;
         }
 
