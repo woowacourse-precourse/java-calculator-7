@@ -1,7 +1,7 @@
 package Validate;
 
 public class NumValidate {
-    public void validate(String[] inputNum) {
+    public int[] validate(String[] inputNum) {
         int[] num = new int [inputNum.length];
         for (int i = 0; i < inputNum.length; i++) {
             try{
@@ -13,5 +13,6 @@ public class NumValidate {
                 throw new IllegalArgumentException("음수가 입력됐습니다.");
             }
         }
+        return num;
     }
 }
