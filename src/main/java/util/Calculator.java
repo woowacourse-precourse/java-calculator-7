@@ -18,7 +18,7 @@ public class Calculator {
             return;  // Basic 구분자가 처리되면 일찍 종료
         }
         // Custom 구분자 처리
-        int result = Calculator.getSum(CustomDelimiter.getNumber(input));
+        int result = getSum(CustomDelimiter.getNumber(input));
         OutputView.printResult(result);
     }
 
