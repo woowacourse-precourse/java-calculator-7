@@ -71,6 +71,9 @@ public class CalculatorService {
         List<Integer> processedValue = new ArrayList<>();
         for (String item : resultList) {
             if (item.trim().isEmpty()) continue;
+            if (!item.matches("-?\\d+")) {
+                throw new IllegalArgumentException();
+            }
             processedValue.add(Integer.parseInt(item));
         }
         return processedValue;
@@ -90,7 +93,6 @@ public class CalculatorService {
         if (newSeparator == null) return;
         String result = newSeparator.substring(2);
         List<String> newSeparators = calculator.getSeparators();
-//        System.out.println("ㄱesult" + result);
         newSeparators.add(result);
         calculator.setSeparators(newSeparators);
     }

@@ -14,14 +14,17 @@ public class CalculatorController {
     public void run() throws IOException {
 
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String input = Console.readLine();
-        Calculator calculator = new Calculator();
-        ExceptionHandler exceptionHandler = new ExceptionHandler();
-        CalculatorService service = new CalculatorService(calculator, exceptionHandler);
-        service.getInputValues(input);
-        service.validateInput();
-        service.sumOfList();
-        service.printResult();
+        while (true) {
+            String input = Console.readLine();
+            Calculator calculator = new Calculator();
+            ExceptionHandler exceptionHandler = new ExceptionHandler();
+            CalculatorService service = new CalculatorService(calculator, exceptionHandler);
+            service.getInputValues(input);
+            service.validateInput();
+            service.sumOfList();
+            service.printResult();
+        }
+
     }
 
 
