@@ -67,6 +67,9 @@ public class Application {
     private static void checkLastCharacter(String delimiter, String str) {
         String[] delimiterList = delimiter.split("\\|");
         for (String del : delimiterList) {
+            if(str.startsWith(del)) {
+                throw new IllegalArgumentException("첫 글자가 구분자일 수 없습니다.");
+            }
             if (str.endsWith(del)) {
                 throw new IllegalArgumentException("마지막 글자가 구분자일 수 없습니다.");
             }
@@ -79,7 +82,7 @@ public class Application {
         for(String i : integerList) {
             int num;
             try {
-                num = Integer.parseInt(i.trim());  // 숫자로 변환
+                num = Integer.parseInt(i.trim());
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
             }
