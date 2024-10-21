@@ -1,6 +1,7 @@
 package calculator.io;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.NoSuchElementException;
 
 /**
  * IO작업을 수행하고, 적절히 검증하는 역할
@@ -25,7 +26,8 @@ public class InputOutputHandler {
      */
     public InputParseResult handleInput() {
         System.out.print(INPUT_PREFIX);
-        String input = Console.readLine();
+
+        String input = readLine();
 
         inputValidator.validate(input);
 
@@ -41,5 +43,15 @@ public class InputOutputHandler {
         System.out.print(OUTPUT_PREFIX);
 
         System.out.print(result);
+    }
+
+    private static String readLine() {
+        String input;
+        try {
+            input = Console.readLine();
+        } catch (NoSuchElementException e) {
+            input = "0";
+        }
+        return input;
     }
 }

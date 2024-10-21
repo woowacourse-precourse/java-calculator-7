@@ -161,6 +161,38 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 빈문자열을_입력하면_0이_반환된다() {
+        assertSimpleTest(() -> {
+            run("");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void 숫자_하나만_입력하면_그대로_반환된다() {
+        assertSimpleTest(() -> {
+            run("10");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
+    @Test
+    void 공백만_존재하는_문자열을_입력하면_예외가_발생한다() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException(" "))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 구분자만_존재하는_문자열을_입력하면_예외가_발생한다() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException(","))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
