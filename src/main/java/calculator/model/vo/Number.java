@@ -12,6 +12,9 @@ public final class Number {
     }
 
     public static Number of(String number) {
+        if (number.isEmpty()) {
+            return new Number(BigInteger.ZERO);
+        }
         return new Number(new BigInteger(number));
     }
 
