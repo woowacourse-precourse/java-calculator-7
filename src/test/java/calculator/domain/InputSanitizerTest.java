@@ -26,4 +26,15 @@ class InputSanitizerTest {
 
         assertEquals("1,2,3", sanitizedInput);
     }
+
+    @Test
+    @DisplayName("구분자가 역순일 때도 올바르게 처리한다")
+    void sanitizeInputWithReversedDelimiters() {
+        InputSanitizer sanitizer = new InputSanitizer();
+        String input = "\n//1,2,3";
+        String sanitizedInput = sanitizer.sanitizeInput(input, "//", "\n");
+
+        assertEquals("1,2,3", sanitizedInput);
+    }
+
 }
