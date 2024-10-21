@@ -11,6 +11,7 @@ public class Calculator {
     private Integer result = 0;
     private String delimiters = ":|,";
     private final String REGEX = "//(.*?)\\n(.*)";
+    private final String RESULT_MESSAGE = "결과: ";
 
     Calculator() {
     }
@@ -33,6 +34,10 @@ public class Calculator {
         }
 
         return nums;
+    }
+
+    private Boolean isEmpty() {
+        return this.inputValue.isEmpty();
     }
 
     private Boolean isCustomDelimiters(String inputValue) {
@@ -71,11 +76,14 @@ public class Calculator {
         return result;
     }
 
-    public void calculate() {
+    public String calculate() {
         createInputValue();
+        if (isEmpty()) {
+            return RESULT_MESSAGE + this.result;
+        }
         String[] stringNums = splitNums();
         ArrayList<Integer> nums = toInteger(stringNums);
         this.result = addNums(nums);
-        System.out.println("결과: " + this.result);
+        return RESULT_MESSAGE + this.result;
     }
 }
