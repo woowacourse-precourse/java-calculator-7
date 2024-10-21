@@ -9,6 +9,8 @@ import java.util.Map;
 public class Calculator {
     private String division;
     private final List<Integer> numbers = new ArrayList<>();
+    private final String COMMA = ",";
+    private final String COLON = ":";
 
     public void getDivision(String inputString) {
         if (inputString != null && inputString.startsWith("//")) {
@@ -24,15 +26,15 @@ public class Calculator {
         }
 
         if (division != null) {
-            regex = ",|" + division + "|:";
+            regex = COMMA + "|" + division + "|" + COLON;
         } else {
-            regex = ",|:";
+            regex = COMMA + "|" + COLON;
         }
         List<String> strings = Arrays.asList(inputString.split(regex));
 
         for (String string : strings) {
             int number = Integer.parseInt(string);
-            if(number < 1){
+            if (number < 1) {
                 throw new IllegalArgumentException();
             }
             numbers.add(number);
@@ -66,7 +68,7 @@ public class Calculator {
     }
 
     public boolean isValid(String inputString) {
-        String regex = "[," + division + ":]";
+        String regex = "[" + COLON + division + COMMA + "]";
         inputString = inputString.replaceAll(regex, "");
 
         char[] inputChars = inputString.toCharArray();
