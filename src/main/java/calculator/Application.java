@@ -24,15 +24,17 @@ public class Application {
         String separator1 = ","; // 구분자 설정
         String separator2 = ":"; // 구분자 설정2
         String separator3 = ""; // 커스텀 구분자 추가 설정, 공백으로 초기화
-
         if (input.length() > 5 && input.substring(0, 2).equals("//") && input.substring(3, 5).equals("\\n")) {
-            if (input.substring(2, 3).equals(";") || input.substring(2, 3).equals(",")) {
+            if (input.substring(2, 3).equals(",") || input.substring(2, 3).equals(":")) {
                 throw new IllegalArgumentException("기존 구분자와 같습니다");
             }
             separator3 = input.substring(2, 3);
             input = input.substring(5);
-
         }
+        if (input.length() == 5 && input.substring(0, 2).equals("//") && input.substring(3, 5).equals("\\n")) {
+            return new String[]{}; // 구분자 제외 빈 문자열이면 빈 배열 반환
+        }
+
         if (separator3.isEmpty()) { // 커스텀 구분자가 있는 경우, 없는 경우 나눠서 return
             return input.split(separator1 + "|" + separator2); // 구분자가 없을 때
         } else {
