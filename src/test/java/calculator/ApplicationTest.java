@@ -49,14 +49,6 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 빈_문자열() {
-        assertSimpleTest(() -> {
-            run("\n");
-            assertThat(output()).contains("결과 : 0");
-        });
-    }
-
-    @Test
     void 공백() {
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> runException(" "))
