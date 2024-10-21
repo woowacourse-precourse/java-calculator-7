@@ -7,7 +7,11 @@
 - [x] 예외 처리 기능
 
 ## 설계
+**구현 전**
 ![image](https://github.com/user-attachments/assets/6de619fd-def6-4819-951b-03f4223bff25)
+
+**구현 후**
+![image](https://github.com/user-attachments/assets/697eef2f-49a9-4426-8c6c-a19f2ee15a9f)
 
 ## 구현 과정
 ### Calculate
