@@ -18,7 +18,7 @@ public class Application {
 
 
         try{
-        System.out.print("input : ");
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
         String userInput = Console.readLine();
         String delimiter = "[,:]"; //기본 구분자
 
@@ -30,11 +30,11 @@ public class Application {
         if(userInput.startsWith("//")) { //userInput이 "//"로 시작하면 커스텀 구분자로
             //구분자 추출
             delimiter = userInput.substring(userInput.indexOf("//") + 2, userInput.indexOf("\\n"));
-            System.out.println("추출된 구분자 : " + delimiter);
+            //System.out.println("추출된 구분자 : " + delimiter);
 
             //숫자 부분만 추출
             userInput = userInput.substring(userInput.indexOf("\\n") + 2);
-            System.out.println("추출된 숫자 : " + userInput);
+            //System.out.println("추출된 숫자 : " + userInput);
         }
 
         // 쉼표 또는 콜론을 구분자로 가지는 문자열
@@ -51,7 +51,7 @@ public class Application {
             sum += Integer.parseInt(s);
         }
 
-        System.out.println(sum);
+        System.out.println("결과 : "+sum);
 
         }catch (IllegalArgumentException e){
             System.err.println(e.getMessage());
