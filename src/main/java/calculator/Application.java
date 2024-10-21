@@ -7,7 +7,7 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
 	
-	// 2. 문자열 분리 로직
+	 // 2. 문자열 분리 로직
     public static String[] splitInput(String inputString) {
         // 빈 문자열 처리
         if (inputString == null || inputString.isEmpty()) {
@@ -18,15 +18,13 @@ public class Application {
         if (inputString.startsWith("//")) {
             // 구분자는 "//" 뒤에 오는 첫 문자
             char delimiter = inputString.charAt(2);  // "//" 뒤의 첫 문자를 구분자로 사용
-            System.out.println(delimiter);
             // 숫자 부분은 "//"와 구분자 뒤의 문자열
             String numbersPart = inputString.substring(5);  // 구분자 이후의 숫자 부분 (5번째 문자부터)
-            System.out.println(numbersPart);
-            // 구분자로 숫자 부분을 분리하여 반환
-            return numbersPart.split(Pattern.quote(String.valueOf(delimiter)));  // 구분자로 분리
+            // 구분자와 기본 구분자인 쉼표(,)와 콜론(:)을 함께 처리
+            return numbersPart.split(Pattern.quote(String.valueOf(delimiter)) + "|[,:]");  // 구분자로 분리
         } else {
             // 기본 구분자 쉼표(,) 또는 콜론(:)으로 분리
-            return inputString.split("[,:]");
+            return inputString.split("[,:]");  // 쉼표(,)와 콜론(:)으로 분리
         }
     }
     
