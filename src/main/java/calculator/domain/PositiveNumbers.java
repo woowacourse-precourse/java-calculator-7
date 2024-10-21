@@ -1,6 +1,7 @@
 package calculator.domain;
 
 import java.util.List;
+import java.util.Objects;
 
 public class PositiveNumbers {
 
@@ -11,7 +12,7 @@ public class PositiveNumbers {
     }
 
     public static PositiveNumbers from(final List<String> numbers) {
-        return new PositiveNumbers(convertToPositiveNumbers(numbers));
+        return new PositiveNumbers(convertToPositiveNumbers(Objects.requireNonNull(numbers)));
     }
 
     private static List<PositiveNumber> convertToPositiveNumbers(final List<String> numbers) {

@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class CustomDelimiter implements Delimiter {
@@ -20,7 +21,7 @@ public class CustomDelimiter implements Delimiter {
     private final String input;
 
     public CustomDelimiter(final String input) {
-        this.input = input;
+        this.input = Objects.requireNonNull(input);
     }
 
     @Override

@@ -17,7 +17,7 @@ public class PositiveNumber {
     }
 
     private PositiveNumber(final String number) {
-        this.value = new BigInteger(number);
+        this.value = new BigInteger(Objects.requireNonNull(number));
     }
 
     public static PositiveNumber zero() {

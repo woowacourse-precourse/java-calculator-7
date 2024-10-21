@@ -2,6 +2,7 @@ package calculator.domain;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class DefaultDelimiter implements Delimiter {
@@ -12,7 +13,7 @@ public class DefaultDelimiter implements Delimiter {
     private final String input;
 
     public DefaultDelimiter(final String input) {
-        this.input = input;
+        this.input = Objects.requireNonNull(input);
     }
 
     @Override

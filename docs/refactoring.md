@@ -34,6 +34,13 @@
 - 변경을 예상하지 않는다. 그저 변경이 발생하면 수용할 수 있는 유연함을 담는다
   - 뺄셈, 곱셈, 나눗셈이 추가된다면 빠르게 수용할 수 있을까?
 - 사용자 입력을 받을 때 `null`은 언제 발생할까?
+  - 사용자가 잘못된 형식의 데이터를 입력하는 경우 발생 가능 -> 입력에서는 공백만을 잘못된 형식으로 보고 예외를 던진다
+  - 요청을 전달하면서 필요한 데이터를 누락하는 경우 발생 가능 -> final 로 누락되지 않게 만든다
+  - DTO 사용 시 데이터를 누락하는 경우 발생 가능 -> record 사용해 누락을 막는다
+  - Scanner의 nextLine() 사용하는 Console 에서 null을 반환하는 상황이 발생할까? nextLine()은 NoSuchElementException 던짐
+  - ApplicationTest.run() 메서드는 args를 개행문자 `\n`를 String.join()으로 연결, 즉 `"args[0]\nargs[1]\n"` 처리
+  - 원인 불명의 null이 발생해 Objects.requireNonNull()에서 NPE가 터진 경우 `IllegalArgumentException`을 던져야 할까?
+  - `IllegalArgumentException`를 던지면 디버깅이 어려움 -> 현재 프로젝트에서 NPE가 발생하면 데이터 누락같은 실수일 확률이 높음
 - 역할, 책임, 협력
   - 숫자가 양수인지 판단하는 것은 누구의 책임인가? InputView 가 입력이 양수인지 판단?
   - 빈 문자열이 들어오면 객체지향 세계의 양수 "0"으로 판단해 "0"을 돌려준다고 가정한다면
