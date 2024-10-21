@@ -1,20 +1,24 @@
 package calculator;
 
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class CalculatorService {
 
+    Calculator calculator;
+
     public String checkCustomSeparator(String inputData) {
         if (inputData.startsWith("//")) {
-            if (inputData.charAt(3) == 'n') {
-                return Constants.DEFAULT_CUSTOM_SEPARATOR + "|" + validateCustomSeparator(inputData);
+            if (!(inputData.indexOf('n') == -1)) {
+                return Constants.DEFAULT_CUSTOM_SEPARATOR + validateCustomSeparator(inputData);
             }
         }
         return Constants.DEFAULT_CUSTOM_SEPARATOR;
     }
 
     private String validateCustomSeparator(String inputData) {
-        String customSeparator = inputData.substring(2, 3);
+        String customSeparator = inputData.substring(2, inputData.indexOf('n'));
+
         validateSpecialCharacterRegex(customSeparator);
         return customSeparator;
     }
@@ -23,6 +27,32 @@ public class CalculatorService {
         if (!Pattern.matches(Constants.SPECIAL_CHARACTER_REGEX, separator)) {
             throw new IllegalArgumentException(Constants.SPECIAL_CHARACTER_ERROR_MESSAGE);
         }
+    }
+
+    public int additionCalculator(String userInputData, String customSeparator) {
+        String trimInputData;
+        if (userInputData.startsWith("//")) {
+            trimInputData = userInputData.substring(4);
+        } else {
+            trimInputData = userInputData;
+        }
+
+        String calculatorRegex = "[" + customSeparator + "]";
+        String calculatorStringRegex = "[0-9" + customSeparator + "]*[0-9]";
+
+        if (!Pattern.matches("^" + calculatorStringRegex + "$", trimInputData)) {
+            throw new IllegalArgumentException(Constants.CUSTOM_SPECIAL_CHARACTER_ERROR_MESSAGE);
+        }
+
+        int[] numbers = Arrays.stream(trimInputData.split(calculatorRegex)).mapToInt(Integer::parseInt).toArray();
+
+        int calcResult = 0;
+
+        for (int number : numbers) {
+            calcResult += number;
+        }
+
+        return calcResult;
     }
 }
 

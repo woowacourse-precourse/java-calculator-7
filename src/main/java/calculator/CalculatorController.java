@@ -8,6 +8,8 @@ public class CalculatorController {
         CalculatorView calculatorView = new CalculatorView();
         String userInputData = calculatorView.getUserInput();
         String customSeparator = calculatorService.checkCustomSeparator(userInputData);
+        int resultCalc = calculatorService.additionCalculator(userInputData, customSeparator);
+        calculatorView.outputCalculatorResults(resultCalc);
     }
 }
 
