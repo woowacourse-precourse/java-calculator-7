@@ -8,7 +8,7 @@ public interface Service {
 
     boolean isCustomSeparator(String input);
 
-    String checkCustomSeparator(String input);
+    String saveCustomSeparator(String input);
 
     String removeCustomPart(String input);
 

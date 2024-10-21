@@ -5,7 +5,10 @@ import java.util.List;
 
 public class CalculatorService implements Service {
 
-    private static final String CUSTOM_SEPARATOR_REGEX = "^//\\D\n";
+    private static final String CUSTOM_SEPARATOR_START_REGEX = "^//";
+
+    private static final String CUSTOM_SEPARATOR_END_REGEX = "\n";
+
 
     @Override
     public List<String> createSeparators() {
@@ -18,16 +21,13 @@ public class CalculatorService implements Service {
 
     @Override
     public boolean isCustomSeparator(String input) {
-        return input.matches(CUSTOM_SEPARATOR_REGEX);
+        return input.matches(CUSTOM_SEPARATOR_START_REGEX + "\\D" + CUSTOM_SEPARATOR_END_REGEX);
     }
 
     @Override
-    public String checkCustomSeparator(String input) {
-        String regex = "^//\\D\n";
-        if (input.matches(regex)) {
-
-        }
-        return input;
+    public String saveCustomSeparator(String input) {
+        int endRegexIndex = input.indexOf(CUSTOM_SEPARATOR_END_REGEX);
+        return String.valueOf(input.charAt(endRegexIndex - 1));
     }
 
     @Override

@@ -23,7 +23,7 @@ public class CalculatorController {
 
         List<String> separators = service.createSeparators();
         if (service.isCustomSeparator(input)) {
-            String customSeparator = service.checkCustomSeparator(input);
+            String customSeparator = service.saveCustomSeparator(input);
             separators.add(customSeparator);
             input = service.removeCustomPart(input);
         }
