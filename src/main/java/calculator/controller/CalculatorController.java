@@ -3,6 +3,7 @@ package calculator.controller;
 import java.util.List;
 
 import calculator.model.Calculator;
+import calculator.model.Delimiter;
 import calculator.model.InputParser;
 import calculator.view.InputView;
 import calculator.view.OutputView;
@@ -20,8 +21,10 @@ public class CalculatorController {
 		String input = inputView.readInput();
 		inputView.closeRead();
 
-		InputParser inputParser = new InputParser(input);
-		List<Integer> numbers = inputParser.extractNumbers(input);
+
+
+		Delimiter delimiter = new Delimiter();
+		List<Integer> numbers = InputParser.extractNumbers(input, delimiter);
 
 		Calculator calculator = new Calculator(numbers);
 		outputView.printResult(calculator.sum());
