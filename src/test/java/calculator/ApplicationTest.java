@@ -34,6 +34,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 커스텀_구분자_사용_여러_양수의_합() {
+        assertSimpleTest(() -> {
+            run("//;\\n1;5;7");
+            assertThat(output()).contains("결과 : 13");
+        });
+    }
+
+    @Test
     void 빈_문자열_사용() {
         assertSimpleTest(() -> {
             run("\n");
