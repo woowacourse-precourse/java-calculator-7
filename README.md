@@ -4,6 +4,7 @@
 
 1. 문자열을 입력받는다.
 2. 구분자의 유효성을 검증한다.
+    - (1. 숫자인가? 2. 등록된 구분자인가? 3. 커스텀 구분자를 등록하고 있나?)
 3. 구분자를 제외한 숫자들의 합을 출력한다.
 
 ## 기능 목록
@@ -31,6 +32,11 @@
 - FixedSeparator : 기본적으로 허용되는 구분자를 설정하는 enum
 - SeparatorService : 구분자 정보를 받아 유효한 구분자인지 판별하고,
   새로운 커스텀 구분자를 받아와 저장시키는 service class
+
+### number
+
+- Calculator : 숫자의 합을 계산하는 class
+- IntegerCalculator : Calculator의 Integer type 구현체
 
 ### view
 
