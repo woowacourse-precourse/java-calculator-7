@@ -2,6 +2,7 @@ package calculator.domain;
 
 import static calculator.domain.constant.errorMessage.ValueError.INVALID_VALUE_FORMAT;
 import static calculator.domain.constant.errorMessage.ValueError.MINUS_VALUE;
+import static calculator.domain.constant.errorMessage.ValueError.OUT_OF_RANGE_VALUE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -41,6 +42,17 @@ class ParserTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> parser.parseInput(input));
         assertEquals(MINUS_VALUE.getMessage(), exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("int 범위를 넘는 값이 있으면 예외를 발생시킨다")
+    void throwsExceptionForOutOfRangeValues() {
+        Parser parser = new Parser();
+        String input = "1,2147483648";
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> parser.parseInput(input));
+        assertEquals(OUT_OF_RANGE_VALUE.getMessage(), exception.getMessage());
     }
 
 
