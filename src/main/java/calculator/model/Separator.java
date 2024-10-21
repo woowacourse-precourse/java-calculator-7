@@ -18,7 +18,7 @@ public class Separator {
             return false;
         }
 
-        String character = input.substring(firstIndex + 2, lastIndex - 1);
+        String character = input.substring(firstIndex + 2, lastIndex);
         characters.add(character);
         return true;
     }

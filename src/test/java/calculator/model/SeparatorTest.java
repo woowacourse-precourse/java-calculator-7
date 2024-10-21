@@ -10,11 +10,12 @@ public class SeparatorTest {
     @DisplayName("커스톰 문자열 추출")
     public void extractCustomCharacterTest() {
         //given
-        String input = "//1\\n1;2;3";
+        String input = "//m\\n1m2;3";
         boolean expect = true;
         //when
         Separator separator = new Separator();
         //then
         assertEquals(separator.extractCustomCharacter(input), expect);
+        System.out.println(separator.getCharacters());
     }
 }
