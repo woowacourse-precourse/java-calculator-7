@@ -54,4 +54,60 @@ class InputNumberTest {
             assertEquals(expected, actual.getMessage());
         }
     }
+
+    @Nested
+    class 정상_동작_테스트를_진행한다 {
+
+        @Test
+        void 기본_구분자가_입력된다() {
+            //given
+            String input = "1,2:3";
+            InputNumber inputNumber = new InputNumber(input);
+
+            //when
+            String actual = inputNumber.getInputStrings();
+
+            //then
+            assertEquals(input, actual);
+        }
+
+        @Test
+        void 단일_커스텀_구분자가_입력된다() {
+            //given
+            String input = "//;\\n1;2;3";
+            InputNumber inputNumber = new InputNumber(input);
+
+            //when
+            String actual = inputNumber.getInputStrings();
+
+            //then
+            assertEquals(input, actual);
+        }
+
+        @Test
+        void 연속된_커스텀_구분자가_입력된다() {
+            //given
+            String input = "//;;;\\n1;;;2;;;3";
+            InputNumber inputNumber = new InputNumber(input);
+
+            //when
+            String actual = inputNumber.getInputStrings();
+
+            //then
+            assertEquals(input, actual);
+        }
+
+        @Test
+        void 메타_문자인_커스텀_구분자로_문자열을_분리한다() {
+            //given
+            String input = "//?\\n1?2?3";
+            InputNumber inputNumber = new InputNumber(input);
+
+            //when
+            String actual = inputNumber.getInputStrings();
+
+            //then
+            assertEquals(input, actual);
+        }
+    }
 }

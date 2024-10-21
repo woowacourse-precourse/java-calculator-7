@@ -40,6 +40,15 @@ class ApplicationTest extends NsTest {
                             .hasMessageContaining("올바른 형식으로 입력하세요.")
             );
         }
+
+        @Test
+        void 마지막_인덱스가_숫자가_아닌_경우_예외를_발생시킨다() {
+            assertSimpleTest(() ->
+                    assertThatThrownBy(() -> runException("//;\n1;2;3;"))
+                            .isInstanceOf(IllegalArgumentException.class)
+                            .hasMessageContaining("올바른 형식으로 입력하세요.")
+            );
+        }
     }
 
     @Nested
