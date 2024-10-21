@@ -64,6 +64,18 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 잘못된_형식_입력_예외() {
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> {
+                String input = "1,A,3";
+                System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+                runMain();
+            }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("숫자로 변환할 수 없는 값이 포함되어 있습니다")
+        );
+    }
 
     @Override
     public void runMain() {
