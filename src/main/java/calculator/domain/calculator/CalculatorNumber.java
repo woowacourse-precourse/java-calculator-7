@@ -1,5 +1,7 @@
 package calculator.domain.calculator;
 
+import calculator.domain.visitor.NumberVisitor;
+
 public class CalculatorNumber {
     private final long value;
 
@@ -31,6 +33,14 @@ public class CalculatorNumber {
         if (value <= 0) {
             throw new IllegalArgumentException("숫자는 양수여야 합니다.");
         }
+    }
+    
+    public void accept(NumberVisitor visitor) {
+        visitor.visit(this);
+    }
+
+    public long getValue() {
+        return value;
     }
 
     @Override
