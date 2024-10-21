@@ -1,5 +1,7 @@
 package calculator.validation;
 
+import static calculator.exception.ErrorMessage.*;
+
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -11,19 +13,19 @@ public class InputValidator {
 		String filteredInput = input.replaceAll(regex, "");
 
 		if (!input.matches(regex)) {
-			throw new IllegalArgumentException("허용되지 않은 구분자가 포함되어 있습니다: " + filteredInput);
+			throw new IllegalArgumentException(INVALID_DELIMITER.getMessage());
 		}
 	}
 
 	public void validateDigit(String input) {
 		if (!isDigit(input)) {
- 			throw new IllegalArgumentException("구분자 사이에 정수가 아닌 값이 포함되어 있습니다.");
+ 			throw new IllegalArgumentException(NON_INTEGER_VALUE.getMessage());
 		}
 	}
 
 	public void validateNonDigit(String input) {
 		if (isDigit(input)) {
-			throw new IllegalArgumentException("커스텀 구분자가 정수입니다.");
+			throw new IllegalArgumentException(INVALID_CUSTOM_DELIMITER.getMessage());
 		}
 	}
 
@@ -33,13 +35,13 @@ public class InputValidator {
 
 	public void validateNumberPositive(String input) {
 		if (Integer.parseInt(input) <= 0) {
-			throw new IllegalArgumentException("0 또는 음수가 포함되어 있습니다.");
+			throw new IllegalArgumentException(NON_POSITIVE_NUMBER.getMessage());
 		}
 	}
 
 	public void validateEmpty(String input) {
 		if (input.isEmpty()) {
-			throw new IllegalArgumentException("커스텀 구분자에는 빈 문자열이 올 수 없습니다.");
+			throw new IllegalArgumentException(EMPTY_CUSTOM_DELIMITER.getMessage());
 		}
 	}
 }
