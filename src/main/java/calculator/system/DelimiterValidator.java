@@ -1,15 +1,9 @@
 package calculator.system;
 
 import calculator.system.exception.InvalidDelimiterException;
-import calculator.system.exception.NegativeValueException;
 import java.util.Set;
 
 public class DelimiterValidator {
-
-	public Long validateNegative(Long term) throws NegativeValueException {
-		if (term < 0) {throw new NegativeValueException();}
-		return term;
-	}
 
 	public void assureDefaultDelimiter(String userDefinedDelimiter) throws InvalidDelimiterException {
 		Delimiter.getDefaults().stream()

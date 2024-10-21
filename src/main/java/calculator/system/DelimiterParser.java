@@ -6,10 +6,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class DelimiterParser {
-	
+
+	private final TermValidator termValidator;
 	private final DelimiterValidator delimiterValidator;
 
 	public DelimiterParser() {
+		termValidator = new TermValidator();
 		delimiterValidator = new DelimiterValidator();
 	}
 
@@ -18,7 +20,7 @@ public class DelimiterParser {
 		String delimiterRegex = createDelimiterRegex(expression);
 		return Arrays.stream(origin.split(delimiterRegex))
 				.map(Long::parseLong)
-				.map(delimiterValidator::validateNegative)
+				.map(termValidator::validateNegative)
 				.collect(Collectors.toList());
 	}
 
