@@ -1,6 +1,6 @@
-~~# java-calculator-precourse
+# java-calculator-precourse
 
-## 기능 목록
+## ✅ 기능 목록
 
 ### [1] 사용자에게 입력 문구를 출력하고, 문자열을 입력 받는다.
 
@@ -29,7 +29,7 @@
 
 ### [5] 정해진 형식에 맞게 덧셈의 결과를 출력한다.
 
-## 클래스 정보
+## ✅ 클래스 정보
 
 ### `Application`
 
