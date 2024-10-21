@@ -13,8 +13,8 @@ public class UserInput {
         this.input = input;
     }
 
-    public List<Long> parser(String userInput) {
-        String delimiterRegex = extractDelimiterRegex(userInput);
+    public List<Long> parser() {
+        String delimiterRegex = extractDelimiterRegex(input);
         String numbers = extractNumbers(delimiterRegex);
 
         return convertToLongList(new InputParser(delimiterRegex, numbers).parse());
