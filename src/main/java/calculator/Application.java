@@ -9,7 +9,7 @@ public class Application {
         try {
             input= validating(input);
             int sum = adding(input);
-            System.out.println("결과: " + sum);
+            System.out.println("결과 : " + sum);
         } catch (IllegalArgumentException e) {
             System.out.println("잘못된 입력입니다");
         }
@@ -19,7 +19,7 @@ public class Application {
     public static String validating(String input) {
 
         // 빈 입력 검사
-        if (input == null || input.trim().isEmpty()) {
+        if (input == null) {
             return  "";
         }
 
