@@ -7,6 +7,8 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Parser {
+	private static final String COMMA = ",";
+	private static final String COLON = ":";
 	private static final String CUSTOM_DELIMITER_PREFIX = "//";
 	private static final String CUSTOM_DELIMITER_POSTFIX = "\\n";
 	private static final int CUSTOM_DELIMITER_INDEX = 2;
@@ -16,7 +18,7 @@ public class Parser {
 	private final List<String> delimiters;
 
 	public Parser() {
-		this.delimiters = new ArrayList<>(Arrays.asList(",", ":"));
+		this.delimiters = new ArrayList<>(Arrays.asList(COMMA, COLON));
 	}
 
 	public List<Integer> parse(String expression) {
