@@ -15,12 +15,27 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("결과 : 1");
         });
     }
+    @Test
+    void 커스텀_구분자_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//*&^\\n1"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
 
     @Test
-    void 예외_테스트() {
+    void 커스텀_구분자_미선언_예외_테스트() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> runException("1.2;3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 정수_입력값_범위_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException((Integer.MAX_VALUE)+"123;"+(Integer.MAX_VALUE)))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
