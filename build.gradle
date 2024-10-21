@@ -18,8 +18,19 @@ repositories {
 
 dependencies {
     implementation 'com.github.woowacourse-projects:mission-utils:1.2.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
 }
 
 test {
     useJUnitPlatform()
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'  // 인코딩 UTF-8 설정
+}
+
+test {
+    useJUnitPlatform()  // JUnit 5 사용
+    systemProperty 'file.encoding', 'UTF-8'  // 테스트 실행 시 UTF-8 설정
 }
