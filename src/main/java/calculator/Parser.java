@@ -14,8 +14,9 @@ public class Parser {
     public static List<Double> parse(String input) {
         List<String> delimiters = new ArrayList<>();
         addDefaultDelimiters(delimiters);
-        addCustomDelimiter(input, delimiters);
-        input = adjustCustomDelimiterPart(input);
+
+        if (input.startsWith(CUSTOM_DELIMITER_PREFIX))
+            input = adjustCustomDelimiter(input, delimiters);
 
         String[] targets = splitInput(input, delimiters);
         return convert(targets);
@@ -26,19 +27,13 @@ public class Parser {
         delimiters.add(DEFAULT_DELIMITER_COLON);
     }
 
-    private static void addCustomDelimiter(String input, List<String> delimiters) {
-        if (input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
-            int delimiterEndIndex = input.indexOf(CUSTOM_DELIMITER_SUFFIX);
-            if (delimiterEndIndex == -1)
-                throw new IllegalArgumentException("잘못된 커스텀 구분자 형식입니다.");
-
-            String customDelimiter = input.substring(CUSTOM_DELIMITER_PREFIX.length(), delimiterEndIndex);
-            delimiters.add(customDelimiter);
-        }
-    }
-
-    private static String adjustCustomDelimiterPart(String input) {
+    private static String adjustCustomDelimiter(String input, List<String> delimiters) {
         int delimiterEndIndex = input.indexOf(CUSTOM_DELIMITER_SUFFIX);
+        if (delimiterEndIndex == -1)
+            throw new IllegalArgumentException("잘못된 커스텀 구분자 형식입니다.");
+
+        String customDelimiter = input.substring(CUSTOM_DELIMITER_PREFIX.length(), delimiterEndIndex);
+        delimiters.add(customDelimiter);
 
         return input.substring(delimiterEndIndex + CUSTOM_DELIMITER_SUFFIX.length());
     }
