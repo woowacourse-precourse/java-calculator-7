@@ -14,6 +14,8 @@ public class NumberParser {
             return List.of(0);
         }
 
+        checkLastCharacter(calculation);
+
         String[] tokens = splitByDelimiters(calculation, delimiters);
         List<Integer> numbers = new ArrayList<>();
 
@@ -22,6 +24,13 @@ public class NumberParser {
             numbers.add(number);
         }
         return numbers;
+    }
+
+    private static void checkLastCharacter(String calculation) {
+        char lastChar = calculation.charAt(calculation.length() - 1);
+        if (!Character.isDigit(lastChar)) {
+            throw new IllegalArgumentException("계산식은 숫자로 끝나야 합니다.");
+        }
     }
 
     private static String[] splitByDelimiters(String calculation, String delimiters) {
