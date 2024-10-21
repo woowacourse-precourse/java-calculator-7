@@ -1,11 +1,11 @@
-package calculator;
+package calculator.domain;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DelimiterSplitter {
-    private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\\n(.*)";
-    private static final String DEFAULT_DELIMITER_PATTERN = ",|;";
+    private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\\\\n(.*)";
+    private static final String DEFAULT_DELIMITER_PATTERN = "[,;]";
 
     private boolean isCustomDelimiter(String input) {
         char firstChar = input.charAt(0);
@@ -14,6 +14,7 @@ public class DelimiterSplitter {
 
     private String[] splitByCustomDelimiter(String input) {
         Matcher m = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(input);
+
         if (m.find()) {
             String customDelimiter = m.group(1);
             return m.group(2).split(customDelimiter);

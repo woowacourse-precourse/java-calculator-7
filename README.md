@@ -11,5 +11,5 @@
   - [o] 구분자를 통해서 분리한 값이 숫자가 아니면 IllegalArgumentException을 발생시킨다.
   - [o] 구분자를 통해서 분리한 값이 비어있으면 IllegalArgumentException을 발생시킨다.
   - [o] 사용자로부터 입력 받은 숫자값이 양수가 아니면 IllegalArgumentException을 발생시킨다.
-- [] 추출한 숫자들을 더한다.
+- [o] 추출한 숫자들을 더한다.
 - [] 결과값을 출력한다.
