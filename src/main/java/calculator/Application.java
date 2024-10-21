@@ -18,20 +18,22 @@ public class Application {
         }
 
         String[] strArr = input.split(sep);
-        int[] intArr = new int[strArr.length];
 
+        for (int i = 0; i < strArr.length; i++) {
+            sum += validationInputToInt(strArr[i]);
+        }
+        System.out.println("결과 : " + sum);
+    }
+
+    static int validationInputToInt(String input) {
         try {
-            for (int i = 0; i < strArr.length; i++) {
-                intArr[i] = Integer.parseInt(strArr[i]);
-                if (intArr[i] < 0) {
-                    throw new IllegalArgumentException();
-                }
-                sum += intArr[i];
+            int i = Integer.parseInt(input);
+            if (i < 0) {
+                throw new IllegalArgumentException();
             }
-            System.out.println("결과 : " + sum);
+            return i;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException();
         }
-
     }
 }
