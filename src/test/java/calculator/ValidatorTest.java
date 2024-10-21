@@ -50,5 +50,14 @@ public class ValidatorTest {
                 () -> validators.validateAllowedCharacters(Arrays.asList(':', ','), "1;2,3"));
     }
 
+    @Test
+    void testValidateDelimiterSurroundings_Success() {
+        validators.validateDelimiterSurroundings(calculator, "1:2:3");
+    }
 
+    @Test
+    void testValidateDelimiterSurroundings_Fail_EmptySection() {
+        assertThrows(IllegalArgumentException.class,
+                () -> validators.validateDelimiterSurroundings(calculator, "1;;2"));
+    }
 }
