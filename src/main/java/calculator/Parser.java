@@ -46,12 +46,18 @@ public class Parser {
             if(checkInteger(currentString)){ // 숫자가 맞는 경우
                 num += currentString;
             }else{ // 구분자인 경우
-                nums.add(Integer.parseInt(num));
+                addNum(num);
                 num = "";
             }
         }
-        nums.add(Integer.parseInt(num));
+        addNum(num);
     }
+
+    private void addNum(String num){
+        if(num.equals("")) nums.add(0);
+        else nums.add(Integer.parseInt(num));
+    }
+
 
     private void initialSeprator(){
         separators.clear();
