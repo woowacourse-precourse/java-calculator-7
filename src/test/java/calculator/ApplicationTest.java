@@ -113,10 +113,12 @@ class ApplicationTest extends NsTest {
     @Test
     @DisplayName("합산된 값이 Integer.MAX_VALUE를 초과하는 경우 예외가 발생한다.")
     void 예외_테스트_정수_오버플로우() {
+        int maxValue = Integer.MAX_VALUE;
+        String input = maxValue + ",1";
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("2147483647,1"))
+                assertThatThrownBy(() -> runException(input))
                         .isInstanceOf(ArithmeticException.class)
-                        .hasMessageContaining("정수 합이 Integer 범위를 초과했습니다.")
+                        .hasMessageContaining("정수 합이 Integer 범위를 초과했습니다")
         );
     }
 
