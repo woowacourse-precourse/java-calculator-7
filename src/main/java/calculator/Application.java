@@ -30,6 +30,11 @@ public class Application {
                 numbers_string = input.substring(newlineIndex + 2);
             }
         }
+        // 빈 문자열일 경우 바로 0 반환
+        if (numbers_string.trim().isEmpty()) {
+            System.out.println("결과 : 0");
+            return;
+        }
         // 숫자 배열 생성
         String[] tokens = numbers_string.split(separator);
         int[] numbers = getNumbers(tokens);
