@@ -17,4 +17,8 @@ public class DelimiterManager {
     public void add(char delimiter) {
         delimiters.add(delimiter);
     }
+
+    public boolean exists(char delimiter) {
+        return delimiters.contains(delimiter);
+    }
 }
