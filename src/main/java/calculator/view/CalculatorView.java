@@ -1,6 +1,6 @@
-﻿package calculator.view;
+package calculator.view;
 
 public interface CalculatorView {
     String getInput();
-    void printResult();
+    void printResult(int result);
 }

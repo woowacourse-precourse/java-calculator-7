@@ -1,6 +1,6 @@
-﻿package calculator.controller;
+package calculator.controller;
 
-public interface CalculatorController {
+public interface  CalculatorController {
 
     void run();
 }

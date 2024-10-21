@@ -1,6 +1,6 @@
-﻿package calculator.model;
+package calculator.model;
 
-interface StringCalculator {
+public interface StringCalculator {
     int add(String input);
     String[] parse(String input);
     int sum(String[] nums);
