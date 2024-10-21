@@ -1,0 +1,19 @@
+package model;
+
+import java.util.ArrayList;
+
+public class Calculator {
+    private final Numbers numbers;
+
+    private Calculator(String input) {
+        numbers = NumberSeparator.from(input).separate();
+    }
+
+    public static Calculator from(String input) {
+        return new Calculator(input);
+    }
+
+    public Long sum() {
+        return numbers.sum();
+    }
+}

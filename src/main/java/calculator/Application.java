@@ -4,7 +4,6 @@ import controller.CalculatorController;
 
 public class Application {
     public static void main(String[] args) {
-        CalculatorController calculatorController = new CalculatorController();
-        calculatorController.calculate();
+        new CalculatorController().calculate();
     }
 }
