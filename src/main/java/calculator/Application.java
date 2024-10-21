@@ -28,8 +28,22 @@ public class Application {
         }
     }
 
+    public static int calculateSum(String[] numbers) {
+        int sum = 0;
+
+        for (String number : numbers) {
+            if (!number.isEmpty()) {
+                int value = Integer.parseInt(number);
+                sum += value;
+            }
+        }
+
+        return sum;
+    }
+
     public static void main(String[] args) {
         String delimiter = ",|:";
+        int result = 0;
 
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
@@ -42,5 +56,6 @@ public class Application {
         }
 
         String[] numbers = input.split(delimiter);
+        result = calculateSum(numbers);
     }
 }
