@@ -6,8 +6,7 @@ public class InputView {
 
     public static String inputString() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-        final String inputString = Console.readLine();
-        return inputString;
+        return Console.readLine();
     }
 }
 
