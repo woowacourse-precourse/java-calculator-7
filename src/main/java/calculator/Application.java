@@ -55,7 +55,7 @@ public class Application {
         if (input.startsWith("//")) {
             int ender = input.indexOf("\n");
             String newSpliter = input.substring(2, ender);
-            spliter = "[" + ":|," + "|" + newSpliter + "]";
+            spliter = "["  + newSpliter + "]";
             input = input.substring(ender + 1);
         }
         String[] nums = input.split(spliter);
