@@ -1,7 +1,5 @@
 package calculator.controller;
 
-import static calculator.model.CustomDelimiter.extractCustomDelimiter;
-
 import calculator.model.Calculator;
 import calculator.model.CustomDelimiter;
 import calculator.model.DelimiterGroup;
@@ -24,12 +22,11 @@ public class CalculatorController {
         outputView.printStart();
         String input = inputView.input();
 
-        CustomDelimiter customDelimiter = extractCustomDelimiter(input);
-        DelimiterGroup delimiterGroup = new DelimiterGroup();
+        CustomDelimiter customDelimiter = new CustomDelimiter(input);
+        DelimiterGroup delimiterGroup = new DelimiterGroup(customDelimiter);
 
-        if (customDelimiter != null) {
-            delimiterGroup.setCustomDelimiters(customDelimiter);
-            input = CustomDelimiter.extractInput(input);
+        if (customDelimiter.exists()) {
+            input = customDelimiter.getInputWithoutCustomDelimiter();
         }
 
         List<String> strings = delimiterGroup.split(input);
