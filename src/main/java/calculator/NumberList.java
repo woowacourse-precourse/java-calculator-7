@@ -23,7 +23,7 @@ public class NumberList {
         String delimiter = findDelimiter(input);
 
         if (input.startsWith("//")) {
-            input = input.substring(4);
+            input = input.split("n")[1];
         }
 
         return Arrays.stream(input.split(delimiter))
@@ -38,13 +38,13 @@ public class NumberList {
 
     private String findDelimiter(String input) {
         if (input.startsWith("//")) {
-            var frontInput = input.split("\n")[0];
+            var frontInput = input.split("n")[0];
 
-            if (frontInput.length() != 3) {
-                throw new IllegalArgumentException("커스텀 구분자가 한 글자 이상입니다.");
+            if (frontInput.length() != 4) {
+                throw new IllegalArgumentException("커스텀 구분자가 한 글자가 아닙니다.");
             }
 
-            var delimiter = frontInput.substring(2);
+            var delimiter = frontInput.substring(2, 3);
 
             if (delimiter.matches("\\d+")) {
                 throw new IllegalArgumentException("커스텀 구분자가 잘못되었습니다.");

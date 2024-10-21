@@ -82,7 +82,7 @@ public class NumberListTest {
     @Test
     void 커스텀_구분자_여러_숫자() {
         // given
-        var numberList = new NumberList("//;\n1;2;3");
+        var numberList = new NumberList("//;\\n1;2;3");
 
         // when
         var result = numberList.getSum();
@@ -94,7 +94,7 @@ public class NumberListTest {
     @Test
     void 커스텀_구분자_단일_숫자() {
         //given
-        var numberList = new NumberList("//;\n1");
+        var numberList = new NumberList("//;\\n1");
 
         //when
         var result = numberList.getSum();
@@ -106,7 +106,7 @@ public class NumberListTest {
     @Test
     void 커스텀_구분자_뒤에_위치() {
         //given
-        String input = "1//;\n1";
+        String input = "1//;\\n1";
 
         //when, then
         assertThrows(IllegalArgumentException.class, () -> new NumberList(input));
@@ -124,7 +124,7 @@ public class NumberListTest {
     @Test
     void 커스텀_구분자가_숫자() {
         //given
-        String input = "//1\n1";
+        String input = "//1\\n1";
 
         //when, then
         assertThrows(IllegalArgumentException.class, () -> new NumberList(input));
@@ -133,7 +133,7 @@ public class NumberListTest {
     @Test
     void 커스텀_구분자가_한_글자_초과() {
         //given
-        String input = "//;;\n1;2;3";
+        String input = "//;;\\n1;2;3";
 
         //when, then
         assertThrows(IllegalArgumentException.class, () -> new NumberList(input));
