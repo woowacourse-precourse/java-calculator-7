@@ -5,22 +5,27 @@ public class Application {
 
     public static int getSum(String[] numberArray){
         int sum=0;
+        boolean hasEmpty = false;
         for (String number : numberArray) {
             String trimmed = number.trim();
             if (trimmed.isEmpty()) {
-                return sum;
+                hasEmpty = true;
                 // throw new IllegalArgumentException("빈 숫자가 있습니다.");
-            }
-            // 숫자 형식 검증
-            if (!trimmed.matches("\\d+")) {
-                throw new IllegalArgumentException("숫자 형식이 올바르지 않습니다.");
-            }
+            } else {
+                if(hasEmpty){
+                    throw new IllegalArgumentException("빈 문자가 존재합니다.");
+                }
+                // 숫자 형식 검증
+                if (!trimmed.matches("\\d+")) {
+                    throw new IllegalArgumentException("숫자 형식이 올바르지 않습니다.");
+                }
 
-            int num = Integer.parseInt(trimmed);
-            if (num < 0) {
-                throw new IllegalArgumentException("음수는 허용되지 않습니다.");
+                int num = Integer.parseInt(trimmed);
+                if (num < 0) {
+                    throw new IllegalArgumentException("음수는 허용되지 않습니다.");
+                }
+                sum += num;
             }
-            sum+=num;
         }
         return sum;
     }
