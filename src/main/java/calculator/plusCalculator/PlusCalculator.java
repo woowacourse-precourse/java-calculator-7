@@ -1,0 +1,140 @@
+package calculator.plusCalculator;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
+public class PlusCalculator implements PlusCalculatorInterface {
+
+    public PlusCalculator(List<String> separators) {
+        this.separators = new ArrayList<>(separators);
+    }
+
+    // 구분자 리스트
+    List<String> separators;
+
+    public int run(String input) {
+        input = findCustomSeparator(input);
+        sortSeparatorsSizeDesc();
+        List<Integer> integerNumbers = extractNumbers(input);
+        return calculate(integerNumbers);
+    }
+
+
+    public String findCustomSeparator(String input) {
+        while (hasCustomSeparator(input)) {
+            input = extractCustomSeparator(input);
+        }
+
+        return input;
+    }
+
+
+    public boolean hasCustomSeparator(String input) {
+
+        if (!input.contains("//")) {
+            return false;
+        }
+
+        // //가 맨 앞에 있지만 \\n이 없는 경우 or //위치가 문자열의 처음이 아닌경우
+        if ((input.indexOf("//") == 0 && !input.contains("\\n")) || input.indexOf("//") > 0) {
+            throw new IllegalArgumentException();
+        }
+
+        return true;
+    }
+
+
+    public String extractCustomSeparator(String input) {
+        int customSeparatorEnd = input.indexOf("\\n");
+        String customSeparator = input.substring(2, customSeparatorEnd);
+        checkCustomSeparator(input, customSeparatorEnd);
+        separators.add(customSeparator);
+        return input.substring(customSeparatorEnd + 2);
+    }
+
+    public void checkCustomSeparator(String input, int end) {
+        String customSeparator = input.substring(2, end);
+
+        if (customSeparator.equals("//") || customSeparator.isBlank()) {
+            throw new IllegalArgumentException();
+        }
+
+        for (char letter : customSeparator.toCharArray()) {
+            checkCustomSeparatorNumber(letter);
+        }
+    }
+
+    public void checkCustomSeparatorNumber(char letter) {
+        if (Character.isDigit(letter)) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public List<Integer> extractNumbers(String input) {
+        List<Integer> integerNumbers = new ArrayList<>();
+
+        // numberString이 공백이면 0으로 간주
+//        if (input.isBlank()) {
+//            integerNumbers.add(0);
+//            return integerNumbers;
+//        }
+
+        // split으로 구분자 기준으로 숫자만 추출
+        String[] stringNumbers = input.split(getSeparatorsSplitRegex());
+
+        // extractNumber를 이용해 Integer로 변환하여 result에 저장
+        for (String stringNumber : stringNumbers) {
+            integerNumbers.add(extractNumber(stringNumber));
+        }
+
+        return integerNumbers;
+    }
+
+
+    public void sortSeparatorsSizeDesc() {
+        separators.sort(Comparator.comparingInt(String::length).reversed());
+    }
+
+
+    public String getSeparatorsSplitRegex() {
+        List<String> splitRegex = new ArrayList<>();
+
+        for (String separator : separators) {
+            splitRegex.add("\\" + separator);
+        }
+
+        return String.join("|", splitRegex);
+    }
+
+
+    public Integer extractNumber(String numberString) {
+        int numberInteger;
+
+        if (numberString.isBlank()) {
+            numberString = "0";
+        }
+
+        try {
+            numberInteger = Integer.parseInt(numberString);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException();
+        }
+
+        if (numberInteger < 0) {
+            throw new IllegalArgumentException();
+        }
+
+        return numberInteger;
+    }
+
+
+    public Integer calculate(List<Integer> integerNumbers) {
+        int result = 0;
+        for (int integerNumber : integerNumbers) {
+            result = result + integerNumber;
+        }
+        return result;
+    }
+
+}
