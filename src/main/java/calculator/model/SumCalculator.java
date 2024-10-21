@@ -31,6 +31,9 @@ public class SumCalculator {
         Matcher matcher = Pattern.compile("//(.*)\\\\n(.*)").matcher(input);
         if (matcher.matches()) {
             String customDelimiter = matcher.group(1);
+            if (customDelimiter.matches(".*[0-9.].*")) {
+                throw new IllegalArgumentException("커스텀 구분자에 숫자나 '.'이 포함될 수 없습니다.");
+            }
             delimiter += "|" + Pattern.quote(customDelimiter);
             numbers = matcher.group(2);
         }
