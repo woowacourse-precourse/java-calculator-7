@@ -71,4 +71,14 @@ public class Calculator {
         System.out.println("결과 : " + result);
     }
 
+    public static void run() {
+        String input = getInput();
+        boolean isCustom = checkCustomDelimiter(input);
+        String[] delimiterAndNumbers = validateDelimiter(isCustom, input);
+        String delimiter = delimiterAndNumbers[0];
+        String numbers = delimiterAndNumbers[1];
+        int result = sum(delimiter, numbers);
+        printResult(result);
+
+    }
 }
