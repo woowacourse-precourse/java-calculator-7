@@ -1,8 +1,8 @@
 package calculator.stringSplitter;
 
-public class StringContoller {
+public class StringController {
     private final StringParser stringParser;
-    public StringContoller(){
+    public StringController(){
         SeparatorManager separatorManager = new SeparatorManager();
         InputValidator inputValidator = new InputValidator();
         this.stringParser = new StringParser(separatorManager,inputValidator);
