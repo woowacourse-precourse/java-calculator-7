@@ -5,11 +5,13 @@ import camp.nextstep.edu.missionutils.Console;
 public class Application {
     public static void main(String[] args) {
         // 입력받기
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
         add(input);
     }
     // 커스텀 구분자를 추가하는지 확인하는 함수
     private static boolean exist_custon_delimiter(String input) {
+        // "//"로 시작하는지 확인하고 커스텀 구분자 추가여부 확인
         if(input.startsWith("//")) {
             return true;
         }
@@ -43,7 +45,9 @@ public class Application {
     private static void add(String input) {
         // 초기 구분자 세팅
         String delimiter = "";
+        // 초기 덧셈할 문자열
         String str_for_add ="";
+        // 커스텀 구분자 여부 확인, 추출 및 분리
         if(exist_custon_delimiter(input)) {
             String[] tokens;
             tokens = get_custom_delimiter(input);
