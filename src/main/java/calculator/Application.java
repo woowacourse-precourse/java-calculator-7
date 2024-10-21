@@ -8,6 +8,7 @@ public class Application {
         String str = Console.readLine();
         Console.close();
 
+        System.out.println(splitString(str));
     }
 
     public static long splitString(String str) {
