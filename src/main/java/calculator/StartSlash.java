@@ -20,8 +20,11 @@ public class StartSlash {
             throw new IllegalArgumentException();
         }
 
+        // 커스텀 구분자, 기본 구분자 모두 포함한 정규식
+        String delimeters = "[" + Pattern.quote(custom) + ",:]";
+
         // 숫자 -문자 - 숫자- ... 형식 맞는지 확인
-        String regex = "^[0-9]+(" + Pattern.quote(custom) + "[0-9]+)*$";
+        String regex = "^[0-9]+(" + delimeters + "[0-9]+)*$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(exp);
 
@@ -30,7 +33,7 @@ public class StartSlash {
         }
 
         ArrayList<Integer> numbers = new ArrayList<>();
-        String[] temps = exp.split(custom);
+        String[] temps = exp.split(delimeters);
         for (String temp : temps) {
             numbers.add(Integer.parseInt(temp));
         }
