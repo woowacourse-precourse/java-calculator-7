@@ -10,7 +10,7 @@ import calculator.validation.InputValidator;
 public class InputFilter {
 	public List<Integer> extractNumbers(String processedInput, Delimiters delimiters) {
 		if (processedInput.isBlank()) {
-			return List.of();
+			return List.of(0);
 		}
 		String[] splitParts = splitInput(processedInput, delimiters);
 		validateEachPart(splitParts);
