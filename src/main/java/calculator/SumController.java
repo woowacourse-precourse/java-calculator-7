@@ -36,11 +36,10 @@ public class SumController {
         return sum(text);
     }
 
-    public static Character[] separatorExtraction(Character word) {
+    public static void separatorExtraction(Character word) {
         separator[0] = ',';
         separator[1] = ':';
         separator[2] = word;
-        return separator;
     }
 
     public static int sum(String text) {
