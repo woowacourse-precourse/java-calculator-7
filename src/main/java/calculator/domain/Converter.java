@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 public class Converter {
 
     private final static Converter CONVERTER = new Converter();
+    private final static String matchRegex = "//.\\\\n";
     private final List<String> delimiterList = new ArrayList<>();
 
     private Converter() {
@@ -35,9 +36,10 @@ public class Converter {
 
     public String findCustomerDelimiter(String words) {
         for (int i = 0; i < words.length() - 5; i++) {
-            isCustomDelimiterIfExist(words.substring(i, i + 5));
+            String substring = words.substring(i, i + 5);
+            isCustomDelimiterIfExist(substring);
         }
-        words = words.replaceAll("//.\\\\n", "");
+        words = words.replaceAll(matchRegex, "");
         return words;
     }
 
@@ -46,7 +48,7 @@ public class Converter {
     }
 
     private void isCustomDelimiterIfExist(String word) {
-        if (word.matches("//.\\\\n"))
+        if (word.matches(matchRegex))
             delimiterList.add(word.substring(2, 3));
     }
 
@@ -80,13 +82,7 @@ public class Converter {
     }
 
     private String getDelimiterRegex() {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < delimiterList.size(); i++) {
-            sb.append(delimiterList.get(i));
-            if (i != delimiterList.size() - 1)
-                sb.append("|");
-        }
-        return sb.toString();
+        return String.join("|",delimiterList);
     }
 
 
