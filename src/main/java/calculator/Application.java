@@ -1,7 +1,20 @@
 package calculator;
 
+import calculator.io.InputConsoleHandler;
+import calculator.io.OutputConsoleHandler;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        InputConsoleHandler inputConsoleHandler = new InputConsoleHandler();
+        OutputConsoleHandler outputConsoleHandler = new OutputConsoleHandler();
+        Calculator calculator = new Calculator();
+
+        CalculatorController calculatorController = new CalculatorController(
+                inputConsoleHandler,
+                outputConsoleHandler,
+                calculator
+        );
+
+        calculatorController.run();
     }
 }
