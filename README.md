@@ -85,7 +85,7 @@
 
 🟢 **Controller**
 #### MainController
- 👉 사용자 요청을 처리여 모델과 상호작용 후 응답을 다시 사용자에서 전달하기 위한 클래스**
+ 👉 사용자 요청을 처리여 모델과 상호작용 후 응답을 다시 사용자에서 전달하기 위한 클래스
 
 **- 필드**  
 `FormulaHandler formulaHandler`: formulaHandler 객체
