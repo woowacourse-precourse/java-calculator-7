@@ -18,6 +18,10 @@ public class JavaCalculator {
             return 0;
         }
 
+        if (input.startsWith("//")) {
+            input = addCustomPartition(input);
+        }
+
         if (isNumeric(input)) {
             return Integer.parseInt(input);
         }
@@ -50,6 +54,12 @@ public class JavaCalculator {
         if (!fullyProcessed && !isNumeric(input)) {
             throw new IllegalArgumentException("Inappropriate type");
         }
+    }
+
+    private String addCustomPartition(String input) {
+        String customPartition = input.charAt(2) + "";
+        partitions.add(customPartition);
+        return input.substring(5);
     }
 
     private boolean isNumeric(String rawDatum) {
