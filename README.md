@@ -62,7 +62,7 @@ BUILD SUCCESSFUL in 0s
 ### 출력
 - 덧셈 결과
 
-#### 예시
+####
 ```bash
 결과 : 6
 ```
