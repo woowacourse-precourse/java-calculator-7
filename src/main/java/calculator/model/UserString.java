@@ -5,29 +5,41 @@ import java.util.Arrays;
 
 public class UserString {
 
+    public static final String CUSTOM_PREFIX = "//";
+    public static final String CUSTOM_SUFFIX = "\\n";
+    public static final String PREFIX = "\\";
+    public static final String DELIMITER_PREFIX = "[";
+    public static final String DELIMITER_SUFFIX = "]";
+
     private final String[] splitValue;
+    private final StringBuilder DELIMITERS = new StringBuilder(",:");
+
 
     public UserString(String userInput) {
 
-        String DELIMITERS = ",:";
-        if (userInput.startsWith("//")) {
-            int endIdx = userInput.indexOf("\\n");
+        if (userInput.startsWith(CUSTOM_PREFIX)) {
+            int endIdx = userInput.indexOf(CUSTOM_SUFFIX);
             Validator.validateWrongCustom(endIdx);
             String delimiter = userInput.substring(2, endIdx);
             if (delimiter.equals("[") || delimiter.equals("]") || delimiter.equals("\\")) {
-                delimiter = "\\" + delimiter;
+                delimiter = PREFIX + delimiter;
             }
-            DELIMITERS += delimiter;
+            DELIMITERS.append(delimiter);
             userInput = userInput.substring(endIdx + 2);
         }
 
-        String[] split = userInput.split("[" + DELIMITERS + "]");
-        split = Arrays.stream(split)
-                .map(String::strip)
-                .toArray(String[]::new);
+        String[] split = userInput.split(DELIMITER_PREFIX + DELIMITERS + DELIMITER_SUFFIX);
+        split = getSplitByStrip(split);
         Validator.validateWrongFormat(split);
         Validator.validatePositiveNumber(split);
         splitValue = split;
+    }
+
+    private static String[] getSplitByStrip(String[] split) {
+        split = Arrays.stream(split)
+                .map(String::strip)
+                .toArray(String[]::new);
+        return split;
     }
 
     public BigInteger sum() {
