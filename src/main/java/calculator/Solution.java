@@ -1,15 +1,18 @@
 package calculator;
 
+import calculator.context.Context;
+import calculator.input.FastScan;
+import calculator.output.Print;
+
 public class Solution {
-
     public void solve() {
-        Input input = new Input();
+        String problem = new FastScan().nextLine();
 
-        Extraction extraction = new Extraction(input.nextLine());
-        Calculation calculation = new Calculation();
+        Context context = new Context();
+        context.setStrategy(problem);
 
-        int res = calculation.calculate(extraction.extract());
+        int res = context.problemCalculate(problem);
 
-        System.out.println("결과 : " + res);
+        new Print().print(res);
     }
 }
