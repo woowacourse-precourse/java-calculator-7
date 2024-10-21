@@ -11,9 +11,8 @@ public class InputValidation { // 입력의 유효성을 확인하는 클래스�
         if (input.contains("//") && input.contains("\\n")) {
             int startCustom = input.indexOf("//");
             int endCustom = input.indexOf("\\n");
-            if (startCustom != 0 || startCustom > endCustom || endCustom - startCustom != 3) {
-                throw new IllegalArgumentException();
-            }
+            checkCustomDelimiterLocation(startCustom, endCustom); // 커스텀 구분자 지정 위치가 올바른지 확인.
+            
             custom_RemainInput[0] = input.substring(startCustom + 2, endCustom); // 커스텀 구분자
             custom_RemainInput[1] = input.substring(endCustom + 2); // 커스텀구분자와 지정문자 이후의 input으로 업데이트한다.
             return custom_RemainInput;
@@ -49,6 +48,12 @@ public class InputValidation { // 입력의 유효성을 확인하는 클래스�
             }
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("올바르지 않은 입력입니다. => " + token);
+        }
+    }
+
+    public static void checkCustomDelimiterLocation(int startCustom, int endCustom) {
+        if (startCustom != 0 || startCustom > endCustom || endCustom - startCustom != 3) {
+            throw new IllegalArgumentException();
         }
     }
 }
