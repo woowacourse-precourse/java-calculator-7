@@ -1,13 +1,12 @@
-package calculator.model;
+package calculator.service;
 
-import calculator.utils.SumExpression;
+import calculator.model.CalculatorValues;
 import calculator.utils.extractor.DelimiterExtractor;
 import calculator.utils.extractor.ExpressionExtractor;
-import calculator.utils.extractor.NumberExtractor;
 
 import java.math.BigDecimal;
 
-public class CalculatorImpl implements Calculator{
+public class CalculatorImpl implements Calculator {
 
     private CalculatorValues calculatorValues;
 
@@ -15,8 +14,7 @@ public class CalculatorImpl implements Calculator{
     }
 
     @Override
-    public void insertValues(String input) {
-
+    public void initValues(String input) {
         boolean hasCustomDelimiter = input.startsWith("//");
         String expression = ExpressionExtractor.extractExpression(
                 input,
@@ -30,12 +28,9 @@ public class CalculatorImpl implements Calculator{
     }
 
     @Override
-    public void extract() {
-        NumberExtractor.extractIntegerFromExpression(calculatorValues);
+    public BigDecimal execute() {
+        calculatorValues.extract();
+        return calculatorValues.sum();
     }
 
-    @Override
-    public BigDecimal sum() {
-        return SumExpression.sum(calculatorValues);
-    }
 }

@@ -1,5 +1,8 @@
 package calculator.model;
 
+import calculator.utils.SumExpression;
+import calculator.utils.extractor.NumberExtractor;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,5 +38,13 @@ public class CalculatorValues {
 
     public String getExpression() {
         return expression;
+    }
+
+    public BigDecimal sum() {
+        return SumExpression.sum(this);
+    }
+
+    public void extract() {
+        NumberExtractor.extractIntegerFromExpression(this);
     }
 }

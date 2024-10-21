@@ -1,7 +1,7 @@
 package calculator.controller;
 
-import calculator.model.Calculator;
-import calculator.model.CalculatorImpl;
+import calculator.service.Calculator;
+import calculator.service.CalculatorImpl;
 import calculator.utils.InputValidator;
 import calculator.view.OutputView;
 import java.math.BigDecimal;
@@ -18,11 +18,8 @@ public class CalculatorController {
 
     public void run(){
         InputValidator.validateInput(input);
-
-        calculator.insertValues(input);
-        calculator.extract();
-
-        BigDecimal result = calculator.sum();
+        calculator.initValues(input);
+        BigDecimal result = calculator.execute();
         OutputView.getOutputMessage(result);
     }
 
