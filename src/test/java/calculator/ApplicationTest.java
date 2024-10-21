@@ -54,7 +54,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 잘못된_형식_테스트() {
+    void 잘못된_형식_테스트() { // 에러 던진 것을 try catch로 감싸지 말기
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("1,2;3"))
                         .isInstanceOf(IllegalArgumentException.class)
