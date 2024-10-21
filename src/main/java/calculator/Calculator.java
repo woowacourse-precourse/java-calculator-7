@@ -1,6 +1,6 @@
 package calculator;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Calculator {
 
@@ -14,7 +14,7 @@ public class Calculator {
         customValidator = new CustomValidator(inputParser);
     }
 
-    public int sum(ArrayList<Integer> numbers) {
+    public int sum(List<Integer> numbers) {
         int result = 0;
         for (Integer number : numbers) {
             result += number;
@@ -26,7 +26,7 @@ public class Calculator {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         inputHandler.input();
         customValidator.validate(inputHandler.getInputData());
-        ArrayList<Integer> numbers = inputParser.parse();
+        List<Integer> numbers = inputParser.parse();
         int result = sum(numbers);
         System.out.printf("결과 : %d", result);
     }

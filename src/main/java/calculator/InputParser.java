@@ -52,10 +52,10 @@ public class InputParser {
         return customSeparator;
     }
 
-    public ArrayList<Integer> parse() {
+    public List<Integer> parse() {
         String data = inputHandler.getInputData();
 
-        ArrayList<Integer> numbers = new ArrayList<>();
+        List<Integer> numbers = new ArrayList<>();
 
         if (data.isEmpty()) {
             numbers.add(0);
