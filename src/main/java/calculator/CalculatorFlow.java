@@ -6,5 +6,8 @@ public class CalculatorFlow {
         String inputValue = UserInput.receiveInput();
 
         int[] extractedNumbers = NumberExtractor.extractNumbers(inputValue);
+
+        OperationExecutor sumOperation = new OperationExecutor();
+        int result = sumOperation.calculate(extractedNumbers);
     }
 }
