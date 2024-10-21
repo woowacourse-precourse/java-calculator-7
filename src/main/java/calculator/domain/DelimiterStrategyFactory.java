@@ -1,4 +1,6 @@
-package calculator;
+package calculator.domain;
+
+import calculator.global.DelimiterUtils;
 
 public class DelimiterStrategyFactory {
     public static DelimiterStrategy create(String input) {
@@ -10,13 +12,7 @@ public class DelimiterStrategyFactory {
     }
 
     public static String extractCustomDelimiter(String input) {
-        int newLineIndex = -1;
-        for (int i = 0; i < input.length(); i++) {
-            if (input.charAt(i) == '\\' && input.charAt(i + 1) == 'n') {
-                newLineIndex = i;
-                break;
-            }
-        }
+        int newLineIndex = DelimiterUtils.findNewlineIndex(input);
         return input.substring(2, newLineIndex);
     }
 }

@@ -1,5 +1,6 @@
-package calculator;
+package calculator.domain;
 
+import calculator.global.DelimiterUtils;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -13,14 +14,8 @@ public class CustomDelimiterStrategy implements DelimiterStrategy{
 
     @Override
     public List<String> split(String input) {
-        int numberStartIndex = -1;
-        for (int i = 0; i < input.length(); i++) {
-            if (input.charAt(i) == '\\' && input.charAt(i + 1) == 'n') {
-                numberStartIndex = i + 2;
-                break;
-            }
-        }
-        String numberParts = input.substring(numberStartIndex);
+        int newLineIndex = DelimiterUtils.findNewlineIndex(input);
+        String numberParts = input.substring(newLineIndex + 2);
         return Arrays.asList(numberParts.split(Pattern.quote(customDelimiter)));
     }
 }
