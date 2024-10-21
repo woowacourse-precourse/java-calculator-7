@@ -7,12 +7,11 @@ public class CalculatorApplication {
     private InputValidator inputValidator;
     private DelimiterExtractor delimiterExtractor;
 
-    public CalculatorApplication(InputView inputView, OutputView outputView, InputValidator inputValidator,
-                                 DelimiterExtractor delimiterExtractor) {
-        this.inputView = inputView;
-        this.outputView = outputView;
-        this.inputValidator = inputValidator;
-        this.delimiterExtractor = delimiterExtractor;
+    public CalculatorApplication() {
+        this.inputView = new InputView();
+        this.outputView = new OutputView();
+        this.inputValidator = new InputValidator();
+        this.delimiterExtractor = new DelimiterExtractor();
     }
 
     public void run() {
