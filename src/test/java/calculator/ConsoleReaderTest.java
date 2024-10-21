@@ -1,13 +1,15 @@
 package calculator;
 
+import calculator.reader.ConsoleReader;
+import calculator.reader.Reader;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class InputReaderTest {
+class ConsoleReaderTest {
 
-    InputReader reader = new InputReader();
+    Reader reader = new ConsoleReader();
 
     @Test
     public void read_함수_테스트() {
