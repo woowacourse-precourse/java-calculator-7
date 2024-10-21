@@ -1,6 +1,5 @@
 package calculator.utils;
 
-
 import calculator.exception.CalculatorException;
 import calculator.exception.CalculatorExceptionStatus;
 
@@ -38,7 +37,7 @@ public class InputValidator {
             return;
         }
 
-        if (!input.matches(CHECK_DEFAULT_DELIMITER_FORMAT)) {
+        if (!input.isEmpty() && !input.matches(CHECK_DEFAULT_DELIMITER_FORMAT)) {
             throw new CalculatorException(
                     CalculatorExceptionStatus.INVALID_DEFAULT_DELIMITER_EXPRESSION);
         }

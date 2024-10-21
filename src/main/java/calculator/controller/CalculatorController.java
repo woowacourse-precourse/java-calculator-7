@@ -17,8 +17,10 @@ public class CalculatorController {
 
     public void run(){
         InputValidator.validateInput(input);
+
         calculator.insertValues(input);
         calculator.extract();
+
         int result = calculator.sum();
         OutputView.getOutputMessage(result);
     }

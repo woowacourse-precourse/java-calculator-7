@@ -11,8 +11,9 @@ public class CalculatorImpl implements Calculator{
         this.calculatorValues = new CalculatorValues();
     }
 
+    @Override
     public void insertValues(String input) {
-        if(input.matches("^//.\\\\n.*")){
+        if (input.matches("^//.\\\\n.*")) {
             calculatorValues.setExpression(input.substring(5));
             calculatorValues.setDelimiter(String.valueOf(input.charAt(2)));
             return;
@@ -21,10 +22,12 @@ public class CalculatorImpl implements Calculator{
         calculatorValues.setDelimiter("[,:]");
     }
 
+    @Override
     public void extract() {
         IntegerExtractor.extractIntegerFromExpression(calculatorValues);
     }
 
+    @Override
     public int sum() {
         return SumExpression.sum(calculatorValues);
     }
