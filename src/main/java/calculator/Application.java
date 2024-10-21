@@ -1,17 +1,9 @@
 package calculator;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import camp.nextstep.edu.missionutils.Console;
 public class Application {
     public static void main(String[] args) {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        String input;
-        try {
-            input = br.readLine();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        System.out.println("덧셈할 문자열을 입력해 주세요. ");
+        String input = Console.readLine();
 
         if (input.isEmpty()) {
             System.out.println(0);
@@ -36,6 +28,6 @@ public class Application {
             num += Integer.parseInt(s);
         }
 
-        System.out.println(num);
+        System.out.println("결과 : " + num);
     }
 }
