@@ -16,7 +16,7 @@
 
 ## 미션 제출 방법
 - 미션 구현을 완료한 후 GitHub를 통해 제출해야 한다.
-  - GitHub를 활용한 제출 방법은 [프리코스 과제 제출]([#](https://github.com/woowacourse/woowacourse-docs/tree/main/precourse)) 문서를 참고해 제출한다.
+  - GitHub를 활용한 제출 방법은 [프리코스 과제 제출](https://github.com/woowacourse/woowacourse-docs/tree/main/precourse) 문서를 참고해 제출한다.
   - GitHub에 미션을 제출한 후 [우아한테크코스 지원 플랫폼](https://apply.techcourse.co.kr/)에 PR 링크를 포함하여 최종 제출한다.
     - 자세한 안내는 [제출 가이드](https://github.com/woowacourse/woowacourse-docs/tree/main/precourse#%EC%A0%9C%EC%B6%9C-%EA%B0%80%EC%9D%B4%EB%93%9C)를 참고한다.
     - 과제를 수행하면서 느낀 점, 배운 점, 많은 시간을 투자한 부분 등 자유롭게 작성한다.
@@ -40,7 +40,7 @@ BUILD SUCCESSFUL in 0s
 # 문자열 덧셈 계산기
 
 ## 과제 진행 요구 사항
-- 미션은 **문자열 덧셈 계산기** 저장소를 포크하고 클론하는 것으로 시작한다.
+- 미션은 [문자열 덧셈 계산기](https://github.com/woowacourse-precourse/java-calculator-7) 저장소를 포크하고 클론하는 것으로 시작한다.
 - 기능을 구현하기 전 `README.md`에 구현할 기능 목록을 정리해 추가한다.
 - Git에 커밋할 단위는 한 단계에서 `README.md`에 정리한 기능 목록 단위를 포함하여 커밋한다.
 - [AngularJS Git Commit Message Conventions](https://github.com/angular/angular/blob/main/CONTRIBUTING.md#commit) 을 참고해 커밋 메시지를 작성한다.
