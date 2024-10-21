@@ -9,6 +9,7 @@ public class InvalidInputStringFormatException {
         checkStartingPoint(operandStr);
         checkEndPoint(operandStr);
         checkFrontAndBackOfCustomDelimiter(operandStr);
+        checkContainsCustomDelimiter(operandStr);
     }
 
     //스페이스만 입력되었는지 확인
@@ -31,10 +32,19 @@ public class InvalidInputStringFormatException {
             throw new IllegalArgumentException("문자열의 마지막이 숫자가 아닙니다.");
     }
 
-    // 커스텀 문자를 구분하는 //뒤에 \\n이 오는지 확인 + 구분자 사이에 문자가 입력되었는지 확인
+    // 커스텀 문자를 구분하는 //뒤에 \\n이 오는지 확인
     public static void checkFrontAndBackOfCustomDelimiter(String operandStr){
-        if(operandStr.startsWith(CUSTOM_DELIMITER_START_WRAPPER) && !operandStr.startsWith(CUSTOM_DELIMITER_END_WRAPPER, 3)){
+        if(operandStr.startsWith(CUSTOM_DELIMITER_START_WRAPPER) && !operandStr.contains(CUSTOM_DELIMITER_END_WRAPPER)){
             throw new IllegalArgumentException("커스텀 문자를 입력하는 형식이 잘못되었습니다.");
         }
+    }
+
+    //커스텀 문자를 포함하고 있는지 확인하는 방법
+    public static void checkContainsCustomDelimiter(String operandStr){
+        int startIndex = operandStr.indexOf(CUSTOM_DELIMITER_START_WRAPPER);
+        int endIndex = operandStr.indexOf(CUSTOM_DELIMITER_END_WRAPPER);
+
+        if(startIndex != -1 && endIndex == startIndex + 2)
+            throw new IllegalArgumentException("커스텀 문자를 입력하지 않았습니다.");
     }
 }

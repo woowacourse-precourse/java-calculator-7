@@ -33,6 +33,9 @@ public class ParsingService {
     private static String parseCustomDelimiter(String operandStr, Delimiters delimiters){
         //custom 구분자 추출
         if(operandStr.startsWith(CUSTOM_DELIMITER_START_WRAPPER)){
+
+
+
             delimiters.addCustomDelimiter(operandStr.charAt(CUSTOM_DELIMITER_INDEX));
             operandStr = operandStr.substring(EXCEPT_CUSTOM_DELIMITER_INDEX);
         }
