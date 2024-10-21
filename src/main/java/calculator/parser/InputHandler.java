@@ -55,23 +55,34 @@ public class InputHandler {
     // user input handling
     public void parseInput() {
         List<Integer> result = new ArrayList<>();
-        for(Character c: userResponse.toCharArray()) {
-            if (c == ',') {
-                separators.add(String.valueOf(c));
-            }else if (c == ':') {
-                separators.add(String.valueOf(c));
-            }
-        }
-        // System.out.println(separators.toString());
-        String[] tokens = userResponse.split(separators.toString());
-        List<String> tokensList = Arrays.stream(tokens).toList();
+        // Add default separators
+        separators.add(",");
+        separators.add(":");
+
+        // Build a regex pattern to match any of the separators
+        String regex = String.join("|", separators.stream()
+                .map(Pattern::quote)  // Escape special characters
+                .toList());
+
+        // Split the user input using the regex
+        String[] tokens = userResponse.split(regex);
+
         try {
-            for(String token: tokensList) {
-                result.add(Integer.parseInt(token));
+            for (String token : tokens) {
+                int number = Integer.parseInt(token.trim());
+
+                // If a negative number is found, throw an exception
+                if (number < 0) {
+                    throw new IllegalArgumentException("Negative numbers are not allowed: " + number);
+                }
+
+                result.add(number);
             }
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             System.out.println("Invalid User Input");
         }
+
+        // Store the parsed numbers
         this.numbers = result;
     }
 }
