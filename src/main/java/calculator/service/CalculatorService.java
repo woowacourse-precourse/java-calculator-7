@@ -6,6 +6,7 @@ import java.util.List;
 public class CalculatorService {
     private final String PATTERN = "//;\\n";
     private final int DELIMITER_INDEX = 2;
+    private final int PATTERN_START_INDEX = 0;
     private String line;
     private String delimiter = ":,";
 
@@ -17,7 +18,7 @@ public class CalculatorService {
         if (line == null) {
             throw new IllegalArgumentException("입력값이 null입니다.");
         }
-        if (!line.isBlank() && line.charAt(0) == PATTERN.charAt(0)) {
+        if (!line.isBlank() && line.charAt(PATTERN_START_INDEX) == PATTERN.charAt(PATTERN_START_INDEX)) {
             line = findDelimiter(line);
         }
         return line;
