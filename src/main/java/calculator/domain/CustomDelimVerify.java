@@ -5,6 +5,10 @@ import calculator.domain.constant.Unit;
 
 public class CustomDelimVerify {
 
+    public static Boolean exist(String candidate) {
+        return suitableLength(candidate) && coveredBracket(candidate);
+    }
+
     private static Boolean suitableLength(String candidate) {
         return candidate.length() >= Unit.CUSTOM_DELIM_EXPRESSION_LENGTH.getValue();
     }
