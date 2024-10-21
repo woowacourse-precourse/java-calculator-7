@@ -39,6 +39,13 @@
 - 기본 구분자를 , 와 |로 정해서 문자열로 만들어 놓음
 - 만약 커스텀 구분자가 나타날 경우 해당 구분자도 기본 구분자에 추가함
 
+#### private static void wrongInputFormat(int delimiterIndex) 메소드
+- 구분자 지정 형식이 올바르지 않은 경우 프로그램 종료
+
+#### private static int arrayEmptyStringCheck(String number) 메소드
+- 구분자로 구분한 배열 속 원소들이 빈 문자열 혹은 null이라면 0으로 변환
+- 숫자라면 숫자로 변환
+
 #### private static int sumNumbers(String[] numbers) 메소드
 - 배열에 저장된 값을 더하는 메소드 
 - 배열에 저장된 값이 빈 문자열, null인 경우 0을 더함
@@ -46,3 +53,6 @@
 
 #### private static int checkNumber(String number) 메소드
 - number가 숫자라면 문자열을 숫자로 바꾸어주고, 숫자가 아니라면 throw를 통해 프로그램을 종료시킴
+
+#### private static void negativeNumberCheck(int num) 메소드
+- 음수 입력 시 프로그램 종료
