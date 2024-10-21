@@ -6,15 +6,12 @@ public class StringCalculator {
         if (text == null || text.isEmpty()) {
             return 0;
         }
-
         if (!startsWithNumber(text) && !text.startsWith("//")) {
             throw new IllegalArgumentException("입력은 숫자나 '//'로 시작해야 합니다.");
         }
 
-        String defaultDelimiter = ",|:";
-        String delimiter = defaultDelimiter;
+        String delimiter = ",|:"; // 기본 구분자: 쉼표 또는 콜론
         String numbers = text;
-        boolean isCustomDelimiterDot = false;
 
         if (text.startsWith("//")) {
             int delimiterEndIndex = text.indexOf("\\n");
@@ -27,16 +24,13 @@ public class StringCalculator {
                 throw new IllegalArgumentException("커스텀 구분자는 한 개의 문자여야 합니다.");
             }
 
-            if (!isNonDigitCharacter(customDelimiter.charAt(0))) {
+            if (Character.isDigit(customDelimiter.charAt(0))) {
                 throw new IllegalArgumentException("커스텀 구분자는 숫자가 아닌 문자여야 합니다.");
             }
 
-            if (customDelimiter.equals(".")) {
-                isCustomDelimiterDot = true;
-            }
+            delimiter = ",|:|" + java.util.regex.Pattern.quote(customDelimiter);
 
-            delimiter = defaultDelimiter + "|" + java.util.regex.Pattern.quote(customDelimiter);
-            numbers = text.substring(delimiterEndIndex + 2);
+            numbers = text.substring(delimiterEndIndex + 2); // '\\n'의 길이는 2입니다.
         }
 
         String[] tokens = numbers.split(delimiter);
@@ -47,41 +41,30 @@ public class StringCalculator {
                 continue;
             }
 
-            if (isCustomDelimiterDot) {
-                String[] dotTokens = token.split("\\.");
-                for (String dotToken : dotTokens) {
-                    if (dotToken.isEmpty()) {
-                        continue;
-                    }
-
-                    int number = parsePositiveInteger(dotToken);
-                    sum += number;
-                }
-            } else {
-                int number = parsePositiveInteger(token);
-                sum += number;
+            // 숫자가 아닌 값이 있는지 확인합니다.
+            if (!isNumeric(token)) {
+                throw new IllegalArgumentException("유효하지 않은 숫자입니다: " + token);
             }
+
+            int number = Integer.parseInt(token);
+
+            // 음수인 경우 에러 처리합니다.
+            if (number < 0) {
+                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
+            }
+
+            sum += number;
         }
 
         return sum;
-    }
-
-    private static int parsePositiveInteger(String str) {
-        if (!isNumeric(str)) {
-            throw new IllegalArgumentException("유효하지 않은 숫자입니다: " + str);
-        }
-        int number = Integer.parseInt(str);
-        if (number <= 0) {
-            throw new IllegalArgumentException("양의 정수만 허용됩니다: " + number);
-        }
-        return number;
     }
 
     private static boolean startsWithNumber(String text) {
         if (text.isEmpty()) {
             return false;
         }
-        return Character.isDigit(text.charAt(0));
+        char firstChar = text.charAt(0);
+        return Character.isDigit(firstChar);
     }
 
     private static boolean isNumeric(String str) {
@@ -94,9 +77,5 @@ public class StringCalculator {
             }
         }
         return true;
-    }
-
-    private static boolean isNonDigitCharacter(char c) {
-        return !Character.isDigit(c);
     }
 }
