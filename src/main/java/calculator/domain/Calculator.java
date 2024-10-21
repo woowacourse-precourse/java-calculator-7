@@ -21,6 +21,9 @@ public class Calculator {
     public int getSum() {
         int sum = 0;
         for (int number : numbers) {
+            if ((long) sum + number > Integer.MAX_VALUE) {
+                throw new IllegalArgumentException("합이 int값을 초과합니다.");
+            }
             sum += number;
         }
         return sum;
