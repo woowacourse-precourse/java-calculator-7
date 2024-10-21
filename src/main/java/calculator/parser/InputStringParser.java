@@ -8,10 +8,9 @@ import java.util.regex.Pattern;
 
 public class InputStringParser {
 
-    private static final String DEFAULT_DELIMITER_REGEX = ", | :";
+    private static final String DEFAULT_DELIMITER_REGEX = ",|:";
 
     public List<Long> parse(String input) throws IllegalArgumentException{
-
         Optional<String> customDelimiter= extractCustomDelimiter(input);
         String removedDelimiterInput = customDelimiter.isPresent() ? removeCustomDelimiterFromOriginal(input) : input;
         String delimiterRegex = customDelimiter.map(Pattern::quote).orElse(DEFAULT_DELIMITER_REGEX);
@@ -31,6 +30,7 @@ public class InputStringParser {
 
     private String removeCustomDelimiterFromOriginal(String input) {
         Matcher matcher = getCustomDelimiterMatcher(input);
+
         if (matcher.find()) {
             return input.substring(matcher.end());
         } else {
