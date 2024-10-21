@@ -14,6 +14,12 @@ public class Application {
         // 결과 출력
         try {
             int result = calculator.add(input);
+
+            // 음수 확인
+            if (result < 0) {
+                throw new IllegalArgumentException("음수는 허용되지 않습니다.");
+            }
+
             System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());

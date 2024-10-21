@@ -24,24 +24,10 @@ public class StringCalculator {
         // 구분자로 문자열을 분리하고 합산
         String[] numbers = input.split(delimiter);
         int sum = 0;
-        StringBuilder negativeNumbers = new StringBuilder();
-
         for (String number : numbers) {
             if (!number.isEmpty()) {
-                int num = Integer.parseInt(number);
-                if (num < 0) {
-                    if (negativeNumbers.length() > 0) {
-                        negativeNumbers.append(",");
-                    }
-                    negativeNumbers.append(num);
-                } else {
-                    sum += num;
-                }
+                sum += Integer.parseInt(number);
             }
-        }
-
-        if (negativeNumbers.length() > 0) {
-            throw new IllegalArgumentException("음수는 허용되지 않습니다: " + negativeNumbers);
         }
 
         return sum;
