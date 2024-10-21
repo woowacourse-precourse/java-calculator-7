@@ -6,8 +6,12 @@ import java.util.Arrays;
 
 public class Application {
     public static void main(String[] args) {
-        String input = Console.readLine();
-        System.out.println("결과 : " + add(input));
+        try {
+            String input = Console.readLine();
+            System.out.println("결과 : " + add(input));
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static int add(String input) {
@@ -29,10 +33,14 @@ public class Application {
     }
 
     private static int toPositiveInt(String value) {
-        int number = Integer.parseInt(value);
-        if (number < 0) {
-            throw new IllegalArgumentException("Negative numbers are not allowed: " + value);
+        try {
+            int number = Integer.parseInt(value);
+            if (number < 0) {
+                throw new IllegalArgumentException("Negative numbers are not allowed: " + value);
+            }
+            return number;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid input: " + value);
         }
-        return number;
     }
 }
