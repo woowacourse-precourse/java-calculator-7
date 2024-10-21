@@ -1,26 +1,19 @@
 package calculator;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 // 구분자를 통한 문자열 파싱
 public class Parsing {
 
-    Set<Character> checkSeparator = new HashSet<>();
+    Set<String> checkSeparator = new HashSet<>(Arrays.asList(",", ":"));
+
 
     public long calculate(String input) {
         if (input == null || input.isEmpty()) {
             return 0;
         }
 
-        checkSeparator.add(',');
-        checkSeparator.add(':');
-
-        String[] numbers;
-
-        numbers = splitString(input);
+        String[] numbers = splitString(input);
         return sum(numbers);
     }
 
@@ -28,21 +21,32 @@ public class Parsing {
         List<String> numbers = new ArrayList<>();
         StringBuilder currentNumber = new StringBuilder();
 
-        int idx = 0;
-        if(checkStart(input)){
-            idx = 5;
-            checkSeparator.add(input.charAt(2));
+        if (input.startsWith("//")) {
+            int newLineIndex = input.indexOf("\\n");
+            if (newLineIndex != -1) {
+                String customDelimiter = input.substring(2, newLineIndex);
+                checkSeparator.add(customDelimiter);
+                input = input.substring(newLineIndex + 2);
+            }
         }
 
-        for (;  idx<input.length(); ++idx) {
-            char c = input.charAt(idx);
-            if (checkSeparator.contains(c)) {
-                if (!currentNumber.isEmpty()) {
-                    numbers.add(currentNumber.toString());
-                    currentNumber = new StringBuilder();
+        int i = 0;
+        while (i < input.length()) {
+            boolean isDelimiter = false;
+            for (String delimiter : checkSeparator) {
+                if (input.startsWith(delimiter, i)) {
+                    if (!currentNumber.isEmpty()) {
+                        numbers.add(currentNumber.toString());
+                        currentNumber = new StringBuilder();
+                    }
+                    i += delimiter.length();
+                    isDelimiter = true;
+                    break;
                 }
-            } else {
-                currentNumber.append(c);
+            }
+            if (!isDelimiter) {
+                currentNumber.append(input.charAt(i));
+                i++;
             }
         }
 
@@ -71,10 +75,5 @@ public class Parsing {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("유효하지 않은 숫자입니다: " + number);
         }
-    }
-
-    private boolean checkStart(String str){
-        if(str.startsWith("//") && str.length() >= 5 && str.substring(3,5).equals("\\n")) return true;
-        return false;
     }
 }
