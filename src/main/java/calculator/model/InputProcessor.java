@@ -74,5 +74,4 @@ public class InputProcessor {
             throw new IllegalArgumentException("잘못된 입력입니다. 음수는 지원하지 않습니다.");
         }
     }
-
 }
