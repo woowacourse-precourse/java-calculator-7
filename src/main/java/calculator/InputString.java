@@ -21,6 +21,10 @@ public class InputString {
 
         String delimiter = findDelimiter(input);
 
+        if (input.startsWith("//")) {
+            input = input.substring(4);
+        }
+
         return Arrays.stream(input.split(delimiter))
                 .map(Integer::valueOf)
                 .toList();
