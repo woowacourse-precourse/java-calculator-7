@@ -2,21 +2,29 @@ package calculator.input;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Parser {
 
     private static String inputString; //입력 문자열
     public static String DELIMITER = ",|:"; // 기본 구분자 쉼표와 콜론
+    private static final String regex = "//(.*?)\\\\n(.*?)(?=//|$)"; // 정규 표현식 패턴 정의
 
     public Parser(String inputString){
         this.inputString = inputString;
     }
 
     public void extractCustomSeparator(){ //커스텀 구분자 추출
-        while (inputString.startsWith("//") && inputString.contains("\\n")){
-            String customDelimiter = inputString.substring(2, inputString.indexOf("\\n")); // "//"와 "\n" 사이의 문자가 구분자
-            DELIMITER += "|" + customDelimiter; // 기본 구분자에 커스텀 구분자 추가
-            inputString = inputString.substring(inputString.indexOf("\\n")+2);
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(inputString);
+
+        // 패턴에 맞는 모든 부분 추출
+        while (matcher.find()) {
+            String customDelimiter = matcher.group(1);
+            DELIMITER+="|"+customDelimiter;
+            inputString = matcher.group(2);
         }
     }
 
