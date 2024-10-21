@@ -10,7 +10,6 @@ public class Calculator {
     }
 
     public long sum(List<Integer> numbers) {
-        reset();
         for (Integer number : numbers) {
             add(number);
         }
@@ -20,9 +19,5 @@ public class Calculator {
      public long add(int a) {
         result += a;
         return result;
-     }
-
-     public void reset() {
-        result = 0;
      }
 }
