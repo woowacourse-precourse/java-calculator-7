@@ -1,8 +1,8 @@
 package calculator.mvc.controller;
 
-import calculator.mvc.model.Calculator;
-import calculator.mvc.model.CalculatorImpl;
-import calculator.mvc.model.CustomExpression;
+import calculator.mvc.model.calculator.Calculator;
+import calculator.mvc.model.calculator.CalculatorImpl;
+import calculator.mvc.model.expression.CustomExpression;
 import calculator.mvc.view.CalculatorView;
 
 public class CalculatorController {
@@ -24,10 +24,10 @@ public class CalculatorController {
 
         String userInput = view.getUserInput();
 
-        String customExpression = new CustomExpression().makeExpression(userInput);
+        model.setSeparator(userInput, new CustomExpression());
 
         try {
-            model.parseNumbersFromString(userInput, customExpression);
+            model.parseNumbersFromString(userInput);
 
             long result = model.addNumbers();
 

@@ -1,4 +1,4 @@
-package calculator.mvc.model;
+package calculator.mvc.model.expression;
 
 import java.util.ArrayList;
 import java.util.List;

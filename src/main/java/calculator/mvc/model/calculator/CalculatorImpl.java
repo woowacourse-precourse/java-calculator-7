@@ -1,9 +1,11 @@
-package calculator.mvc.model;
+package calculator.mvc.model.calculator;
 
+import calculator.mvc.model.expression.Expression;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CalculatorImpl implements Calculator {
+    private String separator;
     private List<Long> numbers = new ArrayList<>();
     private static Calculator instance = new CalculatorImpl();
 
@@ -19,16 +21,21 @@ public class CalculatorImpl implements Calculator {
     }
 
     @Override
-    public void parseNumbersFromString(String input, String expression) throws IllegalStateException {
+    public void setSeparator(String input, Expression expression) {
+        separator = expression.makeExpression(input);
+    }
+
+    @Override
+    public void parseNumbersFromString(String input) throws IllegalStateException {
         if (input.isEmpty()) {
             return;
         }
 
-        if (expression.length() >= 5 && expression.length() <= 6) {
+        if (separator.length() >= 5 && separator.length() <= 6) {
             input = input.substring(5);
         }
 
-        String[] tokens = input.split(expression);
+        String[] tokens = input.split(separator);
 
         for (String s : tokens) {
             try {
