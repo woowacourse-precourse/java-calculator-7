@@ -4,17 +4,37 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.StringTokenizer;
 
 public class Application {
-    static String str;
+    // 문자열 입력받기
+    public static String inputStr() {
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        return Console.readLine();
+    }
 
-    // 결과 출력
-    public static void printResult(String[] nums) {
-        if (isInvalidSeperator(nums) && isPositiveNumber(nums)) {
-            System.out.println("결과 : " + calculate(nums));
+    // 문자열에 숫자가 포함되어 있는지 검사
+    public static boolean checkContainNumber(String str) {
+        if (!str.matches(".*[0-9].*")) {
+            throw new IllegalArgumentException("숫자를 포함하여 입력해 주세요.");
         }
+        return true;
+    }
+
+    // 문자열을 분리하기 위해 구분자들을 모아놓은 문자열 생성
+    public static String makeSeperators(String str) {
+        String seperators = ",:";
+        // 커스텀 구분자가 있는 경우, 커스텀 구분자를 찾아 문자열을 분리할 구분자들(seperators)에 추가
+        if (str.contains("//") && str.contains("\\n")) {
+            int idx = str.indexOf("\\n");
+            seperators += str.substring(2, idx);
+        }
+        return seperators;
     }
 
     // 구분자들을 기준으로 문자열 분리
-    public static String[] seperateString(String seperators) {
+    public static String[] seperateString(String str, String seperators) {
+        if (str.contains("//") && str.contains("\\n")) {
+            int idx = str.indexOf("\\n");
+            str = str.substring(idx + 2);
+        }
         StringTokenizer st = new StringTokenizer(str, seperators);
         String[] nums = new String[st.countTokens()];
         int i = 0;
@@ -25,16 +45,11 @@ public class Application {
         return nums;
     }
 
-    // 문자열을 분리하기 위해 구분자들을 모아놓은 문자열 생성
-    public static String makeSeperators() {
-        String seperators = ",:";
-        // 커스텀 구분자가 있는 경우, 커스텀 구분자를 찾아 문자열을 분리할 구분자들(seperators)에 추가
-        if (str.contains("//") && str.contains("\\n")) {
-            int idx = str.indexOf("\\n");
-            seperators += str.substring(2, idx);
-            str = str.substring(idx + 2);
+    // 결과 출력
+    public static void printResult(String[] nums) {
+        if (isInvalidSeperator(nums) && isPositiveNumber(nums)) {
+            System.out.println("결과 : " + calculate(nums));
         }
-        return seperators;
     }
 
     // 기본 구분자와 커스텀 구분자를 제외한 다른 구분자를 포함하고 있는지 검사
@@ -68,21 +83,17 @@ public class Application {
 
     public static void main(String[] args) {
         // 문자열 입력받기
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        str = Console.readLine();
+        String str = inputStr();
 
         // 아무것도 입력하지 않은 경우
         if (str.isEmpty()) {
             System.out.println(0);
         }
 
-        // 숫자가 포함되어 있지 않은 경우
-        if (!str.matches(".*[0-9].*")) {
-            throw new IllegalArgumentException("숫자를 포함하여 입력해 주세요.");
+        if (checkContainNumber(str)) {
+            String seperators = makeSeperators(str);
+            String[] nums = seperateString(str, seperators);
+            printResult(nums);
         }
-
-        String seperators = makeSeperators();
-        String[] nums = seperateString(seperators);
-        printResult(nums);
     }
 }
