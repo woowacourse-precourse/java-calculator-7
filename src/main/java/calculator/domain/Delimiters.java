@@ -26,6 +26,10 @@ public class Delimiters {
         return new Delimiters(delimiters);
     }
 
+    public static Delimiters of(final String... delimiters) {
+        return new Delimiters(Set.of(delimiters));
+    }
+
     public static void check(final Delimiters delimiters) {
         for (String delimiter : delimiters.toSet()) {
             if (isNumeric(delimiter)) {
