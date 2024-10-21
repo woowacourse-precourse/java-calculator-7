@@ -1,30 +1,26 @@
 package calculator.controller;
 
 import calculator.model.Calculator;
-import calculator.model.CustomCalculator;
-import calculator.model.DefaultCalculator;
+import calculator.model.CalculatorImpl;
+import calculator.utils.InputValidator;
 import calculator.view.OutputView;
 
 public class CalculatorController {
 
+    private final String input;
     private final Calculator calculator;
 
     public CalculatorController(String input) {
-        this.calculator = selectCalculator(input);
+        this.input = input;
+        this.calculator = new CalculatorImpl();
     }
 
     public void run(){
-        calculator.validateValues();
-        calculator.extractNumber();
+        InputValidator.validateInput(input);
+        calculator.insertValues(input);
+        calculator.extract();
         int result = calculator.sum();
         OutputView.getOutputMessage(result);
-    }
-
-    private Calculator selectCalculator(String input) {
-        if (input.matches("^//.\\\\n.*")) {
-            return new CustomCalculator(input);
-        }
-        return new DefaultCalculator(input);
     }
 
 }

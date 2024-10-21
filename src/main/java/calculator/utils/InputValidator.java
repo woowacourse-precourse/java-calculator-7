@@ -13,7 +13,7 @@ public class InputValidator {
     private static final int CUSTOM_DELIMITER_IDX = 2;
     private static final int CUSTOM_DELIMITER_EXPRESSION_START_IDX = 5;
 
-    public void validateInput(String input) {
+    public static void validateInput(String input) {
 
         if (input.matches(CHECK_NEGATIVE_INTEGER_FORMAT)) {
             throw new CalculatorException(
