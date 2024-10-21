@@ -8,6 +8,13 @@ public enum ExceptionMessage {
         }
     },
 
+    INVALID_NUM_RANGE {
+        @Override
+        public String toString() {
+            return "32비트 내에서 입력할 수 있는 숫자의 최대 범위를 벗어났습니다.";
+        }
+    },
+
     INVALID_INPUT_CHAR {
         @Override
         public String toString() {
@@ -15,7 +22,7 @@ public enum ExceptionMessage {
 
         }
     },
-    
+
     INVALID_CUSTOM_DELIMITER_CHAR {
         @Override
         public String toString() {
