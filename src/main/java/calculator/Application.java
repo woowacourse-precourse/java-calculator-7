@@ -15,6 +15,7 @@ public class Application {
 
         String delimiter = "[,:]";  // 기본 구분자
 
+        // 커스텀 구분자 처리
         if (str.startsWith("//")) {
             int delimiterIndex1 = str.indexOf('\\');
             int delimiterIndex2 = str.indexOf('n');
@@ -32,7 +33,7 @@ public class Application {
                     }
                     delimiter = Pattern.quote(delimiterCustom);
                 }
-                str = str.substring(delimiterIndex2 + 1);  // 커스텀 구분자 이후 문자열
+                str = str.substring(delimiterIndex2 + 1);
             } catch (Exception e) {
                 throw new IllegalArgumentException("잘못된 구분자가 입력되었습니다.");
             }
@@ -41,9 +42,13 @@ public class Application {
         String[] strArr = str.split(delimiter);
         int sum = 0;
 
+        // 숫자 합 계산 및 음수 처리
         for (String token : strArr) {
             try {
                 int number = Integer.parseInt(token);
+                if (number <= 0) {
+                    throw new IllegalArgumentException("잘못된 숫자값이 입력되었습니다: " + number);
+                }
                 sum += number;
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("숫자가 아닌 값이 입력되었습니다.");
