@@ -10,12 +10,6 @@ public class Calculator {
     private static final String DEFAULT_DELIMITER_REGEX = "^(|([1-9][0-9]*([,:][1-9][0-9]*)*))$";
     private static final String CUSTOM_DELIMITER_REGEX = "^//([^0-9]*)\\\\n(|([1-9][0-9]*(\\1[1-9][0-9]*)*))$";
 
-    // 문자열 입력 받기
-    public static String getInput() {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        return Console.readLine();
-    }
-
     // 기본 구분자와 커스텀 구분자 구분하기
     public static boolean checkCustomDelimiter(String str) {
         return str.startsWith("//");
