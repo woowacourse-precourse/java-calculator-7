@@ -47,9 +47,7 @@ public class Application {
                     String dividedIntoCustom[] = dividedIntoBasic[i].split(sb.toString());
 
                     for (String answer : dividedIntoCustom) {
-                        if(Integer.parseInt((answer))<0)
-                          throw new IllegalArgumentException();
-                        else sum += Integer.parseInt(answer);
+                        sum += Integer.parseInt(answer);
 
 //                        System.out.print(answer + " ");
                     }
