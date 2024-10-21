@@ -1,12 +1,13 @@
 package calculator;
 
+import camp.nextstep.edu.missionutils.Console;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
-        String input = args[0];
+        String input = Console.readLine();
         int result = add(input);
         System.out.println("결과 : " + result);
     }
