@@ -1,13 +1,21 @@
 package calculator;
 
-import camp.nextstep.edu.missionutils.test.NsTest;
-import org.junit.jupiter.api.Test;
-
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import camp.nextstep.edu.missionutils.test.NsTest;
+import org.junit.jupiter.api.Test;
+
 class ApplicationTest extends NsTest {
+    @Test
+    void 기본_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("1,2,3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
     @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
@@ -17,10 +25,80 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 커스텀_구분자_여러개_사용() {
+        assertSimpleTest(() -> {
+            run("//;\\n1;2;3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 두자리수_입력_테스트() {
+        assertSimpleTest(() -> {
+            run("10,20,30");
+            assertThat(output()).contains("결과 : 60");
+        });
+    }
+
+    @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> runException("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 음수_입력_예외() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,-2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContaining("양수를 입력해 주세요.")
+        );
+    }
+
+    @Test
+    void 제로_입력_예외() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("0,1,2"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContaining("양수를 입력해 주세요.")
+        );
+    }
+
+    @Test
+    void 커스텀_구분자_누락_예외() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//\\n1;2;3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContaining("커스텀 구분자를 입력해 주세요.")
+        );
+    }
+
+    @Test
+    void 잘못된_커스텀_구분자_예외() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;\\n1$2$3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContaining("올바르지 않은 구분자입니다.")
+        );
+    }
+
+    @Test
+    void 잘못된_구분자_예외() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1$2$3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContaining("올바르지 않은 구분자입니다.")
+        );
+    }
+
+    @Test
+    void 구분자만_입력했을시_예외() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException(","))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContaining("구분자를 쓸 때는 숫자를 입력해 주세요.")
         );
     }
 
