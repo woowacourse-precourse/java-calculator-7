@@ -61,4 +61,11 @@ public class Calculator {
             addCustomDelimiters(customDm);
         }
     }
+
+    private Integer getResult(ArrayList<Integer> nums) {
+        for (Integer n : nums) {
+            this.result += n;
+        }
+        return result;
+    }
 }
