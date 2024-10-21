@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.regex.Pattern;
+
 public class StringCalculator {
 
     public String[] splitString(String input, String delimiter) {
@@ -36,11 +38,10 @@ public class StringCalculator {
 
         if(input.startsWith("//")){
             if(input.charAt(3)=='\\'&&input.charAt(4)=='n'){
-                String customDelimiter = String.valueOf(input.charAt(2));
-                if(specialChars.indexOf(customDelimiter) != -1)
-                    delimiter+="|\\"+customDelimiter;
-                else
-                    delimiter+="|"+customDelimiter;
+                String customDelimiter = Pattern.quote(String.valueOf(input.charAt(2)));
+                if(input.charAt(2)>='0'&&input.charAt(2)<='9')
+                    throw new IllegalArgumentException("숫자는 커스텀 구분자가 될 수 없습니다.");
+                delimiter = delimiter + "|" + customDelimiter;
                 input = input.substring(5);
             } else{
                 throw new IllegalArgumentException("커스텀 구분자 형식이 유효하지 않습니다.");
