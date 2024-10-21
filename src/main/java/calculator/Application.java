@@ -18,7 +18,6 @@ public class Application {
             return;
         }
 
-
         // TODO: 문자열 파싱 객체에서 구분자, 숫자 받아오기
         Parser parser = Parser.getInstance();
 

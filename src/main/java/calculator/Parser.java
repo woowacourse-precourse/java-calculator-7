@@ -17,15 +17,6 @@ public class Parser {
         return parser;
     }
 
-    private void parseSeparator(String input) {
-
-        initialSeprator();
-
-        if(checkSeparator(input)){
-               separators.add(input.substring(2,3));
-        }
-
-    }
 
     public void parseNums(String input){
 
@@ -34,12 +25,9 @@ public class Parser {
             return;
         }
 
-        parseSeparator(input);
+        input = parseSeparator(input);
+
         initialNums();
-
-        if(checkSeparator(input))
-            input = input.substring(5);
-
         String num = "";
 
         for(int i=0; i<input.length(); i++){
@@ -48,12 +36,29 @@ public class Parser {
 
             if(checkInteger(currentString)){ // 숫자가 맞는 경우
                 num += currentString;
-            }else{ // 구분자인 경우
+            } else { // 구분자인 경우
                 addNum(num);
                 num = "";
             }
         }
         addNum(num);
+    }
+
+
+
+    private String parseSeparator(String input) {
+
+        initialSeprator();
+
+        if(checkSeparator(input)){
+            separators.add(input.substring(2,3));
+        }
+
+        if(checkSeparator(input))
+            return input.substring(5);
+
+        return input;
+
     }
 
     private void addNum(String num) {
