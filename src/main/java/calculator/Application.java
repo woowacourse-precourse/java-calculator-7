@@ -13,6 +13,11 @@ public class Application {
             throw new RuntimeException(e);
         }
 
+        if (input.isEmpty()) {
+            System.out.println(0);
+            return;
+        }
+
         String[] inputArray = input.split("[,:]");
         int num = 0;
         for (String s : inputArray) {
