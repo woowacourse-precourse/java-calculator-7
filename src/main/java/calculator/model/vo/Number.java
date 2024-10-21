@@ -19,6 +19,10 @@ public final class Number {
         return new Number(new BigInteger(number));
     }
 
+    public Number add(Number another) {
+        return new Number(value.add(another.value));
+    }
+
     private void validatePositive(BigInteger number) {
         if (number.compareTo(BigInteger.ZERO) == -1) {
             throw new IllegalArgumentException("양수만 입력하여야 합니다.");
