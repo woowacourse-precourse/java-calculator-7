@@ -28,11 +28,11 @@
 
 문자열 파싱기는 `구분자 추출기`와 `숫자 추출기`를 통해서 입력받은 문자열을 처리하는 역할을 한다.
 
-- [ ]  [Method] isMinusNumberUsed()
+- [x]  [Method] isMinusNumberUsed()
 
 숫자들 중 음수가 있는지 확인하는 역할
 
-- [ ]  [Method] parseString()
+- [x]  [Method] parseString()
 
 입력 받은 문자열에서 숫자들을 추출하는 역할
 
@@ -40,7 +40,7 @@
 
 덧셈 계산기는 `문자열 파싱기`를 통해서 숫자들을 추출하고 추출한 숫자들을 더하는 용도로 사용된다.
 
-- [ ]  [Method] sum()
+- [x]  [Method] sum()
 
 입력받은 문자열에서 숫자들을 추출 후 숫자들을 더하는 역할
 
@@ -48,14 +48,22 @@
 
 입력받은 문자열과 실행결과를 출력하기 위한 용도로 사용된다.
 
-- [ ]  [Method] displayInput()
+- [x]  [Method] displayInput()
 
 덧셈을 할 문자열을 입력받는 역할
 
-- [ ]  [Method] displayInputResult()
+- [x]  [Method] displayInputResult()
 
 입력한 문자열을 출력해주는 역할
 
-- [ ]  [Method] displayOutputResult()
+- [x]  [Method] displayOutputResult()
 
 결과를 출력해주는 역할
+
+## [Class] Application
+
+요구사항을 실행하는 클래스이다.
+
+- [ ]  [Method] main()
+
+요구사항을 구현할 메인 메서드
