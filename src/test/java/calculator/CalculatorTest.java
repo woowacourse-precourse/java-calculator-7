@@ -25,4 +25,22 @@ public class CalculatorTest {
         // then
         assertThat(result).isEqualTo(0);
     }
+
+    @Test
+    void 구분자만_입력하면_결과는_0() {
+        // given
+        String comma = ",";
+        String colon = ":";
+        String custom = "//;\\n";
+
+        // when
+        int sumByComma = calculator.processInputAndSum(comma);
+        int sumByColon = calculator.processInputAndSum(colon);
+        int sumByCustom = calculator.processInputAndSum(custom);
+
+        // then
+        assertThat(sumByComma).isEqualTo(0);
+        assertThat(sumByColon).isEqualTo(0);
+        assertThat(sumByCustom).isEqualTo(0);
+    }
 }
