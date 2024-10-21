@@ -69,8 +69,10 @@ public class Number {
         return rawText;
     }
 
-    public boolean checkValidNumber(int number) {
-        return 0 <= number && number <= Integer.MAX_VALUE;
+    public void checkMinus(int number) {
+        if (number < 0) {
+            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+        }
     }
 
     public int parseInt(String numberString) {
@@ -97,9 +99,7 @@ public class Number {
 
     public void registerNumber(String numberString) {
         int number = parseInt(numberString);
-        if (!checkValidNumber(number)) {
-            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
-        }
+        checkMinus(number);
         numberList.add(number);
     }
 
