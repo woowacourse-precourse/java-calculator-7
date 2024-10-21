@@ -49,9 +49,9 @@ public class Application {
             }
 
             int num = Integer.parseInt(number);
-            // 숫자가 음수인 경우 예외 발생
-            if (num <= -1) {
-                throw new IllegalArgumentException("음수가 아닌 정수를 입력해야 합니다.");
+            // 숫자가 양수가 아닌 경우 예외 발생
+            if (num <= 0) {
+                throw new IllegalArgumentException("양수를 입력해야 합니다.");
             }
             result += num;
         }
