@@ -23,8 +23,7 @@ public class Application {
             assert bigDecimalList.parallelStream().allMatch(x -> x.compareTo(BigDecimal.ZERO) > 0);
 
             final BigDecimal answer = bigDecimalList.parallelStream().reduce(BigDecimal.ZERO, BigDecimal::add);
-            System.out.print("결과 : ");
-            System.out.print(answer);
+            System.out.printf("결과 : %s", answer.toPlainString());
         } catch (Throwable e) {
             throw new IllegalArgumentException();
         }
