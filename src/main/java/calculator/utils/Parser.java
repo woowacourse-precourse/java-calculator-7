@@ -15,7 +15,7 @@ public class Parser {
         separatorParser.parse(inputString);
         separatorParser.addBasicSeparator();
         return operandParser.parse(
-                separatorParser.getRemovedString(),
+                separatorParser.getParseInputString(),
                 separatorParser.getSeparator());
     }
 }

@@ -6,7 +6,7 @@ import java.util.Stack;
 
 public class SeparatorParser {
     private final List<String> separator = new ArrayList<>();
-    private String removedString = "";
+    private String parseInputString = "";
 
     public void addBasicSeparator() {
         separator.add(",");
@@ -36,7 +36,7 @@ public class SeparatorParser {
                 if (flag) {
                     separator.set(idx, separator.get(idx) + inputString.charAt(i));
                 } else {
-                    removedString += inputString.charAt(i);
+                    parseInputString += inputString.charAt(i);
                 }
             }
         }
@@ -50,7 +50,7 @@ public class SeparatorParser {
         return separator;
     }
 
-    public String getRemovedString() {
-        return removedString;
+    public String getParseInputString() {
+        return parseInputString;
     }
 }
