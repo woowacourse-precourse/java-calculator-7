@@ -1,6 +1,8 @@
 package calculator.delimiterExtractor;
 
 import calculator.dto.DelimiterDto;
+import calculator.validator.Validator;
+import calculator.validator.ValidatorImpl;
 import java.util.regex.Pattern;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,7 +19,8 @@ public class DelimiterExtractorTest {
     @BeforeEach
     @Test
     void beforeEach() {
-        customDelimiterExtractor = new CustomDelimiterExtractor();
+        Validator validator = new ValidatorImpl();
+        customDelimiterExtractor = new CustomDelimiterExtractor(validator);
         defaultDelimiterExtractor = new DefaultDelimiterExtractor();
 
     }

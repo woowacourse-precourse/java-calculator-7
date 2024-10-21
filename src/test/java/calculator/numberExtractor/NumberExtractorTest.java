@@ -49,7 +49,8 @@ public class NumberExtractorTest {
     @ParameterizedTest
     @ValueSource(strings = {"//;\\n1;2;37", "//;as\\\\\\n1;as\\\\2;as\\\\37"})
     void 커스텀구분자_숫자추출(String input) {
-        CustomDelimiterExtractor customDelimiterExtractor = new CustomDelimiterExtractor();
+        Validator validator = new ValidatorImpl();
+        CustomDelimiterExtractor customDelimiterExtractor = new CustomDelimiterExtractor(validator);
         DelimiterDto delimiterDto = customDelimiterExtractor.extractDelimiter(input);
 
         String extractDelimiter = delimiterDto.getDelimiter();
