@@ -7,7 +7,6 @@ public class InputValidator {
 
     private static final String CUSTOM_DELIMITER_FORMAT = "^//.\\\\n.*";
     private static final String CHECK_NEGATIVE_INTEGER_FORMAT = ".*-\\d+.*";
-    private static final String CHECK_CUSTOM_DELIMITER_INTEGER_FORMAT = ".*-\\d+.*";
     private static final String CHECK_DEFAULT_DELIMITER_FORMAT = "[0-9,|:]+";
     private static final int CUSTOM_DELIMITER_IDX = 2;
     private static final int CUSTOM_DELIMITER_EXPRESSION_START_IDX = 5;
@@ -23,7 +22,7 @@ public class InputValidator {
             String delimiter = String.valueOf(input.charAt(CUSTOM_DELIMITER_IDX));
             String expression = input.substring(CUSTOM_DELIMITER_EXPRESSION_START_IDX);
 
-            if (input.matches(CHECK_CUSTOM_DELIMITER_INTEGER_FORMAT)) {
+            if (Character.isDigit(delimiter.charAt(0))) {
                 throw new CalculatorException(
                         CalculatorExceptionStatus.INVALID_CUSTOM_DELIMITER_INTEGER);
             }
