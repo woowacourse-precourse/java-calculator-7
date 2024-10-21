@@ -5,10 +5,10 @@ import java.util.Arrays;
 public class StringCalculator {
     private final DelimiterParser delimiterParser = new DelimiterParser();
 
-    private int[] StringToIntegerArray(String[] arr) {
+    private int[] stringToIntegerArray(String[] arr) {
         return Arrays.stream(arr).mapToInt(this::parseInt).toArray();
     }
-    
+
     private String[] makeStringToExpression(String input) {
         DelimiterContentPair parsed = delimiterParser.parseInput(input);
         return makeStrArray(parsed);
