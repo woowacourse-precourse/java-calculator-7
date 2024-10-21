@@ -11,6 +11,11 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
 
+        if (input == null || input.isEmpty()) {
+            System.out.println("결과 : " + 0);
+            return;
+        }
+
         if (input.startsWith("//")) { // 커스텀 구분자로 시작하는지 확인
             if (input.substring(3, 5).equals("\\n") && input.length() > 5) { // "\n"으로 끝나는지 확인
                 delimiter = input.substring(2, 3);
