@@ -1,4 +1,4 @@
-package calculator.delimiter;
+package calculator;
 
 public class CustomDelimiterDetector implements CustomDelimiterDetectorInterface {
     private static final String DELIMITER_PREFIX = "//";

@@ -1,4 +1,4 @@
-package calculator.parser;
+package calculator;
 
 import java.util.HashSet;
 import java.util.Set;

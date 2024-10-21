@@ -1,4 +1,4 @@
-package calculator.delimiter;
+package calculator;
 
 public interface CustomDelimiterDetectorInterface {
     String findCustomDelimiter(String text);

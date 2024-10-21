@@ -1,8 +1,8 @@
-package calculator.operation;
+package calculator;
 
 import java.util.List;
 
-public class addOperator implements OperatorInterface{
+public class addOperator implements OperatorInterface {
 
     @Override
     public int operate(List<Integer> numbers){
