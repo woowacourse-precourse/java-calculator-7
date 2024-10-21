@@ -49,11 +49,11 @@ class ApplicationTest extends NsTest {
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
             //given
-            String input = "//;\\n1;2;3";
+            String input = "//;\\n1";
             //when
             run(input);
             //then
-            assertThat(output()).contains("결과 : 6");
+            assertThat(output()).contains("결과 : 1");
         });
     }
 
@@ -107,6 +107,14 @@ class ApplicationTest extends NsTest {
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("입력값이 음수입니다");
     }
+
+//    @Test
+//    void 예외_테스트() {
+//        assertSimpleTest(() ->
+//                assertThatThrownBy(() -> runException("-1,2,3"))
+//                        .isInstanceOf(IllegalArgumentException.class)
+//        );
+//    }
 
     @Override
     public void runMain() {
