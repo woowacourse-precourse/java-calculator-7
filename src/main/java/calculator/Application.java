@@ -34,8 +34,8 @@ public class Application {
         // 커스텀 구분자가 있는 경우
         if (word.startsWith("//")) {
             int seperateIdx = word.indexOf("\\n");
-            System.out.println(seperateIdx);
             if (seperateIdx == -1) {
+
                 throw new IllegalArgumentException("잘못된 입력입니다.");
             }
             return word.substring(2, seperateIdx);
