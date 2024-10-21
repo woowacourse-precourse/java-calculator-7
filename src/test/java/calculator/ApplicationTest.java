@@ -48,6 +48,14 @@ class ApplicationTest extends NsTest {
                         .hasMessageContaining("\\n을 사용하여 어떤 문자가 커스텀 구분자인지 구분해주세요."));
     }
 
+    @Test
+    void 기본구분자_숫자외에_다른문자가_왔을경우() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,2,3!4"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContaining("기본 구분자, 숫자로만 이루어진 문자열을 작성해주세요."));
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
