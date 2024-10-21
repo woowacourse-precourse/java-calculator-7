@@ -1,7 +1,7 @@
 package calculator.controller;
 
 import calculator.Calculator;
-import calculator.Filter;
+import calculator.filter.Filter;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
