@@ -23,7 +23,7 @@ class StringCalculator {
         if(input.startsWith("//")) {
             int endIdx = input.indexOf("\\n");
             if(endIdx == -1) {
-                throw new IllegalArgumentException("커스텀 구분자 형식이 잘못되었습니다.");
+                throw new IllegalArgumentException("커스텀 구분자 형식이 올바르지 않습니다.");
             }
             delimiter = input.substring(2, endIdx);
             input = input.substring(endIdx + 2);
@@ -53,15 +53,34 @@ class StringCalculator {
 
     private static String[] splitString(String input, String delimiter) {
         try {
+            if(delimiter.isEmpty()) {
+                throw new IllegalArgumentException("커스텀 구분자가 입력되지 않았습니다.");
+            }
+
             String delimiters = String.join("|", delimiter.split(""));
             if(delimiter.matches(".*\\d.*")) {
                 throw new IllegalArgumentException("숫자는 커스텀 구분자가 될 수 없습니다.: " + delimiter);
             }
-            return input.split(delimiters);
+            return input.split(escapeMetaCharacter(delimiters));
         } catch (PatternSyntaxException e) {
-            throw new IllegalArgumentException("정규 표현식에 사용되는 문자가 구분자로 포함되어 있습니다.: " + delimiter);
+            throw new IllegalArgumentException("커스텀 구분자의 입력이나 처리가 올바르지 않습니다.: " + delimiter);
         }
     }
 
+    private static String escapeMetaCharacter(String delimiter) {
+        String[] metaCharacters = { ".", "^", "$", "*", "+", "?", "(", ")", "[", "]", "{", "}" };
+
+        if(delimiter.contains("\\"))
+            delimiter = delimiter.replace("\\", "\\\\");
+        if(delimiter.contains("||"))
+            delimiter = delimiter.replace("||", "|\\|");
+
+        for(String meta : metaCharacters) {
+            if(delimiter.contains(meta)) {
+                delimiter = delimiter.replace(meta, "\\"+meta);
+            }
+        }
+        return delimiter;
+    }
 
 }
