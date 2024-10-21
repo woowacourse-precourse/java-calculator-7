@@ -56,4 +56,12 @@ public class CalculatorServiceTest {
 
         Assertions.assertDoesNotThrow(() -> calculatorService.extractNumbers(input));
     }
+
+    @Test
+    @DisplayName("숫자칸에 공백을 입력하면 0을 반환")
+    void return_zero_when_numbers_empty() {
+        String input = "// \\n  ";
+
+        Assertions.assertEquals(calculatorService.extractNumbers(input).getSummary(), 0);
+    }
 }

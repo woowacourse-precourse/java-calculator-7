@@ -27,6 +27,10 @@ public class Numbers {
     }
 
     public int getSummary() {
+        if (numberList.isEmpty()) {
+            return STANDARD;
+        }
+
         return numberList
                 .stream()
                 .mapToInt(Integer::intValue)
