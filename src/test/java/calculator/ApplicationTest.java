@@ -90,6 +90,33 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    @DisplayName("양 끝에 공백을 입력 했을 때, 예외가 발생하는지 테스트")
+    void endToEnd_Test_8() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException(" 1,2,3 "))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+    }
+
+    @Test
+    @DisplayName("맨 앞에 공백을 입력 했을 때, 예외가 발생하는지 테스트")
+    void endToEnd_Test_9() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException(" 1,2,3"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+    }
+
+    @Test
+    @DisplayName("맨 뒤에 공백을 입력 했을 때, 정상동작하는지 테스트")
+    void endToEnd_Test_10() {
+        assertSimpleTest(() -> {
+            run("1,2,3 ");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});

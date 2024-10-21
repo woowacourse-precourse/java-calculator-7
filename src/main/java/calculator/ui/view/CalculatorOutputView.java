@@ -8,11 +8,11 @@ public class CalculatorOutputView {
 
     public void splitAndSumOutput(String result) {
         BUFFER.append("결과 : ").append(result).append('\n');
-        System.out.println(BUFFER);
         bufferClear();
     }
 
     private void bufferClear() {
+        System.out.println(BUFFER);
         BUFFER.setLength(0);
     }
 
