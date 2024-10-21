@@ -28,5 +28,21 @@ public class Application {
         }
 
         String splitDelimiters = String.join("|", delimiters);
+        String[] separatedNumbers = str.split(splitDelimiters);
+
+        int result = 0;
+
+        for (String number : separatedNumbers) {
+            try {
+                int parsedNumber = Integer.parseInt(number);
+                if (parsedNumber <= 0) {
+                    throw new IllegalArgumentException();
+                }
+                result += parsedNumber;
+            }
+            catch (NumberFormatException ex) {
+                throw new IllegalArgumentException();
+            }
+        }
     }
 }
