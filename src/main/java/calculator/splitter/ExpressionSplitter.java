@@ -1,6 +1,5 @@
 package calculator.splitter;
 
-import calculator.core.CalculatorError;
 import calculator.model.CalculatorModel;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -25,13 +24,13 @@ public class ExpressionSplitter {
             model.setSeparatorExpression(separatorExpression);
             model.setMathematicalExpression(mathematicalExpression);
         } else {
-            throw new IllegalArgumentException(CalculatorError.INVALID_INPUT.getMessage());
+            throw new IllegalArgumentException(ExpressionSplitterError.INVALID_EXPRESSION.getMessage());
         }
     }
 
     public void isValid(CalculatorModel model) {
         if (!VALID_PATTERN.matcher(model.getInput()).matches()) {
-            throw new IllegalArgumentException(CalculatorError.INVALID_INPUT.getMessage());
+            throw new IllegalArgumentException(ExpressionSplitterError.INVALID_EXPRESSION.getMessage());
         }
     }
 
