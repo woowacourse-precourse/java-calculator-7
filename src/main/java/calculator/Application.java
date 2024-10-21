@@ -6,7 +6,13 @@ public class Application {
     public static int calculator_7(String str){
         if (str.trim().isEmpty()) return 0;
 
-        return 0;
+        String[] numbers = str.split("[,:]");
+        int sum  = 0;
+        for (String number : numbers) {
+            sum += Integer.parseInt(number.trim());
+        }
+        return sum;
+
     }
     public static void main(String[] args) {
         // TODO: 프로그램 구현
