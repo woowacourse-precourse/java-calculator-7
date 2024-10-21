@@ -1,12 +1,12 @@
 package calculator.model;
 
-public enum DefaultDelimiters {
+public enum DefaultDelimiter {
 	COMMA(","),
 	COLON(":");
 
 	private final String delimiter;
 
-	DefaultDelimiters(String delimiter) {
+	DefaultDelimiter(String delimiter) {
 		this.delimiter = delimiter;
 	}
 
