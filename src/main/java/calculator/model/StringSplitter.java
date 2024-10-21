@@ -1,5 +1,7 @@
 package calculator.model;
 
+import java.util.regex.Pattern;
+
 public class StringSplitter {
     private static final String DEFAULT_DELIMITERS = "[,:]";
 
@@ -8,19 +10,19 @@ public class StringSplitter {
             return new String[0];
         }
 
-        // 커스텀 구분자 처리
+        input = input.replace("\\n", "\n");
+
         if (input.startsWith("//")) {
-            // 첫 번째 줄과 그 이후로 분리
             String[] parts = input.split("\n", 2);
+
             if (parts.length != 2) {
-                throw new IllegalArgumentException("유효하지 않은 입력 형식입니다.");
+                throw new IllegalArgumentException();
             }
-            // 커스텀 구분자 분리
+
             String customDelimiter = parts[0].substring(2);
-            return parts[1].split(customDelimiter);
+            return parts[1].split(Pattern.quote(customDelimiter));
         }
 
-        // 기본 구분자 쉼표(,)와 콜론(:)으로 분리
         return input.split(DEFAULT_DELIMITERS);
     }
 }
