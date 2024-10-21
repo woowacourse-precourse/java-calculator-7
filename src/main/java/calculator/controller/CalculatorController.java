@@ -3,7 +3,7 @@ package calculator.controller;
 import calculator.domain.Calculator;
 import calculator.domain.DelimiterManager;
 import calculator.domain.ExpressionSplitter;
-import calculator.domain.PositiveIntegerConverter;
+import calculator.domain.PositiveNumberConverter;
 import calculator.domain.StringParser;
 import calculator.domain.SumCalculator;
 import calculator.dto.AdditionInput;
@@ -56,8 +56,8 @@ public class CalculatorController {
     }
 
     private List<Double> convertToPositiveNumbers(List<String> splittedExpression) {
-        PositiveIntegerConverter positiveIntegerConverter = new PositiveIntegerConverter(splittedExpression);
-        return positiveIntegerConverter.convertStringToPositiveNumbers();
+        PositiveNumberConverter positiveNumberConverter = new PositiveNumberConverter(splittedExpression);
+        return positiveNumberConverter.convertStringToPositiveNumbers();
     }
 
     private AdditionResult calculateResult(List<Double> positiveIntegers) {
