@@ -21,14 +21,14 @@ public class Application {
         }
 
         String delimiters = "[,;]";
-        if (input.length() >= 2 && input.startsWith("//")) {
+        if (input.startsWith("//")) {
             int newLineIndex = input.indexOf("\n");
             if (newLineIndex == -1) {
                 throw new IllegalArgumentException("잘못된 입력입니다.");
             }
             String customDelimiter = input.substring(2, newLineIndex);
             delimiters = "[" + customDelimiter + ",;]";
-            input = input.substring(newLineIndex + 1).replace("\\n", ""); // 줄바꿈 문자 처리
+            input = input.substring(newLineIndex + 1);
         }
 
         String[] splitInput = input.split(delimiters);
