@@ -18,7 +18,7 @@ public class Application {
     }
 
     // 커스텀 구분자 지정하는 함수
-    public static void customSeparator(String input) {
+    public static void setCustomSeparator(String input) {
         // "//"와 "\n" 사이에 문자가 존재하면 커스텀 구분자로 지정
         if (input.startsWith("//")) {
             if (input.substring(3, 5).equals("\\n")) {
@@ -29,7 +29,7 @@ public class Application {
     }
 
     // 빈 문자열인지 확인하는 함수
-    public static boolean validateInput(String input) {
+    public static boolean validateEmptyInput(String input) {
         return input == null || input.isEmpty();
     }
 
@@ -46,10 +46,6 @@ public class Application {
             if (s == null || s.isEmpty()) {
                 throw new IllegalArgumentException("구분자가 연속이거나 숫자 사이에 존재하지 않습니다.");
             }
-            // 문자열 갯수로 구분자 외 다른 문자가 존재하는지 확인
-//            if (!s.equals(String.valueOf(basicSeparators[0])) && !s.equals(String.valueOf(basicSeparators[1]))
-//                    && !s.equals(String.valueOf(customSeparators[0]))) {
-//                throw new IllegalArgumentException("구분자인 문자만 입력할 수 있습니다.");
         }
     }
 
@@ -78,17 +74,23 @@ public class Application {
         }
     }
 
-    public static void main(String[] args) {
-        init();
-        input();
-        customSeparator(userInput);
-        if (validateInput(userInput)) {
+    // 입력 유효성 검사 함수
+    public static void validInput(String input) {
+        validateBlankInput(input);
+        validateNotSeparator(input);
+        if (validateEmptyInput(userInput)) {
             System.out.println("결과 : " + 0);
             return;
         }
         validateNotSeparator(userInput);
         validateBasicSeparator(userInput);
         validateEndWithNumber(userInput);
-        validateBlankInput(userInput);
+    }
+
+    public static void main(String[] args) {
+        init();
+        input();
+        setCustomSeparator(userInput);
+        validInput(userInput);
     }
 }
