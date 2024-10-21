@@ -7,6 +7,29 @@ public class Application {
 
     }
 
+    public static int add(String input) {
+        try {
+            validateInput(input); // 입력 유효성 검사
+
+            if(input.isEmpty()){
+                return 0; //빈 문자열 처리
+            }
+            String delimiter = ",|:"; // 기본 구분자: 쉼표(,)와 콜론(:)
+            String numbers = input;
+
+            // 커스텀 구분자 처리
+            if (input.startsWith("//")) {
+                input = input.replace("\\n", "\n");
+                String[] parts = input.split("\n", 2);
+                delimiter = extractDelimiter(parts); // 구분자 추출
+                numbers = parts[1]; // 숫자 부분 추출
+            }
+            return sumNumbers(numbers, delimiter); // 합산 결과 반환
+        } catch (IllegalArgumentException e) {
+            throw e;
+        }
+    }
+
     private static void validateInput(String input) {
         try {
             if (input == null) {
