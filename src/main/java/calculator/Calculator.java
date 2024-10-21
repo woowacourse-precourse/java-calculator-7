@@ -54,7 +54,7 @@ public class Calculator {
 
     private static String findSeparator(String userInput) {
         return userInput.substring(userInput.indexOf("//") + 2,
-                userInput.indexOf("\\n"));
+            userInput.indexOf("\\n"));
     }
 
     private static String getSeparatorRemovedSubstring(String userInput) {
