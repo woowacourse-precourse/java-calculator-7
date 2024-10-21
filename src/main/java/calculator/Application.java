@@ -7,5 +7,6 @@ public class Application {
         Calculator calculator = new Calculator();
 
         String input = calculator.input();
+        String basicProcess = calculator.basicSeparate(input);
     }
 }
