@@ -14,7 +14,6 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String inputStr = readLine();
 
-        // 정상적인 커스텀 구분자 입력이 있을 때
         Pattern customSepPattern = Pattern.compile("//.\\\\n");
         Matcher m = customSepPattern.matcher(inputStr);
         boolean isCustomForm = m.find();
