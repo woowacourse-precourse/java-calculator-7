@@ -1,6 +1,9 @@
 package calculator;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 public class Expression {
@@ -10,27 +13,27 @@ public class Expression {
     public static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
 
     private final Delimiters delimiters;
-    private final List<String> operands;
+    private final Operands operands;
 
-    private Expression(final Delimiters customDelimiters, final Collection<String> operands) {
+    private Expression(final Delimiters customDelimiters, final Operands operands) {
         Delimiters.check(customDelimiters);
-        checkOperandsConstraints(operands);
+        Operands.check(operands);
 
         delimiters = Delimiters.of(addDefaultDelimiters(DEFAULT_DELIMITERS));
-        this.operands = new ArrayList<>(operands);
+        this.operands = operands;
     }
 
-    public static Expression of(final Collection<String> operands) {
+    public static Expression of(final Operands operands) {
         return new Expression(Delimiters.of(), operands);
     }
 
-    public static Expression of(final Delimiters customDelimiters, final Collection<String> operands) {
+    public static Expression of(final Delimiters customDelimiters, final Operands operands) {
         return new Expression(customDelimiters, operands);
     }
 
     public static Expression parse(final String expr) {
         final Delimiters delimiters = parseCustomDelimiters(expr);
-        final List<String> parsedOperands = parseOperands(expr, delimiters);
+        final Operands parsedOperands = parseOperands(expr, delimiters);
 
         return Expression.of(delimiters, parsedOperands);
     }
@@ -54,16 +57,17 @@ public class Expression {
         return Delimiters.of(delimiters);
     }
 
-    private static List<String> parseOperands(final String expr, final Delimiters delimiters) {
+    private static Operands parseOperands(final String expr, final Delimiters delimiters) {
         int startIndex = 0;
         for (String delimiter : delimiters.toSet()) {
             startIndex += delimiter.length() + CUSTOM_DELIMITER_PREFIX.length() + CUSTOM_DELIMITER_SUFFIX.length();
         }
         final String str = expr.substring(startIndex);
 
-        return new ArrayList<>(Arrays.stream(str.split(buildDelimiterRegex(delimiters)))
-                .map(String::trim)
-                .toList());
+        return Operands.of(
+                Arrays.stream(str.split(buildDelimiterRegex(delimiters)))
+                        .map(String::trim)
+                        .toList());
     }
 
     private static String buildDelimiterRegex(final Delimiters delimiters) {
@@ -77,14 +81,6 @@ public class Expression {
         }
         sb.delete(sb.length() - 1, sb.length());
         return sb.toString();
-    }
-
-    public static void checkOperandsConstraints(final Collection<String> operands) {
-        for (String operand : operands) {
-            if (!isNumeric(operand)) {
-                throw new IllegalArgumentException("피연산자는 숫자로만 이루어져야 합니다: " + operand);
-            }
-        }
     }
 
     private static Set<String> addDefaultDelimiters(final Set<String> delimiters) {
@@ -102,7 +98,7 @@ public class Expression {
         return delimiters;
     }
 
-    public List<String> getOperands() {
-        return new ArrayList<>(operands);
+    public Operands getOperands() {
+        return operands;
     }
 }
