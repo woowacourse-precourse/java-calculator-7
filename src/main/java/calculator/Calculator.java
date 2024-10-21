@@ -25,6 +25,9 @@ public class Calculator {
     
     //입력 값 계산
     public int getResult(String input){
+        if(input == null || input.isEmpty()){
+            return 0;
+        }
         input = parseNumber(input);
         int result = 0;
         String[] numbers = input.split(delimiter);//커스텀 구분자제거
