@@ -9,6 +9,18 @@ import org.junit.jupiter.api.Test;
 public class AddCalculatorTest {
 
     @Test
+    void 소수를_더할_수_있다() {
+        List<Double> numbers = new ArrayList<>();
+        numbers.add(1.2);
+        numbers.add(2.0);
+        numbers.add(3.5);
+
+        AddCalculator.add(numbers);
+
+        assertEquals(6.7, AddCalculator.sum());
+    }
+
+    @Test
     void 숫자_여러_개를_더할_수_있다() {
         List<Double> numbers = new ArrayList<>();
         numbers.add((double) 1);
