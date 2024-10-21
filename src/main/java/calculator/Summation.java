@@ -10,6 +10,9 @@ public class Summation {
 
     void sum() {
         for (Long number : this.numbers) {
+            if (number == null) {
+                return;
+            }
             sum += number;
         }
     }
