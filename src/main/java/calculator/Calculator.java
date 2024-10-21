@@ -4,15 +4,17 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Calculator {
+    private static final Logger logger = Logger.getLogger(Calculator.class.getName());
     static final String regex = "//(.*?)\\\\n";
     static Set<String> separators = new HashSet<>(Arrays.asList(",", ":"));
 
     public String input() {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
+//        System.out.println("덧셈할 문자열을 입력해 주세요.");
         return Console.readLine();
     }
 
@@ -22,10 +24,10 @@ public class Calculator {
         if (hasCustom) {
             inputValue = extractNumbersPart(inputValue);
         }
-        System.out.println("추출된 구분자: " + separators);
-        System.out.println("숫자 부분: " + inputValue);
+        logger.info("추출된 구분자: " + separators);
+        logger.info("숫자 부분: " + inputValue);
         String[] numbers = splitNumbers(inputValue);
-        System.out.println(Arrays.toString(numbers));
+        validate(numbers);
     }
 
     static boolean extractCustomSeparators(String input) {
@@ -57,5 +59,19 @@ public class Calculator {
             return new String[0]; // 빈 배열을 반환
         }
         return numbersPart.split(String.join("|", separators));
+    }
+
+    static void validate(String[] numbers) {
+        //양의 정수 정규식
+        String numberRegex = "^[1-9][0-9]*$";
+        for (String data : numbers) {
+            if (data == null) {
+                continue;
+            }
+            //해당 문자가 숫자형인지
+            if (!data.matches(numberRegex)) {
+                throw new IllegalArgumentException("잘못된 값을 입력하였습니다.");
+            }
+        }
     }
 }
