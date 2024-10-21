@@ -2,6 +2,10 @@ package calculator;
 
 public class InputParser {
     public static String[] stringParse(String str){
+        if(str == null || str.isEmpty()){
+            return new String[]{"0"};
+        }
+
         if(str.startsWith("//")){
             return customParser(str);
         }else{
