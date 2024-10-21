@@ -1,11 +1,13 @@
 package calculator.domain;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Delimiters {
+    private static final String REGEX_OR = "|";
     private static final Set<Delimiter> DEFAULT_DELIMITERS = Set.of(Delimiter.from(","), Delimiter.from(":"));
 
     private final Set<Delimiter> value;
@@ -28,7 +30,9 @@ public class Delimiters {
         return new Delimiters(allDelimiters);
     }
 
-    public Set<Delimiter> getDelimiters() {
-        return Collections.unmodifiableSet(value);
+    public String createRegexPattern() {
+        return value.stream()
+                .map(delimiter -> Pattern.quote(delimiter.getValue()))
+                .collect(Collectors.joining(REGEX_OR));
     }
 }
