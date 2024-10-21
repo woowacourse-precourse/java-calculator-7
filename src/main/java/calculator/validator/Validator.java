@@ -23,7 +23,14 @@ public interface Validator {
     }
 
 
-    public String canParseToNumber(String input);
+    String canParseToNumber(String input);
 
 
+    boolean isDelimiterLengthOne(String delimiterString);
+
+    boolean isNotCustomEqualDefault(String delimiterString);
+
+    boolean isNotNumeric(String delimiterString);
+
+    boolean isDelimiterNullOrBlank(String delimiterString);
 }

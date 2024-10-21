@@ -26,4 +26,44 @@ public class ValidatorImpl implements Validator {
         return null;
     }
 
+    public boolean isDelimiterNullOrBlank(String delimiter) {
+        if (delimiter == null || delimiter.isBlank()) {
+            ExceptionUtils.throwCustomDelimiterCanNotBeBlankException();
+        }
+        return true;
+
+    }
+
+
+    public boolean isNotNumeric(String escapeDelimiter) {
+
+        try {
+            Long.parseLong(escapeDelimiter);
+            ExceptionUtils.throwDelimiterCanNotBeNumberException();
+        } catch (NumberFormatException e) {
+
+        }
+        return true;
+
+    }
+
+
+    public boolean isDelimiterLengthOne(String delimiter) {
+        if (delimiter.length() != 1) {
+            ExceptionUtils.throwCustomDelimiterLengthMustBeOneException();
+        }
+        return true;
+
+    }
+
+
+    public boolean isNotCustomEqualDefault(String delimiter) {
+        if (delimiter.equals(StringConst.COMMA) || delimiter.equals(StringConst.COLON)) {
+            ExceptionUtils.throwCustomCanNotBeDefaultDelimiterException();
+        }
+        return true;
+
+    }
+
+
 }
