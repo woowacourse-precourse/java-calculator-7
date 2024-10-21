@@ -8,7 +8,7 @@ public class Validator {
     private static final String SEPERATOR_COLON = ":";
     private static final String SEPERATOR_COMMA = ",";
     private static final String SEQUENCE_REGEX = ".*\\D{2,}.*";
-    public static void validateCustomSeperator(String inputString) {
+    public void validateCustomSeperator(String inputString) {
         if (!inputString.contains(DELIMETER_END)) {
             throw new IllegalArgumentException("'\\n'로 커스텀 구분자를 지정해야 합니다.");
         }
@@ -30,13 +30,13 @@ public class Validator {
         }
     }
 
-    public static void validateNumber(List<Integer> list) {
+    public void validateNumber(List<Integer> list) {
         if (!list.stream().allMatch(number -> number > 0)) {
             throw new IllegalArgumentException("숫자는 양수여야 합니다.");
         }
     }
 
-    public static void validateSeperator(String Regex, String inputString) {
+    public void validateSeperator(String Regex, String inputString) {
         if (inputString.matches(Regex)) {
             throw new IllegalArgumentException("쉼표(,) 또는 콜론(:) 또는 커스텀 구분자가 아닌 다른 구분자는 사용할 수 없습니다.");
         }

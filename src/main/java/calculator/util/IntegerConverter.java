@@ -5,13 +5,14 @@ import calculator.validator.Validator;
 import java.util.List;
 
 public class IntegerConverter {
-    public static List<Integer> convertToIntegerList(List<String> strings) {
+    private final Validator validator = new Validator();
+    public List<Integer> convertToIntegerList(List<String> strings) {
         List<Integer> list = strings.stream()
                 .filter(IntegerConverter::isNumeric)
                 .map(Integer::parseInt)
                 .toList();
 
-        Validator.validateNumber(list);
+        validator.validateNumber(list);
 
         return list;
     }

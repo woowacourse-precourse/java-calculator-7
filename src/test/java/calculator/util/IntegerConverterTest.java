@@ -15,9 +15,10 @@ class IntegerConverterTest {
         assertSimpleTest(() -> {
             // given
             List<String> stringList = List.of("1", "3", "4", "23");
+            IntegerConverter integerConverter = new IntegerConverter();
 
             // when
-            List<Integer> integerList = IntegerConverter.convertToIntegerList(stringList);
+            List<Integer> integerList = integerConverter.convertToIntegerList(stringList);
 
             // then
             assertThat(integerList).isEqualTo(List.of(1, 3, 4, 23));

@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class InputString {
+    private final Validator validator = new Validator();
     private final String inputString;
     private final String NUMBER_REGEX = "^\\d.*";
     private final String PATTERN_REGEX = "^//([^0-9])\\\\n(.*)";
@@ -36,7 +37,7 @@ public class InputString {
         Pattern compile = Pattern.compile(PATTERN_REGEX);
         Matcher matcher = compile.matcher(inputString);
 
-        Validator.validateCustomSeperator(inputString);
+        validator.validateCustomSeperator(inputString);
 
         if (matcher.matches()) {
             list.add(matcher.group(1));  // 커스텀 구분자 추출
