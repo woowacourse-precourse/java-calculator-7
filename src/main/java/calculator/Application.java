@@ -16,12 +16,12 @@ public class Application {
                 return;
             }
 
-            String delimiter = "[,;]";
+            String delimiter = "[,:]";
 
             if(input.contains("//")) {
                 Pattern pattern = Pattern.compile("//(.*?)\\\\n");
                 Matcher matcher = pattern.matcher(input);
-                StringBuilder customDelimiters = new StringBuilder("[,;");
+                StringBuilder customDelimiters = new StringBuilder("[,:");
 
                 int count = 0;
 

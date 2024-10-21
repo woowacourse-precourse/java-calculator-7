@@ -15,7 +15,7 @@
     - [o] camp.nextstep.edu.missionutils.Console의 readLine() 사용
     - [o] 빈 문자열로 들어올 경우 0으로 처리
 2. 입력된 문자열 분리
-    - [o] 쉼표(,) 또는 세미콜론(;)으로 문자열 분리
+    - [o] 쉼표(,) 또는 콜론(:)으로 문자열 분리
     - [o] 커스텀 구분자("//"과 "\n" 사이의 문자) 추가로 문자열 분리 
 3. 사용자가 잘못된 입력할 경우 IllegalArgumentException 발생
     - [o] 숫자가 아닐 경우
