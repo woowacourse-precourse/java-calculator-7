@@ -47,14 +47,14 @@ public class CalculatorService {
 //        System.out.println(newSeparator +" " +value);
         makeNewSeparator(newSeparator);
         calculator.setRawValue(value);
-        List<Integer> processedValue = extractNumbersToList();
+        List<Double> processedValue = extractNumbersToList();
         if (!isValid) {
             exceptionHandler.handleException(new IllegalArgumentException());
         }
         calculator.setProcessedValue(processedValue);
     }
 
-    public List<Integer> extractNumbersToList() {
+    public List<Double> extractNumbersToList() {
         List<String> resultList = new ArrayList<>(List.of(calculator.getRawValue())); // 초기 결과 리스트
         try {
             for (String separator : calculator.getSeparators()) {
@@ -68,16 +68,18 @@ public class CalculatorService {
         } catch (Exception e) {
             isValid = false;
         }
-        List<Integer> processedValue = new ArrayList<>();
+        List<Double> processedValue = new ArrayList<>();
         for (String item : resultList) {
             if (item.trim().isEmpty()) continue;
-            if (!item.matches("-?\\d+")) {
+            if (!item.matches("\\d+(\\.\\d+)?")) {
                 throw new IllegalArgumentException();
             }
-            if (Integer.parseInt(item)< 0) {
+            double value = Double.parseDouble(item);
+            if (value <= 0) {
                 throw new IllegalArgumentException();
             }
-            processedValue.add(Integer.parseInt(item));
+
+            processedValue.add( value);
         }
         return processedValue;
     }
@@ -101,10 +103,10 @@ public class CalculatorService {
     }
 
 
-    public int sumOfList() {
-        List<Integer> values = calculator.getProcessedValue();
-        int sum = 0;
-        for (int value : values) {
+    public Double sumOfList() {
+        List<Double> values = calculator.getProcessedValue();
+        Double sum = (double) 0;
+        for (Double value : values) {
             sum += value;
         }
         calculator.setSumValue(sum);
