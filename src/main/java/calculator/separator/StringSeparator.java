@@ -33,11 +33,12 @@ public class StringSeparator {
     }
 
     public String extractCustomDelimiters() {
+        String extractedCustomDelimiters = "";
         Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(basicString);
         if (matcher.find()) {
-            return matcher.group(1);
+            extractedCustomDelimiters = matcher.group(1);
         }
-        return "";
+        return extractedCustomDelimiters;
     }
 
     public String addCustomDelimiters(String customDelimiters) {
@@ -49,12 +50,13 @@ public class StringSeparator {
     }
 
     public String separateCustomDelimiter() {
-        if (!validCustomDelimiters()) {
-            return basicString;
+        String separtatedString = basicString;
+        if (validCustomDelimiters()) {
+            String customDelimiters = extractCustomDelimiters();
+            addCustomDelimiters(customDelimiters);
+            separtatedString = splitCustomDelimiters();
         }
-        String customDelimiters = extractCustomDelimiters();
-        addCustomDelimiters(customDelimiters);
-        return splitCustomDelimiters();
+        return separtatedString;
     }
 
     public List<String> splitBasicStringWithDelimiters() {
