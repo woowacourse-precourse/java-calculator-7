@@ -33,23 +33,15 @@ public class PositiveNumber {
     }
 
     private static void validate(final String number) {
-        validatePositive(number);
+        validateNegative(number);
         validateOnlyDigits(number);
         validateLength(number);
     }
 
-    private static boolean isDefault(final String number) {
-        return DEFAULT_NUMBER.equals(number) || number.isEmpty();
-    }
-
-    private static void validatePositive(final String number) {
-        if (isNegative(number)) {
+    private static void validateNegative(final String number) {
+        if (number.startsWith(MINUS)) {
             throw new IllegalArgumentException();
         }
-    }
-
-    private static boolean isNegative(final String number) {
-        return number.startsWith(MINUS);
     }
 
     private static void validateOnlyDigits(final String number) {
@@ -58,6 +50,11 @@ public class PositiveNumber {
         }
     }
 
+    /**
+     * Empty Stream 공진리(vacuous truth) 원리: 빈 스트림의 {@code allMatch()}는 {@code true} 반환
+     *
+     * @return {@code true} 빈 문자열이거나 모두 숫자인 경우, {@code false} 문자열에 숫자가 아닌 문자가 포함된 경우
+     */
     private static boolean hasOnlyDigits(final String number) {
         return number.chars()
                 .allMatch(Character::isDigit);
@@ -67,6 +64,10 @@ public class PositiveNumber {
         if (isOutOfRange(number.length())) {
             throw new IllegalArgumentException();
         }
+    }
+
+    private static boolean isDefault(final String number) {
+        return DEFAULT_NUMBER.equals(number) || number.isEmpty();
     }
 
     private static boolean isOutOfRange(final int numberDigit) {
