@@ -4,10 +4,10 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static void main(String[] args) {
-
         String input = Console.readLine();
-        add(input);
+        String result = add(input);
         Console.close();
+        System.out.printf(result);
     }
 
     public static String add(String input) {
