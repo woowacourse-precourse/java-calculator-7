@@ -1,4 +1,4 @@
-package calculator;
+package calculator.model;
 
 public class InputValidator {
     private static final int CUSTOM_DELIMITER_SIZE = 1;

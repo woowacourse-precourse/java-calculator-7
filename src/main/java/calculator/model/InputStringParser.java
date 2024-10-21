@@ -1,9 +1,8 @@
-package calculator;
+package calculator.model;
 
 import java.util.regex.Pattern;
 
 public class InputStringParser {
-
     public static final String CUSTOM_DELIMITER_END = "\\n";
     private static final String DEFAULT_DELIMITER = "[,:]";
     private static final int CUSTOM_DELIMITER_START_INDEX = 2;
@@ -31,7 +30,7 @@ public class InputStringParser {
         return input.substring(CUSTOM_DELIMITER_END_INDEX);
     }
 
-    public String[] split(String input) {
+    public String[] splitByDelimiter(String input) {
         String[] numbers = input.split(delimiterPattern);
         InputValidator.validateNumbers(numbers);
         return numbers;
