@@ -1,5 +1,6 @@
 package calculator.view;
 
+import calculator.global.exception.Exception;
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
@@ -15,7 +16,7 @@ public class InputView {
         System.out.println(INPUT);
         String inputString = Console.readLine();
         if(inputString.isBlank()){
-            throw new IllegalStateException("입력을 부탁합니다.");
+            throw new IllegalStateException((Exception.INPUT_REQUIRED_ERROR).getValue());
         }
         return inputString;
     }

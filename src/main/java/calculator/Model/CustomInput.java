@@ -1,5 +1,7 @@
 package calculator.Model;
 
+import calculator.global.exception.Exception;
+
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
@@ -68,7 +70,7 @@ public class CustomInput extends Input {
      */
     private void checkCustomDelim(String userInput) {
         if (!userInput.contains("\\n")) {
-            throw new IllegalArgumentException("커스텀 구분자 포맷을 지켜주세요");
+            throw new IllegalArgumentException((Exception.CUSTOM_DELIMITER_FORMAT_ERROR).getValue());
         }
     }
 
@@ -78,7 +80,7 @@ public class CustomInput extends Input {
      */
     void checkDelimDigits(String customDelimiter){
         if (customDelimiter.chars().anyMatch(Character::isDigit)) {
-            throw new IllegalStateException("구분자로 숫자는 사용할 수 없습니다.");
+            throw new IllegalStateException((Exception.INVALID_DELIMITER_ERROR).getValue());
         }
     }
 

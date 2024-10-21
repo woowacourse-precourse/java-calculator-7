@@ -1,5 +1,7 @@
 package calculator.Model;
 
+import calculator.global.exception.Exception;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,7 +51,7 @@ public abstract class Input {
         try {
             return Double.parseDouble(value);  // 숫자로 변환 시도
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("입력된 값 중 숫자가 아닌 값이 있습니다: " + value);
+            throw new IllegalArgumentException((Exception.NON_NUMERIC_INPUT_ERROR).getValue());
         }
     }
 
@@ -59,7 +61,7 @@ public abstract class Input {
     private void isPositiveNumber(){
         for(double num : inputNumbers) {
             if (num < 0) {
-                throw new IllegalStateException("양수를 입력해주세요");
+                throw new IllegalStateException((Exception.POSITIVE_NUMBER_REQUIRED_ERROR).getValue());
             }
         }
     }
