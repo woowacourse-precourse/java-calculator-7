@@ -31,14 +31,15 @@ public class Calculate {
     }
 
     private int isPositiveNumber(String number) {
+        int num = 0;
         try {
-            int num = Integer.parseInt(number);
-            if (num > 0) {
-                return num;
+            num = Integer.parseInt(number);
+            if (num < 0) {
+                throw new IllegalArgumentException();
             }
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException();
         }
-        return 0;
+        return num;
     }
 }
