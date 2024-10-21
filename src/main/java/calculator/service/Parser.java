@@ -46,13 +46,18 @@ public class Parser {
         int sum = 0;
 
         for (String number : numbers) {
-            int num = Integer.parseInt(number.trim());
+            try {
+                int num = Integer.parseInt(number.trim());
 
-            if (num < 0) {
-                throw new IllegalArgumentException("음수는 허용되지 않습니다.");
+                if (num < 0) {
+                    throw new IllegalArgumentException("음수는 허용되지 않습니다.");
+                }
+                sum += num;
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("유효하지 않은 숫자 형식입니다: " + number);
             }
-            sum += num;
         }
+
 
         return sum;
     }
