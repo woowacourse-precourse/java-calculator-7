@@ -1,4 +1,4 @@
-package calculator.controller;
+package calculator.Calculator;
 
 import calculator.input.InputValidator;
 import calculator.staticValue.RegexPatterns;
