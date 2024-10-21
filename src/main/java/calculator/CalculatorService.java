@@ -5,8 +5,6 @@ import java.util.regex.Pattern;
 
 public class CalculatorService {
 
-    Calculator calculator;
-
     public String checkCustomSeparator(String inputData) {
         if (inputData.startsWith("//")) {
             if (!(inputData.indexOf('n') == -1)) {
