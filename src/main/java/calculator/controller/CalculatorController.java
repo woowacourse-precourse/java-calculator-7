@@ -16,14 +16,9 @@ public class CalculatorController {
 
     public void run() {
         try {
-            String input = inputView.getInputString();
-
-            Delimiter delimiter = new Delimiter(input);
-            String[] splitNumbers = delimiter.getSplitString();
-
-            Number number = new Number(splitNumbers);
-            int result = number.calculateSum();
-            outputView.printResult(result);
+            Delimiter delimiter = new Delimiter(inputView.getInputString());
+            Number number = new Number(delimiter.getSplitString());
+            outputView.printResult(number.calculateSum());
 
         } catch (IllegalArgumentException e) {
             outputView.printError(e.getMessage());
