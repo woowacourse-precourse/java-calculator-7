@@ -30,8 +30,10 @@ public class Calculator {
         if (inputSyntaxValidator.validate(input)) {
             this.usingCustomDelimiter = true;
             this.customDelimiter = stringParser.customDelimiter(input);
+            this.input = input.substring(input.indexOf("\\n") + 2).trim();
+        } else {
+            this.input = input.substring(input.indexOf("\\n") + 1).trim();
         }
-        this.input = input.substring(input.indexOf("\\n") + 2).trim();
         validateInput();
     }
 
