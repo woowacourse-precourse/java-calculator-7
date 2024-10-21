@@ -3,6 +3,8 @@ package calculator;
 public class StringAddCalculator {
 
     public static int add(String input) {
+        InputValidator.validateNullInput(input);
+        
         if (InputValidator.isEmptyString(input)) {
             return 0;
         }
