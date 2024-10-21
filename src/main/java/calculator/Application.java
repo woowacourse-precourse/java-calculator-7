@@ -26,7 +26,15 @@ public class Application {
             if (number.isEmpty()) { // 빈 문자열 체크
                 numbers.add(0);
             } else {
-                numbers.add(Integer.parseInt(number.trim()));
+                try {
+                    int parsedNumber = Integer.parseInt(number.trim());
+                    if (parsedNumber < 0) {
+                        throw new IllegalArgumentException("양수만 허용됩니다.: " + parsedNumber);
+                    }
+                    numbers.add(parsedNumber);
+                } catch (NumberFormatException e) {
+                    throw new IllegalArgumentException("숫자가 아닌 문자가 포함되어 있습니다.: " + number);
+                }
             }
         }
 
