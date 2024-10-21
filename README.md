@@ -46,3 +46,40 @@
     - [x] 입력값 중 음수를 입력한 경우
     - [x]  구분자 사이 값이 숫자가 아닌 경우
         - [x]  커스텀 구분자, 디폴트 구분자 외에 문자가 있는 경우
+
+# 패키지 구조
+
+```mathematica
+java
+└── calculator
+    ├── Application.java
+    ├── common
+    │   ├── CalculatorAppConfig.java
+    │   ├── CalculatorConstant.java
+    │   ├── ConsoleMessage.java
+    │   └── DelimiterConstant.java
+    ├── controller
+    │   ├── CalculatorApplication.java
+    │   └── StringCalculatorApplication.java
+    ├── model
+    │   ├── domain
+    │   │   ├── CustomNumber.java
+    │   │   └── DefaultDelimiter.java
+    │   ├── implement
+    │   │   ├── DelimiterChecker.java
+    │   │   ├── DelimiterExtractor.java
+    │   │   ├── DelimiterManager.java
+    │   │   ├── DelimiterStore.java
+    │   │   └── StringParser.java
+    │   ├── service
+    │   │   ├── Calculator.java
+    │   │   └── StringSumCalculator.java
+    ├── view
+    │   ├── ApplicationConsoleView.java
+    │   ├── ApplicationView.java
+    │   └── handler
+    │       ├── ConsoleInputHandler.java
+    │       ├── ConsoleOutputHandler.java
+    │       ├── InputHandler.java
+    │       └── OutputHandler.java
+```
