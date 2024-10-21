@@ -74,4 +74,19 @@ public class CalculatorTest {
         assertThat(resultForCustomDelimiter).isEqualTo(136);
     }
 
+    @Test
+    void 숫자_0을_제외하고_0이_포함된_숫자_계산() {
+        // given
+        String multiplesOfTen = "10,100";
+        String numberWithZeroInMiddle = "20:205";
+
+        // when
+        int sumForMultiplesOfTen = calculator.processInputAndSum(multiplesOfTen);
+        int sumForNumberWithZeroInMiddle = calculator.processInputAndSum(numberWithZeroInMiddle);
+
+        // then
+        assertThat(sumForMultiplesOfTen).isEqualTo(110);
+        assertThat(sumForNumberWithZeroInMiddle).isEqualTo(225);
+    }
+
 }
