@@ -1,24 +1,14 @@
 package calculator;
 import camp.nextstep.edu.missionutils.*;
+import java.util.List;
+import java.util.regex.Pattern;
+import java.util.Arrays;
 
 public class Application {
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
-        String[] numbers;
-
-        if (input.startsWith("//")) {
-            int newLineIndex = input.indexOf("\n");
-            if (newLineIndex == -1) {
-                throw new IllegalArgumentException("구분자가 잘못되었습니다.");
-            }
-            String delimiter = input.substring(2, newLineIndex);
-            input = input.substring(newLineIndex + 1);
-            numbers = input.split("[" + delimiter + ",:]");
-        }
-        else {
-            numbers = input.split("[,:]");
-        }
+        List<String> numbers = parse(input);
     
         int sum = 0;
         for (String number : numbers) {
@@ -30,6 +20,26 @@ public class Application {
                 sum += num; 
             }  
         }
-        System.out.println("결과 : " + sum);
-        
+        System.out.println("결과 : " + sum);   
+    }
+    public static List<String> parse(String input) {
+        if (input == null || input.trim().isEmpty()) {
+            return List.of();
+        }
+
+        String delimiter = ",|:";
+        String numbers = input;
+
+        // 커스텀 구분자 
+        if (input.startsWith("//")) {
+            int delimiterEnd = input.indexOf("\n");
+
+            if (delimiterEnd == -1) {
+                throw new IllegalArgumentException("커스텀 구분자 형식이 올바르지 않습니다.");
+            }
+            delimiter = Pattern.quote(input.substring(2, delimiterEnd));
+            numbers = input.substring(delimiterEnd + 1); // \n은 1개의 문자 +1
+        }
+        return Arrays.asList(numbers.split(delimiter));
+    }
 }
