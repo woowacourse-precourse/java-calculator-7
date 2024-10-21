@@ -27,10 +27,15 @@ public class Number {
 
     public boolean hasNextIndexOfNewLine(int lastIndex, String rawText) {
         int textLength = rawText.length();
+        if (lastIndex <= 0) {
+            return false;
+        }
         if (lastIndex+2 >= textLength || lastIndex+4 >= textLength) {
             return false;
         }
-        if (lastIndex > 0 && rawText.substring(lastIndex+2, lastIndex+4).equals("\\n")) {
+
+        String nextWord = rawText.substring(lastIndex+2, lastIndex+4);
+        if (nextWord.equals("\\n")) {
             return true;
         }
         return false;
