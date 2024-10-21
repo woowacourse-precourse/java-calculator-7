@@ -2,6 +2,8 @@ package calculator.parser;
 
 import calculator.global.DefaultDelimiter;
 
+import java.util.Arrays;
+
 public class InputParser {
 
     private static final InputParser INSTANCE = new InputParser();
@@ -26,6 +28,10 @@ public class InputParser {
 
     private String[] extractNumbersFromDefaultSyntax(String defaultSyntax, String customDelimiter) {
         String delimiters = DefaultDelimiter.COMMA.getKey() + DefaultDelimiter.COLON.getKey() + customDelimiter;
-        return defaultSyntax.split("[" + delimiters + "]");
+        String[] numbers = defaultSyntax.split("[" + delimiters + "]");
+
+        return Arrays.stream(numbers)
+                .filter(num -> !num.isEmpty())
+                .toArray(String[]::new);
     }
 }
