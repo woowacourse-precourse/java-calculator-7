@@ -1,11 +1,7 @@
 package calculator.parser;
 
-import java.util.HashSet;
-import java.util.Set;
+public class ExpressionParser implements NumberParser {
 
-public class ExpressionParser implements Parser {
-
-    private final Set<String> delimiters = new HashSet<>();
     private final String startToken = "//";
     private final String endToken = "\\n";
     private final String TOKEN_STRING = "TOKEN";
@@ -20,12 +16,12 @@ public class ExpressionParser implements Parser {
     // think: split() 내부에서, setDelimiters()를 호출하는 게 맞을까?
     @Override
     public String[] split(String value) {
-        
+
         if (isExistsCustomDelimiter(value)) {
             value = stripCustomDelimiter(value);
         }
 
-        value = replaceToken(stripCustomDelimiter(value));
+        value = replaceToken(value);
 
         return value.split(TOKEN_STRING);
     }
