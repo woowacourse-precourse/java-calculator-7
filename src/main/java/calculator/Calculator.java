@@ -17,10 +17,12 @@ public class Calculator {
     }
 
     private String[] checkCustomDelimeter(String input) {
-        StringTokenizer st = new StringTokenizer(input.substring(2), "\\n");
-        if (st.countTokens() != 2) {
+        input = input.substring(2);
+        int idx = input.indexOf("\\n");
+        if (idx == -1) {
             throw new IllegalArgumentException("올바르지 않은 커스텀 구분자 정의");
         } else {
+            StringTokenizer st = new StringTokenizer(input, "\\n");
             String[] delimeterAndExpression = {st.nextToken(), st.nextToken()};
             return delimeterAndExpression;
         }
