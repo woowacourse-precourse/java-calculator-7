@@ -20,7 +20,7 @@ public class InputService {
 	}
 
 	public String removeBlank(String input) {
-		return input.trim();
+		return input.replace(" ", "");
 	}
 
 	public String[] splitInput(String input) {
