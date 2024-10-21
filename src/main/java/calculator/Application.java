@@ -43,18 +43,18 @@ public class Application {
         }
 
         for(int i = 0; i <numDelimiterString.length(); i++) {
-            if(custom && i > 4 && Character.isDigit(numDelimiterString.charAt(i)) == prevIsNum) {
+            if(custom && i > 4 && Character.isDigit(numDelimiterString.charAt(i)) == prevIsNum) { //커스텀 구분자일때 숫자나 구분자가 연속으로 들어온 경우
                 throw new IllegalArgumentException("Illegal Argument");
-            }else if(custom && i > 4 && prevIsNum && numDelimiterString.charAt(i) != delimiter) {
+            }else if(custom && i > 4 && prevIsNum && numDelimiterString.charAt(i) != delimiter) { //커스텀 구분자일때 구분자로 다른 구분자가 들어온 경우
                 throw new IllegalArgumentException("Illegal Argument");
-            }else if(!custom && Character.isDigit(numDelimiterString.charAt(i)) == prevIsNum) {
+            }else if(!custom && Character.isDigit(numDelimiterString.charAt(i)) == prevIsNum) { //일반 구분자일때 숫자나 구분자가 연속으로 들어온 경우
                 throw new IllegalArgumentException("Illegal Argument");
-            }else if(!custom && prevIsNum && numDelimiterString.charAt(i) != ',' && numDelimiterString.charAt(i) != ':') {
+            }else if(!custom && prevIsNum && numDelimiterString.charAt(i) != ',' && numDelimiterString.charAt(i) != ':') { //일반 구분자일때 쉼표와 콜론 이외의 구분자가 들어온 경우
                 throw new IllegalArgumentException("Illegal Argument");
             }else if(!Character.isDigit(numDelimiterString.charAt(i))) {
                 prevIsNum = false;
                 continue;
-            }else if(Character.getNumericValue(numDelimiterString.charAt(i)) <= 0) {
+            }else if(Character.getNumericValue(numDelimiterString.charAt(i)) <= 0) { //음수가 들어온 경우
                 throw new IllegalArgumentException("Illegal Argument");
             }else {
                 addResult += Character.getNumericValue(numDelimiterString.charAt(i));
