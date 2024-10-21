@@ -117,4 +117,18 @@ class StringValidatorTest {
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessage(errorMessage);
 	}
+
+	@ParameterizedTest
+	@DisplayName("커스텀 구분자가 비어 있는 문자열이 입력되었을 때 에러를 발생시킨다.")
+	@ValueSource(strings = {"//\\n", "//\\n1"})
+	void 커스텀_구분자가_비어_있는_문자열이_입력되었을_때_에러를_발생시킨다(String input) {
+		// given
+		String customDelimiter = "";
+		StringValidator stringValidator = new StringValidator(input, customDelimiter);
+
+		// when, then
+		assertThatThrownBy(stringValidator::validate)
+				.isInstanceOf(IllegalArgumentException.class)
+				.hasMessage(errorMessage);
+	}
 }
