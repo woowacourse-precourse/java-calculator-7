@@ -28,6 +28,8 @@ public class Calculator {
         logger.info("숫자 부분: " + inputValue);
         String[] numbers = splitNumbers(inputValue);
         validate(numbers);
+        int result = calculateSum(numbers);
+        System.out.println("결과 : " + result);
     }
 
     static boolean extractCustomSeparators(String input) {
@@ -73,5 +75,16 @@ public class Calculator {
                 throw new IllegalArgumentException("잘못된 값을 입력하였습니다.");
             }
         }
+    }
+
+    static int calculateSum(String[] numbers) {
+        // 구분자로 나누고 각 숫자의 합을 계산합니다.
+        int sum = 0;
+        for (String number : numbers) {
+            if (!number.trim().isEmpty()) {
+                sum += Integer.parseInt(number);
+            }
+        }
+        return sum;
     }
 }
