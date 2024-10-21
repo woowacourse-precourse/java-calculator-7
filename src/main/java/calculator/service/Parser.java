@@ -10,19 +10,20 @@ public class Parser {
     private static final String BASIC_DELIMITER = "[" + COMMA + SEMICOLON + "]";
     private static final String CUSTOM_DELIMITER = "^//(.*?)\\\\n(.*)";
 
-    public static void parse(String line) {
+    public static int parse(String line) {
         if (isCustomDelimiter(line)) {
-            parseCustomDelimiter(line);
+            return parseCustomDelimiter(line);
         } else {
-            parseBasicDelimiter(line);
+            return parseBasicDelimiter(line);
         }
     }
 
-    private static void parseBasicDelimiter(String line) {
+    private static int parseBasicDelimiter(String line) {
         String[] numbers = line.split(BASIC_DELIMITER);
+        return sumNumbers(numbers);
     }
 
-    private static void parseCustomDelimiter(String line) {
+    private static int parseCustomDelimiter(String line) {
         Pattern pattern = Pattern.compile(CUSTOM_DELIMITER);
         Matcher matcher = pattern.matcher(line);
 
@@ -31,6 +32,7 @@ public class Parser {
             String numbersPart = matcher.group(2);
 
             String[] numbers = numbersPart.split(customDelimiter);
+            return sumNumbers(numbers);
         } else {
             throw new IllegalArgumentException("잘못된 커스텀 구분자 형식입니다.");
         }
@@ -38,6 +40,21 @@ public class Parser {
 
     private static boolean isCustomDelimiter(String line) {
         return line.matches(CUSTOM_DELIMITER);
+    }
+
+    private static int sumNumbers(String[] numbers) {
+        int sum = 0;
+
+        for (String number : numbers) {
+            int num = Integer.parseInt(number.trim());
+
+            if (num < 0) {
+                throw new IllegalArgumentException("음수는 허용되지 않습니다.");
+            }
+            sum += num;
+        }
+
+        return sum;
     }
 
 }
