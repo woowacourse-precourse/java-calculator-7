@@ -36,9 +36,9 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 빈_문자열_입력() {
+    void 공백_문자열_입력() {
         assertSimpleTest(() -> {
-            run("");
+            run(" ");
             assertThat(output()).contains("결과 : 0");
         });
     }
@@ -69,10 +69,10 @@ class ApplicationTest extends NsTest {
 
     @Test
     void 공백이_포함된_입력() {
-        assertSimpleTest(() -> {
-            run(" 1 , 2 : 3 ");
-            assertThat(output()).contains("결과 : 6");
-        });
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException(" 1 , 2 : 3 "))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
     }
 
     @Test
@@ -93,19 +93,19 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 커스텀_구분자와_기본_구분자_혼용() {
+    void 커스텀_구분자에_기본_구분자_혼용() {
         assertSimpleTest(() -> {
-            run("//;\\n1;2,3:4");
+            run("//:\\n1:2:3:4");
             assertThat(output()).contains("결과 : 10");
         });
     }
 
     @Test
-    void 커스텀_구분자에_여러_특수문자_포함() {
-        assertSimpleTest(() -> {
-            run("//;*#\\n1;*#2;*#3;*#4");
-            assertThat(output()).contains("결과 : 10");
-        });
+    void 커스텀_구분자에_여러_특수문자_포함_예외() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;*#\\n1;*#2;*#3;*#4"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
     }
 
     @Test

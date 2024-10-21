@@ -51,7 +51,13 @@ public class Application {
         StringTokenizer st = new StringTokenizer(str, letter);
 
         while(st.hasMoreTokens()){
-            nums.add(Integer.parseInt(st.nextToken()));
+            String token = st.nextToken();
+
+            if (!token.matches("-?\\d+")) {
+                throw new IllegalArgumentException("숫자가 아닌 값이 입력되었습니다: " + token);
+            }
+
+            nums.add(Integer.parseInt(token));
         }
 
         return nums;
