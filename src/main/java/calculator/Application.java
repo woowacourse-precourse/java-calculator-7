@@ -1,5 +1,9 @@
 package calculator;
 
+import calculator.delimiter.CustomDelimiter;
+import calculator.delimiter.DefaultDelimiter;
+import calculator.delimiter.Delimiter;
+
 public class Application {
     public static void main(String[] args) {
         InputService inputService = new InputService();

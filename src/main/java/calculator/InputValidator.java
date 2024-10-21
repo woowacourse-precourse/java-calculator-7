@@ -1,5 +1,7 @@
 package calculator;
 
+import calculator.delimiter.Delimiter;
+
 public class InputValidator {
     private final Delimiter delimiter;
     private final Parser parser;

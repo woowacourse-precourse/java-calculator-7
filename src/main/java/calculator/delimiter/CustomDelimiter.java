@@ -1,4 +1,4 @@
-package calculator;
+package calculator.delimiter;
 
 public class CustomDelimiter implements Delimiter {
     private static final String ERROR_INVALID_DELIMITER_EXPRESSION = "유효하지 않은 커스텀 구분자 표현입니다.";

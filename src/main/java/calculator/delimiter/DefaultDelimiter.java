@@ -1,4 +1,4 @@
-package calculator;
+package calculator.delimiter;
 
 public class DefaultDelimiter implements Delimiter {
     protected String delimiters = ",|:";
