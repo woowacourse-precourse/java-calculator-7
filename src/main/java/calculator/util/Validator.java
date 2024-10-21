@@ -1,6 +1,6 @@
 package calculator.util;
 
-public class NumberValidator {
+public class Validator {
 
     public int validateNumber(String token){
         int number;

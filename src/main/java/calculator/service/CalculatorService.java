@@ -2,13 +2,13 @@ package calculator.service;
 
 import calculator.domain.Expression;
 import calculator.domain.Tokens;
-import calculator.util.NumberValidator;
+import calculator.util.Validator;
 import calculator.util.Parser;
 
 public class CalculatorService {
 
     private final Parser parser = new Parser();
-    private final NumberValidator numberValidator = new NumberValidator();
+    private final Validator validator = new Validator();
 
     public int calculate(Expression expression){
         if (expression.isNull()){
@@ -24,7 +24,7 @@ public class CalculatorService {
         int sum = 0;
 
         for(String token : tokens){
-            int number = numberValidator.validateNumber(token);
+            int number = validator.validateNumber(token);
             sum += number;
         }
         return sum;
