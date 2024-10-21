@@ -12,5 +12,6 @@ public class Application {
         Extract extract = new Extract(input);
         List<Integer> extractResult = extract.checkFirstChar();
         AddNumber addNumber = new AddNumber(extractResult);
+        System.out.println("결과 : "+addNumber.add());
     }
 }
