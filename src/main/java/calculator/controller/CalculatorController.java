@@ -21,5 +21,32 @@ public class CalculatorController {
             throw new IllegalArgumentException(ErrorMessage.EMPTY_INPUT.getMessage());
         }
 
+        // 커스텀 구분자 유무 확인 및 추출
+        if (input.startsWith("//")) {
+            int delimiterEndIndex = input.indexOf("\\n");
+            if (delimiterEndIndex == 2) {
+                throw new IllegalArgumentException(ErrorMessage.EMPTY_CUSTOM_DELIMITER.getMessage());
+            }
+
+            if (delimiterEndIndex != -1) {
+                // //와 \n 사이 구분자 추출하여 커스텀 구분자에 추가
+                customDelimiter.addCustomDelimiter(input.substring(2, delimiterEndIndex));
+                // 커스텀 구분자 쪽 버리고 숫자 부분만 남기기
+                input = input.substring(delimiterEndIndex + 2);
+            }
+        }
+
+        // 문자열 파싱에 사용할 구분자로 이루어진 정규식 생성
+        String regex = customDelimiter.toRegex();
+    }
+
+    // 숫자로 이루어진 값이 맞는지 확인
+    public static boolean isNumb(String str) {
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }
