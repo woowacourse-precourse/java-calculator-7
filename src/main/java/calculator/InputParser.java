@@ -23,6 +23,7 @@ public class InputParser {
 
     private void extractCustomDelimiter(String input) {
         customDelimiter = input.substring(2, input.indexOf(CUSTOM_DELIMITER_SUFFIX));
+        Validator.validateCustomDelimiter(customDelimiter);
     }
 
     private int[] parseInteger(String input) {
@@ -37,8 +38,4 @@ public class InputParser {
         }
         return numbers;
     }
-
-//    public static boolean isDelimiter(String input) { // TODO
-//        return input.matches(DEFAULT_DELIMITERS + "|" + customDelimiter);
-//    }
 }
