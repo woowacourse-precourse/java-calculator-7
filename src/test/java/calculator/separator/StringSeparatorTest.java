@@ -34,4 +34,18 @@ class StringSeparatorTest {
         //then
         assertThat(extractedCustomDelimiters).isEqualTo("?");
     }
+
+
+    @Test
+    public void 추출된_커스텀_구분자를_기본_구분자에_추가() throws Exception {
+        //given
+        stringSeparator = new StringSeparator();
+        String customDelimiters = "?";
+
+        //when
+        String delimiters = stringSeparator.addCustomDelimiters(customDelimiters);
+
+        //then
+        assertThat(delimiters).contains(customDelimiters);
+    }
 }

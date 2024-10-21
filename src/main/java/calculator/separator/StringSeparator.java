@@ -6,7 +6,9 @@ import java.util.regex.Pattern;
 public class StringSeparator {
 
     private String basicString;
+    private String delimiters;
 
+    private final String BASIC_DELIMITERS = ":,";
     private final String CUSTOM_DELIMITER_START = "//";
     private final String CUSTOM_DELIMITER_END = "\\\\n";
     private final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile(
@@ -15,6 +17,11 @@ public class StringSeparator {
 
     public StringSeparator(String basicString) {
         this.basicString = basicString;
+        this.delimiters = BASIC_DELIMITERS;
+    }
+
+    public StringSeparator() {
+        this.delimiters = BASIC_DELIMITERS;
     }
 
 
@@ -28,5 +35,9 @@ public class StringSeparator {
             return matcher.group(1);
         }
         return "";
+    }
+
+    public String addCustomDelimiters(String customDelimiters) {
+        return delimiters += customDelimiters;
     }
 }
