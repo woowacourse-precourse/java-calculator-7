@@ -23,14 +23,14 @@ public class CalculatorDependencyConfig {
 
     private CalculationStrategySelector calculatorStrategySelector() {
         return new CalculationStrategySelector(defaultDelimiterCalculationStrategy(),
-                defaultAndCustomDelimiterStrategy());
+                defaultAndCustomDelimiterCalculationStrategy());
     }
 
     private CalculationStrategy defaultDelimiterCalculationStrategy() {
         return new DefaultDelimiterCalculationStrategy(positiveNumberExtractor());
     }
 
-    private CalculationStrategy defaultAndCustomDelimiterStrategy() {
+    private CalculationStrategy defaultAndCustomDelimiterCalculationStrategy() {
         return new DefaultAndCustomDelimiterCalculationStrategy(customDelimiterExtractor(),
                 positiveNumberExtractor());
     }
