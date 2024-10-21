@@ -9,7 +9,7 @@ public class DelimiterExtractor {
 
     private static final String REGEX_CUSTOM_DELIMITER_PATTERN = "//([^\s]+)\\n";
     private static final String INVALID_REGEX_CUSTOM_DELIMITER_PATTERN = "//.*[\\s]+.*\\n";
-    private static final String REGEX_DEFAULT_DELIMITER_PATTERN = "^[0-9,;]+$";
+    private static final String REGEX_DEFAULT_DELIMITER_PATTERN = "^[0-9,:]+$";
 
     /**
      * 기본 구분자 유효성 검사한다.
