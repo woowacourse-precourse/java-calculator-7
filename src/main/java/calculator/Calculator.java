@@ -19,12 +19,13 @@ public class Calculator {
     public void run() {
         String inputValue = input();
         boolean hasCustom = extractCustomSeparators(inputValue);
-        System.out.println(hasCustom);
+        if (hasCustom) {
+            System.out.println(extractNumbersPart(inputValue));
+        }
     }
 
     static boolean extractCustomSeparators(String input) {
         boolean flag = false;
-
         if (input == null) {
             System.out.println("빈문자열");
             return flag;
@@ -40,5 +41,10 @@ public class Calculator {
 
     static void updateSeperator(String str) {
         separators.add(str);
+    }
+
+    static String extractNumbersPart(String input) {
+        // 커스텀 구분자를 제거 한 문자열 출력
+        return input.replaceAll(regex, "").trim();
     }
 }
