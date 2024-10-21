@@ -41,7 +41,7 @@ public class ValidTest {
     }
 
     @Test
-    @DisplayName("Custom 구분자가 있는 경우")
+    @DisplayName("Custom 구분자가 없는 경우")
     public void testCheckNoCustomDivider() throws Exception {
 
         //Given
