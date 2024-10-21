@@ -77,6 +77,8 @@ public class Application {
         }
     }
 
+    public static void printResult(long value){
+        System.out.println("결과 : " + value);
     }
 
     public static long plus(){
