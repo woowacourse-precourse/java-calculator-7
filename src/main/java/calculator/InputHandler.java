@@ -48,4 +48,13 @@ public class InputHandler {
         }
     }
 
+    private double parsePositiveNumber(String parseString) {
+        try {
+            double number = Double.parseDouble(parseString);
+            checkPositiveNumber(number);
+            return number;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("주어진 문자열이 구분자와 양수로 이루어져 있지 않습니다.");
+        }
+    }
 }
