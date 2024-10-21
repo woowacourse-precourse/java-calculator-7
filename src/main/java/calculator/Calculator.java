@@ -20,10 +20,10 @@ public class Calculator {
     }
 
     public String[] parse(String expr) throws IllegalArgumentException {
-        String del = ",|:";
+        String del = "[,:]";
 
         if(expr.startsWith("//")) {
-            del = ",|:|" + expr.charAt(2);
+            del = del + "|" + expr.charAt(2);
             expr = expr.substring(5);
         }
 
