@@ -31,8 +31,8 @@ public class CalculatorController {
         OutputView.printResult(additionResult);
     }
 
-    private AdditionResult processInput(String input) {
-        ParsedComponents parsedComponents = parseInput(input);
+    private AdditionResult processInput(String validatedInput) {
+        ParsedComponents parsedComponents = parseInput(validatedInput);
         Pattern delimiterPattern = createDelimiterPattern(parsedComponents);
         List<String> splittedExpression = splitExpression(parsedComponents, delimiterPattern);
         List<Double> positiveIntegers = convertToPositiveNumbers(splittedExpression);
