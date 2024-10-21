@@ -4,6 +4,10 @@ import java.util.List;
 
 public class Calculater {
     static int calculateInput(String input, List<Character> divisionCharacter) {
+        if(input.isBlank()) {
+            return 0;
+        }
+
         int result = 0;
         int currentDigit = 0;
         for (int i=0; i<input.length(); i++) {

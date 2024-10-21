@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class CustomInputHandler {
     static List<Character> evaluateCustomInput(String input) {
-        String regex = "^//(.*?)\\\\n";
+        String regex = "//(.*?)\\\\n";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(input);
 
@@ -26,11 +26,11 @@ public class CustomInputHandler {
     }
 
     static String removeCustomInput(String input) {
-        String regex = "^//.*?\\\\n";
+        String regex = "//.*?\\\\n";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(input);
         if (matcher.find()) {
-            return matcher.replaceFirst("");
+            return matcher.replaceAll("");
         }
         return input;
     }
