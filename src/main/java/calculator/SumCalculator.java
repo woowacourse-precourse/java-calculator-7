@@ -2,6 +2,7 @@ package calculator;
 
 public class SumCalculator {
     public static int add(String input) {
+
         if (input.isEmpty()) {
             return 0;
         }
