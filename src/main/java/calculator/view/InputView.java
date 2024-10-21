@@ -8,9 +8,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class InputView {
-    private InputView() {};
+    private InputView() {}
 
-    public static String inputString() {
+    public static String[] inputString() {
         String customSeperator = "";
         System.out.print(ViewMessage.INPUT_STRING);
         String input = Console.readLine();
@@ -20,7 +20,8 @@ public class InputView {
         CheckCustomSeperatorPos.validate(input);
         HasMultiCustomSeperators.validate(input, customSeperator);
         HasNegativeNumber.validate(input, customSeperator);
-        return input;
+
+        return new String[]{input, customSeperator};
     }
     private static String getCustomSeperator(String input) {
         String seperator = "";
