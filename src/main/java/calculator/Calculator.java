@@ -51,9 +51,7 @@ public class Calculator {
         long result = 0;
         String[] rawNumbers = separatorProcessor.split(cmd);
         for (String rawNum : rawNumbers) {
-            validateNumber(rawNum);
-
-            result += Long.parseLong(rawNum);
+            result += convertStrToNum(rawNum);
         }
 
         return result;
@@ -70,6 +68,15 @@ public class Calculator {
         }
 
         separatorProcessor.addSeparator(customSeparator);
+    }
+
+    /**
+     * 숫자로 구성된 문자열을 정수 자료형으로 변경
+     */
+    private long convertStrToNum(String rawNum) {
+        validateNumber(rawNum);
+
+        return Long.parseLong(rawNum);
     }
 
     /**
