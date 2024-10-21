@@ -2,8 +2,8 @@ package calculator;
 
 public class Application {
     public static void main(String[] args) {
-        Calculator calculator = new Calculator();
+        CalculationProcessor calculationProcessor = new CalculationProcessor();
 
-        calculator.startCalculator();
+        calculationProcessor.startCalculator();
     }
 }

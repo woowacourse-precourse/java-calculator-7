@@ -1,6 +1,5 @@
 package calculator;
 
-import static calculator.util.Adder.addNumbers;
 import static calculator.util.InputIntegerParser.parseInputToInteger;
 import static calculator.util.StringSplitter.splitUserInput;
 import static calculator.validator.UserInputValidator.validateNegativeInteger;
@@ -8,7 +7,16 @@ import static calculator.view.InputView.getUserInput;
 import static calculator.view.OutputView.printResult;
 import static calculator.view.OutputView.printStartMessage;
 
-public class Calculator {
+import calculator.operations.Adder;
+import calculator.operations.Calculator;
+
+public class CalculationProcessor {
+    Calculator calculator;
+
+    public CalculationProcessor() {
+        calculator = new Adder();
+    }
+
     public void startCalculator() {
         printStartMessage();
 
@@ -20,7 +28,7 @@ public class Calculator {
 
         validateNegativeInteger(parsedNumbers);
 
-        Integer result = addNumbers(parsedNumbers);
+        int result = calculator.calculate(parsedNumbers);
 
         printResult(result);
     }
