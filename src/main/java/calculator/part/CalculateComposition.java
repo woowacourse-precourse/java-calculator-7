@@ -1,6 +1,6 @@
 package calculator.part;
 
-import calculator.NumberWrapper;
+import calculator.utility.NumberWrapper;
 
 public class CalculateComposition {
 

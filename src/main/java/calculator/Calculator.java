@@ -7,6 +7,7 @@ import calculator.part.CalculatorAdder;
 import calculator.separator.AddSeparator;
 import calculator.separator.DefaultSeparator;
 import calculator.separator.SeparatorStorage;
+import calculator.utility.NumberWrapper;
 
 public class Calculator {
 

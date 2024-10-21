@@ -1,6 +1,6 @@
 package calculator.separator;
 
-import calculator.NumberWrapper;
+import calculator.utility.NumberWrapper;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;

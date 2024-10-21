@@ -1,6 +1,6 @@
 package calculator.io;
 
-import calculator.NumberWrapper;
+import calculator.utility.NumberWrapper;
 
 public class ConsoleOutputHandler {
 

@@ -1,6 +1,7 @@
-package calculator;
+package calculator.utility;
 
 import java.math.BigInteger;
+
 
 public class NumberWrapper {
 
@@ -18,10 +19,6 @@ public class NumberWrapper {
 
     public BigInteger getValue() {
         return value;
-    }
-
-    private void setValue(BigInteger bigInteger){
-        this.value = bigInteger;
     }
 
     public int compareTo(NumberWrapper other) {
