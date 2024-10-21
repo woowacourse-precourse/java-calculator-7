@@ -11,9 +11,11 @@ public class Application {
         String input = Console.readLine();
         ArrayList<String> sep = new ArrayList<>(Arrays.asList(",", ":"));
         ArrayList<Integer> numbers = new ArrayList<>();
+        int result = 0;
 
         if (input.startsWith("//")) {
             int customSepIndexEnd = input.indexOf("\n");
+            System.out.println(customSepIndexEnd);
             String newSep = input.substring(2, customSepIndexEnd).trim();
             sep.add(newSep);
         }
@@ -28,5 +30,10 @@ public class Application {
             }
         }
 
+        for (int number : numbers) {
+            result += number;
+        }
+
+        System.out.println("결과 : " + result);
     }
 }
