@@ -4,9 +4,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Delimiter {
-    private static final String DEFAULT_DELIMITERS = ",|:";
-    private static final String CUSTOM_DELIMITERS_START = "//";
-    private static final String CUSTOM_DELIMITERS_END = "\\\\n";
+    public static final String DEFAULT_DELIMITERS = ",|:";
+    public static final String CUSTOM_DELIMITERS_START = "//";
+    public static final String CUSTOM_DELIMITERS_END = "\\\\n";
     private final String customDelimiter;
 
     public Delimiter(String input) {

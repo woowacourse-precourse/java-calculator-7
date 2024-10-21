@@ -5,8 +5,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class UserInput {
-    private static final String CUSTOM_DELIMITERS_START = "//";
-    private static final String CUSTOM_DELIMITERS_END = "\\\\n";
     private final String input;
 
     public UserInput(String input) {
@@ -27,10 +25,11 @@ public class UserInput {
     private String extractNumbers(String delimiterRegex) {
         String numbers = "";
 
-        if (delimiterRegex.equals(",|:")) {
+        if (delimiterRegex.equals(Delimiter.DEFAULT_DELIMITERS)) {
             numbers = input;
         } else {
-            String pattern = String.join("", CUSTOM_DELIMITERS_START, "(.)", CUSTOM_DELIMITERS_END, "(.*)");
+            String pattern = String.join("", Delimiter.CUSTOM_DELIMITERS_START, "(.)", Delimiter.CUSTOM_DELIMITERS_END,
+                    "(.*)");
             Matcher m = Pattern.compile(pattern).matcher(input);
             if (m.find()) {
                 numbers = m.group(2);
