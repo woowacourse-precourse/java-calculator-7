@@ -22,13 +22,6 @@ public class StringParser {
         }
 
         String[] numbers = input.split(delimiter);
-
-        for (String number : numbers) {
-            if (!number.matches("-?\\d+")) { // 음수를 허용하기 위해 -?를 추가
-                throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다: " + number);
-            }
-        }
-
         return numbers;
     }
 }
