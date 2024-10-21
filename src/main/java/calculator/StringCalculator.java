@@ -5,11 +5,12 @@ package calculator;
  */
 public class StringCalculator {
     /**
-     * 입력된 문자열에서 커스텀 구분자를 지원하여 숫자를 더합니다.
-     * 커스텀 구분자는 문자열의 시작 부분에 "//"와 "\n" 사이에 위치합니다.
+     * 입력된 문자열에서 커스텀 구분자를 지원하며, 숫자가 아닌 값이 포함된 경우
+     * IllegalArgumentException을 던집니다.
      *
-     * @param input 커스텀 구분자를 포함한 숫자 문자열
+     * @param input 커스텀 구분자와 숫자 문자열
      * @return 숫자의 합
+     * @throws IllegalArgumentException 유효하지 않은 입력이 있을 경우 발생
      */
     public static int add(String input) {
         if (input == null || input.isEmpty()) {
@@ -26,7 +27,11 @@ public class StringCalculator {
         String[] numbers = input.split(delimiter);
         int sum = 0;
         for (String number : numbers) {
-            sum += Integer.parseInt(number);
+            try {
+                sum += Integer.parseInt(number);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("잘못된 입력: " + number);
+            }
         }
         return sum;
     }
