@@ -1,6 +1,7 @@
 package calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -52,6 +53,21 @@ class CalculatorTest {
 
         // then
         assertThat(sum).isEqualTo(6.4);
+    }
+
+    @Test
+    @DisplayName("사용자가 음수를 입력하면 애플리케이션을 종료한다")
+    void calculateWithNegativeInput() {
+        // given
+        Calculator calculator = new Calculator();
+        String[] inputs = new String[]{"-1", "2", "3"};
+
+        // when
+
+        // then
+        assertThatThrownBy(() -> calculator.sum(inputs))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("음수를 포함할 수 없습니다. 애플리케이션을 종료합니다.");
     }
 
 
