@@ -22,14 +22,14 @@ public class Application {
         }
 
         String delimiters = "[,;]";
-        if (input.length() >= 2 && input.substring(0, 2).equals("//")) {
+        if (input.length() >= 2 && input.startsWith("//")) {
             int newLineIndex = input.indexOf("\n");
             if (newLineIndex == -1) {
                 throw new IllegalArgumentException("잘못된 입력입니다.");
             }
             String customDelimiter = input.substring(2, newLineIndex);
-            delimiters = "[" + customDelimiter + ",;]";
-            input = input.substring(newLineIndex + 1);
+            delimiters = "[" + customDelimiter + ",;]"; // 커스텀 구분자를 포함한 패턴
+            input = input.substring(newLineIndex + 1); // 줄바꿈 문자 이후의 문자열로 설정
         }
 
         String[] splitInput = input.split(delimiters);
@@ -50,7 +50,7 @@ public class Application {
         try {
             int number = Integer.parseInt(numberStr);
             if (number < 0) {
-                throw new IllegalArgumentException("잘못된 입력입니다." + numberStr);
+                throw new IllegalArgumentException("잘못된 입력입니다.: " + numberStr);
             }
             return number;
         } catch (NumberFormatException e) {
