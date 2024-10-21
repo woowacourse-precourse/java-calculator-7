@@ -3,8 +3,10 @@ package calculator;
 public class Application {
 
     public static void main(String[] args) {
-        new OutputView().printResult(
-                new Calculator().sum(
-                        new StringToNumberConverter(new InputView().read()).convert()));
+        InputView inputView = new InputView();
+        OutputView outputView = new OutputView();
+        Preprocessor preprocessor = new Preprocessor(new DelimiterExtractor(), new FormatValidator());
+        Calculator calculator = new Calculator();
+        outputView.printResult(calculator.sum(preprocessor.preprocess(inputView.read())));
     }
 }
