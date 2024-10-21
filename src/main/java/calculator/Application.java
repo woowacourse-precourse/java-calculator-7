@@ -21,8 +21,17 @@ public class Application {
         }
 
         String delimiter = ",|:"; // 기본 구분자(쉼표, 콜론)
+        String parsedInput = input;
 
-        String[] numbers = input.split(delimiter); // 구분자로 문자열 분리
+        if (input.startsWith("//") && input.charAt(3) == '\\' && input.charAt(4) == 'n') {
+            // 커스텀 구분자를 추출하고 정규식에서 안전하게 사용하기 위해 Pattern.quote()로 처리
+            String customDelimiter = Pattern.quote(String.valueOf(input.charAt(2)));
+            delimiter += "|" + customDelimiter;
+            parsedInput = input.substring(5);
+
+        }
+
+        String[] numbers = parsedInput.split(delimiter); // 구분자로 문자열 분리
         return sum(numbers); // 숫자 합 계산
     }
 
