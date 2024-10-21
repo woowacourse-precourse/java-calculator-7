@@ -22,7 +22,7 @@ public class Application {
                 sep += text.substring(2, sepIdx);  // 커스텀 구분자 추출
                 text = text.substring(sepIdx + 2); // 문자열에서 구분자 부분 제거
             } else { // 예외 : //로 시작하되, 커스텀 구분자가 아닌 경우
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("커스텀 구분자 양식이 아닙니다.");
             }
         }
         String[] num = text.split("["+sep+"]");
@@ -35,14 +35,14 @@ public class Application {
                     int temp = Integer.parseInt(number);
                     // 예외 : 숫자에 음수가 있는 경우
                     if(temp<0){
-                        throw new IllegalArgumentException();
+                        throw new IllegalArgumentException("양수가 아닙니다.");
                     }
                     result += temp;
                 } catch (NumberFormatException e){ // 예외 : 구분자가 아닌 문자가 있는 경우 == 숫자 변환이 불가능할 경우
-                    throw new IllegalArgumentException();
+                    throw new IllegalArgumentException("구분자가 아닌 문자가 있습니다.");
                 }
             }
         }
-        System.out.println(result);
+        System.out.println("결과 : "+result);
     }
 }
