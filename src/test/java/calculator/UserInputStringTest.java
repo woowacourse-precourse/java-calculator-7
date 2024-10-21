@@ -9,7 +9,7 @@ class UserInputStringTest {
     @Test
     void getInput_correct() {
         // when
-        UserInputString userInputString = new UserInputString("test");
+        UserInput userInputString = new UserInput("test");
 
         // given
         String userInput = userInputString.getInput();
@@ -21,10 +21,10 @@ class UserInputStringTest {
     @Test
     void isInputEmpty_false() {
         // when
-        UserInputString userInputString = new UserInputString("");
+        UserInput userInput = new UserInput("");
 
         // given
-        boolean inputString = userInputString.isInputEmpty();
+        boolean inputString = userInput.isInputEmpty();
 
         // then
         assertThat(inputString).isTrue();
@@ -33,10 +33,10 @@ class UserInputStringTest {
     @Test
     void isInputEmpty_true() {
         // when
-        UserInputString userInputString = new UserInputString("test");
+        UserInput userInput = new UserInput("test");
 
         // given
-        boolean inputString = userInputString.isInputEmpty();
+        boolean inputString = userInput.isInputEmpty();
 
         // then
         assertThat(inputString).isFalse();

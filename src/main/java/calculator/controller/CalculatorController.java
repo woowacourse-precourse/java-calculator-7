@@ -1,6 +1,6 @@
 package calculator.controller;
 
-import calculator.UserInputString;
+import calculator.UserInput;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 import java.util.List;
@@ -9,7 +9,7 @@ public class CalculatorController {
 
     public void run() {
         OutputView.printStartMessage();
-        UserInputString userInput = new UserInputString(InputView.readInputString());
+        UserInput userInput = new UserInput(InputView.readInputString());
 
         if (userInput.isInputEmpty()) {
             OutputView.printResult("결과 : " + 0);

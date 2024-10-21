@@ -4,12 +4,12 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class UserInputString {
+public class UserInput {
     private static final String CUSTOM_DELIMITERS_START = "//";
     private static final String CUSTOM_DELIMITERS_END = "\\\\n";
     private final String input;
 
-    public UserInputString(String input) {
+    public UserInput(String input) {
         this.input = input;
     }
 
