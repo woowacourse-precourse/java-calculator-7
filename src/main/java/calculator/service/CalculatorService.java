@@ -1,13 +1,13 @@
 package calculator.service;
 
+import static calculator.service.CustomSeparatorsRegex.END_REGEX;
+import static calculator.service.CustomSeparatorsRegex.MIDDLE_REGEX;
+import static calculator.service.CustomSeparatorsRegex.START_REGEX;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class CalculatorService implements Service {
-
-    private static final String CUSTOM_SEPARATOR_START_REGEX = "^//";
-
-    private static final String CUSTOM_SEPARATOR_END_REGEX = "\n";
 
     private final List<String> separators = new ArrayList<>();
 
@@ -21,18 +21,20 @@ public class CalculatorService implements Service {
 
     @Override
     public boolean isCustomSeparator(String input) {
-        return input.matches(CUSTOM_SEPARATOR_START_REGEX + "\\D" + CUSTOM_SEPARATOR_END_REGEX);
+        return input.matches(
+                START_REGEX.getRegex() + MIDDLE_REGEX.getRegex() + END_REGEX.getRegex());
     }
 
     @Override
     public void saveCustomSeparator(String input) {
-        int endRegexIndex = input.indexOf(CUSTOM_SEPARATOR_END_REGEX);
+        int endRegexIndex = input.indexOf(END_REGEX.getRegex());
         separators.add(String.valueOf(input.charAt(endRegexIndex - 1)));
     }
 
     @Override
     public String removeCustomPart(String input) {
-        return "";
+        return input.replaceAll(
+                START_REGEX.getRegex() + MIDDLE_REGEX.getRegex() + END_REGEX.getRegex(), "");
     }
 
     @Override
