@@ -56,6 +56,14 @@ public class TestCase extends NsTest {
         });
     }
 
+    @Test
+    void 온점_커스텀_작동_테스트() {
+        assertSimpleTest(() -> {
+            run("//.\\n1.3.2");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
 
     @Override
     protected void runMain() {
