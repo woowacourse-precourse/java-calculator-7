@@ -13,13 +13,14 @@ public class CalculatorImpl implements Calculator{
 
     @Override
     public void insertValues(String input) {
-        if (input.matches("^//.\\\\n.*")) {
-            calculatorValues.setExpression(input.substring(5));
-            calculatorValues.setDelimiter(String.valueOf(input.charAt(2)));
-            return;
-        }
-        calculatorValues.setExpression(input);
-        calculatorValues.setDelimiter("[,:]");
+
+        boolean hasCustomDelimiter = input.startsWith("//");
+
+        String expression = hasCustomDelimiter ? input.substring(5) : input;
+        String delimiter = hasCustomDelimiter ? String.valueOf(input.charAt(2)) : "[,:]";
+
+        calculatorValues.setExpression(expression);
+        calculatorValues.setDelimiter(delimiter);
     }
 
     @Override
