@@ -48,6 +48,7 @@ public class Application {
         });
 
         checkForNegativeNumbers(numbers);
+        displayResult(calculateSum(numbers));
     }
 
     private static String getCustomDelimiter(String input) {
@@ -68,6 +69,10 @@ public class Application {
                 throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
             }
         }
+    }
+
+    public static void displayResult(long value) {
+        System.out.println("결과 : " + value);
     }
 
     public static long calculateSum(List<Long> numbers) {
