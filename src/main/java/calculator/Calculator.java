@@ -1,9 +1,10 @@
 package calculator;
 
+import static calculator.ParsingInput.executeParsingInput;
+
 import calculator.exception.InputValidationException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import static calculator.ParsingInput.executeParsingInput;
 
 public class Calculator {
     private final String INPUT;
@@ -40,7 +41,7 @@ public class Calculator {
         return sum;
     }
 
-    private void printSum(int result){
+    private void printSum(int result) {
         System.out.println("결과 : " + result);
     }
 
