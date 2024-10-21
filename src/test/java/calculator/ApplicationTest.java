@@ -24,6 +24,38 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 잘못된_구분자_테스트() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("1;2;3"))
+                .isInstanceOf(IllegalArgumentException.class);
+        });
+    }
+
+    @Test
+    void 숫자가_없는_경우() {
+        assertSimpleTest(() -> {
+            run(" ");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void 숫자가_long_보다_큰_경우() {
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException("99223372036854775807"))
+                .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 숫자_합이_long_보다_큰_경우() {
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException("9223372036854775807,1"))
+                .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
