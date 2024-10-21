@@ -46,6 +46,28 @@
 - [x] AngularJS Git 커밋 메시지 컨벤션을 지키면서 커밋 메시지 작성하기
 - [x] 제공된 Console API를 사용하여 구현하기
 
+## 추가 학습내용 및 과제수행 시 중점 사항 (Learning & Key Takeaways)
+
+- [자바 개념 및 문법 정리하기(자바의 정석 base, ~ing)](https://github.com/cyunlee/java-essentials-notes)
+- 과제수행 시 중점 사항 (신경 쓴 부분)
+    - main 함수에서 모든 것을 구현하지 않고, 클래스로 분리하기
+        - StringCalculator, Validator, InputManager, OutputManager, Constant로 분리함
+        - Application에서 계산기를 실행함
+    - 하나의 클래스가 하나의 책임을 갖도록 구현하기
+        - StringCalculator(계산)
+        - Validator(에러 처리)
+        - InputManager(사용자 입력)
+        - OutputManager(화면 출력)
+        - Constant(상수 및 메시지 보관)
+    - 하나의 메서드가 하나의 역할을 하도록 구현하기
+        - 변수와 메서드의 이름을 알아보기 쉽도록 작성하기
+        - 중복된 코드는 메서드로 설정해서 코드를 간소화하기
+    - 하드 코딩 된 문자열 or 숫자를 상수로 설정하기
+    - 절차 지향으로 작성하지 않고 객체 지향으로 작성하기
+        - 클래스들을 각각 인스턴스화하여 값과 메서드에 접근함
+        - StringCalculator 내부의 값과 기능을 외부로부터 보호하기 위해 캡슐화함
+        - StringCalculator 내부에서 생성자를 이용해 Validator 클래스의 의존성을 주입함
+
 ### 입출력 요구 사항
 
 #### ✍️ 입력

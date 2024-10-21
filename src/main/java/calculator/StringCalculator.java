@@ -17,7 +17,7 @@ public class StringCalculator {
         return str.contains(Constant.CUSTOM_DELIMITER_FRONT) && str.contains(Constant.CUSTOM_DELIMITER_BACK);
     }
 
-    private boolean isBasicInput(String str) {
+    private boolean isDefaultInput(String str) {
         return str.contains(",") || str.contains(":");
     }
 
@@ -64,7 +64,7 @@ public class StringCalculator {
 
         if (isCustomInput(input)) {
             sum = handleCustomInput(input);
-        } else if (isBasicInput(input)) {
+        } else if (isDefaultInput(input)) {
             sum = calculateSum(input);
         } else if (input.isEmpty()) {
             sum = 0;
