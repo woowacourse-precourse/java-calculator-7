@@ -6,5 +6,11 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
         String[] numbers = input.split("[,:]");
+
+        if (input.startsWith("//")) {
+            String delimiter = input.substring(2, input.indexOf("\n"));
+            input = input.substring(input.indexOf("\n") + 1);
+            numbers = input.split(delimiter);
+        }
     }
 }
