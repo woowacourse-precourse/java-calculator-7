@@ -9,7 +9,13 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = sc.nextLine();
 
-        System.out.println("결과 : " + sum(input));
+        // 예외처리
+        try{
+            System.out.println("결과 : " + sum(input));
+
+        }catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     public static int sum(String input) {
@@ -20,6 +26,10 @@ public class Application {
         int customStart = input.indexOf("//");
         if (customStart == 0) {
             int customLast = input.indexOf("\\n");
+            // 구분자가 없는 경우
+            if (customLast == -1) {
+                throw new IllegalArgumentException("구분자가 없습니다.");
+            }
 //            System.out.println(customLast);
             base = String.valueOf(input.charAt(customStart + 2));
 //            System.out.println(base);
@@ -33,6 +43,10 @@ public class Application {
         for (String n : nums) {
             if (!n.isEmpty()) {
                 int num = Integer.parseInt(n);
+                // 숫자가 음수인경우
+                if (num < 0) {
+                    throw new IllegalArgumentException("숫자가 음수입니다.");
+                }
                 total += num;
             }
         }
