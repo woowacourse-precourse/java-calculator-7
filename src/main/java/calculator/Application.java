@@ -40,5 +40,23 @@ public class Application {
         // 구분자로 문자열을 분리하고 숫자를 추출
         String[] tokens = numbers.split(finalDelimiter);
 
+        int sum = 0;
+        // 3. 리스트 객체의 요소를 검사하고 더하고 출력한다. 양수가 아닌 경우 IllegalArgumentException을 발생시킨다.
+        for (String token : tokens) {
+            int number;
+            try {
+                number = Integer.parseInt(token);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("숫자 형식이 잘못되었습니다: " + token);
+            }
+            // 음수는 예외 처리
+            if (number < 0) {
+                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
+            }
+            sum += number;
+        }
+
+        System.out.println("sum: " + sum);
+
     }
 }
