@@ -8,7 +8,7 @@ public class Application {
             CalculatorController controller = new CalculatorController();
             controller.run();
         } catch (IllegalArgumentException e) {
-            System.out.println("[error] " + e.getMessage());
+            //System.out.println("[error] " + e.getMessage());
             return;
         }
         System.out.println();
