@@ -67,7 +67,9 @@ public class Application {
 
     public static String inputCheck(String input){
 //        잘 못 된 입력 체크
-        if(!input.contains(SEMICOLON) && !input.contains(COMMA)) throw new IllegalArgumentException(INPUT_VALIDATION_EXCEPTION_MESSAGE);
+        if(!input.contains(SEMICOLON) && !input.contains(COMMA)) {
+            throw new IllegalArgumentException(INPUT_VALIDATION_EXCEPTION_MESSAGE);
+        }
         return input;
     }
 
