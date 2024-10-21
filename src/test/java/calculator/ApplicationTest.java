@@ -20,8 +20,8 @@ class ApplicationTest extends NsTest {
     @Test
     void 구분자_미사용_문자포함() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("3("))
-                        .isInstanceOf(IllegalArgumentException.class)
+            assertThatThrownBy(() -> runException("3("))
+                .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
@@ -60,8 +60,8 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_위치오류() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("1//;\\n;7"))
-                        .isInstanceOf(IllegalArgumentException.class)
+            assertThatThrownBy(() -> runException("1//;\\n;7"))
+                .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
@@ -76,8 +76,8 @@ class ApplicationTest extends NsTest {
     @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("-1,2,3"))
-                        .isInstanceOf(IllegalArgumentException.class)
+            assertThatThrownBy(() -> runException("-1,2,3"))
+                .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
