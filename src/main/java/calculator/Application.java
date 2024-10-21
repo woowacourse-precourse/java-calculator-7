@@ -48,14 +48,18 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
 
-        String customDelimiter = extractCustomDelimiter(input);
+        if (!input.isEmpty()) {
+            String customDelimiter = extractCustomDelimiter(input);
 
-        if (!customDelimiter.isEmpty()) {
-            input = input.substring(5);
-            delimiter += "|" + customDelimiter;
+            if (!customDelimiter.isEmpty()) {
+                input = input.substring(5);
+                delimiter += "|" + customDelimiter;
+            }
+
+            String[] numbers = input.split(delimiter);
+            result = calculateSum(numbers);
         }
 
-        String[] numbers = input.split(delimiter);
-        result = calculateSum(numbers);
+        System.out.println("결과 : " + result);
     }
 }
