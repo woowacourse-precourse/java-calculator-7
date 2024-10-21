@@ -58,7 +58,7 @@ class FrontendTest {
   public void 계산_결과를_전달받으면_정상_출력되는지_확인한다() throws Exception{
       //given
       int expect = 15;
-      String readLine = "1, 2, 3, 4, 5";
+      String readLine = "1,2,3,4,5";
       Calculator calculator = new Calculator(readLine);
 
       // when

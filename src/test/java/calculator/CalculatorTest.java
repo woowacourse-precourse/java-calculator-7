@@ -35,7 +35,7 @@ class CalculatorTest {
   @Test
   public void 유효_문자열이_입력되면_계산_결과를_전달한다() throws Exception{
     //given
-    String input = "1, 2, 3";
+    String input = "1,2,3";
     int expect = 6;
     System.setIn(new ByteArrayInputStream(input.getBytes()));
     Scanner scanner = new Scanner(System.in);
