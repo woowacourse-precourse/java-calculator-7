@@ -62,4 +62,16 @@ class ParsingUtilTest {
         // then
         assertThat(result).isEqualTo(expected);
     }
+
+    @ParameterizedTest(name = "{0} 커스텀 구별자 확인")
+    @ValueSource(strings = {"//; \n1;2;3", "//.\n1.2.3", "//|\n1|2|3"})
+    @DisplayName("커스텀 구분자가 포함된 문자열 테스트")
+    void containsCustomDelimiter(final String input) {
+
+        // when
+        var result = ParsingUtil.containsCustomDelimiter(input);
+
+        // then
+        assertThat(result).isTrue();
+    }
 }
