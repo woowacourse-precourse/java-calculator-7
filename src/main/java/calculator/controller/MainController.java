@@ -9,6 +9,7 @@ public class MainController {
     public static void run(){
         viewController.printGuidanceMessage();
         String text = viewController.getInputText();
-        calculatorController.calculator(text);
+        Integer result = calculatorController.calculator(text);
+        outView.showResult(result);
     }
 }

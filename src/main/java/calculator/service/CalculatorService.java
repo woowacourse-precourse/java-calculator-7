@@ -12,11 +12,8 @@ public class CalculatorService {
         return calculatorService;
     }
 
-    public Integer textValidation(String text) {
-        if (text == null || text.isEmpty()) {
-            return 0;  // 빈 문자열일 경우 0 반환
-        }
-        return 1;
+    public Boolean textValidation(String text) {
+        return text != null && !text.isEmpty();  // 빈 문자열일 경우 0 반환
     }
 
     public String[] parsing(String text) {

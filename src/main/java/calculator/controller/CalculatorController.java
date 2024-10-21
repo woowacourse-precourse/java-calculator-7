@@ -12,11 +12,12 @@ public class CalculatorController {
         }
         return calculatorController;
     }
-    public String calculator(String text){
-        calculatorService.textValidation(text);
-        String[] parsinged = calculatorService.parsing(text);
-        calculatorService.sum(parsinged);
-        
-        return "123";
+    public Integer calculator(String text){
+        if(calculatorService.textValidation(text)){
+            String[] parsinged = calculatorService.parsing(text);
+            Integer result = calculatorService.sum(parsinged);
+            return result;
+        };
+        return 0;
     }
 }

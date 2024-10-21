@@ -15,4 +15,8 @@ public class OutView {
     public void inputMessage(){
         System.out.println(Utils.INPUT_MESSAGE);
     }
+
+    public void showResult(Integer result){
+        System.out.println("결과 : "+result);
+    }
 }
