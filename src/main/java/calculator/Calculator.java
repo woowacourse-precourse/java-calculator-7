@@ -58,18 +58,15 @@ public class Calculator {
     public Map<String, String> split(String inputString) {
         Map<String, String> splitString = new HashMap<>();
 
-        if (inputString.startsWith("//")) {
+        if (inputString.startsWith("//") && inputString.contains("\\n")) {
             int index = inputString.indexOf("\\n");
-
-            if (index == -1) {
-                throw new IllegalArgumentException();
-            }
-
             splitString.put("division", inputString.substring(0, index));
             splitString.put("number", inputString.substring(index + 2));
-        } else {
+        } else if (!inputString.startsWith("//")) {
             splitString.put("division", null);
             splitString.put("number", inputString);
+        } else {
+            throw new IllegalArgumentException();
         }
 
         return splitString;
