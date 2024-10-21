@@ -97,4 +97,22 @@ class SeparatorTest {
         String input2 = "//b\\nb1b2b3";
         Assertions.assertThrows(IllegalArgumentException.class, () -> separator.separate(input2));
     }
+
+    @Test
+    @DisplayName(" 기본 구분자 - ``이 들어갔을 때 0이 나온다.")
+    void givenEmptyInput_whenSeparate_thenZero() {
+        String input = "";
+        int[] expected = new int[]{0};
+        int[] result = separator.separate(input);
+        Assertions.assertArrayEquals(expected, result);
+    }
+
+    @Test
+    @DisplayName(" 커스텀 구분자 - `//a\n`이 들어가도 0이 나온다.")
+    void givenEmptyInput_whenCustomSeparate_thenZero() {
+        String input = "//a\\n";
+        int[] expected = new int[]{0};
+        int[] result = separator.separate(input);
+        Assertions.assertArrayEquals(expected, result);
+    }
 }
