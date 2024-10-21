@@ -68,4 +68,12 @@ public class Calculator {
         }
         return result;
     }
+
+    public void calculate() {
+        createInputValue();
+        String[] stringNums = splitNums();
+        ArrayList<Integer> nums = toInteger(stringNums);
+        this.result = getResult(nums);
+        System.out.println("결과: " + this.result);
+    }
 }
