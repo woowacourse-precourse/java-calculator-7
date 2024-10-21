@@ -20,10 +20,10 @@ public class Application {
 
             String customDelimiter = input.substring("//".length(), startOfCustomDelimiter);
 
-            if (customDelimiter.matches(".*[0-9].*")) {
+            if (customDelimiter.matches(".*[0-9].*") || customDelimiter.length() > 1) {
                 throwException();
             }
-            
+
             return customDelimiter;
         }
     }
@@ -33,5 +33,6 @@ public class Application {
         String input = Console.readLine();
 
         String customDelimiter = extractCustomDelimiter(input);
+        System.out.println("customDelimiter = " + customDelimiter);
     }
 }
