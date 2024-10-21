@@ -8,8 +8,35 @@ public class Application {
         String input = Console.readLine();
         String delimiters = ",|:";
         String inputTokens[] = splitByDelimiters(input, delimiters);
+        int result = calculateSum(inputTokens);
 
 
+    }
+
+    public static int calculateSum(String inputTokens[]) {
+        int sum = 0;
+
+        for (String inputToken : inputTokens) {
+
+            inputToken = inputToken.strip();
+            if (!inputToken.isEmpty()) {
+
+
+                int numberToken = Integer.parseInt(inputToken);
+
+                if (numberToken > 0) {
+                    sum += numberToken;
+                } else {
+                    throw new IllegalArgumentException();
+
+                }
+
+
+            }
+
+        }
+
+        return sum;
     }
 
 
