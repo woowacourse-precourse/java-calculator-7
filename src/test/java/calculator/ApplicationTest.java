@@ -49,6 +49,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 공백_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("// \\n1:3 5 7, 10");
+            assertThat(output()).contains("결과 : 26");
+        });
+    }
+
+    @Test
     void 문자커스텀_기본_모두_사용() {
         assertSimpleTest(() -> {
             run("//a\\n11:3,5:7a10");
