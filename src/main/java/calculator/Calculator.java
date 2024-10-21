@@ -1,36 +1,38 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Calculator {
     private String userInput;
+    private Integer calculateResult;
 
     public Calculator() {
-
     }
 
-    public Boolean checkInputByRule() {
-        return checkInputByRule(this.userInput);
-    }
-    public Boolean checkInputByRule(String userInput) {
-        return false;
-    }
-
-    public Integer getSumByCalculate() {
-        return this.getSumByCalculate(this.userInput);
-    }
-    public Integer getSumByCalculate(String userInput) {
-        return 0;
-    }
 
     public String setUserInputByCustomConsole() {
-        try{
+        try {
             this.userInput = Console.readLine();
             return this.userInput;
         } catch (OutOfMemoryError e) {
-            throw new IllegalArgumentException(e);
+            throw new IllegalArgumentException("[ERROR] Out of memory : ", e);
         }
-
     }
 
+    public void resultShowConsole() {
+        System.out.println("결과 : " + this.calculateResult);
+    }
+
+    public String resultShowConsole(String givenInput) {
+        if(givenInput == null || givenInput.isEmpty()) {
+            System.out.println(this.calculateResult);
+            return "결과 : " +this.calculateResult;
+        }
+        String outMessage =  "결과 : " + givenInput;
+        System.out.println(outMessage);
+        return outMessage;
+    }
 }
