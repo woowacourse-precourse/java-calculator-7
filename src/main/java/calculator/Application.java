@@ -16,13 +16,12 @@ public class Application {
 
         ArrayList<String> delimiters = new ArrayList<>(List.of(",", ":"));
 
-        if (str.substring(0, 2).equals("//")) {
-            int delimiterIndex = -1;
-            delimiterIndex = str.indexOf("\\n");
+        if (str.startsWith("//")) {
+            int delimiterIndex = str.indexOf("\\n");
             if (delimiterIndex != -1) {
                 String customDelimiter = str.substring(2, delimiterIndex);
                 delimiters.add(customDelimiter);
-                str = str.substring(delimiterIndex + 2, str.length());
+                str = str.substring(delimiterIndex + 2);
             } else {
                 throw new IllegalStateException();
             }
