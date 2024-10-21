@@ -65,7 +65,7 @@ class SumCalculatorTest {
     void splitAndSumWithCustomSeparator() {
         //given
         SumCalculator sumCalculator = new SumCalculator(extractor);
-        String source = "//;\n5;6;7";
+        String source = "//;\\n5;6;7";
 
         //when
         int result = sumCalculator.splitAndSumWith(source);
@@ -79,7 +79,7 @@ class SumCalculatorTest {
     void splitAndSumWithCustomSeparators() {
         //given
         SumCalculator sumCalculator = new SumCalculator(extractor);
-        String source = "//,;\n4,5;6";
+        String source = "//,;\\n4,5;6";
 
         //when
         int result = sumCalculator.splitAndSumWith(source);
