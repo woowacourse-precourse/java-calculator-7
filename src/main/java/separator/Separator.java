@@ -7,9 +7,10 @@ public class Separator {
 
     private static final String DEFAULT_DELIMITER = ",|:";
 
+    // Separator.java
     public static String[] split(String inputString) {
         String delimiter = DEFAULT_DELIMITER;
-        Matcher customDelimiterMatcher = Pattern.compile("//(.)\\n(.*)").matcher(inputString);
+        Matcher customDelimiterMatcher = Pattern.compile("//(.)\\\\n(.*)").matcher(inputString);
 
         if (customDelimiterMatcher.find()) {
             delimiter = Pattern.quote(customDelimiterMatcher.group(1));
