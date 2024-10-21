@@ -54,9 +54,6 @@ public class Application {
             input = input.substring((delimiter.length() - 4) * 5);
         }
 
-        // 현재 구분자들 알려주기
-        System.out.println("구분자 = " + delimiter);
-
         String[] inputSplits = input.split(delimiter);
         int result = 0;
 
