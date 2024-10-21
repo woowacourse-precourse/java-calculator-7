@@ -30,6 +30,9 @@ public class Delimiter {
         return expression;
     }
 
+    public String concatDelimiters() {
+        return String.join("|", delimiters);
+    }
 
     private boolean isCustomDelimiterExist(String expression) {
         return expression.startsWith(CUSTOM_DELIMITER_PREFIX);
