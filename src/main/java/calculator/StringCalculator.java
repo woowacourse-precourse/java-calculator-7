@@ -30,7 +30,7 @@ public class StringCalculator {
                 if (!token.isEmpty()) {
                     int number = Integer.parseInt(token);
                     if (number < 0) {
-                        throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
+                        throw new IllegalArgumentException();
                     }
                     sum += number;  // 각 숫자를 더함
                 }
