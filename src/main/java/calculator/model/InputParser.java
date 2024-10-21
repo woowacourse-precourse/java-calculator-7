@@ -18,13 +18,16 @@ public class InputParser {
         }
 
         String[] tokens = numbers.split(delimiterRegex, -1);
+        validateTokens(tokens);
 
+        return List.of(tokens);
+    }
+
+    private static void validateTokens(String[] tokens) {
         Arrays.stream(tokens).forEach(token -> {
             if (token.isEmpty()) {
                 throw new IllegalArgumentException("연속된 구분자는 허용되지 않습니다.");
             }
         });
-
-        return List.of(tokens);
     }
 }
