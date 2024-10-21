@@ -32,12 +32,16 @@ public class Application {
         int result = 0;
         for (String number:num){
             if(!number.isEmpty()){ // 비었을 경우, 0처럼 처리
-                int temp = Integer.parseInt(number);
-                // 예외 : 숫자에 음수가 있는 경우
-                if(temp<0){
+                try{
+                    int temp = Integer.parseInt(number);
+                    // 예외 : 숫자에 음수가 있는 경우
+                    if(temp<0){
+                        throw new IllegalArgumentException();
+                    }
+                    result += temp;
+                } catch (NumberFormatException e){ // 예외 : 구분자가 아닌 문자가 있는 경우 == 숫자 변환이 불가능할 경우
                     throw new IllegalArgumentException();
                 }
-                result += temp;
             }
         }
         System.out.println(result);
