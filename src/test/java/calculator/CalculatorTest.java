@@ -9,6 +9,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.util.Scanner;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -67,7 +68,10 @@ class CalculatorTest {
         int target = Integer.parseInt(valueOf(index));
         actual += target;
       }
-      // [X] 잘못된 입력값은 예외처리
+      // 입력 가능한 문자열인지 확인해주세요. ',', ':'
+      //java.lang.IllegalArgumentException: 입력 가능한 문자열인지 확인해주세요. ',', ':'
+      // [] 잘못된 입력값은 예외처리
+      // ',', ':' 이거나 0-9 정수이거나로 변경 필요
       boolean validInput = valueOf(index).equals(",") || valueOf(index).equals(":");
       if (!validInput) {
         throw new IllegalArgumentException("입력 가능한 문자열인지 확인해주세요. ',', ':' ");
@@ -85,6 +89,8 @@ class CalculatorTest {
 
 
 
+  // Expected java.lang.IllegalArgumentException to be thrown, but nothing was thrown.
+  @Test
   public void 입력값이_잘못된_경우_예외_처리한다() throws Exception{
       //given
     // 잘못된 입력값이 들어온 경우 예외처리한다
@@ -99,6 +105,7 @@ class CalculatorTest {
   }
 
 
+  // 통과
   @Test
   public void 탐색_인덱스가_정수_변환_가능한지_확인한다() throws Exception{
       //given
@@ -117,7 +124,7 @@ class CalculatorTest {
 
   }
 
-
+  // NumberFormatException: For input string: "/"
   @Test
   public void 입력값이_유효한_경우를_확인한다() throws Exception{
       //given
