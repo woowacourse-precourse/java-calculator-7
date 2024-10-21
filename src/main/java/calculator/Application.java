@@ -60,7 +60,9 @@ public class Application {
         }
         String[] nums = input.split(spliter);
         for (String num : nums) {
-            sum += Integer.parseInt(num.trim());
+            if (!num.isEmpty()) {
+                sum += Integer.parseInt(num.trim());
+            }
         }
         return sum;
     }
