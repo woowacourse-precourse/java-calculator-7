@@ -60,7 +60,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_위치오류() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("1//;\\n;7"))
+            assertThatThrownBy(() -> runException("1//;\\n1;7"))
                 .isInstanceOf(IllegalArgumentException.class)
         );
     }
