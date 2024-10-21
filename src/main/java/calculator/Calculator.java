@@ -61,11 +61,6 @@ public class Calculator {
         return result;
     }
 
-    // 결과 출력
-    public static void printResult(int result) {
-        System.out.println("결과 : " + result);
-    }
-
     public static void run() {
         String input = getInput();
         boolean isCustom = checkCustomDelimiter(input);
