@@ -4,22 +4,23 @@ import calculator.console.InputView;
 import calculator.console.OutputView;
 import calculator.exception.InvalidInputException;
 import calculator.exception.SystemException;
+import calculator.system.ExpressionOperator;
 import java.util.function.Supplier;
 
 public class CalculatorSystem {
 	private final InputView inputView;
 	private final OutputView outputView;
-	private final Calculator calculator;
+	private final ExpressionOperator expressionOperator;
 
 	public CalculatorSystem() {
 		inputView = new InputView();
 		outputView = new OutputView();
-		calculator = new Calculator();
+		expressionOperator = new ExpressionOperator();
 	}
 
 	public void run() {
 		String expression = getExpression();
-		Long result = calculator.sum(expression);
+		Long result = expressionOperator.sum(expression);
 		outputView.printOperationResult(result);
 	}
 
