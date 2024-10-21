@@ -34,18 +34,14 @@ public class Calculator {
         }
 
         for (int i = 0; i < calculateZone.length(); i++) {
-            if (i == 0 && delimeterList.contains(calculateZone.charAt(i))) {
-                return false;
-            }
-
-            if (delimeterList.contains(calculateZone.charAt(i))) {
-                if (!numList.contains(calculateZone.charAt(i - 1))) {
+            if (delimeterList.contains(calculateZone.charAt(i))) { // 구분자인 경우
+                if (!(i >= 1 && numList.contains(calculateZone.charAt(i - 1)))) { // 왼쪽에 숫자가 존재하는 경우를 제외하고 모두 Invalid
                     return false;
                 }
-                if (i + 1 < calculateZone.length() && !numList.contains(calculateZone.charAt(i + 1))) {
+                if (!(i + 1 < calculateZone.length() && numList.contains(calculateZone.charAt(i + 1)))) { // 오른쪽에 숫자가 존재하는 경우를 제외하고 모두 Invalid
                     return false;
                 }
-            } else if (!numList.contains(calculateZone.charAt(i))){
+            } else if (!numList.contains(calculateZone.charAt(i))){ // 구분자가 아닌 경우, 숫자 외의 입력 값이 있으면 안된다.
                 return false;
             }
         }

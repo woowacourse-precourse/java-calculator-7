@@ -35,6 +35,10 @@
 + 덧셈 기능 결과를 출력한다.
 
 ## 업데이트 노트
+### v.3.1.0 구분자로 끝나는 입력값에 대한 테스트 코드 추가 및 예외 처리
+- Input이 구분자로 끝날 때 IllegalArgumentException 발생하도록 예외 처리 추가
+- 구분자로 끝나는 입력 값에 대한 테스트 코드 작성
+
 ### v.3.0.3 CUSTOM_DELIMITER 상수 추가
 - CUSTOM_DELIMITER_POS(2), CUSTOM_DELIMITER_LENGTH(5) 를 상수화하여 코드 유지보수성 향상 
 
