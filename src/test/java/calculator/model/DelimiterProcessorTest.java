@@ -51,4 +51,19 @@ class DelimiterProcessorTest {
         assertThat(result).contains("1","2","3","4","5");
     }
 
+    @Test
+    @DisplayName("빈 문자열 또는 구분자가 없을 때 기본값을 처리한다.")
+    public void 빈_문자열을_입력하거나_구분자가_없을_경우() {
+        //given
+        String userInput = "0";
+        String delimiter = "";
+
+        //when
+        String[] result = delimiterProcessor.splitByDelimiter(userInput, delimiter);
+
+        //then
+        assertThat(result).contains("0");
+    }
+
+
 }

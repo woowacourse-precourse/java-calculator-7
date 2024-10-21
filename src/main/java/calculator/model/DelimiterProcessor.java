@@ -14,6 +14,11 @@ import java.util.Arrays;
 public class DelimiterProcessor {
 
     public String[] splitByDelimiter(String userInput, String delimiter) {
+
+        if (delimiter.isEmpty()) {
+            return new String[]{userInput};
+        }
+
         userInput = deleteCustomDelimiter(userInput, delimiter);
         String[] split = userInput.split(DELIMITER_PATTERN_PREFIX + delimiter + DELIMITER_PATTERN_SUFFIX);
 
