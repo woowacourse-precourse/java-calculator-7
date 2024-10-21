@@ -45,6 +45,16 @@ public class Calculator {
         return input.split(delimiterRegex);
     }
 
+    // 6. 숫자의 합 계산 기능
+    public int calculateSum(String[] numbers) {
+        int total = 0;
+        for (String number : numbers) {
+            int num = toIntAndValidate(number);
+            total += num;
+        }
+        return total;
+    }
+
     // 5. 숫자를 변환하고 검증하는 기능
     private int toIntAndValidate(String number) {
         try {
