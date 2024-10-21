@@ -26,5 +26,9 @@ public class CalcController {
         return inputNums;
     }
 
+    public void receiveData(List<String> dicedExpression) {
+        numberRepository.save(prepToCalc(dicedExpression));
+    }
+
 
 }
