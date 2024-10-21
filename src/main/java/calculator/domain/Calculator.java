@@ -10,15 +10,15 @@ public class Calculator {
      * 입력 문자열을 받아 결과를 반환.
      */
     public int add(String input) {
-        if (input == null || input.isBlank()) { // 공백 입력에 대한 예외 처리 강화
-            throw new IllegalArgumentException("유효하지 않은 입력입니다: 입력이 null이거나 공백입니다.");
+        if (input == null || input.isBlank()) {
+            return 0;
         }
 
         String[] parts = extractCustomDelimiter(input);
         String delimiter = parts[0];
         String numbers = parts[1];
 
-        validateContent(numbers, delimiter); // 유효성 검사
+        validateContent(numbers, delimiter);
         String[] s = numbers.split(delimiter);
         return calculateSum(s);
     }
@@ -56,9 +56,9 @@ public class Calculator {
         if (s.contains(delimiter + delimiter)) { // 연속된 구분자 처리
             throw new IllegalArgumentException("연속된 구분자는 허용되지 않습니다.");
         }
-        // 숫자 유효성 검사
+
         for (String num : s.split(delimiter)) {
-            checkForInvalidNumber(num); // 유효하지 않은 숫자 체크
+            checkForInvalidNumber(num);
         }
     }
 
@@ -71,7 +71,7 @@ public class Calculator {
             if (content.isEmpty()) {
                 throw new IllegalArgumentException("연속된 구분자는 허용되지 않습니다.");
             }
-            int number = parseNumber(content); // 숫자로 변환
+            int number = parseNumber(content);
             sum += number;
         }
         return sum;
