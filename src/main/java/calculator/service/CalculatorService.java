@@ -42,7 +42,7 @@ public class CalculatorService {
 
     private void validateNullInput(String userInput) {
         if(userInput == null){
-            throw new IllegalArgumentException("User input is empty");
+            throw new IllegalArgumentException("입력에서 null 값은 올 수 없습니다.");
         }
     }
 }
