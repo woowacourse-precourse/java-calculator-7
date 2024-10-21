@@ -3,6 +3,8 @@ package calculator.domain;
 import java.util.List;
 
 public class DelimiterFactory {
+    private DelimiterFactory() {
+    }
 
     public static Delimiters createDelimitersFrom(List<String> delimiterStrings) {
         List<Delimiter> customDelimiters = parseDelimiters(delimiterStrings);
@@ -18,4 +20,3 @@ public class DelimiterFactory {
     }
 
 }
-
