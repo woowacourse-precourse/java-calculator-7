@@ -1,9 +1,10 @@
-package calculator;
+package calculator.handler;
 
+import calculator.parser.StringParser;
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputHandler {
-    int[] getInput() {
+    public int[] getInput() {
         String input = Console.readLine();
 
         StringParser parser = new StringParser();
