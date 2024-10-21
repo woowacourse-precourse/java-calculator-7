@@ -68,7 +68,13 @@ public class Application {
         for (int i = 0; i < input.length(); i++) {
             char ch = input.charAt(i);
 
+            boolean isDigit = Character.isDigit(ch);
             boolean isDelimiter = delimiters.indexOf(ch) != -1;
+
+            if (!isDigit && !isDelimiter) {
+                throw new IllegalArgumentException("정의되지 않은 구분자가 포함되어 있습니다: " + ch);
+            }
+
             if (isDelimiter) {
                 if (i == 0) {
                     throw new IllegalArgumentException("문자열은 구분자로 시작할 수 없습니다.");
@@ -76,7 +82,6 @@ public class Application {
                 if (lastWasDelimiter) {
                     throw new IllegalArgumentException("구분자가 연속적으로 사용되었습니다.");
                 }
-
                 lastWasDelimiter = true;
             } else {
                 lastWasDelimiter = false;
@@ -87,6 +92,7 @@ public class Application {
             throw new IllegalArgumentException("구분자로 끝날 수 없습니다.");
         }
     }
+
 
     private static String[] splitNumbers(String input, String delimiters) {
         String delimiterPattern = createDelimiterPattern(delimiters);
