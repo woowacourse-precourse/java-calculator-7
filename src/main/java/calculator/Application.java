@@ -18,6 +18,14 @@ class StringCalculator {
             return 0;
 
         String delimiter = ",|:";
+        if(input.startsWith("//")) {
+            int endIdx = input.indexOf("\\n");
+
+            delimiter = String.join("|", input.substring(2, endIdx).split(""));
+
+            input = input.substring(endIdx + 2);
+            if(input.isEmpty()) return 0;
+        }
         String[] numbers = input.split(delimiter);
 
         int sum = 0;
@@ -27,4 +35,5 @@ class StringCalculator {
         }
         return sum;
     }
+
 }
