@@ -1,6 +1,7 @@
 package calculator.model;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,7 +27,11 @@ public class Delimiter {
 	}
 
 	private void initDefaultDelimiters() {
-		Arrays.stream(DefaultDelimiters.values())
+		Arrays.stream(DefaultDelimiter.values())
 			.forEach(delimiter -> this.delimiters.add(delimiter.getDelimiter()));
+	}
+
+	public Set<String> getDelimiters() {
+		return Collections.unmodifiableSet(delimiters);
 	}
 }
