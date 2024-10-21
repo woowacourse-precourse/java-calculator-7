@@ -121,6 +121,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 커스텀_구분자만_입력() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//&\\n"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
     void 공백만_입력() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException(" "))
