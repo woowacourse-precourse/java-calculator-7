@@ -65,19 +65,14 @@ public class Calculator {
         }
     }
 
-
     public Integer getSumByCalculate() {
-        String delimiter = CalculatorDelimiter.DEFAULT_DELIMITER;
         String targetNumbersWithDelimiter = this.userInput;
-        if (this.calculatorDelimiter.checkDelimiterHead(this.userInput)) {
-            delimiter = Pattern.quote(this.customDelimiter) + "|" + CalculatorDelimiter.DEFAULT_DELIMITER;
-            targetNumbersWithDelimiter = this.calculatorDelimiter.subStringCustomDelimiterInput(this.userInput);
-        }
+        String delimiter = this.calculatorDelimiter.getCustomDelimiterIfPresent(targetNumbersWithDelimiter,this.customDelimiter);
+        targetNumbersWithDelimiter = this.calculatorDelimiter.stripCustomDelimiterFromInput(targetNumbersWithDelimiter);
         this.calculateResult = Arrays.stream(targetNumbersWithDelimiter.split(delimiter))
                 .filter(this.calculatorDelimiter::isContainNumber)
                 .mapToInt(this::parsePositiveInt)
                 .sum();
-
         return this.calculateResult;
     }
 

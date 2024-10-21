@@ -5,13 +5,13 @@ import java.util.regex.Pattern;
 
 public class CalculatorDelimiter {
     static final String DEFAULT_DELIMITER = ",|:";
-    static final String CUSTOM_DELIMITER_HEAD = "//";
-    static final String CUSTOM_DELIMITER_LAST = "\n";
-    static final String  BACKSLASH_WITH_CUSTOM_DELIMITER_LAST= "\\n";
-    static final Integer CUSTOM_DELIMITER_LAST_SIZE = 2;
-    static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.+?)\\n(.*)");
-    static final Pattern CONTAINS_NUMBERS_PATTERN = Pattern.compile(".*\\d+.*");
-    static final Pattern DEFAULT_DELIMITER_PATTERN = Pattern.compile("^[0-9,:,\\s]*$");
+    private static final String CUSTOM_DELIMITER_HEAD = "//";
+    private static final String CUSTOM_DELIMITER_LAST = "\n";
+    private static final String  BACKSLASH_WITH_CUSTOM_DELIMITER_LAST= "\\n";
+    private static final Integer CUSTOM_DELIMITER_LAST_SIZE = 2;
+    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.+?)\\n(.*)");
+    private static final Pattern CONTAINS_NUMBERS_PATTERN = Pattern.compile(".*\\d+.*");
+    private static final Pattern DEFAULT_DELIMITER_PATTERN = Pattern.compile("^[0-9,:,\\s]*$");
 
 
     public Boolean checkDelimiterHead(String userInput) {
@@ -37,6 +37,19 @@ public class CalculatorDelimiter {
     public String subStringCustomDelimiterInput(String givenInput) {
         return  givenInput.substring(givenInput.indexOf(CalculatorDelimiter.BACKSLASH_WITH_CUSTOM_DELIMITER_LAST)
                             + CalculatorDelimiter.CUSTOM_DELIMITER_LAST_SIZE);
+    }
+    public String getCustomDelimiterIfPresent(String userInput,String givenDelimiter) {
+        if (checkDelimiterHead(userInput)) {
+            return Pattern.quote(givenDelimiter) + "|" + DEFAULT_DELIMITER;
+        }
+        return DEFAULT_DELIMITER;
+    }
+
+    public String stripCustomDelimiterFromInput(String userInput) {
+        if (checkDelimiterHead(userInput)) {
+            return subStringCustomDelimiterInput(userInput);
+        }
+        return userInput;
     }
 
 }
