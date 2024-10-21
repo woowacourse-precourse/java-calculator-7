@@ -14,27 +14,27 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class DefaultDelimiterTest {
 
+    @DisplayName("기본 구분자 일치: 빈 문자열, 숫자만 존재, 쉼표(,) 또는 콜론(:)을 사용해 구분")
     @ValueSource(strings = {"", "1", "1,", ":1", "1,2:3", ",|"})
     @ParameterizedTest(name = "\"{0}\"은 기본 구분자")
-    @DisplayName("기본 구분자 일치: 빈 문자열, 숫자만 존재, 쉼표(,) 또는 콜론(:)을 사용해 구분")
     void 기본_구분자_일치(String input) {
         Delimiter delimiter = new DefaultDelimiter(input);
 
         assertThat(delimiter.matches()).isTrue();
     }
 
+    @DisplayName("기본 구분자 불일치: 쉼표(,) 또는 콜론(:)외 포함")
     @ValueSource(strings = {"1.", "!1", "1,2:3;4", ",|;"})
     @ParameterizedTest(name = "\"{0}\"은 기본 구분자가 아님")
-    @DisplayName("기본 구분자 불일치: 쉼표(,) 또는 콜론(:)외 포함")
     void 기본_구분자_불일치(String input) {
         Delimiter delimiter = new DefaultDelimiter(input);
 
         assertThat(delimiter.matches()).isFalse();
     }
 
+    @DisplayName("기본 구분자 입력 분리")
     @MethodSource(value = "provideDefaultInputAndNumbers")
     @ParameterizedTest(name = "{0}의 분리 결과는 {1}")
-    @DisplayName("기본 구분자 입력 분리")
     void 기본_구분자_분리(String input, List<String> expectedNumbers) {
         Delimiter delimiter = new DefaultDelimiter(input);
 

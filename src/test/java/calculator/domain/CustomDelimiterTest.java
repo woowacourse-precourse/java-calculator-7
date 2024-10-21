@@ -15,50 +15,41 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class CustomDelimiterTest {
 
+    @DisplayName("커스텀 구분자 일치: //와 \n 사이에 1개 이상, 3개 이하의 문자가 존재")
     @ValueSource(strings = {"//;\\n1;2;3", "// \\n1 2 3", "//;\\n1", "// \\n", "//[+]\\n"})
     @ParameterizedTest(name = "\"{0}\"은 커스텀 구분자")
-    @DisplayName("커스텀 구분자 일치: //와 \n 사이에 1개 이상, 3개 이하의 문자가 존재")
     void 커스텀_구분자_일치(String input) {
         Delimiter delimiter = new CustomDelimiter(input);
 
         assertThat(delimiter.matches()).isTrue();
     }
 
+    @DisplayName("커스텀 구분자 불일치: //와 \n 사이에 문자가 존재하지 않거나 세 자리 초과한 문자가 존재")
     @ValueSource(strings = {"//\\n", "// -> \\n"})
     @ParameterizedTest(name = "\"{0}\"은 커스텀 구분자가 아님")
-    @DisplayName("커스텀 구분자 불일치: //와 \n 사이에 문자가 존재하지 않거나 세 자리 초과한 문자가 존재")
     void 커스텀_구분자_불일치(String input) {
         Delimiter delimiter = new CustomDelimiter(input);
 
         assertThat(delimiter.matches()).isFalse();
     }
 
+    @DisplayName("커스텀 구분자 입력 분리")
     @MethodSource(value = "provideCustomInputAndNumbers")
     @ParameterizedTest(name = "{0}의 분리 결과는 {1}")
-    @DisplayName("커스텀 구분자 입력 분리")
     void 커스텀_구분자_분리(String input, List<String> expectedNumbers) {
         Delimiter delimiter = new CustomDelimiter(input);
 
         assertThat(delimiter.split()).isEqualTo(expectedNumbers);
     }
 
-    @Test
     @DisplayName("이모지는 길이가 1인 문자로 커스텀 구분자다")
+    @Test
     void 이모지_커스텀_구분자() {
         Delimiter delimiter = new CustomDelimiter("// ➕ \\n1 ➕ 2 ➕ 3");
 
         List<String> numbers = delimiter.split();
 
         assertThat(numbers).containsExactly("1", "2", "3");
-    }
-
-    @MethodSource(value = "provideCustomInputAndNumbers")
-    @ParameterizedTest(name = "{0}은 분리할 수 없습니다")
-    @DisplayName("입력 분리: ")
-    void 입력_분리_실패(String input, List<String> expected) {
-        CustomDelimiter delimiter = new CustomDelimiter(input);
-
-        assertThat(delimiter.split()).isEqualTo(expected);
     }
 
     static Stream<Arguments> provideCustomInputAndNumbers() {

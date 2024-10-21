@@ -22,30 +22,15 @@ class InputViewTest {
         inputView = new InputView();
     }
 
+    @DisplayName("정상 입력을 받으면 해당 줄을 읽어온다")
     @MethodSource(value = "provideInputAndExpected")
     @ParameterizedTest(name = "입력값: \"{0}\", 기대값: \"{1}\"")
-    @DisplayName("정상 입력을 받으면 해당 줄을 읽어온다")
     void 정상_입력(String input, String expected) {
         systemIn(input);
 
         String read = inputView.read();
 
         assertThat(read).isEqualTo(expected);
-    }
-
-    @MethodSource(value = "provideWrongInput")
-    @ParameterizedTest
-    @DisplayName("잘못된 입력은 공백으로 이루어진 입력이다")
-    void 잘못된_입력(String input) {
-        systemIn(input);
-
-        assertThatThrownBy(() -> inputView.read())
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    private void systemIn(final String input) {
-        InputStream inputStream = new ByteArrayInputStream(input.getBytes());
-        System.setIn(inputStream);
     }
 
     private static Stream<Arguments> provideInputAndExpected() {
@@ -56,11 +41,26 @@ class InputViewTest {
         );
     }
 
+    @DisplayName("잘못된 입력은 공백으로 이루어진 입력이다")
+    @MethodSource(value = "provideWrongInput")
+    @ParameterizedTest
+    void 잘못된_입력(String input) {
+        systemIn(input);
+
+        assertThatThrownBy(() -> inputView.read())
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
     private static Stream<Arguments> provideWrongInput() {
         return Stream.of(
                 Arguments.of(createInputWithLineSeparator(" ")),
                 Arguments.of(createInputWithLineSeparator("   "))
         );
+    }
+
+    private void systemIn(final String input) {
+        InputStream inputStream = new ByteArrayInputStream(input.getBytes());
+        System.setIn(inputStream);
     }
 
     private static String createInputWithLineSeparator(String input) {
