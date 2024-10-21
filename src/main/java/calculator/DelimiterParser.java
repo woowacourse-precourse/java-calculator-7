@@ -3,6 +3,9 @@ package calculator;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
+/**
+ * 문자열에서 구분자를 분리해내는 클래스.
+ */
 public class DelimiterParser {
     private static final String CUSTOM_DELIMITER_PREFIX = "//";
     private static final String CUSTOM_DELIMITER_SUFFIX = "\n";
