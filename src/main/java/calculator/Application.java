@@ -33,7 +33,7 @@ class StringCalculator {
             int delimiterIndex = input.indexOf("\\n");
             if (delimiterIndex == -1) {
                 throw new IllegalArgumentException(
-                        "Invalid input format. Expected delimiter definition followed by newline.");
+                        "Invalid input format. Expected delimiter definition followed by \\n.");
             }
             delimiter = input.substring(2, delimiterIndex);
             input = input.substring(delimiterIndex + 2);
@@ -43,15 +43,25 @@ class StringCalculator {
         return calculateSum(numbers);
     }
 
-    // 문자열 배열을 정수 타입으로 바꾸고 더하기 연산
+    // 문자열 배열 더하기 연산
     private static int calculateSum(String[] numbers) {
         int sum = 0;
         for (String number : numbers) {
-            int num = Integer.parseInt(number);
+            int num = parseNumber(number);
+            if (num < 0) {
+                throw new IllegalArgumentException("Negatives not allowed: " + num);
+            }
             sum += num;
         }
         return sum;
     }
 
-
+    // String으로 받은 값을 정수로 변환
+    private static int parseNumber(String number) {
+        try {
+            return Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid number: " + number);
+        }
+    }
 }
