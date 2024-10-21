@@ -2,6 +2,7 @@ package calculator.controller;
 
 import calculator.model.Adder;
 import calculator.view.InputView;
+import calculator.view.OutputView;
 
 public class AdderController {
     public void run() {
@@ -19,4 +20,7 @@ public class AdderController {
         return Adder.makeResult(input, customSeperator);
     }
 
+    private void printResult(int result) {
+        OutputView.printResult(result);
+    }
 }
