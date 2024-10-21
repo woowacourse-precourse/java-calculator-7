@@ -1,5 +1,6 @@
 package calculator;
 
+import static calculator.constant.CalculatorMessageConst.INPUT_ERROR_MESSAGE;
 import static calculator.constant.DelimiterConst.DEFAULT_DELIMITER_COLON;
 import static calculator.constant.DelimiterConst.DEFAULT_DELIMITER_COMMA;
 import static calculator.util.CalculatorUtil.printAdditionCalculatorStartGuideMessage;
@@ -41,15 +42,15 @@ public class AdditionCalculator {
         // 순회용으로 index 사용
         int index = 0;
         while (index < inputString.length()) {
-            char currentChar = inputString.charAt(index);
-            if (currentChar == '/' && index + 1 < inputString.length() && inputString.charAt(index + 1) == '/') {
-                if (index + 4 < inputString.length() && inputString.substring(index + 3, index + 5).equals("\\n")) {
+            if (isCheckLength(index+1) && isStartCustomDelimiter(index)) {
+                if (isCheckLength(index + 4) && isLineFeed(index + 3, index + 5)) {
                     additionDelimiters.add(inputString.charAt(index + 2));
                     index += 5;
                     continue;
                 }
             }
 
+            char currentChar = inputString.charAt(index);
             // 등록된 구분자인 경우
             if (isDelimiter(currentChar)) {
                 index++;
@@ -57,13 +58,13 @@ public class AdditionCalculator {
                 StringBuilder number = new StringBuilder();
 
                 // 구분자가 아닐 때까지
-                while (index < inputString.length() && !isDelimiter(inputString.charAt(index)) && !isStartCustomDelimiter(index)) {
+                while (isCheckLength(index)&& !isDelimiter(inputString.charAt(index)) && !isStartCustomDelimiter(index)) {
                     number.append(inputString.charAt(index++));
                 }
 
                 int num = Integer.parseInt(number.toString());
                 if (num < 0) {
-                    throw new IllegalArgumentException("잘못된 입력입니다.");
+                    throw new IllegalArgumentException(INPUT_ERROR_MESSAGE);
                 }
                 additionNumbers.add(num);
             } else {
@@ -72,13 +73,28 @@ public class AdditionCalculator {
         }
     }
 
+    // 커스텀 구분자 등록 시작 부분을 판단한다
     private boolean isStartCustomDelimiter(int index) {
         if (inputString.charAt(index) == '/' && inputString.charAt(index + 1) == '/') {
             return true;
         } else return false;
     }
 
-    // 등록된 구분자인가요?
+    // index 값이 입력 문자열 길이를 넘지 않는지 판단한다 (반복문에서 활용)
+    private boolean isCheckLength(int index) {
+        if (index < inputString.length()) {
+            return true;
+        } else return false;
+    }
+
+    // 개행 문자 여부를 판단한다
+    private boolean isLineFeed(int firstIndex, int secondIndex) {
+        if (inputString.substring(firstIndex, secondIndex).equals("\\n")) {
+            return true;
+        } else return false;
+    }
+
+    // 등록된 구분자인지 판단한다
     private boolean isDelimiter(char character) {
         return additionDelimiters.contains(character);
     }
