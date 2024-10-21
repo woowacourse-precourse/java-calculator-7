@@ -11,7 +11,8 @@ public class CustomValidator implements Validator{
     }
 
     @Override
-    public void validate(String input) {
+    public ParsedInput validate(String input) {
 
+        return null;
     }
 }

@@ -2,5 +2,5 @@ package calculator.model;
 
 public interface Validator {
 
-    void validate(String input);
+    ParsedInput validate(String input);
 }
