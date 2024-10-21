@@ -11,7 +11,7 @@ public class Application {
         try {
             displayResult(isNull(inputStr) ? 0 : sumNum(splitInput(inputStr)));
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            System.out.println("에러: " + e.getMessage()); // 구체적인 에러 메시지 출력
         } finally {
             Console.close();
         }
@@ -20,11 +20,12 @@ public class Application {
     // 입력 문자열을 처리하고 합산 결과 반환
     private static String[] splitInput(String inputStr) {
         if (inputStr.startsWith("//")) {
-            String delimiter = inputStr.substring(2, inputStr.indexOf("\\n"));
-            inputStr = inputStr.substring(inputStr.indexOf("\\n") + 2);
+            // "\n"으로 개행 문자 처리
+            String delimiter = inputStr.substring(2, inputStr.indexOf("\n"));
+            inputStr = inputStr.substring(inputStr.indexOf("\n") + 1);
             return splitString(inputStr, delimiter);
         }
-        return splitString(inputStr, ",|:");
+        return splitString(inputStr, ",|:"); // 기본 구분자 처리
     }
 
     // 분리된 문자열 합산
@@ -33,15 +34,14 @@ public class Application {
             try {
                 int intNum = Integer.parseInt(num);
                 if (intNum < 0) {
-                    throw new IllegalArgumentException();
+                    throw new IllegalArgumentException("음수는 입력할 수 없습니다: " + num);
                 }
                 return intNum;
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("잘못된 숫자 형식입니다: " + num);
             }
         }).sum();
     }
-
 
     // 문자열을 구분자로 분리하고 빈 문자열을 무시
     private static String[] splitString(String inputStr, String delimiter) {
