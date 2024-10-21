@@ -5,3 +5,6 @@ public class Application {
         // TODO: 프로그램 구현
     }
 }
+
+//camp.nextstep.edu.missionutils
+//camp.nextstep.edu.missionutils.Console의 readLine()
