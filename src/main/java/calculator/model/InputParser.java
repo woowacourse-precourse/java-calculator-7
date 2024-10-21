@@ -10,7 +10,6 @@ import calculator.validation.InputValidator;
 
 public class InputParser {
 	private InputParser() {
-		// extractCustomDelimiter(input).ifPresent(delimiter::add);
 	}
 
 	/**
@@ -74,7 +73,7 @@ public class InputParser {
 	 * 문자열 전처리
 	 */
 	// 입력값에서 커스텀 구분자를 추출 (없을 수 있음)
-	private static Optional<String> extractCustomDelimiter(String input) {
+	public static Optional<String> extractCustomDelimiter(String input) {
 		if (!hasCustomDelimiter(input)) {
 			return Optional.empty();
 		}

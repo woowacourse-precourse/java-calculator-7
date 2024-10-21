@@ -8,7 +8,6 @@ import calculator.model.Delimiter;
 
 public class InputValidator {
 	private InputValidator() {
-
 	}
 
 	public static void validateInvalidDelimiter(String input, Delimiter delimiter) {

@@ -1,6 +1,7 @@
 package calculator.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import calculator.model.Calculator;
 import calculator.model.Delimiter;
@@ -21,9 +22,10 @@ public class CalculatorController {
 		String input = inputView.readInput();
 		inputView.closeRead();
 
-
-
 		Delimiter delimiter = new Delimiter();
+
+		Optional<String> customDelimiter = InputParser.extractCustomDelimiter(input);
+		customDelimiter.ifPresent(delimiter::addCustomDelimiter);
 		List<Integer> numbers = InputParser.extractNumbers(input, delimiter);
 
 		Calculator calculator = new Calculator(numbers);
