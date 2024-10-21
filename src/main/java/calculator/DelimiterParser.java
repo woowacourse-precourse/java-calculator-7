@@ -21,10 +21,8 @@ public class DelimiterParser {
             int delimiterEndIndex = numbersPart.indexOf(CUSTOM_DELIMITER_SUFFIX);
             int numbersStartIndex = delimiterEndIndex + CUSTOM_DELIMITER_SUFFIX.length();
 
-            if (isCustomDelimiterSuffixMissing(delimiterEndIndex)) {
-                throw new IllegalArgumentException("\\n이 존재하지 않습니다: " + input);
-            } else if (isCustomDelimiterMissing(delimiterEndIndex)) {
-                throw new IllegalArgumentException("커스텀 구분자가 지정되지 않았습니다: " + input);
+            if (validateCustomDelimiterFormat(delimiterEndIndex)) {
+                throw new IllegalArgumentException("잘못된 구분자 형식입니다: " + input);
             }
 
             if (hasNoNumber(input, numbersStartIndex)) {
@@ -45,14 +43,8 @@ public class DelimiterParser {
         return !Character.isDigit(input.charAt(input.length() - 1));
     }
 
-    private boolean isCustomDelimiterSuffixMissing(int delimiterEndIndex) {
-        // \n이 존재하지 않는 경우
-        return delimiterEndIndex == -1;
-    }
-
-    private boolean isCustomDelimiterMissing(int delimiterEndIndex) {
-        // "//"와 "\n"사이에 커스텀 구분자가 지정되지 않은 경우
-        return delimiterEndIndex == 2;
+    private boolean validateCustomDelimiterFormat(int delimiterEndIndex) {
+        return delimiterEndIndex == -1 || delimiterEndIndex == CUSTOM_DELIMITER_PREFIX.length();
     }
 
     private boolean hasNoNumber(String input, int numbersStartIndex) {
