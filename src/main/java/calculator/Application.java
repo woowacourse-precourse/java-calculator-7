@@ -9,5 +9,6 @@ public class Application {
         // 1. 사용자의 입력 처리
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
+        System.out.println("결과 : " + new Calculator().run(input));
     }
 }
