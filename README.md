@@ -113,7 +113,7 @@ valid separator을 사용하여 숫자를 의미하는 부분을 나눈다.
 separatorPart, separators, numberPart, numbers 필드를 갖고, processInput, getSeparator, getNumbers 메서드를 구현해 사용자 입력에 대한 유효성 검증 및 처리를 진행한다.
 
 -   [x] processInput(): 사용자의 입력을 처리해 separatorPart, separators, numberPart, numbers 필드에 저장한다.
--   [ ] setSeparator(): 유효한 separator인지 확인한 후, separators 필드에 저장한다.
+-   [x] setSeparator(): 유효한 separator인지 확인한 후, separators 필드에 저장한다.
 -   [ ] setNumbers(): 유효한 숫자인지 확인한 후, numbers 필드에 저장 후 반환한다.
 -   [x] getNumbers(): 각 필드를 반환한다.
 

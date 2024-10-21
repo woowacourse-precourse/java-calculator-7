@@ -44,4 +44,17 @@ public class InputProcessor {
     public List<Integer> getNumbers() {
         return numbers;
     }
+    
+    private void setSeparator() {
+        if (separatorPart.isEmpty()) {
+            return;
+        }
+
+        char ch = separatorPart.charAt(0);
+
+        if (separatorPart.length() != 1 || Character.isDigit(ch) || ch == '+') {
+            throw new IllegalArgumentException("유효하지 않은 구분자입니다.");
+        }
+        separators = String.valueOf(ch);
+    }
 }
