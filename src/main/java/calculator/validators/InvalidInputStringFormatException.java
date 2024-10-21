@@ -2,14 +2,21 @@ package calculator.validators;
 
 public class InvalidInputStringFormatException {
     public static void errorCheck(String operandStr){
+        checkIfStringWhiteSpace(operandStr);
         checkStartingPoint(operandStr);
         checkEndPoint(operandStr);
         checkFrontAndBackOfCustomDelimiter(operandStr);
     }
 
+    public static void checkIfStringWhiteSpace(String operandStr){
+        if(!operandStr.isEmpty() && operandStr.trim().isEmpty()){
+            throw new IllegalArgumentException();
+        }
+    }
+
     // 문자열의 처음이 숫자이거나 // 가 아니라면 에러 발생
-    public static void checkStartingPoint(String OperandStr){
-        if(!(OperandStr.startsWith("//") || Character.isDigit(OperandStr.charAt(0))))
+    public static void checkStartingPoint(String operandStr){
+        if(!(operandStr.startsWith("//") || Character.isDigit(operandStr.charAt(0))))
             throw new IllegalArgumentException();
     }
 
@@ -21,7 +28,7 @@ public class InvalidInputStringFormatException {
     }
 
     public static void checkFrontAndBackOfCustomDelimiter(String operandStr){
-        if(operandStr.startsWith("//") && !operandStr.substring(3, 5).equals("\\n")){
+        if(operandStr.startsWith("//") && !operandStr.startsWith("\\n", 3)){
             throw new IllegalArgumentException();
         }
     }
