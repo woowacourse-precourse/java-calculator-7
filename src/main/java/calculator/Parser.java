@@ -29,8 +29,8 @@ public class Parser {
 
     public void parseNums(String input){
 
-        if(Objects.isNull(input)) {
-            checkInteger("");
+        if(Objects.isNull(input) || input.equals("")) {
+            addNum("");
             return;
         }
 
@@ -57,7 +57,10 @@ public class Parser {
     }
 
     private void addNum(String num) {
-        if (num.equals("")) nums.add(0);
+
+        if (num.equals(""))
+            nums.add(0);
+
         else nums.add(Integer.parseInt(num));
     }
 
@@ -72,19 +75,25 @@ public class Parser {
     }
 
     private boolean checkSeparator(String input){
-        if(input.substring(0,2).equals("//") && input.substring(3,5).equals("\\n")) return true;
+
+        if (input.length() < 4) return false;
+        else if(input.substring(0,2).equals("//") && input.substring(3,5).equals("\\n")) return true;
         return false;
+
     }
+
 
     private boolean checkInteger(String str){
         try {
             Integer.parseInt(str);
             return true;
         }catch (NumberFormatException e){ // 문자가 숫자가 아닌 경우 처리
+
             // 문자가 구분자에 속한다면,
-            for(String s : separators){
+            for(String s : separators)
                 if(str.equals(s)) return false;
-            }
+
+            // 구분자에 속하지 않는 문자가 등장한 경우
             throw new IllegalArgumentException("Invalid input: "+ str);
         }
     }
