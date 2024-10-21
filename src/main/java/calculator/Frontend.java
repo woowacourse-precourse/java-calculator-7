@@ -12,7 +12,7 @@ public class Frontend {
 
   // 전달받은 계산 결과를 출력한다
   public void printResult() {
-    System.out.println("결과 :" + target);
+    System.out.println("결과 : " + target);
   }
 
   public int getTarget() {
