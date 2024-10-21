@@ -13,7 +13,8 @@ class ApplicationTest extends NsTest {
     void 커스텀_구분자로_문자열_분리() {
         String input = "//;\\n1;2;3";
 
-        String[] result = Application.parseInput(input);
+        InputProcessor inputProcessor = new InputProcessor(input);
+        String[] result = inputProcessor.processInput();
 
         assertThat(result).isEqualTo(new String[]{"1", "2", "3"});
     }
@@ -22,60 +23,64 @@ class ApplicationTest extends NsTest {
     void 기본_구분자로_문자열_분리() {
         String input = "1,2:3";
 
-        String[] result = Application.parseInput(input);
+        InputProcessor inputProcessor = new InputProcessor(input);
+        String[] result = inputProcessor.processInput();
 
         assertThat(result).isEqualTo(new String[]{"1", "2", "3"});
     }
 
     @Test
     void 잘못된_구분자_형식_예외처리() {
-        String input = "//\\n123";
+        String input = "//\n123";
 
-        assertThatThrownBy(() -> {
-            Application.parseInput(input);
-        }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("구분자가 비어 있습니다. 구분자를 입력하세요.");
+        InputProcessor inputProcessor = new InputProcessor(input);
+
+        assertThatThrownBy(inputProcessor::processInput)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("잘못된 입력 형식입니다. 커스텀 구분자는 //과 \\n을 포함해야 합니다.");
     }
 
     @Test
     void 기본_구분자로_숫자_분리() {
-        Application application = new Application();
         String input = "1,2:3";
 
-        String[] parsedNumbers = application.parseInput(input);
+        InputProcessor inputProcessor = new InputProcessor(input);
+        String[] parsedNumbers = inputProcessor.processInput();
 
         assertThat(parsedNumbers).isEqualTo(new String[]{"1", "2", "3"});
     }
 
     @Test
     void 커스텀_구분자로_숫자_분리() {
-        Application application = new Application();
         String input = "//;\\n1;2;3";
 
-        String[] parsedNumbers = application.parseInput(input);
+        InputProcessor inputProcessor = new InputProcessor(input);
+        String[] parsedNumbers = inputProcessor.processInput();
 
         assertThat(parsedNumbers).isEqualTo(new String[]{"1", "2", "3"});
     }
 
     @Test
     void 빈_문자열은_0을_반환() {
-        Application application = new Application();
         String input = "";
 
-        String[] parsedNumbers = application.parseInput(input);
-        int sum = application.sumParsedNumbers(parsedNumbers);
+        InputProcessor inputProcessor = new InputProcessor(input);
+        String[] parsedNumbers = inputProcessor.processInput();
+
+        Calculator calculator = new Calculator();
+        int sum = calculator.sum(parsedNumbers);
 
         assertThat(sum).isEqualTo(0);
     }
 
     @Test
     void 커스텀_구분자_추출() {
-        Application application = new Application();
         String input = "//;\\n1;2;3";
 
-        String delimiter = application.extractCustomDelimiter(input);
+        InputProcessor inputProcessor = new InputProcessor(input);
+        String customDelimiter = inputProcessor.extractCustomDelimiter();
 
-        assertThat(delimiter).isEqualTo(";");
+        assertThat(customDelimiter).isEqualTo(";");
     }
 
     @Test
