@@ -37,14 +37,16 @@ public class Application {
 
         for (char ch : numbers.toCharArray()) {
             if (isDelimiter(ch, delimiters)) {
+                // 현재 사용하는 구분자인지 확인.
                 total += parseAndValidate(currentNumber.toString());
-                currentNumber.setLength(0); // 현재 숫자 초기화
+                currentNumber.setLength(0);
             } else {
                 currentNumber.append(ch);
+                // 구분자가 아니면 현재 숫자에 이어 붙임.
             }
         }
 
-        // 마지막 숫자 처리
+        // 마지막 숫자 뒤에는 구분자가 없기 때문에 따로 처리해줘야함.
         if (currentNumber.length() > 0) {
             total += parseAndValidate(currentNumber.toString());
         }
