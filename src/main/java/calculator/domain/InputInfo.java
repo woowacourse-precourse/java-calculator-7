@@ -1,23 +1,31 @@
-package calculator;
+package calculator.domain;
 
-import camp.nextstep.edu.missionutils.Console;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-public class StringCalculator {
+public class InputInfo {
+
+    private String input;
     private final StringBuilder separators;
     private final List<BigInteger> numbers;
-    private String input;
-    private BigInteger result;
 
-    public StringCalculator() {
+    public InputInfo(String input) {
+        this.input = input;
         this.separators = new StringBuilder();
         this.numbers = new ArrayList<>();
-        this.input = "";
-        this.result = BigInteger.ZERO;
         separators.append(",:");
+        inputParse();
+    }
+
+    private void inputParse() {
+        if (input.startsWith("//") && input.contains("\\n")) {
+            splitCustomSeparator();
+        }
+        if (!input.isEmpty()) {
+            splitNumbers();
+        }
     }
 
     private void splitCustomSeparator() {
@@ -71,27 +79,7 @@ public class StringCalculator {
         }
     }
 
-    private BigInteger addNumbers() {
-        return numbers.stream().reduce(result, BigInteger::add);
-    }
-
-    public void run() {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        input = Console.readLine().trim();
-
-        if (input.startsWith("//") && input.contains("\\n")) {
-            splitCustomSeparator();
-        }
-
-        if (!input.isEmpty()) {
-            splitNumbers();
-        }
-
-        if (!numbers.isEmpty()) {
-            result = addNumbers();
-        }
-
-        System.out.println("결과 : " + result);
-        Console.close();
+    public List<BigInteger> getNumbers() {
+        return numbers;
     }
 }
