@@ -26,7 +26,6 @@ class ApplicationTest extends NsTest {
         );
     }
 
-    //기본 구분자 추출되는지 테스트
     @Test
     void 기본_구분자_추출() {
         assertSimpleTest(() -> {
@@ -37,11 +36,20 @@ class ApplicationTest extends NsTest {
             }
         });
     }
-    
+
+
     @Test
     void 커스텀_구분자_숫자() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//1\n0"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 커스텀_구분자_형식이상() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("&\\n0"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
