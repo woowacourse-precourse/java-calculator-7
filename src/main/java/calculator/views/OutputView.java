@@ -1,6 +1,6 @@
-package calculator.io;
+package calculator.views;
 
-public class OutputProcessor {
+public class OutputView {
     // 결과 메세지 헤더
     private static final String MESSAGE_HEADER = "결과 : ";
 
