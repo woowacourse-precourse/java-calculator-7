@@ -43,8 +43,16 @@ public class Parser {
 
         return Arrays.stream(tokens)
                 .map(String::trim)
+                .peek(this::validateNoInternalWhitespace)
                 .map(this::parseValue)
                 .collect(Collectors.toList());
+    }
+
+
+    private void validateNoInternalWhitespace(String token) {
+        if (token.contains(" ")) {
+            throw new CalculatorException(INVALID_VALUE_FORMAT);
+        }
     }
 
     private int parseValue(String token) {
@@ -87,6 +95,4 @@ public class Parser {
             throw new CalculatorException(MINUS_VALUE);
         }
     }
-
-
 }
