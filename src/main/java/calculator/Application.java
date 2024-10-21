@@ -6,17 +6,18 @@ public class Application {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // 문자열 입력
-        System.out.print("덧셈할 문자열을 입력해주세요 : ");
-        String input = scanner.nextLine();
+        while (true) {
+            // 문자열 입력받기
+            System.out.print("덧셈할 문자열을 입력해주세요. (종료하려면 'exit'를 입력해주세요.)");
+            String input = scanner.nextLine();
 
-        // 입력 문자열 출력 (디버깅 용도)
-        //System.out.println("입력된 문자열: " + input);
-        //System.out.println("입력된 문자열에서 n의 위치: " + input.indexOf("n"));
+            if (input.equalsIgnoreCase("exit")) {
+                break;
+            }
 
-        // 결과 출력
-        int result = StringCalculator.add(input);
-        System.out.println("결과 : " + result);
+            int result = StringCalculator.add(input);
+            System.out.println("결과 : " + result);
+        }
 
         scanner.close();
     }
