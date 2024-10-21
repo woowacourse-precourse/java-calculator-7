@@ -9,10 +9,11 @@ import java.util.List;
 public class StringToIntegerListConverter {
 
     public List<Integer> convert(List<String> targets) {
-        targets.removeIf(String::isEmpty);
+        List<String> copyTargets = new ArrayList<>(targets);
+        copyTargets.removeIf(String::isEmpty);
 
         List<Integer> numbers = new ArrayList<>();
-        for (String target : targets) {
+        for (String target : copyTargets) {
             validate(target);
             numbers.add(Integer.parseInt(target));
         }
