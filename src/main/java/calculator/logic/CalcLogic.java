@@ -6,17 +6,17 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CalcLogic {
-    public static List<Integer> getNumbers( InputDTO input ) {
+    public static List<Long> getNumbers( InputDTO input ) {
         String exp = input.calcExp();
 
         return Arrays.stream(exp.split( "[,:]" ))
-                .map( Integer::parseInt )
+                .map( Long::parseLong )
                 .toList();
     }
 
-    public static int sumAll( List<Integer> numbers ) {
+    public static long sumAll( List<Long> numbers ) {
         return numbers.stream()
-                .reduce(Integer::sum)
-                .orElse(0);
+                .reduce(Long::sum)
+                .orElse(0L);
     }
 }

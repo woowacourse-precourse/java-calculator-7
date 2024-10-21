@@ -13,7 +13,7 @@ public class CalculatorIO {
         return new InputDTO( input );
     }
 
-    public static void loggingRes( int res ) {
+    public static void loggingRes( long res ) {
         System.out.printf("결과 : %d\n", res );
         Console.close();
     }

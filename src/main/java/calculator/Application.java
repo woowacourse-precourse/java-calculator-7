@@ -11,8 +11,8 @@ public class Application {
         // TODO: 프로그램 구현
         InputDTO input = CalculatorIO.getInput();
 
-        List<Integer> numbers = CalcLogic.getNumbers( input );
-        int result = CalcLogic.sumAll( numbers );
+        List<Long> numbers = CalcLogic.getNumbers( input );
+        long result = CalcLogic.sumAll( numbers );
 
         CalculatorIO.loggingRes( result );
     }
