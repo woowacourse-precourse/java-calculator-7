@@ -20,8 +20,12 @@ public class Calculator {
         String inputValue = input();
         boolean hasCustom = extractCustomSeparators(inputValue);
         if (hasCustom) {
-            System.out.println(extractNumbersPart(inputValue));
+            inputValue = extractNumbersPart(inputValue);
         }
+        System.out.println("추출된 구분자: " + separators);
+        System.out.println("숫자 부분: " + inputValue);
+        String[] numbers = splitNumbers(inputValue);
+        System.out.println(Arrays.toString(numbers));
     }
 
     static boolean extractCustomSeparators(String input) {
@@ -46,5 +50,12 @@ public class Calculator {
     static String extractNumbersPart(String input) {
         // 커스텀 구분자를 제거 한 문자열 출력
         return input.replaceAll(regex, "").trim();
+    }
+
+    static String[] splitNumbers(String numbersPart) {
+        if (numbersPart == null) {
+            return new String[0]; // 빈 배열을 반환
+        }
+        return numbersPart.split(String.join("|", separators));
     }
 }
