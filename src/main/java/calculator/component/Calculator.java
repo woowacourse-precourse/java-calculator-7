@@ -16,6 +16,13 @@ public class Calculator {
 
     private Integer calculate() {
         return numbers.stream()
-                .reduce(0, Integer::sum);
+                .reduce(0, Calculator::sum);
+    }
+
+    private static Integer sum(int a, int b) {
+        if (a > Integer.MAX_VALUE - b) {
+            throw new IllegalArgumentException();
+        }
+        return a + b;
     }
 }
