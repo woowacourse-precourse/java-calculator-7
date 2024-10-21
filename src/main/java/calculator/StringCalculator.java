@@ -5,7 +5,14 @@ public class StringCalculator {
         if (input == null || input.isEmpty()) {
             return 0;
         }
-        return 0;  // 기본 값으로 0 반환
+
+        String[] tokens = input.split(",|:");  // 쉼표와 콜론을 구분자로 사용
+        int sum = 0;
+        for (String token : tokens) {
+            sum += Integer.parseInt(token);
+        }
+        return sum;
     }
 }
+
 
