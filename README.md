@@ -39,7 +39,7 @@
 - 숫자와 커스텀 구분자로 구성된 문자열인지 판별하는 기능: `isStringWithCustomSeparator()`
 - 커스텀 구분자를 추출하는 기능: `getCustomSeparator()`
 - 커스텀 구분자 생성자를 제거하는 기능: `removeSeparatorInitializer()`
-- 문자열에서 구분자를 기준으로 숫자를 나누어 덧셈하는 기능: `calculateSum`
+- 문자열에서 구분자를 기준으로 숫자를 나누어 덧셈하는 기능: `calculateSum()`
 - 구분자를 포멧하는 기능: `formatSeparator()`
 - 덧셈 결과를 출력하는 기능: `printResult()`
 - 계산기 전체 로직을 처리하는 기능: `calculate()`

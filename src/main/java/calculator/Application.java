@@ -9,26 +9,22 @@ public class Application {
         app.Calculate();
     }
 
-    public void Calculate() {
-        String defaultSeparator = ",:";
+    private static final String DEFAULT_SEPARATOR = ",:";
 
+    public void Calculate() {
         printUserInputMessage();
         String userInput = getUserInput();
 
-        if (isStringWithDefaultSeparator(userInput, defaultSeparator)) {
-            int result = calculateSum(userInput, defaultSeparator);
+        if (isStringWithDefaultSeparator(userInput)) {
+            int result = calculateSum(userInput, DEFAULT_SEPARATOR);
             printResult(result);
-        }
-
-        else if (isStringWithCustomSeparator(userInput)) {
+        } else if (isStringWithCustomSeparator(userInput)) {
             String formattedInput = formatBackslash(userInput);
             String refinedInput = removeSeparatorInitializer(formattedInput);
 
             int result = calculateSum(refinedInput, getCustomSeparator(userInput));
             printResult(result);
-        }
-
-        else {
+        } else {
             throw new IllegalArgumentException("잘못된 입력입니다.");
         }
     }
@@ -49,9 +45,9 @@ public class Application {
         return str.replaceAll(formatSeparator(separator), "");
     }
 
-    private boolean isStringWithDefaultSeparator(String input, String separator) {
+    private boolean isStringWithDefaultSeparator(String input) {
         String str = removeNumber(input);
-        str = removeSeparator(str, separator);
+        str = removeSeparator(str, DEFAULT_SEPARATOR);
         return str.isEmpty();
     }
 
@@ -75,7 +71,7 @@ public class Application {
         int idx = str.indexOf("\\n");
 
         if (idx == -1) {
-            throw new IllegalArgumentException("잘못된 구분자 형식입니다.");
+            throw new IllegalArgumentException("잘못된 입력입니다.");
         }
 
         str = removeSeparatorInitializer(str);
