@@ -12,6 +12,9 @@ public class DelimiterValidator {
         if (end != -1 && start > end) {
             throw new IllegalArgumentException("커스텀 구분자 지정 명령이 잘못되었습니다. 올바른 명령:" + CUSTOM_DELIMITER_PREFIX + "[구분자]" + CUSTOM_DELIMITER_SUFFIX);
         }
+        if (start != 0 && end != -1) {
+            throw new IllegalArgumentException("커스텀 구분자는 문자열 앞부분에서 지정해야 합니다.");
+        }
         if (start != -1 && end != -1) {
             return true;
         }
