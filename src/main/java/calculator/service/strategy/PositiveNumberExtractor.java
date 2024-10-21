@@ -6,18 +6,16 @@ import calculator.model.PositiveNumber;
 import calculator.model.delimiter.Delimiter;
 
 public class PositiveNumberExtractor {
-    private final SplitPatternGenerator splitPatternGenerator;
     private final PatternMatcher patternMatcher;
 
-    public PositiveNumberExtractor(SplitPatternGenerator splitPatternGenerator, PatternMatcher patternMatcher) {
-        this.splitPatternGenerator = splitPatternGenerator;
+    public PositiveNumberExtractor(PatternMatcher patternMatcher) {
         this.patternMatcher = patternMatcher;
     }
 
     public PositiveNumber extractPositiveNumber(Delimiter delimiter, String inputString) {
         String numberLine = extractPositiveNumberLine(inputString);
         String[] positiveNumberString = numberLine.split(
-                splitPatternGenerator.generateSplitPattern(delimiter));
+                delimiter.generateSplitPattern());
         return createPositiveNumber(positiveNumberString);
     }
 
