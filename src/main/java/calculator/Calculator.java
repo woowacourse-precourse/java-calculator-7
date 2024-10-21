@@ -3,6 +3,7 @@ package calculator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 //리스트를 저장하기 위한 클래스
 class ListNode {
@@ -27,6 +28,37 @@ public class Calculator {
     public Calculator(String inputData) {
         this.inputData = inputData;
         this.dTList = new ArrayList<>(Arrays.asList(",", ":"));
+    }
+
+    public int convertStringToIntArrayAndSum() {
+        //글자 -> 정수형 배열 -> 더하기 -> 값 return
+        return Arrays
+                .stream(splitToStrArray(inputData, dTList))
+                .sum();
+    }
+
+    private int[] splitToStrArray(String inputData, List<String> dTList) {
+        String str = updateDTListAndReturnStr(inputData);
+
+        // 구분자 리스트 값 -> 문자열에서 " "으로 다 변경
+        for (String s : dTList) {
+            str = str.replaceAll(Pattern.quote(s), " ");
+        }
+
+        String[] sa = str.trim().split(" ");
+
+        int[] arr = new int[sa.length];
+        for (int i = 0; i < arr.length; i++) {
+            int num = Integer.parseInt(sa[i]);
+            if(num >= 0) {
+                arr[i] = num;
+            } else {
+                throw new IllegalArgumentException();
+            }
+        }
+
+        // 문자열을 " "으로 split
+        return arr;
     }
 
     private String updateDTListAndReturnStr(String inputData) {
