@@ -6,7 +6,10 @@ import static calculator.SumController.*;
 public class Application {
     public static void main(String[] args) throws Exception {
         // TODO: 프로그램 구현
-
-        outputValue(checkValue(inputValue()));
+        try {
+            outputValue(checkValue(inputValue()));
+        } catch (IllegalArgumentException e) {
+            System.out.println("잘못된 입력입니다: " + e.getMessage());
+        }
     }
 }
