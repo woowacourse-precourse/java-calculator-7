@@ -8,6 +8,7 @@ public class Application {
         try {
             System.out.println("덧셈할 문자열을 입력해 주세요.");
             String input = Console.readLine();
+            InputValidator.validate(input);
             System.out.println("결과 : " + 0);
         } catch (IllegalArgumentException e) {
             System.out.println("잘못된 입력입니다. " + e.getMessage());
