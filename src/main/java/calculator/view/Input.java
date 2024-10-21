@@ -8,10 +8,9 @@ import java.util.regex.Pattern;
 import camp.nextstep.edu.missionutils.Console;
 
 public class Input {
-	private static final String PREFIX_CUSTOM_DELIMITER = "//";
-	private static final String SUFFIX_CUSTOM_DELIMITER = "\\n";
-
-	private static final Pattern pattern = java.util.regex.Pattern.compile("//(.*?)\\\\n");
+	private static final String CUSTOM_DELIMITER_PREFIX = "//";
+	private static final String CUSTOM_DELIMITER_SUFFIX = "\\\\n";
+	private static final Pattern CUSTOM_DELIMITER_PATTERN = java.util.regex.Pattern.compile("//(.*?)\\\\n");
 	private static final String DEFAULT_PATTERN = "[,:]";
 
 	public static String readInput() {
@@ -21,35 +20,52 @@ public class Input {
 	public static List<Integer> extractNumbers(String input) {
 		String delimiter = DEFAULT_PATTERN;
 
-		if (input.contains(PREFIX_CUSTOM_DELIMITER) || input.contains(SUFFIX_CUSTOM_DELIMITER)) {
-			Matcher matcher = pattern.matcher(input);
-			if (!matcher.find()) {
-				throw new IllegalArgumentException("'//'와 '\\n' 둘 중 하나만 존재합니다.");
-			}
-
-			delimiter = matcher.group(1);
-			if (delimiter.isBlank()) {
-				throw new IllegalArgumentException("커스텀 구분자가 비어 있는 문자입니다.");
-			}
-
-			if (isNumeric(delimiter)) {
-				throw new IllegalArgumentException("커스텀 구분자는 숫자일 수 없습니다.");
-			}
-
-			input = input.replace(matcher.group(0), "");
+		if (hasCustomDelimiter(input)) {
+			delimiter = extractCustomDelimiter(input);
+			input = removeDelimiterDefinition(input, delimiter);
 		}
 
 		String[] splitNumbers = input.split(delimiter);
 
-		for (String number : splitNumbers) {
-			if (!isNumeric(number)) {
-				throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다: " + number);
-			}
-		}
+		validateNumbers(splitNumbers);
 
 		return Arrays.stream(splitNumbers)
 			.map(Integer::parseInt)
 			.toList();
+	}
+
+	private static boolean hasCustomDelimiter(String input) {
+		return input.startsWith(CUSTOM_DELIMITER_PREFIX);
+	}
+
+	private static String extractCustomDelimiter(String input) {
+		Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(input);
+		if (!matcher.find()) {
+			throw new IllegalArgumentException("Custom delimiter syntax is incorrect. Expected format: //delimiter\\n");
+		}
+
+		String delimiter = matcher.group(1);
+		if (delimiter.isBlank()) {
+			throw new IllegalArgumentException("Custom delimiter cannot be blank.");
+		}
+
+		if (isNumeric(delimiter)) {
+			throw new IllegalArgumentException("Custom delimiter cannot be a numeric value.");
+		}
+
+		return delimiter;
+	}
+
+	private static String removeDelimiterDefinition(String input, String delimiter) {
+		return input.replaceFirst(CUSTOM_DELIMITER_PREFIX + Pattern.quote(delimiter) + CUSTOM_DELIMITER_SUFFIX, "");
+	}
+
+	private static void validateNumbers(String[] splitNumbers) {
+		for (String number : splitNumbers) {
+			if (!isNumeric(number)) {
+				throw new IllegalArgumentException("Invalid input. Non-numeric value found: " + number);
+			}
+		}
 	}
 
 	private static boolean isNumeric(String str) {
