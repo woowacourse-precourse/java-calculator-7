@@ -18,7 +18,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 커스텀_구분자_위치_테스트() {
+    void 커스텀_구분자가_문자열_시작에_존재하지_않는_테스트() {
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> run("12;3//;\\n"))
                     .isInstanceOf(IllegalArgumentException.class);
@@ -26,9 +26,25 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 커스텀_구분자_개수_테스트() {
+    void 커스텀_구분자가_2개이상인_테스트() {
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> run("//!@;\\n"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+    }
+
+    @Test
+    void 숫자가_입력되지_않았을때의_테스트() {
+        assertSimpleTest(() -> {
+            run("//!\\n");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자선언이_2개이상_존재하는_테스트() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> run("//!\\n//?\n123"))
                     .isInstanceOf(IllegalArgumentException.class);
         });
     }
