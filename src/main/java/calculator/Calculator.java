@@ -21,11 +21,11 @@ public class Calculator {
         if (isUserInputEmpty()) {
             throw new IllegalArgumentException(INVALID_INPUT_ERROR+"user Input is Empty");
         }
+        if (this.calculatorDelimiter.isNotHaveAnyDelimiterFormat(this.userInput)) {
+            throw new IllegalArgumentException(INVALID_INPUT_ERROR);
+        }
         if (this.calculatorDelimiter.isCustomDelimiterFormat(this.userInput)) {
             processCustomDelimiter();
-        }
-        if (this.calculatorDelimiter.isHaveDelimiterFormat(this.userInput)) {
-            throw new IllegalArgumentException(INVALID_INPUT_ERROR);
         }
         return true;
     }
@@ -37,14 +37,13 @@ public class Calculator {
     private void processCustomDelimiter() {
         String normalizedInput = this.calculatorDelimiter.changeToNormalizedInput(this.userInput);
         Matcher matcher = this.calculatorDelimiter.getMatcherByCheckPattern(normalizedInput);
-
         if (!matcher.matches()) {
             throw new IllegalArgumentException(INVALID_INPUT_ERROR);
         }
-
-        this.customDelimiter = matcher.group(1);
-        String targetNumbersWithDelimiters = matcher.group(2);
-
+        int singleCustomDelimiterGroupIndex = 1;
+        int targetNumbersWithDelimitersGroupIndex = 2;
+        this.customDelimiter = matcher.group(singleCustomDelimiterGroupIndex);
+        String targetNumbersWithDelimiters = matcher.group(targetNumbersWithDelimitersGroupIndex);
         if (!this.calculatorDelimiter.isContainNumber(targetNumbersWithDelimiters)) {
             throw new IllegalArgumentException(INVALID_INPUT_ERROR);
         }

@@ -57,7 +57,7 @@ public class CalculatorDelimiter {
     public Boolean isCustomDelimiterFormat(String givenInput) {
         return this.checkDelimiterHead(givenInput) && this.checkDelimiterLast(givenInput);
     }
-    public Boolean isHaveDelimiterFormat(String givenInput) {
-        return !this.isCustomDelimiterFormat(givenInput) || this.isDefaultDelimiter(givenInput);
+    public Boolean isNotHaveAnyDelimiterFormat(String givenInput) {
+        return !this.isCustomDelimiterFormat(givenInput) && !this.isDefaultDelimiter(givenInput);
     }
 }
