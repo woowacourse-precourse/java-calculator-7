@@ -11,14 +11,14 @@ public class InputParser {
 
 
     public static int[] parseAndValidateInput(String input) {
-        String delimiter = ",|:";
+        String delimiter = ",:";
 
         if (input.startsWith("//")) {
             int delimiterIndex = input.indexOf("\\n");
             if (delimiterIndex == -1) {
                 throw new IllegalArgumentException(INVALID_CUSTOM_MESSAGE);
             }
-            delimiter = input.substring(2, delimiterIndex);
+            delimiter += input.substring(2, delimiterIndex);
             input = input.substring(delimiterIndex + 2);
         }
         StringTokenizer st = new StringTokenizer(input, delimiter);
