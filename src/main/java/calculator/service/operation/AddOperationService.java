@@ -1,13 +1,17 @@
 package calculator.service.operation;
 
-import calculator.domain.Numbers;
+import calculator.service.dto.NumbersDto;
+import calculator.service.dto.SumDto;
 
 public class AddOperationService implements OperationService {
 
     @Override
-    public int operate(Numbers numbers) {
-        return numbers.getValues().stream()
-                .mapToInt(number -> number.getValue())
+    public SumDto operate(NumbersDto numbersDto) {
+        int value = numbersDto.values()
+                .stream()
+                .mapToInt(number -> number.value())
                 .sum();
+
+        return SumDto.from(value);
     }
 }
