@@ -19,4 +19,9 @@ public class CalculatorView {
     }
 
 
+    public void getOutput(int total) {
+        System.out.println("결과 : " + total);
+    }
+
+
 }
