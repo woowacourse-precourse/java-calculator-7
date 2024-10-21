@@ -1,5 +1,6 @@
 package calculator.separator;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringSeparator {
@@ -21,4 +22,11 @@ public class StringSeparator {
         return CUSTOM_DELIMITER_PATTERN.matcher(basicString).matches();
     }
 
+    public String extractCustomDelimiters() {
+        Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(basicString);
+        if (matcher.find()) {
+            return matcher.group(1);
+        }
+        return "";
+    }
 }
