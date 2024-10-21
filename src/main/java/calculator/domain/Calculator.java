@@ -40,9 +40,9 @@ public class Calculator {
         return new Calculator(numbers);
     }
 
-    private static List<Integer> parseNumbers(String numbers, String delimiters) {
+    private static List<Integer> parseNumbers(String inputNumbers, String delimiters) {
         List<Integer> result = new ArrayList<>();
-        for (String token : numbers.split(delimiters)) {
+        for (String token : inputNumbers.split(delimiters)) {
             try {
                 if (Objects.equals(token, "")) {
                     continue;
