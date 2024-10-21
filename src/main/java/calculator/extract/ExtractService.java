@@ -22,7 +22,7 @@ public class ExtractService {
         throw new IllegalArgumentException(ILLEGAL_STRING);
     }
 
-    private boolean isCustomSeparator(String inputText, int startIndex) {
+    public boolean isCustomSeparator(String inputText, int startIndex) {
         return extractRepository
                 .getExtracts()
                 .stream()

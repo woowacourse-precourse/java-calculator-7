@@ -10,10 +10,10 @@ public class Application {
         Calculator calculator = new Calculator();
 
         SeparatorRepository separatorRepository = new SeparatorRepository();
-        SeparatorService separatorService = new SeparatorService(separatorRepository);
-
         ExtractRepository extractRepository = new ExtractRepository();
+
         ExtractService extractService = new ExtractService(extractRepository);
+        SeparatorService separatorService = new SeparatorService(separatorRepository, extractRepository);
 
         Controller controller = new Controller(separatorService, extractService, calculator);
 
