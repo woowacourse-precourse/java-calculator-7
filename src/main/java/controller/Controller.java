@@ -10,7 +10,6 @@ public class Controller {
     private final InputView inputView;
     private final OutputView outputView;
 
-    // 생성자를 통한 의존성 주입
     public Controller(Calculator calculator, InputView inputView, OutputView outputView) {
         this.calculator = calculator;
         this.inputView = inputView;
@@ -18,22 +17,13 @@ public class Controller {
     }
 
     public void processUserInput() {
-        while (true) {
-            try {
-                String userInput = inputView.readInput();
-
-                // "exit" 입력 시 프로그램 종료
-                if (userInput.equalsIgnoreCase("exit")) {
-                    System.out.println("프로그램을 종료합니다.");
-                    break;
-                }
-
-                int sum = calculator.processInputAndSum(userInput);
-                outputView.printResult(sum);
-            } catch (IllegalArgumentException error) {
-                System.out.println("에러: " + error.getMessage());
-                break;
-            }
+        try {
+            String userInput = inputView.readInput();
+            int sum = calculator.processInputAndSum(userInput);
+            outputView.printResult(sum);
+        } catch (IllegalArgumentException error) {
+            outputView.printError(error);
+            throw error;
         }
     }
 }
