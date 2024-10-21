@@ -31,8 +31,24 @@ public class Application {
 
         }
 
+        if(!isValidInputFormat(parsedInput, delimiter)){
+            throw new IllegalArgumentException("input format error"); // 잘못된 입력 형식
+        }
+
         String[] numbers = parsedInput.split(delimiter); // 구분자로 문자열 분리
         return sum(numbers); // 숫자 합 계산
+    }
+
+    public static boolean isValidInputFormat(String input, String delimiter) {
+        // 정규식 패턴을 "숫자 구분자 숫자 구분자...숫자" 형식으로 생성
+        String regex = "^\\d+([" + delimiter + "]\\d+)*$";
+
+        // 정규식 패턴 생성
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(input);
+
+        // 인풋이 정규식에 맞는지 확인
+        return matcher.matches();
     }
 
     // 문자열 배열을 더해서 합을 반환하는 함수
