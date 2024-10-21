@@ -30,6 +30,8 @@ public class CalculateM {
             } else {
                 throw new IllegalArgumentException("커스텀 구분자 형식이 올바르지 않습니다.");
             }
+        } else if (!input.contains(",") && !input.contains(":")) {
+            throw new IllegalArgumentException("입력값에 구분자가 없습니다.");
         }
 
         return new String[]{delimiter, numbers};
