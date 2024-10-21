@@ -56,4 +56,13 @@ class DelimiterExtractorTest {
         assertEquals(MULTIPLE_CHARACTER.getMessage(), exception.getMessage());
     }
 
+    @Test
+    @DisplayName("-를 커스텀 구분자로 반환")
+    void extractMinusDelimiterCorrectly() {
+        String input = "//-\\n1;2;3";
+        String result = extractor.extractDelimiters(input, ",|:", "//", "\\n");
+
+        assertEquals(",|:|\\Q-\\E", result);
+    }
+
 }
