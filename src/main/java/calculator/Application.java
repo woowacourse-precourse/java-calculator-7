@@ -14,17 +14,25 @@ public class Application {
             String customDelimiter = "^//(.)\\\\n(.*)";
             Pattern pattern = Pattern.compile(customDelimiter);
             Matcher matcher = pattern.matcher(input);
+            String[] numbers;
 
             if (matcher.find()) {
                 String capturedDelimiter = matcher.group(1);
                 String inputAfterDelimiter = matcher.group(2);
-                String[] numbers = inputAfterDelimiter.split(capturedDelimiter);
-                // int 배열로 변경
+                numbers = inputAfterDelimiter.split(Pattern.quote(capturedDelimiter));
             } else {
                 String defaultDelimiter = "[,|:]";
-                String[] numbers = input.split(defaultDelimiter);
-                // int 배열로 변경
+                numbers = input.split(defaultDelimiter);
             }
+            int sum = 0;
+            for (String number : numbers) {
+                int parsedNumber = Integer.parseInt(number);
+                if (parsedNumber < 0) {
+                    throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+                }
+                sum += parsedNumber;
+            }
+            System.out.println("결과 : " + sum);
         }
 
     }
