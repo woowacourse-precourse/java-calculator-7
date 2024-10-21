@@ -21,6 +21,14 @@ public class Calculator {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         this.input = Console.readLine();
 
+        String regex = "(?://(\\S)\\\\n)?[0-9]+(?:(?:\\:|,|\\1)[0-9]+)*";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(input);
+
+        if (!matcher.matches()) {
+            throw new IllegalArgumentException();
+        }
+
         splitInputDelimeter();
     }
 
