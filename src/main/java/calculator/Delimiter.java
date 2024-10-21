@@ -16,4 +16,3 @@ public class Delimiter {
         return delimiter;
     }
 }
-
