@@ -34,20 +34,11 @@ public class CalculatorService {
         String newSeparator = null;
         String value;
 
-        if (rawValue.isEmpty()) {
-            calculator.setProcessedValue(new ArrayList<>());
-            calculator.setSumValue(BigInteger.ZERO);
-            return;
-        }
-
         if (rawValue.startsWith("//")) {
             String[] results = rawValue.split("\\\\n", 2);
             newSeparator = results[0];
             value = results.length > 1 ? results[1] : "";
             isValid = checkNewSeparator(newSeparator);
-            if (!isValid) {
-                throw new IllegalArgumentException();
-            }
             makeNewSeparator(newSeparator);
         } else {
             value = rawValue;
@@ -57,14 +48,13 @@ public class CalculatorService {
         List<Number> processedValue = extractNumbersToList();
 
         if (!isValid) {
-            throw new IllegalArgumentException();
+            exceptionHandler.handleException(new IllegalArgumentException());
         }
         calculator.setProcessedValue(processedValue);
     }
 
     public List<Number> extractNumbersToList() {
-        String rawValue = calculator.getRawValue();
-        List<String> resultList = new ArrayList<>(Arrays.asList(rawValue));
+        List<String> resultList = new ArrayList<>(List.of(calculator.getRawValue()));
         try {
             for (String separator : calculator.getSeparators()) {
                 List<String> tempList = new ArrayList<>();
@@ -81,10 +71,14 @@ public class CalculatorService {
         List<Number> processedValue = new ArrayList<>();
         for (String item : resultList) {
             if (item.trim().isEmpty()) continue;
-            if (!item.matches("\\d+")) {
+            if (!item.matches("\\d+(\\.\\d+)?")) {
                 throw new IllegalArgumentException();
             }
-            processedValue.add(new BigInteger(item));
+            if (item.contains(".")) {
+                processedValue.add(Double.parseDouble(item));
+            } else {
+                processedValue.add(new BigInteger(item));
+            }
         }
         return processedValue;
     }
@@ -103,16 +97,24 @@ public class CalculatorService {
 
     public Number sumOfList() {
         List<Number> values = calculator.getProcessedValue();
-        BigInteger sum = BigInteger.ZERO;
+        double sum = 0;
         for (Number value : values) {
-            sum = sum.add((BigInteger) value);
+            sum += value.doubleValue();
         }
         calculator.setSumValue(sum);
         return sum;
     }
 
     public void printResult() {
-        BigInteger sum = (BigInteger) calculator.getSumValue();
-        System.out.println("결과 : " + sum);
+        Number sum = calculator.getSumValue();
+
+        String result;
+        if (sum.doubleValue() == sum.longValue()) {
+            result = "결과 : " + sum.longValue();
+        } else {
+            result = "결과 : " + sum.doubleValue();
+        }
+
+        System.out.println(result);
     }
 }
