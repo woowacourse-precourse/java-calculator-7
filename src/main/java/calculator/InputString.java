@@ -19,23 +19,18 @@ public class InputString {
             return List.of();
         }
 
-        if(input.startsWith("//")) {
-            return inputToListByCustomDelimiter(input);
-        }
-
-        return Arrays.stream(input.split("[,:]"))
-                .map(Integer::valueOf)
-                .toList();
-    }
-
-    private List<Integer> inputToListByCustomDelimiter(String input) {
-        int delimiterIndex = input.indexOf("\n");
-        String delimiter = input.substring(2, delimiterIndex);
-        input = input.substring(delimiterIndex + 1);
+        String delimiter = findDelimiter(input);
 
         return Arrays.stream(input.split(delimiter))
                 .map(Integer::valueOf)
                 .toList();
+    }
+
+    private String findDelimiter(String input) {
+        if (input.startsWith("//")) {
+            return input.substring(2, 3);
+        }
+        return "[,:]";
     }
 
     public int getSum() {
