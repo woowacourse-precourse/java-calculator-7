@@ -29,7 +29,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 빈문자열() {
         assertSimpleTest(() -> {
-            run("\n"); // TODO 이렇게 안하면 java.util.NoSuchElementException: No line found 이렇게 되는데...
+            run("\n");
             assertThat(output()).contains("결과 : 0");
         });
     }
@@ -60,6 +60,18 @@ class ApplicationTest extends NsTest {
     @Test
     void 구분자가_앞뒤에_있을_경우() {
         String[] inputStrings = {":1:2", "1:2:", ",1:2", "1:2,", ",1,2", "1,2,"};
+        for (String inputString : inputStrings) {
+            assertSimpleTest(() -> {
+                run(inputStrings);
+                assertThat(output()).contains("결과 : 3");
+            });
+        }
+    }
+
+    @Test
+    void 커스텀_구분자가_앞뒤에_있을_경우() {
+        String[] inputStrings = {"//;\\n;1;2", "//;\\n1;2;", "//;\\n;1:2", "//;\\n1:2;", "//;@\\n;@1,2",
+                "//;@\\n1,2;@"};
         for (String inputString : inputStrings) {
             assertSimpleTest(() -> {
                 run(inputStrings);
@@ -116,19 +128,17 @@ class ApplicationTest extends NsTest {
         }
     }
 
-    // TODO
-//    @Test
-//    void 커스텀_구분자가_특수문자2() {
-//        String[] inputStrings = {"//'\\n1'2", "//\"\\n1\"2", "//\t\\n1\t2", "//\\n\\n1\n2",
-//                "//\0\\n1\02", "//\\\\n1\2"};
-//        for (String inputString : inputStrings) {
-//            assertSimpleTest(() -> {
-//                run(inputString);
-//                assertThat(output()).contains("결과 : 3");
-//            });
-//
-//        }
-//    }
+    @Test
+    void 커스텀_구분자가_특수문자2() {
+        String[] inputStrings = {"//'\\n1'2", "//\"\\n1\"2", "//\\t\\n1\t2"};
+        for (String inputString : inputStrings) {
+            assertSimpleTest(() -> {
+                run(inputString);
+                assertThat(output()).contains("결과 : 3");
+            });
+
+        }
+    }
 
     // 에러 케이스
     @Test
@@ -159,6 +169,17 @@ class ApplicationTest extends NsTest {
             assertThatThrownBy(() -> runException("//;@\\n1;2"))
                     .isInstanceOf(IllegalArgumentException.class);
         });
+    }
+
+    @Test
+    void 커스텀_구분자가_숫자인_경우() {
+        String[] inputStrings = {"//0\\n102", "//1\\n112", "//9\\n192"};
+        for (String inputString : inputStrings) {
+            assertSimpleTest(() -> {
+                assertThatThrownBy(() -> runException(inputString))
+                        .isInstanceOf(IllegalArgumentException.class);
+            });
+        }
     }
 
     @Override
