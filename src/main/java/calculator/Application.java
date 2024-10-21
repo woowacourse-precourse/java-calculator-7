@@ -2,8 +2,8 @@ package calculator;
 
 import calculator.calculator.Calculator;
 import calculator.calculator.Parser;
+import calculator.input.InputReader;
 import calculator.output.OutputViewer;
-import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static void main(String[] args) {
@@ -11,7 +11,9 @@ public class Application {
         OutputViewer.printStartMessage();
 
         Calculator calculator = new Calculator(new Parser());
-        int result = calculator.add(Console.readLine());
+        InputReader inputReader = new InputReader();
+
+        int result = calculator.add(inputReader.getInput());
 
         OutputViewer.printResultMessage(result);
     }
