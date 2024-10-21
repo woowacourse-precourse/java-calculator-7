@@ -1,5 +1,7 @@
 package calculator.util;
 
+import static calculator.common.ErrorMessage.*;
+
 public class Validator {
 
     // 숫자 형식 및 음수 검증
@@ -7,10 +9,10 @@ public class Validator {
         try {
             int number = Integer.parseInt(target);
             if (number < 0) {
-                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
+                throw new IllegalArgumentException(NEGATIVE_NUMBER_ERROR_MESSAGE + number);
             }
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("잘못된 숫자 형식입니다: " + target);
+            throw new IllegalArgumentException(INVALID_NUMBER_FORMAT_ERROR_MESSAGE + target);
         }
     }
 
@@ -19,8 +21,19 @@ public class Validator {
         if (input.startsWith("//")) {
             int delimiterEndIndex = input.indexOf("\\n");
             if (delimiterEndIndex == -1) {
-                throw new IllegalArgumentException("잘못된 형식입니다. 커스텀 구분자는 //과 \\n 사이에 있어야 합니다.");
+                throw new IllegalArgumentException(INVALID_CUSTOM_DELIMITER_FORMAT_ERROR_MESSAGE);
             }
         }
     }
+
+    // 커스텀 구분자 숫자가 아닌지 검증
+    public static void validateCustomDelimiterIsNotNumber(String customDelimiter) {
+        try {
+            Integer.parseInt(customDelimiter);
+            throw new IllegalArgumentException(CUSTOM_DELIMITER_CANNOT_BE_NUMBER_ERROR_MESSAGE);
+        } catch (NumberFormatException ignored) {
+
+        }
+    }
+
 }
