@@ -5,7 +5,7 @@ import exception.ErrorMessage;
 public class Delimiter {
     protected static void checkIsEmpty(String token) {
         if (token.isEmpty()) {
-            throw new IllegalArgumentException(ErrorMessage.ERROR_INPUT_IS_EMPTY.toString());
+            throw new IllegalArgumentException(ErrorMessage.ERROR_INPUT_IS_EMPTY_BETWEEN_DELIMITER.toString());
         }
     }
 
