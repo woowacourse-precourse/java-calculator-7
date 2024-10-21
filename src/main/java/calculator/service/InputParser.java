@@ -10,6 +10,12 @@ import static calculator.data.keywords.DOUBLE_SLASH;
 
 public class InputParser implements Parser {
 
+    private InputParser(){}
+
+    public static InputParser makeInputParser(){
+        return new InputParser();
+    }
+
     public Character getCustomParser(String input) {
         Character separator = null;
         if (input.startsWith(DOUBLE_SLASH.getKeyword())) {

@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static calculator.service.InputParser.makeInputParser;
 import static calculator.validation.CheckForm.checkFormOfCustomSeparator;
 import static calculator.validation.CheckForm.checkFormOfOperands;
 
@@ -21,7 +22,7 @@ public class InputString {
     private InputString(String input){
         this.input = input;
         this.customSeparators = new HashSet<>();
-        this.parser = new InputParser();
+        this.parser = makeInputParser();
 
         customSeparators.add(',');
         customSeparators.add(':');
