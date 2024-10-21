@@ -12,41 +12,41 @@ public class Application {
 
     //문자열이 비었거나 null인 경우 0을 반환하고 프로그램을 끝내기 위해 생성
     public static boolean isBlankOrNull(String sentence){
-        return sentence.isBlank() || sentence == null;
+        return sentence == null ||sentence.isBlank();
     }
 
     public static boolean isCustomLetter(String str){
-        char firstLetter = str.charAt(0);
         //:와 ,로 구분되는 경우
-        if(firstLetter == ':' || firstLetter == ',' || Character.isDigit(firstLetter)){
+        if(str.startsWith(":") || str.startsWith(",") || Character.isDigit(str.charAt(0))){
             return false;
         }
         //커스텀 구분자를 쓰는 경우
-        else if(firstLetter == '/') {
+        else if(str.startsWith("//") && str.length() > 4) {
             return true;
         }
         //잘못된 입력
-        throw new IllegalArgumentException("[extractLetter] 잘못된 입력");
+        throw new IllegalArgumentException();
     }
 
-    public static String extractCustomLetter(String str){
-        if(str.length() > 2){
-            return str.substring(2);
+    public static String extractLetter(String str){
+        boolean isCustomLetter = isCustomLetter(str);
+        if(isCustomLetter){
+            // 구분자 다음에 반드시 \n이 있는지 확인
+            String a = str.substring(3, 5); // 여기서 \n을 포함한 부분 추출
+            if (!a.equals("\\n")) {
+                throw new IllegalArgumentException("구분자 뒤에 줄바꿈 문자가 없습니다.");
+            }
+            // 구분자는 "//" 뒤에 있는 한 글자
+            return str.substring(2, 3);
         }
-
-        throw new IllegalArgumentException("[extractCustomLetter] 잘못된 입력");
+        return ":|,";
     }
 
     public static List<Integer> extractNum(String str){
-        String letter = ":|,";
-        String numStr = str;
+        String letter = extractLetter(str);
         List<Integer> nums = new ArrayList<>();
 
-        if(isCustomLetter(str)){
-            letter = extractCustomLetter(str);
-            numStr = Console.readLine();
-        }
-        StringTokenizer st = new StringTokenizer(numStr, letter);
+        StringTokenizer st = new StringTokenizer(str, letter);
 
         while(st.hasMoreTokens()){
             nums.add(Integer.parseInt(st.nextToken()));
@@ -77,7 +77,5 @@ public class Application {
         }
 
         System.out.println("결과 : " + result);
-
-
     }
 }
