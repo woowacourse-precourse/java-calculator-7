@@ -118,4 +118,16 @@ public class ExceptionTest {
                 .hasMessage("분리자는 숫자 사이에 사용해야 한다(문자열 끝에 사용)");
     }
 
+    @Test
+    public void 커스텀구분자예외처리테스트() throws Exception {
+        //given
+        String inputString = "//;\\n//$\\n1;200,13$04//*\\n*3";
+        Parser parser = new Parser();
+        //when
+        Throwable thrown = catchThrowable(() -> parser.parse(inputString));
+        //then
+        Assertions.assertThat(thrown).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("구분자 추가는 문자열 앞에서 이루어져야한다");
+    }
+
 }

@@ -84,18 +84,18 @@ class ParserTest {
         Assertions.assertThat(sum).isEqualTo(10);
     }
 
-//    @Test
-//    public void 커스텀구분자테스트3() throws Exception {
-//        //given
-//        String inputString = "//;\\n//$\\n1;200,13$04//*\\n*3";
-//        //when
-//        Parser parser = new Parser();
-//        parser.parse(inputString);
-//        List<Integer> nums = parser.getNums();
-//        int sum = Calculator.sum(nums);
-//        //then
-//        Assertions.assertThat(sum).isEqualTo(221);
-//    }
+    @Test
+    public void 커스텀구분자테스트3() throws Exception {
+        //given
+        String inputString = "//;\\n//$\\n//*\\n1;200,13$04*3";
+        //when
+        Parser parser = new Parser();
+        parser.parse(inputString);
+        List<Integer> nums = parser.getNums();
+        int sum = Calculator.sum(nums);
+        //then
+        Assertions.assertThat(sum).isEqualTo(221);
+    }
 
     @Test
     public void 커스텀구분자테스트4() throws Exception {

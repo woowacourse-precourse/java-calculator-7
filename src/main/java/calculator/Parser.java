@@ -17,17 +17,19 @@ public class Parser {
     public void parse(String inputString) {
         char[] inputArray = inputString.toCharArray();
         int index = 0;
+        boolean onCalOperating = false;
         while (index < inputArray.length) {
             char curChar = inputArray[index];
 
             checkChar(curChar);
             if (Character.isDigit(curChar)) {
                 index = parseNumber(curChar, index, inputArray);
+                onCalOperating = true;
                 continue;
             }
 
             if (curChar == '/') {
-                index = addSeparator(index, inputArray);
+                index = addSeparator(index, inputArray, onCalOperating);
                 continue;
             }
 
@@ -73,7 +75,11 @@ public class Parser {
         return nums;
     }
 
-    private int addSeparator(int index, char[] inputArray) {
+    private int addSeparator(int index, char[] inputArray, boolean onCalOperating) {
+        if (onCalOperating) {
+            throw new IllegalArgumentException("구분자 추가는 문자열 앞에서 이루어져야한다");
+        }
+
         index++;
         if (inputArray[index] != '/') {
             throw new IllegalArgumentException("'/'다음에는 '/'가 입력되야 한다");
