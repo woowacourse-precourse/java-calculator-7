@@ -1,6 +1,6 @@
 package calculator;
 
-import calculator.parser.Parser;
+import calculator.parser.NumberParser;
 import camp.nextstep.edu.missionutils.Console;
 
 /**
@@ -17,10 +17,10 @@ import camp.nextstep.edu.missionutils.Console;
 // TODO: String -> StringBuiler 변경하기
 public class Context {
 
-    private final Parser parser;
+    private final NumberParser parser;
     private final Calculator calculator;
 
-    public Context(Parser parser, Calculator calculator) {
+    public Context(NumberParser parser, Calculator calculator) {
         this.parser = parser;
         this.calculator = calculator;
     }

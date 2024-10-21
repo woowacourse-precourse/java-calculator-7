@@ -1,7 +1,7 @@
 package calculator;
 
 import calculator.parser.ExpressionParser;
-import calculator.parser.Parser;
+import calculator.parser.NumberParser;
 
 /**
  * think: 이 애플리케이션에 필요한 것
@@ -11,8 +11,8 @@ import calculator.parser.Parser;
  */
 public class Application {
     public static void main(String[] args) {
-        
-        Parser parser = new ExpressionParser();
+
+        NumberParser parser = new ExpressionParser();
         Calculator calculator = new Calculator();
 
         Context context = new Context(parser, calculator);
