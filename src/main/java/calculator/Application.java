@@ -1,8 +1,10 @@
 package calculator;
 
+import calculator.controller.Calculator;
+
 public class Application {
     public static void main(String[] args) {
-        StringSumCalculator calculator = new StringSumCalculator();
-        calculator.run();
+        Calculator controller = new Calculator();
+        controller.run();
     }
 }

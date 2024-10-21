@@ -1,16 +1,13 @@
-package calculator;
+package calculator.model;
 
 import java.util.List;
 
 public class StringSumCalculator {
-    public void run() {
-        String inputString = InputHandler.inputString();
-
+    public double calculate(String inputString) {
         StringParser stringParser = new StringParser(inputString);
         List<Double> numbers = stringParser.extractNumbers();
-        double result = sum(numbers);
 
-        OutputHandler.printResult(result);
+        return sum(numbers);
     }
 
     private double sum(List<Double> numbers) {

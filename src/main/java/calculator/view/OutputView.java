@@ -1,6 +1,6 @@
-package calculator;
+package calculator.view;
 
-public class OutputHandler {
+public class OutputView {
     private static final String RESULT_MESSAGE_PREFIX = "결과 : ";
 
     public static void printResult(double result) {

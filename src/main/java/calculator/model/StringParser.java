@@ -1,5 +1,6 @@
-package calculator;
+package calculator.model;
 
+import calculator.constant.ErrorMessage;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;

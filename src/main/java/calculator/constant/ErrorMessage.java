@@ -1,4 +1,4 @@
-package calculator;
+package calculator.constant;
 
 public enum ErrorMessage {
     INVALID_CUSTOM_DELIMITER_FORMAT("커스텀 구분자 입력 양식이 유효하지 않습니다."),
