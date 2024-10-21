@@ -1,6 +1,6 @@
 package calculator.controller;
 
-import calculator.io.InputProcessor;
+import calculator.utils.InputProcessor;
 import calculator.views.OutputView;
 import calculator.utils.Calculator;
 import calculator.views.InputView;
