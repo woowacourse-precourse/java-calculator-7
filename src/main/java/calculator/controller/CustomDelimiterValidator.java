@@ -2,7 +2,7 @@ package calculator.controller;
 
 import java.util.regex.Pattern;
 
-public class InputSyntaxValidator {
+public class CustomDelimiterValidator {
     private static final Pattern CUSTOM_DELIMITER_REGEX_PATTERN = Pattern.compile("^[//.*\\n]");
 
     public boolean validate(String input) {

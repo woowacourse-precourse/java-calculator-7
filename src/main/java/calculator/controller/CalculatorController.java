@@ -24,10 +24,10 @@ public class CalculatorController {
 
         NumberConverter numberConverter = new NumberConverter();
         StringParser stringParser = new StringParser();
-        InputSyntaxValidator inputSyntaxValidator = new InputSyntaxValidator();
+        CustomDelimiterValidator customDelimiterValidator = new CustomDelimiterValidator();
         InputValueValidator inputValueValidator = new InputValueValidator();
 
-        Calculator calculator = new Calculator(numberConverter, stringParser, inputSyntaxValidator,
+        Calculator calculator = new Calculator(numberConverter, stringParser, customDelimiterValidator,
                 inputValueValidator);
 
         calculator.initialize(input);

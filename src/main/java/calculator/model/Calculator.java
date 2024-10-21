@@ -1,6 +1,6 @@
 package calculator.model;
 
-import calculator.controller.InputSyntaxValidator;
+import calculator.controller.CustomDelimiterValidator;
 import calculator.controller.InputValueValidator;
 import calculator.controller.NumberConverter;
 import calculator.controller.StringParser;
@@ -11,7 +11,7 @@ public class Calculator {
     private final NumberConverter numberConverter;
     private final StringParser stringParser;
     private final InputValueValidator inputValueValidator;
-    private final InputSyntaxValidator inputSyntaxValidator;
+    private final CustomDelimiterValidator customDelimiterValidator;
 
     private String input;
     private String customDelimiter;
@@ -19,15 +19,15 @@ public class Calculator {
     private boolean usingCustomDelimiter = false;
 
     public Calculator(NumberConverter numberConverter, StringParser stringParser,
-                      InputSyntaxValidator inputSyntaxValidator, InputValueValidator inputValueValidator) {
+                      CustomDelimiterValidator customDelimiterValidator, InputValueValidator inputValueValidator) {
         this.numberConverter = numberConverter;
         this.stringParser = stringParser;
         this.inputValueValidator = inputValueValidator;
-        this.inputSyntaxValidator = inputSyntaxValidator;
+        this.customDelimiterValidator = customDelimiterValidator;
     }
 
     public void initialize(String input) {
-        if (inputSyntaxValidator.validate(input)) {
+        if (customDelimiterValidator.validate(input)) {
             this.usingCustomDelimiter = true;
             this.customDelimiter = stringParser.customDelimiter(input);
             this.input = input.substring(input.indexOf("\\n") + 2).trim();
