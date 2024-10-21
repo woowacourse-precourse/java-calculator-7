@@ -27,12 +27,12 @@ public class DelimiterParser {
     }
 
     public String extractCustomDelimiter() {
-        int delimiterEndIndex = findDelimiterEndIndex();
+        int delimiterEndIndex = findCustomDelimiterEndIndex();
         String customDelimiter = input.substring(2, delimiterEndIndex);
-        return escapeSpecialCharactersInDelimiter(customDelimiter);
+        return escapeSpecialCharacters(customDelimiter);
     }
 
-    public int findDelimiterEndIndex() {
+    public int findCustomDelimiterEndIndex() {
         int delimiterEndIndex = input.indexOf("\\n");
         if (delimiterEndIndex == -1) {
             throw new IllegalArgumentException("잘못된 입력 형식입니다. 커스텀 구분자는 //과 \\n을 포함해야 합니다.");
@@ -41,11 +41,11 @@ public class DelimiterParser {
     }
 
     public String extractNumbersSection() {
-        int delimiterEndIndex = findDelimiterEndIndex();
+        int delimiterEndIndex = findCustomDelimiterEndIndex();
         return input.substring(delimiterEndIndex + 2);
     }
 
-    public String escapeSpecialCharactersInDelimiter(String delimiter) {
+    public String escapeSpecialCharacters(String delimiter) {
         return delimiter.replaceAll("([\\\\.^$|?*+()\\[\\]{}])", "\\\\$1");
     }
 }

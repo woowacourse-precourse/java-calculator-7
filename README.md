@@ -15,7 +15,7 @@
 - **커스텀 구분자 처리**  
   입력값이 "//"로 시작하고 "\n" 이전까지 커스텀 구분자가 정의된 경우 이를 적용하여 구분함.
     - 커스텀 구분자에 특수 문자가 포함된 경우 정규식에서 사용할 수 있도록 이스케이프 처리함.
-        - 정규식에서 사용할 수 있게 특수 문자를 이스케이프 처리하는 **escapeSpecialCharactersInDelimiter** 메서드 구현.
+        - 정규식에서 사용할 수 있게 특수 문자를 이스케이프 처리하는 **escapeSpecialCharacters** 메서드 구현.
 
 - **빈 문자열 처리**  
   입력값이 빈 문자열인 경우 결과는 0을 반환.
@@ -52,7 +52,7 @@
 ### 1. Application 클래스
 
 - 프로그램의 시작점으로, 입력을 받아서 처리하고 최종 결과를 출력함.
-- InputProcessor로 입력값을 처리하고, Calculator 객체를 이용해 계산함.
+- DelimiterParser 객체로 입력값을 처리하고, StringCalculator 객체를 이용해 계산함.
 
 ### 2. DelimiterParser 클래스
 
@@ -61,7 +61,7 @@
     - **hasCustomDelimiter** 메서드 : 커스텀 구분자가 있는지 확인함.
     - **extractCustomDelimiter** 메서드 : 커스텀 구분자를 추출함.
     - **extractNumberSection** 메서드 : 숫자 부분을 추출함.
-    - **escapeSpecialCharactersInDelimiter** 메서드 : 특수 문자를 이스케이프 처리함.
+    - **escapeSpecialCharacters** 메서드 : 특수 문자를 이스케이프 처리함.
 
 ### 3. NumberExtractor 클래스
 
