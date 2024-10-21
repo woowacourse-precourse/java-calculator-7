@@ -7,7 +7,8 @@ public class Adder {
     private Adder() {}
 
     public static int makeResult(String input, String customSeperator) {
-        return 0;
+        Set<Integer> numberSet = makeResultSet(input, customSeperator);
+        return calculate(numberSet);
     }
 
     private static Set<Integer> makeResultSet(String input, String customSeperator) {
@@ -30,4 +31,12 @@ public class Adder {
         return input.split(seperators);
     }
 
+    private static int calculate(Set<Integer> numberSet) {
+        int sum = 0;
+        for(int num : numberSet) {
+            sum += num;
+        }
+
+        return sum;
+    }
 }
