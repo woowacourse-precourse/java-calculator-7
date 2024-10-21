@@ -42,6 +42,7 @@ public class Application {
     * 사용자로부터 입력을 받는 메서드
     */
     public static String getUserInput(){
+
         System.out.println("덧셈할 문자열을 입력해주세요.");
         return Console.readLine();
     }
@@ -50,6 +51,7 @@ public class Application {
      * 입력을 전처리하는 메서드
      */
     public static String preprocessInput(String input){
+
         return input.contains("\\n") ? input.replace("\\n", "\n") : input;
     }
 
@@ -57,9 +59,8 @@ public class Application {
      * 빈 문자열인지 확인하는 메서드
      */
     public static Boolean isEmpty(String input){
-        if (input == null || input.isEmpty()){
-            return true;
-        } else return false;
+
+        return input == null || input.isEmpty();
     }
 
     /*
@@ -67,6 +68,7 @@ public class Application {
     * 형식이 잘못된 경우 'IllegalArgumentException을 발생시킨다.
     */
     public static void validateInput(String input){
+
         // 기본 구분자와 숫자만 있을 경우 return
         if(input.matches("[0-9,:]+")){
             return;
@@ -93,6 +95,7 @@ public class Application {
     * 기본 구분자 (,), (:) 또는 커스텀 구분자를 반환한다.
      */
     public static String getDelimiter(String input) {
+
         if (input.startsWith("//")){
             return input.substring(2, input.indexOf("\n"));
         }
@@ -104,6 +107,7 @@ public class Application {
     * 커스텀 구분자가 없으면 원본 문자열을 반환한다.
      */
     public static String removeDelimiterSection(String input){
+
         if (input.startsWith("//")){
             return input.substring(input.indexOf("\n") + 1);
         }
@@ -115,6 +119,7 @@ public class Application {
     * 문자열을 주어진 구분자를 기준으로 분리하여 배열로 변환하는 메서드
      */
     public static String[] splitByDelimiter(String input, String delimiter){
+
         if (delimiter == "[,|:]"){
             return input.split(delimiter);
         }else{
@@ -126,6 +131,7 @@ public class Application {
     * 배열의 문자열 요소들을 정수형으로 변환하여 합을 구하는 메서드
      */
     public static int sumNumbers(String[] numbers){
+
         int sum = 0;
         for (String number : numbers){
             sum += Integer.parseInt(number);
