@@ -5,6 +5,12 @@ public class StringCalculator {
         if (input == null || input.isEmpty()) {
             return 0;
         }
-        return 0;  // 임시로 추가
+
+        String[] tokens = input.split(",|:");  // 쉼표와 콜론을 구분자로 설정
+        int sum = 0;
+        for (String token : tokens) {
+            sum += Integer.parseInt(token);
+        }
+        return sum;
     }
 }
