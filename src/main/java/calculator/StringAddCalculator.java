@@ -17,6 +17,13 @@ public class StringAddCalculator {
     return Console.readLine();
   }
 
+  // 계산 수행
+  public int calculate(String userInput) {
+    String delimiter = getDelimiter(userInput);
+    String[] numbers = splitNumbers(userInput, delimiter);
+    return sumNumbers(numbers);
+  }
+
   // 입력 문자열에서 구분자를 추출하기
   private String getDelimiter(String userInput) {
     if (userInput.startsWith("//")) {
