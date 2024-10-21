@@ -3,8 +3,8 @@ package calculator.domain.delimiter;
 import static calculator.domain.delimiter.DelimiterPattern.CUSTOM_DELIMITER;
 
 import calculator.util.regex.Regex;
-import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 public class Delimiters {
@@ -34,12 +34,6 @@ public class Delimiters {
         return regex;
     }
 
-    private List<Delimiter> concatDelimiters(final Delimiter delimiter) {
-
-        return Stream.concat(delimiters.stream(), Stream.of(new Delimiter(delimiter.delimiter())))
-                .toList();
-    }
-
     private void validateDelimiters(final Delimiter delimiter) {
         checkIfDelimiterContainsOther(delimiter);
     }
@@ -67,8 +61,27 @@ public class Delimiters {
                 CONTAINING_ALL_START_REGEX + existingDelimitersRegex.getRegex() + CONTAINING_ALL_END_REGEX);
     }
 
-    public List<Delimiter> getDelimiters() {
-        return Collections.unmodifiableList(delimiters);
+    private List<Delimiter> concatDelimiters(final Delimiter delimiter) {
+
+        return Stream.concat(delimiters.stream(), Stream.of(new Delimiter(delimiter.delimiter())))
+                .toList();
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Delimiters that = (Delimiters) o;
+        return delimiters.equals(that.delimiters);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(delimiters);
     }
 
 }
