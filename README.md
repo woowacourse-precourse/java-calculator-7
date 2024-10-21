@@ -29,5 +29,5 @@
 ---
 ##  Controller
 #### CalculatorController
--  [ ] 계산기를 실행한다.
+-  [x] 계산기를 실행한다.
 ---
