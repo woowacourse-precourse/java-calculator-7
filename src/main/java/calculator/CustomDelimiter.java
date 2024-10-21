@@ -6,10 +6,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CustomDelimiter {
-    private static List<String> customDelimiterList = new ArrayList<>();
     private static final Pattern PATTERN = Pattern.compile("//(.*?)\\\\n");
 
-    private static void extractValues(String customDelimiterAssign) {
+    public static List<String> getCustomDelimiterList(String customDelimiterAssign) {
+        List<String> customDelimiterList = new ArrayList<>();
+        extractValues(customDelimiterAssign, customDelimiterList);
+        return customDelimiterList;
+    }
+
+    private static void extractValues(String customDelimiterAssign, List<String> customDelimiterList) {
         Matcher matcher = PATTERN.matcher(customDelimiterAssign);
 
         // 정규식 패턴에 매칭되는 모든 문자열을 찾음
@@ -28,10 +33,5 @@ public class CustomDelimiter {
         if (delimiter.length() != 1) {
             throw new IllegalArgumentException("커스텀 구분자는 한 글자로 입력되어야 합니다.");
         }
-    }
-
-    public static List<String> getCustomDelimiterList(String customDelimiterAssign) {
-        extractValues(customDelimiterAssign);
-        return customDelimiterList;
     }
 }
