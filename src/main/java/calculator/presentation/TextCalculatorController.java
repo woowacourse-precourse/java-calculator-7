@@ -1,8 +1,8 @@
 package calculator.presentation;
 
 
-import calculator.business.TextCalculatorService;
-import calculator.business.command.CalculateCommand;
+import calculator.application.TextCalculatorService;
+import calculator.application.command.CalculateCommand;
 
 public class TextCalculatorController {
 

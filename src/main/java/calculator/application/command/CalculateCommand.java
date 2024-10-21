@@ -1,4 +1,4 @@
-package calculator.business.command;
+package calculator.application.command;
 
 import calculator.domain.model.value.MajorData;
 import calculator.domain.model.value.Separator;

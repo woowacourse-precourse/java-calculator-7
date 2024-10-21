@@ -1,8 +1,8 @@
 package calculator.service;
 
-import calculator.business.TextCalculatorService;
-import calculator.business.TextCalculatorServiceImpl;
-import calculator.business.command.CalculateCommand;
+import calculator.application.TextCalculatorService;
+import calculator.application.TextCalculatorServiceImpl;
+import calculator.application.command.CalculateCommand;
 import calculator.domain.service.Calculator;
 import calculator.presentation.InputData;
 import org.assertj.core.api.Assertions;

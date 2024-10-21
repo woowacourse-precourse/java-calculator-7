@@ -1,9 +1,9 @@
 package calculator.global;
 
-import calculator.business.*;
+import calculator.application.*;
 import calculator.domain.service.Calculator;
 import calculator.presentation.TextCalculatorController;
-import calculator.business.TextCalculatorService;
+import calculator.application.TextCalculatorService;
 
 public final class AppConfig {
 

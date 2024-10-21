@@ -1,6 +1,6 @@
-package calculator.business;
+package calculator.application;
 
-import calculator.business.command.CalculateCommand;
+import calculator.application.command.CalculateCommand;
 import calculator.domain.service.Calculator;
 import calculator.domain.model.value.PositiveNumber;
 import calculator.domain.model.Translator;

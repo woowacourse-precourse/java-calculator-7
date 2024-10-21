@@ -1,7 +1,7 @@
 package calculator.domain;
 
 
-import calculator.business.command.CalculateCommand;
+import calculator.application.command.CalculateCommand;
 import calculator.domain.model.value.MajorData;
 import calculator.domain.model.value.Separator;
 import calculator.presentation.InputData;
