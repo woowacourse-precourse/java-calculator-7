@@ -90,7 +90,7 @@ public class Number {
 
     public String removeDelimiter(String rawNumber, String customDelimiter) {
         if (customDelimiter != null) {
-            return rawNumber.replace(customDelimiter, ",");
+            rawNumber = rawNumber.replace(customDelimiter, ",");
         }
         return rawNumber.replace(":", ",");
     }
