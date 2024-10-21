@@ -33,13 +33,18 @@ public class Application {
     private static String[] getNumbers(String rest) {
         String[] numbers = separateNumbers(rest);
 
+        numberListValidation(numbers);
+
+        return numbers;
+    }
+
+    private static void numberListValidation(String[] numbers) {
         emptyCheck(numbers);
 
         for (String number : numbers) {
             onlyZeroCheck(number);
             positiveNumberCheck(number);
         }
-        return numbers;
     }
 
     private static String[] separateNumbers(String input) {
@@ -104,6 +109,7 @@ public class Application {
         if (isDelimiterOpened) {
             throw new IllegalArgumentException("커스텀 구분자가 닫혀 있지 않습니다.");
         }
+
         return refinedInput;
     }
 
