@@ -21,6 +21,19 @@ public class CalculatorTest {
     }
 
     @Test
+    void 커스텀_구분자_숫자_추출_테스트() {
+        // Given : 커스텀 구분자가 적용된 입력 값
+        String input = "//$\n68$32$3";
+
+        // When : Calculator의 extractNumbers 메서드를 실행
+        Calculator calculator = new Calculator();
+        String[] result = calculator.extractNumbers(input);
+
+        // Then : 예상되는 결과값과 비교 (숫자가 제대로 추출되는지)
+        assertArrayEquals(new String[]{"68", "32", "3"}, result);
+    }
+
+    @Test
     void 숫자_추출_테스트() {
         // Given : 쉼표와 콜론으로 구분된 숫자가 있는 입력값
         String input = "9:6,3";
