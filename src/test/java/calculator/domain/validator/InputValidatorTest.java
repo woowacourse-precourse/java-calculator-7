@@ -1,7 +1,7 @@
 package calculator.domain.validator;
 
 import static calculator.domain.constant.errorMessage.ParseError.INCORRECT_POSITION;
-import static calculator.domain.constant.errorMessage.ValueError.INVALID_VALUE_FORMAT;
+import static calculator.domain.constant.errorMessage.ParseError.INVALID_FORMAT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -32,11 +32,11 @@ class InputValidatorTest {
     @Test
     @DisplayName("구분자의 형식이 잘못되었을 때 예외가 발생한다")
     void throwsExceptionForInvalidDelimiterFormat() {
-        String input = "//;\n;1,2,3";
+        String input = "//;;1,2,3";
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> validator.validateFormat(input));
 
-        assertEquals(INVALID_VALUE_FORMAT.getMessage(), exception.getMessage());
+        assertEquals(INVALID_FORMAT.getMessage(), exception.getMessage());
     }
 
 
