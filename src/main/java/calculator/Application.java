@@ -13,10 +13,29 @@ public class Application {
         int sum = 0;
         StringBuilder numberBuilder = new StringBuilder(); // 리스트 대신에 사용하는 StringBuilder
 
-        // 빈 문자일 경우
         if (input.isEmpty()) {
             System.out.println("결과 : 0");
             return;
+        }
+
+        // 커스텀 구분자 설정
+        String customDelimiter = null;
+
+        // 커스텀 구분자 추출
+        if (input.startsWith("//")) {
+            // Escape 문자와 헷갈리는 문제 발생 - > "\\n"을 실제 개행 문자로 변환
+            input = input.replace("\\n", "\n");
+
+            if (input.startsWith("//")) {
+                // 커스텀 구분자가 여러 글자일 경우를 위한 start, end 인덱스
+                int delimiterStartIndex = input.indexOf("//") + 2;
+                int delimiterEndIndex = input.indexOf("\n");
+
+                if (delimiterEndIndex > delimiterStartIndex) {
+                    customDelimiter = input.substring(delimiterStartIndex, delimiterEndIndex); // 커스텀 구분자 추출
+                    input = input.substring(delimiterEndIndex + 1); // 구분자 이후의 입력값만 남김
+                }
+            }
         }
 
         for (int i = 0; i < input.length(); i++) {
@@ -28,8 +47,8 @@ public class Application {
             } else if (Character.isDigit(ch)) {
                 // 숫자인 경우 숫자 빌더에 추가
                 numberBuilder.append(ch);
-            } else if (ch == ':' || ch == ',') {
-                // 기본 구분자를 만나면 그 전까지의 숫자를 합산
+            } else if (ch == ':' || ch == ',' || (customDelimiter != null && input.substring(i).startsWith(customDelimiter))) {
+                // 기본 구분자 또는 커스텀 구분자를 만나면 그 전까지의 숫자를 합산
                 if (!numberBuilder.isEmpty()) {
                     int number = Integer.parseInt(numberBuilder.toString());
 
@@ -38,6 +57,7 @@ public class Application {
                         number = -number; // 음수로 변환
                     }
 
+                    // 양수가 아닌 수 처리
                     if (number <= 0) {
                         System.out.println("양수만 입력 가능합니다: " + number);
                         isValidInput = false;
@@ -48,6 +68,11 @@ public class Application {
 
                     numberBuilder.setLength(0); // 빌더 초기화
                     isNegative = false; // 음수 플래그 초기화
+                }
+
+                // 커스텀 구분자일 경우 구분자의 길이만큼 건너뜀
+                if (customDelimiter != null && input.substring(i).startsWith(customDelimiter)) {
+                    i += customDelimiter.length() - 1;
                 }
             } else {
                 // 잘못된 입력일 경우
@@ -67,7 +92,7 @@ public class Application {
                     number = -number; // 음수로 변환
                 }
 
-                if (number < 0) {
+                if (number <= 0) {
                     System.out.println("양수만 입력 가능합니다: " + number);
                     return;
                 } else {
