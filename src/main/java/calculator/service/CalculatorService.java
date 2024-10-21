@@ -1,6 +1,9 @@
 package calculator.service;
 
 
+import static calculator.exception.ErrorMessages.INCLUDES_NEGATIVE_NUMBER;
+import static calculator.exception.ErrorMessages.INCLUDES_NON_NUMERIC;
+
 import calculator.domain.adder.NumberAdder;
 import calculator.domain.parser.InputParser;
 import calculator.domain.parser.InputParser.ParsedInput;
@@ -23,10 +26,10 @@ public class CalculatorService {
 
         for (String numberToken : parsedInput.numbersToken()) {
             if (!inputValidator.isValidNumber(numberToken)) {
-                throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
+                throw new IllegalArgumentException(INCLUDES_NON_NUMERIC.getMessage());
             }
             if (inputValidator.isNegativeNumber(numberToken)) {
-                throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+                throw new IllegalArgumentException(INCLUDES_NEGATIVE_NUMBER.getMessage());
             }
         }
 
