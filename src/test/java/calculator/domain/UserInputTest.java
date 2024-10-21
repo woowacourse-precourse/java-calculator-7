@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class UserInputTest {
 
     @Test
-    void 구분자가_있는_유저_확인(){
+    void 구분자가_있는_입력_확인(){
         UserInput userInput=new UserInput("//!\\n12!3");
 
         UserInput actualInput=userInput.checkExtractor();
@@ -18,7 +18,7 @@ class UserInputTest {
     }
 
     @Test
-    void 구분자가_없는_유저_확인(){
+    void 구분자가_없는_입력_확인(){
         UserInput userInput=new UserInput("12!3");
 
         UserInput actualInput=userInput.checkExtractor();
@@ -27,7 +27,7 @@ class UserInputTest {
     }
 
     @Test
-    void 구분자가_있는_SPLITOR_확인(){
+    void 커스텀문자가_있는_SEPERATOR_확인(){
         UserInput userInput=new UserInput("//!\\n12!3");
 
         UserInput actualInput=userInput.checkExtractor();
@@ -36,7 +36,7 @@ class UserInputTest {
     }
 
     @Test
-    void 구분자가_없는_SPLITOR_확인(){
+    void 커스텀문자가_없는_SEPERATOR_확인(){
         UserInput userInput=new UserInput("12:3");
 
         UserInput actualInput=userInput.checkExtractor();
@@ -72,9 +72,4 @@ class UserInputTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(NEGATIVE_INPUT);
     }
-
-
-
-
-
 }

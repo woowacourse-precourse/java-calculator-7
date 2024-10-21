@@ -1,11 +1,8 @@
 package calculator.domain;
 
 import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-//정제된 문자열만 들어간다
+
 public class Calculator {
-    private static final Pattern CUSTOM_SEPERATOR_PATTERN=Pattern.compile("^//(.)\\\\n{1}(.*)");
     private static final String NUMBER_REGEX="[0-9]{0,}";
 
     private static final String OVERFLOW_RESULT="덧셈의 결과가 int 범위를 넘어갔습니다";

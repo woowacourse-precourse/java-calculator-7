@@ -13,8 +13,8 @@ public class SeperatorFactory {
         }
 
         regexBuilder.append(seperatorRegex)
-                .append(SPLITOR)
-                .append(customSeperator);
+                    .append(SPLITOR)
+                    .append(customSeperator);
 
         return regexBuilder.toString();
     }
@@ -23,7 +23,7 @@ public class SeperatorFactory {
         StringBuilder seperatorBuilder=new StringBuilder();
 
         seperatorBuilder.append(ESCAPE_CHAR)
-                .append(customSeperator);
+                        .append(customSeperator);
 
         return customSeperator.toString();
     }
