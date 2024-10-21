@@ -48,10 +48,13 @@ public class Validator {
         for (String number : numbers) {
             if (!number.isEmpty()) {
                 try {
-                    if (Integer.parseInt(number) < 0) {
+                    int parsedNumber = Integer.parseInt(number);
+                    // 음수 처리
+                    if (parsedNumber < 0) {
                         throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
                     }
                 } catch (NumberFormatException e) {
+                    // 숫자가 아닌 값이 들어가거나, int 범위를 초과하는 경우 예외 처리
                     throw new IllegalArgumentException("유효하지 않은 숫자 형식입니다: " + number);
                 }
             }
