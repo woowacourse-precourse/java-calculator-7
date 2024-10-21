@@ -8,6 +8,7 @@ import java.util.Set;
 public class Application {
     public static void main(String[] args) {
         // 문자열 값 입력
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = camp.nextstep.edu.missionutils.Console.readLine();
 
         // 문자열 파싱 (커스텀 구분자 확인)
@@ -63,6 +64,9 @@ public class Application {
         for (String i : numbers) {
             result += Long.parseLong(i);
         }
+
+        // 결과 출력
+        System.out.println("결과 : " + result);
     }
 
 }
