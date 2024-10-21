@@ -20,18 +20,17 @@ public class StringCalculator {
     private static int calculateSum(String input) {
         String[] tokens = input.split("[,|:]");
 
-        // 음수 및 숫자 외의 문자가 있는지 확인
         int sum = 0;
         for (String token : tokens) {
             int number;
             try {
-                number = Integer.parseInt(token.trim()); // 숫자로 변환
+                number = Integer.parseInt(token.trim());
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다: " + token);
+                throw new IllegalArgumentException(); // 숫자가 아닌 값이 들어오면 예외 발생
             }
 
             if (number < 0) {
-                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
+                throw new IllegalArgumentException(); // 음수 값이 들어오면 예외 발생
             }
 
             sum += number;
