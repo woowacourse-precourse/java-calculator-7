@@ -111,4 +111,22 @@ class InputConsoleHandlerTest {
         Console.close();
     }
 
+    @Test
+    @DisplayName("사용자의 커스텀 구분자가 정규표현식의 메타문자인 경우도 잘 분리하여 반환한다")
+    void findCustomSeparatorWithRegexSymbol() {
+        // given
+        String input = "//*\\n1*2*3";
+
+        // when
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        // then
+        String[] inputSplit = INPUT_CONSOLE_HANDLER.getUserInput();
+        assertThat(inputSplit).containsExactly("1", "2", "3");
+
+        System.setIn(System.in);
+        Console.close();
+    }
+
+
 }
