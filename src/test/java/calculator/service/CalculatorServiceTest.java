@@ -73,4 +73,11 @@ class CalculatorServiceTest {
         int result = calculatorService.calculate(input);
         assertThat(result).isEqualTo(6);
     }
+
+    @Test
+    void 큰_숫자_입력_테스트() {
+        String input = "1000,2000:3000";
+        int result = calculatorService.calculate(input);
+        assertThat(result).isEqualTo(6000);
+    }
 }
