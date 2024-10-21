@@ -3,10 +3,6 @@ package calculator;
 public class Delimiter {
 
     public String [] findDelimiter(String input) {
-
-        // input = 0
-        // customDivision = 1
-
         String [] result = new String[2];
 
         String customDelimiter = "";
@@ -36,10 +32,10 @@ public class Delimiter {
     }
 
     public String [] devisionString(String[] inputExceptForDelimiterAndCustomDelimiter) {
-        String inputExceptForDelimiter = inputExceptForDelimiterAndCustomDelimiter[0];
+        String inputExceptForCustomDelimiter = inputExceptForDelimiterAndCustomDelimiter[0];
         String customDelimiter = inputExceptForDelimiterAndCustomDelimiter[1];
-        inputExceptForDelimiter = inputExceptForDelimiter.replace(":", ",");
-        inputExceptForDelimiter = inputExceptForDelimiter.replace(customDelimiter, ",");
-        return inputExceptForDelimiter.split(",");
+        inputExceptForCustomDelimiter = inputExceptForCustomDelimiter.replace(":", ",");
+        inputExceptForCustomDelimiter = inputExceptForCustomDelimiter.replace(customDelimiter, ",");
+        return inputExceptForCustomDelimiter.split(",");
     }
 }

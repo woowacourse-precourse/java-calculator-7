@@ -7,8 +7,8 @@ public class Application {
         String input = inputHandler.read();
 
         Delimiter delimiter = new Delimiter();
-        String[] inputExceptForDelimiterAndCustomDelimiter = delimiter.findDelimiter(input);
-        String[] strings = delimiter.devisionString(inputExceptForDelimiterAndCustomDelimiter);
+        String[] inputExceptForCustomDelimiterAndCustomDelimiter = delimiter.findDelimiter(input);
+        String[] strings = delimiter.devisionString(inputExceptForCustomDelimiterAndCustomDelimiter);
 
         Calculator calculator = new Calculator();
         int sum = calculator.getSum(strings);
