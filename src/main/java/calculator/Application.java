@@ -5,23 +5,32 @@ import camp.nextstep.edu.missionutils.Console;
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
-        int sum = 0;
+        char customChar;
+        String[] numbers;
         String inputString = getUserInput();
-        if (isCustom(inputString)){
-            //확인용 출력
-            System.out.println("커스텀 구분자");
+        if (isCustom(inputString)) {
+            customChar = inputString.charAt(2);
+            inputString = inputString.substring(5);
+            numbers = inputString.split(String.valueOf(customChar));
         }
         else {
-            //확인용 출력
-            System.out.println("쉼표 또는 콜론");
+            //쉼표를 콜론으로 변경
+            inputString = inputString.replace(',', ':');
+            numbers = inputString.split(":");
+        }
+        //확인용 출력
+        for(int i=0; i<inputString.length();i++){
+            System.out.println(numbers[i]);
         }
     }
-    public static String getUserInput(){
+
+    public static String getUserInput() {
         System.out.print("덧셈할 문자열을 입력하세요: ");
         String inputString = Console.readLine();
         return inputString;
     }
-    public static boolean isCustom(String inputString){
+
+    public static boolean isCustom(String inputString) {
         return inputString.charAt(0) == '/';
     }
 }
