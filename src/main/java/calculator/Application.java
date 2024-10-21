@@ -23,7 +23,7 @@ public class Application {
                 delimiters.add(customDelimiter);
                 str = str.substring(delimiterIndex + 2);
             } else {
-                throw new IllegalStateException();
+                throw new IllegalArgumentException();
             }
         }
 
