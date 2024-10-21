@@ -3,6 +3,7 @@ package calculator;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.regex.Pattern;
 
 public class InputHandler {
     private String inputText;
@@ -16,6 +17,10 @@ public class InputHandler {
         } catch (IOException e) {
             System.out.println(new IllegalArgumentException().getMessage());
         }
+    }
+
+    private boolean haveCustomSeparator(String text) {
+        return Pattern.matches("^//.*\\\\n.*$", text);
     }
 
 }
