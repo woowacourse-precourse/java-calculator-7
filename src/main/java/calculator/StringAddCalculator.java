@@ -1,13 +1,27 @@
 package calculator;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class StringAddCalculator {
+    private static final String DEFAULT_DELIMITERS = ",|:";
+
     public static int splitAndSum(String input) {
         if (input == null || input.isEmpty()) {
             return 0;
         }
-        String[] tokens = input.split(",|:");
-        // 이후 단계에서 숫자로 변환 및 합산 예정
+        String[] tokens = tokenize(input);
         return sum(tokens);
+    }
+
+    private static String[] tokenize(String input) {
+        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
+        if (m.find()) {
+            String customDelimiter = Pattern.quote(m.group(1));
+            String numbers = m.group(2);
+            return numbers.split(customDelimiter);
+        }
+        return input.split(DEFAULT_DELIMITERS);
     }
 
     private static int sum(String[] tokens) {
