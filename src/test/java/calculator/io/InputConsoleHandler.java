@@ -46,7 +46,7 @@ public class InputConsoleHandler {
             separatorJoiner.add(customSeparator);
         }
 
-        if (isNotCustomSeparatorLine(userInput)) {
+        if (isNotCustomSeparatorLine(userInput) && doesExistsCustomSeparator(userInput)) {
             throw new IllegalArgumentException("커스텀 구분자의 지정 방법이 잘못되었습니다. 애플리케이션을 종료합니다.");
         }
 
@@ -56,7 +56,7 @@ public class InputConsoleHandler {
         return operands.split(joinerString);
     }
 
-    
+
     private boolean isNotOperandLine(String input) {
         return !isOperandLine(input);
     }
@@ -89,6 +89,10 @@ public class InputConsoleHandler {
         matcher.find();
 
         return matcher.group();
+    }
+
+    private boolean doesExistsCustomSeparator(String userInput) {
+        return !userInput.matches("-?\\d+([,|:]-?\\d+)*");
     }
 
 }
