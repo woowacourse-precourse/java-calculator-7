@@ -9,6 +9,12 @@ public class Application {
     private static final String CUSTOM_DELIMITER_START_STR = "//";
     private static final String CUSTOM_DELIMITER_END_STR = "\\n";
 
+
+    public static void inputMessage(){
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        String input = Console.readLine();
+    }
+
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         inputMessage();
