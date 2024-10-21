@@ -7,6 +7,7 @@ public class Calculator {
 
     public int CalculateSum(String[] words) {
         List<String> nonNumericValues = new ArrayList<>();
+        List<String> negativeValues = new ArrayList<>();
         int sum = 0;
 
         for (String word : words) {
@@ -15,10 +16,18 @@ public class Calculator {
                 word = "0";
             }
             try {
-                sum += Integer.parseInt(word);
+                int value = Integer.parseInt(word);
+                if (value < 0) {
+                    negativeValues.add(word);
+                }
+                sum += value;
             } catch (NumberFormatException e) {
                 nonNumericValues.add(word);
             }
+        }
+
+        if(!negativeValues.isEmpty()){
+            throw new IllegalArgumentException("음수는 허용되지 않습니다: " + String.join(", ", negativeValues));
         }
 
         if (!nonNumericValues.isEmpty()) {
