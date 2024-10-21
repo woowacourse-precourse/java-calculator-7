@@ -15,8 +15,7 @@ public class CharacterBuffer {
         cursor += 1;
         return arr[cursor];
     }
-    char prev() {
+    void goPrev() {
         cursor -= 1;
-        return arr[cursor];
     }
 }

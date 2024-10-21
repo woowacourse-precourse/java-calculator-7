@@ -41,7 +41,7 @@ public class Application {
             char current = buffer.next();
             if (current != '/') {
                 if (slashCount == 0) {
-                    buffer.prev();
+                    buffer.goPrev();
                     return false;
                 } else {
                     throw new IllegalArgumentException("/다음에 /이 와야 합니다.");
@@ -61,7 +61,7 @@ public class Application {
         }
         while (!stk.isEmpty()) {
             char top = stk.pop();
-            if (top == ';' || top == ',') {
+            if (top == ':' || top == ',') {
                 throw new IllegalArgumentException("기본 구분자는 포함할 수 없습니다.");
             }
             delimiters.add(top);
@@ -71,7 +71,7 @@ public class Application {
     static List<Character> parseDelimiters(CharacterBuffer buffer) {
         Stack<Character> stk = new Stack<>();
         List<Character> delimiters = new ArrayList<>();
-        delimiters.add(';');
+        delimiters.add(':');
         delimiters.add(',');
 
         boolean isStarted = parseDelimiterStart(buffer);
