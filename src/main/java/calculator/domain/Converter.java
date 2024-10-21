@@ -1,18 +1,21 @@
 package calculator.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Converter {
 
-    private List<String> delimiterList = new ArrayList<>();
+    private final static Converter CONVERTER = new Converter();
+    private final List<String> delimiterList = new ArrayList<>();
 
-    public Converter() {
+    private Converter() {
         delimiterList.add(",");
         delimiterList.add(":");
+    }
+
+    public static Converter getInstance() {
+        return CONVERTER;
     }
 
     public List<Number> convertWordsToString(String words) {
@@ -69,7 +72,7 @@ public class Converter {
     }
 
     private void validatePositiveNumber(Integer integer) throws NumberFormatException {
-        if(integer < 0)
+        if (integer < 0)
             throw new NumberFormatException();
     }
 

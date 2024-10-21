@@ -31,4 +31,8 @@ public class Number {
             return false;
         return Objects.equals(value, number.value);
     }
+
+    public void initialize() {
+        this.value = 0;
+    }
 }

@@ -11,7 +11,7 @@ public class ConverterTest {
     @Test
     void 커스텀_구분자를_판단할_수_있다() {
         //given
-        Converter converter = new Converter();
+        Converter converter = Converter.getInstance();
         String words = "//;\\n1;2;3";
 
         //when
@@ -25,7 +25,7 @@ public class ConverterTest {
     void 구분자를_찾아_나눌_수_있다() {
         //given
         String str = "//;\\n1;2;3";
-        Converter converter = new Converter();
+        Converter converter = Converter.getInstance();
 
         //when
         List<String> words = converter.separateWords(str);
@@ -40,7 +40,7 @@ public class ConverterTest {
     void 빈_문자열은_0으로_간주한다() {
         //given
         String str = "";
-        Converter converter = new Converter();
+        Converter converter = Converter.getInstance();
 
         //when
         List<Number> numbers = converter.convertWordsToString(str);
@@ -53,7 +53,7 @@ public class ConverterTest {
     void 문자열에서_옳바른_숫자를_가져온다1() {
         //given
         String str = "1,2";
-        Converter converter = new Converter();
+        Converter converter = Converter.getInstance();
 
         //when
         List<Number> numbers = converter.convertWordsToString(str);
@@ -66,7 +66,7 @@ public class ConverterTest {
     @Test
     void 숫자와_구분자로_구별할_수_없는_경우_옳지_않은_입력으로_간주한다() {
         //given
-        Converter converter = new Converter();
+        Converter converter = Converter.getInstance();
 
         //when
         String str = "e21";

@@ -10,7 +10,7 @@ public class CalculatorTest {
     @Test
     void 숫자들을_더할_수_있다(){
         //given
-        Calculator calculator = new Calculator();
+        Calculator calculator = Calculator.getInstance();
         List<Number> numberList = List.of(new Number(1),new Number(2));
 
         //when
@@ -23,7 +23,7 @@ public class CalculatorTest {
     @Test
     void 계산결과를_응답한다(){
         //given
-        Calculator calculator = new Calculator();
+        Calculator calculator = Calculator.getInstance();
         List<Number> numberList = List.of(new Number(1),new Number(2));
 
         //when
