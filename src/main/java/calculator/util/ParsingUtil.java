@@ -4,14 +4,13 @@ import calculator.exception.CalculatorError;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public final class ParsingUtil {
     private static final String DEFAULT_DELIMITER_1 = ",";
     private static final String DEFAULT_DELIMITER_2 = ":";
     private static final String DEFAULT_DELIMITER_REGEX = ",|:";
-    private static final String CUSTOM_DELIMITER_REGEX = "//\\s*(.+)\\s*\\n";
+    private static final String CUSTOM_DELIMITER_START_REGEX = "//";
+    private static final String CUSTOM_DELIMITER_END_REGEX = "\\\\n";
 
     private ParsingUtil() {
     }
@@ -35,7 +34,7 @@ public final class ParsingUtil {
         checkNullOrEmpty(input);
 
         List<String> delimiters = extractCustomDelimiter(input);
-        String[] split = input.split("\n");
+        String[] split = input.split(CUSTOM_DELIMITER_END_REGEX);
         String numbers = split[split.length - 1];
 
         for (String delimiter : delimiters) {
@@ -48,13 +47,10 @@ public final class ParsingUtil {
 
     public static List<String> extractCustomDelimiter(String input) {
         checkNullOrEmpty(input);
-
-        Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_REGEX);
-        Matcher matcher = pattern.matcher(input);
+        var splitInput = input.split(CUSTOM_DELIMITER_END_REGEX);
         List<String> delimiters = new ArrayList<>();
-
-        while (matcher.find()) {
-            var customDelimiter = matcher.group(1).trim();
+        for (int index = 0; index < splitInput.length - 1; index++) {
+            var customDelimiter = splitInput[index].replace(CUSTOM_DELIMITER_START_REGEX, "");
             checkDelimiter(customDelimiter);
             delimiters.add(customDelimiter.trim());
         }
@@ -62,10 +58,7 @@ public final class ParsingUtil {
     }
 
     public static boolean containsCustomDelimiter(String input) {
-        Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_REGEX);
-        Matcher matcher = pattern.matcher(input);
-
-        return matcher.find();
+        return input.startsWith(CUSTOM_DELIMITER_START_REGEX);
     }
 
     public static void checkDelimiter(String delimiter) {
