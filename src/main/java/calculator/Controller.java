@@ -9,9 +9,9 @@ import calculator.view.Output;
 public class Controller {
     private final SeparatorService separatorService;
     private final ExtractService extractService;
-    private final Calculator calculator;
+    private final Calculator<?> calculator;
 
-    public Controller(SeparatorService separatorService, ExtractService extractService, Calculator calculator) {
+    public Controller(SeparatorService separatorService, ExtractService extractService, Calculator<?> calculator) {
         this.separatorService = separatorService;
         this.extractService = extractService;
         this.calculator = calculator;
@@ -28,10 +28,10 @@ public class Controller {
             char currentChar = inputText.charAt(index);
 
             if (Character.isDigit(currentChar)) {
-                calculator.temporarySaveNumber(currentChar);
+                calculator.temporarySave(currentChar);
                 continue;
             } else {
-                calculator.saveNumber();
+                calculator.save();
             }
 
             if (separatorService.isAllowedSeparator(currentChar)) {

@@ -1,22 +1,11 @@
 package calculator.number;
 
-public class Calculator {
-    private final StringNumber stringNumber;
+public interface Calculator<T extends Number> {
+    void temporarySave(Character c);
 
-    public Calculator(StringNumber stringNumber) {
-        this.stringNumber = stringNumber;
-    }
+    void save();
 
-    public void temporarySaveNumber(Character c) {
-        stringNumber.temporarySave(c);
-    }
+    void validateRange(Character c);
 
-    public void saveNumber() {
-        stringNumber.save();
-    }
-
-    public Number getTotal() {
-        saveNumber();
-        return stringNumber.getNumber();
-    }
+    T getTotal();
 }

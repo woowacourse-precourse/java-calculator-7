@@ -1,8 +1,6 @@
 package calculator.number;
 
-import static java.lang.Integer.MAX_VALUE;
-
-public class StringInt implements StringNumber<Integer> {
+public class IntegerCalculator implements Calculator<Integer> {
     public static final int MAX_INT_LENGTH = 9;
     public static final String TOTAL_OVER_RANGE = "숫자의 합이 너무 큽니다.";
     public static final String RANGE_IS_NINE = "9자리 이하의 수를 입력하세요.";
@@ -19,11 +17,11 @@ public class StringInt implements StringNumber<Integer> {
     @Override
     public void save() {
         if (sb.length() != 0) {
-            if (total > MAX_VALUE - Integer.parseInt(sb.toString())) {
+            if (total > Integer.MAX_VALUE - Integer.parseInt(sb.toString())) {
                 throw new IllegalArgumentException(TOTAL_OVER_RANGE);
             }
             total += Integer.parseInt(sb.toString());
-            sb.delete(0, sb.length());
+            sb.setLength(0);
         }
     }
 
@@ -35,7 +33,8 @@ public class StringInt implements StringNumber<Integer> {
     }
 
     @Override
-    public Integer getNumber() {
+    public Integer getTotal() {
+        save();
         return total;
     }
 }
