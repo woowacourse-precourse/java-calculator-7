@@ -15,35 +15,35 @@ public class Application {
         return sum;
     }
 
-    public int separate(String str) throws IllegalArgumentException {
+    public int separate(String input) throws IllegalArgumentException {
         int answer = 0;
-        String[] strArr = str.split(",|:");
-        answer = addition(strArr);
+        String[] numArr = input.split(",|:");
+        answer = addition(numArr);
         return answer;
     }
 
-    public int custom(String str) throws IllegalArgumentException {
+    public int custom(String input) throws IllegalArgumentException {
         int answer = 0;
-        int customIndex = str.indexOf("\\n");
+        int customIndex = input.indexOf("\\n");
         if(customIndex==-1) {
             throw new IllegalArgumentException();
         }
-        String delimiter = str.substring(2,customIndex);
-        String str2 = str.substring(customIndex+2);
-        String[] strArr = str2.split(delimiter);
-        answer = addition(strArr);
+        String delimiter = input.substring(2,customIndex);
+        String target = input.substring(customIndex+2);
+        String[] numArr = target.split(delimiter);
+        answer = addition(numArr);
         return answer;
     }
 
     public static void main(String[] args) throws IllegalArgumentException {
         Application app = new Application();
-        String str = Console.readLine();
-        if(str.startsWith("//")) {
-            System.out.println("결과 : " + app.custom(str));
-        } else if(str.isEmpty()) {
+        String input = Console.readLine();
+        if(input.startsWith("//")) {
+            System.out.println("결과 : " + app.custom(input));
+        } else if(input.isEmpty()) {
             System.out.println("결과 : 0");
         } else {
-            System.out.println("결과 : " + app.separate(str));
+            System.out.println("결과 : " + app.separate(input));
         }
     }
 }
