@@ -18,7 +18,7 @@ public class NumberParser {
             try {
                 numbers[i] = toPositiveInteger(token); // 각 토큰을 숫자로 변환
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("Invalid number" + token); // "유효하지 않은 숫자 형식: " + token
+                throw new IllegalArgumentException("Invalid number" + token);
             }
         }
 
