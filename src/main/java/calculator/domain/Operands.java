@@ -22,6 +22,10 @@ public class Operands {
         return new Operands(operands);
     }
 
+    public static Operands of(final String... operands) {
+        return new Operands(List.of(operands));
+    }
+
     public static void check(final Operands operands) {
         for (String operand : operands.toList()) {
             if (!isNumeric(operand)) {
