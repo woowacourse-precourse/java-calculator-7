@@ -6,6 +6,7 @@ public class CalculatorController {
     private static final CalculatorView calculatorView = new CalculatorView();
     private final Delimiters delimiters;
     private final StringChecker stringChecker;
+    private final CustomDelimiterChecker customDelimiterChecker;
     private final StringSplitter stringSplitter;
     private final SumCalculator sumCalculator;
     private String inputString;
@@ -14,6 +15,7 @@ public class CalculatorController {
         this.inputString = inputString;
         this.delimiters = new Delimiters();
         this.stringChecker = new StringChecker(inputString, delimiters);
+        this.customDelimiterChecker = new CustomDelimiterChecker(inputString);
         this.stringSplitter = new StringSplitter(inputString, delimiters);
         this.sumCalculator = new SumCalculator();
         startCalculator();
@@ -27,10 +29,10 @@ public class CalculatorController {
 
         stringChecker.checkBoundary();
 
-        if (stringChecker.hasCustomDelimiter()) {
-            String customDelimiter = stringChecker.checkCustomDelimiter();
+        if (customDelimiterChecker.hasCustomDelimiter()) {
+            String customDelimiter = customDelimiterChecker.checkCustomDelimiter();
             delimiters.addDelimiter(customDelimiter);
-            inputString = stringChecker.getInputString();
+            inputString = customDelimiterChecker.getInputString();
             stringSplitter.setSplitter(inputString, delimiters);
         }
 
