@@ -8,6 +8,8 @@ public class InputView {
 
     public String getInput() {
         System.out.println(INPUT_MESSAGE);
-        return Console.readLine();
+        String input = Console.readLine();
+        Console.close();
+        return input;
     }
 }

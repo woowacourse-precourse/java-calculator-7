@@ -33,13 +33,13 @@ public class Calculator {
             validPositiveNumber(value);
             return value;
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.INCORRECT_NUMBER_TYPE.getMessage(), e);
         }
     }
 
     private static void validPositiveNumber(int value) {
         if (value <= 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.INVALID_POSITIVE_INPUT.getMessage());
         }
     }
 }

@@ -7,14 +7,13 @@ public class Delimiter {
     private final StringBuilder customDelimiters = new StringBuilder(BASE_DELIMITER);
 
     public Delimiter() {
-
     }
 
     public void addCustomDelimiter(String customDelimiter) {
         for (int i = 0; i < customDelimiter.length(); i++) {
             char target = customDelimiter.charAt(i);
             if (Character.isDigit(target)) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException(ErrorMessage.INVALID_NUMERIC_INPUT.getMessage());
             }
             customDelimiters.append("|").append(target);
         }
@@ -23,5 +22,4 @@ public class Delimiter {
     public String getRegex() {
         return customDelimiters.toString();
     }
-
 }

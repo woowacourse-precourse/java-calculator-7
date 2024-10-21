@@ -46,13 +46,13 @@ public class DelimiterParser {
 
     private void validDelimiterFormat(int start, int end) {
         if (end < start) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.INVALID_FORMAT_REGISTER_DELIMITER.getMessage());
         }
     }
 
     private void validEndDelimiterExist(int end) {
         if (end == -1) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.INVALID_FORMAT_REGISTER_DELIMITER.getMessage());
         }
     }
 }
