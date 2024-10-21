@@ -32,7 +32,7 @@ public class Application {
                 if (StringUtils.isNotBlank(customSeperator)) {
                     String subInput = input.substring(5);
                     if (input.length() > 5) {
-                        String[] splitedInput = subInput.split(customSeperator + ",|:");
+                        String[] splitedInput = subInput.split(customSeperator + "|,|:");
                         for (String inputNumber : splitedInput) {
                             int number = Integer.parseInt(inputNumber);
                             result += number;
