@@ -4,8 +4,7 @@
 1. 쉼표(,) 콜론(:)으로 문자열 분리해서 숫자 추출해서 숫자 합 반환
 2. 빈 문자열일시 0 반환
 3. "//" "\n" 사이에 있는 값 커스텀 구분자로 이용, 기준으로 문자열 구분에서 합 반환
-4. 구분자 사이에 양수 이외의 값 입력시(음수, 0, 문자 등) IllegalArgumentException 발생
-5. 구분자 잘못 입력시 IllegalArgumentException 발생
+4. 구분자 안에 양수가 아닌 값 있을 때 IllegalArgumentException을 발생 후 종료
 
 ---
 
