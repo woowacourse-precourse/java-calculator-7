@@ -11,7 +11,6 @@ public class DelimiterExtractor {
         if (!customDelimiter.isEmpty()) {
             delimiters += "|" + Pattern.quote(customDelimiter);
         }
-        System.out.println(delimiters);
         return delimiters;
     }
 
