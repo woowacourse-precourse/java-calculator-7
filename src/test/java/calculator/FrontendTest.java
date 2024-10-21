@@ -19,6 +19,7 @@ class FrontendTest {
   }
 
   //  java.lang.NullPointerException at FrontendTest.java:28
+  // java.lang.NullPointerException: Cannot invoke "calculator.Frontend.accessTarget()" because "this.frontend" is null
   @DisplayName("계산된 결과에 접근해서 값을 가져온다")
   @Test
   public void accessResult() throws Exception{
