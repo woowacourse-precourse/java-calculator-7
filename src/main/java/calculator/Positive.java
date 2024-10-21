@@ -2,21 +2,28 @@ package calculator;
 
 import java.util.Objects;
 
-public class Number {
+public class Positive {
 
-    private static final Number ZERO = new Number(0);
+    private static final Positive ZERO = new Positive(0);
     private final int value;
 
-    public Number(int value) {
+    public Positive(int value) {
+        if (isNotPositive(value)) {
+            throw new IllegalArgumentException("음수 일 수 없습니다.");
+        }
         this.value = value;
     }
 
-    public static Number from(String value) {
+    private boolean isNotPositive(int value) {
+        return value < 0;
+    }
+
+    public static Positive from(String value) {
         if (value.isBlank()) {
             return ZERO;
         }
 
-        return new Number(toInt(value));
+        return new Positive(toInt(value));
     }
 
     private static int toInt(String value) {
@@ -27,12 +34,12 @@ public class Number {
         return value.trim();
     }
 
-    public static Number zero() {
+    public static Positive zero() {
         return ZERO;
     }
 
-    public Number sum(Number number) {
-        return new Number(this.value + number.value);
+    public Positive sum(Positive positive) {
+        return new Positive(this.value + positive.value);
     }
 
     public int value() {
@@ -47,8 +54,8 @@ public class Number {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Number number = (Number) o;
-        return value == number.value;
+        Positive positive = (Positive) o;
+        return value == positive.value;
     }
 
     @Override
