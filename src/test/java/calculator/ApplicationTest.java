@@ -89,4 +89,25 @@ class ApplicationTest {
         Calculator calculator = new Calculator("//;\\n1;2,3:4");
         assertThat(calculator.add()).isEqualTo("결과 : 10");
     }
+
+    @Test
+    void 메타문자_연산자_기호가_있는_경우() {
+        Calculator calculator = new Calculator("//+\\n1+2+3");
+        assertThat(calculator.add()).isEqualTo("결과 : 6");
+    }
+
+    @Test
+    void 커스텀_구분자가_다중_문자인_경우() {
+        Calculator calculator = new Calculator("//***\\n1***2***3");
+        assertThat(calculator.add()).isEqualTo("결과 : 6");
+    }
+
+
+    @Test
+    void 커스텀_구분자가_누락된_경우() {
+        Calculator calculator = new Calculator("//\\n1,23");
+        assertThatThrownBy(calculator::add)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("커스텀 구분자가 없습니다.");
+    }
 }

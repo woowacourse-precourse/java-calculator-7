@@ -56,7 +56,10 @@ public class Calculator {
             String customDelimiters = matcher.group(1);
             input = matcher.group(2);
 
-            // 커스텀 구분자에 메타문자를 포함한 구분자도 처리
+            if(customDelimiters.equals("")) {
+                throw new IllegalArgumentException("커스텀 구분자가 없습니다.");
+            }
+
             for (String delimiter : customDelimiters.split("\\|")) {
                 if (checkMetacharacters(delimiter)) {
                     delimiter = delimiter.replaceAll("([\\\\.*+?^${}()|\\[\\]])", "\\\\$1");
@@ -73,7 +76,7 @@ public class Calculator {
 
     public void splitInput() {
         input = input.replaceAll("\\s+", "");
-        String combinedDelimiters = String.join("|", escapeDelimiters(delimiters));
+        String combinedDelimiters = String.join("|", delimiters);
         parts = Arrays.asList(input.split(combinedDelimiters));
         parts = filterEmptyParts(parts);
 
@@ -104,14 +107,6 @@ public class Calculator {
             }
         }
         return nonEmptyParts;
-    }
-
-    private List<String> escapeDelimiters(List<String> delimiters) {
-        List<String> escaped = new ArrayList<>();
-        for (String delimiter : delimiters) {
-            escaped.add(Pattern.quote(delimiter));
-        }
-        return escaped;
     }
 
     public boolean doubleCheck(String part) {
