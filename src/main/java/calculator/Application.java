@@ -22,7 +22,7 @@ public class Application {
                 startParsingIdx = input.indexOf("\\n") + 2;
             }
             // 기능 3. 문자열 파싱 (만약 유효하지 않은 연산자가 들어있을 경우 에러처리)
-            int totalSum = parsingString(input, setOperator, startParsingIdx);
+            long totalSum = parsingString(input, setOperator, startParsingIdx);
             if (totalSum == -1) {
                 throw new IllegalArgumentException();
             }
@@ -52,19 +52,19 @@ public class Application {
     }
 
     // 기능 2: 문자열 파싱
-    public static int parsingString(String input, Set<Character> setOperator, int startIdx) {
+    public static long parsingString(String input, Set<Character> setOperator, int startIdx) {
         int idx = startIdx;
-        int curNum = 0;
-        int totalSum = 0;
+        long curNum = 0;
+        long totalSum = 0;
 
         while (idx < input.length()) {
             char currentChar = input.charAt(idx);
 
-            if (Character.isDigit(currentChar)) {
-                curNum = curNum * 10 + Character.getNumericValue(currentChar);
-            } else if (setOperator.contains(currentChar)) {
+            if (setOperator.contains(currentChar)) {
                 totalSum += curNum;
                 curNum = 0;
+            } else if (Character.isDigit(currentChar)) {
+                curNum = curNum * 10 + Character.getNumericValue(currentChar);
             } else {
                 return -1; // 에러 발생 시 -1 반환
             }
