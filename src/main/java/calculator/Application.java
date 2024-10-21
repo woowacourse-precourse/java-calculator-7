@@ -14,6 +14,12 @@ public class Application {
                System.out.println("결과 : 0");
                return;
            }
+           // 구분자 처리
+           String[] numbers = input.split(",|:");
+           int sum = 0;
+           for (String number : numbers) {
+               sum +=Integer.parseInt(number.trim());
+           }
            // 결과 출력
            System.out.println("결과 : " + input);
        } catch (IllegalArgumentException e) {
