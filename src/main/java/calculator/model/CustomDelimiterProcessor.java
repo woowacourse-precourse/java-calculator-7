@@ -1,5 +1,7 @@
 package calculator.model;
 
+import calculator.constant.ExceptionMessage;
+
 public class CustomDelimiterProcessor {
     private static final String CUSTOM_DELIMITER_FIRST_FORMAT = "//";
     private static final String CUSTOM_DELIMITER_LAST_FORMAT = "\\n";
@@ -28,13 +30,13 @@ public class CustomDelimiterProcessor {
 
     private void correctCustomDelimiterFormatOrThrow(String inputString) {
         if (!checkCustomDelimiterFormatLength(inputString)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ExceptionMessage.CUSTOM_DELIMITER_FORMAT_LENGTH_EXCEPTION);
         }
         if (!isCustomDelimiterFirstFormatCorrect(inputString)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ExceptionMessage.CUSTOM_DELIMITER_FIRST_FORMAT_EXCEPTION);
         }
         if (!isCustomDelimiterLastFormatCorrect(inputString)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ExceptionMessage.CUSTOM_DELIMITER_LAST_FORMAT_EXCEPTION);
         }
     }
 

@@ -1,5 +1,6 @@
 package calculator.model;
 
+import calculator.constant.ExceptionMessage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -23,7 +24,7 @@ public class Delimiters {
     public void addCustomDelimiter(char customDelimiter) {
 
         if (isCustomDelimiterDigit(customDelimiter)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ExceptionMessage.CUSTOM_DELIMITER_DIGIT_EXCEPTION);
         }
         delimiters.add(customDelimiter);
     }

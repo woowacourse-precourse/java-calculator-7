@@ -1,5 +1,6 @@
 package calculator.model;
 
+import calculator.constant.ExceptionMessage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -11,7 +12,7 @@ public class NumberExtractor {
             return numbers;
         }
         if (!isStartingWithDigit(inputString)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ExceptionMessage.EXPRESSION_PREFIX_EXCEPTION);
         }
         ArrayList<String> splitedStringList = splitByDelimiters(inputString, delimiters);
         for (String str : splitedStringList) {
@@ -49,7 +50,7 @@ public class NumberExtractor {
     private void validateNumberString(String inputString) {
         for (char c : inputString.toCharArray()) {
             if (!Character.isDigit(c)) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException(ExceptionMessage.EXPRESSION_FORMAT_EXCEPTION);
             }
         }
     }
