@@ -4,7 +4,6 @@ import calculator.domain.Delimiters;
 import calculator.domain.Number;
 import calculator.domain.Numbers;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -40,8 +39,8 @@ public class Extractor {
 
     private Numbers convertToNumbers(String numberPart) {
         validateNumberPart(numberPart);
-        String[] extractedNumbers = splitNumberPart(numberPart);
-        List<Number> selectedNumbers = Arrays.stream(extractedNumbers)
+        Pattern splitPattern = delimiters.getSplitPattern();
+        List<Number> selectedNumbers = splitPattern.splitAsStream(numberPart)
             .map(Integer::parseInt)
             .map(Number::new)
             .toList();
@@ -54,11 +53,6 @@ public class Extractor {
         if (!matcher.matches()) {
             throw new IllegalArgumentException("숫자와 구분자로만 이루어져야 합니다.");
         }
-    }
-
-    private String[] splitNumberPart(String numberPart) {
-        String splitRegex = delimiters.getSplitRegex();
-        return numberPart.split(splitRegex);
     }
 
     public Numbers getNumbers() {

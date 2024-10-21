@@ -58,28 +58,28 @@ class DelimitersTest {
         assertThat(delimiters.isCustomDelimiter()).isFalse();
     }
 
-    @DisplayName("구분자를 통해 | 를 포함한 기본 분할 정규식을 반환한다.")
+    @DisplayName("구분자를 통해 | 를 포함한 기본 분할 정규식 패턴을 반환한다.")
     @Test
     void getDefaultSplitRegex() {
         //given
         String input = "1,2:3";
         Delimiters delimiters = Delimiters.from(input);
         //when
-        String regex = delimiters.getSplitRegex();
+        Pattern splitPattern = delimiters.getSplitPattern();
         //then
-        assertThat(regex).contains(",", ":", "|");
+        assertThat(splitPattern.pattern()).contains(",", ":");
     }
 
-    @DisplayName("구분자를 통해 | 를 포함한 커스텀 분할 정규식를 반환한다.")
+    @DisplayName("구분자를 통해 | 를 포함한 커스텀 분할 정규식 패턴를 반환한다.")
     @Test
     void getCustomSplitRegex() {
         //given
         String input = "//;\\n1;2;3";
         Delimiters delimiters = Delimiters.from(input);
         //when
-        String regex = delimiters.getSplitRegex();
+        Pattern splitPattern = delimiters.getSplitPattern();
         //then
-        assertThat(regex).contains(";");
+        assertThat(splitPattern.pattern()).contains(";");
     }
 
     @DisplayName("구분자를 통해 기본 정규식을 반환한다.")

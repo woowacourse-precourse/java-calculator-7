@@ -119,4 +119,16 @@ class ExtractorTest {
         assertThat(extractor.getNumbers()).isEqualTo(Numbers.from(List.of(new Number(1), new Number(2), new Number(3))));
     }
 
+    @DisplayName("구분자로 숫자를 사용하면 예외를 발생시킨다.")
+    @Test
+    void throwIllegalArgumentExceptionWhenDelimiterIsNumber() {
+        //given
+        String input = "//1\\n212";
+        //when
+        //then
+        assertThatIllegalArgumentException()
+            .isThrownBy(() -> Extractor.from(input))
+            .withMessage("구분자로 숫자는 사용할 수 없습니다.");
+    }
+
 }

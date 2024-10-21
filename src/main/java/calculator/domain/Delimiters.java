@@ -49,16 +49,20 @@ public class Delimiters {
         return !(INITIAL_DELIMITER.equals(this.delimiters));
     }
 
-    public String getSplitRegex() {
-        return this.delimiters.stream()
-            .map(Pattern::quote)
-            .collect(Collectors.joining("|"));
-    }
-
     public String getRegex() {
         return this.delimiters.stream()
             .map(Pattern::quote)
             .collect(Collectors.joining());
+    }
+
+    public Pattern getSplitPattern() {
+        return Pattern.compile(getSplitRegex());
+    }
+
+    private String getSplitRegex() {
+        return this.delimiters.stream()
+            .map(Pattern::quote)
+            .collect(Collectors.joining("|"));
     }
 
 }
