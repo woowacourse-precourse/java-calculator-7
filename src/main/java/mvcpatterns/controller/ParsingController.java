@@ -1,28 +1,30 @@
-package calculator;
+package mvcpatterns.controller;
 
-import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Calculator {
-
+public class ParsingController {
     protected Set<Character> delimiterSet;
-    protected ArrayList<Long> elementList;
     protected final char[] DEFAULT_DELIMITER = {',', ':'};
 
-    Calculator() {
-        delimiterSet = new HashSet<>();
-        elementList = new ArrayList<>();
+    public ParsingController() {
+        this.delimiterSet = new HashSet<>();
+    }
+
+    public String[] extractNumbers(String input) {
+
+        String[] parsedInput = this.parseInput(input);
+
+        String header = parsedInput[0];
+        String body = parsedInput[1];
+
+        this.setCustomDelimiter(header);
+
+        return this.parseBody(body);
 
     }
 
-    protected String[] parseInput(String input) {
-
-        if (input.isEmpty()) {
-            throw new IllegalArgumentException("Input string is empty. please check input");
-        }
-
+    private String[] parseInput(String input) {
         final int headStartIdx = 0;
         final String headStartStr = "//";
         final String headEndStr = "\\n";
@@ -61,12 +63,9 @@ public class Calculator {
         //System.out.println("[parseInput] result : [ " + customDelimiters + " , " + body + "] ");
 
         return ret;
-
-
     }
 
-
-    protected void setCustomDelimiter(String delimiters) {
+    private void setCustomDelimiter(String delimiters) {
 
         //System.out.println("[setCustomDelimiter] delimiters : " + delimiters);
         for (int i = 0; i < delimiters.length(); i++) {
@@ -81,7 +80,7 @@ public class Calculator {
         //System.out.print("]\n");
     }
 
-    protected String[] parseBody(String body) {
+    private String[] parseBody(String body) {
 
         //replace delimiter
 
@@ -96,47 +95,5 @@ public class Calculator {
         String[] ret = strEle.split(String.valueOf(DEFAULT_DELIMITER[0]));
 
         return ret;
-    }
-
-
-    protected String sum(String[] elementList) {
-
-        final int maxSize = 8;
-        BigInteger sum = new BigInteger("0");
-
-        for (String s : elementList) {
-
-            for (int i = 0; i < s.length(); i++) {
-                char ch = s.charAt(i);
-
-                if (!Character.isDigit(ch)) {
-                    throw new IllegalArgumentException(s + " is not number or positive number. please check it");
-                }
-            }
-
-            BigInteger num = new BigInteger(s);
-
-            sum = sum.add(num);
-        }
-
-        //System.out.println("[sum] result : " + sum);
-
-        return sum.toString();
-
-    }
-
-    String doTask(String input) {
-
-        final int bodyIdx = 1;
-        final int headerIdx = 0;
-        //get custom delimiter
-        String[] dataList = parseInput(input);
-
-        setCustomDelimiter(dataList[headerIdx]);
-
-        String[] numbers = parseBody(dataList[bodyIdx]);
-
-        return sum(numbers);
-
     }
 }

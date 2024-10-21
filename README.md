@@ -14,3 +14,35 @@
 - check input string functions
     - check empty or not before send input to Calculator
 - import Console from camp.nextstep.edu.missionutils.Console
+
+# Apply MVC pattern
+
+## View
+
+### AppView
+
+- provide view logic printing guide and result Message
+
+## Controller
+
+### AppMainController
+
+- provide interface to user
+- manage all sub-controller which has specific task responsibility
+
+### ParsingController
+
+- sub-controller
+- provide logic for parsing input into number
+
+### IntegerMathController
+
+- sub-controller
+- provide interface to MathModel
+
+## Model
+
+### MathModel
+
+- provide service logic related to math
+
