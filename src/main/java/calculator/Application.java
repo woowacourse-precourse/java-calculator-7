@@ -15,5 +15,8 @@ public class Application {
         if (input == null || input.isEmpty()) {
             return 0;
         }
+
+        String delimiter = ",|:";
+        String[] tokens = input.split(delimiter);
     }
 }
