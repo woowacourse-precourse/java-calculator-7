@@ -13,7 +13,6 @@ public class Calculator {
             processor.isNegative(Integer.parseInt(target));
             result += Integer.parseInt(target);
         }
-
         return result;
     }
 }

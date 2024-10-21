@@ -57,7 +57,6 @@ public class InputProcessor {
                 throw new IllegalArgumentException("잘못된 입력입니다. 입력 문자열은 " +
                         "커스텀 구분자 외 다른 문자를 포함할 수 없습니다.");
             }
-
             return;
         }
         throw new IllegalArgumentException("잘못된 입력입니다. 입력 포맷을 확인해주세요.");
