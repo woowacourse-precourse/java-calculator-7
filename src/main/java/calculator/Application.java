@@ -9,6 +9,8 @@ public class Application {
 
         String[] numbers = splitNumbers(input);
         int sum = calculateSum(numbers);
+
+        System.out.println("결과: " + sum);
     }
 
     private static String[] splitNumbers(String input) {
