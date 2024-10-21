@@ -6,7 +6,11 @@ import java.util.List;
 
 public class Calculator {
 
-    private List<Number> numbers = new ArrayList<>();
+    private List<Number> numbers;
+
+    public Calculator() {
+        this.numbers = new ArrayList<>();
+    }
 
     public Number calculate(String expression) {
         StringProcessor processor = new StringProcessor();
