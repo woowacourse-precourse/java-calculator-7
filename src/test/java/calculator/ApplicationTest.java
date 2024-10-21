@@ -28,8 +28,6 @@ class ApplicationTest extends NsTest {
         });
     }
 
-
-
     // 빈 문자열 테스트
     @Test
     void 빈_문자열_입력() {
@@ -39,7 +37,6 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("결과 : 0");
         });
     }
-
 
     // 큰 숫자 오버플로우 테스트
     @Test
@@ -56,6 +53,34 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             run("1,2:3");
             assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    // 잘못된 구분자가 포함된 문자열 예외 처리 테스트
+    @Test
+    void 잘못된_구분자_테스트() {
+        assertSimpleTest(() -> {
+            run("1,,2"); // 잘못된 구분자가 포함된 경우
+            assertThat(output()).contains("잘못된 입력입니다");
+        });
+
+        assertSimpleTest(() -> {
+            run("1:;2"); // 잘못된 구분자가 포함된 경우
+            assertThat(output()).contains("잘못된 입력입니다");
+        });
+    }
+
+    // 숫자가 아닌 값이 포함된 문자열 예외 처리 테스트
+    @Test
+    void 숫자가_아닌_값_테스트() {
+        assertSimpleTest(() -> {
+            run("1,a,3"); // 숫자가 아닌 문자가 포함된 경우
+            assertThat(output()).contains("잘못된 입력입니다");
+        });
+
+        assertSimpleTest(() -> {
+            run("1:2:three"); // 숫자가 아닌 문자가 포함된 경우
+            assertThat(output()).contains("잘못된 입력입니다");
         });
     }
 
