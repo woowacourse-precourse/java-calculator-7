@@ -19,6 +19,8 @@ public class Application {
     }
 
     private static String[] splitNumbers(String input) {
+        if (input.isEmpty()) throw new IllegalArgumentException("입력된 문자열이 비어 있습니다.");
+
         if (input.startsWith("//")) {
             input = input.replace("\\n", "\n");
             Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(input);
@@ -28,7 +30,7 @@ public class Application {
                 String numbers = matcher.group(2);
                 return numbers.split(Pattern.quote(customDelimiter));
             } else {
-                throw new IllegalArgumentException("구분자 다음에 숫자가 필요합니다.");
+                throw new IllegalArgumentException("입력된 구분자 뒤 숫자가 존재하지 않습니다.");
             }
         }
         return input.split(",|;");
