@@ -1,6 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
@@ -21,6 +22,42 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    @DisplayName("입력 문자가 없는 경우")
+    void test1() {
+        assertSimpleTest(() -> {
+            run("\n");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    @DisplayName("입력 문자가 하나인 경우")
+    void test2() {
+        assertSimpleTest(() -> {
+            run("5");
+            assertThat(output()).contains("결과 : 5");
+        });
+    }
+
+    @Test
+    @DisplayName("입력 문자열이 숫자가 아닌 경우")
+    void test3() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("a,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자 형식을 지키지 않은 경우")
+    void test4() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;//1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
