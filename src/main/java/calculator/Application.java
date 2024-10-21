@@ -1,7 +1,6 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
-
 import java.util.regex.Pattern;
 
 
@@ -27,15 +26,14 @@ public class Application {
         String numbers = input;
         String delimiters = "[,:]"; //basic separators
 
-
-        if (input.isEmpty()){
+        if (input.isEmpty()) {
             return 0;
         }
 
         // custom delimiters
         if (input.startsWith("//")) {
             int idx = input.indexOf("\\n");
-            System.out.println(idx);
+
             if (idx == -1) {
                 throw new IllegalArgumentException(); // add custom delimiters error
             }
