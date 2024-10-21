@@ -11,4 +11,9 @@ class StringAddCalculatorTest {
         assertEquals(0, StringAddCalculator.add(null));
         assertEquals(0, StringAddCalculator.add(""));
     }
+    @Test
+    void testCommaAndColonDelimiters() {
+        assertEquals(6, StringAddCalculator.add("1,2,3"));
+        assertEquals(6, StringAddCalculator.add("1,2:3"));
+    }
 }

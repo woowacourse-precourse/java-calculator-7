@@ -5,6 +5,14 @@ public class StringAddCalculator {
         if (text == null || text.isEmpty()) {
             return 0;
         }
-        return 0; // 기본 반환값
+        // 쉼표와 콜론을 구분자로 사용해 문자열을 분리
+        String[] tokens = text.split("[,|:]");
+        int sum = 0;
+
+        for (String token : tokens) {
+            sum += Integer.parseInt(token);
+        }
+
+        return sum;
     }
 }
