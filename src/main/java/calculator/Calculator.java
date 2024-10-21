@@ -4,6 +4,8 @@ import java.util.List;
 
 public class Calculator {
 
+    private static final int RESULT_WHEN_EMPTY = 0;
+
     private Calculator() {
     }
 
@@ -12,7 +14,7 @@ public class Calculator {
 
         return numbers.stream()
                 .reduce(Integer::sum)
-                .orElseThrow(() -> new RuntimeException("숫자가 존재하지 않습니다."));
+                .orElse(RESULT_WHEN_EMPTY);
     }
 
     private static void validate(int number) {

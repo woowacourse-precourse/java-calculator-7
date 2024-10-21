@@ -2,6 +2,7 @@ package calculator.view;
 
 import camp.nextstep.edu.missionutils.Console;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -11,6 +12,7 @@ public class InputView {
     private static final String CUSTOM_DELIMITER_PREFIX = "//";
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\\\\n(.*)");
     private static final String DEFAULT_NUMBER_DELIMITER_REGEX = "[,:]";
+    private static final int NOT_EXIST_EMPTY_STRING = -1;
 
     private InputView() {
     }
@@ -38,6 +40,10 @@ public class InputView {
     }
 
     private static List<Integer> splitNumbers(String numbers, String delimiterRegex) {
+        if (numbers.isBlank()) {
+            return Collections.emptyList();
+        }
+
         return Arrays.stream(numbers.split(delimiterRegex))
                 .map(InputView::toInt)
                 .toList();
