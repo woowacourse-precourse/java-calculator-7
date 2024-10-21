@@ -27,4 +27,14 @@ class DelimiterExtractorTest {
         assertEquals(",|:", result);
     }
 
+    @Test
+    @DisplayName("커스텀 구분자가 역순으로 있을 때 구분자를 올바르게 추출한다")
+    void extractReversedCustomDelimiter() {
+        String input = "\\n;//1;2;3";
+        String result = extractor.extractDelimiters(input, ",|:", "//", "\\n");
+
+        assertEquals(",|:|\\Q;\\E", result);  // 커스텀 구분자가 없으면 기본 구분자만 포함
+    }
+
+
 }
