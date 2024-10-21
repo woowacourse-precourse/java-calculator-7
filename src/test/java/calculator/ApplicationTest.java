@@ -38,6 +38,38 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 빈_문자열이_입력된_경우_결과값_0을_출력한다() {
+        assertSimpleTest(() -> {
+            run("");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void 공백으로만_이루어진_문자열이_입력된_경우_예외가_발생한다() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("    "))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 구분자만_입력된_경우_결과값_0을_출력한다() {
+        assertSimpleTest(() -> {
+            run("::::::");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void 양수만_입력된_경우_정상적으로_결과값을_출력한다() {
+        assertSimpleTest(() -> {
+            run("123456789");
+            assertThat(output()).contains("결과 : 123456789");
+        });
+    }
+
+    @Test
     void 커스텀_구분자를_포함하고_있을_경우_정상적으로_결과값을_출력한다() {
         assertSimpleTest(() -> {
             run("//^\\n1,2:3^1");
@@ -134,7 +166,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 피연산자가_21억일_경우_정상적으로_출력된다() {
+    void 피연산자가_21억일_경우_정상적으로_결과값을_출력한다() {
         assertSimpleTest(() -> {
             run("2100000000:");
             assertThat(output()).contains("결과 : 2100000000");
@@ -150,7 +182,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 결과값이_21억일_경우_정상적으로_출력된다() {
+    void 결과값이_21억일_경우_정상적으로_결과값을_출력한다() {
         assertSimpleTest(() -> {
             run("1000000000:1100000000");
             assertThat(output()).contains("결과 : 2100000000");
