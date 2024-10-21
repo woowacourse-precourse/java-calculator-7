@@ -29,9 +29,6 @@ public class Separator {
         return String.join("|", separators);
     }
     private static boolean containsDigit(String str) {
-        if (str == null || str.isEmpty()) {
-            return false;
-        }
         for (char c : str.toCharArray()) {
             if (Character.isDigit(c)) {
                 return true;
