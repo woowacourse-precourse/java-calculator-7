@@ -6,17 +6,6 @@ import java.util.HashSet;
 import java.util.StringTokenizer;
 
 public class StringSummationCalculator implements Calculator<BigInteger> {
-    private final HashSet<Character> splitters;
-
-    public StringSummationCalculator(){
-        this.splitters = new HashSet<>();
-        initDefaultSplitters();
-    }
-
-    private void initDefaultSplitters(){
-        splitters.add(';');
-        splitters.add(':');
-    }
 
     public BigInteger calculate(String givenInput){
         BigInteger result;

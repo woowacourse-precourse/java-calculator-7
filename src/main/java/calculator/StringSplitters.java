@@ -20,10 +20,6 @@ public class StringSplitters {
         splitters.add(splitter);
     }
 
-    public void addSplittersAll(List<Character> splitterList) {
-        splitters.addAll(splitterList);
-    }
-
     public String getDelim() {
         StringBuilder delim = new StringBuilder();
         splitters.forEach(delim::append);
