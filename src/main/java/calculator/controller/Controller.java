@@ -16,7 +16,7 @@ public class Controller {
         Calculator calculator = new Calculator();
         int result = calculator.calculateResult(nums);
 
-        OutputView outputView = new OutputView();
+        OutputView outputView = OutputView.getInstance();
         outputView.printResult(result);
     }
 
