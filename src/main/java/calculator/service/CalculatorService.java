@@ -86,7 +86,7 @@ public class CalculatorService {
 
     public void makeNewSeparator(String newSeparator) {
         if (newSeparator == null) return;
-        String result = newSeparator.substring(2, newSeparator.length()-2);
+        String result = newSeparator.substring(2, newSeparator.length()-1);
         List<String> newSeparators = calculator.getSeparators();
         newSeparators.add(result);
         calculator.setSeparators(newSeparators);
