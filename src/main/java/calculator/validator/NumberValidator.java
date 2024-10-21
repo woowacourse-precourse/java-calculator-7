@@ -2,7 +2,6 @@ package calculator.validator;
 
 import static calculator.util.ExtractDelimiters.extractDelimiters;
 import static calculator.util.ExtractNumbersPart.extractNumbersPart;
-import static calculator.util.FindDelimiter.findDelimiter;
 
 import java.util.List;
 
@@ -40,4 +39,15 @@ public class NumberValidator {
         }
         return true; // 유효한 경우 true 반환
     }
+
+    // 주어진 위치에서 구분자를 찾는 메서드
+    public static String findDelimiter(String input, int startIndex, List<String> delimiters) {
+        for (String delimiter : delimiters) {
+            if (input.startsWith(delimiter, startIndex)) {
+                return delimiter;
+            }
+        }
+        return null;
+    }
+
 }
