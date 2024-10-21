@@ -9,13 +9,13 @@ class InputValidatorTest {
 
     @Test
     void 커스텀_구분자() {
-        String s = "//.\n3,6";
+        String s = "//.\\n3,6";
         assertDoesNotThrow(()->inputValidator.validate(s));
     }
 
     @Test
     void 커스텀_구분자_2() {
-        String s = "//}\n3}6";
+        String s = "//}\\n3}6";
         assertDoesNotThrow(()->inputValidator.validate(s));
     }
 

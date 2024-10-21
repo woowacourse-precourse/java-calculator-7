@@ -9,7 +9,7 @@ public class DelimiterExtractor {
     public DelimiterExtractor() {}
 
     public Set<String> extract(String s) {
-        if (s.length() >= 4 && s.substring(0,4).matches("//.\\n")) {
+        if (s.length() >= 5 && s.substring(0,5).matches("//.\\\\n")) {
 
             Set<String> delimitersWithCustom = new HashSet<>(delimiters);
             delimitersWithCustom.add(String.valueOf(s.charAt(2)));

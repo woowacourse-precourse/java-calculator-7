@@ -14,11 +14,12 @@ public class InputValidator {
         if (!s.startsWith("//") && validateHelper(s, delimiters)) {
             return delimiters;
         }
-        if (s.length() >= 4 && s.substring(0, 4).matches("//.\\n")) {
-            String sub = s.substring(4);
+        if (s.length() >= 5 && s.substring(0, 5).matches("//.\\\\n")) {
+            String sub = s.substring(5);
             validateHelper(sub, delimiters);
             return delimiters;
         }
+        System.out.println(s);
         throw new IllegalArgumentException(ErrorMessage.UNRESOLVED_EXPRESSION.getMsg());
     }
 

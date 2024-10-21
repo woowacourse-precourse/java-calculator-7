@@ -13,7 +13,7 @@ public class Calculator {
 
     public int addition(String s) {
         if (s.startsWith("//")) {
-            s = s.substring(4);
+            s = s.substring(5);
         }
         StringTokenizer st = new StringTokenizer(s, delimiters.stream().collect(Collectors.joining()));
         int sum = 0;

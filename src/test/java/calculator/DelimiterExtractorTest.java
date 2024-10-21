@@ -18,7 +18,7 @@ class DelimiterExtractorTest {
 
     @Test
     void 커스텀_구분자_포함() {
-        String s = "//^\n3^4,2;5";
+        String s = "//^\\n3^4,2;5";
         assertEquals(Set.of(",", ";", "^"), delimiterExtractor.extract(s));
     }
 

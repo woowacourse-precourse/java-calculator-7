@@ -11,7 +11,7 @@ class CalculatorTest {
     @Test
     void 커스텀_구분자() {
         calculator = new Calculator(Set.of(",", ";", "^"));
-        Assertions.assertEquals(18, calculator.addition("//^\n3^4,5;6"));
+        Assertions.assertEquals(18, calculator.addition("//^\\n3^4,5;6"));
     }
 
     @Test
