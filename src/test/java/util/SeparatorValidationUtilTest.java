@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 public class SeparatorValidationUtilTest {
 
     @Test
-    @DisplayName("틀린 커스텀 구분자 1.형식이 틀림 2.없음 3.숫자가 들어감 ")
+    @DisplayName("틀린 커스텀 구분자 1.형식이 틀림 2.없음 3.구분자가 한개 이상 4.구분자에 숫자 ")
     public void testInvalidSeparatorStringFormat() {
         assertThrows(IllegalArgumentException.class, () ->
                 SeparatorValidationUtil.validateSeparatorStringFormat("/;\\n")
@@ -17,6 +17,10 @@ public class SeparatorValidationUtilTest {
 
         assertThrows(IllegalArgumentException.class, () ->
                 SeparatorValidationUtil.validateSeparatorStringFormat("//\\n")
+        );
+
+        assertThrows(IllegalArgumentException.class, () ->
+                SeparatorValidationUtil.validateSeparatorStringFormat("//abc\\n")
         );
 
         assertThrows(IllegalArgumentException.class, () ->
