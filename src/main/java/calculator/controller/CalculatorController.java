@@ -1,6 +1,5 @@
 package calculator.controller;
 
-import calculator.model.StringCalculator;
 import calculator.service.CalculatorService;
 import calculator.view.InputView;
 import calculator.view.OutputView;
@@ -17,8 +16,13 @@ public class CalculatorController {
     }
 
     public void run() {
-        String input = inputView.getInput();
-        int result = calculatorService.calculateSum(input);
-        outputView.printResult(result);
+        try {
+            String input = inputView.getInput();
+            int result = calculatorService.calculateSum(input);
+            outputView.printResult(result);
+        } catch (IllegalArgumentException e) {
+            outputView.printError(e.getMessage());
+            throw e; // 예외를 던져 테스트에서 감지 가능하도록
+        }
     }
 }
