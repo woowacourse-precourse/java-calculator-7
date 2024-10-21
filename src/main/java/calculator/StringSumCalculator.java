@@ -46,8 +46,8 @@ public class StringSumCalculator {
 
     private int positiveNumber(Integer input) {
 
-        if (input < 0) {
-            throw new IllegalArgumentException("음수 불가. 다시 실행하시오.");
+        if (input <= 0) {
+            throw new IllegalArgumentException("양수 외에 불가. 다시 실행하시오.");
         }
         return input;
     }
