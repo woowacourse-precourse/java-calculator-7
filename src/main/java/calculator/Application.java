@@ -90,10 +90,28 @@ public class Application {
         validateEndWithNumber(input);
     }
 
+    // 계산 함수
+    public static void calculator(String input) {
+        long total = 0;
+        long sum = 0;
+
+        for(int i=0; i<input.length(); i++) {
+            if(Character.isDigit(input.charAt(i))) {
+                sum *= 10;
+                sum += input.charAt(i) - '0';
+            } else {
+                total += sum;
+                sum = 0;
+            }
+        }
+        total += sum;
+    }
+
     public static void main(String[] args) {
         init();
         input();
         setCustomSeparator(userInput);
         validInput(userInput);
+        calculator(userInput);
     }
 }
