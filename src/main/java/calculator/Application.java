@@ -30,6 +30,9 @@ public class Application {
         }
 
         for (String s : inputArray) {
+            if (!s.matches("\\d+")) {
+                throw new IllegalArgumentException();
+            }
             num += Integer.parseInt(s);
         }
 
