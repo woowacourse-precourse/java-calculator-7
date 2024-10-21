@@ -24,4 +24,15 @@ public class StringProcessorTest {
         assertTrue(result.stream()
                 .anyMatch(number -> number.equals(Number.of("1"))));
     }
+
+    @Test
+    void 커스텀_구분자가_있을_때_문자열을_처리할_수_있다() {
+        String expression = "//;\\n1;2;3";
+
+        List<Number> result = processor.interpret(expression);
+
+        assertTrue(result.stream()
+                .anyMatch(number -> number.equals(Number.of("1"))));
+
+    }
 }
