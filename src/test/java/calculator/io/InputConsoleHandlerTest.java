@@ -1,6 +1,7 @@
 package calculator.io;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import camp.nextstep.edu.missionutils.Console;
 import java.io.ByteArrayInputStream;
@@ -157,6 +158,24 @@ class InputConsoleHandlerTest {
         // then
         String[] inputSplit = INPUT_CONSOLE_HANDLER.getUserInput();
         assertThat(inputSplit).containsExactly("124");
+
+        System.setIn(System.in);
+        Console.close();
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자를 소숫점으로 쓰면 애플리케이션을 종료한다")
+    void inputWithFloatingPoint() {
+        // given
+        String input = "//.\\n1.2.3";
+
+        // when
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        // then
+        assertThatThrownBy(INPUT_CONSOLE_HANDLER::getUserInput)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("구분자로 소숫점 (.) 을 사용할 수 없습니다. 애플리케이션을 종료합니다");
 
         System.setIn(System.in);
         Console.close();
