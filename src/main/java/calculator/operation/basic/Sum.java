@@ -20,6 +20,7 @@ public class Sum implements Calculator {
     @Override
     public Integer calculate(List<String> numbers) {
         int total = 0;
+        if (numbers.get(0).isEmpty()) return total;
 
         for (String number : numbers) {
             total += Integer.parseInt(number);
