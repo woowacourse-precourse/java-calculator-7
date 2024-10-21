@@ -21,7 +21,7 @@ public class Calculator {
         return sumNumbers(numbers);
     }
 
-    public int sumNumbers(List<Integer> numbers) {
+    private int sumNumbers(List<Integer> numbers) {
         int sum = SUM_ZERO;
         for (Integer number : numbers) {
             Validator.validateIncludeZero(number);
@@ -30,7 +30,7 @@ public class Calculator {
         return sum;
     }
 
-    public List<Integer> extractValidNumbers(String[] splitValues) {
+    private List<Integer> extractValidNumbers(String[] splitValues) {
         List<Integer> numbers = new ArrayList<>();
         for (String splitValue : splitValues) {
             if (Utils.containsOnlyNumbers(splitValue)) {
@@ -40,7 +40,7 @@ public class Calculator {
         return numbers;
     }
 
-    public String[] splitByDelimiter(String userInput, String customDelimiter) {
+    private String[] splitByDelimiter(String userInput, String customDelimiter) {
         String numbersPart = extractNumbersPart(userInput, customDelimiter);
         String delimiter = determineDelimiter(customDelimiter);
         Validator.validateAllowedCharacters(numbersPart, customDelimiter);
@@ -48,7 +48,7 @@ public class Calculator {
     }
 
     // 커스텀 구분자가 있는 경우 기본 구분자와 커스텀 구분자 결합
-    public String determineDelimiter(String customDelimiter) {
+    private String determineDelimiter(String customDelimiter) {
         if (!customDelimiter.isEmpty()) {
             return Pattern.quote(customDelimiter) + "|" + DEFAULT_DELIMITER;
         }
@@ -56,7 +56,7 @@ public class Calculator {
     }
 
     // 커스텀 구분자가 있는 경우 커스텀 구분자 선언 부분을 제외한 숫자 부분 추출
-    public String extractNumbersPart(String userInput, String customDelimiter) {
+    private String extractNumbersPart(String userInput, String customDelimiter) {
         if (!customDelimiter.isEmpty()) {
             int customDelimiterEndIndex = userInput.indexOf(CUSTOM_DELIMITER_SUFFIX);
             int numberPartLength = customDelimiterEndIndex + CUSTOM_DELIMITER_SUFFIX.length();
@@ -65,7 +65,7 @@ public class Calculator {
         return userInput;
     }
 
-    public String extractCustomDelimiter(String userInput) {
+    private String extractCustomDelimiter(String userInput) {
         Validator.validateDelimiterDeclaration(userInput, CUSTOM_DELIMITER_PREFIX, CUSTOM_DELIMITER_SUFFIX);
         String customDelimiter = "";
         if (userInput.startsWith(CUSTOM_DELIMITER_PREFIX) && userInput.contains(CUSTOM_DELIMITER_SUFFIX)) {
