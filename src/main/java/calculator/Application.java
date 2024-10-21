@@ -1,4 +1,5 @@
 package calculator;
+
 import static calculator.Converter.*;
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
@@ -10,7 +11,8 @@ public class Application {
 
         String customDelimiter = Validator.findCustomDelimiter(input);
         input = removeCustomDelimiterAndSpace(input, customDelimiter);
-        String[] strings = convertToArray(input);
 
+        Calculator calculator = new Calculator(convertToArray(input));
+        System.out.println("결과 : " + calculator.calculate());
     }
 }
