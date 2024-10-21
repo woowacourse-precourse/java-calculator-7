@@ -18,7 +18,11 @@ public class CalculatorController {
             int result = calculatorService.sum(number);
             outputView.writeSumResult(result);
         }catch(IllegalArgumentException e){
-            throw e;
+            if(e.getMessage().equals("입력이 비어있습니다.")){
+                System.out.println("결과 : 0");
+            }
+            else
+                throw e;
         }catch(Exception e){
             outputView.printErrorMessage("예상치 못한 오류가 발생했습니다.");
             e.printStackTrace();
