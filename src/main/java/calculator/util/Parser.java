@@ -38,8 +38,8 @@ public class Parser {
         List<Integer> result = new ArrayList<>();
         StringBuilder number = new StringBuilder();
 
-        String string = userInput.getInput();
-        List<String> delimiters = userInput.getDelimiters();
+        String string = userInput.input();
+        List<String> delimiters = userInput.delimiters();
 
         int delimiterLength = userInput.hasCustomDelimiter() ? delimiters.getFirst().length() : 1;
         int index = userInput.hasCustomDelimiter() ? delimiterLength + DelimiterConstants.CUSTOM_DELIMITER_BOUND_LENGTH : 0;
