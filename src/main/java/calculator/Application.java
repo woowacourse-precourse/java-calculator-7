@@ -57,5 +57,12 @@ public class Application {
             throw new IllegalArgumentException();
         }
         numbers.add(tempNumber.toString());
+
+        // 구분점으로 구분된 숫자들의 합계 계산
+        long result = 0;
+        for (String i : numbers) {
+            result += Long.parseLong(i);
+        }
     }
+
 }
