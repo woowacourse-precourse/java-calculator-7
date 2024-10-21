@@ -1,4 +1,4 @@
-package calculator.presentation.response;
+package calculator.presentation;
 
 public final class CalculatorResponse {
 

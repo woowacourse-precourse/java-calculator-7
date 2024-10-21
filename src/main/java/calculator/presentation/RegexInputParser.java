@@ -1,6 +1,4 @@
-package calculator.presentation.parser;
-
-import calculator.presentation.request.CalculatorRequest;
+package calculator.presentation;
 
 public class RegexInputParser implements InputParser {
 

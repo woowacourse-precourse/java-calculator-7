@@ -1,7 +1,5 @@
-package calculator.presentation.input;
+package calculator.presentation;
 
-import calculator.presentation.parser.InputParser;
-import calculator.presentation.request.CalculatorRequest;
 import camp.nextstep.edu.missionutils.Console;
 
 public class CalculatorInput {

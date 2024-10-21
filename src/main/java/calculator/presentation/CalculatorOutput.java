@@ -1,6 +1,5 @@
-package calculator.presentation.output;
+package calculator.presentation;
 
-import calculator.presentation.response.CalculatorResponse;
 import java.text.MessageFormat;
 
 public class CalculatorOutput {

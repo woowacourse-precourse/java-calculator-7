@@ -3,10 +3,6 @@ package calculator.presentation;
 import calculator.adder.NumberAdder;
 import calculator.adder.NumberAdderRequest;
 import calculator.adder.NumberAdderResponse;
-import calculator.presentation.input.CalculatorInput;
-import calculator.presentation.output.CalculatorOutput;
-import calculator.presentation.request.CalculatorRequest;
-import calculator.presentation.response.CalculatorResponse;
 import calculator.tokenizer.TokenResponse;
 import calculator.tokenizer.Tokenizer;
 

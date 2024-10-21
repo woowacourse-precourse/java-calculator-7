@@ -1,4 +1,4 @@
-package calculator.presentation.request;
+package calculator.presentation;
 
 public class CalculatorRequest {
 
