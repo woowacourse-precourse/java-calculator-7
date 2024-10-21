@@ -6,6 +6,8 @@
     - [ ] Output
 - Model
     - [ ] CustomDelimiterValidator
+    - [ ] Delimiter
+    - [ ] Status
     - [ ] StringValidator
     - [ ] NumberExtractor
     - [ ] SumCalculator
