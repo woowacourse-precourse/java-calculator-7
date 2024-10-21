@@ -1,7 +1,7 @@
 ﻿package calculator;
 
 public class StringAddCalculator {
-    public static int splitString(String input){
+    public static int splitInput(String input){
         if(isNullOrEmpty(input)){
             return 0;
         }
