@@ -25,7 +25,6 @@ public class StringAddCalculator {
             String anotherDelimiter = "|".concat(input.substring(2, delimiterIndex));
             input = input.substring(delimiterIndex + 2);
             delimiter = delimiter.concat(anotherDelimiter);
-            System.out.println(delimiter);
         }
 
         return input.split(delimiter);
