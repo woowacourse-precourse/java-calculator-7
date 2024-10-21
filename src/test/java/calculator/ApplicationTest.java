@@ -19,10 +19,36 @@ class ApplicationTest extends NsTest {
     @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> runException("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
+
+
+    @Test
+    void 문자열을_입력하였을_때_예외발생() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("a, 2, 3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 문자열만_입력하였을_때_예외발생() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("안녕하세요"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 공백만_입력하였을_때() {
+        assertSimpleTest(() -> {
+            run("                             ");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
 
     @Override
     public void runMain() {
