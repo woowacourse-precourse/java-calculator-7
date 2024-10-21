@@ -1,5 +1,6 @@
 package calculator.model;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -32,5 +33,14 @@ public class DelimiterTest {
         delimiter.choose(expression);
 
         assertTrue(delimiter.concatDelimiters().contains("k"));
+    }
+
+    @Test
+    void 커스텀_구분자의_전처리를_할_수_있다() {
+        String expression = "//;\\n1;2;3";
+
+        String removed = delimiter.removeAffix(expression);
+
+        assertEquals("1;2;3", removed);
     }
 }
