@@ -19,6 +19,13 @@ public class StringCalculator {
         return sumNumbers(tokens);
     }
 
+    private String[] splitNumbers(String text, String delimiter) {
+        for (char ch : delimiter.toCharArray()) {
+            text = text.replace(ch, ',');
+        }
+        return text.split(",");
+    }
+
     private int sumNumbers(String[] tokens) {
         int sum = 0;
         for (String token : tokens) {
