@@ -37,7 +37,7 @@ class Validator {
             return;
         }
 
-        if (value.endsWith("\n")) {
+        if (value.endsWith(customSeparatorSuffix)) {
             return;
         }
 
