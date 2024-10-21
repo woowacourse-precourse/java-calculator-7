@@ -2,13 +2,13 @@ package calculator;
 
 public class NumberParser {
 
-    public int[] parse(String input, String delimiter) {
+    public static int[] parse(String input, String delimiter) {
         String[] values = splitInput(input, delimiter);
         return convertToIntegers(values);
     }
 
     // 문자열 분리 메서드
-    private String[] splitInput(String input, String delimiter) {
+    private static String[] splitInput(String input, String delimiter) {
         if (input == null || input.isEmpty()) {
             return new String[0];
         }
@@ -16,7 +16,7 @@ public class NumberParser {
     }
 
     // 숫자 변환 메서드
-    private int[] convertToIntegers(String[] values) {
+    private static int[] convertToIntegers(String[] values) {
         int[] numbers = new int[values.length];
 
         for (int i = 0; i < values.length; i++) {

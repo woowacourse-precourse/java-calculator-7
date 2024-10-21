@@ -14,14 +14,11 @@ public class Application {
         String input = scanner.nextLine();
         System.out.println(input);
 
-        DelimiterParser delimiterParser = new DelimiterParser();
-        NumberParser numberParser = new NumberParser();
-        Calculator calculator = new Calculator();
+        String delimiter = DelimiterParser.getDelimiter(input);
+        String numbers = DelimiterParser.extractNumbers(input);
+        int[] parsedNumbers = NumberParser.parse(numbers, delimiter);
+        int result = Calculator.sum(parsedNumbers);
 
-        String delimiter = delimiterParser.getDelimiter(input);
-        String s = delimiterParser.extractNumbers(input);
-        int[] numbers = numberParser.parse(s, delimiter);
-        int result = calculator.sum(numbers);
         System.out.println("결과 : " + result);
         scanner.close();
     }

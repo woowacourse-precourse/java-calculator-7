@@ -4,16 +4,14 @@ public class DelimiterParser {
 
     private static final String DEFAULT_DELIMITER = ",|:";
 
-    public String getDelimiter(String input) {
+    public static String getDelimiter(String input) {
         if (input.startsWith("//")) {
             return extractCustomDelimiter(input);
         }
         return DEFAULT_DELIMITER;
     }
 
-
-    private String extractCustomDelimiter(String input) {
-
+    private static String extractCustomDelimiter(String input) {
         // 커스텀 구분자 처리
         int delimiterEnd = input.indexOf("\\n");
         if (delimiterEnd != -1) {
@@ -25,7 +23,7 @@ public class DelimiterParser {
         }
     }
 
-    public String extractNumbers(String input) {
+    public static String extractNumbers(String input) {
         if (input.startsWith("//")) {
             int delimiterEnd = input.indexOf("\\n");
             if (delimiterEnd != -1) {
