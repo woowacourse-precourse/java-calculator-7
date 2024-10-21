@@ -2,6 +2,7 @@ package calculator;
 
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.Arrays;
 
 public class Application {
     public static void main(String[] args) {
@@ -15,13 +16,13 @@ public class Application {
 
         // 커스텀 구분자가 있는지 확인
         if (input.startsWith("//")) {
-            int newlineIndex = input.indexOf("\n"); // 첫 번째 줄바꿈 문자의 인덱스 찾기
+            int newlineIndex = input.indexOf("\\n");
             if (newlineIndex != -1) {  // 줄바꿈 문자가 있는 경우에만
                 // 커스텀 구분자 추출 및 숫자 부분 분리
                 separator = input.substring(2, newlineIndex); //줄바꿈 전까지의 문자열을 구분자로 설정
-                numbers_string = input.substring(newlineIndex + 1);
+                separator = escapeSpecialRegexChars(separator);
+                numbers_string = input.substring(newlineIndex + 2);
             }
-
         }
         // 숫자 배열 생성
         String[] tokens = numbers_string.split(separator);
@@ -34,7 +35,6 @@ public class Application {
 
         // 결과 출력
         System.out.println("결과 : " + result);
-
 
     }
 
@@ -51,5 +51,11 @@ public class Application {
         if (!number.matches("[0-9]+")) {
             throw new IllegalArgumentException("잘못된 값을 입력했습니다!(양수를 입력해주세요)");
         }
+    }
+
+    // 특수 문자를 사용하기 위해 이스케이프 처리하는 메서드
+    private static String escapeSpecialRegexChars(String separator) {
+        // 특수 문자를 이스케이프 처리하는 로직
+        return separator.replaceAll("([\\\\*+\\[\\](){}|.^$?])", "\\\\$1");
     }
 }
