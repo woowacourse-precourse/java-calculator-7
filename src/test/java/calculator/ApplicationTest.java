@@ -15,6 +15,13 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("결과 : 1");
         });
     }
+    @Test
+    void 긴_커스텀_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("//;!@#$%^&*\\(\\n1");
+            assertThat(output()).contains("결과 : 1");
+        });
+    }
 
     @Test
     void 예외_테스트() {
