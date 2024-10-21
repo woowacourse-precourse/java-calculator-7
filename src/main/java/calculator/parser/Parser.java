@@ -11,6 +11,7 @@ public class Parser {
 	private static final String CUSTOM_DELIMITER_POSTFIX = "\\n";
 	private static final int CUSTOM_DELIMITER_INDEX = 2;
 	private static final int PURE_EXPRESSION_START_INDEX = 5;
+	private static final Pattern NON_DIGIT_START_PATTERN = Pattern.compile("^\\D.*");
 
 	private final List<String> delimiters;
 
@@ -36,7 +37,7 @@ public class Parser {
 	}
 
 	private boolean existsCustomDelimiter(String expression) {
-		return expression.matches("^\\D.*");
+		return NON_DIGIT_START_PATTERN.matcher(expression).matches();
 	}
 
 	private void validateCustomDelimiterFormat(String expression) {
