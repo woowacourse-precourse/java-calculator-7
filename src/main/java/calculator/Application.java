@@ -8,18 +8,18 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Application {
+
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = readLine();
         String delimiter;
 
-        if(input.contains("\\n")) {
-            delimiter = getDelimiter(input.substring(0, input.indexOf("\\n") + 2) );
-            //System.out.println(input.indexOf("\\\\n"));
+        if (input.contains("\\n")) {
+            delimiter = getDelimiter(input.substring(0, input.indexOf("\\n") + 2));
             input = input.substring(input.indexOf("\\n") + 2);
         } else {
-           delimiter = getDelimiter("");
+            delimiter = getDelimiter("");
         }
         input = input.isEmpty() ? "0" : input;
         int answer = 0;
@@ -27,9 +27,8 @@ public class Application {
 
         try {
             for (String str : nums) {
-                //양수가 아니면 예외 처리
                 int i = Integer.parseInt(str);
-                if(i < 0) {
+                if (i < 0) {
                     throw new IllegalArgumentException();
                 }
                 answer += i;
@@ -45,28 +44,13 @@ public class Application {
     public static String getDelimiter(String input) {
 
         List<String> delimiters = new ArrayList<>(List.of(",", ":"));
-
         Pattern pattern = Pattern.compile("//([^.$|()\\[\\]\\\\{^?*+]+)\\\\n");
-        //Pattern pattern = Pattern.compile("//(.+)\\n");
-
-        //Pattern pattern = Pattern.compile("//([^.$|()\\[\\]\\\\{^?*+]+)\\n", Pattern.MULTILINE);
         Matcher matcher = pattern.matcher(input);
-        //System.out.println("Pattern: " + pattern.toString());
         if (matcher.find()) {
-            //System.out.println(matcher.group(0)); // 매칭된 전체 문자열 출력
-            //System.out.println("매칭된 문자열 " + matcher.group(1)); // 캡처된 그룹(abc) 출력
             String group = matcher.group(1);
             delimiters.addAll(List.of(group.split("")));
-            //System.out.println(matcher.group(2)); // 캡처된 그룹(abc) 출력
         }
-
-        //Pattern pattern = Pattern.compile("//([^.$|()\\[\\]\\\\{^?*+]+)\n");
-
-        /*Matcher matcher = pattern.matcher(input);
-        if (matcher.find()) {
-            String group = matcher.group(1);
-            delimiters.addAll(List.of(group.split("")));
-        }*/
         return String.join("|", delimiters);
+
     }
 }
