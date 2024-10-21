@@ -1,6 +1,5 @@
 package calculator.domain;
 
-import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class CaculatorModel {
@@ -22,12 +21,12 @@ public class CaculatorModel {
 
     // 커스텀 구분자 지정한 경우
     if (input.startsWith("//")) {
-      int seperatorIndex = input.indexOf("\n");
+      int seperatorIndex = input.indexOf("\\n");
       if (seperatorIndex == -1) {
         throw new IllegalArgumentException("잘못된 구분자 형식입니다.");
       }
       seperator = input.substring(2, seperatorIndex);
-      input = input.substring(seperatorIndex + 1);
+      input = input.substring(seperatorIndex + 2);
     }
 
     if (seperator.matches("[.\\\\+*?\\[\\](){}|^$]")) {
@@ -48,6 +47,6 @@ public class CaculatorModel {
   }
 
   public void printResult(int result) {
-    System.out.println("결과: " + result);
+    System.out.println("결과 : " + result);
   }
 }

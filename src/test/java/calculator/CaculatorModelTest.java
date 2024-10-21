@@ -1,16 +1,11 @@
 package calculator;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
+import static org.junit.jupiter.api.Assertions.*;
 import calculator.domain.CaculatorModel;
 import java.util.stream.Stream;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.*;
 
 public class CaculatorModelTest {
 
@@ -52,9 +47,9 @@ public class CaculatorModelTest {
 
   static Stream<Arguments> provideCustomCustomInputs() {
     return Stream.of(
-        Arguments.of("//;\n1;2;3", 6),
-        Arguments.of("//|\n1|2|3", 6),
-        Arguments.of("//#\n1#2#3", 6)
+        Arguments.of("//;\\n1;2;3", 6),
+        Arguments.of("//|\\n1|2|3", 6),
+        Arguments.of("//#\\n1#2#3", 6)
     );
   }
 
@@ -64,7 +59,7 @@ public class CaculatorModelTest {
     CaculatorModel caculator1 = new CaculatorModel("//;1;2;3");
     assertThrows(IllegalArgumentException.class, caculator1::sum);
 
-    CaculatorModel caculator2 = new CaculatorModel("//;\n1;2,3");
+    CaculatorModel caculator2 = new CaculatorModel("//;\\n1;2,3");
     assertThrows(IllegalArgumentException.class, caculator2::sum);
   }
 
