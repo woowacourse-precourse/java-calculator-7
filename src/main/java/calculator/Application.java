@@ -10,10 +10,17 @@ public class Application {
         // 1. 문자열을 입력 받음.
         InputReader inputReader = new InputReader();
         String input = inputReader.getInput();
-        System.out.println("입력된 값: " + input);
 
         // 2. 입력값을 검증.
         Validator validator = new Validator();
         validator.validateInput(input);
+
+        // 3. 검증된 입력값을 계산
+        Calculator calculator = new Calculator();
+        int result = calculator.sumNumbers(input);
+
+        // 4. 출력
+        OutputPrinter outputPrinter = new OutputPrinter();
+        outputPrinter.printResult(result);
     }
 }
