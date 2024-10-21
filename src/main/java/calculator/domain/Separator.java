@@ -40,9 +40,7 @@ public class Separator {
     private List<String> extractCustomSeparator() {
         List<String> customSeparator = new ArrayList<>();
         if (containsCustomSeparator()) {
-            customSeparator.add(input.substring(
-                    CUSTOM_START_LETTERS.length(),
-                    input.indexOf(CUSTOM_END_LETTERS)));
+            customSeparator.add(input.substring(CUSTOM_START_LETTERS.length(), input.indexOf(CUSTOM_END_LETTERS)));
         }
         return customSeparator;
     }
