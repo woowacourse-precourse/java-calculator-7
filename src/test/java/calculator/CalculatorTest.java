@@ -43,4 +43,19 @@ public class CalculatorTest {
         assertThat(sumByColon).isEqualTo(0);
         assertThat(sumByCustom).isEqualTo(0);
     }
+
+    @Test
+    void 숫자만_입력하면_결과는_입력값과_동일() {
+        // given
+        String singleDigitInput = "1";
+        String multipleDigitsInput = "12";
+
+        // when
+        int resultForSingleDigit = calculator.processInputAndSum(singleDigitInput);
+        int resultForMultipleDigits = calculator.processInputAndSum(multipleDigitsInput);
+
+        // then
+        assertThat(resultForSingleDigit).isEqualTo(1);
+        assertThat(resultForMultipleDigits).isEqualTo(12);
+    }
 }
