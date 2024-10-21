@@ -3,6 +3,7 @@ package calculator.service;
 import calculator.domain.Calculator;
 import calculator.error.ExceptionHandler;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -75,19 +76,18 @@ public class CalculatorService {
             if (item.contains(".")) {
                 processedValue.add(Double.parseDouble(item));
             } else {
-                processedValue.add(Long.parseLong(item));
+                // 여기에서 Long 대신 BigInteger로 변경
+                processedValue.add(new BigInteger(item));
             }
         }
         return processedValue;
     }
-
     private boolean checkNewSeparator(String newSeparator) {
         for (int i = 0; i < 2; i++) {
             if (newSeparator.charAt(i) != '/') {
                 return false;
             }
         }
-
         return true;
     }
 
