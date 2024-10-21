@@ -28,8 +28,8 @@ class InputOutputServiceTest {
         System.setOut(originalOut);
     }
 
-    @DisplayName("안내 문구를 출력한다.")
     @Test
+    @DisplayName("안내 문구를 출력한다.")
     void testWelcomeMessage() {
         // given: OutputService 인스턴스 생성
         OutputService outputService = new OutputService();
@@ -41,8 +41,8 @@ class InputOutputServiceTest {
         assertThat(outContent.toString().trim()).contains("덧셈할 문자열을 입력해 주세요.");
     }
 
-    @DisplayName("문자열을 입력 받는다.")
     @Test
+    @DisplayName("문자열을 입력 받는다.")
     void testInput() {
         // given: 입력 스트림에 입력값 설정
         String input = "123";

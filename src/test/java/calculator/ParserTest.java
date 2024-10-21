@@ -16,8 +16,8 @@ class ParserTest {
         parser = new Parser();
     }
 
-    @DisplayName("커스텀 구분자로 시작하는 입력은 업데이트된 구분자로 파싱됩니다.")
     @Test
+    @DisplayName("커스텀 구분자로 시작하는 입력은 업데이트된 구분자로 파싱됩니다.")
     void startsWithCustomDelimiter() {
         //given
         delimiter = new CustomDelimiter();
@@ -29,8 +29,8 @@ class ParserTest {
         Assertions.assertEquals(require, result);
     }
 
-    @DisplayName("숫자로 시작하는 입력은 기본 구분자로 파싱됩니다.")
     @Test
+    @DisplayName("숫자로 시작하는 입력은 기본 구분자로 파싱됩니다.")
     void startsWithPositiveNumber() {
         ///given
         delimiter = new DefaultDelimiter();
