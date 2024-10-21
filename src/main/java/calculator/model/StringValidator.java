@@ -8,6 +8,7 @@ public class StringValidator {
 
 	private static final String COMMA_DELIMITER = ",";
 	private static final String COLON_DELIMITER = ":";
+	private static final String ERROR_MESSAGE = "잘못된 문자열 형식입니다.";
 	private static final int DIGIT = 0;
 	private static final int DELIMITER = 1;
 	private static final int INPUT_START_INDEX = 0;
@@ -31,7 +32,7 @@ public class StringValidator {
 		return switch (currentStatus) {
 			case DIGIT -> checkInputDigit(input, index);
 			case DELIMITER -> checkInputDelimiter(input, index);
-			default -> throw new IllegalArgumentException("잘못된 문자열 형식입니다.");
+			default -> throw new IllegalArgumentException(ERROR_MESSAGE);
 		};
 	}
 
@@ -45,7 +46,7 @@ public class StringValidator {
 
 	private int checkInputDigit(String input, int index) {
 		if (!Character.isDigit(input.charAt(index))) {
-			throw new IllegalArgumentException("잘못된 문자열 형식입니다.");
+			throw new IllegalArgumentException(ERROR_MESSAGE);
 		}
 		while (index < input.length() && Character.isDigit(input.charAt(index))) {
 			index++;
@@ -55,7 +56,7 @@ public class StringValidator {
 
 	private int checkInputDelimiter(String input, int index) {
 		if (!delimiters.contains(input.substring(index, index + 1))) {
-			throw new IllegalArgumentException("잘못된 문자열 형식입니다.");
+			throw new IllegalArgumentException(ERROR_MESSAGE);
 		}
 		return index + DELIMITER_LENGTH;
 	}
