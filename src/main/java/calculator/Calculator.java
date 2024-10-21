@@ -29,11 +29,9 @@ public class Calculator {
         }
         return true;
     }
-
     private Boolean isUserInputEmpty() {
         return this.userInput == null || this.userInput.isEmpty();
     }
-
     private void processCustomDelimiter() {
         String normalizedInput = this.calculatorDelimiter.changeToNormalizedInput(this.userInput);
         Matcher matcher = this.calculatorDelimiter.getMatcherByCheckPattern(normalizedInput);
@@ -58,7 +56,6 @@ public class Calculator {
                 .sum();
         return this.calculateResult;
     }
-
     private int parsePositiveInt(String str) {
         try {
             int num = Integer.parseInt(str);
@@ -81,7 +78,6 @@ public class Calculator {
     public void resultShowConsole() {
         System.out.println(RESULT_HEADER_MESSAGE + this.calculateResult);
     }
-
     public String resultShowConsole(String givenInput) {
         if(givenInput == null || givenInput.isEmpty()) {
             System.out.println(this.calculateResult);

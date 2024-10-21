@@ -13,30 +13,27 @@ public class CalculatorDelimiter {
     private static final Pattern CONTAINS_NUMBERS_PATTERN = Pattern.compile(".*\\d+.*");
     private static final Pattern DEFAULT_DELIMITER_PATTERN = Pattern.compile("^[0-9,:,\\s]*$");
 
-
+    private boolean matchesPattern(Pattern pattern, String input) {
+        return pattern.matcher(input).matches();
+    }
+    public Matcher getMatcherByCheckPattern(String normalizedInput) {
+        return CUSTOM_DELIMITER_PATTERN.matcher(normalizedInput);
+    }
+    public boolean isContainNumber(String givenInput) {
+        return matchesPattern(CONTAINS_NUMBERS_PATTERN, givenInput);
+    }
+    public boolean isDefaultDelimiter(String givenInput) {
+        return matchesPattern(DEFAULT_DELIMITER_PATTERN, givenInput);
+    }
     public Boolean checkDelimiterHead(String userInput) {
         return userInput.startsWith(CUSTOM_DELIMITER_HEAD);
     }
     public Boolean checkDelimiterLast(String userInput) {
         return userInput.contains(BACKSLASH_WITH_CUSTOM_DELIMITER_LAST);
     }
-
-    public Matcher getMatcherByCheckPattern(String normalizedInput) {
-        return CUSTOM_DELIMITER_PATTERN.matcher(normalizedInput);
-    }
-
-    public Boolean isContainNumber(String givenInput) {
-        return CONTAINS_NUMBERS_PATTERN.matcher(givenInput).matches();
-    }
-
-    public Boolean isDefaultDelimiter(String givenInput) {
-        return DEFAULT_DELIMITER_PATTERN.matcher(givenInput).matches();
-    }
-
     public String changeToNormalizedInput(String givenInput) {
         return givenInput.replace(BACKSLASH_WITH_CUSTOM_DELIMITER_LAST, CUSTOM_DELIMITER_LAST);
     }
-
     public String subStringCustomDelimiterInput(String givenInput) {
         return  givenInput.substring(givenInput.indexOf(BACKSLASH_WITH_CUSTOM_DELIMITER_LAST)
                             + CUSTOM_DELIMITER_LAST_SIZE);
@@ -47,7 +44,6 @@ public class CalculatorDelimiter {
         }
         return DEFAULT_DELIMITER;
     }
-
     public String stripCustomDelimiterFromInput(String userInput) {
         if (checkDelimiterHead(userInput)) {
             return subStringCustomDelimiterInput(userInput);
