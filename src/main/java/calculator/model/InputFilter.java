@@ -15,7 +15,7 @@ public class InputFilter {
 		String[] splitParts = splitInput(processedInput, delimiters);
 		validateEachPart(splitParts);
 
-		return Collections.unmodifiableList(convertToInteger(splitParts));
+		return Collections.unmodifiableList(mapToInteger(splitParts));
 	}
 
 	private String[] splitInput(String processedInput, Delimiters delimiters) {
@@ -31,7 +31,7 @@ public class InputFilter {
 			.forEach(InputValidator::validateCalculatorNumber);
 	}
 
-	private static List<Integer> convertToInteger(String[] splitParts) {
+	private static List<Integer> mapToInteger(String[] splitParts) {
 		return Arrays.stream(splitParts)
 			.map(Integer::valueOf)
 			.toList();
