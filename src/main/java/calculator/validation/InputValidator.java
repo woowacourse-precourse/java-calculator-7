@@ -1,5 +1,6 @@
-package calculator;
+package calculator.validation;
 
+import calculator.Parser;
 import calculator.delimiter.Delimiter;
 
 public class InputValidator {

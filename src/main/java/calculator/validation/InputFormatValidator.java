@@ -1,4 +1,4 @@
-package calculator;
+package calculator.validation;
 
 public class InputFormatValidator {
     private static final String ERROR_NEGATIVE_NUMBER = "음수는 허용되지 않습니다.";

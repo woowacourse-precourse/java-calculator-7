@@ -4,14 +4,6 @@ import calculator.delimiter.Delimiter;
 import java.util.ArrayList;
 
 public class Parser {
-    public String parse(String input, Delimiter delimiter) {
-
-        int result = 0;
-        ArrayList<Integer> numbers = parseNumbers(input, delimiter);
-        result = sumNumbers(numbers, result);
-        return String.valueOf(result);
-    }
-
     private static ArrayList<Integer> parseNumbers(String input, Delimiter delimiter) {
         String delimiters = delimiter.getDelimiters();
         ArrayList<Integer> numbers = new ArrayList<>();
@@ -26,5 +18,13 @@ public class Parser {
             result += number;
         }
         return result;
+    }
+
+    public String parse(String input, Delimiter delimiter) {
+
+        int result = 0;
+        ArrayList<Integer> numbers = parseNumbers(input, delimiter);
+        result = sumNumbers(numbers, result);
+        return String.valueOf(result);
     }
 }
