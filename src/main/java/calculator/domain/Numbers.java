@@ -11,10 +11,6 @@ public class Numbers {
         this.values = values;
     }
 
-    public static Numbers from(List<Number> values) {
-        return new Numbers(values);
-    }
-
     public List<Number> getValues() {
         return values;
     }
