@@ -21,7 +21,6 @@ public class Application {
             if (sepIdx != -1) {
                 sep = text.substring(2, sepIdx);  // 커스텀 구분자 추출
                 text = text.substring(sepIdx + 2); // 문자열에서 구분자 부분 제거
-                System.out.println("사용된 구분자: " + sep);
             } else { // 예외 : //로 시작하되, 커스텀 구분자가 아닌 경우
                 throw new IllegalArgumentException();
             }
