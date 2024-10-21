@@ -11,6 +11,12 @@ public class CalcController {
     private Calc calc;
     private NumberRepository numberRepository;
 
+    public void init(List<String> prepExpression) {
+        createNewCalc();
+        receiveData(prepExpression);
+        calcTheNumbers();
+    }
+
     private void createNewCalc() {
         calc = new Calc();
         numberRepository = new NumberRepository();
