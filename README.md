@@ -23,6 +23,7 @@ AngularJS Git Commit Message Conventions을 참고해 커밋 메시지를 작성
 ## 기능 요구 사항 상세
 
 - [X] 입력 받기 (camp.nextstep.edu.missionutils에서 제공하는 Console API를 사용)
+- [ ] test code 작성하기
 - [ ] 입력 예외 처리 (IllegalArgumentException 발생 & 종료)
 - [ ] 구분자 기준 분리 및 반환
 - [ ] 숫자의 합 반환
