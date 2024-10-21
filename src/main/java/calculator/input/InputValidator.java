@@ -65,7 +65,6 @@ public class InputValidator {
         for (String number : splitInputNumbers) {
 
             if (!inputValidator.matchesPattern(number, RegexPatterns.POSITIVE_NUMBER.getValue())) {
-                System.out.println("내가 진짜 범인: " + number);
                 return false;
             }
 

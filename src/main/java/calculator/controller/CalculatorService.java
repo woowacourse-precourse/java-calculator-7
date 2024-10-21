@@ -39,8 +39,6 @@ public class CalculatorService {
             separators.add(customizedSeparator);
 
             String updatedInputString = removeCustomSeparatorDeclaration(input, customizedSeparator);
-            System.out.println("구분자: " + customizedSeparator);
-            System.out.println("구분자가 삭제된 문자열: " + updatedInputString);
 
             return removeSeparatorDeclarationRecursively(updatedInputString, separators);
         } catch (IllegalArgumentException e) {
