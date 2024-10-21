@@ -100,6 +100,15 @@ class ApplicationTest extends NsTest {
                         .isInstanceOf(IllegalArgumentException.class));
     }
 
+    @Test
+    @DisplayName("구분자가 숫자인 경우는 제외한다")
+    void assertNotAllowDigitDelimiter() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//0\\n10203"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContaining("delimiter cannot be a digit"));
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
