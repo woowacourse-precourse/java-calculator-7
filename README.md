@@ -123,7 +123,7 @@ StringCalculator는 프로그램 전체 흐름을 관리한다. numbers, result 
 
 -   [x] run(): 사용자의 입력을 받아 InputProcessor에 전달, 유효한 숫자를 추출한다.
 -   [x] addNumbers(): 유효한 숫자를 추출하여 더한 결과를 반환한다.
--   [ ] getResult(): 저장된 결과를 반환한다.
+-   [x] getResult(): 저장된 결과를 반환한다.
 
 ## View
 

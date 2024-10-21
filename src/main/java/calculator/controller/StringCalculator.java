@@ -19,4 +19,8 @@ public class StringCalculator {
             result += number;
         }
     }
+
+    public int getResult() {
+        return result;
+    }
 }
