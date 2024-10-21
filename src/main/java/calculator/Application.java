@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 
 public class Application {
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.*?)\\n(.*)");
+    private static final String[] VALID_DELIMITERS = {",", ";"};
 
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
@@ -28,12 +29,33 @@ public class Application {
             if (matcher.find()) {
                 String customDelimiter = matcher.group(1).trim();
                 if (customDelimiter.isEmpty()) throw new IllegalArgumentException("커스텀 구분자가 필요합니다.");
+
+                for (String delimiter : VALID_DELIMITERS) {
+                    if (customDelimiter.equals(delimiter)) {
+                        throw new IllegalArgumentException("커스텀 구분자는 기본 구분자와 중복될 수 없습니다.");
+                    }
+                }
+
                 String numbers = matcher.group(2);
-                return numbers.split(Pattern.quote(customDelimiter));
-            }
-            else throw new IllegalArgumentException("입력한 구분자 뒤 숫자가 존재하지 않습니다.");
+                String[] numberParts = numbers.split(Pattern.quote(customDelimiter));
+                validateDelimiters(numberParts);
+                return numberParts;
+            } else throw new IllegalArgumentException("입력된 구분자 뒤 숫자가 존재하지 않습니다.");
         }
-        return input.split(",|;");
+
+        if (input.contains(",") || input.contains(";")) {
+            String[] numberParts = input.split(",|;");
+            validateDelimiters(numberParts);
+            return numberParts;
+        } else throw new IllegalArgumentException("잘못된 구분자입니다.");
+    }
+
+    private static void validateDelimiters(String[] numbers) {
+        for (String number : numbers) {
+            if (number.isEmpty()) {
+                throw new IllegalArgumentException("연속된 구분자가 포함돼 있습니다.");
+            }
+        }
     }
 
     private static int calculateSum(String[] numbers) {
