@@ -1,27 +1,40 @@
 package calculator;
 
+import calculator.Exception.CustomDelimiterException;
 import camp.nextstep.edu.missionutils.Console;
-
 
 public class Application {
     public static int add(String input) {
-
-        // 올바른 input인지 확인 ..하고 예외처리 해주는 단계..
-        // 커스텀 구분자 예외 처리 ..
-        // 커스텀 구분자가 있으면 .. 커스텀 구분자를 기본 구분자에 추가해줌 .
-        // 구분자는 혼용해서 쓸 수 있다..
 
         StringBuilder delimiters = new StringBuilder(",:");
         String numbers;
 
         if (input.startsWith("//")) {
             int newLineIndex = input.indexOf("\\n");
+            
             if (newLineIndex == -1) {
-                throw new IllegalArgumentException("잘못된 입력입니다: '\\n'을 찾을 수 없습니다.");
+                throw new CustomDelimiterException("잘못된 입력입니다: '\\n'을 찾을 수 없습니다.");
             }
-
             // 커스텀 구분자 추출
             String customDelimiter = input.substring(2, newLineIndex);
+            // 구분자가 두 개 이상인 경우 예외 발생
+            if (customDelimiter.length() > 1) {
+                throw new CustomDelimiterException("구분자는 하나의 문자여야 합니다.");
+            }
+
+            // 커스텀 구분자의 입력으로 기본 구분자 ",|:" (쉼표, 콜론) 가 들어온 경우.
+            if (customDelimiter.equals(",") || customDelimiter.equals(":")) {
+                throw new CustomDelimiterException("커스텀 구분자의 입력으로 기본 구분자가 들어왔습니다.");
+            }
+
+            if (customDelimiter.isEmpty()) {
+                throw new CustomDelimiterException("커스텀 구분자가 지정되지 않았습니다.");
+            }
+            // 구분자가 숫자인 경우 예외 발생,
+            if (Character.isDigit(customDelimiter.charAt(0))) {
+                throw new CustomDelimiterException("숫자는 구분자로 사용할 수 없습니다.");
+            }
+
             delimiters.append(customDelimiter); // 기본 구분자에 커스텀 구분자 추가
             numbers = input.substring(newLineIndex + 2); // 커스텀 구분자와 분리.
         } else {
@@ -68,11 +81,13 @@ public class Application {
             int value = Integer.parseInt(number);
             if (value < 0) {
                 throw new IllegalArgumentException("음수는 허용되지 않습니다: " + value);
+                // 음수가 들어있으면 예외 발생 .
             }
             return value;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("유효하지 않은 숫자입니다: " + number);
-            // 여기서 잡지 말고 .. 바깥으로 던진 다음에 한꺼번에 잡는걸로 수정.
+            // 숫자가 아닌 값이 들어있으면 예외 발생
+            // 숫자가 너무 큰 경우 예외 발생..
         }
     }
 
@@ -87,3 +102,4 @@ public class Application {
         System.out.println("결과 : " + answer);
     }
 }
+
