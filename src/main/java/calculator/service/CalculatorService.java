@@ -8,4 +8,7 @@ public class CalculatorService {
         public CalculatorService(StringCalculator stringCalculator) {
             this.stringCalculator = stringCalculator;
         }
+    public int calculateSum(String input) {
+        return stringCalculator.add(input);
+    }
     }
