@@ -6,12 +6,13 @@ public class Application {
     public static void main(String[] args) {
         try {
             // 1. 사용자로부터 입력을 받는 기능
+            System.out.println("덧셈할 문자열을 입력해 주세요.");
             String input = Console.readLine();
             // System.out.println("입력받은 문자열: " + input);
 
             // 7. 메인 로직을 구현하는 기능 - 빈 문자열 처리
             if (input.isEmpty()) {
-                System.out.println("최종 결과: 0");
+                System.out.println("결과 : 0");
                 return;
             }
 
@@ -46,7 +47,7 @@ public class Application {
             }
 
             // 5. 결과를 출력하는 기능
-            System.out.println(sum);
+            System.out.println("결과 : " + sum);
 
         } catch (IllegalArgumentException e) {
             // 6. 예외 처리 기능
