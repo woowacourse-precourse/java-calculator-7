@@ -8,11 +8,13 @@ public final class StringCalculator {
 
     }
 
-    public static BigInteger calculate(List<String> numberString){
+    public static BigInteger calculate(String input){
+        List<String> numbers = NumberString.parse(input);
+
         long sumOfLongValues = 0L;
         BigInteger sumOfBigIntegerValues = BigInteger.ZERO;
 
-        for (String number : numberString) {
+        for (String number : numbers) {
             try {
                 long longValue = Long.parseLong(number);
                 sumOfLongValues += longValue;
