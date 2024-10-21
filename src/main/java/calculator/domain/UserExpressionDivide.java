@@ -25,4 +25,10 @@ public class UserExpressionDivide {
                 .replace(userExpression.getCustomDelimExpressionCandidate(),""));
     }
 
+    private static void onlyCustomDelimExistInRawExpression() {
+        if(userExpression.getEssentialExpression().isEmpty()) {
+            userExpression.setEssentialExpression("0");
+        }
+    }
+
 }
