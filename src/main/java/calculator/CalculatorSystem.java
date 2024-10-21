@@ -3,12 +3,11 @@ package calculator;
 import calculator.console.InputView;
 import calculator.console.OutputView;
 import calculator.exception.InvalidInputException;
-import calculator.exception.SystemException;
 import calculator.system.ExpressionOperator;
 import java.util.function.Supplier;
 
 public class CalculatorSystem {
-	
+
 	private final InputView inputView;
 	private final OutputView outputView;
 	private final ExpressionOperator expressionOperator;
@@ -35,7 +34,7 @@ public class CalculatorSystem {
 	public <T> T getUserInput(Supplier<T> inputReader) throws InvalidInputException {
 		try {
 			return inputReader.get();
-		} catch (SystemException | IllegalArgumentException e) {
+		} catch (IllegalArgumentException e) {
 			throw new InvalidInputException(e.getMessage());
 		}
 	}
