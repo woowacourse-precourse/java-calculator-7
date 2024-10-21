@@ -24,6 +24,7 @@ public class Application {
             return 0;
         }
 
+
         String delimiter = ",|:"; // 기본 구분자
 
         // 커스텀 구분자 처리
@@ -40,6 +41,9 @@ public class Application {
 
         int sum = 0;
         for (String number : numbers) {
+            if(Integer.parseInt(number) < 0){
+                throw new IllegalArgumentException("0이상의 값을 입력해주세요 ");
+            }
             sum += Integer.parseInt(number); // 각 숫자를 정수로 변환하여 더함
         }
 
