@@ -1,10 +1,12 @@
 package calculator;
 
+import org.junit.platform.commons.util.StringUtils;
+
 import java.util.regex.Pattern;
 
 public class StringSumCalculator {
     public int add(String input) {
-        if (input == null || input.isEmpty()) {
+        if (StringUtils.isBlank(input)) {
             return 0;
         }
 
