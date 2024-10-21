@@ -61,4 +61,21 @@ public class CalculatorServiceTest {
                 .isInstanceOf(RuntimeException.class);
     }
 
+    @Test
+    void 빈_문자열_테스트() {
+        String input = "";
+
+        String result = calculatorService.calculate(input);
+
+        assertThat(result).isEqualTo("0");
+    }
+
+    @Test
+    void 커스텀_구분자_닫기_없음_테스트() {
+        String input = "//;13;21";
+
+        assertThatThrownBy(() -> calculatorService.calculate(input))
+                .isInstanceOf(RuntimeException.class);
+    }
+
 }

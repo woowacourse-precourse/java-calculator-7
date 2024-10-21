@@ -22,6 +22,10 @@ public class CalculatorService {
     }
 
     public String calculate(String input) {
+        if (inputValidator.checkInputEmpty(input)) {
+            return "0";
+        }
+
         final ParsedInput parsedInput = inputParser.parse(input);
 
         for (String numberToken : parsedInput.numbersToken()) {
