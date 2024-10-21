@@ -2,7 +2,7 @@ package calculator;
 
 public class Separator {
 
-    public static String getSeparator(String inputStr) {
+    public String getSeparator(String inputStr) {
         /**
          * 1. "//"로 시작하면 "\n"이 반드시 등장해야 함
          * 2. "//"와 "\n" 사이에 문자가 '하나' 있어야 함
@@ -28,7 +28,7 @@ public class Separator {
         return customSeparator;
     }
 
-    private static void validateInput(String inputStr) {
+    private void validateInput(String inputStr) {
 
         for (int i = 0; i < inputStr.length(); i++) {
             char value = inputStr.charAt(i);

@@ -2,7 +2,7 @@ package calculator;
 
 public class Extractor {
 
-    public static String extractNumbers(String inputStr) {
+    public String extractNumbers(String inputStr) {
         String numbers = inputStr;
 
         if (inputStr.startsWith("//")) {

@@ -1,10 +1,14 @@
 package calculator;
 
-import static calculator.Executor.executeCalculator;
-
 public class Application {
     public static void main(String[] args) {
-        executeCalculator();
+        ConsoleIO consoleIO = new ConsoleIO();
+        Calculator calculator = new Calculator();
+        Extractor extractor = new Extractor();
+        Separator separator = new Separator();
+
+        Executor executor = new Executor(consoleIO, calculator, extractor, separator);
+        executor.executeCalculator();
     }
 }
 

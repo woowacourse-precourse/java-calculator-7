@@ -1,22 +1,29 @@
 package calculator;
 
-import static calculator.Calculator.addNumbers;
-import static calculator.ConsoleIO.printOutput;
-import static calculator.ConsoleIO.readInput;
-import static calculator.Extractor.extractNumbers;
-import static calculator.Separator.getSeparator;
-
 public class Executor {
 
-    public static void executeCalculator() {
-        String inputStr = readInput();
+    private final ConsoleIO consoleIO;
+    private final Separator separator;
+    private final Extractor extractor;
+    private final Calculator calculator;
 
-        String separators = getSeparator(inputStr);
-        String numbers = extractNumbers(inputStr);
+    public Executor(ConsoleIO consoleIO, Calculator calculator, Extractor extractor, Separator separator) {
+        this.consoleIO = consoleIO;
+        this.calculator = calculator;
+        this.extractor = extractor;
+        this.separator = separator;
+    }
 
-        long answer = addNumbers(numbers, separators);
 
-        printOutput(answer);
+    public void executeCalculator() {
+        String inputStr = consoleIO.readInput();
+
+        String separators = separator.getSeparator(inputStr);
+        String numbers = extractor.extractNumbers(inputStr);
+
+        long answer = calculator.addNumbers(numbers, separators);
+
+        consoleIO.printOutput(answer);
     }
 
 }

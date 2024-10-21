@@ -4,7 +4,7 @@ import java.util.StringTokenizer;
 
 public class Calculator {
 
-    public static long addNumbers(String numbers, String separators) {
+    public long addNumbers(String numbers, String separators) {
         StringTokenizer st = new StringTokenizer(numbers, separators);
         long answer = 0;
         while (st.hasMoreTokens()) {
