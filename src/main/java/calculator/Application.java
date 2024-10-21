@@ -28,14 +28,21 @@ public class Application {
 
         int sum = 0;
         for (String number : numbers) {
+            System.out.println(number);
+
             if (!number.trim().isEmpty()) {
                 try {
-                    sum += Integer.parseInt(number.trim());
+                    int parsedNumber = Integer.parseInt(number.trim());
+
+                    if (parsedNumber <= 0) {
+                        throw new IllegalArgumentException("입력은 양수만 사용 가능합니다.");
+                    }
+                    sum += parsedNumber;
                 } catch (NumberFormatException e) {
                     throw new IllegalArgumentException("잘못된 입력입니다.");
                 }
             }
         }
-        System.out.println("결과: " + sum);
+        System.out.println("결과 : " + sum);
     }
 }
