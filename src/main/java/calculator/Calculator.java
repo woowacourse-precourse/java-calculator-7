@@ -73,6 +73,9 @@ public class Calculator {
         }
 
         for (String part : parts) {
+            if (part.contains("-")) {  // 음수가 있는지 확인
+                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + part);
+            }
             if (!part.matches("^[0-9.]+$")) {
                 throw new IllegalArgumentException("입력된 값에 문자가 있습니다.");
             }

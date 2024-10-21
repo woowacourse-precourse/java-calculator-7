@@ -78,6 +78,14 @@ class ApplicationTest extends NsTest {
         assertThat(calculator.add()).isEqualTo("결과 : 6");
     }
 
+    @Test
+    void 음수가_있는_경우() {
+        Calculator calculator = new Calculator("1,-2,3");
+        assertThatThrownBy(calculator::add)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("음수는 허용되지 않습니다: -2");
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
