@@ -1,11 +1,11 @@
 package calculator;
 
-import calculator.controller.CalculatorController;
+import calculator.controller.CalcController;
 
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
-        CalculatorController controller = new CalculatorController();
+
+        CalcController controller = new CalcController();
         controller.run();
     }
 }
