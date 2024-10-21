@@ -28,4 +28,15 @@ public class SumCalculator {
         }
         return result;
     }
+    private int customDelimiterCalculator(String userInput){
+        if (userInput.startsWith("//")){
+            int delimiterEndIndex = userInput.indexOf("\\n");
+            String customDelimiter = userInput.substring(2, delimiterEndIndex);
+            String numbers = userInput.substring(delimiterEndIndex+2);
+            result = sum(numbers.split(Pattern.quote(customDelimiter)));
+            return result;
+        }
+        return nonDelimiterCalculator(userInput);
+    }
+
 }
