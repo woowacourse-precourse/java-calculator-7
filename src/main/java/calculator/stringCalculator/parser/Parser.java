@@ -18,13 +18,22 @@ public class Parser {
         for (char character : input.toCharArray()) {
             if (splitters.contains(character)) {
                 if (!builder.isEmpty()) {
-                    result.add(Long.parseLong(builder.toString()));
+                    try {
+                        result.add(Long.parseLong(builder.toString()));
+                    } catch (NumberFormatException e) {
+                        throw new IllegalArgumentException("정수로 변환할 수 없는 수");
+                    }
                     builder = new StringBuilder();
                 }
                 continue;
             }
 
-            builder.append(character);
+
+            if ("0123456789".contains(""+character)) {
+                builder.append(character);
+            } else {
+                throw new IllegalArgumentException("숫자가 아닙니다.");
+            }
         }
 
         if (!builder.isEmpty()) {
