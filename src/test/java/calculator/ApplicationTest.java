@@ -28,9 +28,20 @@ class ApplicationTest extends NsTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("숫자 형식이 잘못되었습니다.");
     }
+
+    @Test
+    void 예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
     public void runException(String input) {
         Application.add(input); // 예외를 발생시키는 메서드 호출
     }
+
+
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
