@@ -31,7 +31,7 @@ public class ValidationTest {
     @Test
     @DisplayName("커스텀 구분자에 백슬래시를 포함하는 경우 예외발생")
     void throwExceptionWhenDelimiterContainsBackSlash() {
-        assertThatThrownBy(() -> Validation.validateNegativeNumber("1,-2,3"))
+        assertThatThrownBy(() -> Validation.validateBackSlashDelimiter("//\\n1\2\3"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
