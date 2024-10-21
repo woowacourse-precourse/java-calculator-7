@@ -67,6 +67,10 @@ public class StringCalculator {
 
         String delimiter = input.substring(2, delimiterIndex);
 
+        if (delimiter.length() != 1) {
+            throw new IllegalArgumentException("커스텀 구분자는 한 글자 문자여야합니다.");
+        }
+
         if (input.endsWith(delimiter)) {
             throw new IllegalArgumentException("구분자 뒤에 숫자가 없습니다.");
         }
