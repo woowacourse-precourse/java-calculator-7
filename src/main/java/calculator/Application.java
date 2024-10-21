@@ -36,6 +36,15 @@ public class Application {
             throw new IllegalArgumentException("음수 혹은 잘못된 커스텀 구분자 입력입니다.");
         }
 
+        String result[] = input.split(delimiter);
+        // 각 문자열이 숫자로만 이루어졌는지 확인
+        for (String number : result) {
+            if (!isNumeric(number)) {
+                throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
+            }
+        }
+
+        System.out.println("결과 : " + sumArray(result));
 
     }
 
@@ -43,6 +52,13 @@ public class Application {
     public static boolean isNumeric(String str) {
         String regex = "[1-9]\\d*";
         return str.matches(regex);
+    }
+
+    // 배열 합계 게산
+    public static int sumArray(String[] a) {
+        return Arrays.stream(a)
+                .mapToInt(Integer::parseInt)
+                .sum();
     }
 
 }
