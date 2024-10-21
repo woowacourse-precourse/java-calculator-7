@@ -25,6 +25,7 @@ public class Calculator {
     public int sumNumbers(List<Integer> numbers) {
         int sum = SUM_ZERO;
         for (Integer number : numbers) {
+            Validator.validateIncludeZero(number);
             sum += number;
         }
         return sum;
