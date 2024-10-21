@@ -30,17 +30,19 @@ public class Application {
         String delimiter = splitInput[0];
         String numbers = splitInput[1];
         return Arrays.stream(numbers.split(delimiter))
-            .map(this::convertToNum)
-            .reduce(0, Integer::sum);
+                .map(this::convertToNum)
+                .reduce(0, Integer::sum);
     }
 
     public int convertToNum(String num) {
         try {
             int parsedNum = Integer.parseInt(num);
-            if (parsedNum <= 0) throw new IllegalArgumentException();
+            if (parsedNum <= 0) {
+                throw new IllegalArgumentException();
+            }
             return parsedNum;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException();
         }
-	}
+    }
 }
