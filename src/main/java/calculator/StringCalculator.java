@@ -25,17 +25,25 @@ public class StringCalculator {
     private String extractDelimiter(String inputString) {
         if (inputString.startsWith(CUSTOM_DELIMITER_START)) {
             if (inputString.contains(CUSTOM_DELIMITER_END)) {
-                String newDelimiter = inputString.substring(2, inputString.indexOf("\\n"));
+                String newDelimiter = extractCustomDelimiter(inputString);
                 if (newDelimiter.isEmpty() || newDelimiter.matches("\\d+")) {
                     throw new IllegalArgumentException("잘못된 값을 입력하였습니다");
                 }
                 delimiters.add(Pattern.quote(newDelimiter));
-                inputString = inputString.substring(inputString.lastIndexOf("\\n") + 2);
+                inputString = extractNumbers(inputString);
             } else {
                 throw new IllegalArgumentException("잘못된 값을 입력하였습니다");
             }
         }
         return inputString;
+    }
+
+    private String extractNumbers(String inputString) {
+        return inputString.substring(inputString.lastIndexOf(CUSTOM_DELIMITER_END) + 2);
+    }
+
+    private String extractCustomDelimiter(String inputString) {
+        return inputString.substring(2, inputString.indexOf("\\n"));
     }
 
     private BigInteger sumNumbers(String[] splitByDelimiter) {
