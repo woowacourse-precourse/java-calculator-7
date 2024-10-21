@@ -2,12 +2,12 @@ package utils;
 
 public class Utils {
 
-    private static final String DIGITS_ONLY_PATTERN = "^[0-9]+$";
+    private static final String NUMBERS_ONLY_PATTERN = "^[0-9]+$";
     private static final String COMMA = ",";
     private static final String COLON = ":";
 
-    public static boolean containsOnlyDigits(String input) {
-        return input.matches(DIGITS_ONLY_PATTERN);
+    public static boolean containsOnlyNumbers(String input) {
+        return input.matches(NUMBERS_ONLY_PATTERN);
     }
 
     public static String removeCommas(String input) {

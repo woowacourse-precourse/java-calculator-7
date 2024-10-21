@@ -33,7 +33,7 @@ public class Calculator {
     public List<Integer> extractValidNumbers(String[] splitValues) {
         List<Integer> numbers = new ArrayList<>();
         for (String splitValue : splitValues) {
-            if (Utils.containsOnlyDigits(splitValue)) {
+            if (Utils.containsOnlyNumbers(splitValue)) {
                 numbers.add(Integer.parseInt(splitValue));
             }
         }
