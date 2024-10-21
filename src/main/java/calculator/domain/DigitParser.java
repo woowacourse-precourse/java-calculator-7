@@ -22,15 +22,19 @@ public class DigitParser {
         while (tokenizer.hasMoreTokens()) {
             try {
                 int value = Integer.parseInt(tokenizer.nextToken());
-                if (value < 0) {
-                    throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
-                }
+                validateNonNegative(value);
                 numbers.add(value);
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("잘못된 입력 값이 포함되었습니다.");
             }
         }
         return numbers;
+    }
+
+    private static void validateNonNegative(int value) {
+        if (value < 0) {
+            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+        }
     }
 
     private StringTokenizer createTokenizer(String input) {
@@ -54,9 +58,9 @@ public class DigitParser {
     }
 
     private static String createCustomDelimiter(String input) {
-        int startIdx = input.indexOf(CUSTOM_DELIMITER_START_COMMAND);
+        int startIdx = input.indexOf(CUSTOM_DELIMITER_START_COMMAND) + CUSTOM_DELIMITER_START_COMMAND.length();
         int endIdx = input.indexOf(CUSTOM_DELIMITER_END_COMMAND);
-        return input.substring(startIdx + CUSTOM_DELIMITER_START_COMMAND.length(), endIdx);
+        return input.substring(startIdx, endIdx);
     }
 
 }
