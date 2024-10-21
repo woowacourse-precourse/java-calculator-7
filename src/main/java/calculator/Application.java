@@ -6,6 +6,7 @@ import calculator.splitter.CustomDelimiterSplitter;
 import calculator.splitter.DefaultDelimiterSplitter;
 import calculator.splitter.DelegateDelimiterSplitter;
 import calculator.view.InputView;
+import calculator.view.OutputView;
 import java.util.List;
 
 public class Application {
@@ -14,9 +15,7 @@ public class Application {
         DelegateDelimiterSplitter splitter = new DelegateDelimiterSplitter(splitters());
         Accumulator accumulator = new Accumulator(splitter);
 
-        int sum = accumulator.sum(InputView.readInput());
-
-
+        OutputView.renderResult(accumulator.sum(InputView.readInput()));
     }
 
     private static List<AbstractDelimiterSplitter> splitters() {
