@@ -36,14 +36,22 @@ public class Application {
                     delimiter = Pattern.quote(input.substring(2, delimiterIndex));
                     numberString = input.substring(delimiterIndex + 2);
                 } else {
-                    throw new IllegalArgumentException("커스텀 구분자 지정 오류 발생.");
+                    throw new IllegalArgumentException("커스텀 구분자 형식에 오류가 있습니다.");
                 }
             }
 
             String[] numbers = numberString.split(delimiter);
             int sum = 0;
-            for (String number : numbers) {
-                sum += Integer.parseInt(number.trim());
+            for(String number : numbers) {
+                try {
+                    int num = Integer.parseInt(number);
+                    if(num < 0){
+                        throw new IllegalArgumentException("음수는 허용되지 않습니다." + num);
+                    }
+                    sum += num;
+                } catch (NumberFormatException e) {
+                    throw new IllegalArgumentException("숫자 형식에 오류가 있습니다:" + number);
+                }
             }
             return sum;
         }
