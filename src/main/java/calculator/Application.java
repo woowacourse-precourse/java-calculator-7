@@ -34,7 +34,7 @@ public class Application {
 
             input = input.substring(index + 2);
         } else if (!Character.isDigit(input.charAt(0))) {
-            throw new IllegalArgumentException("커스텀 구분자를 지정하지 않는다면 입력은 숫자로 시작해야 합니다.(시작할 때 공백도 없어야 합니다.)");
+            throw new IllegalArgumentException("커스텀 구분자를 지정하지 않는다면 입력은 양수로 시작해야 합니다.(시작할 때 공백도 없어야 합니다.)");
         }
 
         String[] numbers = input.split("[" + delimiter + "]");
