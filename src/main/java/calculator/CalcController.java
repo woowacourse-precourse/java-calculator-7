@@ -23,10 +23,10 @@ public class CalcController {
 
         Extractor ex = new Extractor();
         if (ex.isDefaultDelimiterUsed(numsWithDelimiter)) {
+            nums = ex.extractNumbersWithDefaultDelimiter(numsWithDelimiter);
+        } else {
             String customDelimiter = ex.extractCustomDelimiter(numsWithDelimiter);
             nums = ex.extractNumbersWithCustomDelimiter(numsWithDelimiter, customDelimiter);
-        } else {
-            nums = ex.extractNumbersWithDefaultDelimiter(numsWithDelimiter);
         }
 
         Calculator calc = new PositiveCalculator(nums);
