@@ -10,6 +10,7 @@ public class Converter {
                 DELIMITERS.add(delimiter.charAt(i));
             }
         }
+
         int index = target.indexOf(CUSTOM_END) + CUSTOM_END.length();
         return target.substring(index).replaceAll(" ", "");
     }
@@ -20,6 +21,7 @@ public class Converter {
             sb.append(del);
             sb.append('|');
         }
+
         sb.deleteCharAt(sb.length()-1);
 
         return target.split(sb.toString());
