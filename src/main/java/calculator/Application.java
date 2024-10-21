@@ -34,7 +34,7 @@ public class Application {
         if (delimiterEndIndex == -1) {
             throw new IllegalArgumentException("잘못된 입력 형식입니다. 커스텀 구분자는 //과 \\n을 포함해야 합니다.");
         }
-        return escapeSpecailCharactersInDelimiter(input.substring(2, delimiterEndIndex));
+        return escapeSpecialCharactersInDelimiter(input.substring(2, delimiterEndIndex));
     }
 
     public static String extractNumbersSection(String input) {
@@ -62,7 +62,7 @@ public class Application {
         return sum;
     }
 
-    public static String escapeSpecailCharactersInDelimiter(String delimiter) {
+    public static String escapeSpecialCharactersInDelimiter(String delimiter) {
         return delimiter.replaceAll("([\\\\.^$|?*+()\\[\\]{}])", "\\\\$1");
     }
 }
