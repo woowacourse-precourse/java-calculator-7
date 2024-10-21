@@ -2,6 +2,9 @@ package calculator;
 
 public class Adder {
     public int run(String input) {
+        if (input.isEmpty()) {
+            return 0;
+        }
         String[] stringNumbers = input.split("[,:]");
         int sum = 0;
 

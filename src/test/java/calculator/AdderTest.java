@@ -34,4 +34,13 @@ public class AdderTest {
 
         assertThat(result).isEqualTo(6);
     }
+
+    @Test
+    void 빈_문자열_테스트() {
+        String input = "";
+
+        int result = adder.run(input);
+
+        assertThat(result).isEqualTo(0);
+    }
 }
