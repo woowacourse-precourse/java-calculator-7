@@ -17,7 +17,7 @@ class AdderTest {
     @EnumSource(ExpressionTestCase.class)
     void sum(ExpressionTestCase testCase) {
         //given
-        final Adder adder = new Adder(testCase.delimiters, testCase.operands);
+        final Adder adder = new Adder(testCase.operands);
 
         //when
         final int sum = adder.sum();
