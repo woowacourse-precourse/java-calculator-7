@@ -1,7 +1,6 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.util.regex.Pattern;
 
 
 public class Application {
@@ -37,7 +36,7 @@ public class Application {
         if (separator3.isEmpty()) { // 커스텀 구분자가 있는 경우, 없는 경우 나눠서 return
             return input.split(separator1 + "|" + separator2); // 구분자가 없을 때
         } else {
-            return input.split(separator1 + "|" + separator2 + "|" + Pattern.quote(separator3)); // 모든 구분자로 나누기
+            return input.split(separator1 + "|" + separator2 + "|" + separator3); // 모든 구분자로 나누기
         }
 
     }
