@@ -15,12 +15,21 @@ public class CalculatorController {
 	private final OutputView outputView;
 	private final Delimiters delimiters;
 	private final CustomDelimiterProcessor customDelimiterProcessor;
+	private final InputFilter inputFilter;
+	private final Calculator calculator;
 
-	public CalculatorController() {
-		this.inputView = new InputView();
-		this.outputView = new OutputView();
-		this.customDelimiterProcessor = new CustomDelimiterProcessor();
-		this.delimiters = new Delimiters();
+	public CalculatorController(
+		InputView inputView,
+		OutputView outputView,
+		Delimiters delimiters,
+		CustomDelimiterProcessor customDelimiterProcessor, InputFilter inputFilter, Calculator calculator
+	) {
+		this.inputView = inputView;
+		this.outputView = outputView;
+		this.delimiters = delimiters;
+		this.customDelimiterProcessor = customDelimiterProcessor;
+		this.inputFilter = inputFilter;
+		this.calculator = calculator;
 	}
 
 	public void run() {
@@ -28,7 +37,7 @@ public class CalculatorController {
 
 		String processedInput = processCustomDelimiter(input);
 		List<Integer> numbers = extractNumbers(processedInput);
-		int result = calculate(numbers);
+		int result = sum(numbers);
 
 		printResult(result);
 	}
@@ -49,7 +58,7 @@ public class CalculatorController {
 	}
 
 	private List<Integer> extractNumbers(String processedInput) {
-		return InputFilter.extractNumbers(processedInput, delimiters);
+		return inputFilter.extractNumbers(processedInput, delimiters);
 	}
 
 	private int sum(List<Integer> numbers) {
