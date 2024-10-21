@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class InputValidation {
   private static final String INVALID_INPUT_DATE_ERROR = "[ERROR] 유효하지 않은 입력값입니다. 다시 입력해 주세요.";
-  private static String separator = ",|;";
+  private static String separator = ",|:";
 
   public static void validateInputString(String inputData) {
 
@@ -23,7 +23,7 @@ public class InputValidation {
     try {
 
       Arrays.stream(inputData.split(separator))
-          .map(Integer::parseInt)
+          .mapToInt(Integer::parseInt)
           .forEach(value -> {
             if (value < 1) {
               throw new IllegalArgumentException(INVALID_INPUT_DATE_ERROR);
