@@ -1,0 +1,53 @@
+- docs(README): 제출 전 확인 리스트 업데이트
+- test(AdditionResultTest): AdditionResult 소수점 유무에 따른 결과값 변환 테스트 구현
+- test(ApplicationTest): 커스텀 및 기본 구분자 사용 테스트 추가
+- test(PositiveIntegerValidatorTest): PositiveIntegerValidator 대한 성공 및 예외 처리 테스트 추가
+- test(DelimiterValidatorTest): DelimiterValidator에 대한 성공 및 예외 처리 테스트 추가
+- test(AdditionInputTest): AdditionInput에 대한 null값 예외 처리 및 빈 문자열 정상처리 테스트 추가
+- style: 가독성을 위해 메서드 네이밍 변경
+- refactor(AdditionResult): 더 큰수를 계산하도록 하기 위해 long 타입으로 형변환 하도록 변경
+- style(CalculatorController): "입력에 대한 검증이 완료되었다"는 의미가 담긴 변수명으로 변경
+- refactor(AdditionResult): 소수면 그대로, 정수면 정수로 형변환을 해서 출력하도록 리팩토링
+- refactor: 양수인 소수로도 덧셈이 가능하도록 리팩토링
+- fix(StringParser): 커스텀 구분자가 맨 앞에 있을 경우, 빈 문자열로 처리되는 것을 방지하기 위해 '0'을 추가
+- fix(StringParser): 커스텀 구분자 처리 오류 수정 및 연산 로직 개선
+- refactor(CalculatorController): 메서드 하나가 한 가지 기능만 담당하도록 분리
+- docs(README): 새롭게 추가한 도메인 명시
+- refactor(StringParser): 생성자에서 유효성 검사를 하도록 변경
+- refactor: 리스트를 Delimiter 객체로 관리하도록 변경
+- feat(Delimiter): 구분자 처리를 위한 Delimiter 클래스 추가
+- docs(README): 커스텀 구분자가 기본 구분자인 경우 예외처리 체크리스트 추가 및 업데이트
+- refactor(StringParser): 단일 클래스 상수를 공통 상수로 변경
+- feat: 커스텀 구분자로 기본 구분자를 명시할 경우 예외처리 구현
+- feat(DelimiterConstants): 공통 상수 관리를 위한 final 클래스 생성
+- fix(StringParser): 개행문자 처리 로직 수정 및 인덱스 조정
+- fix(ErrorMessage): 잘못된 에러 메시지의 이스케이프 문자 수정
+- docs(README): 구현할 기능 목록 체크리스트 업데이트
+- feat: 합산한 결과를 출력하는 view 메서드 구현
+- feat: 계산 결과를 AdditionResult DTO로 감싸서 반환하는 기능 추가
+- feat: Calculator 인터페이스 및 양의 정수들의 합계를 계산하는 SumCalculator 구현
+- docs(README): 구현할 기능 목록 체크리스트 업데이트 및 세부 설명 수정
+- refactor: 양의 정수 검증 로직을 PositiveIntegerValidator로 분리
+- feat: PositiveIntegerConverter 생성, 양수 변환 로직 추가 및 유효성 검증 로직 추가
+- feat: ExpressionSplitter 생성 및 구분자를 사용하여 연산할 표현식을 분리된 문자열 리스트로 변환하는 기능 추가
+- refactor: 커스텀 구분자 처리 로직 private 메서드로 분리 및 변수 네이밍 수정
+- feat: DelimiterManager 생성 및 구분자 목록을 기반으로 정규식 패턴 생성 기능 추가
+- refactor: 구분자 검증 로직을 DelimiterValidator 클래스로 분리
+- docs(README): 구현할 기능 목록 체크리스트 업데이트
+- feat: StringParser 클래스 구현 및 예외 처리 추가
+- docs(README): 구현할 기능 목록 체크리스트 내용 수정 및 업데이트
+- feat(OutputView): 기본 결과 출력 메서드 추가
+- feat(CalculatorController): 사용자 입력 처리 로직 추가
+- refactor(AdditionInput): CalculatorException을 통한 예외 처리 방식으로 변경
+- feat(CalculatorException): ErrorMessage를 사용하는 커스텀 예외 클래스 생성
+- feat(ErrorMessage): 예외 메시지 관리를 위한 열거형 생성 및 null 입력 예외 메시지 추가
+- style(OutputView): 중복되는 개행 삭제
+- feat: 입력 view에서 입력받은 문자열을 dto에서 null인지 검증 하는 로직 구현
+- feat(InputView): 입력 view 생성 및 사용자의 덧셈 문자열을 입력받는 메서드 구현
+- docs(README): 구현할 기능 목록 체크리스트 업데이트
+- feat(Application): main 메서드에서 CalculatorController의 run() 메서드 호출 로직 추가
+- feat(CalculatorController): CalculatorController 생성 및 덧셈할 문자열 입력 안내메시지 출력 기능 추가
+- feat(OutputView): OutputView 생성 및 덧셈 입력 안내 메시지 출력 메서드 구현
+- docs(README): 역할별 패키지 분리 내용 초안 작성
+- docs(README): 구현할 기능 목록 작성
+- feat: setup project
