@@ -1,4 +1,4 @@
-package calculator.calculator;
+package calculator.model;
 
 import static calculator.validate.Validator.validateNumber;
 
