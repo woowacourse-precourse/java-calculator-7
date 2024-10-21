@@ -1,123 +1,166 @@
 package calculator;
 
+/** 입력한 문자열에서 숫자를 추출하여 더하는 계산기 클래스 */
 public class Calculator {
 
+    /**
+     * PROMPT_MESSAGE : 사용자에게 보여줄 메시지
+     * sum : 최종적으로 반환할 모든 값을 더한 값
+     * originalInput : 사용자 입력 문자열의 원본
+     * modifiedInput : 파싱을 거쳐 구분자 섹션을 제외한 사용자 입력 문자열
+     * parser : 파싱을 담당하는 Calculator의 내부 클래스
+     * delimiterManager : 구분자와 관련된 속성과 기능을 구현한 클래스
+     */
     public static final String PROMPT_MESSAGE = "덧셈할 문자열을 입력해 주세요.";
-    private String input;
-    private String output;
     private double sum;
-    private boolean hasCustomDelimiter;
-    private String customDelimiter;
+    private String originalInput;
+    private String modifiedInput;
     private final Parser parser;
     private final DelimiterManager delimiterManager;
 
     public Calculator() {
-        customDelimiter = "";
+        originalInput = "";
+        modifiedInput = "";
         parser = new Parser();
         delimiterManager = new DelimiterManager();
     }
 
+    /**
+     * 사용자가 입력한 문자열을 파싱하고 처리합니다.
+     *
+     * @param input 사용자 입력 문자열
+     */
     public void readInput(String input) {
-        // 구분자 문자열이 제거된 String 타입의 문자열이 반환됩니다.
-        output = parser.parseString(input);
+        originalInput = input;
+        if (input.isEmpty()) {
+            return;
+        }
+        String output = parser.parseString(input);
+
+        if (output.isEmpty()) {
+            return;
+        }
         sum(output);
     }
 
-    public void sum(String strippedInput) {
-        String digitString = "";
-        if (Character.isDigit(strippedInput.charAt(0)) != true) {
-            throw new IllegalArgumentException("Invalid String: The input contains invalid characters.");
+    /**
+     * 숫자형 문자의 값을 더합니다.
+     *
+     * @param modifiedInput 구분자 섹션이 분리된 문자열
+     */
+    private void sum(String modifiedInput) {
+        if (Character.isDigit(modifiedInput.charAt(0)) != true) {
+            throw new IllegalArgumentException("The input contains invalid characters.");
         }
 
-        for (char c : strippedInput.toCharArray()) {
-            if (Character.isDigit(c) || (!customDelimiter.equals(".") && c == '.')) {
-                digitString += Character.toString(c);
-            } else if (delimiterManager.isDelimiter(c)) {
-                add(digitString);
-                digitString = "";
-            } else {
-                throw new IllegalArgumentException("Invalid String: The input contains invalid characters.");
+        String[] splittedString = splitByDelimiters(modifiedInput);
+        for (String string : splittedString) {
+            if (string.isEmpty()) {
+                throw new IllegalArgumentException("The input contains invalid characters.");
             }
+            add(string);
         }
-        add(digitString);
     }
 
-    public void add(String digitString) {
-        sum += Double.valueOf(digitString);
+    /**
+     * 구분자들을 기준으로 문자열을 쪼개는 메서드
+     *
+     * @param modifiedInput
+     * @return 쪼개진 문자열 배열
+     */
+    private String[] splitByDelimiters(String modifiedInput) {
+        String regex = "[" + delimiterManager.getDelimiters() + "]";
+        return modifiedInput.split(regex);
     }
 
-    /** 지정된 메시지를 프롬프트에 출력하는 메서드 */
+    /**
+     * 합산한 값(sum)에 인자로 들어온 값을 더합니다.
+     *
+     * @param digitString
+     */
+    private void add(String digitString) {
+        if (isNumeric(digitString)) {
+            sum += Double.valueOf(digitString);
+        } else {
+            throw new IllegalArgumentException("The input contains invalid characters.");
+        }
+    }
+
+    /**
+     * 정규표현식을 사용해 숫자형 문자인지 확인합니다.
+     * @param str 판별할 문자열
+     * @return 숫자형 문자인지 판별 여부
+     */
+    private boolean isNumeric(String str) {
+        return str.matches("-?\\d+(\\.\\d+)?");
+    }
+
+    /** 프롬프트에 지정한 메시지를 출력합니다. */
     public void displayPrompt() {
         System.out.println(PROMPT_MESSAGE);
     }
 
-    /** 지정된 형식으로 문자열에서 추출한 숫자를 더한 값을 출력하는 메서드 */
+    /** 지정한 형식으로 결과값을 출력합니다. */
     public void printSum() {
-        System.out.println(String.format("결과 : %.0f", sum));
+        System.out.println(String.format("결과 : %.1f", sum));
     }
 
-    /* 입력받은 문자열을 파싱하는 클래스 */
     private class Parser {
-
-        /*
-         * DELIMITER_PREFIX: 커스텀 구분자 정의 접두사
-         * DELIMITER_SUFFIX: 커스텀 구분자 정의 접미사
-         * START_INDEX: StringBuilder.delete() 메서드 호출 시, 잘라낼 문자열의 시작 인덱스 값을 나타냅니다.
-         */
-        private static final String DELIMITER_PREFIX = "//";
-        private static final String DELIMITER_SUFFIX = "\\n";
-        private static final int START_INDEX = 0;
 
         public Parser() {
         }
 
-        private String parseString(String inputString) {
-            String strippedString = inputString.strip();
+        private String parseString(String originalInput) {
+            String strippedInput = originalInput.strip();
 
-            if (strippedString.isEmpty()) {
+            if (strippedInput.equals("\"\"")) {
                 return "0";
             }
-            StringBuilder strippedStringBuilder = removeDelimiterPrefix(strippedString);
+            hasDelimiterSection(strippedInput);
 
-            if (hasCustomDelimiter) {
-                removeDelimiterSuffix(strippedStringBuilder);
+            if (delimiterManager.getCustomDelimiter() != '\0') {
+                String splittedString = splitByDelimiterChar(strippedInput);
+                modifiedInput = compareToSuffix(splittedString);
+                return modifiedInput;
             }
-            return strippedStringBuilder.toString();
+            return originalInput;
         }
 
-        private StringBuilder removeDelimiterPrefix(String targetString) {
-            StringBuilder targetStringBuilder = new StringBuilder(targetString);
-
-            if (targetString.startsWith(DELIMITER_PREFIX)) {
-                hasCustomDelimiter = true;
-                targetStringBuilder.delete(0, DELIMITER_PREFIX.length());
+        private void hasDelimiterSection(String strippedInput) {
+            if (Character.isDigit(strippedInput.charAt(0))) {
+                return;
             }
-            return targetStringBuilder;
+            checkValidInput(strippedInput);
+            delimiterManager.setCustomChar(
+                    strippedInput.charAt(delimiterManager.getLenOfPrefix()));
         }
 
-        private void removeDelimiterSuffix(StringBuilder targetStringBuilder) {
-            /* 커스텀 구분자를 추출 */
-            extractCustomDelimiter(targetStringBuilder);
-
-            /* Delimiter suffix를 제거. 만약 suffix가 없다면 유효하지 않은 문자열 예외 발생 */
-            if (!isDelimiterSuffix(targetStringBuilder)) {
-                throw new IllegalArgumentException("Invalid string: missing custom delimiter suffix.");
+        private void checkValidInput(String targetString) {
+            if (targetString.length() <= delimiterManager.getLenOfPrefix() + delimiterManager.CUSTOM_DELIMITER_LEN) {
+                throw new IllegalArgumentException("The input formats invalidly.");
             }
-            targetStringBuilder.delete(START_INDEX, DELIMITER_SUFFIX.length());
         }
 
-        private boolean isDelimiterSuffix(StringBuilder targetStringBuilder) {
-            String stringWithSuffix = targetStringBuilder.toString();
+        private String splitByDelimiterChar(String strippedInput) {
+            String customDelimiter = Character.toString(delimiterManager.getCustomDelimiter());
 
-            return stringWithSuffix.startsWith(DELIMITER_SUFFIX);
+            String regexDelimiter = customDelimiter.replace("\\", "\\\\"); // \를 \\로 이스케이프
+
+            String[] splittedString = strippedInput.split("[" + regexDelimiter + "]");
+
+            return splittedString[1];
         }
 
-        private void extractCustomDelimiter(StringBuilder targetStringBuilder) {
-            customDelimiter = Character.toString(targetStringBuilder.charAt(START_INDEX));
-            /* DelimiterManager 인스턴스에 customDelimiter 전달 */
-            delimiterManager.addDelimiter(customDelimiter);
-            /* targetStringBuilder의 customDelimiter 제거 */
-            targetStringBuilder.deleteCharAt(START_INDEX);
+        private String compareToSuffix(String stringWithSuffix) {
+            if (stringWithSuffix.length() < delimiterManager.getLenOfSuffix()) {
+                throw new IllegalArgumentException("The input formats invalidly. especially at suffix.");
+            }
+
+            if (stringWithSuffix.startsWith(delimiterManager.DELIMITER_SUFFIX)) {
+                stringWithSuffix = stringWithSuffix.replace(delimiterManager.DELIMITER_SUFFIX, "n");
+                return stringWithSuffix.substring(delimiterManager.getLenOfSuffix() - 1);
+            }
+            throw new IllegalArgumentException("The provided suffix is invalid or not present.");
         }
     }
 }
