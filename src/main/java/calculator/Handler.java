@@ -41,7 +41,7 @@ public class Handler {
     }
 
     private void validCustom(String custom) throws IllegalArgumentException {
-        if (custom.length() != 1) {
+        if (custom.length() > 1) {
             throw new IllegalArgumentException("커스텀 구분자는 문자열이 아닌 문자이어야 합니다");
         }
         if (custom.equals("")) {
