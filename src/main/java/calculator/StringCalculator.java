@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 public class StringCalculator {
     // 문자열에 적힌 수를 합산하는 메서드
     public static int calculateSum(String string){
+        if(string.isBlank()) return 0;
         String[] parsedStrings = parseString(string);
         return sumParsedString(parsedStrings[1], parsedStrings[0]);
     }
