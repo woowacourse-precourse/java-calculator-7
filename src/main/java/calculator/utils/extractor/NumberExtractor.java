@@ -1,21 +1,14 @@
-package calculator.utils;
+package calculator.utils.extractor;
 
 import calculator.exception.CalculatorException;
 import calculator.exception.CalculatorExceptionStatus;
 import calculator.model.CalculatorValues;
-import java.util.regex.Pattern;
 
-public class IntegerExtractor {
+public class NumberExtractor {
 
     public static void extractIntegerFromExpression(CalculatorValues calculatorValues) {
 
-        String delimiter = Pattern.quote(calculatorValues.getDelimiter());
-
-        if (calculatorValues.getDelimiter().equals("[,:]")) {
-            delimiter = calculatorValues.getDelimiter();  // 정규식 구분자는 그대로 사용
-        }
-
-        String[] tokens = calculatorValues.getExpression().split(delimiter);
+        String[] tokens = calculatorValues.getExpression().split(calculatorValues.getDelimiter());
 
         for (String token : tokens) {
             try{
