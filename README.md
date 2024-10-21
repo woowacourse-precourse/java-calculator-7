@@ -46,12 +46,12 @@
 ---
 ## 리팩토링
 
-- [ ] 하드 코딩 제거
-- [ ] 코딩 컨벤션 준수
-- [ ] 이상한 수식 넣었을 때 에러
+- [X] 하드 코딩 제거
+- [X] 코딩 컨벤션 준수
+- [X] 이상한 수식 넣었을 때 에러
   ```
   덧셈할 문자열을 입력해 주세요.
   //;\n112kio12u328948
   Exception in thread "main" java.lang.NumberFormatException: For input string: "112kio12u328948"
   ```
-- [ ] 기능 쪼개기
+- [ ] 기능 쪼개기 
