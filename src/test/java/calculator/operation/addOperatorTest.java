@@ -1,6 +1,5 @@
 package calculator.operation;
 
-import calculator.addOperator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class addOperatorTest {
 
-    private calculator.addOperator addOperator = new addOperator();
+    private calculator.operation.addOperator addOperator = new addOperator();
 
     @Test
     @DisplayName("더하기 테스트")

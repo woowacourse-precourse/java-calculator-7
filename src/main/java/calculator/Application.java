@@ -1,5 +1,9 @@
 package calculator;
 
+import calculator.delimiter.CustomDelimiterDetector;
+import calculator.operation.addOperator;
+import calculator.parser.Seperator;
+import calculator.parser.Splitter;
 import camp.nextstep.edu.missionutils.Console;
 
 import java.util.List;
@@ -9,7 +13,7 @@ public class Application {
     private static final Splitter splitter = new Splitter();
     private static final CustomDelimiterDetector customDelimiterDetector = new CustomDelimiterDetector();
     private static final Seperator seperator = new Seperator();
-    private static final addOperator addOperator = new addOperator();
+    private static final calculator.operation.addOperator addOperator = new addOperator();
 
     public static void main(String[] args) {
         try{
