@@ -26,5 +26,14 @@ public class Application {
     }
 
     public static void main(String[] args) {
+        Application app = new Application();
+
+        try {
+            String input = app.inputHandler.getInput();
+            int result = app.calculateSum(input);
+            System.out.println(result);
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+        }
     }
 }
