@@ -21,7 +21,6 @@ public class CustomTextCalculator {
         }
 
         String[] numbers = input.split(splitter);
-
         return sumNumbers(numbers);
     }
 
