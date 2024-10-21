@@ -1,15 +1,23 @@
 package calculator.domain;
 
 public class Calculator {
-    private String delimeter;
-    private String[] tokens;
+    private String delimiter;
+    private String numbers;
 
-    public Calculator(String delimeter, String[] tokens) {
-        this.delimeter = delimeter;
-        this.tokens = tokens;
+    public Calculator(String numbers) {
+        this.numbers = numbers;
+        this.delimiter = ",|:";
     }
 
-    public String[] getTokens() {
-        return tokens;
+    public Calculator(String delimiter, String numbers) {
+        this.delimiter = delimiter;
+        this.numbers = numbers;
+    }
+
+    public String getNumbers() {
+        return numbers;
+    }
+    public String getDelimiter() {
+        return delimiter;
     }
 }
