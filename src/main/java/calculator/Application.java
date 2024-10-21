@@ -9,6 +9,9 @@ public class Application {
         // 문자열 입력 받기
         String inputStr = getInput();
 
+        // 입력값이 없거나 공백인 경우
+        inputStr = handleZero(inputStr);
+
         // 입력한 문자열에서 기본 구분자, 커스텀 구분자 찾아내기
         String customSeparator = findCustomSeparator(inputStr);
 
@@ -57,6 +60,14 @@ public class Application {
         }
 
         return customSeparator;
+    }
+
+    // 입력값이 ""일 경우
+    private static String handleZero(String inputStr){
+        if(inputStr.trim().isEmpty()){
+            return "0,0";
+        }
+        return inputStr;
     }
 
     // 기본 구분자 리스트에 커스텀 구분자 추가하기
