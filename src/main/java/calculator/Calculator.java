@@ -9,9 +9,11 @@ public class Calculator {
   public static void run() {
 
     String userInput = ioHandler.getUserInput();
-
+    System.out.println("userInput : " + userInput);
     long sum = 0;
-    if (userInput.contains(",") || userInput.contains(":")) {
+    if (userInput == "")
+      sum = 0;
+    else if (userInput.contains(",") || userInput.contains(":")) {
       if (userInput.contains(",")) {
         String[] nums = userInput.trim().split("[,:]");
         for (String num : nums) {
