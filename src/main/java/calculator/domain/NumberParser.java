@@ -27,5 +27,25 @@ public class NumberParser {
         private static boolean isBlank(String message) {
             return message == null || message.isBlank(); // null 체크 추가
         }
+
+        private static void validateNumbers(String[] numbers) {
+            for (String number : numbers) {
+                if (!isNumeric(number)) {
+                    throw new IllegalArgumentException("숫자가 아닌 잘못된 입력입니다: " + number);
+                }
+                if (Integer.parseInt(number) < 0) {
+                    throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
+                }
+            }
+        }
+
+        private static boolean isNumeric(String str) {
+            try {
+                Integer.parseInt(str);
+                return true;
+            } catch (NumberFormatException e) {
+                return false;
+            }
+        }
     }
 }
