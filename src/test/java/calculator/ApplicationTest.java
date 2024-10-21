@@ -71,6 +71,14 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             assertThatNoException().isThrownBy(() -> run("1;3,1"));
         });
+        assertSimpleTest(() -> {
+            run("9223372036854775808;");
+            assertThat(output()).contains("결과 : 9223372036854775808");
+        });
+        assertSimpleTest(() -> {
+            run("9223372036854775807;1");
+            assertThat(output()).contains("결과 : 9223372036854775808");
+        });
     }
 
     @Test
@@ -146,42 +154,6 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void addInputOverIntegerSize() {
-        assertSimpleTest(() -> {
-            run("2147483648;");
-            assertThat(output()).contains("결과 : 2147483648");
-        });
-        assertSimpleTest(() -> {
-            run("2147483649 ;");
-            assertThat(output()).contains("결과 : 2147483649");
-        });
-    }
-
-    @Test
-    void addInputOverLongSize() {
-        assertSimpleTest(() -> {
-            run("9223372036854775808;");
-            assertThat(output()).contains("결과 : 9223372036854775808");
-        });
-    }
-
-    @Test
-    void validateResultOverIntSize() {
-        assertSimpleTest(() -> {
-            run("2147483647;1");
-            assertThat(output()).contains("결과 : 2147483648");
-        });
-    }
-
-    @Test
-    void validateResultOverLongSize() {
-        assertSimpleTest(() -> {
-            run("9223372036854775807;1");
-            assertThat(output()).contains("결과 : 9223372036854775808");
-        });
-    }
-
-    @Test
     void validateInputOnlyContaining_CustomDelimiter() {
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> runException("//??\\n")).isInstanceOf(IllegalArgumentException.class)
@@ -238,6 +210,14 @@ class ApplicationTest extends NsTest {
             run("//?\\n12?345");
             assertThat(output()).contains("결과 : 357");
         });
+        assertSimpleTest(() -> {
+            run("//?\\n2147483647?1");
+            assertThat(output()).contains("결과 : 2147483648");
+        });
+        assertSimpleTest(() -> {
+            run("//?\\n9223372036854775807?1");
+            assertThat(output()).contains("결과 : 9223372036854775808");
+        });
     }
 
     @Test
@@ -281,38 +261,6 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             run("//?\\n1?2 ?3 ?4?5?");
             assertThat(output()).contains("결과 : 15");
-        });
-    }
-
-    @Test
-    void addInputOverIntegerSize_CustomDelimiter() {
-        assertSimpleTest(() -> {
-            run("//?\\n2147483648");
-            assertThat(output()).contains("결과 : 2147483648");
-        });
-    }
-
-    @Test
-    void addInputOverLongSize_CustomDelimiter() {
-        assertSimpleTest(() -> {
-            run("//?\\n9223372036854775807?1");
-            assertThat(output()).contains("결과 : 9223372036854775808");
-        });
-    }
-
-    @Test
-    void addResultOverIntSize_CustomDelimiter() {
-        assertSimpleTest(() -> {
-            run("//?\\n2147483647?1");
-            assertThat(output()).contains("결과 : 2147483648");
-        });
-    }
-
-    @Test
-    void addResultOverLongSize_CustomDelimiter() {
-        assertSimpleTest(() -> {
-            run("//?\\n2147483647?1");
-            assertThat(output()).contains("결과 : 2147483648");
         });
     }
 
