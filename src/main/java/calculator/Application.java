@@ -23,9 +23,9 @@ public class Application {
     }
 
     public static boolean isValidInput(String input) {
-        List<String> number = new ArrayList<>();
+        List<Character> number = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            number.add(String.valueOf(i));
+            number.add((char) (i + '0'));
         }
 
         if (hasCustomDelimeter(input)) {
@@ -33,7 +33,17 @@ public class Application {
                 return false;
             }
             for (int i = 5; i < input.length(); i++) {
-                if (input.charAt(i) == ',' || input.charAt(i) == ':' || number.contains(String.valueOf(input.charAt(i))) || input.charAt(i) == input.charAt(2)) {
+                if (i == 5 && (input.charAt(i) == ',' || input.charAt(i) == ':' || input.charAt(i) == input.charAt(2))) {
+                    return false;
+                }
+                if (input.charAt(i) == ',' || input.charAt(i) == ':' || input.charAt(i) == input.charAt(2)) {
+                    if (!number.contains(input.charAt(i - 1))) {
+                        return false;
+                    }
+                    if (i + 1 < input.length() && !number.contains(input.charAt(i + 1))) {
+                        return false;
+                    }
+                } else if (number.contains(input.charAt(i))){
                     continue;
                 } else {
                     return false;
@@ -43,7 +53,17 @@ public class Application {
         } else {
             // 일반 유효성 검사
             for (int i = 0; i < input.length(); i++) {
-                if (input.charAt(i) == ',' || input.charAt(i) == ':' || number.contains(String.valueOf(input.charAt(i)))) {
+                if (i == 0 && (input.charAt(i) == ',' || input.charAt(i) == ':')) {
+                    return false;
+                }
+                if (input.charAt(i) == ',' || input.charAt(i) == ':') {
+                    if (!number.contains(input.charAt(i - 1))) {
+                        return false;
+                    }
+                    if (i + 1 < input.length() && !number.contains(input.charAt(i + 1))) {
+                        return false;
+                    }
+                } else if (number.contains(input.charAt(i))) {
                     continue;
                 } else {
                     return false;
