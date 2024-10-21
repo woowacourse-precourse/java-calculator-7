@@ -12,12 +12,12 @@ public class StringSplitterImpl implements StringSplitter {
             return new String[]{""};
         }
         if (input.startsWith("//")) {
-            return CustomDelimiter(input);
+            return customDelimiter(input);
         }
-        return DefaultDelimiter(input);
+        return defaultDelimiter(input);
     }
 
-    private String[] DefaultDelimiter(String input) {
+    private String[] defaultDelimiter(String input) {
         validateDelimiter(input);
 
         String[] result = input.split("[,:]");
@@ -29,7 +29,7 @@ public class StringSplitterImpl implements StringSplitter {
         return result;
     }
 
-    private String[] CustomDelimiter(String input) {
+    private String[] customDelimiter(String input) {
         int delimiterEndIndex = input.indexOf("\\n");
         if (delimiterEndIndex == -1) {
             throw new IllegalArgumentException(INVALID_DELIMITER_FORMAT.getMessage());
