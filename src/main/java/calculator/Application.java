@@ -44,30 +44,20 @@ public class Application {
                 throw new IllegalArgumentException(ERROR_CUSTOM_DELIMITER_OVER_TWO);
             }
 
-            String firstToTwoLetter = customDelimiterInputs.getFirst().substring(0, 2);
+            String firstToTwoLetter = customDelimiterInputs.getFirst()
+                    .substring(0, 2);
             if (!firstToTwoLetter.equals(CUSTOM_DELIMITER_START)) {
                 throw new IllegalArgumentException(ERROR_CUSTOM_DELIMITER_NOT_START_WITH_FORMAT);
             }
 
-            String customDelimiter = customDelimiterInputs.getFirst().substring(2);
+            String customDelimiter = customDelimiterInputs.getFirst()
+                    .substring(2);
             try {
                 new BigInteger(customDelimiter);
             } catch (NumberFormatException e) {
-                List<BigInteger> operands;
-                try {
-                    operands = Arrays.stream(expression.split(Pattern.quote(customDelimiter)))
-                            .map(String::trim)
-                            .map(BigInteger::new)
-                            .toList();
-                } catch (NumberFormatException i) {
-                    throw new IllegalArgumentException(ERROR_CUSTOM_DELIMITER_OPERANDS_CONTAIN_OTHER_CHAR);
-                }
-
-                validatePositive(operands, ERROR_CUSTOM_DELIMITER_CONTAIN_ZERO, ERROR_CUSTOM_DELIMITER_CONTAIN_MINUS);
-
-                return operands.stream()
-                        .reduce(BigInteger.valueOf(0), BigInteger::add);
+                return calculatePositiveNumber(Arrays.stream(expression.split(Pattern.quote(customDelimiter))).toList(), ERROR_CUSTOM_DELIMITER_OPERANDS_CONTAIN_OTHER_CHAR, ERROR_CUSTOM_DELIMITER_CONTAIN_ZERO, ERROR_CUSTOM_DELIMITER_CONTAIN_MINUS);
             }
+
             throw new IllegalArgumentException(ERROR_CUSTOM_DELIMITER_CONTAIN_NUMBER);
         }
 
@@ -80,32 +70,33 @@ public class Application {
             validateOnlyDelimiter(input, delimiter);
         }
 
-        List<String> stringInputs = Arrays.stream(input.split(COMMA_OR_SEMICOLON))
+        List<String> stringOperands = Arrays.stream(input.split(COMMA_OR_SEMICOLON))
                 .filter(letter -> !letter.equals(EMPTY))
-                .map(String::trim)
                 .toList();
 
-        List<BigInteger> bigIntegerParsedInputs;
+        return calculatePositiveNumber(stringOperands, ERROR_BASIC_DELIMITER_OPERAND_CONTAIN_OTHER_CHAR, ERROR_BASIC_DELIMITER_CONTAIN_ZERO, ERROR_BASIC_DELIMITER_CONTAIN_MINUS);
+    }
+
+    private static BigInteger calculatePositiveNumber(List<String> stringOperands, String errorBasicDelimiterOperandContainOtherChar, String errorBasicDelimiterContainZero, String errorBasicDelimiterContainMinus) {
+        List<BigInteger> bigIntegerOperands = validateOperandIsNumber(stringOperands, errorBasicDelimiterOperandContainOtherChar);
+        validatePositive(bigIntegerOperands, errorBasicDelimiterContainZero, errorBasicDelimiterContainMinus);
+
+        return bigIntegerOperands.stream()
+                .reduce(BigInteger.valueOf(0), BigInteger::add);
+    }
+
+    private static List<BigInteger> validateOperandIsNumber(List<String> stringOperands, String errorBasicDelimiterOperandContainOtherChar) {
+        List<BigInteger> bigIntegerOperands;
         try {
-            bigIntegerParsedInputs = stringInputs.stream()
+            bigIntegerOperands = stringOperands.stream()
+                    .map(String::trim)
                     .map(BigInteger::new)
                     .toList();
-
         } catch (NumberFormatException e) {
-            for (String stringInput : stringInputs) {
-                boolean isNumeric = stringInput.matches("\\d+");
-                if (!isNumeric) {
-                    throw new IllegalArgumentException(ERROR_BASIC_DELIMITER_OPERAND_CONTAIN_OTHER_CHAR);
-                }
-            }
-
-            throw new IllegalArgumentException(ERROR_BASIC_DELIMITER_PARSING_PROBLEM);
+            throw new IllegalArgumentException(errorBasicDelimiterOperandContainOtherChar);
         }
 
-        validatePositive(bigIntegerParsedInputs, ERROR_BASIC_DELIMITER_CONTAIN_ZERO, ERROR_BASIC_DELIMITER_CONTAIN_MINUS);
-
-        return bigIntegerParsedInputs.stream()
-                .reduce(BigInteger.valueOf(0), BigInteger::add);
+        return bigIntegerOperands;
     }
 
     private static void validatePositive(List<BigInteger> operands, String errorCustomDelimiterContainZero, String errorCustomDelimiterContainMinus) {
