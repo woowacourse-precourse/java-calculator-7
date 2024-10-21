@@ -2,14 +2,14 @@ package calculator.domain;
 
 public class Calculator {
     private String delimeter;
-    private String[] numbers;
+    private String[] tokens;
 
-    public Calculator(String delimeter, String[] numbers) {
+    public Calculator(String delimeter, String[] tokens) {
         this.delimeter = delimeter;
-        this.numbers = numbers;
+        this.tokens = tokens;
     }
 
-    public String[] getNumbers() {
-        return numbers;
+    public String[] getTokens() {
+        return tokens;
     }
 }

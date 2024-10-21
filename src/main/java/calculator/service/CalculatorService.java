@@ -7,8 +7,8 @@ import calculator.util.Parser;
 
 public class CalculatorService {
 
-    private Parser parser = new Parser();
-    private NumberValidator numberValidator = new NumberValidator();
+    private final Parser parser = new Parser();
+    private final NumberValidator numberValidator = new NumberValidator();
 
     public int calculate(Expression expression){
         if (expression.isNull()){
@@ -17,7 +17,7 @@ public class CalculatorService {
 
         Calculator calculator = parser.parse(expression.getExpression());
 
-        return sumNumbers(calculator.getNumbers());
+        return sumNumbers(calculator.getTokens());
     }
 
     private int sumNumbers(String[] tokens){
