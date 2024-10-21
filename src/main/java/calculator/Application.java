@@ -1,5 +1,7 @@
 package calculator;
 
+import static camp.nextstep.edu.missionutils.Console.readLine;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -17,8 +19,8 @@ public class Application {
         int acc = -1;
         while (buffer.hasNext()) {
             char current = buffer.next();
-            if (delimiters.contains(current)) {
-                parsedNumbers.add(acc == -1 ? 0 : acc);
+            if (delimiters.contains(current) && acc != -1) {
+                parsedNumbers.add(acc);
                 acc = -1;
             } else if ('0' <= current && current <= '9') {
                 if (current == '0' && acc == 0) {
@@ -31,6 +33,9 @@ public class Application {
             } else {
                 throw new IllegalArgumentException("숫자와 정해진 구분자외 다른 문자는 올 수 없습니다.");
             }
+        }
+        if (acc != -1) {
+            parsedNumbers.add(acc);
         }
         return parsedNumbers;
     }
@@ -91,6 +96,11 @@ public class Application {
     }
 
     public static void main(String[] args) {
-
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        CharacterBuffer buffer = new CharacterBuffer(readLine());
+        List<Character> delimiters = parseDelimiters(buffer);
+        List<Integer> numbers = parseNumberWithDelimiters(buffer, delimiters);
+        int result = sum(numbers);
+        System.out.printf("결과 : %d\n", result);
     }
 }
