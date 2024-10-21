@@ -25,7 +25,11 @@ class DelimiterControllerTest {
     static Stream<Arguments> inputData() {
         return Stream.of(
                 Arguments.of(new InputData("//;\\n1;2;3"), CustomDelimiter.class, "커스텀 구분자 객체 생성"),
-                Arguments.of(new InputData("1,2,3"), DefaultDelimiter.class, "기본 구분자 객체 생성")
+                Arguments.of(new InputData("1,2,3"), DefaultDelimiter.class, "기본 구분자 객체 생성"),
+                Arguments.of(
+                        new InputData("//\\n123"),
+                        DefaultDelimiter.class,
+                        "커스텀구분자에 아무것도 지정하지 않으면 기본 구분자 객체를 생성")
         );
     }
 

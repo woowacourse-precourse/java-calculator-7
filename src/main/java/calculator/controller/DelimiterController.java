@@ -7,7 +7,7 @@ import calculator.model.InputData;
 
 public class DelimiterController {
     public Delimiter createDelimiterPart(InputData inputData) {
-        if (inputData.isDelimiter()) {
+        if (inputData.isDelimiter() && !inputData.convertDelimiterPart().isEmpty()) {
             return new CustomDelimiter(inputData.convertDelimiterPart());
         }
 
