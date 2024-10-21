@@ -1,6 +1,6 @@
 package calculator.stringCalculator;
 
-import calculator.validator.InputParser;
+import calculator.parser.InputParser;
 
 public class StringCalculator implements Calculator{
 
