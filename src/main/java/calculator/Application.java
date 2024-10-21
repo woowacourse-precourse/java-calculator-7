@@ -20,7 +20,13 @@ public class Application {
             // 커스텀 구분자 확인
             if (input.startsWith("//")) {
                 int delimiterIndex = input.indexOf("\n");
-                delimiter = input.substring(2, delimiterIndex);  // 커스텀 구분자 가져오기
+
+                // 예외 처리: delimiterIndex 가 -1일 경우 처리
+                if (delimiterIndex == -1) {
+                    throw new IllegalArgumentException("구분자를 찾을 수 없습니다.");
+                }
+
+                delimiter = input.substring(2, delimiterIndex);
                 input = input.substring(delimiterIndex + 1);
             }
 
@@ -34,7 +40,7 @@ public class Application {
 
                 // 음수일 경우 예외 발생
                 if (num < 0) {
-                    throw new IllegalArgumentException("음수는 허용되지 않습니다." + num);
+                    throw new IllegalArgumentException("음수는 허용되지 않습니다. " + num);
                 }
 
                 sum += num;
