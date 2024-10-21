@@ -20,6 +20,11 @@ public class Application {
             int delimiterIndex = str.indexOf("\\n");
             if (delimiterIndex != -1) {
                 String customDelimiter = str.substring(2, delimiterIndex);
+                for (char c : customDelimiter.toCharArray()) {
+                    if (Character.isDigit(c)) {
+                        throw new IllegalArgumentException();
+                    }
+                }
                 delimiters.add(customDelimiter);
                 str = str.substring(delimiterIndex + 2);
                 if (str.isEmpty()) {
