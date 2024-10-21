@@ -3,9 +3,11 @@ package calculator;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
+import static calculator.Application.validationInputToInt;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ApplicationTest extends NsTest {
     @Test
@@ -22,6 +24,14 @@ class ApplicationTest extends NsTest {
             assertThatThrownBy(() -> runException("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
         );
+    }
+
+    @Test
+    void vaidationTest() {
+        String input = "t사";
+        assertThrows(IllegalArgumentException.class, () -> {
+            Application.validationInputToInt(input);
+        });
     }
 
     @Override
