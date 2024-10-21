@@ -42,6 +42,7 @@ public class CalculatorService {
             value = results[0];
         }
 
+//        System.out.println(newSeparator +" " +value);
         makeNewSeparator(newSeparator);
         calculator.setRawValue(value);
         List<Integer> processedValue = extractNumbersToList();
@@ -85,7 +86,7 @@ public class CalculatorService {
 
     public void makeNewSeparator(String newSeparator) {
         if (newSeparator == null) return;
-        String result = newSeparator.substring(2, newSeparator.length() - 1);
+        String result = newSeparator.substring(2, newSeparator.length()-2);
         List<String> newSeparators = calculator.getSeparators();
         newSeparators.add(result);
         calculator.setSeparators(newSeparators);
