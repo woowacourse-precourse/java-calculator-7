@@ -10,12 +10,12 @@ public class CustomParser {
     }
 
     public int[] parse(String input) {
-        String regx = "([0-9]+[" + this.BASIC_SEPARATOR + "])*[0-9]*";
+        String regx = "[0-9]*([" + this.BASIC_SEPARATOR + "][0-9]+)*";
         if (input.matches(regx)) { // 기본 구분자를 사용할 경우
             return parse(input, this.BASIC_SEPARATOR);
         }
 
-        if (input.matches("//.[^0-9]\\\\n.*")) { // 커스텀 구분자를 사용할 경우
+        if (input.matches("//[^0-9]\\\\n.*[0-9]$")) { // 커스텀 구분자를 사용할 경우
             String separator = processSeparator(input.charAt(2) + "");
             String temp = input.substring(5);
             return parse(temp, this.BASIC_SEPARATOR + "|" + separator);
