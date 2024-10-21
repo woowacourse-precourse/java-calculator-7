@@ -8,6 +8,8 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
         try {
+            // \n 문자열을 실제 줄바꿈 문자로 변환
+            input = input.replace("\\n", "\n");
             int result = StringCalculator.splitString(input);
             System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
