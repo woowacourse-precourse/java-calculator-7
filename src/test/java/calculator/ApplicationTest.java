@@ -17,11 +17,11 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 커스텀_구분자_사용2() {
-        assertSimpleTest(() -> {
-            run("1,2;3//%#!\\n4");
-            assertThat(output()).contains("결과 : 10");
-        });
+    void 커스텀_구분자_사용_예외() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,2;3//%!!\\n4"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
     }
 
     @Test
