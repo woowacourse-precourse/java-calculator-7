@@ -102,4 +102,32 @@ class ParsingUtilTest {
         // then
         assertThat(result).isEqualTo(expected);
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,3", "1:2:3", "1:2,3", "1,2:3"})
+    @DisplayName("Default 구분자, 숫자 추출 테스트")
+    void containsCustomDelimiter_False() {
+        // given
+        final String input = "1,2,3";
+
+        // when
+        var result = ParsingUtil.containsCustomDelimiter(input);
+
+        // then
+        assertThat(result).isFalse();
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"//;\n1;2;3", "///\n1/2/3", "//|\n1|2|3"})
+    @DisplayName("커스텀 구분자, 숫자 추출 테스트")
+    void parseWithCustomDelimiter(String input) {
+        // given
+        final List<String> expected = List.of("1", "2", "3");
+
+        // when
+        var result = ParsingUtil.parseWithCustomDelimiter(input);
+
+        // then
+        assertThat(result).isEqualTo(expected);
+    }
 }
