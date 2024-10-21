@@ -23,7 +23,14 @@ public class DelimiterParser {
 	}
 
 	private String getCustomDelimiterParsed(String expression) {
-		return expression.startsWith("//") ? expression.substring(2, expression.indexOf("\\n")) : expression;
+		return expression.startsWith("//") ? expression.substring(expression.indexOf("\\n") + 2) : expression;
+	}
+
+	private String createDelimiterRegex(String expression) {
+		List<String> delimiters = getDelimiters(expression);
+		return delimiters.stream()
+				.map(d -> d.equals(",") ? "\\," : d)
+				.collect(Collectors.joining("|"));
 	}
 
 	private List<String> getDelimiters(String expression) {
@@ -34,14 +41,7 @@ public class DelimiterParser {
 		}
 		return delimiters.stream().toList();
 	}
-
-	private String createDelimiterRegex(String expression) {
-		List<String> delimiters = getDelimiters(expression);
-		return delimiters.stream()
-				.map(d -> d.equals(",") ? "\\," : d)
-				.collect(Collectors.joining("|"));
-	}
-
+	
 	private String extractUserDefinedDelimiter(String expression) {
 		int i = expression.indexOf("\\n");
 		String userDefinedDelimiter = expression.substring(2, i);
