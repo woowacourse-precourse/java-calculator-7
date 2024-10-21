@@ -7,7 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DelimiterExtractor {
-    private static final String CUSTOM_DELIMITER_PATTERN = "//(.+)\n";
+    private static final String CUSTOM_DELIMITER_PATTERN = "//((?:(?!\\\\n).)+)\\\\n";
     private static final Pattern PATTERN = Pattern.compile(CUSTOM_DELIMITER_PATTERN);
 
     public ExtractionResult extract(String input) {
