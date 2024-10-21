@@ -11,7 +11,13 @@ public class Application {
 
         // Console.readLine()으로 사용자로부터 입력 받기
         String input = Console.readLine();
+        // 빈 문자열 입력 처리
+        if (input == null || input.trim().isEmpty()) {
+            System.out.println("결과 : 0");
+            return;  // 프로그램 종료
+        }
         String separator = "[,:]";
+
         String numbers_string = input;
 
         // 커스텀 구분자가 있는지 확인
