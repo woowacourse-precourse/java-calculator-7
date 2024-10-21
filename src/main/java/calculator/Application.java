@@ -30,13 +30,13 @@ class StringCalculator {
 
         // "//"로 시작할 경우 "\n"로 구분해 delimiter 추가
         if (input.startsWith("//")) {
-            int delimiterIndex = input.indexOf("\\n");
+            int delimiterIndex = input.indexOf("\n");
             if (delimiterIndex == -1) {
                 throw new IllegalArgumentException(
-                        "Invalid input format. Expected delimiter definition followed by \\n.");
+                        "Invalid input format. Expected delimiter definition followed by newline.");
             }
             delimiter = input.substring(2, delimiterIndex);
-            input = input.substring(delimiterIndex + 2);
+            input = input.substring(delimiterIndex + 1);
         }
 
         delimiter = "[%s,:]".formatted(delimiter);
