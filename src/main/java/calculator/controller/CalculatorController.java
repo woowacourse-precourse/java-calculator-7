@@ -13,23 +13,23 @@ import calculator.view.OutputView;
 public class CalculatorController {
 	private final InputView inputView;
 	private final OutputView outputView;
+	private final Delimiters delimiters;
 	private final CustomDelimiterProcessor customDelimiterProcessor;
 
 	public CalculatorController() {
 		this.inputView = new InputView();
 		this.outputView = new OutputView();
 		this.customDelimiterProcessor = new CustomDelimiterProcessor();
+		this.delimiters = new Delimiters();
 	}
 
 	public void run() {
 		String input = readInput();
 
-		Delimiters delimiters = new Delimiters();
-		addCustomDelimiter(input, delimiters);
-
-		List<Integer> numbers = extractNumbers(input, delimiters);
-
+		String processedInput = processCustomDelimiter(input);
+		List<Integer> numbers = extractNumbers(processedInput);
 		int result = calculate(numbers);
+
 		printResult(result);
 	}
 
@@ -41,14 +41,14 @@ public class CalculatorController {
 		return input;
 	}
 
-	private void addCustomDelimiter(String input, Delimiters delimiters) {
+	private String processCustomDelimiter(String input) {
 		Optional<String> customDelimiter = customDelimiterProcessor.extractCustomDelimiter(input);
 		customDelimiter.ifPresent(delimiters::addCustomDelimiter);
+
+		return customDelimiterProcessor.removeCustomDelimiterPattern(input);
 	}
 
-	private List<Integer> extractNumbers(String input, Delimiters delimiters) {
-		String processedInput = customDelimiterProcessor.removeCustomDelimiterPattern(input);
-
+	private List<Integer> extractNumbers(String processedInput) {
 		return InputFilter.extractNumbers(processedInput, delimiters);
 	}
 
@@ -61,5 +61,4 @@ public class CalculatorController {
 	private void printResult(int result) {
 		outputView.printResult(result);
 	}
-
 }
