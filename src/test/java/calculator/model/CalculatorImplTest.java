@@ -4,12 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import calculator.AppConfig;
+import java.util.Locale;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class CalculatorImplTest {
 
-    AppConfig appConfig = new AppConfig();
+    AppConfig appConfig = new AppConfig(Locale.KOREA);
 
     @Test
     @DisplayName("빈 입력값이 들어왔을 때 예외를 발생시키는지 테스트")

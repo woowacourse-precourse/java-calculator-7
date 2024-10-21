@@ -1,13 +1,16 @@
 package calculator.model;
 
+import calculator.util.MessageSource;
 import calculator.util.ValidatorUtil;
 
 public class CalculatorImpl implements Calculator {
 
     private final ExtractNumber extractNumber;
+    private final MessageSource messageSource;
 
-    public CalculatorImpl(ExtractNumber extractNumber) {
+    public CalculatorImpl(ExtractNumber extractNumber, MessageSource messageSource) {
         this.extractNumber = extractNumber;
+        this.messageSource = messageSource;
     }
 
     @Override
@@ -32,12 +35,12 @@ public class CalculatorImpl implements Calculator {
                 int num = Integer.parseInt(number);
 
                 if (ValidatorUtil.isNegativeNumber(num)) {
-                    throw new IllegalArgumentException("음수는 허용되지 않습니다.");
+                    throw new IllegalArgumentException(messageSource.getMessage("error.negative_number"));
                 }
 
                 total += num;
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("잘못된 숫자 형식입니다.");
+                throw new IllegalArgumentException(messageSource.getMessage("error.invalid_number_format"));
             }
         }
 

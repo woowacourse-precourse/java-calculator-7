@@ -5,10 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import calculator.model.Calculator;
 import calculator.model.CalculatorImpl;
 import calculator.model.ExtractNumber;
+import calculator.util.MessageSource;
 import calculator.validator.DelimiterValidator;
 import calculator.validator.Validator;
 import calculator.validator.ValueValidate;
 import calculator.view.CalculatorView;
+import java.util.Locale;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +21,7 @@ class CalculatorControllerTest {
     void run_메서드_테스트() {
 
         //given
-        AppConfig appConfig = new AppConfig();
+        AppConfig appConfig = new AppConfig(Locale.KOREA);
 
         TestCalculatorView testCalculatorView = new TestCalculatorView("1,2,3");
         CalculatorController calculatorController = appConfig.calculatorController(testCalculatorView);
@@ -57,24 +59,35 @@ class CalculatorControllerTest {
 
     class AppConfig {
 
+        private final Locale locale;
+
+        public AppConfig(Locale locale) {
+            this.locale = locale;
+        }
+
         public CalculatorController calculatorController(CalculatorView calculatorView) {
             return new CalculatorController(calculator(), calculatorView);
         }
 
         private Calculator calculator() {
-            return new CalculatorImpl(extractNumber());
+            return new CalculatorImpl(extractNumber(), messageSource());
         }
 
         private ExtractNumber extractNumber() {
-            return new ExtractNumber(delimiterValidator(), valueValidator());
+            return new ExtractNumber(delimiterValidator(), valueValidator(), messageSource());
         }
 
         private Validator delimiterValidator() {
-            return new DelimiterValidator();
+            return new DelimiterValidator(messageSource());
         }
 
         private Validator valueValidator() {
-            return new ValueValidate();
+            return new ValueValidate(messageSource());
         }
+
+        public MessageSource messageSource() {
+            return new MessageSource(locale);
+        }
+
     }
 }

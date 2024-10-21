@@ -1,18 +1,25 @@
 package calculator.validator;
 
+import calculator.util.MessageSource;
 import java.util.regex.Pattern;
 
 public class ValueValidate implements Validator {
+
+    private final MessageSource messageSource;
+
+    public ValueValidate(MessageSource messageSource) {
+        this.messageSource = messageSource;
+    }
 
     @Override
     public void validate(String value, String delimiter) {
 
         if (value.contains(" ")) {
-            throw new IllegalArgumentException("잘못된 입력: 값에 공백이 포함될 수 없습니다.");
+            throw new IllegalArgumentException(messageSource.getMessage("error.input_contains_whitespace"));
         }
 
         if (containsInvalidCharacters(value, delimiter)) {
-            throw new IllegalArgumentException("잘못된 입력: 구분자와 숫자 이외에 다른 문자가 포함되었습니다.");
+            throw new IllegalArgumentException(messageSource.getMessage("error.input_contains_invalid_characters"));
         }
     }
 

@@ -2,6 +2,7 @@ package calculator.model;
 
 import static calculator.util.Constant.DEFAULT_DELIMITERS;
 
+import calculator.util.MessageSource;
 import calculator.util.ValidatorUtil;
 import calculator.validator.Validator;
 import java.util.regex.Pattern;
@@ -10,10 +11,12 @@ public class ExtractNumber {
 
     private final Validator delimiterValidator;
     private final Validator valueValidator;
+    private final MessageSource messageSource;
 
-    public ExtractNumber(Validator delimiterValidator, Validator valueValidator) {
+    public ExtractNumber(Validator delimiterValidator, Validator valueValidator, MessageSource messageSource) {
         this.delimiterValidator = delimiterValidator;
         this.valueValidator = valueValidator;
+        this.messageSource = messageSource;
     }
 
     public String[] extractNumberFromInput(String input) {
@@ -52,7 +55,7 @@ public class ExtractNumber {
         String[] parts = input.split("\n", 2);
 
         if (parts.length != 2) {
-            throw new IllegalArgumentException("잘못된 입력 형식입니다: 계산 될 문자가 없습니다.");
+            throw new IllegalArgumentException(messageSource.getMessage("error.invalid_format"));
         }
 
         return parts;

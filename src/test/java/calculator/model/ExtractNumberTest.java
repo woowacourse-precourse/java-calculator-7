@@ -1,13 +1,14 @@
 package calculator.model;
 
 import calculator.AppConfig;
+import java.util.Locale;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class ExtractNumberTest {
 
-    AppConfig appConfig = new AppConfig();
+    AppConfig appConfig = new AppConfig(Locale.KOREA);
 
     @Test
     @DisplayName("기본 구분자를 사용하여 숫자를 정상적으로 추출하는지 테스트")
