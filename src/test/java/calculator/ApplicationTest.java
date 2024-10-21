@@ -51,32 +51,32 @@ class ApplicationTest extends NsTest {
     @Test
     void 예외_테스트_음수() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                    .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> runException("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
     @Test
     void 예외_테스트_0() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("0,2,3"))
-                    .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> runException("0,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
     @Test
     void 예외_테스트_커스텀_구분자_형식() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("//;1;2"))
-                    .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> runException("//;1;2"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
     @Test
     void 예외_테스트_숫자아닌값() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("1,a,3"))
-                    .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> runException("1,a,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
