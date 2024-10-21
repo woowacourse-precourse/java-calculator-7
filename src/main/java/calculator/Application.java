@@ -2,6 +2,7 @@ package calculator;
 
 import calculator.io.InputHandler;
 import calculator.service.Calculator;
+import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static void main(String[] args) {
@@ -15,5 +16,6 @@ public class Application {
         int result = calculator.sum();
 
         System.out.println("결과 : " + result);
+        Console.close();
     }
 }

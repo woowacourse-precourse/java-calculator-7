@@ -9,7 +9,7 @@ public class StringParser {
         Pattern pattern = Pattern.compile("^//(.)\\\\n.*$");
         Matcher matcher = pattern.matcher(input);
         if (!matcher.matches()) {
-            throw new IllegalArgumentException("올바르지 않은 형식의 커스텀 구분자입니다.");
+            throw new CustomExceptions.InvalidDelimiterFormatException("커스텀 구분자의 형식이 잘못되었습니다.");
         }
         return matcher.group(1);
     }
@@ -27,7 +27,7 @@ public class StringParser {
 
         String[] parts = input.split("\n", 2);
         if (parts.length <= 1) {
-            throw new IllegalArgumentException("올바르지 않은 형식의 입력입니다. 줄바꿈 문자가 없습니다.");
+            throw new IllegalArgumentException("커스텀 구분자의 형식이 잘못되었습니다.");
         }
         return parts[1];
     }
