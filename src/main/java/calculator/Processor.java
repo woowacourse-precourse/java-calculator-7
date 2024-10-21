@@ -14,6 +14,10 @@ public class Processor {
     }
 
     public int execute() {
+        if (input == null || input.isEmpty()) {
+            return 0;
+        }
+
         if (input.startsWith(DELIMITER_DECLARATION_SECTION)) {
             String customDelimiter = extractCustomDelimiter();
             delimiters.add(customDelimiter);
