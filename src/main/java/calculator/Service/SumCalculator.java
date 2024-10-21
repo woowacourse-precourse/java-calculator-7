@@ -14,7 +14,7 @@ public class SumCalculator {
             try {
                 // 문자열을 정수로 변환 후 합산
                 int number = Integer.parseInt(element.trim());
-                if (number < 1) {
+                if (number < 0) {
                     // 0 또는 음수가 입력된 경우
                     throw new IllegalArgumentException("[ERROR] 잘못된 입력 형식 (0 or 음수):" + element);
                 }
@@ -22,9 +22,6 @@ public class SumCalculator {
             } catch (NumberFormatException e) {
                 // 숫자로 변환할 수 없는 경우 (구분자 이외의 문자가 존재하는 경우)
                 throw new IllegalArgumentException("[ERROR] 잘못된 입력 형식 (구분자 이외의 문자):" + element);
-            } catch (IllegalArgumentException e) {
-                System.err.println(e.getMessage());
-                System.exit(1);  // 프로그램 종료
             }
         }
 
