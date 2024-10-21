@@ -16,7 +16,7 @@ public class Application {
         long answer = 0;
 
         if ((str.startsWith("//") && str.contains("\\n"))) {
-            // 커스텀 구분자 확인
+            delimiters = checkDelimiter(str);
         }
 
         // 구분자 이용해서 문자열 나누기
@@ -26,6 +26,12 @@ public class Application {
 
         System.out.println("결과 : " + answer);
 
+    }
+
+    private static List<String> checkDelimiter(String str) {
+        String tmp = str.substring(2, str.indexOf("\\n"));
+        delimiters.add(tmp);
+        return delimiters;
     }
 
 }
