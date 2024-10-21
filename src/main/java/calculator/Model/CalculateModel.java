@@ -9,7 +9,7 @@ public class CalculateModel {
         String[] numbers;
 
         //빈 문자열이면 0 반환
-        if (input.isEmpty()) {
+        if (input == null || input.isEmpty()) {
             return 0;
         }
 
