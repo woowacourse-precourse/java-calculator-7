@@ -13,7 +13,7 @@ public class Application {
             throw new RuntimeException(e);
         }
 
-        String[] inputArray = input.split("[,;]");
+        String[] inputArray = input.split("[,:]");
         int num = 0;
         for (String s : inputArray) {
             num += Integer.parseInt(s);
