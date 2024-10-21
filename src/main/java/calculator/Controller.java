@@ -1,0 +1,34 @@
+package calculator;
+
+import calculator.service.InputHandler;
+import calculator.service.SeparatorHandler;
+import calculator.service.Calculator;
+
+public class Controller {
+    private final InputHandler inputHandler;
+    private final SeparatorHandler separatorHandler;
+    private final Calculator calculator;
+
+    public Controller() {
+        this.inputHandler = new InputHandler();
+        this.separatorHandler = new SeparatorHandler();
+        this.calculator = new Calculator();
+    }
+
+    public void run(){
+        String input = inputHandler.getUserInput();
+
+        input = separatorHandler.checkCustomSeparator(input);
+
+        if (input.isEmpty()){
+            System.out.println("결과 : " + 0);
+            return;
+        }
+
+        inputHandler.validateInput(input);
+
+        int result = calculator.calculate(input);
+
+        System.out.println("결과 : " + result);
+    }
+}
