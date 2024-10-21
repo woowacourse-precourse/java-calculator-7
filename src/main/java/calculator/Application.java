@@ -12,6 +12,8 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
         List<Integer> integers = extractNumbers(input);
+        int result = sumValues(integers);
+        System.out.println("결과 : " + result);
     }
     private static List<Integer> extractNumbers(String input) {
         String delimiter = ",|:";
@@ -48,5 +50,8 @@ public class Application {
         }
 
         return result;
+    }
+    private static Integer sumValues(List<Integer> numbers) {
+        return numbers.stream().mapToInt(Integer::intValue).sum();
     }
 }
