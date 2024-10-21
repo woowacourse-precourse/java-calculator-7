@@ -3,18 +3,15 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IllegalArgumentException{
         // TODO: 프로그램 구현
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String numDelimiterString = Console.readLine();
-        try {
-            int addResult = separator(numDelimiterString);
-            System.out.println("결과 : " + addResult);
-            return;
-        } catch(IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return;
-        }
+
+        int addResult = separator(numDelimiterString);
+        System.out.println("결과 : " + addResult);
+        return;
+
     }
 
     public static int separator(String numDelimiterString) { //문자열에서 숫자 추출하여 더한 값 반환
@@ -31,7 +28,7 @@ public class Application {
             if(Character.isDigit(numDelimiterString.charAt(0))) {
                 return Character.getNumericValue(numDelimiterString.charAt(0));
             }else {
-                throw new IllegalArgumentException("Illegal Argument");
+                throw new IllegalArgumentException("IllegalArgumentException");
             }
         }
 
@@ -43,19 +40,17 @@ public class Application {
         }
 
         for(int i = 0; i <numDelimiterString.length(); i++) {
-            if(custom && i > 4 && Character.isDigit(numDelimiterString.charAt(i)) == prevIsNum) {
-                throw new IllegalArgumentException("Illegal Argument");
-            }else if(custom && i > 4 && prevIsNum && numDelimiterString.charAt(i) != delimiter) {
-                throw new IllegalArgumentException("Illegal Argument");
-            }else if(!custom && Character.isDigit(numDelimiterString.charAt(i)) == prevIsNum) {
-                throw new IllegalArgumentException("Illegal Argument");
-            }else if(!custom && prevIsNum && numDelimiterString.charAt(i) != ',' && numDelimiterString.charAt(i) != ':') {
-                throw new IllegalArgumentException("Illegal Argument");
+            if(custom && i > 4 && Character.isDigit(numDelimiterString.charAt(i)) == prevIsNum) { //커스텀 구분자일때 숫자나 구분자가 연속으로 들어온 경우 (음수가 들어온 경우 포함)
+                throw new IllegalArgumentException("IllegalArgumentException");
+            }else if(custom && i > 4 && prevIsNum && numDelimiterString.charAt(i) != delimiter) { //커스텀 구분자일때 구분자로 다른 구분자가 들어온 경우
+                throw new IllegalArgumentException("IllegalArgumentException");
+            }else if(!custom && Character.isDigit(numDelimiterString.charAt(i)) == prevIsNum) { //일반 구분자일때 숫자나 구분자가 연속으로 들어온 경우 (음수가 들어온 경우 포함)
+                throw new IllegalArgumentException("IllegalArgumentException");
+            }else if(!custom && prevIsNum && numDelimiterString.charAt(i) != ',' && numDelimiterString.charAt(i) != ':') { //일반 구분자일때 쉼표와 콜론 이외의 구분자가 들어온 경우
+                throw new IllegalArgumentException("IllegalArgumentException");
             }else if(!Character.isDigit(numDelimiterString.charAt(i))) {
                 prevIsNum = false;
                 continue;
-            }else if(Character.getNumericValue(numDelimiterString.charAt(i)) <= 0) {
-                throw new IllegalArgumentException("Illegal Argument");
             }else {
                 addResult += Character.getNumericValue(numDelimiterString.charAt(i));
                 prevIsNum = true;
