@@ -16,6 +16,7 @@ public class Numbers {
             return new Numbers(new ArrayList<>());
         }
         List<Integer> integers = Stream.of(split)
+                .filter(s -> !s.isEmpty())
                 .map(Integer::parseInt)
                 .toList();
 
