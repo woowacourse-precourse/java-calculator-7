@@ -18,11 +18,7 @@ public class CalcModel {
         if (inputString.startsWith(CUSTOM_DELIMITER_START_PREFIX))
             return sumWithCustomDelimiter(inputString);
 
-        return sumNumbers(parseByDelimiter(inputString, DEFAULT_DELIMITER_PREFIX));
-    }
-
-    private int sumNumbers(int[] numArray) {
-        return Arrays.stream(numArray).sum();
+        return Arrays.stream(parseByDelimiter(inputString, DEFAULT_DELIMITER_PREFIX)).sum();
     }
 
     public int sumWithCustomDelimiter(String inputString) {
@@ -32,7 +28,7 @@ public class CalcModel {
 
         String customDelimiter = Pattern.quote(matcher.group(1));
         String numbers = matcher.group(2);
-        return sumNumbers(parseByDelimiter(numbers, customDelimiter));
+        return Arrays.stream(parseByDelimiter(numbers, customDelimiter)).sum();
     }
 
     public int[] parseByDelimiter(String inputString, String delimiter) {
@@ -43,14 +39,15 @@ public class CalcModel {
     }
 
     public int parseNum(String input) {
-        try {
-            int num = Integer.parseInt(input);
-            if (num < 0)
-                throw new IllegalArgumentException(NUMBER_NOT_POSITIVE);
-            return num;
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(INPUT_NOT_VALID);
-        }
+        validateNum(input);
+        int num = Integer.parseInt(input);
+        if (num < 0)
+            throw new IllegalArgumentException(NUMBER_NOT_POSITIVE);
+        return num;
+    }
 
+    private void validateNum(String input) {
+        if (!input.matches("[0-9]+"))
+            throw new IllegalArgumentException(INPUT_NOT_VALID);
     }
 }
