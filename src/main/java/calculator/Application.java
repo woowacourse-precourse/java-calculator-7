@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 public class Application {
     private static final String COMMA = ",";
     private static final String SEMICOLON = ";";
-    private static final String COMMA_AND_SEMICOLON = COMMA + "|" + SEMICOLON;
+    private static final String COMMA_OR_SEMICOLON = COMMA + "|" + SEMICOLON;
     private static final String EMPTY = "";
     private static final String REX_ONLY_NUMBER = "\\d+";
     private static final String CUSTOM_DELIMITER_START = "//";
@@ -88,12 +88,12 @@ public class Application {
             throw new IllegalArgumentException(ERROR_NOT_CONTAIN_DELIMITER);
         }
 
-        String[] delimiters = {COMMA, SEMICOLON, COMMA_AND_SEMICOLON};
+        String[] delimiters = {COMMA, SEMICOLON, COMMA_OR_SEMICOLON};
         for (String delimiter : delimiters) {
             validateOnlyDelimiter(input, delimiter);
         }
 
-        List<String> stringInputs = Arrays.stream(input.split(COMMA_AND_SEMICOLON))
+        List<String> stringInputs = Arrays.stream(input.split(COMMA_OR_SEMICOLON))
                 .filter(letter -> !letter.equals(EMPTY))
                 .map(String::trim)
                 .toList();
