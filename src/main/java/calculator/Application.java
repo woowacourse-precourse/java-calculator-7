@@ -28,22 +28,24 @@ public class Application {
         throw new IllegalArgumentException();
     }
 
-    public static String extractLetter(String str){
-        boolean isCustomLetter = isCustomLetter(str);
+    public static String extractLetter(String str, boolean isCustomLetter){
         if(isCustomLetter){
             // 구분자 다음에 반드시 \n이 있는지 확인
             String a = str.substring(3, 5); // 여기서 \n을 포함한 부분 추출
             if (!a.equals("\\n")) {
-                throw new IllegalArgumentException("구분자 뒤에 줄바꿈 문자가 없습니다.");
+                throw new IllegalArgumentException();
             }
             // 구분자는 "//" 뒤에 있는 한 글자
             return str.substring(2, 3);
         }
+
         return ":|,";
     }
 
     public static List<Integer> extractNum(String str){
-        String letter = extractLetter(str);
+        boolean isCustomLetter = isCustomLetter(str);
+        String letter = extractLetter(str, isCustomLetter);
+        str = isCustomLetter ? sliceCustomStr(str) : str;
         List<Integer> nums = new ArrayList<>();
 
         StringTokenizer st = new StringTokenizer(str, letter);
@@ -53,6 +55,10 @@ public class Application {
         }
 
         return nums;
+    }
+
+    public static String sliceCustomStr(String str){
+        return str.substring(5);
     }
 
     public static long plusNums(List<Integer> nums){
