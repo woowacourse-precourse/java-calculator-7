@@ -45,7 +45,9 @@ public class Calculator {
 
     private String getCustomDelimiters(String inputValue) {
         Pattern pattern = Pattern.compile(REGEX);
-        Matcher matcher = pattern.matcher(inputValue);
+
+        String value = inputValue.replace("\\n", "\n");
+        Matcher matcher = pattern.matcher(value);
 
         if (!matcher.find()) {
             throw new IllegalStateException("BAD REQUEST");
@@ -62,7 +64,7 @@ public class Calculator {
         }
     }
 
-    private Integer getResult(ArrayList<Integer> nums) {
+    private Integer addNums(ArrayList<Integer> nums) {
         for (Integer n : nums) {
             this.result += n;
         }
@@ -73,7 +75,7 @@ public class Calculator {
         createInputValue();
         String[] stringNums = splitNums();
         ArrayList<Integer> nums = toInteger(stringNums);
-        this.result = getResult(nums);
+        this.result = addNums(nums);
         System.out.println("결과: " + this.result);
     }
 }
