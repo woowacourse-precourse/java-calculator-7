@@ -15,7 +15,7 @@ public interface SeparatorService {
      * @return 기본 구분자와 커스텀 구분자가 포함된 정규표현식 {@code RegexStr} 객체
      */
 
-    RegexStr getCustomSeparators(Input input);
+    RegexStr getSepsRegex(Input input);
 
     /**
      * 커스텀 구분자로 인식되는 문자열의 첫번째 인덱스를 큐에 삽입하여 반환

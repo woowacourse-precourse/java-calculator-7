@@ -15,7 +15,7 @@ import calculator.service.SeparatorService;
 public class SeparatorServiceImpl implements SeparatorService {
 
     @Override
-    public RegexStr getCustomSeparators(Input input) {
+    public RegexStr getSepsRegex(Input input) {
 
         SeparatorSet separatorSet = new SeparatorSet();
 

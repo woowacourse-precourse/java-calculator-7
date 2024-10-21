@@ -74,11 +74,12 @@ public class Index implements Comparable<Index> {
     }
 
     protected boolean isEndCustomSep(String str) {
-        return str.startsWith(CUSTOM_DESIGNATOR_END, value + CUSTOM_SEPARATOR_END_IDX.value);
+        Integer customSepEndIdx = CUSTOM_SEPARATOR_END_IDX.value;
+        return str.startsWith(CUSTOM_DESIGNATOR_END, value + customSepEndIdx);
     }
 
     protected String oneLetter(String str) {
-        char charLetter = str.charAt(this.value);
+        char charLetter = str.charAt(value);
         return String.valueOf(charLetter);
     }
 

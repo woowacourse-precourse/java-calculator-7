@@ -31,7 +31,7 @@ class SeparatorServiceTest {
         RegexStr expected = separatorSet.toRegexStr();
 
         // when
-        RegexStr result = separatorService.getCustomSeparators(input);
+        RegexStr result = separatorService.getSepsRegex(input);
 
         // then
         assertThat(expected).isEqualTo(result);
@@ -58,7 +58,7 @@ class SeparatorServiceTest {
         IndexQueue result = separatorService.getAllCustomSepIdx(input);
 
         // then
-        assertThat(expected).isIn(result);
+        assertThat(expected).isEqualTo(result);
     }
 
     @Test
