@@ -9,11 +9,7 @@ import java.util.regex.Pattern;
 import calculator.validation.InputValidator;
 
 public class InputParser {
-	private final InputValidator inputValidator;
-
 	public InputParser(String input) {
-		this.inputValidator = new InputValidator();
-		// 만약 사용자가 커스텀 구분자를 입력했다면, 커스텀 구분자를 따로 추출해서 구분자 목록에 추가한다..
 		// extractCustomDelimiter(input).ifPresent(delimiter::add);
 	}
 
@@ -33,7 +29,7 @@ public class InputParser {
 	// 구분자들을 이용해 정규식을 만들고, 이를 이용해 입력값을 분리
 	private String[] splitInput(String input, Delimiter delimiter) {
 		String processedInput = removeCustomDelimiter(input);
-		inputValidator.validateInvalidDelimiter(processedInput, delimiter);
+		InputValidator.validateInvalidDelimiter(processedInput, delimiter);
 
 		String regex = String.join("|",
 			delimiter.getDelimiters().stream()
@@ -66,8 +62,8 @@ public class InputParser {
 		Arrays.stream(splitParts)
 			.map(String::trim)
 			.forEach(part -> {
-				inputValidator.validateDigit(part);
-				inputValidator.validateNumberPositive(part);
+				InputValidator.validateDigit(part);
+				InputValidator.validateNumberPositive(part);
 				numbers.add(Integer.parseInt(part));
 			});
 

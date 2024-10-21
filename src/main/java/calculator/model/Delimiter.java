@@ -9,16 +9,14 @@ import calculator.validation.InputValidator;
 
 public class Delimiter {
 	private final Set<String> delimiters = new HashSet<>();
-	private final InputValidator inputValidator;
 
 	public Delimiter() {
 		initDefaultDelimiters();
-		this.inputValidator = new InputValidator();
 	}
 
 	public void addCustomDelimiter(String delimiterInput) {
-		inputValidator.validateEmpty(delimiterInput);
-		inputValidator.validateNonDigit(delimiterInput);
+		InputValidator.validateEmpty(delimiterInput);
+		InputValidator.validateNonDigit(delimiterInput);
 		delimiters.add(delimiterInput);
 	}
 
