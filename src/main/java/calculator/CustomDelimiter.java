@@ -6,8 +6,6 @@ public class CustomDelimiter implements Delimiter {
     private static final int CUSTOM_DELIMITER_START_INDEX = 2; // 커스텀 구분자 시작 인덱스
     private static final int CUSTOM_DELIMITER_END_INDEX = 3;   // 커스텀 구분자 종료 인덱스
     private static final int CUSTOM_DELIMITER_EXPRESSION_LENGTH = 4; // "//?\n" 표현의 길이
-    private static final String[] META_CHARACTERS = {".", "*", "+", "?", "|", "^", "$", "(", ")", "[", "]", "{", "}",
-            "\\"};
 
     private String delimiters = ",|:";
 
@@ -22,7 +20,7 @@ public class CustomDelimiter implements Delimiter {
 
     @Override
     public String parseDelimiter(String input) {
-        if (isValidExpression(input)) {
+        if (isCustomDelimiterExpression(input)) {
             // todo : 커스텀 구분자가 1문자 이상인 경우 예외 처리(리팩토링 중 유실됨,
             // todo : //와 \\n 기준으로 동적으로 진행되게 해야하는지 검토 필요
             if (input.length() < CUSTOM_DELIMITER_EXPRESSION_LENGTH) {
@@ -35,7 +33,7 @@ public class CustomDelimiter implements Delimiter {
                 throw new IllegalArgumentException(ERROR_NUMBER_AS_DELIMITER);
             }
 
-            customDelimiter = escapeMetaCharacters(customDelimiter);
+            customDelimiter = MetaCharacterUtil.escapeMetaCharacters(customDelimiter);
             delimiters += "|" + customDelimiter;  // 기본 구분자에 커스텀 구분자 추가
             return input.substring(CUSTOM_DELIMITER_EXPRESSION_LENGTH + 1); // 커스텀 구분자를 제외한 나머지 문자열 반환
         }
@@ -43,16 +41,7 @@ public class CustomDelimiter implements Delimiter {
         throw new IllegalArgumentException(ERROR_INVALID_DELIMITER_EXPRESSION);
     }
 
-    private boolean isValidExpression(String input) {
+    private boolean isCustomDelimiterExpression(String input) {
         return input.startsWith("//") && input.contains("\\n");
-    }
-
-    private String escapeMetaCharacters(String customDelimiter) {
-        for (String metaChar : META_CHARACTERS) {
-            if (customDelimiter.equals(metaChar)) {
-                return "\\" + customDelimiter;
-            }
-        }
-        return customDelimiter;
     }
 }
