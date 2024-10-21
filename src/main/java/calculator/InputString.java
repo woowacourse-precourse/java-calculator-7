@@ -37,7 +37,11 @@ public class InputString {
 
     private String findDelimiter(String input) {
         if (input.startsWith("//")) {
-            return input.substring(2, 3);
+            var delimiter = input.substring(2, 3);
+            if (delimiter.matches("\\d+")) {
+                throw new IllegalArgumentException("커스텀 구분자가 잘못되었습니다.");
+            }
+            return delimiter;
         }
         return "[,:]";
     }
