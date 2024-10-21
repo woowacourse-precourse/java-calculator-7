@@ -14,7 +14,12 @@ public class Validation {
             throw new IllegalArgumentException();
     }
 
+    public static void overflowOccurInLongValue(Long value) {
+        if(overflowOutbreak(value)) throw new IllegalArgumentException();
+    }
+
     private static Boolean overflowOutbreak(Long value) {
         return value < 0;
     }
+
 }
