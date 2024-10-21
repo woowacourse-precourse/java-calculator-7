@@ -5,19 +5,15 @@ import java.util.Scanner;
 public class Application {
     public static void main(String[] args) {
 
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        String customDelimiter = ",|:";
 
-        Scanner scanner = new Scanner(System.in);
-        String str = scanner.nextLine();
+        String str = getStr();
 
-        // 빈 문자열 처리
-        if (str.isEmpty()) {
-            System.out.println("결과 : 0");
+        if (isEmptyInput(str)) {
             return;
         }
 
         // 커스텀 구분자 처리
-        String customDelimiter = ",|:";
         if (str.startsWith("//")) {
             int delimiterIndex = str.indexOf("\\n");
 
@@ -48,5 +44,21 @@ public class Application {
         } catch (Exception e) {
             throw new IllegalArgumentException("잘못된 값을 입력하였습니다.");
         }
+    }
+
+    private static boolean isEmptyInput(String str) {
+        if (str.isEmpty()) {
+            System.out.println("결과 : 0");
+            return true;
+        }
+        return false;
+    }
+
+    private static String getStr() {
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+
+        Scanner scanner = new Scanner(System.in);
+        String str = scanner.nextLine();
+        return str;
     }
 }
