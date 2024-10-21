@@ -2,7 +2,6 @@ package calculator;
 
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -41,7 +40,8 @@ class CalculatorTest {
         // given
         List<String> numbers = List.of("1","-2","3");
         // when then
-        assertThatThrownBy(() -> Calculator.numberSum(numbers)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> Calculator.numberSum(numbers))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     static Stream<Arguments> provideValidNumbers() {
