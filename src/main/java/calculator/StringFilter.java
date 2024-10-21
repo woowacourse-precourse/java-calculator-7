@@ -1,41 +1,39 @@
 package calculator;
 
+
 import java.util.Arrays;
 
 public class StringFilter {
+    final String baseDelimiter = "[,|:]";
+    String customDelimiter = "";
 
-    private String str;
+    public String[] checkString(String input) {
+        input = input.replaceAll(" ", "");
 
-    public StringFilter(String str) {
-        this.str = str;
+        if(input.isEmpty()) {
+            throw new IllegalArgumentException("잘못된 형식입니다.");
+        }
+
+        if(input.contains("//") && input.contains("\\n")) {
+            return customDelimiterCheck(input);
+        }
+        return filteringString(input);
     }
 
-    public String[] getFilteredString() {
-        //만약 공백입력시
-        if(str==null || str.isEmpty())
-            return new String[]{"0"};
-
-
-        str = str.replaceAll(" ", "");
-        String delimiter = "[,|:]";
-        String numberPart;
-
-        // 만약 커스텀 구분자가 존재한다면.
-        if(str.startsWith("//")) {
-            //구분자의 추출
-            String customDelimiter = str.substring(2, str.indexOf("\\"));
-            delimiter += "|" + customDelimiter;
-            // //, \n, 구분자를 제외한 나머지 숫자들 추출
-            numberPart = str.substring(str.indexOf("n") + 1);
-
-            //빈 문자열 필터링 및 결과 반환
-//            return numberPart.split(delimiter);
-        } else {
-            numberPart = str;
+    private String[] customDelimiterCheck(String input) {
+        if(input.indexOf("//") > input.indexOf("\\n")) {
+            throw new IllegalArgumentException("커스텀 구분자를 찾을 수 없습니다.");
         }
-//        return str.split(delimiter);
-        return Arrays.stream(numberPart.split(delimiter))
-                .filter(s -> !s.isEmpty()) // 빈 문자열 제거
+        customDelimiter = input.substring(input.indexOf("//")+2, input.indexOf("\\n"));
+        return filteringString(input);
+    }
+
+    private String[] filteringString(String input) {
+        String replaceInput = input.replace("//","").replace("\\n", "");
+        return Arrays.stream(replaceInput.split(baseDelimiter))
+                .flatMap(part -> Arrays.stream(part.split(customDelimiter)))
+                .filter(s -> !s.isEmpty())
                 .toArray(String[]::new);
+
     }
 }
