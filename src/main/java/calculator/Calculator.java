@@ -36,10 +36,13 @@ public class Calculator {
         if (isDigit(readLine.charAt(i))) {
           addNumbers(readLine.charAt(i));
         }
-//        // 아닌 경우는 예외 처리한다
-//        throw new IllegalArgumentException(
-//            "커스텀 구분자를 입력하려면 문자열 맨앞에 '//;\\n'를 붙인 다음 사용해주세요 (예시 //;\\n1;2;3)");
+        else {
+          // 아닌 경우는 예외 처리한다
+          throw new IllegalArgumentException(
+              "커스텀 구분자를 입력하려면 문자열 맨앞에 '//;\\n'를 붙인 다음 사용해주세요 (예시 //;\\n1;2;3)");
+          }
         }
+
         char index = readLine.charAt(i);
 
         //  인덱스가 기본 구분자 ‘,’ , ‘:’ 인 경우
