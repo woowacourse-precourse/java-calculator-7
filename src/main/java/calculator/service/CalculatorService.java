@@ -114,9 +114,18 @@ public class CalculatorService {
     }
 
     public String printResult() {
-        String result = "결과 : " + calculator.getSumValue();
+        double sum = calculator.getSumValue();
+
+        // 값이 정수인지 소수인지 확인
+        String result;
+        if (sum == (int) sum) {  // 정수와 동일한 값인지 체크
+            result = "결과 : " + (int) sum;
+        } else {
+            result = "결과 : " + sum;
+        }
+
         System.out.println(result);
-        return  result;
+        return result;
     }
 }
 
