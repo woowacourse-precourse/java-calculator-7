@@ -1,10 +1,10 @@
 package calculator.view;
 
-import calculator.global.exception.CalculatorException;
-import calculator.view.constant.errorMessage.InputErrorMessage;
+import calculator.domain.validation.DelimiterValidator;
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
+    private final DelimiterValidator delimiterValidator = new DelimiterValidator();
 
     public String inputString() {
         String input = Console.readLine();
@@ -13,8 +13,6 @@ public class InputView {
     }
 
     private void validateInput(String input) {
-        if (input.isEmpty()) {
-            throw new CalculatorException(InputErrorMessage.NULL_INPUT_ERROR);
-        }
+        delimiterValidator.validateFormat(input);
     }
 }
