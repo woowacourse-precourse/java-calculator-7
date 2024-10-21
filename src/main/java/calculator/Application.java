@@ -1,32 +1,55 @@
 package calculator;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
 
-import static camp.nextstep.edu.missionutils.Console.readLine;
+import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static int sumNumbers(String input) {
-        // 정규식을 사용하여 , 혹은 : 로 문자열을 분리
-        String[] parts = input.split("[,:]");
+        if (input.isEmpty()) {
+            throw new IllegalArgumentException("Input string cannot be empty");
+        }
+
+        String delimiter = "[,:]"; // 기본 구분자
+        String numbers = input;
+
+        // 커스텀 구분자가 있는지 확인
+        if (input.startsWith("//")) {
+            int delimiterEndIndex = input.indexOf("\n");
+            if (delimiterEndIndex == -1) {
+                throw new IllegalArgumentException("Custom delimiter must end with '\\n'");
+            }
+            delimiter = input.substring(2, delimiterEndIndex); // 커스텀 구분자 추출
+            numbers = input.substring(delimiterEndIndex + 1); // 실제 숫자 문자열
+        }
+
+        // 커스텀 구분자를 포함하여 문자열을 분리
+        String[] parts = numbers.split(delimiter);
         int sum = 0;
 
         for (String part : parts) {
-            // 문자열을 정수로 변환하여 더하기
-            sum += Integer.parseInt(part.trim());
+            part = part.trim();
+            if (part.isEmpty()) {
+                throw new IllegalArgumentException("Empty value detected between delimiters");
+            }
+
+            try {
+                sum += Integer.parseInt(part); // 숫자 변환 시도
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Invalid number format: " + part);
+            }
         }
 
         return sum;
     }
 
     public static void main(String[] args) {
-        String string;
-
-        Scanner sc = new Scanner(System.in);
-        System.out.println("덧셈할 문자열을 입력해 주세요");
-        string= sc.nextLine();;
-
-        int result = sumNumbers(string);
-        System.out.println("Sum: " + result);
+        try {
+            System.out.println("덧셈할 문자열을 입력해 주세요:");
+            String input = Console.readLine();
+            int result = sumNumbers(input);
+            System.out.println("결과 : " + result);
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error : " + e.getMessage());
+            //System.exit(1); // 애플리케이션 종료
+        }
     }
 }
