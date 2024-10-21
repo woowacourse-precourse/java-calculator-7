@@ -9,8 +9,6 @@ import java.util.regex.Pattern;
 
 public class CalculatorService {
 
-    //TODO: 입력에 대한 문자열 처리, 계산 등을 진행하는 클래스
-
     private final String SPECIAL_PREFIX = "//";
     private final String SPECIAL_SUFFIX = "\\n";
     private final String SEPARATOR_COMMA = ",";

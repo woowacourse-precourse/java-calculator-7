@@ -5,6 +5,7 @@ import calculator.service.CalculatorService;
 import calculator.view.CalculatorView;
 
 public class Application {
+
     public static void main(String[] args) {
 
         CalculatorView calcView = new CalculatorView();
