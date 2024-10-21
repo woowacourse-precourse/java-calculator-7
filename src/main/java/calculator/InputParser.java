@@ -6,7 +6,7 @@ import java.util.StringTokenizer;
 public class InputParser {
 
     public static ArrayList<Integer> parseInput(String input) {
-        String delimiters = ",;";
+        String delimiters = ",:";
 
         if(input.contains("//")) {
             int endIndex = input.indexOf("\\n");
