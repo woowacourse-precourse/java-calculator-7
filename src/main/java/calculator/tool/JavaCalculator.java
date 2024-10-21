@@ -14,6 +14,8 @@ public class JavaCalculator {
     }
 
     public int solution(String input) {
-        return 0;
+        if (input == null || input.isEmpty()) {
+            return 0;
+        }
     }
 }
