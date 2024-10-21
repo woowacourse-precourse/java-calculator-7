@@ -33,6 +33,22 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 커스텀_구분자_사용_여러수() {
+        assertSimpleTest(() -> {
+            run("//;\\n1;2");
+            assertThat(output()).contains("결과 : 3");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자와_기본_구분자를_섞어서_사용() {
+        assertSimpleTest(() -> {
+            run("//;\\n1;2,3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
     void 커스텀_구분자_사용시_예외_테스트() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//;1;2;3"))
