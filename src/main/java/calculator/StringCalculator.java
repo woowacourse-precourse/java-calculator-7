@@ -9,12 +9,21 @@ public class StringCalculator {
 	private static final String DEFAULT_DELIMITERS = ",|:";
 
 	public int add(String input) {
-		if (input == null || input.isEmpty()) {
+		if (isEmptyOrZero(input)) {
 			return 0;
 		}
 
 		String[] numbers = splitNumbers(input);
 		return sum(numbers);
+	}
+
+	private boolean isEmptyOrZero(String input) {
+		if (input == null || input.isEmpty()) {
+			return true;
+		}
+		// "0" 또는 공백을 제거한 후 "0"인 경우 처리
+		String trimmed = input.trim();
+		return trimmed.isEmpty() || trimmed.equals("0");
 	}
 
 	private String[] splitNumbers(String input) {
