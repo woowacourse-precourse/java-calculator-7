@@ -27,13 +27,6 @@ public class Application {
             }
         }
 
-        String splitDelimiters = "";
-
-        for (int i = 0; i < delimiters.size(); i++) {
-            if (i == delimiters.size() - 1) {
-                splitDelimiters += delimiters.get(i);
-            }
-            splitDelimiters += delimiters.get(i) + "|";
-        }
+        String splitDelimiters = String.join("|", delimiters);
     }
 }
