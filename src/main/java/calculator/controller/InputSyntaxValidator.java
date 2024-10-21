@@ -1,6 +1,8 @@
 package calculator.controller;
 
+import java.util.Arrays;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class InputSyntaxValidator {
 
