@@ -1,14 +1,14 @@
 package calculator;
 
 public class Delimiter {
-    private String delimiter;
+    private final String delimiter;
 
     public Delimiter(String input) {
-        if (input.startsWith("//") && input.contains("\n")) {
-            int delimiterIndex = input.indexOf("\n");
-            this.delimiter = input.substring(2, delimiterIndex);  // 커스텀 구분자
+        if (input.startsWith("//")) {
+            int delimiterEndIndex = input.indexOf("\n");
+            delimiter = input.substring(2, delimiterEndIndex);
         } else {
-            this.delimiter = "[,|:]";  // 기본 구분자 쉼표와 콜론
+            delimiter = ",|:";  // 기본 구분자
         }
     }
 
