@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.StringTokenizer;
 
 public class CalculatorService {
-    private final Set<String> separators = new HashSet<>(Set.of(",", ":"));
+    private final Set<String> separators = new HashSet<>();
 
     public int strCalculator(String input) {
         return extractNumber(customSplit(input));
@@ -28,6 +28,8 @@ public class CalculatorService {
             for (char c : separator.toCharArray()) {
                 separators.add(String.valueOf(c));
             }
+
+            separators.addAll(Set.of(",", ":"));
 
             input = input.substring(separatorIndex + 1);
         }
