@@ -2,7 +2,8 @@ package calculator.controller;
 
 import calculator.domain.Calculator;
 import calculator.domain.NumberParser;
-import calculator.view.View;
+import calculator.view.InputView;
+import calculator.view.OutputView;
 
 public class CalculatorController {
     private final NumberParser numberParser;
@@ -14,9 +15,9 @@ public class CalculatorController {
     }
 
     public void run() {
-        String input = View.requestString();
+        String input = InputView.requestString();
         String[] numbers = numberParser.parse(input);
         int result = calculator.sum(numbers);
-        View.printResult(result);
+        OutputView.printResult(result);
     }
 }
