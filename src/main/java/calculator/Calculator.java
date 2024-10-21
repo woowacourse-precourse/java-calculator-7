@@ -60,11 +60,12 @@ public class Calculator {
   }
 
   // 문자열의 요소가 유효하지 않으면 예외 처리한다
+  // 유효한 경우 : 기본구분자
   private void checkException(char index) {
-    // [x] 디버깅 :  오타 수정 && -> !=
-    // 특정 구분자가 아닌 경우
+    //
     if (index != ',' && index != ':' && isDigit(index)) {
       // [] 비정상 입력 예외 처리
+
       throw new IllegalArgumentException("입력 가능한 문자열인지 확인해주세요. ',', ':'");
     }
   }

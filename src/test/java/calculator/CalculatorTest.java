@@ -44,6 +44,7 @@ class CalculatorTest {
     Calculator calculator = new Calculator(input);
     int actual = calculator.calculating(input);
 
+    // then
     assertEquals(expect, actual);
   }
 
