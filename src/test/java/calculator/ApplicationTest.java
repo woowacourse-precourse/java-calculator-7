@@ -36,8 +36,6 @@ class ApplicationTest extends NsTest {
     }
 
 
-
-
     // 문자열 // 열렸으나 \\n 닫힘이 없을시 예외처리,
     @Test
     void 커스텀_구분자_열린후_닫힘_없으면_예외처리() {

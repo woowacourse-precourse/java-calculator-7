@@ -1,7 +1,7 @@
 # 🖥🙈 java-calculator-precourse
 
 
-## 🙉 개발 과정
+## 🙉💻 개발 과정
 1. feat(Calculator.java): 기본 요구사항인 숫자 추출 및 합산 로직추가(0d6b1be29a1d68a8bb22cab01bb74c0533d0c30f)
 
 2. feat(Calculator.java): 커스텀 구분자 중간에 있는경우 로직 추가 #2 (72544657a2682b757d9f23d530d5347812139cda)
@@ -12,8 +12,23 @@
 4. feat(calculator.java): 엣지케이스 예외 추가 (5206b25bd36916d3337cb6d205853ede9327ca97)
     - validateInput을 추가하여 엣지케이스 체크
 
-5. 주석 정리 및 객체지향에 대한 고민 중
+5. 객체지향에대한 고민으로 > MVC 패턴의 적용 결정.
 
+6. 기존 Calculator class를 아래 5가지로 분류하여 각 계층에 맞는 코드만 적고 객체지향에대 한 고민을 계속함.
+    1. CalculatorController.java : 프로그램의 run 결정 컨트롤러 클래스
+    2. CalculatorModel.java : 모델 클래스에 계산된 결과를 저장하고 반환
+    3. CalculatorService.java : view의 입력값에 대한 실질적인 계산 수행
+    4. CalculatorView.java : 사용자 입력을 받기 위한 분리 진행
+    5. Application.java : 프로그램의 실행 (main)클래스
+
+7. 예외 케이스 테스트 코드 작성 및 테스트 진행
+    1. 커스텀 구분자가 있는경우
+    2. 중간에 공백이 있는경우 예외 던지기
+    3. 커스텀 구분자가 열린 후 닫힘 없으면 예외처리
+    4. 문자열만 입력시 예외처리
+    5. 커스텀 구분자가 아닌 임의의 문자가 섞였을때 예외처리 진행
+
+<hr>
 
 ## 💡기능 요구 사항
 ### 🙉 기능 개요
