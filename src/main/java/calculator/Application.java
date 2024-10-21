@@ -18,7 +18,16 @@ public class Application {
 
         System.out.println("결과 : " +
             Arrays.stream(numbers.split(delimiter))
-                .map(Integer::parseInt)
+                .map(num -> {
+                    try {
+                        int parsedNum = Integer.parseInt(num);
+                        if (parsedNum <= 0) throw new IllegalArgumentException();
+                        return parsedNum;
+                    } catch (NumberFormatException e) {
+                        throw new IllegalArgumentException();
+                    }
+                })
                 .reduce(0, Integer::sum));
+
     }
 }
