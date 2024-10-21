@@ -12,7 +12,7 @@ public class Calculator {
 
         // 커스텀 구분자 처리
         if (input.startsWith("//")) {
-            int delimiterEndIndex = input.indexOf("\n");
+            int delimiterEndIndex = input.indexOf("\\n"); // "\n"을 이스케이프 처리하여 찾음
 
             if (delimiterEndIndex == -1) {
                 throw new IllegalArgumentException("잘못된 입력입니다. 올바른 형식이 아닙니다.");
@@ -22,7 +22,7 @@ public class Calculator {
             delimiter = input.substring(2, delimiterEndIndex);
 
             // "\n" 이후 부분만 추출
-            input = input.substring(delimiterEndIndex + 1);
+            input = input.substring(delimiterEndIndex + 2); // "\n"을 처리했으므로 +2
         }
 
         // 입력 문자열을 구분자로 분리
@@ -41,7 +41,7 @@ public class Calculator {
         return sum;
     }
 
-    // 문자열을 양수로 변환, 유효성 검사
+    // 문자열을 양수로 변환, 유효성 검사 및 음수 체크
     private int parsePositiveInteger(String number) {
         try {
             int result = Integer.parseInt(number);
