@@ -1,0 +1,9 @@
+- docs: README 느낀점 추가
+- test: 덧셈 테스트 및 통합 테스트 추가
+- feat: 덧셈 기능 구현
+- test: 구분자 판별 테스트 추가
+- feat: 구분자 판별 기능 구현
+- feat(Input): 문자열 입력 기능 구현
+- feat(Viewer): 출력 기능 구현
+- docs(README): 구현할 기능 목록 작성
+- feat: setup project
