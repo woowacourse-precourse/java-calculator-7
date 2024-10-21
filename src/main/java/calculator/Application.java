@@ -47,7 +47,7 @@ public class Application {
                 }
                 // 둘 다 아닐 경우 에러 발생
             } else {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("잘못된 값을 입력하셨습니다.");
             }
         }
         // 마지막에 만들어진 숫자 결과값에 더하기
