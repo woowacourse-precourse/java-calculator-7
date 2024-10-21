@@ -1,17 +1,14 @@
 package calculator;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Adder {
 
-    private final List<String> operands;
+    private final Operands operands;
 
 
-    public Adder(List<String> operands) {
-        Expression.checkOperandsConstraints(operands);
+    public Adder(Operands operands) {
+        Operands.check(operands);
 
-        this.operands = new ArrayList<>(operands);
+        this.operands = operands;
     }
 
     public Adder(Expression expression) {
@@ -21,11 +18,10 @@ public class Adder {
     public int sum() {
         int sum = 0;
 
-        for (String operand : operands) {
+        for (String operand : operands.toList()) {
             sum += Integer.parseInt(operand);
         }
         return sum;
     }
-
 
 }
