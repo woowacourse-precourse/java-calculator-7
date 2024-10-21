@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 public class StringParser {
     private static final String CUSTOM_DELIMITER_PATTERN = "//(.*?)\\\\n(.*)";
     private static final String DEFAULT_DELIMITER = "[,:]";
+
     public String[] parseString(String string) {
         Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(string);
 
