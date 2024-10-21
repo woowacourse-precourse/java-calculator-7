@@ -19,7 +19,7 @@ public class Application {
             delimiters = checkDelimiter(str);
         }
 
-        // 구분자 이용해서 문자열 나누기
+        String[] nums = splitNum(str, delimiters);
 
         // 오류 확인
         // 나눠진 문자열 이용해 합계 계산
@@ -32,6 +32,12 @@ public class Application {
         String tmp = str.substring(2, str.indexOf("\\n"));
         delimiters.add(tmp);
         return delimiters;
+    }
+
+    private static String[] splitNum(String str, List<String> delimiter) {
+        String input = str.substring(str.indexOf("\\n") + 2);
+        String lastDeli = String.join("|", delimiters);
+        return input.split(lastDeli);
     }
 
 }
