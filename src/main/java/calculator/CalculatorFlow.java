@@ -7,6 +7,8 @@ public class CalculatorFlow {
 
         int[] extractedNumbers = NumberExtractor.extractNumbers(inputValue);
 
+        InputValidator.checkNegativeNumbers(extractedNumbers);
+
         OperationExecutor sumOperation = new OperationExecutor();
         int result = sumOperation.calculate(extractedNumbers);
 
