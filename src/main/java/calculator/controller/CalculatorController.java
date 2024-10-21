@@ -32,7 +32,7 @@ public class CalculatorController {
 		String processedInput = customDelimiterProcessor.removeCustomDelimiterPattern(input);
 		List<Integer> numbers = InputFilter.extractNumbers(processedInput, delimiter);
 
-		Calculator calculator = new Calculator(numbers);
-		outputView.printResult(calculator.sum());
+		Calculator calculator = new Calculator();
+		outputView.printResult(calculator.sum(numbers));
 	}
 }
