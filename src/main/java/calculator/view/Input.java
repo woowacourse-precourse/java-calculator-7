@@ -28,6 +28,7 @@ public class Input {
         return splitNum;
     }
 
+    //커스텀 구분자 지정
     private String[] splitInputNum(String input) {
         String divisionNum = ",|:";  // 기본 구분자는 콤마(,)와 콜론(:)
         String numsPart = input; // 입력값을 numsPart 변수에 저장
