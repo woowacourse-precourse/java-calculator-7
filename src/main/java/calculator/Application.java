@@ -1,7 +1,6 @@
 package calculator;
 import  java.util.Scanner;
 import java.util.StringTokenizer;
-
 public class Application {
     public static void main(String[] args) { //main 메서드 : Scanner객체 호출 후 문자열 입력
         Scanner scanner = new Scanner(System.in);
@@ -30,7 +29,12 @@ public class Application {
         while (tokenizer.hasMoreTokens()) {//while문을 사용하여 토큰끼리 합함
             String token = tokenizer.nextToken();
             try {
-                sum += Integer.parseInt(token);
+                int inputnumber = Integer.parseInt(token);
+
+                if (inputnumber<0){
+                    throw new IllegalArgumentException("음수는 입력이 불가합니다 : "+inputnumber);
+                }
+                sum += inputnumber;
 
         }  catch(NumberFormatException e){//try catch문을 통해 IllegalArgumentException를 발생
             throw new IllegalArgumentException("잘못된 입력입니다. :" + token);//thorw하여 프로그램 종료
