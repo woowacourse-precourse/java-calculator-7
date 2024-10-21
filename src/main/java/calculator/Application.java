@@ -59,6 +59,7 @@ public class Application {
                 throw new IllegalArgumentException("입력 내에 숫자가 아닌 문자가 존재합니다.");
             }
         }
+        inputNumbers.add(inputNum);
 
         // 3. 덧셈 계산기
         // 3-1. 덧셈 계산기
