@@ -40,7 +40,10 @@ public class CustomDelimiter {
     }
 
     private static void addDelimiter(String delimiter) {
-        delimiters += "|" + Pattern.quote(String.valueOf(delimiter));
+        if (!delimiter.isEmpty()) {
+            delimiter = Pattern.quote(String.valueOf(delimiter));
+        }
+        delimiters += "|" + delimiter;
     }
 
     private static void isNonNumeric(String delmiter) {
