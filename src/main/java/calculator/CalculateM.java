@@ -5,10 +5,11 @@ public class CalculateM {
         validateInput(input);
 
         String[] parts = splitInput(input);
+        String delimiter = parts[0];
+        String numbers = parts[1];
 
-        return 0;
-
-
+        String[] numberArray = splitNumbers(numbers, delimiter);
+        return sumNumbers(numberArray);
     }
 
     private void validateInput(String input) {
@@ -32,5 +33,35 @@ public class CalculateM {
         }
 
         return new String[]{delimiter, numbers};
+    }
+
+    private String[] splitNumbers(String numbers, String delimiter) {
+        return numbers.split(delimiter);
+    }
+
+    private int sumNumbers(String[] numberArray) {
+        int sum = 0;
+        for (String numberStr : numberArray) {
+            if (!numberStr.trim().isEmpty()) {
+                int number = parseNumber(numberStr);
+                validateNumber(number);
+                sum += number;
+            }
+        }
+        return sum;
+    }
+
+    private int parseNumber(String numberStr) {
+        try {
+            return Integer.parseInt(numberStr.trim());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("유효하지 않은 숫자 형식입니다: " + numberStr);
+        }
+    }
+
+    private void validateNumber(int number) {
+        if (number < 0) {
+            throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
+        }
     }
 }
