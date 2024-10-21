@@ -19,7 +19,6 @@ public class InputValidator {
             validateHelper(sub, delimiters);
             return delimiters;
         }
-        System.out.println(s);
         throw new IllegalArgumentException(ErrorMessage.UNRESOLVED_EXPRESSION.getMsg());
     }
 
