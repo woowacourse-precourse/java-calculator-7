@@ -130,4 +130,4 @@ StringCalculator는 프로그램 전체 흐름을 관리한다. numbers, result 
 InputView, OutputView 클래스를 구현해 사용자와의 입출력을 담당한다.
 
 -   [x] InputView: 사용자의 입력을 받아 반환한다.
--   [ ] OutputView: 결과를 출력한다.
+-   [x] OutputView: 결과를 출력한다.
