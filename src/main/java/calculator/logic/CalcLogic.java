@@ -8,8 +8,8 @@ import java.util.List;
 
 public class CalcLogic {
     public static List<Long> getNumbers( InputDTO input ) {
-        String exp = input.getSumExp();
-        String divider = input.getDividerExp();
+        String exp = input.getSumExp().replaceAll("\\\\", "_");
+        String divider = input.getDividerExp().replaceAll("\\\\", "_");
         String dividerRegex = String.format( "[,:%s]", divider );
 
         // 수식 내 오류여부 확인
