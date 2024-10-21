@@ -4,7 +4,9 @@ public class NumberParser {
     public String[] parse(String input, String delimiters) {
         Validator.validate(input);
         String processedInput = getSplittedString(input);
-        return processedInput.split(delimiters);
+        String[] numbers = processedInput.split(delimiters);
+        Validator.validateNumbers(numbers);
+        return numbers;
     }
 
     private String getSplittedString(String input) {
