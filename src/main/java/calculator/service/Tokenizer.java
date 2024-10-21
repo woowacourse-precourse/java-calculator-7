@@ -19,6 +19,10 @@ class Tokenizer {
     }
 
     Numbers tokenize() {
+        if (this.targetNumberInput.isBlank()) {
+            return new Numbers(List.of(new Number("0")));
+        }
+
         final List<Number> numbers = new ArrayList<>();
 
         final int nextSeparatorIndex = findNextSeparatorIndex(this.targetNumberInput);

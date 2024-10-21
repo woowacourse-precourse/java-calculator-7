@@ -22,6 +22,16 @@ class TokenizerTest {
     }
 
     @ParameterizedTest
+    @CsvSource(value = {"''", "' '", "'  '"})
+    void 공백(final String numbers) {
+        final Tokenizer tokenizer = new Tokenizer(numbers);
+        tokenizer.addSeparator(new CharacterSequenceSeparator(","));
+        tokenizer.addSeparator(new CharacterSequenceSeparator(":"));
+
+        Assertions.assertThat(tokenizer.tokenize()).isEqualTo(new Numbers(List.of(new Number("0"))));
+    }
+
+    @ParameterizedTest
     @MethodSource("예외케이스")
     void 예외(final String userInputNumber) {
         final Tokenizer tokenizer = new Tokenizer(userInputNumber);
