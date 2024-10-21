@@ -4,7 +4,7 @@ public class Application {
     static String inputString = "";
 
     public static void main(String[] args) {
-        try {
+        //try {
             IOHandler iohandler = new IOHandler();
             NumberParser numberparser;
             Adder adder;
@@ -16,8 +16,8 @@ public class Application {
             adder = new Adder(numberparser.getExtractedNumList());
 
             iohandler.printResultMsg(adder.getSum());
-        }catch(IllegalArgumentException e){
-            System.err.println("Wrong input : " + e.getMessage());
-        }
+        //}catch(IllegalArgumentException e){
+            //System.err.println("잘못된 입력입니다 : " + e.getMessage());
+        //}
     }
 }

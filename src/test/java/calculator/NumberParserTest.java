@@ -44,7 +44,7 @@ public class NumberParserTest {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             new NumberParser("//***1***2***3");
         });
-        assertEquals("Invalid separator input format.", exception.getMessage());
+        assertEquals("유효하지 않은 구분자 형식입니다.", exception.getMessage());
     }
 
     @Test
@@ -53,7 +53,7 @@ public class NumberParserTest {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             new NumberParser(null);
         });
-        assertEquals("The input string is null or empty.", exception.getMessage());
+        assertEquals("입력이 비어있습니다.", exception.getMessage());
     }
 
     @Test
@@ -62,7 +62,7 @@ public class NumberParserTest {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             new NumberParser("");
         });
-        assertEquals("The input string is null or empty.", exception.getMessage());
+        assertEquals("입력이 비어있습니다.", exception.getMessage());
     }
 
     @Test
@@ -71,7 +71,7 @@ public class NumberParserTest {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             new NumberParser("1,2,three");
         });
-        assertEquals("Contains invalid something.: three", exception.getMessage());
+        assertEquals("숫자가 아닌 값이 있습니다: three", exception.getMessage());
     }
 
     @Test
