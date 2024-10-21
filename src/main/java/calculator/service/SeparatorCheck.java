@@ -17,14 +17,10 @@ public class SeparatorCheck {
             String nums = matcher.group(2).replace("\"", ""); // 구분자 정의 뒷 부분
 
             String finalDelimiter = customDelimiter + "|" + DEFAULT_DELIMITER;
-//            System.out.println(finalDelimiter);
-//            System.out.println(Arrays.toString(nums.split(finalDelimiter)));
 
-//            return numbers.split(combinedDelimiter); // 커스텀 구분자로 분리
             return nums.split(finalDelimiter);
-        } else {
-            System.out.println("There is no user-specified delimiter.");
         }
+        
         return input.split(DEFAULT_DELIMITER);
     }
 }
