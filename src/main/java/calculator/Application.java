@@ -11,6 +11,6 @@ public class    Application {
         int result=0;
         result=calculator.add(string);
 
-        System.out.println("결과: "+ result);
+        System.out.println("결과 : "+ result);
     }
 }

@@ -13,8 +13,9 @@ public class DelimiterParser {
         if (input.startsWith("//") && input.contains("\\n")){
             int newLineIndex = input.indexOf("\\n");
             delimiter=input.substring(2,newLineIndex);
+            String regexDelimiter = "[" + delimiter + "]";
             input=input.substring(newLineIndex+2);
-            return input.split(delimiter);
+            return input.split(regexDelimiter);
         }
         else if((input.contains(","))||(input.contains(":"))){
            inputs= input.split(delimiter);
@@ -22,6 +23,7 @@ public class DelimiterParser {
         else{
             throw new IllegalArgumentException("커스텀 구분자가 올바르지 않은 형식인 경우입니다.");
         }
+
 
         return inputs;
     }
