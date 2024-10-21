@@ -1,6 +1,7 @@
 package calculator;
 
 import static camp.nextstep.edu.missionutils.Console.readLine;
+import static java.lang.Float.sum;
 
 public class Application {
     // TODO: 입력한 문자열에서 숫자를 추출하여 더하는 계산기
@@ -10,19 +11,25 @@ public class Application {
     // 3. 메인함수에서 2번 함수의 배열 호출하여 sum하고 출력
     
     public static void main(String[] args) {
-        float[] numbers=new float[0];
         float result=0;
-
-        //입력
+        float[] numbers=null;
+        //문자열입력
         String enter = readLine();
-        
-        //함수들 호출 후 return된 배열을 numbers배열에 저장하기
+
+        //커스텀구분자 추출하는 클래스 호출
+        DelimiterExtractor delimiterExtractor=new DelimiterExtractor(enter);
+        String customDelimiter = delimiterExtractor.getCustomDelimiter();
+
+        //구분자를 기준으로 추출한 숫자를 실수 배열에 담는 클래스 호출
+        NumberExtractor numberExtractor = new NumberExtractor(enter, customDelimiter);
 
 
-        //배열에 저장된 숫자 합산
+        //numbers=
 
         //출력
-        System.out.println("결과 : "+result);
+        //배열에 담긴 숫자를 모두 합산
+//        result=sum(numbers);
+//        System.out.println("결과 : "+result);
 
     }
 }
