@@ -37,7 +37,9 @@
 
 ------------
 
-## 코드 작성 중 헷갈렸던 문제들
+## [1주차 회고](https://mandu98.tistory.com/8)
+
+## 코드 작성 중 헷갈렸던 부분
 
 ```java
 // 커스텀 구분자인지 확인
@@ -86,4 +88,6 @@ java.lang.StringIndexOutOfBoundsException: Range [2, -1) out of bounds for lengt
 2. `run("//;\n1;2;3")`의 경우 :
     
     * `\n`은 줄바꿈 문자
-    * `input.indexOf("\n")`라고 했을 때, 이 코드는 문자열에서 실제 줄바꿈을 찾
+    * `input.indexOf("\n")`라고 했을 때, 이 코드는 문자열에서 실제 줄바꿈을 찾음
+
+
