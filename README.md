@@ -2,14 +2,14 @@
 
 ## 목표
 1. GitHub, IDE 등 실제 개발을 위한 환경에 익숙해지기
-- [ ] GitHub
+- [x] GitHub
 2. Java 21 과 친해지기
 - [ ] SequencedCollection 학습
 - [ ] JEP 440: Record Patterns 학습
 - [ ] JEP 441: Pattern Matching for switch
 - [ ] JEP 439: Generational ZGC
 3. 테스트 코드 작성
-- [ ] 모든 상황을 커버하는 테스트케이스 작성 : 예외 케이스가 많지 않기 때문에 모두 커버 가능하다고 생각
+- [x] 모든 상황을 커버하는 테스트케이스 작성 : 예외 케이스가 많지 않기 때문에 모두 커버 가능하다고 생각
 4. 우아한 객체지향 보고 적용해보기
 - [ ] Validator 클래스 만들기
 
@@ -41,7 +41,7 @@
 - [x] 계산 결과값을 출력한다.
 
 ### Calculator
-- [ ] 덧셈 기능을 호출한다.
+- [x] 덧셈 기능을 호출한다.
 
 ### Numbers 일급컬렉션
 - [x] 객체 생성할 때, 양수인지 검증
