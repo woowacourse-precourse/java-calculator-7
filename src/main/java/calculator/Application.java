@@ -6,6 +6,11 @@ public class Application {
     public static void main(String[] args) {
 
     }
+
+    private static boolean isDelimiterFormatCorrect(String[] parts) {
+        return parts.length < 2 || parts[0].length() < 3; // 유효하지 않은 경우 true 반환
+    }
+
     private static int sumNumbers(String numbers, String delimiter) {
         try {
             String[] tokens = numbers.split(delimiter);
