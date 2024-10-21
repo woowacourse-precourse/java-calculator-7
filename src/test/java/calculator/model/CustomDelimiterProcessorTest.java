@@ -20,6 +20,14 @@ public class CustomDelimiterProcessorTest {
     }
 
     @Test
+    void 남아있는_문자열이_충분하지_않으면_예외() {
+        assertThatThrownBy(() ->
+                customDelimiterProcessor.addCustomDelimiters("//$n", delimiters))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ExceptionMessage.CUSTOM_DELIMITER_FORMAT_LENGTH_EXCEPTION);
+    }
+
+    @Test
     void 커스텀_구분자_앞부분_포맷_예외() {
         assertThatThrownBy(() ->
                 customDelimiterProcessor.addCustomDelimiters("/%$\\n5,3", delimiters))
@@ -33,13 +41,5 @@ public class CustomDelimiterProcessorTest {
                 customDelimiterProcessor.addCustomDelimiters("//$\\%5,3", delimiters))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ExceptionMessage.CUSTOM_DELIMITER_LAST_FORMAT_EXCEPTION);
-    }
-
-    @Test
-    void 커스텀_구분자_길이_포맷_예외() {
-        assertThatThrownBy(() ->
-                customDelimiterProcessor.addCustomDelimiters("//%$\\n5,3", delimiters))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(ExceptionMessage.CUSTOM_DELIMITER_FORMAT_LENGTH_EXCEPTION);
     }
 }

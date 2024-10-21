@@ -29,7 +29,7 @@ public class CustomDelimiterProcessor {
     }
 
     private void correctCustomDelimiterFormatOrThrow(String inputString) {
-        if (!checkCustomDelimiterFormatLength(inputString)) {
+        if (!isCustomDelimiterFormatLengthEnough(inputString)) {
             throw new IllegalArgumentException(ExceptionMessage.CUSTOM_DELIMITER_FORMAT_LENGTH_EXCEPTION);
         }
         if (!isCustomDelimiterFirstFormatCorrect(inputString)) {
@@ -40,7 +40,7 @@ public class CustomDelimiterProcessor {
         }
     }
 
-    private boolean checkCustomDelimiterFormatLength(String inputString) {
+    private boolean isCustomDelimiterFormatLengthEnough(String inputString) {
         return inputString.length() >= CUSTOM_DELIMITER_FORMAT_LENGTH;
     }
 
