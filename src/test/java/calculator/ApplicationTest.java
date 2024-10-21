@@ -56,11 +56,10 @@ class ApplicationTest extends NsTest {
     @Test
     @DisplayName("`//`만 있고 `\n`이 없는 경우 예외를 던짐")
     void assertThrowExceptionWhenNoEndCommand() {
-        assertSimpleTest(() -> {
-            assertThatThrownBy(() -> runException("//1,2,3"))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining("missing newline after header");
-        });
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContaining("missing newline after header"));
     }
 
     @Test
@@ -107,7 +106,7 @@ class ApplicationTest extends NsTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"1:2:3","1,2,3","//\n123","//n\\n1n2n3","//kk\\n1kk2kk3","//-\\n-1-2-3"})
+    @ValueSource(strings = {"1:2:3", "1,2,3", "//\n123", "//n\\n1n2n3", "//kk\\n1kk2kk3", "//-\\n-1-2-3"})
     @DisplayName("시스템 문자열은 항상 출력됨")
     void assertMustContainSystemMessage(String argument) {
         assertSimpleTest(() -> {
