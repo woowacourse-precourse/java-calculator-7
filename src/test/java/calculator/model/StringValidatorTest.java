@@ -144,4 +144,17 @@ class StringValidatorTest {
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessage(errorMessage);
 	}
+
+	@ParameterizedTest
+	@DisplayName("구분자 옆에 수가 존재하지 않는 문자열이 입력되었을 때 에러를 발생시킨다.")
+	@ValueSource(strings = {"1,", ",1", ","})
+	void 구분자_옆에_수가_존재하지_않는_문자열이_입력되었을_때_에러를_발생시킨다(String input) {
+		// given
+		StringValidator stringValidator = new StringValidator(input);
+
+		// when, then
+		assertThatThrownBy(stringValidator::validate)
+				.isInstanceOf(IllegalArgumentException.class)
+				.hasMessage(errorMessage);
+	}
 }
