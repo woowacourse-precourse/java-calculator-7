@@ -12,9 +12,7 @@ public final class InputReader {
     public static String read() {
         try {
             String input = Console.readLine();
-            if (input == null || input.trim().isEmpty()) {
-                throw new IllegalArgumentException();
-            }
+            InputValidator.validateNullAndEmpty(input);
             Console.close();
             return input.trim();
         } catch (NoSuchElementException exception) {
