@@ -9,12 +9,19 @@ import java.util.LinkedList;
 public class InputStringException {
     private static final ExtractService extractService = new ExtractService();
     public Numbers validateInputPattern(String inputString, Numbers numbers, Delimiters delimiters){
+        if(validateIfInputEmptyOrNull(inputString)){
+            return numbers;
+        }
         if(inputString.contains("//") || inputString.contains("\\n")) {
             isCustomDelimiterDeclaredInStandardFormat(inputString);
             extractService.extractDelimeter(inputString, delimiters);
         }
         validateInputInStandardFormat(delimiters, inputString);
         return checkIfNumeric(inputString, numbers);
+    }
+
+    public static boolean validateIfInputEmptyOrNull(String inputString){
+        return inputString == null || inputString.isEmpty();
     }
 
     public static void isCustomDelimiterDeclaredInStandardFormat(String inputString){
