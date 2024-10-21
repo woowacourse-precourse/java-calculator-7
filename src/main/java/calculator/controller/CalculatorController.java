@@ -1,6 +1,6 @@
 package calculator.controller;
 
-import calculator.dto.OperandDTO;
+import calculator.domain.Operands;
 import calculator.dto.ResultDTO;
 import calculator.dto.UserInputDTO;
 import calculator.service.CalculateService;
@@ -16,7 +16,7 @@ public class CalculatorController {
         String operandStr = userInputDTO.getOperandStr();
 
         //문자열 파싱 처리
-        OperandDTO operandDTO = parseOperand(operandStr);
+        Operands operandDTO = parseOperand(operandStr);
 
         //덧셈연산계산
         ResultDTO resultDTO = addOperand(operandDTO);
@@ -29,11 +29,11 @@ public class CalculatorController {
         return InputView.getOperandInput();
     }
 
-    public static OperandDTO parseOperand(String operandStr){
+    public static Operands parseOperand(String operandStr){
         return ParsingService.parseOperandStr(operandStr);
     }
 
-    public static ResultDTO addOperand(OperandDTO operandDTO){
+    public static ResultDTO addOperand(Operands operandDTO){
         return CalculateService.addOperand(operandDTO);
     }
 }

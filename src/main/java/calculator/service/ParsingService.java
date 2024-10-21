@@ -1,7 +1,7 @@
 package calculator.service;
 
 import calculator.domain.Delimiters;
-import calculator.dto.OperandDTO;
+import calculator.domain.Operands;
 import java.util.ArrayList;
 
 import static calculator.utils.Constants.*;
@@ -9,19 +9,19 @@ import static calculator.validators.InvalidInputStringFormatException.errorCheck
 import static calculator.validators.InvalidOperandFormatException.validateToken;
 
 public class ParsingService {
-    public static OperandDTO parseOperandStr(String operandStr) {
+    public static Operands parseOperandStr(String operandStr) {
         Delimiters delimiters = new Delimiters();
         ArrayList<Integer> operandList = new ArrayList<>();
 
         if(checkIFStringEmpty(operandStr)){
             operandList.add(0);
-            return new OperandDTO(operandList);
+            return new Operands(operandList);
         }
         errorCheck(operandStr);
         operandStr = parseCustomDelimiter(operandStr, delimiters);
         parse(operandStr, delimiters, operandList);
 
-        return new OperandDTO(operandList);
+        return new Operands(operandList);
     }
 
     //입력받은 문자열이 없을 때 true return
