@@ -40,8 +40,7 @@
 ```
 
 ### 클래스 다이어그램
-
-![우테코diagram.png](..%2F..%2F..%2F..%2FDownloads%2F%EC%9A%B0%ED%85%8C%EC%BD%94diagram.png)
+![우테코1주차계층구조](https://github.com/user-attachments/assets/317ba623-fb1e-44b0-bc28-03279205ec68)
 
 ---
 
