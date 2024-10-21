@@ -12,9 +12,8 @@ public class PositiveIntegerConverter {
         this.splittedExpression = splittedExpression;
     }
 
-    public List<Integer> convertToPositiveIntegers() {
+    public List<Double> convertToPositiveNumbers() {
         return splittedExpression.stream()
-                .map(Integer::parseInt)
-                .toList();
+                .map(Double::parseDouble).toList();
     }
 }

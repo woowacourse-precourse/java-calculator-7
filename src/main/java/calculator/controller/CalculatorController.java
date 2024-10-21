@@ -35,7 +35,7 @@ public class CalculatorController {
         ParsedComponents parsedComponents = parseInput(input);
         Pattern delimiterPattern = createDelimiterPattern(parsedComponents);
         List<String> splittedExpression = splitExpression(parsedComponents, delimiterPattern);
-        List<Integer> positiveIntegers = convertToPositiveIntegers(splittedExpression);
+        List<Double> positiveIntegers = convertToPositiveNumbers(splittedExpression);
         return calculateResult(positiveIntegers);
     }
 
@@ -55,12 +55,12 @@ public class CalculatorController {
         return expressionSplitter.splitOperationalExpressionByDelimiters();
     }
 
-    private List<Integer> convertToPositiveIntegers(List<String> splittedExpression) {
+    private List<Double> convertToPositiveNumbers(List<String> splittedExpression) {
         PositiveIntegerConverter positiveIntegerConverter = new PositiveIntegerConverter(splittedExpression);
-        return positiveIntegerConverter.convertToPositiveIntegers();
+        return positiveIntegerConverter.convertToPositiveNumbers();
     }
 
-    private AdditionResult calculateResult(List<Integer> positiveIntegers) {
+    private AdditionResult calculateResult(List<Double> positiveIntegers) {
         Calculator calculator = new SumCalculator(positiveIntegers);
         return AdditionResult.from(calculator.calculate());
     }

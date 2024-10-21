@@ -4,16 +4,16 @@ import java.util.List;
 
 public class SumCalculator implements Calculator {
 
-    private final List<Integer> positiveIntegers;
+    private final List<Double> positiveNumbers;
 
-    public SumCalculator(List<Integer> positiveIntegers) {
-        this.positiveIntegers = positiveIntegers;
+    public SumCalculator(List<Double> positiveNumbers) {
+        this.positiveNumbers = positiveNumbers;
     }
 
     @Override
-    public int calculate() {
-        return positiveIntegers.stream()
-                .mapToInt(Integer::intValue)
+    public double calculate() {
+        return positiveNumbers.stream()
+                .mapToDouble(Double::doubleValue)
                 .sum();
     }
 }

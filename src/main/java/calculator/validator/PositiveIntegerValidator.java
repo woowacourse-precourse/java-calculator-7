@@ -18,7 +18,7 @@ public class PositiveIntegerValidator {
 
     private static void validatePositiveInteger(String numberString) {
         try {
-            int number = Integer.parseInt(numberString);
+            double number = Double.parseDouble(numberString);
             if (number < 0) {
                 throw CalculatorException.from(ErrorMessage.NEGATIVE_NUMBER_NOT_ALLOWED);
             }
