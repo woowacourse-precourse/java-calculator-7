@@ -2,6 +2,7 @@ package calculator.view;
 
 import camp.nextstep.edu.missionutils.Console;
 import java.math.BigInteger;
+import java.util.NoSuchElementException;
 
 public class CalculatorView {
 
@@ -10,7 +11,11 @@ public class CalculatorView {
     }
 
     public String getInput() {
-        return Console.readLine().trim();
+        try {
+            return Console.readLine().trim();
+        } catch (NoSuchElementException e) {
+            return "";
+        }
     }
 
     public void printResult(BigInteger result) {

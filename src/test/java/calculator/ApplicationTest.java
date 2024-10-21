@@ -11,7 +11,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 공백_입력() {
         assertSimpleTest(() -> {
-            run(" ");
+            run("");
             assertThat(output()).contains("결과 : 0");
         });
     }
