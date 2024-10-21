@@ -32,25 +32,50 @@ public class CalculatorService {
     public void validateInput() {
         String rawValue = calculator.getRawValue();
         String newSeparator = null;
-        String value = "";
-        String[] results = rawValue.split("\\\\n", 2);
+        String value;
 
-        if (results.length > 1) {
+        if (rawValue.startsWith("//")) {
+            String[] results = rawValue.split("\n", 2);
             newSeparator = results[0];
-            value = results[1];
+            value = results.length > 1 ? results[1] : "";
             isValid = checkNewSeparator(newSeparator);
+            makeNewSeparator(newSeparator);
         } else {
-            value = results[0];
+            value = rawValue;
         }
 
-        makeNewSeparator(newSeparator);
         calculator.setRawValue(value);
         List<Number> processedValue = extractNumbersToList();
+
         if (!isValid) {
             exceptionHandler.handleException(new IllegalArgumentException());
         }
         calculator.setProcessedValue(processedValue);
     }
+
+//
+//    public void validateInput() {
+//        String rawValue = calculator.getRawValue();
+//        String newSeparator = null;
+//        String value = "";
+//        String[] results = rawValue.split("\\\\n", 2);
+//
+//        if (results.length > 1) {
+//            newSeparator = results[0];
+//            value = results[1];
+//            isValid = checkNewSeparator(newSeparator);
+//        } else {
+//            value = results[0];
+//        }
+//
+//        makeNewSeparator(newSeparator);
+//        calculator.setRawValue(value);
+//        List<Number> processedValue = extractNumbersToList();
+//        if (!isValid) {
+//            exceptionHandler.handleException(new IllegalArgumentException());
+//        }
+//        calculator.setProcessedValue(processedValue);
+//    }
 
     public List<Number> extractNumbersToList() {
         List<String> resultList = new ArrayList<>(List.of(calculator.getRawValue()));
@@ -70,25 +95,17 @@ public class CalculatorService {
         List<Number> processedValue = new ArrayList<>();
         for (String item : resultList) {
             if (item.trim().isEmpty()) continue;
-            if (!item.matches("\\d+(\\.\\d+)?")) {
-                throw new IllegalArgumentException();
+            if (!item.matches("\\d+")) {
+                throw new IllegalArgumentException("Invalid input: " + item);
             }
-            if (item.contains(".")) {
-                processedValue.add(Double.parseDouble(item));
-            } else {
-                // 여기에서 Long 대신 BigInteger로 변경
-                processedValue.add(new BigInteger(item));
-            }
+            processedValue.add(new BigInteger(item));
         }
         return processedValue;
     }
+
+
     private boolean checkNewSeparator(String newSeparator) {
-        for (int i = 0; i < 2; i++) {
-            if (newSeparator.charAt(i) != '/') {
-                return false;
-            }
-        }
-        return true;
+        return newSeparator.startsWith("//");
     }
 
     public void makeNewSeparator(String newSeparator) {
@@ -101,25 +118,16 @@ public class CalculatorService {
 
     public Number sumOfList() {
         List<Number> values = calculator.getProcessedValue();
-        double sum = 0;
+        BigInteger sum = BigInteger.ZERO;
         for (Number value : values) {
-            sum += value.doubleValue();
+            sum = sum.add((BigInteger) value);
         }
         calculator.setSumValue(sum);
         return sum;
     }
 
-    public String printResult() {
-        Number sum = calculator.getSumValue();
-
-        String result;
-        if (sum.doubleValue() == sum.longValue()) {
-            result = "결과 : " + sum.longValue();
-        } else {
-            result = "결과 : " + sum.doubleValue();
-        }
-
-        System.out.println(result);
-        return result;
+    public void printResult() {
+        BigInteger sum = (BigInteger) calculator.getSumValue();
+        System.out.println("결과 : " + sum);
     }
 }
