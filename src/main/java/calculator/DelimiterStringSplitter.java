@@ -15,7 +15,7 @@ public record DelimiterStringSplitter(
         Pattern defaultPattern = Pattern.compile("^(\\d*(,\\d+)*(:\\d+)*)*");
         Matcher defaultMatcher = defaultPattern.matcher(input);
 
-        Pattern customPattern = Pattern.compile("^/{2}(\\D)\\\\n(.*)");
+        Pattern customPattern = Pattern.compile("^/{2}(\\D+)\\\\n(.*)");
         Matcher customMatcher = customPattern.matcher(input);
 
         String[] delimiter;
