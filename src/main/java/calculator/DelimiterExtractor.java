@@ -19,8 +19,6 @@ public class DelimiterExtractor {
     }
 
 
-
-
     public String extractNumbers(String input) {
         if (input.startsWith("//")) {
             int delimiterEndIndex = input.indexOf("\\n");
