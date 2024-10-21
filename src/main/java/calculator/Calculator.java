@@ -4,9 +4,9 @@ import java.util.List;
 
 public class Calculator {
 
-    private CustomValidator customValidator;
-    private InputHandler inputHandler;
-    private InputParser inputParser;
+    private final CustomValidator customValidator;
+    private final InputHandler inputHandler;
+    private final InputParser inputParser;
 
     public Calculator() {
         inputHandler = InputHandler.getInstance();

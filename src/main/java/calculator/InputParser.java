@@ -7,7 +7,7 @@ public class InputParser {
 
     List<String> separators;
     String regex;
-    InputHandler inputHandler;
+    private final InputHandler inputHandler;
 
     public InputParser() {
         this.inputHandler = InputHandler.getInstance();

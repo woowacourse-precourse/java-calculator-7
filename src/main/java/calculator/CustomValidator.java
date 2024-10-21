@@ -2,16 +2,17 @@ package calculator;
 
 public class CustomValidator {
 
-    InputParser inputParser;
+    private final InputParser inputParser;
 
     public CustomValidator(InputParser inputParser) {
         this.inputParser = inputParser;
     }
 
     public boolean validate(String inputData) {
+        String separators = inputParser.concatSeparactor();
         if (inputData.matches("\\d*")) {
             return false;
-        } else if (inputData.matches("^(\\d+([,:]\\d+)*)*$")) {
+        } else if (inputData.matches(String.format("^(\\d+([%s]\\d+)*)*$", separators))) {
             return false;
         } else {
             return customValidate(inputData);
