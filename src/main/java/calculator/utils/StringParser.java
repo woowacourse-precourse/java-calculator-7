@@ -13,7 +13,7 @@ public class StringParser {
             String[] parts = input.split("\\\\n", 2);
 
             if (parts.length != 2) {
-                throw new IllegalArgumentException("잘못된 입력 형식입니다.");
+                throw new IllegalArgumentException("잘못된 입력 형식입니다. (예: //;\\n1;2;3)");
             }
 
             String customDelimiter = parts[0].substring(2);
