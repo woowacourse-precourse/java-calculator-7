@@ -15,6 +15,16 @@ public class ExpressionController {
     private UserExpression userExpression;
     private DelimiterRepository delimiterRepository;
 
+    public List<String> init(UserExpression userExpression) {
+        this.userExpression = userExpression;
+        delimiterRepository = new DelimiterRepository();
+        divideUserExpression();
+        customDelimProcess();
+        String unified = unifyAllDelim(userExpression.getEssentialExpression(),
+                delimiterRepository.getDelimiters());
+        return prepExpressionDiced(unified);
+    }
+
     private void createExpression(UserExpression userExpression) {
         this.userExpression = userExpression;
         delimiterRepository = new DelimiterRepository();
