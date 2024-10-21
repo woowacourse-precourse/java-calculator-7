@@ -15,7 +15,7 @@ public class Calculator {
         }
     }
 
-    public String input() {
+    public String input() throws IllegalArgumentException {
         return Console.readLine();
     }
 
