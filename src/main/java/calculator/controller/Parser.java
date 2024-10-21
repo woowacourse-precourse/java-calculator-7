@@ -46,6 +46,10 @@ public class Parser {
                 removedString += inputString.charAt(i);
             }
         }
+
+        if (separators.isEmpty()) {
+            throw new IllegalArgumentException("구분자가 존재하지 않습니다.");
+        }
     }
 
     // 구분자 판단
@@ -77,13 +81,17 @@ public class Parser {
                 throw new IllegalArgumentException("입력 문자열에 음수가 존재합니다.");
 
             } else { // 구분자도 숫자도 아니면 skip?
-                throw new IllegalArgumentException("등록되지 않은 구분자가 포함되어있습니다.");
+                throw new IllegalArgumentException("우등록되지 않은 구분자가 포함되어있습니다.");
             }
         }
 
         // 문자열에 숫자가 존재하면 피연산자 배열에 추가
         if (!operandBuffer.isEmpty()) {
             operands.add(Integer.parseInt(operandBuffer));
+        }
+
+        if (operands.isEmpty()) {
+            throw new IllegalArgumentException("피연산자가 존재하지 않습니다.");
         }
     }
 
