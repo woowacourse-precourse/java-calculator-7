@@ -18,8 +18,17 @@ public class Application {
             return;
         }
 
-        String[] inputArray = input.split("[,:]");
+        String[] inputArray;
         int num = 0;
+
+        if (input.startsWith("//")) {
+            int endIdx = input.indexOf("\\n");
+            String separator = input.substring(2, endIdx);
+            inputArray = input.substring(endIdx + 2).split(separator);
+        } else {
+            inputArray = input.split("[,:]");
+        }
+
         for (String s : inputArray) {
             num += Integer.parseInt(s);
         }
