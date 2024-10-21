@@ -28,8 +28,12 @@
  │           ├── AppConfig.java                     // 객체 생성 및 의존성 주입을 담당하는 클래스
  │           ├── util
  │           │   ├── Constants.java                 // 공통 상수를 정의한 클래스
- │           │   └── ValidatorUtil.java             // 공통 검증 기능을 처리하는 클래스
+ │           │   ├── ValidatorUtil.java             // 공통 검증 기능을 처리하는 클래스
+ │           │   └── MessageSource.java             // 메시지 프로퍼티를 처리하는 클래스
  │           └── Application.java                   // 애플리케이션 실행 로직을 포함하는 클래스
+ ├── resources                                      // 메시지 프로퍼티 파일을 관리하는 디렉토리
+ │   ├── messages_ko.properties                     // 한국어 메시지 파일
+ │   └── messages_en.properties                     // 영어 메시지 파일
  └── test
      └── java
          └── calculator
