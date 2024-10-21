@@ -12,7 +12,9 @@ public class Application {
         try {
             // 올바른 값인지 입력값 검증
             InputValidator.validateInput(input);
-            System.out.println("결과 : " + input);
+            // 덧셈 수행
+            int result = SumCalculator.add(input);
+            System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
             System.out.println("잘못된 입력입니다: " + e.getMessage());
         }
