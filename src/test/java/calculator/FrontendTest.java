@@ -18,15 +18,15 @@ class FrontendTest {
   @Test
   public void accessResult() throws Exception{
       //given
-      int expect = 21;
-      String target = "1, 2, 3, 4, 5";
+      int expect = 15;
+      String readLine = "1, 2, 3, 4, 5";
 
       //when
-    Calculator calculator = new Calculator();
-    calculator.calculating(target);
-    // "calculator.Frontend.accessTarget()" because "this.frontend" is null
-    Frontend frontend = new Frontend();
-      int actual = frontend.accessTarget();
+    Calculator calculator = new Calculator(readLine);
+    int target = calculator.calculating();
+
+    Frontend frontend = new Frontend(target);
+    int actual = frontend.getTarget();
 
     //then
       assertEquals(expect, actual);

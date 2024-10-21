@@ -42,8 +42,8 @@ class CalculatorTest {
     String readLine = scanner.nextLine();
 
     // when
-    Calculator calculator = new Calculator();
-    int actual = calculator.calculating(input);
+    Calculator calculator = new Calculator(readLine);
+    int actual = calculator.calculating();
 
     // then
     assertEquals(expect, actual);
@@ -63,13 +63,13 @@ class CalculatorTest {
      String NoMoreWoowa = "우아한 테크코스 탄핵 시위";
      String failConcert = "우아콘 추첨 실패";
     String actual = "-1,2,3";
-    Calculator calculator = new Calculator();
+    Calculator deleteApp = new Calculator(deleteBamin);
+    Calculator testWoowaBro = new Calculator(NoMoreWoowa);
+    Calculator testWoowaCon = new Calculator(failConcert);
+    Calculator testException = new Calculator(actual);
       //then
       assertThrows(IllegalArgumentException.class, () -> {
-      calculator.calculating(deleteBamin);
-      calculator.calculating(NoMoreWoowa);
-      calculator.calculating(failConcert);
-      calculator.calculating(actual);
+        testException.calculating();
     });
   }
 
@@ -102,11 +102,11 @@ class CalculatorTest {
 
     // "this.calculator" is null
     // "calculator.Calculator.calculating(String)" because "this.calculator" is null
-    Calculator customCalculator = new Calculator();
-    Calculator defaultCalculator = new Calculator();
+    Calculator customCalculator = new Calculator(customDelimeter);
+    Calculator defaultCalculator = new Calculator(defaultDelimeter);
 
-//    int calculateCustom = customCalculator.calculating(customDelimeter);
-    int calculateDefault = defaultCalculator.calculating(defaultDelimeter);
+    int calculateCustom = customCalculator.calculating();
+    int calculateDefault = defaultCalculator.calculating();
 
   }
 

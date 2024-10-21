@@ -6,13 +6,16 @@ import static java.lang.String.valueOf;
 
 public class Calculator {
 
-  public Calculator() {
-    this.target = target;
+  private String readLine;
+  private int target;
+  public Calculator(String readLine) {
+    this.target = 0;
+    this.readLine = readLine;
   }
 
-  private int target = 0;
 
-  public int calculating(String readLine) {
+
+  public int calculating() {
 
     // [] 입력 문자열 탐색중
     // find why readline could be null
@@ -33,9 +36,9 @@ public class Calculator {
         if (isDigit(readLine.charAt(i))) {
           addNumbers(readLine.charAt(i));
         }
-        // 아닌 경우는 예외 처리한다
-        throw new IllegalArgumentException(
-            "커스텀 구분자를 입력하려면 문자열 맨앞에 '//;\\n'를 붙인 다음 사용해주세요 (예시 //;\\n1;2;3)");
+//        // 아닌 경우는 예외 처리한다
+//        throw new IllegalArgumentException(
+//            "커스텀 구분자를 입력하려면 문자열 맨앞에 '//;\\n'를 붙인 다음 사용해주세요 (예시 //;\\n1;2;3)");
         }
         char index = readLine.charAt(i);
 
