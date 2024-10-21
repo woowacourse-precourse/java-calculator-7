@@ -49,5 +49,7 @@ public class NumberToken {
             throw new IllegalArgumentException("Number too large: " + value);
         }
     }
-
+    public double getValue() {
+        return value;
+    }
 }
