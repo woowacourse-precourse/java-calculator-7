@@ -4,36 +4,36 @@ import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class Application {
     public static void main(String[] args){
-        String st = readLine();
+        String input = readLine();
 
         int sum = 0;
 
-        if (st.contains(":") || st.contains(";")) {
-            String[] arr = st.split("\\D");
+        if (input.contains(":") || input.contains(";")) {
+            String[] splitNumbers = input.split("\\D");
 
-            for (int i = 0; i < arr.length; i++) {
-                if(arr[i].equals("")) {
-                    arr[i] = "0";
+            for (int i = 0; i < splitNumbers.length; i++) {
+                if(splitNumbers[i].equals("")) {
+                    splitNumbers[i] = "0";
                 }
             }
 
-            for (String s : arr) {
-                int integer = Integer.parseInt(s);
-                sum += integer;
+            for (String numberString : splitNumbers) {
+                int parsedInt = Integer.parseInt(numberString);
+                sum += parsedInt;
             }
 
             System.out.println("결과 : " + sum);
 
-        } else if (st.contains("//") && st.contains("\\n")) {
-            String[] arr1 = st.split("\\D");
+        } else if (input.contains("//") && input.contains("\\n")) {
+            String[] splitNumbers = input.split("\\D");
 
-            for (int i = 0; i < arr1.length; i++) {
-                if(arr1[i].equals("")) {
-                    arr1[i] = "0";
+            for (int i = 0; i < splitNumbers.length; i++) {
+                if(splitNumbers[i].equals("")) {
+                    splitNumbers[i] = "0";
                 }
             }
 
-            for (String s : arr1) {
+            for (String s : splitNumbers) {
                 int integer = Integer.parseInt(s);
                 sum += integer;
             }
