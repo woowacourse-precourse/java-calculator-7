@@ -40,7 +40,8 @@ public class InputHandler {
             	throw new IllegalArgumentException("구분자는 반드시 한 글자여야 합니다.");
             }
             
-            return delimiter; // 커스텀 구분자 반환
+            // 커스텀 구분자와 기본 구분자를 모두 사용
+            return delimiter + "|" + DEFAULT_DELIMITERS;
         }
         return DEFAULT_DELIMITERS; // 기본 구분자 반환
     }
