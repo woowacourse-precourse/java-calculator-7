@@ -7,7 +7,7 @@ public class StringCalculatorApp {
         OutputView.printStartMessage();
         String userInput = InputView.readInputString();
         List<String> numbers = Splitter.splitByDelimiter(userInput);
-        int sum = Calculator.convertAndSum(numbers);
+        int sum = Calculator.numberSum(numbers);
         OutputView.printSumResult(sum);
     }
 }
