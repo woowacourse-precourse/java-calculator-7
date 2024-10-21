@@ -16,12 +16,16 @@ public class Controller {
         Calculator calculator = new Calculator();
         int result = calculator.calculateResult(nums);
 
-        OutputView outputView = OutputView.getInstance();
-        outputView.printResult(result);
+        printResult(result);
     }
 
     private String getInput() {
         InputView inputView = InputView.getInstance();
         return inputView.getInputFromUser();
+    }
+
+    private void printResult(int result) {
+        OutputView outputView = OutputView.getInstance();
+        outputView.printResult(result);
     }
 }
