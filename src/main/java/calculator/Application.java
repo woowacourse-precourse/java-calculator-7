@@ -30,6 +30,8 @@ public class Application {
             if(matcher.find()){
                 delimiter = matcher.group(1);
                 input = matcher.group(2);
+            }else{
+                throw new IllegalArgumentException("Invalid input");
             }
         }
         return sum(input, delimiter);
