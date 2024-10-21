@@ -15,6 +15,7 @@ public class CalculatorController {
     public Integer calculator(String text){
         if(calculatorService.textValidation(text)){
             String[] parsinged = calculatorService.parsing(text);
+            calculatorService.parseValidation(parsinged);
             Integer result = calculatorService.sum(parsinged);
             return result;
         };
