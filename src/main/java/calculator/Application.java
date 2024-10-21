@@ -1,13 +1,22 @@
 package calculator;
 
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Application {
     public static void main(String[] args) {
         Application app = new Application();
 
         String input = app.getInputString();
-        int[] numList = app.sliceString(input);
+
+        String[] slice;
+        if(input.startsWith("/")){
+            slice = app.customSliceString(input);
+        }else {
+            slice = app.sliceString(input);
+        }
+
+        int[] numList = app.stringArrayToIntArray(slice);
         int sum = app.sumList(numList);
         System.out.println(sum);
     }
@@ -19,8 +28,12 @@ public class Application {
         return input;
     }
 
-    public int[] sliceString(String input){
+    public String[] sliceString(String input){
         String[] slice = input.split("[,;]");
+        return slice;
+    }
+
+    public int[] stringArrayToIntArray(String[] slice){
         int[] numList = new int[slice.length];
 
         for (int i = 0; i < slice.length; i++) {
@@ -35,5 +48,13 @@ public class Application {
             sum += j;
         }
         return sum;
+    }
+
+    public String[] customSliceString(String input){
+        input = input.replace("\\n","\n");
+        String[] s = input.split("\n");
+        String custom = s[0].substring(2);
+        String[] slice = s[1].split(Pattern.quote(custom));
+        return slice;
     }
 }
