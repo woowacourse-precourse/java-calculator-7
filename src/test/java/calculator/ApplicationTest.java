@@ -44,7 +44,7 @@ class ApplicationTest extends NsTest {
     void validateOnlyContainCOMMA() {
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> runException(",,,,,,")).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining(","+ERROR_BASIC_DELIMITER_ONLY_DELIMITER_SUPPORT);
+                    .hasMessageContaining("," + ERROR_BASIC_DELIMITER_ONLY_DELIMITER_SUPPORT);
         });
         assertSimpleTest(() -> {
             assertThatNoException().isThrownBy(() -> run("1,3,"));
@@ -55,7 +55,7 @@ class ApplicationTest extends NsTest {
     void validateOnlyContainSEMICOLON() {
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> runException(";;;;;;;;")).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining(";"+ERROR_BASIC_DELIMITER_ONLY_DELIMITER_SUPPORT);
+                    .hasMessageContaining(";" + ERROR_BASIC_DELIMITER_ONLY_DELIMITER_SUPPORT);
         });
         assertSimpleTest(() -> {
             assertThatNoException().isThrownBy(() -> run("1;;3"));
@@ -66,7 +66,7 @@ class ApplicationTest extends NsTest {
     void validateOnlyContainCOMMA_SEMICOLON() {
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> runException(",,,,,,;;;;;;;;")).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining(",|;"+ERROR_BASIC_DELIMITER_ONLY_DELIMITER_SUPPORT);
+                    .hasMessageContaining(",|;" + ERROR_BASIC_DELIMITER_ONLY_DELIMITER_SUPPORT);
         });
         assertSimpleTest(() -> {
             assertThatNoException().isThrownBy(() -> run("1;3,1"));
@@ -117,7 +117,7 @@ class ApplicationTest extends NsTest {
     void validateAddingNotContainZero() {
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> runException("0,2;3")).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(ERROR_BASIC_DELIMITER_CONTAIN_ZERO);
+                    .hasMessage(ERROR_OPERANDS_CONTAIN_ZERO);
         });
     }
 
@@ -137,11 +137,11 @@ class ApplicationTest extends NsTest {
     void validateInput_ContainingPositive_Delimiter() {
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> runException(";,kk333333")).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(ERROR_BASIC_DELIMITER_OPERAND_CONTAIN_OTHER_CHAR);
+                    .hasMessage(ERROR_OPERANDS_CONTAIN_OTHER_CHAR);
         });
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> runException("1 000;1,55")).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(ERROR_BASIC_DELIMITER_OPERAND_CONTAIN_OTHER_CHAR);
+                    .hasMessage(ERROR_OPERANDS_CONTAIN_OTHER_CHAR);
         });
     }
 
@@ -244,7 +244,7 @@ class ApplicationTest extends NsTest {
     void validateCustomDelimiterNotContainZero() {
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> runException("//!!!\\n12!!!345!!!0 ")).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(ERROR_CUSTOM_DELIMITER_CONTAIN_ZERO);
+                    .hasMessage(ERROR_OPERANDS_CONTAIN_ZERO);
         });
     }
 
@@ -252,7 +252,7 @@ class ApplicationTest extends NsTest {
     void validateCustomDelimiterNotContainMinus() {
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> runException("//!!!\\n12!!!345!!!-1")).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(ERROR_CUSTOM_DELIMITER_CONTAIN_MINUS);
+                    .hasMessage(ERROR_OPERANDS_CONTAIN_MINUS);
         });
     }
 
@@ -260,15 +260,15 @@ class ApplicationTest extends NsTest {
     void validateCustomDelimiterExpressionOnlyContaining_Positive_Delimiter() {
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> runException("//?\\n33kk3333?")).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(ERROR_CUSTOM_DELIMITER_OPERANDS_CONTAIN_OTHER_CHAR);
+                    .hasMessage(ERROR_OPERANDS_CONTAIN_OTHER_CHAR);
         });
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> runException("//kk?\\n33kk?3333?")).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(ERROR_CUSTOM_DELIMITER_OPERANDS_CONTAIN_OTHER_CHAR);
+                    .hasMessage(ERROR_OPERANDS_CONTAIN_OTHER_CHAR);
         });
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> runException("//???\\n33?3333")).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(ERROR_CUSTOM_DELIMITER_OPERANDS_CONTAIN_OTHER_CHAR);
+                    .hasMessage(ERROR_OPERANDS_CONTAIN_OTHER_CHAR);
         });
     }
 
