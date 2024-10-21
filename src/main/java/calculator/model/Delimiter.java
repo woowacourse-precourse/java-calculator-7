@@ -1,5 +1,6 @@
 package calculator.model;
 
+import calculator.errors.InputError;
 import java.util.regex.Pattern;
 
 public class Delimiter {
@@ -28,7 +29,11 @@ public class Delimiter {
     private String extractCustomDelimiter(String message) {
         int startIndex = CUSTOM_DELIMITER_PREFIX.length();
         int endIndex = message.indexOf(CUSTOM_DELIMITER_SUFFIX);
-        return message.substring(startIndex, endIndex);
+        String customDelimiter = message.substring(startIndex, endIndex);
+        if (customDelimiter.isEmpty()) {
+            throw new IllegalArgumentException(InputError.INVALID_DELIMITER.getMessage());
+        }
+        return customDelimiter;
     }
 
     private void addCustomDelimiter(String newDelimiter) {
