@@ -1,7 +1,7 @@
 package calculator.model;
 
 public interface Calculator {
-    void extractNumber();
+    void insertValues(String input);
+    void extract();
     int sum();
-    void validateValues();
 }

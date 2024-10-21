@@ -7,21 +7,23 @@ public class CalculatorValues {
 
     private final List<Integer> numbers = new ArrayList<>();
 
-    private final String delimiter;
+    private String delimiter;
 
-    private final String expression;
+    private String expression;
 
-    public CalculatorValues(String expression, String delimiter) {
-        this.expression = expression;
-        this.delimiter = delimiter;
+    public CalculatorValues() {
     }
 
     public List<Integer> getNumbers() {
         return numbers;
     }
 
-    public void addNumbersFromInputByDelimiter(int num) {
-        numbers.add(num);
+    public void addNumbersFromInputByDelimiter(String token) {
+        if(token.isEmpty()) {
+            numbers.add(0);
+            return;
+        }
+        numbers.add(Integer.parseInt(token));
     }
 
     public String getDelimiter() {
@@ -30,5 +32,13 @@ public class CalculatorValues {
 
     public String getExpression() {
         return expression;
+    }
+
+    public void setDelimiter(String delimiter) {
+        this.delimiter = delimiter;
+    }
+
+    public void setExpression(String expression) {
+        this.expression = expression;
     }
 }
