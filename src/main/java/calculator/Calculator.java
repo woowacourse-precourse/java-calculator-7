@@ -28,8 +28,13 @@ public class Calculator {
     public int add(String[] numstr) throws IllegalArgumentException {
         int sum = 0;
 
-        for(String x : numstr) {
-            sum += 1;
+        for(String xstr : numstr) {
+            try {
+                int x = Integer.parseInt(xstr);
+                sum += x;
+            } catch(NumberFormatException e) {
+                throw new IllegalArgumentException();
+            }
         }
 
         return sum;
