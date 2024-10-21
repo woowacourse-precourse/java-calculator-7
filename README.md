@@ -1,4 +1,4 @@
-# java-caculator 
+# java-calculator-precourse
 ## 기능 목록
 
 입력
