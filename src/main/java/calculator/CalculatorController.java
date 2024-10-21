@@ -62,4 +62,8 @@ public class CalculatorController {
         }
         return result;
     }
+
+    private void printResult(int result) {
+        System.out.printf(Constants.MESSAGE_RESULT_FORMAT + "\n", result);
+    }
 }

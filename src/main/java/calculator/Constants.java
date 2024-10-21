@@ -2,6 +2,7 @@ package calculator;
 
 public class Constants {
     public static final String MESSAGE_START_INPUT = "덧셈할 문자열을 입력해 주세요.";
+    public static final String MESSAGE_RESULT_FORMAT = "결과 : %d";
 
     public static final String ERROR_MISSING_NUMBER = "덧셈할 양수를 포함하여 입력해 주세요";
     public static final String ERROR_MISSING_DEFAULT_SEPARATOR = "구분자(쉼표, 콜론)를 포함하여 입력해 주세요";
