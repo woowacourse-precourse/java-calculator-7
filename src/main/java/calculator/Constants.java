@@ -11,7 +11,7 @@ public class Constants {
     public static final String ALLOWED_CHARACTERS_REGEX = ".*[^1-9,:].*";
     public static final char REGEX_SUFFIX = ']';
     public static final String DELIMITER_PATTERN = "(?<=//)(.*?)(?=\\\\n)";
-    public static final int FIRST_INDEX = 0;
+    public static final int START_INDEX = 0;
     public static final int SINGLE_ELEMENT = 1;
 
 
