@@ -31,9 +31,14 @@ public class Application {
                 throw new IllegalArgumentException();
             }
             String newSpliter = input.substring(2, ender);
+
+            if (newSpliter.length() != 1) {
+                throw new IllegalArgumentException();
+            }
+
             if (newSpliter.isEmpty()) {
                 throw new IllegalArgumentException();
-            } else if (!newSpliter.matches("^[^a-zA-Z0-9]+$")){
+            } else if (!newSpliter.matches("^[^a-zA-Z0-9]$")){
                 throw new IllegalArgumentException();
             }
         } else if (!input.matches("^[0-9,:]+$")) {
@@ -76,7 +81,7 @@ public class Application {
                 if (number < 0) {
                     throw new IllegalArgumentException();
                 }
-                sum += Integer.parseInt(num.trim());
+                sum += number;
             }
         }
         return sum;
