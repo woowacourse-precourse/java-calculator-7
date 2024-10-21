@@ -14,6 +14,12 @@ public class Validation {
             throw new IllegalArgumentException();
     }
 
+    public static void overTheLongRangeNumberElements (List<Long> numbers) {
+        for (Long number : numbers) {
+            if(overflowOutbreak(number)) throw new IllegalArgumentException();
+        }
+    }
+
     public static void overflowOccurInLongValue(Long value) {
         if(overflowOutbreak(value)) throw new IllegalArgumentException();
     }
