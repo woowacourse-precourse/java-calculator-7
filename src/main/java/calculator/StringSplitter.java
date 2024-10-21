@@ -5,10 +5,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class StringSplitter {
-    private final String inputString;
-    private final Delimiters delimiters;
+    private String inputString;
+    private Delimiters delimiters;
 
     public StringSplitter(String inputString, Delimiters delimiters) {
+        this.inputString = inputString;
+        this.delimiters = delimiters;
+    }
+
+    public void setSplitter(String inputString, Delimiters delimiters) {
         this.inputString = inputString;
         this.delimiters = delimiters;
     }

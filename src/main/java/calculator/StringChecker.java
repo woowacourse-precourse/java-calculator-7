@@ -25,18 +25,15 @@ public class StringChecker {
     }
 
     public String checkCustomDelimiter() {
-        if (hasCustomDelimiter()) {
-            String suffix = inputString.substring(3, 5);
-            if (suffix.equals("\\n")) {
-                String customDelimiter = inputString.substring(2, 3);
-                delimiters.addDelimiter(customDelimiter);
-
-                return inputString.substring(5);
-            }
+        String suffix = inputString.substring(3, 5);
+        if (suffix.equals("\\n")) {
+            return inputString.substring(2, 3);
+        } else {
             throw new IllegalArgumentException("커스텀 문자열을 잘못 입력하였습니다.");
         }
-        return inputString;
     }
 
-
+    public String getInputString() {
+        return inputString.substring(5);
+    }
 }

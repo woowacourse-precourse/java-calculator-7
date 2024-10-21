@@ -26,7 +26,14 @@ public class CalculatorController {
         }
 
         stringChecker.checkBoundary();
-        inputString = stringChecker.checkCustomDelimiter();
+
+        if (stringChecker.hasCustomDelimiter()) {
+            String customDelimiter = stringChecker.checkCustomDelimiter();
+            delimiters.addDelimiter(customDelimiter);
+            inputString = stringChecker.getInputString();
+            stringSplitter.setSplitter(inputString, delimiters);
+        }
+
         List<Integer> numbers = stringSplitter.splitString();
         sumCalculator.setNumbers(numbers);
         calculatorView.printResult(sumCalculator.sumNumbers());
