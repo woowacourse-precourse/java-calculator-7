@@ -14,6 +14,9 @@ public class StringCalculator {
             if (!token.isEmpty()) {
                 try {
                     int number = Integer.parseInt(token);
+                    if (number < 0) {
+                        throw new IllegalArgumentException();
+                    }
                     sum += number;
                 } catch (Exception e) {
                     throw new IllegalArgumentException();
