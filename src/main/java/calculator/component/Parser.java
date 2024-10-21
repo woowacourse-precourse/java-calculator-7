@@ -14,10 +14,6 @@ public class Parser {
     }
 
     public List<Integer> parse() {
-        if (formula.isBlank()) {
-            return List.of(0);
-        }
-
         return Arrays.stream(formula.split(delimiter.toString()))
                 .map(Validator::checkNumeric)
                 .map(Integer::parseInt)
@@ -26,6 +22,10 @@ public class Parser {
     }
 
     private String extractFormula(String expression) {
+        if (!Validator.checkEndsWithNumber(expression)) {
+            throw new IllegalArgumentException();
+        }
+
         if (checkCustomDelimiter(expression)) {
             return expression.substring(5);
         }

@@ -15,4 +15,8 @@ public class Validator {
         }
         return number;
     }
+
+    public static boolean checkEndsWithNumber(String expression) {
+        return expression.matches(".*\\d$");
+    }
 }

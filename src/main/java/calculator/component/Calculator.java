@@ -11,6 +11,10 @@ public class Calculator {
     }
 
     public static Integer calculate(String expression) {
+        if (expression.isBlank()) {
+            return 0;
+        }
+
         return new Calculator(expression).calculate();
     }
 
