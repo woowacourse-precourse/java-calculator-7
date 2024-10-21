@@ -5,19 +5,17 @@ import java.util.List;
 public class StringSplitterManager {
 
     private final List<StringSplitter> stringSplitters;
-    private final String string;
 
-    public StringSplitterManager(List<StringSplitter> stringSplitters, String string) {
+    public StringSplitterManager(List<StringSplitter> stringSplitters) {
         this.stringSplitters = stringSplitters;
-        this.string = string;
     }
 
-    public List<String> getSplitStrings() {
+    public List<String> getSplitStrings(String str) {
         StringSplitter stringSplitter = stringSplitters.stream()
-                .filter(splitter -> splitter.canSupport(string))
+                .filter(splitter -> splitter.canSupport(str))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(string));
+                .orElseThrow(() -> new IllegalArgumentException(str));
 
-        return stringSplitter.splitString(string);
+        return stringSplitter.splitString(str);
     }
 }
