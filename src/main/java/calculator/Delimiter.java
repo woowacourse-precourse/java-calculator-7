@@ -11,6 +11,9 @@ public class Delimiter {
             int delimiterIndex = str.indexOf("\\n");
             if (delimiterIndex != -1) {
                 String customDelimiter = str.substring(2, delimiterIndex);
+                if (!customDelimiter.isEmpty()) {
+                    delimiters.add(customDelimiter);
+                }
                 for (char c : customDelimiter.toCharArray()) {
                     if (Character.isDigit(c)) {
                         throw new IllegalArgumentException();
