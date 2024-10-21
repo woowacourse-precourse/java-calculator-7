@@ -18,38 +18,43 @@ public class Calculator {
     // find why readline could be null
     for (int i = 0; i < readLine.length(); i++) {
 
-      processCustomDelimeter(readLine, i);
-      char index = readLine.charAt(i);
+      // 문자열이 커스텀 구분자로 시작하면
+      if (readLine.startsWith("//;\\n")) {
+        char index = readLine.charAt(i);
+        // 커스텀 구분자는 건너뛰고
+        if (index == '/' || index == '\\') {
+          continue;
+        }
 
-      //  인덱스가 기본 구분자 ‘,’ , ‘:’ 인 경우
-      if (index == ',' || index == ':') {
-        // 다음 인덱스 탐색으로 넘어간다
-        continue;
+        if (index == ';' || index == 'n') {
+          continue;
+        }
+        // 정수는 target에 합산한다
+        if (isDigit(readLine.charAt(i))) {
+          addNumbers(readLine.charAt(i));
+        }
+        // 아닌 경우는 예외 처리한다
+        throw new IllegalArgumentException(
+            "커스텀 구분자를 입력하려면 문자열 맨앞에 '//;\\n'를 붙인 다음 사용해주세요 (예시 //;\\n1;2;3)");
+        }
+        char index = readLine.charAt(i);
+
+        //  인덱스가 기본 구분자 ‘,’ , ‘:’ 인 경우
+        if (index == ',' || index == ':') {
+          // 다음 인덱스 탐색으로 넘어간다
+          continue;
+        }
+        // 예외 체크
+        checkException(index);
+        // 처리 : 정수 요소의 덧셈 결과를 합산한다
+        addNumbers(index);
       }
-      // 예외 체크
-      checkException(index);
-      // 처리 : 정수 요소의 덧셈 결과를 합산한다
-      addNumbers(index);
+      // 전달
+      return target;
     }
-    // 전달
-    return target;
-  }
 
-  private void processCustomDelimeter(String readLine, int i) {
-    // 문자열이 커스텀 구분자로 시작하면
-    if (readLine.startsWith("//;\\n")) {
-      // 비정상 입력을 체크하고
 
-      // 정상인 경우 결과를 합산한다
-      String numeric = valueOf(readLine.charAt(i));
-      addNumbers(convertToNumber(numeric));
-    }
-  }
 
-  // 문자열을 숫자로 변환
-  private static char convertToNumber(String numeric) {
-    return (char) parseInt(numeric);
-  }
 
   private void addNumbers(char index) {
     // [] 입력 문자열 탐색 중 인덱스가 정수 변환 가능한 경우
@@ -74,3 +79,4 @@ public class Calculator {
     return validDigit;
   }
 }
+

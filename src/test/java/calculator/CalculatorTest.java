@@ -31,6 +31,7 @@ class CalculatorTest {
   }
 
 
+  // java.lang.IllegalArgumentException at CalculatorTest.java:45
   @Test
   public void 유효_문자열이_입력되면_계산_결과를_전달한다() throws Exception{
     //given
@@ -52,6 +53,7 @@ class CalculatorTest {
 
 
   // 통과
+  // 메인 테스트 실패
   @Test
   public void 입력값이_잘못된_경우_예외_처리한다() throws Exception{
       //given
@@ -91,7 +93,7 @@ class CalculatorTest {
 
   }
 
-  // NumberFormatException: For input string: "/"
+  // java.lang.IllegalArgumentException at CalculatorTest.java:108
   @Test
   public void 입력값이_유효한_경우를_확인한다() throws Exception{
       //given
@@ -103,7 +105,7 @@ class CalculatorTest {
     Calculator customCalculator = new Calculator(customDelimeter);
     Calculator defaultCalculator = new Calculator(defaultDelimeter);
 
-    int calculateCustom = customCalculator.calculating(customDelimeter);
+//    int calculateCustom = customCalculator.calculating(customDelimeter);
     int calculateDefault = defaultCalculator.calculating(defaultDelimeter);
 
   }

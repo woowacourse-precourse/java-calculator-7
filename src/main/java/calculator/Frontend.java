@@ -17,6 +17,7 @@ public class Frontend {
   }
 
   // 계산된 결과값에 접근한다
+  // null
   public int accessTarget() {
     return calculator.calculating(this.readLine);
   }

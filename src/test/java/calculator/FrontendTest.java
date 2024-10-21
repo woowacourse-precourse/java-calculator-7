@@ -18,6 +18,7 @@ class FrontendTest {
     System.setOut(System.out);
   }
 
+  //  java.lang.NullPointerException at FrontendTest.java:28
   @DisplayName("계산된 결과에 접근해서 값을 가져온다")
   @Test
   public void accessResult() throws Exception{
