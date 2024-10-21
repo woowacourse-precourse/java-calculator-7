@@ -6,18 +6,18 @@ public class Input {
     private final String word = Console.readLine();
 
     public boolean isCustomDivision() {
-        return word.startsWith("//") && word.contains("\n");
+        return word.startsWith("//") && word.contains("\\n");
     }
 
     public String findCustomDivision() {
         int startIndex = 2;
-        int endIndex = word.indexOf("\n");
+        int endIndex = word.indexOf("\\n");
         return word.substring(startIndex, endIndex);
     }
 
     public String numbers() {
         if (isCustomDivision()) {
-            return word.substring(word.indexOf("\n"));
+            return word.substring(word.indexOf("\\n") + 2);
         }
         return word;
     }

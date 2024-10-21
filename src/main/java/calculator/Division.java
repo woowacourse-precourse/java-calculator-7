@@ -7,7 +7,7 @@ public class Division {
     private final List<String> word = new ArrayList<>();
 
     public Division() {
-        word.add(";");
+        word.add(":");
         word.add(",");
     }
 
@@ -23,6 +23,7 @@ public class Division {
                 regularWord.append("|");
             }
         }
+        regularWord.append("\\\\");
         return String.valueOf(regularWord);
     }
 }
