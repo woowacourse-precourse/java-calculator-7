@@ -63,7 +63,7 @@ public class InputValidator {
 
 	public static void validatePatternPosition(int start, int end) {
 		if (start >= end) {
-			throw new IllegalArgumentException("구분자의 시작 패턴 및 종료 패턴 위치가 바뀌었습니다.");
+			throw new IllegalArgumentException(INVALID_PATTERN_POSITION.getMessage());
 		}
 	}
 }

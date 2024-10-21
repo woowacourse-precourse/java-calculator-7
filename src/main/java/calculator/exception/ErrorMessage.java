@@ -16,7 +16,8 @@ public enum ErrorMessage {
 
 	// custom delimiter pattern
 	INVALID_START_PATTERN("커스텀 구분자의 시작 패턴이 올바르지 않습니다."),
-	INVALID_END_PATTERN("커스텀 구분자의 종료 패턴이 올바르지 않습니다.");
+	INVALID_END_PATTERN("커스텀 구분자의 종료 패턴이 올바르지 않습니다."),
+	INVALID_PATTERN_POSITION("커스텀 구분자의 위치가 올바르지 않습니다.");
 
 	private final String message;
 
