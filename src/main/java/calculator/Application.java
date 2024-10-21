@@ -1,5 +1,6 @@
 package calculator;
 import camp.nextstep.edu.missionutils.Console;
+import java.util.regex.Pattern;
 
 public class Application {
     public static void main(String[] args) {
@@ -33,7 +34,7 @@ class StringCalculator{
             int index = input.indexOf("\\n");
             String n = input.substring(2, index);
             input = input.substring(index+2);
-            String[] numbers = input.split(n);
+            String[] numbers = input.split(Pattern.quote(n));
 
             int sum = 0;
             for(String number : numbers){
