@@ -17,7 +17,7 @@ public class Calculator {
         for (String number : numbers) {
             int parsedNumber = parseNumber(number);
             if (parsedNumber < 0) {
-                throw new IllegalArgumentException("음수는 허용되지 않습니다.");
+                throw new IllegalArgumentException();
             }
             total += parsedNumber;
         }
@@ -25,13 +25,13 @@ public class Calculator {
     }
 
     private int parseNumber(String str) {
-        if (!str.matches("[0-9]+")) {  // 숫자가 아닌 문자에 대한 예외 처리
-            throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
+        if (!str.matches("[0-9]+")) {
+            throw new IllegalArgumentException();
         }
         try {
             return Integer.parseInt(str);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("잘못된 숫자 형식입니다.");
+            throw new IllegalArgumentException();
         }
     }
 }
