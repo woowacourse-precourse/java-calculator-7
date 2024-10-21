@@ -10,6 +10,12 @@ public class Application {
     }
 
     private static String[] splitNumbers(String input) {
+        if (input.startsWith("//")) {
+            String[] tokens = input.split("\n", 2);
+            String customDelimiter = tokens[0].substring(2);
+            input = tokens[1];
+            return input.split(customDelimiter);
+        }
         return input.split("[,;]");
     }
 }
