@@ -40,4 +40,8 @@ public class InputProcessor {
             throw e;
         }
     }
+
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
 }
