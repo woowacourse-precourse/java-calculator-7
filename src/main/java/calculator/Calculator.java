@@ -23,9 +23,8 @@ public class Calculator {
     }
 
     private int calculate(String input) {
-        System.out.println(input);
         var numbers = ParsingUtil.extractNumbers(input);
-        System.out.println(numbers);
+
         var result = numbers.stream()
                 .mapToInt(Integer::parseInt)
                 .peek(this::checkNegative)
