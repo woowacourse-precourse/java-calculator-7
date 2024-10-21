@@ -33,4 +33,19 @@ public class Application {
         }
         return result;
     }
+    public static String escapeAllSpecials(String delimiters) {
+        // delimiters에 포함된  [ * + ? { . ( ) ^ $ | \ 와 같은 특수문자들을 모두 이스케이프 시킨다
+        return delimiters.replace("\\", "\\\\")
+                .replace("[", "\\[")
+                .replace("*", "\\*")
+                .replace("+", "\\+")
+                .replace("?", "\\?")
+                .replace("{", "\\{")
+                .replace(".", "\\.")
+                .replace("(", "\\(")
+                .replace(")", "\\)")
+                .replace("^", "\\^")
+                .replace("$", "\\$")
+                .replace("|", "\\|");
+    }
 }
