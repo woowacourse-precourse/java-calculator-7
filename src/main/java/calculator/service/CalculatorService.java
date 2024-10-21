@@ -1,12 +1,17 @@
 package calculator.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CalculatorService implements Service {
 
     @Override
     public List<String> createSeparators() {
-        return List.of();
+        List<String> separators = new ArrayList<>();
+        for (Separators separator : Separators.values()) {
+            separators.add(separator.getSeparator());
+        }
+        return separators;
     }
 
     @Override
