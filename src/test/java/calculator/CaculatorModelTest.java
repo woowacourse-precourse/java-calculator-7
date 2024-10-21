@@ -1,7 +1,8 @@
 package calculator;
 
 import static org.junit.jupiter.api.Assertions.*;
-import calculator.domain.CaculatorModel;
+
+import calculator.domain.CalculatorModel;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,8 +14,8 @@ public class CaculatorModelTest {
   @ParameterizedTest
   @ValueSource(strings = {"", "   "})
   void testEmptyOrBlankInput(String input) {
-    CaculatorModel caculator = new CaculatorModel(input);
-    int result = caculator.sum();
+    CalculatorModel calculator = new CalculatorModel();
+    int result = calculator.sum(input);
     assertEquals(0, result);
   }
 
@@ -23,8 +24,8 @@ public class CaculatorModelTest {
   @ParameterizedTest
   @MethodSource("provideBasicSeperatorInputs")
   void testBasicSeperator(String input, int expected) {
-    CaculatorModel caculator = new CaculatorModel(input);
-    int result = caculator.sum();
+    CalculatorModel calculator = new CalculatorModel();
+    int result = calculator.sum(input);
     assertEquals(expected, result);
   }
 
@@ -40,8 +41,8 @@ public class CaculatorModelTest {
   @ParameterizedTest
   @MethodSource("provideCustomCustomInputs")
   void testCustomSeperator(String input, int expected) {
-    CaculatorModel caculator = new CaculatorModel(input);
-    int result = caculator.sum();
+    CalculatorModel calculator = new CalculatorModel();
+    int result = calculator.sum(input);
     assertEquals(expected, result);
   }
 
@@ -55,19 +56,17 @@ public class CaculatorModelTest {
 
   @DisplayName("커스텀 구분자를 가지는 문자열인 경우 - 실패")
   @Test
-  void testInvalidCustomSeperator() {
-    CaculatorModel caculator1 = new CaculatorModel("//;1;2;3");
-    assertThrows(IllegalArgumentException.class, caculator1::sum);
-
-    CaculatorModel caculator2 = new CaculatorModel("//;\\n1;2,3");
-    assertThrows(IllegalArgumentException.class, caculator2::sum);
+  void testInvalidCustomSeparator() {
+    CalculatorModel calculator = new CalculatorModel();
+    assertThrows(IllegalArgumentException.class, () -> calculator.sum("//;1;2;3"));
+    assertThrows(IllegalArgumentException.class, () -> calculator.sum("//;\\n1;2,3"));
   }
 
   @DisplayName("숫자가 아닌 문자가 포함된 경우")
   @Test
   void testInvalidNumberFormat() {
-    CaculatorModel caculator = new CaculatorModel("//;\n1;a;3");
-    assertThrows(IllegalArgumentException.class, caculator::sum);
+    CalculatorModel calculator = new CalculatorModel();
+    assertThrows(IllegalArgumentException.class, () -> calculator.sum("//;\n1;a;3"));
   }
 
 
