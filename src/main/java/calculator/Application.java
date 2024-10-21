@@ -31,5 +31,6 @@ public class Application {
         }
 
         return sum;
+
     }
 }
