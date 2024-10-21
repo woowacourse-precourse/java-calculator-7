@@ -63,6 +63,7 @@ public class Calculator {
     }
 
     public void splitInput() {
+        input = input.replaceAll("\\s+", "");  // 모든 공백 제거
         String combinedDelimiters = String.join("|", escapeDelimiters(delimiters));
         parts = Arrays.asList(input.split(combinedDelimiters));
         parts = filterEmptyParts(parts);

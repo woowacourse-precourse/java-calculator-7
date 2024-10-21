@@ -72,6 +72,12 @@ class ApplicationTest extends NsTest {
         assertThat(calculator.add()).isEqualTo("결과 : 123");
     }
 
+    @Test
+    void 공백이_있는_경우() {
+        Calculator calculator = new Calculator("1 , 2 : 3");
+        assertThat(calculator.add()).isEqualTo("결과 : 6");
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
