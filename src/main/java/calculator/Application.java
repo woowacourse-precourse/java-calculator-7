@@ -14,12 +14,13 @@ public class Application {
             String[] tokens = add_delimiter(input,delimiter);
             delimiter = tokens[0];
             str_to_add = tokens[1];
-            System.out.println(delimiter + " " + str_to_add );
+            //System.out.println(delimiter + " " + str_to_add );
         }else{
             str_to_add = input;
         }
         str_to_add = str_to_add.strip();
         validation(str_to_add, delimiter);
+        System.out.println("결과 : "+cal(str_to_add));
     }
     //커스텀 구분자 여부 확인
     private static boolean check_delimiter(String input) {
@@ -30,7 +31,7 @@ public class Application {
     }
     //구분자 추가 함수
     private static String[] add_delimiter(String input, String delimiter) {
-        String[] components = input.split("\\\\" + "n");
+        String[] components = input.split("\\\\n");
         String delimiters = components[0].split("//")[1];
         String str_to_add = components[1];
         for(int i=0;i<delimiters.length();i++) {
@@ -43,9 +44,37 @@ public class Application {
         for(int i=0;i<str_to_add.length();i++) {
             char c = str_to_add.charAt(i);
             if(c-48<0 || c-48>9) {
-                throw new IllegalArgumentException("입력이 잘못된 형식입니다.");
+                if(!is_delimiter(c,delimiter)) throw new IllegalArgumentException("입력이 잘못된 형식입니다.");
             }
         }
+    }
+    //계산함수
+    private static int cal(String str_to_add) {
+        int sum = 0;
+        String num = "";
+        for(int i=0;i<str_to_add.length();i++) {
+            char c = str_to_add.charAt(i);
+            if((c-48<0 || c-48>9)) {
+                int n = Integer.parseInt(num);
+                if(n>=0) sum += Integer.parseInt(num);
+                else throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+                num = "";
+            }
+            else {
+                num += c;
+            }
+        }
+        sum += Integer.parseInt(num);
+        return sum;
+    }
+    //구분자인지 확인 함수
+    private static boolean is_delimiter(char c, String delimiter) {
+        for(int i=0;i<delimiter.length();i++) {
+            if(delimiter.charAt(i)==c) {
+                return true;
+            }
+        }
+        return false;
     }
 }
 
