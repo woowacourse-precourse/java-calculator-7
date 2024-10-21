@@ -53,7 +53,7 @@ public class InputTest {
     void inputSplitWithBasicSeparators() {
         // given
         Separators separators = new Separators();
-        String _string = separators.segregateByInput("1;2,3");
+        String _string = separators.segregateByInput("1:2,3");
         Input input = new Input(_string);
 
         // when
