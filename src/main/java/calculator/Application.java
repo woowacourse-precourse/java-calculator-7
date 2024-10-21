@@ -37,8 +37,7 @@ public class Application {
             sum += Integer.parseInt(num);  // 숫자로 변환하여 합 계산
         }
 
-        System.out.println("숫자들의 합: " + sum);
-
-        // TODO: 나머지 기능 구현
+        // 5. 결과를 출력하는 기능
+        System.out.println("최종 결과: " + sum);
     }
 }
