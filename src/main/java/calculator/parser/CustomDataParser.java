@@ -44,9 +44,14 @@ public class CustomDataParser implements DataParser {
     private String getCustomSeparator(String inputData) {
         StringTokenizer st = new StringTokenizer(inputData, DELIM);
         String prefix = st.nextToken();
-        if (prefix.length() != 3) {
+        if (!(prefix.length() == 3 || prefix.length() == 2)) {
             throw new IllegalArgumentException(INVALID_SEPARATOR_LENGTH_ERROR_MESSAGE);
         }
+
+        if (prefix.length() == 2) {
+            return ":,";
+        }
+
         char separator = prefix.charAt(2);
         return separator + ":,";
     }
