@@ -68,8 +68,88 @@
 - 입력한 숫자는 중복을 허용한다.
 - 구분자는 숫자를 제외한 문자만 허용한다.
 - 커스텀 구분자를 지정하면, 기본 구분자를 무시하지 않고 추가로 적용한다.
-
+---
 ### 2) 숫자의 자료형
 > 요구 사항에 숫자에 대한 범위가 기재되어 있지 않아, 범위를 정해야한다고 판단.<br>
 > 자료형에 따라 표현 가능한 숫자의 범위가 다르므로, 처음엔 문자열로 처리하는 Biginteger 사용 고려.<br>
 > 하지만 작은 숫자를 계산할 땐 메모리 낭비가 될 수 있으므로, 숫자 범위에 따라 자료형을 다르게 저장하는 방법을 고민.
+---
+### 3) getter, setter
+> 개인적인 목표로 getter, setter를 사용하지 않고 객체간 메시지로 데이터를 전달해야겠다고 생각.<br>
+> 예를 들어 계산기는 숫자의 내부 로직을 몰라도 `plus` 메서드만으로 덧셈을 수행할 수 있음.<br>
+> 숫자의 값을 직접 가져오지 않아 값을 변경할 수 없고, 이는 불변성을 보장함.<br>
+
+```java
+    public static Number calculateSum(Numbers numbers) {
+        Number sumResult = Number.zero();
+        for (int index = 0; index < numbers.size(); index++) {
+            sumResult.plus(numbers.findByIndex(index));
+        }
+        return sumResult;
+    }
+```
+---
+### 4) Wrapper 클래스, 일급 컬렉션
+> 해당 미션에서 '숫자'의 개념이 가장 중요하다고 생각.<br>
+> 숫자를 의미있게 사용하기 위해 단순 원시 자료형이 아닌, 도메인 로직을 포함한 래퍼 클래스로 구현<br>
+> 비즈니스 로직을 캡슐화하고, 검증 로직을 추가해 객체 상태를 안전하게 유지할 수 있음
+> 클래스명을 통해 특정 규칙을 가진 숫자라는 것을 명확히 알 수 있음
+
+```java
+public class Number {
+
+    private static final int MAX_NUMBER_DIGITS = 30;
+
+    private BigInteger value;
+
+    private Number(BigInteger value) {
+        validate(value);
+        this.value = value;
+    }
+// ...
+}
+```
+```java
+public class Numbers {
+
+    private static final int MIN_INDEX = 0;
+    private static final int MAX_NUMBER_DIGITS = 30;
+
+    private final List<Number> values;
+
+    private Numbers(List<Number> values) {
+        validateNumberCount(values.size());
+        this.values = values;
+    }
+// ...
+}
+```
+---
+### 5) 정적 팩토리 메서드 패턴
+> 상황에 따라 인스턴스를 반환하는 로직이 필요하여 정적 팩토리 메서드 패턴을 적용<br>
+> of(), from(), zero(), emtpy() 등 메서드명을 통해 어떤 인스턴스인지 나타냄<br>
+
+```java
+    // Number.class
+    public static Numbers empty() {
+        return new Numbers(Collections.emptyList());
+    }
+
+    public static Numbers of(List<Number> values) {
+        return new Numbers(values);
+    }
+```
+```java
+    // Numbers.class
+    public static Number zero() {
+        return new Number(BigInteger.ZERO);
+    }
+
+    public static Number from(String value) {
+        try {
+            return new Number(new BigInteger(value));
+        } catch (NumberFormatException ex) {
+            throw new IllegalArgumentException("[ERROR] 올바르지 않은 숫자 형식입니다.");
+        }
+    }
+```
