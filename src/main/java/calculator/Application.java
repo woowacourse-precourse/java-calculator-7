@@ -11,9 +11,12 @@ public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         String input = InputConsole.inputConsole();
-
-        String[] numbers = calculatorService.splitInputString(input);
-
+        String[] numbers;
+        try {
+            numbers = calculatorService.splitInputString(input);
+        }catch (NumberFormatException e){
+            throw new IllegalArgumentException();
+        }
         int result = calculatorService.calculateSum(numbers);
 
         OutputConsole.outputConsole(result);

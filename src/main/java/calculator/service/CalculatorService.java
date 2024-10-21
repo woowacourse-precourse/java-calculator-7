@@ -1,7 +1,7 @@
 package calculator.service;
 
 public class CalculatorService {
-    public String[] splitInputString(String input){
+    public String[] splitInputString(String input) throws IllegalArgumentException{
 
         String[] number;
         int endIndex = -1;
@@ -36,7 +36,11 @@ public class CalculatorService {
             return sum;
         }
         for(int i=0; i< numbers.length; i++){
-            sum += Integer.parseInt(numbers[i]);
+            try {
+                sum += Integer.parseInt(numbers[i]);
+            } catch (NumberFormatException e){
+                throw new IllegalArgumentException();
+            }
         }
         return sum;
     }
