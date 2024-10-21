@@ -6,8 +6,34 @@ import java.util.List;
 
 public class Delimiters {
     private final List<Delimiter> delimiters = new ArrayList<>();
-    private int index = 0;
+    private final Index index = new Index(0);
 
+    private static class Index {
+        private int index;
+
+        public Index(int index) {
+            this.index = index;
+        }
+
+        public int getIndex() {
+            return index;
+        }
+
+        public void setIndex(int index) {
+            this.index = index;
+        }
+
+        public void incrementIndex(int amount) {
+            this.index += amount;
+        }
+
+        public void validateCustomDelimiterFormat() {
+            if (index == -1) {
+                throw new IllegalArgumentException("커스텀 구분자 입력이 잘못되었습니다.");
+            }
+        }
+
+    }
 
     private void addDelimiter(Delimiter delimiter) {
         delimiters.add(delimiter);
@@ -24,7 +50,7 @@ public class Delimiters {
         if (inputString.startsWith("//")) {
             setIndexAndResetDelimiters(inputString);
         }
-        String numString = inputString.substring(index);
+        String numString = inputString.substring(index.getIndex());
         return numString.split(getDelimiterExpression());
     }
 
@@ -39,10 +65,10 @@ public class Delimiters {
     private void setIndexAndResetDelimiters(String inputString) {
 
         delimiters.clear();
-        index = inputString.indexOf("\\n");
-        validateCustomDelimiterFormat();
+        index.setIndex(inputString.indexOf("\\n"));
+        index.validateCustomDelimiterFormat();
         addDelimiterToDelimiters(inputString);
-        index += 2;
+        index.incrementIndex(2);
     }
 
     private String getDelimiterExpression() {
@@ -61,7 +87,7 @@ public class Delimiters {
     }
 
     private void addDelimiterToDelimiters(String inputString) {
-        for (int i = 2; i < index; i++) {
+        for (int i = 2; i < index.getIndex(); i++) {
             Delimiter currentDelimiter = new Delimiter(inputString.charAt(i));
             addDelimiter(currentDelimiter);
         }
@@ -76,10 +102,5 @@ public class Delimiters {
         }
     }
 
-    private void validateCustomDelimiterFormat() {
-        if (index == -1) {
-            throw new IllegalArgumentException("커스텀 구분자 입력이 잘못되었습니다.");
-        }
-    }
 
 }
