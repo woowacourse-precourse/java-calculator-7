@@ -56,6 +56,33 @@ class StringCalculatorTest extends NsTest {
         });
     }
 
+    @Test
+    void 음수_입력_예외_테스트() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("-1,2,3"))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessageContaining("음수는 입력할 수 없습니다");
+        });
+    }
+
+    @Test
+    void 유효하지_않은_숫자_예외_테스트() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("1,a,3"))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessageContaining("숫자 변환에 실패했습니다");
+        });
+    }
+
+    @Test
+    void 유효하지_않은_구분자_형식_예외_테스트() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("//\n456n4"))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessageContaining("유효하지 않은 구분자 형식입니다");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
