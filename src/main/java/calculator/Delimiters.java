@@ -39,9 +39,6 @@ public class Delimiters {
         delimiters.add(delimiter);
     }
 
-    private List<Delimiter> getDelimiters() {
-        return new ArrayList<>(delimiters);
-    }
 
     public String[] getNumList(String inputString) {
 
@@ -73,7 +70,7 @@ public class Delimiters {
 
     private String getDelimiterExpression() {
         StringBuilder delimiterExpression = new StringBuilder();
-        for (Delimiter delimiter : getDelimiters()) {
+        for (Delimiter delimiter : delimiters) {
             appendDelimiterToExpression(delimiterExpression, delimiter.getDelimiter());
         }
         return delimiterExpression.toString();
