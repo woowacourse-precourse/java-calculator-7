@@ -27,3 +27,5 @@
 - 입력 화면과 출력 화면을 각각 구현하였다.
 - 입력은 `readLine()`을 이용하였다.
 
+## 실행 결과
+![image](https://github.com/user-attachments/assets/917c63c2-bde8-4764-9898-da122bc5a93e)
