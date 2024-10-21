@@ -13,4 +13,8 @@ public class Validation {
                 != chars.size())
             throw new IllegalArgumentException();
     }
+
+    private static Boolean overflowOutbreak(Long value) {
+        return value < 0;
+    }
 }
