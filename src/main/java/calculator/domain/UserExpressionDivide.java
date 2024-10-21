@@ -12,6 +12,14 @@ public class UserExpressionDivide {
         userExpression.setEssentialExpression(rawExpression);
     }
 
+    public static void dividePart(UserExpression expression) {
+        setting(expression);
+        if(enoughLengthToDivide(rawExpression)) {
+            assignCandidate(rawExpression);
+            assignRemainingPart(rawExpression);
+        }
+    }
+
     private static Boolean enoughLengthToDivide(String rawExpression) {
         return rawExpression.length() >= CUSTOM_DELIM_LENGTH;
     }
