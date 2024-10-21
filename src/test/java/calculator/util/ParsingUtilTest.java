@@ -144,4 +144,38 @@ class ParsingUtilTest {
         // then
         assertThat(result).isEqualTo(expected);
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1", "2", "13", "14"})
+    @DisplayName("커스텀 구분자가 숫자일 경우 오류발생 테스트")
+    void checkDelimiterFormat(String delimiter) {
+
+        // when & then
+        assertThatThrownBy(() -> ParsingUtil.checkDelimiterFormat(delimiter))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(CalculatorError.DELIMITER_IS_NUMBER.getMessage());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"//1\n1;2;3", "//2\n1/2/3", "//13\n1|2|3"})
+    @DisplayName("")
+    void checkDelimiterFormat_Exception(String input) {
+
+        // when & then
+        assertThatThrownBy(() -> ParsingUtil.extractNumbers(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(CalculatorError.DELIMITER_IS_NUMBER.getMessage());
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자가 빈 문자열일 경우 오류발생 테스트")
+    void checkDelimiterEmpty() {
+        // given
+        final String input = "// \n1;2;3";
+
+        // when & then
+        assertThatThrownBy(() -> ParsingUtil.extractCustomDelimiter(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(CalculatorError.DELIMITER_IS_EMPTY.getMessage());
+    }
 }
