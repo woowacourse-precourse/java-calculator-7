@@ -1,7 +1,6 @@
 package calculator;
 
 import java.util.HashSet;
-import java.util.List;
 
 public class StringSplitters {
     private final HashSet<Character> splitters;
@@ -27,7 +26,7 @@ public class StringSplitters {
         return delim.toString();
     }
 
-    public void addSplittersByToken(StringToken token, String givenInput){
+    public void addSplittersFromToken(StringToken token, String givenInput){
         token.regexMatch(givenInput).forEach(matchResult -> {
             String tokenValue = matchResult.group(1);
 

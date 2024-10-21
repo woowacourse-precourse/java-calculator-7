@@ -2,7 +2,6 @@ package calculator;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.StringTokenizer;
 
 public class StringSummationCalculator implements Calculator<BigInteger> {
@@ -40,9 +39,9 @@ public class StringSummationCalculator implements Calculator<BigInteger> {
     private ArrayList<String> parse(String givenInput){
         StringSplitters stringSplitters = new StringSplitters();
         StringToken stringToken = new StringToken("//","\\\\n");
-        stringSplitters.addSplittersByToken(stringToken,givenInput);
+        stringSplitters.addSplittersFromToken(stringToken,givenInput);
 
-        String removedString = stringToken.removeTokenDeclaration(givenInput);
+        String removedString = stringToken.removeToken(givenInput);
         StringTokenizer tokenizer = new StringTokenizer(removedString, stringSplitters.getDelim());
         ArrayList<String> parsedArgs = new ArrayList<>();
 

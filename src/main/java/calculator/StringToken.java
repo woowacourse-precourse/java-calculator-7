@@ -5,16 +5,8 @@ import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class StringToken {
-    private String startToken;
-    private String endToken;
-
-    public StringToken(String startToken, String endToken){
-        this.startToken = startToken;
-        this.endToken = endToken;
-    }
-
-    public String removeTokenDeclaration(String givenInput){
+public record StringToken(String startToken, String endToken) {
+    public String removeToken(String givenInput){
         String removedString = givenInput;
 
         for (MatchResult matchResult: regexMatch(givenInput)){
@@ -26,13 +18,13 @@ class StringToken {
     }
 
     public List<MatchResult> regexMatch(String given){
-        Pattern regexPattern = Pattern.compile(getTokenDeclarationRegex());
+        Pattern regexPattern = Pattern.compile(getTokenRegex());
         Matcher regexMatcher = regexPattern.matcher(given);
 
         return regexMatcher.results().toList();
     }
 
-    public String getTokenDeclarationRegex(){
+    public String getTokenRegex(){
         return String.format("%s(.*?)%s",this.startToken,this.endToken);
     }
 }
