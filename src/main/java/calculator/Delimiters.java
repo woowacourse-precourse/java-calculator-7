@@ -11,23 +11,23 @@ public class Delimiters {
     private static class Index {
         private int index;
 
-        public Index(int index) {
+        private Index(int index) {
             this.index = index;
         }
 
-        public int getIndex() {
+        private int getIndex() {
             return index;
         }
 
-        public void setIndex(int index) {
+        private void setIndex(int index) {
             this.index = index;
         }
 
-        public void incrementIndex(int amount) {
+        private void incrementIndex(int amount) {
             this.index += amount;
         }
 
-        public void validateCustomDelimiterFormat() {
+        private void validateCustomDelimiterFormat() {
             if (index == -1) {
                 throw new IllegalArgumentException("커스텀 구분자 입력이 잘못되었습니다.");
             }
