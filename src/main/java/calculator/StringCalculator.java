@@ -5,7 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringCalculator {
-    private static final String DEFAULT_DELIMITER = "[,:]";
+    private static final String DEFAULT_DELIMITER = ",|:";
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
 
     public int calculate(String input) {
@@ -20,9 +20,9 @@ public class StringCalculator {
     private String[] splitNumbers(String input) {
         Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(input);
         if (matcher.find()) {
-            String customDelimiter = matcher.group(1);
+            String customDelimiter = Pattern.quote(matcher.group(1));
             String numbersString = matcher.group(2);
-            return numbersString.split(Pattern.quote(customDelimiter));
+            return numbersString.split(customDelimiter);
         }
         return input.split(DEFAULT_DELIMITER);
     }
@@ -34,10 +34,14 @@ public class StringCalculator {
     }
 
     private int parseNumber(String number) {
+        try{
         int value = Integer.parseInt(number);
         if (value < 0) {
-            throw new IllegalArgumentException("음수는 허용되지 않습니다: " + value);
+            throw new IllegalArgumentException("음수는 허용되지 않습니다.");
         }
         return value;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("유효하지 않은 숫자입니다.");
+        }
     }
 }
