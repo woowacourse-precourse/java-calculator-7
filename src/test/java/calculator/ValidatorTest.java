@@ -10,7 +10,7 @@ public class ValidatorTest {
 
     @Test
     void 커스텀_구분자_목록에_숫자_포함_테스트() {
-        String optionField = "//;-1)[]\n";
+        String optionField = "//;-1)[]\\n";
         boolean expected = false;
         boolean result = validator.isValidOptionField(optionField);
         assertEquals(expected, result);
@@ -18,7 +18,7 @@ public class ValidatorTest {
 
     @Test
     void 커스텀_구분자_목록에_숫자_미포함_테스트() {
-        String optionField = "//;-)[]\n";
+        String optionField = "//;-)[]\\n";
         boolean expected = true;
         boolean result = validator.isValidOptionField(optionField);
         assertEquals(expected, result);

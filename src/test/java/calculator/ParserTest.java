@@ -39,7 +39,7 @@ public class ParserTest {
 
     @Test
     void 커스텀_구분자_설정_포멧이_여러개인_경우_실패_테스트() {
-        String input = "//;\n//;\n1,2:3";
+        String input = "//;\\n//;\\n1,2:3";
         assertThrows(IllegalArgumentException.class,
                 () -> {
                     parser.parseInput(input);

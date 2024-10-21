@@ -11,8 +11,8 @@ public class ExtractorTest {
 
     @Test
     void 커스텀_구분자_설정_영역_추출_성공_테스트() {
-        String input = "//;tb=-//++~``\n1;2;3";
-        String expected = "//;tb=-//++~``\n";
+        String input = "//;tb=-//++~``\\n1;2;3";
+        String expected = "//;tb=-//++~``\\n";
         String result = extractor.extractOptionField(input);
 
         assertEquals(expected, result);
@@ -20,8 +20,8 @@ public class ExtractorTest {
 
     @Test
     void 커스텀_구분자_설정_영역_추출_실패_테스트() {
-        String input = "//;tb=-//++~``\n1;2;3";
-        String expected = "//;tb=-//++~`\n";    // 마지막 `(백틱) 미포함
+        String input = "//;tb=-//++~``\\n1;2;3";
+        String expected = "//;tb=-//++~`\\n";    // 마지막 `(백틱) 미포함
         String result = extractor.extractOptionField(input);
 
         assertNotEquals(expected, result);
@@ -29,7 +29,7 @@ public class ExtractorTest {
 
     @Test
     void 숫자_포함_영역_추출_성공_테스트() {
-        String input = "//;tb=-//++~``\n1;2;3t45b7";
+        String input = "//;tb=-//++~``\\n1;2;3t45b7";
         String expected = "1;2;3t45b7";
         String result = extractor.extractTargetField(input);
 
@@ -38,7 +38,7 @@ public class ExtractorTest {
 
     @Test
     void 숫자_포함_영역_추출_실패_테스트() {
-        String input = "//;tb=-//++~``\n1;2;3t45b7";
+        String input = "//;tb=-//++~``\\n1;2;3t45b7";
         String expected = "1;2;3t45c7";    // b가 아닌 c 문자 포함 되어 오류
         String result = extractor.extractTargetField(input);
 
