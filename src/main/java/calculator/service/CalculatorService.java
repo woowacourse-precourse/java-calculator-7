@@ -25,17 +25,19 @@ public class CalculatorService {
         Matcher matcher = Pattern.compile(Delimiter.CUSTOM_PATTERN.getPattern()).matcher(input);
         String delimiters = Delimiter.DEFAULT.getPattern(); // 기본 구분자(쉼표, 콜론)
 
-        // 커스텀 구분자가 있는 경우, 커스텀 구분자 추가
         if (matcher.matches()) {
-            String customDelimiter = Pattern.quote(matcher.group(1)); // 커스텀 구분자
-            String numbers = matcher.group(2);
-            delimiters += "|" + customDelimiter; // 기본 구분자와 커스텀 구분자를 결합
-            return numbers.split(delimiters);
+            delimiters = getCombinedDelimiters(matcher, delimiters);
+            input = matcher.group(2); // 숫자 부분만 추출
         }
 
-        // 기본 구분자만 사용하는 경우
         return input.split(delimiters);
     }
+
+    private String getCombinedDelimiters(Matcher matcher, String defaultDelimiters) {
+        String customDelimiter = Pattern.quote(matcher.group(1));
+        return defaultDelimiters + "|" + customDelimiter;
+    }
+
 
     private int sumOfNumbers(String[] tokens) {
         return Arrays.stream(tokens)
