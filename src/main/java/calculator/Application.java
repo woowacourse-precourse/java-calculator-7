@@ -56,4 +56,9 @@ public class Application {
             throw new IllegalArgumentException("잘못된 값입니다.");
         }
     }
+
+    // 중의적 의미 특수기호 변환
+    private static String specialSymbols(String delimiter) {
+        return Pattern.quote(delimiter);
+    }
 }
