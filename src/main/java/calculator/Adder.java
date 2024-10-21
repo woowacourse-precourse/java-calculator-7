@@ -7,14 +7,15 @@ public class Adder {
     private static final String DEFAULT_DELIM = "[,:]";
     private static final String CUSTOM_DELIM_PREFIX = "//";
     private static final String CUSTOM_DELIM_SUFFIX = "\\n";
+    private static final int ZERO = 0;
+
 
     public int run(String input) {
         if (hasCustomDelim(input)) {
-            String customDelim = input.substring(
-                    input.indexOf(CUSTOM_DELIM_PREFIX) + CUSTOM_DELIM_PREFIX.length(),
-                    input.indexOf(CUSTOM_DELIM_SUFFIX)
-            );
-            String numberString = input.substring(input.indexOf(CUSTOM_DELIM_SUFFIX) + CUSTOM_DELIM_SUFFIX.length());
+            int customDelimIndex = input.indexOf(CUSTOM_DELIM_SUFFIX);
+            String numberString = input.substring(customDelimIndex + CUSTOM_DELIM_SUFFIX.length());
+            String customDelim = input.substring(CUSTOM_DELIM_PREFIX.length(), customDelimIndex);
+
             return run(numberString, customDelim);
         }
         return run(input, DEFAULT_DELIM);
@@ -26,7 +27,7 @@ public class Adder {
 
     private int run(String numberString, String delim) {
         if (numberString.isEmpty()) {
-            return 0;
+            return ZERO;
         }
         return Arrays.stream(numberString.split(delim))
                 .mapToInt(Integer::parseInt)
@@ -35,7 +36,7 @@ public class Adder {
     }
 
     private int validateNumber(int number) {
-        if (number <= 0) {
+        if (number <= ZERO) {
             throw new IllegalArgumentException("입력된 수가 음수이거나 0입니다.");
         }
         return number;
