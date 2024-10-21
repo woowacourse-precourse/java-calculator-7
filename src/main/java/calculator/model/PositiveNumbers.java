@@ -5,7 +5,7 @@ import java.util.List;
 
 public class PositiveNumbers {
 
-    private static final String POSITIVE_NUMBER_ERROR_MESSAGE = "숫자는 양수를 입력해야 합니다.";
+    private static final String ERROR_POSITIVE_NUMBER_TYPE = "숫자는 양수를 입력해야 합니다.";
     private static final PositiveNumbers EMPTY_INSTANCE = new PositiveNumbers(List.of());
 
     private final List<Integer> numbers;
@@ -24,7 +24,7 @@ public class PositiveNumbers {
 
     private void validatePositiveNumbers(List<Integer> numbers) {
         if (numbers.stream().anyMatch(number -> number < 0)) {
-            throw new IllegalArgumentException(POSITIVE_NUMBER_ERROR_MESSAGE);
+            throw new IllegalArgumentException(ERROR_POSITIVE_NUMBER_TYPE);
         }
     }
 
