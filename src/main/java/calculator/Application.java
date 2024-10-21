@@ -99,13 +99,26 @@ class Calc {
         String regex = String.join("|", sep);
 
         try {
-            if (input != "") {
-                numArr = Arrays.stream(input.split(regex))
-                        .mapToInt(Integer::parseInt)
-                        .toArray();
-            } else {
-                numArr = new int[0];
-            }
+            numArr = Arrays.stream(input.split(regex))
+                    .mapToInt(s -> {
+                        try {
+                            if (s == null || s.isEmpty()) {
+                                return 0; // 빈 문자열 또는 null은 0으로 처리
+                            }
+
+                            int value = Integer.parseInt(s); // 문자열을 숫자로 변환
+
+                            if (value < 0) {
+                                throw new IllegalArgumentException("음수는 입력할 수 없습니다: " + value);
+                            }
+
+                            return value; // 양수는 그대로 반환
+                        } catch (NumberFormatException e) {
+                            return 0; // 숫자로 변환할 수 없는 경우 0으로 처리
+                        }
+                    })
+                    .toArray();
+
         } catch (Exception e) {
             throw new IllegalArgumentException("입력 값이 잘못되었습니다: " + e.getMessage());
         }
