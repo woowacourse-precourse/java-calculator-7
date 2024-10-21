@@ -9,13 +9,13 @@ import java.util.regex.Pattern;
 
 public final class ParsingUtil {
     private static final String DEFAULT_DELIMITER = ",|:";
-    private static final String CUSTOM_DELIMITER = "//\\s*(.)\\s*\\n";
+    private static final String CUSTOM_DELIMITER_REGEX = "//\\s*(.)\\s*\\n";
 
     private ParsingUtil() {
     }
 
     public static List<String> extractCustomDelimiter(String input) {
-        Pattern pattern = Pattern.compile(CUSTOM_DELIMITER);
+        Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_REGEX);
         Matcher matcher = pattern.matcher(input);
         List<String> delimiters = new ArrayList<>();
 
@@ -26,7 +26,7 @@ public final class ParsingUtil {
     }
 
     public static boolean containsCustomDelimiter(String input) {
-        Pattern pattern = Pattern.compile(CUSTOM_DELIMITER);
+        Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_REGEX);
         Matcher matcher = pattern.matcher(input);
 
         return matcher.find();
