@@ -18,17 +18,8 @@ public class InputValidator {
 
     private static boolean isValidateInput(CalcTarget target) {
         StringBuilder prefix = new StringBuilder();
-        boolean isHaveSeparator = false;
-        if (!Character.isDigit(target.getValue().charAt(0))){
-            return false;
-        }
-        prefix.append(target.getValue().charAt(0));
-        for(int i = 1; i < target.getValue().length(); i++) {
-            if (!prefix.isEmpty()) {
-                if (isContainSeparator(target.getValue(), i)) {
-                    isHaveSeparator = true;
-                }
-            }
+
+        for(int i = 0; i < target.getValue().length(); i++) {
 
             if(!prefix.isEmpty() && separator.contains(prefix.toString())) {
                 if(!Character.isDigit(target.getValue().charAt(i))){
@@ -48,13 +39,7 @@ public class InputValidator {
         if(prefix.length() == 1 && separator.contains(prefix.toString())) {
             return false;
         }
-        if(!isHaveSeparator && target.getValue().length()!=1) {
-            return false;
-        }
         return true;
     }
 
-    private static boolean isContainSeparator(String input, int index) {
-        return separator.indexOf(input.charAt(index)) != -1;
-    }
 }
