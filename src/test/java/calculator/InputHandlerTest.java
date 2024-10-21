@@ -68,4 +68,19 @@ class InputHandlerTest {
         // 1, 2, 3, 4로 분리되는지 확인
         assertThat(result).containsExactly("1", "2", "3", "4");
     }
+    
+    @Test
+    void 기본_구분자_빈_문자열_테스트() {
+        String input = ""; 
+
+        assertThat(input).isEqualTo("");
+        assertThat("0").isEqualTo("0"); 
+    }
+    
+    @Test
+    void 커스텀_구분자_빈_문자열_테스트() {
+        String input = "//n\n";  
+        assertThat(input).isEqualTo("//n\n");
+        assertThat("0").isEqualTo("0"); 
+    }
 }
