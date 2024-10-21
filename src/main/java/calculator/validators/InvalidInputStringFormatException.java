@@ -1,0 +1,50 @@
+package calculator.validators;
+
+import static calculator.utils.Constants.CUSTOM_DELIMITER_END_WRAPPER;
+import static calculator.utils.Constants.CUSTOM_DELIMITER_START_WRAPPER;
+
+public class InvalidInputStringFormatException {
+    public static void errorCheck(String operandStr){
+        checkIfStringWhiteSpace(operandStr);
+        checkStartingPoint(operandStr);
+        checkEndPoint(operandStr);
+        checkFrontAndBackOfCustomDelimiter(operandStr);
+        checkContainsCustomDelimiter(operandStr);
+    }
+
+    //스페이스만 입력되었는지 확인
+    public static void checkIfStringWhiteSpace(String operandStr){
+        if(!operandStr.isEmpty() && operandStr.trim().isEmpty()){
+            throw new IllegalArgumentException("공백만 입력되었습니다.");
+        }
+    }
+
+    // 문자열의 처음이 숫자이거나 //인지 확인
+    public static void checkStartingPoint(String operandStr){
+        if(!(operandStr.startsWith(CUSTOM_DELIMITER_START_WRAPPER) || Character.isDigit(operandStr.charAt(0))))
+            throw new IllegalArgumentException("문자열의 처음 형식이 올바르지 않습니다.");
+    }
+
+    //문자열의 마지막이 숫자로 끝나는지 확인
+    public static void checkEndPoint(String operandStr){
+        char endOfString = operandStr.charAt(operandStr.length() - 1);
+        if(!Character.isDigit(endOfString))
+            throw new IllegalArgumentException("문자열의 마지막이 숫자가 아닙니다.");
+    }
+
+    // 커스텀 문자를 구분하는 //뒤에 \\n이 오는지 확인
+    public static void checkFrontAndBackOfCustomDelimiter(String operandStr){
+        if(operandStr.startsWith(CUSTOM_DELIMITER_START_WRAPPER) && !operandStr.contains(CUSTOM_DELIMITER_END_WRAPPER)){
+            throw new IllegalArgumentException("커스텀 문자를 입력하는 형식이 잘못되었습니다.");
+        }
+    }
+
+    //커스텀 문자를 포함하고 있는지 확인하는 방법
+    public static void checkContainsCustomDelimiter(String operandStr){
+        int startIndex = operandStr.indexOf(CUSTOM_DELIMITER_START_WRAPPER);
+        int endIndex = operandStr.indexOf(CUSTOM_DELIMITER_END_WRAPPER);
+
+        if(startIndex != -1 && endIndex == startIndex + 2)
+            throw new IllegalArgumentException("커스텀 문자를 입력하지 않았습니다.");
+    }
+}
