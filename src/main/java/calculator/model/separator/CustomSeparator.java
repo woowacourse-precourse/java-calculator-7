@@ -27,7 +27,7 @@ public class CustomSeparator implements Separator {
         return customSeparator;
     }
 
-    public static Separator extractAndCombine(String input, String defaultSeparator) {
+    public static Separator extractInputAndCombineToSeparator(String input, String defaultSeparator) {
         int separatorIndex = input.indexOf(CUSTOM_SEPARATOR_SUFFIX);
         if (separatorIndex == -1) {
             throw new IllegalArgumentException(ErrorCode.INVALID_CUSTOM_SEPARATOR.getMessage());
