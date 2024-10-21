@@ -1,7 +1,9 @@
 package calculator.service;
 
 public enum CustomSeparatorsRegex {
-    START_REGEX("^//"), MIDDLE_REGEX("\\D"), END_REGEX("\n");
+    START_SEPARATOR("//"), START_REGEX("^" + START_SEPARATOR.getRegex() + ".*"),
+    MIDDLE_REGEX("\\D+"),
+    END_SEPARATOR("\\n"), END_REGEX(".*\\" + END_SEPARATOR.getRegex() + ".*");
 
     private String regex;
 
