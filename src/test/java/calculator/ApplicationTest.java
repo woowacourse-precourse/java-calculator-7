@@ -2,6 +2,7 @@ package calculator;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.DisplayName;
@@ -30,37 +31,37 @@ class ApplicationTest extends NsTest {
     @Test
     @DisplayName("[예외] - 음수")
     void exception_minus() {
-        assertSimpleTest(() -> {
-            run("-1,2,-3");
-            assertThat(output()).contains("올바른 입력이 아닙니다.");
-        });
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
     }
 
     @Test
-    @DisplayName("[예외] - long 범위 초과")
+    @DisplayName("[예외] - 입력범위 초과")
     void exception_overflow() {
-        assertSimpleTest(() -> {
-            run("9223372036854775807123");
-            assertThat(output()).contains("올바른 입력이 아닙니다.");
-        });
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("9223372036854775807123"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
     }
 
     @Test
     @DisplayName("[예외] - 문자 입력")
     void exception_notNumber() {
-        assertSimpleTest(() -> {
-            run("abcabc,123,345");
-            assertThat(output()).contains("올바른 입력이 아닙니다.");
-        });
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("abcabc,123,345"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
     }
 
     @Test
-    @DisplayName("[예외] - 문자 입력")
+    @DisplayName("[예외] - 덧셈연산결과 범위 초과")
     void exception_overflowDuringCalculation() {
-        assertSimpleTest(() -> {
-            run("9223372036854775807,1");
-            assertThat(output()).contains("연산 가능한 범위를 초과했습니다.");
-        });
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("9223372036854775807,1"))
+                        .isInstanceOf(ArithmeticException.class)
+        );
     }
 
     @Override
