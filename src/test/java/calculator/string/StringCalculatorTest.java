@@ -46,4 +46,10 @@ class StringCalculatorTest {
         assertThat(calculator.add("1,2,3")).isEqualTo(6);
         assertThat(calculator.add("1,2,3,4,5")).isEqualTo(15);
     }
+
+    @Test
+    void 쉼표_콜론_구분된_여러숫자_더하기() {
+        assertThat(calculator.add("1,2:3")).isEqualTo(6);
+        assertThat(calculator.add("1:2,3:4,5")).isEqualTo(15);
+    }
 }

@@ -10,7 +10,7 @@ public class StringCalculator {
 
     /**
      * 입력된 문자열의 숫자들을 더한 결과 반환
-     * 숫자는 쉼표(,)로 구분, 개수 제한 없음
+     * 숫자는 쉼표(,)로 or 콜(:)으로 구분, 개수 제한 없음
      *
      * @param input 계산할 숫자들이 포함된 문자열
      * @return 문자열에 포함된 숫자들의 합
@@ -20,7 +20,7 @@ public class StringCalculator {
         if(input.isEmpty()){
             return 0;
         }
-        String[] numbers = input.split(",");
+        String[] numbers = input.split("[,:]"); //정규식으로 구분자에 콜론(:) 추가
         return Arrays.stream(numbers)
                 .mapToInt(Integer::parseInt)
                 .sum();
