@@ -35,6 +35,9 @@ public class CalculateM {
         } else if (!input.contains(",") && !input.contains(":")) {
             throw new IllegalArgumentException("입력값에 구분자가 없습니다.");
         }
+        if (numbers.trim().isEmpty()) {
+            throw new IllegalArgumentException("입력값이 비어있습니다.");
+        }
 
         return new String[]{delimiter, numbers};
     }
@@ -44,6 +47,9 @@ public class CalculateM {
     }
 
     private int sumNumbers(String[] numberArray) {
+        if (numberArray.length == 0) {
+            throw new IllegalArgumentException("입력값이 비어있습니다.");
+        }
         long sum = 0;
         for (String numberStr : numberArray) {
             if (!numberStr.trim().isEmpty()) {
@@ -60,9 +66,13 @@ public class CalculateM {
 
     private int parseNumber(String numberStr) {
         try {
+            if (numberStr.contains(".")) {
+                throw new IllegalArgumentException("소수점은 허용되지 않습니다: " + numberStr);
+            }
             long number = Long.parseLong(numberStr.trim());
             if (number > MAX_NUMBER) {
-                throw new IllegalArgumentException("숫자가 너무 큽니다 (최대 " + MAX_NUMBER + "): " + number);
+                throw new IllegalArgumentException("입력 숫자가 너무 큽니다 (최대 " + MAX_NUMBER + "): "
+                        + number);
             }
             return (int) number;
         } catch (NumberFormatException e) {
