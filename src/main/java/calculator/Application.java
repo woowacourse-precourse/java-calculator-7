@@ -32,20 +32,16 @@ public class Application {
             String new_delimiter = input.substring(2, index);
             input = input.substring(index + 2).replace(new_delimiter, ",");
         }
-        String[] arr = input.split("[,:]"); // splitPattern 안에 구분자들을 기준으로 분리함
+        String[] arr = input.split("[,:]"); // ,와 :를 기준으로 분리함
 
-        try {
-            for (String a : arr) {
-                if (!a.matches("[0-9]+")) {
-                    throw new IllegalArgumentException("잘못된 숫자 형식:" + a); // 분리된 arr 안에 값들이 정수인지 확인
-                }
-                result += Long.parseLong(a);
+        for (String a : arr) {
+            if (!a.matches("[0-9]+")) {
+                throw new IllegalArgumentException("잘못된 숫자 형식:" + a); // 분리된 arr 안에 값들이 정수인지 확인
             }
-            System.out.println("결과 : "+result); // 결과 출력!(성공)
-
-        }catch (IllegalArgumentException e){
-            System.out.println(e.getMessage());
-            System.exit(1);
+            result += Long.parseLong(a);
         }
+        System.out.println("결과 : "+result); // 결과 출력!(성공)
+
+
     }
 }
