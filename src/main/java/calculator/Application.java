@@ -6,20 +6,33 @@ public class Application {
 
         // TODO: 프로그램 구현
         // 1차
-        System.out.println("입력해 주세요");
         String input_sen = Console.readLine();
         int sum= 0;
-        String target_op =",:";
+        StringBuilder target_op = new StringBuilder(",:");
         StringBuilder temp_buf = new StringBuilder();
 
         for(int i = 0; i < input_sen.length();i++){
             String c = String.valueOf(input_sen.charAt(i));
 
-            if(target_op.contains(c)){
+            if(target_op.toString().contains(c)){
                 // temp_buf 를 숫자로 바꿔서 더하기
                 sum += Integer.parseInt(temp_buf.toString());
 
                 temp_buf = new StringBuilder();
+            }
+            else if(c.equals("/")){
+                // add char
+                if(input_sen.length()>= i+1) {
+                    if (input_sen.charAt(i + 1) == '/'
+                            && input_sen.charAt(i + 3) == '\\'
+                            && input_sen.charAt(i + 4) == 'n') {
+                        target_op.append(input_sen.charAt(i + 2));
+                        i = i + 4;
+                    } else {
+                        // error
+                    }
+
+                }
             }
             else{// 포함되어있는 기호가 아닐때
                 //todo 커스텀 기호
@@ -31,7 +44,7 @@ public class Application {
             }
         }
         sum += Integer.parseInt(temp_buf.toString());
-        System.out.println(sum);
+        System.out.println("결과 : " + sum);
 
         //end
         Console.close();
