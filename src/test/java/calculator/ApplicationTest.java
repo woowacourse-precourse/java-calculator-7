@@ -53,7 +53,6 @@ class ApplicationTest extends NsTest {
                 run(inputString);
                 assertThat(output()).contains("결과 : 6");
             });
-
         }
     }
 
@@ -136,7 +135,17 @@ class ApplicationTest extends NsTest {
                 run(inputString);
                 assertThat(output()).contains("결과 : 3");
             });
+        }
+    }
 
+    @Test
+    void 커스텀_구분자가_공백인_경우() {
+        String[] inputStrings = {"// \\n1 2", "// \\n 1 2", "// \\n1 1 1", "// \\n1 1 1 "};
+        for (String inputString : inputStrings) {
+            assertSimpleTest(() -> {
+                run(inputString);
+                assertThat(output()).contains("결과 : 3");
+            });
         }
     }
 
