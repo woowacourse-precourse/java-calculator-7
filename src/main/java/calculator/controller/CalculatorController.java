@@ -1,5 +1,6 @@
 package calculator.controller;
 
+import calculator.common.NumberConverter;
 import calculator.model.Calculator;
 import calculator.view.InputView;
 import calculator.view.OutputView;

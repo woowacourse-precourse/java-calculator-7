@@ -1,8 +1,8 @@
 package calculator.model;
 
+import calculator.common.NumberConverter;
 import calculator.controller.CustomDelimiterValidator;
 import calculator.controller.InputValueValidator;
-import calculator.controller.NumberConverter;
 import calculator.controller.StringParser;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,8 +44,9 @@ public class Calculator {
         } else {
             extract = stringParser.parseNumber(this.input);
         }
-
-        this.inputNumbers = numberConverter.convert(extract);
+        List<Long> numbers = numberConverter.convert(extract);
+        inputValueValidator.number(numbers);
+        this.inputNumbers = numbers;
     }
 
     public Long sum() {
