@@ -19,13 +19,13 @@ public class Calculator {
         return Console.readLine();
     }
 
-    public String[] parse(String expr) {
+    public String[] parse(String expr) throws IllegalArgumentException {
         String del = ",|:";
 
         return expr.split(del);
     }
 
-    public int add(String[] numstr) {
+    public int add(String[] numstr) throws IllegalArgumentException {
         int sum = 0;
 
         for(String x : numstr) {
