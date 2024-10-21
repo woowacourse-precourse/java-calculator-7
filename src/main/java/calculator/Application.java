@@ -4,7 +4,6 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
 
@@ -28,8 +27,8 @@ public class Application {
                 throw new IllegalArgumentException("잘못된 입력입니다.");
             }
             String customDelimiter = input.substring(2, newLineIndex);
-            delimiters = "[" + customDelimiter + ",;]"; // 커스텀 구분자를 포함한 패턴
-            input = input.substring(newLineIndex + 1); // 줄바꿈 문자 이후의 문자열로 설정
+            delimiters = "[" + customDelimiter + ",;]";
+            input = input.substring(newLineIndex + 1).replace("\\n", ""); // 줄바꿈 문자 처리
         }
 
         String[] splitInput = input.split(delimiters);
