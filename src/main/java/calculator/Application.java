@@ -12,7 +12,7 @@ public class Application {
             // 빈값 0 처리
             System.out.println("결과 : " + result);
         } else {
-            if (str.indexOf("//") == 0 && str.indexOf("\\\\n") == 3) {
+            if (str.indexOf("//") == 0 && str.indexOf("\\n") == 3) {
                 // 커스텀 구분자는 문자열 앞부분의 "//"와 "\n" 사이에 위치하는 문자를 커스텀 구분자로 사용한다.
                 customCharacter = String.valueOf(str.charAt(2));
                 str = str.replace("/", "").replace("\\", "").replace("n", "").replace(customCharacter, ",");
