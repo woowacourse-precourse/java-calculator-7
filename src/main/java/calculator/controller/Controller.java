@@ -29,6 +29,7 @@ public class Controller {
     }
 
     public void startWithDelimiterInitialization() {
+        outputView.printCalculatorStartMessage();
         calculator.init();
     }
 
