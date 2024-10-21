@@ -6,7 +6,9 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 class ApplicationTest extends NsTest {
@@ -14,20 +16,19 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_사용_2() {
         String str = "//;\n1;2,3";
-        List<Character> separatorList = new ArrayList<>();
-        separatorList.add(':');
-        separatorList.add(',');
-        Application.addSeparator(str, separatorList);
-        assertThat(separatorList).containsExactly(':', ',', ';');
+        Set<Character> separatorSet = new HashSet<>();
+        Application.processInput(str, separatorSet);
+        assertThat(separatorSet).containsExactlyInAnyOrder(':', ',', ';');
     }
+
 
     @Test
     void 숫자_추출_테스트() {
-        List<Character> separatorList = new ArrayList<>();
-        separatorList.add(':');
-        separatorList.add(',');
+        Set<Character> separatorSet = new HashSet<>();
+        separatorSet.add(':');
+        separatorSet.add(',');
 
-        List<Integer> numbers = Application.extractNumbers("1,2:3", separatorList);
+        List<Integer> numbers = Application.extractNumbers("1,2:3", separatorSet);
         assertThat(numbers).containsExactly(1, 2, 3);
     }
 

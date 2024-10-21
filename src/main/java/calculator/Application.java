@@ -2,27 +2,23 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
         String str = Console.readLine();
-        List<Character> separatorList = new ArrayList<>();
+        Set<Character> separatorSet = new HashSet<>();
 
-        // 구분자 추가
-        addSeparator(str, separatorList);
+        String numbersPart = processInput(str, separatorSet);
 
-        // 숫자 추출
-        List<Integer> numbers = extractNumbers(str, separatorList);
-
-        // 숫자 합계 계산
+        List<Integer> numbers = extractNumbers(numbersPart, separatorSet);
         long sum = sumNumbers(numbers);
-        System.out.println("합계: " + sum);
+        System.out.println("결과 : " + sum);
     }
 
-    // 숫자 추출 함수
-    public static List<Integer> extractNumbers(String str, List<Character> separatorList) {
+    public static List<Integer> extractNumbers(String str, Set<Character> separatorSet) {
         List<Integer> numberList = new ArrayList<>();
 
         if (str.isEmpty()) {
@@ -31,18 +27,20 @@ public class Application {
             StringBuilder regexBuilder = new StringBuilder();
             regexBuilder.append("[");
 
-            for (Character character : separatorList) {
+            // separatorSet에서 구분자를 가져와서 정규 표현식 생성
+            for (Character character : separatorSet) {
                 regexBuilder.append(character);
             }
             regexBuilder.append("]");
 
+            // 문자열을 구분자로 나눔
             String[] parts = str.split(regexBuilder.toString());
+
             for (String part : parts) {
                 if (!part.isEmpty()) {
                     try {
                         int number = Integer.parseInt(part);
-                        // 음수 처리
-                        if (number < 0 && !separatorList.contains('-')) {
+                        if (number < 0) {
                             throw new IllegalArgumentException("음수는 허용되지 않습니다: " + part);
                         }
                         numberList.add(number);
@@ -63,35 +61,35 @@ public class Application {
         return sum;
     }
 
-    // "//" 와 "\n" 사이에 있는 문자를 커스텀 구분자로 추가
-    public static void addSeparator(String str, List<Character> separatorList) {
+    public static String processInput(String str, Set<Character> separatorSet) {
         // 기본 구분자 추가
-        separatorList.add(',');
-        separatorList.add(':');
+        separatorSet.add(':');
+        separatorSet.add(',');
 
-        int startIdx = -1;
+        // 커스텀 구분자 부분 확인
+        if (str.startsWith("//")) {
+            String[] parts = str.split("n"); // "\n"으로 문자열을 나누기
 
-        for (int i = 0; i < str.length(); i++) {
-            if (i < str.length() - 1 && str.charAt(i) == '/' && str.charAt(i + 1) == '/') {
-                startIdx = i + 2;
-                continue;
-            }
-            if (str.charAt(i) == '\n' && startIdx != -1) {
-                for (int j = startIdx; j < i; j++) {
-                    separatorList.add(str.charAt(j));
+            // 커스텀 구분자가 있는 경우
+            if (parts.length > 0 && parts[0].startsWith("//")) {
+                String customSeparatorPart = parts[0].substring(2); // "//" 이후 부분
+
+                // 커스텀 구분자들을 separatorSet에 추가
+                for (int i = 0; i < customSeparatorPart.length(); i++) {
+                    char ch = customSeparatorPart.charAt(i);
+                    // 맨 마지막 문자가 '\'일 경우 추가하지 않음
+                    if (i == customSeparatorPart.length() - 1 && ch == '\\') {
+                        continue;
+                    }
+                    separatorSet.add(ch);
                 }
-                startIdx = -1;
+
+                // 커스텀 구분자 설정 이후 부분을 반환 (두 번째 부분)
+                return parts.length > 1 ? parts[1] : ""; // 두 번째 부분 반환
             }
         }
 
-        // '//'로 시작하고 '\n'으로 끝나지 않는 경우 예외 발생
-        if (startIdx != -1) {
-            throw new IllegalArgumentException("잘못된 입력: '//'로 시작하지만 '\\n'으로 끝나지 않습니다.");
-        }
-
-        // 구분자가 없고 문자열에 숫자가 포함된 경우 예외 발생
-        if (separatorList.isEmpty() && str.contains(",")) {
-            throw new IllegalArgumentException("구분자가 추가되지 않았습니다.");
-        }
+        // "//"가 없을 경우 전체 문자열 반환
+        return str;
     }
 }
