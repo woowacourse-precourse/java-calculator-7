@@ -1,23 +1,26 @@
 package calculator.Controller;
 
-import calculator.Model.CalculateModel;
+import calculator.Service.CalculateService;
 import calculator.View.Input;
 import calculator.View.InputImpl;
 import calculator.View.Output;
 import calculator.View.OutputImpl;
 
 public class CalculatorController {
+    private final CalculateService calculateService;
+    private final Input input;
+    private final Output output;
+
+
+    public CalculatorController(CalculateService calculateService) {
+        this.calculateService = calculateService;
+        this.input = new InputImpl();
+        this.output = new OutputImpl();
+    }
+
     public void run() {
-        //Input 호출
-        Input input = new InputImpl();
         String inputString = input.getStringInput();
-
-        //Model 호출
-        CalculateModel calculateModel = new CalculateModel();
-        int result = calculateModel.calculate(inputString);
-
-        //Output 호출
-        Output output = new OutputImpl();
+        int result = calculateService.calculate(inputString);
         output.printResult(result);
 
     }
