@@ -12,6 +12,6 @@ public class View {
     }
 
     public static void outputValue(int result) {
-        System.out.println("결과 : " +result);
+        System.out.print("결과 : " +result);
     }
 }
