@@ -1,33 +1,53 @@
 package calculator;
 
 public class StringCalculator {
-    private final DelimiterParser delimiterParser;
-    private final NumberParser numberParser;
+    private final DelimiterExtractor delimiterExtractor;
+    private final ArrayBuilder arrayBuilder;
 
     public StringCalculator() {
-        this.delimiterParser = new DelimiterParser();
-        this.numberParser = new NumberParser();
+        this.delimiterExtractor = new DelimiterExtractor();
+        this.arrayBuilder = new ArrayBuilder();
     }
 
-    public int addNumbers(String numbers) {
-        if (numbers.isEmpty()) {
+
+    public int calculate(String numbers) {
+        if (isEmpty(numbers)) {
             return 0;
         }
+        // String[] array = delimiterExtractor.getDelimiter(numbers);
 
-        String numberString = numbers;
-        String delimiter = delimiterParser.parse(numbers);
+        // parsing, extract, -> 구분자 추출 및 numberPart parsing
+        String delimiter = delimiterExtractor.getDelimiter(numbers);
+        if (delimiterExtractor.checkDelimiter(delimiter)) {
+            int delimiterEndIndex = delimiterExtractor.getDelimiterEndIndex(numbers);
+            String strNumbers = arrayBuilder.getStrNumbers(numbers, delimiterEndIndex);
+            String[] splitCustomNumbers = getCustomSplitNumbers(strNumbers, delimiter);
+            return calculateSum(splitCustomNumbers);
+        }
 
+        String[] splitNumbers = getSplitNumbers(numbers, delimiter);
+        return calculateSum(splitNumbers);
+    }
+
+    private String[] getSplitNumbers(String numbers, String delimiter) {
+
+        return numbers.split(delimiter);
+    }
+
+    private String[] getCustomSplitNumbers(String splitArray, String delimiter) {
+        return splitArray.split(delimiter);
+    }
+
+    private boolean isEmpty(String numbers) {
+        return numbers.isEmpty();
+    }
+
+    private int calculateSum(String[] splitNumbers) {
         int sum = 0;
-        String[] splitNumbers = splitNumbers(numberString, delimiter);
-
         for (String splitNum : splitNumbers) {
-            int number = numberParser.parse(splitNum);
+            int number = NumberValidator.validate(splitNum);
             sum += number;
         }
         return sum;
-    }
-
-    private String[] splitNumbers(String numberString, String delimiter) {
-        return numberString.split(delimiter);
     }
 }
