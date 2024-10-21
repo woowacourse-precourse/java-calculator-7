@@ -1,6 +1,7 @@
 package calculator.controller;
 
 import calculator.dto.CalculatorResultDTO;
+import calculator.dto.ExpressionDTO;
 import calculator.model.Calculator;
 import calculator.model.Parser;
 import calculator.model.StringCalculator;
@@ -10,7 +11,7 @@ import java.math.BigDecimal;
 public class CalculatorController {
 
     // 추출한 실수형에 관한 빠른 덧셈 연산 수행용
-    public static CalculatorResultDTO<Double> sum(double initialValue, String expression) {
+    public static CalculatorResultDTO<Double> sum(double initialValue, ExpressionDTO expression) {
         Parser<Double> parser = new StringParser<>(expression);
         Calculator<Double> calculator = new StringCalculator<>(
                 initialValue,
@@ -20,8 +21,8 @@ public class CalculatorController {
         return new CalculatorResultDTO<>(calculator.calculate(parser.parse(Double::parseDouble)));
     }
 
-    // 추출한 실수형에 관한 정밀한 연산 수행용
-    public static CalculatorResultDTO<BigDecimal> sum(BigDecimal initialValue, String expression) {
+    // 추출한 실수형에 관한 정밀한 덧셈 연산 수행용
+    public static CalculatorResultDTO<BigDecimal> sum(BigDecimal initialValue, ExpressionDTO expression) {
         Parser<BigDecimal> parser = new StringParser<>(expression);
         Calculator<BigDecimal> calculator = new StringCalculator<>(
                 initialValue,
