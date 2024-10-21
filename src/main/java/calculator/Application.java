@@ -20,6 +20,9 @@ public class Application {
         List<Integer> parsedNumbers = parseInput(input);
         int sum = 0;
         for (int number : parsedNumbers) {
+            if (number <= 0) {
+                throw new IllegalArgumentException();
+            }
             sum += number;
         }
         return sum;
@@ -28,16 +31,20 @@ public class Application {
     public static List<Integer> parseInput(String input) {
         String delimiter = "[,:]";
 
-        if (input.startsWith("//")) {
-            int newLineIndex = input.indexOf("\\n");
-            delimiter = input.substring(2, newLineIndex);
-            input = input.substring(newLineIndex + 2);
-        }
+        try {
+            if (input.startsWith("//")) {
+                int newLineIndex = input.indexOf("\\n");
+                delimiter = input.substring(2, newLineIndex);
+                input = input.substring(newLineIndex + 2);
+            }
 
-        List<Integer> parsedNumbers = new ArrayList<>();
-        for (String number : input.split(delimiter)) {
-            parsedNumbers.add(Integer.parseInt(number.trim()));
+            List<Integer> parsedNumbers = new ArrayList<>();
+            for (String number : input.split(delimiter)) {
+                parsedNumbers.add(Integer.parseInt(number.trim()));
+            }
+            return parsedNumbers;
+        } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
+            throw new IllegalArgumentException();
         }
-        return parsedNumbers;
     }
 }
