@@ -11,7 +11,7 @@ public class Validator {
 
     public String getValidInput(String input) {
         if (isCustom(input)) {
-            return input.substring(input.indexOf(CUSTOM_END) + 2);
+            return input.substring(input.indexOf(CUSTOM_END) + CUSTOM_END.length());
         }
         return input.replace(":", ",");
     }
@@ -22,7 +22,7 @@ public class Validator {
             if (index == -1) {
                 throw new IllegalArgumentException("커스텀 구분자 형식이 잘못되었습니다.");
             }
-            return input.substring(2, index);
+            return input.substring(CUSTOM_START.length(), index);
         }
         return ",";
     }
