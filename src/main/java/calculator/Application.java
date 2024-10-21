@@ -14,7 +14,7 @@ public class Application {
             System.out.println("결과 : " + sum(input));
 
         }catch (IllegalArgumentException e){
-            System.out.println(e.getMessage());
+            return;
         }
     }
 
@@ -28,7 +28,7 @@ public class Application {
             int customLast = input.indexOf("\\n");
             // 구분자가 없는 경우
             if (customLast == -1) {
-                throw new IllegalArgumentException("구분자가 없습니다.");
+                throw new IllegalArgumentException();
             }
 //            System.out.println(customLast);
             base = String.valueOf(input.charAt(customStart + 2));
@@ -45,7 +45,7 @@ public class Application {
                 int num = Integer.parseInt(n);
                 // 숫자가 음수인경우
                 if (num < 0) {
-                    throw new IllegalArgumentException("숫자가 음수입니다.");
+                    throw new IllegalArgumentException();
                 }
                 total += num;
             }
