@@ -19,7 +19,7 @@ public class Application {
         String input;
         try {
             input = Console.readLine();
-        }catch (NoSuchElementException ex){
+        }catch (NoSuchElementException ex){ // 빈문자열의 경우 NoSuchElementException 발생 => catch 하여 결과 출력
             System.out.println("결과 : 0");
             return;
         }catch (Exception ex){
@@ -28,9 +28,50 @@ public class Application {
 
         // 커스텀 구분자를 감싸는 정규식
         String customKeywordRegex = "^//(.*)\\\\n";
+        String separator = determineSeparator(customKeywordRegex, input);
+
+        // 입력문자열 앞부분의 커스텀 지정 부분 제거
+        input = input.replaceFirst(customKeywordRegex, "");
+
+        // 숫자와 구분자 외의 숫자가 존재하는 경우 예외
+        if (!input.matches("[0-9" + separator + "]*")) {
+            throw new IllegalArgumentException(ExceptionMessages.INVALID_CHARACTER_IN_INPUT);
+        }
+
+        String[] str = input.split(separator);
+
+        IntStream numbers = Arrays.stream(str).mapToInt(Application::parseStringToInt);
+
+        System.out.println("결과 : "+ numbers.sum());
+    }
+
+    /**
+     * 문자열을 정수로 변환한다.
+     * @param s 정수로 변환할 문자열
+     * @return 변환된 정수 값
+     * @throws IllegalArgumentException 문자열이 숫자가 아닐 경우 예외
+     */
+    private static int parseStringToInt(String s) {
+        try {
+            return Integer.parseInt(s);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(ExceptionMessages.NON_NUMERIC_VALUE);
+        }
+    }
+
+    /**
+     * 커스텀 구분자를 추출하고 반환한다.
+     * 주어진 정규식(customKeywordRegex)을 사용하여 입력 문자열(input)에서 커스텀 구분자를 찾는다.
+     * 만약 커스텀 구분자가 존재하면 기본 구분자(DEFAULT_SEPARATOR)에 추가하여 반환한다.
+     * @param customKeywordRegex 커스텀 구분자를 찾기 위한 정규 표현식.
+     * @param input 사용자 입력 문자열
+     * @return 기본 구분자와 커스텀 구분자가 포함된 문자열
+     * @throws IllegalArgumentException 커스텀 구분자가 숫자이거나 1바이트 문자가 아닐 경우 예외
+     */
+    private static String determineSeparator(String customKeywordRegex, String input) {
+        String separator = DEFAULT_SEPARATOR;
         Matcher customKeywordMatcher = getMatcher(customKeywordRegex, input);
 
-        String separator = DEFAULT_SEPARATOR;
         if (customKeywordMatcher.find()) {
             separator = customKeywordMatcher.group(1);
             // 숫자인지 판별
@@ -41,29 +82,11 @@ public class Application {
             if(separator.length() != 1) {
                 throw new IllegalArgumentException(ExceptionMessages.CUSTOM_SEPARATOR_ONE_BYTE_REQUIRED);
             }
-            // 입력문자열 앞부분의 커스텀 지정 부분 제거
-            input = input.replaceFirst(customKeywordRegex, "");
+
             // 커스텀 구분자 추가 지정
             separator = DEFAULT_SEPARATOR + OR + separator;
         }
-
-        if (!input.matches("[0-9" + separator + "]*")) {
-            throw new IllegalArgumentException(ExceptionMessages.INVALID_CHARACTER_IN_INPUT);
-        }
-
-        String[] str = input.split(separator);
-
-        IntStream numbers = Arrays.stream(str).mapToInt(
-                s -> {
-                    try {
-                        return Integer.parseInt(s);
-                    } catch (NumberFormatException e) {
-                        throw new IllegalArgumentException(ExceptionMessages.NON_NUMERIC_VALUE);
-                    }
-                });
-
-        System.out.println("결과 : "+ numbers.sum());
-
+        return separator;
     }
 
     /**
