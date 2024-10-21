@@ -4,9 +4,11 @@ import java.util.StringTokenizer;
 
 public class ExtractString {
 
-    public void ExtractInput(String input, StringBuilder split){
+    public StringTokenizer ExtractInput(String input, StringBuilder split){
 
         StringTokenizer st = new StringTokenizer(input, split.toString());
+
+        return st;
 
     }
 
