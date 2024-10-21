@@ -1,10 +1,8 @@
 package calculator.infrastructure;
 
 import calculator.common.exception.ContainsBlankException;
-import calculator.common.exception.InvalidSeparatorException;
+import calculator.domain.Separators;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 public class InputParser {
 
@@ -20,17 +18,13 @@ public class InputParser {
     }
 
     public boolean checkIfInputStringContainsSeparator(String inputStr) {
-        if (!checkIfSeparatorForm(inputStr)) {
-            return false;
-        }
-        validateSeparator(inputStr.charAt(SEPARATOR_LOCATION_INDEX));
-        return true;
+        return checkIfSeparatorForm(inputStr);
     }
 
-    public Set<Character> getSeparatorList(boolean hasCustomSeparator, String inputStr) {
-        Set<Character> separators = new HashSet<>(Arrays.asList(':', ','));
+    public Separators getSeparatorList(boolean hasCustomSeparator, String inputStr) {
+        Separators separators = new Separators();
         if (hasCustomSeparator) {
-            separators.add(inputStr.charAt(SEPARATOR_LOCATION_INDEX));
+            separators.addCustomSeparator(inputStr.charAt(SEPARATOR_LOCATION_INDEX));
         }
         return separators;
     }
@@ -42,8 +36,8 @@ public class InputParser {
         return inputStr;
     }
 
-    public String[] splitStrBySeparator(Set<Character> separators, String slicedStr) {
-        String delimiter = getDelimiter(separators);
+    public String[] splitStrBySeparator(Separators separators, String slicedStr) {
+        String delimiter = separators.getDelimiter();
         String[] splitStr = slicedStr.split(delimiter);
         return Arrays.stream(splitStr)
                 .filter(str -> !str.trim().isEmpty())
@@ -66,22 +60,4 @@ public class InputParser {
                 firstFiveCharacters.endsWith(SEPARATOR_FORM_END_STR);
     }
 
-    private void validateSeparator(Character separator) {
-        if (Character.isDigit(separator)) {
-            throw new InvalidSeparatorException(separator);
-        }
-    }
-
-    private String getDelimiter(Set<Character> separators) {
-        StringBuilder delimiter = new StringBuilder();
-        delimiter.append("[");
-        for (Character separator : separators) {
-            if (separator == '-' || separator == '[' || separator == ']') {
-                delimiter.append("\\");
-            }
-            delimiter.append(separator);
-        }
-        delimiter.append("]");
-        return delimiter.toString();
-    }
 }

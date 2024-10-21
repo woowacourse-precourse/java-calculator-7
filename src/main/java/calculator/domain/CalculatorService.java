@@ -4,7 +4,6 @@ import calculator.infrastructure.InputParser;
 import calculator.infrastructure.NumberValidator;
 import calculator.infrastructure.SumCalculator;
 import java.util.List;
-import java.util.Set;
 
 public class CalculatorService {
 
@@ -31,7 +30,7 @@ public class CalculatorService {
      */
     public String[] splitStrBySeparators(String inputStr) {
         boolean hasCustomSeparator = inputParser.checkIfInputStringContainsSeparator(inputStr);
-        Set<Character> separators = inputParser.getSeparatorList(hasCustomSeparator, inputStr);
+        Separators separators = inputParser.getSeparatorList(hasCustomSeparator, inputStr);
         String strRemovedSeparatorForm = inputParser.removeSeparatorForm(hasCustomSeparator, inputStr);
         return inputParser.splitStrBySeparator(separators, strRemovedSeparatorForm);
     }
