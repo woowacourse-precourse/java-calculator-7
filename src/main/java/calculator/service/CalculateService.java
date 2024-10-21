@@ -18,7 +18,7 @@ public class CalculateService {
             return 0;
         }
 
-        if(str.startsWith("/")) {
+        if(str.startsWith("//")) {
             if(str.length() >= CommonConstant.MINIMUM_LENGTH
                     && str.charAt(1) == '/'
                     && str.charAt(3) == '\\'
@@ -51,6 +51,7 @@ public class CalculateService {
         int sum = 0;
         for(String num : number) {
             int part;
+            if(num.isEmpty()) continue;
             try {
                 part = Integer.parseInt(num);
                 if (part < 0) {
