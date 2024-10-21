@@ -40,14 +40,10 @@ public class NumberParser {
     public void parseNumber(String input) {
         int value = 0;
         for(int i = 0; i < input.length(); i ++) {
-            if((i+2 < input.length() && delimiter.isCustomDelimiter(input.substring(i, i+2)))
-                || delimiter.isDelimiter(input.charAt(i))) {
-                if(i+2 < input.length() && delimiter.isCustomDelimiter(input.substring(i, i+2))) {
-                    i ++;
-                }
-                if(value != 0) {
-                    numberList.add(value);
-                }
+            if((i+delimiter.getCustomDelimiterLength() < input.length() &&
+                    delimiter.isCustomDelimiter(input.substring(i, i+delimiter.getCustomDelimiterLength()))) ||
+                    !isNumber(input.charAt(i))) {
+                numberList.add(value);
                 value = 0;
             }
             else {
@@ -57,10 +53,8 @@ public class NumberParser {
         if(value != 0) {
             numberList.add(value);
         }
-        for (Integer integer : numberList) {
-            System.out.print(integer + " ");
-        }
-        System.out.println();
-
+    }
+    private boolean isNumber(char c) {
+        return c <= '9' && c >= '0';
     }
 }
