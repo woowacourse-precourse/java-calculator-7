@@ -9,7 +9,7 @@ public class OutputWriter {
     private StringBuilder stringBuilder;
 
 
-    public void writer(String result) {
+    public void writer(long result) {
         getStringBuilder().append("결과 : ").append(result);
         System.out.print(getStringBuilder());
     }

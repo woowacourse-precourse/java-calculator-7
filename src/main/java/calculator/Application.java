@@ -13,7 +13,7 @@ public class Application {
 
         StringCalculator stringCalculator = appConfig.stringCalculator();
         String input = inputReader.readLine();
-        String result = stringCalculator.operate(input);
+        long result = stringCalculator.operate(input);
         outputWriter.writer(result);
 
         inputReader.close();

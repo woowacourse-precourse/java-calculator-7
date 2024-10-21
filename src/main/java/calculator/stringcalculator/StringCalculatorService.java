@@ -13,7 +13,7 @@ public interface StringCalculatorService {
     /*
         문자열 계산
      */
-    String calculate(String input);
+    long calculate(String input);
 
     /*
         문자열에서 구분자 추출
@@ -33,6 +33,6 @@ public interface StringCalculatorService {
     /*
         슷자 문자열 더하기
      */
-    String addStringNumbers(String[] stringNumbers);
+    long addStringNumbers(String[] stringNumbers);
 
 }
