@@ -46,12 +46,30 @@ public class AdderTest {
     }
 
     @Test
+    void 빈_문자열을_포함한_숫자_테스트() {
+        String input = "1,2,";
+
+        int result = adder.run(input);
+
+        assertThat(result).isEqualTo(3);
+    }
+
+    @Test
     void 커스텀_구분자_테스트() {
         String input = "//;\n1;2;3";
 
         int result = adder.run(input);
 
         assertThat(result).isEqualTo(6);
+    }
+
+    @Test
+    void 커스텀_구분자만_있는경우_0을_반환() {
+        String input = "//;\n";
+
+        int result = adder.run(input);
+
+        assertThat(result).isEqualTo(0);
     }
 
     @Test

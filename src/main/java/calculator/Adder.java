@@ -5,13 +5,11 @@ public class Adder {
     private static final String DEFAULT_DELIM = "[,:]";
     private static final String CUSTOM_DELIM_PREFIX = "//";
     private static final String CUSTOM_DELIM_SUFFIX = "\n";
+    private static final int ALLOW_TAILING_EMPTY_STRING = -1;
 
     public int run(String input) {
-        if (input.isEmpty()) {
-            return 0;
-        }
         if (input.startsWith(CUSTOM_DELIM_PREFIX) && input.contains(CUSTOM_DELIM_SUFFIX)) {
-            String[] split = input.split(CUSTOM_DELIM_SUFFIX);
+            String[] split = input.split(CUSTOM_DELIM_SUFFIX, ALLOW_TAILING_EMPTY_STRING);
             String customDelimiter = split[0].substring(CUSTOM_DELIM_PREFIX.length());
 
             return run(split[1], customDelimiter);
@@ -20,6 +18,9 @@ public class Adder {
     }
 
     private int run(String input, String delim) {
+        if (input.isEmpty()) {
+            return 0;
+        }
         String[] stringNumbers = input.split(delim);
         int sum = 0;
 
