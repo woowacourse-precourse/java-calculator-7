@@ -5,11 +5,11 @@ public class InputValidationException extends IllegalArgumentException{
         super(message);
     }
 
-    public static String isEmpty(String input) {
+    public static boolean isEmpty(String input) {
         if (input == null || input.isEmpty()) {
             throw new IllegalArgumentException("아무것도 입력하지 않았습니다. 애플리케이션을 종료합니다.");
         }
-        return input;
+        return false;
     }
 
     public static void isPositiveNumber(int value) {
