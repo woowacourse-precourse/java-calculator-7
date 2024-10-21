@@ -1,5 +1,7 @@
 package calculator;
 
+import camp.nextstep.edu.missionutils.Console;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,7 +14,6 @@ public class Application {
 
     public static void main(String[] args) throws IOException {
         // TODO: 프로그램 구현
-        var bf = new BufferedReader(new InputStreamReader(System.in));
 
         HashSet<Integer> delimiters = new HashSet<Integer>();
         int idx = 0;
@@ -20,7 +21,7 @@ public class Application {
         delimiters.add((int)':');
         delimiters.add((int)',');
 
-        String line = bf.readLine();
+        String line = Console.readLine();
 
         if (Objects.isNull(line)) {
             System.out.println("결과 : 0");
