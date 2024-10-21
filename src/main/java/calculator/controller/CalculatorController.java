@@ -11,7 +11,7 @@ public class CalculatorController {
     private final CustomDelimiterParser customDelimiterParser;
     private final NumberStringSplitter numberStringSplitter;
     private final SumCalculator sumCalculator;
-    private final NumberStringConverter numberStringConverter; // 추가된 부분
+    private final NumberStringConverter numberStringConverter;
     private final CalculatorOutputView calculatorOutputView;
 
     public CalculatorController(CustomDelimiterParser customDelimiterParser, NumberStringSplitter numberStringSplitter,
@@ -19,7 +19,7 @@ public class CalculatorController {
                                 CalculatorOutputView calculatorOutputView) {
         this.customDelimiterParser = customDelimiterParser;
         this.numberStringSplitter = numberStringSplitter;
-        this.numberStringConverter = numberStringConverter; // 추가된 부분
+        this.numberStringConverter = numberStringConverter;
         this.sumCalculator = sumCalculator;
         this.calculatorOutputView = calculatorOutputView;
     }
