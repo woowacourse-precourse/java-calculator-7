@@ -26,6 +26,22 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 여러_커스텀_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("//;.\\n1.2;3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 중복된_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("1,:2,,3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
     void 빈_문자열_입력() {
         assertSimpleTest(() -> {
             run("");
@@ -72,6 +88,8 @@ class ApplicationTest extends NsTest {
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
+
+
 
     @Override
     public void runMain() {
