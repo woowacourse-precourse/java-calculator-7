@@ -4,14 +4,14 @@ import calculator.model.primitive.PositiveNumber;
 
 public class StringAddCalculator {
 
-    private static final int ZERO_VALUE = 0;
+    private static final long ZERO_VALUE = 0L;
     private static final String BLANK = " ";
     private static final String CONTAIN_BLANK_EXCEPTION_MESSAGE = "공백을 포함할 수 없습니다.";
     private static final String INVALID_DELIMITER_EXCEPTION_MESSAGE =
             "구분자가 잘못 되었습니다. 커스텀 구분자, 기본 구분자를 확인 후, "
                     + "다시 입력하세요";
 
-    public static int splitAndSum(String input) {
+    public static long splitAndSum(String input) {
         if (validateNullOrEmpty(input)) {
             return ZERO_VALUE;
         }
@@ -46,22 +46,22 @@ public class StringAddCalculator {
         return Separator.splitByDelimiter(input);
     }
 
-    private static int calculateSum(String[] splitInput) {
-        int sum = ZERO_VALUE;
+    private static long calculateSum(String[] splitInput) {
+        long sum = ZERO_VALUE;
         for (String splitNumber : splitInput) {
-            PositiveNumber positiveNumber = PositiveNumber.of(toInt(splitNumber));
+            PositiveNumber positiveNumber = PositiveNumber.of(toLong(splitNumber));
             sum = positiveNumber.addNumber(sum);
         }
         return sum;
     }
 
-    private static int toInt(String splitNumber) {
+    private static long toLong(String splitNumber) {
         return parseNumber(splitNumber);
     }
 
-    private static int parseNumber(String splitNumber) {
+    private static long parseNumber(String splitNumber) {
         try {
-            return Integer.parseInt(splitNumber);
+            return Long.parseLong(splitNumber);
         } catch (NumberFormatException exception) {
             throw new IllegalArgumentException(INVALID_DELIMITER_EXCEPTION_MESSAGE);
         }
