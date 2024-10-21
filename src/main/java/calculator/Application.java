@@ -7,10 +7,10 @@ public class Application {
         // TODO: 프로그램 구현
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String numDelimiterString = Console.readLine();
-        System.out.println(numDelimiterString);
         try {
             int addResult = separator(numDelimiterString);
             System.out.println("결과 : " + addResult);
+            return;
         } catch(IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return;
@@ -45,18 +45,20 @@ public class Application {
         for(int i = 0; i <numDelimiterString.length(); i++) {
             if(custom && i > 4 && Character.isDigit(numDelimiterString.charAt(i)) == prevIsNum) {
                 throw new IllegalArgumentException("Illegal Argument");
-            }else if(custom && i > 4 && (prevIsNum && numDelimiterString.charAt(i) != delimiter)) {
+            }else if(custom && i > 4 && prevIsNum && numDelimiterString.charAt(i) != delimiter) {
                 throw new IllegalArgumentException("Illegal Argument");
             }else if(!custom && Character.isDigit(numDelimiterString.charAt(i)) == prevIsNum) {
                 throw new IllegalArgumentException("Illegal Argument");
-            }else if(!custom && prevIsNum && (numDelimiterString.charAt(i) != ',' || numDelimiterString.charAt(i) != ':')) {
-                throw new IllegalArgumentException("Illegal Argument");
-            }else if(Character.getNumericValue(numDelimiterString.charAt(i)) <= 0) {
+            }else if(!custom && prevIsNum && numDelimiterString.charAt(i) != ',' && numDelimiterString.charAt(i) != ':') {
                 throw new IllegalArgumentException("Illegal Argument");
             }else if(!Character.isDigit(numDelimiterString.charAt(i))) {
+                prevIsNum = false;
                 continue;
+            }else if(Character.getNumericValue(numDelimiterString.charAt(i)) <= 0) {
+                throw new IllegalArgumentException("Illegal Argument");
             }else {
                 addResult += Character.getNumericValue(numDelimiterString.charAt(i));
+                prevIsNum = true;
             }
         }
 
