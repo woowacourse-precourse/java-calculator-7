@@ -24,12 +24,19 @@ public class Calculator {
 
     private int calculate(String input) {
         var numbers = ParsingUtil.extractNumbers(input);
-
+        System.out.println(numbers);
         var result = numbers.stream()
+                .peek(this::checkNumberic)
                 .mapToInt(Integer::parseInt)
                 .peek(this::checkNegative)
                 .sum();
         return result;
+    }
+
+    private void checkNumberic(String number) {
+        if (!number.matches("[0-9]+")) {
+            throw new IllegalArgumentException(CalculatorError.INPUT_IS_NOT_NUMBER.getMessage());
+        }
     }
 
     private void checkNegative(int number) {
