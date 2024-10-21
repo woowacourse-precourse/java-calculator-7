@@ -17,17 +17,33 @@ class Calculator {
 
 class Extraction {
     // 입력을 처리하는 메서드
-    public void processInput(String inputNum) {
+    public void processInput(String inputNum, Calculator calculator) {
         // 1. 입력값이 null이거나 빈 문자열인 경우
         if (inputNum == null || inputNum.isEmpty()) {
             empty();
             return;
         }
+        // 2. 쉼표(,)와 콜론(:)으로 구분된 숫자인지 확인
+        if (inputNum.matches("[0-9,:]+")) {
+            commaColon(inputNum, calculator);
+            return;
+        }
+
+        // 3. 커스텀 구분자 처리 (예: "//[구분자]\\n[숫자목록]" 형식)
+        if (inputNum.startsWith("//")) {
+            custom(inputNum, calculator);
+            return;
+        }
+
         throw new IllegalArgumentException();
     }
-
     public void empty() {
+    }
 
+    public void commaColon(String input, Calculator calculator) {
+    }
+
+    public void custom(String input, Calculator calculator){
     }
 
     public class Application {
