@@ -23,6 +23,7 @@ public class UserExpressionDivide {
     private static void assignRemainingPart(String rawExpression) {
         userExpression.setEssentialExpression(rawExpression
                 .replace(userExpression.getCustomDelimExpressionCandidate(),""));
+        onlyCustomDelimExistInRawExpression();
     }
 
     private static void onlyCustomDelimExistInRawExpression() {
