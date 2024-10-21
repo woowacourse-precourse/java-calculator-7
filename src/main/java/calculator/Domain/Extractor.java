@@ -1,5 +1,6 @@
 package calculator.Domain;
 
+import calculator.Message.ErrorMessage;
 import calculator.Tool.Delimiters;
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ public class Extractor {
         String[] extractedWords = input.split(delimeter);
 
         for (String word : extractedWords) {
-            if (!word.trim().isEmpty()) { // 빈 문자열 무시
+            if (!word.trim().isEmpty()) {
                 int number = validateNumber(word);
                 result.add(number);
             }
@@ -24,11 +25,11 @@ public class Extractor {
         try {
             int number = Integer.parseInt(token);
             if (number < 0) {
-                throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+                throw new IllegalArgumentException(ErrorMessage.NEGATIVE_NUMBER_INPUT_ERROR);
             }
             return number;
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("유효한 숫자가 아닙니다.");
+            throw new IllegalArgumentException(ErrorMessage.NOT_A_NUMBER_INPUT_ERROR);
         }
     }
 }
