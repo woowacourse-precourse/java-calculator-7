@@ -2,6 +2,8 @@ package calculator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Delimiter {
     private ArrayList<String> delimiters = new ArrayList<>(List.of(",", ":"));
@@ -31,8 +33,9 @@ public class Delimiter {
     }
 
     public String makeSplitDelimiters(){
-        String splitDelimiters = String.join("|", delimiters);
-        return splitDelimiters;
+        return delimiters.stream()
+                .map(Pattern::quote)
+                .collect(Collectors.joining("|"));
     }
 
     public ArrayList<String> getDelimiters() {
