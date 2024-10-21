@@ -1,7 +1,6 @@
 package calculator.model.delimiter;
 
 import calculator.validator.DuplicatedCharacterValidator;
-import calculator.validator.IllegalNumericDelimiterValidator;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +22,6 @@ public class Delimiter {
 
     public static Delimiter createDelimiter(List<String> customDelimiter) {
         DuplicatedCharacterValidator.validate(customDelimiter);
-        IllegalNumericDelimiterValidator.validate(customDelimiter);
         return new Delimiter(customDelimiter);
     }
 
