@@ -4,5 +4,5 @@ import calculator.model.LongCalculatorModel;
 
 @FunctionalInterface
 public interface LongCalculatorOperation {
-	public void operate(LongCalculatorModel model);
+    public void operate(LongCalculatorModel model);
 }
