@@ -2,24 +2,27 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.regex.Pattern;
 
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
+        CalculatorProcess cal = new CalculatorProcess();
+        cal.mainProcess();
+
+
         //....
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String str = Console.readLine();
-        String strDelim = insertSeparator(selectDelimiter(str), "|");
-        String addStr = addString(str);
-        int answer = cal(strDelim, addStr);
-        System.out.println("결과 : "+answer);
+//        System.out.println("덧셈할 문자열을 입력해 주세요.");
+//        String str = Console.readLine();
+//        String strDelim = createDelimiterRegex(getDelimiter(str), "|");
+//        String addStr = getAddString(str);
+//        String[] strArr = getAddArr(strDelim, addStr);
+//        int answer = cal(strArr);
+//
+//        System.out.println("결과 : "+answer);
 
     }
-    public static String selectDelimiter(String str){
+    /*public static String getDelimiter(String str){
         //구분자가 한번에 안들어올 수 있다.
         // "//"와 "\n" 사이 값만 추출해서 ..?
         // 추출값을 구분자그룹에 넣고, 원본스트링에서 구분자 그룹을 제외하기?
@@ -34,7 +37,7 @@ public class Application {
         //System.out.println("selectDelimiter:"+customDelimiter);
         return customDelimiter;
     }
-    public static String insertSeparator(String original, String separator) {
+    public static String createDelimiterRegex(String original, String separator) {
         StringBuilder sb = new StringBuilder();
         for(int i=0; i<original.length(); i++) {
             char ch = original.charAt(i);
@@ -50,7 +53,7 @@ public class Application {
         }
         return sb.toString();
     }
-    public static String addString(String str) {
+    public static String getAddString(String str) {
         int startIdx, endIdx;
         if((startIdx=str.indexOf("//"))!=-1) {
             if((endIdx=str.indexOf("\\n",startIdx))!=-1) {
@@ -62,9 +65,11 @@ public class Application {
         //System.out.println("addString:"+str);
         return str;
     }
-
-    public static int cal(String delim, String str){
-        String[] strArr = str.replace(" ","").split(delim);
+    public static String[] getAddArr(String delim, String str){
+        return str.replace(" ", "").split(delim);
+    }
+    public static int cal(String[] strArr){
+        //String[] strArr = str.replace(" ","").split(delim);
         int sum = 0;
         for (String s : strArr) {
             try {
@@ -86,8 +91,8 @@ public class Application {
     }
     public static int cal2(String str) {
         String delimiter = selectDelimiter(str);
-        String delimRegex = insertSeparator(delimiter, "|");
-        String summingStr = addString(str);
+        String delimRegex = createDelimiterRegex(delimiter, "|");
+        String summingStr = getAddString(str);
         //String realStr = summingStr.replace(" ", "");
         //System.out.println(realStr);
         String[] strArr = summingStr.replace(" ","").split(delimRegex);
@@ -113,5 +118,5 @@ public class Application {
         return sum;
         //String split을 여러 문자로?-> 정규식 이용 ...
 
-    }
+    }*/
 }
