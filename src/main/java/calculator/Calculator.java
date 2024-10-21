@@ -24,20 +24,22 @@ public class Calculator {
             return sum;
         }
 
-        if (isDefaultSeparator(userInput)) {
+        if (hasDefaultSeparator(userInput)) {
             String[] nums = userInput.split(DEFAULT_SEPARATOR);
             sum = calculateListSum(nums, sum);
             return sum;
         }
 
-        if (isCustomSeparator(userInput)) {
+        if (hasCustomSeparator(userInput)) {
             String customSeparator = findSeparator(userInput);
             String[] nums = getSeparatorRemovedSubstring(userInput).split(customSeparator);
             sum = calculateListSum(nums, sum);
             return sum;
         }
 
-        throw new IllegalArgumentException("구분자와 양수로 구성된 문자열을 입력해 주세요.");
+        notHaveSeparator(userInput);
+        sum += Long.parseLong(userInput);
+        return sum;
     }
 
     private static long calculateListSum(String[] nums, long sum) {
@@ -63,11 +65,17 @@ public class Calculator {
         return userInput.isEmpty();
     }
 
-    private static boolean isDefaultSeparator(String userInput) {
+    private static boolean hasDefaultSeparator(String userInput) {
         return userInput.contains(",") || userInput.contains(":");
     }
 
-    private static boolean isCustomSeparator(String userInput) {
+    private static boolean hasCustomSeparator(String userInput) {
         return userInput.contains("//") && userInput.contains("\\n");
+    }
+
+    private static void notHaveSeparator(String userInput) {
+        if (!userInput.matches("[+-]?\\d*(\\.\\d+)?")) {
+            throw new IllegalArgumentException("구분자를 지정해 주세요");
+        }
     }
 }
