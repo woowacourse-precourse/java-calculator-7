@@ -89,6 +89,11 @@ public class InputStringSeparator {
     }
 
     private void changeToInt() {
+        if (inputNumberString == null) {
+            inputNumberInt.add(0);
+            return;
+        }
+
         Arrays.stream(inputNumberString).map(Integer::parseInt)
                 .peek(parseInt -> {
                     if (parseInt < 0) {
