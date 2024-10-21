@@ -1,3 +1,11 @@
+- feat: 공백 예외상황 제거를 위한 공백제거 함수 추가 구현
+- refactor: 불필요한 코드 제거
+- refactor: 오류메시지 수정
+- refactor: 계산기 실행 코드 Calculator로 이동
+- refactor: view계층 구현 후 Application에 적용
+- refactor: view계층 추가
+- refactor: Adder클래스명 Calculator로 변경
+- docs: CHANGELOG 생성
 - refactor: Delimiter 클래스 생성
 - refactor: ErrorMessage 분리
 - feat(application): 계산기 실행 구현
