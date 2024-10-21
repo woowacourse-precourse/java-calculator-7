@@ -45,15 +45,18 @@ public class StringCalculator {
 
     // 커스텀 구분자를 추출하는 static 메서드
     private static String[] extractCustomDelimiter(String input) {
-        int delimiterIndex = input.indexOf("\n");
+        int delimiterIndex = input.indexOf("\\n");
         if (delimiterIndex == -1) {
             throw new IllegalArgumentException("잘못된 구분자 형식입니다.");
         }
 
-        String delimiter = input.substring(2, delimiterIndex); // 커스텀 구분자 추출
-        String numbers = input.substring(delimiterIndex + 1);  // 숫자 부분
+        String delimiter = input.substring(2, delimiterIndex);
+        if (delimiter.isEmpty()) {
+            throw new IllegalArgumentException("구분자가 비어있습니다.");
+        }
 
-        return new String[]{delimiter, numbers};  // 구분자와 숫자 부분을 배열로 반환
+        String numbers = input.substring(delimiterIndex + 2);
+        return new String[]{delimiter, numbers};
     }
 
 }
