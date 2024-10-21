@@ -15,7 +15,6 @@ public class CustomInputValidation {
 
     public void userInputValidate(String Numbers) {
         if (isValid) {
-            //customInputValidate(userNumbers);
             checkCustomSeparatorForm(Numbers);
             isCustomNotDigit(Numbers);
             separatedNumbers = makeUserCustomNumbers(Numbers);
