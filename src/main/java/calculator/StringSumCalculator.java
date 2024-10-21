@@ -6,9 +6,11 @@ import java.util.regex.Pattern;
 
 public class StringSumCalculator {
     private final InputValidator validator;
+    private final StringParser parser;
 
-    public StringSumCalculator(InputValidator validator) {
+    public StringSumCalculator(InputValidator validator, StringParser parser) {
         this.validator = validator;
+        this.parser = parser;
     }
 
     public int add(String input) {
@@ -16,7 +18,7 @@ public class StringSumCalculator {
             return 0;
         }
 
-        String[] numbers = splitNumbers(input);
+        String[] numbers = parser.splitNumbers(input);
 
         int sum = 0;
         for (String number : numbers) {
@@ -25,26 +27,6 @@ public class StringSumCalculator {
             sum += validator.positiveNumber(Integer.parseInt(trim));
         }
         return sum;
-    }
-
-    private String[] splitNumbers(String input) {
-        input = input.replace("\\n", "\n");
-
-        if (!input.startsWith("//") || !input.contains("\n")) {
-            return input.split(",|:");
-        }
-
-        int delimiterIdx = input.indexOf("\n");
-        String customDelimiters = input.substring(2, delimiterIdx);
-        String numbersWithDelimiter = input.substring(delimiterIdx + 1);
-
-        if (!customDelimiters.startsWith("[") || !customDelimiters.endsWith("]")) {
-            return numbersWithDelimiter.split(Pattern.quote(customDelimiters));
-        } else {
-            String[] delimiters = customDelimiters.substring(1, customDelimiters.length() - 1).split("]\\[");
-            String delimiterPattern = String.join("|", Pattern.quote(delimiters[0]), Pattern.quote(delimiters[1]));
-            return numbersWithDelimiter.split(delimiterPattern);
-        }
     }
 
 }
