@@ -5,8 +5,18 @@ public class StringAddCalculator {
         if (text == null || text.isEmpty()) {
             return 0;
         }
-        // 쉼표와 콜론을 구분자로 사용해 문자열을 분리
-        String[] tokens = text.split("[,|:]");
+
+        String delimiter = "[,|:]";  // 기본 구분자 쉼표와 콜론
+
+        // 커스텀 구분자 처리
+        if (text.startsWith("//")) {
+            int delimiterIndex = text.indexOf("\n");
+            delimiter = text.substring(2, delimiterIndex);
+            text = text.substring(delimiterIndex + 1);
+        }
+
+        // 구분자를 사용해 문자열 분리
+        String[] tokens = text.split(delimiter);
         int sum = 0;
 
         for (String token : tokens) {
