@@ -80,7 +80,7 @@ public class CustomInput extends Input {
      */
     void checkDelimDigits(String customDelimiter){
         if (customDelimiter.chars().anyMatch(Character::isDigit)) {
-            throw new IllegalStateException((Exception.INVALID_DELIMITER_ERROR).getValue());
+            throw new IllegalArgumentException((Exception.INVALID_DELIMITER_ERROR).getValue());
         }
     }
 

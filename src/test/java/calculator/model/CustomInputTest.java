@@ -83,7 +83,7 @@ public class CustomInputTest {
         Executable executable = () -> new CustomInput(inputWithInvalidDelimiter);
 
         // then
-        IllegalStateException exception = assertThrows(IllegalStateException.class, executable);
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, executable);
         assertThat(exception.getMessage()).isEqualTo(Exception.INVALID_DELIMITER_ERROR.getValue());
     }
 

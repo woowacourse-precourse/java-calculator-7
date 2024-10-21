@@ -61,7 +61,7 @@ public abstract class Input {
     private void isPositiveNumber(){
         for(double num : inputNumbers) {
             if (num < 0) {
-                throw new IllegalStateException((Exception.POSITIVE_NUMBER_REQUIRED_ERROR).getValue());
+                throw new IllegalArgumentException((Exception.POSITIVE_NUMBER_REQUIRED_ERROR).getValue());
             }
         }
     }
