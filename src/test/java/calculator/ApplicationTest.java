@@ -27,9 +27,17 @@ class ApplicationTest extends NsTest {
     @Test
     void 공백_커스텀_구분자가_주어졌을_경우() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("//\n1;2;3"))
+                assertThatThrownBy(() -> runException("//\\n1;2;3"))
                         .isInstanceOf(IllegalArgumentException.class)
                         .hasMessageContaining("// \\n 사이 문자가 존재하지 않습니다. 커스텀 구분자를 넣어주세요."));
+    }
+
+    @Test
+    void 커스텀_구분자로_문자열이_주어졌을_경우() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//!!\\n1!!2!!3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContaining("// \\n 사이 구분자는 문자이어야 합니다. 문자열이 아닌 문자를 넣어주세요."));
     }
 
     @Override
