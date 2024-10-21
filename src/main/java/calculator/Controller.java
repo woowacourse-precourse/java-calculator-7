@@ -23,5 +23,7 @@ public class Controller {
         inputHandler.validateInput(input);
 
         int result = calculator.calculate(input);
+
+        System.out.println("결과 : " + result);
     }
 }
