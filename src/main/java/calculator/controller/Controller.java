@@ -30,7 +30,7 @@ public class Controller {
     }
 
     private int getResult(List<Integer> nums) {
-        Calculator calculator = new Calculator();
+        Calculator calculator = Calculator.getInstance();
         return calculator.calculateResult(nums);
     }
 }
