@@ -4,6 +4,7 @@ public class Calculator {
 
     public int getSum(String [] split) {
         int result = 0;
+
         for (String s : split) {
             try {
                 result += Integer.parseInt(s);
@@ -11,6 +12,7 @@ public class Calculator {
                 throw new IllegalArgumentException();
             }
         }
+
         return result;
     }
 }

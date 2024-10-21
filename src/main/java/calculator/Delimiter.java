@@ -8,7 +8,6 @@ public class Delimiter {
         String customDelimiter = "";
         String exceptForDelimiter = input;
 
-        // 커스텀 구분자 구하기
         if (exceptForDelimiter.startsWith("//")) {
             exceptForDelimiter = exceptForDelimiter.substring(2);
 
@@ -34,8 +33,10 @@ public class Delimiter {
     public String [] devisionString(String[] inputExceptForDelimiterAndCustomDelimiter) {
         String inputExceptForCustomDelimiter = inputExceptForDelimiterAndCustomDelimiter[0];
         String customDelimiter = inputExceptForDelimiterAndCustomDelimiter[1];
+
         inputExceptForCustomDelimiter = inputExceptForCustomDelimiter.replace(":", ",");
         inputExceptForCustomDelimiter = inputExceptForCustomDelimiter.replace(customDelimiter, ",");
+
         return inputExceptForCustomDelimiter.split(",");
     }
 }
