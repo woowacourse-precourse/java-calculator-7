@@ -3,7 +3,7 @@ package Validate;
 import IO.Input;
 
 public class InputValidate {
-    String userInput;
+    public String userInput;
 
     public void validate(){
         Input input = new Input();
