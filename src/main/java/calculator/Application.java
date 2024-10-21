@@ -14,7 +14,6 @@ public class Application {
         String numsInput;
         String[] input = Console.readLine().split("\\\\n");
 
-        System.out.println(Arrays.toString(input));
         if (input.length > 1) {
             String prefix = input[0];
             numsInput = input[1];
@@ -71,7 +70,22 @@ public class Application {
             throw new IllegalArgumentException("구분자는 한글자여야 합니다.");
         };
 
-        return delimiter;
+        return escapeSpecialRegexChars(delimiter);
+    }
+
+    // 정규 표현식 특수 문자만 이스케이프 처리하는 메서드
+    private static String escapeSpecialRegexChars(String delimiter) {
+        // 정규 표현식 특수문자
+        String specialChars = "[]{}()^$.*+?|\\";
+
+        // 특수문자가 포함되어 있을 경우에만 이스케이프 처리
+        StringBuilder escapedDelimiter = new StringBuilder();
+        if (specialChars.contains(delimiter)) {
+            escapedDelimiter.append("\\").append(delimiter);  // 특수문자 앞에 이스케이프 추가
+        } else {
+            escapedDelimiter.append(delimiter);  // 특수문자가 아니면 그대로 추가
+        }
+        return escapedDelimiter.toString();
     }
 
 }
