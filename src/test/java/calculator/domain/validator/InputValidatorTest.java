@@ -39,5 +39,12 @@ class InputValidatorTest {
         assertEquals(INVALID_FORMAT.getMessage(), exception.getMessage());
     }
 
+    @Test
+    @DisplayName("숫자 사이에 공백이 있으면 예외가 발생한다")
+    void throwsExceptionForInternalWhitespace() {
+        String token = "1 2";
+        assertThrows(IllegalArgumentException.class, () -> InputValidator.validateNoInternalWhitespace(token));
+    }
+
 
 }
