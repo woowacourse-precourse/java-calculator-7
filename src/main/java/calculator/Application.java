@@ -16,7 +16,7 @@ public class Application {
     }
 
     // 계산 메서드
-    private static int calculateSum(String input) {
+    static int calculateSum(String input) {
         if (input == null || input.isEmpty()) {
             return 0; // 빈 문자열일 경우 0 반환
         }
@@ -66,7 +66,7 @@ public class Application {
 
             int num = Integer.parseInt(number.trim());
             if (num < 0) {
-                throw new IllegalArgumentException("양수가 아닙니다: " + num);
+                throw new IllegalArgumentException("양수가 아닙니다.");
             }
         }
     }
