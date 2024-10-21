@@ -9,8 +9,8 @@ public class InputParser {
     String regex;
     InputHandler inputHandler;
 
-    public InputParser(InputHandler inputHandler) {
-        this.inputHandler = inputHandler;
+    public InputParser() {
+        this.inputHandler = InputHandler.getInstance();
         separators = new ArrayList<>();
         separators.add(":");
         separators.add(",");

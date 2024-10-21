@@ -9,8 +9,8 @@ public class Calculator {
     private InputParser inputParser;
 
     public Calculator() {
-        inputHandler = new InputHandler();
-        inputParser = new InputParser(inputHandler);
+        inputHandler = InputHandler.getInstance();
+        inputParser = new InputParser();
         customValidator = new CustomValidator(inputParser);
     }
 
