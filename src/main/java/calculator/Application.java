@@ -9,7 +9,6 @@ public class Application {
 
     public static void main(String[] args) {
         // TODO: 프로그램 구현
-        // 객체들 생성
         DelimiterManager delimiterManager = new DelimiterManager();
         Separator separator = new Separator(delimiterManager);
         Adder adder = new Adder();

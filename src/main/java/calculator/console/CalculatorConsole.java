@@ -3,6 +3,7 @@ package calculator.console;
 import calculator.domain.Adder;
 import calculator.domain.Separator;
 import camp.nextstep.edu.missionutils.Console;
+import java.util.NoSuchElementException;
 
 public class CalculatorConsole {
 
@@ -18,14 +19,16 @@ public class CalculatorConsole {
     // 사용자로부터 문자를 입력받음
     String getInput() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-        input = Console.readLine();
-
-        // null 입력인 경우 예외 처리
-        if (input == null) {
-            throw new IllegalArgumentException("입력값이 null입니다.");
+        try {
+            // 사용자 입력값을 받음
+            input = Console.readLine();
+            // null 입력인 경우 예외 처리
+            if (input == null) {
+                throw new IllegalArgumentException("입력값이 null입니다.");
+            }
+        } catch (NoSuchElementException e) {
+            return "0";
         }
-
-        System.out.println(input);
         return input;
     }
 

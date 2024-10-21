@@ -1,6 +1,5 @@
 package calculator.domain;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class Separator {
@@ -23,34 +22,38 @@ public class Separator {
 
     // 구분자를 사용하여 숫자를 분리하는 메서드
     private String splitByDelimiters(String input, List<String> delimiters) {
-        // 첫 번째 숫자가 나올 때까지의 부분을 무시하고 나머지를 추출
-        for (int i = 0; i < input.length(); i++) {
-            char c = input.charAt(i);
-            // 음수 부호는 뒤에 숫자가 나올 때만 인정
-            if (Character.isDigit(c) || (c == '-' && i + 1 < input.length() && Character.isDigit(
-                input.charAt(i + 1)))) {
-                input = input.substring(i);
-                break;
-            }
+        if (input.contains("\\n")) {
+            input = input.substring(input.indexOf("\\n") + 2);
+        }
+
+        //문자열 맨 앞 또는 맨 뒤에 구분자가 오는경우 예외처리
+        if (input.startsWith(delimiters.get(0)) || input.endsWith(
+            delimiters.get(delimiters.size() - 1))) {
+            throw new IllegalArgumentException("유효하지 않은 입력입니다.");
         }
 
         String delimiterRegex = String.join("|", delimiters);
         String[] tokens = input.split(delimiterRegex);
 
-        System.out.println(Arrays.toString(tokens));
         // 각 토큰을 공백 없이 연결된 하나의 문자열로 반환
         StringBuilder separatedNumbers = new StringBuilder();
         for (String token : tokens) {
             if (!token.isEmpty()) {
-                // 음수인지 아닌지를 확인하기 위해 정수 변환 시도
+                String trimmedToken = token.trim();
+
+                // 공백이 있는지 확인
+                if (token.length() != trimmedToken.length()) {
+                    throw new IllegalArgumentException("입력에 공백이 포함되어 있습니다: " + token);
+                }
+
                 try {
-                    int number = Integer.parseInt(token.trim());
+                    int number = Integer.parseInt(trimmedToken);
                     separatedNumbers.append(number).append(",");
                 } catch (NumberFormatException e) {
-                    throw new IllegalArgumentException("유효하지 않은 입력입니다");
+                    throw new IllegalArgumentException("유효하지 않은 입력입니다: " + token + "는 숫자가 아닙니다.");
                 }
             } else {
-                throw new IllegalArgumentException("유효하지 않은 입력입니다");
+                throw new IllegalArgumentException("유효하지 않은 숫자가 포함되어 있습니다.");
             }
         }
 
@@ -58,7 +61,7 @@ public class Separator {
         if (separatedNumbers.length() > 0) {
             separatedNumbers.setLength(separatedNumbers.length() - 1);
         }
-        System.out.println(separatedNumbers.toString());
+
         return separatedNumbers.toString();
     }
 }
