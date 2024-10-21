@@ -1,5 +1,6 @@
 package calculator;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -18,16 +19,22 @@ public class Parser {
     }
 
 
-    public void parseNums(String input){
+    public ArrayList<Integer> parseNums(String input){
 
         if(Objects.isNull(input) || input.equals("")) {
             addNum("");
-            return;
+            return nums;
         }
 
         input = parseSeparator(input);
 
         initialNums();
+        addParsedNums(input);
+        return nums;
+    }
+
+
+    private void addParsedNums(String input){
         String num = "";
 
         for(int i=0; i<input.length(); i++){
@@ -43,8 +50,6 @@ public class Parser {
         }
         addNum(num);
     }
-
-
 
     private String parseSeparator(String input) {
 
@@ -89,6 +94,7 @@ public class Parser {
 
 
     private boolean checkInteger(String str){
+
         try {
             Integer.parseInt(str);
             return true;
@@ -101,6 +107,7 @@ public class Parser {
             // 구분자에 속하지 않는 문자가 등장한 경우
             throw new IllegalArgumentException("Invalid input: "+ str);
         }
+
     }
 
     public ArrayList<Integer> getNums(){
