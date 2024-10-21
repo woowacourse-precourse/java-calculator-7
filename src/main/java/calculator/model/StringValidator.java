@@ -1,7 +1,5 @@
 package calculator.model;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class StringValidator {
@@ -14,13 +12,24 @@ public class StringValidator {
 	private static final int INPUT_START_INDEX = 0;
 	private static final int DELIMITER_LENGTH = 1;
 
-	private List<String> delimiters = new ArrayList<>(Arrays.asList(COMMA_DELIMITER, COLON_DELIMITER));
+	private final String input;
+	private final List<String> delimiters;
 
-	public void addCustomDelimiter(String customDelimiter) {
-		delimiters.add(customDelimiter);
+	public StringValidator(String input) {
+		this.input = input;
+		this.delimiters = List.of(COMMA_DELIMITER, COLON_DELIMITER);
 	}
 
-	public void validate(String input) {
+	public StringValidator(String input, String customDelimiter) {
+		this.input = input;
+		this.delimiters = List.of(COMMA_DELIMITER, COLON_DELIMITER, customDelimiter);
+	}
+
+	public String getInput() {
+		return this.input;
+	}
+
+	public void validate() {
 		int index = INPUT_START_INDEX;
 		while (index < input.length()) {
 			index = checkInputStatus(input, index);
