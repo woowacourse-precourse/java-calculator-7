@@ -23,8 +23,20 @@ public class StringCalculator {
     private static int sumNumbers(String[] tokens) {
         int sum = 0;
         for (String token : tokens) {
-            sum += Integer.parseInt(token);
+            sum += toPositiveInt(token);
         }
         return sum;
+    }
+
+    private static int toPositiveInt(String token) {
+        try {
+            int number = Integer.parseInt(token);
+            if (number < 0) {
+                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + token);
+            }
+            return number;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("유효하지 않은 숫자입니다: " + token);
+        }
     }
 }
