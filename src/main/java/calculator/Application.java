@@ -2,7 +2,12 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Application {
+    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.*?)\\n(.*)");
+
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
@@ -10,17 +15,23 @@ public class Application {
         String[] numbers = splitNumbers(input);
         int sum = calculateSum(numbers);
 
-        System.out.println("결과: " + sum);
+        System.out.println("결과 : " + sum);
     }
 
     private static String[] splitNumbers(String input) {
         if (input.startsWith("//")) {
-            String[] tokens = input.split("\n", 2);
-            String customDelimiter = tokens[0].substring(2);
-            input = tokens[1];
-            return input.split(customDelimiter);
+            input = input.replace("\\n", "\n");
+            Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(input);
+
+            if (matcher.find()) {
+                String customDelimiter = matcher.group(1).trim();
+                String numbers = matcher.group(2);
+                return numbers.split(Pattern.quote(customDelimiter));
+            } else {
+                throw new IllegalArgumentException("구분자 다음에 숫자가 필요합니다.");
+            }
         }
-        return input.split("[,;]");
+        return input.split(",|;");
     }
 
     private static int calculateSum(String[] numbers) {
