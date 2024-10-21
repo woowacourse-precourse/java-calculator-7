@@ -3,13 +3,13 @@ package calculator;
 import java.util.List;
 
 public class Calculator {
-    private int result;
+    private long result;
 
     public Calculator() {
         result = 0;
     }
 
-    public int sum(List<Integer> numbers) {
+    public long sum(List<Integer> numbers) {
         reset();
         for (Integer number : numbers) {
             add(number);
@@ -17,7 +17,7 @@ public class Calculator {
         return result;
     }
 
-     public int add(int a) {
+     public long add(int a) {
         result += a;
         return result;
      }
