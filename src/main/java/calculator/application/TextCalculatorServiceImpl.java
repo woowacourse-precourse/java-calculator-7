@@ -19,9 +19,7 @@ public class TextCalculatorServiceImpl implements TextCalculatorService {
     public Long calculateSumTotal(final CalculateCommand calculateCommand) {
 
         Translator translator = new Translator(calculateCommand.customSeparators);
-
         List<PositiveNumber> positiveNumbers = translator.translate(calculateCommand.majorData);
-
         return calculator.getSum(positiveNumbers);
     }
 }
