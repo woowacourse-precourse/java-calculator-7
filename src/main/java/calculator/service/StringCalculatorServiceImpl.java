@@ -23,7 +23,7 @@ public class StringCalculatorServiceImpl implements StringCalculatorService {
 
             // 정규 표현식에서 특수문자 이스케이프 처리
             customDelimiter = escapeSpecialRegexCharacters(customDelimiter);
-            
+
             delimiter += "|" + customDelimiter;
             input = input.substring(idx + 1); // "\n" 이후 부터 입력으로 저장
         }
@@ -36,12 +36,24 @@ public class StringCalculatorServiceImpl implements StringCalculatorService {
         for (String token : tokens) {
             // 공백이 있을 수 있으므로 trim()을 이용해 제거
             token = token.trim();
-            // 빈 문자열이 아닌지 확인 후, 숫자로 변환
-            if (!token.isEmpty()) {
+
+            // 빈 문자열 예외처리
+            if (token.isEmpty()) {
+                throw new IllegalArgumentException("Invalid input : 구분자 사이에 빈 값이 존재합니다.");
+            }
+
+            try {
+                int number = Integer.parseInt(token);
+
+                // 입력 값이 음수인 경우
+                if (number < 0) {
+                    throw new IllegalArgumentException("Invalid input : 입력값에 음수가 올 수 없습니다. 입력값: " + number);
+                }
                 total += Integer.parseInt(token); // 빈 문자열이 아닌 경우만 합산
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Invalid input : 숫자 형식이 아닌 값이 있습니다. 입력값: " + token);
             }
         }
-
         return total;
     }
 
