@@ -11,6 +11,8 @@ public class Application {
         input = Console.readLine(); // 문자열 입력
         List<String> delimiters = getDelimiters(); // 커스텀 구분자 확인
         List<Integer> numbers = splitNumbers(delimiters); // 구분자에 맞춰 숫자 분리
+        int sum = calculateSum(numbers);
+        System.out.println("결과 : " + sum);
     }
 
     private static List<String> getDelimiters() {
@@ -36,7 +38,7 @@ public class Application {
                 delimiter += input.charAt(i);
             }
             delimiters.add(delimiter);
-            input.substring(end + 3);
+            input = input.substring(end + 3);
         }
 
         return delimiters;
@@ -55,5 +57,13 @@ public class Application {
         }
 
         return numbers;
+    }
+
+    private static int calculateSum(List<Integer> numbers) {
+        int sum = 0;
+        for (Integer number : numbers) {
+            sum += number;
+        }
+        return sum;
     }
 }
