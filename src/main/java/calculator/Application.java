@@ -1,120 +1,29 @@
 package calculator;
 
-import java.math.BigInteger;
-import java.util.Arrays;
-
-import camp.nextstep.edu.missionutils.*;
+import calculator.controller.LogicController;
+import calculator.model.Answer;
+import calculator.model.Numbers;
+import calculator.validation.Validator;
+import calculator.view.IOView;
 
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
 
-        String input = getInput();
+        // View
+        IOView ioView = new IOView();
 
-        input = customDelimiterCheck(input);
+        // Model
+        Numbers numbers = new Numbers();
+        Answer answer = new Answer();
+        Validator validator = new Validator();
 
-        String[] numbers = getNumbers(input);
+        // Controller
+        LogicController controller = new LogicController(numbers, answer, ioView, validator);
 
-        String answer = calculateNumbers(numbers);
-
-        System.out.println("결과 : " + answer);
-    }
-
-    private static String calculateNumbers(String[] numbers) {
-        String answer = numbers[0];
-        for (int i = 1; i < numbers.length; i++) {
-            String nowNumber = numbers[i];
-
-            answer = new BigInteger(answer).add(new BigInteger(nowNumber)).toString();
-        }
-        return answer;
-    }
-
-    private static String[] getNumbers(String rest) {
-        String[] numbers = separateNumbers(rest);
-
-        numberListValidation(numbers);
-
-        return numbers;
-    }
-
-    private static void numberListValidation(String[] numbers) {
-        emptyCheck(numbers);
-
-        for (String number : numbers) {
-            onlyZeroCheck(number);
-            positiveNumberCheck(number);
-        }
-    }
-
-    private static String[] separateNumbers(String input) {
-        return Arrays.stream(input.split("[:,]")).map(String::trim)
-            .filter(s -> !s.isEmpty())
-            .toArray(String[]::new);
-    }
-
-    private static void emptyCheck(String[] numbers) {
-        if (numbers.length == 0) {
-            throw new IllegalArgumentException("숫자가 없습니다.");
-        }
-    }
-
-    private static void positiveNumberCheck(String number) {
-        for (int i = 0; i < number.length(); i++) {
-            if (!(number.charAt(i) >= '0' && number.charAt(i) <= '9')) {
-                throw new IllegalArgumentException("양수가 아니거나, 올바른 숫자가 아닙니다.");
-            }
-        }
-    }
-
-    private static void onlyZeroCheck(String number) {
-        if (number.length() == 1 && number.charAt(0) == '0') {
-            throw new IllegalArgumentException("0값은 올 수 없습니다.");
-        }
-        if (duplicateZeroCheck(number)) {
-            throw new IllegalArgumentException("0값은 올 수 없습니다.");
-        }
-    }
-
-    private static boolean duplicateZeroCheck(String number) {
-        return new BigInteger(number).equals(new BigInteger("0"));
-    }
-
-    private static String customDelimiterCheck(String input) {
-        boolean isDelimiterOpened = false;
-
-        StringBuilder customDelimiterString = new StringBuilder();
-        String refinedInput = input;
-
-        for (int i = 0; i < input.length() - 1; i++) {
-            if (!isDelimiterOpened) {
-                if (input.startsWith("//", i)) {
-                    isDelimiterOpened = true;
-                    customDelimiterString = new StringBuilder("//");
-                    i += 1;
-                }
-            } else {
-                if (input.startsWith("\\n", i)) {
-                    isDelimiterOpened = false;
-                    customDelimiterString.append(input, i, i + 2);
-                    refinedInput = refinedInput.replace(customDelimiterString, ":");
-                    i += 1;
-                } else {
-                    customDelimiterString.append(input.charAt(i));
-
-                }
-            }
-        }
-
-        if (isDelimiterOpened) {
-            throw new IllegalArgumentException("커스텀 구분자가 닫혀 있지 않습니다.");
-        }
-
-        return refinedInput;
-    }
-
-    private static String getInput() {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        return Console.readLine();
+        // Logic Calculation
+        controller.inputData();
+        controller.calculateNumbers();
+        controller.printData();
     }
 }
