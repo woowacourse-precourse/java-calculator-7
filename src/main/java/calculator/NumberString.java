@@ -3,6 +3,10 @@ package calculator;
 import java.util.List;
 
 public final class NumberString {
+    private NumberString(){
+
+    }
+
     public static Character getSeparatorToken(String Input) {
         if(Input.startsWith("//") && Input.startsWith("\\n", 3)){
             return Input.charAt(2);
