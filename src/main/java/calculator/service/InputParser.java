@@ -12,7 +12,7 @@ public class InputParser implements Parser {
 
     private InputParser(){}
 
-    public static InputParser makeInputParser(){
+    public static InputParser makeDefaultInputParser(){
         return new InputParser();
     }
 

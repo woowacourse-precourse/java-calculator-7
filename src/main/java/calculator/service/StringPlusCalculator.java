@@ -5,9 +5,11 @@ import calculator.data.InputString;
 public class StringPlusCalculator {
 
     private static StringPlusCalculator singleInstance;
-    private final Calculation calculation = new Calculation();
+    private final Calculation calculation;
 
-    private StringPlusCalculator() {}
+    private StringPlusCalculator() {
+        calculation = Calculation.makeDefaultCalculation();
+    }
 
     public static StringPlusCalculator getInstance() {
         if (singleInstance == null) {

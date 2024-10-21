@@ -6,6 +6,12 @@ import java.util.List;
 
 public class Calculation {
 
+    private Calculation(){}
+
+    public static Calculation makeDefaultCalculation(){
+        return new Calculation();
+    }
+
     public Integer addOperands(InputString inputString){
         List<Integer> operands = inputString.getOperands();
         Integer result = 0;
