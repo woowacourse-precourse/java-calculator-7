@@ -19,7 +19,7 @@ public class Application {
         if(text.startsWith("//")){
             int sepIdx = text.indexOf("\\n"); // 줄바꿈으로 인식하지 않기 위해
             if (sepIdx != -1) {
-                sep = text.substring(2, sepIdx);  // 커스텀 구분자 추출
+                sep += text.substring(2, sepIdx);  // 커스텀 구분자 추출
                 text = text.substring(sepIdx + 2); // 문자열에서 구분자 부분 제거
             } else { // 예외 : //로 시작하되, 커스텀 구분자가 아닌 경우
                 throw new IllegalArgumentException();
