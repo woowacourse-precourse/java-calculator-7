@@ -27,6 +27,6 @@ public class StringCalculatorView implements CalculatorView{
     }
 
     public void displayOutput(CalculatorResultDTO<BigDecimal> total) {
-        System.out.printf("전체 " + OUTPUT_MESSAGE_FORMAT, total);
+        System.out.printf(OUTPUT_MESSAGE_FORMAT, total);
     }
 }
