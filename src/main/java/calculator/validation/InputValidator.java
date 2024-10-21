@@ -16,15 +16,20 @@ public class InputValidator {
 		}
 	}
 
-	public static void validateDigit(String input) {
-		if (!isDigit(input)) {
- 			throw new IllegalArgumentException(NON_INTEGER_VALUE.getMessage());
-		}
-	}
-
 	public static void validateNonDigit(String input) {
 		if (isDigit(input)) {
 			throw new IllegalArgumentException(INVALID_CUSTOM_DELIMITER.getMessage());
+		}
+	}
+
+	public static void validateCalculatorNumber(String input) {
+		validateDigit(input);
+		validateNumberPositive(input);
+	}
+
+	private static void validateDigit(String input) {
+		if (!isDigit(input)) {
+			throw new IllegalArgumentException(NON_INTEGER_VALUE.getMessage());
 		}
 	}
 
@@ -32,7 +37,7 @@ public class InputValidator {
 		return input.chars().allMatch(Character::isDigit);
 	}
 
-	public static void validateNumberPositive(String input) {
+	private static void validateNumberPositive(String input) {
 		if (Integer.parseInt(input) <= 0) {
 			throw new IllegalArgumentException(NON_POSITIVE_NUMBER.getMessage());
 		}
