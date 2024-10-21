@@ -24,6 +24,14 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 빈_문자열의_경우_0를_반환한다() {
+        assertSimpleTest(() -> {
+            run(" ");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
