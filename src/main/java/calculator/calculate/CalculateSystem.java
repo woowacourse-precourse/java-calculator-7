@@ -19,9 +19,14 @@ public class CalculateSystem {
     }
 
     public void process() {
-        String input = inputSystem.input();
-        List<Integer> positiveNumbers = validationProcessor.extractNumbers(input);
-        int result = calculator.multipleSum(positiveNumbers);
-        outputSystem.outputMessage(result);
+        try {
+            String input = inputSystem.input();
+            List<Integer> positiveNumbers = validationProcessor.extractNumbers(input);
+            int result = calculator.multipleSum(positiveNumbers);
+            outputSystem.outputMessage(result);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw new IllegalArgumentException();
+        }
     }
 }

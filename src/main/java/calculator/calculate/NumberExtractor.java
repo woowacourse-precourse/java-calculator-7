@@ -30,7 +30,7 @@ public class NumberExtractor {
 
         // 양수만 있는지 검증
         if (!isAllNumberPositive()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("유효하지 않은 입력입니다.");
         }
 
         return this.numbers;

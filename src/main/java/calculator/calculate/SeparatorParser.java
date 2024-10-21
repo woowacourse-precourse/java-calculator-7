@@ -25,7 +25,7 @@ public class SeparatorParser {
         }
 
         if (regex.isEmpty()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("유효하지 않은 입력입니다.");
         }
 
         return regex;
@@ -36,7 +36,7 @@ public class SeparatorParser {
         int endIndex = input.indexOf("\\n");
 
         if (startIndex == -1 || endIndex == -1 || startIndex >= endIndex) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("유효하지 않은 입력입니다.");
         }
 
         regex.add(input.substring(startIndex, endIndex));
