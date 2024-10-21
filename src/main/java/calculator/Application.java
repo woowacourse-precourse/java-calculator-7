@@ -10,6 +10,7 @@ public class Application {
         String sep = "";
         String str = "";
         int result = 0;
+        int sum = 0;
 
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         Scanner sc = new Scanner(System.in);
@@ -37,6 +38,16 @@ public class Application {
             }
             System.out.println("결과 : " + result);
 
+        } else {
+            for (int i = 0; i < str_num.length; i++) {
+                if (Integer.parseInt(str_num[i]) >= 0) {
+                    sum = Integer.parseInt(str_num[i]);
+                    result += sum;
+                } else {
+                    throw new IllegalArgumentException("잘못된 값입니다.");
+                }
+            }
+            System.out.println("결과 : " + result);
         }
     }
 }
