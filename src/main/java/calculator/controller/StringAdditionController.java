@@ -22,11 +22,13 @@ public class StringAdditionController {
     public void run() {
         try {
             outputView.printInputPrompt();
-            String input = getValidInput();
+            String input = inputView.readInput();
+            inputValidator.validate(input);
             int result = model.calculate(input);
             outputView.printResult(result);
         } catch (IllegalArgumentException e) {
             outputView.printError(e.getMessage());
+            throw e; // 예외를 다시 던져서 애플리케이션이 종료되도록 함
         }
     }
 
