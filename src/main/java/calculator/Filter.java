@@ -10,11 +10,11 @@ import java.util.stream.Stream;
 public class Filter {
 
     //기존 구분자
-    public static List<String> delimiterList = new ArrayList<String>(Arrays.asList(",", ":"));
+    public List<String> delimiterList = new ArrayList<String>(Arrays.asList(",", ":"));
     //커스텀 구분자
-    public static List<String> customDelimiterList = new ArrayList<String>();
+    public List<String> customDelimiterList = new ArrayList<String>();
 
-    public static List<Integer> doFilter(String input) {
+    public List<Integer> doFilter(String input) {
         //TODO input 데이터를 필터를 통해 정제하여 List<Integer>로 return 해주는 메서드
 
         /*
@@ -24,10 +24,6 @@ public class Filter {
           - 공백을 기준으로 문자 형태의 숫자들을 담기(문자가 있다면 예외 처리 -> 구분자,커스텀 구분자가 아닌 문자가 있었다는 것)
           - List<String> 형태에서 List<Integer>형태로 변환
           */
-
-        System.out.println(input);
-
-
 
         //custom 구분자 추출 문자열 맨 앞에 위치한 "//" 과 "\n" 사이에 있는 문자를 추출해서 커스텀 구분자에 넣기
         // 커스텀 구분자 자체가 없을 수도 있음.. 그래서 있다면? 커스텀 구분자를 뽑아내기
