@@ -60,11 +60,11 @@ public class Application {
         while (idx < input.length()) {
             char currentChar = input.charAt(idx);
 
-            if (setOperator.contains(currentChar)) {
+            if (Character.isDigit(currentChar)) {
+                curNum = curNum * 10 + Character.getNumericValue(currentChar);
+            } else if (setOperator.contains(currentChar)) {
                 totalSum += curNum;
                 curNum = 0;
-            } else if (Character.isDigit(currentChar)) {
-                curNum = curNum * 10 + Character.getNumericValue(currentChar);
             } else {
                 return -1; // 에러 발생 시 -1 반환
             }
