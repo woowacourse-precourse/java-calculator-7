@@ -27,7 +27,7 @@ class CalculatorControllerTests {
         String expected = "결과: 6";
         BigDecimal result = CalculatorController.sum(BigDecimal.ZERO, expression);
 
-        assertThat(String.format("결과: %s", new CalculatorResultDTO<>(result).getTotal())).startsWith(expected);
+        assertThat(String.format("결과: %s", new CalculatorResultDTO<>(result))).startsWith(expected);
     }
 
     @Test
@@ -39,7 +39,7 @@ class CalculatorControllerTests {
         String expected = "결과: 6.6";
         BigDecimal result = CalculatorController.sum(BigDecimal.ZERO, expression);
 
-        assertThat(String.format("결과: %s", new CalculatorResultDTO<>(result).getTotal())).startsWith(expected);
+        assertThat(String.format("결과: %s", new CalculatorResultDTO<>(result))).startsWith(expected);
     }
 
     @ParameterizedTest
@@ -51,8 +51,8 @@ class CalculatorControllerTests {
         Double result1 = CalculatorController.sum(0, expression);
         BigDecimal result2 = CalculatorController.sum(BigDecimal.ZERO, expression);
 
-        Assertions.assertNotEquals(new CalculatorResultDTO<>(result1).getTotal(), expected);
-        Assertions.assertEquals(new CalculatorResultDTO<>(result2).getTotal(), expected);
+        Assertions.assertNotEquals(new CalculatorResultDTO<>(result1).toString(), expected);
+        Assertions.assertEquals(new CalculatorResultDTO<>(result2).toString(), expected);
     }
     private static Stream<Arguments> provideStringToExpressionAndTotalSum() {
         return Stream.of(

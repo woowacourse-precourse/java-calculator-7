@@ -1,6 +1,6 @@
 package calculator;
 
-import calculator.controller.CalculatorController;
+import calculator.controller.ApplicationController;
 import calculator.dto.CalculatorResultDTO;
 import calculator.dto.ExpressionDTO;
 import calculator.view.StringCalculatorView;
@@ -10,9 +10,11 @@ public class Application {
 
     private static final StringCalculatorView view = new StringCalculatorView();
 
+    private static BigDecimal totalSum = BigDecimal.ZERO;
+
     public static void main(String[] args) {
-        BigDecimal totalSum = BigDecimal.ZERO;
-        while (true) {
+        CalculatorResultDTO<BigDecimal> currentSum;
+        do {
             String input;
             try {
                 input = view.displayInput();
@@ -20,13 +22,9 @@ public class Application {
                 e.printStackTrace();
                 return;
             }
-            BigDecimal currentSum = CalculatorController.sum(BigDecimal.ZERO, new ExpressionDTO(input));
-            view.displayOutput(new CalculatorResultDTO<>(currentSum).getTotal());
-            if (currentSum.equals(BigDecimal.ZERO)) {
-                view.displayOutput(new CalculatorResultDTO<>(totalSum));
-                break;
-            }
-            totalSum = totalSum.add(currentSum);
-        }
+            currentSum = ApplicationController.run(new ExpressionDTO(input), view);
+            totalSum = totalSum.add(currentSum.get());
+        } while (!currentSum.get().equals(BigDecimal.ZERO));
+        view.displayOutput(new CalculatorResultDTO<>(totalSum));
     }
 }

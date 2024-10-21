@@ -4,14 +4,19 @@ import java.math.BigDecimal;
 
 public class CalculatorResultDTO<T extends Number> {
 
-    private final T result;
+    private final T currentSum;
 
-    public CalculatorResultDTO(T result) {
-        this.result = result;
+    public CalculatorResultDTO(T currentSum) {
+        this.currentSum = currentSum;
     }
 
-    public String getTotal() {
-        BigDecimal totalValue = new BigDecimal(result.toString());
+    public T get() {
+        return currentSum;
+    }
+
+    @Override
+    public String toString() {
+        BigDecimal totalValue = new BigDecimal(currentSum.toString());
         BigDecimal integer = totalValue.divideAndRemainder(BigDecimal.ONE)[0];     // 정수부
         BigDecimal decimals = totalValue.divideAndRemainder(BigDecimal.ONE)[1];    // 소수부
 

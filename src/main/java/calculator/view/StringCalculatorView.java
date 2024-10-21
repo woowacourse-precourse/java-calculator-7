@@ -23,10 +23,10 @@ public class StringCalculatorView implements CalculatorView{
     @Override
     public void displayOutput(String output) {
         CalculatorResultDTO<BigDecimal> result = new CalculatorResultDTO<>(new BigDecimal(output));
-        System.out.printf(OUTPUT_MESSAGE_FORMAT, result.getTotal());
+        System.out.printf(OUTPUT_MESSAGE_FORMAT, result);
     }
 
     public void displayOutput(CalculatorResultDTO<BigDecimal> total) {
-        System.out.printf("전체 " + OUTPUT_MESSAGE_FORMAT, total.getTotal());
+        System.out.printf("전체 " + OUTPUT_MESSAGE_FORMAT, total);
     }
 }
