@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 import org.junit.platform.commons.util.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Application {
@@ -58,6 +59,27 @@ public class Application {
         // IllegalArgumentException 발생시킴
         } else if (words.substring(0, 1).matches(regex)) {
             throw new IllegalArgumentException();
+        }
+
+        // 4. 구분자를 기준으로 분리한 수가 유효한지 확인 후 합산
+        int answer = 0;
+        String[] numbers;
+
+        // 커스텀 구분자 설정 유무에 따라 분리할 시작 위치를 다르게 설정
+        if (end == 0) {
+            numbers = words.split(delimiters);
+        } else {
+            numbers = words.substring(end+2).split(delimiters);
+        }
+
+        // 분리한 값이 숫자 형태로만 구성되어 있는지, 양수인지 확인 후 합산
+        // 만약 두 조건을 만족하지 못할 경우 IllegalArgumentException 발생시킴
+        for (String number : numbers) {
+            if (number.matches("^[\\d]+$") && Integer.parseInt(number) > 0) {
+                answer += Integer.parseInt(number);
+            } else {
+                throw new IllegalArgumentException();
+            }
         }
     }
 }
