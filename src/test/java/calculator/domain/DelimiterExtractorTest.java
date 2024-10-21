@@ -1,5 +1,6 @@
 package calculator.domain;
 
+import static calculator.domain.constant.errorMessage.ValueError.INVALID_VALUE_FORMAT;
 import static calculator.domain.constant.errorMessage.ValueError.MULTIPLE_CHARACTER;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -63,6 +64,17 @@ class DelimiterExtractorTest {
         String result = extractor.extractDelimiters(input, ",|:", "//", "\\n");
 
         assertEquals(",|:|\\Q-\\E", result);
+    }
+
+    @Test
+    @DisplayName("숫자가 아닌 문자가 입력되면 예외가 발생한다")
+    void throwsExceptionForNonNumericInput() {
+        Parser parser = new Parser();
+        String input = "1,a,3";
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> parser.parseInput(input));
+        assertEquals(INVALID_VALUE_FORMAT.getMessage(), exception.getMessage());
     }
 
 }
