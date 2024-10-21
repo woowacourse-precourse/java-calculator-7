@@ -14,9 +14,10 @@ public class Separator {
             throw new IllegalArgumentException("구분자는 반드시 //와 \\n 사이에 있어야 합니다.");
         }
 
-//         커스텀 문자의 길이가 1이 아닐 경우 예외처리
         String extractedSeparator = input.substring(START_OF_CUSTOM_SEPARATOR,
             endOfCustomSeparator);
+
+//          커스텀 문자의 길이가 1이 아닐 경우 예외처리
         if (extractedSeparator.length() != 1) {
             throw new IllegalArgumentException("커스텀 구분자는 하나의 문자만 가능합니다.");
         }

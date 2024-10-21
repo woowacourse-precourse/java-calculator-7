@@ -18,7 +18,6 @@ class ApplicationTest extends NsTest {
     @Test
     @DisplayName("문자열 길이가 0일 경우, 0출력")
     public void case1() {
-
         assertSimpleTest(() -> {
             run("\n");
             assertThat(output()).contains("결과 : 0");
