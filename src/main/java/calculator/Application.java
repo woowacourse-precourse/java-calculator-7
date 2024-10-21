@@ -10,11 +10,5 @@ public class Application {
         StringCalculator calculator = new StringCalculator();
         int result = calculator.calculate(input);
         System.out.println("결과 : " + result);
-//        try {
-//            int result = calculator.calculate(input);
-//            System.out.println("결과 : " + result);
-//        } catch (IllegalArgumentException e) {
-//            System.out.println(e.getMessage());
-//        }
     }
 }
