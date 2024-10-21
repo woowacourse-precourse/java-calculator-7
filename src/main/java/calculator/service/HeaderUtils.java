@@ -28,6 +28,8 @@ public class HeaderUtils {
         if (delimiter.length() != 1) {
             throw new IllegalArgumentException("invalid header: invalid length");
         }
-
+        if (Character.isDigit(delimiter.charAt(0))) {
+            throw new IllegalArgumentException("invalid header: delimiter cannot be a digit");
+        }
     }
 }
