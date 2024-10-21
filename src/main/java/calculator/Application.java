@@ -7,7 +7,9 @@ public class Application {
         // 사용자로부터 문자열을 입력받음
         System.out.print("덧셈할 문자열을 입력해 주세요 : ");
         String input = Console.readLine();
-        System.out.println("입력한 문자열: " + input);
+
+        int result = add(5, 7, 8, 20);  // 단순 덧셈 예시
+        System.out.println("결과: " + result);
     }
 
     public static int add(int... numbers) {
