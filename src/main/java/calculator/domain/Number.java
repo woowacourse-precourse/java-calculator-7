@@ -13,7 +13,7 @@ public class Number {
         return number;
     }
 
-    public void validatePositiveNumber(Integer n) {
+    private void validatePositiveNumber(Integer n) {
         if (n <= 0) {
             throw new IllegalArgumentException("[ERROR] 양수를 입력해야 합니다.");
         }

@@ -10,7 +10,7 @@ public class Separator {
         this.seperator = seperator;
     }
 
-    public void validateSeparatorIsChar(String s) {
+    private void validateSeparatorIsChar(String s) {
         if (s.length() != 1) {
             throw new IllegalArgumentException("[ERROR] 구분자는 한 글자여야 합니다.");
         }
