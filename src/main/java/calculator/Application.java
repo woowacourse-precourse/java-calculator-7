@@ -14,10 +14,10 @@ public class Application {
         int result = 0;
 
         if (input.startsWith("//")) {
-            int customSepIndexEnd = input.indexOf("\n");
-            System.out.println(customSepIndexEnd);
+            int customSepIndexEnd = input.indexOf("\\n");
             String newSep = input.substring(2, customSepIndexEnd).trim();
             sep.add(newSep);
+            input = input.substring(customSepIndexEnd+2);
         }
 
         String[] strNumbers = input.split(String.join("|", sep));
