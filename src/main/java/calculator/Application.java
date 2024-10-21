@@ -7,24 +7,20 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         try{
             String input = Console.readLine();
-
             int sum;
             if (nullCheck(input)){
                 sum = 0;
-                System.out.println("결과 : " + sum);
             } else {
                 sum = addNumbers(isPositiveNum(stringSplit(input)));
-                System.out.println("결과 : " + sum);
             }//if end
+            System.out.println("결과 : " + sum);
         } catch(java.util.NoSuchElementException e){
             System.out.println("결과 : 0");
-        }
-
+        }//try end
     }//main() end
 
     private static int addNumbers(int[] numbers){
         int sum = 0;
-
         for (int number : numbers) {
             sum += number;
         }//for end
@@ -61,5 +57,4 @@ public class Application {
     private static boolean nullCheck(String input) {
         return input.isEmpty() || input.trim().isEmpty();
     }//nullCheck() end
-
 }//class end
