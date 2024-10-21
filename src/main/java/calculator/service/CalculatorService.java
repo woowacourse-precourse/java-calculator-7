@@ -34,11 +34,21 @@ public class CalculatorService {
         String newSeparator = null;
         String value;
 
+        if (rawValue.isEmpty()) {
+            calculator.setProcessedValue(new ArrayList<>());
+            calculator.setSumValue(BigInteger.ZERO);
+            return;
+        }
+
         if (rawValue.startsWith("//")) {
             String[] results = rawValue.split("\n", 2);
             newSeparator = results[0];
             value = results.length > 1 ? results[1] : "";
             isValid = checkNewSeparator(newSeparator);
+            if (!isValid) {
+                exceptionHandler.handleException(new IllegalArgumentException());
+                return;
+            }
             makeNewSeparator(newSeparator);
         } else {
             value = rawValue;
@@ -53,32 +63,9 @@ public class CalculatorService {
         calculator.setProcessedValue(processedValue);
     }
 
-//
-//    public void validateInput() {
-//        String rawValue = calculator.getRawValue();
-//        String newSeparator = null;
-//        String value = "";
-//        String[] results = rawValue.split("\\\\n", 2);
-//
-//        if (results.length > 1) {
-//            newSeparator = results[0];
-//            value = results[1];
-//            isValid = checkNewSeparator(newSeparator);
-//        } else {
-//            value = results[0];
-//        }
-//
-//        makeNewSeparator(newSeparator);
-//        calculator.setRawValue(value);
-//        List<Number> processedValue = extractNumbersToList();
-//        if (!isValid) {
-//            exceptionHandler.handleException(new IllegalArgumentException());
-//        }
-//        calculator.setProcessedValue(processedValue);
-//    }
-
     public List<Number> extractNumbersToList() {
-        List<String> resultList = new ArrayList<>(List.of(calculator.getRawValue()));
+        String rawValue = calculator.getRawValue();
+        List<String> resultList = new ArrayList<>(Arrays.asList(rawValue));
         try {
             for (String separator : calculator.getSeparators()) {
                 List<String> tempList = new ArrayList<>();
@@ -102,7 +89,6 @@ public class CalculatorService {
         }
         return processedValue;
     }
-
 
     private boolean checkNewSeparator(String newSeparator) {
         return newSeparator.startsWith("//");
