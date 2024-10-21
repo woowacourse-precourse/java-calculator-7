@@ -18,5 +18,7 @@ public class Application {
         if (input == null || input.trim().isEmpty()) {
             return 0; // 빈 입력일 경우 0 반환
         }
+        String[] numbers = input.split("[^0-9-]+"); // 숫자가 아닌 문자들을 기준으로 분리
+        int sum = 0;
     }
 }
