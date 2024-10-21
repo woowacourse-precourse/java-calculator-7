@@ -3,20 +3,14 @@ package calculator;
 public class Application {
     public static void main(String[] args) {
 
-        Input input = new Input();
-        Division division = new Division();
-        Calculator calculator = new Calculator();
+        String customDivision = Input.findCustomDivision();
 
-        String customDivision = input.findCustomDivision();
+        if (Input.findCustomDivision() != null)
+            Division.add(customDivision);
 
-        if (input.findCustomDivision() != null)
-            division.add(customDivision);
+        Calculator.run(Input.numbers(), Division.regularExpression());
 
-//        String inputWord = input.numbers();
-//        calculator.run(inputWord, division);
-        calculator.run(input, division);
-
-        System.out.println("결과 : " + calculator.result());
+        System.out.println("결과 : " + Calculator.result());
 
     }
 }

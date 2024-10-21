@@ -3,13 +3,18 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 
 public class Input {
-    private final String word = Console.readLine();
+    private static final String word;
 
-    private boolean isCustomDivision() {
+    static {
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        word = Console.readLine();
+    }
+
+    private static boolean isCustomDivision() {
         return word.startsWith("//") && word.contains("\\n");
     }
 
-    public String findCustomDivision() {
+    public static String findCustomDivision() {
         if (isCustomDivision()) {
             int startIndex = 2;
             int endIndex = word.indexOf("\\n");
@@ -18,7 +23,7 @@ public class Input {
         return null;
     }
 
-    public String numbers() {
+    public static String numbers() {
         if (isCustomDivision()) {
             return word.substring(word.indexOf("\\n") + 2);
         }
