@@ -25,6 +25,7 @@ public class Calculator {
 
             // 하나씩 합산
             for (int i = 0; i < splitNumbers.length; i++) {
+                isvalidNumber(Integer.parseInt(splitNumbers[i]));
                 sum += Integer.parseInt(splitNumbers[i]);
             }
 
@@ -33,5 +34,12 @@ public class Calculator {
         } catch (NumberFormatException e){
             throw new IllegalArgumentException("형식이 잘못되었습니다");
         }
+    }
+
+
+    // 유효성 검사 메소드
+    public void isvalidNumber(int splitNumber){
+        if(splitNumber<0) throw new IllegalArgumentException("음수는 들어올수없습니다.");
+        // 추가적인 예외처리
     }
 }
