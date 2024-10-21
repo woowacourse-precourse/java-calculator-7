@@ -10,4 +10,9 @@ public class Calculator {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         return Console.readLine();
     }
+
+    // 기본 구분자와 커스텀 구분자 구분하기
+    public static boolean checkCustomDelimiter(String str) {
+        return str.startsWith("//");
+    }
 }
