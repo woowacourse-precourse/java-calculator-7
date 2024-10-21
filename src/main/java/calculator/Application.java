@@ -45,9 +45,9 @@ public class Application {
         int result = 0;
 
         for (String number : numbers) {
-            // 숫자가 아니거나 비어있는 경우 예외 발생
+            // 숫자가 아니거나 비어있거나 숫자에 공백이 함께 있는 경우 예외 발생
             if (!number.chars().allMatch(Character::isDigit)) {
-                throw new IllegalArgumentException("숫자를 입력해야 합니다.");
+                throw new IllegalArgumentException("숫자만 입력해야 합니다.(공백도 없어야 합니다.)");
             }
 
             int num = Integer.parseInt(number);
