@@ -9,5 +9,7 @@ public class CalculatorFlow {
 
         OperationExecutor sumOperation = new OperationExecutor();
         int result = sumOperation.calculate(extractedNumbers);
+
+        System.out.println("결과 : " + result);
     }
 }
