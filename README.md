@@ -36,23 +36,59 @@
 
 - [x] 결과 출력
 
-### 6. 확장성 고려
-
-- [x] 기본 구분자 변경 가능성 고려
-- [x] `Integer` 타입에서 `Long` 타입으로의 변경 가능성 고려
-- [x] 입출력 방식 변경 가능성 고려
-
-## 구현 순서
-
-1. 입력값으로부터 커스텀 구분자를 추출한다.
-2. 구분자를 기준으로 문자열을 분리한다.
-3. 추출한 문자열을 숫자로 변환한다.
-4. 구한 숫자들을 더한 값을 출력한다.
-
-## 예외 처리
+### 예외 처리
 
 - 입력한 문자열 검증 -> `IllegalArgumentException` 후 종료
 - 계산기 로직 -> `IllegalStateException` 후 종료
+
+---
+
+## 프로젝트 구조
+
+### root 패키지
+
+- `Application` : 진입점
+- `StringCalculator` : 문자열 계산기 클래스
+
+### domain 패키지
+
+#### adder
+
+- `Addable` : 덧셈 기능 인터페이스
+- `IntegerAdder` : Integer 덧셈 구현체
+- `LongAdder` : Long 덧셈 구현체
+
+#### delimiter
+
+- `Delimiter` : 구분자 VO
+- `Delimiters` : 구분자 집합, 일급 컬렉션
+- `DelimiterExtractor` : 구분자 추출기
+- `DelimiterPattern` : 커스텀 구분자 패턴
+
+### io 패키지
+
+- `InputHandler` : 입력 처리 인터페이스
+- `OutputHandler` : 출력 처리 인터페이스
+- `ConsoleInputHandler` : 콘솔 입력 처리 구현체
+- `ConsoleOutputHandler` : 콘솔 출력 처리 구현체
+
+### util 패키지
+
+#### converter
+
+- `NumberConvertible` : 숫자 변환 인터페이스
+- `IntegerConverter` : Integer 변환 구현체
+- `LongConverter` : Long 변환 구현체
+
+#### regex
+
+- `Regex` : 정규식 VO
+
+#### splitter
+
+- `Splitter` : 문자열 분리기
+
+---
 
 ## 구현 유의사항
 
@@ -67,13 +103,13 @@
 
 ### 2. 객체지향 설계 원칙을 적용한다.
 
-- 단일 책임 원칙 (SRP)
+- 단일 책임 원칙 (`SRP`)
     - 클래스와 메서드의 책임을 분리한다.
         - 클래스당 4개 미만의 인스턴스 변수 유지
         - 메서드의 인자를 3개 이하로 만들기
-- 개방-폐쇄 원칙 (OCP)
-    - `Addable`, `NumberConvertible` 인터페이스를 도입하여 계산 타입을 확장한다. (Integer, Long)
-    - `InputHandler`와 `OutputHandler` 인터페이스를 통해 입출력 방식을 확장한다.
+- 개방-폐쇄 원칙 (`OCP`), 의존성 역전 원칙 (`DIP`)
+    - `Addable`, `NumberConvertible` 인터페이스를 도입하여 계산 타입을 확장하고 추상화에 의존한다. (Integer, Long)
+    - `InputHandler`와 `OutputHandler` 인터페이스를 통해 입출력 방식을 확장하고 추상화에 의존한다.
 
 ### 3. 느슨한 결합을 통해 유연성을 제공한다.
 
