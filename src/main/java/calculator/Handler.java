@@ -53,7 +53,7 @@ public class Handler {
     }
 
     private List<String> splitter(String input) {
-        StringTokenizer st = new StringTokenizer(input, ",|:");
+        StringTokenizer st = new StringTokenizer(input, ",:");
         List<String> result = new ArrayList<>();
         while (st.hasMoreTokens()) {
             result.add(st.nextToken());
