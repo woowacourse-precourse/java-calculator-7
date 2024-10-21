@@ -81,15 +81,7 @@ public class Application {
         String substring1 = input.substring(0, 2);
         String substring2 = input.substring(3, 5);
 
-        if (!substring1.equals("//")) {
-            return false;
-        }
-
-        if (!substring2.equals("\\n")) {
-            return false;
-        }
-
-        return true;
+        return (substring1.equals("//") && substring2.equals("\\n"));
     }
 
     private static BigInteger calculate(String input) {
