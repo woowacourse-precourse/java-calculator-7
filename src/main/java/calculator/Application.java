@@ -5,7 +5,7 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static void main(String[] args) {
-        int result = 0;
+        long result = 0L;
 
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
@@ -19,7 +19,7 @@ public class Application {
 
         // 단일 숫자가 입력된 경우
         if (input.matches("[0-9]+")){
-            System.out.println("결과 : "+Integer.parseInt(input));
+            System.out.println("결과 : "+Long.parseLong(input));
             return;
         }
 
@@ -39,7 +39,7 @@ public class Application {
                 if (!a.matches("[0-9]+")) {
                     throw new IllegalArgumentException("잘못된 숫자 형식:" + a); // 분리된 arr 안에 값들이 정수인지 확인
                 }
-                result += Integer.parseInt(a);
+                result += Long.parseLong(a);
             }
             System.out.println("결과 : "+result); // 결과 출력!(성공)
 
