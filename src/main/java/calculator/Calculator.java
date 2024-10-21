@@ -57,6 +57,10 @@ public class Calculator {
         if (inputString.startsWith("//")) {
             int index = inputString.indexOf("\\n");
 
+            if(index == -1) {
+                throw new IllegalArgumentException();
+            }
+
             splitString.put("division", inputString.substring(0, index));
             splitString.put("number", inputString.substring(index + 2));
         } else {
