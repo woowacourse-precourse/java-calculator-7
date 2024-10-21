@@ -37,7 +37,7 @@
 
 ------------
 
-## [1주차 회고](https://mandu98.tistory.com/8)
+## [1주차 회고 정리 URL](https://mandu98.tistory.com/8)
 
 ## 코드 작성 중 헷갈렸던 부분
 
