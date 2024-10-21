@@ -29,13 +29,13 @@ public class Application {
         if (input.isEmpty()) {
             return BigInteger.valueOf(0);
         }
+
         if (input.matches(".*//(.+)\\\\n.*")) {
             List<String> customDelimiterInputs = Arrays.stream(input.split(CUSTOM_DELIMITER_END))
                     .filter(letter -> !letter.isBlank())
                     .toList();
 
             String expression = customDelimiterInputs.getLast();
-
             if (expression.contains(CUSTOM_DELIMITER_START)) {
                 throw new IllegalArgumentException(ERROR_NO_EXPRESSION_CUSTOM_DELIMITER);
             }
@@ -65,7 +65,8 @@ public class Application {
 
                 validatePositive(operands, ERROR_CUSTOM_DELIMITER_CONTAIN_ZERO, ERROR_CUSTOM_DELIMITER_CONTAIN_MINUS);
 
-                return operands.stream().reduce(BigInteger.valueOf(0), BigInteger::add);
+                return operands.stream()
+                        .reduce(BigInteger.valueOf(0), BigInteger::add);
             }
             throw new IllegalArgumentException(ERROR_CUSTOM_DELIMITER_CONTAIN_NUMBER);
         }
@@ -103,7 +104,8 @@ public class Application {
 
         validatePositive(bigIntegerParsedInputs, ERROR_BASIC_DELIMITER_CONTAIN_ZERO, ERROR_BASIC_DELIMITER_CONTAIN_MINUS);
 
-        return bigIntegerParsedInputs.stream().reduce(BigInteger.valueOf(0), BigInteger::add);
+        return bigIntegerParsedInputs.stream()
+                .reduce(BigInteger.valueOf(0), BigInteger::add);
     }
 
     private static void validatePositive(List<BigInteger> operands, String errorCustomDelimiterContainZero, String errorCustomDelimiterContainMinus) {
@@ -111,6 +113,7 @@ public class Application {
             if (inputNumber.compareTo(BigInteger.ZERO) == 0) {
                 throw new IllegalArgumentException(errorCustomDelimiterContainZero);
             }
+
             if (inputNumber.compareTo(BigInteger.ZERO) < 0) {
                 throw new IllegalArgumentException(errorCustomDelimiterContainMinus);
             }
