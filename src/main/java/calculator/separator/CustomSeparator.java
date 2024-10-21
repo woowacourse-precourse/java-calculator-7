@@ -7,8 +7,6 @@ import java.util.regex.Pattern;
 
 public class CustomSeparator implements Separator {
     private String separator = "";
-    private final String customPrefix = "//";
-    private final String customSuffix = "\\n";
     private final String regex = "//([^0-9])\\\\n((\\d+\\1)*\\d+)";
 
     @Override
