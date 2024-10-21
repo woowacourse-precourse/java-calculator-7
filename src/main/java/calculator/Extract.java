@@ -1,16 +1,16 @@
 package calculator;
 import java.util.*;
 
-public class ExtractAndAdd {
+public class Extract {
     String input;
     List<Integer> extractNumber;
 
-    ExtractAndAdd(String input){
+    Extract(String input){
         this.input = input;
         this.extractNumber = new ArrayList<>();
     }
 
-    public void checkFirstChar(){
+    List<Integer> checkFirstChar(){
         if (Character.isDigit(input.charAt(0))){
             basicSeparator();
         }
@@ -18,6 +18,8 @@ public class ExtractAndAdd {
         else if (input.charAt(0)=='/' || input.charAt(1)=='/'){
             customSeparator();
         }
+
+        return extractNumber;
     }
 
     //2. 기본 구분자(, or :)를 구분자로 가지는 문자열에서 숫자 추출
