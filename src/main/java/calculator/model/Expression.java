@@ -7,17 +7,17 @@ public class Expression {
         this.expression = expression;
     }
 
-    public boolean hasCustomDelimiter() {
+    public boolean hasCustomSeparator() {
         return expression.startsWith("//");
     }
 
-    public String delimiterSection() {
+    public String separatorSection() {
         int startIdx = expression.indexOf("//") + 2;
         int endIdx = expression.indexOf("\\n");
         return expression.substring(startIdx, endIdx);
     }
 
-    public String nonDelimiterSection() {
+    public String nonSeparatorSection() {
         int startIdx = expression.indexOf("\\n") + 2;
         return expression.substring(startIdx);
     }

@@ -1,21 +1,21 @@
 package calculator.service;
 
-import calculator.model.Delimiter;
 import calculator.model.Expression;
 import calculator.model.PositiveNumber;
+import calculator.model.Separator;
 
 public class Calculator {
-    private final Delimiter delimiter = new Delimiter();
+    private final Separator separator = new Separator();
 
     public int calculate(Expression expressionModel) {
-        String nonDelimiterSection = expressionModel.getExpression();
+        String nonSeparatorSection = expressionModel.getExpression();
 
-        if (expressionModel.hasCustomDelimiter()) {
-            delimiter.registerDelimiter(expressionModel.delimiterSection());
-            nonDelimiterSection = expressionModel.nonDelimiterSection();
+        if (expressionModel.hasCustomSeparator()) {
+            separator.registerSeparator(expressionModel.separatorSection());
+            nonSeparatorSection = expressionModel.nonSeparatorSection();
         }
 
-        String[] numbers = nonDelimiterSection.split(delimiter.getDelimiter());
+        String[] numbers = nonSeparatorSection.split(separator.getSeparator());
 
         PositiveNumber sum = new PositiveNumber(0);
         for (String nowNum : numbers) {
