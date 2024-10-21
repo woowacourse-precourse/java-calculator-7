@@ -12,7 +12,7 @@
    - camp.nextstep.edu.missiononutils.Console의 readLine() 활용. 잘못된 값 입력 시 illegalArgumentException 발생 후 종료.
    
 2. **문자열에 구분자 판별하는 클래스 만들기**:  
-   - ,와 ; 구분자 판별 함수  
+   - ,와 : 구분자 판별 함수  
    - //와 \n 커스텀 구분자 판별하는 함수
 
 3. **숫자 더하는 계산 클래스 만들기**:  
