@@ -8,20 +8,38 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
+
     @Test
-    void 커스텀_구분자_사용() {
+    void 빈_문자열_테스트() {
         assertSimpleTest(() -> {
-            run("//;\\n1");
-            assertThat(output()).contains("결과 : 1");
+            run("");
+            assertThat(output()).contains("결과: 0");
         });
     }
 
     @Test
-    void 예외_테스트() {
-        assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
-        );
+    void 쉼표_구분자_테스트() {
+        assertSimpleTest(() -> {
+            run("1,2,3");
+            assertThat(output()).contains("결과: 6");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_테스트() {
+        assertSimpleTest(() -> {
+            run("//;\n1;2");
+            assertThat(output()).contains("결과: 3");
+        });
+    }
+
+    @Test
+    void 음수_입력_테스트() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("-1,2"))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessageContaining("음수는 입력할 수 없습니다: -1");
+        });
     }
 
     @Override
