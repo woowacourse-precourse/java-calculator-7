@@ -1,6 +1,14 @@
 package calculator;
 
+import camp.nextstep.edu.missionutils.Console;
+
 public class Calculator {
+    public void run() {
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        String st = Console.readLine();
+        int value = new Calculator().calculate(st);
+        System.out.println("결과 : " + value);
+    }
 
     public int calculate(String st) {
         // 입력값이 없는 경우에 대한 예외 처리
