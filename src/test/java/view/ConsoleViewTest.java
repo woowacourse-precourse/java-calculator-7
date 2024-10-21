@@ -40,7 +40,7 @@ public class ConsoleViewTest {
         ConsoleView view = new ConsoleView();
         view.printResult(new BigInteger("6"));
 
-        assertEquals("\n" + MessageConst.RESULT_MSG + "6", outContent.toString());
+        assertEquals(MessageConst.RESULT_MSG + "6", outContent.toString());
     }
 
     @Test
@@ -49,8 +49,7 @@ public class ConsoleViewTest {
         ConsoleView view = new ConsoleView();
         view.printErrorMessage(MessageConst.INVALID_SEPARATOR_MSG);
 
-        String expectedOutput =
-                "\n" + MessageConst.INVALID_INPUT_MSG + MessageConst.INVALID_SEPARATOR_MSG;
+        String expectedOutput = MessageConst.INVALID_INPUT_MSG + MessageConst.INVALID_SEPARATOR_MSG;
         assertEquals(expectedOutput, outContent.toString());
     }
 
@@ -60,8 +59,7 @@ public class ConsoleViewTest {
         ConsoleView view = new ConsoleView();
         view.printErrorMessage(MessageConst.INVALID_NUMBER_MSG);
 
-        String expectedOutput =
-                "\n" + MessageConst.INVALID_INPUT_MSG + MessageConst.INVALID_NUMBER_MSG;
+        String expectedOutput = MessageConst.INVALID_INPUT_MSG + MessageConst.INVALID_NUMBER_MSG;
         assertEquals(expectedOutput, outContent.toString());
     }
 }
