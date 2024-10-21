@@ -6,16 +6,22 @@ public class CustomSeparatorRegister {
     private static final String REGISTER_PREFIX = "//";
     private static final String REGISTER_SUFFIX = "\\n";
 
-    public static CalcTarget registerCustomSeparator(String input) {
-        if (!input.startsWith(REGISTER_PREFIX)) {
-            return CalcTarget.registCustomSeparator(input, null);
+    public static CalcTarget registerCustomSeparator(CalcTarget input) {
+        if (!input.getValue().startsWith(REGISTER_PREFIX)) {
+            input.registCustomSeparator(input.getValue(), null);
+            return input;
         }
-        int start = input.indexOf(REGISTER_PREFIX) + REGISTER_PREFIX.length();
-        int end = input.indexOf(REGISTER_SUFFIX, start);
+        int start = input.getValue().indexOf(REGISTER_PREFIX) + REGISTER_PREFIX.length();
+        int end = input.getValue().indexOf(REGISTER_SUFFIX, start);
 
-        String customSeparator = input.substring(start, end);
-        String value = input.substring(end + REGISTER_SUFFIX.length());
+        String customSeparator = input.getValue().substring(start, end);
+        String value = input.getValue().substring(end + REGISTER_SUFFIX.length());
 
-        return CalcTarget.registCustomSeparator(value, customSeparator);
+        if (value.isEmpty()){
+            value = "0";
+        }
+
+        input.registCustomSeparator(value, customSeparator);
+        return input;
     }
 }
