@@ -8,17 +8,17 @@ public class Calculator {
     private static final String CUSTOM_DELIMITER_REGEX = "//(.*?)\\n(.*)"; // 커스텀 구분자 정규식
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile(CUSTOM_DELIMITER_REGEX, Pattern.DOTALL);
 
+    public static void runException(String input) {
+        Calculator.add(input);
+    }
+
     public static int add(String input) {
         if (isNullOrEmpty(input)) {
             return 0; // 빈 문자열인 경우 0 반환
         }
 
         String delimiter = DEFAULT_DELIMITER; // 기본 구분자를 사용
-        String numbers = input; // 입력 숫자 초기화
-
-        // 입력 문자열에서 \\n을 실제 개행 문자로 변환
-        input = input.replace("\\n", "\n");
-
+        String numbers = input.replace("\\n", "\n");
         // 커스텀 구분자 처리
         if (input.startsWith("//")) {
             Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(input);
@@ -38,29 +38,38 @@ public class Calculator {
         return input == null || input.isEmpty();
     }
 
-    private static int calculateSum(String[] tokens) {
+    private static int calculateSum(String[] inputs) {
         int sum = 0;
 
-        for (String token : tokens) {
-            String trimmedToken = token.trim();
-            if (trimmedToken.isEmpty()) {
+        for (String input : inputs) {
+            String trimmedInput = input.trim();
+            if (trimmedInput.isEmpty()) {
                 continue; // 빈 문자열 무시
             }
-            sum += parseAndValidateNumber(trimmedToken);
+            try {
+                sum += parseNumber(trimmedInput);
+            } catch (IllegalArgumentException e) {
+                throw e; // 예외를 다시 던져서 호출자에게 전달
+            }
         }
 
         return sum;
     }
 
-    private static int parseAndValidateNumber(String token) {
+    private static int parseNumber(String input) {
         try {
-            int number = Integer.parseInt(token);
-            if (number < 0) {
-                throw new RuntimeException("음수는 허용되지 않습니다."); // 음수 예외 처리
-            }
+            int number = Integer.parseInt(input);
+            validateNegativeNumber(number); // 음수 검증 추가
             return number;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("잘못된 숫자 형식입니다."); // 숫자 형식 예외 처리
         }
     }
+
+    private static void validateNegativeNumber(int number) {
+        if (number < 0) {
+            throw new IllegalArgumentException("음수는 허용되지 않습니다."); // 음수 예외 처리
+        }
+    }
+
 }
