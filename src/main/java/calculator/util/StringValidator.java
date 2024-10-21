@@ -29,7 +29,6 @@ public class StringValidator {
             String otherText = inputString.substring(5);
 
             String newDelimiter = Constants.DEFAULT_DELIMITERS + "|" + customDelimiter;
-            System.out.println(newDelimiter);
             validateDelimiters(otherText, newDelimiter);
 
         }else throw new IllegalArgumentException("잘못된 커스텀 구분자 형식입니다.");
