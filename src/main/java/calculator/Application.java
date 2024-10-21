@@ -13,11 +13,10 @@ public class Application {
         String[] numberStrings = delimiterHandler.splitNumbers(input);
         int sum = 0;
 
-        System.out.print(numberStrings);
-
         for (String numberString : numberStrings) {
             if (!numberString.isEmpty()) {
                 int number = Integer.parseInt(numberString);
+                System.out.println(number);
                 if (number <= 0) {
                     throw new IllegalArgumentException("양수가 아닙니다: " + number);
                 }
@@ -30,12 +29,8 @@ public class Application {
     public static void main(String[] args) {
         Application app = new Application();
 
-        try {
-            String input = app.inputHandler.getInput();
-            int result = app.calculateSum(input);
-            System.out.println("결과 : " + result);
-        } catch (IllegalArgumentException e) {
-            System.err.println(e.getMessage());
-        }
+        String input = app.inputHandler.getInput();
+        int result = app.calculateSum(input);
+        System.out.println("결과 : " + result);
     }
 }
