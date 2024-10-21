@@ -40,8 +40,9 @@ public class Application {
 		return 0;
 	}
 	
+	//구분자를 기준으로 문자열을 분할하는 함수
+	//커스텀 구분자가 0인 경우는 커스텀 구분자가 없음으로 간주하는 바
 	private static String[] splitString(String inputString, char customDelimiter) {
-		//커스텀 구분자가 /0인 경우는 없음으로 간주한 바
 		//커스텀 구분자가 있을 경우, 해당 포맷을 제외한 부분부터 Split
 		if (customDelimiter != 0)
 			inputString = inputString.substring(4);
@@ -53,15 +54,44 @@ public class Application {
 		return stringArray;
 	}
 	
+	//누적합을 계산하는 함수
+	//계산 과정에서 문자열을 양수로 파싱
+	//파싱되지 않거나 음수가 나올 경우 비정상적인 입력으로 간주하여 예외 처리
+	private static long calculateSum(String[] inputStringArray) {
+		long sum = 0;
+		int number;
+		
+		for (String inputString : inputStringArray) {
+			//1.
+			//빈 문자열은 0으로 간주
+			if (inputString.equals("")) {
+				continue;
+			} else {
+				try {
+					number = Integer.parseInt(inputString);
+					//2.
+					//음수로 파싱될 경우는 실패로 간주
+					if (number < 0)
+						throw new Exception();
+					sum += number;
+				} catch (Exception e) {
+					//3.
+					//파싱에 실패할 경우 예외 처리
+					throw new IllegalArgumentException();
+				}
+			}
+		}
+		
+		return sum;
+	}
+	
     public static void main(String[] args) {
-        String testCase1 = "//a\n123a123a09a";
+        String testCase1 = "//-\n1231--2309";
         String[] testCase1_array = splitString(testCase1, getCustomDelimiter(testCase1));
-        for(String s : testCase1_array)
-        	System.out.println(s);
+        System.out.println(calculateSum(testCase1_array));
         
-        String testCase2 = "123012;123,1";
+        String testCase2 = "1230::12123,1";
         String[] testCase2_array = splitString(testCase2, getCustomDelimiter(testCase2));
-        for(String s : testCase2_array)
-        	System.out.println(s);
+        System.out.println(calculateSum(testCase2_array));
     }
 }
