@@ -11,12 +11,7 @@ public class Application {
         StringCalculatorService calculatorService = new StringCalculatorServiceImpl();
         CalculatorController calculatorController = new CalculatorController(calculatorService);
 
-        while (true) {
-            String input = CalculatorView.getInput();
-            if (input.equalsIgnoreCase("exit")) {
-                break;
-            }
-            calculatorController.processInput(input);
-        }
+        String input = CalculatorView.getInput();
+        calculatorController.processInput(input);
     }
 }

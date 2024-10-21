@@ -19,13 +19,28 @@ public class StringCalculatorServiceImpl implements StringCalculatorService {
         // 커스텀 구분자가 있는 경우 "//[구분자]\n" 형식을 처리
         if (input.startsWith("//")) {
             int idx = input.indexOf("\n");
-            String customDelimiter = input.substring(2, idx);
 
-            // 정규 표현식에서 특수문자 이스케이프 처리
-            customDelimiter = escapeSpecialRegexCharacters(customDelimiter);
+            // 줄바꿈 문자가 없고 "\\n"이 문자 그대로 있는 경우
+            if (idx == -1) {
+                idx = input.indexOf("\\n");
+                if (idx != -1) {
+                    // 커스텀 구분자는 \n 앞에 있는 문자가 됨
+                    String customDelimiter = input.substring(2, idx);
+                    customDelimiter = escapeSpecialRegexCharacters(customDelimiter);
 
-            delimiter += "|" + customDelimiter;
-            input = input.substring(idx + 1); // "\n" 이후 부터 입력으로 저장
+                    delimiter += "|" + customDelimiter;
+                    input = input.substring(idx + 2); // \\n 이후의 문자열만 처리
+                } else {
+                    throw new IllegalArgumentException("Invalid input: 줄바꿈(\\n)이 없거나 형식이 잘못되었습니다.");
+                }
+            } else {
+                // 정상적인 "\n" 줄바꿈이 있는 경우
+                String customDelimiter = input.substring(2, idx);
+                // 정규 표현식에서 특수문자 이스케이프 처리
+                customDelimiter = escapeSpecialRegexCharacters(customDelimiter);
+                delimiter += "|" + customDelimiter;
+                input = input.substring(idx + 1); // \n 이후의 문자열만 처리
+            }
         }
 
         // 쉽표(,)와 콜론(:)을 기본 구분자로 사용하여 문자열을 분리
