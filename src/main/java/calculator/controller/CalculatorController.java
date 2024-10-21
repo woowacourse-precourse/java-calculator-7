@@ -26,10 +26,11 @@ public class CalculatorController {
 		inputView.closeRead();
 
 		Delimiter delimiter = new Delimiter();
-
 		Optional<String> customDelimiter = customDelimiterProcessor.extractCustomDelimiter(input);
 		customDelimiter.ifPresent(delimiter::addCustomDelimiter);
-		List<Integer> numbers = InputParser.extractNumbers(input, delimiter);
+
+		String processedInput = customDelimiterProcessor.removeCustomDelimiterPattern(input);
+		List<Integer> numbers = InputParser.extractNumbers(processedInput, delimiter);
 
 		Calculator calculator = new Calculator(numbers);
 		outputView.printResult(calculator.sum());

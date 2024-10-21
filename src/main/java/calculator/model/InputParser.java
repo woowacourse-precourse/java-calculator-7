@@ -15,18 +15,17 @@ public class InputParser {
 	 * 핵심 로직
 	 */
 	// 1차 가공된 입력값에서 숫자를 추출
-	public static List<Integer> extractNumbers(String input, Delimiter delimiter) {
-		if (input.isBlank()) {
+	public static List<Integer> extractNumbers(String processedInput, Delimiter delimiter) {
+		if (processedInput.isBlank()) {
 			return List.of();
 		}
-		String[] splitParts = splitInput(input, delimiter);
+		String[] splitParts = splitInput(processedInput, delimiter);
 
 		return saveNumbers(splitParts);
 	}
 
 	// 구분자들을 이용해 정규식을 만들고, 이를 이용해 입력값을 분리
-	private static String[] splitInput(String input, Delimiter delimiter) {
-		String processedInput = removeCustomDelimiter(input);
+	private static String[] splitInput(String processedInput, Delimiter delimiter) {
 		InputValidator.validateInvalidDelimiter(processedInput, delimiter);
 
 		String regex = String.join("|",
@@ -36,22 +35,6 @@ public class InputParser {
 		);
 
 		return processedInput.split(regex);
-	}
-
-	// 입력값에서 커스텀 구분자를 제거한 문자열을 반환
-	private static String removeCustomDelimiter(String input) {
-		if (hasCustomDelimiter(input)) {
-			int delimiterEnd = input.indexOf("\\n");
-
-			return input.substring(delimiterEnd + 2); // \n 이후의 문자열 반환
-		}
-
-		return input; // 커스텀 구분자가 없을 경우 원본 문자열 반환
-	}
-
-	// 입력값에 커스텀 구분자가 있는지 확인
-	private static boolean hasCustomDelimiter(String input) {
-		return input.startsWith("//");
 	}
 
 	// 분리된 각 부분에서 숫자로 변환하여 리스트에 추가
