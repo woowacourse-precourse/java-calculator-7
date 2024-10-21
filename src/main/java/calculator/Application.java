@@ -52,4 +52,20 @@ public class Application {
         String delimiter = "[" + Arrays.stream(delimiters).reduce("", String::concat) + "]";
         return input.split(delimiter);
     }
+
+    public static int validateAndParse(String number) {
+        int result;
+
+        try {
+            result = Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자가 아닌 입력값 : " + number);
+        }
+
+        if (result < 0) {
+            throw new IllegalArgumentException("음수 입력: " + number);
+        }
+
+        return result;
+    }
 }
