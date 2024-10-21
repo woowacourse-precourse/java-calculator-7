@@ -42,4 +42,24 @@ public class ValidatorTest {
         assertThat(spaceCharacterException).isInstanceOf(IllegalArgumentException.class);
     }
 
+    @Test
+    void 잘못된_커스텀_구분자_선언_시_예외_발생() {
+        // given
+        String missingPrefix = ";\\n1;2;3";
+        String missingSuffix = "//;1;2;3";
+        String customDelimiterPrefix = "//";
+        String customDelimiterSuffix = "\\n";
+
+        // when
+        Throwable missingPrefixException = catchThrowable(() -> {
+            Validator.validateDelimiterDeclaration(missingPrefix, customDelimiterPrefix, customDelimiterSuffix);
+        });
+        Throwable missingSuffixException = catchThrowable(() -> {
+            Validator.validateDelimiterDeclaration(missingSuffix, customDelimiterPrefix, customDelimiterSuffix);
+        });
+
+        // then
+        assertThat(missingPrefixException).isInstanceOf(IllegalArgumentException.class);
+        assertThat(missingSuffixException).isInstanceOf(IllegalArgumentException.class);
+    }
 }
