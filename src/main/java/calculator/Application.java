@@ -13,6 +13,19 @@ public class Application {
     public static void inputMessage(){
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
+        inputParser(input);
+    }
+
+    public static void inputParser(String input){
+        try {
+            numberList = new ArrayList<>();
+//            커스텀 구분자 여부 체크
+            String delimiter;
+        }   catch (Exception e){
+            throw new IllegalArgumentException(INPUT_VALIDATION_EXCEPTION_MESSAGE);
+        }
+    }
+
     }
 
     public static void main(String[] args) {
