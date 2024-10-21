@@ -1,26 +1,28 @@
 package calculator;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import calculator.model.CalculatorService;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
 class ApplicationTest extends NsTest {
-//    @Test
-//    void 커스텀_구분자_사용() {
-//        assertSimpleTest(() -> {
-//            run("//;\\n1");
-//            assertThat(output()).contains("결과 : 1");
-//        });
-//    }
+    @Test
+    void 커스텀_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("//;\\n1");
+            assertThat(output()).contains("결과 : 1");
+        });
+    }
 
     @Test
     void testEmptyStringReturnsZero() {
         assertSimpleTest(() -> {
             // Given
-            StringCalculator calculator = new StringCalculator();
+            CalculatorService calculator = new CalculatorService();
             String input = "";
 
             // When
@@ -35,7 +37,7 @@ class ApplicationTest extends NsTest {
     void testNullStringReturnsZero() {
         assertSimpleTest(() -> {
             // Given
-            StringCalculator calculator = new StringCalculator();
+            CalculatorService calculator = new CalculatorService();
             String input = null;
 
             // When
@@ -50,7 +52,7 @@ class ApplicationTest extends NsTest {
     void testSingleNumberReturnsValue() {
         assertSimpleTest(() -> {
             // Given
-            StringCalculator calculator = new StringCalculator();
+            CalculatorService calculator = new CalculatorService();
             String input = "1";
 
             // When
@@ -65,7 +67,7 @@ class ApplicationTest extends NsTest {
     void testNumbersSeparatedByComma() {
         assertSimpleTest(() -> {
             // Given
-            StringCalculator calculator = new StringCalculator();
+            CalculatorService calculator = new CalculatorService();
             String input = "1,2";
 
             // When
@@ -80,7 +82,7 @@ class ApplicationTest extends NsTest {
     void testNumbersSeparatedByColon() {
         assertSimpleTest(() -> {
             // Given
-            StringCalculator calculator = new StringCalculator();
+            CalculatorService calculator = new CalculatorService();
             String input = "1:2";
 
             // When
@@ -95,7 +97,7 @@ class ApplicationTest extends NsTest {
     void testNumbersSeparatedByCommaAndColon() {
         assertSimpleTest(() -> {
             // Given
-            StringCalculator calculator = new StringCalculator();
+            CalculatorService calculator = new CalculatorService();
             String input = "1,2:3";
 
             // When
@@ -110,7 +112,7 @@ class ApplicationTest extends NsTest {
     void testCustomSeparator() {
         assertSimpleTest(() -> {
             // Given
-            StringCalculator calculator = new StringCalculator();
+            CalculatorService calculator = new CalculatorService();
             String input = "//;\n1;2;3";
 
             // When
@@ -125,7 +127,7 @@ class ApplicationTest extends NsTest {
     void testCustomAndDefaultSeparators() {
         assertSimpleTest(() -> {
             // Given
-            StringCalculator calculator = new StringCalculator();
+            CalculatorService calculator = new CalculatorService();
             String input = "//;\n1;2,3:4";
 
             // When
@@ -140,7 +142,7 @@ class ApplicationTest extends NsTest {
     void testNegativeNumberThrowsException() {
         assertSimpleTest(() -> {
             // Given
-            StringCalculator calculator = new StringCalculator();
+            CalculatorService calculator = new CalculatorService();
             String input = "-1,-2,3";
 
             // When & Then
@@ -153,7 +155,7 @@ class ApplicationTest extends NsTest {
     void testMultiCharacterCustomSeparatorThrowsException() {
         assertSimpleTest(() -> {
             // Given
-            StringCalculator calculator = new StringCalculator();
+            CalculatorService calculator = new CalculatorService();
             String input = "//;;\n1;2;3";
 
             // When & Then
@@ -166,7 +168,7 @@ class ApplicationTest extends NsTest {
     void testCustomSeparatorWithMetaCharacter() {
         assertSimpleTest(() -> {
             // Given
-            StringCalculator calculator = new StringCalculator();
+            CalculatorService calculator = new CalculatorService();
             String input = "//+\n1+2";
 
             // When
@@ -181,7 +183,7 @@ class ApplicationTest extends NsTest {
     void testInputMustEndWithNumber() {
         assertSimpleTest(() -> {
             // Given
-            StringCalculator calculator = new StringCalculator();
+            CalculatorService calculator = new CalculatorService();
             String input = "1,2,3,";
 
             // When & Then
@@ -195,7 +197,7 @@ class ApplicationTest extends NsTest {
     void testInvalidCustomSeparatorFormatThrowsException() {
         assertSimpleTest(() -> {
             // Given
-            StringCalculator calculator = new StringCalculator();
+            CalculatorService calculator = new CalculatorService();
             String input = "//;1;2;3";
 
             // When & Then
@@ -209,7 +211,7 @@ class ApplicationTest extends NsTest {
     void testCustomSeparatorWithEmptyStringReturnsZero() {
         assertSimpleTest(() -> {
             // Given
-            StringCalculator calculator = new StringCalculator();
+            CalculatorService calculator = new CalculatorService();
             String input = "//;\n";
 
             // When
