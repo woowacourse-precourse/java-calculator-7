@@ -19,6 +19,7 @@ public class Calculator {
 
         String delimiter = DEFAULT_DELIMITER; // 기본 구분자를 사용
         String numbers = input;
+
         input = input.replace("\\n", "\n");
         // 커스텀 구분자 처리
         if (input.startsWith("//")) {
@@ -60,17 +61,12 @@ public class Calculator {
     private static int parseNumber(String input) {
         try {
             int number = Integer.parseInt(input);
-            validateNegativeNumber(number); // 음수 검증 추가
+            if (number < 0) {
+                throw new IllegalArgumentException("음수는 허용되지 않습니다.");
+            }
             return number;
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("잘못된 숫자 형식입니다."); // 숫자 형식 예외 처리
+            throw new IllegalArgumentException("잘못된 숫자 형식입니다.");
         }
     }
-
-    private static void validateNegativeNumber(int number) {
-        if (number < 0) {
-            throw new IllegalArgumentException("음수는 허용되지 않습니다."); // 음수 예외 처리
-        }
-    }
-
 }
