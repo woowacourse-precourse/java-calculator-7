@@ -21,6 +21,7 @@ public class Calculator {
             input = input.substring(customIndex + 2);
         }
         String[] numbers = input.split(delimiter);
+        return sum(numbers);
     }
 
     // 4. 커스텀 구분자로 문장 분리
@@ -39,5 +40,15 @@ public class Calculator {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("문자 오류");
         }
+    }
+
+    // 6. 숫자 합산 로직 구현
+    private int sum(String[] numbers) {
+        int total = 0;
+        for (String num : numbers) {
+            checkExclusive(num);
+            total += Integer.parseInt(num);
+        }
+        return total;
     }
 }
