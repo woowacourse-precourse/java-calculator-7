@@ -27,7 +27,7 @@
 - 구분자는 문자여야 한다.
 - 커스텀 구분자는 문자열 앞부분의 "//"와 "\n" 사이에 위치해야 한다.
 - 위 조건을 만족하지 않으면 IllegalArgumentException을 발생시킨다.
-4. 3에서 커스텀 구분자를 반환받는다면 커스텀 구분자를 나타내는 문자열 앞부분을 제거한다. (Model/CustomDelimiterRemover)
+4. 3에서 커스텀 구분자를 반환받는다면 커스텀 구분자를 나타내는 문자열 앞부분을 제거한다. (Model/CustomDelimiterValidator)
 5. 구분자를 바탕으로 문자열의 유효성을 판별한다. (Model/StringValidator)
 - 구분자와 양수로 구성된 문자열이어야 한다.
 6. 문자열에 있는 정수를 분리하고 이를 리스트로 반환한다. (Model/NumberExtractor)
