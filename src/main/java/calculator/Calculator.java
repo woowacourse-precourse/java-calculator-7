@@ -24,38 +24,23 @@ public class Calculator {
             return;
         }
 
-        List<String> strings;
+        List<String> strings = new ArrayList<>();
         String regex = COMMA + "|" + COLON;
 
         if (division != null) {
-            List<String> tokens = new ArrayList<>();
             StringTokenizer tokenizer = new StringTokenizer(inputString, division);
-
             while (tokenizer.hasMoreTokens()) {
-                tokens.add(tokenizer.nextToken());
+                strings.addAll(Arrays.asList(tokenizer.nextToken().split(regex)));
             }
-
-            for (String token : tokens) {
-                strings = Arrays.asList(token.split(regex));
-                for (String string : strings) {
-                    int number = Integer.parseInt(string);
-                    if (number < 1) {
-                        throw new IllegalArgumentException();
-                    }
-                    numbers.add(number);
-                }
-            }
-            return;
+        } else {
+            strings.addAll(Arrays.asList(inputString.split(regex)));
         }
 
-        strings = Arrays.asList(inputString.split(regex));
         for (String string : strings) {
             int number = Integer.parseInt(string);
-
             if (number < 1) {
                 throw new IllegalArgumentException();
             }
-
             numbers.add(number);
         }
     }
@@ -67,7 +52,7 @@ public class Calculator {
             result += number;
         }
 
-        return result; // 계산 결과값 반환
+        return result;
     }
 
     public Map<String, String> split(String inputString) {
