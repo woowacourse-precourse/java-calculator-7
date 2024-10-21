@@ -18,17 +18,11 @@ public class InputView {
     public static List<Integer> inputNumbers() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
 
-        String input = input();
+        String input = Console.readLine();
         if (input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
             return splitNumbersWithCustomDelimiter(input);
         }
         return splitNumbers(input, DEFAULT_NUMBER_DELIMITER_REGEX);
-    }
-
-    private static String input() {
-        String input = Console.readLine();
-        System.out.println(input);
-        return input;
     }
 
     private static List<Integer> splitNumbersWithCustomDelimiter(String input) {
