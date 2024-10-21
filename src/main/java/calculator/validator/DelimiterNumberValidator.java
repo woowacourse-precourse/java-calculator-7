@@ -12,9 +12,16 @@ public class DelimiterNumberValidator {
     private static final int MINIMUM_ALLOWED_NUMBER = 0;
 
     public List<Integer> isValidNumber(String[] numbers) {
+        validateNonEmptyNumbers(numbers);
         return Arrays.stream(numbers)
                 .map(this::parseAndValidateNumber)
                 .collect(Collectors.toList());
+    }
+
+    private void validateNonEmptyNumbers(String[] numbers) {
+        if (numbers.length == 0) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT.getMessage());
+        }
     }
 
     private int parseAndValidateNumber(String number) {
