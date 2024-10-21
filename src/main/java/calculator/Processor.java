@@ -30,7 +30,8 @@ public class Processor {
         int delimiterEnd = input.indexOf(DELIMITER_AND_NUMBERS_SEPARATOR);
         String customDelimiter = input.substring(delimiterStart, delimiterEnd);
 
-        input = input.substring(delimiterEnd + 1);
+        int endOfDelimiterSection = delimiterEnd + DELIMITER_AND_NUMBERS_SEPARATOR.length();
+        input = input.substring(endOfDelimiterSection);
 
         return customDelimiter;
     }
