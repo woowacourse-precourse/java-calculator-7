@@ -1,5 +1,6 @@
 package calculator.util;
 
+import calculator.enums.ErrorMessages;
 import calculator.exception.CalculatorException;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -25,7 +26,7 @@ public class StringValidator {
 
             // 커스텀 구분자 정의 종료 부분이 없다면 예외 발생
             if (delimiterEnd == -1) {
-                throw new CalculatorException("커스텀 구분자 형식(//커스텀구분자\\n)을 준수해주세요.");
+                throw new CalculatorException(ErrorMessages.INVALID_CUSTOM_DELIMITER_FORMAT.getMessage());
             }
 
             // 정의 부분을 제외한 커스텀 구분자
@@ -33,7 +34,7 @@ public class StringValidator {
 
             // 커스텀 구분자가 숫자 형식이라면 예외 발생
             if (isDigit(customDelimiter)) {
-                throw new CalculatorException("숫자는 커스텀 구분자로 지정할 수 없습니다.");
+                throw new CalculatorException(ErrorMessages.NUMBER_DELIMITER.getMessage());
             }
         }
     }
@@ -43,7 +44,7 @@ public class StringValidator {
 
         // 입력이 비어있거나 공백일 경우 예외 발생
         if (input.isEmpty() || input.isBlank()) {
-            throw new CalculatorException("입력이 이루어지지 않았습니다.");
+            throw new CalculatorException(ErrorMessages.EMPTY_INPUT.getMessage());
         }
 
         // 입력의 첫 번째 문자
@@ -53,7 +54,7 @@ public class StringValidator {
 
         // 마지막 문자가 숫자 형식이 아니라면 예외 발생
         if (!isDigit(String.valueOf(lastCharacter))) {
-            throw new CalculatorException("양수,구분자,양수의 입력 형식을 지켜주세요. 현재 구분자로 끝나고 있습니다.");
+            throw new CalculatorException(ErrorMessages.INVALID_DELIMITER_FORMAT_END.getMessage());
         }
 
         // 커스텀 구분자를 사용할 경우
@@ -65,7 +66,7 @@ public class StringValidator {
 
         // 첫 번째 문자가 숫자 형식이 아니라면 예외 발생
         if (!isDigit(String.valueOf(firstCharacter))) {
-            throw new CalculatorException("양수,구분자,양수의 입력 형식을 지켜주세요. 현재 구분자로 시작하고 있습니다.");
+            throw new CalculatorException(ErrorMessages.INVALID_DELIMITER_FORMAT_START.getMessage());
         }
     }
 
@@ -75,12 +76,12 @@ public class StringValidator {
 
             // 숫자가 비어있거나 공백이면 예외 발생
             if (number.isEmpty() || number.isBlank()) {
-                throw new CalculatorException("양수입력이 비어있습니다.");
+                throw new CalculatorException(ErrorMessages.EMPTY_NUMBER_INPUT.getMessage());
             }
 
             // 숫자 입력이 아닐 경우 예외 발생
             if (!isDigit(number)) {
-                throw new CalculatorException("올바르지 않은 양수 입력입니다: " + number);
+                throw new CalculatorException(ErrorMessages.INVALID_NUMBER_INPUT.getMessage() + number);
             }
 
         }
