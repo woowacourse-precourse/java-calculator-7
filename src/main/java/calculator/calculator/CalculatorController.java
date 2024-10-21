@@ -1,6 +1,10 @@
-package calculator;
+package calculator.calculator;
 
 import java.util.List;
+
+import calculator.domain.Numbers;
+import calculator.view.Input;
+import calculator.view.Output;
 
 public class CalculatorController {
 	private Calculator calculator;

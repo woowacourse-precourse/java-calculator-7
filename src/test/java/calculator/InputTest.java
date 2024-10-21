@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import calculator.view.Input;
 import camp.nextstep.edu.missionutils.test.NsTest;
 
 public class InputTest extends NsTest {

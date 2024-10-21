@@ -2,6 +2,8 @@ package calculator;
 
 import java.util.HashSet;
 
+import calculator.calculator.Calculator;
+import calculator.calculator.CalculatorController;
 import calculator.config.DIContainer;
 
 public class Application {
