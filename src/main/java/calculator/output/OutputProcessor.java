@@ -8,7 +8,7 @@ public class OutputProcessor {
     }
 
     public static OutputProcessor getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new OutputProcessor();
         }
 
