@@ -11,7 +11,6 @@ public class Application {
         int addResult = separator(numDelimiterString);
         System.out.println("결과 : " + addResult);
         return;
-
     }
 
     public static int separator(String numDelimiterString) { //문자열에서 숫자 추출하여 더한 값 반환
