@@ -1,0 +1,79 @@
+package calculator.domain;
+
+import static calculator.exception.constants.ErrorMessage.INVALID_INPUT_VALUE;
+import static calculator.exception.constants.ErrorMessage.INVALID_NON_POSITIVE_VALUE;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import calculator.exception.CalculatorException;
+import java.util.stream.Stream;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
+
+class CalculatorTest {
+
+    @ParameterizedTest(name = "입력값: {0}, 기대값: {1}")
+    @MethodSource("providePositiveNumber")
+    void 양수_더하기(String[] splitInputs, Number expected) {
+        // given
+        Calculator calculator = new Calculator(splitInputs);
+
+        // when
+        Number result = calculator.sum();
+
+        // then
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @ParameterizedTest(name = "입력값: {0}")
+    @ValueSource(strings = {"a", "a,b", "1,a,3"})
+    void 예외_테스트_문자가_포함된_더하기(String input) {
+        // given
+        String[] splitInputs = input.split(",", -1);
+        Calculator calculator = new Calculator(splitInputs);
+
+        // when & then
+        assertThatThrownBy(calculator::sum)
+                .isInstanceOf(CalculatorException.class)
+                .hasMessage(INVALID_INPUT_VALUE.getMessage());
+    }
+
+    @ParameterizedTest(name = "입력값: {0}")
+    @ValueSource(strings = {"-1", "0", "0,1", "-1,2,3", "-1,-2,-3", "-1.0,2,3"})
+    void 예외_테스트_양수가_아닌_수가_포함된_더하기(String input) {
+        // given
+        String[] splitInputs = input.split(",", -1);
+        Calculator calculator = new Calculator(splitInputs);
+
+        // when & then
+        assertThatThrownBy(calculator::sum)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(INVALID_NON_POSITIVE_VALUE.getMessage());
+    }
+
+    @ParameterizedTest(name = "입력값: {0}")
+    @ValueSource(strings = {"1,", "1,2,", "1,,", "1.2,,"})
+    void 예외_테스트_빈_값이_포함된_더하기(String input) {
+        // given
+        String[] splitInputs = input.split(",", -1);
+        Calculator calculator = new Calculator(splitInputs);
+
+        // when & then
+        assertThatThrownBy(calculator::sum)
+                .isInstanceOf(CalculatorException.class)
+                .hasMessage(INVALID_INPUT_VALUE.getMessage());
+    }
+
+    static Stream<Arguments> providePositiveNumber() {
+        return Stream.of(
+                Arguments.of(new String[]{"1"}, 1L),
+                Arguments.of(new String[]{"1.0"}, 1L),
+                Arguments.of(new String[]{"1", "2"}, 3L),
+                Arguments.of(new String[]{"1", "2", "3"}, 6L),
+                Arguments.of(new String[]{"1.2", "2.3", "3.4"}, 6.9),
+                Arguments.of(new String[]{"1.3", "2.3", "3.4"}, 7L)
+        );
+    }
+}
