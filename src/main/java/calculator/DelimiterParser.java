@@ -1,13 +1,16 @@
 package calculator;
 
-import java.util.regex.Pattern;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class DelimiterParser {
 
     private static final String CUSTOM_DELIMITER_PREFIX = "//"; // 커스텀 구분자 접두사
+    private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
 
-    public String[] splitNumbers(String input) {
-        String delimiter = ",|:"; // 기본 구분자. 정규표현식 사용
+    public String[] parseNumbers(String input) {
+        List<String> delimiterList = new ArrayList<>(Arrays.asList(",", ":"));
         String numbersPart = input; // 숫자 부분
 
         if (!Character.isDigit(input.charAt(input.length() - 1))) {
@@ -15,8 +18,8 @@ public class DelimiterParser {
         }
 
         if (input.startsWith("//")) {
-            int delimiterEndIndex = numbersPart.indexOf("\\n");
-            int numbersStartIndex = delimiterEndIndex + 2;
+            int delimiterEndIndex = numbersPart.indexOf(CUSTOM_DELIMITER_SUFFIX);
+            int numbersStartIndex = delimiterEndIndex + CUSTOM_DELIMITER_SUFFIX.length();
 
             // \n이 존재하지 않거나 //와 \n사이에 구분자가 없는 경우
             if (delimiterEndIndex == -1 || delimiterEndIndex == 2) {
@@ -30,11 +33,11 @@ public class DelimiterParser {
 
             String customDelimiter = input.substring(CUSTOM_DELIMITER_PREFIX.length(), delimiterEndIndex);
 
-            // 기본 구분자와 커스텀 구분자를 합쳐서 정규표현식 생성
-            delimiter += "|" + Pattern.quote(customDelimiter); // customDelimiter 이스케이프 처리
+            delimiterList.add(customDelimiter);
             numbersPart = input.substring(numbersStartIndex);
         }
 
+        String delimiter = String.join("|", delimiterList);
         return numbersPart.split(delimiter);
     }
 }
