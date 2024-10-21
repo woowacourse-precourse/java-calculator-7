@@ -10,6 +10,8 @@ public class Validator {
             }
             int last = str.indexOf("\\n");
             return str.substring(CUSTOM_START.length(), last);
+        } else if (!Character.isDigit(str.charAt(0))) {
+            throw new IllegalArgumentException("올바르지 못한 입력", new Throwable("양수만 연산이 가능합니다."));
         }
         return "";
     }

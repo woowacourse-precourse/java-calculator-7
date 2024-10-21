@@ -16,7 +16,7 @@ public class Calculator {
                 result += temp;
             }
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("올바르지 못한 입력", new Throwable("숫자만 연산이 가능합니다."));
+            throw new IllegalArgumentException("올바르지 못한 입력", new Throwable("양수만 연산이 가능합니다."));
         }
         return result;
     }
