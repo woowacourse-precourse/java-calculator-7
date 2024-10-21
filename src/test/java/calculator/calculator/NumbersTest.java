@@ -17,4 +17,14 @@ public class NumbersTest {
         int sum = input.stream().filter(v -> !v.isBlank()).mapToInt(Integer::parseInt).sum();
         assertThat(numbers.sum()).isEqualTo(new Number(sum));
     }
+
+    @Test
+    public void 숫자변환() {
+        List<String> input = List.of("1", "3", "4", " ", "");
+
+        Numbers numbers = Numbers.from(input);
+
+        List<Number> result = input.stream().map(Number::from).toList();
+        assertThat(numbers).isEqualTo(new Numbers(result));
+    }
 }

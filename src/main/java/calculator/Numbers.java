@@ -1,6 +1,7 @@
 package calculator;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Numbers {
 
@@ -24,5 +25,22 @@ public class Numbers {
             result = result.sum(number);
         }
         return result;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Numbers numbers1 = (Numbers) o;
+        return numbers.equals(numbers1.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 }
