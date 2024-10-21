@@ -1,5 +1,6 @@
 package calculator;
 
+import java.math.BigInteger;
 import java.util.regex.Pattern;
 
 public class Calculator {
@@ -15,9 +16,11 @@ public class Calculator {
         this.delimiter = delimiter;
     }
 
-    public int calculate() {
+    public long calculate() {
         if (userInput == null || userInput.isEmpty()) {
             return 0;
+
+
         }
 
         // 1. 커스텀 구분자가 있는지 확인
@@ -31,6 +34,11 @@ public class Calculator {
             String customDelimiter = userInput.substring(2, delimiterEndIndex);
 
             // 3. 단일 문자만 허용
+
+            if (customDelimiter.isEmpty()) {
+                throw new IllegalArgumentException("잘못된 입력: => 커스텀문자가 없습니다.");
+            }
+
             if (customDelimiter.length() != 1) {
                 throw new IllegalArgumentException("잘못된 입력: => 커스텀문자는 단일 문자만 입력할 수 있습니다.");
             }
@@ -46,20 +54,36 @@ public class Calculator {
             // 기본 구분자와 커스텀 구분자를 모두 포함한 정규식 생성
             delimiter = delimiter + "|" + customDelimiter;
         }
-
-        String[] numbers = userInput.split(delimiter);  // 쉼표와 콜론으로 분리
-        int sum = 0;
+        // -1의 의미 :마지막에 구분자가 있을 경우 빈 문자열도 배열에 포함. 예=> "1,2,"
+        String[] numbers = userInput.split(delimiter, -1);  // 쉼표와 콜론,(커스텀구분자)으로 분리
+        long sum = 0;
         for (String number : numbers) {
             try {
-                int value = Integer.parseInt(number);  // 문자열을 정수로 변환
 
-                if (value < 0) {
-                    throw new IllegalArgumentException("잘못된 입력: 음수는 포함될 수 없습니다: " + value);
+                if (number.isEmpty()) {
+                    throw new IllegalArgumentException("잘못된 입력: 구분자와 숫자 매치가 맞지 않습니다.");
                 }
 
-                sum += Integer.parseInt(number);
+                // BigInteger를 사용해 숫자 범위 검증
+                BigInteger bigValue = new BigInteger(number);
+
+                if (bigValue.compareTo(BigInteger.valueOf(Long.MAX_VALUE)) > 0) {
+                    throw new IllegalArgumentException("잘못된 입력: 정수 표현범위를 넘어섰습니다.");
+                }
+
+                long value = bigValue.longValue();  // long으로 변환
+
+                if (value < 0) {
+                    throw new IllegalArgumentException("잘못된 입력: 음수는 포함될 수 없습니다. " + value);
+                }
+
+                sum += value;
+                
+                if (sum < 0) {
+                    throw new IllegalArgumentException("잘못된 입력: 더하는 과정에서 정수 표현범위를 넘어섰습니다. ");
+                }
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("잘못된 입력: 숫자가 아닌 값이 포함되어 있습니다: " + number);
+                throw new IllegalArgumentException("잘못된 입력: 숫자가 아닌 값이 포함되어 있습니다.");
             }
         }
         return sum;
