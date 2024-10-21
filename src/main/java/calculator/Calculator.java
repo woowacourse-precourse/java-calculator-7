@@ -22,19 +22,19 @@ public class Calculator {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         this.inputValue = Console.readLine();
 
-        if (!this.inputValue.contains(",") && !this.inputValue.contains(":")
-                && !(this.inputValue.contains("//") && this.inputValue.contains("\n"))) {
+        if (!inputValue.contains(",") && !inputValue.contains(":")
+                && !(inputValue.contains("//") && inputValue.contains("\n"))) {
             throw new IllegalArgumentException(INVALID_INPUT_VALUE.getMessage());
         }
 
-        if (!this.inputValue.matches(".*\\d.*")) {
+        if (!inputValue.matches(".*\\d.*")) {
             throw new IllegalArgumentException(MISSING_NUMBER.getMessage());
         }
     }
 
     private String[] splitNums() {
         setCustomDelimiter(); // 커스텀 구분자 설정 추가
-        return this.inputValue.split(delimiters);
+        return inputValue.split(delimiters);
     }
 
     private ArrayList<Integer> toInteger(String[] stringNums) {
@@ -46,14 +46,13 @@ public class Calculator {
             } catch (Exception e) {
                 throw new IllegalArgumentException(INVALID_NUMBER.getMessage());
             }
-
         }
 
         return nums;
     }
 
     private Boolean isEmpty() {
-        return this.inputValue.isEmpty();
+        return inputValue.isEmpty();
     }
 
     private Boolean isCustomDelimiters(String inputValue) {
@@ -61,7 +60,7 @@ public class Calculator {
     }
 
     private void addCustomDelimiters(String customDm) {
-        this.delimiters += "|" +  customDm;
+        delimiters += "|" +  customDm;
     }
 
     private String getCustomDelimiters(String inputValue) {
@@ -79,8 +78,8 @@ public class Calculator {
     }
 
     private void setCustomDelimiter() {
-        if (isCustomDelimiters(this.inputValue)) {
-            String customDm = getCustomDelimiters(this.inputValue);
+        if (isCustomDelimiters(inputValue)) {
+            String customDm = getCustomDelimiters(inputValue);
             addCustomDelimiters(customDm);
         }
     }
@@ -90,7 +89,7 @@ public class Calculator {
             if (n <= 0) {
                 throw new IllegalArgumentException(NON_POSITIVE_VALUE.getMessage());
             }
-            this.result += n;
+            result += n;
         }
         return result;
     }
@@ -98,11 +97,11 @@ public class Calculator {
     public String calculate() {
         createInputValue();
         if (isEmpty()) {
-            return RESULT_MESSAGE + this.result;
+            return RESULT_MESSAGE + result;
         }
         String[] stringNums = splitNums();
         ArrayList<Integer> nums = toInteger(stringNums);
-        this.result = addNums(nums);
-        return RESULT_MESSAGE + this.result;
+        result = addNums(nums);
+        return RESULT_MESSAGE + result;
     }
 }
