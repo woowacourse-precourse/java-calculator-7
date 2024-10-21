@@ -6,6 +6,33 @@ import java.util.List;
 import java.util.Set;
 
 public class Application {
+
+    static List<String> getNumbers(String input, Set<Character> delimiters) {
+        List<String> numbers = new ArrayList<>();
+        StringBuilder tempNumber = new StringBuilder();
+        for (char c : input.toCharArray()) {
+            if (delimiters.contains(c)) {
+                // 구분자로 시작하거나, 구분자가 두개 붙어있는 경우
+                if (tempNumber.isEmpty()) {
+                    throw new IllegalArgumentException();
+                }
+                numbers.add(tempNumber.toString());
+                tempNumber.setLength(0);
+                continue;
+            }
+            if (Character.isDigit(c)) {
+                tempNumber.append(c);
+                continue;
+            }
+            throw new IllegalArgumentException();
+        }
+        if (tempNumber.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+        numbers.add(tempNumber.toString());
+        return numbers;
+    }
+
     public static void main(String[] args) {
         // 문자열 값 입력
         System.out.println("덧셈할 문자열을 입력해 주세요.");
@@ -35,34 +62,15 @@ public class Application {
             input = input.substring(5);
         }
 
-        // 문자열 파싱 (숫자 추출)
-        List<String> numbers = new ArrayList<>();
-        StringBuilder tempNumber = new StringBuilder();
-        for (char c : input.toCharArray()) {
-            if (delimiters.contains(c)) {
-                // 구분자로 시작하거나, 구분자가 두개 붙어있는 경우
-                if (tempNumber.isEmpty()) {
-                    throw new IllegalArgumentException();
-                }
-                numbers.add(tempNumber.toString());
-                tempNumber.setLength(0);
-                continue;
-            }
-            if (Character.isDigit(c)) {
-                tempNumber.append(c);
-                continue;
-            }
-            throw new IllegalArgumentException();
-        }
-        if (tempNumber.isEmpty()) {
-            throw new IllegalArgumentException();
-        }
-        numbers.add(tempNumber.toString());
-
-        // 구분점으로 구분된 숫자들의 합계 계산
         long result = 0;
-        for (String i : numbers) {
-            result += Long.parseLong(i);
+        if (!input.isEmpty()) {
+            // 문자열 파싱 (숫자 추출)
+            List<String> numbers = getNumbers(input, delimiters);
+
+            // 구분점으로 구분된 숫자들의 합계 계산
+            for (String i : numbers) {
+                result += Long.parseLong(i);
+            }
         }
 
         // 결과 출력
