@@ -1,0 +1,93 @@
+package calculator;
+
+import calculator.enums.ErrorMessage;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Calculator {
+
+    private final SeparatorProcessor separatorProcessor;
+    private final Pattern customSeparatorCmdPattern;
+    private final int CUSTOM_SEPARATOR_IDX = 2;
+    private final String CUSTOM_SEPARATOR_CMD_REGEX = "^(\\/\\/.\\\\n)";
+    private final String MINUS_DIGIT_REGEX = "-[0-9]*";
+    private final String DIGIT_REGEX = "-?\\d+";
+    private final int MAX_NUM_LENGTH = 18;
+    private final ICalculatorDisplay calculatorDisplay;
+
+    public Calculator(ICalculatorDisplay calculatorDisplay) {
+        this.separatorProcessor = new SeparatorProcessor(',', ':');
+        this.customSeparatorCmdPattern = Pattern.compile(CUSTOM_SEPARATOR_CMD_REGEX);
+        this.calculatorDisplay = calculatorDisplay;
+    }
+
+    public void run() {
+        String cmd = calculatorDisplay.getPromptInput();
+
+        // 커스텀 구분자 설정
+        Matcher matcher = customSeparatorCmdPattern.matcher(cmd);
+        if (matcher.find()) { // 사용자가 커스텀 구분자 설정 명령을 입력했을 시
+            registerCustomSeparator(matcher.group().charAt(CUSTOM_SEPARATOR_IDX));
+
+            // 구분자 등록에 사용됐던 명령어 제거
+            cmd = cmd.replace(matcher.group(), "");
+        }
+
+        // 계산
+        long result = sum(cmd);
+
+        calculatorDisplay.printResult(result);
+    }
+
+    /**
+     * 문자열에서 구분자를 기준으로 숫자를 추출하여 합 계산
+     *
+     * @return 구분자로 분리된 숫자의 합
+     */
+    private long sum(String cmd) {
+        if (cmd.isEmpty()) {
+            return 0;
+        }
+
+        // 합 계산
+        long result = 0;
+        String[] rawNumbers = separatorProcessor.split(cmd);
+        for (String rawNum : rawNumbers) {
+            result += convertStrToNum(rawNum);
+        }
+
+        return result;
+    }
+
+    /**
+     * 커스텀 구분자 등록
+     *
+     * @throws IllegalArgumentException 숫자를 커스텀 구분자로 등록하려는 경우
+     */
+    private void registerCustomSeparator(char customSeparator) {
+        if (Character.isDigit(customSeparator)) {
+            throw new IllegalArgumentException(ErrorMessage.CAN_NOT_REGISTER_CUSTOM_SEPARATOR_BY_NUMBER.getMessage());
+        }
+
+        separatorProcessor.addSeparator(customSeparator);
+    }
+
+    /**
+     * 숫자로 구성된 문자열을 정수 자료형으로 변경
+     *
+     * @throws IllegalArgumentException 음수이거나, 숫자 이외의 값이거나, 숫자 입력 범위를 초과하였을 경우
+     */
+    private long convertStrToNum(String rawNum) {
+        if (rawNum.matches(MINUS_DIGIT_REGEX)) {
+            throw new IllegalArgumentException(ErrorMessage.CAN_NOT_CALC_MINUS_NUMBER.getMessage());
+        }
+        if (!rawNum.matches(DIGIT_REGEX)) {
+            throw new IllegalArgumentException(ErrorMessage.ONLY_CALC_DIGIT.getMessage());
+        }
+        if (rawNum.length() >= MAX_NUM_LENGTH) {
+            throw new IllegalArgumentException(ErrorMessage.EXCEED_MAX_NUM_LENGTH.getMessage());
+        }
+
+        return Long.parseLong(rawNum);
+    }
+}
