@@ -10,7 +10,7 @@ public class SeparatorHandler {
     public String getCustomSeparator(String input) {
         // 커스텀 구분자가 제대로 된 형식인지 확인 (//로 시작하고 구분자가 1글자 이상 뒤에 \n이 와야 함)
         if (input.startsWith("/")) {
-            if (!input.matches("//.{1,}\\\\n.*")) {
+            if (!input.matches("^//(.+)\\\\n.*")) { // ^ 를 사용하여 시작 문자열 확인
                 throw new IllegalArgumentException(VaildExceptionMessage.INVALID_SEPARATOR_FORMAT.getMessage());
             }
 
@@ -53,7 +53,7 @@ public class SeparatorHandler {
     }
 
     // 구분자 유효성을 검증하는 메서드
-    private void validateSeparator(String separator) {
+    public void validateSeparator(String separator) {
         for (char c : separator.toCharArray()) {
             if (c == ',' || c == ':') {
                 throw new IllegalArgumentException(VaildExceptionMessage.BASIC_SEPARATOR_AS_CUSTOM.getMessage());
