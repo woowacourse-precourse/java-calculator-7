@@ -13,6 +13,7 @@ public class Application {
     }
 
     public static int calculate(String input) {
+        input = input.replaceAll("\\s", ""); //공백 제거
         if (input.isEmpty()) {
             return 0;
         }
