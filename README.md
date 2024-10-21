@@ -36,6 +36,11 @@
 
 ### DelimeterManager
 
+- `getCustomDelimiter()` : 멤버 변수 customdelimiter의 getter
+- `getLenOfPrefix()` : 멤버 변수 lenOfPrefix의 getter
+- `getLenOfSuffix()` : 멤버 변수 lenOfSuffix의 getter
+- `getDelimiters()` : 멤버 변수 delimiters의 getter
+- `setCustomDelimiter()` : 멤버 변수 customdelimiter의 setter
 - `addDelimeter()` : 기존의 구분자(",", ":")에 커스텀 구분자를 더합니다.
 - `isDelimiterLimitExceeded` : 구분자의 최대 개수를 초과하는지 확인합니다.
 - `isDelimiterExists` : 이미 존재하는 구분자("," 또는 ":")인지 확인합니다.
