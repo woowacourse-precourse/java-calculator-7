@@ -17,9 +17,6 @@ public class RegexValidator implements Validator {
         String numberPart = input;
         String customSeparator = "";
 
-        System.out.println(input);
-        System.out.println(CUSTOM_SEPARATOR_PATTERN);
-
         // 정규표현식을 사용하여 커스텀 구분자가 있는지 확인
         Pattern customPattern = Pattern.compile(CUSTOM_SEPARATOR_PATTERN);
         Matcher matcher = customPattern.matcher(input);
