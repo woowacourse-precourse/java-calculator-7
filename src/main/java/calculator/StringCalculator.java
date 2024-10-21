@@ -23,7 +23,23 @@ public class StringCalculator {
         // 구분자를 기준으로 숫자를 분리
         String[] tokens = numbers.split(delimiter);
 
-        return 0;
+        int sum = 0;
+
+        try {
+            for (String token : tokens) {
+                if (!token.isEmpty()) {
+                    int number = Integer.parseInt(token);
+                    if (number < 0) {
+                        throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
+                    }
+                    sum += number;  // 각 숫자를 더함
+                }
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
+        }
+
+        return sum;
 
     }
 
@@ -39,6 +55,5 @@ public class StringCalculator {
 
         return new String[]{delimiter, numbers};  // 구분자와 숫자 부분을 배열로 반환
     }
-
-
+    
 }
