@@ -1,13 +1,9 @@
 package calculator.service;
 
-import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CalculatorService {
-    private static final Pattern CUSTOM_PATTERN = Pattern.compile("//(.)\n(.*)");
-    private static final String DEFAULT_DELIMITERS = "[,:]";
-
     public int calculate(String input) {
         if (input == null || input.trim().isEmpty()) {
             return 0;
@@ -15,39 +11,40 @@ public class CalculatorService {
 
         String[] numbers;
         if (input.startsWith("//")) {
-            numbers = splitWithCustomDelimiter(input);
+            numbers = getNumbersByCustomDelimiter(input);
         } else {
-            numbers = input.split(DEFAULT_DELIMITERS);
+            numbers = input.split("[,:]");
         }
 
-        return Arrays.stream(numbers)
-                .map(String::trim)
-                .filter(s -> !s.isEmpty())
-                .mapToInt(this::parseNumber)
-                .sum();
+        return sum(numbers);
     }
 
-    private String[] splitWithCustomDelimiter(String input) {
-        Matcher matcher = CUSTOM_PATTERN.matcher(input);
-
-        if (!matcher.matches()) {
-            throw new IllegalArgumentException("잘못된 구분자 형식입니다.");
+    private String[] getNumbersByCustomDelimiter(String input) {
+        Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
+        if (!matcher.find()) {
+            throw new IllegalArgumentException();
         }
+        String customDelimiter = matcher.group(1);
+        return matcher.group(2).split(Pattern.quote(customDelimiter));
+    }
 
-        String delimiter = matcher.group(1);
-        String numbers = matcher.group(2);
-        return numbers.split(Pattern.quote(delimiter));
+    private int sum(String[] numbers) {
+        int sum = 0;
+        for (String number : numbers) {
+            sum += parseNumber(number.trim());
+        }
+        return sum;
     }
 
     private int parseNumber(String number) {
         try {
             int value = Integer.parseInt(number);
             if (value < 0) {
-                throw new IllegalArgumentException("음수는 사용할 수 없습니다: " + value);
+                throw new IllegalArgumentException();
             }
             return value;
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("유효하지 않은 숫자 형식입니다: " + number);
+            throw new IllegalArgumentException();
         }
     }
 }
