@@ -43,7 +43,7 @@ public class Application {
         int result = 0;
 
         for (String number : numbers) {
-            // 숫자가 아닌 경우 예외 발생
+            // 숫자가 아니거나 비어있는 경우 예외 발생
             if (!number.chars().allMatch(Character::isDigit)) {
                 throw new IllegalArgumentException("숫자를 입력해야 합니다.");
             }
