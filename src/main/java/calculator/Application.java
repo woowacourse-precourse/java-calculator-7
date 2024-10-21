@@ -9,7 +9,7 @@ public class Application {
         String userInput = Console.readLine();
 
         DelimiterParser delimiterParser = new DelimiterParser(userInput);
-        String[] numbers = delimiterParser.processInput();
+        String[] numbers = delimiterParser.parseNumbers();
 
         StringCalculator stringCalculator = new StringCalculator();
         int sumResult = stringCalculator.sum(numbers);

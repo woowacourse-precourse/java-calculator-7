@@ -9,7 +9,7 @@ public class DelimiterParser {
         this.input = input;
     }
 
-    public String[] processInput() {
+    public String[] parseNumbers() {
         String delimiters = DEFAULT_DELIMITERS;
         String numberSection = input;
 

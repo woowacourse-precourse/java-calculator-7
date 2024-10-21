@@ -6,7 +6,7 @@
 
 - **기본 구분자 사용**  
   쉼표(,)와 콜론(:)을 기본 구분자로 하여 입력받은 문자열을 처리함.
-    - 입력 문자열을 처리하여 구분자에 따라 숫자를 분리하는 **'processInput'** 메서드 구현.
+    - 입력 문자열을 처리하여 구분자에 따라 숫자를 분리하는 **'parserNumbers'** 메서드 구현.
         - 입력 문자열이 커스텀 구분자를 포함하는지 확인하는 **'hasCustomDelimiter'** 메서드 구현.
         - 커스텀 구분자가 포함된 경우, '//'와 '\n' 사이의 문자열을 구분자로 추출하는 **'extractCustomDelimiter'** 메서드 구현.
         - 커스텀 구분자가 포함된 경우 숫자 부분만을 추출하는 **'extractNumbersSection'** 메서드 구현.
@@ -57,7 +57,7 @@
 ### 2. DelimiterParser 클래스
 
 - 입력값을 처리하고 구분자 및 숫자를 분리함.
-    - **processInput** 메서드 : 기본 구분자와 커스텀 구분자를 사용해 문자열에서 숫자를 분리함.
+    - **parseNumbers** 메서드 : 기본 구분자와 커스텀 구분자를 사용해 문자열에서 숫자를 분리함.
     - **hasCustomDelimiter** 메서드 : 커스텀 구분자가 있는지 확인함.
     - **extractCustomDelimiter** 메서드 : 커스텀 구분자를 추출함.
     - **extractNumberSection** 메서드 : 숫자 부분을 추출함.

@@ -14,7 +14,7 @@ class ApplicationTest extends NsTest {
         String input = "//;\\n1;2;3";
 
         DelimiterParser delimiterParser = new DelimiterParser(input);
-        String[] result = delimiterParser.processInput();
+        String[] result = delimiterParser.parseNumbers();
 
         assertThat(result).isEqualTo(new String[]{"1", "2", "3"});
     }
@@ -24,7 +24,7 @@ class ApplicationTest extends NsTest {
         String input = "1,2:3";
 
         DelimiterParser delimiterParser = new DelimiterParser(input);
-        String[] result = delimiterParser.processInput();
+        String[] result = delimiterParser.parseNumbers();
 
         assertThat(result).isEqualTo(new String[]{"1", "2", "3"});
     }
@@ -35,7 +35,7 @@ class ApplicationTest extends NsTest {
 
         DelimiterParser delimiterParser = new DelimiterParser(input);
 
-        assertThatThrownBy(delimiterParser::processInput)
+        assertThatThrownBy(delimiterParser::parseNumbers)
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("잘못된 입력 형식입니다. 커스텀 구분자는 //과 \\n을 포함해야 합니다.");
     }
@@ -45,7 +45,7 @@ class ApplicationTest extends NsTest {
         String input = "1,2:3";
 
         DelimiterParser delimiterParser = new DelimiterParser(input);
-        String[] parsedNumbers = delimiterParser.processInput();
+        String[] parsedNumbers = delimiterParser.parseNumbers();
 
         assertThat(parsedNumbers).isEqualTo(new String[]{"1", "2", "3"});
     }
@@ -55,7 +55,7 @@ class ApplicationTest extends NsTest {
         String input = "//;\\n1;2;3";
 
         DelimiterParser delimiterParser = new DelimiterParser(input);
-        String[] parsedNumbers = delimiterParser.processInput();
+        String[] parsedNumbers = delimiterParser.parseNumbers();
 
         assertThat(parsedNumbers).isEqualTo(new String[]{"1", "2", "3"});
     }
@@ -65,7 +65,7 @@ class ApplicationTest extends NsTest {
         String input = "";
 
         DelimiterParser delimiterParser = new DelimiterParser(input);
-        String[] parsedNumbers = delimiterParser.processInput();
+        String[] parsedNumbers = delimiterParser.parseNumbers();
 
         StringCalculator stringCalculator = new StringCalculator();
         int sum = stringCalculator.sum(parsedNumbers);
