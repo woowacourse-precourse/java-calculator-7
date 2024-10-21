@@ -10,8 +10,12 @@ public class Application {
             String input = Console.readLine();
             long sum;
 
-            ArrayList<Integer> parsedInput = InputParser.parseInput(input);
-            sum = Calculator.sum(parsedInput);
+            if(input.isEmpty() || input.isBlank()) {
+                sum = 0;
+            } else {
+                ArrayList<Integer> parsedInput = InputParser.parseInput(input);
+                sum = Calculator.sum(parsedInput);
+            }
 
             System.out.println("결과 : "+sum);
         } catch (IllegalArgumentException e) {
