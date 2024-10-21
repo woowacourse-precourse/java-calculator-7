@@ -54,7 +54,7 @@ class AddCalculator {
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
-        int result = 0;
+        int result;
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
         result = calculateSum(input);
@@ -62,8 +62,14 @@ public class Application {
     }
 
     private static int calculateSum(String input) {
+        // 빈 문자열 입력 시
+        if (input.isEmpty()) {
+            return 0;
+        }
+
         AddCalculator calculator = new AddCalculator();
         String[] parsedList;
+
         if (calculator.isCustomDelimiterExisted(input)) {
             parsedList = calculator.validateCustomDelimiterInput(input);
         } else {
