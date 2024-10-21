@@ -18,6 +18,9 @@ public class UserInputSeparator {
             if (idx == -1) {
                 throw new IllegalArgumentException("커스텀 구분자 종료되지 않음");
             }
+            if (idx != 3) {
+                throw new IllegalArgumentException("커스텀 구분자 형식 에러");
+            }
             return new UserInputSeparator(message.substring(2, idx));
         }
         return null;

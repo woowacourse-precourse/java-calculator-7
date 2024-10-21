@@ -24,11 +24,29 @@ class UserInputSeparatorTest {
                 .isEqualTo(null);
     }
 
+    @ParameterizedTest
+    @MethodSource("예외케이스")
+    void 예외처리(final String inputMessage) {
+        Assertions.assertThatThrownBy(() -> UserInputSeparator.of(inputMessage))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    static Stream<Arguments> 예외케이스() {
+        return Stream.of(
+                Arguments.of("//\\n"),
+                Arguments.of("//\\\n"),
+                Arguments.of("//\\\n"),
+                Arguments.of("///\n"),
+                Arguments.of("//1\\n\\n"),
+                Arguments.of("//12\n")
+        );
+    }
+
     static Stream<Arguments> 정상커스텀구분자입력() {
         return Stream.of(
-                Arguments.of("//1234222\\n1", "1234222"),
+                Arguments.of("//1\\n1", "1"),
                 Arguments.of("//-\\n1", "-"),
-                Arguments.of("//\\n1", "")
+                Arguments.of("// \\n1", " ")
         );
     }
 
