@@ -14,7 +14,7 @@ public class Separator {
         this.delimiterManager = delimiterManager;
     }
 
-    public Optional<Character> addCustomDelimiter(String prefix, String suffix) {
+    public Optional<Character> extractCustomDelimiter(String prefix, String suffix) {
         int prefixPosition = target.indexOf(prefix);
         int suffixPosition = target.indexOf(suffix);
         int customDelimiterPosition = prefixPosition + prefix.length();
