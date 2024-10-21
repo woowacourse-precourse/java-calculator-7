@@ -4,7 +4,7 @@
 
 ## 요구 사항
 
-- [ ] 문자열 입력 받기
+- [x] 문자열 입력 받기
 
   사용자가 덧셈할 문자열을 입력받는다.
   입력은 camp.nextstep.edu.missionutils.Console의 readLine() 메서드를 사용한다.
