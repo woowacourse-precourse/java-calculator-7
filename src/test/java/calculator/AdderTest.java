@@ -43,4 +43,13 @@ public class AdderTest {
 
         assertThat(result).isEqualTo(0);
     }
+
+    @Test
+    void 커스텀_구분자_테스트() {
+        String input = "//;\n1;2;3";
+
+        int result = adder.run(input);
+
+        assertThat(result).isEqualTo(6);
+    }
 }
