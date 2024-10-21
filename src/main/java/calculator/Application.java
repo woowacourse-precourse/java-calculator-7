@@ -14,6 +14,6 @@ public class Application {
 
         // 2. 입력값을 검증.
         Validator validator = new Validator();
-        validator.validateDefaultDelimiters(input);
+        validator.validateInput(input);
     }
 }
