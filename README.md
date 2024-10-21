@@ -1,10 +1,10 @@
 # java-calculator-precourse
 
 ## TODO
-- [ ] 문자를 입력 받는 inputHandler 부분을 구현한다.
-- [ ] 쉼표와 콜론을 구분하는 inputChecker를 구현한다.
-- [ ] 커스텀 구분자를 추가한다.
-- [ ] 잘못된 입력에 대한 handler를 추가한다.
+- [x] 문자를 입력 받는 inputHandler 부분을 구현한다.
+- [x] 쉼표와 콜론을 구분하는 inputChecker를 구현한다.
+- [x] 커스텀 구분자를 추가한다.
+- [x] 잘못된 입력에 대한 handler를 추가한다.
 - [ ] 테스트 케이스를 작성한다.
 
 ## 기능 요구 사항
