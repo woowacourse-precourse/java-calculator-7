@@ -8,9 +8,8 @@ public class Application {
         int sum = 0;
 
         //문자열 입력받기
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         try {
-            str = reader.readLine();
+            str = camp.nextstep.edu.missionutils.Console.readLine();
         } catch (IOException e) {
             throw new IllegalArgumentException(e);
         }
