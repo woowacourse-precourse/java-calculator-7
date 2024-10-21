@@ -1,13 +1,12 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Application {
     public static void main(String[] args) {
         int result;
-            System.out.println("덧셈할 문자열을 입력해 주세요.");
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
 
         try {
@@ -74,7 +73,7 @@ public class Application {
         } else if (str.isEmpty()) {
             // A2 아무것도 없는 경우
             return 0;
-        } else if (str.length() > 4 && str.substring(0, 2).equals("//") && str.substring(3, 6).equals("\\\\n")) { // //@\n 꼴의 양식인가?
+        } else if (str.length() > 4 && str.substring(0, 2).equals("//") && str.substring(3, 5).equals("\\n")) { // //@\n 꼴의 양식인가?
             // A3 구분 지정자(//@\n) 경우
             customDelimiter = str.charAt(2);
             delimiterFinder = new DelimiterFinder(str, customDelimiter);
@@ -82,10 +81,10 @@ public class Application {
 
             // 구분지정자를 설정했지만 뒤에 구분지정자를 생성하지 않은 경우 (#1. 숫자도 없는 경우 #2. 숫자만 있음 #3. 다른 구분자가 있음)
             if (delimiterPositions.isEmpty()) {
-                if (str.length() == 6) { // #1
+                if (str.length() == 5) { // #1
                     return 0;
-                } else if (isNumeric(str.substring(6))) { // #2
-                    return Integer.parseInt(str.substring(6));
+                } else if (isNumeric(str.substring(5))) { // #2
+                    return Integer.parseInt(str.substring(5));
                 } else { // #3
                     throw new IllegalArgumentException();
                 }
