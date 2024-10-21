@@ -2,6 +2,7 @@ package calculator.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class InputProcessor {
     private static final String DEFAULT_SEPARATORS = ",;";
@@ -35,6 +36,9 @@ public class InputProcessor {
             setSeparator();
             setNumbers();
         } catch (NumberFormatException e) {
+            System.out.println("여기");
+            System.out.println(separators);
+            System.out.println(numbers);
             throw new IllegalArgumentException("유효하지 않은 정수입니다.");
         } catch (IllegalArgumentException e) {
             throw e;
@@ -64,7 +68,8 @@ public class InputProcessor {
             return;
         }
 
-        String[] tokens = numberPart.split(separators);
+        String regex = "[" + Pattern.quote(separators) + "]";
+        String[] tokens = numberPart.split(regex);
 
         for (String token : tokens) {
             int number = Integer.parseInt(token);
