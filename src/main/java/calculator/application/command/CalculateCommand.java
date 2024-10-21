@@ -2,7 +2,7 @@ package calculator.application.command;
 
 import calculator.domain.model.value.MajorData;
 import calculator.domain.model.value.Separator;
-import calculator.presentation.InputData;
+import calculator.presentation.dto.InputData;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;

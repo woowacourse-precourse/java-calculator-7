@@ -1,4 +1,4 @@
-package calculator.presentation;
+package calculator.presentation.dto;
 
 import static calculator.global.AffixConst.SUFFIX_CUSTOM_SEPARATOR;
 

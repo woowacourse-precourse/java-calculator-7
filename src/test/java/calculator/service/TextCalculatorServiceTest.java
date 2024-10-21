@@ -4,7 +4,7 @@ import calculator.application.TextCalculatorService;
 import calculator.application.TextCalculatorServiceImpl;
 import calculator.application.command.CalculateCommand;
 import calculator.domain.service.Calculator;
-import calculator.presentation.InputData;
+import calculator.presentation.dto.InputData;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

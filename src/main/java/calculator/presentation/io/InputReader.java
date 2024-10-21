@@ -1,5 +1,6 @@
-package calculator.presentation;
+package calculator.presentation.io;
 
+import calculator.presentation.dto.InputData;
 import camp.nextstep.edu.missionutils.Console;
 
 public final class InputReader {

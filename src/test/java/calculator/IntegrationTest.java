@@ -1,7 +1,7 @@
 package calculator;
 
 import calculator.global.AppConfig;
-import calculator.presentation.InputData;
+import calculator.presentation.dto.InputData;
 import calculator.presentation.TextCalculatorController;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

@@ -4,7 +4,7 @@ package calculator.domain;
 import calculator.application.command.CalculateCommand;
 import calculator.domain.model.value.MajorData;
 import calculator.domain.model.value.Separator;
-import calculator.presentation.InputData;
+import calculator.presentation.dto.InputData;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
