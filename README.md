@@ -20,8 +20,8 @@
 ## ⛳️ 1주차 목표
 
 - [ ] JDK 21 기능 활용
-- [ ] SRP(단일 책임 원칙)를 따른 명확한 객체 책임 분리
-- [ ] OCP(개방-폐쇄 원칙)를 적용한 확장 가능한 문자열 덧셈 계산기 구현
+- [x] SRP(단일 책임 원칙)를 따른 명확한 객체 책임 분리
+- [x] OCP(개방-폐쇄 원칙)를 적용한 확장 가능한 문자열 덧셈 계산기 구현
 
 ## ✏️ 구현할 기능 목록
 
@@ -164,15 +164,15 @@
 
 ### 제출 전 확인 리스트
 
-- [ ]  JDK-21 사용
-- [ ]  프로그램 실행의 시작점은 `Application`의 `main()`
-- [ ]  `build.gradle` 변경 불가, 제공된 라이브러리만 사용
-- [ ]  [Java Style Guide](https://github.com/woowacourse/woowacourse-docs/tree/main/styleguide/java)를 준수하며 프로그래밍
-- [ ]  프로그램 종료 시`System.exit()`를 호출 X
-- [ ]  프로그램 구현 완료 시 `ApplicationTest`의 모든 테스트가 성공
-- [ ]  프로그래밍 요구 사항에서 달리 명시하지 않는 한 파일, 패키지 이름을 수정하거나 이동 X
+- [x]  JDK-21 사용
+- [x]  프로그램 실행의 시작점은 `Application`의 `main()`
+- [x]  `build.gradle` 변경 불가, 제공된 라이브러리만 사용
+- [x]  [Java Style Guide](https://github.com/woowacourse/woowacourse-docs/tree/main/styleguide/java)를 준수하며 프로그래밍
+- [x]  프로그램 종료 시`System.exit()`를 호출 X
+- [x]  프로그램 구현 완료 시 `ApplicationTest`의 모든 테스트가 성공
+- [x]  프로그래밍 요구 사항에서 달리 명시하지 않는 한 파일, 패키지 이름을 수정하거나 이동 X
 
 ### 라이브러리 요구 사항
 
-- [ ]  camp.nextstep.edu.missionutils에서 제공하는 Console API를 사용하여 구현
-- [ ] 사용자가 입력하는 값은 camp.nextstep.edu.missionutils.Console의 readLine()을 활용 
+- [x]  camp.nextstep.edu.missionutils에서 제공하는 Console API를 사용하여 구현
+- [x] 사용자가 입력하는 값은 camp.nextstep.edu.missionutils.Console의 readLine()을 활용 
