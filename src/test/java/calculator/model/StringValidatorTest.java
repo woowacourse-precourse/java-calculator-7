@@ -1,6 +1,7 @@
 package calculator.model;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -8,6 +9,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class StringValidatorTest {
+
+	private final String errorMessage = "잘못된 문자열 형식입니다.";
 
 	@ParameterizedTest
 	@DisplayName("기본 문자열이 입력되었을 때 에러 없이 이를 검증한다.")
@@ -56,5 +59,18 @@ class StringValidatorTest {
 
 		// when, then
 		assertThatCode(stringValidator::validate).doesNotThrowAnyException();
+	}
+
+	@Test
+	@DisplayName("음수가 포함된 문자열이 입력되었을 때 에러를 발생시킨다.")
+	void 음수가_포함된_문자열이_입력되었을_때_에러를_발생시킨다() {
+		// given
+		String input = "-1,2,3";
+		StringValidator stringValidator = new StringValidator(input);
+
+		// when, then
+		assertThatThrownBy(stringValidator::validate)
+		        .isInstanceOf(IllegalArgumentException.class)
+				.hasMessage(errorMessage);
 	}
 }
