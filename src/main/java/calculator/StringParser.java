@@ -13,6 +13,7 @@ public class StringParser {
         String[] tokens = extractionResult.input.split(pattern.toString());
 
         return Arrays.stream(tokens).map(InputValidator::validateToken)
+                .filter(token -> !token.isEmpty())
                 .mapToInt(Integer::parseInt)
                 .toArray();
     }
