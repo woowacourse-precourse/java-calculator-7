@@ -20,10 +20,7 @@ public class Application {
         }
 
         // 3. 커스텀 구분자가 지정되었는지 확인
-        List<String> delimiters = new ArrayList<>();
-        delimiters.add(",");
-        delimiters.add(":");
-
+        String delimiters = ",|:";
         String regex = "^[\\D]+$";
 
         // 3-1. 커스텀 구분자가 지정되었다면 그 값이 유효한지 확인 후 구분자에 추가
@@ -41,7 +38,7 @@ public class Application {
 
                     String delimiter = words.substring(start+2, end);
                     if (delimiter.matches(regex)) {
-                        delimiters.add(delimiter);
+                        delimiters += "|" + delimiter;
                     } else {
                         throw new IllegalArgumentException();
                     }
