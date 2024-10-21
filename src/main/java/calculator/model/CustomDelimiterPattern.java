@@ -13,4 +13,8 @@ public enum CustomDelimiterPattern {
 	public String getPattern() {
 		return pattern;
 	}
+
+	public int getPatternLength() {
+		return pattern.length();
+	}
 }

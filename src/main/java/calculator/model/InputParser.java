@@ -1,5 +1,7 @@
 package calculator.model;
 
+import static calculator.model.CustomDelimiterPattern.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -83,8 +85,8 @@ public class InputParser {
 	}
 
 	private static String parseCustomDelimiter(String input) {
-		int delimiterStart = input.indexOf("//") + 2;
-		int delimiterEnd = input.indexOf("\\n");
+		int delimiterStart = input.indexOf(START.getPattern()) + START.getPatternLength();
+		int delimiterEnd = input.indexOf(END.getPattern());
 		if (delimiterEnd == -1) {
 			throw new IllegalArgumentException("커스텀 구분자의 끝을 의미하는 \\n이 없습니다.");
 		}
