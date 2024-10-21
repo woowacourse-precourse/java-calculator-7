@@ -14,7 +14,7 @@ public class Calculator {
     private final InputSyntaxValidator inputSyntaxValidator;
 
     private String input;
-    private char CustomDelimiter;
+    private String customDelimiter;
     private List<Long> inputNumbers = new ArrayList<>();
     private boolean usingCustomDelimiter;
 
@@ -24,5 +24,12 @@ public class Calculator {
         this.stringParser = stringParser;
         this.inputValueValidator = inputValueValidator;
         this.inputSyntaxValidator = inputSyntaxValidator;
+    }
+
+    public void initialize(String input) {
+        if (inputSyntaxValidator.validate(input)) {
+            this.usingCustomDelimiter = true;
+            this.customDelimiter = stringParser.customDelimiter(input);
+        }
     }
 }

@@ -1,19 +1,17 @@
 package calculator.controller;
 
-import java.util.Arrays;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class InputSyntaxValidator {
-
-
     private static final Pattern CUSTOM_DELIMITER_REGEX_PATTERN = Pattern.compile("^//.*\\n.*");
 
-    public void validate(String input) {
+    public boolean validate(String input) {
         // 커스텀 구분자를 지정하는가
         if (CUSTOM_DELIMITER_REGEX_PATTERN.matcher(input).matches()) {
             customDelimiter(input);
+            return true;
         }
+        return false;
     }
 
     private void customDelimiter(String input) {

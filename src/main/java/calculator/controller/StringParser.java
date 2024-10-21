@@ -17,8 +17,8 @@ public class StringParser {
         return input.split(regex);
     }
 
-    public char customDelimiter(String input) {
+    public String customDelimiter(String input) {
         int index = input.indexOf("//");
-        return input.charAt(index + 2);
+        return Character.toString(input.charAt(index + 2));
     }
 }
