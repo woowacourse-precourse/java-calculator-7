@@ -25,7 +25,6 @@ public class Application {
 
     }
 
-
     public static String getNumberTextFromInputDividedBySeparators(String input, ArrayList<String> separatorList) {
         boolean hasValidSeparatorStart = checkCustomSeparatorStartKeyword(input, customSeparatorKeywordStart);
         boolean hasValidSeparatorEnd = checkCustomSeparatorEndKeyWord(input, customSeparatorKeywordEnd);
@@ -84,14 +83,11 @@ public class Application {
         }
     }
 
-    public static BigInteger convertStringToBigInt(String numberString) {
-        return new BigInteger(numberString);
-    }
 
     public static String getSumOfNumberTexts(ArrayList<String> userNumList) {
         BigInteger answer = BigInteger.ZERO;
         for (String numberText : userNumList) {
-            answer = answer.add(convertStringToBigInt(numberText));
+            answer = answer.add(new BigInteger(numberText));
         }
         return answer.toString();
     }
