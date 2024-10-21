@@ -14,6 +14,8 @@ public class DelimiterExtractor {
         while (matcher.find()) {
             if (matcher.group(1).length() > 1) {
                 throw new IllegalArgumentException("커스텀 구분자가 문자열입니다. 문자로 입력해 주세요.");
+            } else if (matcher.group(1).length() < 1) {
+                throw new IllegalArgumentException("커스텀 구분자가 입력되지 않았습니다. 문자를 입력해 주세요.");
             }
             delimiters.add(matcher.group(1));
             input = input.replaceFirst(Pattern.quote(matcher.group()), "");
