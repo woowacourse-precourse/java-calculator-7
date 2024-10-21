@@ -1,4 +1,4 @@
-package calculator.model.delimiter;
+package calculator.config;
 
 public enum DefaultDelimiter {
 	COMMA(","),

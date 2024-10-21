@@ -1,6 +1,6 @@
 package calculator.model.delimiter;
 
-import static calculator.model.delimiter.CustomDelimiterPattern.*;
+import static calculator.config.CustomDelimiterPattern.*;
 
 import java.util.Optional;
 
