@@ -9,7 +9,7 @@ public class Parser {
     private String customDelimiters = "";
     private final HashSet<String> delimiters = new HashSet<>();
 
-    private String equation = "";
+    private String equation;
     private final String customDelimiterStart;
     private final String customDelimiterEnd;
 

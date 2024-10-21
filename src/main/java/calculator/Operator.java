@@ -6,9 +6,9 @@ public class Operator {
 
     public static <E extends Number> E summation(Operands<E> operands) {
         Number result = null;
-        Class<E> clazz = operands.getType();
+        Class<E> type = operands.getType();
 
-        if (clazz == Long.class) {
+        if (type == Long.class) {
             result = 0L;
             for (E number : operands.getData()) {
                 if (result.longValue() > Long.MAX_VALUE - number.longValue()) {
@@ -18,6 +18,6 @@ public class Operator {
             }
         }
 
-        return clazz.cast(result);
+        return type.cast(result);
     }
 }

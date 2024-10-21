@@ -3,6 +3,10 @@ package calculator.operands;
 import java.util.regex.Pattern;
 
 public class PositiveIntegerOperands extends Operands<Long> {
+    
+    public Class<Long> getType() {
+        return Long.class;
+    }
 
     public boolean validate(String operand) {
         String regEx = "\\d*";
@@ -11,9 +15,5 @@ public class PositiveIntegerOperands extends Operands<Long> {
 
     public void addOperand(String operand) {
         this.data.add(Long.parseLong(operand));
-    }
-
-    public Class<Long> getType() {
-        return Long.class;
     }
 }
