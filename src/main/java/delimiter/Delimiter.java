@@ -27,19 +27,19 @@ public class Delimiter {
         // 5-2. "\n"만 존재하는 경우
         if (hasEndDelimiter(userInput)) {
             if (hasNotStartDelimiter(userInput)) {
-                throw new IllegalArgumentException("질못된 입력입니다.");
+                throw new IllegalArgumentException("잘못된 입력입니다.");
             }
         }
 
         // 5-3. "\n"이 "//"보다 더 앞에 있는 경우
         if (isEndDelimiterBeforStartDelimiter(userInput)) {
-            throw new IllegalArgumentException("질못된 입력입니다.");
+            throw new IllegalArgumentException("잘못된 입력입니다.");
         }
 
         // 5-5. "//"와 "\n"이 문자열 맨 앞에 존재하지 않는 경우
         if (hasStartDelimiter(userInput) && hasEndDelimiter(userInput)) {
             if (isNotStartWithStartDelimiter(userInput)) {
-                throw new IllegalArgumentException("질못된 입력입니다.");
+                throw new IllegalArgumentException("잘못된 입력입니다.");
             }
         }
 
