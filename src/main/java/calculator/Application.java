@@ -18,6 +18,23 @@ public class Application {
         }
 
         String delimiter = ",:";
+
+        if (input.startsWith("//")) {
+            int delimiterIndex = input.indexOf("\\n");
+
+            if (delimiterIndex == -1) {
+                throw new IllegalArgumentException("커스텀 구분자의 입력 형식에 맞게 작성해 주세요.");
+            } else if (delimiterIndex == 2) {
+                throw new IllegalArgumentException("사용할 커스텀 구분자를 입력해 주세요.");
+            }
+
+            delimiter = input.substring(2, delimiterIndex);
+            input = input.substring(delimiterIndex + 2);
+            if (input.isEmpty()) {
+                return 0;
+            }
+        }
+
         String[] splitInputs = input.split(String.format("[%s]", delimiter));
         int sum = 0;
         for (String splitInput : splitInputs) {
