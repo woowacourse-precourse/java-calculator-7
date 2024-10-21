@@ -23,54 +23,44 @@ public class Application {
     }
 
     public static boolean isValidInput(String input) {
-        List<Character> number = new ArrayList<>();
+        List<Character> numList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            number.add((char) (i + '0'));
+            numList.add((char) (i + '0'));
         }
 
+        List<Character> delimeterList = new ArrayList<>();
+        delimeterList.add(',');
+        delimeterList.add(':');
+
+        String calculateZone = input;
         if (hasCustomDelimeter(input)) {
-            if (input.length() == 5) {
+            delimeterList.add(input.charAt(2));
+
+            if (input.length() <= 5) {
                 return false;
             }
-            for (int i = 5; i < input.length(); i++) {
-                if (i == 5 && (input.charAt(i) == ',' || input.charAt(i) == ':' || input.charAt(i) == input.charAt(2))) {
-                    return false;
-                }
-                if (input.charAt(i) == ',' || input.charAt(i) == ':' || input.charAt(i) == input.charAt(2)) {
-                    if (!number.contains(input.charAt(i - 1))) {
-                        return false;
-                    }
-                    if (i + 1 < input.length() && !number.contains(input.charAt(i + 1))) {
-                        return false;
-                    }
-                } else if (number.contains(input.charAt(i))){
-                    continue;
-                } else {
-                    return false;
-                }
-            }
-            return true;
-        } else {
-            // 일반 유효성 검사
-            for (int i = 0; i < input.length(); i++) {
-                if (i == 0 && (input.charAt(i) == ',' || input.charAt(i) == ':')) {
-                    return false;
-                }
-                if (input.charAt(i) == ',' || input.charAt(i) == ':') {
-                    if (!number.contains(input.charAt(i - 1))) {
-                        return false;
-                    }
-                    if (i + 1 < input.length() && !number.contains(input.charAt(i + 1))) {
-                        return false;
-                    }
-                } else if (number.contains(input.charAt(i))) {
-                    continue;
-                } else {
-                    return false;
-                }
-            }
-            return true;
+
+            calculateZone = input.substring(5);
         }
+
+        for (int i = 0; i < calculateZone.length(); i++) {
+            if (i == 0 && delimeterList.contains(calculateZone.charAt(i))) {
+                return false;
+            }
+
+            if (delimeterList.contains(calculateZone.charAt(i))) {
+                if (!numList.contains(calculateZone.charAt(i - 1))) {
+                    return false;
+                }
+                if (i + 1 < calculateZone.length() && !numList.contains(calculateZone.charAt(i + 1))) {
+                    return false;
+                }
+            } else if (!numList.contains(calculateZone.charAt(i))){
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public static boolean hasCustomDelimeter(String input) {
