@@ -5,7 +5,13 @@ import java.util.regex.Pattern;
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
-        String input = getInput();
+        try {
+            String input = getInput();
+            int result = calculatorSum(input);
+            printResult(result);
+        } catch (IllegalArgumentException e) {
+            System.out.println("오류 : " + e.getMessage());
+        }
     }
 
     private static String getInput() {
