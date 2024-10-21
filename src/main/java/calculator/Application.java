@@ -11,7 +11,8 @@ public class Application {
         String input = Console.readLine();
         validateIsInputEmpty(input);
 
-        getSeparatorAndNumbers(input);
+        int result = getSeparatorAndNumbers(input);
+        System.out.println("결과 : " + result);
     }
 
     public static int getSeparatorAndNumbers(String input) {
