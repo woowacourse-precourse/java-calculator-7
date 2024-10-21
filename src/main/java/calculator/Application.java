@@ -1,7 +1,7 @@
-package calculator.application;
+package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
-import calculator.separatorParser.*;
+
 import java.math.BigInteger;
 import java.util.Set;
 
