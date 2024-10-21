@@ -7,6 +7,10 @@ import java.util.List;
 
 public class Application {
 
+    private static String customSeparatorKeywordStart = "//";
+    private static String customSeparatorKeywordEnd = "\\n";
+    private static int customSeparatorKeywordEndIndex = 3;
+
     public static void main(String[] args) {
         ArrayList<String> separatorList = new ArrayList<>(List.of(".", ":"));
         String userInput, cleanInput;
@@ -21,35 +25,32 @@ public class Application {
 
     }
 
-    public static String getNumberTextFromInputDividedBySeparators(String input, ArrayList<String> separatorList) {
-        checkCustomSeparatorCount(input, "//");
-        checkCustomSeparatorCount(input, "\\n");
 
-        String customSeparator;
-        if (input.contains("\\n") && input.contains("//")) {
-            customSeparator = input.substring(input.indexOf("//") + 2, input.indexOf("\\n"));
-            if (customSeparator.length() > 1) {
-                throw new IllegalArgumentException("한개의 커스텀 구분자만 추가할 수 있습니다.");
+    public static String getNumberTextFromInputDividedBySeparators(String input, ArrayList<String> separatorList) {
+        boolean hasValidSeparatorStart = checkCustomSeparatorStartKeyword(input, customSeparatorKeywordStart);
+        boolean hasValidSeparatorEnd = checkCustomSeparatorEndKeyWord(input, customSeparatorKeywordEnd);
+
+        if (hasValidSeparatorStart && !hasValidSeparatorEnd) {
+            if (!input.contains(customSeparatorKeywordEnd)) {
+                throw new IllegalArgumentException("커스텀 구분자 시작 문자가 입력되었지만, 종료 문자가 없습니다.");
             }
-            if (input.indexOf("//") != 0) {
-                throw new IllegalArgumentException("커스텀 구분자는 문자열 처음에서만 추가할 수 있습니다.");
+            if (input.indexOf(customSeparatorKeywordEnd) != customSeparatorKeywordEndIndex) {
+                throw new IllegalArgumentException("커스텀 구분자는 1개만 추가할 수 있습니다.");
             }
-            separatorList.add(customSeparator);
-            return input.substring((input.indexOf("\\n") + 2));
         }
-        return input;
+        if (!hasValidSeparatorStart && !hasValidSeparatorEnd) {
+            return input;
+        }
+
+        return input.substring(customSeparatorKeywordEndIndex + 2);
     }
 
-    public static void checkCustomSeparatorCount(String input, String customSeparatorKeyword) {
-        int index = 0;
-        int keyworkdCount = 0;
-        while ((index = input.indexOf(customSeparatorKeyword, index)) != -1) {
-            keyworkdCount++;
-            if (keyworkdCount > 1) {
-                throw new IllegalArgumentException("//와 \\n는 한 번만 사용될 수 있습니다.");
-            }
-            index += customSeparatorKeyword.length();
-        }
+    public static boolean checkCustomSeparatorStartKeyword(String input, String customSeparatorKeywordStart) {
+        return input.startsWith(customSeparatorKeywordStart);
+    }
+
+    public static boolean checkCustomSeparatorEndKeyWord(String input, String customSeparatorKeyword) {
+        return input.indexOf(customSeparatorKeyword) == customSeparatorKeywordEndIndex;
     }
 
     public static String getUserInput() {
