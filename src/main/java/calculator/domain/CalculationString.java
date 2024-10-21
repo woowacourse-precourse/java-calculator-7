@@ -11,9 +11,7 @@ public class CalculationString {
         this.value = calculationString;
     }
 
-    public SumValues getSumValues(Delimiters delimiters) {
-        String regex = delimiters.convertToRegex();
-
+    public SumValues getSumValues(String regex) {
         List<SumValue> sumValues = Arrays.stream(splitValueWithDelimiters(regex))
                 .map(str -> stringToInteger(str))
                         .map(SumValue::new)

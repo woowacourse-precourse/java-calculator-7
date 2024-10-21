@@ -12,11 +12,10 @@ class CalculationStringTest {
     @DisplayName("CalculationString은_구분자를_기준으로_value를_분리하고_SumValues를_반환한다")
     public void getSumValues() {
         //given
-        Delimiters delimiters = new Delimiters(new CustomDelimiter(";"));
         CalculationString calculationString = new CalculationString("5:3,6;6");
 
         //when
-        SumValues result = calculationString.getSumValues(delimiters);
+        SumValues result = calculationString.getSumValues(":|,|;");
 
         //then
         assertThat(result.sumAll()).isEqualTo(20);
@@ -30,7 +29,7 @@ class CalculationStringTest {
         CalculationString calculationString = new CalculationString("5:3,6*6");
 
         //when
-        SumValues result = calculationString.getSumValues(delimiters);
+        SumValues result = calculationString.getSumValues(":|,|\\*");
 
         //then
         assertThat(result.sumAll()).isEqualTo(20);
@@ -45,7 +44,7 @@ class CalculationStringTest {
 
         //when
         //then
-        assertThatThrownBy(() -> calculationString.getSumValues(delimiters))
+        assertThatThrownBy(() -> calculationString.getSumValues(":|,|;"))
                 .isInstanceOf(IllegalArgumentException.class)
                         .hasMessage("구분자와 정수 이외 다른 문자는 입력x");
     }
