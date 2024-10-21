@@ -27,6 +27,12 @@ class StringAdditionCalculator {
     }
 
     private void extractDelimiter() {
+        if (input.startsWith("//")) {
+            String[] temp = input.split("\\n", 2);
+            if (temp.length > 1 && temp[0].startsWith("//")) {
+                delimiter = temp[0].substring(2);
+            }
+        }
     }
 
     public int calculateSum() {
