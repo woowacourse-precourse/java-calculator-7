@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,14 +23,14 @@ class StringCalculatorServiceImplTest {
 
     @Test
     void validateInputFormTest1() {
-        String input = "/?+\n123";
+        String input = "/?+\\n123";
         assertThrows(IllegalArgumentException.class,
                 () -> stringCalculatorService.validateInputForm(input));
     }
 
     @Test
     void validateInputFormTest2() {
-        String input = "//+\n\n123";
+        String input = "//+\\n\\n123";
         assertThrows(IllegalArgumentException.class,
                 () -> stringCalculatorService.validateInputForm(input));
     }
@@ -47,7 +50,7 @@ class StringCalculatorServiceImplTest {
 
     @Test
     void extractDelimiterTest1() {
-        String input = "//;\n12:34,56";
+        String input = "//;\\n12:34,56";
 
         String extractedDelimiter = stringCalculatorService.extractDelimiter(input);
 
@@ -56,7 +59,7 @@ class StringCalculatorServiceImplTest {
 
     @Test
     void extractDelimiterTest2() {
-        String input = "//\n12:34,56";
+        String input = "//\\n12:34,56";
 
         String extractedDelimiter = stringCalculatorService.extractDelimiter(input);
 
