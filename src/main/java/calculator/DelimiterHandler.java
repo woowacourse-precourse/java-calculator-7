@@ -9,7 +9,6 @@ public class DelimiterHandler {
 
         if (input.startsWith("//")) {
             int newlineIndex = input.indexOf("\\n");
-            System.out.println(newlineIndex);
             if (newlineIndex == -1 || newlineIndex <= 2) {
                 throw new IllegalArgumentException("Invalid input format: " + input);
             }
