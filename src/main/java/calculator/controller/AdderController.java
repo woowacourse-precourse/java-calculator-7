@@ -10,6 +10,7 @@ public class AdderController {
         String input = resultOfInput[0];
         String customSeperator = resultOfInput[1];
         int result = calculate(input, customSeperator);
+        printResult(result);
     }
 
     private String[] getInputString() {
