@@ -1,4 +1,7 @@
 package calculator;
+
+import camp.nextstep.edu.missionutils.Console;
+
 class Printer{}
 class Extraction{}
 class Calculator{}
@@ -13,6 +16,7 @@ public class Application {
         Extraction extraction = new Extraction();
         Calculator calculator = new Calculator();
 
+        String inputStr = Console.readLine();
 
     }
 
