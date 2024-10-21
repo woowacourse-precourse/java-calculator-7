@@ -33,6 +33,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 커스텀_이후_인풋_없음() {
+        assertSimpleTest(() -> {
+            run("//;.\\n");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
     void 예외_테스트_줄바꿈빠짐() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//.1.2.3"))
@@ -52,6 +60,14 @@ class ApplicationTest extends NsTest {
     void 예외_테스트_숫자가_아닌_문자입력() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("1,2,A"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_잘못된_커스텀_구분자_정의() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//\\n1:2"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }

@@ -38,8 +38,17 @@ class StringCalculator {
                 throw new IllegalArgumentException(
                         "Invalid input format. Expected delimiter definition followed by newline.");
             }
+            if (delimiterIndex == 2) {
+                throw new IllegalArgumentException(
+                        "//와 \\n 사이에 구분자가 없습니다.");
+            }
             delimiter = input.substring(2, delimiterIndex);
             input = input.substring(delimiterIndex + 1);
+        }
+
+        // //{%s}\n 이후에 input이 없는 경우
+        if (input.isEmpty()) {
+            return 0;
         }
 
         delimiter = "[%s,:]".formatted(delimiter);
