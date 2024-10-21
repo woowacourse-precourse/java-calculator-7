@@ -63,15 +63,13 @@ class Tokenizer {
     }
 
     private NumberSeparator selectAvailableSeparator(final String targetString) {
-        int largestSeparator = -1;
         NumberSeparator selectedSeparator = null;
         for (final NumberSeparator separator : numberSeparators) {
-            if (separator.available(targetString) && largestSeparator < separator.getLength()) {
-                largestSeparator = separator.getLength();
+            if (separator.available(targetString)) {
                 selectedSeparator = separator;
             }
         }
-        if (largestSeparator == -1) {
+        if (Objects.isNull(selectedSeparator)) {
             return null;
         }
         return selectedSeparator;

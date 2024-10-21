@@ -17,11 +17,6 @@ class CharacterSequenceSeparator implements NumberSeparator {
     }
 
     @Override
-    public int getLength() {
-        return separateCharacterSequence.length();
-    }
-
-    @Override
     public String extract(final String numberMessage) {
         if (this.available(numberMessage)) {
             return numberMessage.substring(this.separateCharacterSequence.length());
