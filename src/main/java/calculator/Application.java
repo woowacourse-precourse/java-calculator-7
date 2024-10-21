@@ -38,9 +38,37 @@ public class Application {
         String[] splitInputs = input.split(String.format("[%s]", delimiter));
         int sum = 0;
         for (String splitInput : splitInputs) {
-            int number = Integer.parseInt(splitInput);
+            int number = parseNumber(splitInput);
+
+            if (sum > Integer.MAX_VALUE - number) {
+                throw new IllegalArgumentException(
+                        String.format("입력한 숫자의 합계가 int의 최대 범위(%d)를 초과하였습니다.", Integer.MAX_VALUE)
+                );
+            }
+
             sum += number;
         }
         return sum;
+    }
+
+    private static int parseNumber(String splitInput) {
+        //1. 정규표현식으로 1자리부터 9자리 숫자를 검증
+        if (splitInput.matches("\\d{1,9}")) {
+            return Integer.parseInt(splitInput);
+        }
+
+        //2. 10자리 숫자 중에서 int 범위의 최대값인 2147483647을 초과하는지 검사
+        if (splitInput.matches("\\d{10}")) {
+            if (splitInput.compareTo(String.valueOf(Integer.MAX_VALUE)) > 0) {
+                throw new IllegalArgumentException(
+                        String.format("입력한 숫자(%s)가 int의 최대 범위(%d)를 초과하였습니다.", splitInput, Integer.MAX_VALUE)
+                );
+            }
+            return Integer.parseInt(splitInput); //범위 내이면 변환
+        }
+
+        throw new IllegalArgumentException(
+                String.format("유효하지 않은 입력입니다(%s). 양의 정수를 입력해 주세요.", splitInput)
+        );
     }
 }
