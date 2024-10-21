@@ -8,8 +8,13 @@ public class StringCalculator {
 
         String[] numbers = input.split("[,:]");
         int sum = 0;
+
         for (String number : numbers) {
-            sum += Integer.parseInt(number.trim());
+            String trimmedNumber = number.trim();
+            if (trimmedNumber.isEmpty() || Integer.parseInt(trimmedNumber) < 0) {
+                throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+            }
+            sum += Integer.parseInt(trimmedNumber);
         }
         return sum;
     }
