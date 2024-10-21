@@ -5,7 +5,16 @@ public class UserExpressionDivide {
     private static String rawExpression;
     private static final int CUSTOM_DELIM_LENGTH = 5;
 
+    private static void setting(UserExpression expression) {
+        userExpression = expression;
+        rawExpression = userExpression.getRawExpression();
+        userExpression.setCustomDelimExpressionCandidate(rawExpression);
+        userExpression.setEssentialExpression(rawExpression);
+    }
+
     private static Boolean enoughLengthToDivide(String rawExpression) {
         return rawExpression.length() >= CUSTOM_DELIM_LENGTH;
     }
+
+
 }
