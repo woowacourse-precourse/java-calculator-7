@@ -1,5 +1,7 @@
 package calculator.model;
 
+import calculator.error.ErrorCode;
+
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
@@ -32,7 +34,7 @@ public class StringCalculator {
         // "//;\n1;2;3" 형식을 "\\n"을 기준으로 두 부분으로 나누기
         int delimiterIndex = input.indexOf(NEW_LINE_LITERAL);
         if (delimiterIndex == INVALID_INDEX) {
-            throw new IllegalArgumentException("구분자 형식이 올바르지 않습니다: " + input);
+            throw new IllegalArgumentException(ErrorCode.INVALID_DELIMITER_FORMAT.getMessage(input));
         }
 
         // 커스텀 구분자는 "//" 이후부터 "\\n" 이전까지의 문자열
@@ -54,11 +56,11 @@ public class StringCalculator {
         try {
             int number = Integer.parseInt(value);
             if (number < NON_NEGATIVE_THRESHOLD) {
-                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + value);
+                throw new IllegalArgumentException(ErrorCode.NEGATIVE_NUMBER.getMessage(value));
             }
             return number;
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("유효하지 않은 값이 포함되어 있습니다: " + value);
+            throw new IllegalArgumentException(ErrorCode.INVALID_NUMBER_FORMAT.getMessage(value));
         }
     }
 
