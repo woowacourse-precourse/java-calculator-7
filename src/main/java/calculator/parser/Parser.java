@@ -20,20 +20,21 @@ public class Parser {
 	}
 
 	public List<Integer> parse(String expression) {
-		String pureExpression = expression;
-
 		if (existsCustomDelimiter(expression)) {
 			validateCustomDelimiterFormat(expression);
 
 			String delimiter = extractCustomDelimiter(expression);
 			delimiters.add(delimiter);
 
-			pureExpression = expression.substring(PURE_EXPRESSION_START_INDEX);
+			String pureExpression = expression.substring(PURE_EXPRESSION_START_INDEX);
+			validateStartAndEndWithDigit(pureExpression);
+
+			return extractNumbers(pureExpression);
 		}
 
-		validateStartAndEndWithDigit(pureExpression);
+		validateStartAndEndWithDigit(expression);
 
-		return extractNumbers(pureExpression);
+		return extractNumbers(expression);
 	}
 
 	private boolean existsCustomDelimiter(String expression) {
