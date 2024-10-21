@@ -29,4 +29,13 @@ public class StringAddCalculator {
     }
     return ",|:"; // 기본 구분자만 반환
   }
+
+  // 커스텀 구분자 정의 시 //와 \n 제거
+  private String[] removeInvalidNumbers(String[] numbers) {
+    return Arrays.stream(numbers)
+        .map(String::trim)
+        .filter(number -> !number.isEmpty() && !number.equals("//") && !number.equals(
+            "\n")) // 빈 문자열과 '//' 제거
+        .toArray(String[]::new);
+  }
 }
