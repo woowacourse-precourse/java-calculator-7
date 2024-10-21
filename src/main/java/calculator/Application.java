@@ -54,8 +54,7 @@ public class Application {
 
             System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
-            System.out.println("잘못된 입력을 하였습니다.");
-            System.out.println(e.getMessage());
+            System.out.println(e.getMessage() + "으로 인하여 애플리케이션 종료합니다.");
         }
     }
 }
