@@ -10,10 +10,10 @@ public class Application {
 
         if (input.startsWith("//")) {
             String delimiter = input.substring(2, input.indexOf("\\n"));
-            String[] numbers = input.substring(input.indexOf("\\n") + 2).split(",|:|" + delimiter);
+            String[] numbers = input.substring(input.indexOf("\\n") + 2).split("[,:" + delimiter + "]");
             result = sumNumbers(numbers);
         } else {
-            String[] numbers = input.split(",|:");
+            String[] numbers = input.split("[,:]");
             result = sumNumbers(numbers);
         }
 
@@ -23,7 +23,11 @@ public class Application {
     private static int sumNumbers(String[] numbers) {
         int result = 0;
         for (String num : numbers) {
-            int number = Integer.parseInt(num.trim());
+            num = num.trim();  // 공백 제거
+            if (num.isEmpty()) {
+                continue;  // 빈 문자열이면 건너뛰기
+            }
+            int number = Integer.parseInt(num);
             if (number < 0) {
                 throw new IllegalArgumentException("잘못된 값입니다: " + number);
             }
