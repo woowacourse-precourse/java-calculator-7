@@ -24,10 +24,22 @@ public class Calculator {
             if(!delimiter.contains(parsedUserInput.charAt(i))){
                 sb.append(parsedUserInput.charAt(i));
             }else{
+                if(parsedUserInput.length()-1 == i){
+                    if(Character.isDigit(parsedUserInput.charAt(i))){
+                        sb.append(parsedUserInput.charAt(i));
+                        sum += Integer.parseInt(sb.toString());
+                        sb.delete(0, sb.length());
+                    }
+                }
                 if(sb.length()==0) continue;
                 sum += Integer.parseInt(sb.toString());
                 sb.delete(0, sb.length());
             }
+        }
+
+        if(sb.length() != 0){
+            sum += Integer.parseInt(sb.toString());
+            sb.delete(0, sb.length());
         }
     }
 }

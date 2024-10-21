@@ -8,11 +8,14 @@ public class CheckCompatibility {
         for (Character checkChar : parsedUserInput.toCharArray()) {
             if (!Character.isDigit(checkChar)) {
                 isdelimiter(delimiter, checkChar);
+
             }
         }
     }
 
     private void isdelimiter(List<Character> delimiter, Character checkChar) {
-        if(!delimiter.contains(checkChar)) throw new IllegalArgumentException();
+        if (!delimiter.contains(checkChar)) {
+            throw new IllegalArgumentException("구분자 외의 문자가 있습니다.");
+        }
     }
 }

@@ -11,6 +11,7 @@ public class Controller {
     public void startProcess(){
         calculatorManager.makeUserInput(inputHandler);
         calculatorManager.makeDelimiter(delimiterParser);
+        calculatorManager.parseMarker(delimiterParser);
         calculatorManager.checkCompatibility(checkCompatibility);
         calculatorManager.calculateSum(calculator);
         calculatorManager.printAnswer(outputHandler);

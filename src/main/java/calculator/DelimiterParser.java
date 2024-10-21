@@ -10,17 +10,22 @@ public class DelimiterParser {
         addBasicDelimiter(delimiter);
         addSpecialDelimiter(delimiter, userInput);
 
+
         return delimiter;
     }
 
     private void addSpecialDelimiter(List<Character> delimiter, String userInput) {
         StringBuilder delimiterBuilder = new StringBuilder(userInput);
         int start = delimiterBuilder.indexOf("//");
-        int end = delimiterBuilder.indexOf("\n");
+        int end = delimiterBuilder.indexOf("\\n");
 
-        if(end - start == 3){
-            delimiter.add(delimiterBuilder.charAt(end-1));
-        }else{
+        if (start == -1 || end == -1) {
+            return;
+        }
+
+        if (end - start == 3) {
+            delimiter.add(delimiterBuilder.charAt(end - 1));
+        } else {
             throw new IllegalArgumentException("커스텀 구분자는 문자열이 아닌 문자여야 합니다.");
         }
     }
@@ -33,9 +38,13 @@ public class DelimiterParser {
     public String parseMarker(String userInput) {
         StringBuilder delimiterBuilder = new StringBuilder(userInput);
         int start = delimiterBuilder.indexOf("//");
-        int end = delimiterBuilder.indexOf("\n");
+        int end = delimiterBuilder.indexOf("\\n");
 
-        String parsedUserInput = delimiterBuilder.substring(0,start) + delimiterBuilder.substring(end+1);
+        if (start == -1 || end == -1) {
+            return userInput;
+        }
+
+        String parsedUserInput = delimiterBuilder.substring(0, start) + delimiterBuilder.substring(end + 2);
 
         return parsedUserInput;
     }
