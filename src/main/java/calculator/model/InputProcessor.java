@@ -43,19 +43,19 @@ public class InputProcessor {
         } else if (isDefaultCase()) {
             if (!input.replaceAll(regex + "|[0-9]", "").isEmpty()) {
                 throw new IllegalArgumentException("잘못된 입력입니다. 입력 문자열은 " +
-                        "커스텀 구분자 외 다른 문자를 포함할 수 없습니다.");
+                        "구분자 외 다른 문자를 포함할 수 없습니다.");
             }
             return;
         } else if (isCustomCase()) {
             getCustomDelimiter();
             regex = String.join("|", delimiterList);
             if (delimiterList.contains("")) {
-                throw new IllegalArgumentException("잘못된 입력입니다. 빈칸(\"\")은 커스텀 구분자가 될 수 없습니다.");
+                throw new IllegalArgumentException("잘못된 입력입니다. 빈칸(\"\")은 구분자가 될 수 없습니다.");
             } else if (regex.matches(".*[0-9].*")) {
-                throw new IllegalArgumentException("잘못된 입력입니다. 커스텀 구분자에는 숫자를 포함할 수 없습니다.");
+                throw new IllegalArgumentException("잘못된 입력입니다. 구분자에는 숫자를 포함할 수 없습니다.");
             } else if (!input.replaceAll(regex + "|[0-9]", "").isEmpty()) {
                 throw new IllegalArgumentException("잘못된 입력입니다. 입력 문자열은 " +
-                        "커스텀 구분자 외 다른 문자를 포함할 수 없습니다.");
+                        "구분자 외 다른 문자를 포함할 수 없습니다.");
             }
             return;
         }
