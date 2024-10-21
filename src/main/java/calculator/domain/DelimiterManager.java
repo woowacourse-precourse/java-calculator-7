@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class DelimiterManager {
-    private final List<Delimiter> delimiters;
+    private List<Delimiter> delimiters;
 
     public DelimiterManager(List<Delimiter> delimiters) {
         this.delimiters = uniqueDelimiters(delimiters);
@@ -16,6 +16,11 @@ public class DelimiterManager {
         return delimiters.stream()
                 .distinct()
                 .collect(Collectors.toList());
+    }
+
+    public void addDelimiter(String delimiter) {
+        delimiters.add(new Delimiter(delimiter));
+        delimiters = uniqueDelimiters(delimiters);
     }
 
     public List<Delimiter> getDelimiters() {
