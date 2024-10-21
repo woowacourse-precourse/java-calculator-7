@@ -77,6 +77,18 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 커스텀_구분자_여러_자리_사용() {
+        assertSimpleTest(() -> {
+            String input = "//***\\n1***2***3";
+            System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+            runMain();
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
