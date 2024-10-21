@@ -1,5 +1,8 @@
 package calculator.controller;
 
+import static calculator.CustomCheck.isCustom;
+
+import calculator.Delimiter;
 import calculator.Validation;
 import calculator.io.Input;
 import calculator.io.Output;
@@ -15,10 +18,10 @@ public class Controller {
         }
         Validation.execution(str);
         // 구분자 구별 및 처리
-
+        String[] delimitedValues = Delimiter.execution(str, isCustom(str));
         // 숫자 합 계산
 
         // 결과 반환
-        
+
     }
 }
