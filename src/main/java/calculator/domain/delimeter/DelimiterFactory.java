@@ -18,5 +18,4 @@ public class DelimiterFactory {
                 .map(Delimiter::from)
                 .toList();
     }
-
 }
