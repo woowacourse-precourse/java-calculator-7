@@ -1,11 +1,13 @@
 package calculator.model;
 
+import calculator.util.NumberValidator;
+
 import java.util.regex.Matcher;
 
 import static calculator.constant.DelimiterConstants.DEFAULT_DELIMITER_REGEX;
-import static calculator.constant.ErrorMessages.*;
+import static calculator.constant.ErrorMessages.CUSTOM_DELIMITER_NOT_FOUND;
 
-public class CustomValidator implements Validator{
+public class CustomValidator implements Validator {
 
     private final Matcher matcher;
 
@@ -15,32 +17,15 @@ public class CustomValidator implements Validator{
 
     @Override
     public ParsedInput validate(String input) {
-        String delimiter = extractDelimiter();
-        String numbersWithDelimiter = matcher.group(2);
+        String delimiter = extractDelimiter(); // 커스텀 구분자 추출
+        String numbersWithDelimiter = matcher.group(2); // 숫자 문자열 추출
 
         String delimiterRegex = buildDelimiterRegex(delimiter);
         String[] numbers = numbersWithDelimiter.split(delimiterRegex);
 
-        validateNumbers(numbers);
+        NumberValidator.validateNumbers(numbers);
 
         return new ParsedInput(delimiterRegex, numbersWithDelimiter);
-    }
-
-    private static void validateNumbers(String[] numbers) {
-        for (String number : numbers) {
-            if (number.isEmpty()) {
-                continue;
-            }
-
-            try {
-                int num = Integer.parseInt(number);
-                if (num < 0) {
-                    throw new IllegalArgumentException(NEGATIVE_NUMBER_NOT_ALLOWED);
-                }
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException(INVALID_NUMBER_FORMAT);
-            }
-        }
     }
 
     private String buildDelimiterRegex(String delimiter) {
