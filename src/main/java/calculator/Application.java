@@ -81,5 +81,8 @@ public class Application {
                 throw new IllegalArgumentException();
             }
         }
+
+        // 5. 결과를 요구 사항에 맞게 출력
+        System.out.println("결과 : " + answer);
     }
 }
