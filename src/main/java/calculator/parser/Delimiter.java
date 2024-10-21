@@ -15,7 +15,8 @@ public class Delimiter {
 
     public String extractDelimiter(String input) {
         if (validateStartsWith(input) && validateEndsWith(input)) {
-            return String.valueOf(input.charAt(DelimiterSyntaxIndex.DELIMITER_INDEX.getKey()));
+            String rawDelimiter = String.valueOf(input.charAt(DelimiterSyntaxIndex.DELIMITER_INDEX.getKey()));
+            return rawDelimiter.matches("[\\W]") ? "\\" + rawDelimiter : rawDelimiter;
         }
         return "";
     }
