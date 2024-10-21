@@ -11,10 +11,10 @@ public class Application {
             try {
                 String input = Console.readLine();
                 int result = calculator.calculate(input);
-                System.out.println("결과: " + result);
+                System.out.println("결과 : " + result);
                 break;
             } catch (IllegalArgumentException e) {
-                System.out.println("오류: " + e.getMessage());
+                System.out.println("오류 : " + e.getMessage());
                 break;
             }
         }
