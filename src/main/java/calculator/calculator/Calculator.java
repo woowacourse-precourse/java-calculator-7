@@ -1,5 +1,7 @@
 package calculator.calculator;
 
+import java.util.List;
+
 public interface Calculator {
-    int add(String[] tokens);
+    int add(List<Integer> numbers);
 }
