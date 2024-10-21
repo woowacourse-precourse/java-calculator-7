@@ -15,5 +15,13 @@ public class InputController {
         parser.validateInput(input);
         String trimmedInput = parser.processSpace(input);
         List<Integer> numbers = parser.parse(trimmedInput);
+        performStringAddCalculator(numbers);
+    }
+    private void performStringAddCalculator(List<Integer> numbers) {
+        int sum = 0;
+        for (Integer number : numbers) {
+            sum += number;
+        }
+        System.out.println("결과 : " + sum);
     }
 }
