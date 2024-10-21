@@ -19,4 +19,12 @@ public class CustomSplitter {
 
     }
 
+    public StringBuilder makeSplit(){
+        StringBuilder split = new StringBuilder();
+        for(char splitter : splitters){
+            split.append(splitter);
+        }
+        return split;
+    }
+
 }
