@@ -1,6 +1,5 @@
 package calculator.model;
 
-import static java.util.Collections.addAll;
 
 import java.util.Arrays;
 import java.util.HashSet;
