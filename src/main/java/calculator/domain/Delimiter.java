@@ -2,6 +2,7 @@ package calculator.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class Delimiter {
 
@@ -19,6 +20,9 @@ public class Delimiter {
 
     @Override
     public String toString() {
-        return String.join("|", delimiters);
+        return delimiters.stream()
+                .map(Pattern::quote) // 특수 문자 이스케이프 처리
+                .reduce((a, b) -> a + "|" + b)
+                .orElse("");
     }
 }
