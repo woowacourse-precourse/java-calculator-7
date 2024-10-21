@@ -38,4 +38,16 @@ public class Application {
             throw new IllegalArgumentException(token + "은 유효하지 않은 숫자입니다");
         }
     }
+
+    private static int calculatorSum(String input) {
+        if(input.isEmpty()) {
+            return 0;
+        }
+        String[] tokens = parseInput(input);
+        int sum = 0;
+        for(String token : tokens) {
+            sum += parseNumber(token);
+        }
+        return sum;
+    }
 }
