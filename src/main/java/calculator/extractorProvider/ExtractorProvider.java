@@ -22,10 +22,9 @@ public class ExtractorProvider {
     }
 
     public void initExtractorMappingMap(Validator validator) {
-        ExtractorMappingMap.putDelimiterExtractor(StringConst.CUSTOM_START_STRING,
-                new CustomDelimiterExtractor(validator));
+        ExtractorMappingMap.putDelimiterExtractor(StringConst.CUSTOM_INPUT, new CustomDelimiterExtractor(validator));
         ExtractorMappingMap.putDelimiterExtractor(StringConst.DEFAULT_INPUT, new DefaultDelimiterExtractor());
-        ExtractorMappingMap.putNumberExtractor(StringConst.CUSTOM_START_STRING, new CustomNumberExtractor(validator));
+        ExtractorMappingMap.putNumberExtractor(StringConst.CUSTOM_INPUT, new CustomNumberExtractor(validator));
         ExtractorMappingMap.putNumberExtractor(StringConst.DEFAULT_INPUT, new DefaultNumberExtractor(validator));
 
     }
