@@ -15,7 +15,7 @@ public class Calculator {
     public int sum(String[] tokens) {
         int total = 0;
         for (String token : tokens) {
-            total += NumberConverter.convertToInt(token.trim()); // 공백 제거 후 변환
+            total += NumberConverter.convertToInt(token.trim());
         }
         return total;
     }
