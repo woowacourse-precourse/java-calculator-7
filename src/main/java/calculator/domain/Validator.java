@@ -21,6 +21,7 @@ public class Validator {
                 throw new IllegalArgumentException(numbers[i] + "는 유효한 숫자가 아닙니다.");
             }
         }
+
         return numbersArray;
     }
 }
