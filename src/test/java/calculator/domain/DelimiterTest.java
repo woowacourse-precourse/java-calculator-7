@@ -33,4 +33,17 @@ class DelimiterTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(errorMessage);
     }
+
+    @DisplayName("validateNoDigits() : 구분자에 숫자가 포함된 경우")
+    @ParameterizedTest
+    @ValueSource(strings = {"1,", ",2", "33", "3,4"})
+    void validateNoDigits_delimiter_fail(String symbol) throws Exception{
+        //given
+        String errorMessage = "[ERROR] 구분자에 숫자가 포함될 수 없습니다.";
+
+        //when & then
+        assertThatThrownBy(() -> new Delimiter(symbol))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(errorMessage);
+    }
 }
