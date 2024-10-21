@@ -77,18 +77,24 @@ public class Application {
     }
 
     public static int parseAndValidate(String number) {
-        try {
-            int value = Integer.parseInt(number);
-            if (value < 0) {
-                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + value);
-                // 음수가 들어있으면 예외 발생 .
-            }
-            return value;
-        } catch (NumberFormatException e) {
+        if (number == null || number.isEmpty()) {
             throw new IllegalArgumentException("유효하지 않은 숫자입니다: " + number);
-            // 숫자가 아닌 값이 들어있으면 예외 발생
-            // 숫자가 너무 큰 경우 예외 발생..
         }
+
+        // 예외 처리 기능 수정 ..
+        for (char c : number.toCharArray()) {
+            if (!Character.isDigit(c) && c != '-') {
+                throw new IllegalArgumentException("유효하지 않은 숫자입니다: " + number);
+            }
+        }
+
+        int value = Integer.parseInt(number);
+
+        if (value < 0) {
+            throw new IllegalArgumentException("음수는 허용되지 않습니다: " + value);
+        }
+
+        return value;
     }
 
     public static void main(String[] args) {
