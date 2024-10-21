@@ -49,7 +49,7 @@
     ```
     덧셈할 문자열을 입력해 주세요.
     ```
-  - [ ] 사용자에게 문자열을 입력받는 기능 구현
+  - [X] 사용자에게 문자열을 입력받는 기능 구현
     - 사용자 입력 값은 camp.nextstep.edu.missionutils.Console의 readLine()을 활용
 
 <br/>
