@@ -10,7 +10,6 @@ import java.util.List;
 
 public class Calculator {
     public void start() {
-        System.out.println(SentenceUtil.extractSentence("1,2,3"));
         OutputView.printNotice();
         String input = InputView.readInput();
 

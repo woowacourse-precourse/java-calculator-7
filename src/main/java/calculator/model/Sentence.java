@@ -8,7 +8,7 @@ import java.util.Stack;
 import java.util.stream.Collectors;
 
 public class Sentence {
-    String text;
+    private final String text;
 
     public Sentence(String text) {
         this.text = text;
@@ -26,7 +26,7 @@ public class Sentence {
         return convertNumbersStringToInt(currentTexts);
     }
 
-    public List<Integer> convertNumbersStringToInt(List<String> numbers) {
+    private List<Integer> convertNumbersStringToInt(List<String> numbers) {
         return numbers.stream().map(Integer::parseInt).collect(Collectors.toList());
     }
 }
