@@ -55,7 +55,10 @@ class Splitter {
         if (suffixIndex != prefix.length() + 1)
             throw new IllegalArgumentException("커스텀 구분자는 한 글자여야 합니다.");
 
-        separators.add(inputValue.charAt(prefix.length()));
+        char customSeparator = inputValue.charAt(prefix.length());
+        if (Character.isDigit(customSeparator))
+            throw new IllegalArgumentException("숫자는 구분자가 될 수 없습니다.");
+        separators.add(customSeparator);
 
         return inputValue.substring(suffixIndex + suffix.length());
     }
