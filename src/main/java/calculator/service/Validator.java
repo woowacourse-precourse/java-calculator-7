@@ -3,6 +3,7 @@ package calculator.service;
 import calculator.service.util.ManageDelimiters;
 import calculator.view.Constant;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Validator {
@@ -15,6 +16,15 @@ public class Validator {
         return s.startsWith(CUSTOM_DELIMITER_PREFIX) && (s.contains(CUSTOM_DELIMITER_SUFFIX));
     }
 
+    private static String getCustomDelimiter(String s) {
+        return String.valueOf(s.charAt(CUSTOM_DELIMITER_PREFIX.length()));
+    }
+
+    public List<Integer> getConvertedInput(String s) {
+        Converter converter = new Converter();
+        return converter.convertToNumbers(s, manageDelimiters.getDelimiters());
+    }
+
     public static void validateCustomDelimiter(String s) {
         if (s.indexOf(CUSTOM_DELIMITER_SUFFIX) == 2)
             throw new IllegalArgumentException(Constant.NOT_ENTERED_DELIMITER);
@@ -22,10 +32,6 @@ public class Validator {
             throw new IllegalArgumentException(Constant.NOT_ONE_DELIMITER);
         if (s.indexOf(CUSTOM_DELIMITER_SUFFIX) == 3)
             manageDelimiters.addDelimiter(getCustomDelimiter(s));
-    }
-
-    private static String getCustomDelimiter(String s) {
-        return String.valueOf(s.charAt(CUSTOM_DELIMITER_PREFIX.length()));
     }
 
     private static void validateDelimiter(String s) {
@@ -52,10 +58,5 @@ public class Validator {
         validateDelimiter(s);
         validateNumbers(s);
         return s;
-    }
-
-    public List<Integer> getConvertedInput(String s) {
-        Converter converter = new Converter();
-        return converter.convertToNumbers(s, manageDelimiters.getDelimiters());
     }
 }
