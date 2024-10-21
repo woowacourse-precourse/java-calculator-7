@@ -54,5 +54,5 @@
 - `docs` documentation 문서 수정
 - `style` 코드 포맷팅, 세미콜론 누락 등
 - `refactor` 코드 리팩토링
-- `test` test코드 추가
+- `test` test 코드 추가
 - `chore` maintain (잡일), 빌드 업무 수정, 패키지 매니저 수정
