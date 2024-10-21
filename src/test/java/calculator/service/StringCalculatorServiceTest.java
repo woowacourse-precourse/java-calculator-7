@@ -43,6 +43,13 @@ class StringCalculatorServiceTest {
         assertThrows(expectedException, () -> calculator.calculate(input));
     }
 
+    @DisplayName("커스텀 구분자 뒤에 숫자가 없는 경우 테스트")
+    @ParameterizedTest(name = "{index} 구분자 뒤에 숫자가 없는 경우 예외 발생")
+    @MethodSource("missingNumberAfterCustomDelimiterTestProvider")
+    void checkMissingNumberAfterDelimiter(String input, Class<? extends Exception> expectedException) {
+        assertThrows(expectedException, () -> calculator.calculate(input));
+    }
+
     static List<Arguments> emptyStringTestProvider() {
         return List.of(
                 Arguments.arguments("", 0),
@@ -63,5 +70,12 @@ class StringCalculatorServiceTest {
         return List.of(Arguments.arguments("1," + "9".repeat(1000), IllegalArgumentException.class),
                 // "abc"는 하나의 구분자로 취급되지만, "a"는 개별 구분자로 사용할 수 없으므로 예외 발생
                 Arguments.arguments("//abc\\n1a2a3", IllegalArgumentException.class));
+    }
+
+    static List<Arguments> missingNumberAfterCustomDelimiterTestProvider() {
+        return List.of(
+                // 커스텀 구분자를 설정하였지만 숫자가 없는 경우 예외가 발생
+                Arguments.arguments("//abc\n", IllegalArgumentException.class)
+        );
     }
 }
