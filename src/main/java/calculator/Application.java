@@ -14,7 +14,7 @@ public class Application {
         getSeparatorAndNumbers(input);
     }
 
-    public static String[] getSeparatorAndNumbers(String input) {
+    public static int getSeparatorAndNumbers(String input) {
         String delimiter = ",|:";
         String numbers = input;
 
@@ -24,7 +24,20 @@ public class Application {
             numbers = matcher.group(2);
         }
 
-        return separateNumber(numbers, delimiter);
+        return sumNumber(numbers, delimiter);
+    }
+
+    private static int sumNumber(String numbers, String delimiter) {
+        String[] tokens = separateNumber(numbers, delimiter);
+        int sum = 0;
+
+        for (String token : tokens) {
+            if (!token.isEmpty()) {
+                int number = convertNumber(token);
+                sum += number;
+            }
+        }
+        return sum;
     }
 
     private static String[] separateNumber(String numbers, String delimiter) {
