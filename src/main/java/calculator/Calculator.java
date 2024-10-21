@@ -25,4 +25,19 @@ public class Calculator {
         // 쉼표(,) 또는 콜론(:)을 기준으로 숫자를 분리
         return input.split("[,:]");
     }
+
+    // 추출된 숫자를 합산
+    public int sumNumbers(String input) {
+        // 추출된 숫자 배열을 할당
+        String[] numbers = extractNumbers(input);
+        int sum = 0;
+
+        // 추출된 숫자들을 합산
+        for (String number : numbers) {
+            sum += Integer.parseInt(number);
+        }
+
+        // 합계 반환
+        return sum;
+    }
 }
