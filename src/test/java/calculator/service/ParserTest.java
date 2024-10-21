@@ -14,6 +14,7 @@ class ParserTest {
 
     private final Calculator calculator = CalculatorFixture.createCalculator();
     private final Parser parser = new Parser();
+    private final CalculatorService calculatorService = new CalculatorService();
 
     @Test
     @DisplayName("parsing Operands and Identifiers Without custom identifier")
