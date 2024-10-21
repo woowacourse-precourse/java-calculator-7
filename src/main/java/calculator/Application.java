@@ -42,7 +42,7 @@ public class Application {
     private static void validateInput(String input) {
         try {
             if (input == null) {
-                throw new IllegalArgumentException("입력이 null입니다."); // null 입력 처리
+                throw new IllegalArgumentException("입력은 null이 될 수 없습니다."); // null 입력 처리
             }
         } catch (IllegalArgumentException e) {
             throw e; // 예외를 상위로 던짐
