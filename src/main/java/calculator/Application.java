@@ -10,6 +10,7 @@ public class Application {
 
     public static void main(String[] args) {
         int inputNum = 0;
+        int result = 0;
         String inputString = null;
         char customDelim = 0;
         List<Integer> inputNumbers = new ArrayList<>();
@@ -56,6 +57,12 @@ public class Application {
             else {
                 throw new IllegalArgumentException("입력 내에 숫자가 아닌 문자가 존재합니다.");
             }
+        }
+
+        // 3. 덧셈 계산기
+        // 3-1. 덧셈 계산기
+        for (Integer i : inputNumbers) {
+            result += i;
         }
     }
 }
