@@ -74,6 +74,33 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 모든_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("//;\\n1,2;1000;30");
+            assertThat(output()).contains("결과 : 1033");
+        });
+    }
+
+    @Test
+    void 예외_테스트_짧은문자열() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("/"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+
+    @Test
     void 예외_테스트_음수포함() {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("-1,2,3"))
