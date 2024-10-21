@@ -1,11 +1,8 @@
 package calculator.model;
 
-import static calculator.model.CustomDelimiterPattern.*;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.regex.Pattern;
 
 import calculator.validation.InputValidator;
@@ -69,27 +66,5 @@ public class InputParser {
 			});
 
 		return numbers;
-	}
-
-	/**
-	 * 문자열 전처리
-	 */
-	// 입력값에서 커스텀 구분자를 추출 (없을 수 있음)
-	public static Optional<String> extractCustomDelimiter(String input) {
-		if (!hasCustomDelimiter(input)) {
-			return Optional.empty();
-		}
-		String customDelimiter = parseCustomDelimiter(input);
-
-		return Optional.of(customDelimiter);
-	}
-
-	private static String parseCustomDelimiter(String input) {
-		int delimiterStart = input.indexOf(START.getPattern()) + START.getPatternLength();
-		int delimiterEnd = input.indexOf(END.getPattern());
-		if (delimiterEnd == -1) {
-			throw new IllegalArgumentException("커스텀 구분자의 끝을 의미하는 \\n이 없습니다.");
-		}
-		return input.substring(delimiterStart, delimiterEnd);
 	}
 }
