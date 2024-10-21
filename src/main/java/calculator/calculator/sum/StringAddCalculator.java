@@ -25,7 +25,19 @@ public class StringAddCalculator implements StringCalculator<SeparatedDecimal> {
             return List.of();
         }
 
-        String delimiter = "[,:]";
+        String delimiter = ",:";
+
+        if (str.matches("^//(.)+\\\\n(.)+$")) {
+            String[] s = str.split("\\\\n");
+            String customDelimiter = s[0].substring("//".length());
+            if (customDelimiter.matches("(.*)[.0-9](.*)")) {
+                throw new IllegalArgumentException("허용되지 않은 delimiter('.' or number)");
+            }
+            delimiter += s[0].substring("//".length());
+            str = s[1];
+        }
+
+        delimiter = "["+delimiter+"]";
 
         String[] operand = str.split(delimiter);
 
