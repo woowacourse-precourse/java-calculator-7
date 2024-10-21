@@ -8,10 +8,6 @@ public class Calculator {
     private static final String CUSTOM_DELIMITER_REGEX = "//(.*?)\\n(.*)"; // 커스텀 구분자 정규식
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile(CUSTOM_DELIMITER_REGEX, Pattern.DOTALL);
 
-    public static void runException(String input) {
-        Calculator.add(input);
-    }
-
     public static int add(String input) {
         if (isNullOrEmpty(input)) {
             return 0; // 빈 문자열인 경우 0 반환
