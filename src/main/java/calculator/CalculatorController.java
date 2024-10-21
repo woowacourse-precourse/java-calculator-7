@@ -7,7 +7,7 @@ public class CalculatorController {
     public void run() {
         CalculatorView calculatorView = new CalculatorView();
         String userInputData = calculatorView.getUserInput();
-        calculatorService.checkCustomSeparator(userInputData);
+        String customSeparator = calculatorService.checkCustomSeparator(userInputData);
     }
 }
 

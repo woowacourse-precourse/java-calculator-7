@@ -4,19 +4,19 @@ import java.util.regex.Pattern;
 
 public class CalculatorService {
 
-    Calculator calculator = new Calculator();
-
-    public void checkCustomSeparator(String inputData) {
+    public String checkCustomSeparator(String inputData) {
         if (inputData.startsWith("//")) {
             if (inputData.charAt(3) == 'n') {
-                validateCustomSeparator(inputData);
+                return Constants.DEFAULT_CUSTOM_SEPARATOR + "|" + validateCustomSeparator(inputData);
             }
         }
+        return Constants.DEFAULT_CUSTOM_SEPARATOR;
     }
 
-    private void validateCustomSeparator(String inputData) {
+    private String validateCustomSeparator(String inputData) {
         String customSeparator = inputData.substring(2, 3);
         validateSpecialCharacterRegex(customSeparator);
+        return customSeparator;
     }
 
     private void validateSpecialCharacterRegex(String separator) {
@@ -25,3 +25,4 @@ public class CalculatorService {
         }
     }
 }
+
