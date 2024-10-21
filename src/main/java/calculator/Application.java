@@ -80,7 +80,12 @@ public class Application {
             splArr.add(token);
         }
         for (String strNum: splArr) {
-            int num = Integer.parseInt(strNum);
+            int num = 0;
+            try {
+                num = Integer.parseInt(strNum);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("잘못된 입력 값입니다: 구분자가 아닌 문자를 사용했습니다.");
+            }
             if (num < 0) {
                 throw new IllegalArgumentException("잘못된 입력 값입니다: 음수가 입력되었습니다.");
             }
