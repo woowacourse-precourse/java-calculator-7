@@ -12,10 +12,6 @@ public class InputHandler {
     // 사용자 입력 받기
     public String getInput() {
         String input = Console.readLine();
-        if (input == null || input.trim().isEmpty()) {
-            System.out.println(0);
-            System.exit(0); // 입력이 없을 경우 프로그램 종료
-        }
         return input;
     }
 
@@ -50,7 +46,13 @@ public class InputHandler {
     public String getProcessedInput(String input) {
         if (input.startsWith(CUSTOM_DELIMITERS_PREFIX)) {
             int delimiterEndIndex = input.indexOf(CUSTOM_DELIMITERS_SUFFIX) + 2; // "\n" 뒤부터 데이터 시작
-            return input.substring(delimiterEndIndex);
+            String processedInput = input.substring(delimiterEndIndex);
+            
+            // 공백이거나 빈 문자열인 경우 null 반환
+            if (processedInput.trim().isEmpty()) {
+                return null;
+            }
+            return processedInput;
         }
         return input; // 기본 입력 문자열 그대로 반환
     }
