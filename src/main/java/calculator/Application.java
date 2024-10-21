@@ -36,6 +36,12 @@ public class Application {
                 while (index < customDelimiterParts.length && customDelimiterParts[index].startsWith("//")) {
                     // 구분자 스트링에 커스텀 구분자 추가 (정규식 특수 문자 이스케이프 처리)
                     String customDelimiter = customDelimiterParts[index].substring(2);
+
+                    // 숫자가 포함된 커스텀 구분자 처리
+                    if (customDelimiter.matches(".*\\d.*")) {
+                        throw new IllegalArgumentException();
+                    }
+
                     // 특수 문자 이스케이프
                     customDelimiter = escapeCharacter(customDelimiter);
                     delimiters += "|" + customDelimiter;
@@ -78,7 +84,7 @@ public class Application {
         return delimiter.replaceAll("([\\W])", "\\\\$1");
     }
 
-    //덧셈과 양수를 제외한 0과 음수에 대해 예외 처리하는 함수
+    // 덧셈과 양수를 제외한 0과 음수에 대해 예외 처리하는 함수
     private static int sumNumbers(String[] numbers) {
         int sum = 0;
         for (String number : numbers) {
