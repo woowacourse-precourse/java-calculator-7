@@ -8,7 +8,7 @@ public class CalculatorService {
     public String checkCustomSeparator(String inputData) {
         if (inputData.startsWith("//")) {
             if (!(inputData.indexOf('n') == -1)) {
-                return Constants.DEFAULT_CUSTOM_SEPARATOR + validateCustomSeparator(inputData);
+                return Constants.DEFAULT_CUSTOM_SEPARATOR + validateCustomSeparator(inputData).replace("\\", "\\\\");
             }
         }
         return Constants.DEFAULT_CUSTOM_SEPARATOR;
@@ -30,7 +30,7 @@ public class CalculatorService {
     public int additionCalculator(String userInputData, String customSeparator) {
         String trimInputData;
         if (userInputData.startsWith("//")) {
-            trimInputData = userInputData.substring(4);
+            trimInputData = userInputData.substring(userInputData.indexOf('n') + 1);
         } else {
             trimInputData = userInputData;
         }
@@ -38,7 +38,7 @@ public class CalculatorService {
         String calculatorRegex = "[" + customSeparator + "]";
         String calculatorStringRegex = "[0-9" + customSeparator + "]*[0-9]";
 
-        if (!Pattern.matches("^" + calculatorStringRegex + "$", trimInputData)) {
+        if (!Pattern.matches("^" + calculatorStringRegex + "+$", trimInputData)) {
             throw new IllegalArgumentException(Constants.CUSTOM_SPECIAL_CHARACTER_ERROR_MESSAGE);
         }
 
