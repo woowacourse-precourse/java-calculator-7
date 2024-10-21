@@ -32,13 +32,13 @@ public class Application {
 
         // 커스텀 구분자 
         if (input.startsWith("//")) {
-            int delimiterEnd = input.indexOf("\n");
+            int newLineIndex = input.indexOf("\\n");
 
-            if (delimiterEnd == -1) {
+            if (newLineIndex == -1) {
                 throw new IllegalArgumentException("커스텀 구분자 형식이 올바르지 않습니다.");
             }
-            delimiter = Pattern.quote(input.substring(2, delimiterEnd));
-            numbers = input.substring(delimiterEnd + 1); // \n은 1개의 문자 +1
+            delimiter = Pattern.quote(input.substring(2, newLineIndex));
+            numbers = input.substring(newLineIndex + 2); 
         }
         return Arrays.asList(numbers.split(delimiter));
     }
