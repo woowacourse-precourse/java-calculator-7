@@ -8,7 +8,7 @@ public class Application {
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
-        List<String> numbers = parse(input);
+        List<String> numbers = parser(input);
     
         int sum = 0;
         for (String number : numbers) {
@@ -22,7 +22,7 @@ public class Application {
         }
         System.out.println("결과 : " + sum);   
     }
-    public static List<String> parse(String input) {
+    public static List<String> parser(String input) {
         if (input == null || input.trim().isEmpty()) {
             return List.of();
         }
