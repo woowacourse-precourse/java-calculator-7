@@ -3,8 +3,14 @@ package calculator.util;
 import calculator.model.primitive.PositiveNumber;
 
 public class StringAddCalculator {
+
     private static final int ZERO_VALUE = 0;
     private static final String BLANK = " ";
+    private static final String CONTAIN_BLANK_EXCEPTION_MESSAGE = "공백을 포함할 수 없습니다.";
+    private static final String INVALID_DELIMITER_EXCEPTION_MESSAGE =
+            "구분자가 잘못 되었습니다. 커스텀 구분자, 기본 구분자를 확인 후, "
+                    + "다시 입력하세요";
+
 
     public static int splitAndSum(String input) {
         if (validateNullOrEmpty(input)) {
@@ -29,7 +35,7 @@ public class StringAddCalculator {
 
     private static void validateContainBlank(String input) {
         if (isContainBlank(input)) {
-            throw new IllegalArgumentException("공백을 포함할 수 없습니다.");
+            throw new IllegalArgumentException(CONTAIN_BLANK_EXCEPTION_MESSAGE);
         }
     }
 
@@ -58,7 +64,7 @@ public class StringAddCalculator {
         try {
             return Integer.parseInt(splitNumber);
         } catch (NumberFormatException exception) {
-            throw new IllegalArgumentException("구분자가 잘못 되었습니다. 커스텀 구분자, 기본 구분자를 확인 후, 다시 입력하세요");
+            throw new IllegalArgumentException(INVALID_DELIMITER_EXCEPTION_MESSAGE);
         }
     }
 }

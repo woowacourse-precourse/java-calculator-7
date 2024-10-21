@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Separator {
+
     private static final String CUSTOM_PATTERN = "^//(.*)\\\\n(.*)";
     private static final String DEFAULT_PATTERN = "[,:]";
     private static final String ONLY_DIGITS_PATTERN = "\\d+";
