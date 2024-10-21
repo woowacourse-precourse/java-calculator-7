@@ -44,6 +44,13 @@ public class SeparatorValidator {
         }
     }
 
+    public static void validateCustomDelimiterIsNotNumber(String customSeparator) {
+        if (Character.isDigit(customSeparator.charAt(0))) {
+            throw new IllegalArgumentException("구분자는 숫자가 될 수 없습니다: " + customSeparator);
+        }
+    }
+
+
 
 
 }

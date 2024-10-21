@@ -22,6 +22,7 @@ public class Separator {
         if (matcher.find()) {
             String customSeparator = matcher.group(1);
             SeparatorValidator.validateCustomDelimiterLength(customSeparator);
+            SeparatorValidator.validateCustomDelimiterIsNotNumber(customSeparator);
             activeSeparator = DEFAULT_SEPARATOR + "|" + customSeparator;
             SeparatorValidator.validateOnlyCustomDelimiterUsed(input);
         }
