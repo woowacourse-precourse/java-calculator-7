@@ -11,11 +11,21 @@ import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class Application {
     public static void main(String[] args) {
-        // 0. 문자열 입력받기
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String input = readLine();
+        try{
+            // 0. 문자열 입력받기
+            System.out.println("덧셈할 문자열을 입력해 주세요.");
+            String input = readLine();
 
-        Calc calc = new Calc(input);
+            Calc calc = new Calc(input);
+
+            int result = calc.calcSum();
+
+            System.out.println("결과 : " + result);
+
+        } catch (IllegalArgumentException e) {
+            throw e;
+        }
+
 
     }
 }
@@ -98,6 +108,15 @@ class Calc {
         }
 
         return numArr;
+    }
+
+    // 3. 숫자 합 구하기
+    public int calcSum() {
+        int[] numArr = getNumArr();
+        if (numArr != null) {
+            return Arrays.stream(numArr).sum();
+        }
+        return 0;
     }
 
 
