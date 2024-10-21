@@ -1,5 +1,6 @@
 package calculator.util;
 
+import java.util.List;
 public class InputValidator {
 
     private static final String CUSTOM_DELIMITER_START = "//";
@@ -41,6 +42,16 @@ public class InputValidator {
     private static void validateCustomDelimiterLength(String delimiterPart) {
         if (delimiterPart.length() > MAX_CUSTOM_DELIMITER_LENGTH) {
             throw new IllegalArgumentException("커스텀 구분자는 한 글자여야 합니다.");
+        }
+    }
+
+    // 입력값이 음수인지 검증하는 메서드
+    public static void validateNegativeNumbers(List<String> numbers) {
+        for (int i = 0; i < numbers.size(); i++) {
+            int num = Integer.parseInt(numbers.get(i));
+            if (num < 0) {
+                throw new IllegalArgumentException("음수는 입력할 수 없습니다: " + num);
+            }
         }
     }
 }
