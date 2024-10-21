@@ -199,4 +199,22 @@ class InputConsoleHandlerTest {
         Console.close();
     }
 
+    @Test
+    @DisplayName("커스텀 구분자 지정을 하지 않고 커스텀 구분자를 사용하면 애플리케이션을 종료한다")
+    void throwExceptionBadCustomSeparator() {
+        // given
+        String input = "1a2a3";
+
+        // when
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        // then
+        assertThatThrownBy(INPUT_CONSOLE_HANDLER::getUserInput)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("커스텀 구분자의 지정 방법이 잘못되었습니다. 애플리케이션을 종료합니다.");
+
+        System.setIn(System.in);
+        Console.close();
+    }
+
 }
