@@ -12,14 +12,26 @@ public class CustomStringSplitter implements StringSplitter{
     private static final String CUSTOM_DELIMITER_HEADER = "\\/\\/";
     private static final String CUSTOM_DELIMITER_FOOTER = "\\\n";
 
+
+    @Override
+    public boolean canSupport(String str) {
+        String patternRegex = generatePatternRegex();
+        Pattern pattern = Pattern.compile(patternRegex);
+        Matcher matcher = pattern.matcher(str);
+        boolean isFound = matcher.matches();
+
+        if (isFound) {
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public List<String> splitString (String str) {
         String patternRegex = generatePatternRegex();
         Pattern pattern = Pattern.compile(patternRegex);
         Matcher matcher = pattern.matcher(str);
-
-        boolean isFound = matcher.find();
-        validateMatcher(isFound, str);
+        matcher.matches();
 
         String customDelimiter = matcher.group(1);
         validateCustomDelimiter(customDelimiter, str);
@@ -42,13 +54,6 @@ public class CustomStringSplitter implements StringSplitter{
                 .append("(.+)");
 
         return delimiterBuilder.toString();
-    }
-    
-    private void validateMatcher(boolean isFound, String str) {
-        boolean notFound = !isFound;
-        if (notFound) {
-            throw new IllegalArgumentException(str);
-        }
     }
 
     private void validateCustomDelimiter(String customDelimiter, String str) {

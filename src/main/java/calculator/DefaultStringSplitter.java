@@ -4,8 +4,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class DefaultStringSplitter implements StringSplitter{
+
+
+    @Override
+    public boolean canSupport(String str) {
+        Pattern pattern = Pattern.compile("^[0-9]+([" + DEFAULT_DELIMITER + "][0-9]+)?");
+        Matcher matcher = pattern.matcher(str);
+        return matcher.matches();
+    }
 
     @Override
     public List<String> splitString (String str) {
