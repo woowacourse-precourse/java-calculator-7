@@ -5,10 +5,7 @@ import calculator.view.InputView;
 import calculator.view.OutputView;
 
 public class CalculatorController {
-    private final CalculatorService calculatorService;
-    public CalculatorController(CalculatorService calculatorService){
-        this.calculatorService = calculatorService;
-    }
+    private final CalculatorService calculatorService = new CalculatorService();
 
     public void run(){
         String input = InputView.input();
