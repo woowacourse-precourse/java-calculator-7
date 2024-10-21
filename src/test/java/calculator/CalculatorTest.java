@@ -51,4 +51,11 @@ class CalculatorTest {
         assertThatThrownBy(() -> Calculator.calculate("asd"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("커스텀 구분자 테스트")
+    public void custom_delimiter() {
+        int result = Calculator.calculate("//;\n1;2;3");
+        assertThat(result).isEqualTo(6);
+    }
 }
