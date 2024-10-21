@@ -6,11 +6,11 @@ import java.util.Set;
 
 import calculator.validation.InputValidator;
 
-public class Delimiters {
+public class Delimiter {
 	private final Set<String> delimiters = new HashSet<>();
 	private final InputValidator inputValidator;
 
-	public Delimiters() {
+	public Delimiter() {
 		initDefaultDelimiters();
 		this.inputValidator = new InputValidator();
 	}
