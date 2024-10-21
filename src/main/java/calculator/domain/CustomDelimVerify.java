@@ -4,6 +4,10 @@ import calculator.domain.constant.CustomDelimBracket;
 
 public class CustomDelimVerify {
 
+    private static Boolean suitableLength(String candidate) {
+        return candidate.length() >= 5;
+    }
+
     public static Boolean coveredBracket(String candidate) {
         return correctOpenBracket(candidate)
                 && CorrectCloseBracket(candidate);
