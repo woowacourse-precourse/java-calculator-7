@@ -20,7 +20,7 @@ public class Application {
                 }
 
                 if (StringUtils.isBlank(customSeperator)) {
-                    String[] splitedInput = input.split(",|;");
+                    String[] splitedInput = input.split(",|:");
                     for (String inputNumber : splitedInput) {
                         int number = Integer.parseInt(inputNumber);
                         result += number;
