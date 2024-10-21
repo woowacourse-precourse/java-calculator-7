@@ -10,7 +10,7 @@ public class InputValidator {
 
     public void validateCustomEmpty(String input) {
         if (input.isEmpty()) {
-            throw new IllegalArgumentException("커스텀 구분자가 공백입니다.");
+            throw new IllegalArgumentException("커스텀 구분자가 빈 문자열입니다.");
         }
     }
 
