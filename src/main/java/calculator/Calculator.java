@@ -18,6 +18,9 @@ public class Calculator {
         //입력값 앞부분이 '//'인 경우 customDelimiter 실행함
         if (input.startsWith("//")) {
             String[] customResult = customDelimiter(input);
+            if (customResult.length == 0) {
+                return 0;
+            }
             delimeter = customResult[0];
             input = customResult[1];
         }
@@ -40,8 +43,7 @@ public class Calculator {
         } else {
             //숫자가 없는 경우 예외 처리
             if (input.endsWith("\\n")) {
-                System.out.println("결과 : 0");
-                System.exit(0);
+                return new String[]{};
             } else {
                 throw new IllegalArgumentException();
             }
