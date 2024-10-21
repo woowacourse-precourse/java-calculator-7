@@ -48,13 +48,9 @@ public class InputParser {
         List<Integer> integerList = new ArrayList<>();
         for (String s : splitInput) {
             if (!s.matches("\\d+")) {
-                throw new IllegalArgumentException("Error: 입력 값은 숫자여야 합니다.");
+                throw new IllegalArgumentException("Error: 입력 값은 양수여야 합니다.");
             }
-            int number = Integer.parseInt(s);
-            if (number < 0) {
-                throw new IllegalArgumentException("Error: 입력 값은 음수가 될 수 없습니다.");
-            }
-            integerList.add(number);
+            integerList.add(Integer.parseInt(s));
         }
         return integerList;
     }

@@ -19,8 +19,8 @@ class ApplicationTest extends NsTest {
     @Test
     void 실행_테스트() {
         assertSimpleTest(() -> {
-            run("1,2,3");
-            assertThat(output()).contains("결과 : 6");
+            run("-1,-2,-3");
+            assertThat(output()).contains("결과 : -6");
         });
     }
 
