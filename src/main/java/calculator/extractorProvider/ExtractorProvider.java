@@ -21,7 +21,7 @@ public class ExtractorProvider {
     }
 
     public void initExtractorMappingMap(Validator validator) {
-        ExtractorMappingMap.putDelimiterExtractor("CustomInput", new CustomDelimiterExtractor());
+        ExtractorMappingMap.putDelimiterExtractor("CustomInput", new CustomDelimiterExtractor(validator));
         ExtractorMappingMap.putDelimiterExtractor("DefaultInput", new DefaultDelimiterExtractor());
         ExtractorMappingMap.putNumberExtractor("CustomInput", new CustomNumberExtractor(validator));
         ExtractorMappingMap.putNumberExtractor("DefaultInput", new DefaultNumberExtractor(validator));
