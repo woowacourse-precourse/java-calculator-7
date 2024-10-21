@@ -5,7 +5,7 @@ import static calculator.domain.constant.errorMessage.ParseError.INVALID_FORMAT;
 
 import calculator.global.exception.CalculatorException;
 
-public class DelimiterValidator {
+public class InputValidator {
 
     private static final String CUSTOM_DELIMITER_START = "//";
     private static final String CUSTOM_DELIMITER_END = "\\n";

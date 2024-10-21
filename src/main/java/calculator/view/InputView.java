@@ -1,10 +1,10 @@
 package calculator.view;
 
-import calculator.domain.validator.DelimiterValidator;
+import calculator.domain.validator.InputValidator;
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
-    private final DelimiterValidator delimiterValidator = new DelimiterValidator();
+    private final InputValidator inputValidator = new InputValidator();
 
     public String inputString() {
         String input = Console.readLine();
@@ -13,6 +13,6 @@ public class InputView {
     }
 
     private void validateInput(String input) {
-        delimiterValidator.validateFormat(input);
+        inputValidator.validateFormat(input);
     }
 }
