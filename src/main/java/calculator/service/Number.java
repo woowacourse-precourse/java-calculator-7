@@ -16,7 +16,7 @@ class Number {
 
     private static String parse(final String number) {
         if (number.isBlank()) {
-            return "0";
+            throw new IllegalArgumentException("구분자는 연속될 수 없습니다.");
         }
         if (number.startsWith("-")) {
             throw new IllegalArgumentException("입력으로 음수는 들어올 수 없습니다.");
