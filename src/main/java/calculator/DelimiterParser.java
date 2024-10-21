@@ -33,6 +33,9 @@ public class DelimiterParser {
             if (substr.length == 1 || addedDelimiter.isEmpty()) {
                 throw new IllegalArgumentException("Invalid input: there is no valid custom delimiter.");
             }
+            if (Pattern.matches("^\\d.*\\d$", addedDelimiter)) {
+                throw new IllegalArgumentException("Invalid input: can't use delim start or end with num.");
+            }
 
             String customDelimiter = DEFAULT_DELIMITER + "|" + Pattern.quote(addedDelimiter);
             return Optional.of(new DelimiterContentPair(substr[1], customDelimiter));
