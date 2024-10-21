@@ -57,9 +57,9 @@ public class Calculator {
 
     private void validateInput() {
         if (usingCustomDelimiter) {
-            inputValueValidator.validate(this.input, customDelimiter);
+            inputValueValidator.charExceptDelimiter(this.input, customDelimiter);
         } else {
-            inputValueValidator.validate(this.input);
+            inputValueValidator.charExceptDelimiter(this.input);
         }
     }
 }

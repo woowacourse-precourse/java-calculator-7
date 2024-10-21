@@ -15,13 +15,13 @@ public class InputValueValidator {
 
     private static final Pattern DEFAULT_DELIMITER_REGEX_PATTERN = Pattern.compile(DEFAULT_DELIMITER_REGEX);
 
-    public void validate(String input) {
+    public void charExceptDelimiter(String input) {
         if (DEFAULT_DELIMITER_REGEX_PATTERN.matcher(input).find()) {
             throw new IllegalArgumentException();
         }
     }
 
-    public void validate(String input, String customDelimiter) {
+    public void charExceptDelimiter(String input, String customDelimiter) {
         String regex = "[^0-9"
                 + Arrays.stream(Delimiter.values())
                 .map(Delimiter::getDelimiter)
