@@ -3,8 +3,8 @@ package calculator.utils;
 import java.util.List;
 
 public class Parser {
-    private SeparatorParser separatorParser;
-    private OperandParser operandParser;
+    private final SeparatorParser separatorParser;
+    private final OperandParser operandParser;
 
     public Parser() {
         separatorParser = new SeparatorParser();
