@@ -1,0 +1,86 @@
+package calculator;
+
+import camp.nextstep.edu.missionutils.Console;
+import java.util.Arrays;
+
+public class StringCalculator {
+
+    public void run() {
+        printInputPrompt();
+
+        String defaultDelimiter = "[,:]";
+        String input = Console.readLine();
+        UserInput userInput = new UserInput(input);
+
+        boolean isCustomDelimiter = userInput.hasCustomDelimiter();
+
+        DefaultDelimiter defaultDelimiters = new DefaultDelimiter(defaultDelimiter);
+        DelimiterResult delimiterResult = new DelimiterResult(defaultDelimiters.getDefaultDelimiter());
+
+        if (isCustomDelimiter) {
+            delimiterResult = generateDelimiterResult(userInput, delimiterResult);
+            input = userInput.extractNumbersPart();
+        }
+
+        DelimitedNumbers delimitedNumbers = new DelimitedNumbers(input, delimiterResult);
+        String[] separatedNumbers = generateSeparatedNumbers(delimitedNumbers, delimiterResult);
+        Numbers numbers = new Numbers(separatedNumbers);
+
+        int sum = calculateTotalSum(numbers);
+        printResult(sum);
+
+    }
+
+    private static void printResult(int sum) {
+        System.out.println("결과 : " + sum);
+    }
+
+    private static void printInputPrompt() {
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+    }
+
+    private DelimiterResult generateDelimiterResult(UserInput userInput, DelimiterResult delimiterResult) {
+        String combineDelimiters = combineDelimiters(userInput, delimiterResult);
+        return new DelimiterResult(combineDelimiters);
+    }
+
+    private int calculateTotalSum(Numbers numbers) {
+        int sum = 0;
+        for (String stringNumbers : numbers.getNumbers()) {
+            Number number = new Number(stringNumbers);
+            sum += Integer.parseInt(number.getNumber());
+        }
+        return sum;
+    }
+
+    private String combineDelimiters(UserInput userInput, DelimiterResult delimiterResult) {
+        String extractCustomDelimiter = userInput.extractCustomDelimiter();
+        CustomDelimiter customDelimiter = new CustomDelimiter(extractCustomDelimiter);
+        return combineDelimiter(delimiterResult, customDelimiter.getCustomDelimiter());
+    }
+
+    private String combineDelimiter(DelimiterResult delimiterResult, String customRegex) {
+        return delimiterResult.getDelimiterResult().replace("]", customRegex + "]");
+    }
+
+
+    private String[] generateSeparatedNumbers(DelimitedNumbers delimitedNumbers, DelimiterResult delimiterResult) {
+        String[] separatedNumber = delimitedNumbers.getStringNumbers().split(delimiterResult.getDelimiterResult());
+        return findFilterNumbers(separatedNumber);
+    }
+
+    private String[] findFilterNumbers(String[] split) {
+        int validCount = 0;
+
+        String[] filteredNumbers = new String[split.length];
+
+        for (String number : split) {
+            if (!number.isBlank()) {
+                filteredNumbers[validCount++] = number;
+            }
+        }
+
+        return Arrays.copyOf(filteredNumbers, validCount);
+    }
+
+}
