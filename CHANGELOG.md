@@ -1,0 +1,3 @@
+- feat(parseSeparators) : add separator-extracting function
+- feat(readIn) : add input-reading function
+- feat: setup project
