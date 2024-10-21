@@ -20,7 +20,11 @@ public class Calculator {
     private static int calculateSum(String[] numbers) {
         int sum = 0;
         for (String number : numbers) {
-            sum += Integer.parseInt(number.trim());
+            int num = Integer.parseInt(number.trim());
+            if (num < 0) {  // 음수일 경우 예외 발생
+                throw new IllegalArgumentException("음수는 입력할 수 없습니다: " + num);
+            }
+            sum += num;
         }
         return sum;
     }
