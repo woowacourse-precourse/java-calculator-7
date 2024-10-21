@@ -6,16 +6,16 @@ public class SplitService {
     private static final String START_POINT = "//";
     private static final String END_POINT = "\\n";
     private static final String[] BASIC_DELIMITERS = {",", ":"};
-    private final Set<String> delimiterSet = new HashSet<>();
+    private final Set<String> delimiters = new HashSet<>();
 
     public SplitService() {
-        delimiterSet.addAll(Arrays.asList(BASIC_DELIMITERS));
+        delimiters.addAll(Arrays.asList(BASIC_DELIMITERS));
     }
 
     public List<String> split(String input) {
-        String expressionStr = extractExpression(input);
-        checkStringValidity(expressionStr);
-        String[] numbers = expressionStr.split(delimiterSetToString());
+        String expression = extractExpression(input);
+        checkStringValidity(expression);
+        String[] numbers = expression.split(delimiterSetToString());
         return Arrays.stream(numbers).toList();
     }
 
@@ -33,12 +33,12 @@ public class SplitService {
         int endIndex = input.indexOf(END_POINT);
         String customDelimiter = input.substring(startIndex, endIndex);
         checkStringValidity(customDelimiter);
-        delimiterSet.add(customDelimiter);
+        delimiters.add(customDelimiter);
     }
 
     private String delimiterSetToString() {
         StringBuilder builder = new StringBuilder();
-        for (String delimiter : delimiterSet) {
+        for (String delimiter : delimiters) {
             builder.append(delimiter).append("|");
         }
         builder.setLength(builder.length() - 1);
