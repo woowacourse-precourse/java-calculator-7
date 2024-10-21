@@ -3,40 +3,40 @@ package calculator;
 public class CalculatorModel {
     private final Util util = new Util();
 
-    public long[] changeStringtoLongOperandArray(String userInput) {
-        if (!util.checkforInvalidPrefix(userInput)) {
+    public long[] changeStringToLongOperandArray(String userInput) {
+        if (!util.checkForInvalidPrefix(userInput)) {
             throw new IllegalArgumentException("잘못된 입력값입니다: " + userInput);
         }
         if (userInput.isEmpty()) {
             // case1: 문자열이 비어있는 경우
-            long[] operandArrayinLong = {0};
-            return operandArrayinLong;
+            long[] operandArrayInLong = {0};
+            return operandArrayInLong;
         } else if (userInput.startsWith("//")) {
             //case2: 커스텀 구분자가 있는 경우
-            int lastDeliiterIndex = getLastCustomDelimiterIndex(userInput);
+            int DelimiterIndex = getLastCustomDelimiterIndex(userInput);
 
-            String delimiter = getCustomDelimiter(userInput, lastDeliiterIndex);
-            String operandSubString = userInput.substring(lastDeliiterIndex + 2, userInput.length());
+            String delimiter = getCustomDelimiter(userInput, DelimiterIndex);
+            String operandSubString = userInput.substring(DelimiterIndex + 2);
 
-            long[] operandArrayinLong = getLongArrayFromStringArray(operandSubString, delimiter);
-            return operandArrayinLong;
+            long[] operandArrayInLong = getLongArrayFromStringArray(operandSubString, delimiter);
+            return operandArrayInLong;
 
         } else {
             //case3: 커스텀 구분자가 없는 경우
-            long[] operandArrayinLong = getLongArrayFromStringArray(userInput, ",|:");
-            return operandArrayinLong;
+            long[] operandArrayInLong = getLongArrayFromStringArray(userInput, ",|:");
+            return operandArrayInLong;
         }
     }
 
     public long[] getLongArrayFromStringArray(String userInput, String delimiter) {
         String[] operandArrayinString = userInput.split(delimiter);
-        long[] operandArrayinLong = changeStringArrtoLongArr(operandArrayinString);
+        long[] operandArrayInLong = changeStringArrToLongArr(operandArrayinString);
 
-        return operandArrayinLong;
+        return operandArrayInLong;
     }
 
 
-    public long[] changeStringArrtoLongArr(String[] stringArr) {
+    public long[] changeStringArrToLongArr(String[] stringArr) {
         long[] longArr = new long[stringArr.length];
 
         for (int i = 0; i < stringArr.length; i++) {
@@ -84,10 +84,10 @@ public class CalculatorModel {
 
     public long calculateSum(String userInput) {
         long sum = 0;
-        long[] operandArray = changeStringtoLongOperandArray(userInput);
+        long[] operandArray = changeStringToLongOperandArray(userInput);
 
-        for (int i = 0; i < operandArray.length; i++) {
-            sum += operandArray[i];
+        for (long operand : operandArray) {
+            sum += operand;
         }
 
         return sum;
