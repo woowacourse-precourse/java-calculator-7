@@ -6,6 +6,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class InputProcessor {
+    private static final char PRE_CUSTOM_DELIM_SLASH = '/';
+    private static final char BASIC_DELIM_COMMA = ',';
+    private static final char BASIC_DELIM_COLON = ':';
+    private static final char PRE_REGEX = '[';
+    private static final char POST_REGEX = ']';
+
     private static InputProcessor instance;
 
     private InputProcessor() {
@@ -36,7 +42,7 @@ public class InputProcessor {
     }
 
     private boolean isInputHasCustomDelim(String input) {
-        if (input.charAt(0) == '/') {
+        if (input.charAt(0) == PRE_CUSTOM_DELIM_SLASH) {
             for (int i = 0; i < 2; i++) {
                 exceptionHandler.checkIncorrectCustomDelimGenerateInput(input.charAt(i));
             }
@@ -87,19 +93,19 @@ public class InputProcessor {
 
     private List<String> makeBasicDelimiters() {
         return new ArrayList<>(){{
-            add(",");
-            add(":");
+            add(String.valueOf(BASIC_DELIM_COMMA));
+            add(String.valueOf(BASIC_DELIM_COLON));
         }};
     }
 
     private String makeRegex(List<String> delimiters) {
         StringBuilder regex = new StringBuilder();
 
-        regex.append("[");
+        regex.append(PRE_REGEX);
         for (String delim : delimiters) {
             regex.append(delim);
         }
-        regex.append("]");
+        regex.append(POST_REGEX);
 
         return regex.toString();
     }
