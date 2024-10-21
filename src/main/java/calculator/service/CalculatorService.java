@@ -1,7 +1,7 @@
 package calculator.service;
 
-import calculator.domain.Calculator;
 import calculator.domain.Expression;
+import calculator.domain.Tokens;
 import calculator.util.NumberValidator;
 import calculator.util.Parser;
 
@@ -15,9 +15,9 @@ public class CalculatorService {
             return 0;
         }
 
-        Calculator calculator = parser.parse(expression.getExpression());
+        Tokens tokens = parser.parse(expression.getExpression());
 
-        return sumNumbers(calculator.getTokens());
+        return sumNumbers(tokens.getTokens());
     }
 
     private int sumNumbers(String[] tokens){
