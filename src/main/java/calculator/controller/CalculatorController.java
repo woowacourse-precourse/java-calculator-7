@@ -11,7 +11,7 @@ public class CalculatorController {
 
     public void calculate() {
         String input = InputView.getInput();
-        //input format 점검
+
         Stream<Integer> numbers = convertString(input);
 
         int sum = numbers.reduce(0, Integer::sum);
@@ -19,13 +19,13 @@ public class CalculatorController {
         OutputView.printResult(sum);
     }
 
-    private Stream<Integer> convertString(String input) {
+    public Stream<Integer> convertString(String input) {
         String[] stringNums = extractStringNumber(input);
 
         return convertToNumber(stringNums);
     }
 
-    public String[] extractStringNumber(String input) {
+    private String[] extractStringNumber(String input) {
         InputCase inputCase = separateCase(input);
         return switch (inputCase) {
             case InputCase.NONE -> new String[0];
@@ -66,17 +66,19 @@ public class CalculatorController {
     }
 
     private boolean isCustomFormat(String str) {
-        if (!str.startsWith("//")) throw new IllegalArgumentException("커스텀 구분자 입력은 //으로 시작해야합니다.");
-        if (!str.contains("\\n")) throw new IllegalArgumentException("커스텀 구분자는 입력은 \\n 로 끝나야합니다.");
+        int startFormIndex = str.indexOf("//");
+        int endFormIndex = str.lastIndexOf("\\n");
+
+        if (startFormIndex != 0) throw new IllegalArgumentException("커스텀 구분자 입력은 //으로 시작해야합니다.");
+        if (endFormIndex == 2) throw new IllegalArgumentException("커스텀 구분자가 없습니다.");
+        if (endFormIndex == -1) throw new IllegalArgumentException("커스텀 구분자는 입력은 \\n 로 끝나야합니다.");
         return true;
     }
 
     private boolean startsWithPositiveNumber(String str) {
-        if (str.matches("-[0-9]")) {
+        if (str.matches("(-[0-9]+|0).*")) {
             throw new IllegalArgumentException("숫자는 양수만 입력할 수 있습니다.");
-        } else if (str.matches("[1-9].*")) {
-            return true;
-        } else return false;
+        } else return str.matches("[1-9].*");
     }
 }
 
