@@ -22,7 +22,7 @@ public class CalculatorService {
     }
 
     public String calculate(String input) {
-        ParsedInput parsedInput = inputParser.parse(input);
+        final ParsedInput parsedInput = inputParser.parse(input);
 
         for (String numberToken : parsedInput.numbersToken()) {
             if (!inputValidator.isValidNumber(numberToken)) {
