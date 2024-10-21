@@ -4,7 +4,7 @@ public class StringCalculator {
 
     public static int add(String input) {
 
-        //2. 문자열 구분
+        //문자열 구분
         // 빈 문자열 또는 null 입력 처리
         if (input == null || input.isEmpty()) {
             return 0;
@@ -21,6 +21,11 @@ public class StringCalculator {
         }
 
         // 구분자를 기준으로 숫자를 분리
+        return calculate(numbers, delimiter);
+
+    }
+
+    private static int calculate(String numbers, String delimiter) {
         String[] tokens = numbers.split(delimiter);
 
         int sum = 0;
@@ -40,7 +45,6 @@ public class StringCalculator {
         }
 
         return sum;
-
     }
 
     // 커스텀 구분자를 추출하는 static 메서드
