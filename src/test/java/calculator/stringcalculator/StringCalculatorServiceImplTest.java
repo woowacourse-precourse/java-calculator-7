@@ -45,4 +45,31 @@ class StringCalculatorServiceImplTest {
         assertDoesNotThrow(() -> stringCalculatorService.validateInputForm(input));
     }
 
+    @Test
+    void extractDelimiterTest1() {
+        String input = "//;\n12:34,56";
+
+        String extractedDelimiter = stringCalculatorService.extractDelimiter(input);
+
+        assertThat(extractedDelimiter).isEqualTo(";");
+    }
+
+    @Test
+    void extractDelimiterTest2() {
+        String input = "//\n12:34,56";
+
+        String extractedDelimiter = stringCalculatorService.extractDelimiter(input);
+
+        assertThat(extractedDelimiter).isEqualTo("");
+    }
+
+    @Test
+    void extractDelimiterTest3() {
+        String input = "12:34,56";
+
+        String extractedDelimiter = stringCalculatorService.extractDelimiter(input);
+
+        assertThat(extractedDelimiter).isEqualTo("");
+    }
+
 }
