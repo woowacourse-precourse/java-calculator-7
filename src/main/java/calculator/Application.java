@@ -11,5 +11,6 @@ public class Application {
         spliter.calculate();
 
         spliter.printResult();
+
     }
 }
