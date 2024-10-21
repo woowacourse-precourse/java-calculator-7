@@ -1,5 +1,6 @@
 package calculator.extractorProvider;
 
+import calculator.constants.StringConst;
 import calculator.delimiterExtractor.CustomDelimiterExtractor;
 import calculator.delimiterExtractor.DefaultDelimiterExtractor;
 import calculator.delimiterExtractor.DelimiterExtractor;
@@ -21,10 +22,11 @@ public class ExtractorProvider {
     }
 
     public void initExtractorMappingMap(Validator validator) {
-        ExtractorMappingMap.putDelimiterExtractor("CustomInput", new CustomDelimiterExtractor(validator));
-        ExtractorMappingMap.putDelimiterExtractor("DefaultInput", new DefaultDelimiterExtractor());
-        ExtractorMappingMap.putNumberExtractor("CustomInput", new CustomNumberExtractor(validator));
-        ExtractorMappingMap.putNumberExtractor("DefaultInput", new DefaultNumberExtractor(validator));
+        ExtractorMappingMap.putDelimiterExtractor(StringConst.CUSTOM_START_STRING,
+                new CustomDelimiterExtractor(validator));
+        ExtractorMappingMap.putDelimiterExtractor(StringConst.DEFAULT_INPUT, new DefaultDelimiterExtractor());
+        ExtractorMappingMap.putNumberExtractor(StringConst.CUSTOM_START_STRING, new CustomNumberExtractor(validator));
+        ExtractorMappingMap.putNumberExtractor(StringConst.DEFAULT_INPUT, new DefaultNumberExtractor(validator));
 
     }
 
