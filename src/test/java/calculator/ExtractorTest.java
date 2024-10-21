@@ -18,7 +18,7 @@ class ExtractorTest {
         String input = "//+\\n1,2,3";
 
         //when & then
-        assertTrue(ex.hasCustomDelimiter(input));
+        assertFalse(ex.isDefaultDelimiterUsed(input));
     }
 
     @Test
@@ -28,7 +28,7 @@ class ExtractorTest {
         String input = "1,2,3";
 
         //when & then
-        assertFalse(ex.hasCustomDelimiter(input));
+        assertTrue(ex.isDefaultDelimiterUsed(input));
     }
 
     @Test

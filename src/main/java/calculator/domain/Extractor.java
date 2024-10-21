@@ -10,8 +10,10 @@ public class Extractor {
     private static final String DEFAULT_DELIMITER = "[,:]";
     private static final int NUMBER_BEGIN_INDEX = 5;
 
-    public boolean hasCustomDelimiter(String numsWithCustomDelimiter) {
-        return numsWithCustomDelimiter.startsWith(HEADER);
+    public boolean isDefaultDelimiterUsed(String numsWithCustomDelimiter) {
+        return numsWithCustomDelimiter.matches("^[0-9]+([,:][0-9]+)*$");
+//        String footer = numsWithCustomDelimiter.substring(3, 5);
+//        return numsWithCustomDelimiter.startsWith(HEADER) && footer.equals(FOOTER);
     }
 
     public String extractCustomDelimiter(String numsWithDelimiter) {
