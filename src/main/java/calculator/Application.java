@@ -4,15 +4,10 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static void main(String[] args) {
-        try{
-            String inputString = getUserInput();
-            String[] numbers = extractNumbers(inputString);
-            int sum = addNumbers(numbers);
-            System.out.println("결과 : " + sum);
-        }
-        catch(IllegalArgumentException e){
-            System.out.println(e.getMessage());
-        }
+        String inputString = getUserInput();
+        String[] numbers = extractNumbers(inputString);
+        int sum = addNumbers(numbers);
+        System.out.println("결과 : " + sum);
     }
 
     public static String getUserInput() {
@@ -31,13 +26,8 @@ public class Application {
         char customChar;
         if (isCustom(inputString)) {
             customChar = inputString.charAt(2);
-            String newinputString = inputString.substring(5);
-            //확인용 출력
-            newinputString = newinputString.replace(customChar, ':');
+            String newinputString = inputString.substring(inputString.indexOf("\\n")+2);newinputString = newinputString.replace(customChar, ':');
             String[] numbers = newinputString.split(":");
-            for (int i = 0; i < numbers.length; i++) {
-                System.out.println(numbers[i]);
-            }
             return numbers;
         }
         else {
@@ -51,12 +41,14 @@ public class Application {
         int sum = 0;
         for (int i = 0; i < numbers.length; i++) {
             try{
-                sum += Integer.parseInt(numbers[i]);
-                //확인용 출력
-                System.out.println(sum);
+                int number = Integer.parseInt(numbers[i]);
+                if (number < 0){
+                    throw new IllegalArgumentException("음수 입력");
+                }
+                sum += number;
             }
             catch (NumberFormatException e){
-                throw new IllegalArgumentException("잘못된 입력입니다");
+                throw new IllegalArgumentException("잘못된 입력");
             }
         }
         return sum;
