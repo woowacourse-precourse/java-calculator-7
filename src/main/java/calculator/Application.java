@@ -8,6 +8,8 @@ public class Application {
         String parseString = ParsingString.parsingString(input, delimiters);
 
         Calculator calculator = new Calculator();
-        InputOutputManager.outputMessage(calculator.add(parseString, delimiters));
+        int result = calculator.add(parseString, delimiters);
+
+        InputOutputManager.outputMessage(result);
     }
 }
