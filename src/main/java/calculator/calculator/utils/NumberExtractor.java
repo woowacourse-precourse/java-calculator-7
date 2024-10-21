@@ -1,12 +1,8 @@
 package calculator.calculator.utils;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class NumberExtractor {
 
     public static final String DEFAULT_SEPARATOR = "[,:]+";
-    public static final String CUSTOM_SEPARATOR = "//(.*?)\\n";
 
     public int[] extractNumbersWithDefaultSeparator(String source) {
         String[] extractNumbers = source.split(DEFAULT_SEPARATOR);
@@ -17,7 +13,7 @@ public class NumberExtractor {
             for (int i = 0; i < size; i++) {
                 numbers[i] = Integer.parseInt(extractNumbers[i]);
             }
-        }catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             System.out.println(e.getMessage());
         }
 
@@ -27,17 +23,17 @@ public class NumberExtractor {
 
 
     public int[] extractNumbersWithCustomSeparator(String source) {
-        Pattern pattern = Pattern.compile(CUSTOM_SEPARATOR);
-        Matcher matcher = pattern.matcher(source);
+        int start = source.indexOf("//") + 2;
+        int end = source.indexOf("\\n");
 
-        String customRegex = "[";
-        if (matcher.find()) {
-            customRegex += matcher.group(1);
+        String delimiter = "";
+        if (start != -1 && end != -1) {
+            delimiter = source.substring(start, end);
         }
-        customRegex += "]+";
 
-        int beginIndex = matcher.group().length();
-        String validSource = source.substring(beginIndex);
+        String customRegex = new StringBuilder().append("[").append(delimiter).append("]+").toString();
+
+        String validSource = source.substring(end + 2);
         String[] extractNumbers = validSource.split(customRegex);
 
         int size = extractNumbers.length;
@@ -46,7 +42,7 @@ public class NumberExtractor {
             for (int i = 0; i < size; i++) {
                 numbers[i] = Integer.parseInt(extractNumbers[i]);
             }
-        }catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             System.out.println(e.getMessage());
         }
 
