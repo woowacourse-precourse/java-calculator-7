@@ -96,7 +96,7 @@ public class CalculatorService {
         for (String item : resultList) {
             if (item.trim().isEmpty()) continue;
             if (!item.matches("\\d+")) {
-                throw new IllegalArgumentException("Invalid input: " + item);
+                throw new IllegalArgumentException();
             }
             processedValue.add(new BigInteger(item));
         }
