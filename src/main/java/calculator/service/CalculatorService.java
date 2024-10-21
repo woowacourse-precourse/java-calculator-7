@@ -41,13 +41,12 @@ public class CalculatorService {
         }
 
         if (rawValue.startsWith("//")) {
-            String[] results = rawValue.split("\n", 2);
+            String[] results = rawValue.split("\\\\n", 2);
             newSeparator = results[0];
             value = results.length > 1 ? results[1] : "";
             isValid = checkNewSeparator(newSeparator);
             if (!isValid) {
-                exceptionHandler.handleException(new IllegalArgumentException());
-                return;
+                throw new IllegalArgumentException();
             }
             makeNewSeparator(newSeparator);
         } else {
@@ -58,7 +57,7 @@ public class CalculatorService {
         List<Number> processedValue = extractNumbersToList();
 
         if (!isValid) {
-            exceptionHandler.handleException(new IllegalArgumentException());
+            throw new IllegalArgumentException();
         }
         calculator.setProcessedValue(processedValue);
     }

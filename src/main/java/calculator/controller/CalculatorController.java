@@ -5,26 +5,28 @@ import calculator.error.ExceptionHandler;
 import calculator.service.CalculatorService;
 import camp.nextstep.edu.missionutils.Console;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 public class CalculatorController {
 
-    public void run() throws IOException {
+    public void run() {
+        try {
+            System.out.println("덧셈할 문자열을 입력해 주세요.");
+            String input = Console.readLine().trim();
+            Calculator calculator = new Calculator();
+            ExceptionHandler exceptionHandler = new ExceptionHandler();
+            CalculatorService service = new CalculatorService(calculator, exceptionHandler);
 
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String input = Console.readLine();
-        Calculator calculator = new Calculator();
-        ExceptionHandler exceptionHandler = new ExceptionHandler();
-        CalculatorService service = new CalculatorService(calculator, exceptionHandler);
-        service.getInputValues(input);
-        service.validateInput();
-        service.sumOfList();
-        service.printResult();
+            service.getInputValues(input);
+            service.validateInput();
 
+            // 계산 결과 출력
+            service.sumOfList();
+            service.printResult();
 
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException();
+        }
     }
-
 
 }
