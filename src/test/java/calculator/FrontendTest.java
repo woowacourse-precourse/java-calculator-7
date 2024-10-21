@@ -66,7 +66,7 @@ class FrontendTest {
       Frontend frontend = new Frontend(target);
 
       // then
-      frontend.printResult();
+      frontend.printCalculationResult();
 
   }
 
