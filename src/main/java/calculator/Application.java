@@ -21,7 +21,7 @@ public class Application {
 
         String[] nums = splitNum(str, delimiters);
 
-        // 오류 확인
+        checkError(nums);
         // 나눠진 문자열 이용해 합계 계산
 
         System.out.println("결과 : " + answer);
@@ -38,6 +38,23 @@ public class Application {
         String input = str.substring(str.indexOf("\\n") + 2);
         String lastDeli = String.join("|", delimiters);
         return input.split(lastDeli);
+    }
+
+    private static void checkError(String[] nums) {
+        for (String num : nums) {
+            int tmp = Integer.parseInt(num);
+            if (tmp < 0) {
+                throw new IllegalArgumentException (
+                        "음수가 포함되어 있습니다."
+                );
+            }
+        }
+
+        if (nums.length == 0) {
+            throw new IllegalArgumentException(
+                    "덧셈을 수행할 숫자가 없습니다."
+            );
+        }
     }
 
 }
