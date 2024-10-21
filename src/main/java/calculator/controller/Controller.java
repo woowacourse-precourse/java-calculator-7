@@ -9,9 +9,7 @@ import java.util.List;
 public class Controller {
     public void executeProgram() {
         String input = getInput();
-
-        InputProcessor inputProcessor = InputProcessor.getInstance();
-        List<Integer> nums = inputProcessor.processInput(input);
+        List<Integer> nums = makeListFromString(input);
 
         Calculator calculator = new Calculator();
         int result = calculator.calculateResult(nums);
@@ -27,5 +25,10 @@ public class Controller {
     private void printResult(int result) {
         OutputView outputView = OutputView.getInstance();
         outputView.printResult(result);
+    }
+
+    private List<Integer> makeListFromString(String input) {
+        InputProcessor inputProcessor = InputProcessor.getInstance();
+        return inputProcessor.processInput(input);
     }
 }
