@@ -6,23 +6,26 @@ import calculator.view.Constant;
 import java.util.List;
 
 public class Validator {
+    private static final String CUSTOM_DELIMITER_PREFIX = "//";
+    private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
+
     static ManageDelimiters manageDelimiters = new ManageDelimiters();
 
     private static boolean hasCustomDelimiter(String s) {
-        return s.startsWith("//") && (s.contains("\\n"));
+        return s.startsWith(CUSTOM_DELIMITER_PREFIX) && (s.contains(CUSTOM_DELIMITER_SUFFIX));
     }
 
     public static void validateCustomDelimiter(String s) {
-        if (s.indexOf("\\n") == 2)
+        if (s.indexOf(CUSTOM_DELIMITER_SUFFIX) == 2)
             throw new IllegalArgumentException(Constant.NOT_ENTERED_DELIMITER);
-        if (s.indexOf("\\n") > 3)
+        if (s.indexOf(CUSTOM_DELIMITER_SUFFIX) > 3)
             throw new IllegalArgumentException(Constant.NOT_ONE_DELIMITER);
-        if (s.indexOf("\\n") == 3)
+        if (s.indexOf(CUSTOM_DELIMITER_SUFFIX) == 3)
             manageDelimiters.addDelimiter(getCustomDelimiter(s));
     }
 
     private static String getCustomDelimiter(String s) {
-        return String.valueOf(s.charAt(2));
+        return String.valueOf(s.charAt(CUSTOM_DELIMITER_PREFIX.length()));
     }
 
     private static void validateDelimiter(String s) {
@@ -41,20 +44,18 @@ public class Validator {
         }
     }
 
-    public void validateInput(String s) {
+    public String validateInput(String s) {
         if (hasCustomDelimiter(s)) {
             validateCustomDelimiter(s);
-            s = s.substring(5);
+            s = s.substring(CUSTOM_DELIMITER_PREFIX.length() + CUSTOM_DELIMITER_SUFFIX.length() + 1);
         }
         validateDelimiter(s);
         validateNumbers(s);
+        return s;
     }
 
     public List<Integer> getConvertedInput(String s) {
         Converter converter = new Converter();
-        if (hasCustomDelimiter(s)) {
-            s = s.substring(5);
-        }
         return converter.convertToNumbers(s, manageDelimiters.getDelimiters());
     }
 }
