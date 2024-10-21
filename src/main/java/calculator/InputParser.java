@@ -18,7 +18,9 @@ public class InputParser {
             throw new IllegalArgumentException("잘못된 구분자 형식입니다.");
         }
         String custom = str.substring(2, idx);
-
+        if (custom.length() != 1) {
+            throw new IllegalArgumentException("커스텀 구분자는 한 글자여야 합니다.");
+        }
         return str.substring(idx + 1).split("custom");
     }
 }
