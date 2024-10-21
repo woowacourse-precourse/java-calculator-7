@@ -33,6 +33,14 @@ public class PositiveNumber {
         int number = Integer.parseInt(numberAdded);
         validatePositiveNumber(number);
         this.count += number;
+
+        validateIsResultPositive();
+    }
+
+    public void validateIsResultPositive() {
+        if (this.count < 0) {
+            throw new IllegalArgumentException("결과값이 양수가 아닙니다. 큰 수를 더했을 수 있습니다.");
+        }
     }
 
     public int getCount() {
