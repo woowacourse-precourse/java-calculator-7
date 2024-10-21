@@ -1,6 +1,9 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 public class Application {
 
@@ -13,15 +16,38 @@ public class Application {
         String customDelimiter = delimiterAndContent[0];
         String contentWithoutDelimiter = delimiterAndContent[1];
 
-        String[] numberArray;
-        int resultSum;
+        if (!negativeNumberChecker(input, customDelimiter)) {
 
-        checkValidDelimiters(contentWithoutDelimiter, customDelimiter);
-        numberArray = splitByDelimiter(contentWithoutDelimiter, customDelimiter);
-        resultSum = calculateSum(numberArray);
+            String[] numberArray;
+            int resultSum;
 
-        System.out.print("결과 : " + resultSum);
+            checkValidDelimiters(contentWithoutDelimiter, customDelimiter);
+            numberArray = splitByDelimiter(contentWithoutDelimiter, customDelimiter);
+            resultSum = calculateSum(numberArray);
+
+            System.out.print("결과 : " + resultSum);
+        }
     }
+
+    public static boolean negativeNumberChecker(String input, String customDelimiter) {
+        Pattern negativeNumberPattern;
+
+        if (customDelimiter.equals("-")) {
+            negativeNumberPattern = Pattern.compile("--\\d+");
+
+        } else {
+            negativeNumberPattern = Pattern.compile("-\\d+");
+        }
+
+        Matcher matcher = negativeNumberPattern.matcher(input);
+
+        if (matcher.find()) {
+            throw new IllegalArgumentException("Error: Invalid input");
+        } else {
+            return false;
+        }
+    }
+
 
     public static String[] getCustomDelimiterAndContent(String input) {
         if (input.startsWith("//")) {
