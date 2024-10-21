@@ -25,8 +25,6 @@ public class Application {
         } catch (IllegalArgumentException e) {
             throw e;
         }
-
-
     }
 }
 
@@ -118,7 +116,5 @@ class Calc {
         }
         return 0;
     }
-
-
 }
 
