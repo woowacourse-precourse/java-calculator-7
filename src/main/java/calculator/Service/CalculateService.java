@@ -1,9 +1,12 @@
-package calculator.Model;
+package calculator.Service;
 
+import calculator.Util.NumberParser;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CalculateModel {
+public class CalculateService {
+    private static final String DEFAULT_DELIMITER = ",|:";
+    private static final String CUSTOM_DELIMITER = "//(.*?)\\\\n(.*)";
 
     public int calculate(String input) {
         String[] numbers;
@@ -14,37 +17,23 @@ public class CalculateModel {
         }
 
         //custom 구분자 있는지 확인하고 구분자로 나누기
-        String regex = "//(.*?)\\\\n(.*)";
+        String regex = CUSTOM_DELIMITER;
         Matcher matcher = Pattern.compile(regex).matcher(input);
         if (matcher.find()) {
             String customDelimiter = matcher.group(1);
             numbers = matcher.group(2).split(customDelimiter);
         } else {
-            numbers = input.split(",|:");
+            numbers = input.split(DEFAULT_DELIMITER);
         }
         return sum(numbers);
     }
 
-    //SUM
     private int sum(String[] numbers) {
         int sum = 0;
         for (String number : numbers) {
-            sum += intParser(number);
+            sum += NumberParser.parseAndValidateNumber(number);
         }
         return sum;
     }
 
-    //문자열을 정수로 변환 + 예외처리
-    private int intParser(String number) {
-        System.out.println(number);
-        try {
-            int intNumber = Integer.parseInt(number);
-            if (intNumber < 0) {
-                throw new IllegalArgumentException("음수는 입력할 수 없습니다." + intNumber);
-            }
-            return intNumber;
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("잘못된 숫자 형식입니다." + number);
-        }
-    }
 }
