@@ -1,6 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
@@ -23,6 +24,16 @@ class ApplicationTest extends NsTest {
                 .isInstanceOf(IllegalArgumentException.class)
         );
     }
+
+    @Test
+    @DisplayName("기본 구분자를 사용하여 덧셈을 할 수 있다")
+    void calculateAdditionByUsingDefaultDelimiter(){
+        assertSimpleTest(() -> {
+            run("1:2,3:4");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
 
     @Override
     public void runMain() {
