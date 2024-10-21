@@ -21,8 +21,8 @@ public class InputParser {
             int delimiterEnd = input.indexOf("\\n");
             if (delimiterEnd != -1) {
                 String customDelimiter = input.substring(2, delimiterEnd);
-                if (customDelimiter.length() != 1) {
-                    throw new IllegalArgumentException("커스텀 구분자는 한 글자만 가능합니다.");
+                if (customDelimiter.isEmpty()) {
+                    throw new IllegalArgumentException("커스텀 구분자는 빈 문자열일 수 없습니다.");
                 }
                 delimiter = Pattern.quote(customDelimiter);
                 input = input.substring(delimiterEnd + 2);
