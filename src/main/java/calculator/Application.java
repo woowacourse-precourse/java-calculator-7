@@ -7,7 +7,9 @@ public class Application {
         // TODO: 프로그램 구현
         InputHandler inputHandler = new InputHandler();
         Calculator calculator = new Calculator();
+        OutputHandler outputHandler = new OutputHandler();
         String userInput = inputHandler.getInput();
-        System.out.println(calculator.calculate(userInput));
+        long number = calculator.calculate(userInput);
+        System.out.println(outputHandler.getOutput(number));
     }
 }
