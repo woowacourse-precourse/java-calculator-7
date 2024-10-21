@@ -1,13 +1,16 @@
 package calculator.business;
 
+import calculator.business.dto.CalculatorInputDTO;
+import calculator.business.dto.CalculatorOutputDTO;
+
 public class CalculatorService {
     private String delimiter;
 
 
-    public int run(String input) {
-        String inputWithoutDelimiter = selectCalculateMode(input);
+    public CalculatorOutputDTO run(CalculatorInputDTO calculatorInputDTO) {
+        String inputWithoutDelimiter = selectCalculateMode(calculatorInputDTO.getInput());
         int[] numbers = convertStringToInt(inputWithoutDelimiter);
-        return calculate(numbers);
+        return new CalculatorOutputDTO(calculate(numbers));
     }
 
     private int calculate(int[] numbers) {
