@@ -12,11 +12,14 @@ public class SeparatorManager {
         this.separators = new ArrayList<>(Arrays.asList(",", ":"));
     }
 
-    public boolean exists(String separator) {
+    private boolean exists(String separator) {
         return separators.contains(separator);
     }
 
     public void add(String separator) {
+        if (this.exists(separator)) {
+            throw new IllegalArgumentException("이미 존재하는 구분자입니다.");
+        }
         separators.add(separator);
     }
 

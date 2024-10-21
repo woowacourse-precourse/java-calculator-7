@@ -1,8 +1,7 @@
 package calculator;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 
 import calculator.util.SeparatorManager;
 import org.junit.jupiter.api.Test;
@@ -11,13 +10,15 @@ class SeparatorManagerTest {
     SeparatorManager separatorManager = new SeparatorManager();
 
     @Test
-    void 이미_있는_구분자라면_True_반환() {
-        assertTrue(separatorManager.exists(":"));
+    void 이미_있는_구분자라면_예외_처리() {
+        assertThatThrownBy(() -> separatorManager.add(":"))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    void 없는_구분자라면_False_반환() {
-        assertFalse(separatorManager.exists("!"));
+    void 없는_구분자라면_정상_작동() {
+        assertThatCode(() -> separatorManager.add(";"))
+                .doesNotThrowAnyException();
     }
 
     @Test
