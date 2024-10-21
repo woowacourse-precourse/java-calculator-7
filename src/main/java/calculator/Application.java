@@ -20,9 +20,19 @@ public class Application {
     }//main() end
 
     private static String[] stringSplit(String input){
+        if(input.startsWith("//")){
+            int separEndIndex = input.indexOf("\\n");
+            if(separEndIndex != -1){
+                String customSeparator = input.substring(2, separEndIndex);
+                String numbers = input.substring(separEndIndex+2);
+                return numbers.split(customSeparator);
+            } else {
+                throw new IllegalArgumentException("잘못된 형식입니다. \\n을 포함하여 다시 입력해주세요");
+            }//if end
+        } else {
             return input.split(",|:");
+        }//if end
     }//stringSplit() end
-
 
     private static boolean nullCheck(String input) {
         return input.isEmpty() || input.trim().isEmpty();
