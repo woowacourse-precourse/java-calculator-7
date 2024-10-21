@@ -2,9 +2,11 @@ package calculator;
 
 public class InputValidator {
     private Delimiter delimiter;
+    private Parser parser;
 
     public InputValidator(Delimiter delimiter) {
         this.delimiter = delimiter;
+        this.parser = new Parser();
     }
 
     public String validate(String input) {
@@ -20,7 +22,7 @@ public class InputValidator {
         validateNotStartsWithChar(input);
         validateNotStartsWithNegativeNumber(input);
 
-        return Parser.parse(input, delimiter);
+        return this.parser.parse(input, delimiter);
     }
 
     private void validateNotStartsWithNegativeNumber(String input) {

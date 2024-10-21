@@ -3,11 +3,11 @@ package calculator;
 import java.util.ArrayList;
 
 public class Parser {
-    static int result = 0;
-    static ArrayList<Integer> numbers;
+    private int result = 0;
+    private ArrayList<Integer> numbers;
 
-    public static String parse(String input, Delimiter delimiter) {
-        String delimiters = delimiter.getDelimiters(); // Delimiter에서 구분자 정보 가져오기
+    public String parse(String input, Delimiter delimiter) {
+        String delimiters = delimiter.getDelimiters();
         numbers = new ArrayList<>();
 
         for (String number : input.split(delimiters)) {
@@ -19,5 +19,9 @@ public class Parser {
         }
 
         return String.valueOf(result);
+    }
+
+    public int getResult() {
+        return result;
     }
 }

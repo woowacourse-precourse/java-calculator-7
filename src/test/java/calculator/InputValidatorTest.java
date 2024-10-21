@@ -7,11 +7,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class InputValidatorTest {
+    private Delimiter delimiter;
+    private Parser parser;
 
     @BeforeEach
-    void resetParserResult() {
-        Parser.result = 0;  // 각 테스트 실행 전 result 초기화
-
+    void setUp() {
+        delimiter = new Delimiter();  // 기본 Delimiter 생성
+        parser = new Parser();        // 각 테스트 실행 전에 Parser 인스턴스 생성
     }
 
 
@@ -20,12 +22,12 @@ class InputValidatorTest {
     void properResultStartsFromNumber() {
         //given
         String input = "1:2,3";
-        Delimiter delimiter = new Delimiter();
+        delimiter = new Delimiter();
         InputValidator inputValidator = new InputValidator(delimiter);
         //when
-        inputValidator.validate(input);
+        String result= inputValidator.validate(input);
         //then
-        assertEquals(6, Parser.result);
+        assertEquals("6", result);
     }
 
     @DisplayName("커스텀 구분자가 있으면 커스텀 구분자에 대해 정상 동작")
@@ -33,12 +35,12 @@ class InputValidatorTest {
     void properResultStartsFromCustomDelimiter() {
         //given
         String input = "//.\\n1:2,3.4";
-        Delimiter delimiter = new CustomDelimiter();
+        delimiter = new CustomDelimiter();
         InputValidator inputValidator = new InputValidator(delimiter);
         //when
-        inputValidator.validate(input);
+        String result= inputValidator.validate(input);
         //then
-        assertEquals(10, Parser.result);
+        assertEquals("10", result);
     }
 
     @DisplayName("빈 문자열 입력 0을 반환")
@@ -46,7 +48,7 @@ class InputValidatorTest {
     void testEmptyString() {
         // given
         String input = "";
-        Delimiter delimiter = new Delimiter();
+        delimiter = new Delimiter();
         InputValidator inputValidator = new InputValidator(delimiter);
 
         // when, then: 정상 동작 => 예외 미동작
@@ -63,7 +65,7 @@ class InputValidatorTest {
     void testStartsWithDelimiter() {
         // given
         String input = "//?\\n";
-        Delimiter delimiter = new Delimiter();
+        delimiter = new Delimiter();
         InputValidator inputValidator = new InputValidator(delimiter);
 
         // when, then: 정상 동작 => 예외 미동작
@@ -76,7 +78,7 @@ class InputValidatorTest {
     void testInvalidNonCustomDelimiter() {
         // given: 첫 시작이 문자이지만 커스텀 구분자가 아닌 경우
         String input1 = "abc,1,2,3";
-        Delimiter delimiter = new Delimiter();
+        delimiter = new Delimiter();
         InputValidator inputValidator = new InputValidator(delimiter);
         // when, then: 커스텀 구분자로 시작하지 않으면 예외 발생
         assertThrows(IllegalArgumentException.class, () -> inputValidator.validate(input1));
@@ -110,7 +112,7 @@ class InputValidatorTest {
     @Test
     void testisNotNegativeNumber() {
         String input = "-1,2,3";
-        Delimiter delimiter = new Delimiter();
+        delimiter = new Delimiter();
         InputValidator inputValidator = new InputValidator(delimiter);
         // when, then: 음수는 예외 발생
         assertThrows(IllegalArgumentException.class, () -> inputValidator.validate(input));
