@@ -77,3 +77,7 @@
 ### 7️⃣ 구분자를 단순 필드 변수로 관리중 → 구분자 관리를 위한 별도 클래스 생성
 
 - [x] `Delimiters` 클래스를 생성하여, 구분자 목록을 관리하도록 수정한다.
+
+### 8️⃣ 커스텀 구분자에 대한 처리를 `InputParser` 클래스에서 전담하고 있는 상황 → `CustomDelimiterProcessor` 클래스 생성을 통한 책임 분리
+
+- [ ] 기존 `InputParser` 클래스에 있던 커스텀 구분자 처리 로직을 `CustomDelimiterProcessor` 클래스로 이동시킨다.
