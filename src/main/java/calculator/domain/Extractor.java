@@ -23,6 +23,9 @@ public class Extractor {
     }
 
     public int[] extractNumbersWithDefaultDelimiter(String delimitedNumsWithDefault) {
+        if (!delimitedNumsWithDefault.matches("^[0-9]+((.)[0-9]+)*$")) {
+            throw new IllegalArgumentException("입력 형식이 올바르지 않습니다.");
+        }
         String[] splitNumbers = delimitedNumsWithDefault.split(DEFAULT_DELIMITER);
         return Arrays.stream(splitNumbers).mapToInt(this::parseNumber).toArray();
     }
@@ -34,7 +37,11 @@ public class Extractor {
     }
 
     private String getNumbersWithoutPrefix(String delimitedNumsWithCustom) {
-        return delimitedNumsWithCustom.substring(NUMBER_BEGIN_INDEX);
+        String nums = delimitedNumsWithCustom.substring(NUMBER_BEGIN_INDEX);
+        if (nums.matches("^[0-9]+((.)[0-9]+)*$")) {
+            return nums;
+        }
+        throw new IllegalArgumentException("입력 형식이 올바르지 않습니다.");
     }
 
     private int parseNumber(String num) {

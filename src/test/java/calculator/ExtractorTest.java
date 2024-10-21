@@ -144,4 +144,27 @@ class ExtractorTest {
         //when & then
         assertFalse(ex.isDefaultDelimiterUsed(input));
     }
+
+    @Test
+    public void 마지막은_숫자로_끝나야한다() {
+        //given
+        Extractor ex = new Extractor();
+        String input = "//-\\n1-2-3-";
+
+        //when
+        String delimiter = ex.extractCustomDelimiter(input);
+
+        //then
+        assertThrows(IllegalArgumentException.class, () -> ex.extractNumbersWithCustomDelimiter(input, delimiter));
+    }
+
+    @Test
+    public void 마지막은_숫자로_끝나야한다2() {
+        //given
+        Extractor ex = new Extractor();
+        String input = "1,2,3,";
+
+        //when & then
+        assertThrows(IllegalArgumentException.class, () -> ex.extractNumbersWithDefaultDelimiter(input));
+    }
 }
