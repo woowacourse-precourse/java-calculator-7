@@ -12,6 +12,14 @@ public class Application {
         // 문자열 입력 받기
         String input = Console.readLine();
         
-
+        // 기본 구분자와 숫자 구분하여 숫자만 문자열 배열에 넣기
+        String[] numbers = input.split(",|:");
+            // 테스트 위해 구분된 숫자 출력
+            /*
+            for(String number : numbers){
+                System.out.println(number);
+            }
+            */
+        
     }
 }
