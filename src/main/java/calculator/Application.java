@@ -1,8 +1,7 @@
 package calculator;
 
-import calculator.delimiter.CustomDelimiter;
-import calculator.delimiter.DefaultDelimiter;
 import calculator.delimiter.Delimiter;
+import calculator.delimiter.DelimiterFactory;
 
 public class Application {
     public static void main(String[] args) {
@@ -12,18 +11,11 @@ public class Application {
         outputService.welcome();
 
         String input = inputService.getInput();
-        Delimiter delimiter = isCustomDelimiter(input);
+        Delimiter delimiter = DelimiterFactory.createDelimiter(input);
 
         Parser parser = new Parser();
         InputValidator inputValidator = new InputValidator(delimiter, parser);
 
         outputService.printResult(inputValidator.validate(input));
-    }
-
-    private static Delimiter isCustomDelimiter(String input) {
-        if (input.startsWith("//")) {
-            return new CustomDelimiter();
-        }
-        return new DefaultDelimiter();
     }
 }
