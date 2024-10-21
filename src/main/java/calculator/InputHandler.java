@@ -29,9 +29,7 @@ public class InputHandler {
 
     private void addCustomSeparator(String separatorText) {
         separatorText = separatorText.substring(2);
-        for (char separator : separatorText.toCharArray()) {
-            separators = separators + separator;
-        }
+        separators = separatorText.concat(separatorText);
     }
 
     private void splitInputText() {
