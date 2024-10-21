@@ -16,6 +16,21 @@ public final class ParsingUtil {
     private ParsingUtil() {
     }
 
+    public static List<String> extractNumbers(String input) {
+        if (containsCustomDelimiter(input)) {
+            return parseWithCustomDelimiter(input);
+        }
+        return parseWithDefault(input);
+    }
+
+    public static List<String> parseWithDefault(String input) {
+        if (isInputIsNullOrEmpty(input)) {
+            throw new IllegalArgumentException(CalculatorError.INPUT_IS_NULL_OR_EMPTY.getMessage());
+        }
+
+        return Arrays.asList(input.split(DEFAULT_DELIMITER_REGEX));
+    }
+
     public static List<String> parseWithCustomDelimiter(String input) {
         List<String> delimiters = extractCustomDelimiter(input);
         String[] split = input.split("\n");
@@ -28,13 +43,6 @@ public final class ParsingUtil {
         return parseWithDefault(numbers);
     }
 
-    public static List<String> parseWithDefault(String input) {
-        if (isInputIsNullOrEmpty(input)) {
-            throw new IllegalArgumentException(CalculatorError.INPUT_IS_NULL_OR_EMPTY.getMessage());
-        }
-
-        return Arrays.asList(input.split(DEFAULT_DELIMITER_REGEX));
-    }
 
     public static List<String> extractCustomDelimiter(String input) {
         Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_REGEX);
