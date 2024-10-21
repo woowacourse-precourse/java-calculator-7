@@ -19,6 +19,7 @@ public class StringCalculator {
 
         // 커스텀 구분자가 있는 경우 처리
         if (input.startsWith("//")) {
+            input = input.replace("\\n", "\n");
             String[] result = extractCustomDelimiter(input);
             delimiter = result[0];
             numbers = result[1];
