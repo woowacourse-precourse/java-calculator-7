@@ -7,20 +7,36 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
 
         String separators = ",|:";
-        String input = Console.readLine();
+        String input;
 
-        if (input.charAt(0) == '/') {
-            separators += "|" + input.charAt(2); // 커스텀 구분자 추가
-            input = input.substring(5); // 앞의 "//_\n" 버리기
+        try {
+            input = Console.readLine();
+            System.out.println(input.charAt(4));
+
+            // 예외 처리 - 빈 문자열 입력 시
+            if (input == null || input.isEmpty()) {
+                throw new IllegalArgumentException("입력값이 비어 있습니다.");
+            }
+
+            // 커스텀 구분자 체크
+            if (input.startsWith("//")) {
+                if (input.length() < 4 || input.charAt(3) != '\n') {
+                    throw new IllegalArgumentException("커스텀 구분자의 형식이 잘못되었습니다.");
+                }
+                separators += "|" + input.charAt(2); // 커스텀 구분자 추가
+                input = input.substring(4); // 앞의 "//_\n" 제거
+            }
+
+            String[] sArr = input.split(separators);
+            long answer = 0;
+            for (String s : sArr) {
+                answer += Integer.parseInt(s);
+            }
+
+            System.out.println("결과 : " + answer);
+
+        } catch (IllegalArgumentException e) {
+            return; // 프로그램 종료
         }
-
-        String[] sArr = input.split(separators);
-
-        long answer = 0;
-        for (String s : sArr) {
-            answer += Integer.parseInt(s);
-        }
-
-        System.out.println("결과 : " + answer);
     }
 }
