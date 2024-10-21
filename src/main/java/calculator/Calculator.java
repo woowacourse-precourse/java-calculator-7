@@ -20,4 +20,15 @@ public class Calculator {
         String[] tokens = input.split(delimiter);
         return sum(tokens);
     }
+
+    private static int sum(String[] tokens) {
+        int total = 0;
+
+        for (String token : tokens) {
+            int number = Integer.parseInt(token);
+            total += number;
+        }
+
+        return total;
+    }
 }
