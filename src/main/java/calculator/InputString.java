@@ -26,8 +26,13 @@ public class InputString {
         }
 
         return Arrays.stream(input.split(delimiter))
-                .map(Integer::valueOf)
-                .toList();
+            .peek(s -> {
+                if (!s.matches("\\d+")) {
+                    throw new IllegalArgumentException("숫자가 아닌 값이나 음수가 포함되어 있습니다.");
+                }
+            })
+            .map(Integer::valueOf)
+            .toList();
     }
 
     private String findDelimiter(String input) {
