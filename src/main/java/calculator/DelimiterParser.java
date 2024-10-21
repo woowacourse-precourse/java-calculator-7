@@ -28,7 +28,7 @@ public class DelimiterParser {
             String addedDelimiter = substr[0].substring(2);
 
             if (substr.length == 1 || addedDelimiter.isEmpty()) {
-                throw new IllegalArgumentException("Invalid input: ");
+                throw new IllegalArgumentException("Invalid input: there is no valid custom delimiter.");
             }
 
             String customDelimiter = DEFAULT_DELIMITER + "|" + Pattern.quote(addedDelimiter);
