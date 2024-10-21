@@ -16,8 +16,7 @@ class StringCalculator{
         if (matcher.find()){
             String customDelimiter = Pattern.quote(matcher.group(1));
             input = matcher.group(2);
-            String[] numbers = input.split(customDelimiter);
-            return sumNumbers(numbers);
+            delimiter = customDelimiter;
         }
         String[] numbers = input.split(delimiter);
         return sumNumbers(numbers);
@@ -31,7 +30,7 @@ class StringCalculator{
             if (!number.isEmpty()){
                 try{
                     int parsedNumber = Integer.parseInt(number);
-                    if (parsedNumber <= 0){
+                    if (parsedNumber < 0){
                         throw new IllegalArgumentException("양수만 입력가능합니다: " + parsedNumber);
                     }
                     sum += parsedNumber;
