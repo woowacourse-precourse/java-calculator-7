@@ -35,7 +35,7 @@ class ParserTest {
         ///given
         delimiter = new DefaultDelimiter();
         String input = delimiter.parseDelimiter("1,2,3:4");
-        String require= "10";
+        String require = "10";
         //when
         String result = parser.parse(input, delimiter);
         //then

@@ -33,7 +33,7 @@ public class CustomDelimiter implements Delimiter {
                 throw new IllegalArgumentException(ERROR_NUMBER_AS_DELIMITER);
             }
 
-            customDelimiter = MetaCharacterUtil.escapeMetaCharacters(customDelimiter);
+            customDelimiter = MetaCharacterUtil.isContainMetaCharacters(customDelimiter);
             delimiters += "|" + customDelimiter;  // 기본 구분자에 커스텀 구분자 추가
             return input.substring(CUSTOM_DELIMITER_EXPRESSION_LENGTH + 1); // 커스텀 구분자를 제외한 나머지 문자열 반환
         }
