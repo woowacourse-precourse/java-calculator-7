@@ -7,7 +7,7 @@ import calculator.service.Parser;
 public class StringAddCalculator {
 
     public static void run() {
-        String line = Input.inputMessage();
-        Output.printResult(Parser.parse(line));
+        String input = Input.inputMessage();
+        Output.printResult(Parser.parse(input));
     }
 }

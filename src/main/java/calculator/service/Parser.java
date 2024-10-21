@@ -10,22 +10,22 @@ public class Parser {
     private static final String BASIC_DELIMITER = "[" + COMMA + SEMICOLON + "]";
     private static final String CUSTOM_DELIMITER = "^//(.*?)\\\\n(.*)";
 
-    public static int parse(String line) {
-        if (isCustomDelimiter(line)) {
-            return parseCustomDelimiter(line);
+    public static String parse(String input) {
+        if (isCustomDelimiter(input)) {
+            return parseCustomDelimiter(input);
         } else {
-            return parseBasicDelimiter(line);
+            return parseBasicDelimiter(input);
         }
     }
 
-    private static int parseBasicDelimiter(String line) {
-        String[] numbers = line.split(BASIC_DELIMITER);
+    private static String parseBasicDelimiter(String input) {
+        String[] numbers = input.split(BASIC_DELIMITER);
         return sumNumbers(numbers);
     }
 
-    private static int parseCustomDelimiter(String line) {
+    private static String parseCustomDelimiter(String input) {
         Pattern pattern = Pattern.compile(CUSTOM_DELIMITER);
-        Matcher matcher = pattern.matcher(line);
+        Matcher matcher = pattern.matcher(input);
 
         if (matcher.find()) {
             String customDelimiter = Pattern.quote(matcher.group(1));
@@ -38,11 +38,11 @@ public class Parser {
         }
     }
 
-    private static boolean isCustomDelimiter(String line) {
-        return line.matches(CUSTOM_DELIMITER);
+    private static boolean isCustomDelimiter(String input) {
+        return input.matches(CUSTOM_DELIMITER);
     }
 
-    private static int sumNumbers(String[] numbers) {
+    private static String sumNumbers(String[] numbers) {
         int sum = 0;
 
         for (String number : numbers) {
@@ -59,7 +59,7 @@ public class Parser {
         }
 
 
-        return sum;
+        return Integer.toString(sum);
     }
 
 }
