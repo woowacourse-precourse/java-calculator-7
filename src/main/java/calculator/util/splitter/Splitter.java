@@ -1,8 +1,9 @@
-package calculator.util.regex;
+package calculator.util.splitter;
 
 import static calculator.domain.delimiter.DelimiterPattern.CUSTOM_DELIMITER;
 
 import calculator.domain.delimiter.Delimiters;
+import calculator.util.regex.Regex;
 import java.util.Arrays;
 import java.util.List;
 

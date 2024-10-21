@@ -8,7 +8,7 @@ import calculator.io.ConsoleInputHandler;
 import calculator.io.ConsoleOutputHandler;
 import calculator.util.converter.IntegerConvertible;
 import calculator.util.converter.NumberConvertible;
-import calculator.util.regex.Splitter;
+import calculator.util.splitter.Splitter;
 
 public class Application {
 

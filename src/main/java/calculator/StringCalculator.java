@@ -7,7 +7,7 @@ import calculator.domain.delimiter.Delimiters;
 import calculator.io.ConsoleInputHandler;
 import calculator.io.ConsoleOutputHandler;
 import calculator.util.converter.NumberConvertible;
-import calculator.util.regex.Splitter;
+import calculator.util.splitter.Splitter;
 import java.util.List;
 
 public class StringCalculator {

@@ -1,4 +1,4 @@
-package calculator.util.regex;
+package calculator.util.splitter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
