@@ -1,7 +1,13 @@
 package calculator;
 
+import calculator.controller.AdditionController;
+import calculator.service.AdditionService;
+
 public class Application {
+
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        AdditionController additionController = new AdditionController(new AdditionService());
+        additionController.run();
     }
+
 }
