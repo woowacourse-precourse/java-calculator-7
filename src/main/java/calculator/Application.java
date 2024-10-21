@@ -11,17 +11,27 @@ public class Application {
         String sep = ",|;";
         int sum = 0;
 
-        if (input.startsWith("//")) {
-            sep = input.split("\n")[0].substring(1);
+        if (input.contains("\\n")) {
+            String[] splitStr = input.split("\\\\n");
+            sep = Pattern.quote(splitStr[0].substring(2));
+            input = splitStr[1];
         }
 
         String[] strArr = input.split(sep);
-        int[] intArr = new int[strArr.length];  // strArr int 형으로 변환해서 넣을 배열
-        for (String s : strArr) {
-            sum += Integer.parseInt(s);
-        }
+        int[] intArr = new int[strArr.length];
 
-        System.out.println("결과 : " + sum);
+        try {
+            for (int i = 0; i < strArr.length; i++) {
+                intArr[i] = Integer.parseInt(strArr[i]);
+                if (intArr[i] < 0) {
+                    throw new IllegalArgumentException();
+                }
+                sum += intArr[i];
+            }
+            System.out.println("결과 : " + sum);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException();
+        }
 
     }
 }
