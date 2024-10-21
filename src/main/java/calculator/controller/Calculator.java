@@ -1,9 +1,9 @@
 package calculator.controller;
 
-import calculator.domain.CalculatorNumberFactory;
-import calculator.domain.CalculatorNumbers;
-import calculator.domain.DelimiterFactory;
-import calculator.domain.Delimiters;
+import calculator.domain.calculator.CalculatorNumberFactory;
+import calculator.domain.calculator.CalculatorNumbers;
+import calculator.domain.delimeter.DelimiterFactory;
+import calculator.domain.delimeter.Delimiters;
 import calculator.dto.ExtractionResult;
 import calculator.service.DelimiterExtractor;
 import calculator.service.StringSplitter;

@@ -2,8 +2,8 @@ package calculator.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import calculator.domain.Delimiter;
-import calculator.domain.Delimiters;
+import calculator.domain.delimeter.Delimiter;
+import calculator.domain.delimeter.Delimiters;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;

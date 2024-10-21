@@ -1,4 +1,4 @@
-package calculator.domain;
+package calculator.domain.calculator;
 
 public class CalculatorNumber {
     private final long value;

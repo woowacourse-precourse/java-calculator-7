@@ -1,4 +1,4 @@
-package calculator.domain;
+package calculator.domain.delimeter;
 
 public class Delimiter {
     private final String value;
@@ -24,7 +24,7 @@ public class Delimiter {
             throw new IllegalArgumentException("구분자는 '//' 이거나 '\\n' 일 수 없습니다.");
         }
     }
-    
+
     public String getValue() {
         return value;
     }
