@@ -14,7 +14,14 @@ public class StringCalculator {
         // 숫자 합산
         int sum = 0;
         for (String number : numbers) {
-            sum += Integer.parseInt(number);
+            // 문자열에 포함된 공백 제거
+            int num = Integer.parseInt(number.trim());
+
+            // 음수 예외 처리
+            if (num < 0) {
+                throw new IllegalArgumentException("음수는 허용되지 않습니다.");
+            }
+            sum += num;
         }
 
         // 결과 출력
