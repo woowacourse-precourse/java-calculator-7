@@ -1,7 +1,6 @@
 package calculator;
 import camp.nextstep.edu.missionutils.Console;
 
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.util.ArrayList;
 import java.util.List;
 import java.lang.String;
@@ -12,9 +11,15 @@ public class Application {
         int result;
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
-        result = checkString(input);
+        try {
+            result = checkString(input);
+        } catch (IllegalArgumentException e) {
+            System.out.println("잘못된 값을 입력하여 프로그램이 종료됩니다.");
+            return;
+        }
         System.out.println("결과 : " + result);
     }
+
 
     public static int checkString(String input) {
         int answer = 0;
@@ -38,11 +43,17 @@ public class Application {
         String customChecker1 = input.substring(0,2);
         String customChecker2 = input.substring(3,5);
 
-        if (customChecker1.equals(c1) && (customChecker2.equals(c2))) {
+        if (customChecker1.equals(c1) && customChecker2.equals(c2)) { // 정상적인 구분자입력의 경우
             delim = new char[3];
+            if (48 <= input.charAt(2) && input.charAt(2) <= 57) { // 구분자 입력을 숫자로 한 경우
+                throw new IllegalArgumentException("잘못된 입력 값입니다: 구분자가 숫자입니다.");
+            }
             delim[2] = input.charAt(2);
         }
-        else {
+        else if (customChecker1.equals(c1) && input.contains(c2)) { // 커스텀문자열이 2자 이상
+            throw new IllegalArgumentException("잘못된 입력 값입니다: 커스텀 문자열이 2자 이상입니다.");
+        }
+        else { // 커스텀구분자 없음
             delim = new char[2];
         }
         delim[0] = ',';
