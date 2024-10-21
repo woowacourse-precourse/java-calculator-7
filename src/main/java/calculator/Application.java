@@ -2,6 +2,15 @@ package calculator;
 
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+
+        String customDivision = Input.findCustomDivision();
+
+        if (Input.findCustomDivision() != null)
+            Division.add(customDivision);
+
+        Calculator.run(Input.numbers(), Division.regularExpression());
+
+        System.out.println("결과 : " + Calculator.result());
+
     }
 }
