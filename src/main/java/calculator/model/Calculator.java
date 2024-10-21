@@ -55,9 +55,9 @@ public class Calculator {
 
     private void setMode(String input) {
         if (tokenizer.isExistsCustomDelimiterToken(input)) {
-            mode = DEFAULT;
-        } else {
             mode = CUSTOM;
+        } else {
+            mode = DEFAULT;
         }
     }
 }
