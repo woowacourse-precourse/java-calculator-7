@@ -58,9 +58,13 @@ public class Application {
         if(!expression.matches("[0-9,]+"))
             throw new IllegalArgumentException("계산식은 양수의 숫자와 콜론(:), 쉼표(,), 커스텀 구분자로만 입력할 수 있습니다.");
 
-        // 숫자로 시작해서 숫자로 끝나지 않거나, 구분자를 연속으로 사용 할 경우 입력 오류
-        if(!expression.matches("^[0-9]$|^[0-9].*[0-9]$") || expression.contains(",,"))
-            throw new IllegalArgumentException("입력 양식을 지켜주세요. ex) 1,2:3, //*\\n1:2*3");
+        // 숫자로 시작해서 숫자로 끝나지 않으면
+        if(!expression.matches("^[0-9]$|^[0-9].*[0-9]$"))
+            throw new IllegalArgumentException("계산식은 숫자로 시작해서 숫자로 끝나야 합니다. 입력 양식을 지켜주세요. ex) 1,2:3, //*\\n1:2*3");
+
+        // 구분자를 연속으로 사용 할 경우 입력 오류
+        if(expression.contains(",,"))
+            throw new IllegalArgumentException("구분자는 연속으로 사용 할 수 없습니다. 입력 양식을 지켜주세요. ex) 1,,2(x)");
     }
 
     // 구분자로 분리한 숫자들의 합을 구해서 반환하는 메소드
