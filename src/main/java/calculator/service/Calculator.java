@@ -14,7 +14,7 @@ public class Calculator {
             input = input.substring(customEnd + 2);
 
             // 커스텀 구분자로 분리
-            return input.split(separator);
+            return input.split(separator + "|[,:]");
         }
         // 기본 구분자
         return input.split("[,:]");
