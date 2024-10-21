@@ -12,7 +12,9 @@ public class Application {
         Input.readLine();
 
         Calculator calculator = new Calculator();
-        Output.outLine(calculator.calculateSum(Input.getInput()));
+        int result = calculator.calculateSum(Input.getInput());
+
+        Output.outLine(result);
 
     }
 }

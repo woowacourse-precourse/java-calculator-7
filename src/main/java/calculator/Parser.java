@@ -18,7 +18,6 @@ public class Parser {
         return parser;
     }
 
-
     public ArrayList<Integer> parseNums(String input){
 
         if(Objects.isNull(input) || input.equals("")) {
@@ -33,22 +32,21 @@ public class Parser {
         return nums;
     }
 
-
     private void addParsedNums(String input){
-        String num = "";
+        StringBuilder num = new StringBuilder();
 
-        for(int i=0; i<input.length(); i++){
+        for(int i=0; i<input.length(); i++) {
 
             String currentString = input.substring(i,i+1);
 
-            if(checkInteger(currentString)){ // 숫자가 맞는 경우
-                num += currentString;
+            if (checkInteger(currentString)){ // 숫자가 맞는 경우
+                num.append(currentString);
             } else { // 구분자인 경우
-                addNum(num);
-                num = "";
+                addNum(num.toString());
+                num = new StringBuilder();
             }
         }
-        addNum(num);
+        addNum(num.toString());
     }
 
     private String parseSeparator(String input) {
@@ -99,15 +97,12 @@ public class Parser {
             Integer.parseInt(str);
             return true;
         }catch (NumberFormatException e){ // 문자가 숫자가 아닌 경우 처리
-
             // 문자가 구분자에 속한다면,
             for(String s : separators)
                 if(str.equals(s)) return false;
-
             // 구분자에 속하지 않는 문자가 등장한 경우
             throw new IllegalArgumentException("Invalid input: "+ str);
         }
-
     }
 
     public ArrayList<Integer> getNums(){
