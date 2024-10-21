@@ -17,8 +17,8 @@ public class CalculatorController {
     public void run() {
         ArrayList<String> separate = new ArrayList<>(Arrays.asList(",", ":"));
         String str = calculatorView.input();
-        if (calculatorModel.CustomDiscrimination(str)) {
-            separate.add(calculatorModel.CustomExtraction(str));
+        if (calculatorModel.customDiscrimination(str)) {
+            separate.add(calculatorModel.customExtraction(str));
             calculatorView.output(calculatorModel.sumCalculator(str.substring(str.indexOf("\\n") + 2), separate));
         } else {
             calculatorView.output(calculatorModel.sumCalculator(str, separate));

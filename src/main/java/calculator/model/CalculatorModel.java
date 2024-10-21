@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 public class CalculatorModel {
 
-    public Boolean CustomDiscrimination(String input) {
+    public Boolean customDiscrimination(String input) {
         if (input.startsWith("//") && input.contains("\\n")) {
             return true;
         } else if (!input.startsWith("//") && !input.contains("\\n")) {
@@ -16,7 +16,7 @@ public class CalculatorModel {
         }
     }
 
-    public String CustomExtraction(String customInput) {
+    public String customExtraction(String customInput) {
         Pattern compiledPattern = Pattern.compile("//" + "(.*?)" + "\\\\n");
         Matcher matcher = compiledPattern.matcher(customInput);
         if (matcher.find()) {

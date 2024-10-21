@@ -15,14 +15,14 @@ class CalculatorModelTest {
     @ValueSource(strings = {"//;\\n1,2;3", "//\\n1,2,3,4"})
     void 커스텀_구분자_지정_문자_올바른_사용(String input) {
         CalculatorModel cm = new CalculatorModel();
-        Assertions.assertThat(cm.CustomDiscrimination(input)).isEqualTo(true);
+        Assertions.assertThat(cm.customDiscrimination(input)).isEqualTo(true);
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"//;1,2:3", ";\\n1,2,3;4"})
     void 커스텀_구분자_지정_문자_사용_예외(String input) {
         CalculatorModel cm = new CalculatorModel();
-        assertThatThrownBy(() -> cm.CustomDiscrimination(input))
+        assertThatThrownBy(() -> cm.customDiscrimination(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -30,26 +30,26 @@ class CalculatorModelTest {
     @ValueSource(strings = {"1,2,3", "n1,2;3", " 1,2,3,4"})
     void 커스텀_구분자_지정_X(String input) {
         CalculatorModel cm = new CalculatorModel();
-        Assertions.assertThat(cm.CustomDiscrimination(input)).isEqualTo(false);
+        Assertions.assertThat(cm.customDiscrimination(input)).isEqualTo(false);
     }
 
     @Test
     void 커스텀_구분자_지정_추출_O() {
         CalculatorModel cm = new CalculatorModel();
-        Assertions.assertThat(cm.CustomExtraction("//;\\n1,2;3")).isEqualTo(";");
+        Assertions.assertThat(cm.customExtraction("//;\\n1,2;3")).isEqualTo(";");
     }
 
     @Test
     void 커스텀_구분자_지정_빈값_추출() {
         CalculatorModel cm = new CalculatorModel();
-        Assertions.assertThat(cm.CustomExtraction("//\\n1,2;3")).isEqualTo("");
+        Assertions.assertThat(cm.customExtraction("//\\n1,2;3")).isEqualTo("");
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"//1\\n1,2,3", "//ad-\\n1,2,3"})
     void 커스텀_구분자_지정_예외처리(String input) {
         CalculatorModel cm = new CalculatorModel();
-        assertThatThrownBy(() -> cm.CustomExtraction(input))
+        assertThatThrownBy(() -> cm.customExtraction(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
