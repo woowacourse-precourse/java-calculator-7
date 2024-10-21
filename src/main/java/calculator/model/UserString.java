@@ -13,8 +13,7 @@ public class UserString {
 
     private final String[] splitValue;
     private final StringBuilder DELIMITERS = new StringBuilder(",:");
-
-
+    
     public UserString(String userInput) {
 
         if (userInput.startsWith(CUSTOM_PREFIX)) {
@@ -43,7 +42,7 @@ public class UserString {
     }
 
     public BigInteger sum() {
-        BigInteger sum = new BigInteger("0");
+        BigInteger sum = BigInteger.ZERO;
         for (String num : splitValue) {
             sum = sum.add(new BigInteger(num));
         }

@@ -16,7 +16,7 @@ public class CalculatorController {
         String userInput = inputView.input();
 
         if (userInput.isBlank()) {
-            return new BigInteger("0");
+            return BigInteger.ZERO;
         }
 
         UserString userString = new UserString(userInput);
