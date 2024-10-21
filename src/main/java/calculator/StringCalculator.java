@@ -5,6 +5,13 @@ public class StringCalculator {
 
         String delimiter = ",|:"; // 구분자
 
+        // 구분자 커스텀
+        if (input.startsWith("//") && input.contains("\\n")) {
+            int delimiterIndex = input.indexOf("\\n");
+            delimiter = input.substring(2, delimiterIndex);
+            input = input.substring(delimiterIndex + 2);
+        }
+
         if (input == null || input.isEmpty()) {
             return 0;
         }
