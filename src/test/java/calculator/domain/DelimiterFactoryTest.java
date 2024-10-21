@@ -24,7 +24,8 @@ class DelimiterFactoryTest {
     @ParameterizedTest(name = "\"{0}\"은 기본 구분자가 아님")
     void 기본_구분자_생성_실패(String input) {
         assertThatThrownBy(() -> create(input))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(errorMessage(input));
     }
 
     @DisplayName("커스텀 구분자는 //와 \\n 사이에 위치한 1 ~ 3자리 문자")
@@ -39,7 +40,16 @@ class DelimiterFactoryTest {
     @ParameterizedTest(name = "\"{0}\"은 커스텀 구분자가 아님")
     void 커스텀_구분자_생성_실패(String input) {
         assertThatThrownBy(() -> create(input))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(errorMessage(input));
+    }
+
+    private String errorMessage(String input) {
+        return String.join("은 ", input, """
+                입력 형식에 맞지 않습니다.
+                - 기본 구분자는 쉼표(,)와 콜론(:)을 사용합니다. ex) 1,2:3
+                - 커스텀 구분자는 //와 \\n 사이에 1~3개 문자를 입력해 사용합니다. ex) //;\\n1;2;3
+                """);
     }
 
 }

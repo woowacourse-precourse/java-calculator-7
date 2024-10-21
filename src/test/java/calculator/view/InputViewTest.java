@@ -48,7 +48,8 @@ class InputViewTest {
         systemIn(input);
 
         assertThatThrownBy(() -> inputView.read())
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("공백만 입력할 수 없습니다. 빈 문자열은 0입니다.");
     }
 
     private static Stream<Arguments> provideWrongInput() {

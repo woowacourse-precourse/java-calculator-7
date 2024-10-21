@@ -40,13 +40,13 @@ public class PositiveNumber {
 
     private static void validateNegative(final String number) {
         if (number.startsWith(MINUS)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("0(or 빈 문자)을 포함한 양수를 +없이 입력해 주세요.");
         }
     }
 
     private static void validateOnlyDigits(final String number) {
         if (!hasOnlyDigits(number)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("구분자를 제외한 입력은 숫자만 입력해 주세요.");
         }
     }
 
@@ -62,7 +62,7 @@ public class PositiveNumber {
 
     private static void validateLength(final String number) {
         if (isOutOfRange(number.length())) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(MAX_LENGTH_THRESHOLD + "자리를 초과한 양수는 계산할 수 없습니다.");
         }
     }
 

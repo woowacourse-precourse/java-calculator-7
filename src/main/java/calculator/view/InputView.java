@@ -22,13 +22,13 @@ public class InputView {
 
     private void validateNull(final String input) {
         if (input == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("시스템 오류로 프로그램을 종료합니다. 다시 실행해 주세요");
         }
     }
 
     private void validateWhiteSpaces(final String input) {
         if (isWhitespaces(input)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("공백만 입력할 수 없습니다. 빈 문자열은 0입니다.");
         }
     }
 
