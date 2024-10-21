@@ -1,6 +1,6 @@
 package calculator;
-
 import camp.nextstep.edu.missionutils.Console;
+
 
 public class Application {
     public static void main(String[] args) {
@@ -9,7 +9,7 @@ public class Application {
         app.Calculate();
     }
 
-    private static final String DEFAULT_SEPARATOR = ",:";
+    private static final String DEFAULT_SEPARATOR = "[,:]";
 
     public void Calculate() {
         printUserInputMessage();
@@ -22,7 +22,7 @@ public class Application {
             String formattedInput = formatBackslash(userInput);
             String refinedInput = removeSeparatorInitializer(formattedInput);
 
-            int result = calculateSum(refinedInput, getCustomSeparator(userInput));
+            int result = calculateSum(refinedInput, formatSeparator(getCustomSeparator(userInput)));
             printResult(result);
         } else {
             throw new IllegalArgumentException("잘못된 입력입니다.");
@@ -42,7 +42,10 @@ public class Application {
     }
 
     private String removeSeparator(String str, String separator) {
-        return str.replaceAll(formatSeparator(separator), "");
+        if (separator.equals("[,:]")) {
+            return str.replaceAll(separator, "");
+        }
+        return str.replace(separator, "");
     }
 
     private boolean isStringWithDefaultSeparator(String input) {
@@ -82,7 +85,7 @@ public class Application {
     }
 
     private String formatSeparator(String separator) {
-        return "[" + separator.replace("\\", "\\\\") + "]";
+        return separator.replace("\\", "\\\\");
     }
 
     private int calculateSum(String input, String separator) {
@@ -90,7 +93,7 @@ public class Application {
             return 0;
         }
 
-        String[] nums = input.split(formatSeparator(separator));
+        String[] nums = input.split(separator);
         int result = 0;
 
         for (String num : nums) {
