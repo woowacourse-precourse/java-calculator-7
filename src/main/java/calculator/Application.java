@@ -34,6 +34,9 @@ public class Application {
 
             // //와 \n로 이루어진 문자열이 있을 경우 그 사이의 커스텀 구분자 가져오기
             while(matcher.find()) {
+                if(matcher.group().length() > 5) {
+                    throw new IllegalArgumentException("구분자 연속 사용");
+                }
                 customDelimiters.append(matcher.group(), 2, matcher.group().length()-2);
                 count += matcher.group().length();
             }
