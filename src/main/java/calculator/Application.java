@@ -31,9 +31,21 @@ public class Application {
         return numbers.split(delimiter);
     }
 
+    private static int convertNumber(String token) {
+        int number = Integer.parseInt(token);
+        validateIsInputNegative(number);
+        return number;
+    }
+
     private static void validateIsInputEmpty(String input) {
         if (input == null || input.isEmpty()) {
             throw new IllegalArgumentException("올바르지 않은 입력값 입니다.");
+        }
+    }
+
+    private static void validateIsInputNegative(int number) {
+        if (number < 0) {
+            throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
         }
     }
 }
