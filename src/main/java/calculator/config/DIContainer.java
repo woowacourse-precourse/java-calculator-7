@@ -1,4 +1,4 @@
-package calculator;
+package calculator.config;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;

@@ -2,6 +2,8 @@ package calculator;
 
 import java.util.HashSet;
 
+import calculator.config.DIContainer;
+
 public class Application {
     public static void main(String[] args) {
         DIContainer diContainer = createDIContainer();
