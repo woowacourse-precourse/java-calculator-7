@@ -9,10 +9,10 @@ public class CalculateString {
             return basicString(str);
         }
 
-        String userCustom = String.valueOf(str.charAt(2));
+        String userCustomDel = str.substring(2, endCheck);
         String inputString = str.substring(endCheck + 2).trim();
 
-        int finalValue = calString(inputString, userCustom);
+        int finalValue = calString(inputString, userCustomDel);
         if (finalValue == 0) {
             return 0;
         }
