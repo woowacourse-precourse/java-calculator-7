@@ -43,10 +43,10 @@ public class Application {
 
         int sum = 0;
         for (String number : numbers) {
-            if(Integer.parseInt(number)<0){
-                throw new IllegalArgumentException("음수를 입력했습니다.");
-            }
             try {
+                if(Integer.parseInt(number)<0){
+                    throw new IllegalArgumentException("음수를 입력했습니다.");
+                }
                 sum += Integer.parseInt(number);
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("입력된 문자열에 숫자가 아닌 값이 포함되어 있습니다.");
