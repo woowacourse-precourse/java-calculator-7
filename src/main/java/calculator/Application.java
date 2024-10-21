@@ -7,7 +7,7 @@ import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class Application {
     public static void main(String[] args) {
-        System.out.println("덧셈할 문자열을 입력해주세요.");
+        System.out.print("덧셈할 문자열을 입력해주세요.");
         String input = readLine();
 
         try{
@@ -24,7 +24,7 @@ public class Application {
             return 0;
         }
 
-        String delimiter = "-,|:`@|\\*{}().\\[\\]<>\\?|\\^\\$\\|";
+        String delimiter = "[,|:!@#$%^&*()_\\-+=\\[\\]{};:'\"\\\\|<>/?]";
 
         if(input.startsWith("//")){
             Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
