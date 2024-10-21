@@ -9,8 +9,14 @@ public class Application {
         if (input == null || input.isEmpty()) {
             return 0;
         }
-        // 기본 구분자 쉼표와 콜론으로 문자열 분리
-        String[] numbers = input.split(",|:");
+        String delimiter = ",|:"; // 기본 구분자
+        if (input.startsWith("//")) {
+            int delimiterEndIndex = input.indexOf("\n");
+            delimiter = input.substring(2, delimiterEndIndex); // 커스텀 구분자 추출
+            input = input.substring(delimiterEndIndex + 1);    // 구분자 이후 문자열 추출
+        }
+
+        String[] numbers = input.split(delimiter);
         int sum = 0;
         for (String number : numbers) {
             sum += Integer.parseInt(number);
