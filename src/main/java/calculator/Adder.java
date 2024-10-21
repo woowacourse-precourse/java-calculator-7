@@ -5,9 +5,10 @@ public class Adder {
 
     public void sumNumbers(String[] numbers) {
         int sum = 0;
+        OutputHandler outputHandler = new OutputHandler();
         for (String num : numbers) {
             sum += number.validateAndParseNumber(num);
         }
-        System.out.println("결과 : " + sum);
+        outputHandler.printSumResult(sum);
     }
 }

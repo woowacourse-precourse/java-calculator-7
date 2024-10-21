@@ -7,16 +7,14 @@ public class Application {
         Separator separator = new Separator();
         Number number = new Number();
         Adder adder = new Adder();
+        InputHandler inputHandler = new InputHandler();
+        String inputStr = inputHandler.getInput();
 
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String input = Console.readLine();
-
-        if(input.isEmpty()){
-            System.out.println("결과 : 0");
+        if (inputStr.isEmpty()) {
             return;
         }
 
-        String processedString = separator.addCustomParser(input);
+        String processedString = separator.addCustomParser(inputStr);
         number.extractNumbers(processedString, separator.createDelimiterRegex());
         adder.sumNumbers(number.getExtractedNumbers());
     }
