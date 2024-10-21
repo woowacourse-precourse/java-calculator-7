@@ -10,7 +10,7 @@ public class SumController {
             }
             for(int i = 5; i<text.length(); i++) {
                 if(i % 2 != 0) {
-                    if(text.charAt(i) <= '0' || text.charAt(i) >= '9') {
+                    if(text.charAt(i) < '0' || text.charAt(i) > '9') {
                         throw new IllegalArgumentException();
                     }
                 } else {
@@ -24,7 +24,7 @@ public class SumController {
         for(int i = 0; i<text.length(); i++) {
             separatorExtraction(null);
             if(i % 2 == 0) {
-                if(text.charAt(i) <= '0' || text.charAt(i) >= '9') {
+                if(text.charAt(i) < '0' || text.charAt(i) > '9') {
                     throw new IllegalArgumentException();
                 }
             } else {
