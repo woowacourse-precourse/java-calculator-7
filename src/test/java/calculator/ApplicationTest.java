@@ -89,7 +89,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 예외_테스트5() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("//\n1"))
+                assertThatThrownBy(() -> runException("//\\n1"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
@@ -97,7 +97,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 예외_테스트6() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("//;\n1}2"))
+                assertThatThrownBy(() -> runException("//;\\n1}2"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
@@ -121,7 +121,6 @@ class ApplicationTest extends NsTest {
             throw e; // 예외 다시 던지기
         }
     }
-
 
     @Override
     public void runMain() {
