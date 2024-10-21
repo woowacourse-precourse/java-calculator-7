@@ -57,14 +57,6 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 숫자_커스텀_구분자_사용() {
-        assertSimpleTest(() -> {
-            run("//1\\n112,3");
-            assertThat(output()).contains("결과 : 6");
-        });
-    }
-
-    @Test
     void 빈_문자열_입력() {
         assertSimpleTest(() -> {
             run("");
@@ -92,6 +84,14 @@ class ApplicationTest extends NsTest {
     void 숫자_0_예외_테스트() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("0,1,2"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 숫자_커스텀_구분자_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//1\\n412,3"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
