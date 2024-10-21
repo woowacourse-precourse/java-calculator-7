@@ -8,13 +8,8 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String inputString = Console.readLine();
 
-        try {
-            int result = processInput(inputString);
-            System.out.print("결과 : " + result);
-        } catch (IllegalArgumentException e) {
-            // 프로그램 종료
-            return;
-        }
+        int result = processInput(inputString);
+        System.out.print("결과 : " + result);
     }
 
     public static int processInput(String input) {
