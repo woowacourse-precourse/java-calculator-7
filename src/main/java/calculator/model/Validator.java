@@ -8,13 +8,15 @@ public class Validator {
     private static final String CUSTOM_DELIMITER_START = "//";
     private static final String CUSTOM_DELIMITER_END = "\\n";
 
-    public void validateInput(String input) {
-        if (input.isEmpty()) {
-            throw new IllegalArgumentException();
+    public int validateInput(String input) {
+        if (input == null||input.isEmpty()) {
+            return 0;
         }
         if (!startsWithValidCharacter(input)) {
             throw new IllegalArgumentException();
         }
+
+        return -1;
     }
 
     public boolean startsWithValidCharacter(String input) {
@@ -48,18 +50,12 @@ public class Validator {
         return numbersPart.split(delimiter);
     }
 
-    public void validateLastNumber(String[] numbers) {
-        if (!isNumeric(numbers[numbers.length - 1])) {
+
+    public void validateLastNumber(String numbersPart) {
+        char lastChar = numbersPart.charAt(numbersPart.length() - 1);
+
+        if (!Character.isDigit(lastChar)) {
             throw new IllegalArgumentException();
         }
-    }
-
-    private boolean isNumeric(String number) {
-        for (int i = 0; i < number.length(); i++) {
-            if (!Character.isDigit(number.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
     }
 }

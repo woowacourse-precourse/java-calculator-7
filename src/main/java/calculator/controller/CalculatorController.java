@@ -21,18 +21,23 @@ public class CalculatorController {
     public void run() {
         String input = InputView.getString();
 
-        validator.validateInput(input);
+        int validationResult = validator.validateInput(input);
+        int result = 0;
 
-        String delimiter = validator.getDelimiter(input);
-        String numbersPart = validator.getNumbersPart(input);
 
-        String[] numbers = validator.splitNumbers(numbersPart, delimiter);
+        if (validationResult != 0) {
+            String delimiter = validator.getDelimiter(input);
+            String numbersPart = validator.getNumbersPart(input);
 
-        validator.validateLastNumber(numbers);
+            validator.validateLastNumber(numbersPart);
 
-        List<Integer> numbersList = calculator.convertStringToInteger(Arrays.asList(numbers));
+            String[] numbers = validator.splitNumbers(numbersPart, delimiter);
 
-        int result = calculator.sumNumbers(numbersList);
+
+            List<Integer> numbersList = calculator.convertStringToInteger(Arrays.asList(numbers));
+
+            result = calculator.sumNumbers(numbersList);
+        }
 
         OutputView.printResult(result);
     }
