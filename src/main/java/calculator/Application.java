@@ -9,5 +9,7 @@ public class Application {
         String input = Console.readLine();
 
         ArrayList<Integer> parsedInput = InputParser.parseInput(input);
+        int sum = Calculator.sum(parsedInput);
+        System.out.println("결과 : "+sum);
     }
 }
