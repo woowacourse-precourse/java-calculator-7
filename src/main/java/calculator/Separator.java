@@ -46,9 +46,8 @@ public class Separator {
     }
 
     public String findAndAddCustomSeparator(String input, String regex) {
-        Matcher match = Pattern
-                .compile(Constants.REGEX_CUSTOM_SEPARATOR_PATTERN)
-                .matcher(input);
+        Pattern pattern = Pattern.compile(Constants.REGEX_CUSTOM_SEPARATOR_PATTERN);
+        Matcher match = pattern.matcher(input);
 
         while (match.find()) {
             String customSeparator = match.group(1);
