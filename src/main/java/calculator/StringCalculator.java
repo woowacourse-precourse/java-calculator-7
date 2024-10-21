@@ -2,7 +2,7 @@ package calculator;
 
 public class StringCalculator {
 
-    public int add(String input) {
+    public static int add(String input) {
 
         //2. 문자열 구분
         // 빈 문자열 또는 null 입력 처리
@@ -55,5 +55,5 @@ public class StringCalculator {
 
         return new String[]{delimiter, numbers};  // 구분자와 숫자 부분을 배열로 반환
     }
-    
+
 }
