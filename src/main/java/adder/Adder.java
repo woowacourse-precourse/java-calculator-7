@@ -88,7 +88,7 @@ public class Adder {
             number.append(element);
         }
 
-        if (!calculationFormula.isEmpty()) {
+        if (!number.isEmpty()) {
             parsedString.add(number.toString());
         }
 
@@ -96,7 +96,7 @@ public class Adder {
     }
 
     public boolean isValidated(ArrayList<String> calculationFormula) {
-
+        System.out.println("calculationFormula = " + calculationFormula);
         for (String element : calculationFormula) {
             if (!isNumber(element) && !isSeparator(element)) {
                 return false;
