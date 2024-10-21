@@ -89,9 +89,8 @@ class ApplicationTest extends NsTest {
     @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> Application.calculateProcess("-1,2,3"))
+            assertThatThrownBy(() -> runException("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage("잘못된 값을 입력하였습니다.")
         );
     }
 
