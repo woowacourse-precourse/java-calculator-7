@@ -1,6 +1,6 @@
 package calculator.separatorProvider;
 
-import java.util.List;
+import java.util.Set;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +12,7 @@ class SeparatorProviderTest {
         SeparatorProviderImpl sut = new SeparatorProviderImpl();
 
         //when
-        List<Character> result = sut.extractCustomSeparator("");
+        Set<Character> result = sut.extractCustomSeparator("");
 
         //then
         Assertions.assertThat(result).isEmpty();
@@ -24,7 +24,7 @@ class SeparatorProviderTest {
         SeparatorProviderImpl sut = new SeparatorProviderImpl();
 
         //when
-        List<Character> result = sut.extractCustomSeparator(";");
+        Set<Character> result = sut.extractCustomSeparator(";");
 
         //then
         Assertions.assertThat(result).containsExactly(';');
@@ -36,10 +36,10 @@ class SeparatorProviderTest {
         SeparatorProviderImpl sut = new SeparatorProviderImpl();
 
         //when
-        List<Character> result = sut.extractCustomSeparator(";^&");
+        Set<Character> result = sut.extractCustomSeparator(";^&");
 
         //then
-        Assertions.assertThat(result).containsExactly(';', '^', '&');
+        Assertions.assertThat(result).containsExactlyInAnyOrder(';', '^', '&');
     }
 
     @Test
@@ -48,9 +48,9 @@ class SeparatorProviderTest {
         SeparatorProviderImpl sut = new SeparatorProviderImpl();
 
         //when
-        List<Character> result = sut.getDefaultSeparator();
+        Set<Character> result = sut.getDefaultSeparator();
 
         //then
-        Assertions.assertThat(result).containsExactly(':', ',');
+        Assertions.assertThat(result).containsExactlyInAnyOrder(':', ',');
     }
 }

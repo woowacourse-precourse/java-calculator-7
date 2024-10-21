@@ -2,11 +2,12 @@ package calculator.numberExtractor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class NumberExtractorImpl implements NumberExtractor {
 
     @Override
-    public List<Integer> extract(String str, List<Character> separators) {
+    public List<Integer> extract(String str, Set<Character> separators) {
         int currentNumber = 0;
         List<Integer> numberList = new ArrayList<>();
 

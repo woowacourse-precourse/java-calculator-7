@@ -1,15 +1,15 @@
 package calculator.separatorProvider;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class SeparatorProviderImpl implements SeparatorProvider {
 
-    private static final List<Character> defaultSeparators = List.of(':', ',');
+    private static final Set<Character> defaultSeparators = Set.of(':', ',');
 
     @Override
-    public List<Character> extractCustomSeparator(String str) {
-        List<Character> extractedSeparators = new ArrayList<>();
+    public Set<Character> extractCustomSeparator(String str) {
+        Set<Character> extractedSeparators = new HashSet<>();
 
         if (str != null && !str.isBlank()) {
             for (char ch : str.toCharArray()) {
@@ -21,7 +21,7 @@ public class SeparatorProviderImpl implements SeparatorProvider {
     }
 
     @Override
-    public List<Character> getDefaultSeparator() {
+    public Set<Character> getDefaultSeparator() {
         return defaultSeparators;
     }
 }

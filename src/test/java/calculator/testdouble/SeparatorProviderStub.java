@@ -1,18 +1,18 @@
 package calculator.testdouble;
 
 import calculator.separatorProvider.SeparatorProvider;
-import java.util.List;
+import java.util.Set;
 
 public class SeparatorProviderStub implements SeparatorProvider {
 
 
     @Override
-    public List<Character> extractCustomSeparator(String str) {
-        return List.of('(', ')');
+    public Set<Character> extractCustomSeparator(String str) {
+        return Set.of('(', ')');
     }
 
     @Override
-    public List<Character> getDefaultSeparator() {
-        return List.of(':', ',');
+    public Set<Character> getDefaultSeparator() {
+        return Set.of(':', ',');
     }
 }

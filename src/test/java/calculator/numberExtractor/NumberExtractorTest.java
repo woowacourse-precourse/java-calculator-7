@@ -1,6 +1,7 @@
 package calculator.numberExtractor;
 
 import java.util.List;
+import java.util.Set;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +13,7 @@ class NumberExtractorTest {
         NumberExtractorImpl sut = new NumberExtractorImpl();
 
         //when
-        List<Integer> result = sut.extract("1:2:3", List.of(':', ','));
+        List<Integer> result = sut.extract("1:2:3", Set.of(':', ','));
 
         //then
         Assertions.assertThat(result).containsExactly(1, 2, 3);
@@ -24,7 +25,7 @@ class NumberExtractorTest {
         NumberExtractorImpl sut = new NumberExtractorImpl();
 
         //when
-        List<Integer> result = sut.extract("1:12:123:1234", List.of(':', ','));
+        List<Integer> result = sut.extract("1:12:123:1234", Set.of(':', ','));
 
         //then
         Assertions.assertThat(result).containsExactly(1, 12, 123, 1234);
@@ -37,7 +38,7 @@ class NumberExtractorTest {
 
         //expected
         Assertions.assertThatThrownBy(() ->
-                        sut.extract("1:2^3", List.of(':', ',')))
+                        sut.extract("1:2^3", Set.of(':', ',')))
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage("입력된 문자열에 구분자와 숫자가 아닌 문자가 포함되어 있습니다.");
     }
@@ -48,7 +49,7 @@ class NumberExtractorTest {
         NumberExtractorImpl sut = new NumberExtractorImpl();
 
         //when
-        List<Integer> result = sut.extract("10203", List.of('0'));
+        List<Integer> result = sut.extract("10203", Set.of('0'));
 
         //then
         Assertions.assertThat(result).containsExactly(1, 2, 3);
@@ -61,7 +62,7 @@ class NumberExtractorTest {
 
         //expected
         Assertions.assertThatThrownBy(() ->
-                        sut.extract("21474836478:10", List.of(':')))
+                        sut.extract("21474836478:10", Set.of(':')))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("입력된 문자열에 입력 최대값을 넘는 숫자가 포함되어 있습니다.");
     }

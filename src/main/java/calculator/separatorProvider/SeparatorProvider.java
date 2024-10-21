@@ -1,6 +1,6 @@
 package calculator.separatorProvider;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * 기본구분자와 커스텀구분자를 제공하는 역할
@@ -13,12 +13,12 @@ public interface SeparatorProvider {
      * @param str 커스텀구분자 문자열
      * @return 분리된 커스텀구분자 리스트
      */
-    List<Character> extractCustomSeparator(String str);
+    Set<Character> extractCustomSeparator(String str);
 
     /**
      * 기본구분자들을 반환한다.
      *
      * @return 기본구분자 리스트
      */
-    List<Character> getDefaultSeparator();
+    Set<Character> getDefaultSeparator();
 }
