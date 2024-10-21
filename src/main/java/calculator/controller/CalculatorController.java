@@ -38,6 +38,24 @@ public class CalculatorController {
 
         // 문자열 파싱에 사용할 구분자로 이루어진 정규식 생성
         String regex = customDelimiter.toRegex();
+
+        // 정규식을 활용하여 문자로 이뤄진 부분으로 분할.
+        double sum = 0;
+        String[] numbers = input.split(regex);
+        for (String str : numbers) {
+            if (!isNumb(str)) {
+                throw new IllegalArgumentException(ErrorMessage.NON_NUMERIC_VALUE.getMessage());
+            }
+
+            double num = Double.parseDouble(str);
+            if (num < 0) {  // 음수 값이면 예외 발생
+                throw new IllegalArgumentException(ErrorMessage.NEGATIVE_VALUE.getMessage());
+            }
+            sum += num;
+        }
+
+        // 결과 출력
+        System.out.println("결과 : " + sum);
     }
 
     // 숫자로 이루어진 값이 맞는지 확인
