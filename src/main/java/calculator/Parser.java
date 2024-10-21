@@ -9,7 +9,7 @@ public class Parser {
     private static final String DEFAULT_DELIMITER_COMMA = ",";
     private static final String DEFAULT_DELIMITER_COLON = ":";
     private static final String CUSTOM_DELIMITER_PREFIX = "//";
-    private static final String CUSTOM_DELIMITER_SUFFIX = "\n";
+    private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
 
     public static List<Double> parse(String input) {
         List<String> delimiters = new ArrayList<>();
@@ -40,7 +40,7 @@ public class Parser {
     private static String adjustCustomDelimiterPart(String input) {
         int delimiterEndIndex = input.indexOf(CUSTOM_DELIMITER_SUFFIX);
 
-        return input.substring(delimiterEndIndex + 1);
+        return input.substring(delimiterEndIndex + CUSTOM_DELIMITER_SUFFIX.length());
     }
 
     private static String[] splitInput(String input, List<String> delimiters) {
