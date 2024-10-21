@@ -11,6 +11,7 @@ public class Application {
         String splits = ":,";
         String patterString = "(?<=//).*?(?=\\\\n)"; //사이만 추출가능
         String patterString2 = "//.*?\\\\n";
+        int sum = 0;
         System.out.println("Please Enter Your String!");
         String input = Console.readLine();
 
@@ -25,13 +26,6 @@ public class Application {
             }
             input = input.replaceAll(patterString2,""); //새 input받기
 
-        } else if (input.matches("^[^0-9]*$")) {
-            try {
-                throw new IllegalArgumentException();
-            } catch (IllegalArgumentException e) {
-                System.out.println(e);
-                System.exit(0);
-            }
         }
         if (input.isEmpty()) {
             System.out.println(0);
@@ -39,8 +33,6 @@ public class Application {
             String splitFormmat = String.format("[%s]", splits); //정규식으로 전환
             String[] strArr = input.split(splitFormmat); //구분자를 기준으로 분할
 
-
-            int sum = 0;
 
             int[] intArr = null;
             try {
@@ -53,7 +45,7 @@ public class Application {
             for (int j : intArr) { //배열의 값 모두 출력
                 sum += j;
             }
-            System.out.println(sum);
+            System.out.println(String.format("결과 : %s",sum));
         }
     }
 
@@ -61,7 +53,11 @@ public class Application {
         int[] intArr = new int[strArr.length];
         for (int i = 0; i < strArr.length; i++) {
             try {
-                intArr[i] = Integer.parseInt(strArr[i]);
+                int parseInt = Integer.parseInt(strArr[i]);
+                if (parseInt<0){
+                    throw new IllegalArgumentException();
+                }
+                intArr[i] = parseInt;
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException();
             }
