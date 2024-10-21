@@ -26,6 +26,19 @@ public class Application {
 
         List<String> numbers = List.of(input.split(delimiter));
 
+        for (String number : numbers) {
+            String trimmedNumber = number.trim();
+            if (!trimmedNumber.matches("-?\\d+")) {
+                throw new IllegalArgumentException("잘못된 입력 값입니다.");
+            }
+
+            int parsedNumber = Integer.parseInt(trimmedNumber);
+            if (parsedNumber < 0) {
+                throw new IllegalArgumentException("음수는 허용되지 않습니다.");
+            }
+        }
+
+
         int result = numbers.stream()
                 .mapToInt(Integer::parseInt)
                 .sum();
