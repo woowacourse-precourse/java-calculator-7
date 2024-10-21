@@ -24,7 +24,7 @@ public class StringCalculator {
         try {
             int number = Integer.parseInt(numberToken);
             if (number < 0) {
-                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + numberToken);
+                throw new IllegalArgumentException("음수는 허용되지 않습니다 \n사용된 음수 : " + numberToken);
             }
             return number;
         } catch (NumberFormatException exception) {
