@@ -4,12 +4,31 @@ import java.util.Arrays;
 
 public class StringAddCalculator {
 
-    public static int splitAndSum(String input){
-        if(input == null || input.isEmpty()){
+    private static final String DEFAULT_DELIMITERS = ",|:";
+    private static final String CUSTOM_DELIMITERS_PREFIX = "//";
+    private static final String CUSTOM_DELIMITERS_SUFFIX = "\\n";
+    private static String customDelimiter = "";
+
+    public static int splitAndSum(String input) {
+        if (input == null || input.isEmpty()) {
             return 0;
         }
 
-        String[] tokens = input.split(",|:");
+        String[] tokens;
+        if (input.startsWith(CUSTOM_DELIMITERS_PREFIX)) {
+            int customDelimiterIndex = input.indexOf(CUSTOM_DELIMITERS_SUFFIX);
+            if (customDelimiterIndex <= 2) {
+                throw new IllegalArgumentException("커스텀 구분자 지정 형식이 올바르지 않습니다.");
+            }
+            else {
+                customDelimiter += input.substring(2, customDelimiterIndex);
+                input = input.substring(customDelimiterIndex + 2);
+            }
+            String combinedDelimiters = customDelimiter + "|" + DEFAULT_DELIMITERS;
+            tokens = input.split(combinedDelimiters);
+        } else {
+            tokens = input.split(DEFAULT_DELIMITERS);
+        }
         return sumTokens(tokens);
     }
 
@@ -29,5 +48,4 @@ public class StringAddCalculator {
             throw new IllegalArgumentException("잘못된 입력 값이 포함되어 있습니다.");
         }
     }
-
 }
