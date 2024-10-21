@@ -2,6 +2,9 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
@@ -10,8 +13,10 @@ public class Application {
         if (customDelimiter != null) {
             String delimiterRemovedInput = input.substring(customDelimiter.length() + 5);
             String[] splitInput = delimiterRemovedInput.split(customDelimiter + "|" + "," + "|" + ":");
+            List<Integer> numbers = parseIntegers(splitInput);
         } else {
             String[] splitInput = input.split("[,:]");
+            List<Integer> numbers = parseIntegers(splitInput);
         }
     }
 
@@ -23,5 +28,13 @@ public class Application {
             throw new IllegalArgumentException();
         }
         return null;
+    }
+
+    public static List<Integer> parseIntegers(String[] input) {
+        try {
+            return Arrays.stream(input).map(Integer::parseInt).toList();
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException();
+        }
     }
 }
