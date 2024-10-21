@@ -29,11 +29,16 @@ public class Application {
     }
 
     public static int calculateSum(String[] numbers) {
-        int sum = 0;
+        int sum = 0, value = 0;
 
         for (String number : numbers) {
             if (!number.isEmpty()) {
-                int value = Integer.parseInt(number);
+                try {
+                    value = Integer.parseInt(number);
+                } catch (NumberFormatException e) {
+                    throwException();
+                }
+
                 sum += value;
             }
         }
