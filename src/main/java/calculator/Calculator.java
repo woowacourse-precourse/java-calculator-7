@@ -1,10 +1,14 @@
 package calculator;
 
 import calculator.exception.OperationOutOfBoundsException;
+import calculator.system.DelimiterParser;
 import java.util.List;
 
 public class Calculator {
-	public Long sum(List<Long> terms) {
+	private DelimiterParser delimiterParser;
+
+	public Long sum(String expression) {
+		List<Long> terms = delimiterParser.extractTerms(expression);
 		return terms.stream().reduce(Long::sum).orElseThrow(
 				OperationOutOfBoundsException::new);
 	}

@@ -4,27 +4,22 @@ import calculator.console.InputView;
 import calculator.console.OutputView;
 import calculator.exception.InvalidInputException;
 import calculator.exception.SystemException;
-import calculator.system.DelimiterParser;
-import java.util.List;
 import java.util.function.Supplier;
 
 public class UserConsoleView {
 	private final InputView inputView;
 	private final OutputView outputView;
-	private final DelimiterParser delimiterParser;
 	private final Calculator calculator;
 
 	public UserConsoleView() {
 		inputView = new InputView();
 		outputView = new OutputView();
-		delimiterParser = new DelimiterParser();
 		calculator = new Calculator();
 	}
 
 	public void run() {
 		String expression = getExpression();
-		List<Long> terms = delimiterParser.extractTerms(expression);
-		Long result = calculator.sum(terms);
+		Long result = calculator.sum(expression);
 		outputView.printOperationResult(result);
 	}
 
