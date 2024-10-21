@@ -22,7 +22,7 @@ public class Parser {
             return null;
         }
 
-        int endIndex = input.indexOf("\\n");
+        int endIndex = input.lastIndexOf("\\n");
         if (endIndex == -1) {
             throw new IllegalArgumentException("올바르지 않은 문법입니다.");
         }
@@ -63,17 +63,18 @@ public class Parser {
      */
     public List<Integer> parsePositiveIntegers(String input, Character customDelimiter) {
         String integersAndDelimiters = input;
-
+        String DelimiterRegex = ",|:";
         // customDelimiter가 존재하는 경우 = //*\n이 존재하는 경우
         if (customDelimiter != null) {
             int lastIndex = input.lastIndexOf("\\n");
             integersAndDelimiters = input.substring(lastIndex + 2);
+            DelimiterRegex = DelimiterRegex + "|" + customDelimiter;
         }
 
         // customDelimiter가 존재하지 않는 경우 = 바로 숫자부터 시작하는 경우
         List<Integer> integers = new ArrayList<>();
         try {
-            String[] integerStrs = integersAndDelimiters.split(",|:");
+            String[] integerStrs = integersAndDelimiters.split(DelimiterRegex);
             for (String integerStr : integerStrs) {
                 int number = Integer.parseInt(integerStr);
                 if (number <= 0) {
