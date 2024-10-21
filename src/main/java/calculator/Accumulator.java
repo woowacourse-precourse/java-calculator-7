@@ -12,6 +12,9 @@ public class Accumulator {
             }
 
             ExceptionHandler.handleNonNumbericInput(s);
+
+            ExceptionHandler.handleNumberRange(s);
+
             int number = Integer.parseInt(s);
             sum += number;
         }

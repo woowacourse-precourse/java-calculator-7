@@ -15,6 +15,14 @@ public class ExceptionHandler {
         }
     }
 
+    public static void handleNumberRange(String input) {
+        try {
+            Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw createIllegalArgumentException(Integer.MAX_VALUE + " 이상의 숫자는 계산할 수 없습니다.");
+        }
+    }
+
     private static IllegalArgumentException createIllegalArgumentException(String message) {
         return new IllegalArgumentException(message);
     }
