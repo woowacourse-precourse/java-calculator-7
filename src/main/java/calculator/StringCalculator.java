@@ -21,20 +21,24 @@ public class StringCalculator {
 
     private int sum(String[] numbers) {
         return Arrays.stream(numbers)
-                .mapToInt(this::validateNumber)
-                .sum();
+                .map(n -> {
+                    validateNumber(n);
+                    return Integer.parseInt(n);
+                })
+                .reduce(0, Integer::sum);
     }
 
-    private int validateNumber(String number) {
+    private void validateNumber(String number) {
+        int num;
         try {
-            int num = Integer.parseInt(number);
+            num = Integer.parseInt(number);
 
-            if (num < 0) {
-                throw new IllegalArgumentException("음수가 포함되었습니다: " + num);
-            }
-            return num;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자가 아닌 값이 포함되었습니다: " + number);
+        }
+
+        if (num < 0) {
+            throw new IllegalArgumentException("음수가 포함되었습니다: " + num);
         }
     }
 }
