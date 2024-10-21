@@ -86,11 +86,6 @@ public class CalculatorModel {
         long sum = 0;
         long[] operandArray = changeStringtoLongOperandArray(userInput);
 
-        // test용
-//        for (int i = 0; i < operandArray.length; i++) {
-//            System.out.println(operandArray[i]);
-//        }
-
         for (int i = 0; i < operandArray.length; i++) {
             sum += operandArray[i];
         }
