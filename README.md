@@ -17,7 +17,7 @@ java-calculator-7
 
 ### Calculator 클래스를 내 기능 구현
 - Calculator(String readLine()) :: 생성자를 통해 사용자 입력 값을 인스턴스에 전달 과 checkCustom() 메소드 호출로 커스텀 구분자 여부 체크
-- run() :: sum메소드 호출로 계산기 실행
+- run() :: 
 - checkCustom() :: 커스텀 구분자 사용 여부 체크 후 커스텀 및 디폴트 구분자 설정
 - sum() :: 확인 된 구분자 및 입력 값으로 문자열 데이터를 int데이터로 변형 후 계산
 
