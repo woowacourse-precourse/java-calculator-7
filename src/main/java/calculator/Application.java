@@ -1,8 +1,6 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Application {
     public static void main(String[] args) {
@@ -29,11 +27,10 @@ public class Application {
 
         String delimiter = ",|:";
         if (input.startsWith("//")) {
-            // 커스텀 구분자 처리
-            Matcher matcher = Pattern.compile("//(.)\\n(.*)").matcher(input);
-            int delimiterEndIndex = input.indexOf("\n");
-            delimiter = input.substring(2, delimiterEndIndex);
-            input = input.substring(delimiterEndIndex + 1);
+            // "//" 뒤에 오는 구분자를 추출하고, \n로 구분
+            int delimiterIndex = input.indexOf("\\n");
+            delimiter = input.substring(2, delimiterIndex);  // 커스텀 구분자 추출
+            input = input.substring(delimiterIndex + 2);     // 숫자 부분 추출
         }
         // 입력을 구분자로 분리하여 계산
         String[] numbers = input.split(delimiter);
