@@ -5,6 +5,7 @@ import calculator.exception.NegativeValueException;
 import java.util.Set;
 
 public class DelimiterValidator {
+
 	public Long validateNegative(Long term) throws NegativeValueException {
 		if (term < 0) {throw new NegativeValueException();}
 		return term;

@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class DelimiterParser {
-
+	
 	private final DelimiterValidator delimiterValidator;
 
 	public DelimiterParser() {
@@ -41,7 +41,7 @@ public class DelimiterParser {
 		}
 		return delimiters.stream().toList();
 	}
-	
+
 	private String extractUserDefinedDelimiter(String expression) {
 		int i = expression.indexOf("\\n");
 		String userDefinedDelimiter = expression.substring(2, i);
