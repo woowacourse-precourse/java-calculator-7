@@ -1,6 +1,7 @@
 package calculator.controller;
 
 import calculator.domain.UserExpression;
+import calculator.view.Users;
 import java.util.List;
 
 public class TotalController {
@@ -23,4 +24,10 @@ public class TotalController {
         List<String> prepToSend = expressionController.init(userExpression);
         calcController.init(prepToSend);
     }
+
+    private static void outputPrint() {
+        Users.resultOfMatchingOutputFormat(calcController.calcTheNumbers());
+    }
+
+
 }
