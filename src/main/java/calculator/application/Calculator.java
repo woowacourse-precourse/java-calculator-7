@@ -1,7 +1,7 @@
 package calculator.application;
 
-import calculator.application.util.CustomSeparatorUtil;
 import calculator.application.util.NumberInputUtil;
+import calculator.application.util.CustomSeparatorUtil;
 import calculator.application.util.io.print.CommandPrinter;
 import calculator.application.util.io.print.ResultPrinter;
 import calculator.application.util.io.read.InputReader;
