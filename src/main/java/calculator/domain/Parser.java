@@ -48,23 +48,45 @@ public class Parser {
     }
 
     private int parseValue(String token) {
-        if (token.isEmpty()) {
+        if (isEmptyValue(token)) {
             return 0;
         }
 
+        long number = parseLongValue(token);
+        checkOutOfRange(number);
+        int intValue = convertToInt(number);
+        checkNegativeValue(intValue);
+
+        return intValue;
+    }
+
+    private boolean isEmptyValue(String token) {
+        return token.isEmpty();
+    }
+
+    private long parseLongValue(String token) {
         try {
-            long number = Long.parseLong(token);
-            if (number < Integer.MIN_VALUE || number > Integer.MAX_VALUE) {
-                throw new CalculatorException(OUT_OF_RANGE_VALUE);
-            }
-            int intValue = (int) number;
-            if (intValue < 0) {
-                throw new CalculatorException(MINUS_VALUE);
-            }
-            return intValue;
+            return Long.parseLong(token);
         } catch (NumberFormatException e) {
             throw new CalculatorException(INVALID_VALUE_FORMAT);
         }
     }
+
+    private void checkOutOfRange(long number) {
+        if (number < Integer.MIN_VALUE || number > Integer.MAX_VALUE) {
+            throw new CalculatorException(OUT_OF_RANGE_VALUE);
+        }
+    }
+
+    private int convertToInt(long number) {
+        return (int) number;
+    }
+
+    private void checkNegativeValue(int value) {
+        if (value < 0) {
+            throw new CalculatorException(MINUS_VALUE);
+        }
+    }
+
 
 }
