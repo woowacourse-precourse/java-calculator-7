@@ -10,7 +10,7 @@ public class Adder {
         if (input.isEmpty()) {
             return 0;
         }
-        if (input.startsWith(CUSTOM_DELIM_PREFIX)) {
+        if (input.startsWith(CUSTOM_DELIM_PREFIX) && input.contains(CUSTOM_DELIM_SUFFIX)) {
             String[] split = input.split(CUSTOM_DELIM_SUFFIX);
             String customDelimiter = split[0].substring(CUSTOM_DELIM_PREFIX.length());
 
