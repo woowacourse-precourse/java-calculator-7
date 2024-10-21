@@ -4,19 +4,13 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 public class Calculator {
     private String userInput;
     private String customDelimiter;
     private Integer calculateResult;
     private static final String INVALID_INPUT_ERROR = "[ERROR] Invalid input format : ";
     private static final String RESULT_HEADER_MESSAGE = "결과 : ";
-    private static final String DEFAULT_DELIMITER = ",|:";
-    private static final String DEFINE_CUSTOM_DELIMITER_HEAD = "//";
-    private static final String DEFINE_CUSTOM_DELIMITER_LAST = "\n";
-    private static final Integer DEFINE_CUSTOM_DELIMITER_LAST_SIZE = 2;
-    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.+?)\\n(.*)");
-    private static final Pattern CONTAINS_NUMBERS_PATTERN = Pattern.compile(".*\\d+.*");
-    private static final Pattern DEFAULT_DELIMITER_PATTERN = Pattern.compile("^[0-9,:,\\s]*$");
 
 
     public Calculator() {}
@@ -39,18 +33,18 @@ public class Calculator {
     }
 
     private Boolean isCustomDelimiterFormat() {
-        return this.userInput.startsWith(DEFINE_CUSTOM_DELIMITER_HEAD);
+        return this.userInput.startsWith(CalculatorDelimiter.DEFINE_CUSTOM_DELIMITER_HEAD);
     }
 
     private void processCustomDelimiter() {
-        String normalizedInput = this.userInput.replace("\\n", DEFINE_CUSTOM_DELIMITER_LAST);
-        Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(normalizedInput);
+        String normalizedInput = this.userInput.replace("\\n", CalculatorDelimiter.DEFINE_CUSTOM_DELIMITER_LAST);
+        Matcher matcher = CalculatorDelimiter.CUSTOM_DELIMITER_PATTERN.matcher(normalizedInput);
 
         if (!matcher.matches()) {
             throw new IllegalArgumentException(INVALID_INPUT_ERROR);
         }
 
-        customDelimiter = matcher.group(1);
+        this.customDelimiter = matcher.group(1);
         String targetNumbersWithDelimiters = matcher.group(2);
 
         if (!containsNumbers(targetNumbersWithDelimiters)) {
@@ -59,28 +53,29 @@ public class Calculator {
     }
 
     private Boolean containsNumbers(String input) {
-        return CONTAINS_NUMBERS_PATTERN.matcher(input).matches();
+        return CalculatorDelimiter.CONTAINS_NUMBERS_PATTERN.matcher(input).matches();
     }
 
     private void validateDefaultDelimiterFormat() {
-        if (!DEFAULT_DELIMITER_PATTERN.matcher(this.userInput).matches()) {
+        if (!CalculatorDelimiter.DEFAULT_DELIMITER_PATTERN.matcher(this.userInput).matches()) {
             throw new IllegalArgumentException(INVALID_INPUT_ERROR);
         }
     }
 
 
     public Integer getSumByCalculate() {
-        String delimiter = DEFAULT_DELIMITER;
+        String delimiter = CalculatorDelimiter.DEFAULT_DELIMITER;
         String targetNumbersWithDelimiter = this.userInput;
 
-        if (this.userInput.startsWith(DEFINE_CUSTOM_DELIMITER_HEAD)) {
-            delimiter = Pattern.quote(customDelimiter) + "|" + DEFAULT_DELIMITER;
-            targetNumbersWithDelimiter = this.userInput.substring(this.userInput.indexOf("\\n") + DEFINE_CUSTOM_DELIMITER_LAST_SIZE);
+        if (this.userInput.startsWith(CalculatorDelimiter.DEFINE_CUSTOM_DELIMITER_HEAD)) {
+            delimiter = Pattern.quote(this.customDelimiter) + "|" + CalculatorDelimiter.DEFAULT_DELIMITER;
+            targetNumbersWithDelimiter = this.userInput.substring(this.userInput.indexOf("\\n")
+                    + CalculatorDelimiter.DEFINE_CUSTOM_DELIMITER_LAST_SIZE);
         }
 
         this.calculateResult = Arrays.stream(targetNumbersWithDelimiter.split(delimiter))
                 .filter(slicedString -> !slicedString.trim().isEmpty())
-                .filter(slicedString -> CONTAINS_NUMBERS_PATTERN.matcher(slicedString).matches())
+                .filter(slicedString -> CalculatorDelimiter.CONTAINS_NUMBERS_PATTERN.matcher(slicedString).matches())
                 .mapToInt(this::parsePositiveInt)
                 .sum();
 
