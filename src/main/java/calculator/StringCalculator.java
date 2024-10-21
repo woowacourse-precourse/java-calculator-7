@@ -13,15 +13,15 @@ public class StringCalculator {
     private final DelimiterParser delimiterParser = new DelimiterParser();
     private int[] expression;
 
+    public StringCalculator(String input) {
+        preprocessMakingExpression(input);
+    }
+    
     public int doSum() {
         return Arrays.stream(expression).sum();
     }
 
-    public StringCalculator(String input) {
-        preprocessOnInput(input);
-    }
-
-    private void preprocessOnInput(String input) {
+    private void preprocessMakingExpression(String input) {
         String[] stringExpression = stringDivideByDelimiter(input);
         expression = stringToIntegerArray(stringExpression);
     }
