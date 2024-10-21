@@ -24,7 +24,7 @@ public class Calculator {
 
     private int calculate(String input) {
         var numbers = ParsingUtil.extractNumbers(input);
-        System.out.println(numbers);
+        
         var result = numbers.stream()
                 .peek(this::checkNumberic)
                 .mapToInt(Integer::parseInt)
