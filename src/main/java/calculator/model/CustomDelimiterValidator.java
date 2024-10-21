@@ -9,16 +9,25 @@ public class CustomDelimiterValidator {
 	private static final int CUSTOM_DELIMITER_INDEX = 2;
 	private static final int CUSTOM_DELIMITER_LENGTH = 1;
 
-	public boolean hasCustomDelimiter(String input) {
+	public StringValidator validCustomDelimiter(String input) {
+		if (hasCustomDelimiter(input)) {
+			String customDelimiter = getCustomDelimiter(input);
+			input = this.removeCustomDelimiter(input);
+			return new StringValidator(input, customDelimiter);
+		}
+		return new StringValidator(input);
+	}
+
+	private boolean hasCustomDelimiter(String input) {
 		return input.length() >= SPECIFIED_CUSTOM_DELIMITER_LENGTH && input.startsWith(CUSTOM_DELIMITER_PREFIX)
 		        && input.startsWith(CUSTOM_DELIMITER_SUFFIX, CUSTOM_DELIMITER_SUFFIX_START_INDEX);
 	}
 
-	public String getCustomDelimiter(String input) {
+	private String getCustomDelimiter(String input) {
 		return input.substring(CUSTOM_DELIMITER_INDEX, CUSTOM_DELIMITER_INDEX + CUSTOM_DELIMITER_LENGTH);
 	}
 
-	public String removeCustomDelimiter(String input) {
+	private String removeCustomDelimiter(String input) {
 		return input.substring(SPECIFIED_CUSTOM_DELIMITER_LENGTH);
 	}
 }
