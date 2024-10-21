@@ -30,7 +30,7 @@
 
 ### isDigit(char c)
 
-주어진 문자가 숫자인지 반환
+주어진 문자가 숫자인지 반환하는 함수
 
 ### hasCustomDelimiter(String str)
 
