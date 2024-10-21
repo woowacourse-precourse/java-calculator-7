@@ -24,5 +24,5 @@
   - [x] 구분된 문자가 숫자인지
   - [x] 0이 아닌 양의 정수인지
   - [x] 더할 때 값이 초과가 되는지
-- [ ] View와 Service를 관리하는 Manager 구현
+- [x] View와 Service를 관리하는 Manager 구현
 - [x] Service 테스트 구현
