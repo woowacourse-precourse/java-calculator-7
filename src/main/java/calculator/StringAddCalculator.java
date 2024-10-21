@@ -39,6 +39,10 @@ public class StringAddCalculator {
             try {
                 int num = Integer.parseInt(inputArray[i]);
 
+                if (num < 0) {
+                    throw new IllegalArgumentException();
+                }
+
                 numArray[i] = num;
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException();
