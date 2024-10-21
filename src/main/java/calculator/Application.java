@@ -26,6 +26,7 @@ public class Application {
 
             // 검증 실패하면 에러 메시지 출력
             System.err.println(e.getMessage());
+            throw e;
         }
     }
 
