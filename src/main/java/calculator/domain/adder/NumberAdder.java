@@ -1,9 +1,9 @@
-package calculator.domain;
+package calculator.domain.adder;
 
 import calculator.domain.parser.InputParser.ParsedInput;
 import java.math.BigDecimal;
 
-public class Calculator {
+public class NumberAdder {
 
     public String adder(ParsedInput parsedInput) {
         BigDecimal result = BigDecimal.ZERO;

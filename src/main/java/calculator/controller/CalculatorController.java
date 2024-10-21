@@ -1,6 +1,6 @@
 package calculator.controller;
 
-import calculator.domain.Calculator;
+import calculator.domain.adder.NumberAdder;
 import calculator.domain.parser.InputParser;
 import calculator.domain.parser.InputParser.ParsedInput;
 import calculator.dto.CalculatorRequestDto;
@@ -11,17 +11,17 @@ import calculator.view.OutputView;
 public class CalculatorController {
 
     private final InputParser inputParser;
-    private final Calculator calculator;
+    private final NumberAdder numberAdder;
 
     public CalculatorController() {
         this.inputParser = new InputParser();
-        this.calculator = new Calculator();
+        this.numberAdder = new NumberAdder();
     }
 
     private CalculatorResponseDto calculate(CalculatorRequestDto calculatorRequestDto) {
         ParsedInput parsedInput = inputParser.parse(calculatorRequestDto.input());
 
-        return new CalculatorResponseDto(calculator.adder(parsedInput));
+        return new CalculatorResponseDto(numberAdder.adder(parsedInput));
     }
 
     public void run() {
