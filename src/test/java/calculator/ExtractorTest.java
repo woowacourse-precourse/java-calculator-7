@@ -90,11 +90,9 @@ class ExtractorTest {
         //given
         Extractor ex = new Extractor();
         String input = "//\\n1=2=3=4=5";
-        //when
-        String delimiter = ex.extractCustomDelimiter(input);
 
-        //then
-        assertThrows(IllegalArgumentException.class, () -> ex.extractNumbersWithCustomDelimiter(input, delimiter));
+        //when & then
+        assertThrows(IllegalArgumentException.class, () -> ex.extractCustomDelimiter(input));
     }
 
     @Test
@@ -103,11 +101,8 @@ class ExtractorTest {
         Extractor ex = new Extractor();
         String input = "//'\\1;2;3";
 
-        //when
-        String delimiter = ex.extractCustomDelimiter(input);
-
-        //then
-        assertThrows(IllegalArgumentException.class, () -> ex.extractNumbersWithCustomDelimiter(input, delimiter));
+        //when & then
+        assertThrows(IllegalArgumentException.class, () -> ex.extractCustomDelimiter(input));
     }
 
     @Test
@@ -116,24 +111,17 @@ class ExtractorTest {
         Extractor ex = new Extractor();
         String input = "/\\\\n1\\2\\3\\4";
 
-        //when
-        //여기서 문제가 발생해야함
-        String delimiter = ex.extractCustomDelimiter(input);
-
-        //then
-        assertThrows(IllegalArgumentException.class, () -> ex.extractNumbersWithCustomDelimiter(input, delimiter));
+        //when & then
+        assertThrows(IllegalArgumentException.class, () -> ex.extractCustomDelimiter(input));
     }
 
     @Test
     public void 커스텀_구분자는_정해진_접미사가_있다() {
         //given
         Extractor ex = new Extractor();
-        String input = "//?n1?2?3?4";
+        String input = "//?_n1?2?3?4";
 
-        //when
-        String delimiter = ex.extractCustomDelimiter(input);
-
-        //then
-        assertThrows(IllegalArgumentException.class, () -> ex.extractNumbersWithCustomDelimiter(input, delimiter));
+        //when & then
+        assertThrows(IllegalArgumentException.class, () -> ex.extractCustomDelimiter(input));
     }
 }

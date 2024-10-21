@@ -17,7 +17,11 @@ public class Extractor {
     }
 
     public String extractCustomDelimiter(String numsWithDelimiter) {
-        return numsWithDelimiter.substring(2, 3);
+        String footer = numsWithDelimiter.substring(3, 5);
+        if (numsWithDelimiter.startsWith(HEADER) && footer.equals(FOOTER)) {
+            return numsWithDelimiter.substring(2, 3);
+        }
+        throw new IllegalArgumentException("입력 형식이 올바르지 않습니다.");
     }
 
     public int[] extractNumbersWithDefaultDelimiter(String delimitedNumsWithDefault) {
