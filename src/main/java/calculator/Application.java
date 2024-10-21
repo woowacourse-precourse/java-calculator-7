@@ -41,7 +41,14 @@ public class Application {
         // 각 숫자 합산
         int sum = 0;
         for (String token : tokens) {
-            sum += Integer.parseInt(token);
+            int number = Integer.parseInt(token);
+
+            // 음수 값이 있으면 예외 발생
+            if (number < 0) {
+                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
+            }
+
+            sum += number;
         }
 
         return sum;
