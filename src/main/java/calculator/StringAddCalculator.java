@@ -30,6 +30,9 @@ public class StringAddCalculator {
         InputValidator.validateNoNegativeNumbers(numbers);
         InputValidator.validateNoDecimalNumbers(numbers);
 
+        // 숫자나 구분자를 제외한 문자가 포함되어 있는지 검증
+        InputValidator.validateNonNumericCharacters(numbers);
+
         // 연속된 구분자를 하나의 구분자로 치환
         String finalInput = numbers.replaceAll("[" + delimiter + "]+", delimiter);
 
@@ -46,6 +49,19 @@ public class StringAddCalculator {
 
     private static int sum(String input, String delimiter) {
         String[] numbers = input.split(delimiter);
+
+        int sum = 0;
+        for (String number : numbers) {
+            if (!number.isEmpty()) {
+                sum += Integer.parseInt(number);
+            }
+        }
+        return sum;
+    }
+    
+    private static int sumWithDefaultDelimiters(String input) {
+        // 기본 구분자 쉼표와 콜론을 사용하여 숫자 합산
+        String[] numbers = input.split("[,:]"); // 쉼표와 콜론을 구분자로 사용
 
         int sum = 0;
         for (String number : numbers) {

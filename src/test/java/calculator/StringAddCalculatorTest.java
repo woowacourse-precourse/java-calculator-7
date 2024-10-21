@@ -130,4 +130,14 @@ public class StringAddCalculatorTest {
                 .hasMessageContaining("연속된 구분자는 허용되지 않습니다.");
     }
 
+    @Test
+    void 숫자가_아닌_입력값이_있으면_예외가_발생한다() {
+        // given
+        String input = "1,2,a,3";
+
+        // when, then
+        assertThatThrownBy(() -> StringAddCalculator.add(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("계산 대상 문자열에는 숫자와 구분자 외의 문자가 포함될 수 없습니다.");
+    }
 }

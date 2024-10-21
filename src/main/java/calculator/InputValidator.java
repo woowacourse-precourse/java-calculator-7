@@ -69,4 +69,13 @@ public class InputValidator {
             throw new IllegalArgumentException("소수는 허용되지 않습니다: " + String.join(", ", decimalNumbers));
         }
     }
+
+    public static void validateNonNumericCharacters(String input) {
+        // 숫자, 구분자 외의 문자가 있는지 검사
+        String regex = "[^\\d" + Pattern.quote(",|:") + "]";
+        if (input.matches(".*" + regex + ".*")) {
+            throw new IllegalArgumentException("계산 대상 문자열에는 숫자와 구분자 외의 문자가 포함될 수 없습니다.");
+        }
+    }
+
 }
