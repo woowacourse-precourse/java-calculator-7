@@ -19,7 +19,7 @@ public class SeparatorTest {
         assertThatCode(() -> new Separator(inputs)).doesNotThrowAnyException();
     }
 
-    @DisplayName("구분자 입력 실패 : 여러 자 입력, 빈 값 입력")
+    @DisplayName("커스텀 구분자 입력 실패 : 여러 자 입력, 빈 값 입력")
     @ParameterizedTest
     @ValueSource(strings = {"//;;\\n", "//\\n"})
     void validateLengthTest(String inputs) {
@@ -31,7 +31,7 @@ public class SeparatorTest {
                 .hasMessage("커스텀 구분자는 한 자만 가능합니다.");
     }
 
-    @DisplayName("구분자 입력 실패 : 숫자 입력")
+    @DisplayName("커스텀 구분자 입력 실패 : 숫자 입력")
     @ParameterizedTest
     @ValueSource(strings = {"//1\\n"})
     void validateLetterTest(String inputs) {
