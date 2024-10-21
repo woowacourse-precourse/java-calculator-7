@@ -19,6 +19,7 @@ public class Calculator {
 
     public void start() {
         try {
+            outputView.printlnMessage("덧셈할 문자열을 입력해 주세요.");
             String input = inputView.readInput();
             Expression expression = new Expression(input);
             separator.checkCustomSeparator(expression.getRawExpression());
