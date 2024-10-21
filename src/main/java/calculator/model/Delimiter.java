@@ -8,7 +8,11 @@ public class Delimiter {
     private static final String COMMA = ",";
     private static final String CUSTOM_DELIMITER_PREFIX = "//";
     private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
-    private List<String> delimiters = new ArrayList<>();
+    private List<String> delimiters;
+
+    public Delimiter() {
+        this.delimiters = new ArrayList<>();
+    }
 
     public void choose(String expression) {
         if (isCustomDelimiterExist(expression)) {
@@ -17,6 +21,15 @@ public class Delimiter {
             delimiters = List.of(COLON, COMMA);
         }
     }
+
+    public String removeAffix(String expression) {
+        if (isCustomDelimiterExist(expression)) {
+            int end = expression.indexOf(CUSTOM_DELIMITER_SUFFIX);
+            return expression.substring(end + CUSTOM_DELIMITER_SUFFIX.length());
+        }
+        return expression;
+    }
+
 
     private boolean isCustomDelimiterExist(String expression) {
         return expression.startsWith(CUSTOM_DELIMITER_PREFIX);
