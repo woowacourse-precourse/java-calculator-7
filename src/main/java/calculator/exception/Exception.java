@@ -5,6 +5,7 @@ import calculator.constants.SeparatorConstants;
 public enum Exception {
     INVALID_NUMBER_FORMAT("정수 형식이어야 합니다 : "),
     INVALID_NEGATIVE_NUMBER("양수만 허용됩니다 : "),
+    INVALID_NUMBER_SIZE("입력된 숫자가 너무 큽니다 : "),
 
     INVALID_CUSTOM_SEPARATOR_FORMAT(
             "커스텀 구분자는 " + SeparatorConstants.CUSTOM_SEPARATOR_PREFIX + "와 "
