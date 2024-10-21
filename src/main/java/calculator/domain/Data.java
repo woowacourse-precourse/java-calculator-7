@@ -15,11 +15,9 @@ public class Data {
     }
 
     public int calculateAddition() {
-        int sum = 0;
-        for (int number : number.getNumbers()) {
-            sum += number;
-        }
-        return sum;
+        return number.getNumbers().stream()
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 
     public void handleInput() {

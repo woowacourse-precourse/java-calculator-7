@@ -16,9 +16,9 @@ public class Number {
     }
 
     public void convertNumbers(List<String> separatedString) {
-        for (String number : separatedString) {
-            numbers.add(Integer.parseInt(number));
-        }
+        separatedString.stream()
+                .mapToInt(Integer::parseInt)
+                .forEach(numbers::add);
     }
 
     public List<Integer> getNumbers() {
