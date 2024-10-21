@@ -13,7 +13,11 @@ public class UserString {
         if (userInput.startsWith("//")) {
             int endIdx = userInput.indexOf("\\n");
             Validator.validateWrongCustom(endIdx);
-            DELIMITERS += userInput.substring(2, endIdx);
+            String delimiter = userInput.substring(2, endIdx);
+            if (delimiter.equals("[") || delimiter.equals("]") || delimiter.equals("\\")) {
+                delimiter = "\\" + delimiter;
+            }
+            DELIMITERS += delimiter;
             userInput = userInput.substring(endIdx + 2);
         }
 
