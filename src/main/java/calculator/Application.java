@@ -24,6 +24,8 @@ public class Application {
             if (input.substring(3, 5).equals("\\n")) {
                 userInput = input.substring(5);
                 customSeparators = new char[]{input.charAt(2)};
+            } else {
+                throw new IllegalArgumentException("지정된 커스텀 구분자 형식으로 작성해야 합니다.");
             }
         }
     }
@@ -91,7 +93,7 @@ public class Application {
     }
 
     // 계산 함수
-    public static void calculator(String input) {
+    public static long calculator(String input) {
         long total = 0;
         long sum = 0;
 
@@ -105,6 +107,13 @@ public class Application {
             }
         }
         total += sum;
+
+        return total;
+    }
+
+    // 계산 결과 출력 함수
+    public static void print() {
+        System.out.println("결과 : " + calculator(userInput));
     }
 
     public static void main(String[] args) {
@@ -113,5 +122,6 @@ public class Application {
         setCustomSeparator(userInput);
         validInput(userInput);
         calculator(userInput);
+        print();
     }
 }
