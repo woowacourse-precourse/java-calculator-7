@@ -6,10 +6,10 @@ import java.util.List;
 public class Number {
     private final List<Integer> numbers;
 
-    public Number(String [] numbers) {
+    public Number(String[] numbers) {
         this.numbers = new ArrayList<>();
-        for(int i = 0; i < numbers.length; i++){
-            if(!isNumeric(numbers[i])){
+        for (int i = 0; i < numbers.length; i++) {
+            if (!isNumeric(numbers[i])) {
                 throw new IllegalArgumentException();
             }
             this.numbers.add(Integer.parseInt(numbers[i]));

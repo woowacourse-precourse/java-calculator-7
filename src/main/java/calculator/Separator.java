@@ -14,7 +14,7 @@ public class Separator {
         }
     }
 
-    public List<String> getSeparators(){
+    public List<String> getSeparators() {
         return separators;
     }
 

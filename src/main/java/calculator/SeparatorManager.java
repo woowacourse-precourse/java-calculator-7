@@ -10,8 +10,7 @@ public class SeparatorManager {
             separator.addSeparator(extractDelimiter(originString));
 
             return separator;
-        }
-        else{
+        } else {
             return new Separator();
         }
     }
@@ -21,8 +20,8 @@ public class SeparatorManager {
         return parts[0].substring(2);
     }
 
-    public Number getNumber(Separator separator, String originString){
-        if(originString.startsWith(customSeparatorStart)){
+    public Number getNumber(Separator separator, String originString) {
+        if (originString.startsWith(customSeparatorStart)) {
             originString = separateCustomSeparator(originString);
         }
 
@@ -33,7 +32,7 @@ public class SeparatorManager {
         return new Number(originString.split(regex));
     }
 
-    public String separateCustomSeparator(String originString){
+    public String separateCustomSeparator(String originString) {
         String[] parts = originString.split(customSeparatorEnd);
         return parts[1];
     }
