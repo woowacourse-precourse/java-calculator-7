@@ -40,6 +40,14 @@ class ApplicationTest extends NsTest {
                         .hasMessageContaining("// \\n 사이 구분자는 문자이어야 합니다. 문자열이 아닌 문자를 넣어주세요."));
     }
 
+    @Test
+    void 커스텀_구분자가_무엇인지_명시하지_않은_경우() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//2;3;4"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContaining("\\n을 사용하여 어떤 문자가 커스텀 구분자인지 구분해주세요."));
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
