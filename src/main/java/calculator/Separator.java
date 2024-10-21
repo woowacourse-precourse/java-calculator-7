@@ -46,4 +46,21 @@ public class Separator {
         }
         return separatedResult;
     }
+
+    public static int getSum(List<String> separatedList) {
+        int total = 0;
+        for (String separated : separatedList) {
+            int separatedValue = -1;
+            try {
+                separatedValue = Integer.parseInt(separated);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("숫자로 변환할 수 없습니다!");
+            }
+            if (separatedValue < 0) {
+                throw new IllegalArgumentException("양수가 아닙니다!");
+            }
+            total += separatedValue;
+        }
+        return total;
+    }
 }
