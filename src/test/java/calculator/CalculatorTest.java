@@ -34,14 +34,14 @@ public class CalculatorTest {
         String custom = "//;\\n";
 
         // when
-        int sumByComma = calculator.processInputAndSum(comma);
-        int sumByColon = calculator.processInputAndSum(colon);
-        int sumByCustom = calculator.processInputAndSum(custom);
+        int sumForComma = calculator.processInputAndSum(comma);
+        int sumForColon = calculator.processInputAndSum(colon);
+        int sumForCustom = calculator.processInputAndSum(custom);
 
         // then
-        assertThat(sumByComma).isEqualTo(0);
-        assertThat(sumByColon).isEqualTo(0);
-        assertThat(sumByCustom).isEqualTo(0);
+        assertThat(sumForComma).isEqualTo(0);
+        assertThat(sumForColon).isEqualTo(0);
+        assertThat(sumForCustom).isEqualTo(0);
     }
 
     @Test
@@ -58,4 +58,20 @@ public class CalculatorTest {
         assertThat(resultForSingleDigit).isEqualTo(1);
         assertThat(resultForMultipleDigits).isEqualTo(12);
     }
+
+    @Test
+    void 여러_자리_숫자로_구성된_문자열_계산() {
+        // given
+        String defaultDelimiterAndMultipleDigits = "1,12:123";
+        String customDelimiterAndMultipleDigits = "//;\\n1;12;123";
+
+        // when
+        int sumForDefaultDelimiter = calculator.processInputAndSum(defaultDelimiterAndMultipleDigits);
+        int resultForCustomDelimiter = calculator.processInputAndSum(customDelimiterAndMultipleDigits);
+
+        // then
+        assertThat(sumForDefaultDelimiter).isEqualTo(136);
+        assertThat(resultForCustomDelimiter).isEqualTo(136);
+    }
+
 }
