@@ -8,10 +8,19 @@ public class Calculator {
         if (input == null || input.isEmpty()) {
             return 0;
         }
-        
-        // TODO : 계산기 구현
 
-        return 0;
+        String delim = ",|:";
+        String numbers = input;
+
+        // 구분자로 숫자 분리 및 덧셈
+        String[] tokens = numbers.split(delim);
+        int sum = 0;
+        for (String token : tokens) {
+            int number = Integer.parseInt(token);
+            sum += number;
+        }
+        
+        return sum;
     }
 
 }
