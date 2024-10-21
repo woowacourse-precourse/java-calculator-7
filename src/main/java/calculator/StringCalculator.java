@@ -12,26 +12,31 @@ public class StringCalculator {
             return 0;
         }
 
-        String[] numbers = delimiterParser.splitNumbers(input);
+        String[] numbers = delimiterParser.parseNumbers(input);
 
-        return sumNumbers(numbers);
+        return sum(numbers);
     }
 
-    private int sumNumbers(String[] numbers) {
+    private int sum(String[] numbers) {
         int sum = 0;
 
         for (String number : numbers) {
-            try {
-                int num = Integer.parseInt(number);
-
-                if (num < 0) {
-                    throw new IllegalArgumentException("음수가 포함되었습니다.");
-                }
-                sum += num;
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("숫자가 아닌 값이 포함되었습니다.");
-            }
+            int num = validateNumber(number);
+            sum += num;
         }
         return sum;
+    }
+
+    private int validateNumber(String number) {
+        try {
+            int num = Integer.parseInt(number);
+
+            if (num < 0) {
+                throw new IllegalArgumentException("음수가 포함되었습니다: " + num);
+            }
+            return num;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자가 아닌 값이 포함되었습니다: " + number);
+        }
     }
 }

@@ -14,7 +14,7 @@ public class DelimiterParser {
         String numbersPart = input; // 숫자 부분
 
         if (isEndsWithNumber(input)) {
-            throw new IllegalArgumentException("구분자 뒤에 숫자가 없습니다:" + input);
+            throw new IllegalArgumentException("구분자 뒤에 숫자가 없습니다: " + input);
         }
 
         if (input.startsWith("//")) {
@@ -24,7 +24,7 @@ public class DelimiterParser {
             if (isCustomDelimiterSuffixMissing(delimiterEndIndex)) {
                 throw new IllegalArgumentException("\\n이 존재하지 않습니다: " + input);
             } else if (isCustomDelimiterMissing(delimiterEndIndex)) {
-                throw new IllegalArgumentException("커스텀 구분자가 지정되지 않았습니다:" + input);
+                throw new IllegalArgumentException("커스텀 구분자가 지정되지 않았습니다: " + input);
             }
 
             if (hasNoNumber(input, numbersStartIndex)) {
