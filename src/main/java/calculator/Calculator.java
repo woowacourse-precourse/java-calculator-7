@@ -10,6 +10,10 @@ public class Calculator {
     private Integer calculateResult;
     private static final String INVALID_INPUT_ERROR = "[ERROR] Invalid input format : ";
     private static final String RESULT_HEADER_MESSAGE = "결과 : ";
+    private static final String DEFAULT_DELIMITER = ",|:";
+    private static final String DEFINE_CUSTOM_DELIMITER_HEAD = "//";
+    private static final String DEFINE_CUSTOM_DELIMITER_LAST = "\n";
+    private static final Integer DEFINE_CUSTOM_DELIMITER_LAST_SIZE = 2;
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.+?)\\n(.*)");
     private static final Pattern CONTAINS_NUMBERS_PATTERN = Pattern.compile(".*\\d+.*");
     private static final Pattern DEFAULT_DELIMITER_PATTERN = Pattern.compile("^[0-9,:,\\s]*$");
@@ -31,15 +35,15 @@ public class Calculator {
     }
 
     private Boolean isUserInputEmpty() {
-        return userInput == null || userInput.isEmpty();
+        return this.userInput == null || this.userInput.isEmpty();
     }
 
     private Boolean isCustomDelimiterFormat() {
-        return userInput.startsWith("//");
+        return this.userInput.startsWith(DEFINE_CUSTOM_DELIMITER_HEAD);
     }
 
     private void processCustomDelimiter() {
-        String normalizedInput = userInput.replace("\\n", "\n");
+        String normalizedInput = this.userInput.replace("\\n", DEFINE_CUSTOM_DELIMITER_LAST);
         Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(normalizedInput);
 
         if (!matcher.matches()) {
@@ -59,24 +63,24 @@ public class Calculator {
     }
 
     private void validateDefaultDelimiterFormat() {
-        if (!DEFAULT_DELIMITER_PATTERN.matcher(userInput).matches()) {
+        if (!DEFAULT_DELIMITER_PATTERN.matcher(this.userInput).matches()) {
             throw new IllegalArgumentException(INVALID_INPUT_ERROR);
         }
     }
 
 
     public Integer getSumByCalculate() {
-        String defaultDelimiter = ",|:";
-        String numbers = userInput;
+        String delimiter = DEFAULT_DELIMITER;
+        String targetNumbersWithDelimiter = this.userInput;
 
-        if (userInput.startsWith("//")) {
-            defaultDelimiter = Pattern.quote(customDelimiter) + "|,|:";
-            numbers = userInput.substring(userInput.indexOf("\n") + 1);
+        if (this.userInput.startsWith(DEFINE_CUSTOM_DELIMITER_HEAD)) {
+            delimiter = Pattern.quote(customDelimiter) + "|" + DEFAULT_DELIMITER;
+            targetNumbersWithDelimiter = this.userInput.substring(this.userInput.indexOf("\\n") + DEFINE_CUSTOM_DELIMITER_LAST_SIZE);
         }
 
-        this.calculateResult = Arrays.stream(numbers.split(defaultDelimiter))
-                .filter(s -> !s.trim().isEmpty())
-                .filter(s -> CONTAINS_NUMBERS_PATTERN.matcher(s).matches())
+        this.calculateResult = Arrays.stream(targetNumbersWithDelimiter.split(delimiter))
+                .filter(slicedString -> !slicedString.trim().isEmpty())
+                .filter(slicedString -> CONTAINS_NUMBERS_PATTERN.matcher(slicedString).matches())
                 .mapToInt(this::parsePositiveInt)
                 .sum();
 
@@ -84,9 +88,7 @@ public class Calculator {
     }
 
     private int parsePositiveInt(String str) {
-        str = str.trim();
         try {
-            str = str.replaceAll("[^0-9]", "");
             int num = Integer.parseInt(str);
             if (num < 0) {
                 throw new IllegalArgumentException(INVALID_INPUT_ERROR+"Negative numbers are not allowed");
