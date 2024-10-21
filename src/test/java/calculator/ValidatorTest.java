@@ -58,6 +58,6 @@ public class ValidatorTest {
     @Test
     void testValidateDelimiterSurroundings_Fail_EmptySection() {
         assertThrows(IllegalArgumentException.class,
-                () -> validators.validateDelimiterSurroundings(calculator, "1;;2"));
+                () -> validators.validateDelimiterSurroundings(calculator, "1::2"));
     }
 }
