@@ -23,6 +23,15 @@ class ApplicationTest extends NsTest {
                 .isInstanceOf(IllegalArgumentException.class)
         );
     }
+    @Test
+    void 공백_입력() {
+        assertSimpleTest(() -> {
+            // 공백 입력을 처리할 수 있도록 run 메서드를 실행
+            run(" "); // 공백 입력
+            // 출력 결과를 확인하는 방법
+            assertThat(output()).contains("결과 : 0"); // 결과 출력에서 0이 포함되는지 확인
+        });
+    }
 
     @Override
     public void runMain() {
