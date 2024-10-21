@@ -1,7 +1,7 @@
 package calculator;
-import java.lang.System;
-import java.util.regex.Pattern;
+
 import camp.nextstep.edu.missionutils.Console;
+import java.util.regex.Pattern;
 
 public class Application {
     public static void main(String[] args) {
@@ -18,13 +18,13 @@ public class Application {
         String input_string = Console.readLine();
         String[] splited_string = input_string.split("\\\\n");
         // 커스텀 구분자가 있는 경우
-        if (splited_string.length > 1 && splited_string[0].startsWith("//")){
+        if (splited_string.length > 1 && splited_string[0].startsWith("//")) {
             String separator = splited_string[0].substring(2);
             custom_seperators = ",|:|" + separator;
             splited_by_seperators = splited_string[1].split(custom_seperators);
         }
         // 커스텀 구분자가 없는 경우
-        else if (splited_string.length == 1){
+        else if (splited_string.length == 1) {
             custom_seperators = "[,:]";
             splited_by_seperators = splited_string[0].split(custom_seperators);
         } else {
@@ -34,11 +34,11 @@ public class Application {
 
         // 3. 덧셈을 하는 기능
         int sum = 0;
-        if (splited_by_seperators.length == 1 && splited_by_seperators[0].isEmpty()){
+        if (splited_by_seperators.length == 1 && splited_by_seperators[0].isEmpty()) {
             System.out.println("결과 : " + sum);
         } else {
-            for (String num: splited_by_seperators) {
-                if (Pattern.matches("^[0-9]*$", num)){
+            for (String num : splited_by_seperators) {
+                if (Pattern.matches("^[0-9]*$", num)) {
                     sum += Integer.parseInt(num);
                 } else {
                     // 양수를 제외한 다른 것이 나왔을 때 에러처리
