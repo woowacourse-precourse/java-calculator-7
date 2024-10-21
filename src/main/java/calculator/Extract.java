@@ -1,0 +1,104 @@
+package calculator;
+import java.util.*;
+
+public class Extract {
+    String input;
+    List<Integer> extractNumber;
+
+    Extract(String input){
+        this.input = input;
+        this.extractNumber = new ArrayList<>();
+    }
+
+    List<Integer> checkFirstChar(){
+        if (input.length() == 0) {
+            extractNumber.add(0);
+        }
+        else if (Character.isDigit(input.charAt(0))){
+            basicSeparator();
+        }
+        else if (input.charAt(0)=='/' && input.charAt(1)=='/'){
+            customSeparator();
+        }
+        else{
+            throw new IllegalArgumentException("문자열은 반드시 // 혹은 숫자로 시작하여야 합니다.");
+        }
+
+        return extractNumber;
+    }
+
+    //2. 기본 구분자(, or :)를 구분자로 가지는 문자열에서 숫자 추출
+    void basicSeparator(){
+        String value = "";
+        for(int i=0; i<input.length(); i++){
+            if(Character.isDigit(input.charAt(i))){
+                value+=input.charAt(i);
+            }
+            //구분자를 만나면 숫자 추출
+            else if(input.charAt(i) ==':' || input.charAt(i) ==','){
+                extractNumber.add(Integer.parseInt(value));
+                value = "";
+            }
+            // 5.예외처리
+            else{
+                throw new IllegalArgumentException("기본 - 문자열 구성 규칙을 지켜주세요.");
+            }
+
+            //마지막 구분자 뒤에 존재하는 수 처리
+            if(i==input.length()-1 && value!=""){
+                extractNumber.add(Integer.parseInt(value));
+            }
+        }
+    }
+
+    //3. 기본 구분자 외에 커스텀 구분자를 가지는 문자열에서 숫자 추출
+    void customSeparator(){
+        String value = "";
+        String separator = "";
+        int separatorLength = 0;
+        //구분자 찾기
+        for(int i=2; i<input.length(); i++) {
+            separator += input.charAt(i);
+            separatorLength += 1;
+            if (input.charAt(i + 1) == '\\' && input.charAt(i + 2) == 'n') {
+                break;
+            }
+        }
+        // //과 \n로 인한 기본 문자열 길이. 커스텀 구분자를 만나면 숫자 추출
+        for(int i=4+separatorLength; i<input.length(); i++){
+            if(input.charAt(i) == separator.charAt(0) && i+separatorLength<=input.length()){
+                String candidate = input.substring(i,i+separatorLength);
+                if (separator.equals(candidate)) {
+                    extractNumber.add(Integer.parseInt(value));
+                    value = "";
+                    i += separatorLength - 1;
+                    continue;
+                }
+                else {
+                    throw new IllegalArgumentException("커스텀 구분자 활용이 부적절합니다.");
+                }
+            }
+            //커스텀구분자가 기본구분자를 포함하고 있을 경우 먼저 처리하면 안되기 때문에 이곳에 위치
+            else if(input.charAt(i) ==':' || input.charAt(i) ==','){
+                extractNumber.add(Integer.parseInt(value));
+                value = "";
+            }
+
+            //커스텀구분자가 숫자를 포함하고 있을 경우 먼저 처리하면 안되기 때문에 이곳에 위치
+            // EX) "//2aa\n12aa22aa4"
+            else if(Character.isDigit(input.charAt(i))){
+                value+=input.charAt(i);
+            }
+
+            // 5.예외처리
+            else{
+                throw new IllegalArgumentException("커스텀 - 문자열 구성 규칙을 지켜주세요.");
+            }
+
+            //마지막 구분자 뒤에 존재하는 수 처리
+            if(i==input.length()-1 && value!=""){
+                extractNumber.add(Integer.parseInt(value));
+            }
+        }
+    }
+}
