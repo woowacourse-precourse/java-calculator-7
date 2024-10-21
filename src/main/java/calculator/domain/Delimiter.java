@@ -7,6 +7,7 @@ public class Delimiter {
 
     private static final String DEFAULT_DELIMITER = ",|:";
     private static final String CUSTOM_DELIMITER = "//(.*?)\\\\n";
+    static int THE_NUMBER_OF_CUSTOM_DELIMITER = 1;
 
     private String input;
 
@@ -14,7 +15,7 @@ public class Delimiter {
         this.input = input;
     }
 
-    public String[] extractDelimiterAndNumber() { // 이게 Delimiter에 있는 게 맞나?
+    public String[] extractDelimiterAndNumber() {
         String delimiters = getDelimiter();
         return splitByDelimiter(delimiters);
     }
@@ -30,11 +31,11 @@ public class Delimiter {
                 return DEFAULT_DELIMITER;
             }
 
-            if (customDelimiter.length() == 1) {
+            if (customDelimiter.length() == THE_NUMBER_OF_CUSTOM_DELIMITER) {
                 return "[" + Pattern.quote(customDelimiter) + "]|" + DEFAULT_DELIMITER;
             }
 
-            throw new IllegalArgumentException("커스텀 구분자는 하나의 문자만 지정할 수 있습니다.");
+            throw new IllegalArgumentException("커스텀 구분자는" + THE_NUMBER_OF_CUSTOM_DELIMITER + "개의 문자만 지정할 수 있습니다.");
         }
         return DEFAULT_DELIMITER;
     }
