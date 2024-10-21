@@ -10,9 +10,9 @@ public class NumberFilter {
     Validation validation = new Validation();
 
 
-    public List<Long> filter(String inputString, String separator) {
+    public List<Long> filter(final String inputString, final String separator) {
         if (validation.isZeroFrom(inputString)) {
-            return Arrays.asList(0L);
+            return zeroFilter();
         }
 
         if (validation.isCustomFrom(inputString)) {
@@ -22,26 +22,29 @@ public class NumberFilter {
         return basicFilter(inputString, separator);
     }
 
+    private List<Long> zeroFilter() {
+        return List.of(0L);
+    }
 
-    private List<Long> basicFilter(String inputString, String separator) {
+    private List<Long> basicFilter(final String inputString, final String separator) {
         return Arrays.stream(inputString.split(separator))
                 .filter(token -> token.matches(NUMBER_FROM))
                 .map(Long::parseLong)
                 .toList();
     }
 
-    private List<Long> customFilter(String inputString, String separator) {
+    private List<Long> customFilter(final String inputString, final String separator) {
         String confirmedSeparator = confirmSeparator(separator);
         String modifiedInputString = modifyInputString(inputString);
 
         return basicFilter(modifiedInputString, confirmedSeparator);
     }
 
-    private String modifyInputString(String inputString) {
+    private String modifyInputString(final String inputString) {
         return inputString.substring(inputString.indexOf("n") + 1);
     }
 
-    private String confirmSeparator(String separator) {
+    private String confirmSeparator(final String separator) {
         if (SPECIAL_STRINGS.contains(separator)) {
             return "\\" + separator;
         }

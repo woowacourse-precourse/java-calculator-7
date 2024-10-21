@@ -10,7 +10,7 @@ public class Separator {
         this.validation = new Validation();
     }
 
-    private String establishSeparator(String inputString) {
+    private String establishSeparator(final String inputString) {
         if (validation.isAllowedFrom(inputString)) {
             return ALLOWED_SEPARATOR;
         }
@@ -22,7 +22,7 @@ public class Separator {
         return ZERO;
     }
 
-    public String getSeparator(String inputString) {
+    public String getSeparator(final String inputString) {
         validation.validate(inputString);
         return establishSeparator(inputString);
     }

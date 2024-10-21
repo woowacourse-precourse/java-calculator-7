@@ -25,9 +25,9 @@ public class CalculatorTest {
         List<Long> numbers2 = Arrays.asList(100L, 300L);
         List<Long> numbers3 = Arrays.asList(100L, 300L, 1L);
         // when
-        long result1 = calculator.add(numbers1);
-        long result2 = calculator.add(numbers2);
-        long result3 = calculator.add(numbers3);
+        long result1 = calculator.calculate(numbers1);
+        long result2 = calculator.calculate(numbers2);
+        long result3 = calculator.calculate(numbers3);
         // then
         assertThat(result1).isEqualTo(1L);
         assertThat(result2).isEqualTo(400L);

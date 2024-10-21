@@ -5,19 +5,19 @@ public class Validation {
     private static final String ALLOWED_FROM = "^[0-9]+([:,][0-9]+)*$";
     private static final String CUSTOM_FROM = "//\\D\\\\n([0-9]+(\\D[0-9]+)*)";
 
-    public boolean isZeroFrom(String inputString) {
+    public boolean isZeroFrom(final String inputString) {
         return inputString.matches(ZERO_FROM);
     }
 
-    public boolean isAllowedFrom(String inputString) {
+    public boolean isAllowedFrom(final String inputString) {
         return inputString.matches(ALLOWED_FROM);
     }
 
-    public boolean isCustomFrom(String inputString) {
+    public boolean isCustomFrom(final String inputString) {
         return inputString.matches(CUSTOM_FROM);
     }
 
-    public void validate(String inputString) {
+    public void validate(final String inputString) {
         if (isZeroFrom(inputString)) {
             return;
         }
