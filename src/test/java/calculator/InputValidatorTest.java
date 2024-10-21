@@ -8,12 +8,10 @@ import org.junit.jupiter.api.Test;
 
 class InputValidatorTest {
     private Delimiter delimiter;
-    private Parser parser;
 
     @BeforeEach
     void setUp() {
         delimiter = new Delimiter();  // 기본 Delimiter 생성
-        parser = new Parser();        // 각 테스트 실행 전에 Parser 인스턴스 생성
     }
 
 

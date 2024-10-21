@@ -2,7 +2,7 @@ package calculator;
 
 public class InputValidator {
     private Delimiter delimiter;
-    private Parser parser;
+    private final Parser parser;
 
     public InputValidator(Delimiter delimiter) {
         this.delimiter = delimiter;
