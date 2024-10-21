@@ -1,6 +1,5 @@
 package calculator;
 
-import static calculator.Constants.CUSTOM_END;
 import static calculator.Constants.DELIMITERS;
 
 public class Converter {
@@ -11,7 +10,7 @@ public class Converter {
             }
         }
 
-        int index = target.indexOf(CUSTOM_END) + CUSTOM_END.length();
+        int index = target.indexOf("\\n") + 2;
         return target.substring(index).replaceAll(" ", "");
     }
 
