@@ -10,10 +10,7 @@ public class Controller {
     public void executeProgram() {
         String input = getInput();
         List<Integer> nums = makeListFromString(input);
-
-        Calculator calculator = new Calculator();
-        int result = calculator.calculateResult(nums);
-
+        int result = getResult(nums);
         printResult(result);
     }
 
@@ -30,5 +27,10 @@ public class Controller {
     private List<Integer> makeListFromString(String input) {
         InputProcessor inputProcessor = InputProcessor.getInstance();
         return inputProcessor.processInput(input);
+    }
+
+    private int getResult(List<Integer> nums) {
+        Calculator calculator = new Calculator();
+        return calculator.calculateResult(nums);
     }
 }
