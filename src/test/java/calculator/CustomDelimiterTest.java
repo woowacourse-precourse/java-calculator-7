@@ -1,7 +1,5 @@
 package calculator;
 
-import static calculator.CustomDelimiter.extractCustomDelimiter;
-import static calculator.CustomDelimiter.isValidExpression;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
@@ -14,11 +12,11 @@ class CustomDelimiterTest {
     void checkExpresstionContiansExcapeCharacter() {
         //given
         String input = "//\\\\n11";
+        Delimiter delimiter= new CustomDelimiter();
         //when
         //then
-        assertTrue(CustomDelimiter.isValidExpression(input));
-        assertEquals("11", extractCustomDelimiter(input));
-        assertEquals("\\\\", CustomDelimiter.getCustomDelimiter());
+        assertEquals("11", delimiter.parseDelimiter(input));
+        assertEquals(",|:"+"|"+"\\\\", delimiter.delimiters);
     }
 
     @DisplayName("커스텀 구분자를 바르게 추출하는가?")
@@ -26,11 +24,10 @@ class CustomDelimiterTest {
     void canExtractCustomDelimiterProperly() {
         //given
         String input = "//!\\n11";
+        Delimiter delimiter= new CustomDelimiter();
         //when
-        extractCustomDelimiter(input);
         //then
-        assertTrue(CustomDelimiter.isValidExpression(input));
-        assertEquals("11", CustomDelimiter.getResult());
-        assertEquals("!", CustomDelimiter.getCustomDelimiter());
+        assertEquals("11", delimiter.parseDelimiter(input));
+        assertEquals(",|:"+"|"+"!", delimiter.delimiters);
     }
 }

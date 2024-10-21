@@ -4,7 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class InputService {
 
-    public static String getInput() {
+    public String getInput() {
         return Console.readLine();
     }
 }

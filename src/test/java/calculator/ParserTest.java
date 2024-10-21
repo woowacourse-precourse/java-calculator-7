@@ -16,26 +16,27 @@ class ParserTest {
 
     @DisplayName("커스텀 구분자로 시작하는 입력은 업데이트된 구분자로 파싱됩니다.")
     @Test
-    void statrsWithCustomDelimiter() {
+    void startsWithCustomDelimiter() {
         //given
-        String input="1,2:3)4";
-        String customDelimiter="\\)";
-        int result = 10;
+        Delimiter delimiter = new CustomDelimiter();
+        String input = delimiter.parseDelimiter("//?\\n1,2?3");
+        String require = "6";
         //when
-        Parser.startsWithCustomDelimiter(customDelimiter,input);
+        String result = Parser.parse(input, delimiter);
         //then
-        Assertions.assertEquals(result, Parser.result);
+        Assertions.assertEquals(require, result);
     }
 
     @DisplayName("숫자로 시작하는 입력은 기본 구분자로 파싱됩니다.")
     @Test
     void startsWithPositiveNumber() {
         ///given
-        String input="1,2:3";
-        int result= 6;
+        Delimiter delimiter = new Delimiter();
+        String input = delimiter.parseDelimiter("1,2,3:4");
+        String require= "10";
         //when
-        Parser.startsWithPositiveNumber(input);
+        String result = Parser.parse(input, delimiter);
         //then
-        Assertions.assertEquals(result, Parser.result);
+        Assertions.assertEquals(require, result);
     }
 }

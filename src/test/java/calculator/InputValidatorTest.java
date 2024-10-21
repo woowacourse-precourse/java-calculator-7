@@ -20,8 +20,7 @@ class InputValidatorTest {
     void properResultStartsFromNumber() {
         //given
         String input = "1:2,3";
-        CustomDelimiter customDelimiter = new CustomDelimiter();
-        InputValidator inputValidator = new InputValidator(customDelimiter);
+        InputValidator inputValidator = new InputValidator();
         //when
         inputValidator.validate(input);
         //then
@@ -33,8 +32,7 @@ class InputValidatorTest {
     void properResultStartsFromCustomDelimiter() {
         //given
         String input = "//.\\n1:2,3.4";
-        CustomDelimiter customDelimiter = new CustomDelimiter();
-        InputValidator inputValidator = new InputValidator(customDelimiter);
+        InputValidator inputValidator = new InputValidator();
         //when
         inputValidator.validate(input);
         //then
@@ -46,8 +44,7 @@ class InputValidatorTest {
     void testEmptyString() {
         // given
         String input = "";
-        CustomDelimiter customDelimiter = new CustomDelimiter();
-        InputValidator inputValidator = new InputValidator(customDelimiter);
+        InputValidator inputValidator = new InputValidator();
 
         // when, then: 정상 동작 => 예외 미동작
         String result = inputValidator.validate(input);  // validate 메서드에서 0을 반환하도록 처리
@@ -62,12 +59,11 @@ class InputValidatorTest {
     @Test
     void testStartsWithDelimiter() {
         // given
-        String input = "//";
-        CustomDelimiter customDelimiter = new CustomDelimiter();
-        InputValidator inputValidator = new InputValidator(customDelimiter);
+        String input = "//?\\n";
+        InputValidator inputValidator = new InputValidator();
 
         // when, then: 정상 동작 => 예외 미동작
-        assertDoesNotThrow(() -> inputValidator.validateStartsWithDelimiter(input));
+        assertDoesNotThrow(() -> inputValidator.validate(input));
     }
 
 
@@ -76,8 +72,7 @@ class InputValidatorTest {
     void testInvalidNonCustomDelimiter() {
         // given: 첫 시작이 문자이지만 커스텀 구분자가 아닌 경우
         String input1 = "abc,1,2,3";
-        CustomDelimiter customDelimiter = new CustomDelimiter();
-        InputValidator inputValidator = new InputValidator(customDelimiter);
+        InputValidator inputValidator = new InputValidator();
         // when, then: 커스텀 구분자로 시작하지 않으면 예외 발생
         assertThrows(IllegalArgumentException.class, () -> inputValidator.validate(input1));
         String input2 = "-abc,1,2,3";
@@ -110,8 +105,7 @@ class InputValidatorTest {
     @Test
     void testisNotNegativeNumber() {
         String input = "-1,2,3";
-        CustomDelimiter customDelimiter = new CustomDelimiter();
-        InputValidator inputValidator = new InputValidator(customDelimiter);
+        InputValidator inputValidator = new InputValidator();
         // when, then: 음수는 예외 발생
         assertThrows(IllegalArgumentException.class, () -> inputValidator.validate(input));
 
