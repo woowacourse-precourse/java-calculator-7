@@ -11,6 +11,7 @@ public class Calculator {
     private final String CUSTOM_SEPARATOR_CMD_REGEX = "^(\\/\\/.\\\\n)";
     private final String MINUS_DIGIT_REGEX = "-[0-9]*";
     private final String DIGIT_REGEX = "-?\\d+";
+    private final int MAX_NUM_LENGTH = 18;
     private final ICalculatorDisplay calculatorDisplay;
 
     public Calculator(ICalculatorDisplay calculatorDisplay) {
@@ -73,7 +74,7 @@ public class Calculator {
     /**
      * 숫자로 구성된 문자열을 정수 자료형으로 변경
      *
-     * @throws IllegalArgumentException 음수이거나, 숫자 이외의 값일 경우
+     * @throws IllegalArgumentException 음수이거나, 숫자 이외의 값이거나, 숫자 입력 범위를 초과하였을 경우
      */
     private long convertStrToNum(String rawNum) {
         if (rawNum.matches(MINUS_DIGIT_REGEX)) {
@@ -81,6 +82,9 @@ public class Calculator {
         }
         if (!rawNum.matches(DIGIT_REGEX)) {
             throw new IllegalArgumentException("숫자 이외의 값은 계산 불가");
+        }
+        if (rawNum.length() >= MAX_NUM_LENGTH) {
+            throw new IllegalArgumentException("18자리까지만 입력할 수 있음");
         }
 
         return Long.parseLong(rawNum);

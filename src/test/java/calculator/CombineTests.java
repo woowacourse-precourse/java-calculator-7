@@ -89,6 +89,16 @@ public class CombineTests extends NsTest {
         );
     }
 
+    @Test
+    void 예외_exceedInputRange() {
+        String bigNum = "11111111111111111111";
+
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException(bigNum + ":2:3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     protected void runMain() {
         Application.main(new String[]{});
