@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -97,6 +98,31 @@ public class ValidTest {
         assertTrue(thrownException.getCause() instanceof IllegalArgumentException);
         assertEquals("Custom Divider format is wrong", thrownException.getCause().getMessage());
 
+    }
+
+    @Test
+    @DisplayName("숫자 추출 테스트")
+    public void testExtractNums() throws Exception {
+
+        //Given
+        CalculationUtil calculationUtil = new CalculationUtil("//n\\n1,23:456n78n9");
+
+        //When
+        invokePrivateMethod(calculationUtil, "checkCustomDivider");
+        invokePrivateMethod(calculationUtil, "checkDivider");
+
+        //Then
+        Field numbersField = CalculationUtil.class.getDeclaredField("numbers");
+
+        numbersField.setAccessible(true);
+
+        List<Integer> numbers = (List<Integer>) numbersField.get(calculationUtil);
+
+        assertEquals(1, numbers.get(0));
+        assertEquals(23, numbers.get(1));
+        assertEquals(456, numbers.get(2));
+        assertEquals(78, numbers.get(3));
+        assertEquals(9, numbers.get(4));
     }
 
 
