@@ -94,4 +94,21 @@ class InputConsoleHandlerTest {
         Console.close();
     }
 
+    @Test
+    @DisplayName("이모지도 구분자로 사용할 수 있다")
+    void inputSplitWithEmoji() {
+        // given
+        String input = "//\uD83C\uDF51\\n1\uD83C\uDF512\uD83C\uDF513";
+
+        // when
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        // then
+        String[] inputSplit = INPUT_CONSOLE_HANDLER.getUserInput();
+        assertThat(inputSplit).containsExactly("1", "2", "3");
+
+        System.setIn(System.in);
+        Console.close();
+    }
+
 }
