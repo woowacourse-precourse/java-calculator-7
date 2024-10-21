@@ -1,4 +1,4 @@
-package calculator.domain.validation;
+package calculator.domain.validator;
 
 import static calculator.domain.constant.errorMessage.ParseError.INCORRECT_POSITION;
 import static calculator.domain.constant.errorMessage.ParseError.INVALID_FORMAT;

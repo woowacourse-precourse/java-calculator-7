@@ -1,6 +1,6 @@
 package calculator.view;
 
-import calculator.domain.validation.DelimiterValidator;
+import calculator.domain.validator.DelimiterValidator;
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
