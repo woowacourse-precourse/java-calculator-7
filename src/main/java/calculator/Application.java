@@ -50,26 +50,26 @@ public class Application {
         System.out.println(MESSAGE_NORMAL_RESULT + " : " + getSumResult(userInput, delimiterRegex));
     }
 
-    private static int getSumResult(String userInput, String delimiterRegex) {
-        int sumResult = 0;
+    private static long getSumResult(String userInput, String delimiterRegex) {
+        long sumResult = 0;
 
         for (String numberToken : userInput.split(delimiterRegex)) {
             if (numberToken.isEmpty()) {
                 continue;
             }
 
-            int parsedInt;
+            long parsedNumber;
             try {
-                parsedInt = Integer.parseInt(numberToken);
+                parsedNumber = Long.parseLong(numberToken);
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException(
                         MESSAGE_ERROR_ILLEGAL_FORMULA + getProblematicInputMessage(numberToken));
             }
-            if (parsedInt < 0) {
+            if (parsedNumber < 0) {
                 throw new IllegalArgumentException(
                         MESSAGE_ERROR_NEGATIVE_NUMBER + getProblematicInputMessage(numberToken));
             }
-            sumResult += parsedInt;
+            sumResult += parsedNumber;
         }
         return sumResult;
     }
