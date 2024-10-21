@@ -65,7 +65,11 @@ public class Application {
             try{
                 int number = Integer.parseInt(s);
 
-                // 마이너스 입력 시 예외 처리
+                // 음수 혹은 0 입력 시 예외 처리
+                if(number == 0) {
+                    throw new IllegalArgumentException("0 입력");
+                }
+
                 if(number < 0) {
                     throw new IllegalArgumentException("마이너스 입력");
                 }
