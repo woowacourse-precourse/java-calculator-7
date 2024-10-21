@@ -18,7 +18,7 @@ public class CalculatorController {
         }
 
         List<Long> inputNumbers = userInput.parser();
-        long result = new Calculator().sum(inputNumbers);
+        long result = Calculator.sum(inputNumbers);
 
         OutputView.printResult("결과 : " + result);
     }
