@@ -2,14 +2,18 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.List;
+
 public class Application {
 
     static InputValidator validator = new InputValidator();
+    static Parser parser = new Parser();
 
     public static void main(String[] args) {
         Application application = new Application();
         String input = application.getInputString();
         PatternType patternType = validator.validate(input);
+        List<Integer> numbers = parser.parseToInt(input, patternType);
         application.printResult(1);
     }
 
