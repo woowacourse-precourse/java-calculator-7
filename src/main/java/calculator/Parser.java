@@ -1,5 +1,6 @@
 package calculator;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,19 +11,17 @@ public class Parser {
     private static List<Character> delimiters;
 
 
-    public static List<Integer> parse(String input) {
+    public static List<BigInteger> parse(String input) {
         delimiters = new ArrayList<>(List.of(':', ','));
-        List<Integer> numbers = new ArrayList<>();
+        List<BigInteger> numbers = new ArrayList<>();
 
         input = parseCustomDelimiter(input);
 
         String[] stringNumbers = input.split(delimiters.toString());
 
-        for (String stringNumber : stringNumbers) {
-            checkNumeric(stringNumber);
-
-            int number = Integer.parseInt(stringNumber);
-            numbers.add(number);
+        for (String number : stringNumbers) {
+            checkNumeric(number);
+            numbers.add(new BigInteger(number));
         }
 
         return numbers;
