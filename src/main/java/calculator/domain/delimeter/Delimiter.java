@@ -1,5 +1,8 @@
 package calculator.domain.delimeter;
 
+import static calculator.constant.ExceptionMessage.DELIMITER_NULL_OR_EMPTY;
+import static calculator.constant.ExceptionMessage.DELIMITER_RESERVED_CHARACTER;
+
 public class Delimiter {
     private final String value;
 
@@ -15,13 +18,13 @@ public class Delimiter {
 
     private static void validateNotNullOrEmpty(String value) {
         if (value == null || value.isEmpty()) {
-            throw new IllegalArgumentException("구분자는 null 이거나 비어있을 수 없습니다.");
+            throw new IllegalArgumentException(DELIMITER_NULL_OR_EMPTY.message());
         }
     }
 
     private static void validateNotReservedCharacters(String value) {
         if ("//".equals(value) || "\n".equals(value)) {
-            throw new IllegalArgumentException("구분자는 '//' 이거나 '\\n' 일 수 없습니다.");
+            throw new IllegalArgumentException(DELIMITER_RESERVED_CHARACTER.message());
         }
     }
 

@@ -1,5 +1,7 @@
 package calculator.service;
 
+import static calculator.constant.ExceptionMessage.CUSTOM_DELIMITER_POSITION;
+import static calculator.constant.ExceptionMessage.INVALID_CUSTOM_DELIMITER_FORMAT;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
@@ -140,7 +142,7 @@ class DelimiterExtractorTest {
             // When & Then
             assertThatThrownBy(() -> delimiterExtractor.extract(input))
                     .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage("커스텀 구분자는 문자열의 시작 부분에만 위치해야 합니다.");
+                    .hasMessage(CUSTOM_DELIMITER_POSITION.message());
         }
 
         @Test
@@ -151,7 +153,7 @@ class DelimiterExtractorTest {
             // When & Then
             assertThatThrownBy(() -> delimiterExtractor.extract(input))
                     .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage("커스텀 구분자 형식이 올바르지 않습니다.");
+                    .hasMessage(INVALID_CUSTOM_DELIMITER_FORMAT.message());
         }
 
         @Test
@@ -162,7 +164,7 @@ class DelimiterExtractorTest {
             // When & Then
             assertThatThrownBy(() -> delimiterExtractor.extract(input))
                     .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage("커스텀 구분자 형식이 올바르지 않습니다.");
+                    .hasMessage(INVALID_CUSTOM_DELIMITER_FORMAT.message());
         }
     }
 }

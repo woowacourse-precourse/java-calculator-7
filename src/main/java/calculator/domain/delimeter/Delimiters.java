@@ -1,5 +1,7 @@
 package calculator.domain.delimeter;
 
+import static calculator.constant.ExceptionMessage.CUSTOM_DELIMITERS_NULL;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -22,7 +24,7 @@ public class Delimiters {
 
     public static Delimiters createWithCustom(List<Delimiter> customDelimiters) {
         if (customDelimiters == null) {
-            throw new IllegalArgumentException("커스텀 구분자목록은 null 일 수 없습니다.");
+            throw new IllegalArgumentException(CUSTOM_DELIMITERS_NULL.message());
         }
 
         Set<Delimiter> allDelimiters = new HashSet<>(DEFAULT_DELIMITERS);

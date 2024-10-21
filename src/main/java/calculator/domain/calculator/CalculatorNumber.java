@@ -1,5 +1,8 @@
 package calculator.domain.calculator;
 
+import static calculator.constant.ExceptionMessage.INVALID_NUMBER_FORMAT;
+import static calculator.constant.ExceptionMessage.NOT_POSITIVE_NUMBER;
+
 import calculator.domain.visitor.NumberVisitor;
 
 public class CalculatorNumber {
@@ -15,9 +18,7 @@ public class CalculatorNumber {
             return new CalculatorNumber(parseLong(value));
 
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(
-                    "유효하지 않은 숫자 형식입니다: " + value + "\n양의 정수만 사용 가능하며, 소수점, 공백, 문자, 특수 문자는 사용할 수 없습니다."
-            );
+            throw new IllegalArgumentException(INVALID_NUMBER_FORMAT.format(value));
         }
     }
 
@@ -31,10 +32,10 @@ public class CalculatorNumber {
 
     private static void validatePositive(long value) {
         if (value <= 0) {
-            throw new IllegalArgumentException("숫자는 양수여야 합니다.");
+            throw new IllegalArgumentException(NOT_POSITIVE_NUMBER.message());
         }
     }
-    
+
     public void accept(NumberVisitor visitor) {
         visitor.visit(this);
     }
