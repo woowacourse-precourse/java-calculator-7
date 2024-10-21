@@ -7,25 +7,6 @@ import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-/*
-테스트 입력
-"1,2,3"
-"1,2:3"
-"-1,2,-3"
-"1,2,3,"
-"1,2:3@4"
-"1,;2:3"
-"1, 2;3"
-"//;\n1;2;2"
-"//;\n1,2;3:4"
-"//;\n1;2; 3"
-"//;\n1:2@3;4"
-"//7\n172,3"
-"//\n1,2:2"
-"//;\n1;10,100:1"
-"10,100:1"
-*/
-
 class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_사용() {
