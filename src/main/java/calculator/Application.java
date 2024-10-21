@@ -10,6 +10,7 @@ public class Application {
 
         if (input.startsWith("//")) {
             String sep = input.substring(2, input.indexOf("\\n"));
+            String[] numbers = input.substring(input.indexOf("\\n") + 2).split(",|:|" + sep);
         } else {
             String[] numbers = input.split("[,:]");
         }
