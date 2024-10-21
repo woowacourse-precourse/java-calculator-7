@@ -1,43 +1,42 @@
 package calculator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class NumberExtractor {
 
-    public static List<Long> parseInput(String input, List<Character> delimiters) {
+    public static Long sumParsedNumbers(String input, List<Character> delimiters) {
 
-        StringBuilder stringBuilder = new StringBuilder();
-        List<Long> result = new ArrayList<>();
+        StringBuilder delimitedString = new StringBuilder();
+        Long sum = 0L;
 
         for (int i = 0; i < input.length(); i++) {
             char currentChar = input.charAt(i);
 
             if (delimiters.contains(currentChar)) {
-                if (!stringBuilder.isEmpty()) {
-                    parseAndReset(result, stringBuilder);
+                if (!delimitedString.isEmpty()) {
+                    sum += parseNumber(delimitedString);
                 }
                 continue;
             }
 
             if (Character.isDigit(currentChar)) {
-                appendDigit(currentChar, stringBuilder);
+                appendDigit(currentChar, delimitedString);
             } else {
                 throw new IllegalArgumentException();
             }
         }
 
-        if (!stringBuilder.isEmpty()) {
-            parseAndReset(result, stringBuilder);
+        if (!delimitedString.isEmpty()) {
+            sum += parseNumber(delimitedString);
         }
 
-        return result;
+        return sum;
     }
 
-    private static void parseAndReset(List<Long> result, StringBuilder stringBuilder) {
-        Long parsedNum = Long.parseLong(stringBuilder.toString());
-        stringBuilder.setLength(0);
-        result.add(parsedNum);
+    private static Long parseNumber(StringBuilder delimitedString) {
+        Long parsedNum = Long.parseLong(delimitedString.toString());
+        delimitedString.setLength(0);
+        return parsedNum;
     }
 
     private static void appendDigit(char currentChar, StringBuilder stringBuilder) {
