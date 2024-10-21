@@ -11,6 +11,7 @@ public interface NumberExtractor {
     default Long parseNumber(String split) {
 
         try {
+            split = split.strip();
             long parseInt = Long.parseLong(split);
             return parseInt;
         } catch (NumberFormatException e) {
