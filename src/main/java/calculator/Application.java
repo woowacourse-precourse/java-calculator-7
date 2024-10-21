@@ -2,6 +2,8 @@ package calculator;
 
 import java.util.Scanner;
 import java.util.regex.Pattern;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
@@ -11,24 +13,19 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해주세요: ");
         String input = sc.nextLine();
 
-        try {
-            int result = calculator.calculate(input);
-            System.out.println("결과: " + result);
-        } catch (IllegalArgumentException e) {
-            System.out.println("오류: " + e.getMessage());
-        }finally {
-            sc.close();
-        }
+        int result = calculator.calculate(input);
+        System.out.println("결과 : " + result);
 
+        sc.close();
     }
 
     static class StringCalculator {
         public int calculate(String input) {
-            if (input.isEmpty()) {
+            if (input == null || input.trim().isEmpty()) {
                 return 0;
             }
 
-            String delimiter = "[,:]";
+            String delimiter = ",|:";
             String numberString = input;
 
             if (input.startsWith("//")) {
@@ -43,17 +40,21 @@ public class Application {
 
             String[] numbers = numberString.split(delimiter);
             int sum = 0;
-            for(String number : numbers) {
+            List<Integer> negatives = new ArrayList<>();
+
+            for (String number : numbers) {
                 try {
-                    int num = Integer.parseInt(number);
-                    if(num < 0){
-                        throw new IllegalArgumentException("음수는 허용되지 않습니다." + num);
+                    int num = Integer.parseInt(number.trim());
+                    if (num < 0) {
+                        throw new IllegalArgumentException("음수는 허용되지 않습니다: " + num);
                     }
                     sum += num;
                 } catch (NumberFormatException e) {
-                    throw new IllegalArgumentException("숫자 형식에 오류가 있습니다:" + number);
+                    throw new IllegalArgumentException("숫자 형식에 오류가 있습니다: " + number);
                 }
             }
+
+
             return sum;
         }
     }
