@@ -17,6 +17,22 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 숫자_한개() {
+        assertSimpleTest(() -> {
+            run("1");
+            assertThat(output()).contains("결과 : 1");
+        });
+    }
+
+    @Test
+    void 올바른_커스텀_구분자() {
+        assertSimpleTest(() -> {
+            run("//;\\n1;2:3,4");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
+    @Test
     void 덧셈식_형식_오류_1() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException(",1,3"))
