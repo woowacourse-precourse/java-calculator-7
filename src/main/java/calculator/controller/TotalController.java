@@ -16,6 +16,12 @@ public class TotalController {
         calcController = new CalcController();
     }
 
+    public static void init() {
+        input();
+        prepExpressionAndCalc();
+        outputPrint();
+    }
+
     private static void input() {
         userExpression = inputController.input();
     }
