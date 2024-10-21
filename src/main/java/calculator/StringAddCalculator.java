@@ -11,6 +11,7 @@ public class StringAddCalculator {
     private static final int EMPTY_VALUE = 0;
     private static final int PATTERN_IN_GROUP = 1;
     private static final int NUMBERS_IN_GROUP = 2;
+    private static final String BACKSLASH = "\\";
 
     public int calculate(String input) {
         return validateEmptyValue(input) ? EMPTY_VALUE : splitAndSumNumber(input);
@@ -25,7 +26,7 @@ public class StringAddCalculator {
         Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(input);
 
         if (matcher.find()) {
-            pattern = matcher.group(PATTERN_IN_GROUP);
+            pattern = BACKSLASH + matcher.group(PATTERN_IN_GROUP);
             input = matcher.group(NUMBERS_IN_GROUP);
         }
 
