@@ -70,6 +70,24 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 큰_수_덧셈() {
+        assertSimpleTest(() -> {
+            run("2147483648");
+            assertThat(output()).contains("결과 : 2147483648");
+        });
+
+        assertSimpleTest(() -> {
+            run("//;\\n2147483648;2147483648,2147483648");
+            assertThat(output()).contains("결과 : 6442450944");
+        });
+
+        assertSimpleTest(() -> {
+            run("2147483648,2147483648");
+            assertThat(output()).contains("결과 : 4294967296");
+        });
+    }
+
+    @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("-1,2,3"))

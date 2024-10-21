@@ -2,75 +2,45 @@ package calculator.service.impl;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.BeforeEach;
+import java.math.BigInteger;
 import org.junit.jupiter.api.Test;
 
 class CalculatorServiceImplTest {
 
-    private CalculatorServiceImpl calculatorService;
-
-    @BeforeEach
-    void setUp() {
-        calculatorService = new CalculatorServiceImpl();
-    }
+    private CalculatorServiceImpl calculatorService = new CalculatorServiceImpl();;
 
     @Test
     void simpleCalculateTest() {
-        // Given
-        int[] numbers = {1, 2, 3, 4, 5};
-
-        // When
-        int result = calculatorService.calculate(numbers);
-
-        // Then
-        assertEquals(15, result);
+        BigInteger[] numbers = {BigInteger.ONE, BigInteger.valueOf(2), BigInteger.valueOf(3), BigInteger.valueOf(4), BigInteger.valueOf(5)};
+        BigInteger result = calculatorService.calculate(numbers);
+        assertEquals(BigInteger.valueOf(15), result);
     }
 
     @Test
     void emptyArrayCalculateTest() {
-        // Given
-        int[] numbers = {};
-
-        // When
-        int result = calculatorService.calculate(numbers);
-
-        // Then
-        assertEquals(0, result);
+        BigInteger[] numbers = {};
+        BigInteger result = calculatorService.calculate(numbers);
+        assertEquals(BigInteger.ZERO, result);
     }
 
     @Test
     void negativeNumbersArrayCalculateTest() {
-        // Given
-        int[] numbers = {-1, -2, -3, -4};
-
-        // When
-        int result = calculatorService.calculate(numbers);
-
-        // Then
-        assertEquals(-10, result);
+        BigInteger[] numbers = {BigInteger.valueOf(-1), BigInteger.valueOf(-2), BigInteger.valueOf(-3), BigInteger.valueOf(-4)};
+        BigInteger result = calculatorService.calculate(numbers);
+        assertEquals(BigInteger.valueOf(-10), result);
     }
 
     @Test
     void onlyZeroArrayCalculateTest() {
-        // Given
-        int[] numbers = {0, 0, 0};
-
-        // When
-        int result = calculatorService.calculate(numbers);
-
-        // Then
-        assertEquals(0, result);
+        BigInteger[] numbers = {BigInteger.ZERO, BigInteger.ZERO, BigInteger.ZERO};
+        BigInteger result = calculatorService.calculate(numbers);
+        assertEquals(BigInteger.ZERO, result);
     }
 
     @Test
     void mixedPositiveAndNegativeNumbersArrayCalculateTest() {
-        // Given
-        int[] numbers = {1, -2, 3, -4, 5};
-
-        // When
-        int result = calculatorService.calculate(numbers);
-
-        // Then
-        assertEquals(3, result);
+        BigInteger[] numbers = {BigInteger.valueOf(1), BigInteger.valueOf(-2), BigInteger.valueOf(3), BigInteger.valueOf(-4), BigInteger.valueOf(5)};
+        BigInteger result = calculatorService.calculate(numbers);
+        assertEquals(BigInteger.valueOf(3), result);
     }
 }
