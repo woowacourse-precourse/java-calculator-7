@@ -17,7 +17,7 @@ public class SeparatorValidationUtil {
         }
 
         String betweenSeparators = separatorString.substring(2, separatorString.length() - 2);
-        System.out.println(betweenSeparators);
+
         if (betweenSeparators.length() != 1 || Character.isDigit(betweenSeparators.charAt(0))) {
             throw new IllegalArgumentException(MessageConst.INVALID_SEPARATOR_MSG);
         }
