@@ -1,6 +1,8 @@
 package calculator.util;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -57,7 +59,6 @@ class ExtractionUtilTest {
         inputsAndResults.put("//!+.\\n1,2,3", new char[]{'!', '+', '.'});
         inputsAndResults.put("//\"'|\\n1,2,3", new char[]{'\"', '\'', '|'});
         inputsAndResults.put("//'@#$\\n1,2,3", new char[]{'\'', '@', '#', '$'});
-        inputsAndResults.put("//()_**\\n1,2,3", new char[]{'(', ')', '_', '*', '*'});
 
         // when, then
         inputsAndResults.forEach((input, expected) -> {
@@ -66,6 +67,25 @@ class ExtractionUtilTest {
 
             // then
             Assertions.assertThat(actual).isEqualTo(expected);
+        });
+    }
+
+    @Test
+    public void 커스텀_구분자_숫자_지정시_예외_발생() {
+        // given
+        List<String> inputs = new ArrayList<>();
+        inputs.add("//1\\n1,2,3");
+        inputs.add("//;1\\n1,2,3");
+        inputs.add("//.1!\\n1,2,3");
+        inputs.add("//1\\n.\\n1,2,3");
+        inputs.add("//.\\n1\\n1,2,3");
+        inputs.add("//1\\n2\\n1,2,3");
+
+        // when, then
+        inputs.forEach((input) -> {
+            Assertions.assertThatThrownBy(() -> ExtractionUtil.extractDelimiter(input))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage("커스텀 구분자로 숫자를 지정할 수 없습니다.");
         });
     }
 
@@ -83,13 +103,14 @@ class ExtractionUtilTest {
         inputsAndResults.put("//!\\n@\\n1!2@3", "1!2@3");
         inputsAndResults.put("//!\\n@\\n1!2\\n3", "1!2\\n3");
         inputsAndResults.put("//\\n1,2", "1,2");
-        inputsAndResults.put("//\\n1,2\\n", "1,2\\n");
+        inputsAndResults.put("//\\n1,2\\n", "");
         inputsAndResults.put("//\\n\\n\\n\\n1", "\\n\\n1");
         inputsAndResults.put("///\\n1/2", "1/2");
-        // 숫자는 구분자가 될 수 없기 때문에 '\n'을 구분자로 설정하고 싶어도 사이에 숫자가 들어가면 무시된다.
-        inputsAndResults.put("//'@#$\\n1,\\n2,3", "1,\\n2,3");
-        inputsAndResults.put("//\\n2\\n121\\n1", "2\\n121\\n1");
-        inputsAndResults.put("//;!\\n1,2,3\\n", "1,2,3\\n");
+        inputsAndResults.put("//'@#$\\n1,\\n2,3", "2,3");
+        inputsAndResults.put("//\\n2\\n121\\n1", "121\\n1");
+        inputsAndResults.put("//;!\\n1,2,3\\n", "");
+        inputsAndResults.put("//;!\\n1,2,3\\n1,2,3\\n", "1,2,3\\n");
+        inputsAndResults.put("//;!\\n1,2,3\\n1,2,3\\n1,2,3", "1,2,3\\n1,2,3");
 
         // when, then
         inputsAndResults.forEach((input, expected) -> {

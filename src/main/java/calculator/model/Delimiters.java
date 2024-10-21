@@ -25,9 +25,6 @@ public class Delimiters {
         for (char c : extracted) {
             delimiters.add(c);
         }
-        if (extracted.length != delimiters.size() - 2) {
-            throw new IllegalArgumentException("구분자를 중복해서 지정할 수 없습니다.");
-        }
         return new Delimiters(delimiters);
     }
 
