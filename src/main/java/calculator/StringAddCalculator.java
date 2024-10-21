@@ -8,6 +8,6 @@ public class StringAddCalculator {
 
     public static void run() {
         String line = Input.inputMessage();
-        Parser.parse(line);
+        Output.printResult(Parser.parse(line));
     }
 }
