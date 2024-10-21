@@ -43,7 +43,7 @@ public class CalculatorController {
 
 	private String processCustomDelimiter(String input) {
 		Optional<String> customDelimiter = customDelimiterProcessor.extractCustomDelimiter(input);
-		customDelimiter.ifPresent(delimiters::addCustomDelimiter);
+		customDelimiter.ifPresent(delimiters::addDelimiter);
 
 		return customDelimiterProcessor.removeCustomDelimiterPattern(input);
 	}

@@ -14,7 +14,7 @@ public class Delimiters {
 		initDefaultDelimiters();
 	}
 
-	public void addCustomDelimiter(String delimiterInput) {
+	public void addDelimiter(String delimiterInput) {
 		InputValidator.validateEmpty(delimiterInput);
 		InputValidator.validateNonDigit(delimiterInput);
 		delimiters.add(delimiterInput);
