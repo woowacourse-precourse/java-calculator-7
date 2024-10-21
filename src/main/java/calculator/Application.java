@@ -1,7 +1,14 @@
 package calculator;
 
 public class Application {
+
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        InputHandler inputHandler = new InputHandler();
+        Calculator calculator = new Calculator();
+        OutputHandler outputHandler = new OutputHandler();
+
+        String input = inputHandler.getInput();
+        int result = calculator.separateInput(input);
+        outputHandler.printResult(result);
     }
 }
