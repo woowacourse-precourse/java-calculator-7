@@ -1,7 +1,9 @@
 package calculator;
 
+import calculator.calculator.MainCalculator;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        MainCalculator.execute();
     }
 }
