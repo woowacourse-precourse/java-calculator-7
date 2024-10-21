@@ -25,4 +25,12 @@ public record Number(int value) {
         return String.valueOf(value);
     }
 
+    /**
+     * 현재 객체의 값 반환
+     *
+     * @return
+     */
+    public int getValue() {
+        return value;
+    }
 }
