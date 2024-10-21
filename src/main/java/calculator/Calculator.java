@@ -3,19 +3,15 @@ package calculator;
 import java.util.List;
 
 public class Calculator {
-    private String[] splitNumbers;
     private int sum;
 
     public int getSum(String parsedUserInput, List<Character> delimiter) {
-        makeSplitNumbers(parsedUserInput, delimiter);
-//        for(String number : splitNumbers){
-//            sum += Integer.parseInt(number);
-//        }
+        searchNumberAndCalculate(parsedUserInput, delimiter);
 
         return sum;
     }
 
-    private void makeSplitNumbers(String parsedUserInput, List<Character> delimiter) {
+    private void searchNumberAndCalculate(String parsedUserInput, List<Character> delimiter) {
         StringBuilder sb = new StringBuilder();
         this.sum = 0;
 
