@@ -1,7 +1,6 @@
 package calculator.controller;
 
 import calculator.service.CalculatorService;
-import java.util.Arrays;
 
 public class CalculatorController {
     private static CalculatorController calculatorController;
@@ -13,12 +12,12 @@ public class CalculatorController {
         return calculatorController;
     }
     public Integer calculator(String text){
-        if(calculatorService.textValidation(text)){
-            String[] parsinged = calculatorService.parsing(text);
-            calculatorService.parseValidation(parsinged);
-            Integer result = calculatorService.sum(parsinged);
-            return result;
+        if(!calculatorService.textValidation(text)){
+            return 0;
         };
-        return 0;
+        String[] parsinged = calculatorService.parsing(text);
+        calculatorService.parseValidation(parsinged);
+        Integer result = calculatorService.sum(parsinged);
+        return result;
     }
 }

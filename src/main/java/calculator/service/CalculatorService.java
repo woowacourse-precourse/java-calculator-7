@@ -1,7 +1,5 @@
 package calculator.service;
 
-import calculator.controller.CalculatorController;
-
 public class CalculatorService {
     private static CalculatorService calculatorService;
 
@@ -17,13 +15,13 @@ public class CalculatorService {
     }
 
     public String[] parsing(String text) {
-        if (text.startsWith("//")) {
-            int startIndex = text.indexOf("\\n");
-            String customDelimiter = checkCustomDelimiter(text.substring(2, startIndex));
-            String numbersPart = text.substring(startIndex + 2);
-            return numbersPart.split(customDelimiter);
+        if (!text.startsWith("//")) {
+            return text.split("[,:]");
         }
-        return text.split("[,:]");
+        int startIndex = text.indexOf("\\n");
+        String customDelimiter = checkCustomDelimiter(text.substring(2, startIndex));
+        String numbersPart = text.substring(startIndex + 2);
+        return numbersPart.split(customDelimiter);
     }
 
     private String checkCustomDelimiter(String customDelimiter) {
