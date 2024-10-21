@@ -34,6 +34,10 @@ public class Application {
         for (String num : numbers) {
             if (!num.trim().isEmpty()) {
                 try {
+                    int number=Integer.parseInt(num.trim());
+                    if (number<0){
+                        throw new IllegalArgumentException("양수가 아닙니다."+number);
+                    }
                     sum += Integer.parseInt(num.trim());
                 } catch (NumberFormatException e) {
                     throw new IllegalArgumentException("잘못된 값: " + num);
