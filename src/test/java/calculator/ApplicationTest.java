@@ -24,6 +24,23 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 기문_구분자만_사용(){
+        assertSimpleTest(() ->{
+            run("1,2:3,4");
+            assertThat(output().contains("결과 : 10"));
+        });
+    }
+
+    @Test
+    void 빈_문자열만_입력(){
+        assertSimpleTest(() -> {
+            run("");
+            assertThat(output().contains("결과 : 0"));
+                }
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
