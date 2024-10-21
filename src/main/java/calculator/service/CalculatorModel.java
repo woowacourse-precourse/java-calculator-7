@@ -4,16 +4,12 @@ import calculator.model.Expression;
 import calculator.model.PositiveNumber;
 import calculator.model.Separator;
 
-public class Calculator {
+public class CalculatorModel {
     private final Separator separator = new Separator();
 
     public int calculate(Expression expressionModel) {
         String nonSeparatorSection = expressionModel.nonSeparatorSection();
-
-        if (expressionModel.hasCustomSeparator()) {
-            separator.registerSeparator(expressionModel.separatorSection());
-            nonSeparatorSection = expressionModel.nonSeparatorSection();
-        }
+        separator.registerSeparator(expressionModel.separatorSection());
 
         String[] numbers = nonSeparatorSection.split(separator.getSeparator());
 

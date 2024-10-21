@@ -1,14 +1,14 @@
 package calculator.controller;
 
 import calculator.model.Expression;
-import calculator.service.Calculator;
+import calculator.service.CalculatorModel;
 import calculator.view.CalculateView;
 
 public class CalculatorController {
-    private final Calculator model;
+    private final CalculatorModel model;
     private final CalculateView view;
 
-    public CalculatorController(Calculator model, CalculateView view) {
+    public CalculatorController(CalculatorModel model, CalculateView view) {
         this.model = model;
         this.view = view;
     }

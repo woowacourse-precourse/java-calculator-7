@@ -28,7 +28,7 @@ public class Expression {
         if (!hasCustomSeparator()) {
             return expression;
         }
-        int startIdx = expression.indexOf(FIRST_DELIMITER) + 2;
+        int startIdx = expression.indexOf(LAST_DELIMITER) + 2;
         return expression.substring(startIdx);
     }
 }
