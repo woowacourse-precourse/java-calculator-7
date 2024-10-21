@@ -1,4 +1,4 @@
-package calculator.splitter;
+package calculator.parser;
 
 import java.util.ArrayList;
 import java.util.List;
