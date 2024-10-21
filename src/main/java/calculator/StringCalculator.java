@@ -54,10 +54,6 @@ public class StringCalculator {
                         continue;
                     }
 
-                    if (!isNumeric(dotToken)) {
-                        throw new IllegalArgumentException("유효하지 않은 숫자입니다: " + dotToken);
-                    }
-
                     int number = Integer.parseInt(dotToken);
 
                     if (number < 0) {
@@ -67,10 +63,6 @@ public class StringCalculator {
                     sum += number;
                 }
             } else {
-                if (!isValidNumber(token)) {
-                    throw new IllegalArgumentException("유효하지 않은 숫자입니다: " + token);
-                }
-
                 double number = Double.parseDouble(token);
 
                 if (number < 0) {
@@ -90,29 +82,5 @@ public class StringCalculator {
         }
         char firstChar = text.charAt(0);
         return Character.isDigit(firstChar);
-    }
-
-    private static boolean isNumeric(String str) {
-        if (str == null || str.isEmpty()) {
-            return false;
-        }
-        for (char c : str.toCharArray()) {
-            if (!Character.isDigit(c)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private static boolean isValidNumber(String str) {
-        if (str == null || str.isEmpty()) {
-            return false;
-        }
-        try {
-            Double.parseDouble(str);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
     }
 }
