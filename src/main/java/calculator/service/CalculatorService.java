@@ -42,20 +42,17 @@ public class CalculatorService {
             value = results[0];
         }
 
-
-
-//        System.out.println(newSeparator +" " +value);
         makeNewSeparator(newSeparator);
         calculator.setRawValue(value);
-        List<Double> processedValue = extractNumbersToList();
+        List<Number> processedValue = extractNumbersToList();
         if (!isValid) {
             exceptionHandler.handleException(new IllegalArgumentException());
         }
         calculator.setProcessedValue(processedValue);
     }
 
-    public List<Double> extractNumbersToList() {
-        List<String> resultList = new ArrayList<>(List.of(calculator.getRawValue())); // 초기 결과 리스트
+    public List<Number> extractNumbersToList() {
+        List<String> resultList = new ArrayList<>(List.of(calculator.getRawValue()));
         try {
             for (String separator : calculator.getSeparators()) {
                 List<String> tempList = new ArrayList<>();
@@ -68,18 +65,18 @@ public class CalculatorService {
         } catch (Exception e) {
             isValid = false;
         }
-        List<Double> processedValue = new ArrayList<>();
+
+        List<Number> processedValue = new ArrayList<>();
         for (String item : resultList) {
             if (item.trim().isEmpty()) continue;
             if (!item.matches("\\d+(\\.\\d+)?")) {
                 throw new IllegalArgumentException();
             }
-            double value = Double.parseDouble(item);
-            if (value <= 0) {
-                throw new IllegalArgumentException();
+            if (item.contains(".")) {
+                processedValue.add(Double.parseDouble(item));
+            } else {
+                processedValue.add(Long.parseLong(item));
             }
-
-            processedValue.add( value);
         }
         return processedValue;
     }
@@ -102,30 +99,27 @@ public class CalculatorService {
         calculator.setSeparators(newSeparators);
     }
 
-
-    public Double sumOfList() {
-        List<Double> values = calculator.getProcessedValue();
-        Double sum = (double) 0;
-        for (Double value : values) {
-            sum += value;
+    public Number sumOfList() {
+        List<Number> values = calculator.getProcessedValue();
+        double sum = 0;
+        for (Number value : values) {
+            sum += value.doubleValue();
         }
         calculator.setSumValue(sum);
         return sum;
     }
 
     public String printResult() {
-        double sum = calculator.getSumValue();
+        Number sum = calculator.getSumValue();
 
-        // 값이 정수인지 소수인지 확인
         String result;
-        if (sum == (int) sum) {  // 정수와 동일한 값인지 체크
-            result = "결과 : " + (int) sum;
+        if (sum.doubleValue() == sum.longValue()) {
+            result = "결과 : " + sum.longValue();
         } else {
-            result = "결과 : " + sum;
+            result = "결과 : " + sum.doubleValue();
         }
 
         System.out.println(result);
         return result;
     }
 }
-

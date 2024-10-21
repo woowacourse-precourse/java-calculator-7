@@ -7,8 +7,8 @@ import java.util.List;
 public class Calculator {
 
     String rawValue;
-    List<Double> processedValue;
-    Double sumValue;
+    List<Number> processedValue;
+    Number sumValue;
     List<String> separators;
 
     public List<String> getSeparators() {
@@ -31,19 +31,19 @@ public class Calculator {
         this.rawValue = rawValue;
     }
 
-    public List<Double> getProcessedValue() {
+    public List<Number> getProcessedValue() {
         return processedValue;
     }
 
-    public void setProcessedValue(List<Double> processedValue) {
+    public void setProcessedValue(List<Number> processedValue) {
         this.processedValue = processedValue;
     }
 
-    public Double getSumValue() {
+    public Number getSumValue() {
         return sumValue;
     }
 
-    public void setSumValue(Double sumValue) {
+    public void setSumValue(Number sumValue) {
         this.sumValue = sumValue;
     }
 }
