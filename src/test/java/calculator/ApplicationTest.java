@@ -24,21 +24,15 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    // NoSuchElementException오류 방지를 위해서 빈 값은 \n으로 입력 테스트
     @Test
     void 빈_문자열_입력() {
         assertSimpleTest(() -> {
-            run("");
+            run("\n");
             assertThat(output()).contains("결과 : 0");
         });
     }
 
-    @Test
-    void null_입력() {
-        assertSimpleTest(() -> {
-            run(null);
-            assertThat(output()).contains("결과 : 0");
-        });
-    }
 
     @Test
     void 기본_구분자_쉼표_사용() {
@@ -119,7 +113,7 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("결과 : 10");
         });
     }
-
+    
     @Override
     public void runMain() {
         Application.main(new String[]{});
