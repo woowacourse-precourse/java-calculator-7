@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CalculatorDelimiter {
-    static final String DEFAULT_DELIMITER = ",|:";
+    private static final String DEFAULT_DELIMITER = ",|:";
     private static final String CUSTOM_DELIMITER_HEAD = "//";
     private static final String CUSTOM_DELIMITER_LAST = "\n";
     private static final String  BACKSLASH_WITH_CUSTOM_DELIMITER_LAST= "\\n";
@@ -15,28 +15,31 @@ public class CalculatorDelimiter {
 
 
     public Boolean checkDelimiterHead(String userInput) {
-        return userInput.startsWith(CalculatorDelimiter.CUSTOM_DELIMITER_HEAD);
+        return userInput.startsWith(CUSTOM_DELIMITER_HEAD);
+    }
+    public Boolean checkDelimiterLast(String userInput) {
+        return userInput.contains(BACKSLASH_WITH_CUSTOM_DELIMITER_LAST);
     }
 
     public Matcher getMatcherByCheckPattern(String normalizedInput) {
-        return CalculatorDelimiter.CUSTOM_DELIMITER_PATTERN.matcher(normalizedInput);
+        return CUSTOM_DELIMITER_PATTERN.matcher(normalizedInput);
     }
 
     public Boolean isContainNumber(String givenInput) {
-        return CalculatorDelimiter.CONTAINS_NUMBERS_PATTERN.matcher(givenInput).matches();
+        return CONTAINS_NUMBERS_PATTERN.matcher(givenInput).matches();
     }
 
-    public Boolean isNotDefaultDelimiter(String givenInput) {
-        return !CalculatorDelimiter.DEFAULT_DELIMITER_PATTERN.matcher(givenInput).matches();
+    public Boolean isDefaultDelimiter(String givenInput) {
+        return DEFAULT_DELIMITER_PATTERN.matcher(givenInput).matches();
     }
 
     public String changeToNormalizedInput(String givenInput) {
-        return givenInput.replace(CalculatorDelimiter.BACKSLASH_WITH_CUSTOM_DELIMITER_LAST, CalculatorDelimiter.CUSTOM_DELIMITER_LAST);
+        return givenInput.replace(BACKSLASH_WITH_CUSTOM_DELIMITER_LAST, CUSTOM_DELIMITER_LAST);
     }
 
     public String subStringCustomDelimiterInput(String givenInput) {
-        return  givenInput.substring(givenInput.indexOf(CalculatorDelimiter.BACKSLASH_WITH_CUSTOM_DELIMITER_LAST)
-                            + CalculatorDelimiter.CUSTOM_DELIMITER_LAST_SIZE);
+        return  givenInput.substring(givenInput.indexOf(BACKSLASH_WITH_CUSTOM_DELIMITER_LAST)
+                            + CUSTOM_DELIMITER_LAST_SIZE);
     }
     public String getCustomDelimiterIfPresent(String userInput,String givenDelimiter) {
         if (checkDelimiterHead(userInput)) {
@@ -51,5 +54,10 @@ public class CalculatorDelimiter {
         }
         return userInput;
     }
-
+    public Boolean isCustomDelimiterFormat(String givenInput) {
+        return this.checkDelimiterHead(givenInput) && this.checkDelimiterLast(givenInput);
+    }
+    public Boolean isHaveDelimiterFormat(String givenInput) {
+        return !this.isCustomDelimiterFormat(givenInput) || this.isDefaultDelimiter(givenInput);
+    }
 }

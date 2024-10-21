@@ -3,7 +3,6 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 import java.util.Arrays;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Calculator {
     private String userInput;
@@ -22,21 +21,17 @@ public class Calculator {
         if (isUserInputEmpty()) {
             throw new IllegalArgumentException(INVALID_INPUT_ERROR+"user Input is Empty");
         }
-
-        if (isCustomDelimiterFormat()) {
+        if (this.calculatorDelimiter.isCustomDelimiterFormat(this.userInput)) {
             processCustomDelimiter();
-        } else {
-            validateDefaultDelimiterFormat();
+        }
+        if (this.calculatorDelimiter.isHaveDelimiterFormat(this.userInput)) {
+            throw new IllegalArgumentException(INVALID_INPUT_ERROR);
         }
         return true;
     }
 
     private Boolean isUserInputEmpty() {
         return this.userInput == null || this.userInput.isEmpty();
-    }
-
-    private Boolean isCustomDelimiterFormat() {
-        return this.calculatorDelimiter.checkDelimiterHead(this.userInput);
     }
 
     private void processCustomDelimiter() {
@@ -50,21 +45,10 @@ public class Calculator {
         this.customDelimiter = matcher.group(1);
         String targetNumbersWithDelimiters = matcher.group(2);
 
-        if (!containsNumbers(targetNumbersWithDelimiters)) {
+        if (!this.calculatorDelimiter.isContainNumber(targetNumbersWithDelimiters)) {
             throw new IllegalArgumentException(INVALID_INPUT_ERROR);
         }
     }
-
-    private Boolean containsNumbers(String givenInput) {
-        return this.calculatorDelimiter.isContainNumber(givenInput);
-    }
-
-    private void validateDefaultDelimiterFormat() {
-        if (this.calculatorDelimiter.isNotDefaultDelimiter(this.userInput)) {
-            throw new IllegalArgumentException(INVALID_INPUT_ERROR);
-        }
-    }
-
     public Integer getSumByCalculate() {
         String targetNumbersWithDelimiter = this.userInput;
         String delimiter = this.calculatorDelimiter.getCustomDelimiterIfPresent(targetNumbersWithDelimiter,this.customDelimiter);
