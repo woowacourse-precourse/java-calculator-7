@@ -4,19 +4,27 @@ import static java.lang.Character.isDigit;
 import static java.lang.Integer.parseInt;
 import static java.lang.String.valueOf;
 
-// google java style guide
+// google java style guide 도입
 
 /**
  * [x] 공백과 주석 정리
  * [x] 불필요한 import 삭제
- * [] 가독성 향상을 위한 변수명 개선
- * [] 조건문 가독성 향상
+ * [x] 가독성 향상을 위한 변수명 개선
+ * [x] 조건문 가독성 향상
  */
 
 public class Calculator {
 
   private String readLine;
   private int target;
+  private static final char COMMA = ',';
+  private static final char COLON = ':';
+  private static final char SEMI_COLON = ';';
+  private static final char SLASH = '/';
+  private static final char BACK_SLASH = '\\';
+  private static final char LINE_BREAK = 'n';
+  private static final char BLANK = 'n';
+  private static final String REGEX = "[0-9]" ;
 
   public Calculator(String readLine) {
     this.target = 0;
@@ -24,20 +32,21 @@ public class Calculator {
   }
 
   public int calculating() {
+    boolean isCustomerDelimiter = readLine.startsWith("//;\\n");
 
     // 입력 문자열 탐색중
     for (int i = 0; i < readLine.length(); i++) {
 
       // 커스텀 구분자로 시작하면
-      if (readLine.startsWith("//;\\n")) {
+      if (isCustomerDelimiter) {
         char index = readLine.charAt(i);
 
         // 유효한 경우엔 건너뛰고
-        if (index == '/' || index == '\\' || index == ';' || index == 'n') {
+        if (index == SLASH || index == BACK_SLASH || index == SEMI_COLON || index == LINE_BREAK) {
           continue;
         }
 
-        if (index != '/' && index != '\\' && !validIsDigit(index) && index != 'n') {
+        if (index != SLASH && index != BACK_SLASH && !validIsDigit(index) && index != LINE_BREAK) {
           // 커스텀 구분자 또는 정수가 아닌 경우는 예외 처리한다
           throw new IllegalArgumentException(
               "커스텀 구분자를 입력하려면 문자열 맨앞에 '//;\\n'를 붙인 다음 사용해주세요 (예시 //;\\n1;2;3)");
@@ -51,13 +60,13 @@ public class Calculator {
       }
 
       //  인덱스가 기본 구분자 ‘,’ , ‘:’ 인 경우
-      if (readLine.charAt(i) == ',' || readLine.charAt(i) == ':') {
+      if (readLine.charAt(i) == COMMA || readLine.charAt(i) == COLON) {
         // 다음 인덱스 탐색으로 넘어간다
         continue;
       }
       // 예외 체크
       checkException(readLine.charAt(i));
-      if (readLine.charAt(i) != ',' && readLine.charAt(i) != ':' && !validIsDigit(readLine.charAt(i)) && readLine.charAt(i) != ' ') {
+      if (readLine.charAt(i) != COMMA && readLine.charAt(i) != COLON && !validIsDigit(readLine.charAt(i)) && readLine.charAt(i) != BLANK) {
         // 비정상 입력 예외 처리
         throw new IllegalArgumentException("입력 가능한 문자열인지 확인해주세요. ',', ':' 를 포함한 0-9의 정수 (예시 : 1, 2, 3 또는 1,2:3)");
       }
@@ -89,7 +98,7 @@ private void addNumbers(char index) {
   }
 
   private static boolean validIsDigit(char index) {
-    boolean validDigit = Character.toString(index).matches("[0-9]");
+    boolean validDigit = Character.toString(index).matches(REGEX);
     return validDigit;
   }
 }

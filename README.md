@@ -14,7 +14,7 @@
   - [x] build.gradle 변경 x, 외부 라이브러리 사용 x, 제공된 라이브러리 사용
   - [x] 프로그램 종료시 System.exit() 호출 x
   - [x] 프로그래밍 요구사항에 달리 명시하지 않는 한 파일, 패키지 등의 이름을 바꾸거나 이동 x
-  - [] 자바 코드 컨벤션 준수 : Google Java Style Guide
+  - [x] 자바 코드 컨벤션 준수 : Google Java Style Guide
   - [x] camp.nextstep.edu.missionutils에서 제공하는 Console API를 사용하여 구현
   - [x] 사용자가 입력하는 값은 camp.nextstep.edu.missionutils.Console의 readLine()을 활용
 
