@@ -35,6 +35,9 @@ public class DelimiterSet {
     }
 
     private void validateDelimiter(String delimiter) {
+        if (delimiter.isEmpty()) {
+            return;
+        }
         if (delimiter.matches(NUMERIC_REGEX)) {
             throw new IllegalArgumentException(NUMERIC_ERROR_MESSAGE);
         }

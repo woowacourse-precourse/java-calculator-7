@@ -19,6 +19,9 @@ public class DelimiterExtractor {
 
         DelimiterSet delimiterSet = new DelimiterSet();
         String firstHalf = getFistHalf(input);
+        if (firstHalf.isEmpty()) {
+            return new DelimiterSet();
+        }
         delimiterSet.addAll(List.of(firstHalf.split(EMPTY)));
         return delimiterSet;
     }
@@ -38,6 +41,7 @@ public class DelimiterExtractor {
 
     private void checkValidatePrefix(String input) {
         if (notStartWithPrefix(input)) {
+            System.out.println("dddddd");
             throw new IllegalArgumentException(PREFIX_ERROR_MESSAGE);
         }
     }
