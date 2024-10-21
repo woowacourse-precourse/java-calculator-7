@@ -16,6 +16,7 @@ public class InputProcessor {
         this.input = input;
         delimiterList.add(",");
         delimiterList.add(":");
+        regex = String.join("|", delimiterList);
     }
 
     public boolean isDefaultCase() {
