@@ -24,6 +24,16 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 빈_문자열_입력() {
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException(" "))  // 빈 문자열 입력
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("빈 문자열은 허용되지 않습니다.") // 메시지 확인
+        );
+    }
+
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
