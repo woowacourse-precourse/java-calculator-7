@@ -2,23 +2,24 @@ package calculator;
 
 public class CalculatorController {
 
-    private final StringCalculator calculator;
-    private final CalculatorView view;
+    private final Calculator calculator;
+    private final CalculatorInput calculatorInput;
+    private final CalculatorOutput calculatorOutput;
 
-    public CalculatorController(StringCalculator calculator, CalculatorView view) {
+    public CalculatorController(Calculator calculator, CalculatorInput calculatorInput, CalculatorOutput calculatorOutput) {
         this.calculator = calculator;
-        this.view = view;
+        this.calculatorInput = calculatorInput;
+        this.calculatorOutput = calculatorOutput;
     }
-
     public void run() {
-        String input = view.getInput();
-
         try {
-            int result = calculator.calculate(input);
-            view.displayResult(result);
+            String input = calculatorInput.getInput();
+            int result = calculator.splitAndSum(input);
+            calculatorOutput.printResult(result);
         } catch (IllegalArgumentException e) {
-            view.displayError(e.getMessage());
+            calculatorOutput.printError(e.getMessage());
         }
     }
+
 }
 
