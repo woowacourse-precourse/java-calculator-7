@@ -17,6 +17,8 @@ public class Application {
                     continue;
                 } else if (Character.isDigit(ch)) {
                     result += Character.getNumericValue(ch);
+                } else {
+                    throw new IllegalArgumentException();
                 }
             }
         } else {
@@ -26,6 +28,8 @@ public class Application {
                     continue;
                 } else if (Character.isDigit(ch)) {
                     result += Character.getNumericValue(ch);
+                } else {
+                    throw new IllegalArgumentException();
                 }
             }
         }
