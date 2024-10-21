@@ -16,3 +16,4 @@ public class StringParser {
         return input.split(delimiter.getDelimiter());
     }
 }
+
