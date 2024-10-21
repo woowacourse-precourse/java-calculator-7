@@ -26,4 +26,16 @@ public class DefaultStringSplitterTest {
         Assertions.assertTrue(strings.contains(expected3));
         Assertions.assertTrue(strings.size() == 3);
     }
+
+    @ParameterizedTest
+    @CsvSource({
+            "'1', '1'",
+            "'234567890', '234567890'"
+    })
+    void 나누어진_크기가_1인_문자열(String input, String expected1) {
+        List<String> strings = stringSplitter.splitString(input);
+
+        Assertions.assertTrue(strings.contains(expected1));
+        Assertions.assertTrue(strings.size() == 1);
+    }
 }

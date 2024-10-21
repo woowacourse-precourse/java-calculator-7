@@ -10,7 +10,6 @@ import java.util.List;
 class CustomStringSplitterTest {
 
     StringSplitter stringSplitter = new CustomStringSplitter();
-
     @ParameterizedTest
     @CsvSource({
             "'//*\n2*23*4', '2', '23', '4'",
@@ -38,6 +37,18 @@ class CustomStringSplitterTest {
         Assertions.assertTrue(strings.contains(expected3));
         Assertions.assertTrue(strings.contains(expected4));
         Assertions.assertTrue(strings.size() == 4);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "'//*\n1', '1'",
+            "'//i\n2345678590', '2345678590'"
+    })
+    void 나누어진_크기가_1인_문자열(String input, String expected1) {
+        List<String> strings = stringSplitter.splitString(input);
+
+        Assertions.assertTrue(strings.contains(expected1));
+        Assertions.assertTrue(strings.size() == 1);
     }
 
     @ParameterizedTest
