@@ -4,7 +4,7 @@ package calculator.model;
 import static calculator.common.DelimiterConstant.DELIMITER_CREATOR_BACK;
 import static calculator.common.DelimiterConstant.DELIMITER_SEPERATOR;
 
-import calculator.common.NumberValidator;
+import calculator.model.domain.CustomNumber;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,17 +20,11 @@ public class StringParser {
         return value.substring(value.lastIndexOf(DELIMITER_CREATOR_BACK) + DELIMITER_CREATOR_BACK.length());
     }
 
-    public List<Integer> parseToNumbers(String value) {
+    public List<CustomNumber> parseToNumbers(String value) {
         String[] splitValues = value.split(getAllSpliterator());
         return Arrays.stream(splitValues)
-                .map(this::parseIntAndValidate)
+                .map(CustomNumber::fromString)
                 .toList();
-    }
-
-    private Integer parseIntAndValidate(String splitValue) {
-        int parsedValue = Integer.parseInt(splitValue);
-        NumberValidator.validatePositive(parsedValue);
-        return parsedValue;
     }
 
     private String getAllSpliterator() {

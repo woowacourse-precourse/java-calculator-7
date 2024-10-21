@@ -25,10 +25,10 @@ public class StringSumCalculator implements Calculator {
             delimiterManager.registerCustomDelimiters(inputValue);
             targetValue = stringParser.splitTarget(inputValue);
         }
-        List<Integer> extractedNumbers = stringParser.parseToNumbers(targetValue);
+        List<CustomNumber> extractedNumbers = stringParser.parseToNumbers(targetValue);
 
         return extractedNumbers.stream()
-                .mapToInt(Integer::intValue)
+                .mapToInt(CustomNumber::getNumber)
                 .sum();
     }
 }
