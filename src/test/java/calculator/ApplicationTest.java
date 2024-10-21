@@ -60,6 +60,21 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void testNumbersSeparatedByComma() {
+        assertSimpleTest(() -> {
+            // Given
+            StringCalculator calculator = new StringCalculator();
+            String input = "1,2";
+
+            // When
+            int result = calculator.add(input);
+
+            // Then
+            assertEquals(3, result);
+        });
+    }
+
 //    @Test
 //    void 예외_테스트() {
 //        assertSimpleTest(() ->
