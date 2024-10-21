@@ -24,14 +24,14 @@ public class Application {
 
         //커스텀 구분자 처리
         if (input.length() > 2 && input.charAt(0) == '/' && input.charAt(1) == '/') {
-            int nindex = input.indexOf("\n");
-            if (nindex == -1) {
+            int nIndex = input.indexOf("\n");
+            if (nIndex == -1) {
                 throw new IllegalArgumentException("커스텀 구분자 형식이 잘못되었습니다.");
             }
-            String customDelimiter = input.substring(2, nindex);
-            numbers = (input.substring(nindex + 1)).split(customDelimiter);
+            String customDelimiter = input.substring(2, nIndex);
+            numbers = (input.substring(nIndex + 1)).split(customDelimiter);
         } else {
-            numbers = input.split(delimiter);
+            numbers = input.split(delimiter); //커스텀구분자가 없을경우
         }
 
         int sum = 0;
