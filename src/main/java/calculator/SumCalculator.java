@@ -22,4 +22,10 @@ public class SumCalculator {
         }
         return result;
     }
+    private int sum(String[] userNumbers) {
+        for (int i = 0; i < userNumbers.length; i++) {
+            result = result + isPositive(userNumbers[i]);
+        }
+        return result;
+    }
 }
