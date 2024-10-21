@@ -51,7 +51,7 @@ class Calc {
 
         if(matcher.find()) {
 
-            String customSep = matcher.group(1).trim();
+            String customSep = matcher.group(1);
 
             sep.add(customSep);
 
