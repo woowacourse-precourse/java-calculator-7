@@ -37,7 +37,7 @@ public class CalculatorService {
      * @param userInput
      * @return Boolean
      */
-    private static Boolean containsDefaultDelimiters(String userInput) {
+    public static Boolean containsDefaultDelimiters(String userInput) {
         return userInput.contains(",") || userInput.contains(":");
     }
 
