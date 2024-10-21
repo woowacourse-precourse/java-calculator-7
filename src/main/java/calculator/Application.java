@@ -8,7 +8,13 @@ public class Application {
         StringCalculator calculator = new StringCalculator();
 
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String input = scanner.nextLine();
+        String input;
+
+        if (scanner.hasNextLine()) {
+            input = scanner.nextLine();
+        } else {
+            input = "";  // 빈 입력 처리
+        }
 
         try {
             int result = calculator.add(input);
@@ -18,3 +24,5 @@ public class Application {
         }
     }
 }
+
+

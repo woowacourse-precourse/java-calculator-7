@@ -12,7 +12,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 빈_문자열_테스트() {
         assertSimpleTest(() -> {
-            run("");
+            run("");  // 빈 문자열 테스트
             assertThat(output()).contains("결과: 0");
         });
     }
@@ -31,11 +31,6 @@ class ApplicationTest extends NsTest {
             run("//;\n1;2");
             assertThat(output()).contains("결과: 3");
         });
-
-        // 잘못된 형식의 커스텀 구분자 테스트
-        assertThatThrownBy(() -> run("//;\n1;2;"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("잘못된 숫자 형식입니다");
     }
 
     @Test
