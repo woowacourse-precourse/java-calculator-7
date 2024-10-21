@@ -2,21 +2,24 @@ package calculator.controller;
 
 import java.util.List;
 
-import calculator.domain.Delimiter;
-import calculator.domain.DelimiterFactory;
 import calculator.domain.PositiveNumber;
 import calculator.domain.PositiveNumbers;
+import calculator.service.AdditionService;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
-public class Controller {
+public class AdditionController {
+
+    private final AdditionService additionService;
+
+    public AdditionController(final AdditionService additionService) {
+        this.additionService = additionService;
+    }
 
     public void run() {
         String input = readInput();
-        
-        Delimiter delimiter = DelimiterFactory.create(input);
 
-        PositiveNumber total = sum(delimiter.split());
+        PositiveNumber total = additionService.calculate(input);
 
         printResult(total);
     }
