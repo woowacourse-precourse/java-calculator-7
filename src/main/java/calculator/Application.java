@@ -16,7 +16,7 @@ public class Application {
             result = calculator.stringCalculate(input);
             System.out.println("결과 : " + result);
         } catch(Exception e){
-            System.out.println("ERROR: " + e.getMessage());
+//            System.out.println("ERROR: " + e.getMessage());
         }
 
     }
