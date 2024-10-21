@@ -19,7 +19,7 @@ public class Expression {
         for (char ch : expression.toCharArray()) {
             String character = String.valueOf(ch);
             if (!Character.isDigit(ch) && !delimiters.contains(character) && ch != ':' && ch != ',') {
-                throw new IllegalArgumentException("\""+ character + "\" 는 유효한 구분자가 아닙니다." );
+                throw new IllegalArgumentException("\"" + character + "\" 는 유효한 구분자가 아닙니다.");
             }
         }
     }
