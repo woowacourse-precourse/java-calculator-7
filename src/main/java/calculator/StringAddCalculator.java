@@ -22,10 +22,10 @@ public class StringAddCalculator {
             int delimiterIndex = input.indexOf("\\n");
             wrongInputFormat(delimiterIndex); // 구분자 지정 형식이 올바르지 않을 경우
 
-            delimiter = input.substring(2,delimiterIndex);
             String anotherDelimiter = "|".concat(input.substring(2, delimiterIndex));
             input = input.substring(delimiterIndex + 2);
             delimiter = delimiter.concat(anotherDelimiter);
+            System.out.println(delimiter);
         }
 
         return input.split(delimiter);
