@@ -24,7 +24,7 @@ public class InputProcessor {
     }
 
     public boolean isCustomCase() {
-        return input.startsWith(CUSTOM_DELIM_START);
+        return (input.startsWith(CUSTOM_DELIM_START) & input.contains(CUSTOM_DELIM_END));
     }
 
     public void getCustomDelimiter() {
