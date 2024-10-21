@@ -6,6 +6,7 @@ public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
 
+
         // 사용자 입력 받기
         System.out.println("구분자와 양수 구성된 문자열을 입력해 주세요.");
         String input = Console.readLine();
@@ -38,11 +39,13 @@ public class Application {
         // 음수이거나 숫자가 아닌경우 예외처리
         try {
             for (String number : numbers) {
-                int parseNumber = Integer.parseInt(number.trim());
-                if (parseNumber < 0) {
-                    throw new IllegalArgumentException("음수는 입력할 수 없습니다");
+                if (!number.trim().isEmpty()) {  // 빈 문자열 처리
+                    int parseNumber = Integer.parseInt(number.trim());
+                    if (parseNumber < 0) {
+                        throw new IllegalArgumentException("음수는 입력할 수 없습니다");
+                    }
+                    sum += parseNumber;
                 }
-                sum += parseNumber;
             }
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("잘못된 입력값이 있습니다.", e);
