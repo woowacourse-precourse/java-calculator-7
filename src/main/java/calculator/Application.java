@@ -48,4 +48,11 @@ public class Application {
                 .replace("$", "\\$")
                 .replace("|", "\\|");
     }
+    public static int sumAllIntegers(int[] arr) {
+        int result = 0;
+        for(int i : arr) {
+            result += i;
+        }
+        return result;
+    }
 }
