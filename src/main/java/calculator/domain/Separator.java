@@ -1,6 +1,7 @@
 package calculator.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Separator {
@@ -18,8 +19,8 @@ public class Separator {
         handleSeparator();
     }
 
-    public String[] removeSeparator() {
-        return removeCustomSeparatorFormat().split(makeSplitFormat());
+    public List<String> removeSeparator() {
+        return Arrays.stream(removeCustomSeparatorFormat().split(makeSplitFormat())).toList();
     }
 
     private String removeCustomSeparatorFormat() {

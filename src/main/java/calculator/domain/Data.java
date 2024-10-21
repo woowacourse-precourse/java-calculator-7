@@ -1,6 +1,5 @@
 package calculator.domain;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class Data {
@@ -28,7 +27,7 @@ public class Data {
             number.handleEmptyData();
             return;
         }
-        List<String> extractedStrings = Arrays.stream(separator.removeSeparator()).toList();
+        List<String> extractedStrings = separator.removeSeparator();
         SeparatorValidator.validateSeparator(extractedStrings);
         number.convertNumbers(extractedStrings);
         NumberValidator.validateNumber(number.getNumbers());
