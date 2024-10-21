@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Extractor {
-    public static final String DEFAULT_DELIMITER = "[,:]";
+    public static final String DEFAULT_DELIMITER = ",|:";
     public static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("^//(.)\\\\n");
 
     private String delimiter;
