@@ -15,6 +15,7 @@ public class ParsingService {
             operands.addOperand("0");
             return operands;
         }
+
         errorCheck(operandStr);
         operandStr = parseCustomDelimiter(operandStr, delimiters);
         parse(operandStr, delimiters, operands);

@@ -16,10 +16,10 @@ public class CalculatorController {
         String operandStr = userInputDTO.getOperandStr();
 
         //문자열 파싱 처리
-        Operands operandDTO = parseOperand(operandStr);
+        Operands operands = parseOperand(operandStr);
 
         //덧셈연산계산
-        ResultDTO resultDTO = addOperand(operandDTO);
+        ResultDTO resultDTO = addOperand(operands);
 
         OutputView.printCalculationResultMessage(resultDTO);
     }
