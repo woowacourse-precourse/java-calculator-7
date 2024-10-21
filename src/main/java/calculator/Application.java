@@ -1,7 +1,17 @@
 package calculator;
 
+import calculator.view.InputView;
+import calculator.view.OutputView;
+import java.util.List;
+
 public class Application {
+
+    private Application() {
+    }
+
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        List<Integer> numbers = InputView.inputNumbers();
+        int result = Calculator.sum(numbers);
+        OutputView.print(result);
     }
 }
