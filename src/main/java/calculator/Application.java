@@ -26,7 +26,7 @@ class StringCalculator {
         }
 
         // 기본 delimiter 설정
-        String delimiter = ",|:";
+        String delimiter = "[,:]";
 
         // "//"로 시작할 경우 "\n"로 구분해 delimiter 추가
         if (input.startsWith("//")) {
@@ -39,6 +39,7 @@ class StringCalculator {
             input = input.substring(delimiterIndex + 2);
         }
 
+        delimiter = "[%s,:]".formatted(delimiter);
         String[] numbers = input.split(delimiter);
         return calculateSum(numbers);
     }
