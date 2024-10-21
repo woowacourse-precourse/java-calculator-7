@@ -1,26 +1,130 @@
 package calculator;
 
-import camp.nextstep.edu.missionutils.test.NsTest;
-import org.junit.jupiter.api.Test;
-
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import camp.nextstep.edu.missionutils.test.NsTest;
+import org.junit.jupiter.api.Test;
+
 class ApplicationTest extends NsTest {
     @Test
-    void 커스텀_구분자_사용() {
+    void 기본_구분자_사용1() {
         assertSimpleTest(() -> {
-            run("//;\\n1");
-            assertThat(output()).contains("결과 : 1");
+            run("1:2,3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 기본_구분자_사용2() { // 숫자, 구분자 외의 문자가 포함된 문자열
+        assertSimpleTest(() -> {
+            run("1::3");
+            assertThat(output()).contains("결과 : 4");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용1() {
+        assertSimpleTest(() -> {
+            run("//;\\n1;2");
+            assertThat(output()).contains("결과 : 3");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용2() { // 2개 이상의 커스텀 구분자
+        assertSimpleTest(() -> {
+            run("//^;\\n1^2;3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용3() {
+        assertSimpleTest(() -> {
+            run("//^;\\n");
+            assertThat(output()).contains("결과 : 0");
         });
     }
 
     @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> runException("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 십의_자리_수_인식() {
+        assertSimpleTest(() -> {
+            run("10,2:3");
+            assertThat(output()).contains("결과 : 15");
+        });
+    }
+
+    @Test
+    void 백의_자리_수_인식() {
+        assertSimpleTest(() -> {
+            run("1,200:3");
+            assertThat(output()).contains("결과 : 204");
+        });
+    }
+
+    @Test
+    void 예외_테스트_공통1() { // 숫자로 혹은 '/'로 시작하지 않는 문자열
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("a:2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_공통2() { // 숫자, 구분자 외의 문자가 포함된 문자열
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1:2,a:3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_기본1() { // ',', ':' 외의 구분자(문자)
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1[2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_커스텀1() { // 커스텀 설정 시 오류1
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("/^1^2"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_커스텀2() { // 커스텀 설정 시 오류2
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//^1^2"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_커스텀3() { // 커스텀 설정 시 오류3
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//^\\1^2"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_커스텀4() { // 기본/커스텀 외의 구분자
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//^\\n1^2+3"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
