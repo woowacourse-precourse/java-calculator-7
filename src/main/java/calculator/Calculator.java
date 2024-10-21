@@ -13,7 +13,7 @@ public class Calculator {
         }
     }
 
-    public int calculateSum(String str) {
+    public int calculateSum(String str) throws IllegalArgumentException{
         int result = 0;
         String numberBuffer = "";
         for(int i = 0; i < str.length(); i++) {
@@ -44,13 +44,15 @@ public class Calculator {
             int idx2 = str.indexOf("\\n");
             if(idx1 == -1|| idx2 == -1 ||idx1 > 0|| idx2+2 == str.length())
                 throw new IllegalArgumentException("Error");
-
             else {
                 addSeparator(str.substring(idx1, idx2+2),idx1, idx2);
                 str = str.substring(idx2+2, str.length());
 
             }
         }
+        result = calculateSum(str);
+        if(result == -1)
+            throw new IllegalArgumentException("Error");
         return calculateSum(str);
     }
 }
