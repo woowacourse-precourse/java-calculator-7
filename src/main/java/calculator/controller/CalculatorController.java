@@ -1,7 +1,5 @@
 package calculator.controller;
 
-import static camp.nextstep.edu.missionutils.Console.readLine;
-
 import calculator.domain.Calculator;
 import calculator.domain.Extractor;
 import calculator.view.InputView;
@@ -25,6 +23,5 @@ public class CalculatorController {
         InputView.printStartMessage();
         return InputView.readInputString();
     }
-
 
 }
