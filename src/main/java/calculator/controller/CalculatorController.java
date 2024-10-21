@@ -16,11 +16,9 @@ public class CalculatorController {
     public void run() {
         String expression = view.getUserInput();
 
-        // 데이터 처리
         Expression expressionModel = new Expression(expression);
         int result = model.calculate(expressionModel);
 
-        // 출력
         view.displayResult(result);
     }
 }
