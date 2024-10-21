@@ -1,6 +1,6 @@
 package calculator.presentation;
 
-public class Validator {
+public class PresentationValidator {
 
     public String valid(String input) {
         return inputTypeValidation(input);

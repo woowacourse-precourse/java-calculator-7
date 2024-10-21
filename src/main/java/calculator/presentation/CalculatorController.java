@@ -8,7 +8,7 @@ public class CalculatorController {
     public CalculatorController() {
         System.out.println("덧셈할 문자열을 입력해주세요.");
 
-        String validUserInput = new Validator().valid(Console.readLine());
+        String validUserInput = new PresentationValidator().valid(Console.readLine());
 
         System.out.println("결과 : " + new CalculatorService().run(validUserInput));
     }
