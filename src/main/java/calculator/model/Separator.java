@@ -36,4 +36,16 @@ public class Separator {
 
         return tmpRegex.toString();
     }
+
+    public List<Number> separate(String str){
+        List<Number> ret = new ArrayList<>();
+        String[] splitStr = str.split(regex);
+
+        for(String strNumber: splitStr){
+            Number number = new Number(strNumber);
+            ret.add(number);
+        }
+
+        return ret;
+    }
 }
