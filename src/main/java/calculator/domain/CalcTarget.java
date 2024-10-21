@@ -15,10 +15,9 @@ public class CalcTarget {
         return new CalcTarget(value);
     }
 
-    public static CalcTarget registCustomSeparator(String value, String customSeparator) {
-        CalcTarget calcTarget = new CalcTarget(value);
-        calcTarget.customSeparator = customSeparator;
-        return calcTarget;
+    public void registCustomSeparator(String value, String customSeparator) {
+        this.value = value;
+        this.customSeparator = customSeparator;
     }
 
     public String getValue() {
