@@ -11,7 +11,6 @@ public class StringAddCalculator {
             "구분자가 잘못 되었습니다. 커스텀 구분자, 기본 구분자를 확인 후, "
                     + "다시 입력하세요";
 
-
     public static int splitAndSum(String input) {
         if (validateNullOrEmpty(input)) {
             return ZERO_VALUE;
