@@ -21,4 +21,20 @@ public class ValidatorTest {
         // then
         assertThat(zeroInputException).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void 허용되지_않은_문자가_입력되면_예외_발생() {
+        // given
+        String invalidCharacters = "1&2,3";
+        String emptyCustomDelimiter = "";
+
+        // when
+        Throwable thrownException = catchThrowable(() -> {
+            Validator.validateAllowedCharacters(invalidCharacters, emptyCustomDelimiter);
+        });
+
+        // then
+        assertThat(thrownException).isInstanceOf(IllegalArgumentException.class);
+    }
+
 }
