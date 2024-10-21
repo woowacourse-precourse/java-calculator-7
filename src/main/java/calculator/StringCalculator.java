@@ -17,6 +17,10 @@ public class StringCalculator {
         preprocessOnInput(input);
     }
 
+    public int doSum() {
+        return Arrays.stream(expression).sum();
+    }
+
     private void preprocessOnInput(String input) {
         String[] stringExpression = makeStringToExpression(input);
         expression = stringToIntegerArray(stringExpression);
