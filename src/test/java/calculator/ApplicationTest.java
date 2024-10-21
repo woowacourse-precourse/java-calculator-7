@@ -57,7 +57,7 @@ class ApplicationTest extends NsTest {
 
 
         // when
-        String[] wrongInputCases = new String[] {"/;\n1;1", "//;\n1;2", "//t\n1+1", "1+1:", "1--1"};
+        String[] wrongInputCases = new String[] {"/;\n1;1", "//;\n1;2", "//t\n1+1", "1+1:", "1--1", "1(1"};
 
         // then
         for (String wrongInputCase : wrongInputCases) {
