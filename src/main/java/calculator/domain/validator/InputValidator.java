@@ -1,5 +1,7 @@
 package calculator.domain.validator;
 
+import static calculator.domain.constant.Delimiter.CUSTOM_END;
+import static calculator.domain.constant.Delimiter.CUSTOM_START;
 import static calculator.domain.constant.errorMessage.ParseError.INCORRECT_POSITION;
 import static calculator.domain.constant.errorMessage.ParseError.INVALID_FORMAT;
 
@@ -7,8 +9,8 @@ import calculator.global.exception.CalculatorException;
 
 public class InputValidator {
 
-    private static final String CUSTOM_DELIMITER_START = "//";
-    private static final String CUSTOM_DELIMITER_END = "\\n";
+    private static final String CUSTOM_DELIMITER_START = CUSTOM_START.getDelimiter();
+    private static final String CUSTOM_DELIMITER_END = CUSTOM_END.getDelimiter();
 
     public void validateFormat(String inputString) {
         checkStartDelimiter(inputString);

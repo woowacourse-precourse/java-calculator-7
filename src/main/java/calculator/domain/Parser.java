@@ -1,5 +1,8 @@
 package calculator.domain;
 
+import static calculator.domain.constant.Delimiter.CUSTOM_END;
+import static calculator.domain.constant.Delimiter.CUSTOM_START;
+import static calculator.domain.constant.Delimiter.DEFAULT;
 import static calculator.domain.constant.errorMessage.ValueError.INVALID_VALUE_FORMAT;
 import static calculator.domain.constant.errorMessage.ValueError.MINUS_VALUE;
 import static calculator.domain.constant.errorMessage.ValueError.OUT_OF_RANGE_VALUE;
@@ -11,9 +14,9 @@ import java.util.stream.Collectors;
 
 public class Parser {
 
-    private static final String DEFAULT_DELIMITERS = ",|:";
-    private static final String CUSTOM_DELIMITER_START = "//";
-    private static final String CUSTOM_DELIMITER_END = "\\n";
+    private static final String DEFAULT_DELIMITERS = DEFAULT.getDelimiter();
+    private static final String CUSTOM_DELIMITER_START = CUSTOM_START.getDelimiter();
+    private static final String CUSTOM_DELIMITER_END = CUSTOM_END.getDelimiter();
 
     public List<Integer> parseInput(String targetInput) {
         String sanitizedInput = getSanitizeInput(targetInput);
