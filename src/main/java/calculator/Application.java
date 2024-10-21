@@ -3,6 +3,8 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Application {
     public static void main(String[] args) {
@@ -16,11 +18,19 @@ public class Application {
         if (input.isEmpty()) {
             return 0;  // 빈 문자열 처리
         }
+        String delimiter = getDelimiter(input);  // 구분자 결정
         // 더미 메서드로 표현
         return 0;
     }
 
     private static String getDelimiter(String input) {
+        if (input.startsWith("//")) {
+            return extractCustomDelimiter(input);  // 커스텀 구분자 추출
+        }
+        return ",|:";  // 기본 구분자
+    }
+
+    private static String extractCustomDelimiter(String input) {
         // 더미 메서드로 표현
         return ",";
     }
