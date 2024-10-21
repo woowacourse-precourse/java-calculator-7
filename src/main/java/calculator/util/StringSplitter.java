@@ -23,7 +23,7 @@ public class StringSplitter {
 
     }
 
-    public static String getCustomSplitter(String userInput) {
+    private static String getCustomSplitter(String userInput) {
         if (userInput.startsWith(CUSTOM_SPLITTER_SETTER_PREFIX) && userInput.contains(CUSTOM_SPLITTER_SETTER_SUFFIX)) {
             int customSpliterIndex =
                     userInput.indexOf(CUSTOM_SPLITTER_SETTER_PREFIX) + CUSTOM_SPLITTER_SETTER_PREFIX.length();
