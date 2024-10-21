@@ -1,54 +1,55 @@
 package calculator;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class StringCalculator {
-    public long calculate(String userInput) {
-        ArrayList<String> delimiters = new ArrayList<>();
-        delimiters.add(",");
-        delimiters.add(":");
 
-        if (userInput.startsWith("//")) {
-            if (userInput.contains("\\n")) {
-                String newDelimiter = userInput.substring(2, userInput.indexOf("\\n"));
-                System.out.println(newDelimiter);
+    private static final String CUSTOM_DELIMITER_START = "//";
+    private static final String CUSTOM_DELIMITER_END = "\\n";
+
+    ArrayList<String> delimiters = new ArrayList<>(List.of(",", ":"));
+
+    public BigInteger calculate(String inputString) {
+        inputString = extractDelimiter(inputString);
+
+        String regex = String.join("|", delimiters);
+        String[] splitByDelimiter = inputString.split(regex);
+
+        return sumNumbers(splitByDelimiter);
+
+    }
+
+    private String extractDelimiter(String inputString) {
+        if (inputString.startsWith(CUSTOM_DELIMITER_START)) {
+            if (inputString.contains(CUSTOM_DELIMITER_END)) {
+                String newDelimiter = inputString.substring(2, inputString.indexOf("\\n"));
                 if (newDelimiter.isEmpty() || newDelimiter.matches("\\d+")) {
                     throw new IllegalArgumentException("잘못된 값을 입력하였습니다");
                 }
                 delimiters.add(Pattern.quote(newDelimiter));
-                userInput = userInput.substring(userInput.lastIndexOf("\\n") + 2);
+                inputString = inputString.substring(inputString.lastIndexOf("\\n") + 2);
             } else {
                 throw new IllegalArgumentException("잘못된 값을 입력하였습니다");
             }
         }
-        String regex = String.join("|", delimiters);
-        System.out.println(userInput);
-        String[] splitByDelimiter = userInput.split(regex);
-        System.out.println(Arrays.toString(splitByDelimiter));
-        System.out.println(splitByDelimiter[0]);
-        long result = 0;
-        for (String num : splitByDelimiter) {
+        return inputString;
+    }
 
-            long addNum;
-            try {
-                if (num.isEmpty()) {
-                    num = "0";
-                }
-                addNum = Long.parseLong(num);
-            } catch (IllegalArgumentException e) {
-                throw new IllegalArgumentException();
+    private BigInteger sumNumbers(String[] splitByDelimiter) {
+        BigInteger result = BigInteger.ZERO;
+        for (String num : splitByDelimiter) {
+            if (num.isEmpty()) {
+                num = "0";
             }
-            if (addNum < 0) {
-                throw new IllegalArgumentException();
+            BigInteger addNum = new BigInteger(num);
+            if (addNum.compareTo(BigInteger.ZERO) < 0) {
+                throw new IllegalArgumentException("음수 값은 허용되지 않습니다.");
             }
-            result += addNum;
+            result = result.add(addNum);
         }
         return result;
     }
 }
-
-//구분자만 들어오는 경우,숫자만 들어오는 경우
-//커스텀 구분자가 숫자일 경우
-//커스텀 구분자가 특수문자일 경우-정규표현식 공부할 것.
