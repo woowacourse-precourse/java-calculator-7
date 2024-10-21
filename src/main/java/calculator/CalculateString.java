@@ -29,6 +29,10 @@ public class CalculateString {
     }
 
     public int calString(String str, String delimeters) {
+        if (delimeters.equals(".")) {
+            delimeters = delimeters.replace(".", "\\.");
+        }
+
         String[] splitString = str.trim().split(delimeters);
 
         if (splitString.length == 0) {
