@@ -1,10 +1,19 @@
 package calculator;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import org.junit.jupiter.api.Test;
 
 public class DelimiterExtractorTest {
+
+    @Test
+    void 기본_구분자_문자열에_음수가_있는_경우_마이너스가_구분자로_인식되지_않게한다() {
+        String input = "1,2,-3";
+        DelimiterExtractor delimiterExtractor = new DelimiterExtractor(input);
+
+        assertDoesNotThrow(delimiterExtractor::validate);
+    }
 
     @Test
     void 커스텀_구분자로_대시를_사용하면_IllegalArgumentException_예외가_발생한다() {
@@ -31,7 +40,7 @@ public class DelimiterExtractorTest {
 
     @Test
     void 잘못된_기본_구분자가_있으면_IllegalArgumentException_예외가_발생한다() {
-        DelimiterExtractor delimiterExtractor = new DelimiterExtractor("1,2:3-4");
+        DelimiterExtractor delimiterExtractor = new DelimiterExtractor("1,2:3#-4");
 
         assertThrows(IllegalArgumentException.class, delimiterExtractor::validate);
     }
@@ -61,10 +70,10 @@ public class DelimiterExtractorTest {
 
     @Test
     void 기본_구분자_문자열에_사용된_구분자를_추출한다() {
-        DelimiterExtractor delimiterExtractor = new DelimiterExtractor("1,2:3-4");
+        DelimiterExtractor delimiterExtractor = new DelimiterExtractor("1,2:3,-4");
 
-        String delimiterLeft = delimiterExtractor.remove();
-        String expected = " , : - ";
+        String delimiterLeft = delimiterExtractor.remove().trim();
+        String expected = ", : ,";
         assertEquals(expected, delimiterLeft);
     }
 

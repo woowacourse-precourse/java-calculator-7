@@ -27,9 +27,10 @@ public class DelimiterExtractor {
     public String remove() {
         final String LINE_BREAK = "\\n";
         final int OPERATION_FORMULA_LOCATION = 1;
+        final String MINUS = "-";
 
         if (DelimiterType.BASIC.equals(this.type())) {
-            return remove(POSITIVE_NUMBER_PATTERN_REGEX, this.text);
+            return remove(POSITIVE_NUMBER_PATTERN_REGEX, remove(MINUS, this.text));
         }
 
         return remove(POSITIVE_NUMBER_PATTERN_REGEX, this.text.split(LINE_BREAK)[OPERATION_FORMULA_LOCATION]);
