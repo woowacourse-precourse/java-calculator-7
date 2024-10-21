@@ -29,10 +29,18 @@ public class Application {
     }
 
     public static void main(String[] args) {
+        String delimiter = ",|:";
+
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
 
         String customDelimiter = extractCustomDelimiter(input);
-        System.out.println("customDelimiter = " + customDelimiter);
+
+        if (!customDelimiter.isEmpty()) {
+            input = input.substring(5);
+            delimiter += "|" + customDelimiter;
+        }
+
+        String[] numbers = input.split(delimiter);
     }
 }
