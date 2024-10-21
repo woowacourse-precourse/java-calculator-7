@@ -9,7 +9,7 @@ public class Application {
         String delimiters = ",|:";
         String inputTokens[] = splitByDelimiters(input, delimiters);
         int result = calculateSum(inputTokens);
-
+        System.out.println("결과 : " + result);
 
     }
 
@@ -21,21 +21,20 @@ public class Application {
             inputToken = inputToken.strip();
             if (!inputToken.isEmpty()) {
 
+                try {
+                    int numberToken = Integer.parseInt(inputToken);
 
-                int numberToken = Integer.parseInt(inputToken);
+                    if (numberToken > 0) {
+                        sum += numberToken;
+                    } else {
+                        throw new IllegalArgumentException();
+                    }
 
-                if (numberToken > 0) {
-                    sum += numberToken;
-                } else {
+                } catch (NumberFormatException e) {
                     throw new IllegalArgumentException();
-
                 }
-
-
             }
-
         }
-
         return sum;
     }
 
