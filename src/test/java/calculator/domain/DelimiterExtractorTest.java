@@ -1,6 +1,8 @@
 package calculator.domain;
 
+import static calculator.domain.constant.errorMessage.ValueError.MULTIPLE_CHARACTER;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -43,6 +45,15 @@ class DelimiterExtractorTest {
         String result = extractor.extractDelimiters(input, ",|:", "//", "\n");
 
         assertEquals(",|:", result);
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자가 여러 문자일 때 예외반환")
+    void extractMultiCharacterCustomDelimiter() {
+        String input = "//[***]\\n1***2***3";
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> extractor.extractDelimiters(input, ",|:", "//", "\\n"));
+        assertEquals(MULTIPLE_CHARACTER.getMessage(), exception.getMessage());
     }
 
 }
