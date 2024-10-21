@@ -2,7 +2,6 @@ package calculator.common.util;
 
 import calculator.common.constant.RegexPatterns;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -36,13 +35,23 @@ public class CalculatorUtil {
     }
 
     public static List<Integer> splitByDelimiters(List<String> delimiters, String inputValue) {
+
+        ArrayList<Integer> numberList = new ArrayList<>();
+
         String combinedDelimiters = delimiters.stream()
                 .map(Pattern::quote)
                 .collect(Collectors.joining("|"));
 
-        return Arrays.stream(Pattern.compile(combinedDelimiters).split(inputValue))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+        String[] numbers = Pattern.compile(combinedDelimiters).split(inputValue);
+
+        for (String value : numbers) {
+            if (value.isEmpty())
+                throw new IllegalArgumentException();
+
+            numberList.add(Integer.parseInt(value));
+        }
+
+        return numberList;
     }
 
     public static String formattingString(String inputValue) {

@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import calculator.common.util.CalculatorUtil;
 import calculator.service.InputValidator;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,20 +29,33 @@ class CalculatorUtilTest {
     }
 
     @Test
-    void splitByDelimiters() {
+    @DisplayName("구분자를 기준으로 숫자를 추출합니다.")
+    void splitByDelimiters_o() {
 
         // given
-        List<String> delimiters = new ArrayList<>();
-        delimiters.add(",");
-        delimiters.add(":");
-        delimiters.add("+");
-        delimiters.add("|");
+        String[] delimiters = {",", "|", ":"};
+        List<String> delimiterList = new ArrayList<>(Arrays.asList(delimiters));
+        String inputValue = "1:2:3,4|5|6";
 
         // when
-        List<Integer> result = CalculatorUtil.splitByDelimiters(delimiters, "1:2:3,4|5|6");
+        List<Integer> result = CalculatorUtil.splitByDelimiters(delimiterList, inputValue);
 
         // then
         assertEquals(6, result.size());
+    }
+
+    @Test
+    @DisplayName("숫자 구분시, 잘못된 입력이 존재하는 경우 오류를 발생합니다.")
+    void splitByDelimiters_x() {
+        // given
+        String[] delimiters = {",", "|", "+", ":"};
+        List<String> delimiterList = new ArrayList<>(Arrays.asList(delimiters));
+        String inputValue = "1::2:3,4|5|6";
+
+        // when, then
+        assertThrows(IllegalArgumentException.class,
+                () -> {CalculatorUtil.splitByDelimiters(delimiterList, inputValue);
+        });
     }
 
     @Test
