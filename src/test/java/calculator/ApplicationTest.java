@@ -12,6 +12,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import calculator.domain.Number;
 import calculator.domain.Numbers;
+import calculator.service.dto.NumberDto;
+import calculator.service.dto.NumbersDto;
 import calculator.service.exception.SeparationException;
 import calculator.service.separation.BasicSeparationService;
 import calculator.service.separation.CustomSeparationService;
@@ -63,20 +65,20 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자를_사용하고_입력값이_비어있는_경우() {
         String input = "//&\\n";
-        Numbers numbers = Numbers.from(List.of(Number.from(0)));
+        NumbersDto numbersDto = NumbersDto.from(List.of(NumberDto.from(0)));
         assertEquals(
                 customSeparationService.getNumbers(input, CUSTOM_SEPARATOR),
-                numbers
+                numbersDto
         );
     }
 
     @Test
     void 커스텀_구분자를_사용하고_입력값이_공백문자인_경우() {
         String input = "//&\\n     ";
-        Numbers numbers = Numbers.from(List.of(Number.from(0)));
+        NumbersDto numbersDto = NumbersDto.from(List.of(NumberDto.from(0)));
         assertEquals(
                 customSeparationService.getNumbers(input, CUSTOM_SEPARATOR),
-                numbers
+                numbersDto
         );
     }
 
@@ -129,20 +131,20 @@ class ApplicationTest extends NsTest {
     @Test
     void 기본_구분자를_사용하고_입력값이_비어있는_경우() {
         final String input = "";
-        Numbers numbers = Numbers.from(List.of(Number.from(0)));
+        NumbersDto numbersDto = NumbersDto.from(List.of(NumberDto.from(0)));
         assertEquals(
                 basicSeparationService.getNumbers(input, BASIC_SEPARATOR_COMMA, BASIC_SEPARATOR_COLON),
-                numbers
+                numbersDto
         );
     }
 
     @Test
     void 기본_구분자를_사용하고_입력값이_공백문자인_경우() {
         final String input = "     ";
-        Numbers numbers = Numbers.from(List.of(Number.from(0)));
+        NumbersDto numbersDto = NumbersDto.from(List.of(NumberDto.from(0)));
         assertEquals(
                 basicSeparationService.getNumbers(input, BASIC_SEPARATOR_COMMA, BASIC_SEPARATOR_COLON),
-                numbers
+                numbersDto
         );
     }
 
