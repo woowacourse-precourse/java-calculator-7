@@ -31,7 +31,7 @@ public class CalculatorService {
     /**
      * 숫자들의 형식을 나타내는 정규표현식입니다. 양수이거나 0이고, 콜론 또는 콤마로 구분되어 있습니다.
      */
-    private final static String pattern = "^([0-9 ]\\d*)([,:]([0-9]\\d*))*$";
+    private final static String pattern = "^([0-9]\\d*)([,:]([0-9]\\d*))*$";
 
     /**
      * 계산기 서비스를 생성하는 생성자입니다.
