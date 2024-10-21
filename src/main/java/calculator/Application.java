@@ -16,9 +16,10 @@ public class Application {
             System.out.println("결과: " + result);
         } catch (IllegalArgumentException e) {
             System.out.println("오류: " + e.getMessage());
+        }finally {
+            sc.close();
         }
 
-        sc.close();
     }
 
     static class StringCalculator {
