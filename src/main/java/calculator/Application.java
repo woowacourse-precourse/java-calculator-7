@@ -1,35 +1,34 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
         String input = Console.readLine();
-        System.out.println("답 : " + calculate(input));
+        System.out.println("결과 : " + calculate(input));
     }
 
     private static int calculate(String input) {
-        if (input == null || input.trim().isEmpty()) {
-            return 0;
+        if (input.startsWith("//")) {
+            String[] parts = input.split("\\\\n", 2);
+            String customDelimiter = parts[0].substring(2);
+            String numbers = parts[1];
+
+            return sum(numbers.split(customDelimiter));
+        } else {
+            return sum(input.split(","));
         }
+    }
 
-        List<String> storage = new ArrayList<>();
-
-        String[] numbers = input.split("[,:]");
+    private static int sum(String[] numbers) {
+        int result = 0;
         for (String number : numbers) {
-            storage.add(number.trim());
-        }
-
-        int sum = 0;
-
-        for (String num : storage) {
-            if (!num.isEmpty()) {
-                sum += Integer.parseInt(num);
+            int num = Integer.parseInt(number.trim());
+            if (num < 0) {
+                throw new IllegalArgumentException();
             }
+            result += num;
         }
-
-        return sum;
+        return result;
     }
 }
