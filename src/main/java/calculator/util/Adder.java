@@ -2,8 +2,8 @@ package calculator.util;
 
 import static calculator.config.SystemConstantMessages.UTILITY_CLASS_MESSAGE;
 
-public class Calculator {
-    private Calculator() {
+public class Adder {
+    private Adder() {
         throw new IllegalStateException(UTILITY_CLASS_MESSAGE);
     }
 
