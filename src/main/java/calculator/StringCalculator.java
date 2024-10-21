@@ -30,7 +30,7 @@ public class StringCalculator {
             if (!number.isEmpty()) {
                 int num = Integer.parseInt(number);
                 if (num < 0) {
-                    if (!negativeNumbers.isEmpty()) {
+                    if (negativeNumbers.length() > 0) {
                         negativeNumbers.append(",");
                     }
                     negativeNumbers.append(num);
@@ -40,8 +40,8 @@ public class StringCalculator {
             }
         }
 
-        if (!negativeNumbers.isEmpty()) {
-            throw new IllegalArgumentException("음수는 허용되지 않습니다: " + negativeNumbers.toString());
+        if (negativeNumbers.length() > 0) {
+            throw new IllegalArgumentException("음수는 허용되지 않습니다: " + negativeNumbers);
         }
 
         return sum;
