@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Processor {
-    private static final String DELIMITER_DECLARATION_SECTION = "//";
-    private static final String DELIMITER_AND_NUMBERS_SEPARATOR = "\\n";
+    private static final String CUSTOM_DELIMITER_PREFIX = "//";
+    private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
     private List<String> delimiters = new ArrayList<>(List.of(",", ":"));
     private String input;
 
@@ -18,7 +18,7 @@ public class Processor {
             return 0;
         }
 
-        if (input.startsWith(DELIMITER_DECLARATION_SECTION)) {
+        if (input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
             String customDelimiter = extractCustomDelimiter();
             delimiters.add(customDelimiter);
         }
@@ -33,11 +33,11 @@ public class Processor {
     }
 
     public String extractCustomDelimiter() {
-        int delimiterStart = DELIMITER_DECLARATION_SECTION.length();
-        int delimiterEnd = input.indexOf(DELIMITER_AND_NUMBERS_SEPARATOR);
+        int delimiterStart = CUSTOM_DELIMITER_PREFIX.length();
+        int delimiterEnd = input.indexOf(CUSTOM_DELIMITER_SUFFIX);
         String customDelimiter = input.substring(delimiterStart, delimiterEnd);
 
-        int endOfDelimiterSection = delimiterEnd + DELIMITER_AND_NUMBERS_SEPARATOR.length();
+        int endOfDelimiterSection = delimiterEnd + CUSTOM_DELIMITER_SUFFIX.length();
         input = input.substring(endOfDelimiterSection);
 
         return customDelimiter;
