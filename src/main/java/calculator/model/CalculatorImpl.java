@@ -25,20 +25,20 @@ public class CalculatorImpl implements Calculator {
         return sum(numbers);
     }
 
-    private int sum(String[] numbers) {
+    private int sum(String[] extractNumbers) {
 
         int total = 0;
 
-        for (String number : numbers) {
+        for (String extractNumber : extractNumbers) {
             try {
 
-                int num = Integer.parseInt(number);
+                int number = Integer.parseInt(extractNumber);
 
-                if (ValidatorUtil.isNegativeNumber(num)) {
+                if (ValidatorUtil.isNegativeNumber(number)) {
                     throw new IllegalArgumentException(messageSource.getMessage("error.negative_number"));
                 }
 
-                total += num;
+                total += number;
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException(messageSource.getMessage("error.invalid_number_format"));
             }
