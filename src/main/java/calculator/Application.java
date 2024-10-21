@@ -19,7 +19,7 @@ public class Application {
             // 기능 2. 문자열 파싱 전처리 : 시작점 잡기
             int startParsingIdx = 0;
             if (input.startsWith("//")) {
-                startParsingIdx = input.indexOf("\\n") + 2;
+                startParsingIdx = input.indexOf("\n") + 1;
             }
             // 기능 3. 문자열 파싱 (만약 유효하지 않은 연산자가 들어있을 경우 에러처리)
             int totalSum = parsingString(input, setOperator, startParsingIdx);
@@ -40,7 +40,7 @@ public class Application {
         setOperator.add(':');
 
         if (word.startsWith("//")) {
-            int idxNextLine = word.indexOf("\\n");
+            int idxNextLine = word.indexOf("\n");
             if (idxNextLine == -1) {
                 return null;
             }
