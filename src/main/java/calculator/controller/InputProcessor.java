@@ -36,10 +36,7 @@ public class InputProcessor {
             setSeparator();
             setNumbers();
         } catch (NumberFormatException e) {
-            System.out.println("여기");
-            System.out.println(separators);
-            System.out.println(numbers);
-            throw new IllegalArgumentException("유효하지 않은 정수입니다.");
+            throw new IllegalArgumentException("유효하지 않은 양수입니다.");
         } catch (IllegalArgumentException e) {
             throw e;
         }
@@ -73,8 +70,8 @@ public class InputProcessor {
 
         for (String token : tokens) {
             int number = Integer.parseInt(token);
-            if (number < 0) {
-                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
+            if (number <= 0) {
+                throw new IllegalArgumentException("양수만 허용됩니다: " + number);
             }
             numbers.add(number);
         }
