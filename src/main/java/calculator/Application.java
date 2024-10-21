@@ -24,12 +24,13 @@ public class Application {
             return 0;
         }
 
-        String delimiter = "[,|:!@#$%^&*()_\\-+=\\[\\]{};:'\"\\\\|<>/?]";
+        String delimiter = "[,:|;]";
 
         if(input.startsWith("//")){
             Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
             if(matcher.find()){
-                delimiter = matcher.group(1);
+                String customDelimiter = matcher.group(1);
+                delimiter = customDelimiter + "|" + delimiter;
                 input = matcher.group(2);
             }else{
                 throw new IllegalArgumentException("Invalid input");
@@ -44,7 +45,9 @@ public class Application {
         int sum = 0;
 
         for(String token : tokens){
-            sum += Integer.parseInt(token);
+            if (!token.isEmpty()) { // 빈 문자열은 무시
+                sum += Integer.parseInt(token);
+            }
         }
 
         return sum;
