@@ -33,12 +33,16 @@ public class StringAddCalculator {
         return total;
     }
 
-    private static int toInt(String token) {
-        try {
-            return Integer.parseInt(token);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
-        }
-    }
+	private static int toInt(String token) {
+		try {
+			int number = Integer.parseInt(token);
+			if (number < 0) {
+				throw new IllegalArgumentException("음수는 허용되지 않습니다.");
+			}
+			return number;
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
+		}
+	}
 
 }
