@@ -13,7 +13,7 @@ public class Application {
                 str = str.substring(5).replace(customDelimiter, ",");
             }
             else {
-                return 0; // 예외처리 할 상황
+                throw new IllegalArgumentException("잘못된 입력입니다.");
             }
             if (str.trim().isEmpty()) return 0;
         }
@@ -21,15 +21,22 @@ public class Application {
         String[] numbers = str.split("[,:]");
         int sum = 0;
         for (String number : numbers) {
-            sum += Integer.parseInt(number.trim());
+            int num = Integer.parseInt(number.trim());
+            if (num < 0) throw new IllegalArgumentException("잘못된 입력입니다.");
+            sum += num;
         }
+
         return sum;
     }
 
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
-        int result = calculator_7(input);
-        System.out.println("결과 : " + result);
+        try {
+            int result = calculator_7(input);
+            System.out.println("결과 : " + result);
+        } catch (IllegalArgumentException e){
+            System.out.println("오류: " + e.getMessage());
+        }
     }
 }
