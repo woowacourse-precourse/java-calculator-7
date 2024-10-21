@@ -26,9 +26,9 @@ public class CalculatorServiceTest {
         assertThat(isContainsDefaultDelimiters).isEqualTo(true);
     }
 
-    @DisplayName("문자열에 커스텀 구분자(\"//\"와 \"\\n\" 사이에 위치하는 문자)가 포함되어 있는지 체크하는 메소드")
+    @DisplayName("문자열에 커스텀 구분자(\"//\"와 \"\\n\" 사이에 위치하는 문자)가 비교하는 메소드")
     @Test
-    void isContainsCustomDelimiters() {
+    void compareCustomDelimiters() {
         // give
         String userInput = "//;\n1;2;3";
         // when
