@@ -1,36 +1,64 @@
 package calculator;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
-class ApplicationTest {
+import static camp.nextstep.edu.missionutils.test.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
 
-    private final calculator.Calculator calculator = new calculator.Calculator();
+public class ApplicationTest {
 
-    @Test
-    void 커스텀_구분자_사용() {
-        String input = "//;\n1;2";
-        int result = calculator.add(input);
-        assertEquals(3, result); // 결과가 3이어야 함
-    }
 
     @Test
-    void 음수_입력_예외_테스트() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            calculator.add("-1,2");
+    void 입력이_올바를때_add(){
+        Calculator calculator = new Calculator();
+        String input = "1,2,3";
+
+        assertSimpleTest(() -> {
+            assertThat(calculator.add(input)).isEqualTo(6);
         });
-        assertEquals("잘못된 입력입니다: 입력값에 음수가 포함되어 있습니다: -1 ", exception.getMessage());
     }
 
     @Test
-    void 빈_입력_테스트() {
-        assertEquals(0, calculator.add("")); // 빈 입력은 0이어야 함
+    void 음수가_입력됐을때_예외가_발생(){
+        Calculator calculator = new Calculator();
+        String input = "1,-2,3";
+
+        assertThatThrownBy(() -> {
+            calculator.add(input);
+        })
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("0 이상의 숫자를 입력해주세요");
     }
 
     @Test
-    void 여러_구분자_사용() {
-        String input = "//;\n1;2;3;4";
-        int result = calculator.add(input);
-        assertEquals(10, result); // 결과가 10이어야 함
+    void 숫자대신_문자가_입력됐을때_예외가_발생(){
+        Calculator calculator = new Calculator();
+        String input = "1,a,3";
+
+        assertThatThrownBy(() -> {
+            calculator.add(input);
+        })
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("조건에 맞게 입력해주세요");
     }
+    @Test
+    void 올바른_커스텀구분자_입력으로_계산이_실행될때(){
+        Calculator calculator = new Calculator();
+        String input = "//;\\n1;2;3";
+
+        assertSimpleTest(() ->{
+            assertThat(calculator.add(input)).isEqualTo(6);
+        });
+    }
+
+    @Test
+    void 잘못된_커스텀구분자_입력으로_계산이_실행될때(){
+        Calculator calculator = new Calculator();
+        String input = "//;\\n1,2,3";
+        assertThatThrownBy(() ->{
+            calculator.add(input);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("조건에 맞게 입력해주세요");
+    }
+
 }
