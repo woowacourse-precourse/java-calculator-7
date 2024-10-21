@@ -26,7 +26,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 그냥_기본입출력_테스트_3() {
         assertSimpleTest(() -> {
-            run("\n");
+            run("");
         });
     }
     @Test
@@ -147,6 +147,13 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 예외_테스트_빈칸(){
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException(" "))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
 
     @Override
     public void runMain() {
