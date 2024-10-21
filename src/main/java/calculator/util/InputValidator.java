@@ -29,12 +29,11 @@ public class InputValidator {
 
     // 커스텀 구분자가 올바른 형식인지 확인
     private static void validateCustomDelimiterFormat(String input) {
-        String[] parts = input.split(NEW_LINE, 2);
-        if (parts.length < 2) {
+        if (!input.contains(NEW_LINE)) {
             throw new IllegalArgumentException("잘못된 구분자 형식입니다.");
         }
 
-        String delimiterPart = parts[0].substring(2);
+        String delimiterPart = input.substring(2, input.indexOf(NEW_LINE));
         validateCustomDelimiterLength(delimiterPart);
     }
 
