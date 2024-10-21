@@ -2,6 +2,7 @@ package calculator.service;
 
 import calculator.domain.Delimiters;
 import calculator.domain.Operands;
+import com.sun.security.jgss.GSSUtil;
 
 import static calculator.utils.Constants.*;
 import static calculator.validators.InvalidInputStringFormatException.errorCheck;
@@ -33,11 +34,10 @@ public class ParsingService {
     private static String parseCustomDelimiter(String operandStr, Delimiters delimiters){
         //custom 구분자 추출
         if(operandStr.startsWith(CUSTOM_DELIMITER_START_WRAPPER)){
-
-
-
-            delimiters.addCustomDelimiter(operandStr.charAt(CUSTOM_DELIMITER_INDEX));
-            operandStr = operandStr.substring(EXCEPT_CUSTOM_DELIMITER_INDEX);
+            int customDelimiterEndWrapperIndex = operandStr.indexOf(CUSTOM_DELIMITER_END_WRAPPER);
+            String customDelimiter = operandStr.substring(CUSTOM_DELIMITER_INDEX, customDelimiterEndWrapperIndex);
+            delimiters.addCustomDelimiter(customDelimiter);
+            operandStr = operandStr.substring(customDelimiterEndWrapperIndex + CUSTOM_DELIMITER_END_WRAPPER.length());
         }
         return operandStr;
     }
@@ -45,7 +45,6 @@ public class ParsingService {
     //구분자에 따라 문자열을 분리하는 기능
     private static void parse(String operandStr, Delimiters delimiters, Operands operands){
         String regex = delimiters.createRegexFromDelimiters();
-
         String[] tokens = operandStr.split(regex);
         for (String token : tokens) {
             operands.addOperand(token);
