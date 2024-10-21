@@ -64,4 +64,17 @@ public class Calculator {
 
         return splitString;
     }
+
+    public boolean isValid(String inputString) {
+        String regex = "[," + division + ":]";
+        inputString = inputString.replaceAll(regex, "");
+
+        char[] inputChars = inputString.toCharArray();
+        for (char inputChar : inputChars) {
+            if (!Character.isDigit(inputChar)) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

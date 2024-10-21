@@ -10,13 +10,14 @@ public class Application {
         CalculatorIO calculatorIO = new CalculatorIO();
 
         String inputString = calculatorIO.input();
-        System.out.println(inputString);
         Map<String, String> splitString = calculator.split(inputString);
 
         calculator.getDivision(splitString.get("division"));
+        if (!calculator.isValid(splitString.get("number"))) {
+            throw new IllegalArgumentException();
+        }
         calculator.getNumbers(splitString.get("number"));
-        int result = calculator.calculateNumber();
 
-        calculatorIO.output(result);
+        calculatorIO.output(calculator.calculateNumber());
     }
 }
