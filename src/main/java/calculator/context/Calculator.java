@@ -1,13 +1,14 @@
-package calculator;
+package calculator.context;
+
+import calculator.strategy.Calculate;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Calculator {
     private final Calculate operation;
     private final String OUTPUT_MESSAGE = "결과 : ";
-    private List<Integer> numbers;
+    private List<Integer> numbers = new ArrayList<>();
     public Calculator(Calculate operation) {
         this.operation = operation;
     }
@@ -23,9 +24,8 @@ public class Calculator {
         return operation;
     }
     // use strategy
-    public int calculate() {
-        System.out.print(OUTPUT_MESSAGE);
-        return operation.computeOperation(numbers);
+    public void calculate() {
+        System.out.printf("결과 : %d", operation.computeOperation(this.numbers));
     }
 
 
