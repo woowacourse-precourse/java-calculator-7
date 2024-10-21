@@ -108,7 +108,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 소수점이_포함된_덧셈도_계산이_되어야_한다() {
+    void 커스텀_구분자가_점이_아닌_소수점이_포함된_Input은_예외_발생() {
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> runException("1.1,2.2"))
                     .isInstanceOf(IllegalArgumentException.class);
