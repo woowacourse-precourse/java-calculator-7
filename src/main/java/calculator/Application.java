@@ -29,7 +29,7 @@ public class Application {
                     throw new IllegalArgumentException("커스텀 구분자는 하나의 문자여야 됩니다.");
                 }
             } else {
-                System.out.println("\\n을 못찾으면 예외처리");
+                throw new IllegalArgumentException("\"\\n\"을 찾을 수 없습니다.");
             }
 
             input = input.substring(index + 2);
