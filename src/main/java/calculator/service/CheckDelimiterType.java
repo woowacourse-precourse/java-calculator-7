@@ -1,5 +1,5 @@
 package calculator.service;
-
+// 기본 구분자 형식인지 판별하기 위한 클래스
 public class CheckDelimiterType {
 
     // 기본 구분자 형식인지 판별하기 위한 정규식

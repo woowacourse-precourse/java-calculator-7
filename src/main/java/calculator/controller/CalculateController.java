@@ -6,7 +6,7 @@ import calculator.service.DelimiterExtractor;
 import calculator.service.NumExtractor;
 import calculator.view.InputView;
 import calculator.view.OutputView;
-
+// 사용자가 애플리케이션을 실행하면 적절히 처리하기 위한 클래스
 public class CalculateController {
 
     // 사용자가 애플리케이션을 실행하면 적절히 처리하는 메소드
