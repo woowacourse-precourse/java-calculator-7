@@ -25,5 +25,26 @@ public class CalculatorService {
                 .mapToLong(Long::parseLong)
                 .sum();
     }
-}
 
+    private void validateNumbers(List<String> splitInput) {
+        splitInput.forEach(value -> {
+            if (isNotNumeric(value)) {
+                throw new IllegalArgumentException();
+            }
+
+            long number = Long.parseLong(value);
+            if (number <= 0) {
+                throw new IllegalArgumentException();
+            }
+        });
+    }
+
+    private boolean isNotNumeric(String value) {
+        try {
+            Long.parseLong(value);
+            return false;
+        } catch (NumberFormatException e) {
+            return true;
+        }
+    }
+}
