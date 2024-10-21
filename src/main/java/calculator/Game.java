@@ -23,7 +23,7 @@ public class Game {
     }
 
     private String processInput(String input, Separators separators) {
-        return separators.containCustomSeparator(input);
+        return separators.segregateByInput(input);
     }
 
     private int[] convertInputToNumbers(String input, Separators separators) {

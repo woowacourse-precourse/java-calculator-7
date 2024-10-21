@@ -8,39 +8,69 @@ import org.junit.jupiter.api.Test;
 
 public class InputTest {
 
-
     @Test
     void inputSplit() {
         // given
         Separators separators = new Separators();
+        String _string = separators.segregateByInput("1,2,3");
+        Input input = new Input(_string);
 
         // when
-        final int[] numbers = separatorInput(separators);
+        String[] splitStr = input.splitBySeparator(separators);
 
         // then
-        assertThat(numbers).containsExactly(1, 2, 3);
-    }
-
-    private int[] separatorInput(Separators separators) {
-        Input input = new Input("1,2,3");
-        String regex = separators.getRegex();
-        String[] splitStr = input.getInput().split(regex);
-
-        int[] numbers = new int[splitStr.length];
-        for (int i = 0; i < splitStr.length; i++) {
-            numbers[i] = Integer.parseInt(splitStr[i]);
-        }
-        return numbers;
+        assertThat(splitStr).containsExactly("1", "2", "3");
     }
 
     @Test
-    public void inputContainEnter() {
+    void inputWithNoNumber() {
         // given
-        Input input = new Input("//;\n2,3");
+        Separators separators = new Separators();
+        String _string = separators.segregateByInput("");
+        Input input = new Input(_string);
 
         // when
-        boolean isStart = input.getInput().startsWith("//");
-        boolean contains = input.getInput().contains("\n");
+        String[] splitStr = input.splitBySeparator(separators);
+
+        // then
+        assertThat(splitStr).isEmpty();
+    }
+
+    @Test
+    public void inputIsNULL() {
+        // given
+        Separators separators = new Separators();
+
+        // when & then
+        // IllegalArgumentException 발생
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
+            String _string = separators.segregateByInput(null);
+        });
+        assertThat(exception.getMessage()).isEqualTo(ExceptionCode.NULL_INPUT.getMessage());
+    }
+
+    @Test
+    void inputSplitWithBasicSeparators() {
+        // given
+        Separators separators = new Separators();
+        String _string = separators.segregateByInput("1;2,3");
+        Input input = new Input(_string);
+
+        // when
+        String[] splitStr = input.splitBySeparator(separators);
+
+        // then
+        assertThat(splitStr).containsExactly("1", "2", "3");
+    }
+
+    @Test
+    public void inputWithDesignSeparators() {
+        // given
+        String input = "//;\\n2,3";
+
+        // when
+        boolean isStart = input.startsWith("//");
+        boolean contains = input.contains("\\n");
 
         // then
         assertThat(isStart).isTrue();
@@ -51,7 +81,7 @@ public class InputTest {
     public void separatorInputWithCostume() {
         // given
         Separators separators = new Separators();
-        String splitInputWithSeparator = separators.containCustomSeparator("//;\\n1;2;3");
+        String splitInputWithSeparator = separators.segregateByInput("//;\\n1;2;3");
         Input input = new Input(splitInputWithSeparator);
 
         // when
@@ -65,15 +95,66 @@ public class InputTest {
     }
 
     @Test
-    public void inputIsNULL() {
+    public void inputWithNegativeNumber() {
         // given
         Separators separators = new Separators();
+        String _string = separators.segregateByInput("1,-2,3");
+        Input input = new Input(_string);
 
         // when & then
         // IllegalArgumentException 발생
         Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
-            String string = separators.containCustomSeparator(null);
+            String[] splitStr = input.splitBySeparator(separators);
+            input.convertToIntArray(splitStr);
         });
-        assertThat(exception.getMessage()).isEqualTo(ExceptionCode.NULL_INPUT.getMessage());
+        assertThat(exception.getMessage()).isEqualTo(ExceptionCode.NEGATIVE_OR_ZERO_INPUT.getMessage());
     }
+
+    @Test
+    public void inputWithBlank() {
+        // given
+        Separators separators = new Separators();
+        String _string = separators.segregateByInput(" 1 , 2 , 3 ");
+        Input input = new Input(_string);
+        String[] splitString = input.splitBySeparator(separators);
+
+        // when & then
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
+            input.convertToIntArray(splitString);
+        });
+        assertThat(exception.getMessage()).isEqualTo(ExceptionCode.VALID_NUMBER.getMessage());
+    }
+
+    @Test
+    public void inputWithNotCollectBasicSeparator() {
+        // given
+        Separators separators = new Separators();
+        String _string = separators.segregateByInput("//;\\n\\n1;2;3");
+        Input input = new Input(_string);
+        String[] splitString = input.splitBySeparator(separators);
+
+        // when & then
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
+            input.convertToIntArray(splitString);
+        });
+        assertThat(exception.getMessage()).isEqualTo(ExceptionCode.VALID_NUMBER.getMessage());
+    }
+
+    @Test
+    public void inputWithZeroNumber() {
+        // given
+        Separators separators = new Separators();
+        String _string = separators.segregateByInput("//;\\n0;1;2;3");
+        Input input = new Input(_string);
+
+        // when & then
+        // IllegalArgumentException 발생
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
+            String[] splitStr = input.splitBySeparator(separators);
+            input.convertToIntArray(splitStr);
+        });
+        assertThat(exception.getMessage()).isEqualTo(ExceptionCode.NEGATIVE_OR_ZERO_INPUT.getMessage());
+    }
+
+
 }

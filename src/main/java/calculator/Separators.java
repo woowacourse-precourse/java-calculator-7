@@ -1,11 +1,12 @@
 package calculator;
 
+import static calculator.constants.BasicSeparator.COLON;
+import static calculator.constants.BasicSeparator.COMMA;
 import static calculator.constants.DesignSeparator.END;
 import static calculator.constants.DesignSeparator.START;
 import static calculator.constants.ExceptionCode.NULL_INPUT;
 import static calculator.constants.ExceptionCode.VAILDATION_CUSTOME;
 
-import calculator.constants.BasicSeparator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,10 +17,10 @@ public class Separators {
 
     public Separators() {
         this.separators = new ArrayList<>(
-                Arrays.asList(BasicSeparator.COMMA.getSymbol(), BasicSeparator.COLON.getSymbol()));
+                Arrays.asList(COMMA.getSymbol(), COLON.getSymbol()));
     }
 
-    public String containCustomSeparator(String input) {
+    public String segregateByInput(String input) {
         if (input == null) {
             throw new IllegalArgumentException(NULL_INPUT.getMessage());
         }
