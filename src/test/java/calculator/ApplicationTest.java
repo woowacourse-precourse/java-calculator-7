@@ -53,6 +53,17 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 공백_포함_입력() {
+        assertSimpleTest(() -> {
+            String input = "1, 2 : 3";
+            System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+            runMain();
+            assertThat(output()).contains("결과 : 6"); // 공백을 무시하고 1 + 2 + 3 = 6
+        });
+    }
+
 
     @Override
     public void runMain() {
