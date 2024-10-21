@@ -1,10 +1,11 @@
 package calculator;
 
 import calculator.controller.CalculatorController;
-import calculator.service.CalculatorInputParseService;
+import calculator.service.parse.BigIntegerCalculatorInputParseService;
 import calculator.service.CalculatorService;
+import calculator.service.parse.PositiveBigIntegerCalculatorInputParseService;
+import calculator.service.BigIntegerCalculatorService;
 import calculator.view.CalculatorView;
-import java.math.BigInteger;
 
 public class Application {
 
@@ -16,14 +17,15 @@ public class Application {
     }
 
     private static void init() {
-        CalculatorInputParseService calculatorInputParseService = new CalculatorInputParseService();
-        CalculatorService calculatorService = new CalculatorService(calculatorInputParseService);
+        BigIntegerCalculatorInputParseService bigIntegerCalculatorInputParseService
+                = new PositiveBigIntegerCalculatorInputParseService();
+        CalculatorService calculatorService = new BigIntegerCalculatorService(bigIntegerCalculatorInputParseService);
         calculatorController = new CalculatorController(calculatorService);
     }
 
     private static void run() {
         String input = CalculatorView.sumInput();
-        BigInteger result = calculatorController.sum(input);
+        Number result = calculatorController.sum(input);
         CalculatorView.result(result);
     }
 }

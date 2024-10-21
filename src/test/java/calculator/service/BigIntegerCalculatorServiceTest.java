@@ -1,17 +1,20 @@
 package calculator.service;
 
+import calculator.service.parse.BigIntegerCalculatorInputParseService;
+import calculator.service.parse.PositiveBigIntegerCalculatorInputParseService;
 import java.math.BigInteger;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class CalculatorServiceTest {
+class BigIntegerCalculatorServiceTest {
 
-    private final CalculatorService calculatorService;
+    private final BigIntegerCalculatorService bigIntegerCalculatorService;
 
-    public CalculatorServiceTest() {
-        CalculatorInputParseService calculatorInputParseService = new CalculatorInputParseService();
-        this.calculatorService = new CalculatorService(calculatorInputParseService);
+    public BigIntegerCalculatorServiceTest() {
+        BigIntegerCalculatorInputParseService bigIntegerCalculatorInputParseService
+                = new PositiveBigIntegerCalculatorInputParseService();
+        this.bigIntegerCalculatorService = new BigIntegerCalculatorService(bigIntegerCalculatorInputParseService);
     }
 
 
@@ -23,7 +26,7 @@ class CalculatorServiceTest {
         BigInteger expectedResult = BigInteger.valueOf(6);
 
         // when
-        BigInteger result = calculatorService.sum(input);
+        BigInteger result = bigIntegerCalculatorService.sum(input);
 
         // then
         Assertions.assertThat(result).isEqualTo(expectedResult);
@@ -37,7 +40,7 @@ class CalculatorServiceTest {
         BigInteger expectedResult = BigInteger.valueOf(Integer.MAX_VALUE).add(BigInteger.ONE);
 
         // when
-        BigInteger result = calculatorService.sum(input);
+        BigInteger result = bigIntegerCalculatorService.sum(input);
 
         // then
         Assertions.assertThat(result).isEqualTo(expectedResult);
@@ -51,7 +54,7 @@ class CalculatorServiceTest {
         BigInteger expectedResult = BigInteger.valueOf(Long.MAX_VALUE).add(BigInteger.ONE);
 
         // when
-        BigInteger result = calculatorService.sum(input);
+        BigInteger result = bigIntegerCalculatorService.sum(input);
 
         // then
         Assertions.assertThat(result).isEqualTo(expectedResult);

@@ -1,6 +1,5 @@
-package calculator.service;
+package calculator.service.parse;
 
-import calculator.exception.NonPositiveNumberException;
 import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
@@ -8,16 +7,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class CalculatorInputParseService {
+public class BigIntegerCalculatorInputParseService implements CalculatorInputParseService {
 
     private static final String DEFAULT_DELIMITER_REGEX = "[,:]";
     private static final String CUSTOM_DELIMITER_START_STRING = "//";
     private static final String CUSTOM_DELIMITER_END_STRING = "\\n";
     private static final String CUSTOM_DELIMITER_PART_REGEX = "^//(.*?)\\\\n";
 
-    public CalculatorInputParseService() {
-    }
-
+    @Override
     public List<BigInteger> parseSumInput(String input) {
         String delimiterRegex = DEFAULT_DELIMITER_REGEX;
 
@@ -45,19 +42,11 @@ public class CalculatorInputParseService {
                 .collect(Collectors.toList());
     }
 
-    private BigInteger parseSumNumber(String numberStr) {
-        BigInteger parsedNumber = null;
-
+    protected BigInteger parseSumNumber(String numberStr) {
         try {
-            parsedNumber = new BigInteger(numberStr);
+            return new BigInteger(numberStr);
         } catch (NumberFormatException e) {
             throw new NumberFormatException("변환할 수 없는 숫자입니다.: " + numberStr);
         }
-
-        if (parsedNumber.compareTo(BigInteger.ZERO) <= 0) {
-            throw new NonPositiveNumberException(parsedNumber);
-        }
-
-        return parsedNumber;
     }
 }

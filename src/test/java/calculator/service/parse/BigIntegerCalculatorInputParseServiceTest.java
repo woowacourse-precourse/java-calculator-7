@@ -1,17 +1,18 @@
-package calculator.service;
+package calculator.service.parse;
 
+import calculator.service.parse.BigIntegerCalculatorInputParseService;
 import java.math.BigInteger;
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class CalculatorInputParseServiceTest {
+class BigIntegerCalculatorInputParseServiceTest {
 
-    private final CalculatorInputParseService calculatorInputParseService;
+    private final BigIntegerCalculatorInputParseService bigIntegerCalculatorInputParseService;
 
-    public CalculatorInputParseServiceTest() {
-        this.calculatorInputParseService = new CalculatorInputParseService();
+    public BigIntegerCalculatorInputParseServiceTest() {
+        this.bigIntegerCalculatorInputParseService = new BigIntegerCalculatorInputParseService();
     }
 
     @Test
@@ -38,9 +39,9 @@ class CalculatorInputParseServiceTest {
         );
 
         // when
-        List<BigInteger> result1 = calculatorInputParseService.parseSumInput(input1);
-        List<BigInteger> result2 = calculatorInputParseService.parseSumInput(input2);
-        List<BigInteger> result3 = calculatorInputParseService.parseSumInput(input3);
+        List<BigInteger> result1 = bigIntegerCalculatorInputParseService.parseSumInput(input1);
+        List<BigInteger> result2 = bigIntegerCalculatorInputParseService.parseSumInput(input2);
+        List<BigInteger> result3 = bigIntegerCalculatorInputParseService.parseSumInput(input3);
 
         // then
         Assertions.assertThat(result1).isEqualTo(expectedResult1);
@@ -61,7 +62,7 @@ class CalculatorInputParseServiceTest {
         );
 
         // when
-        List<BigInteger> result = calculatorInputParseService.parseSumInput(input);
+        List<BigInteger> result = bigIntegerCalculatorInputParseService.parseSumInput(input);
 
         // then
         Assertions.assertThat(result).isEqualTo(expectedResult);
@@ -80,7 +81,7 @@ class CalculatorInputParseServiceTest {
         );
 
         // when
-        List<BigInteger> result = calculatorInputParseService.parseSumInput(input);
+        List<BigInteger> result = bigIntegerCalculatorInputParseService.parseSumInput(input);
 
         // then
         Assertions.assertThat(result).isEqualTo(expectedResult);
@@ -99,7 +100,7 @@ class CalculatorInputParseServiceTest {
         );
 
         // when
-        List<BigInteger> result = calculatorInputParseService.parseSumInput(input);
+        List<BigInteger> result = bigIntegerCalculatorInputParseService.parseSumInput(input);
 
         // then
         Assertions.assertThat(result).isEqualTo(expectedResult);
@@ -118,22 +119,10 @@ class CalculatorInputParseServiceTest {
         );
 
         // when
-        List<BigInteger> result = calculatorInputParseService.parseSumInput(input);
+        List<BigInteger> result = bigIntegerCalculatorInputParseService.parseSumInput(input);
 
         // then
         Assertions.assertThat(result).isEqualTo(expectedResult);
-    }
-
-    @Test
-    @DisplayName("parseSumInput은 음수가 포함된 입력에 대해 IllegalArgumentException을 던진다.")
-    public void parseSumInput_WithNegativeNumber_ThrowsIllegalArgumentException() {
-        // given
-        String input = "1,-2,3";
-
-        // when & then
-        Assertions.assertThatThrownBy(() ->
-                calculatorInputParseService.parseSumInput(input)
-        ).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -144,7 +133,7 @@ class CalculatorInputParseServiceTest {
 
         // when & then
         Assertions.assertThatThrownBy(() ->
-                calculatorInputParseService.parseSumInput(input)
+                bigIntegerCalculatorInputParseService.parseSumInput(input)
         ).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -156,7 +145,7 @@ class CalculatorInputParseServiceTest {
 
         // when & then
         Assertions.assertThatThrownBy(() ->
-                calculatorInputParseService.parseSumInput(input)
+                bigIntegerCalculatorInputParseService.parseSumInput(input)
         ).isInstanceOf(IllegalArgumentException.class);
     }
 }

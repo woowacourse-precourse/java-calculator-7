@@ -1,7 +1,6 @@
 package calculator.controller;
 
 import calculator.service.CalculatorService;
-import java.math.BigInteger;
 
 public class CalculatorController {
 
@@ -11,7 +10,7 @@ public class CalculatorController {
         this.calculatorService = calculatorService;
     }
 
-    public BigInteger sum(String input) {
+    public Number sum(String input) {
         return calculatorService.sum(input);
     }
 }
