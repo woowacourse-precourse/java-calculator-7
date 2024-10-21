@@ -10,16 +10,13 @@ public class Application {
         String input = Console.readLine();
 
         try {
-            // 커스텀 구분자와 나머지 문자열 추출
-            String[] delimiterAndNumbers = DelimiterParser.getDelimiter(input);
-            String customDelimiter = delimiterAndNumbers[0];
-            String numbers = delimiterAndNumbers[1];
+            // StringCalculator를 사용하여 입력된 문자열의 합을 계산
+            int result = calculator.add(input);
 
-            // StringCalculator에 커스텀 문자와 문자열을 넘겨 합 계산
-            int result = calculator.add(numbers, customDelimiter);
-
+            // 결과 출력
             System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
+            // 예외 발생 시 메시지 출력
             System.out.println("예외 발생: " + e.getMessage());
             throw e;
         }
