@@ -99,4 +99,22 @@ class StringValidatorTest {
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessage(errorMessage);
 	}
+
+	@ParameterizedTest
+	@DisplayName("커스텀 구분자의 길이가 2 이상인 문자열이 입력되었을 때 에러를 발생시킨다.")
+	@ValueSource(strings = {"//##\\n", "//???\\n1"})
+	void 커스텀_구분자의_길이가_2이_이상인_문자열이_입력되었을_때_에러를_발생시킨다(String input) {
+		// given
+		int customDelimiterIndex = 2;
+		int customDelimiterLength = 1;
+		int specifiedCustomDelimiterLength = 5;
+		String customDelimiter = input.substring(customDelimiterIndex, customDelimiterIndex + customDelimiterLength);
+		String customDelimiterRemovedInput = input.substring(specifiedCustomDelimiterLength);
+		StringValidator stringValidator = new StringValidator(customDelimiterRemovedInput, customDelimiter);
+
+		// when, then
+		assertThatThrownBy(stringValidator::validate)
+				.isInstanceOf(IllegalArgumentException.class)
+				.hasMessage(errorMessage);
+	}
 }
