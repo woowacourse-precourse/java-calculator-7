@@ -6,7 +6,7 @@ public class Adder {
 
     private static final String DEFAULT_DELIM = "[,:]";
     private static final String CUSTOM_DELIM_PREFIX = "//";
-    private static final String CUSTOM_DELIM_SUFFIX = "\n";
+    private static final String CUSTOM_DELIM_SUFFIX = "\\n";
 
     public int run(String input) {
         if (hasCustomDelim(input)) {
@@ -14,7 +14,7 @@ public class Adder {
                     input.indexOf(CUSTOM_DELIM_PREFIX) + CUSTOM_DELIM_PREFIX.length(),
                     input.indexOf(CUSTOM_DELIM_SUFFIX)
             );
-            String numberString = input.substring(input.indexOf(CUSTOM_DELIM_SUFFIX) + 1);
+            String numberString = input.substring(input.indexOf(CUSTOM_DELIM_SUFFIX) + CUSTOM_DELIM_SUFFIX.length());
             return run(numberString, customDelim);
         }
         return run(input, DEFAULT_DELIM);
