@@ -6,6 +6,6 @@ public class ConsoleView {
     }
 
     public void DisplayResult(int result) {
-        System.out.println("결과: " + result);
+        System.out.println("결과 : " + result);
     }
 }
