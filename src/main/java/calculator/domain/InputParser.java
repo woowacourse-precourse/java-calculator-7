@@ -30,13 +30,13 @@ public class InputParser {
     public void extractNumbers(Vector<Integer> extractedNumbers) {
         String target = inputString;
         target = removeDelimiterCreator(target);
-        
+
         if (target.isEmpty()) {
             return;
         }
 
         String regExp = generateRegex();
-        String[] extractedStrings = target.split(regExp);
+        String[] extractedStrings = trimArray(target.split(regExp));
 
         validateExtractedNumbers(extractedStrings);
         addToExtractedNumbers(extractedStrings, extractedNumbers);
@@ -62,6 +62,16 @@ public class InputParser {
             target = target.replaceFirst(targetToDelete, "");
         }
         return target;
+    }
+
+    public String[] trimArray(String[] targetArray) {
+        String[] trimmedArray = new String[targetArray.length];
+
+        for (int i = 0; i < targetArray.length; i++) {
+            trimmedArray[i] = targetArray[i].trim(); // 앞뒤 공백 제거
+        }
+
+        return trimmedArray;
     }
 
 }

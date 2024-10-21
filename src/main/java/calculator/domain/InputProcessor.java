@@ -16,8 +16,8 @@ public class InputProcessor {
     }
 
     public void processInputString() {
-        if (!inputString.isEmpty()) {
-            inputParser.parseInput(inputString, extractedNumbers);
+        if (!inputString.trim().isEmpty()) {
+            inputParser.parseInput(inputString.trim(), extractedNumbers);
             result = getSum(extractedNumbers);
         }
     }
