@@ -34,6 +34,7 @@ public record Delimiter(String delimiter) {
             return false;
         }
         Delimiter delimiter1 = (Delimiter) o;
+
         return Objects.equals(delimiter, delimiter1.delimiter);
     }
 
@@ -41,5 +42,5 @@ public record Delimiter(String delimiter) {
     public int hashCode() {
         return Objects.hash(delimiter);
     }
-    
+
 }
