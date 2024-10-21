@@ -41,7 +41,7 @@
             int sum = 0;
             for (String num: numbers){
                 if(num.trim().isEmpty()){
-                    throw new IllegalArgumentException("숫자가 존재 하지 않는다.");
+                    return 0;
                 }
                 try{
                     int n = Integer.parseInt(num.trim());
