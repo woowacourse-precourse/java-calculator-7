@@ -12,6 +12,7 @@ public class Application {
             input = input.substring(input.indexOf("\n") + 1);
             numbers = input.split(delimiter);
         }
+    
         int sum = 0;
         for (String number : numbers) {
             int num = Integer.parseInt(number.trim()); 
@@ -20,7 +21,6 @@ public class Application {
             }
             sum += num; 
         }  
-        System.out.println(input);
         System.out.println("결과 : " + sum);
     }
 }
