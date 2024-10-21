@@ -1,12 +1,13 @@
 package calculator;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
 public class Separator {
     private final Delimiter delimiter;
-    private final List<Integer> numList;
+    private final List<BigInteger> numList;
 
     public Separator(Delimiter delimiter) {
         this.delimiter = delimiter;
@@ -14,7 +15,7 @@ public class Separator {
     }
 
     // 문자열 분리
-    public List<Integer> separateString(String input) {
+    public List<BigInteger> separateString(String input) {
         List<String> delimiterList = delimiter.getDelimiters(input);
 
         if (input.startsWith("//")) {
@@ -22,7 +23,6 @@ public class Separator {
             input = input.substring(delimiterEndIndex + 2);
         }
 
-        System.out.println(input);
         StringBuilder delimiterString = new StringBuilder();
         for (String delim : delimiterList) {
             delimiterString.append(delim);
@@ -33,7 +33,7 @@ public class Separator {
             String separatedStr = st.nextToken();
 
             try {
-                int num = Integer.parseInt(separatedStr);
+                BigInteger num = new BigInteger(separatedStr);
                 numList.add(num);
             } catch (NumberFormatException e) {
                 // 숫자 변환 실패 시 예외 발생 후 프로그램 종료
