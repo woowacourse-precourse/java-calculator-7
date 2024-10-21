@@ -37,9 +37,16 @@ public class Application {
         String[] tokens = input.split(delimiter);  // delimiter 사용해 분리
         int sum = 0;
 
-        // 숫자 합산 처리
+        // 숫자 합산 및 음수 처리
         for (String token : tokens) {
-            sum += Integer.parseInt(token.trim());  // 문자열을 숫자로 변환 후 합산
+            int number = Integer.parseInt(token.trim());  // 문자열을 숫자로 변환
+
+            // 음수 값이 있을 경우 예외 처리
+            if (number < 0) {
+                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
+            }
+
+            sum += number;  // 음수가 아닌 경우 합산
         }
 
         return sum;  // 합산 결과 반환
