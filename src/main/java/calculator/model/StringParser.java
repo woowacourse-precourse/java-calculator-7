@@ -12,6 +12,11 @@ public class StringParser {
 
 
     public List<BigDecimal> parse(String input) {
+        input = input.trim();
+        if (input.isEmpty()) {
+            return List.of(BigDecimal.ZERO);
+        }
+
         String[] splitInput;
         if (input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
             splitInput = splitByCustomDelimiter(input);
