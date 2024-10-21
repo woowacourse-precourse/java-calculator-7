@@ -28,7 +28,6 @@ public class InputParser {
         }
 
         String[] numbersTokens = tokenizeNumbers(stringNumbers, delimiters);
-        validateNumbers(numbersTokens);
 
         return new ParsedInput(numbersTokens);
     }
@@ -67,17 +66,6 @@ public class InputParser {
         return Arrays.stream(numbers)
                 .filter(Predicate.not(String::isEmpty))
                 .toArray(String[]::new);
-    }
-
-    private void validateNumbers(String[] numbersToken) {
-        for (String numberToken : numbersToken) {
-            if (inputValidator.isMinus(numberToken)) {
-                throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
-            }
-            if (!inputValidator.isNumeric(numberToken)) {
-                throw new IllegalArgumentException("숫자 이외의 값은 입력할 수 없습니다.");
-            }
-        }
     }
 
     private Set<String> extractCustomDelimiters(String customDelimiterSection) {

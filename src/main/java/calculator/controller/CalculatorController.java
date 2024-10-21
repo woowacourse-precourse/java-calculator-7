@@ -1,36 +1,28 @@
 package calculator.controller;
 
-import calculator.domain.adder.NumberAdder;
-import calculator.domain.parser.InputParser;
-import calculator.domain.parser.InputParser.ParsedInput;
 import calculator.dto.CalculatorRequestDto;
 import calculator.dto.CalculatorResponseDto;
+import calculator.service.CalculatorService;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
 public class CalculatorController {
 
-    private final InputParser inputParser;
-    private final NumberAdder numberAdder;
+    private final CalculatorService calculatorService;
 
     public CalculatorController() {
-        this.inputParser = new InputParser();
-        this.numberAdder = new NumberAdder();
+        this.calculatorService = new CalculatorService();
     }
 
-    private CalculatorResponseDto calculate(CalculatorRequestDto calculatorRequestDto) {
-        ParsedInput parsedInput = inputParser.parse(calculatorRequestDto.input());
+    private CalculatorResponseDto calculator(CalculatorRequestDto calculatorRequestDto) {
+        final String result = calculatorService.calculate(calculatorRequestDto.input());
 
-        return new CalculatorResponseDto(numberAdder.adder(parsedInput));
+        return new CalculatorResponseDto(result);
     }
 
     public void run() {
-        try {
-            CalculatorRequestDto calculatorRequestDto = InputView.beginInput();
-            OutputView.printResult(calculate(calculatorRequestDto).result());
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
+        CalculatorRequestDto calculatorRequestDto = InputView.beginInput();
+        OutputView.printResult(calculator(calculatorRequestDto).result());
     }
 
 }
