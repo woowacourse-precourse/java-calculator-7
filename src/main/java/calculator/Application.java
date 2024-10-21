@@ -8,10 +8,11 @@ public class Application {
         System.out.println("덧셈할 수를 입력해주세요.");
         String input = Console.readLine();
         try {
+            Calculator.validateInput(input);
             int result = Calculator.calculate(input);
             System.out.println("결과: " + result);
         } catch (IllegalArgumentException e) {
-            System.out.println();
+            System.out.println(e.getMessage());
         }
     }
 
