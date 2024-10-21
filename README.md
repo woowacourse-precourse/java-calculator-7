@@ -13,7 +13,7 @@
 #### Separator
 - [x] 덧셈 문자열을 특정 문자로 구분하여, List< Number> 을 반환한다.
 #### Adder
-- [ ] List< Number>를 덧셈한다.
+- [x] List< Number>를 덧셈한다.
 ---
 ## VIEW
 
