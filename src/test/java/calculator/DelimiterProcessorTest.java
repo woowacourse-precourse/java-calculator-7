@@ -20,6 +20,30 @@ class DelimiterProcessorTest {
     }
 
     @Test
+    void 커스텀_구분자를_추가할_수_있다1() {
+        // given
+        String input = "//;\\n1;2";
+
+        // when
+        DelimiterProcessor delimiterProcessor = new DelimiterProcessor(input);
+
+        // then
+        assertThat(delimiterProcessor.getDelimiterCount()).isEqualTo(3);
+    }
+
+    @Test
+    void 커스텀_구분자를_추가할_수_있다2() {
+        // given
+        String input = "//;\\n1";
+
+        // when
+        DelimiterProcessor delimiterProcessor = new DelimiterProcessor(input);
+
+        // then
+        assertThat(delimiterProcessor.getDelimiterCount()).isEqualTo(3);
+    }
+
+    @Test
     void 다중_구분자는_예외를_발생시킨다() {
         // given
         String input = "//&^\\n1;2;3";
