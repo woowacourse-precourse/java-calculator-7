@@ -11,12 +11,12 @@ public class Calculator {
     private static final String CUSTOM_DELIMITER_REGEX = "^//([^0-9]*)\\\\n(|([1-9][0-9]*(\\1[1-9][0-9]*)*))$";
 
     // 기본 구분자와 커스텀 구분자 구분하기
-    public static boolean checkCustomDelimiter(String str) {
+    public boolean checkCustomDelimiter(String str) {
         return str.startsWith("//");
     }
 
     // 구분자 검증하기
-    public static String[] validateDelimiter(boolean isCustom, String str) {
+    public String[] validateDelimiter(boolean isCustom, String str) {
         if (isCustom) {
             return validateCustomDelimiter(str);
         }
@@ -48,7 +48,7 @@ public class Calculator {
     }
 
     // 덧셈 기능
-    public static int sum(String delimiter, String numberFormula) {
+    public int sum(String delimiter, String numberFormula) {
         if (numberFormula.isEmpty()) {
             return 0;
         }
