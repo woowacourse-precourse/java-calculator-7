@@ -7,7 +7,7 @@ public class StringCalculator {
             return 0;
         }
         if (str.length() == 1) {
-            // 구분자 없이 숫자만 입력할 경우, 해당 숫자를 반환
+            // 구분자 없이 숫자만 입력할 경우, 해당 숫자를 반환한다.
             if (Character.isDigit(str.charAt(0))) {
                 return str.charAt(0) - '0';
             }
