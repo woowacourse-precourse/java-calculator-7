@@ -14,7 +14,7 @@ public class Application {
         // 문자열 파싱 (커스텀 구분자 확인)
         Set<Character> delimiters = new HashSet<>();
         delimiters.add(',');
-        delimiters.add(';');
+        delimiters.add(':');
 
         // 커스텀 구분자가 존재할 수 있는 경우
         if (input.startsWith("//")) {
