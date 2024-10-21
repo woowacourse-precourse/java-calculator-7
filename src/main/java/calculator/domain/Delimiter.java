@@ -1,5 +1,6 @@
 package calculator.domain;
 
+import calculator.vo.ExceptionMessage;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,7 +13,7 @@ public class Delimiter {
         Matcher matcher = Pattern.compile(delimiterRegex).matcher(input);
 
         if (!matcher.matches()) {
-            throw new IllegalArgumentException("올바르지 않은 구분자입니다.");
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_DELIMITER.getMessage());
         }
 
         return input.replaceAll(removeDelimiterRegex, " ");

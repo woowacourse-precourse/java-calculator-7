@@ -1,5 +1,6 @@
-package org.example.domain;
+package calculator.domain;
 
+import calculator.vo.ExceptionMessage;
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,8 +14,7 @@ public class Number {
             return;
         }
 
-        nums = Arrays.stream
-                        (parseInput.split(" "))
+        nums = Arrays.stream(parseInput.split(" "))
                 .map(Integer::valueOf)
                 .peek(num -> validatePositive(num))
                 .toList();
@@ -26,7 +26,7 @@ public class Number {
 
     private void validatePositive(int num) {
         if (num < 0) {
-            throw new IllegalArgumentException("Invalid number: " + num);
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_INPUT_NEGATIVE.getMessage());
         }
     }
 }

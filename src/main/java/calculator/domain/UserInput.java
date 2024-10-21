@@ -1,5 +1,6 @@
 package calculator.domain;
 
+import calculator.vo.ExceptionMessage;
 import java.util.regex.Pattern;
 
 public class UserInput {
@@ -33,7 +34,7 @@ public class UserInput {
 
     private void validateInput(String input) {
         if (Pattern.matches("[a-zA-Z]+", input)) {
-            throw new IllegalArgumentException("허용되지 않은 문자가 입력되었습니다.");
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_STRING.getMessage());
         }
     }
 
