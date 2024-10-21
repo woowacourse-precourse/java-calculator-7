@@ -5,7 +5,7 @@ import static calculator.controller.CalculatorController.splitters;
 
 public class CustomSplitter {
 
-    public void addCustomSplitter(String input){
+    public String addCustomSplitter(String input){
 
         splitters.add(',');
         splitters.add(':');
@@ -16,6 +16,8 @@ public class CustomSplitter {
             splitters.add(splitter);
             input = input.substring(5);
         }
+
+        return input;
 
     }
 

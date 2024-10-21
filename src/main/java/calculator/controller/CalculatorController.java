@@ -14,9 +14,9 @@ public class CalculatorController {
 
     InputView inputView = new InputView();
     OutputView outputView = new OutputView();
-    CustomSplitter customSplitter;
-    ExtractString extractString;
-    Calculator calculator;
+    CustomSplitter customSplitter = new CustomSplitter();
+    ExtractString extractString = new ExtractString();
+    Calculator calculator = new Calculator();
 
     public static List<Character> splitters = new ArrayList<>();
 
@@ -24,7 +24,7 @@ public class CalculatorController {
 
         String input = inputView.inputString();
 
-        customSplitter.addCustomSplitter(input);
+        input = customSplitter.addCustomSplitter(input);
 
         StringBuilder split = customSplitter.makeSplit();
 
