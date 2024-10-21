@@ -8,9 +8,14 @@ public class StringAddCalculator {
         if (InputValidator.isEmptyString(input)) {
             return 0;
         }
-        // 문자열 길이 검증 (기본 구분자 사용시)
+
+        // 커스텀 구분자 사용 시 길이 검증
+        if (input.startsWith("//")) {
+            InputValidator.validateCustomDelimiterInputLength(input);
+        }
+        // 기본 구분자 사용 시 길이 검증
         InputValidator.validateInputLength(input);
-        
+
         return -1; // 추후 로직 추가 예정
     }
 }

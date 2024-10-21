@@ -19,4 +19,15 @@ public class InputValidator {
             throw new IllegalArgumentException("계산 대상 문자열의 길이가 9자를 초과했습니다.");
         }
     }
+
+    public static void validateCustomDelimiterInputLength(String input) {
+        String[] parts = input.split("\n", 2);
+        if (parts.length < 2) {
+            throw new IllegalArgumentException("잘못된 커스텀 구분자 포맷입니다.");
+        }
+        String numbersPart = parts[1]; // 구분자 지정 부분을 제외한 계산 대상 문자열
+        if (numbersPart.length() > MAX_LENGTH) {
+            throw new IllegalArgumentException("계산 대상 문자열의 길이가 9자를 초과했습니다.");
+        }
+    }
 }

@@ -40,4 +40,15 @@ public class StringAddCalculatorTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("계산 대상 문자열의 길이가 9자를 초과했습니다.");
     }
+
+    @Test
+    void 커스텀_구분자_사용시_계산_대상_문자열이_9자를_넘으면_예외가_발생한다() {
+        // given
+        String input = "//;\n1;2;3;4;5;6;7";
+
+        // when, then: 예외 발생 여부 확인
+        assertThatThrownBy(() -> StringAddCalculator.add(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("계산 대상 문자열의 길이가 9자를 초과했습니다.");
+    }
 }
