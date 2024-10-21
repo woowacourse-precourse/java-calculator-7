@@ -5,9 +5,9 @@ import camp.nextstep.edu.missionutils.Console;
 public class Application {
     public static void main(String[] args) {
         // 문자열 입력 받기
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
         try {
-            System.out.println("덧셈할 문자열을 입력해 주세요.");
             int result = StringCalculator.splitString(input);
             System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
@@ -24,7 +24,23 @@ class StringCalculator {
         if (input == null || input.isEmpty()) {
             return 0;
         }
-        String delimiter = ",:";
+
+        // 기본 delimiter 설정
+        String delimiter = ",|:";
+
+        // "//"로 시작할 경우 "\n"로 구분해 delimiter 추가
+        if (input.startsWith("//")) {
+            int delimiterIndex = input.indexOf("\\n");
+            if (delimiterIndex == -1) {
+                throw new IllegalArgumentException(
+                        "Invalid input format. Expected delimiter definition followed by newline.");
+            }
+            delimiter = input.substring(2, delimiterIndex);
+            System.out.println(delimiter);
+            input = input.substring(delimiterIndex + 2);
+            System.out.println(input);
+        }
+
         String[] numbers = input.split(delimiter);
         return calculateSum(numbers);
     }
