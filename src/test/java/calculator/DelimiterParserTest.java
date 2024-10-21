@@ -37,4 +37,13 @@ public class DelimiterParserTest {
         assertThrows(IllegalArgumentException.class,
                 () -> parser.parseInput("//" + "\n" + content));
     }
+
+    @Test
+    void 숫자시작_숫자끝_구분자_테스트() {
+        String customDelimiter = "1;;";
+        String content = "1,2:3";
+
+        assertThrows(IllegalArgumentException.class,
+                () -> parser.parseInput("//" + customDelimiter + "\n" + content));
+    }
 }
