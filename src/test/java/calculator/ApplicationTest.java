@@ -48,8 +48,17 @@ class ApplicationTest extends NsTest {
         });
     }
 
+
     @Test
     void 기본_구분자_사용1() {
+        assertSimpleTest(() -> {
+            run("1,2,3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 기본_구분자_사용2() {
         assertSimpleTest(() -> {
             run("1,2:3");
             assertThat(output()).contains("결과 : 6");
@@ -57,7 +66,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 기본_구분자_사용2() {
+    void 공백_처리_테스트() {
         assertSimpleTest(() -> {
             run(":1:,2:39");
             assertThat(output()).contains("결과 : 42");
@@ -92,6 +101,14 @@ class ApplicationTest extends NsTest {
     void 예외_테스트5() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//;\\n1:2\\n3,8"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트6() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("12 3,8"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
