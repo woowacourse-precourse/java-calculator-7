@@ -31,7 +31,15 @@ class StringCalculatorServiceTest {
 
     @Test
     void validateInputFormTest3() {
-        String input = "k12;;3";
+        String input = "k12::3";
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> stringCalculatorService.validateInputForm(input));
+    }
+
+    @Test
+    void validateInputFormTest4() {
+        String input = ":,12:,:3";
         Assertions.assertDoesNotThrow(() -> stringCalculatorService.validateInputForm(input));
     }
+
 }
