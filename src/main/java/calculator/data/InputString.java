@@ -1,6 +1,5 @@
 package calculator.data;
 
-import calculator.service.InputParser;
 import calculator.service.Parser;
 
 import java.util.HashSet;
