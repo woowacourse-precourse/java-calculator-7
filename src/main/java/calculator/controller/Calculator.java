@@ -36,7 +36,7 @@ public class Calculator {
     private String getDelimiter(String input) {
         String delimiter = DEFAULT_DELIMITER;
         if (Validation.hasCustomDelimiter(input)) {
-            delimiter += (OR + input.charAt(CUSTOM_DELIMITER_INDEX));
+            delimiter += (OR + '\\' + input.charAt(CUSTOM_DELIMITER_INDEX));
         }
         return delimiter;
     }
