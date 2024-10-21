@@ -7,12 +7,19 @@ import calculator.model.DelimiterExtractor;
 public class CalculatorService {
     public static int calculate(CalculationRequestDTO requestDTO) {
         String input = requestDTO.getInput();
+        if (isNullOrEmpty(input)) {
+            return 0;
+        }
 
         DelimiterExtractionResult extractionResult = DelimiterExtractor.extractDelimiterAndNumbers(input);
         String delimiter = extractionResult.getDelimiter();
         String numbers = extractionResult.getNumbers();
 
         return sumNumbers(numbers, delimiter);
+    }
+
+    private static boolean isNullOrEmpty(String input) {
+        return input == null || input.isEmpty();
     }
 
     private static int sumNumbers(String input, String delimiter) {
