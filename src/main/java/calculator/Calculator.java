@@ -15,7 +15,7 @@ public class Calculator {
 
     public int add(String input) {
         int sum = 0;
-        if (!input.isEmpty()) {
+        if (!input.isBlank()) {
             input = input.trim();
             input = checkUseCustomDelimiter(input);
             checkValidInput(input);
