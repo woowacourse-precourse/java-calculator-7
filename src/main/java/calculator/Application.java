@@ -5,11 +5,7 @@ import camp.nextstep.edu.missionutils.Console;
 public class Application {
     public static void main(String[] args) {
         // 프로그램 시작
-        try {
-            playGame();
-        } catch (IllegalArgumentException e) {
-            System.out.println("애플리케이션을 종료합니다.");
-        }
+        playGame();
     }
 
     private static void playGame() {
@@ -23,8 +19,13 @@ public class Application {
 
         input = input.replace("\\n", "\n");
 
-        int result = addNumbers(input);
-        System.out.println("결과 : " + result);
+        try {
+            int result = addNumbers(input);
+            System.out.println("결과 : " + result);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            throw e;
+        }
     }
 
     public static int addNumbers(String input) {
@@ -51,11 +52,15 @@ public class Application {
 
         int sum = 0;
         for (String token : tokens) {
-            int number = parseNumber(token);
-            if (number < 0) {
-                throw new IllegalArgumentException("음수 값은 허용되지 않습니다.");
+            try {
+                int number = parseNumber(token);
+                if (number < 0) {
+                    throw new IllegalArgumentException("음수 값은 허용되지 않습니다.");
+                }
+                sum += number;
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("유효하지 않은 숫자 형식입니다.");
             }
-            sum += number;
         }
 
         return sum;
