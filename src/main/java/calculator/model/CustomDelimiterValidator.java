@@ -11,7 +11,7 @@ public class CustomDelimiterValidator {
 
 	public StringValidator validCustomDelimiter(String input) {
 		if (hasCustomDelimiter(input)) {
-			String customDelimiter = getCustomDelimiter(input);
+			String customDelimiter = this.getCustomDelimiter(input);
 			input = this.removeCustomDelimiter(input);
 			return new StringValidator(input, customDelimiter);
 		}
