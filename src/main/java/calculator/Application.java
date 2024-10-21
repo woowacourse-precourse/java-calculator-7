@@ -33,6 +33,8 @@ public class Application {
                 sum += Integer.parseInt(trimmedNumber);
             }
 
+            System.out.println("결과 : "+sum);
+
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
             throw e;
