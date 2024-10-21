@@ -15,7 +15,7 @@ class ValidatorTest {
     @Test
     @DisplayName("custom 구분자를 추출해낸다.")
     void customDelimiter() {
-        String str = "//:\\n1:2:3";
+        String str = "//:\n1:2:3";
         assert(findCustomDelimiter(str)).equals(":");
     }
 
