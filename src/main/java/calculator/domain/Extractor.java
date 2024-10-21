@@ -58,9 +58,16 @@ public class Extractor {
         List<Number> numberList = new ArrayList<>();
 
         for (String token : tokens) {
+            validateSeparatorExistOneByOne(token);
             numberList.add(new Number(Integer.parseInt(token)));
         }
 
         return numberList;
+    }
+
+    private void validateSeparatorExistOneByOne(String token) {
+        if (token == "") {
+            throw new IllegalArgumentException("[ERROR] 구분자는 한 개씩 존재해야 합니다.");
+        }
     }
 }

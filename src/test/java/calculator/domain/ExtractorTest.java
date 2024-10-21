@@ -1,5 +1,6 @@
 package calculator.domain;
 
+import static org.assertj.core.api.Fail.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Arrays;
@@ -27,6 +28,16 @@ public class ExtractorTest {
         );
         for (int i = 0; i < 4; i++) {
             assertEquals(numbers.get(i).getNumber(), answer.get(i).getNumber());
+        }
+    }
+
+    @Test
+    void 구분자_한_개씩_존재_유효성_검사() {
+        try {
+            Extractor extractor = new Extractor("//;\n1;;2;3");
+            fail("테스트에 실패하였습니다.");
+        } catch (IllegalArgumentException e) {
+            assertEquals("[ERROR] 구분자는 한 개씩 존재해야 합니다.", e.getMessage());
         }
     }
 }
