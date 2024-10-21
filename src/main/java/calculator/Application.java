@@ -43,4 +43,17 @@ public class Application {
 
         return sum;
     }
+
+    // 숫자 규칙 확인
+    private static int checkSentence(String number) {
+        try {
+            int num = Integer.parseInt(number);
+            if (num < 0) {
+                throw new IllegalArgumentException("음수 값은 잘못된 입력입니다.");
+            }
+            return num;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("잘못된 값입니다.");
+        }
+    }
 }
