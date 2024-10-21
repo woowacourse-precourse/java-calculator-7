@@ -42,6 +42,9 @@ public class Separator {
         String[] splitStr = str.split(regex);
 
         for(String strNumber: splitStr){
+            if (strNumber == "")
+                continue;
+
             Number number = new Number(strNumber);
             ret.add(number);
         }
