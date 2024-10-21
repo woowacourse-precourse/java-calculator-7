@@ -1,6 +1,8 @@
 package calculator.extractor;
 
-import calculator.exception.ExceptionMessage;
+
+import static calculator.exception.ExceptionMessage.EMPTY_DELIMITER;
+import static calculator.exception.ExceptionMessage.INVALID_DELIMITER_FORMAT;
 
 public class StringSplitterImpl implements StringSplitter {
 
@@ -30,12 +32,12 @@ public class StringSplitterImpl implements StringSplitter {
     private String[] CustomDelimiter(String input) {
         int delimiterEndIndex = input.indexOf("\\n");
         if (delimiterEndIndex == -1) {
-            throw new IllegalArgumentException(ExceptionMessage.INVALID_DELIMITER_FORMAT.getMessage());
+            throw new IllegalArgumentException(INVALID_DELIMITER_FORMAT.getMessage());
         }
 
         String customDelimiter = input.substring(2, delimiterEndIndex);
         if (customDelimiter.isEmpty()) {
-            throw new IllegalArgumentException(ExceptionMessage.EMPTY_DELIMITER.getMessage());
+            throw new IllegalArgumentException(EMPTY_DELIMITER.getMessage());
         }
         return input.substring(delimiterEndIndex + 2).split(customDelimiter);
     }
@@ -45,7 +47,7 @@ public class StringSplitterImpl implements StringSplitter {
                 input.matches(".*[\\|\\\\\\n\\t\\r\\f\\s].*") || input.matches(".*[^0-9a-zA-Z,:-].*");
 
         if (containsInvalidDelimiter) {
-            throw new IllegalArgumentException(ExceptionMessage.INVALID_DELIMITER_FORMAT.getMessage());
+            throw new IllegalArgumentException(INVALID_DELIMITER_FORMAT.getMessage());
         }
     }
 }

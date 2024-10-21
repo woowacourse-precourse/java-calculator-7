@@ -1,6 +1,7 @@
 package calculator.converter;
 
-import calculator.exception.ExceptionMessage;
+import static calculator.exception.ExceptionMessage.INVALID_NUMBER_FORMAT;
+import static calculator.exception.ExceptionMessage.NEGATIVE_NUMBER;
 
 public class NumberConverterImpl implements NumberConverter {
 
@@ -16,11 +17,11 @@ public class NumberConverterImpl implements NumberConverter {
                 }
                 int number = Integer.parseInt(stringArr[i]);
                 if (number <= 0) {
-                    throw new IllegalArgumentException(ExceptionMessage.NEGATIVE_NUMBER.getMessage() + stringArr[i]);
+                    throw new IllegalArgumentException(NEGATIVE_NUMBER.getMessage() + stringArr[i]);
                 }
                 numberArr[i] = number;
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException(ExceptionMessage.INVALID_NUMBER_FORMAT.getMessage() + stringArr[i]
+                throw new IllegalArgumentException(INVALID_NUMBER_FORMAT.getMessage() + stringArr[i]
                 );
             }
         }
