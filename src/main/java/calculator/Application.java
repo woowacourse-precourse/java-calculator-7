@@ -11,9 +11,15 @@ public class Application {
         Validator validator = new Validator();
         String input = readLine();
         int result = 0;
-        if (!input.isEmpty()) result = start(input, separator, calculator, validator);
-        System.out.println("결과 : " + result);
-        Console.close();
+        try {
+            if (!input.isEmpty()){
+                result = start(input, separator, calculator, validator);
+            }
+            System.out.println("결과 : " + result);
+            Console.close();
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static int start(String input, Separator separator, Calculator calculator, Validator validator) {
