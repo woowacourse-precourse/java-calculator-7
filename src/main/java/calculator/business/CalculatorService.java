@@ -5,7 +5,7 @@ public class CalculatorService {
 
 
     public int run(String input) {
-        String inputWithoutDelimiter = selectPrefix(input);
+        String inputWithoutDelimiter = selectCalculateMode(input);
         int[] numbers = convertStringToInt(inputWithoutDelimiter);
         return calculate(numbers);
     }
@@ -25,13 +25,25 @@ public class CalculatorService {
         int[] numbers = new int[inputString.length];
 
         for (int i = 0; i < inputString.length; i++) {
-            numbers[i] = Integer.parseInt(inputString[i]);
+
+            int parsedNumber;
+            try {
+                parsedNumber = Integer.parseInt(inputString[i]);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException();
+            }
+
+            if (parsedNumber < 0) {
+                throw new IllegalArgumentException();
+            }
+
+            numbers[i] = parsedNumber;
         }
 
         return numbers;
     }
 
-    private String selectPrefix(String input) {
+    private String selectCalculateMode(String input) {
 
         if (input.startsWith("//")) {
             delimiter = input.substring(2, 3);
