@@ -9,10 +9,6 @@ public class CalculateModel {
     // 피연산자 배열
     private List<Integer> operands = new ArrayList<>();
 
-    public void setOperands(List<Integer> operands) {
-        this.operands = operands;
-    }
-
     // 최종 덧셈 연산 메서드
     public int sum(List<Integer> operands) {
         int sum = 0;
