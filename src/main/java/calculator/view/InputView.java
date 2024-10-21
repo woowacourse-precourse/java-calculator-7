@@ -5,7 +5,7 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
     public String readInput() {
-        System.out.println("µ¡¼ÀÇÒ ¹®ÀÚ¿­À» ÀÔ·ÂÇØ ÁÖ¼¼¿ä.");
+        System.out.println("ë§ì…ˆí•  ë¬¸ìì—´ì„ ì…ë ¥í•´ ì£¼ì„¸ìš”.");
         return Console.readLine();
     }
 }
