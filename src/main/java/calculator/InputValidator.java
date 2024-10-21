@@ -26,13 +26,17 @@ public class InputValidator {
     }
 
     public static void validateCustomDelimiterInputLength(String input) {
-        String[] parts = input.split("\n", 2);
-        if (parts.length < 2) {
-            throw new IllegalArgumentException("잘못된 커스텀 구분자 포맷입니다.");
-        }
-        String numbersPart = parts[1]; // 구분자 지정 부분을 제외한 계산 대상 문자열
-        if (numbersPart.length() > MAX_LENGTH) {
+        // 커스텀 구분자를 제외한 계산 대상 문자열 길이를 검사
+        if (input.length() > MAX_LENGTH) {
             throw new IllegalArgumentException("계산 대상 문자열의 길이가 9자를 초과했습니다.");
+        }
+    }
+
+    public static void validateConsecutiveDelimiters(String input, String delimiter) {
+        // 연속된 구분자가 있는지 확인하는 정규 표현식
+        String regex = "[" + Pattern.quote(delimiter) + "]{2,}";
+        if (input.matches(".*" + regex + ".*")) {
+            throw new IllegalArgumentException("연속된 구분자는 허용되지 않습니다.");
         }
     }
 
