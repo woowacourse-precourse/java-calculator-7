@@ -1,7 +1,11 @@
 package calculator;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class StringCalculator {
     private static final String DEFAULT_DELIMITER = ",|:";
+    private static final String CUSTOM_DELIMITER_PATTERN = "//(.*?)\n(.*)";
 
     /**
      * 문자열 입력을 받아 덧셈을 수행합니다.
@@ -16,6 +20,17 @@ public class StringCalculator {
 
         input = input.trim();
         String delimiter = DEFAULT_DELIMITER;
+
+        Matcher m = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(input);
+
+        if (m.find()) {
+            delimiter = Pattern.quote(m.group(1));
+            input = m.group(2);
+        }
+
+        if (input.isEmpty()) {
+            return 0;
+        }
 
         return sumNumbers(input.split(delimiter));
     }
