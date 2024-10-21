@@ -14,7 +14,19 @@ public class Application {
     }
     private static int calculateSum(String input){
         if(input.isEmpty()) return 0;
-        String[] numbers=input.split("[,:]");
+        String[] numbers;
+        if(input.startsWith("/")){
+            int delimiterIndex=input.indexOf("n");
+            if (delimiterIndex == -1) {
+                throw new IllegalArgumentException("커스텀 구분자 형식이 잘못되었습니다.");
+            }
+            String custom=input.substring(2,delimiterIndex-1);
+            input=input.substring(delimiterIndex+1);
+            custom = custom.replaceAll("[{}()\\[\\].?*+|^$]", "\\\\$0");
+            numbers=input.split("[,:]"+"|"+custom);
+        }else{
+            numbers=input.split("[,:]");
+        }
         return sumNumbers(numbers);
     }
 
