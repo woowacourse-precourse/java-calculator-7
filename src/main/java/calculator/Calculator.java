@@ -14,4 +14,22 @@ public class Calculator {
         return -1; // 처리할 값이 있는 경우
     }
 
+    // 3. 커스텀 구분자 처리 기능
+    public List<String> getDelimiters(String input) {
+        List<String> delimiters = new ArrayList<>();
+        delimiters.add(","); // 기본 구분자 포함
+        delimiters.add(":");
+
+        if (input.startsWith("//")) {
+            int delimiterIndex = input.indexOf("\\n");  // 문자 그대로 "\n"을 기준으로 처리
+            if (delimiterIndex != -1 && delimiterIndex > 2) {
+                String customDelimiter = input.substring(2, delimiterIndex);
+                delimiters.add(Pattern.quote(customDelimiter)); // 정규식으로 구분자 처리
+            } else {
+                throw new IllegalArgumentException("잘못된 구분자 형식입니다.");
+            }
+        }
+        return delimiters;
+    }
+
 }
