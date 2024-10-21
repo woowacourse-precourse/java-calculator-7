@@ -31,6 +31,9 @@ public class Calculator {
         for(String xstr : numstr) {
             try {
                 int x = Integer.parseInt(xstr);
+                if(x < 0) {
+                    throw new IllegalArgumentException();
+                }
                 sum += x;
             } catch(NumberFormatException e) {
                 throw new IllegalArgumentException();
