@@ -19,10 +19,15 @@ public class PlusCalculator implements CalculatorService {
         return instance;
     }
 
+    static CalculatorValidation validation = new CalculatorValidation();
 
     @Override
     public int operation(List<String> numList) {
-        return 0;
+        return numList.stream()
+                .filter(num -> !num.isEmpty())
+                .map(validation::validateParseInt)
+                .peek(validation::validatePositiveNumber)
+                .reduce(0, validation::validatePlusOverflow);
     }
 
     @Override
