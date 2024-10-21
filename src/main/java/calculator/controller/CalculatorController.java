@@ -10,6 +10,6 @@ public class CalculatorController {
 
     public void run(){
         Expression expression = new Expression(view.getInput());
-        view.showResult(calculator.add(expression));
+        view.showResult(calculator.calculate(expression));
     }
 }
