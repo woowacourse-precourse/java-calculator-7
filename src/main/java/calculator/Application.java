@@ -11,26 +11,30 @@ public class Application {
         input = Console.readLine();
 
         if (input.startsWith("//")) {
-            int customIndex = input.indexOf("\\n");
-
-            if (customIndex == -1) {
+            if (!input.contains("\\n")) {
                 throw new IllegalArgumentException("잘못된 구분자 형식입니다. 커스텀 구분자는 //로 시작하고 \\n으로 끝나야 합니다.");
             }
+
+            int customIndex = input.indexOf("\\n");
 
             String customSeparator = input.substring(2, customIndex);
             String numbersRest = input.substring(customIndex + 2);
 
-            numbersRest = numbersRest.replace(customSeparator, " ");
-            numbers = numbersRest.split("[ ,:]");
+            numbers = numbersRest.split(customSeparator + "|,|:");
         } else {
             numbers = input.split("[,:]");
         }
 
+        int sum = getSum(numbers);
+        System.out.println("결과 : " + sum);
+    }
+
+    private static int getSum(String[] numbers) {
         int sum = 0;
         for (String number : numbers) {
-            System.out.println(number);
-
-            if (!number.trim().isEmpty()) {
+            if (number.contains(" ")) {
+                throw new IllegalArgumentException("잘못된 입력입니다. 숫자에 공백을 포함할 수 없습니다.");
+            } else {
                 try {
                     int parsedNumber = Integer.parseInt(number.trim());
 
@@ -39,10 +43,10 @@ public class Application {
                     }
                     sum += parsedNumber;
                 } catch (NumberFormatException e) {
-                    throw new IllegalArgumentException("잘못된 입력입니다.");
+                    throw new IllegalArgumentException("잘못된 입력입니다. 입력은 숫자로만 이루어집니다.");
                 }
             }
         }
-        System.out.println("결과 : " + sum);
+        return sum;
     }
 }
