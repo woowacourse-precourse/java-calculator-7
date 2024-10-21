@@ -9,6 +9,8 @@ public class InputHandler {
     private String inputText;
     private String separators = ",;";
 
+    private String positiveText;
+
     private void read() {
         inputText = "";
         try {
@@ -28,6 +30,15 @@ public class InputHandler {
         separatorText = separatorText.substring(2);
         for (char separator : separatorText.toCharArray()) {
             separators = separators + separator;
+        }
+    }
+
+    private void splitInputText() {
+        positiveText = inputText;
+        if (haveCustomSeparator(inputText)) {
+            String[] splitText = inputText.split("\\\\n");
+            addCustomSeparator(splitText[0]);
+            positiveText = splitText[1];
         }
     }
 
