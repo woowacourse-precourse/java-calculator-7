@@ -9,11 +9,17 @@ public class NumberStorage {
     public void addNumber(String num, Delimiter delimiter){
         InputParser.checkAllowedDelimiters(num, delimiter);
         checkDecimalNumber(num);
+        checkZeroNumber(num);
         numberList.add(Double.valueOf(num));
     }
 
     private void checkDecimalNumber(String num){
         if(num.charAt(0) == '.' || num.charAt(num.length()-1) == '.'){
+            throw new IllegalArgumentException();
+        }
+    }
+    private void checkZeroNumber(String num){
+        if(Double.valueOf(num).equals(0.0)){
             throw new IllegalArgumentException();
         }
     }

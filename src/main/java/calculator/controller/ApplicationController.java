@@ -45,7 +45,7 @@ public class ApplicationController {
         if(delimiter.hasCustomDelimiter()) numList = getNumList(userInputMessage.substring(5));
         else numList = getNumList(userInputMessage);
         for(int i = 0; i < numList.size(); i++){
-            numberStorage.addNumber(numList.get(i), delimiter);
+            if(!numList.get(i).equals("")) numberStorage.addNumber(numList.get(i), delimiter);
         }
     }
 
