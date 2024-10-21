@@ -19,8 +19,8 @@ public class InputProcessor {
         }
     }
 
-    private void customDelimiter(){
-        Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
+    private void customDelimiter() {
+        Matcher matcher = Pattern.compile("//(.)\\\\n(.*)").matcher(input);
         if (!matcher.find()) {
             throw new IllegalArgumentException("잘못된 구분자 형식입니다.");
         }
@@ -33,11 +33,12 @@ public class InputProcessor {
         validateNumbers();
     }
 
-    private void checkInputNotEmpty(){
+    private void checkInputNotEmpty() {
         if (input.isEmpty()) {
             input = "0";
         }
     }
+
     private void validateNumbers() {
         if (!input.matches("[0-9" + delimiter + "]*")) {
             throw new IllegalArgumentException("입력값이 잘못되었습니다. 숫자와 구분자로만 이루어져야 합니다.");
