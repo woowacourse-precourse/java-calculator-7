@@ -10,10 +10,10 @@ public class OutputView {
     }
 
     public static void printResult(String message) {
-        System.out.println(message);
+        System.out.println("결과 : " + message);
     }
 
     public static void printResult(long message) {
-        System.out.println(message);
+        System.out.println("결과 : " + message);
     }
 }

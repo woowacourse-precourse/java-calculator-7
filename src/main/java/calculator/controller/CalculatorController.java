@@ -13,13 +13,13 @@ public class CalculatorController {
         UserInput userInput = new UserInput(InputView.readInputString());
 
         if (userInput.isInputEmpty()) {
-            OutputView.printResult("결과 : " + 0);
+            OutputView.printResult(0);
             return;
         }
 
         List<Long> inputNumbers = userInput.parser();
         long result = Calculator.sum(inputNumbers);
 
-        OutputView.printResult("결과 : " + result);
+        OutputView.printResult(result);
     }
 }
