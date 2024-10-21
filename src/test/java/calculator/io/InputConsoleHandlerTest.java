@@ -145,5 +145,22 @@ class InputConsoleHandlerTest {
         Console.close();
     }
 
+    @Test
+    @DisplayName("하나의 숫자만 입력하면 그 숫자 그대로 반환한다")
+    void singleInput() {
+        // given
+        String input = "124";
+
+        // when
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        // then
+        String[] inputSplit = INPUT_CONSOLE_HANDLER.getUserInput();
+        assertThat(inputSplit).containsExactly("124");
+
+        System.setIn(System.in);
+        Console.close();
+    }
+
 
 }
