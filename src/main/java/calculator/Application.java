@@ -23,7 +23,7 @@ public class Application {
             return;
         }
 
-        // 커스텀 구분자 확인 및 저장
+        // 커스텀 구분자 확인 및 변환
         if (input.startsWith("//")) {
             int index = input.indexOf("\\n");
             if (index == -1) {
@@ -31,6 +31,11 @@ public class Application {
             }
             String new_delimiter = input.substring(2, index);
             input = input.substring(index + 2).replace(new_delimiter, ",");
+        }
+
+        // 마지막에 구분자 뒤에 값이 오지 않을 경우 예외처리 (ex. "3,4:5,")
+        if (input.endsWith(",") || input.endsWith(":")){
+            throw new IllegalArgumentException("마지막 구분자 뒤에 값이 오지 않았습니다.");
         }
         String[] arr = input.split("[,:]"); // ,와 :를 기준으로 분리함
 
