@@ -1,10 +1,15 @@
 package calculator;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
+
 public class Handler {
-    public int[] inputHandler(String input) {
-        String[] split;
+
+    public List<Integer> inputHandler(String input) {
+        List<String> split;
         if (indicateCustom(input)) {
-            String custom = makeCustomSeperator(input);
+            String custom = makeCustomSeparator(input);
             split = splitter(input, custom);
         } else {
             split = splitter(input);
@@ -13,10 +18,10 @@ public class Handler {
         return transToInt(split);
     }
 
-    public int sumCalculator(int[] numbers) {
+    public int sumCalculator(List<Integer> numbers) {
         int sum = 0;
-        for (int i = 0; i < numbers.length; i++) {
-            sum += numbers[i];
+        for (int i = 0; i < numbers.size(); i++) {
+            sum += numbers.get(i);
         }
         return sum;
     }
@@ -29,7 +34,7 @@ public class Handler {
         }
     }
 
-    private String makeCustomSeperator(String input) throws IllegalArgumentException {
+    private String makeCustomSeparator(String input) throws IllegalArgumentException {
         String custom = input.substring(2, input.indexOf("\\"));
         if (custom.equals("")) {
             throw new IllegalArgumentException("커스텀 구분자 선언이 잘못되었습니다.");
@@ -37,20 +42,30 @@ public class Handler {
         return custom;
     }
 
-    private String[] splitter(String input) {
-        String[] result = input.split("[,:]");
+    private List<String> splitter(String input) {
+        StringTokenizer st = new StringTokenizer(input, ",|:");
+        List<String> result = new ArrayList<>();
+        while (st.hasMoreTokens()) {
+            result.add(st.nextToken());
+        }
+
         return result;
     }
 
-    private String[] splitter(String input, String custom) {
-        String[] result = input.split(",|:|" + custom);
+    private List<String> splitter(String input, String custom) {
+        String separator = String.format(",|:|&s", custom);
+        StringTokenizer st = new StringTokenizer(input, separator);
+        List<String> result = new ArrayList<>();
+        while (st.hasMoreTokens()) {
+            result.add(st.nextToken());
+        }
         return result;
     }
 
-    private void validInput(String[] split) throws IllegalArgumentException {
+    private void validInput(List<String> split) throws IllegalArgumentException {
         try {
-            for (int i = 0; i < split.length; i++) {
-                int argument = Integer.parseInt(split[i]);
+            for (int i = 0; i < split.size(); i++) {
+                int argument = Integer.parseInt(split.get(i));
                 if (argument <= 0) {
                     throw new NumberFormatException("입력 숫자는 양수이어야 합니다.");
                 }
@@ -60,12 +75,11 @@ public class Handler {
         }
     }
 
-    private int[] transToInt(String[] split) {
-        int[] result = new int[split.length];
-        for (int i = 0; i < split.length; i++) {
-            result[i] = Integer.parseInt(split[i]);
+    private List<Integer> transToInt(List<String> split) {
+        List<Integer> result = new ArrayList<>();
+        for (int i = 0; i < split.size(); i++) {
+            result.add(Integer.parseInt(split.get(i)));
         }
         return result;
     }
-
 }
