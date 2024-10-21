@@ -19,7 +19,7 @@ public class Delimiter {
         return splitByDelimiter(delimiters);
     }
 
-    private String getDelimiter() {
+    public String getDelimiter() {
         Matcher matcher = Pattern.compile(CUSTOM_DELIMITER).matcher(input);
 
         if (matcher.find()) {
@@ -39,7 +39,7 @@ public class Delimiter {
         return DEFAULT_DELIMITER;
     }
 
-    private String[] splitByDelimiter(String delimiters) {
+    public String[] splitByDelimiter(String delimiters) {
         return input.split(delimiters);
     }
 
