@@ -22,7 +22,6 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("결과 : 3");
         });
     }
-
     @Test
     void 커스텀_구분자_미사용() {
         assertSimpleTest(() -> {
@@ -51,6 +50,13 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("결과 : 6.3");
         });
     }
+    @Test
+    void 커스텀_구분자_숫자사용_계산할숫자가없을경우() {
+        assertSimpleTest(() -> {
+            run("//7\\n7777");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
 
     @Test
     void 예외_테스트() {
@@ -70,6 +76,41 @@ class ApplicationTest extends NsTest {
     void 예외_테스트_소수사용_소수누락시() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("2.,0.1"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+    @Test
+    void 예외_테스트_커스텀구분자문자사용_숫자누락시() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;\\;;;;;;"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+    @Test
+    void 예외_테스트_커스텀구분자미사용_숫자누락시() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException(",,,::,"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+    @Test
+    void 예외_테스트_커스텀구분자미사용_문자누락시() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("123123"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+    @Test
+    void 예외_테스트_숫자0만입력시() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("0,1,2"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+    @Test
+    void 예외_테스트_소수0만입력시() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("0.0,1,2"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
