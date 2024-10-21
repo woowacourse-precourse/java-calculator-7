@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static calculator.exception.ErrorCode.*;
+
 public class Calculator {
     private String inputValue;
     private Integer result = 0;
@@ -19,6 +21,15 @@ public class Calculator {
     public void createInputValue() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         this.inputValue = Console.readLine();
+
+        if (!this.inputValue.contains(",") && !this.inputValue.contains(":")
+                && !(this.inputValue.contains("//") && this.inputValue.contains("\n"))) {
+            throw new IllegalArgumentException(INVALID_INPUT_VALUE.getMessage());
+        }
+
+        if (!this.inputValue.matches(".*\\d.*")) {
+            throw new IllegalArgumentException(MISSING_NUMBER.getMessage());
+        }
     }
 
     private String[] splitNums() {
@@ -30,7 +41,12 @@ public class Calculator {
         ArrayList<Integer> nums = new ArrayList<>();
 
         for (String n : stringNums) {
-            nums.add(Integer.parseInt(n));
+            try {
+                nums.add(Integer.parseInt(n));
+            } catch (Exception e) {
+                throw new IllegalArgumentException(INVALID_NUMBER.getMessage());
+            }
+
         }
 
         return nums;
@@ -55,7 +71,7 @@ public class Calculator {
         Matcher matcher = pattern.matcher(value);
 
         if (!matcher.find()) {
-            throw new IllegalStateException("BAD REQUEST");
+            throw new IllegalArgumentException(INVALID_CUSTOM_DELIMITER.getMessage());
         }
 
         this.inputValue = matcher.group(2);
@@ -71,6 +87,9 @@ public class Calculator {
 
     private Integer addNums(ArrayList<Integer> nums) {
         for (Integer n : nums) {
+            if (n <= 0) {
+                throw new IllegalArgumentException(NON_POSITIVE_VALUE.getMessage());
+            }
             this.result += n;
         }
         return result;
