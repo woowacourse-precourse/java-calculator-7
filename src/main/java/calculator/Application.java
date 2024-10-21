@@ -14,7 +14,7 @@ public class Application {
                System.out.println("결과 : 0");
                return;
            }
-           // 출력
+           // 결과 출력
            System.out.println("결과 : " + input);
        } catch (IllegalArgumentException e) {
             // 예외 발생 시 프로그램 종료
