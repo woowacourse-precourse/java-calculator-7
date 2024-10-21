@@ -1,0 +1,15 @@
+package calculator.common.constant;
+
+import calculator.model.Separator;
+
+public final class Constants {
+
+    public static final Separator COMMA = Separator.from(",");
+    public static final Separator COLON = Separator.from(":");
+
+    public static final String CUSTOM_SEPARATOR_REGEX = "^//(.*)\\\\n(.*)$";
+
+    public static final int SEPARATOR_SIZE = 1;
+
+    public static final String REGEX_OR = "|";
+}
