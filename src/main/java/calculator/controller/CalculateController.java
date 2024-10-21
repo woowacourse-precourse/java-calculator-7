@@ -19,11 +19,15 @@ public class CalculateController {
     private final OutputView outputView;
 
 
-    public CalculateController() {
-        this.inputView = new InputView();
-        this.outputView = new OutputView();
-        this.separatorService = new SeparatorServiceImpl();
-        this.calculateService = new CalculateServiceImpl();
+    public CalculateController(SeparatorService separatorService,
+                               CalculateService calculateService,
+                               InputView inputView,
+                               OutputView outputView)
+    {
+        this.inputView = inputView;
+        this.outputView = outputView;
+        this.separatorService = separatorService;
+        this.calculateService = calculateService;
     }
 
     /**
