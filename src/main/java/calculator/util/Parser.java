@@ -32,6 +32,10 @@ public class Parser {
     }
 
     private List<Long> extractOperands(Calculator calculator, String expression) {
+        if(expression.isEmpty()) {
+            return new ArrayList<>(0);
+        }
+
         List<Long> operands = new ArrayList<>();
         String[] numbers = expression.split(calculator.identifiersToString());
 
@@ -47,7 +51,7 @@ public class Parser {
     }
 
     private boolean matches(String input) {
-        Pattern pattern = Pattern.compile("//.\n.+");
+        Pattern pattern = Pattern.compile("//.\n.*");
         Matcher matcher = pattern.matcher(input);
         return matcher.matches();
     }
