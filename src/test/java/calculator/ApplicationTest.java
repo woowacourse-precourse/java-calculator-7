@@ -54,6 +54,13 @@ class ApplicationTest extends NsTest {
         assertThat(result).isEqualTo(List.of(1, 2));
     }
 
+    @Test
+    @DisplayName("배열의 요소를 더한 값을 반환한다.")
+    void should_returnSumOfDigitArray() {
+        int result = Application.calculateSum("//a\\n1a2");
+        assertThat(result).isEqualTo(3);
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});

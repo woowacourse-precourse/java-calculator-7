@@ -9,14 +9,20 @@ public class Application {
     public static void main(String[] args) {
         String input = Console.readLine();
         int result = calculateSum(input);
+        System.out.printf("결과 : %d\n", result);
     }
 
     public static int calculateSum(String input) {
         if (input.isEmpty()) {
             return 0;
         }
+
         List<Integer> parsedNumbers = parseInput(input);
-        return -1;
+        int sum = 0;
+        for (int number : parsedNumbers) {
+            sum += number;
+        }
+        return sum;
     }
 
     public static List<Integer> parseInput(String input) {
