@@ -6,6 +6,10 @@ import java.util.regex.Pattern;
 
 public class Application {
 
+    private static final String INVALID_INPUT_ERROR = "잘못된 형식의 입력입니다.";
+    private static final String NEGATIVE_NUMBER_ERROR = "음수는 입력할 수 없습니다.";
+    private static final String INVALID_NUMBER_FORMAT_ERROR = "잘못된 숫자 형식이 포함되어 있습니다: ";
+
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String inputString = Console.readLine();
@@ -24,7 +28,7 @@ public class Application {
         }
 
         String delimiter = getDelimiter(input);
-        String numbers = getNumbersString(input, delimiter);
+        String numbers = getNumbersString(input);
         String[] numberArray = numbers.split(delimiter);
 
         return sumNumbers(numberArray);
@@ -46,11 +50,11 @@ public class Application {
         return ",|:";
     }
 
-    public static String getNumbersString(String input, String delimiter) {
+    public static String getNumbersString(String input) {
         if (input.startsWith("//")) {
             String[] parts = input.split("\\\\n", 2);
             if (parts.length < 2 || parts[1].isEmpty()) {
-                throw new IllegalArgumentException("잘못된 형식의 입력입니다.");
+                throw new IllegalArgumentException(INVALID_INPUT_ERROR);
             }
             return parts[1];
         }
@@ -62,7 +66,7 @@ public class Application {
         for (String numberStr : numberArray) {
             int number = parseNumber(numberStr.trim());
             if (number < 0) {
-                throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+                throw new IllegalArgumentException(NEGATIVE_NUMBER_ERROR);
             }
             total += number;
         }
@@ -73,7 +77,7 @@ public class Application {
         try {
             return Integer.parseInt(numberStr);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("잘못된 숫자 형식이 포함되어 있습니다: " + numberStr);
+            throw new IllegalArgumentException(INVALID_NUMBER_FORMAT_ERROR + numberStr);
         }
     }
 }
