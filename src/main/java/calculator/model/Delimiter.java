@@ -11,7 +11,7 @@ public class Delimiter {
 
     public static final String CUSTOM_DELIMITER = "//(.*)\n(.*)";
     public static final String BASIC_DELIMITER = ",|:";
-    public static final String STRING_BETWEEN_DELIMITER = "|";
+    public static final String PIPE = "|";
     public static final String COMMA = ",";
     public static final String COLON = ":";
     public static final String INVALID_DELIMITER = "허용되지 않은 구분자가 존재합니다";
@@ -48,7 +48,7 @@ public class Delimiter {
 
     private String customAndBasicDelimiter() {
         return delimiter.stream()
-                .collect(Collectors.joining(STRING_BETWEEN_DELIMITER));
+                .collect(Collectors.joining(PIPE));
     }
 
     private void checkExpressionHasInvalidExpression(String[] splitedExpression) {
