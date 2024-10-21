@@ -6,21 +6,26 @@ public class StringCalculator {
             return 0;
         }
 
-        String delimiter = ",|:";  // 기본 구분자
+        String delimiter = ",|:";
 
         if (input.startsWith("//")) {
             int delimiterEndIndex = input.indexOf("\n");
-            delimiter = input.substring(2, delimiterEndIndex);  // 커스텀 구분자 추출
-            input = input.substring(delimiterEndIndex + 1);  // 숫자 부분 추출
+            delimiter = input.substring(2, delimiterEndIndex);
+            input = input.substring(delimiterEndIndex + 1);
         }
 
         String[] tokens = input.split(delimiter);
         int sum = 0;
         for (String token : tokens) {
-            sum += Integer.parseInt(token);
+            int number = Integer.parseInt(token);
+            if (number < 0) {
+                throw new IllegalArgumentException("음수는 입력할 수 없습니다: " + number);
+            }
+            sum += number;
         }
         return sum;
     }
 }
+
 
 
