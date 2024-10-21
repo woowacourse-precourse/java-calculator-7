@@ -11,15 +11,12 @@ public class Application {
         long sum = 0;
         if (userInput.contains(",") || userInput.contains(":")) {
             if (userInput.contains(",")) {
-                String[] nums = userInput.split(",");
+                String[] nums = userInput.trim().split("[,:]");
                 for (String num : nums) {
-                    String[] splits = num.split(":");
-                    for (String split : splits) {
-                        if (Long.parseLong(split) < 0) {
-                            throw new IllegalArgumentException("구분자와 양수로 구성된 문자열을 입력해 주세요.");
-                        }
-                        sum += Long.parseLong(split);
+                    if (Long.parseLong(num) < 0) {
+                        throw new IllegalArgumentException("구분자와 양수로 구성된 문자열을 입력해 주세요.");
                     }
+                    sum += Long.parseLong(num);
                 }
             }
         } else if (userInput.contains("//") && userInput.contains("\\n")) {
