@@ -44,6 +44,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("-1,2,3"))
                         .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContaining("음수가 입력되었습니다")
         );
     }
 
@@ -52,6 +53,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("1,2!3"))
                         .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContaining("입력 문자열에는 숫자만 포함되어야 합니다")
         );
     }
 
@@ -60,6 +62,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//;\\x1;2;3"))
                         .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContaining("커스텀 구분자 지정 양식이 잘못되었습니다")
         );
     }
 
@@ -68,6 +71,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//;;\\n1;;2;;3"))
                         .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContaining("커스텀 구분자가 존재하지 않거나 2자 이상입니다")
         );
     }
 
