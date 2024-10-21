@@ -1,5 +1,5 @@
-package calculator;
 
+package calculator;
 
 public class StringCalculator {
     public static int splitAndSum(String text) {
@@ -30,19 +30,29 @@ public class StringCalculator {
         return text.split(delimiter);
     }
 
+
     private static int sum(String[] tokens) {
         int total = 0;
         for (String token : tokens) {
             if (token.isEmpty()) {
                 continue;
             }
-            int num = toInt(token);
+            int num = toPositiveInt(token);
             total += num;
         }
         return total;
     }
 
-    private static int toInt(String s) {
-        return Integer.parseInt(s);
+    private static int toPositiveInt(String s) {
+        int num;
+        try {
+            num = Integer.parseInt(s);
+            if (num < 0) {
+                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + num);
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("유효하지 않은 숫자: " + s, e);
+        }
+        return num;
     }
 }
