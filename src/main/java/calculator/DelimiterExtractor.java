@@ -62,7 +62,7 @@ public class DelimiterExtractor {
         }
     }
 
-    private String createRegularExpression() {
+    public String createRegularExpression() {
         String BASIC_DELIMITER_REGEX = ",|:";
 
         if (DelimiterType.BASIC.equals(this.type())) {

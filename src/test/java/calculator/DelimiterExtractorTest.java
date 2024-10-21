@@ -9,6 +9,15 @@ public class DelimiterExtractorTest {
     private final String positiveNumberPattern = "[0-9]+\\.?[0-9]*";
 
     @Test
+    void 개행문자() {
+        String input1 = "//;\\n1";
+        System.out.println("input1 = " + input1);
+
+        String result = input1.replace("\\n", "\n");
+        System.out.println("result = " + result);
+    }
+
+    @Test
     void 잘못된_커스텀_구분자가_있으면_IllegalArgumentException_예외가_발생한다() {
         DelimiterExtractor delimiterExtractor = new DelimiterExtractor("//;\n1;2$3");
 
