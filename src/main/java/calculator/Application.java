@@ -46,21 +46,27 @@ public class Application {
         boolean isCustomLetter = isCustomLetter(str);
         String letter = extractLetter(str, isCustomLetter);
         str = isCustomLetter ? sliceCustomStr(str) : str;
-        List<Integer> nums = new ArrayList<>();
 
         String[] tokens = str.split(letter);
 
+        return convertTokensToNums(tokens);
+    }
+
+    // 토큰들을 숫자로 변환하는 로직을 분리
+    private static List<Integer> convertTokensToNums(String[] tokens) {
+        List<Integer> nums = new ArrayList<>();
         for (String token : tokens) {
-            // 숫자인지 체크
-            if (!token.matches("-?\\d+")) {
+            if (!isNumeric(token)) {
                 throw new IllegalArgumentException("숫자가 아닌 값이 입력되었습니다: " + token);
             }
-
-            // 숫자로 변환 후 리스트에 추가
             nums.add(Integer.parseInt(token));
         }
-
         return nums;
+    }
+
+    // 문자열이 숫자인지 확인하는 메서드
+    private static boolean isNumeric(String token) {
+        return token.matches("-?\\d+");
     }
 
     public static String sliceCustomStr(String str){
