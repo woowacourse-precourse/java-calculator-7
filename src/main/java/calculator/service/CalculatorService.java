@@ -1,16 +1,16 @@
 package calculator.service;
 
 public class CalculatorService {
+    private static final int ZERO = 0;
     private final StringParser stringParser = new StringParser();
+    private final Calculator calculator = new Calculator();
 
     public int calculate(String input) {
-        int answer = 0;
         if (input.isEmpty()) {
-            return answer;
+            return ZERO;
         }
 
         String[] parsed = stringParser.parseString(input);
-
-        return answer;
+        return calculator.getSum(parsed);
     }
 }

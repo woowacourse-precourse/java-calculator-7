@@ -9,6 +9,6 @@ public class CalculatorController {
     public void calculate() {
         String input = Console.readLine();
 
-        calculatorService.calculate(input);
+        System.out.println("결과 : " + calculatorService.calculate(input));
     }
 }
