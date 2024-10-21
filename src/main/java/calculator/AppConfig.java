@@ -2,13 +2,18 @@ package calculator;
 
 import calculator.controller.CalculatorController;
 import calculator.model.StringCalculator;
+import calculator.service.CalculatorService;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
 public class AppConfig {
 
     public CalculatorController calculatorController() {
-        return new CalculatorController(stringCalculator(), inputView(), outputView());
+        return new CalculatorController(calculatorService(), inputView(), outputView());
+    }
+
+    public CalculatorService calculatorService() {
+        return new CalculatorService(stringCalculator());
     }
 
     public StringCalculator stringCalculator() {

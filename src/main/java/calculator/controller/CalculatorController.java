@@ -1,17 +1,17 @@
 package calculator.controller;
 
 import calculator.model.StringCalculator;
+import calculator.service.CalculatorService;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
 public class CalculatorController {
-    private final StringCalculator calculator;
+    private final CalculatorService calculatorService;
     private final InputView inputView;
     private final OutputView outputView;
 
-    // 의존성 주입을 위한 생성자
-    public CalculatorController(StringCalculator calculator, InputView inputView, OutputView outputView) {
-        this.calculator = calculator;
+    public CalculatorController(CalculatorService calculatorService, InputView inputView, OutputView outputView) {
+        this.calculatorService = calculatorService;
         this.inputView = inputView;
         this.outputView = outputView;
     }
