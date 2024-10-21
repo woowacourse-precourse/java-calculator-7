@@ -1,14 +1,15 @@
 package calculator.service.impl;
 
 import calculator.service.CalculatorService;
+import java.math.BigInteger;
 
 public class CalculatorServiceImpl implements CalculatorService {
 
     @Override
-    public int calculate(int[] numbers) {
-        int sum = 0;
-        for (int num : numbers) {
-            sum += num;
+    public BigInteger calculate(BigInteger[] numbers) {
+        BigInteger sum = BigInteger.ZERO;
+        for (BigInteger num : numbers) {
+            sum = sum.add(num);
         }
         return sum;
     }

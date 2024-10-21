@@ -1,5 +1,7 @@
 package calculator.service;
 
+import java.math.BigInteger;
+
 public interface CalculatorService {
 
     /**
@@ -8,5 +10,5 @@ public interface CalculatorService {
      * @param numbers 계산할 문자열
      * @return 덧셈 결과
      */
-    int calculate(int[] numbers);
+    BigInteger calculate(BigInteger[] numbers);
 }
