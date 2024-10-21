@@ -41,9 +41,17 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 예외_테스트_커스텀_구분자() {
+    void 예외_테스트_커스텀_구분자_문자열() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//and\\n1and2and3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_커스텀_구분자_숫자() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//1\\n21314"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
