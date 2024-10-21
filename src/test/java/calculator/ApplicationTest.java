@@ -24,6 +24,14 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 기문_구분자만_사용(){
+        assertSimpleTest(() ->{
+            run("1,2:3,4");
+            assertThat(output().contains("결과 : 10"));
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});

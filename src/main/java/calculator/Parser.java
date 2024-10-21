@@ -1,7 +1,7 @@
 package calculator;
 
 import java.util.ArrayList;
-
+import java.util.Objects;
 
 public class Parser {
     private static final Parser parser = new Parser();
@@ -24,12 +24,15 @@ public class Parser {
         if(checkSeparator(input)){
                separators.add(input.substring(2,3));
         }
-//        System.out.println("input : " + input);
-//        System.out.println("separator : "  + separators.toString());
 
     }
 
-    public void parseNums(String input){
+        public void parseNums(String input){
+
+        if(Objects.isNull(input)) {
+            checkInteger("");
+            return;
+        }
 
         parseSeparator(input);
 
@@ -53,11 +56,10 @@ public class Parser {
         addNum(num);
     }
 
-    private void addNum(String num){
-        if(num.equals("")) nums.add(0);
+    private void addNum(String num) {
+        if (num.equals("")) nums.add(0);
         else nums.add(Integer.parseInt(num));
     }
-
 
     private void initialSeprator(){
         separators.clear();
@@ -79,7 +81,7 @@ public class Parser {
             Integer.parseInt(str);
             return true;
         }catch (NumberFormatException e){ // 문자가 숫자가 아닌 경우 처리
-
+            // 문자가 구분자에 속한다면,
             for(String s : separators){
                 if(str.equals(s)) return false;
             }
