@@ -13,9 +13,11 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String str = Console.readLine();
         String substr = str;
+
         //입력이 비어있는 경우
         if (str == null || str.isEmpty()) {
-            number.add(0);
+            System.out.println("결과 : 0");
+            return;
         } else {
             //커스텀 구분자라면
             if(str.contains("//")){
@@ -52,21 +54,21 @@ public class Application {
         }
         String[] token = substr.split(stringBuilder.toString());
         for (String s : token) {
-            if(s.trim().isEmpty() || s == null){
-                throw new IllegalArgumentException("잘못된 입력: 공백이나 잘못된 값이 포함되어 있습니다.");
+            if(s == null || s.trim().isEmpty()) {
+                throw new IllegalArgumentException("잘못된 입력: 공백이 포함되었습니다.");
             }
-            if (!s.isEmpty()) {
-                try {
-                    int num = Integer.parseInt(s);
-                    if(num < 0){
-                        throw new IllegalArgumentException("잘못된 입력: 음수가 포함되었습니다.");
-                    }
-                    number.add(num);
-                } catch (NumberFormatException e) {
-                    throw new IllegalArgumentException("잘못된 입력: 숫자가 아닙니다.");
+
+            try {
+                int num = Integer.parseInt(s);
+                if (num < 0) {
+                    throw new IllegalArgumentException("잘못된 입력: 음수가 포함되었습니다.");
                 }
+                number.add(num);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("잘못된 입력: 숫자가 아닙니다.");
             }
         }
+
         int sum = number.stream().mapToInt(Integer::intValue).sum();
         System.out.println("결과 : " + sum);
     }
