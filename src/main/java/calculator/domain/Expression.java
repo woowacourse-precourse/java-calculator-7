@@ -10,4 +10,11 @@ public class Expression {
     public String getExpression() {
         return expression;
     }
+
+    public boolean isNull(){
+        if(expression == null || expression.isEmpty()){
+            return true;
+        }
+        return false;
+    }
 }

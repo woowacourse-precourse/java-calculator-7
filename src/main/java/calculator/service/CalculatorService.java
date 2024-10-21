@@ -1,16 +1,20 @@
 package calculator.service;
 
+import calculator.domain.Expression;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CalculatorService {
 
     private static final String DEFAULT_DELIMITERS = ",|:";
-    public int add(String input){
-        if (input == null || input.isEmpty()){
+
+    public int calculate(Expression expression){
+        if (expression.isNull()){
             return 0;
         }
 
+        String input = expression.getExpression();
         String delimiter = DEFAULT_DELIMITERS;
         String numbers = input;
 
