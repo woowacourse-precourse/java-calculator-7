@@ -31,8 +31,8 @@ public class StringAddCalculator {
     }
 
     private static void wrongInputFormat(int delimiterIndex){
-        if (delimiterIndex == -1) {
-            throw new IllegalArgumentException("구분자 지정 형식이 올바르지 않습니다. '\\n'이 필요합니다.");
+        if (delimiterIndex != 3) {
+            throw new IllegalArgumentException();
         }
     }
 
@@ -58,14 +58,14 @@ public class StringAddCalculator {
             num = Integer.parseInt(number);
             negativeNumberCheck(num);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자 혹은 구분자만 입력해주세요.");
+            throw new IllegalArgumentException();
         }
         return num;
     }
 
     private static void negativeNumberCheck(int num){
         if(num < 0){
-            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+            throw new IllegalArgumentException();
         }
     }
 }
