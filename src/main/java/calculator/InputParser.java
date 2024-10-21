@@ -14,7 +14,9 @@ public class InputParser {
             return new int[]{0};  // 빈 문자열일 경우 0 반환
         }
 
-        input = input.replaceAll("\\s+", "");
+        if (input.contains(" ")) {
+            input = input.replaceAll("\\s+", "");
+        }
 
         String delimiter = "[,|:]"; // 기본 구분자
         boolean customDelimiterUsed = false;
