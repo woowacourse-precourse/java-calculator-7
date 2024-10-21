@@ -56,14 +56,23 @@ public class Calculator {
             String customDelimiters = matcher.group(1);
             input = matcher.group(2);
 
+            // 커스텀 구분자에 메타문자를 포함한 구분자도 처리
             for (String delimiter : customDelimiters.split("\\|")) {
-                delimiters.add(Pattern.quote(delimiter));
+                if (checkMetacharacters(delimiter)) {
+                    delimiter = delimiter.replaceAll("([\\\\.*+?^${}()|\\[\\]])", "\\\\$1");
+                }
+                delimiters.add(delimiter);
             }
         }
     }
 
+    public boolean checkMetacharacters(String delimiter) {
+        String regex = "[.*+?^${}()|\\[\\]\\\\]";
+        return delimiter.matches(".*" + regex + ".*");
+    }
+
     public void splitInput() {
-        input = input.replaceAll("\\s+", "");  // 모든 공백 제거
+        input = input.replaceAll("\\s+", "");
         String combinedDelimiters = String.join("|", escapeDelimiters(delimiters));
         parts = Arrays.asList(input.split(combinedDelimiters));
         parts = filterEmptyParts(parts);
@@ -73,10 +82,11 @@ public class Calculator {
         }
 
         for (String part : parts) {
-            if (part.contains("-")) {  // 음수가 있는지 확인
+            if (part.contains("-")) {
                 throw new IllegalArgumentException("음수는 허용되지 않습니다: " + part);
             }
-            if (!part.matches("^[0-9.]+$")) {
+
+            if (!part.matches("^[0-9.]+$")) {  // 숫자와 소수점만 허용
                 throw new IllegalArgumentException("입력된 값에 문자가 있습니다.");
             }
 
@@ -96,10 +106,10 @@ public class Calculator {
         return nonEmptyParts;
     }
 
-    private static List<String> escapeDelimiters(List<String> delimiter) {
+    private List<String> escapeDelimiters(List<String> delimiters) {
         List<String> escaped = new ArrayList<>();
-        for (String deli : delimiter) {
-            escaped.add(Pattern.quote(deli));
+        for (String delimiter : delimiters) {
+            escaped.add(Pattern.quote(delimiter));
         }
         return escaped;
     }
