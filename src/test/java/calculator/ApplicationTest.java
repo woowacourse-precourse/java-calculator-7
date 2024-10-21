@@ -59,7 +59,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 빈_문자열_입력() {
         assertSimpleTest(() -> {
-            run("");
+            run("\n");
             assertThat(output()).contains("결과 : 0");
         });
     }
