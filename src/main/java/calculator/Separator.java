@@ -16,7 +16,7 @@ public class Separator {
                 if(containsDigit(customSeperator)){
                     throw new IllegalArgumentException();
                 }
-                separators.add(customSeperator);
+                if(!customSeperator.isEmpty()) separators.add(customSeperator);
                 processedString = input.substring(limitIndex + 2);
                 return processedString;
             } else {
