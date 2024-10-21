@@ -42,7 +42,6 @@ public class Application {
         separations = "[" + separations + "]";
 
         String[] tokens = inputStr.split(separations);
-
         return tokens;
     }
 
@@ -82,7 +81,7 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해주세요.");
         String inputStr = Console.readLine();
         String separations = ",:";
-
+        String numbers = inputStr;
         CustomSeparationDto customSeparationDto = extractCustomSeparation(inputStr);
 
         if (customSeparationDto != null) {
@@ -90,9 +89,9 @@ public class Application {
             int customSeparationEnd = customSeparationDto.getCustomSeparationEnd();
 
             separations += customSeparation;
-            inputStr = inputStr.substring(customSeparationEnd + 2);
+            numbers = inputStr.substring(customSeparationEnd + 2);
         }
-        String[] tokens = extractToken(inputStr, separations);
+        String[] tokens = extractToken(numbers, separations);
         ArrayList<Integer> integers = extractIntegerAndDetectChar(tokens);
 
         int sum = integers.stream().mapToInt(Integer::intValue).sum();
