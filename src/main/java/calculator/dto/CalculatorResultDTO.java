@@ -2,11 +2,11 @@ package calculator.dto;
 
 import java.math.BigDecimal;
 
-public class ResultDTO<T> {
+public class CalculatorResultDTO<T extends Number> {
 
     private final T result;
 
-    public ResultDTO(T result) {
+    public CalculatorResultDTO(T result) {
         this.result = result;
     }
 
