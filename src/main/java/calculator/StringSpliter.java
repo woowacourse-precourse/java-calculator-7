@@ -19,10 +19,10 @@ public class StringSpliter {
         Matcher matcher = customDelimiterPattern.matcher(input);
         // 완벽하게 일치하는 지 확인
         if (matcher.matches()) {
-            String customDeilimiter = matcher.group(1);
+            String customDelimiter = matcher.group(1);
             // 음수 기호 및 숫자 제외
-            if (!"-".equals(customDeilimiter) && !customDeilimiter.matches("\\d")) {
-                delimiter += "|" + customDeilimiter;
+            if (!"-".equals(customDelimiter) && !customDelimiter.matches("\\d")) {
+                delimiter += "|" + customDelimiter;
                 values = matcher.group(2);
             }
         }
