@@ -55,11 +55,20 @@ public class DelimiterExtractor {
     }
 
     public void validate() {
+        validateCustomDelimiter();
+
         String delimiterLeft = remove();
         String maybeNothing = remove(createRegularExpression(), delimiterLeft).trim();
 
         if (!maybeNothing.isBlank()) {
             throw new IllegalArgumentException("[" + type() + "] " + maybeNothing + " 은 잘못된 구분자예요!");
+        }
+    }
+
+    private void validateCustomDelimiter() {
+        final String PERIOD = ".";
+        if (PERIOD.equals(createRegularExpression())) {
+            throw new IllegalArgumentException("[" + type() + "] " + " 온점(.)은 사용할 수 없는 구분자예요!");
         }
     }
 

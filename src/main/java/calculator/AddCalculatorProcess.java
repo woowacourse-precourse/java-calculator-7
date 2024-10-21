@@ -48,7 +48,6 @@ public class AddCalculatorProcess {
     private static void requestInput() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         input = StringParser.parseBr(Console.readLine());
-        System.out.println(input);
     }
 
     public static void result() {
