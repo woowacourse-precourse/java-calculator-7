@@ -12,12 +12,9 @@ import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class Application {
     public static void main(String[] args) {
-
         try{
             // 0. 문자열 입력받기
             String input = readLine();
-
-//        System.out.println("input: " + input);
 
             Calc calc = new Calc(input);
 
@@ -26,13 +23,11 @@ public class Application {
             System.out.println("결과 : " + result);
 
         } catch (IllegalArgumentException e) {
-            //System.out.println("잘못된 값을 입력했습니다. 프로그램을 종료합니다."); // 예외 발생 시 메시지 출력
         }
     }
 }
 
 class Calc {
-
     private static Set<String> sep = new HashSet<String>();
     private String input;
     private int[] numArr;
@@ -43,13 +38,10 @@ class Calc {
     }
 
     private String escapeRegexSpecialChars(String input) {
-        // 이스케이프가 필요한 기호 목록
         String[] specialChars = {"\\", "[", "]", "(", ")", "{", "}", "^", "$", ".", "|", "*", "+", "?"};
 
-        // StringBuilder를 사용하여 이스케이프된 문자열을 빌드
         StringBuilder escapedString = new StringBuilder();
 
-        // 입력 문자열을 순회하면서 이스케이프 처리
         for (char c : input.toCharArray()) {
             boolean isSpecialChar = false;
             for (String special : specialChars) {
@@ -63,13 +55,11 @@ class Calc {
                 escapedString.append(c);
             }
         }
-
         return escapedString.toString();
     }
 
     // 1. 구분자 저장 및 input에서 커스텀 구분자 분리하기
     private void setSepAndInput() {
-
         sep.add(",");
         sep.add(":");
 
@@ -78,24 +68,15 @@ class Calc {
         Matcher matcher = pattern.matcher(input);
 
         if(matcher.find()) {
-
             String customSep = matcher.group(1);
-
             sep.add(escapeRegexSpecialChars(customSep)); // 이스케이프 처리 후 추가
-
-
             this.input = input.replace(matcher.group(0), "").replace("\\n", "").trim(); // 첫 번째 매칭된 문자열 제거
 
         }
-
-//        System.out.println("sep: " + sep.toString());
-//        System.out.println("input: " + this.input);
-
     }
 
     // 2. 숫자 구분하기
     private int[] getNumArr() {
-
         String regex = String.join("|", sep);
 
         try {
@@ -114,13 +95,12 @@ class Calc {
 
                             return value; // 양수는 그대로 반환
                         } catch (NumberFormatException e) {
-                            return 0; // 숫자로 변환할 수 없는 경우 0으로 처리
+                            throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다: " + s);
                         }
                     })
                     .toArray();
-
         } catch (Exception e) {
-            throw new IllegalArgumentException("입력 값이 잘못되었습니다: " + e.getMessage());
+            throw new IllegalArgumentException();
         }
 
         return numArr;
@@ -129,20 +109,9 @@ class Calc {
     // 3. 숫자 합 구하기
     public int calcSum() {
         int[] numArr = getNumArr();
-
         if (numArr != null) {
-
             return Arrays.stream(numArr).sum();
         }
-
         return 0;
     }
-
-    // 결과 출력하기
-    public void printResult(int result) {
-        System.out.println("결과 : " + result);
-    }
-
 }
-
-
