@@ -82,7 +82,7 @@ public class Application {
 
             } catch (Exception e) {
                 // 계산식에 들어있는 수가 Long 범위를 벗어나거나, 총 합이 Long 범위를 벗어나면 예외 발생
-                throw new IllegalArgumentException(String.format("절대값이 %d를 넘는 값은 계산할 수 없습니다.", Long.MAX_VALUE));
+                throw new IllegalArgumentException(String.format("%d를 넘는 값은 계산할 수 없습니다.", Long.MAX_VALUE));
             }
         }
 
