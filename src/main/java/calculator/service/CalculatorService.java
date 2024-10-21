@@ -2,12 +2,14 @@ package calculator.service;
 
 import calculator.domain.Calculator;
 import calculator.domain.Expression;
+import calculator.util.NumberValidator;
 import calculator.util.Parser;
 
 public class CalculatorService {
 
-    private static final String DEFAULT_DELIMITERS = ",|:";
     private Parser parser = new Parser();
+    private NumberValidator numberValidator = new NumberValidator();
+
     public int calculate(Expression expression){
         if (expression.isNull()){
             return 0;
@@ -22,26 +24,9 @@ public class CalculatorService {
         int sum = 0;
 
         for(String token : tokens){
-            int number = checkCorrectNumber(token);
+            int number = numberValidator.validateNumber(token);
             sum += number;
         }
         return sum;
-    }
-
-    private int checkCorrectNumber(String token){
-        int number;
-        try {
-            number = Integer.parseInt(token);
-        }catch(NumberFormatException e){
-            throw new IllegalArgumentException("숫자가 아닙니다" + token);
-        }
-        return checkPositiveNumber(number);
-    }
-
-    private int checkPositiveNumber(int number){
-        if (number < 0){
-            throw new IllegalArgumentException("음수는 허용되지 않습니다." + number);
-        }
-        return number;
     }
 }
