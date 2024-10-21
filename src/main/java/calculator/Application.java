@@ -6,19 +6,14 @@ public class Application {
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String word = Console.readLine();
-
-        try {
-            int checkInput = checkInput(word);
-            if (checkInput == 0) {
-                System.out.println("결과 : " + 0);
-            } else {
-                String delimiter = getDelimiter(word);
-                String[] numbers = extractNumbers(word, delimiter);
-                int resultSum = sumNumbers(numbers);
-                System.out.println("결과 : " + resultSum);
-            }
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+        int checkInput = checkInput(word);
+        if (checkInput == 0) {
+            System.out.println("결과 : " + 0);
+        } else {
+            String delimiter = getDelimiter(word);
+            String[] numbers = extractNumbers(word, delimiter);
+            int resultSum = sumNumbers(numbers);
+            System.out.println("결과 : " + resultSum);
         }
     }
 
