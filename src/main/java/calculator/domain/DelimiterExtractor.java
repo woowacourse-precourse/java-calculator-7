@@ -1,14 +1,19 @@
 package calculator.domain;
 
 public class DelimiterExtractor {
-    private static final String DEFAULT_DELIMITERS = ",|:";
+    public String[] extract(String input) {
+        String defaultDelimiters = ",|:";
 
-    public String extract(String input) {
         if (input.startsWith("//")) {
-            int delimiterEndIndex = input.indexOf("\n");
-            String customDelimiter = input.substring(2, delimiterEndIndex);
-            return DEFAULT_DELIMITERS + "|" + customDelimiter;
+            String[] parts = input.split("\\\\n", 2);
+            String customDelimiter = parts[0].substring(2);
+            String numbers = parts.length > 1 ? parts[1] : "";
+
+            String combinedDelimiters = defaultDelimiters + "|" + customDelimiter;
+
+            return new String[] {combinedDelimiters, numbers};
         }
-        return DEFAULT_DELIMITERS;
+
+        return new String[] {defaultDelimiters, input};
     }
 }
