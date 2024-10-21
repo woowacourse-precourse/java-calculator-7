@@ -18,7 +18,7 @@ public class Application {
 
         int[] numList = app.stringArrayToIntArray(slice);
         int sum = app.sumList(numList);
-        System.out.println(sum);
+        app.printResult(sum);
     }
 
     public String getInputString(){
@@ -56,5 +56,9 @@ public class Application {
         String custom = s[0].substring(2);
         String[] slice = s[1].split(Pattern.quote(custom));
         return slice;
+    }
+
+    public void printResult(int sum){
+        System.out.println("결과 : "+sum);
     }
 }
