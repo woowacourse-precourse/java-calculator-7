@@ -1,13 +1,13 @@
-package calculator;
+package calculator.input;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Input {
+public class FastScan {
     static BufferedReader br;
 
-    public Input() {
+    public FastScan() {
         br = new BufferedReader(new InputStreamReader(System.in));
     }
 
