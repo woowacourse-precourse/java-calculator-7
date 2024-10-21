@@ -32,7 +32,7 @@ public class Calculator {
         String inputNumbers = input;
 
         if (matcher.matches()) {
-            delimiters = Pattern.quote(matcher.group(1));
+            delimiters += "|" + Pattern.quote(matcher.group(1));
             inputNumbers = matcher.group(2);
         }
 
