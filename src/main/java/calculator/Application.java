@@ -9,7 +9,7 @@ public class Application {
     }
 
     private static String getInput() {
-        System.out.println("덧셈할 문자열을 입력해 주세요 : ");
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
         return Console.readLine();
     }
 
@@ -49,5 +49,9 @@ public class Application {
             sum += parseNumber(token);
         }
         return sum;
+    }
+
+    private static void printResult(int result) {
+        System.out.println("결과 : " + result);
     }
 }
