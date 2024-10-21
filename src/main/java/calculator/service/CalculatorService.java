@@ -26,7 +26,11 @@ public class CalculatorService {
     private int calculateSum(String[] numbers) {
         int sum = 0;
         for (String number : numbers) {
-            sum += Integer.parseInt(number);
+            int num = Integer.parseInt(number);
+            if (num < 0) {
+                throw new IllegalArgumentException("Negative numbers are not allowed.");
+            }
+            sum += num;
         }
         return sum;
     }
