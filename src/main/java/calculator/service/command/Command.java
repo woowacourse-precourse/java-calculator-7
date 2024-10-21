@@ -1,4 +1,4 @@
-package calculator.command;
+package calculator.service.command;
 
 public interface Command {
 

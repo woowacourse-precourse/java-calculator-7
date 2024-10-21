@@ -71,13 +71,10 @@ class DelimiterExtractorTest {
     }
 
     @ParameterizedTest
-    @CsvSource({
-            "////\\n1//2//3",
-            "//\\n\\n1\\n2\\n3",
+    @CsvSource({"////\\n1//2//3", "//\\n\\n1\\n2\\n3",
             "//\\n\\n////\\n1//2\\n3",
             "////\\n\\n//$\\n////\\n1//2\\n3$4,5",
-            "//////\\n\\n\\n1////\\n\\n2"
-    })
+            "//////\\n\\n\\n1////\\n\\n2"})
     void 커스텀_구분자_포맷_예외_테스트(String input) {
         Exception exception = assertThrows(IllegalArgumentException.class,
                 () -> extractor.generateDelimiterRegex(input));

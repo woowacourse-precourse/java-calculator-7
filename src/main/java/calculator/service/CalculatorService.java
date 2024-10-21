@@ -1,12 +1,12 @@
 package calculator.service;
 
-import calculator.command.Command;
 import calculator.domain.DelimiterExtractor;
+import calculator.service.command.Command;
 
 public class CalculatorService {
 
-    private Command calculator;
     private final DelimiterExtractor extractor;
+    private Command calculator;
 
     public CalculatorService(DelimiterExtractor extractor) {
         this.extractor = extractor;

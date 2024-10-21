@@ -60,22 +60,15 @@ class CalculatorServiceTest {
     }
 
     @ParameterizedTest
-    @CsvSource({
-            "//;1;2;3",
-            "//;\n//#1;2;3",
-            ";\\n1;2;3",
-            "//-\\n,4-3-4,-4"
-    })
+    @CsvSource({"//;1;2;3", "//;\n//#1;2;3", ";\\n1;2;3", "//-\\n,4-3-4,-4"})
     void 커스텀_구분자_실수_예외_처리(String input) {
-        Exception exception = assertThrows(IllegalArgumentException.class,
-                () -> calculator.calculate(input));
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> calculator.calculate(input));
         assertEquals("올바르지 않은 형식입니다.", exception.getMessage());
     }
 
     @Test
-    void 연속된_구분자_예외_처리(){
-        Exception exception = assertThrows(IllegalArgumentException.class,
-                () -> calculator.calculate(",,,,,,3"));
+    void 연속된_구분자_예외_처리() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> calculator.calculate(",,,,,,3"));
         assertEquals("올바르지 않은 형식입니다.", exception.getMessage());
     }
 }

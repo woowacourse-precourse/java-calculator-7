@@ -1,10 +1,10 @@
 package calculator;
 
-import calculator.command.Command;
-import calculator.command.SumCommand;
 import calculator.controller.CalculatorController;
 import calculator.domain.DelimiterExtractor;
 import calculator.service.CalculatorService;
+import calculator.service.command.Command;
+import calculator.service.command.SumCommand;
 import calculator.view.CalculatorView;
 
 public class Configuration {
