@@ -15,6 +15,11 @@ public class Caculator {
 
         setNumbers();
         validateNumbers(numbers);
+
+        int total = 0;
+        for (String number : numbers) {
+            total += Integer.parseInt(number);
+        }
     }
 
     private void setInputString() {
