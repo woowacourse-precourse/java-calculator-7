@@ -31,7 +31,7 @@ public class Validator {
         String escapedSeparators = Pattern.quote(customSeparators);
 
         // 정규식: 숫자 + ','와 ':'와 커스텀 구분자로 구분된 패턴 (0번 이상 반복 허용)
-        String regex = "^\\d+([,:" + escapedSeparators + "]\\d+)*$";
+        String regex = "^\\d+(\\.\\d+)?([,:" + escapedSeparators + "]\\d+(\\.\\d+)?)*$";
 
         return Pattern.matches(regex, targetField);
     }
