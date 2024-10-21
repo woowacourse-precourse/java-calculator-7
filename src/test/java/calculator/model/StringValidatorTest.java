@@ -131,4 +131,17 @@ class StringValidatorTest {
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessage(errorMessage);
 	}
+
+	@ParameterizedTest
+	@DisplayName("커스텀 구분자의 위치가 올바르지 않은 문자열이 입력되었을 때 에러를 발생시킨다.")
+	@ValueSource(strings = {"#//\\n", "/#/\\n", "//\\#n", "//\\n#"})
+	void 커스텀_구분자의_위치가_올바르지_않은_문자열이_입력되었을_때_에러를_발생시킨다(String input) {
+		// given
+		StringValidator stringValidator = new StringValidator(input);
+
+		// when, then
+		assertThatThrownBy(stringValidator::validate)
+				.isInstanceOf(IllegalArgumentException.class)
+				.hasMessage(errorMessage);
+	}
 }
