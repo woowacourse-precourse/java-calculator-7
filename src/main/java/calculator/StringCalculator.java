@@ -5,6 +5,11 @@ public class StringCalculator {
         if (input == null || input.isEmpty()) {
             return 0;
         }
+        String[] numbers = splitNumbers(input);
+        return sumNumbers(numbers);
+    }
+
+    private String[] splitNumbers(String input) {
         String separator = ",|:";
         if (input.startsWith("//")) {
             int delimiterEndIndex = input.indexOf("\n");
@@ -12,8 +17,7 @@ public class StringCalculator {
             separator = customDelimiter + "|,|:";
             input = input.substring(delimiterEndIndex + 1);
         }
-        String[] numbers = input.split(separator);
-        return sumNumbers(numbers);
+        return input.split(separator);
     }
 
     private int sumNumbers(String[] numbers) {
