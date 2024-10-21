@@ -48,12 +48,13 @@ public class InputParser implements Parser {
     }
 
     private List<Integer> typeCastingStringListToIntegerList(List<String> parsedOperand){
-        List<Integer> integerList = new ArrayList<>();
+        List<Integer> integerList =  new ArrayList<>();
 
         try{
-            for(String s : parsedOperand){
-                integerList.add(Integer.parseInt(s));
-            }
+            integerList = parsedOperand.stream()
+                    .map(Integer::parseInt)
+                    .toList();
+
         }catch (NumberFormatException e){
             CheckForm.throwException();
         }
