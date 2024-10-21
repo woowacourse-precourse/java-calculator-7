@@ -12,7 +12,7 @@ public class NumberExtractor {
 		List<Integer> numbers = new ArrayList<>();
 		int index = INPUT_START_INDEX;
 		while (index < input.length()) {
-			int endIndex = getNumberRange(input, index);
+			int endIndex = this.getNumberRange(input, index);
 			int number = Integer.parseInt(input.substring(index, endIndex));
 			numbers.add(number);
 			index = endIndex + DELIMITER_LENGTH;
