@@ -1,5 +1,6 @@
 package calculator.view;
 
+import calculator.util.ErrorCode;
 import camp.nextstep.edu.missionutils.Console;
 
 import java.util.ArrayList;
@@ -25,6 +26,8 @@ public class InputView {
         if (subStr.startsWith("//")) {
             if(subStr.endsWith("\\n"))
                 return "" + subStr.charAt(2);
+            else
+                throw new IllegalArgumentException(ErrorCode.INPUT_ERROR.getMessage());
         }
 
         return null;
