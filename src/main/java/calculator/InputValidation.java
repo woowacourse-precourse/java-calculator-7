@@ -12,7 +12,7 @@ public class InputValidation { // 입력의 유효성을 확인하는 클래스�
             int startCustom = input.indexOf("//");
             int endCustom = input.indexOf("\\n");
             checkCustomDelimiterLocation(startCustom, endCustom); // 커스텀 구분자 지정 위치가 올바른지 확인.
-            
+
             custom_RemainInput[0] = input.substring(startCustom + 2, endCustom); // 커스텀 구분자
             custom_RemainInput[1] = input.substring(endCustom + 2); // 커스텀구분자와 지정문자 이후의 input으로 업데이트한다.
             return custom_RemainInput;
@@ -43,9 +43,7 @@ public class InputValidation { // 입력의 유효성을 확인하는 클래스�
     public static void checkNumber(String token) {
         try {
             int number = Integer.parseInt(token); // 입력이 숫자가 아니라면 예외를 터뜨린다.
-            if (number < 0) {
-                throw new IllegalArgumentException("양수만 사용이 가능합니다. => " + token);
-            }
+            checkNegativeNumber(number); // 음수 확인
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("올바르지 않은 입력입니다. => " + token);
         }
@@ -53,7 +51,13 @@ public class InputValidation { // 입력의 유효성을 확인하는 클래스�
 
     public static void checkCustomDelimiterLocation(int startCustom, int endCustom) {
         if (startCustom != 0 || startCustom > endCustom || endCustom - startCustom != 3) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("커스텀 구분자 지정 오류입니다.");
+        }
+    }
+
+    public static void checkNegativeNumber(int number) {
+        if (number < 0) {
+            throw new IllegalArgumentException("양수만 사용이 가능합니다. => " + number);
         }
     }
 }
