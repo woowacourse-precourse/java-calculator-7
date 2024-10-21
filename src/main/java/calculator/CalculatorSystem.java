@@ -2,8 +2,8 @@ package calculator;
 
 import calculator.console.InputView;
 import calculator.console.OutputView;
+import calculator.console.exception.InvalidInputException;
 import calculator.system.ExpressionOperator;
-import calculator.system.exception.InvalidInputException;
 import java.util.function.Supplier;
 
 public class CalculatorSystem {

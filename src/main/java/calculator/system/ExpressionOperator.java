@@ -1,6 +1,6 @@
 package calculator.system;
 
-import calculator.system.exception.OperationOutOfBoundsException;
+import calculator.console.exception.OperationOutOfBoundsException;
 import java.util.List;
 
 public class ExpressionOperator {

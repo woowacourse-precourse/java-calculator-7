@@ -1,6 +1,6 @@
 package calculator.console;
 
-import calculator.system.exception.InvalidInputException;
+import calculator.console.exception.InvalidInputException;
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
