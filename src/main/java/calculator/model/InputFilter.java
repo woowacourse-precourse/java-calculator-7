@@ -1,10 +1,8 @@
 package calculator.model;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import calculator.model.delimiter.Delimiters;
 import calculator.validation.InputValidator;
@@ -19,8 +17,9 @@ public class InputFilter {
 			return List.of();
 		}
 		String[] splitParts = splitInput(processedInput, delimiters);
+		validateEachPart(splitParts);
 
-		return saveNumbers(splitParts);
+		return Collections.unmodifiableList(getExtractedNumbers(splitParts));
 	}
 
 	// 구분자들을 이용해 정규식을 만들고, 이를 이용해 입력값을 분리
@@ -31,17 +30,15 @@ public class InputFilter {
 		return processedInput.split(regex);
 	}
 
-	// 분리된 각 부분에서 숫자로 변환하여 리스트에 추가
-	private List<Integer> saveNumbers(String[] splitParts) {
-		List<Integer> numbers = new ArrayList<>();
+	private static void validateEachPart(String[] splitParts) {
 		Arrays.stream(splitParts)
 			.map(String::trim)
-			.forEach(part -> {
-				InputValidator.validateDigit(part);
-				InputValidator.validateNumberPositive(part);
-				numbers.add(Integer.parseInt(part));
-			});
+			.forEach(InputValidator::validateCalculatorNumber);
+	}
 
-		return Collections.unmodifiableList(numbers);
+	private static List<Integer> getExtractedNumbers(String[] splitParts) {
+		return Arrays.stream(splitParts)
+			.map(Integer::valueOf)
+			.toList();
 	}
 }
