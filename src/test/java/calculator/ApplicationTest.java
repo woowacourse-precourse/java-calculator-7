@@ -18,6 +18,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 커스텀_구분자_입력_및_사용하는_테스트() {
+        assertSimpleTest(() -> {
+            run("//;\\n1.2;3:4");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
+    @Test
     void 커스텀_구분자가_문자열_시작에_존재하지_않는_테스트() {
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> run("12;3//;\\n"))
