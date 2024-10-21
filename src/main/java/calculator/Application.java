@@ -38,16 +38,23 @@ public class Application {
     
     public static void main(String[] args) {
         // TODO: 프로그램 구현
-    	// 1. 사용자 입력 받기 (Console API 사용)
-        String userInput = Console.readLine();
-        
-        // 2. 입력 받은 문자열을 분리
-        String[] numbers = splitInput(userInput);
-        
-        // 3. 덧셈 계산
-        int result = sumNumbers(numbers);
-        
-        // 4. 결과 출력
-        System.out.println("결과: " + result);
+    	try {
+    		// 1. 사용자 입력 받기 (Console API 사용)
+            String userInput = Console.readLine();
+            
+            // 2. 입력 받은 문자열을 분리
+            String[] numbers = splitInput(userInput);
+            
+            // 3. 덧셈 계산
+            int result = sumNumbers(numbers);
+            
+            // 4. 결과 출력
+            System.out.println("결과: " + result);
+    	
+    	}catch (IllegalArgumentException e) {
+            // 잘못된 입력 처리
+            System.out.println(e.getMessage());
+        }
+    	
     }
 }
