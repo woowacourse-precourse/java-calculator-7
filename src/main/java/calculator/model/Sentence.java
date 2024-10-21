@@ -22,6 +22,7 @@ public class Sentence {
                     .flatMap(currentText -> Arrays.stream(currentText.split(separator)))
                     .collect(Collectors.toCollection(Stack::new));
         }
+        SentenceUtil.validNumbers(currentTexts);
         return convertNumbersStringToInt(currentTexts);
     }
 
