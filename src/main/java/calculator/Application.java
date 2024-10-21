@@ -36,10 +36,13 @@ public class Application {
         int sum = 0;
         for (String token : tokens) {
             try {
-                int number = Integer.parseInt(token.trim());  // 숫자 변환 시도
+                int number = Integer.parseInt(token.trim());
+                if (number < 0) {
+                    throw new IllegalArgumentException("음수는 허용되지 않습니다.");  // 음수 예외 처리
+                }
                 sum += number;
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");  // 예외 처리
+                throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
             }
         }
 
