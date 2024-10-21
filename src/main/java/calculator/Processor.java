@@ -33,11 +33,11 @@ public class Processor {
     }
 
     public String extractCustomDelimiter() {
-        int delimiterStart = CUSTOM_DELIMITER_PREFIX.length();
-        int delimiterEnd = input.indexOf(CUSTOM_DELIMITER_SUFFIX);
-        String customDelimiter = input.substring(delimiterStart, delimiterEnd);
+        int startIndexOfCustomDelimiter = CUSTOM_DELIMITER_PREFIX.length();
+        int endIndexOfCustomDelimiter = input.indexOf(CUSTOM_DELIMITER_SUFFIX);
+        String customDelimiter = input.substring(startIndexOfCustomDelimiter, endIndexOfCustomDelimiter);
 
-        int endOfDelimiterSection = delimiterEnd + CUSTOM_DELIMITER_SUFFIX.length();
+        int endOfDelimiterSection = endIndexOfCustomDelimiter + CUSTOM_DELIMITER_SUFFIX.length();
         input = input.substring(endOfDelimiterSection);
 
         return customDelimiter;
