@@ -42,4 +42,10 @@ public class InputHandler {
         }
     }
 
+    private void checkPositiveNumber(double number) {
+        if (number < 0) {
+            throw new IllegalArgumentException();
+        }
+    }
+
 }
