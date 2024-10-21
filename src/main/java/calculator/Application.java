@@ -1,7 +1,17 @@
 package calculator;
 
+import calculator.domain.Adder;
+import calculator.domain.Expression;
+import calculator.util.ConsoleIOHandler;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+
+        try (ConsoleIOHandler handler = new ConsoleIOHandler()) {
+            final Expression expr = Expression.parse(handler.read());
+            final Adder adder = new Adder(expr);
+            final int result = adder.sum();
+            handler.print(result);
+        }
     }
 }
