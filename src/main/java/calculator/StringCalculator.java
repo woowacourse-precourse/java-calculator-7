@@ -1,14 +1,15 @@
 package calculator;
 
 public class StringCalculator {
-    public int add(String input) {
+    public int add(String input, String customDelimiter) {
         // 입력값이 빈 문자열이거나 null인 경우 0 반환
         if (input == null || input.isEmpty()) {
             return 0;
         }
 
-        // 쉼표와 콜론을 기준으로 문자열 분리
-        String[] numbers = input.split(",:");
+        // 쉼표와 콜론, 커스텀 문자를 포함하여 분리
+        String delimiter = (customDelimiter != null) ? customDelimiter + "|,|" : ",|:";
+        String[] numbers = input.split(delimiter);
 
         // 숫자 합산
         int sum = 0;
