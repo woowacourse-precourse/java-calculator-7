@@ -45,7 +45,6 @@ public class InputValidation {
 
         numbers = customInputValidation.getNumbers();
         isDigitNormalNumbers(numbers);
-        System.out.println(Arrays.toString(numbers));
         numbers = transEmptyNumbers(numbers);
 
         isPositiveNumbers(numbers);
