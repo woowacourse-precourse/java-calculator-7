@@ -72,26 +72,17 @@ public class Calculator {
 
     /**
      * 숫자로 구성된 문자열을 정수 자료형으로 변경
-     */
-    private long convertStrToNum(String rawNum) {
-        validateNumber(rawNum);
-
-        return Long.parseLong(rawNum);
-    }
-
-    /**
-     * 올바른 숫자인지 검사
      *
      * @throws IllegalArgumentException 음수이거나, 숫자 이외의 값일 경우
      */
-    private boolean validateNumber(String str) {
-        if (str.matches(MINUS_DIGIT_REGEX)) {
+    private long convertStrToNum(String rawNum) {
+        if (rawNum.matches(MINUS_DIGIT_REGEX)) {
             throw new IllegalArgumentException("음수 계산 불가");
         }
-        if (!str.matches(DIGIT_REGEX)) {
+        if (!rawNum.matches(DIGIT_REGEX)) {
             throw new IllegalArgumentException("숫자 이외의 값은 계산 불가");
         }
 
-        return true;
+        return Long.parseLong(rawNum);
     }
 }
