@@ -34,13 +34,13 @@ public class ExceptionTest {
     @Test
     public void 커스텀구분자예외처리테스트2() throws Exception {
         //given
-        String inputString = "//a\\n1;2,3";
+        String inputString = "//n\\n1;2,3";
         Parser parser = new Parser();
         //when
         Throwable thrown = catchThrowable(() -> parser.parse(inputString));
         //then
         Assertions.assertThat(thrown).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("숫자와 알파벳, 문자 '/', 문자 '\\' 는 구분자가 될 수 없다");
+                .hasMessage("숫자와 알파벳 n, 문자 '/', 문자 '\\' 는 구분자가 될 수 없다");
 
     }
 
@@ -77,7 +77,7 @@ public class ExceptionTest {
         Throwable thrown = catchThrowable(() -> parser.parse(inputString));
         //then
         Assertions.assertThat(thrown).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("숫자와 알파벳, 문자 '/', 문자 '\\' 는 구분자가 될 수 없다");
+                .hasMessage("숫자와 알파벳 n, 문자 '/', 문자 '\\' 는 구분자가 될 수 없다");
 
     }
 
@@ -90,7 +90,7 @@ public class ExceptionTest {
         Throwable thrown = catchThrowable(() -> parser.parse(inputString));
         //then
         Assertions.assertThat(thrown).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("숫자와 알파벳, 문자 '/', 문자 '\\' 는 구분자가 될 수 없다");
+                .hasMessage("숫자와 알파벳 n, 문자 '/', 문자 '\\' 는 구분자가 될 수 없다");
 
     }
     //

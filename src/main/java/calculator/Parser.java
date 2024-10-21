@@ -68,9 +68,9 @@ public class Parser {
 
         index++;
         char separator = inputArray[index];
-        if (Character.isDigit(separator) || Character.isAlphabetic(separator) || separator == '/'
+        if (Character.isDigit(separator) || separator == 'n' || separator == '/'
                 || separator == '\\') {
-            throw new IllegalArgumentException("숫자와 알파벳, 문자 '/', 문자 '\\' 는 구분자가 될 수 없다");
+            throw new IllegalArgumentException("숫자와 알파벳 n, 문자 '/', 문자 '\\' 는 구분자가 될 수 없다");
         }
         separators.add(separator);
 

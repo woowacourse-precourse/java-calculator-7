@@ -97,4 +97,17 @@ class ParserTest {
         Assertions.assertThat(sum).isEqualTo(221);
     }
 
+    @Test
+    public void 커스텀구분자테스트4() throws Exception {
+        //given
+        String inputString = "//a\\n10a2,3:4";
+        //when
+        Parser parser = new Parser();
+        parser.parse(inputString);
+        List<Integer> nums = parser.getNums();
+        int sum = Calculator.sum(nums);
+        //then
+        Assertions.assertThat(sum).isEqualTo(19);
+    }
+
 }
