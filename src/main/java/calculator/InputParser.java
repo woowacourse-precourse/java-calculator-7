@@ -18,7 +18,11 @@ public class InputParser {
         ArrayList<Integer> parsedInput = new ArrayList<>();
 
         while(st.hasMoreTokens()) {
-            parsedInput.add(Integer.parseInt(st.nextToken()));
+            try {
+                parsedInput.add(Integer.parseInt(st.nextToken()));
+            } catch (IllegalArgumentException e) {
+                throw new IllegalArgumentException();
+            }
         }
 
         return parsedInput;
