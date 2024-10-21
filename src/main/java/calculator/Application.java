@@ -56,9 +56,9 @@ public class Application {
     public static void validateInputString(String inputString) {
         StringTokenizer st = new StringTokenizer(inputString, ",:/;\\n0123456789");
 
-        // 0이면 구분자와 양수로 구성된 문자열, 1이면 이외에 숫자가 있음.
+        // 0이면 구분자와 양수로 구성된 문자열, 1이상이면 이외에 숫자가 있음.
         int i = st.countTokens();
-        if (i == 1) {
+        if (i >= 1) {
             throw new IllegalArgumentException();
         }
     }
