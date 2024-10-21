@@ -33,7 +33,7 @@ public class StringParserTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"1,-2,10", "1/2/10", "1,2,a,10"})
+    @ValueSource(strings = {"1,-2,10", "1/2/10", "1,2,a,10", "1,,2,10"})
     public void 입력에_잘못된_값이_포함된_경우_에러_발생(String input) {
         assertThrows(IllegalArgumentException.class, ()
                 -> stringParser.parse(input));
