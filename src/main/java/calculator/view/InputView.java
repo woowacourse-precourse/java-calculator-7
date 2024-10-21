@@ -21,6 +21,9 @@ public class InputView {
     }
 
     private static String extractCustomSeparator(String input) {
+        if (input.length() <= 5)
+            return null;
+
         String subStr = input.substring(0, 5);
 
         if (subStr.startsWith("//")) {
