@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class InputParser {
     private static final String DEFAULT_DELIMITERS_PATTERN = "^\\d+([,:]\\d+)*$";
-    private static final String CUSTOM_DELIMITERS_PATTERN = "^//(.)\\\\n(\\d+\\1)*\\d+$";
+    private static final String CUSTOM_DELIMITERS_PATTERN = "^//((?![,:]).)\\\\n(\\d+\\1)*\\d+$";
     private InputParser() {
 
     }
@@ -37,8 +37,9 @@ public class InputParser {
         }
 
         if (customDelimiterMatcher.matches()) {
+            String customDelimiter = customDelimiterMatcher.group(1);
             final String data = input.substring(5); // "//(custom delimiter)\n : 5글자
-            return DelimiterAndDataDto.of(customDelimiterMatcher.group(1), data);
+            return DelimiterAndDataDto.of(customDelimiter, data);
         }
 
         throw new IllegalArgumentException("유효하지 않은 입력입니다.");

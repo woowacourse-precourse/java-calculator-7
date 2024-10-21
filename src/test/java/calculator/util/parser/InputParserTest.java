@@ -20,6 +20,7 @@ class InputParserTest {
 
         String customTest4 = "//;\n1;2;3";
         String customTest5 = "//-\n4-5-6";
+        String customTest6 = "// \n4 5 6";
 
         String[] defaultTestSets = {defaultTest1, defaultTest2, defaultTest3,defaultTest4};
         //when
