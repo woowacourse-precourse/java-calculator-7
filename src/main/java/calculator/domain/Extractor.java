@@ -34,6 +34,7 @@ public class Extractor {
         while (matcher.find()) {
             String customSection = matcher.group(1);
             separators.add(new Separator(customSection));
+            System.out.println(customSection);
         }
 
         return separators;
@@ -42,6 +43,10 @@ public class Extractor {
     public List<Number> extractNumbers(String input) {
         String modifiedInput = input.replaceAll(customSeparatorPattern, "");
         StringBuilder allSeparatorsPattern = new StringBuilder();
+        System.out.println("!!!!!!!!!!!!!!");
+        customSeparators.stream()
+                .map(Separator::getSeparator)
+                .forEach(System.out::println);
 
         for (String sep : defaultSeparators) {  // 기본 구분자 추가
             allSeparatorsPattern.append(Pattern.quote(sep)).append("|");
@@ -58,7 +63,8 @@ public class Extractor {
         List<Number> numberList = new ArrayList<>();
 
         for (String token : tokens) {
-            validateSeparatorExistOneByOne(token);
+            System.out.println("======" + token);
+            validateSeparatorExistOneByOne(token, input);
             validateInputAnotherChar(token);
             numberList.add(new Number(Integer.parseInt(token)));
         }
@@ -66,8 +72,8 @@ public class Extractor {
         return numberList;
     }
 
-    private void validateSeparatorExistOneByOne(String token) {
-        if (token == "") {
+    private void validateSeparatorExistOneByOne(String token, String input) {
+        if (token == "" && input.length() != 0) {
             throw new IllegalArgumentException("[ERROR] 구분자는 한 개씩 존재해야 합니다.");
         }
     }
