@@ -106,6 +106,15 @@ class ApplicationTest extends NsTest {
     }
 
     @ParameterizedTest
+    @ValueSource(strings = {"///\\n1/2/3", "//\\\\n1\\2\\3", "//[\\n1[2[3", "//]\\n1]2]3"})
+    void 커스텀구분자_정상_예외입력(String input) {
+        assertSimpleTest(() -> {
+            run(input);
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @ParameterizedTest
     @ValueSource(strings = {"//;\\m1;2;3", "//c\\2,3:4", "//9\n19293"})
     void 커스텀구분자_끝_잘못_입력(String input) {
         assertSimpleTest(() ->
