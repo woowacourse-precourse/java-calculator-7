@@ -47,7 +47,8 @@ public class Application {
         if (existCustomSeparator(input)) {
 
             // 커스텀 구분자가 존재한다면 구분자를 추출해서 separator 변수에 저장
-            separator = findCustomSeparator(input);
+            // 기본 구분자와 커스텀 구분자를 같이 사용할 수 있게 "|" 추가
+            separator += "|" + findCustomSeparator(input);
 
             // 커스텀 구분자가 숫자인지 검증하는 메서드 호출
             isNumber(separator);
