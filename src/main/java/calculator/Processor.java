@@ -24,6 +24,8 @@ public class Processor {
         }
 
         String[] splitInput = Splitter.splitByDelimiters(input, delimiters);
+        Validator.isAllNumbers(splitInput);
+
         int[] numbers = Converter.toIntArray(splitInput);
         Validator.isAllPositiveNumbers(numbers);
 
