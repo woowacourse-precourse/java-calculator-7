@@ -1,10 +1,8 @@
-package calculator.Controller;
+package calculator.controller;
 
-import calculator.Service.CalculateService;
-import calculator.View.Input;
-import calculator.View.InputImpl;
-import calculator.View.Output;
-import calculator.View.OutputImpl;
+import calculator.service.CalculateService;
+import calculator.view.Input;
+import calculator.view.Output;
 
 public class CalculatorController {
     private final CalculateService calculateService;
@@ -12,10 +10,10 @@ public class CalculatorController {
     private final Output output;
 
 
-    public CalculatorController(CalculateService calculateService) {
+    public CalculatorController(CalculateService calculateService, Input input, Output output) {
         this.calculateService = calculateService;
-        this.input = new InputImpl();
-        this.output = new OutputImpl();
+        this.input = input;
+        this.output = output;
     }
 
     public void run() {

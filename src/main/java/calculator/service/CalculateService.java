@@ -1,7 +1,7 @@
-package calculator.Service;
+package calculator.service;
 
-import calculator.Util.Constants;
-import calculator.Util.NumberParser;
+import calculator.util.Constants;
+import calculator.util.NumberParser;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

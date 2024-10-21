@@ -1,4 +1,4 @@
-package calculator.Util;
+package calculator.util;
 
 public class NumberParser {
 
