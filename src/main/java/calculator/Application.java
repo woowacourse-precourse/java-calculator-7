@@ -5,7 +5,6 @@ public class Application {
         Input.print();
         String input = Input.input();
         Parser parser = new Parser(input);
-        parser.replace();
         String[] splitInput = parser.split();
         Validate.validate(splitInput);
         Char2Num char2Num = new Char2Num();
