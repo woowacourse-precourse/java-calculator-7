@@ -28,8 +28,12 @@ public class Calculator {
 
             int num = Integer.parseInt(token.trim());
 
-            sum += num;
+            if (num < 0) {
+                throw new IllegalArgumentException("음수가 포함되었습니다. ");
             }
+
+            sum += num;
+        }
 
         return sum;
     }
