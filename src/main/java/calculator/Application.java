@@ -30,6 +30,12 @@ public class Application {
         int beginIndex = inputSequence.indexOf("//") + 2;
         int endIndex = inputSequence.indexOf("\\n");
         String divider = inputSequence.substring(beginIndex, endIndex);
+        divider = handleEscapeSequence(divider);
+        return divider;
+    }
+
+    private static String handleEscapeSequence(String divider) {
+        divider = divider.replace("\\", "\\\\");
         return divider;
     }
 
@@ -50,25 +56,24 @@ public class Application {
     }
 
     private static int[] convertStringToInt(String[] parsedInput) {
+
+        if (parsedInput[0].isEmpty()) {
+            return new int[0];
+        }
+
         int arrayLength = parsedInput.length;
         int[] convertedInput = new int[arrayLength];
 
-        if (parsedInput[0] == "") {
-            return convertedInput;
-        }
-
         for (int i = 0; i < arrayLength; i++) {
             try {
-                int element = Integer.parseInt(parsedInput[i]);
+                int element = Integer.parseInt(parsedInput[i]); 
+                if (element <= 0) {
+                    throw new IllegalArgumentException("양수가 아닙니다");
+                }
+                convertedInput[i] = element;
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("파싱할 수 없습니다");
             }
-
-            int element = Integer.parseInt(parsedInput[i]);
-            if (element <= 0) {
-                throw new IllegalArgumentException("양수가 아닙니다");
-            }
-            convertedInput[i] = element;
         }
         return convertedInput;
     }
