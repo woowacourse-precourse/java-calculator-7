@@ -36,6 +36,29 @@ class StringAdditionCalculator {
     }
 
     public int calculateSum() {
+        String numbersPart;
+        if (input.startsWith("//")) {
+            String[] temp = input.split("\\n", 2);
+            numbersPart = temp.length > 1 ? temp[1] : "";
+        } else {
+            numbersPart = input;
+        }
+
+        if (numbersPart.isEmpty()) {
+            return 0;
+        }
+
+        String[] numberStrings = numbersPart.split("[" + delimiter + "]");
+        int total = 0;
+
+        for (String piece : numberStrings) {
+            total += parseAndValidateNumber(piece);
+        }
+
+        return total;
+    }
+
+    private int parseAndValidateNumber(String piece) {
         return 0;
     }
 }
