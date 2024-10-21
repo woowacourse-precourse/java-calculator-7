@@ -12,6 +12,7 @@
     - [x] 구분자 제거
     - [x] 피연산자 배열에 추가
 - [x] 예외처리
+- [x] 리팩토링
 - [x] 결과 출력
 
 ### 파일 구조
@@ -27,14 +28,15 @@
     │           ├── model
     │           │   └── CalculatorModel.java
     │           ├── utils
-    │           │   └── Parser.java
+    │           │   ├── OperandParser.java
+    │           │   ├── Parser.java
+    │           │   └── SeparatorParser.java
     │           └── view
     │               └── CalculatorView.java
     └── test
         └── java
             └── calculator
                 └── ApplicationTest.java
-
 ```
 
 ### 클래스 다이어그램
