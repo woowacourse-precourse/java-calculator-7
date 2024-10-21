@@ -7,8 +7,6 @@ public class StringCalculator {
             return 0;
         }
 
-        System.out.println("사용할 구분자: " + delimiter); // 디버깅
-
         String[] numbers = input.split(delimiter);
 
         // 숫자 합산
@@ -25,14 +23,14 @@ public class StringCalculator {
 
             try {
                 num = Integer.parseInt(number);
+                // 음수 예외 처리
+                if (num < 0) {
+                    throw new IllegalArgumentException("음수는 허용되지 않습니다.");
+                }
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("잘못된 형식의 숫자입니다.");
             }
 
-            // 음수 예외 처리
-            if (num < 0) {
-                throw new IllegalArgumentException("음수는 허용되지 않습니다.");
-            }
             sum += num;
         }
 
