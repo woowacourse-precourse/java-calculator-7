@@ -39,8 +39,9 @@ public class Application {
             System.out.println("숫자 (처리 전): " + numbers);
 
             // 줄바꿈 문자를 제거하여 숫자 문자열 처리
-            numbers = numbers.replace("\n", "");
+            numbers = numbers.replace("\\n", "");  // 문자 그대로의 \n 제거
             System.out.println("숫자 (처리 후): " + numbers);
+
 
             // 커스텀 구분자를 기준으로 숫자를 분리
             String[] numberArray = numbers.split(Pattern.quote(delimiter));
