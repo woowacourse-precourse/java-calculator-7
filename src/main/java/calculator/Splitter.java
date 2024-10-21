@@ -19,7 +19,7 @@ class Splitter {
     public List<String> split(String target) {
 
         List<String> tokens = new ArrayList<>();
-        String token = "";
+        StringBuilder token = new StringBuilder();
 
         if (!target.equals("")) {
             if (!(Character.isDigit(target.charAt(0)) && Character.isDigit(target.charAt(target.length() - 1))))
@@ -28,18 +28,18 @@ class Splitter {
 
         for (char ch : target.toCharArray()) {
             if (separators.contains(ch)) {
-                if (token.equals(""))
+                if (token.isEmpty())
                     throw new IllegalArgumentException("구분자는 연속으로 올 수 없습니다.");
 
-                tokens.add(token);
-                token = "";
+                tokens.add(token.toString());
+                token.delete(0, token.length());
             }
             else if (Character.isDigit(ch))
-                token += ch;
+                token.append(ch);
             else
                 throw new IllegalArgumentException("숫자와 구분자 이외의 값은 입력할 수 없습니다.");
         }
-        tokens.add(token);
+        tokens.add(token.toString());
 
         return tokens;
     }
