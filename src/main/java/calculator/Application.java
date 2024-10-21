@@ -13,7 +13,6 @@ public class Application {
 
         // '\\n'을 실제 개행 문자 '\n'으로 변환
         input = input.replace("\\n", "\n");
-        System.out.println("변환된 문자열: " + input);
 
         // 2. 입력값을 검증.
         Validator validator = new Validator();
