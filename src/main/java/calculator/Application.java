@@ -20,6 +20,19 @@ public class Application {
             return 0;
         }
 
-        return 0;
+        String delimiter = "-,|:`@|\\*{}().\\[\\]<>\\?|\\^\\$\\|";
+        return sum(input, delimiter);
+
+    }
+
+    private static int sum(String numbers, String delimiter){
+        String[] tokens = numbers.split(delimiter);
+        int sum = 0;
+
+        for(String token : tokens){
+            sum += Integer.parseInt(token);
+        }
+
+        return sum;
     }
 }
