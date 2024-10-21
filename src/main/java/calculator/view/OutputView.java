@@ -1,5 +1,7 @@
 package calculator.view;
 
+import java.math.BigDecimal;
+
 public class OutputView {
 
     private OutputView() {
@@ -13,7 +15,7 @@ public class OutputView {
         System.out.println(output.message);
     }
 
-    public void printMessage(Output output, int result) {
-        System.out.printf(output.message, result);
+    public void printMessage(Output output, double result) {
+        System.out.println(output.message + BigDecimal.valueOf(result).stripTrailingZeros());
     }
 }

@@ -13,10 +13,10 @@ public class Numbers {
         return new Numbers(numbers);
     }
 
-    public int add() {
-        int sum = 0;
+    public double add() {
+        double sum = 0;
         for (String number : numbers) {
-            sum += Integer.parseInt(number);
+            sum += Double.parseDouble(number);
         }
         return sum;
     }
