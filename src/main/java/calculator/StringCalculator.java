@@ -33,9 +33,31 @@ public class StringCalculator {
 
     private int sumNumbers(String[] numbers) {
         int sum = 0;
+
         for (String number : numbers) {
-            sum += Integer.parseInt(number.trim());
+            int parsedNumber = parseNumber(number.trim());
+            validateNumber(parsedNumber);
+            sum += parsedNumber;
         }
+
         return sum;
+    }
+
+    private int parseNumber(String number) {
+        if (number.isEmpty()) {
+            return 0;
+        }
+
+        try {
+            return Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("잘못된 입력입니다: " + number);
+        }
+    }
+
+    private void validateNumber(int number) {
+        if (number < 0) {
+            throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
+        }
     }
 }
