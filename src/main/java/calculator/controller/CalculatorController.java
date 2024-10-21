@@ -12,6 +12,7 @@ public class CalculatorController {
     private final InputParser inputParser = new InputParser(new Delimiters());
 
     public void run(){
+        OutputView.printInputPrompt();
         String input = InputView.getInput();
 
         List<Double> numbers = inputParser.parse(input);

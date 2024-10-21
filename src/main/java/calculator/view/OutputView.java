@@ -1,9 +1,14 @@
 package calculator.view;
 
-public class OutputView {
-    private static final String RESULT = "결과 : ";
+import static calculator.constant.ViewConstants.INPUT_STRING;
+import static calculator.constant.ViewConstants.RESULT;
 
-    public static void printResult(Number number){
+public class OutputView {
+    public static void printInputPrompt() {
+        System.out.println(INPUT_STRING);
+    }
+
+    public static void printResult(Number number) {
         System.out.println(RESULT + number);
     }
 }
