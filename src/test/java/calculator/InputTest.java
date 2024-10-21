@@ -155,6 +155,4 @@ public class InputTest {
         });
         assertThat(exception.getMessage()).isEqualTo(ExceptionCode.NEGATIVE_OR_ZERO_INPUT.getMessage());
     }
-
-
 }

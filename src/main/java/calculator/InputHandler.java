@@ -11,4 +11,3 @@ public class InputHandler {
         return readLine();
     }
 }
-

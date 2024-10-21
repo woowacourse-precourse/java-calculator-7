@@ -66,6 +66,4 @@ class SeparatorsTest {
         });
         assertThat(exception.getMessage()).isEqualTo(VAILDATION_CUSTOME.getMessage());
     }
-
-    
 }
