@@ -16,19 +16,19 @@ public class Expression {
     }
 
     public String separatorSection() {
-        if (!hasCustomSeparator()) {
-            return EMPTY_SECTION;
+        if (hasCustomSeparator()) {
+            int startIdx = expression.indexOf(FIRST_DELIMITER) + 2;
+            int endIdx = expression.indexOf(LAST_DELIMITER);
+            return expression.substring(startIdx, endIdx);
         }
-        int startIdx = expression.indexOf(FIRST_DELIMITER) + 2;
-        int endIdx = expression.indexOf(LAST_DELIMITER);
-        return expression.substring(startIdx, endIdx);
+        return EMPTY_SECTION;
     }
 
     public String nonSeparatorSection() {
-        if (!hasCustomSeparator()) {
-            return expression;
+        if (hasCustomSeparator()) {
+            int startIdx = expression.indexOf(LAST_DELIMITER) + 2;
+            return expression.substring(startIdx);
         }
-        int startIdx = expression.indexOf(LAST_DELIMITER) + 2;
-        return expression.substring(startIdx);
+        return expression;
     }
 }
