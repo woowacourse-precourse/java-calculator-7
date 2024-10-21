@@ -1,17 +1,29 @@
 package calculator;
 
+import calculator.dto.CustomSeparationDto;
 import camp.nextstep.edu.missionutils.Console;
 import java.util.ArrayList;
 
 public class Application {
 
-    private static String extractCustomSeparation(String inputStr) {
-        if (inputStr.startsWith("//")) { //\n이 구분자일 경우도 생각해봐야함. //와 \n 사이에 아무것도 없을 경우
-            int endIndex = inputStr.lastIndexOf("\\n");
-            if (endIndex != -1) {
-                String customSeparation = inputStr.substring(2, endIndex);
+    private static CustomSeparationDto extractCustomSeparation(String inputStr) {
+        //커스텀 구분자가 있는 경우
+        if (inputStr.startsWith("//")) {
+            CustomSeparationDto customSeparationDto = new CustomSeparationDto();
+            int customSeparationStart = 2; // 구분자는 // 뒤에 시작됨
+            int customSeparationEnd = 0;
+            for (int charIndex = 0; charIndex < inputStr.length(); charIndex++) {
+                if (Character.isDigit(inputStr.charAt(charIndex))) {
+                    customSeparationEnd = charIndex - 2; // \n이라 2자리 빼야함.
+                    break;
+                }
+            }
+            if (customSeparationEnd != 0) {
+                String customSeparation = inputStr.substring(customSeparationStart, customSeparationEnd);
                 if (!customSeparation.isEmpty()) {
-                    return customSeparation;
+                    customSeparationDto.setCustomSeparation(customSeparation);
+                    customSeparationDto.setCustomSeparationEnd(customSeparationEnd);
+                    return customSeparationDto;
                 } else {
                     throw new IllegalArgumentException();
                 }
@@ -21,8 +33,16 @@ public class Application {
     }
 
     private static String[] extractToken(String inputStr, String separations) {
+
+        if (separations.contains("\\n")) { //커스텀 구분자로 \\n을 사용하는 경우 \\n을 기본 구분자인 :로 치환
+            inputStr = inputStr.replace("\\n", ":");
+            separations = separations.replace("\\n", "");
+        }
+
         separations = "[" + separations + "]";
+
         String[] tokens = inputStr.split(separations);
+
         return tokens;
     }
 
@@ -36,7 +56,7 @@ public class Application {
                 } else {
                     numbers.add(number);
                 }
-            } else {
+            } else { //숫자가 아닐 경우
                 throw new IllegalArgumentException();
             }
         }
@@ -63,15 +83,18 @@ public class Application {
         String inputStr = Console.readLine();
         String separations = ",:";
 
-        String customSeparation = extractCustomSeparation(inputStr);
-        separations += customSeparation;
-        System.out.println("customSeparation = " + customSeparation);
-        if (customSeparation != null) {
-            int SeparationEndIndex = inputStr.indexOf("\\n");
-            inputStr = inputStr.substring(SeparationEndIndex + 2);
+        CustomSeparationDto customSeparationDto = extractCustomSeparation(inputStr);
+
+        if (customSeparationDto != null) {
+            String customSeparation = customSeparationDto.getCustomSeparation();
+            int customSeparationEnd = customSeparationDto.getCustomSeparationEnd();
+
+            separations += customSeparation;
+            inputStr = inputStr.substring(customSeparationEnd + 2);
         }
         String[] tokens = extractToken(inputStr, separations);
         ArrayList<Integer> integers = extractIntegerAndDetectChar(tokens);
+
         int sum = integers.stream().mapToInt(Integer::intValue).sum();
 
         System.out.println("결과 : " + sum);
