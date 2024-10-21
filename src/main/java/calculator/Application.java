@@ -15,3 +15,14 @@ public class Application {
 
     }
 }
+public static int sum(String input) {
+    if (input.isEmpty()) {
+        return 0;  // 빈 문자열이면 0 반환
+    }
+
+    if (input.matches("\\d+")) {
+        return Integer.parseInt(input);  // 숫자 하나만 입력 시 그 숫자 반환
+    }
+
+    return 0;  // 기본 반환 값
+}
