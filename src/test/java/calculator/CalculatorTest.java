@@ -32,58 +32,19 @@ class CalculatorTest {
 
 
   @Test
-  public void 문자열이_입력되면_구분자와_정수를_분리한다() throws Exception{
+  public void 유효_문자열이_입력되면_계산_결과를_전달한다() throws Exception{
     //given
     String input = "1, 2, 3";
+    int expect = 6;
     System.setIn(new ByteArrayInputStream(input.getBytes()));
     Scanner scanner = new Scanner(System.in);
     String readLine = scanner.nextLine();
 
     // when
-    int actual = 0;
-    for (int i = 0; i < readLine.length(); i++) {
+    Calculator calculator = new Calculator(input);
+    int actual = calculator.calculating(input);
 
-      char index = readLine.charAt(i);
-
-      // [x] 문자열이 구분자인 경우 건너뛰고
-      if (index == ',' || index == ':') {
-        continue;
-      }
-      // [x] 커스텀 구분자가 문자열 맨 앞에 지정된 경우
-      // //;\n
-
-      // [x] charArray 인덱스0부터 5까지의 값이 "//;\n" 인지 체크
-      boolean validCustomSeparator = readLine.startsWith("//;\\n");
-      if (validCustomSeparator) {
-        // 맞다면 커스텀 구분자 ';'인지 체크하고 건너뛰거나
-        if (index == ';') {
-          continue;
-        }
-        // 정상적인 커스텀 구분자가 아닌 경우 IllegalArgumentException
-        throw new IllegalArgumentException("커스텀 구분자를 확인해주세요 ('//;\\n'를 맨 앞에 선언 후 ';' 사용");
-      }
-      // [x] 탐색 인덱스가 정수 변환 가능한 경우
-      if (Character.isDigit(index)) {
-        // actual과 합산을 반복
-        int target = Integer.parseInt(valueOf(index));
-        actual += target;
-      }
-      // 입력 가능한 문자열인지 확인해주세요. ',', ':'
-      //java.lang.IllegalArgumentException: 입력 가능한 문자열인지 확인해주세요. ',', ':'
-      // [] 잘못된 입력값은 예외처리
-      // ',', ':' 이거나 0-9 정수이거나로 변경 필요
-      boolean validInput = valueOf(index).equals(",") || valueOf(index).equals(":");
-      if (!validInput) {
-        throw new IllegalArgumentException("입력 가능한 문자열인지 확인해주세요. ',', ':' ");
-      }
-
-    }
-    int expected = 6;
-
-    // 기대값, 실제값 비교 검증
-    //then
-    assertEquals(expected, actual);
-
+    assertEquals(expect, actual);
   }
 
 
@@ -97,9 +58,9 @@ class CalculatorTest {
    char[] invalidInput = new char[]{'.', '/', '>', '!', '?'};
       //when
      String readLine = "배달의 민족 삭제";
-    Calculator calculator = new Calculator(readLine);
+     Calculator calculator = new Calculator(readLine);
       //then
-    assertThrows(IllegalArgumentException.class, () -> {
+      assertThrows(IllegalArgumentException.class, () -> {
       calculator.calculating(readLine);
     });
   }
@@ -138,8 +99,6 @@ class CalculatorTest {
 
     int calculateCustom = customCalculator.calculating(customDelimeter);
     int calculateDefault = defaultCalculator.calculating(defaultDelimeter);
-
-
 
   }
 
