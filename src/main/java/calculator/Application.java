@@ -1,7 +1,7 @@
 package calculator;
 
 public class Application {
-    public static Handler handler;
+    public static Handler handler = new Handler();
 
     public static void main(String[] args) {
         // 입력을 받는 기능
