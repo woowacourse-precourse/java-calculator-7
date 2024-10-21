@@ -1,13 +1,9 @@
 package calculator.model;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CalculateModel {
-
-    // 피연산자 배열
-    private List<Integer> operands = new ArrayList<>();
 
     // 최종 덧셈 연산 메서드
     public int sum(List<Integer> operands) {
