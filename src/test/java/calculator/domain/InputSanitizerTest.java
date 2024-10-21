@@ -16,4 +16,14 @@ class InputSanitizerTest {
 
         assertEquals("1;2;3", sanitizedInput);
     }
+
+    @Test
+    @DisplayName("커스텀 구분자가 없을 때 입력을 그대로 반환한다")
+    void sanitizeInputWithoutCustomDelimiter() {
+        InputSanitizer sanitizer = new InputSanitizer();
+        String input = "1,2,3";
+        String sanitizedInput = sanitizer.sanitizeInput(input, "//", "\n");
+
+        assertEquals("1,2,3", sanitizedInput);
+    }
 }
