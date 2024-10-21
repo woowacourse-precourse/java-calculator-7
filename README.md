@@ -30,6 +30,7 @@
   * 추출한 숫자를 실수형으로 변환한 다음 리스트로 반환: 표현식이 빈 문자열이면 빈 리스트 반환
   * 추출한 숫자들 중 하나라도 정수나 실수로 변환할 수 없는 것이 존재하면 `IllegalArgumentException` 발생
   * 소수점이 숫자의 맨 앞이나 맨 뒤에 붙은 경우에도 변환할 수 없는 숫자로 간주하여 `IllegalArgumentException` 발생
+  * 토큰 1개에 2개 이상의 소수점이 사용된 경우 `IllegalArgumentException` 발생
 
 ---
 

@@ -2,6 +2,7 @@ package calculator.model;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import calculator.dto.ExpressionDTO;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
@@ -17,12 +18,14 @@ import org.junit.jupiter.params.provider.MethodSource;
 class StringParserTests {
 
     private Parser<Double> sample;
+    private ExpressionDTO expression;
 
     @ParameterizedTest
     @DisplayName("입력한 표현식이 문법에 맞지 않으면 예외 발생")
     @CsvSource(value = {"1;2;3", "//\\n1:2:3", "//1\\n112131", "//.\\n1:2:3", "1;//;\\n2;3"})
     public void throwExceptionIfIncorrectGrammar(String input) {
-        sample = new StringParser<>(input);
+        expression = new ExpressionDTO(input);
+        sample = new StringParser<>(expression);
         assertThatThrownBy(() -> sample.parse(Double::parseDouble))
                 .isInstanceOf(IllegalArgumentException.class);
     }
@@ -31,9 +34,10 @@ class StringParserTests {
     @DisplayName("문자열을 실수형으로 파싱 가능")
     public void testIfNumberTypeDouble() {
         String input = "1.1:2:3";
-        List<Double> expected = List.of(1.1, 2.0, 3.0);
+        expression = new ExpressionDTO(input);
+        sample = new StringParser<>(expression);
 
-        sample = new StringParser<>(input);
+        List<Double> expected = List.of(1.1, 2.0, 3.0);
 
         List<Double> result = sample.parse(Double::parseDouble);
         Assertions.assertEquals(expected, result);
@@ -44,8 +48,9 @@ class StringParserTests {
     @CsvSource(value = {"//;*&\\n1*2&3;4", "//;*&\\n1&;2*3;&*4"})
     public void testIfUseManyCustomDelimiter(String input) {
         List<Double> expected = List.of(1.0, 2.0, 3.0, 4.0);
+        expression = new ExpressionDTO(input);
 
-        sample = new StringParser<>(input);
+        sample = new StringParser<>(expression);
 
         List<Double> result = sample.parse(Double::parseDouble);
         Assertions.assertEquals(expected, result);
@@ -53,9 +58,11 @@ class StringParserTests {
 
     @ParameterizedTest
     @DisplayName("숫자 형식을 지키지 않은 경우 예외 발생")
-    @CsvSource(value = {"1.:2.:3.", ".1:.2:.3"})
+    @CsvSource(value = {"1.:2.:3.", ".1:.2:.3", "1:2..5"})
     public void testIfNumberFormatInvalid(String input) {
-        sample = new StringParser<>(input);
+        expression = new ExpressionDTO(input);
+        sample = new StringParser<>(expression);
+
         assertThatThrownBy(() -> sample.parse(Double::parseDouble))
                 .isInstanceOf(IllegalArgumentException.class);
     }
@@ -65,9 +72,10 @@ class StringParserTests {
     @MethodSource("provideStringToExpression")
     public void testIfUseMetaLetterAsDelimiter() {
         String input = "//[](){}.*+?^\\\\$\\|\\n1[2(3{4.5*6+7?8^9$10|11\\12";
-        List<Double> expected = Arrays.asList(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0);
+        expression = new ExpressionDTO(input);
+        sample = new StringParser<>(expression);
 
-        sample = new StringParser<>(input);
+        List<Double> expected = Arrays.asList(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0);
 
         List<Double> result = sample.parse(Double::parseDouble);
         Assertions.assertEquals(expected, result);
@@ -83,7 +91,8 @@ class StringParserTests {
     @DisplayName("표현식이 빈 문자열인 경우 빈 리스트를 반환")
     @EmptySource
     public void testIfEmptyExpression(String input) {
-        sample = new StringParser<>(input);
+        expression = new ExpressionDTO(input);
+        sample = new StringParser<>(expression);
 
         List<Double> result = sample.parse(Double::parseDouble);
         Assertions.assertTrue(result.isEmpty());
