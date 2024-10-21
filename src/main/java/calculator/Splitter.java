@@ -21,10 +21,13 @@ class Splitter {
         List<String> tokens = new ArrayList<>();
         StringBuilder token = new StringBuilder();
 
-        if (!target.equals("")) {
-            if (!(Character.isDigit(target.charAt(0)) && Character.isDigit(target.charAt(target.length() - 1))))
-                throw new IllegalArgumentException("숫자로 시작하고 끝나야 합니다.");
+        if (target.isEmpty() || target.isBlank()) {
+            tokens.add("0");
+            return tokens;
         }
+
+        if (!(Character.isDigit(target.charAt(0)) && Character.isDigit(target.charAt(target.length() - 1))))
+            throw new IllegalArgumentException("숫자로 시작하고 끝나야 합니다.");
 
         for (char ch : target.toCharArray()) {
             if (separators.contains(ch)) {
