@@ -49,7 +49,7 @@ public class Parser {
         try {
             for (String number : numbers) {
                 long num = Long.parseLong(number);
-                if(num <= 0) {
+                if(num < 0) {
                     throw new IllegalArgumentException("양수이어야 합니다.");
                 }
                 operands.add(num);
@@ -62,7 +62,7 @@ public class Parser {
     }
 
     private boolean matches(String input) {
-        Pattern pattern = Pattern.compile("^//.\n.*");
+        Pattern pattern = Pattern.compile("^//.*\\\\n");
         Matcher matcher = pattern.matcher(input);
         return matcher.matches();
     }
