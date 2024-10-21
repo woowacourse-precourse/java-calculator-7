@@ -1,7 +1,11 @@
 package calculator;
 
+import calculator.factory.FlowFactory;
+import calculator.controller.CalculationController;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        CalculationController calculationFlow = FlowFactory.createCalculationFlow();
+        calculationFlow.run();
     }
 }
