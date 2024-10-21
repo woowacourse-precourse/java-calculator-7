@@ -31,7 +31,12 @@ public class StringCalculator {
     private int sumNumbers(String[] numbers) {
         int sum = 0;
         for (String number : numbers) {
-            int num = Integer.parseInt(number);
+            int num;
+            try {
+                num = Integer.parseInt(number);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다: " + number);
+            }
             if (num < 0) {
                 throw new IllegalArgumentException("음수가 포함되어 계산불가: " + num);
             }
