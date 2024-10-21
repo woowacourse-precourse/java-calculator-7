@@ -42,6 +42,9 @@ public class Delimiter {
 
     private void createCustomDelimiter(String expression) {
         int end = expression.indexOf(CUSTOM_DELIMITER_SUFFIX);
+        if (end < 1) {
+            throw new IllegalArgumentException("커스텀 구분자의 형식이 올바르지 않습니다.");
+        }
         delimiters.add(expression.substring(CUSTOM_DELIMITER_PREFIX.length(), end));
     }
 }
