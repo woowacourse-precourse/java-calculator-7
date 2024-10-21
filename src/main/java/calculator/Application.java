@@ -22,6 +22,8 @@ public class Application {
                 sep = text.substring(2, sepIdx);  // 커스텀 구분자 추출
                 text = text.substring(sepIdx + 2); // 문자열에서 구분자 부분 제거
                 System.out.println("사용된 구분자: " + sep);
+            } else {
+                throw new IllegalArgumentException();
             }
         }
         String[] num = text.split("["+sep+"]");
