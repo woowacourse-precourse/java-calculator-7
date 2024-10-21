@@ -6,6 +6,7 @@ import calculator.error.ExceptionHandler;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class CalculatorService {
 
@@ -29,10 +30,9 @@ public class CalculatorService {
 
     public void validateInput() {
         String rawValue = calculator.getRawValue();
-        System.out.println("시작값 : " + rawValue);
         String newSeparator = null;
         String value = "";
-        String[] results = rawValue.split("\\\\n", 2);
+        String[] results = rawValue.split("n", 2);
 
         if (results.length > 1) {
             newSeparator = results[0];
@@ -41,8 +41,6 @@ public class CalculatorService {
         } else {
             value = results[0];
         }
-
-        System.out.println("분리된 애들: " + newSeparator +" " +value);
 
         makeNewSeparator(newSeparator);
         calculator.setRawValue(value);
@@ -59,28 +57,25 @@ public class CalculatorService {
             for (String separator : calculator.getSeparators()) {
                 List<String> tempList = new ArrayList<>();
                 for (String item : resultList) {
-                    String regex = "\\" + separator;
+                    String regex = Pattern.quote(separator);
                     tempList.addAll(Arrays.asList(item.split(regex)));
                 }
                 resultList = tempList;
             }
         } catch (Exception e) {
-            System.out.println("숫자가 아니어서 안됨");
             isValid = false;
         }
         List<Integer> processedValue = new ArrayList<>();
         for (String item : resultList) {
-            System.out.print(item + " ");
+            if (item.trim().isEmpty()) continue;
             processedValue.add(Integer.parseInt(item));
         }
-        System.out.println();
         return processedValue;
     }
 
     private boolean checkNewSeparator(String newSeparator) {
         for (int i = 0; i < 2; i++) {
             if (newSeparator.charAt(i) != '/') {
-                System.out.println("앞에 // 가 없어");
                 return false;
             }
         }
@@ -90,11 +85,10 @@ public class CalculatorService {
 
     public void makeNewSeparator(String newSeparator) {
         if (newSeparator == null) return;
-        String result = newSeparator.substring(2);
+        String result = newSeparator.substring(2, newSeparator.length() - 1);
         List<String> newSeparators = calculator.getSeparators();
         newSeparators.add(result);
         calculator.setSeparators(newSeparators);
-        System.out.println("새로운 값 :" + calculator.getSeparators());
     }
 
 

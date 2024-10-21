@@ -1,6 +1,6 @@
 # java-calculator-precourse
 
-
+> ### [노션 : 프로젝트 정리](https://grand-calcium-138.notion.site/1-1228d7f5b23380968545e40f074bc6f1?pvs=4)
 ---
 ## 개발 프로세스 및 규칙
 
@@ -204,6 +204,91 @@
 
 ---
 
-## 코드 예시
+# 개발 일지
 
-### 사진 첨부 -> 개발 이후
+## 고민
+
+### 1. 함수를 어떤 단위로 쪼개야 하나
+- **너무 기능적으로 쪼개면**: 불필요하게 많은 함수를 만들 수 있음.
+- **너무 안 쪼개면**: 서비스 고도화 시 유지 및 보수가 어려워짐.
+- **현재 결론**: 작은 서비스이므로 한 클래스 내에서 정의.
+    - 장점: 함수를 한 장소에서 관리하므로 한눈에 파악 가능.
+    - 서비스 복잡도가 올라갈수록 기능을 나누는 필요성이 발생할 것.
+
+### 2. 토픽을 어떤 기준으로 나눠야 하나
+- 이번 기능은 단순하여 아무리 쪼개도 4개의 토픽으로 구현 가능.
+- 출력 관련해서는 덧셈 후 바로 출력해도 문제없음.
+- **고민**: 명확한 기준이 필요함.
+
+### 3. 에러 발생 시기
+- 입력값 유효성 검사에 초점을 맞추는 것이 효율적이라 판단.
+    - **입력값 유효성 검사**: 변동이 발생할 수 있는 입력 단계에서 철저한 검사가 필요.
+    - **중복 검사 방지**: 로직 내에서 모든 기능에서 유효성을 검사하면 중복 코드가 발생할 수 있음.
+
+### 4. 브랜치 가르기
+- Jira와 브랜치 관리에 익숙하지 않아서 실수함
+- 이슈별로 브랜치를 나누게 되면서 commit 로그가 복잡해지고 가독성이 떨어졌음.
+- **개선 필요**: 토픽 단위로 브랜치를 나눌 것.
+
+
+## Pattern 사용
+
+### 커스텀 구분자 문제 해결
+- **처음 접근**: 
+  - 문자열에서 구분자를 추출하고 `split` 함수로 나누는 방식.
+  - 문제점
+    - `|`, `*` 같은 문자를 구분자로 사용할 경우 정규식 표현 때문에 이스케이프 문자가 필요 했음.
+
+  - //jj\n1jj1
+      - jj 가 구분자가 되어야 함
+  - //*\n1*1
+      - * 가 구분자가 되어야 함
+
+
+#### 예시 코드
+
+```java
+// 1번째 방법 -> 이스케이프 처리
+for (String separator : calculator.getSeparators()) {
+    List<String> tempList = new ArrayList<>();
+    for (String item : resultList) {
+        String regex = "\\"+ separator;
+        tempList.addAll(Arrays.asList(item.split(regex)));
+    }
+    resultList = tempList;
+}
+
+// 2번째 방법 (이스케이프 미처리
+for (String separator : calculator.getSeparators()) {
+    List<String> tempList = new ArrayList<>();
+    for (String item : resultList) {
+        String regex = separator;
+        tempList.addAll(Arrays.asList(item.split(regex)));
+    }
+    resultList = tempList;
+}
+```
+
+
+- 첫번째 방법을 사용할 경우 → 이스케이프를 처리해주기 때문에
+    - //*\n1*1 와 같은 구분자는 잘 처리함
+    - 하지만 → //jj\n1jj1 와 같이 이스케이프가 필요 없는 경우 에러 발생
+- 2번째 방법은 첫번째 방법과 반대
+- 게다가, 여러 반례들을 생각해 볼때
+    - 구분자가 j*j*j*j 인 경우에는
+    - j\\*j\\*j\\*j
+    - 이런식으로 처리해야만 했음
+    - 로직이 복잡해지고 → 쓸모 없어진다고 판단
+- 이러한 기능을 하는 라이브러리를 찾음
+
+  `import java.util.regex.Pattern;`
+
+    - Pattern.quote(input)
+    - 문자열을 받아 → 리터럴 패턴으로 반환
+        - 리터럴?
+            - 정규 표현식에서 → *, | 등이 정규식 표현 문법으로 사용되지 않고, 일반적인 문자처럼 사용될 수 있도록 함
+        - 이를 통해서 → 어떤 형태더라도 바로 구분자로 적용할 수 있게 됨
+
+> [Java Pattern API Documentation](https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html)
+- 이를 적용해 어떤 패턴이더라도 → 구분자로 사용할 수 있도록 구현함
+
