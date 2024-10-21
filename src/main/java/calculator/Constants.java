@@ -2,7 +2,7 @@ package calculator;
 
 public class Constants {
     public static final int START_INDEX_AFTER_NEWLINE = 1;
-    public static final char CUSTOM_DELIMITER_END_CHAR = 'n';
+    public static final char CUSTOM_DELIMITER_DEFINITION_END_CHAR = 'n';
     public static final String DEFAULT_DELIMITERS = ",:";
     public static final char REGEX_PREFIX = '[';
     public static final int BLANK_AS_ZERO = 0;
