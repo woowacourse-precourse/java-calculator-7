@@ -13,4 +13,10 @@ public class StringCalculator {
         numbers = processor.getNumbers();
         addNumbers();
     }
+
+    private void addNumbers() {
+        for (int number : numbers) {
+            result += number;
+        }
+    }
 }
