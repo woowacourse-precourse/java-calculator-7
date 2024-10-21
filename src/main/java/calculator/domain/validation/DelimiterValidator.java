@@ -1,7 +1,7 @@
 package calculator.domain.validation;
 
-import static calculator.domain.errorMessage.ParseError.INCORRECT_POSITION;
-import static calculator.domain.errorMessage.ParseError.INVALID_FORMAT;
+import static calculator.domain.constant.errorMessage.ParseError.INCORRECT_POSITION;
+import static calculator.domain.constant.errorMessage.ParseError.INVALID_FORMAT;
 
 import calculator.global.exception.CalculatorException;
 
