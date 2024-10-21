@@ -8,11 +8,11 @@
 ## 기능
 - operator parser
 
-  문자열이 \\로 시작할 경우 operator를 파싱한다. 
+  문자열이 \\\\로 시작할 경우 operator를 파싱한다. 
 - digit parsing
     
     input에서 숫자를 파싱한다.
-- calculate
+- calculator
     
     숫자들을 더한다.
 
