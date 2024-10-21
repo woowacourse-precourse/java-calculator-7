@@ -59,4 +59,17 @@ public class Calculator {
 
         return custom;
     }
+
+    public void calculationResult(String resultStr){
+        String[] splitNum = resultStr.split("@");
+
+        int result = 0;
+
+        for (String s : splitNum) {
+            result += Integer.parseInt(s);
+        }
+
+        System.out.println("결과 : " + result);
+    }
+
 }
