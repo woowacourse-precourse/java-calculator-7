@@ -36,7 +36,7 @@ public class CustomTest extends NsTest {
     @Test
     void null_입력_예외처리() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException(null))
+                assertThatThrownBy(() -> runException((String) null))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
@@ -44,7 +44,7 @@ public class CustomTest extends NsTest {
     @Test
     void 빈_문자열_처리() {
         assertSimpleTest(() -> {
-            run("");
+            run(" ");
             assertThat(output()).contains("결과 : 0");
         });
     }
