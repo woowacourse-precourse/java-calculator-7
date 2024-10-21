@@ -93,4 +93,139 @@ class user user;
     - 결과 출력: `결과 : [계산된 합계]`
         - ex) `결과 : 6`
 
+   <br/>
+      <br/>
 
+## ⚖️ 구현 내용
+
+> 오른쪽의 <-> 버튼을 누르면 잘 보여요
+
+```mermaid
+classDiagram
+    direction BT
+    class Application {
+        + Application()
+    }
+    class Calculator {
+        + Calculator()
+        - DelimiterExtractor delimiterExtractor
+        - OutputView outputView
+        - InputView inputView
+        - StringSplitter stringSplitter
+    }
+    class CalculatorNumber {
+        - CalculatorNumber(long)
+        - long value
+    }
+    class CalculatorNumberFactory {
+        - CalculatorNumberFactory()
+    }
+    class CalculatorNumbers {
+        - CalculatorNumbers(List~CalculatorNumber~)
+        - List~CalculatorNumber~ value
+    }
+    class Delimiter {
+        - Delimiter(String)
+        - String value
+        - String RESERVED_PREFIX
+        - String RESERVED_SUFFIX
+    }
+    class DelimiterExtractor {
+        + DelimiterExtractor()
+        - String CUSTOM_DELIMITER_SUFFIX
+        - String CUSTOM_DELIMITER_PREFIX
+        - String CUSTOM_DELIMITER_PATTERN
+        - Pattern PATTERN
+    }
+    class DelimiterFactory {
+        - DelimiterFactory()
+    }
+    class Delimiters {
+        - Delimiters(Set~Delimiter~)
+        - Set~Delimiter~ value
+        - Set~Delimiter~ DEFAULT_DELIMITERS
+        - String REGEX_OR
+    }
+    class ExceptionMessage {
+        <<enumeration>>
+        - ExceptionMessage(String)
+        +  INVALID_NUMBER_FORMAT
+        +  CUSTOM_DELIMITERS_NULL
+        +  DELIMITER_NULL_OR_EMPTY
+        - String message
+        +  DELIMITER_RESERVED_CHARACTER
+        +  INVALID_CUSTOM_DELIMITER_FORMAT
+        +  CUSTOM_DELIMITER_POSITION
+        +  NOT_POSITIVE_NUMBER
+    }
+    class ExtractionResult {
+        + ExtractionResult(List~String~, String)
+        - List~String~ delimiters
+        - String remainingInput
+    }
+    class InputView {
+        + InputView()
+        - String READ_STRING_TO_ADD_MESSAGE
+    }
+    class NumberVisitor {
+        <<Interface>>
+    }
+    class OutputView {
+        + OutputView()
+        - String RESULT_FORMAT
+    }
+    class StringSplitter {
+        + StringSplitter()
+    }
+    class SumVisitor {
+        + SumVisitor()
+        - long sum
+    }
+
+    Application ..> Calculator: «create»
+    Calculator ..> DelimiterExtractor: «create»
+    Calculator "1" *--> "delimiterExtractor 1" DelimiterExtractor
+    Calculator "1" *--> "inputView 1" InputView
+    Calculator ..> InputView: «create»
+    Calculator ..> OutputView: «create»
+    Calculator "1" *--> "outputView 1" OutputView
+    Calculator "1" *--> "stringSplitter 1" StringSplitter
+    Calculator ..> StringSplitter: «create»
+    CalculatorNumbers "1" *--> "value *" CalculatorNumber
+    CalculatorNumbers --> CalculatorNumber
+    CalculatorNumbers ..> SumVisitor: «create»
+    Delimiters "1" *--> "DEFAULT_DELIMITERS *" Delimiter
+    SumVisitor ..> NumberVisitor
+
+```
+
+### 1️⃣ 도메인 객체 설계
+
+각 숫자는 `CalculatorNumber`라는 도메인 객체로 캡슐화되어 있으며, 이를 관리하는 일급 컬렉션인 `CalculatorNumbers`가 있습니다.
+이렇게 개별 숫자를 도메인 객체로 분리한 이유는, 단순히 숫자를 다루는 것 이상의 의미를 부여하고, 이후 확장성을 고려한 설계입니다.
+예를 들어, 향후 덧셈 외의 연산을 추가하거나, 숫자에 대한 검증 로직을 더할 때, 각 숫자 객체에 직접적인 책임을 부여할 수 있습니다.
+
+여기서 `CalculatorNumbers`는 단순 리스트 이상의 역할을 합니다. 이 클래스는 **일급 컬렉션**으로, 숫자 리스트에 대한 연산을 캡슐화하여
+외부에서 리스트를 직접 조작하지 못하게 하고, 모든 연산이 클래스 내부에서 처리되도록 합니다.
+이를 통해 **응집도**를 높이고, **객체의 불변성**을 유지할 수 있었습니다.
+
+   <br/>
+
+### 2️⃣ 구분자 추출 및 문자열 파싱
+
+입력 문자열에서 구분자를 추출하는 `DelimiterExtractor`는 사용자 정의 구분자를 추출하거나, 기본 구분자를 사용하는 기능을 제공합니다. 이 클래스는 커스텀 구분자의 존재 여부를 확인한 후, 구분자와
+숫자를분리해주는 역할을 합니다.
+
+**구분자를 추출하는 과정**은 매우 유연하게 설계하였습니다. 커스텀 구분자는 `//`로 시작하고 `\n`으로 끝나는 형식으로 제공되며, 이를 정규 표현식을 통해 처리합니다. 만약 형식이 올바르지 않다면
+`IllegalArgumentException`을 발생시켜 사용자의 잘못된 입력을 방지합니다. 이 구조는 확장성 면에서도 큰 이점을 제공합니다. 앞으로 더 다양한 구분자 규칙이 추가되더라도
+`DelimiterExtractor`를 통해 쉽게 확장할 수 있습니다.
+
+   <br/>
+
+### 3️⃣ Visitor 패턴 적용
+
+숫자를 더하는 과정에서는 **Visitor 패턴**을 사용했습니다. 이 패턴은 숫자들의 모음(`CalculatorNumbers`)을 순회하며 덧셈을 수행하는 역할을 `SumVisitor`라는 객체에 위임합니다.
+Visitor 패턴을 사용한 이유는, 계산의 로직과 데이터 구조를 분리함으로써, 숫자를 다루는 방식(덧셈, 곱셈 등)을 쉽게 확장할 수 있기 때문입니다.
+
+이 **설계의 장점**은, 만약 덧셈 외에 곱셈과 같은 새로운 연산을 추가해야 할 때, `NumberVisitor`의 구현체를 추가하는 것만으로 간단히 확장할 수 있다는 것입니다. 또한, 데이터 구조(여기서는
+`CalculatorNumbers`)는 변경되지 않고, 로직만을 추가하는 방식으로 **개방-폐쇄 원칙**(OCP)을 지킬 수 있었습니다.
