@@ -2,7 +2,6 @@ package calculator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import calculator.delimiter.CustomDelimiter;
 import calculator.delimiter.Delimiter;
 import calculator.delimiter.DelimiterFactory;
 import org.junit.jupiter.api.DisplayName;
@@ -15,7 +14,7 @@ class CustomDelimiterTest {
     void checkExpresstionContiansExcapeCharacter() {
         //given
         String input = "//\\\\n11";
-        Delimiter delimiter = DelimiterFactory.createDelimiter(input);;
+        Delimiter delimiter = DelimiterFactory.createDelimiter(input);
         //when
         //then
         assertEquals("11", delimiter.parseDelimiter(input));

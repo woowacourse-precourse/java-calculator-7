@@ -1,7 +1,7 @@
 package calculator.delimiter;
 
 public class DefaultDelimiter implements Delimiter {
-    protected String delimiters = ",|:";
+    final String delimiters = ",|:";
 
     @Override
     public String getDelimiters() {

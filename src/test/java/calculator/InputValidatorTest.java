@@ -3,7 +3,6 @@ package calculator;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import calculator.delimiter.CustomDelimiter;
 import calculator.delimiter.DefaultDelimiter;
 import calculator.delimiter.Delimiter;
 import calculator.delimiter.DelimiterFactory;
@@ -14,13 +13,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class InputValidatorTest {
-    private Delimiter delimiter;
     private InputValidator inputValidator;
     private Parser parser;
 
     @BeforeEach
     void setUp() {
-        delimiter = new DefaultDelimiter();
+        Delimiter delimiter = new DefaultDelimiter();
         parser = new Parser();
         inputValidator = new InputValidator(delimiter, parser);
     }
