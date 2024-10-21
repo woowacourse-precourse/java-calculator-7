@@ -15,10 +15,12 @@ public class Application {
             String[] splitInput = delimiterRemovedInput.split(customDelimiter + "|" + "," + "|" + ":");
             List<Integer> numbers = parseIntegers(splitInput);
             int sum = numbers.stream().mapToInt(Integer::intValue).sum();
+            System.out.println("결과 : " + sum);
         } else {
             String[] splitInput = input.split("[,:]");
             List<Integer> numbers = parseIntegers(splitInput);
             int sum = numbers.stream().mapToInt(Integer::intValue).sum();
+            System.out.println("결과 : " + sum);
         }
     }
 
