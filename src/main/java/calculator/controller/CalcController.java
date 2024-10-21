@@ -30,5 +30,10 @@ public class CalcController {
         numberRepository.save(prepToCalc(dicedExpression));
     }
 
+    private void checkingResult() {
+        Validation.overflowOccurInLongValue(calc.getValue());
+    }
+
+
 
 }
