@@ -19,6 +19,8 @@ public class Application {
         } else {
             throw new IllegalArgumentException();
         }
+
+        Console.close();
     }
 
 }

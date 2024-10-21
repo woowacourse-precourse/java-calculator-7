@@ -35,6 +35,9 @@
 + 덧셈 기능 결과를 출력한다.
 
 ## 업데이트 노트
+### v.3.0.2 Console.close() 호출 추가
+- Console.close() 호출 추가하여 콘솔 리소스 해제
+
 ### v.3.0.1 hasCustomDelimiter 메서드 이름 수정
 - As is : hasCustomDelimeter
 - To be : hasCustomDelimiter
