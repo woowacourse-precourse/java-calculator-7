@@ -15,6 +15,6 @@ public class StringAdditionCalculator {
     OutputView outputView = new OutputViewImpl();
 
     CalculatorController calculatorController = new CalculatorController(calculatorService, inputView, outputView);
-
+    calculatorController.calculate();
   }
 }
