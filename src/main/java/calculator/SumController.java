@@ -4,6 +4,10 @@ public class SumController {
     public static Character[] separator = new Character[3];
 
     public static int checkValue(String text) throws Exception {
+        if (text.isEmpty()) {
+            return 0;
+        }
+
         if(text.charAt(0) == '/' && text.charAt(1) == '/') {
             if(text.charAt(3) == '\\' && text.charAt(4) == 'n') {
                 separatorExtraction(text.charAt(2));
