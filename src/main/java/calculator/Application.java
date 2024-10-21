@@ -10,26 +10,26 @@ public class Application {
         String[] nums;
         String delimiter = ",:";
 
-        if("".equals(str)){
+        if ("".equals(str)) {
             System.out.println("결과 : 0");
             return;
         }
 
-        if(str.matches("//.\\\\n.+")){
+        if (str.matches("//.\\\\n.+")) {
             delimiter = String.valueOf(str.charAt(2));
             str = str.substring(5);
         }
-        nums = str.split("["+ delimiter + "]");
+        nums = str.split("[" + delimiter + "]");
 
         int sum = 0;
         for (String num : nums) {
-            try{
+            try {
                 int i = Integer.parseInt(num);
                 if (i <= 0) {
                     throw new IllegalArgumentException();
                 }
                 sum += i;
-            } catch(NumberFormatException e){
+            } catch (NumberFormatException e) {
                 throw new IllegalArgumentException();
             }
         }
