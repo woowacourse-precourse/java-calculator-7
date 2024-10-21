@@ -33,10 +33,10 @@ public class Application {
             String newSpliter = input.substring(2, ender);
             if (newSpliter.isEmpty()) {
                 throw new IllegalArgumentException();
-            } else if (!newSpliter.matches("^[^a-zA-Z0-9]+$")){
+            } else if (!newSpliter.matches("^[^a-zA-Z0-9-]+$")){
                 throw new IllegalArgumentException();
             }
-        } else if (!input.matches("^[0-9,:]+$")) {
+        } else if (!input.matches("^[0-9,:-]+$")) {
                 throw new IllegalArgumentException();
         }
         return input;
@@ -48,7 +48,7 @@ public class Application {
         if (input.trim().isEmpty()) {
             return 0;
         }
-        String spliter = "[:|,]";
+        String spliter = "[:,]";
         int sum = 0;
 
         // 커스텀 구분자 검사
@@ -68,7 +68,7 @@ public class Application {
             spliter = escapedSpliter;
             input = input.substring(ender + 1);
         }
-        
+
         String[] nums = input.split(spliter);
         for (String num : nums) {
             if (!num.isEmpty()) {
