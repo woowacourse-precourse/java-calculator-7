@@ -23,10 +23,10 @@ public class SeparatedDecimal {
                 integerPart = Integer.parseInt(s[0]);
                 decimalPart = 0L;
             } else {
-                throw new NumberFormatException("String이 비었거나 소수의 형식이 아님");
+                throw new NumberFormatException();
             }
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자가 아니거나 형식을 위반함(.1 혹은 0. 등의 표현 불가)");
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_DELIMITER.getMessage());
         }
     }
 

@@ -1,6 +1,7 @@
 package calculator.calculator.sum;
 
 import calculator.calculator.StringCalculator;
+import calculator.util.ExceptionMessage;
 import calculator.util.SeparatedDecimal;
 
 import java.util.Arrays;
@@ -14,7 +15,7 @@ public class StringAddCalculator implements StringCalculator<SeparatedDecimal> {
         return operand.stream()
                 .peek(i -> {
                     if (i.getIntegerPart() < 0) {
-                        throw new IllegalArgumentException("음수는 넣을 수 없음");
+                        throw new IllegalArgumentException(ExceptionMessage.NEGATIVE_INPUT.getMessage());
                     }
                 })
                 .reduce(new SeparatedDecimal("0"), SeparatedDecimal::add);
@@ -31,7 +32,7 @@ public class StringAddCalculator implements StringCalculator<SeparatedDecimal> {
             String[] s = str.split("\\\\n");
             String customDelimiter = s[0].substring("//".length());
             if (customDelimiter.matches("(.*)[.0-9](.*)")) {
-                throw new IllegalArgumentException("허용되지 않은 delimiter('.' or number)");
+                throw new IllegalArgumentException(ExceptionMessage.INVALID_NUMBER_FORMAT.getMessage());
             }
             delimiter += s[0].substring("//".length());
             str = s[1];
