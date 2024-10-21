@@ -1,6 +1,7 @@
 package calculator.parser;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -13,7 +14,7 @@ public class DelimiterParser {
         List<String> delimiters = new ArrayList<>(DEFAULT_DELIMITERS);
 
         if (input.startsWith("//")) {
-            int delimiterEndIndex = input.indexOf("\n");
+            int delimiterEndIndex = input.indexOf("\\n");
             String customDelimiter = input.substring(2, delimiterEndIndex);
             delimiters.add(customDelimiter);
         }
