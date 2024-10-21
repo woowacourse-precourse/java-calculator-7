@@ -1,8 +1,5 @@
 package calculator;
 import camp.nextstep.edu.missionutils.Console;
-
-import java.util.Arrays;
-import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,35 +7,61 @@ import java.util.regex.Pattern;
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
-//        String newSplit = "";
+
         String splits = ":,";
         String patterString = "(?<=//).*"; //사이만 추출가능
-        String patterString1 = "//.*?\\n"; //새 구분자 부분 지우기위한 키워드 추출
         String input = Console.readLine();
-        if (input.startsWith("//")){
+        if (input.startsWith("//")) {
             Pattern pattern = Pattern.compile(patterString);
             Matcher matcher = pattern.matcher(input);
-            if(matcher.find()){
+            if (matcher.find()) {
                 String newSplit = matcher.group();
-                splits+= newSplit;
-            }
-            else{
+                splits += newSplit;
+            } else {
                 System.out.println("there is no matched String");
             }
             input = Console.readLine(); //새 input받기
+        } else if (input.matches("^[^0-9]*$")) {
+            try {
+                throw new IllegalArgumentException();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e);
+                System.exit(0);
+            }
         }
-        String splitFormmat = String.format("[%s]",splits); //정규식으로 전환
-        String[] strArr = input.split(splitFormmat);
+        if (input.isEmpty()) {
+            System.out.println(0);
+        } else {
+            String splitFormmat = String.format("[%s]", splits); //정규식으로 전환
+            String[] strArr = input.split(splitFormmat); //구분자를 기준으로 분할
 
+
+            int sum = 0;
+
+            int[] intArr = null;
+            try {
+                intArr = toIntArray(strArr);
+            } catch (IllegalArgumentException e) {
+                System.out.println("IllegalArgument Exception occur!");
+                System.exit(0);
+            }
+
+            for (int j : intArr) { //배열의 값 모두 출력
+                sum += j;
+            }
+            System.out.println(sum);
+        }
+    }
+
+    public static int[] toIntArray(String[] strArr) {
         int[] intArr = new int[strArr.length];
-        int sum = 0;
         for (int i = 0; i < strArr.length; i++) {
-            intArr[i] = Integer.parseInt(strArr[i]);
+            try {
+                intArr[i] = Integer.parseInt(strArr[i]);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException();
+            }
         }
-
-        for (int j : intArr) {
-            sum += j;
-        }
-        System.out.println(sum);
+        return intArr;
     }
 }
