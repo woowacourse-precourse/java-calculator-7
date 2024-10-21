@@ -2,15 +2,17 @@ package calculator;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class Parser {
     private static final Parser parser = new Parser();
-    private ArrayList<String> separators ;
+    private Set<String> separators ;
     private ArrayList<Integer> nums;
 
     private Parser(){
-        separators = new ArrayList<String>();
+        separators = new HashSet<String>();
         nums = new ArrayList<Integer>();
     }
 
@@ -19,11 +21,6 @@ public class Parser {
     }
 
     public ArrayList<Integer> parseNums(String input){
-
-        if(Objects.isNull(input) || input.equals("")) {
-            addNum("");
-            return nums;
-        }
 
         input = parseSeparator(input);
 
@@ -90,7 +87,6 @@ public class Parser {
 
     }
 
-
     private boolean checkInteger(String str){
 
         try {
@@ -98,8 +94,7 @@ public class Parser {
             return true;
         }catch (NumberFormatException e){ // 문자가 숫자가 아닌 경우 처리
             // 문자가 구분자에 속한다면,
-            for(String s : separators)
-                if(str.equals(s)) return false;
+            if(separators.contains(str)) return false;
             // 구분자에 속하지 않는 문자가 등장한 경우
             throw new IllegalArgumentException("Invalid input: "+ str);
         }
@@ -108,7 +103,9 @@ public class Parser {
     public ArrayList<Integer> getNums(){
         return nums;
     }
-    public ArrayList<String> getSeparators() {
+
+    public Set<String> getSeparators() {
         return separators;
     }
+
 }
