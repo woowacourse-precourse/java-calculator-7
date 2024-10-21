@@ -5,6 +5,12 @@ import org.junit.platform.commons.util.StringUtils;
 import java.util.regex.Pattern;
 
 public class StringSumCalculator {
+    private final InputValidator validator;
+
+    public StringSumCalculator(InputValidator validator) {
+        this.validator = validator;
+    }
+
     public int add(String input) {
         if (StringUtils.isBlank(input)) {
             return 0;
@@ -15,8 +21,8 @@ public class StringSumCalculator {
         int sum = 0;
         for (String number : numbers) {
             String trim = number.trim();
-            validateInput(trim);
-            sum += positiveNumber(Integer.parseInt(trim));
+            validator.validateInput(trim);
+            sum += validator.positiveNumber(Integer.parseInt(trim));
         }
         return sum;
     }
@@ -38,20 +44,6 @@ public class StringSumCalculator {
             String[] delimiters = customDelimiters.substring(1, customDelimiters.length() - 1).split("]\\[");
             String delimiterPattern = String.join("|", Pattern.quote(delimiters[0]), Pattern.quote(delimiters[1]));
             return numbersWithDelimiter.split(delimiterPattern);
-        }
-    }
-
-    private int positiveNumber(Integer input) {
-
-        if (input <= 0) {
-            throw new IllegalArgumentException("양수 외에 불가. 다시 실행하시오.");
-        }
-        return input;
-    }
-
-    private void validateInput(String input) {
-        if (!input.matches("\\d+")) {
-            throw new IllegalArgumentException("잘못된 값 입력됨. 다시 실행하시오.");
         }
     }
 
