@@ -24,9 +24,21 @@ public class StringAddCalculator {
         return input.split(DEFAULT_DELIMITERS);
     }
 
-    private static int sum(String[] tokens) {
-        // 임시로 0 반환
-        return 0;
+	private static int sum(String[] tokens) {
+        int total = 0;
+        for (String token : tokens) {
+            int number = toInt(token);
+            total += number;
+        }
+        return total;
+    }
+
+    private static int toInt(String token) {
+        try {
+            return Integer.parseInt(token);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
+        }
     }
 
 }
