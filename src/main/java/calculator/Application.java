@@ -5,8 +5,6 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
 
-
-
     public static void main(String[] args) throws IllegalArgumentException{
         Calculator calculator = new Calculator(new InputStringParser(), new ListCalculator());
 
@@ -15,6 +13,5 @@ public class Application {
 
         long sumResult = calculator.calculate(inputString);
         System.out.println("결과 : " + sumResult);
-
     }
 }
