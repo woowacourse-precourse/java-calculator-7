@@ -44,4 +44,13 @@ public class StringSeparator {
     public String splitCustomDelimiters() {
         return basicString = basicString.split(CUSTOM_DELIMITER_END)[1];
     }
+
+    public String separateCustomDelimiter() {
+        if (!validCustomDelimiters()) {
+            return basicString;
+        }
+        String customDelimiters = extractCustomDelimiters();
+        addCustomDelimiters(customDelimiters);
+        return splitCustomDelimiters();
+    }
 }

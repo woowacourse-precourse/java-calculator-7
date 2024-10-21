@@ -1,7 +1,6 @@
 package calculator.separator;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
@@ -59,6 +58,21 @@ class StringSeparatorTest {
 
         //when
         String resultCalculatableString = stringSeparator.splitCustomDelimiters();
+
+        //then
+        assertThat(resultCalculatableString).isEqualTo(calculatableString);
+    }
+
+
+    @Test
+    public void 커스텀_구분자_사용() throws Exception {
+        //given
+        String calculatableString = "3?2:4";
+        String inputString = "//?\\n" + calculatableString;
+        stringSeparator = new StringSeparator(inputString);
+
+        //when
+        String resultCalculatableString = stringSeparator.separateCustomDelimiter();
 
         //then
         assertThat(resultCalculatableString).isEqualTo(calculatableString);
