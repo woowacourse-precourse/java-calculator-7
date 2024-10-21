@@ -60,13 +60,17 @@ public class Calculator {
   }
 
   // 문자열의 요소가 유효하지 않으면 예외 처리한다
-  // 유효한 경우 : 기본구분자
+  // 유효한 경우 : 기본 구분자
   private void checkException(char index) {
-    //
-    if (index != ',' && index != ':' && isDigit(index)) {
-      // [] 비정상 입력 예외 처리
 
-      throw new IllegalArgumentException("입력 가능한 문자열인지 확인해주세요. ',', ':'");
+    if (index != ',' && index != ':' && !validIsDigit(index)) {
+      // [] 비정상 입력 예외 처리
+      throw new IllegalArgumentException("입력 가능한 문자열인지 확인해주세요. ',', ':' 를 포함한 0-9의 정수 (예시 : 1, 2, 3 또는 1,2:3)");
     }
+  }
+
+  private static boolean validIsDigit(char index) {
+    boolean validDigit = Character.toString(index).matches("0-9");
+    return validDigit;
   }
 }

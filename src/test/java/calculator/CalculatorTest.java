@@ -51,18 +51,23 @@ class CalculatorTest {
 
 
 
-  // Expected java.lang.IllegalArgumentException to be thrown, but nothing was thrown.
+  // 통과
   @Test
   public void 입력값이_잘못된_경우_예외_처리한다() throws Exception{
       //given
     // 잘못된 입력값이 들어온 경우 예외처리한다
-   char[] invalidInput = new char[]{'.', '/', '>', '!', '?'};
       //when
-     String readLine = "배달의 민족 삭제";
-     Calculator calculator = new Calculator(readLine);
+     String deleteBamin = "배달의 민족 삭제";
+     String NoMoreWoowa = "우아한 테크코스 탄핵 시위";
+     String failConcert = "우아콘 추첨 실패";
+    String actual = "-1,2,3";
+    Calculator calculator = new Calculator(deleteBamin);
       //then
       assertThrows(IllegalArgumentException.class, () -> {
-      calculator.calculating(readLine);
+      calculator.calculating(deleteBamin);
+        calculator.calculating(NoMoreWoowa);
+        calculator.calculating(failConcert);
+        calculator.calculating(actual);
     });
   }
 
