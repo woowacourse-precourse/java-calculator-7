@@ -12,7 +12,7 @@ class UserInputNumbersTest {
     @MethodSource("적합데이터")
     void 입력파싱(final String inputMessage, final String result) {
         final UserInputNumbers inputNumbers = UserInputNumbers.of(inputMessage);
-        Assertions.assertThat(inputNumbers.toString())
+        Assertions.assertThat(inputNumbers.getNumbers())
                 .isEqualTo(result);
     }
 

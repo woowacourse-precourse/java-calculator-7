@@ -8,6 +8,10 @@ public class UserInputNumbers {
         this.numbers = inputNumbers;
     }
 
+    String getNumbers() {
+        return this.numbers;
+    }
+
     public static UserInputNumbers of(final String message) {
         if (message.startsWith("//")) {
             final int index = message.lastIndexOf("\\n");
@@ -16,16 +20,10 @@ public class UserInputNumbers {
         return new UserInputNumbers(message);
     }
 
-    Tokenizer getTokenizer(final SeparatorFactory separatorFactory) {
-        return new Tokenizer(this.numbers, separatorFactory);
-    }
-
-    Tokenizer getTokenizer() {
-        return new Tokenizer(this.numbers);
-    }
-
     @Override
     public String toString() {
-        return numbers;
+        return "UserInputNumbers{" +
+                "numbers='" + numbers + '\'' +
+                '}';
     }
 }

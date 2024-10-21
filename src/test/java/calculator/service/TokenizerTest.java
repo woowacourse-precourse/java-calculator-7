@@ -13,7 +13,7 @@ class TokenizerTest {
 
     @ParameterizedTest
     @MethodSource("provideLegalSource")
-    void tokenizeTest(final String inputNumbers, final Numbers numbers) {
+    void tokenizeTest(final UserInputNumbers inputNumbers, final Numbers numbers) {
         final Tokenizer tokenizer = new Tokenizer(inputNumbers);
         tokenizer.addSeparator(new CharacterSequenceSeparator(","));
         tokenizer.addSeparator(new CharacterSequenceSeparator(":"));
@@ -24,7 +24,8 @@ class TokenizerTest {
     @ParameterizedTest
     @CsvSource(value = {"''", "' '", "'  '"})
     void 공백(final String numbers) {
-        final Tokenizer tokenizer = new Tokenizer(numbers);
+        final UserInputNumbers userInputNumbers = UserInputNumbers.of(numbers);
+        final Tokenizer tokenizer = new Tokenizer(userInputNumbers);
         tokenizer.addSeparator(new CharacterSequenceSeparator(","));
         tokenizer.addSeparator(new CharacterSequenceSeparator(":"));
 
@@ -33,7 +34,7 @@ class TokenizerTest {
 
     @ParameterizedTest
     @MethodSource("예외케이스")
-    void 예외(final String userInputNumber) {
+    void 예외(final UserInputNumbers userInputNumber) {
         final Tokenizer tokenizer = new Tokenizer(userInputNumber);
         tokenizer.addSeparator(new CharacterSequenceSeparator(","));
         tokenizer.addSeparator(new CharacterSequenceSeparator(":"));
@@ -43,7 +44,8 @@ class TokenizerTest {
 
     @Test
     void 음수() {
-        final Tokenizer tokenizer = new Tokenizer("-102");
+        final UserInputNumbers userInputNumbers = UserInputNumbers.of("-102");
+        final Tokenizer tokenizer = new Tokenizer(userInputNumbers);
         tokenizer.addSeparator(new CharacterSequenceSeparator(","));
         tokenizer.addSeparator(new CharacterSequenceSeparator(":"));
 
@@ -53,19 +55,19 @@ class TokenizerTest {
 
     static Stream<Arguments> 예외케이스() {
         return Stream.of(
-                Arguments.of(",12,34"),
-                Arguments.of(","),
-                Arguments.of(",,"),
-                Arguments.of(",12,"),
-                Arguments.of(":"),
-                Arguments.of(":::")
+                Arguments.of(UserInputNumbers.of(",12,34")),
+                Arguments.of(UserInputNumbers.of(",")),
+                Arguments.of(UserInputNumbers.of(",,")),
+                Arguments.of(UserInputNumbers.of(",12,")),
+                Arguments.of(UserInputNumbers.of(":")),
+                Arguments.of(UserInputNumbers.of(":::"))
         );
     }
 
     static Stream<Arguments> provideLegalSource() {
         return Stream.of(
                 Arguments.of(
-                        "1,2,3:4,5",
+                        UserInputNumbers.of("1,2,3:4,5"),
                         new Numbers(
                                 List.of(
                                         new Number("1"),
@@ -77,7 +79,7 @@ class TokenizerTest {
                         )
                 ),
                 Arguments.of(
-                        "12,223,3232:422,511",
+                        UserInputNumbers.of("12,223,3232:422,511"),
                         new Numbers(
                                 List.of(
                                         new Number("12"),
@@ -89,7 +91,7 @@ class TokenizerTest {
                         )
                 ),
                 Arguments.of(
-                        "",
+                        UserInputNumbers.of(""),
                         new Numbers(
                                 List.of(
                                         new Number("0")

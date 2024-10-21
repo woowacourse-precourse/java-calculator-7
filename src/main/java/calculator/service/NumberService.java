@@ -8,7 +8,7 @@ public class NumberService {
     public String doService(final UserInputMessage userInputMessage) {
         final UserInputNumbers userInputNumbers = userInputMessage.getUserInputNumber();
         final UserInputSeparator userInputSeparator = userInputMessage.getUserInputSeparator();
-        final Tokenizer tokenizer = userInputNumbers.getTokenizer(new DefaultSeparatorFactory());
+        final Tokenizer tokenizer = new Tokenizer(userInputNumbers, new DefaultSeparatorFactory());
         if (Objects.nonNull(userInputSeparator)) {
             tokenizer.addSeparator(new CharacterSequenceSeparator(userInputSeparator.getSeparator()));
         }

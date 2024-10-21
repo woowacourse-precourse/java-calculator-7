@@ -9,13 +9,13 @@ class Tokenizer {
     private final List<NumberSeparator> numberSeparators = new ArrayList<>();
     private String targetNumberInput;
 
-    Tokenizer(final String inputNumbers, final SeparatorFactory separatorFactory) {
-        targetNumberInput = inputNumbers;
+    Tokenizer(final UserInputNumbers userInputNumbers, final SeparatorFactory separatorFactory) {
+        targetNumberInput = userInputNumbers.getNumbers();
         numberSeparators.addAll(separatorFactory.getSeparators());
     }
 
-    Tokenizer(final String inputNumbers) {
-        targetNumberInput = inputNumbers;
+    Tokenizer(final UserInputNumbers userInputNumbers) {
+        targetNumberInput = userInputNumbers.getNumbers();
     }
 
     Numbers tokenize() {
