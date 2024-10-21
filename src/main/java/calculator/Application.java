@@ -13,6 +13,7 @@ public class Application {
         // 문자열 처리 및 계산
         int result = StringAddCalculator.add(userInput);
 
-        // 결과 출력 기능 추가 예정
+        // 결과 출력
+        ResultPrinter.printResult(result);
     }
 }
