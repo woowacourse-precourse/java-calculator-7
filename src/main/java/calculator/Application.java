@@ -10,8 +10,8 @@ public class Application {
         String input = Console.readLine();
         int sum = 0;
 
-        if(input.isEmpty()){
-            System.out.println("결과 : " + sum );
+        if (input == null || input.trim().isEmpty()) {
+            System.out.println("결과 : " + sum);
             return;
         }
 
@@ -19,6 +19,9 @@ public class Application {
 
         if (input.startsWith("//")) {
             int endIndex = input.indexOf("\\n");
+            if (endIndex == -1) {
+                throw new IllegalArgumentException("잘못된 입력 형식입니다.");
+            }
             String customDelimiter = input.substring(2, endIndex);
             delimiter += "|" + Pattern.quote(customDelimiter);
             input = input.substring(endIndex + 2);
@@ -29,16 +32,17 @@ public class Application {
         for (String numberString : inputNumbers) {
             if (numberString.trim().isEmpty()) continue;
 
+            int number;
             try {
-                int number = Integer.parseInt(numberString.trim());
-                if (number < 0) {
-                    throw new IllegalArgumentException("음수는 입력하지 않는다." + number);
-                }
-                sum += number;
-            } catch (IllegalArgumentException e) {
-                System.out.println("입력 형식이 잘못 되었습니다.");
-                return;
+                number = Integer.parseInt(numberString.trim());
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("유효한 숫자가 아닙니다");
             }
+
+            if (number < 0) {
+                throw new IllegalArgumentException("음수는 입력하지 않습니다");
+            }
+            sum += number;
         }
 
         System.out.println("결과 : " + sum);
