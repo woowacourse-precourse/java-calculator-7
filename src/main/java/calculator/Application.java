@@ -24,9 +24,9 @@ public class Application {
                 index = input.indexOf("\\n");
                 delimiter = input.substring(2, index);
 
-                // 커스텀 구분자는 하나의 문자여야 됨. 그보다 크면 예외처리
+                // 커스텀 구분자는 하나의 문자여야 됨.
                 if (delimiter.length() > 1) {
-                    System.out.println("커스텀 구분자는 하나의 문자여야 됨. 그보다 크면 예외처리");
+                    throw new IllegalArgumentException("커스텀 구분자는 하나의 문자여야 됩니다.");
                 }
             } else {
                 System.out.println("\\n을 못찾으면 예외처리");
