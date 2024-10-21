@@ -5,6 +5,7 @@ import java.util.stream.Stream;
 
 public class StringValidator {
 
+	private static final String CUSTOM_DELIMITER_PREFIX = "//";
 	private static final String COMMA_DELIMITER = ",";
 	private static final String COLON_DELIMITER = ":";
 	private static final String ERROR_MESSAGE = "잘못된 문자열 형식입니다.";
@@ -37,12 +38,27 @@ public class StringValidator {
 	}
 
 	public void validate() {
+		checkInputSide();
 		int index = INPUT_START_INDEX;
 		Status status = Status.checkStatus(input);
 		while (index < input.length()) {
 			index = this.checkInputStatus(input, index, status);
 			status = Status.changeStatus(status);
 		}
+	}
+
+	private void checkInputSide() {
+		if (!input.isEmpty() && (checkInputStartIsNotDelimiter() || checkInputEndIsNotDelimiter())) {
+			throw new IllegalArgumentException(ERROR_MESSAGE);
+		}
+	}
+
+	private boolean checkInputStartIsNotDelimiter() {
+		return !Character.isDigit(input.charAt(INPUT_START_INDEX)) && !input.startsWith(CUSTOM_DELIMITER_PREFIX);
+	}
+
+	private boolean checkInputEndIsNotDelimiter() {
+		return !input.isEmpty() && !Character.isDigit(input.charAt(input.length() - 1));
 	}
 
 	private int checkInputStatus(String input, int index, Status status) {
