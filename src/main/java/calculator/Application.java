@@ -39,10 +39,10 @@ public class Application {
                     throwException();
                 }
 
-                if (value < 0) {
+                if (value <= 0) {
                     throwException();
                 }
-                
+
                 sum += value;
             }
         }
