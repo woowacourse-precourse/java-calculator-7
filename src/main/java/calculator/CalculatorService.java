@@ -1,38 +1,34 @@
 package calculator;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+public class CalculatorService {
+    private CalculatorModel model;
 
-public class Calculator {
-
-    private int result; // 결과 도출할 result 선언
-
-    public Calculator(String input){
-        calculate(input); // 숫자 추출 및 합산을 메서드 호출
+    // 결과값을 model로 보내주기위해 생성자 선언
+    public CalculatorService(CalculatorModel model) {
+        this.model = model;
     }
 
-    // 구분자 추가하고 합산하는 메서드
-    private void calculate(String input) {
-
+    public void calculate(String input){
         List<String> delimiters = new ArrayList<>();
 
         delimiters.add(","); // delimiters에 기본 구분자 추가
         delimiters.add(":"); // delimiters에 기본 구분자 추가
+        validateInput(input, delimiters); // 유효성 검사 먼저 한 후
+        delimiters.add("//"); // 커스텀 구분자 추가
+        delimiters.add("\n"); // 커스텀 구분자 추가
 
-        // findCustomDelimiters로 구분자 추출 및 재설정
-//        findCustomDelimiters(input, delimiters);
+        // 입력된 숫자 구분자 기준으로 분리 후 합산 진행
+        int sum = calculateSum(input, delimiters);
 
-        validateInput(input, delimiters); // 입력 유효성 검사
-
-        delimiters.add("//");
-        delimiters.add("\n");
-
-        result = calculateSum(input, delimiters);
+        // 계산 결과 model에 저장
+        model.setResult(sum);
     }
 
-    private static void validateInput(String input, List<String> delimiters) {
+    // 입력값 검증 로직
+    private void validateInput(String input, List<String> delimiters){
         if (input == null || input.trim().isEmpty()) {
             throw new IllegalArgumentException("입력이 비어있거나 null입니다.");
         }
@@ -76,8 +72,7 @@ public class Calculator {
         }
     }
 
-
-    public static int calculateSum(String input, List<String> delimiters) {
+    private int calculateSum(String input, List<String> delimiters){
         // 구분자로 사용할 문자열을 빈 문자열로 초기화
         String result = input;
 
@@ -129,33 +124,9 @@ public class Calculator {
         return sum; // 합 반환
     }
 
-    public int getResult() {
-        return result;
+    // Model을 getter를 통해 반환함.
+    public CalculatorModel getModel(){
+        return model;
     }
+
 }
-
-
-
-
-// 커스텀 구분자를 찾고 입력 정제
-//    private static void findCustomDelimiters(String input, List<String> delimiters) {
-//        int startIndex = 0;
-//
-//        // 무한루프
-//        while (true) {
-//            // //값이 있으면,
-//            int customDelimStart = input.indexOf("//", startIndex);
-//            if (customDelimStart == -1) {
-//                break;
-//            }
-//
-//            int newLineIndex = input.indexOf("\n", customDelimStart);
-//            if (newLineIndex == -1) {
-//                break;
-//            }
-//
-//            String customDelimiter = input.substring(customDelimStart + 2, newLineIndex);
-//            delimiters.add(customDelimiter);
-//            startIndex = newLineIndex + 2;
-//        }
-//    }

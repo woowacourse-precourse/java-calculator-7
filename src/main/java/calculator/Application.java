@@ -5,18 +5,13 @@ public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
 
-        try{
-//            System.out.println("덧셈할 문자열을 입력해 주세요.");
-            String input = Console.readLine();
-//            String input = "//;\\n1";
-            Calculator calculator = new Calculator(input);
-            System.out.println("결과 : " + calculator.getResult());
-        } catch (IllegalArgumentException e) {
-            throw e;
-        }
+        // Model, Servcie, view 객체 생성
+        CalculatorModel model = new CalculatorModel(); // 결과 데이터 저장 객체
+        CalculatorService service = new CalculatorService(model); // 비즈니스 로직 처리 서비스
+        CalculatorView view = new CalculatorView(); // 입출력 view따로 뺌.
 
-//        String input = "//;\\n1";
-//        Calculator calculator = new Calculator(input);
-//        System.out.println(calculator.getResult());
+        // controller로 프로그램 실행 조작
+        CalculatorController controller = new CalculatorController(service, view);
+        controller.run(); // 실행
     }
 }
