@@ -1,5 +1,7 @@
 package calculator.view;
 
+import calculator.global.error.ErrorMessage;
+import calculator.global.error.handler.ErrorHandler;
 import camp.nextstep.edu.missionutils.Console;
 
 public class CalculatorView {
@@ -13,9 +15,9 @@ public class CalculatorView {
         System.out.print("결과 : " + result);
     }
 
-    public void printError(String message) {
-        System.out.println("에러 " + message);
-        throw new IllegalArgumentException(message);  // 예외를 실제로 던짐
+    public void printError(ErrorMessage errorMessage) {
+        // 핸들러가 예외를 던질지 경고를 출력할지 결정함
+        ErrorHandler.handlerError(errorMessage);
     }
 
 }
