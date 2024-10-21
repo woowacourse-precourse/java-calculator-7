@@ -52,9 +52,7 @@ public class CalculatorController {
 		return InputFilter.extractNumbers(processedInput, delimiters);
 	}
 
-	private int calculate(List<Integer> numbers) {
-		Calculator calculator = new Calculator();
-
+	private int sum(List<Integer> numbers) {
 		return calculator.sum(numbers);
 	}
 
