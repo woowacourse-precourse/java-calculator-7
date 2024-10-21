@@ -14,7 +14,6 @@ public class CalculatorController {
 
     // 덧셈 연산을 처리하고 결과를 출력하는 메서드
     public void run() {
-        try {
             // 입력 받기
             String input = inputView.getInput();
 
@@ -23,9 +22,6 @@ public class CalculatorController {
 
             // 결과 출력
             outputView.printResult(result);
-        } catch (IllegalArgumentException e) {
-            // 잘못된 입력이 들어왔을 때 에러 메시지 출력
-            outputView.printError(e.getMessage());
-        }
+
     }
 }
