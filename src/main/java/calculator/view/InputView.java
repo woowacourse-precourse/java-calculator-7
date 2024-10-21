@@ -12,7 +12,6 @@ public class InputView {
     private static final String CUSTOM_DELIMITER_PREFIX = "//";
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\\\\n(.*)");
     private static final String DEFAULT_NUMBER_DELIMITER_REGEX = "[,:]";
-    private static final int NOT_EXIST_EMPTY_STRING = -1;
 
     private InputView() {
     }
