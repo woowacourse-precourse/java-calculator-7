@@ -92,17 +92,11 @@ escape 문자를 고려하여 index 값을 하나 더 늘렸습니다. :
 
 빈 문자열이나 공백만 포함된 문자열이 입력되었을 때, 이를 올바르게 처리하기 위해서 다음과 같은 조건문을 추가했습니다:
 
-```java
-if(input ==null||input.
-
-trim().
-
-isEmpty()){
-        System.out.
-
-println("결과 : 0");
+```
+if(input ==null||input.trim().isEmpty()){
+        System.out.println("결과 : 0");
     return;  // 프로그램 종료
-            }
+}
 ```
 
 
