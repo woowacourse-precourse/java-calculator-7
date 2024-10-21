@@ -11,8 +11,12 @@ public class Application {
         // 문자열 분리
         String input = Console.readLine();
         String[] inputNumbers = input.split(",|:");
+        int sum = 0;
+
         for(String number : inputNumbers) {
-            System.out.print(number + " ");
+            sum += Integer.parseInt(number);
         }
+
+        System.out.println("결과 : " + sum);
     }
 }
