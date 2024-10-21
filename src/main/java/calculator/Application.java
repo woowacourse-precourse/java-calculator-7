@@ -29,6 +29,10 @@ public class Application {
 
         String[] inputNumbers = input.split(delimiter);
 
+        for(String number : inputNumbers) {
+            sum += Integer.parseInt(number.trim());
+        }
+
         System.out.println("결과 : " + sum);
     }
 }
