@@ -2,6 +2,9 @@ package calculator.utils;
 
 import calculator.constants.ErrorConst;
 import calculator.exception.CanNotParseToNumberException;
+import calculator.exception.CustomCanNotBeDefaultDelimiterException;
+import calculator.exception.CustomDelimiterCanNotBeBlankException;
+import calculator.exception.CustomDelimiterLengthMustBeOneException;
 import calculator.exception.DelimiterCanNotBeNumberException;
 import calculator.exception.InvalidFormatException;
 import calculator.exception.InvalidNumberException;
@@ -27,6 +30,18 @@ public class ExceptionUtils {
 
     public static void throwDelimiterCanNotBeNumberException() {
         throw new DelimiterCanNotBeNumberException(ErrorConst.DELIMITER_CAN_NOT_BE_NUMBER_ERROR);
+    }
+
+    public static void throwCustomCanNotBeDefaultDelimiterException() {
+        throw new CustomCanNotBeDefaultDelimiterException(ErrorConst.CUSTOM_CAN_NOT_BE_DEFAULT_DELIMITER);
+    }
+
+    public static void throwCustomDelimiterLengthMustBeOneException() {
+        throw new CustomDelimiterLengthMustBeOneException(ErrorConst.CUSTOM_DELIMITER_LENGTH_MUST_BE_ONE);
+    }
+
+    public static void throwCustomDelimiterCanNotBeBlankException() {
+        throw new CustomDelimiterCanNotBeBlankException(ErrorConst.CUSTOM_DELIMITER_CAN_NOT_BE_BLANK);
     }
 
 
