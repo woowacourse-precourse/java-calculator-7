@@ -8,19 +8,17 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
 
-        List<Double> numbers = Parser.parse(input);
+        List<Long> numbers = Parser.parse(input);
 
-        double sum = numbers.stream()
-                        .filter(Objects::nonNull)
-                                .reduce(0.0, Double::sum);
-
-        if (Double.isInfinite(sum)) {
-            throw new IllegalArgumentException("합산 결과가 너무 커서 Infinity가 발생했습니다.");
+        long sum = 0L;
+        for (Long number : numbers) {
+            if (number != null) {
+                if (sum > Long.MAX_VALUE - number)
+                    throw new IllegalArgumentException("합산 결과가 너무 커서 오버플로우가 발생했습니다.");
+                sum += number;
+            }
         }
 
-        if (sum == (int)sum)
-            System.out.println("결과 : " + (int)sum);
-        else
-            System.out.println("결과 : " + sum);
+        System.out.println("결과 : " + sum);
     }
 }

@@ -11,7 +11,7 @@ public class Parser {
     private static final String CUSTOM_DELIMITER_PREFIX = "//";
     private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
 
-    public static List<Double> parse(String input) {
+    public static List<Long> parse(String input) {
         List<String> delimiters = new ArrayList<>();
         addDefaultDelimiters(delimiters);
 
@@ -47,11 +47,11 @@ public class Parser {
         return input.split(splitPattern);
     }
 
-    private static List<Double> convert(String[] targets) {
-        List<Double> numbers = new ArrayList<>();
+    private static List<Long> convert(String[] targets) {
+        List<Long> numbers = new ArrayList<>();
 
         for (String target: targets) {
-            double number = Validator.validateNumber(target);
+            long number = Validator.validateNumber(target);
             numbers.add(number);
         }
 
