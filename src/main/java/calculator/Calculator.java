@@ -1,7 +1,11 @@
-package calculator;public class Calculator {
-    private char[] delimiters;
+package calculator;
 
-    public Calculator(char[] delimiters) {
+import java.util.Set;
+
+public class Calculator {
+    private Set<String> delimiters;
+
+    public Calculator(Set<String> delimiters) {
         this.delimiters = delimiters;
     }
 

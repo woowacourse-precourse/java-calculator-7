@@ -1,32 +1,36 @@
 package calculator;
 
-public class InputValidator {
-    public char[] validate(String s) {
-        char[] defaultDelimiters= new char[]{',', ';'};
-        if (s.isEmpty()) {
-            return defaultDelimiters;
-        }
+import java.util.Set;
 
-        if (!s.startsWith("//") && validateHelper(s, defaultDelimiters)) {
-            return defaultDelimiters;
+public class InputValidator {
+
+    private static DelimiterExtractor delimiterExtractor = new DelimiterExtractor();
+
+    public Set<String> validate(String s) {
+        Set<String> delimiters = delimiterExtractor.extract(s);
+        if (s.isEmpty()) {
+            return delimiters;
         }
-        if (s.length() >= 4 && s.substring(0,4).matches("//.\\n")) {
+        if (!s.startsWith("//") && validateHelper(s, delimiters)) {
+            return delimiters;
+        }
+        if (s.length() >= 4 && s.substring(0, 4).matches("//.\\n")) {
             String sub = s.substring(4);
-            validateHelper(sub, new char[]{',', ';', s.charAt(2)});
-            return new char[]{',', ';', s.charAt(2)};
+            validateHelper(sub, delimiters);
+            return delimiters;
         }
         throw new IllegalArgumentException();
     }
 
-    private boolean validateHelper(String s, char[] delimiters) {
+    private boolean validateHelper(String s, Set<String> delimiters) {
         char[] parsed = s.toCharArray();
-        for (int i=0; i < parsed.length; i++) {
+        for (int i = 0; i < parsed.length; i++) {
             if (48 <= parsed[i] && parsed[i] <= 57) {
                 continue;
             }
             boolean isChecked = false;
-            for (char token: delimiters) {
-                if (parsed[i] == token) {
+            for (String token : delimiters) {
+                if (String.valueOf(parsed[i]).equals(token)) {
                     isChecked = true;
                     break;
                 }

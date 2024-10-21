@@ -1,7 +1,20 @@
 package calculator;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class DelimiterExtractor {
-    public char[] extract(String s) {
-        return new char[0];
+    private static Set<String> delimiters = Set.of(",", ";");
+
+    public DelimiterExtractor() {}
+
+    public Set<String> extract(String s) {
+        if (s.length() >= 4 && s.substring(0,4).matches("//.\\n")) {
+
+            Set<String> delimitersWithCustom = new HashSet<>(delimiters);
+            delimitersWithCustom.add(String.valueOf(s.charAt(2)));
+            return delimitersWithCustom;
+        }
+        return delimiters;
     }
 }

@@ -16,9 +16,6 @@ class InputValidatorTest {
     @Test
     void 커스텀_구분자_2() {
         String s = "//}\n3}6";
-        System.out.println(s.substring(0,4));
-        System.out.println(s.substring(4));
-        System.out.println(s.charAt(2));
         assertDoesNotThrow(()->inputValidator.validate(s));
     }
 

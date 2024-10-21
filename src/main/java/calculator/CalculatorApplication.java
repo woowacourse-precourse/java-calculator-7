@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.Set;
+
 public class CalculatorApplication {
 
     private InputView inputView;
@@ -17,7 +19,7 @@ public class CalculatorApplication {
     public void run() {
         String s = inputView.input();
         inputValidator.validate(s);
-        char[] delimiters = delimiterExtractor.extract(s);
+        Set<String> delimiters = delimiterExtractor.extract(s);
         Calculator calculator = new Calculator(delimiters);
         outputView.printResult(calculator.add(s));
     }
