@@ -16,7 +16,7 @@ public class SplitStringUtil {
     }
 
     /**
-     * 숫자가 나올 때까지 커스텀 구분자 문자열로 간주.
+     * 숫자가 나올 때까지 커스텀 구분자 문자열로 간주. 구분자 문자열이 -로 끝난경우 숫자 문자열이 음수로 시작한다는 의미 -> -를 제거 후 숫자 문자열 앞에 부착
      *
      * @param input 입력 문자열
      * @return 구분자 문자열과 숫자 문자열 배열 [separator, numbers]
@@ -28,7 +28,15 @@ public class SplitStringUtil {
             separatorString.append(input.charAt(index));
             index++;
         }
+
         String numberString = input.substring(index);
+
+        char separatorStringLastCharacter = separatorString.charAt(separatorString.length() - 1);
+        if (separatorStringLastCharacter == '-') {
+            numberString = separatorStringLastCharacter + numberString;
+            separatorString.deleteCharAt(separatorString.length() - 1);
+        }
+
         return new String[]{separatorString.toString(), numberString};
     }
 
