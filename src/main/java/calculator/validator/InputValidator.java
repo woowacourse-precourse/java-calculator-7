@@ -6,11 +6,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class InputValidator {
-	private final Pattern hasCustomDelimiter = Pattern.compile("^//(.*?)\\\\n$");
+	private final Pattern hasCustomDelimiter = Pattern.compile("^//(.)\\\\n$");
 
 	public String[] validateInputSplittable(String input) {
 		String delimiter = "[:,]";
-
 		// 커스텀 구분자 있는지 체크
 		if (input.length() >= 5) {
 			Matcher matcher = hasCustomDelimiter.matcher(input.substring(0, 5));
