@@ -11,10 +11,12 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ApplicationTest extends NsTest {
+class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
+            run("//;\\n1");
+            assertThat(output()).contains("결과 : 1");
             run("//;\\n1;2;3");
             assertThat(output()).contains("결과 : 6");
         });
@@ -22,10 +24,11 @@ public class ApplicationTest extends NsTest {
 
     @Test
     void 예외_테스트() {
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("-1,2,3"))
-                        .isInstanceOf(IllegalArgumentException.class)
-        );
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("-1,2,3"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("음수는 허용되지 않습니다."); // 예외 메시지 확인 추가
+        });
     }
 
     @Override
