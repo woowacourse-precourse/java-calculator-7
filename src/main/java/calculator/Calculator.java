@@ -6,7 +6,7 @@ import calculator.part.CalculateComposition;
 import calculator.part.CalculatorAdder;
 import calculator.separator.DelimiterAdder;
 import calculator.separator.DefaultSeparator;
-import calculator.separator.SeparatorStorage;
+import calculator.separator.DelimiterStorage;
 import calculator.utility.NumberWrapper;
 
 public class Calculator {
@@ -16,12 +16,12 @@ public class Calculator {
     private final DefaultSeparator defaultSeparator = new DefaultSeparator();
     private final CalculatorAdder calculatorAdder = new CalculatorAdder();
     private final CalculateComposition calculateComposition = new CalculateComposition(calculatorAdder);
-    private static final SeparatorStorage separatorStorage = new SeparatorStorage();
+    private static final DelimiterStorage DELIMITER_STORAGE = new DelimiterStorage();
 
     public void initialize(){
 
-        separatorStorage.addSeparator(":");
-        separatorStorage.addSeparator(",");
+        DELIMITER_STORAGE.addDelimiter(":");
+        DELIMITER_STORAGE.addDelimiter(",");
 
     }
     public void run(){
@@ -36,7 +36,7 @@ public class Calculator {
         try {
             String parsedInput = DelimiterAdder.addCustomSeparator(userInput);
 
-            NumberWrapper[] toSumArrays = defaultSeparator.separateStringToSum(parsedInput, separatorStorage);
+            NumberWrapper[] toSumArrays = defaultSeparator.separateStringToSum(parsedInput, DELIMITER_STORAGE);
             NumberWrapper sum = calculateComposition.makeSum(toSumArrays);
 
             consoleOutputHandler.showFinalOutput(sum);

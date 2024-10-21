@@ -7,13 +7,13 @@ import java.util.stream.Collectors;
 
 public class DefaultSeparator {
 
-    public NumberWrapper[] separateStringToSum(String userInput, SeparatorStorage separatorStorage) throws IllegalArgumentException{
+    public NumberWrapper[] separateStringToSum(String userInput, DelimiterStorage delimiterStorage) throws IllegalArgumentException{
 
-        if (containsInvalidSeparator(userInput, separatorStorage)) {
+        if (containsInvalidDelimiter(userInput, delimiterStorage)) {
             throw new IllegalArgumentException("유효한 구분자가 입력에 포함되지 않았습니다");
         }
 
-        String [] parsedStrings = userInput.split(getRegex(separatorStorage));
+        String [] parsedStrings = userInput.split(getRegex(delimiterStorage));
 
         if(Arrays.stream(parsedStrings)
                 .anyMatch(String::isEmpty)){
@@ -27,9 +27,9 @@ public class DefaultSeparator {
         return numbers;
     }
 
-    private static boolean containsInvalidSeparator(String input, SeparatorStorage separatorStorage) {
+    private static boolean containsInvalidDelimiter(String input, DelimiterStorage delimiterStorage) {
 
-        String allowedSeparators = separatorStorage.getSeparators()
+        String allowedSeparators = delimiterStorage.getDelimiters()
                 .stream()
                 .map(Pattern::quote)
                 .collect(Collectors.joining("|"));
@@ -39,8 +39,8 @@ public class DefaultSeparator {
         return !Pattern.matches(regex, input);
     }
 
-    private static String getRegex(SeparatorStorage separatorStorage) {
-        return separatorStorage.getSeparators()
+    private static String getRegex(DelimiterStorage delimiterStorage) {
+        return delimiterStorage.getDelimiters()
                 .stream()
                 .map(Pattern::quote)
                 .collect(Collectors.joining("|"));

@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public class DelimiterAdder {
 
     private static final String regex = "//(.)\\\\n(.*)";
-    private static SeparatorStorage separatorStorage = new SeparatorStorage();
+    private static DelimiterStorage delimiterStorage = new DelimiterStorage();
     public static String addCustomSeparator(String userInput) {
 
         Pattern pattern = Pattern.compile(regex);
@@ -15,7 +15,7 @@ public class DelimiterAdder {
         if (matcher.find()) {
             String delimiter = matcher.group(1);
 
-            separatorStorage.addSeparator(delimiter);
+            delimiterStorage.addDelimiter(delimiter);
 
             String remainingInput = matcher.group(2);
             return remainingInput;
