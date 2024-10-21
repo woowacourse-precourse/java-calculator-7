@@ -13,7 +13,7 @@ public class Application {
     private static int customSeparatorKeywordEndIndex = 3;
 
     public static void main(String[] args) {
-        Set<Character> separatorList = new HashSet<>('.', ':');
+        Set<Character> separatorList = new HashSet<>(Set.of('.', ':'));
 
         System.out.println("덧셈할 문자열을 입력해주세요");
         String userInput = getUserInput();
