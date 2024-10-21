@@ -15,6 +15,24 @@ public class Application {
         System.out.println("결과 : " + result);
     }
 
+    public static int add(String input) {
+        if (input.isEmpty()) {
+            return 0;
+        }
+
+        String[] numbers = parseDelimiter(input);
+
+        int sum = 0;
+        for (String number : numbers) {
+            if (!number.isEmpty()) {
+                int parsedNumber = validateAndParse(number);
+                sum += parsedNumber;
+            }
+        }
+
+        return sum;
+    }
+
     public static String[] parseDelimiter(String input) {
         if (input.contains("//") && !input.startsWith("//")) {
             throw new IllegalArgumentException("잘못된 형식의 입력: " + input);
