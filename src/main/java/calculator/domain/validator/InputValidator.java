@@ -37,9 +37,5 @@ public class InputValidator {
                 && startDelimiterIndex == -1)) {
             throw new CalculatorException(INCORRECT_POSITION);
         }
-
-        if (startDelimiterIndex == -1 && endDelimiterIndex == -1) {
-            return;
-        }
     }
 }
