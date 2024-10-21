@@ -74,6 +74,9 @@ public class CalculatorService {
             if (!item.matches("-?\\d+")) {
                 throw new IllegalArgumentException();
             }
+            if (Integer.parseInt(item)< 0) {
+                throw new IllegalArgumentException();
+            }
             processedValue.add(Integer.parseInt(item));
         }
         return processedValue;
