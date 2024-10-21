@@ -6,17 +6,13 @@ public class Application {
         StringCalculator calculator = new StringCalculator();
         OutputPrinter outputPrinter = new OutputPrinter();
 
-        try {
-            // 사용자의 입력을 받는 기능
-            String input = inputReader.promptForInput();
+        // 사용자의 입력을 받는 기능
+        String input = inputReader.promptForInput();
 
-            // 계산하는 기능
-            int result = calculator.calculateSum(input);
+        // 계산하는 기능
+        int result = calculator.calculateSum(input);
 
-            // 결과를 출력하는 기능
-            outputPrinter.displayResult(result);
-        } catch (IllegalArgumentException e) {
-            outputPrinter.displayError(e.getMessage());
-        }
+        // 결과를 출력하는 기능
+        outputPrinter.displayResult(result);
     }
 }
