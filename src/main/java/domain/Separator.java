@@ -51,20 +51,16 @@ public class Separator {
 
             if (!part.isEmpty()) {
                 try {
-                    int number = Integer.parseInt(part);  // 문자열을 바로 정수로 변환
+                    int number = Integer.parseInt(part);
                     if (number <= 0) {
                         throw new IllegalArgumentException("0 이하의 숫자는 입력할 수 없습니다.");
                     }
-                    numberCollection.add(number);  // 예외가 발생하지 않으면 숫자 리스트에 추가
+                    numberCollection.add(number);
                 } catch (NumberFormatException e) {
-                    throw new IllegalArgumentException(part + "는 유효한 숫자가 아닙니다.");  // 변환에 실패하면 예외 발생
+                    throw new IllegalArgumentException(part + "는 유효한 숫자가 아닙니다.");
                 }
             }
         }
         return numberCollection;
-    }
-
-    public List<String> getSeparatorCollection() {
-        return separatorCollection;
     }
 }
