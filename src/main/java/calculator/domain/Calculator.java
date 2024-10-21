@@ -1,13 +1,16 @@
 package calculator.domain;
 
+import calculator.util.InputParser;
+
 import java.util.ArrayList;
+import static calculator.util.InputValidator.validate;
 
 public class Calculator {
-    private static Calculator instance = new Calculator();
-    private Calculator() {}
+    private final String input;
 
-    public static Calculator getInstance() {
-        return instance;
+    public Calculator(String input) {
+        validate(input);
+        this.input = input;
     }
 
     public int add(ArrayList<Integer> numbers) {
