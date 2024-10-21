@@ -1,7 +1,6 @@
 package calculator.io;
 
 import calculator.utils.ExceptionHandler;
-import camp.nextstep.edu.missionutils.Console;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,8 +21,7 @@ public class InputProcessor {
 
     private final ExceptionHandler exceptionHandler = ExceptionHandler.getInstance();
 
-    public List<Integer> getInputFromUser() {
-        String input = Console.readLine();
+    public List<Integer> processInput(String input) {
         List<String> delimiters = makeBasicDelimiters();
         boolean customDelimFlag = isInputHasCustomDelim(input);
 
