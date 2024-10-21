@@ -13,8 +13,8 @@ public class CustomSeparators implements Separators {
     private final List<String> customSeparators;
 
     public CustomSeparators(List<String> customSeparators) {
-        new CustomSeparatorsValidator().validate(customSeparators);
         this.customSeparators = customSeparators;
+        new CustomSeparatorsValidator().validate(customSeparators);
     } // CustomSeparators
 
     @Override
