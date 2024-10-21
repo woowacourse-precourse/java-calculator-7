@@ -21,13 +21,17 @@ public class StringCalculator {
         int sum = 0;
         for (String token : tokens) {
             if (token.isEmpty()) {
-                continue; // 빈 문자열 무시
+                continue;
             }
-            int number = Integer.parseInt(token);
-            if (number < 0) {
-                throw new IllegalArgumentException("음수는 입력할 수 없습니다: " + number);
+            try {
+                int number = Integer.parseInt(token);
+                if (number < 0) {
+                    throw new IllegalArgumentException("음수는 입력할 수 없습니다: " + number);
+                }
+                sum += number;
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("잘못된 숫자 형식입니다: " + token);
             }
-            sum += number;
         }
         return sum;
     }
