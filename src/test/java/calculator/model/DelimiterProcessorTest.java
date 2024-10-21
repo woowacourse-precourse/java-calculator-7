@@ -27,7 +27,7 @@ class DelimiterProcessorTest {
     @DisplayName("커스텀 구분자를 사용하여 문자열을 분리")
     public void 문자열_분리_커스텀_구분자사용() {
         //given
-        String userInput = "//&\n1&2&3";
+        String userInput = "//&\\n1&2&3";
         String delimiter = "&";
 
         //when
@@ -41,7 +41,7 @@ class DelimiterProcessorTest {
     @DisplayName("기본 구분자와 커스텀 구분자를 사용하여 문자열을 분리")
     public void 문자열_분리_기본_구분자와_커스텀_구분자사용() {
         //given
-        String userInput = "//&\n1&2&3,4:5";
+        String userInput = "//&\\n1&2&3,4:5";
         String delimiter = "&,:";
 
         //when

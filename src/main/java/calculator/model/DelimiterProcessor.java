@@ -2,8 +2,11 @@ package calculator.model;
 
 import static calculator.Utils.DelimiterConstants.COLON;
 import static calculator.Utils.DelimiterConstants.COMMA;
+import static calculator.Utils.DelimiterConstants.CUSTOM_DELIMITER_PREFIX;
+import static calculator.Utils.DelimiterConstants.CUSTOM_DELIMITER_SUFFIX;
 import static calculator.Utils.DelimiterConstants.DELIMITER_PATTERN_PREFIX;
 import static calculator.Utils.DelimiterConstants.DELIMITER_PATTERN_SUFFIX;
+import static calculator.Utils.DelimiterConstants.EMPTY;
 
 import java.util.Arrays;
 
@@ -23,8 +26,8 @@ public class DelimiterProcessor {
 
     public String deleteCustomDelimiter(String userInput, String delimiter) {
         if (hasCustomDelimiter(delimiter)) {
-            userInput = userInput.replace("//", "");
-            userInput = userInput.replace("\n", "");
+            userInput = userInput.replace(CUSTOM_DELIMITER_PREFIX, EMPTY);
+            userInput = userInput.replace(CUSTOM_DELIMITER_SUFFIX, EMPTY);
         }
         return userInput;
     }
