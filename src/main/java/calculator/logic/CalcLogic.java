@@ -7,9 +7,12 @@ import java.util.List;
 
 public class CalcLogic {
     public static List<Long> getNumbers( InputDTO input ) {
-        String exp = input.calcExp();
+        String exp = input.getSumExp();
+        String divider = input.getDividerExp();
 
-        return Arrays.stream(exp.split( "[,:]" ))
+
+        // 숫자탐색
+        return Arrays.stream( exp.split( String.format( "[,:%s]", divider ) ) )
                 .map( Long::parseLong )
                 .toList();
     }
