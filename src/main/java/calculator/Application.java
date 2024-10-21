@@ -2,6 +2,8 @@ package calculator;
 
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        InputReader inputReader = InputReader.getInstance(StringSplitter.getInstance(), NumberConverter.getInstance(), SumCalculator.getInstance());
+        int result = inputReader.readAndProcess();
+        System.out.println("결과 : " + result); // 결과 출력
     }
 }
