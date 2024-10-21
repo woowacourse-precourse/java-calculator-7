@@ -21,7 +21,16 @@ public class Application {
         }
 
         int result = 0;
-        String[] numbers = input.split("[,:]");
+        String[] numbers;
+
+        if (input.startsWith("//")) {
+            int newlineIndex = input.indexOf("\\n");
+            String delimiter = input.substring(2, newlineIndex);
+            String numbersPart = input.substring(newlineIndex + 2);
+            numbers = numbersPart.split(delimiter);
+        } else {
+            numbers = input.split("[,:]");
+        }
 
         for (String num : numbers) {
             result += Integer.parseInt(num.trim());
