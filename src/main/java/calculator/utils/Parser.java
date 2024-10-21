@@ -14,8 +14,8 @@ public class Parser {
     public List<Integer> parse(String inputString) {
         separatorParser.parse(inputString);
         separatorParser.addBasicSeparator();
-        operandParser.parse(separatorParser.getRemovedString(), separatorParser.getSeparator());
-
-        return operandParser.getOperand();
+        return operandParser.parse(
+                separatorParser.getRemovedString(),
+                separatorParser.getSeparator());
     }
 }

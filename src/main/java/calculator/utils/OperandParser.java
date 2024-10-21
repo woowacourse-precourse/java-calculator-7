@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OperandParser {
-    private final List<Integer> operand = new ArrayList<>();
-
     private int isSeparator(String tmpString, List<String> separator) {
         for (int i = 0; i < separator.size(); i++) {
             if (tmpString.length() < separator.get(i).length()) {
@@ -18,7 +16,8 @@ public class OperandParser {
         return -1;
     }
 
-    public void parse(String removedString, List<String> separator) {
+    public List<Integer> parse(String removedString, List<String> separator) {
+        List<Integer> operand = new ArrayList<>();
         String tmpOperand = "";
 
         for (int i = 0; i < removedString.length(); i++) {
@@ -39,9 +38,6 @@ public class OperandParser {
         if (!tmpOperand.equals("")) {
             operand.add(Integer.parseInt(tmpOperand));
         }
-    }
-
-    public List<Integer> getOperand() {
         return operand;
     }
 }
