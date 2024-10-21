@@ -1,27 +1,27 @@
 package calculator.view;
 
 import calculator.common.ConsoleMessage;
-import calculator.view.input.InputView;
-import calculator.view.output.OutputView;
+import calculator.view.handler.InputHandler;
+import calculator.view.handler.OutputHandler;
 
 public class ApplicationConsoleView implements ApplicationView{
 
-    private final InputView inputView;
-    private final OutputView outputView;
+    private final InputHandler inputHandler;
+    private final OutputHandler outputHandler;
 
-    public ApplicationConsoleView(InputView inputView, OutputView outputView) {
-        this.inputView = inputView;
-        this.outputView = outputView;
+    public ApplicationConsoleView(InputHandler inputHandler, OutputHandler outputHandler) {
+        this.inputHandler = inputHandler;
+        this.outputHandler = outputHandler;
     }
 
     @Override
     public String requestValue() {
-        outputView.requestInputValue();
-        return inputView.inputValue();
+        outputHandler.requestInputValue();
+        return inputHandler.inputValue();
     }
 
     @Override
     public void printResult(int result) {
-        outputView.printMessage(ConsoleMessage.RESULT_PREFIX + result);
+        outputHandler.printMessage(ConsoleMessage.RESULT_PREFIX + result);
     }
 }

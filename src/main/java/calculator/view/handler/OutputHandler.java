@@ -1,6 +1,6 @@
-package calculator.view.output;
+package calculator.view.handler;
 
-public interface OutputView {
+public interface OutputHandler {
 
     void requestInputValue();
     void printMessage(String message);

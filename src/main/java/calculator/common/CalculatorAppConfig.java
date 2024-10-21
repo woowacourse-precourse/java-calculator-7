@@ -10,8 +10,8 @@ import calculator.model.service.StringSumCalculator;
 import calculator.model.implement.StringParser;
 import calculator.view.ApplicationConsoleView;
 import calculator.view.ApplicationView;
-import calculator.view.input.InputConsoleView;
-import calculator.view.output.OutputConsoleView;
+import calculator.view.handler.ConsoleInputHandler;
+import calculator.view.handler.ConsoleOutputHandler;
 
 public final class CalculatorAppConfig {
 
@@ -29,7 +29,7 @@ public final class CalculatorAppConfig {
     }
 
     private ApplicationView applicationView() {
-        return new ApplicationConsoleView(new InputConsoleView(), new OutputConsoleView());
+        return new ApplicationConsoleView(new ConsoleInputHandler(), new ConsoleOutputHandler());
     }
 
     private Calculator calculator() {

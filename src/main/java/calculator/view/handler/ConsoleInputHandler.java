@@ -1,8 +1,8 @@
-package calculator.view.input;
+package calculator.view.handler;
 
 import camp.nextstep.edu.missionutils.Console;
 
-public class InputConsoleView implements InputView {
+public class ConsoleInputHandler implements InputHandler {
 
     @Override
     public String inputValue() {

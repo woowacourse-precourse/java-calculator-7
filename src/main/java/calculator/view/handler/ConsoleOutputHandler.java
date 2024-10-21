@@ -1,8 +1,8 @@
-package calculator.view.output;
+package calculator.view.handler;
 
 import calculator.common.ConsoleMessage;
 
-public class OutputConsoleView implements OutputView {
+public class ConsoleOutputHandler implements OutputHandler {
 
     @Override
     public void requestInputValue() {
