@@ -25,6 +25,11 @@ public class Calculator {
 
         //String delimiter로 자르기
         String[] numbers = numberString.split(delimiter);
+
+        //공백 제거
+        for (int i = 0; i < numbers.length; i++) {
+            numbers[i] = numbers[i].trim();
+        }
         return sumString(numbers);
     }
 
@@ -33,6 +38,9 @@ public class Calculator {
         int sum = 0;
         for (String number : numbers) {
             try {
+                if(number.isEmpty()){
+                    continue;
+                }
                 int num = Integer.parseInt(number);
 
                 //음수면 예외발생

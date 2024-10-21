@@ -24,6 +24,30 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void spacingTest(){
+        assertSimpleTest(() -> {
+            run(" ");
+           assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void spacingbetweenTest(){
+        assertSimpleTest(() -> {
+            run("1, 2, 3 ");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void differentdelimiterTest(){
+        assertSimpleTest(() -> {
+            run("1, 2: 3 ");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
