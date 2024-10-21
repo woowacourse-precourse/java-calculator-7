@@ -3,15 +3,15 @@ package calculator;
 public class Calculator {
     private int result;
 
-    public Calculator() {}
+    Calculator() {}
 
-    public void run(){
+    void run() {
         Output.printInputRequest();
         String inputData = Input.getUserInput();
         this.result = Calculation.getCalculationResult(inputData);
     }
 
-    public void end(){
+    void end() {
         Output.printResult(this.result);
     }
 }

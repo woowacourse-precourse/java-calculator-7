@@ -49,6 +49,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 커스텀_구분자_사용5() {
+        assertSimpleTest(() -> {
+            run("//;\\n1;10,100:10");
+            assertThat(output()).contains("결과 : 121");
+        });
+    }
+
+    @Test
     void 기본_구분자_사용1() {
         assertSimpleTest(() -> {
             run("1,2,3");
@@ -69,6 +77,14 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             run("10,100:1");
             assertThat(output()).contains("결과 : 111");
+        });
+    }
+
+    @Test
+    void 공백_사용() {
+        assertSimpleTest(() -> {
+            run("\n");
+            assertThat(output()).contains("결과 : 0");
         });
     }
 

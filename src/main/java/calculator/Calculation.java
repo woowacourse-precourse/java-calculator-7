@@ -1,14 +1,14 @@
 package calculator;
 
 public class Calculation {
-    public static int getCalculationResult(String input) {
+    static int getCalculationResult(String input) {
         if (input.isEmpty()) {
             return 0;
         }
         return calculateString(input);
     }
 
-    public static int calculateString(String input) {
+    private static int calculateString(String input) {
         String result = "";
         int sum = 0;
         for (int i = 0; i < input.length(); i++) {
