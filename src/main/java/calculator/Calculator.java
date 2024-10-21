@@ -1,6 +1,7 @@
 package calculator;
 
 public class Calculator {
+
     public int calculator(String input){
 
         // input없으면 0을 리턴
@@ -10,6 +11,13 @@ public class Calculator {
 
         String delimiter = ",|:";
         String numberString = input;
+
+        // "//"로 시작하고 "\n"으로끝나는 문자열일 시 그 사이값 구하기
+        if(input.startsWith("//")){
+            int delimiterIndex = input.indexOf("\n");
+            delimiter = input.substring(2, delimiterIndex);
+            numberString = input.substring(delimiterIndex+1);
+        }
 
         //String delimiter로 자르기
         String[] numbers = numberString.split(delimiter);
