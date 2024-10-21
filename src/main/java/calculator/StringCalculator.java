@@ -25,6 +25,9 @@ public class StringCalculator {
             separator = Pattern.quote(customDelimiter) + "|,|:";
             input = input.substring(delimiterEndIndex + 1);
         }
+        if (input.isEmpty()) {
+            return new String[0];
+        }
         if (!Character.isDigit(input.charAt(input.length() - 1))) {
             throw new IllegalArgumentException("입력은 반드시 숫자로 끝나야합니다.");
         }

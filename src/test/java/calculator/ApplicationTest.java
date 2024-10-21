@@ -205,6 +205,21 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void testCustomSeparatorWithEmptyStringReturnsZero() {
+        assertSimpleTest(() -> {
+            // Given
+            StringCalculator calculator = new StringCalculator();
+            String input = "//;\n";
+
+            // When
+            int result = calculator.add(input);
+
+            // Then
+            assertEquals(0, result);
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
