@@ -6,21 +6,20 @@ public class StringAddCalculator {
             return 0;
         }
 
-        String delimiter = "[,|:]";  // 기본 구분자 쉼표와 콜론
+        String delimiter = ",|:";  // 기본 구분자 선언 및 초기화
 
-        // 커스텀 구분자 처리
+        // 커스텀 구분자가 있는 경우 처리
         if (text.startsWith("//")) {
-            int delimiterIndex = text.indexOf("\n");
-            delimiter = text.substring(2, delimiterIndex);
-            text = text.substring(delimiterIndex + 1);
+            int delimiterEndIndex = text.indexOf("\n");
+            delimiter = text.substring(2, delimiterEndIndex);  // 커스텀 구분자 설정
+            text = text.substring(delimiterEndIndex + 1);  // 실제 숫자 부분 추출
         }
 
-        // 구분자를 사용해 문자열 분리
-        String[] tokens = text.split(delimiter);
-        int sum = 0;
+        String[] numbers = text.split(delimiter);  // 구분자로 숫자 분리
 
-        for (String token : tokens) {
-            sum += Integer.parseInt(token);
+        int sum = 0;
+        for (String number : numbers) {
+            sum += Integer.parseInt(number.trim());  // 공백 제거 후 숫자 합산
         }
 
         return sum;
