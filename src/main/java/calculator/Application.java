@@ -18,10 +18,7 @@ public class Application {
         int result = SumCalculator.add(input);
         System.out.println("결과 : " + result);
 
-
     }
-
-
 
 }
 
