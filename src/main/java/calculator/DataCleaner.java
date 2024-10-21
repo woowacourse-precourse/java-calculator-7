@@ -6,14 +6,18 @@ import java.util.StringTokenizer;
 
 public class DataCleaner {
     private static final String INVALID_NUMBER_MESSAGE = "잘못된 입력 값";
+    private static final String INVALID_CUSTOM_MESSAGE = "잘못된 입력 값, 구분자 다음에 줄바꿈이 필요합니다.";
 
     public static int[] cleanData(String input) {
         String delimiter = ",|:";
 
         if (input.startsWith("//")) {
-            int delimiterIndex = input.indexOf("\n");
+            int delimiterIndex = input.indexOf("\\n");
+            if (delimiterIndex == -1) {
+                throw new IllegalArgumentException(INVALID_CUSTOM_MESSAGE);
+            }
             delimiter = input.substring(2, delimiterIndex);
-            input = input.substring(delimiterIndex + 1);
+            input = input.substring(delimiterIndex + 2);
         }
         StringTokenizer st = new StringTokenizer(input, delimiter);
         List<Integer> numbers = new ArrayList<>();
