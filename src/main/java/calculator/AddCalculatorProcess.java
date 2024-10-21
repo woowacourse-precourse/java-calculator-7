@@ -51,6 +51,6 @@ public class AddCalculatorProcess {
     }
 
     public static void result() {
-        System.out.println("결과 : " + Math.round(output));
+        System.out.println("결과 : " + output);
     }
 }
