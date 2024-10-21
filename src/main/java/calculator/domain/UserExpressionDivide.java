@@ -16,5 +16,8 @@ public class UserExpressionDivide {
         return rawExpression.length() >= CUSTOM_DELIM_LENGTH;
     }
 
+    private static void assignCandidate(String rawExpression) {
+        userExpression.setCustomDelimExpressionCandidate(rawExpression.substring(0,CUSTOM_DELIM_LENGTH));
+    }
 
 }
