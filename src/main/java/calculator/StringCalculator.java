@@ -23,6 +23,6 @@ public class StringCalculator {
             return m.group(2).split(customDelimiter);
         }
 
-
+        return string.split(",|:");
     }
 }
