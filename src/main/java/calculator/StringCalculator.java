@@ -4,10 +4,6 @@ import java.util.regex.Pattern;
 
 public class StringCalculator {
     public String[] splitInput(String input) {
-        // 입력이 null이면 예외를 던짐
-        if (input == null) {
-            throw new IllegalArgumentException("입력값이 null입니다.");
-        }
 
         // 커스텀 구분자를 사용한 경우
         if (input.startsWith("//")) {
