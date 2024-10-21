@@ -2,8 +2,7 @@ package calculator;
 
 public class Check {
     public String check_last_char(String str) {
-        int end = str.length();
-        if (str.charAt(end - 1) >= '0' && str.charAt(end - 1) <= '9') {
+        if (str.charAt(str.length() - 1) >= '0' && str.charAt(str.length() - 1) <= '9') {
             str += ",";
         }
         return str;
