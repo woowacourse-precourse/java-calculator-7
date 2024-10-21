@@ -77,8 +77,7 @@ public class PositiveNumber {
     public PositiveNumber add(final PositiveNumber otherOperand) {
         String total = value.add(otherOperand.value)
                 .toString();
-        validateLength(total);
-        return new PositiveNumber(total);
+        return from(total);
     }
 
     public BigInteger value() {
