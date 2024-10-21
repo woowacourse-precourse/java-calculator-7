@@ -5,7 +5,7 @@ import camp.nextstep.edu.missionutils.Console;
 public class OutputView {
 
     // 계산 결과를 출력하는 메소드
-    public static void printOutput(Integer output) {
+    public static void printOutput(String output) {
         System.out.println("결과 : " + output);
         Console.close();
     }
