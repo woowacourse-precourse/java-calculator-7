@@ -13,4 +13,8 @@ public class ConsoleIO {
         System.out.println(INPUTMSG);
         return Console.readLine();
     }
+
+    public static void putOutput(int sum) {
+        System.out.println(OUTPUTMSG + sum);
+    }
 }
