@@ -19,7 +19,8 @@ public class CalculationService {
 
     public int calculate(String input) {
         checkParams(input);
-        extractNumbers(input);
+        String newInput = checkNewParam(input);
+        extractNumbers(newInput);
         List<Integer> nums = separator.getNums();
         return calculator.calculate(nums);
     }
@@ -45,25 +46,34 @@ public class CalculationService {
     private void extractNumbers(String input) {
         StringBuilder currentNumber = new StringBuilder();
         int paramCount = 0;
+
+        // 입력이 비어있는 경우 예외 처리
+        if (input == null || input.isEmpty()) {
+            throw new InvalidInputException("입력이 비어있습니다.");
+        }
+
+        // 첫 번째 문자가 숫자가 아닌 경우 예외 처리
+        if (!Character.isDigit(input.charAt(0))) {
+            throw new InvalidInputException("입력의 첫 번째 문자는 숫자여야 합니다.");
+        }
+
         for (char ch : input.toCharArray()) {
             if (Character.isDigit(ch)) {
                 currentNumber.append(ch);
-                paramCount = 0;
+                paramCount = 0; // 숫자가 계속 들어오는 경우 paramCount를 초기화
             } else {
-                if(paramCount > 0){
+                if (!Character.isDigit(ch) && paramCount > 0) {
                     throw new ParamCountException("파라미터의 개수가 1개를 초과합니다.");
-                }
-                else {
+                } else {
                     paramCount++;
                     separator.addNum(Integer.parseInt(currentNumber.toString()));
-                    currentNumber.setLength(0);
-
+                    currentNumber.setLength(0); // currentNumber 초기화
                 }
             }
         }
 
         if (paramCount > 0){
-            throw new ParamCountException("문자열은 숫자로 종결되어야 합니다.");
+            throw new InvalidInputException("문자열은 숫자로 종결되어야 합니다.");
         }
 
         if (!currentNumber.isEmpty()) {

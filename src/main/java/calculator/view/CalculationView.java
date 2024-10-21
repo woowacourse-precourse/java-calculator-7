@@ -11,6 +11,5 @@ public class CalculationView {
 
     public void displayResult(int result) {
         System.out.println("결과 : " + result);
-        Console.close();
     }
 }
