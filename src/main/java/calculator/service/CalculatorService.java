@@ -39,7 +39,8 @@ public class CalculatorService implements Service {
 
     @Override
     public String[] separateInput(String input) {
-        return new String[0];
+        String separatorsRegex = String.join(" | ", separators);
+        return input.split(separatorsRegex);
     }
 
     @Override
