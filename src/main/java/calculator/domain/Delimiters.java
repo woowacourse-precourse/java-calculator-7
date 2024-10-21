@@ -8,8 +8,10 @@ import java.util.stream.Collectors;
 
 public class Delimiters {
 
+    public static final String NUMBER_REGEX = "[0-9]";
     private static final Pattern CUSTOM_REGEX_PATTERN = Pattern.compile("//(.*)\\\\n");
     private static final Set<String> INITIAL_DELIMITER = Set.of(",", ":");
+    private static final int VALID_DELIMITER_LENGTH = 1;
 
     private final Set<String> delimiters;
 
@@ -18,6 +20,8 @@ public class Delimiters {
     }
 
     private Delimiters(String delimiter) {
+        checkLengthIsOne(delimiter);
+        checkIsNotNumber(delimiter);
         this.delimiters = new HashSet<>(Set.of(delimiter));
     }
 
@@ -27,6 +31,18 @@ public class Delimiters {
             return new Delimiters(matcher.group(1));
         }
         return new Delimiters();
+    }
+
+    private void checkLengthIsOne(String delimiter) {
+        if (delimiter.length() > VALID_DELIMITER_LENGTH) {
+            throw new IllegalArgumentException("구분자는 한 글자여야 합니다.");
+        }
+    }
+
+    private void checkIsNotNumber(String delimiter) {
+        if (delimiter.matches(NUMBER_REGEX)) {
+            throw new IllegalArgumentException("구분자로 숫자는 사용할 수 없습니다.");
+        }
     }
 
     public boolean isCustomDelimiter() {

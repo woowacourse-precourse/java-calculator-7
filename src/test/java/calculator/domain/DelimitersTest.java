@@ -4,8 +4,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class DelimitersTest {
 
@@ -87,7 +89,7 @@ class DelimitersTest {
         String input = "1,2:3";
         Delimiters delimiters = Delimiters.from(input);
         //when
-        String regex = delimiters.getSplitRegex();
+        String regex = delimiters.getRegex();
         //then
         assertThat(regex).contains(",", ":");
     }
@@ -99,10 +101,33 @@ class DelimitersTest {
         String input = "//;\\n1;2;3";
         Delimiters delimiters = Delimiters.from(input);
         //when
-        String regex = delimiters.getSplitRegex();
+        String regex = delimiters.getRegex();
         //then
         assertThat(regex).contains(";");
     }
 
+    @DisplayName("구분자는 한 글자여야 한다.")
+    @Test
+    void delimiterLengthIsOne() {
+        //given
+        String input = "//;;\\n1;;2;;3";
+        //when
+        //then
+        assertThatIllegalArgumentException()
+            .isThrownBy(() -> Delimiters.from(input))
+            .withMessage("구분자는 한 글자여야 합니다.");
+    }
+
+    @DisplayName("구분자로 숫자는 사용할 수 없다.")
+    @Test
+    void delimiterCannotUseNumber() {
+        //given
+        String input = "//1\\n11213";
+        //when
+        //then
+        assertThatIllegalArgumentException()
+            .isThrownBy(() -> Delimiters.from(input))
+            .withMessage("구분자로 숫자는 사용할 수 없습니다.");
+    }
 
 }
