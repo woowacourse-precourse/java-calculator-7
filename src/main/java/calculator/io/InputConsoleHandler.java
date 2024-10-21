@@ -95,7 +95,7 @@ public class InputConsoleHandler {
         return !userInput.matches("-?\\d+([,|:]-?\\d+)*");
     }
 
-    public boolean isAppEnd() {
+    public boolean askIfAppEnd() {
         String userAction = Console.readLine();
 
         if ("1".equals(userAction)) {

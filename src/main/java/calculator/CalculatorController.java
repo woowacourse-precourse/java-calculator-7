@@ -28,7 +28,7 @@ public class CalculatorController {
             outputConsoleHandler.showCalculatedResult(result);
             outputConsoleHandler.showContinueMessage();
 
-            if (inputConsoleHandler.isAppEnd()) {
+            if (inputConsoleHandler.askIfAppEnd()) {
                 calculator.changeStatusToEnd();
                 outputConsoleHandler.showAppExitMessage();
             }

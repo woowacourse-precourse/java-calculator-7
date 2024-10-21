@@ -224,7 +224,7 @@ class InputConsoleHandlerTest {
         String input = "6";
 
         System.setIn(new ByteArrayInputStream(input.getBytes()));
-        assertThatThrownBy(INPUT_CONSOLE_HANDLER::isAppEnd)
+        assertThatThrownBy(INPUT_CONSOLE_HANDLER::askIfAppEnd)
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("허용되지 않은 동작입니다. 애플리케이션을 종료합니다.");
     }
