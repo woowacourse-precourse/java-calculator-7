@@ -25,7 +25,7 @@ public class ParsingService {
 
     //입력받은 문자열이 없을 때 true return
     private static Boolean checkIFStringEmpty(String operandStr){
-        if(operandStr.isEmpty()) return true;
+        if(operandStr == null || operandStr.isEmpty()) return true;
         return false;
     }
 
