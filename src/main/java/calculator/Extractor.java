@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 public class Extractor {
     public static final String DEFAULT_DELIMITER = "[,:]";
     public static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("^//(.)\\\\n");
+
     private String delimiter;
     private final FormatValidator formatValidator;
 
@@ -33,6 +34,7 @@ public class Extractor {
         return input;
     }
 
+    //테스트를 위한 getter 메서드로 삭제하는 리팩터링 필요
     public String getDelimiter() {
         return delimiter;
     }
