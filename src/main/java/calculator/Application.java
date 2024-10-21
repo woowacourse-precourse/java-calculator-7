@@ -4,7 +4,6 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
 
         // 입력 문구
         System.out.println("덧셈할 문자열을 입력해 주세요.");
@@ -37,27 +36,36 @@ public class Application {
 
 
         // 숫자 추출
-        // 기본 구분자와 숫자 구분하여 숫자만 문자열 배열에 넣기
+        // 구분자로 문자열을 분할하기
         String[] numbers = input.split(Sep);
             // 테스트 위해 구분된 숫자 출력
             /*
             for(String test_num : numbers){
-                System.out.println("구분된 숫자 : " + test_num);
+                System.out.println("분할된 문자열 : " + test_num);
             }
             */
         
 
-        // 더하기
-        int sum = 0; // 더한 값 저장할 변수
+        // 더한 값 저장할 변수
+        int sum = 0;
 
+        //예외처리와 동시에 더하기
         for (String number : numbers){
-            int num = Integer.parseInt(number); // 타입을 문자에서 숫자로 변환
-            sum += num; // 덧셈
+
+            try{
+                int num = Integer.parseInt(number); // 타입을 문자에서 숫자로 변환
+
+                if (num < 0){ // 음수의 경우
+                    throw new IllegalArgumentException("구분자와 양수만 입력 가능합니다."); // 음수의 경우 예외처리
+                }
+                sum += num; // 덧셈
+            } catch (NumberFormatException e) { // 숫자가 아닐 경우
+                throw new IllegalArgumentException("구분자와 양수만 입력 가능합니다."); // 이외 예외처리
+            }
         }
 
         //결과 출력
         System.out.println("결과 : " + sum);
         
-
     }
 }
