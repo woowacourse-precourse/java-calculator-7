@@ -4,7 +4,6 @@ import camp.nextstep.edu.missionutils.Console;
 
 import java.nio.charset.StandardCharsets;
 import java.io.PrintStream;
-import java.util.Arrays;
 
 public class Application {
     public static void main(String[] args) {
@@ -36,8 +35,37 @@ public class Application {
         if (input == null) {
             throw new IllegalArgumentException();
         }
-        String splitPattern = "[,:]";
 
-        return input.split(splitPattern);
+        StringBuilder splitPattern = new StringBuilder("[,:");
+        String baseInput = input;
+
+        // when custom separator exist
+        if ((input.length() >=4) && (input.charAt(0) == '/') && (input.charAt(1) == '/')){
+            int currIndex = 2;
+
+            // check whether '\' and follow 'n' exist or not.
+            // to use split function, "\\" prefix must be appended to regex operators
+            Outer: while (currIndex < input.length()-1) {
+                char c = input.charAt(currIndex);
+                switch (c){
+                    case '\\':
+                        if (input.charAt(currIndex+1) == 'n') {
+                            currIndex++;
+                            break Outer;
+                        }
+                    case '[', ']', '(', ')', '{', '}', '.', '*', '+', '|', '?', '^', '$':
+                        splitPattern.append('\\').append(c);
+                        break;
+                    default:
+                        splitPattern.append(c);
+                        break;
+                }
+                currIndex++;
+            }
+            baseInput = input.substring(currIndex+1);
+        }
+
+        splitPattern.append(']');
+        return baseInput.split(splitPattern.toString());
     }
 }
