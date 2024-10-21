@@ -29,7 +29,7 @@ public class ParsingService {
         return false;
     }
 
-    //구분자 관련해서 해결해야 할 듯;; ㅜㅜ 이거 해결해야만 돼. ㅜ
+    //customDelimiter 분리
     private static String parseCustomDelimiter(String operandStr, Delimiters delimiters){
         //custom 구분자 추출
         if(operandStr.startsWith(CUSTOM_DELIMITER_START_WRAPPER)){
