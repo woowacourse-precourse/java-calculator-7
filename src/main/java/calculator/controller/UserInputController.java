@@ -1,12 +1,8 @@
 package calculator.controller;
 
 import calculator.domain.Delimiter;
-import calculator.domain.InputParser;
-import calculator.domain.NumberStorage;
+import calculator.utility.Utils;
 import calculator.view.UserInput;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class UserInputController {
     private final String userInputMessage;
@@ -27,18 +23,11 @@ public class UserInputController {
         return userInputMessage;
     }
 
-    public static boolean checkNumber(char targetChar){
-        if(0 <= targetChar - '0' && targetChar - '0'<= 9){
-            return true;
-        }
-        else return false;
-    }
-
     private void checkDelimiterAndNumber(String userInputMessage){
         boolean hasDelimiter = false;
         boolean hasNumber = false;
         for(int i = 0; i < userInputMessage.length(); i++){
-            if(checkNumber(userInputMessage.charAt(i))){
+            if(Utils.checkNumber(userInputMessage.charAt(i))){
                 hasNumber = true;
             }
             else hasDelimiter = true;

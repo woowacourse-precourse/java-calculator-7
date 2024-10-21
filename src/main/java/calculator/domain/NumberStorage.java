@@ -1,5 +1,7 @@
 package calculator.domain;
 
+import calculator.utility.Utils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +9,7 @@ public class NumberStorage {
     private final List<Double> numberList = new ArrayList<Double>();
 
     public void addNumber(String num, Delimiter delimiter){
-        InputParser.checkAllowedDelimiters(num, delimiter);
+        Utils.checkAllowedDelimiters(num, delimiter);
         checkDecimalNumber(num);
         checkZeroNumber(num);
         numberList.add(Double.valueOf(num));
