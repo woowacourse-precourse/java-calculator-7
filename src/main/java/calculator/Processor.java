@@ -22,7 +22,7 @@ public class Processor {
 
         int[] numbers = convertToIntArray(splitByDelimiters());
 
-        return calculateSum(numbers);
+        return Calculator.calculateSum(numbers);
     }
 
     public String extractCustomDelimiter() {
