@@ -22,7 +22,9 @@ public class CalculatorController {
 		InputView inputView,
 		OutputView outputView,
 		Delimiters delimiters,
-		CustomDelimiterProcessor customDelimiterProcessor, InputFilter inputFilter, Calculator calculator
+		CustomDelimiterProcessor customDelimiterProcessor,
+		InputFilter inputFilter,
+		Calculator calculator
 	) {
 		this.inputView = inputView;
 		this.outputView = outputView;
