@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.StringTokenizer;
+
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class Application {
@@ -16,6 +18,12 @@ public class Application {
                 throw new IllegalArgumentException("잘못된 형식: 커스텀 구분자는 \\n을 포함해야 합니다.");
             }
             numbers = inputStr.substring(newlineIndex + 2);
+        }
+
+        StringTokenizer st = new StringTokenizer(numbers, separators);
+        long answer = 0;
+        while (st.hasMoreTokens()) {
+            answer += Integer.parseInt(st.nextToken());
         }
     }
 
