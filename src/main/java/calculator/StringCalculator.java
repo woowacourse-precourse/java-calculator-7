@@ -20,23 +20,21 @@ public class StringCalculator {
     }
 
     public int calculate(String input) {
-        //계산로직: 커스텀구분자를 일반구분자로 변경
+
+        if (input.matches("\"\"")) {
+            return 0;
+        }
+
         if (input.startsWith("//")) {
             input = normalizeDelimiter(input);
         }
 
-        //사용자 입력 검증
-        char[] charArray = input.toCharArray();
-        validator.isPositiveNumber(charArray);
-        validator.isDelimiter(charArray);
+        validator.validate(input);
+        String[] numbers = input.split(",|:");
 
-        //계산로직: 구분자 기준으로 숫자 추출
-        String[] split1 = input.split(",|:");
-
-        //계산로직: 숫자의 합 구하기
-        int resultSum = Stream.of(split1).mapToInt(Integer::parseInt).sum();
-
-        return resultSum;
+        return Stream.of(numbers)
+                .mapToInt(Integer::parseInt)
+                .sum();
     }
 }
 
