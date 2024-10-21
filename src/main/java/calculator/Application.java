@@ -30,12 +30,6 @@ public class Application {
                 String customDelimiter = matcher.group(1).trim();
                 if (customDelimiter.isEmpty()) throw new IllegalArgumentException("커스텀 구분자가 필요합니다.");
 
-                for (String delimiter : VALID_DELIMITERS) {
-                    if (customDelimiter.equals(delimiter)) {
-                        throw new IllegalArgumentException("커스텀 구분자는 기본 구분자와 중복될 수 없습니다.");
-                    }
-                }
-
                 String numbers = matcher.group(2);
                 String[] numberParts = numbers.split(Pattern.quote(customDelimiter));
                 validateDelimiters(numberParts);
