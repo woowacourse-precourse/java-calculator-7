@@ -21,6 +21,9 @@ public class Application {
 
         if (input.startsWith("//")) {
             int delimiterEndIndex = input.indexOf("\\n");
+            if (delimiterEndIndex == -1 || delimiterEndIndex == 2) {
+                throw new IllegalArgumentException("커스텀 구분자는 공백 또는 \n가 될 수 없습니다.");
+            }
             String customDelimiter = input.substring(2, delimiterEndIndex);
             delimiters.add(customDelimiter);
 
