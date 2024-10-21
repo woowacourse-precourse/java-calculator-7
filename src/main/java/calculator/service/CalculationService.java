@@ -5,6 +5,7 @@ package calculator.service;
 import calculator.domain.Calculator;
 import calculator.domain.Separator;
 import calculator.exception.InvalidInputException;
+import calculator.exception.ParamCountException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,16 +47,26 @@ public class CalculationService {
 
     private void extractNumbers(String input) {
         StringBuilder currentNumber = new StringBuilder();
-
+        int paramCount = 0;
         for (char ch : input.toCharArray()) {
             if (Character.isDigit(ch)) {
                 currentNumber.append(ch);
+                paramCount = 0;
             } else {
-                if (!currentNumber.isEmpty()) {
+                if(paramCount > 0){
+                    throw new ParamCountException("파라미터의 개수가 1개를 초과합니다.");
+                }
+                else {
+                    paramCount++;
                     separator.addNum(Integer.parseInt(currentNumber.toString()));
                     currentNumber.setLength(0);
+
                 }
             }
+        }
+
+        if (paramCount > 0){
+            throw new ParamCountException("문자열은 숫자로 종결되어야 합니다.");
         }
 
         if (!currentNumber.isEmpty()) {

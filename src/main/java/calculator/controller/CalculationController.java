@@ -1,6 +1,5 @@
 package calculator.controller;
 
-import calculator.exception.ErrorHandler;
 import calculator.service.CalculationService;
 import calculator.view.CalculationView;
 
