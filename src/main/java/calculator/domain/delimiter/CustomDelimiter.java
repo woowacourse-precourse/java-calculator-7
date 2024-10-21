@@ -1,4 +1,4 @@
-package calculator.domain;
+package calculator.domain.delimiter;
 
 import java.text.BreakIterator;
 import java.util.Arrays;

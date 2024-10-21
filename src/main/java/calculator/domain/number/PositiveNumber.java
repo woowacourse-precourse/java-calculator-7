@@ -1,4 +1,4 @@
-package calculator.domain;
+package calculator.domain.number;
 
 import java.math.BigInteger;
 import java.util.Objects;

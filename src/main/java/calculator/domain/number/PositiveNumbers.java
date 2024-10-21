@@ -1,4 +1,4 @@
-package calculator.domain;
+package calculator.domain.number;
 
 import java.util.List;
 import java.util.Objects;

@@ -3,9 +3,9 @@ package calculator.service;
 import java.math.BigInteger;
 import java.util.List;
 
-import calculator.domain.Delimiter;
-import calculator.domain.DelimiterFactory;
-import calculator.domain.PositiveNumbers;
+import calculator.domain.delimiter.Delimiter;
+import calculator.domain.delimiter.DelimiterFactory;
+import calculator.domain.number.PositiveNumbers;
 
 public class AdditionService {
 

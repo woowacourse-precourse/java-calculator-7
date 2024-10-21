@@ -1,6 +1,6 @@
-package calculator.domain;
+package calculator.domain.delimiter;
 
-import static calculator.domain.DelimiterFactory.create;
+import static calculator.domain.delimiter.DelimiterFactory.create;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
