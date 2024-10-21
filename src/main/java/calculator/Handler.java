@@ -34,12 +34,22 @@ public class Handler {
         }
     }
 
-    private String makeCustomSeparator(String input) throws IllegalArgumentException {
+    private String makeCustomSeparator(String input) {
         String custom = input.substring(2, input.indexOf("\\"));
+        validCustom(custom);
+        return custom;
+    }
+
+    private void validCustom(String custom) throws IllegalArgumentException {
+        if (custom.length() != 1) {
+            throw new IllegalArgumentException("커스텀 구분자는 문자열이 아닌 문자이어야 합니다");
+        }
         if (custom.equals("")) {
             throw new IllegalArgumentException("커스텀 구분자 선언이 잘못되었습니다.");
         }
-        return custom;
+        if (Character.isDigit(custom.charAt(0))) {
+            throw new IllegalArgumentException("숫자는 구분자로 사용할 수 없습니다.");
+        }
     }
 
     private List<String> splitter(String input) {
@@ -61,7 +71,7 @@ public class Handler {
         }
         return result;
     }
-자
+
     private void validInput(List<String> split) throws IllegalArgumentException {
         try {
             for (int i = 0; i < split.size(); i++) {
