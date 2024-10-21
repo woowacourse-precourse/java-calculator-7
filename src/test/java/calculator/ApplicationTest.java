@@ -48,6 +48,14 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 커스텀_쉼표_콜론_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("//;\\n1;2,3:4");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
