@@ -18,6 +18,38 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 기본_구분자_쉼표만을_사용() {
+        assertSimpleTest(() -> {
+            run("1,2,3,4,5");
+            assertThat(output()).contains("결과 : 15");
+        });
+    }
+
+    @Test
+    void 기본_구분자_콜론만을_사용() {
+        assertSimpleTest(() -> {
+            run("1:2:3:4:5");
+            assertThat(output()).contains("결과 : 15");
+        });
+    }
+
+    @Test
+    void 기본_구분자_둘다_사용() {
+        assertSimpleTest(() -> {
+            run("10:2,3:4,5:7");
+            assertThat(output()).contains("결과 : 31");
+        });
+    }
+
+    @Test
+    void 기본_구분자_커스텀_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("//;\\n10:2;3:4,5;7");
+            assertThat(output()).contains("결과 : 31");
+        });
+    }
+
+    @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("-1,2,3"))
