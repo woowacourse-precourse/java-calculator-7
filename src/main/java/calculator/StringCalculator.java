@@ -16,7 +16,7 @@ public class StringCalculator {
 
 	public StringCalculator() {
 		userInput = null;
-		delimiters = new ArrayList<String>(Arrays.asList(",", ":"));
+		delimiters = new ArrayList<>(Arrays.asList(",", ":"));
 	}
 
 	public void run() {
