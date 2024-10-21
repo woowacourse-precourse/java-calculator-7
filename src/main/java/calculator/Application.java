@@ -8,5 +8,6 @@ public class Application {
 
         String input = calculator.input();
         String basicProcess = calculator.basicSeparate(input);
+        System.out.println(calculator.customSeparate(basicProcess));
     }
 }
