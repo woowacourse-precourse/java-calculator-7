@@ -6,8 +6,14 @@ import camp.nextstep.edu.missionutils.Console;
 public class Application {
     public static void main(String[] args) {
         // 1. 사용자에게서 입력값 받기
-        String inputValue = Console.readLine();
-        System.out.println("inputValue: "+ inputValue);
+        String inputValue;
+        try {
+            System.out.println("덧셈할 문자열을 입력해 주세요.");
+            inputValue = Console.readLine();
+        } catch (IllegalArgumentException e){
+            return;
+        }
+
 
         // 2. 입력값에서 기본 구분자(쉼표, 콜론)를 통해 숫자를 추출하는 기능
         ArrayList<Integer> result = new ArrayList<Integer>();
@@ -34,13 +40,24 @@ public class Application {
         // 3. 입력값에서 커스텀 구분자를 통해 숫자를 추출하는 기능
         // 4. 추출한 숫자를 합하는 기능
         Integer total = 0;
+        Integer tmp=0;
+
+        // 5. 사용자가 값을 잘못 입력할 경우, 예외처리 기능
         if (nums.length>0){
             for (String value: nums){
+                try{
+                    tmp = Integer.parseInt(value);
+                } catch(NumberFormatException e){
+                    throw new IllegalArgumentException();
+                }
+                if (tmp<0){
+                    throw new IllegalArgumentException();
+                }
                 total+=Integer.parseInt(value);
             }
         }
 
-        System.out.println(total);
+        System.out.println("결과 : "+total);
 
     }
 }
