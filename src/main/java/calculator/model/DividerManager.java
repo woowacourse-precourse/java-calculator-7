@@ -14,7 +14,6 @@ public class DividerManager {
         dividers.add(divider);
     }
 
-
     public List<String> getDividers() {
         return dividers;
     }

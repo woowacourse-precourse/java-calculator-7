@@ -2,7 +2,6 @@ package calculator.model;
 
 import java.util.*;
 
-
 public class CalculatorModel {
     private List<Integer> numbers = new ArrayList<>();
     private DividerManager dividerManager = new DividerManager();
@@ -23,8 +22,6 @@ public class CalculatorModel {
         return numbers.stream().mapToInt(Integer::intValue).sum();
     }
 
-
-
     public List<String> getDividers() {
         return dividerManager.getDividers();
     }
@@ -32,6 +29,4 @@ public class CalculatorModel {
     public List<Integer> getNumbers() {
         return numbers;
     }
-
-
 }
