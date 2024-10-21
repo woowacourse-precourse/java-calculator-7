@@ -8,7 +8,7 @@ public class UserInputMessage {
     private final String message;
 
     public UserInputMessage(final String message) {
-        this.message = message;
+        this.message = message.trim();
     }
 
     @Override
