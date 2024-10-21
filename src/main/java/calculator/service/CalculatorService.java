@@ -41,5 +41,17 @@ public class CalculatorService {
         return userInput.contains(",") || userInput.contains(":");
     }
 
+    /**
+     * "//"와 "\n" 사이의 커스텀 구분자를 추출하는 메소드
+     * @param userInput
+     * @return String
+     */
+    public static String extractCustomDelimiter(String userInput) {
+        int startIndex = userInput.indexOf("//") + "//".length();
+        int endIndex = userInput.indexOf("\n");
+
+        return (startIndex != -1 && endIndex != -1 && startIndex < endIndex)
+                ? userInput.substring(startIndex, endIndex) : "";
+    }
 
 }
