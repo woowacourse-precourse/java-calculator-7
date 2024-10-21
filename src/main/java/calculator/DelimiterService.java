@@ -1,8 +1,7 @@
 package calculator;
 
-
-import static calculator.InputValidation.CheckCustomDelimiter;
 import static calculator.InputValidation.CheckInput;
+import static calculator.InputValidation.checkCustomDelimiter;
 
 public class DelimiterService { // 코드 실행 제어 서비스 클래스
     public static int DelimiterProcess(String input) {
@@ -11,7 +10,7 @@ public class DelimiterService { // 코드 실행 제어 서비스 클래스
         String customDelimiter = "";
 
         try { // 정상 흐름
-            Custom = CheckCustomDelimiter(input); // 커스텀 구분자 검사
+            Custom = checkCustomDelimiter(input); // 커스텀 구분자 검사
             if (Custom != null) {
                 customDelimiter = Custom[0];
                 input = Custom[1];
