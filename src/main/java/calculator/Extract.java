@@ -11,12 +11,18 @@ public class Extract {
     }
 
     List<Integer> checkFirstChar(){
-        if (Character.isDigit(input.charAt(0))){
+        if (input.length() == 0) {
+            extractNumber.add(0);
+        }
+        else if (Character.isDigit(input.charAt(0))){
             basicSeparator();
         }
-
-        else if (input.charAt(0)=='/' || input.charAt(1)=='/'){
+        else if (input.charAt(0)=='/' && input.charAt(1)=='/'){
             customSeparator();
+        }
+
+        else{
+            //5.예외처리
         }
 
         return extractNumber;
