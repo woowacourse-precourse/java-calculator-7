@@ -69,7 +69,9 @@ public class Separator {
     }
 
     public boolean hasCustomSeparator(String readString) {
-        if(readString.contains(CUSTOM_SEPARATOR_START) && readString.contains(CUSTOM_SEPARATOR_END))return true;
+        if(readString.contains(CUSTOM_SEPARATOR_START) && readString.contains(CUSTOM_SEPARATOR_END)){
+            return true;
+        }
         return false;
     }
 }

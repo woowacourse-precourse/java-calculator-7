@@ -16,6 +16,8 @@ public class OutputView {
             String result = String.format("%.0f", sum);
             System.out.println("결과 : " + result);
         }
-        if(sum%1 != 0) System.out.println("결과 : " + sum);
+        if(sum%1 != 0){
+            System.out.println("결과 : " + sum);
+        }
     }
 }
