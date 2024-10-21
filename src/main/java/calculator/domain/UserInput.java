@@ -9,10 +9,10 @@ public class UserInput {
     private final boolean hasCustomDelimiter;
     private final List<String> delimiters;
 
-    public UserInput(String input){
-        this.hasCustomDelimiter = Parser.hasCustomDelimiter(input);
-        this.input = hasCustomDelimiter ? input : input.replace(" ","");
-        this.delimiters = hasCustomDelimiter ? List.of(Parser.extractCustomDelimiter(input)) : List.of(":",",");
+    public UserInput(String input, boolean hasCustomDelimiter, List<String> delimiters){
+        this.input = input;
+        this.hasCustomDelimiter = hasCustomDelimiter;
+        this.delimiters = delimiters;
     }
 
     public String getInput(){

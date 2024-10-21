@@ -10,11 +10,15 @@ public class CalculatorService {
     public CalculatorService(){}
 
     public int calculate(String input){
-        UserInput userInput = new UserInput(input);
+        InputValidator.validate(input);
 
-        InputValidator.validate(userInput);
+        boolean hasCustomDelimiter = Parser.hasCustomDelimiter(input);
+        String string = hasCustomDelimiter ? input : input.replace(" ","");
+        List<String> delimiters = hasCustomDelimiter ? List.of(Parser.extractCustomDelimiter(input)) : List.of(":",",");
 
-        List<Integer> numbers = Parser.parseNumbersFromInput(userInput.getInput(), userInput.getDelimiters());
+        UserInput userInput = new UserInput(string, hasCustomDelimiter, delimiters);
+
+        List<Integer> numbers = Parser.parseNumbersFromInput(userInput);
         return Adder.add(numbers);
     }
 }

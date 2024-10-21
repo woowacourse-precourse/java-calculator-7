@@ -2,6 +2,7 @@ package calculator.util;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import calculator.domain.UserInput;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
@@ -44,9 +45,10 @@ class ParserTest {
     @ParameterizedTest
     @MethodSource(value = "inputAndDelimiterAndNumbers")
     @DisplayName("구분자 기준으로 숫자 리스트 추출 테스트")
-    void parseNumbersFromInput(String input, List<String> delimiter, List<Integer> expected){
+    void parseNumbersFromInput(String input, List<String> delimiters, List<Integer> expected){
+        UserInput userInput = new UserInput(input, delimiters.size() == 1, delimiters);
         // when
-        List<Integer> result = Parser.parseNumbersFromInput(input, delimiter);
+        List<Integer> result = Parser.parseNumbersFromInput(userInput);
         // then
         assertThat(result.size()).isEqualTo(expected.size());
         for(int i=0; i<expected.size(); i++)

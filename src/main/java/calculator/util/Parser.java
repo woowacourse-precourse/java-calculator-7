@@ -1,6 +1,7 @@
 package calculator.util;
 
 import calculator.constants.DelimiterConstants;
+import calculator.domain.UserInput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,12 +34,15 @@ public class Parser {
         return delimiter.toString();
     }
 
-    public static List<Integer> parseNumbersFromInput(String string, List<String> delimiters) {
+    public static List<Integer> parseNumbersFromInput(UserInput userInput) {
         List<Integer> result = new ArrayList<>();
         StringBuilder number = new StringBuilder();
 
-        int delimiterLength = delimiters.size() == 2 ? 1 : delimiters.getFirst().length();
-        int index = delimiters.size() == 2 ? 0 : delimiterLength + DelimiterConstants.CUSTOM_DELIMITER_BOUND_LENGTH;
+        String string = userInput.getInput();
+        List<String> delimiters = userInput.getDelimiters();
+
+        int delimiterLength = userInput.hasCustomDelimiter() ? delimiters.getFirst().length() : 1;
+        int index = userInput.hasCustomDelimiter() ? delimiterLength + DelimiterConstants.CUSTOM_DELIMITER_BOUND_LENGTH : 0;
 
         while (index < string.length()) {
             if (matchesDelimiter(string, index, delimiters)) {
