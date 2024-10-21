@@ -5,6 +5,7 @@ import static calculator.service.CustomSeparatorsRegex.MIDDLE_REGEX;
 import static calculator.service.CustomSeparatorsRegex.START_REGEX;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CalculatorService implements Service {
@@ -45,6 +46,6 @@ public class CalculatorService implements Service {
 
     @Override
     public int calculate(String[] nums) {
-        return 0;
+        return Arrays.stream(nums).mapToInt(Integer::parseInt).sum();
     }
 }
