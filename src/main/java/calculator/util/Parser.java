@@ -29,7 +29,7 @@ public class Parser {
 
             return new Calculator(delimiter, numbers);
         }else{
-            throw new IllegalArgumentException("잘못된 구분자 형식입니다.");
+            throw new IllegalArgumentException(input + " : 잘못된 커스텀 구분자 형식입니다.");
         }
     }
 

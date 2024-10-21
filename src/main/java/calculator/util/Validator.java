@@ -7,14 +7,14 @@ public class Validator {
         try {
             number = Integer.parseInt(token);
         }catch(NumberFormatException e){
-            throw new IllegalArgumentException("숫자가 아닙니다" + token);
+            throw new IllegalArgumentException(token + " : 해당 입력문자는 숫자가 아닙니다");
         }
         return checkPositiveNumber(number);
     }
 
     private int checkPositiveNumber(int number){
         if (number < 0){
-            throw new IllegalArgumentException("음수는 허용되지 않습니다." + number);
+            throw new IllegalArgumentException(number + " : 음수는 허용되지 않습니다.");
         }
         return number;
     }
