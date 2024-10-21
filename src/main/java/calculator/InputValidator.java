@@ -19,7 +19,7 @@ public class InputValidator {
             validateHelper(sub, delimiters);
             return delimiters;
         }
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException(ErrorMessage.UNRESOLVED_EXPRESSION.getMsg());
     }
 
     private boolean validateHelper(String s, Set<String> delimiters) {
@@ -38,7 +38,7 @@ public class InputValidator {
             if (isChecked) {
                 continue;
             }
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.UNDEFINED_DELIMITER.getMsg());
         }
         return true;
     }
