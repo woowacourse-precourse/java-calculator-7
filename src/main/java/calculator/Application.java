@@ -13,18 +13,21 @@ import static camp.nextstep.edu.missionutils.Console.readLine;
 public class Application {
     public static void main(String[] args) {
 
-        // 0. 문자열 입력받기
-        String input = readLine();
+        try{
+            // 0. 문자열 입력받기
+            String input = readLine();
 
-        System.out.println("input: " + input);
+//        System.out.println("input: " + input);
 
-        Calc calc = new Calc(input);
+            Calc calc = new Calc(input);
 
-        int result = calc.calcSum();
+            int result = calc.calcSum();
 
-        calc.printResult(result);
+            System.out.println("결과 : " + result);
 
-
+        } catch (IllegalArgumentException e) {
+            //System.out.println("잘못된 값을 입력했습니다. 프로그램을 종료합니다."); // 예외 발생 시 메시지 출력
+        }
     }
 }
 
@@ -71,12 +74,15 @@ class Calc {
         String regex = String.join("|", sep);
 
         try {
-            numArr = Arrays.stream(input.split(regex))
-                    .mapToInt(Integer::parseInt)
-                    .toArray();
+            if (input != "") {
+                numArr = Arrays.stream(input.split(regex))
+                        .mapToInt(Integer::parseInt)
+                        .toArray();
+            } else {
+                numArr = new int[0];
+            }
         } catch (Exception e) {
-
-            numArr = new int[0];
+            throw new IllegalArgumentException("입력 값이 잘못되었습니다: " + e.getMessage());
         }
 
         return numArr;
