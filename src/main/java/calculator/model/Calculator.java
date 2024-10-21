@@ -5,6 +5,11 @@ import java.util.Arrays;
 public class Calculator {
     public int calc(String input) throws IllegalArgumentException {
             int[] arr = validateInput(input);
+
+            if (arr.length == 1) {
+                return sum(new int[]{0, arr[0]});
+            }
+
             return sum(arr);
     }
     public int sum(int[] arr) {
@@ -20,6 +25,8 @@ public class Calculator {
             delimiter = ",";
         }else if(input.contains(".")){
             delimiter = ".";
+        }else{
+            throw new IllegalArgumentException("구분자를 지정해야 합니다.");
         }
 
         return parseNumbers(input, delimiter);
@@ -32,6 +39,9 @@ public class Calculator {
     }
 
     private int[] parseNumbers(String input, String delimiter) throws IllegalArgumentException {
+        if (input.isEmpty()) {
+            throw new IllegalArgumentException("입력값이 비어있습니다.");
+        }
         String[] stringNumbers = input.split(delimiter);
         return convertToIntArray(stringNumbers);
     }
