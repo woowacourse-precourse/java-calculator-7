@@ -25,7 +25,7 @@ AngularJS Git Commit Message Conventions을 참고해 커밋 메시지를 작성
 - [X] 입력 받기 (camp.nextstep.edu.missionutils에서 제공하는 Console API를 사용)
 - [ ] test code 작성하기
 - [ ] 입력 예외 처리 (IllegalArgumentException 발생 & 종료)
-- [ ] 구분자 기준 분리 및 반환
+- [X] 구분자 기준 분리 및 반환
 - [ ] 숫자의 합 반환
 - [ ] 잘못된 값 입력 처리
 - [ ] 커스텀 구분자 분리 기준 추가
