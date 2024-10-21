@@ -17,6 +17,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 커스텀_빈_문자열_테스트() {
+        assertSimpleTest(() -> {
+            run("//;\\n"); // 커스텀 구분자가 있는 빈 문자열 입력
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
     void 기본_구분자_사용() {
         assertSimpleTest(() -> {
             run("1,2:3");
@@ -29,6 +37,14 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             run("//;\\n1");
             assertThat(output()).contains("결과 : 1");
+        });
+    }
+
+    @Test
+    void 추가_커스텀_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("//; \\n1 2;3");
+            assertThat(output()).contains("결과 : 6");
         });
     }
 
