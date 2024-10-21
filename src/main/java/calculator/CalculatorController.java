@@ -19,19 +19,17 @@ public class CalculatorController {
 
 
     public void run() {
-        while (calculator.isInProgress()) {
-            inputConsoleHandler.showInputGuideMessage();
+        inputConsoleHandler.showInputGuideMessage();
 
-            String[] operands = inputConsoleHandler.getUserInput();
-            double result = calculator.sum(operands);
+        String[] operands = inputConsoleHandler.getUserInput();
+        double result = calculator.sum(operands);
 
-            outputConsoleHandler.showCalculatedResult(result);
-            outputConsoleHandler.showContinueMessage();
-
-            if (inputConsoleHandler.askIfAppEnd()) {
-                calculator.changeStatusToEnd();
-                outputConsoleHandler.showAppExitMessage();
-            }
-        }
+        outputConsoleHandler.showCalculatedResult(result);
+//            outputConsoleHandler.showContinueMessage();
+//
+//            if (inputConsoleHandler.askIfAppEnd()) {
+//                calculator.changeStatusToEnd();
+//                outputConsoleHandler.showAppExitMessage();
+//            }
     }
 }
