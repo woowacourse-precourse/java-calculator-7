@@ -12,9 +12,10 @@ public class InputValidationException extends IllegalArgumentException{
         return false;
     }
 
-    public static void isPositiveNumber(int value) {
+    public static boolean isPositiveNumber(int value) {
         if (value <= 0) {
             throw new IllegalArgumentException("잘못된 입력입니다. 애플리케이션을 종료합니다.");
         }
+        return true;
     }
 }
