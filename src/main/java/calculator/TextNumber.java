@@ -16,7 +16,8 @@ public class TextNumber {
             }catch(IllegalArgumentException e){
                 System.out.println("잘못된 값을 입력하였습니다.");
             }
-            return "결과 : "+sum;
+    //        String.valueOf(sum) 스트링으로변환하기
+            return String.valueOf(sum);
         }
 }
 
