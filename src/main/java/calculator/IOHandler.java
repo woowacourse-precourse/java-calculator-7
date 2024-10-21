@@ -12,6 +12,6 @@ public class IOHandler {
     }
 
     public void printResultMsg(int result){
-        System.out.println("Result :"+Integer.toString(result));
+        System.out.println("Result : "+Integer.toString(result));
     }
 }

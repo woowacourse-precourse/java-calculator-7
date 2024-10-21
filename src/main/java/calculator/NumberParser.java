@@ -51,6 +51,12 @@ public class NumberParser {
         for (String numberString : numberStrings) {
             try {
                 int number = Integer.parseInt(numberString.trim());
+
+                // 음수 예외 처리
+                if (number < 0) {
+                    throw new IllegalArgumentException("Negative numbers are not allowed: " + number);
+                }
+
                 extractedNumList.add(number);
             } catch (NumberFormatException e) {
                 // 예외 처리: 숫자가 아닌 값이 있을 경우 예외 발생
