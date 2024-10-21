@@ -43,10 +43,17 @@
 ## 예외 처리
 
 
-- **IllegalArgumentException**:
-    - 잘못된 커스텀 구분자 형식: `"잘못된 커스텀 구분자 형식입니다."`
-    - 음수 사용 시: `"음수는 허용되지 않습니다."`
-    - 잘못된 숫자 형식: `"잘못된 숫자 형식입니다."`
+- **입력 예외**:
+    - input이 null일 경우 IllegalArgumentException 발생.
+    - validateNonNegative(int number): number가 음수일 경우 IllegalArgumentException 발생.
+    - validateIsNumber(String token): token이 숫자로 변환할 수 없을 경우 IllegalArgumentException 발생.
+
+- **분리자 예외**:
+    - validateCustomDelimiter(String input): 구분자 형식이 올바르지 않을 경우 IllegalArgumentException 발생.
+    - validateInputEndsWithNumber(String input, String activeSeparator): 입력이 구분자로 끝날 경우 IllegalArgumentException 발생.
+    - validateNoConsecutiveDelimiters(String input, String separator): 연속된 구분자가 있을 경우 IllegalArgumentException 발생
+    - -validateCustomDelimiterLength(String customSeparator): 구분자의 길이가 1자 가 아닌 경우 IllegalArgumentException 발생.
+    - validateOnlyCustomDelimiterUsed(String input): 기본 구분자와 커스텀 구분자가 혼용될 경우 IllegalArgumentException 발생.
 
 ## 추가로 발생할 수 있는 문제상황?
 
