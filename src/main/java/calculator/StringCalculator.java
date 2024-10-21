@@ -2,7 +2,7 @@ package calculator;
 
 public class StringCalculator {
 
-    public static double add(String text) {
+    public static int add(String text) {
         if (text == null || text.isEmpty()) {
             return 0;
         }
@@ -27,7 +27,7 @@ public class StringCalculator {
                 throw new IllegalArgumentException("커스텀 구분자는 한 개의 문자여야 합니다.");
             }
 
-            if (Character.isDigit(customDelimiter.charAt(0))) {
+            if (!isNonDigitCharacter(customDelimiter.charAt(0))) {
                 throw new IllegalArgumentException("커스텀 구분자는 숫자가 아닌 문자여야 합니다.");
             }
 
@@ -40,7 +40,7 @@ public class StringCalculator {
         }
 
         String[] tokens = numbers.split(delimiter);
-        double sum = 0;
+        int sum = 0;
 
         for (String token : tokens) {
             if (token.isEmpty()) {
@@ -54,21 +54,11 @@ public class StringCalculator {
                         continue;
                     }
 
-                    int number = Integer.parseInt(dotToken);
-
-                    if (number < 0) {
-                        throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
-                    }
-
+                    int number = parsePositiveInteger(dotToken);
                     sum += number;
                 }
             } else {
-                double number = Double.parseDouble(token);
-
-                if (number < 0) {
-                    throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
-                }
-
+                int number = parsePositiveInteger(token);
                 sum += number;
             }
         }
@@ -76,11 +66,37 @@ public class StringCalculator {
         return sum;
     }
 
+    private static int parsePositiveInteger(String str) {
+        if (!isNumeric(str)) {
+            throw new IllegalArgumentException("유효하지 않은 숫자입니다: " + str);
+        }
+        int number = Integer.parseInt(str);
+        if (number <= 0) {
+            throw new IllegalArgumentException("양의 정수만 허용됩니다: " + number);
+        }
+        return number;
+    }
+
     private static boolean startsWithNumber(String text) {
         if (text.isEmpty()) {
             return false;
         }
-        char firstChar = text.charAt(0);
-        return Character.isDigit(firstChar);
+        return Character.isDigit(text.charAt(0));
+    }
+
+    private static boolean isNumeric(String str) {
+        if (str == null || str.isEmpty()) {
+            return false;
+        }
+        for (char c : str.toCharArray()) {
+            if (!Character.isDigit(c)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean isNonDigitCharacter(char c) {
+        return !Character.isDigit(c);
     }
 }

@@ -8,7 +8,7 @@ public class Application {
 
     public static void main(String[] args) {
         String input = readLine();
-        double result = StringCalculator.add(input);
-        System.out.printf("결과 : %f%n", result);
+        int result = StringCalculator.add(input);
+        System.out.println("결과 : " + result);
     }
 }
