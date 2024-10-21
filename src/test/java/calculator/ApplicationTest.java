@@ -154,6 +154,30 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 예외_테스트_음수_4() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//a\\n1-1a1"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_음수_5() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//\\n-11"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_음수_6() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("11,-11"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
     void 예외_테스트_입력형식_오류() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("askdjg;asijeag"))
@@ -168,6 +192,7 @@ class ApplicationTest extends NsTest {
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
+
 
     @Override
     public void runMain() {
