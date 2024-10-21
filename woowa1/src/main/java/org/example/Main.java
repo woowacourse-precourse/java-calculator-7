@@ -27,8 +27,21 @@ public class Main {
                 System.out.println(sum);
                 temp_buf = "";
             }
+            else if(c == '/'){
+                // add char
+                if(input_sen.length()>= i+4) {
+                    if (input_sen.charAt(i + 1) == '/'
+                            && input_sen.charAt(i + 3) == '\\'
+                            && input_sen.charAt(i + 4) == 'n') {
+                        target_op.add(input_sen.charAt(i+2));
+                        i = i + 4;
+                    } else {
+                        // error
+                    }
+
+                }
+            }
             else{// 포함되어있는 기호가 아닐때
-                //todo 커스텀 기호
                 //todo 숫자가 아닐때 error
 
                 // 숫자일 때
