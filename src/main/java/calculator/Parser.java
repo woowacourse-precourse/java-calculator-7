@@ -20,7 +20,7 @@ public class Parser {
         while (index < inputArray.length) {
             char curChar = inputArray[index];
 
-            charCheck(curChar);
+            checkChar(curChar);
             if (Character.isDigit(curChar)) {
                 index = parseNumber(curChar, index, inputArray);
                 continue;
@@ -32,13 +32,14 @@ public class Parser {
             }
 
             if (separators.contains(curChar)) {
+
                 index++;
                 continue;
             }
         }
     }
 
-    private void charCheck(char curChar) {
+    private void checkChar(char curChar) {
         if (!Character.isDigit(curChar) && curChar != '/' && !separators.contains(curChar)) {
             throw new IllegalArgumentException("올바르지 않은 입력입니다");
         }
