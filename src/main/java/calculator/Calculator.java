@@ -23,8 +23,12 @@ public class Calculator {
         String del = "[,:]";
 
         if(expr.startsWith("//")) {
-            del = del + "|" + expr.charAt(2);
-            expr = expr.substring(5);
+            try {
+                del = del + "|" + expr.charAt(2);
+                expr = expr.substring(5);
+            } catch(Exception e) {
+                throw new IllegalArgumentException();
+            }
         }
 
         return expr.split(del);
