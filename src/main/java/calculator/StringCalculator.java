@@ -18,4 +18,16 @@ public class StringCalculator {
         String[] tokens = splitNumbers(text, delimiter);
         return sumNumbers(tokens);
     }
+
+    private int sumNumbers(String[] tokens) {
+        int sum = 0;
+        for (String token : tokens) {
+            int number = changeNumber(token);
+            if (number < 0) {
+                throw new IllegalArgumentException("음수는 허용하지 않습니다.");
+            }
+            sum += number;
+        }
+        return sum;
+    }
 }
