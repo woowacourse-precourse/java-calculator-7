@@ -23,6 +23,10 @@ public class Application {
     }
 
     public static boolean isValidInput(String input) {
+        if (input.isEmpty()) {
+            return true;
+        }
+
         List<Character> numList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             numList.add((char) (i + '0'));
@@ -75,6 +79,10 @@ public class Application {
     }
 
     private static BigInteger calculate(String input) {
+        if (input.isEmpty()) {
+            return BigInteger.ZERO;
+        }
+
         List<Character> delimeterList = new ArrayList<>();
         delimeterList.add(',');
         delimeterList.add(':');
