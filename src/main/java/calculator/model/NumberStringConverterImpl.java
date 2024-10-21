@@ -8,7 +8,6 @@ public class NumberStringConverterImpl implements NumberStringConverter {
 
     @Override
     public long[] convert(String[] numberStrings) {
-
         return Arrays.stream(numberStrings)
                 .mapToLong(numberString -> {
                     try {

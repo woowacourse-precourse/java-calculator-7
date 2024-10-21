@@ -7,7 +7,6 @@ public class CalculatorInputView {
     private final CalculatorOutputView calculatorOutputView = new CalculatorOutputView();
 
     public String inputExpression() {
-
         calculatorOutputView.printInstruction();
         String input = Console.readLine();
 
