@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class InputValidator {
+public class InputSyntaxValidator {
     private static final String DEFAULT_DELIMITER_REGEX = "[^0-9"
             + Arrays.stream(Delimiter.values())
             .map(Delimiter::getDelimiter)
