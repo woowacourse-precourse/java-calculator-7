@@ -2,9 +2,9 @@ package calculator;
 
 public class Splitter {
     private String inputString;
-    private char customSeparator;
+    private String[] resultArray;
     private int resultValue = 0;
-    private String[] result;
+    private char customSeparator;
 
     // 생성자
     public Splitter(String inputString){
@@ -17,33 +17,30 @@ public class Splitter {
     }
 
     public void calculate() {
-        // 커스텀 구분자 있으면 추가
-        if(isNum(inputString.charAt(0))) { // 문자열 시작이 숫자이면
-            result = inputString.split(":|,");
-        } else { // 문자열 시작이 문자이면
+        if(isNum(inputString.charAt(0))) { // 문자열 시작 : 숫자
+            resultArray = inputString.split(":|,");
+        } else { // 문자열 시작 : 문자
+            // 커스텀 구분자 있으면 추가
             generateCustomSeparator();
 
+            // 기본 + 커스텀 구분자를 이용한 Split
             if(customSeparator >= 65 && customSeparator <= 90 || customSeparator >= 97 && customSeparator <= 122) {
-                result = inputString.split(":|,|" + customSeparator);
+                resultArray = inputString.split(":|,|" + customSeparator);
             } else {
-                result = inputString.split(":|,|" + "\\" + customSeparator);
+                resultArray = inputString.split(":|,|\\" + customSeparator);
             }
         }
 
-        if(inspectionValue(result)) {
-            sum(result);
+        // 생성된 resultArray 의 값이 유효하면 합계 계산, 유효하지 않으면 에러 발생 후 프로그램 종료
+        if(inspectionValue(resultArray)) {
+            sum(resultArray);
         } else {
             throw new IllegalArgumentException();
         }
-
     }
 
     public boolean isNum(int num) {
-        if(num > 47 && num < 58) {
-            return true;
-        } else {
-            return false;
-        }
+        return num > 47 && num < 58;
     }
 
     public void generateCustomSeparator() {
@@ -61,9 +58,9 @@ public class Splitter {
     }
 
     public boolean inspectionValue(String[] result) {
-        for(int i=0; i<result.length; i++) {
-            for(int j=0; j<result[i].length(); j++) {
-                if(result[i].charAt(j) < 48 || result[i].charAt(j) > 57) {
+        for(String iter : result) {
+            for(int i = 0; i < iter.length(); i++) {
+                if(iter.charAt(i) < 48 || iter.charAt(i) > 57) {
                     return false;
                 }
             }
@@ -72,8 +69,8 @@ public class Splitter {
     }
 
     public void sum(String[] result) {
-        for(int i=0; i<result.length; i++) {
-            this.resultValue += Integer.parseInt(result[i]);
+        for(String iter : result) {
+            resultValue += Integer.parseInt(iter);
         }
     }
 
