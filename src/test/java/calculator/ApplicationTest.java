@@ -32,6 +32,14 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 추가_예외_테스트_2() {
+        assertSimpleTest(() -> {
+            run("//;432\\n1;4328:46,23");
+            assertThat(output()).contains("결과 : 78");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
