@@ -23,6 +23,7 @@ public class Separator {
     }
 
     private String removeCustomSeparatorFormat() {
+        SeparatorValidator.validateCustomSeparatorFormat(input, CUSTOM_START_LETTERS, CUSTOM_END_LETTERS);
         if (containsCustomSeparator()) {
             return input.substring(input.indexOf(CUSTOM_END_LETTERS) + CUSTOM_END_LETTERS.length());
         }
