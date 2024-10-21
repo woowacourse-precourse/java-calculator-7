@@ -5,17 +5,25 @@ package calculator;
  */
 public class StringCalculator {
     /**
-     * 입력된 문자열에서 숫자를 더하는 메서드입니다.
-     * 입력이 null이거나 빈 문자열일 경우 0을 반환합니다.
+     * 입력된 문자열에서 커스텀 구분자를 지원하여 숫자를 더합니다.
+     * 커스텀 구분자는 문자열의 시작 부분에 "//"와 "\n" 사이에 위치합니다.
      *
-     * @param input 쉼표(,) 또는 콜론(:)으로 구분된 숫자 문자열
-     * @return 숫자의 합 또는 입력이 비어 있을 경우 0
+     * @param input 커스텀 구분자를 포함한 숫자 문자열
+     * @return 숫자의 합
      */
     public static int add(String input) {
         if (input == null || input.isEmpty()) {
             return 0;
         }
-        String[] numbers = input.split("[,|:]");
+
+        String delimiter = "[,|:]";
+        if (input.startsWith("//")) {
+            int delimiterIndex = input.indexOf("\n");
+            delimiter = input.substring(2, delimiterIndex);
+            input = input.substring(delimiterIndex + 1);
+        }
+
+        String[] numbers = input.split(delimiter);
         int sum = 0;
         for (String number : numbers) {
             sum += Integer.parseInt(number);
