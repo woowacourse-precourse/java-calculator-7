@@ -4,6 +4,7 @@ import calculator.model.Calculator;
 import calculator.model.CustomSplitter;
 import calculator.model.ExtractString;
 import calculator.view.InputView;
+import calculator.view.OutputView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.StringTokenizer;
 public class CalculatorController {
 
     InputView inputView = new InputView();
+    OutputView outputView = new OutputView();
     CustomSplitter customSplitter;
     ExtractString extractString;
     Calculator calculator;
@@ -29,6 +31,8 @@ public class CalculatorController {
         StringTokenizer st = extractString.ExtractInput(input, split);
 
         long ans = calculator.calculate(st);
+
+        outputView.printAnswer(ans);
     }
 
 }
