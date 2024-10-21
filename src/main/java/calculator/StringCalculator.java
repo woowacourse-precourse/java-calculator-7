@@ -6,11 +6,12 @@ public class StringCalculator {
         if (text == null || text.isEmpty()) {
             return 0;
         }
+
         if (!startsWithNumber(text) && !text.startsWith("//")) {
             throw new IllegalArgumentException("입력은 숫자나 '//'로 시작해야 합니다.");
         }
 
-        String delimiter = ",|:"; // 기본 구분자: 쉼표 또는 콜론
+        String delimiter = ",|:";
         String numbers = text;
 
         if (text.startsWith("//")) {
@@ -30,25 +31,23 @@ public class StringCalculator {
 
             delimiter = ",|:|" + java.util.regex.Pattern.quote(customDelimiter);
 
-            numbers = text.substring(delimiterEndIndex + 2); // '\\n'의 길이는 2입니다.
+            numbers = text.substring(delimiterEndIndex + 2);
         }
 
-        String[] tokens = numbers.split(delimiter);
+        String[] tokens = numbers.split(delimiter, -1);
         int sum = 0;
 
         for (String token : tokens) {
             if (token.isEmpty()) {
-                continue;
+                throw new IllegalArgumentException("빈 값을 처리할 수 없습니다.");
             }
 
-            // 숫자가 아닌 값이 있는지 확인합니다.
             if (!isNumeric(token)) {
                 throw new IllegalArgumentException("유효하지 않은 숫자입니다: " + token);
             }
 
             int number = Integer.parseInt(token);
 
-            // 음수인 경우 에러 처리합니다.
             if (number < 0) {
                 throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
             }
