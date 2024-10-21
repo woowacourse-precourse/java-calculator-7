@@ -69,4 +69,20 @@ public class AdderTest {
         assertThatThrownBy(() -> adder.run(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void 숫자와_구분자_이외의_문자를_전달하는경우_예외처리() {
+        String input = "1,2,a";
+
+        assertThatThrownBy(() -> adder.run(input))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 숫자와_구분자_이외의_문자를_전달하는경우_예외처리2() {
+        String input = "//;\n1;2,3";
+
+        assertThatThrownBy(() -> adder.run(input))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
