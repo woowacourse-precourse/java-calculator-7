@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import static calculator.validators.InvalidOperandFormatException.validateToken;
 
 public class Operands {
-    private ArrayList<Integer> operandList;
+    private final ArrayList<Integer> operandList;
 
     public Operands() {
         this.operandList = new ArrayList<>();

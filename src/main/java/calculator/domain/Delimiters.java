@@ -6,7 +6,7 @@ import static calculator.utils.Constants.DEFAULT_DELIMITER1;
 import static calculator.utils.Constants.DEFAULT_DELIMITER2;
 
 public class Delimiters {
-    private ArrayList<Character> delimiters;
+    private final ArrayList<Character> delimiters;
 
     public Delimiters(){
         this.delimiters = new ArrayList<>();
