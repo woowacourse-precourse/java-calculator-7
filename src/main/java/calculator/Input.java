@@ -6,12 +6,11 @@ import camp.nextstep.edu.missionutils.Console;
 public class Input {
     static String input;
     static String[] tokens;
-    public String inputCal(){
+    public void inputCal(){
         input = Console.readLine();
         isEmpty();
-        return input;
     }
-    public String[] inputSplit(){
+    public void inputSplit(){
 
         String delimiter = "[,:]";
         input = input.replaceAll("\\s","");
@@ -26,8 +25,8 @@ public class Input {
 
         tokens = input.split(delimiter);
         isValidNumber();
-        return tokens;
     }
+
     public int sumToken(){
         int sum = 0;
         for(String token : tokens){
