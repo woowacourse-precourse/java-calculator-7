@@ -1,51 +1,30 @@
 package calculator.model;
 
-import static calculator.model.BasicDelimiter.BASIC_DELIMITER_COLON;
-import static calculator.model.BasicDelimiter.BASIC_DELIMITER_COMMA;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class DelimiterGroup {
 
+    public static final String BASIC_DELIMITER_COMMA = ",";
+    public static final String BASIC_DELIMITER_COLON = ":";
     public static final String WHITE_SPACE = " ";
-    public static final String EMPTY_STRING = "";
 
+    public final String EMPTY_STRING = "";
+    private final List<String> delimiters = new ArrayList<>();
 
-    private final List<BasicDelimiter> basicDelimiters = new ArrayList<>();
+    public DelimiterGroup(CustomDelimiter customDelimiter) {
+        delimiters.add(BASIC_DELIMITER_COMMA);
+        delimiters.add(BASIC_DELIMITER_COLON);
 
-    private CustomDelimiter customDelimiters;
-
-    public DelimiterGroup() {
-        basicDelimiters.add(new BasicDelimiter(BASIC_DELIMITER_COLON));
-        basicDelimiters.add(new BasicDelimiter(BASIC_DELIMITER_COMMA));
-    }
-
-    public void setCustomDelimiters(CustomDelimiter customDelimiters) {
-        this.customDelimiters = customDelimiters;
-        checkDuplicate();
-    }
-
-    private void checkDuplicate() {
-        if (customDelimiters == null) {
-            return;
+        if (customDelimiter.exists()) {
+            delimiters.addFirst(customDelimiter.getValue());
         }
-
-        basicDelimiters.forEach(basicDelimiter -> {
-            if (customDelimiters.get().equals(basicDelimiter.get())) {
-                throw new IllegalArgumentException();
-            }
-        });
     }
 
     public List<String> split(String input) {
-        if (customDelimiters != null) {
-            input = input.replace(customDelimiters.get(), WHITE_SPACE);
-        }
-
-        for (BasicDelimiter delimiter : basicDelimiters) {
-            input = input.replace(delimiter.get(), WHITE_SPACE);
+        for (String delimiter : delimiters) {
+            input = input.replace(delimiter, WHITE_SPACE);
         }
 
         checkDelimiterBoundaries(input);

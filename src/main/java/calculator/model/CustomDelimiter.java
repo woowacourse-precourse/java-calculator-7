@@ -1,7 +1,7 @@
 package calculator.model;
 
-import static calculator.model.BasicDelimiter.BASIC_DELIMITER_COLON;
-import static calculator.model.BasicDelimiter.BASIC_DELIMITER_COMMA;
+import static calculator.model.DelimiterGroup.BASIC_DELIMITER_COLON;
+import static calculator.model.DelimiterGroup.BASIC_DELIMITER_COMMA;
 import static calculator.model.DelimiterGroup.WHITE_SPACE;
 
 public class CustomDelimiter {
