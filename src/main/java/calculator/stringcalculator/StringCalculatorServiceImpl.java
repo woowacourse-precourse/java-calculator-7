@@ -45,7 +45,27 @@ public class StringCalculatorServiceImpl implements StringCalculatorService {
 
     @Override
     public String[] extractNumber(String input, List<String> delimiters) {
-        return new String[]{""};
+        String str = input;
+
+        if(input.matches("//(.*)\\n(.*)$")) {
+            Pattern pattern = Pattern.compile("//(.*)\\n(.*)$");
+            Matcher matcher = pattern.matcher(input);
+            str = matcher.group(2);
+        }
+
+        StringBuilder regex = new StringBuilder();
+        for (int i = 0; i < delimiters.size(); i++) {
+            if (i < delimiters.size() - 1) {
+                regex.append(delimiters.get(i)).append("|");
+                continue;
+            }
+            regex.append(delimiters.get(i));
+        }
+
+        String[] stringNumbers = str.split(String.valueOf(regex));
+        validateInputDelimiter(stringNumbers);
+
+        return stringNumbers;
     }
 
     @Override
