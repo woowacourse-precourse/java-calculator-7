@@ -37,7 +37,7 @@ public class InputParser {
      *
      * @return 기본 구분자들을 포함한 `Set` 객체
      */
-    private Set<String> initializeDefaultDelimiters() {
+    private static Set<String> initializeDefaultDelimiters() {
         Set<String> delimiters = new HashSet<>();
         delimiters.add(DEFAULT_DELIMITER_COLON.getValue());
         delimiters.add(DEFAULT_DELIMITER_COMMA.getValue());
@@ -52,7 +52,7 @@ public class InputParser {
      * @param delimiters 구분자 집합
      * @return 숫자만 남은 문자열
      */
-    private String processCustomDelimiter(String input, Set<String> delimiters) {
+    private static String processCustomDelimiter(String input, Set<String> delimiters) {
         int lastDelimiterIndex = input.lastIndexOf(CUSTOM_DELIMITER_SUFFIX.getValue());
 
         String customDelimiterSection = input.substring(2, lastDelimiterIndex);
@@ -70,7 +70,7 @@ public class InputParser {
      * @param delimiters 사용할 구분자들의 집합
      * @return 구분된 숫자 토큰 배열
      */
-    private String[] tokenizeNumbers(String numbers, Set<String> delimiters) {
+    private static String[] tokenizeNumbers(String numbers, Set<String> delimiters) {
         String regex = String.join("|", delimiters);
         String[] numbersTokens = numbers.split(regex);
 
@@ -83,7 +83,7 @@ public class InputParser {
      * @param numbers 토큰화된 숫자 배열
      * @return 빈 문자열을 제거한 숫자 배열
      */
-    private String[] filterEmptyString(String[] numbers) {
+    private static String[] filterEmptyString(String[] numbers) {
         return Arrays.stream(numbers)
                 .filter(Predicate.not(String::isEmpty))
                 .toArray(String[]::new);
@@ -95,7 +95,7 @@ public class InputParser {
      * @param customDelimiterSection 커스텀 구분자 섹션
      * @return 추출된 구분자들을 포함한 `Set` 객체
      */
-    private Set<String> extractCustomDelimiters(String customDelimiterSection) {
+    private static Set<String> extractCustomDelimiters(String customDelimiterSection) {
         Set<String> delimiters = new HashSet<>();
 
         for (char ch : customDelimiterSection.toCharArray()) {
@@ -111,7 +111,7 @@ public class InputParser {
      * @param input 사용자로부터 입력받은 문자열
      * @return 커스텀 구분자가 포함되어 있으면 true, 그렇지 않으면 false
      */
-    public boolean containCustomDelimiter(String input) {
+    private static boolean containCustomDelimiter(String input) {
         return input.startsWith(CUSTOM_DELIMITER_PREFIX.getValue())
                 && input.contains(CUSTOM_DELIMITER_SUFFIX.getValue());
     }
