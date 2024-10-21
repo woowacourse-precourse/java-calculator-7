@@ -41,6 +41,9 @@ public class InputParser {
             if (!token.matches("-?\\d+")) {
                 throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다: " + token);
             }
+            if (token.equals("0")) {
+                throw new IllegalArgumentException("0은 입력할 수 없습니다.");
+            }
         }
 
         int[] numbers = new int[tokens.length];
