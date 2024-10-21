@@ -76,11 +76,11 @@ public class Calculator {
         try{
             num = Integer.parseInt(str);
         }
-        catch(NumberFormatException e){
-            throw new NumberFormatException();
+        catch(IllegalArgumentException e){
+            throw new IllegalArgumentException();
         }
         if(num < zeroNumber){
-            throw new RuntimeException();
+            throw new IllegalArgumentException();
         }
     }
 
