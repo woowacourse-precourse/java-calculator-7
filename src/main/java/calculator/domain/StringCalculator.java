@@ -14,13 +14,9 @@ public class StringCalculator {
     }
 
     public Number calculate(String input) {
-        System.out.println("StringCalculator - 계산 시작. 입력 문자열: '" + input + "'");
         try {
-            Number result = service.calculate(input);
-            System.out.println("StringCalculator - 계산 완료. 결과: " + result.value());
-            return result;
+            return service.calculate(input);
         } catch (IllegalArgumentException e) {
-            System.out.println("StringCalculator - 계산 중 오류 발생: " + e.getMessage());
             throw e;
         }
     }

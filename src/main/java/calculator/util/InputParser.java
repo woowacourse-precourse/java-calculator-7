@@ -15,10 +15,8 @@ public class InputParser {
      * @return
      */
     public List<String> parse(String input) {
-        System.out.println("InputParser - 입력 문자열: '" + input + "'");
 
         if (input == null || input.trim().isEmpty()) {
-            System.out.println("InputParser - 빈 입력, 빈 리스트 반환");
             return List.of();
         }
 
@@ -29,8 +27,6 @@ public class InputParser {
         // Case2 커스텀 구문자
         if (input.startsWith("//")) {
             int delimiterEnd = input.indexOf("\\n");
-            System.out.println("input 확인: " + input);
-            System.out.println("delimiterEnd " + delimiterEnd);
 
             if (delimiterEnd == -1) {
                 throw new IllegalArgumentException("커스텀 구분자 형식이 올바르지 않습니다: " + input);
@@ -39,11 +35,6 @@ public class InputParser {
             numbers = input.substring(delimiterEnd + 2); // \\n은 2개의 문자 임으로 +2 해줘야함
         }
 
-        System.out.println("InputParser - 최종 구분자: '" + delimiter + "'");
-        System.out.println("InputParser - 파싱할 숫자 문자열: '" + numbers + "'");
-
-        List<String> result = Arrays.asList(numbers.split(delimiter));
-        System.out.println("InputParser - 최종 파싱 결과: " + result);
-        return result;
+        return Arrays.asList(numbers.split(delimiter));
     }
 }

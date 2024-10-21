@@ -15,15 +15,9 @@ public class CalculatorService {
     }
 
     public Number calculate(String input) {
-        System.out.println("CalculatorService - 계산 시작. 입력 문자열: '" + input + "'");
-
         List<String> numbers = parser.parse(input);
-        System.out.println("CalculatorService - 파싱된 숫자 목록: " + numbers);
 
-        Number result = sum(numbers);
-        System.out.println("CalculatorService - 계산 결과: " + result.value());
-
-        return result;
+        return sum(numbers);
     }
 
     /**
@@ -34,10 +28,8 @@ public class CalculatorService {
      */
     //StringCalculatro 의 숫자 합산 로직은 서비스 로직에 더 가깝다
     private Number sum(List<String> numbers) {
-        System.out.println("CalculatorService - 합계 계산 시작");
         return numbers.stream()
                 .filter(s -> !s.trim().isEmpty()) // 빈 문자열을 제외 (공백을 제거한 후 비어있는 문자열은 제외)
-                .peek(s -> System.out.println("CalculatorService - 처리 중인 숫자: '" + s + "'")) //로깅용
                 .peek(validator::validate) //숫자 유효성 검사(NumberValidator)
                 .map(num -> new Number(Integer.parseInt(num.trim()))) // 문자열 > Integer > Number 객체로
                 .reduce(new Number(0), Number::add); // Number 객체 모두 더하기
