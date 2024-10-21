@@ -20,8 +20,9 @@ public class Calculator {
 
             // 커스텀 구분자를 구분자 리스트에 추가
             String customDelimiter = str.substring(2, endIndex);
-            for (char c : customDelimiter.toCharArray()) {
-                delimiter.append("|").append(c);
+
+            for (int i=0; i<customDelimiter.length(); i++) {
+                delimiter.append("|").append("[").append(customDelimiter.charAt(i)).append("]");
             }
 
             // 구분자 설정문 이후의 문자열처리
