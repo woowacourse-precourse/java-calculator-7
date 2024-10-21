@@ -14,7 +14,7 @@
 
 <br>
 
-<img src="src/main/resources/static/operation.gif" alt="실행 GIF">
+<img src="src/main/resources/static/operation.gif" alt="실행 GIF" width="400">
 
 # 목차
 
