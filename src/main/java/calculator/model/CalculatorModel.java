@@ -31,7 +31,7 @@ public class CalculatorModel {
     }
 
     public String[] operationSetting(String operationInput, ArrayList<String> separate) {
-        String separatorPattern = java.lang.String.join("|", separate);
+        String separatorPattern = String.join("|", separate);
         return operationInput.split(separatorPattern);
     }
 
