@@ -9,6 +9,8 @@ public class StringAddCalculator {
 
   public void run() {
     String input = readInput();
+    int result = calculate(input);
+    System.out.println("결과 : " + result);
   }
 
   // 사용자 입력 받기
