@@ -18,7 +18,7 @@ public class InputString {
 
     private Parser parser;
 
-    public InputString(String input){
+    private InputString(String input){
         this.input = input;
         this.customSeparators = new HashSet<>();
         this.parser = new InputParser();
@@ -52,5 +52,9 @@ public class InputString {
 
     private void setOperands(){
         operands = parser.getIntegerList(input, customSeparators);
+    }
+
+    public static InputString of(String input){
+        return new InputString(input);
     }
 }

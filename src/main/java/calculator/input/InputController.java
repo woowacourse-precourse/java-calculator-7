@@ -10,6 +10,6 @@ public class InputController {
     public static InputString getInputString(){
         String inputString = readLine();
         close();
-        return new InputString(inputString);
+        return InputString.of(inputString);
     }
 }
