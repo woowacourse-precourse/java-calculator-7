@@ -8,6 +8,9 @@ public class Converter {
         List<Integer> convertedList = new ArrayList<>();
 
         for (String element : input) {
+            if (element.isEmpty()) {
+                continue;
+            }
             try {
                 convertedList.add(Integer.parseInt(element));
             }catch (NumberFormatException e) {
