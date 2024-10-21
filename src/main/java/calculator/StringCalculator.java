@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.Arrays;
+
 public class StringCalculator {
     private final DelimiterParser delimiterParser;
 
@@ -18,13 +20,9 @@ public class StringCalculator {
     }
 
     private int sum(String[] numbers) {
-        int sum = 0;
-
-        for (String number : numbers) {
-            int num = validateNumber(number);
-            sum += num;
-        }
-        return sum;
+        return Arrays.stream(numbers)
+                .mapToInt(this::validateNumber)
+                .sum();
     }
 
     private int validateNumber(String number) {
