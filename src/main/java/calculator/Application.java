@@ -44,7 +44,7 @@ public class Application {
     private static boolean isAllNumbers(String[] nums) {
         for (String num : nums) {
             if (!num.matches("\\d+")) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("덧셈할 숫자는 양수만 입력 가능합니다.");
             };
         }
         return true;
@@ -63,12 +63,12 @@ public class Application {
     private static String getCustomDelimiter(String input) {
 
         if (!input.startsWith("//")) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("구분자 입력형식이 올바르지 않습니다.");
         };
 
         String delimiter = input.substring(2);
         if (delimiter.length() > 1) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("구분자는 한글자여야 합니다.");
         };
 
         return delimiter;
