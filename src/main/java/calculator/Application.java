@@ -55,6 +55,10 @@ class Func{
 		try {
 			int sum = 0;
 			for(int i=0;i<arr.length;i++) {
+				if(Integer.parseInt(arr[i]) < 0) {
+					throw new IllegalArgumentException();
+				}
+				
 				if(arr[i].equals("")) {
 					sum += 0;
 					continue;
