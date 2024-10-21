@@ -6,12 +6,17 @@ public class Calculator {
             return 0;
         }
 
-        // 쉼표(,)와 콜론(:)을 구분자로 사용하여 숫자를 분리
-        String[] numbers = input.split(",|:");
-        return calculateSum(numbers); // 분리된 숫자 배열을 합산
+        String delimiter = ",|:"; // 기본 구분자
+        if (input.startsWith("//")) {  // 커스텀 구분자 처리
+            int delimiterIndex = input.indexOf("\n");
+            delimiter = input.substring(2, delimiterIndex);  // 구분자를 추출
+            input = input.substring(delimiterIndex + 1);     // 숫자 부분만 추출
+        }
+
+        String[] numbers = input.split(delimiter);
+        return calculateSum(numbers);
     }
 
-    // 숫자 배열을 합산하는 메서드
     private static int calculateSum(String[] numbers) {
         int sum = 0;
         for (String number : numbers) {
