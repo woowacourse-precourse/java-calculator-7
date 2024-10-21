@@ -1,7 +1,7 @@
 package calculator.controller;
 
 import calculator.io.InputProcessor;
-import calculator.io.OutputProcessor;
+import calculator.views.OutputView;
 import calculator.utils.Calculator;
 import calculator.views.InputView;
 import java.util.List;
@@ -16,8 +16,8 @@ public class Controller {
         Calculator calculator = new Calculator();
         int result = calculator.calculateResult(nums);
 
-        OutputProcessor outputProcessor = new OutputProcessor();
-        outputProcessor.printResult(result);
+        OutputView outputView = new OutputView();
+        outputView.printResult(result);
     }
 
     private String getInput() {
