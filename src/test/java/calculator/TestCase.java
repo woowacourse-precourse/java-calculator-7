@@ -11,7 +11,7 @@ public class TestCase extends NsTest {
     @Test
     void 구분자_테스트() {
         assertSimpleTest(() -> {
-            run(";;;");
+            run(":::");
             assertThat(output()).contains("결과 : 0");
         });
     }
@@ -29,6 +29,22 @@ public class TestCase extends NsTest {
         assertSimpleTest(() -> {
             run("//\\n1");
             assertThat(output()).contains("결과 : 1");
+        });
+    }
+
+    @Test
+    void 커스텀_작동_테스트() {
+        assertSimpleTest(() -> {
+            run("//;\\n1;2;3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 기본_작동_테스트() {
+        assertSimpleTest(() -> {
+            run("1,2:3");
+            assertThat(output()).contains("결과 : 6");
         });
     }
 
