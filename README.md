@@ -56,13 +56,13 @@
 
 ### controller
 
-- CalculatorController : 사용자 입력을 처리 및 계산 로직과 뷰를 연결
+- CalculatorController : 사용자 입력을 처리 및 계산 로직과 뷰 연결
 
 ### model
 
 - Calculator: 계산 메서드 인터페이스
-- CalculatorImpl: 파싱된 숫자 배열 합산
-- DelimiterParser : 입력 문자열 해당 하는 구분자로 파싱하여 숫자 추출
+- SumCalculator:  파싱된 숫자 배열 합산
+- DelimiterParser : 입력 문자열 해당하는 구분자로 파싱 하여 숫자 추출
 - Validator : 입력값 유효성 검사
 
 ### view
@@ -70,4 +70,4 @@
 - InputView : 입력 요청 및 저장
 - ResultView: 결과 출력
 
-**Application :** 메인 코드로서 모든 로직 빌드
+**Application :** 프로그램의 진입점으로, 모든 로직을 초기화하고 실행하는 메인 클래스
