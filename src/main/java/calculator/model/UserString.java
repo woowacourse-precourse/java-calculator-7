@@ -7,22 +7,20 @@ public class UserString {
 
     public static final String CUSTOM_PREFIX = "//";
     public static final String CUSTOM_SUFFIX = "\\n";
-    public static final String PREFIX = "\\";
+    public static final String ESCAPE_PREFIX = "\\";
     public static final String DELIMITER_PREFIX = "[";
     public static final String DELIMITER_SUFFIX = "]";
 
     private final String[] splitValue;
     private final StringBuilder DELIMITERS = new StringBuilder(",:");
-    
+
     public UserString(String userInput) {
 
         if (userInput.startsWith(CUSTOM_PREFIX)) {
             int endIdx = userInput.indexOf(CUSTOM_SUFFIX);
             Validator.validateWrongCustom(endIdx);
             String delimiter = userInput.substring(2, endIdx);
-            if (delimiter.equals("[") || delimiter.equals("]") || delimiter.equals("\\")) {
-                delimiter = PREFIX + delimiter;
-            }
+            delimiter = getEscapeDelimiter(delimiter);
             DELIMITERS.append(delimiter);
             userInput = userInput.substring(endIdx + 2);
         }
@@ -34,9 +32,17 @@ public class UserString {
         splitValue = split;
     }
 
+    private static String getEscapeDelimiter(String delimiter) {
+        if (delimiter.equals("[") || delimiter.equals("]") || delimiter.equals("\\")) {
+            delimiter = ESCAPE_PREFIX + delimiter;
+        }
+        return delimiter;
+    }
+
     private static String[] getSplitByStrip(String[] split) {
         split = Arrays.stream(split)
                 .map(String::strip)
+                .filter(splitNum -> !splitNum.isBlank())
                 .toArray(String[]::new);
         return split;
     }
