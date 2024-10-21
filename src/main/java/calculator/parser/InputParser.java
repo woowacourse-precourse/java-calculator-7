@@ -4,9 +4,10 @@ import java.util.regex.Pattern;
 
 public class InputParser {
 
-    private static final String DEFAULT_SEPARATOR = ", | :";
+    private static final String DEFAULT_SEPARATOR = ",|:";
 
     public String[] parse(String input) throws IllegalArgumentException {
+        input = input.replace("\\n", "\n");
         String separator = DEFAULT_SEPARATOR;
         String numbers = input;
 
@@ -25,7 +26,7 @@ public class InputParser {
                 throw new IllegalArgumentException("구분자는 숫자가 될 수 없습니다.");
             }
 
-            separator = Pattern.quote(customSeparator);     //구분자를 quote 처리
+            separator = DEFAULT_SEPARATOR + "|" + Pattern.quote(customSeparator);     //구분자를 quote 처리
             numbers = input.substring(newlineIndex + 1);    //\n 이후부터 numbers로 사용
         } else {
             if (!Character.isDigit(input.charAt(0))) {  //첫 글자가 숫자가 아니라면 오류발생

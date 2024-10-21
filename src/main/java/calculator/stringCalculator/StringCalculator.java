@@ -38,7 +38,7 @@ public class StringCalculator implements Calculator{
             return num;
         }
         catch (IllegalArgumentException e){
-            throw new IllegalArgumentException("유효ㅎ한 숫자가 아닙니다.");
+            throw new IllegalArgumentException("유효한 숫자가 아닙니다.");
         }
     }
 }

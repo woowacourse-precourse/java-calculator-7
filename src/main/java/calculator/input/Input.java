@@ -1,6 +1,6 @@
 package calculator.input;
 
-import static camp.nextstep.edu.missionutils.Console.readLine;
+import camp.nextstep.edu.missionutils.Console;
 
 public class Input {
     private static final String INPUTMESSAGE = "덧셈할 문자열을 입력해 주세요";
@@ -10,6 +10,6 @@ public class Input {
     }
 
     public static String getUserMessage(){
-        return readLine();
+        return Console.readLine();
     }
 }
