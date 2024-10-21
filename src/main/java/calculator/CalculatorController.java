@@ -10,11 +10,8 @@ public class CalculatorController {
     }
 
     public void run() {
-        try {
-            String inputValue = view.input();
-            int result = calculator.calculate(inputValue);
-            view.output(result);
-        } catch (IllegalArgumentException e) {
-        }
+        String inputValue = view.input();
+        int result = calculator.calculate(inputValue);
+        view.output(result);
     }
 }
