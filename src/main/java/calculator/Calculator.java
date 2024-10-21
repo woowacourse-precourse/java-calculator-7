@@ -4,7 +4,7 @@ import calculator.io.ConsoleInputHandler;
 import calculator.io.ConsoleOutputHandler;
 import calculator.part.CalculateComposition;
 import calculator.part.CalculatorAdder;
-import calculator.separator.AddSeparator;
+import calculator.separator.DelimiterAdder;
 import calculator.separator.DefaultSeparator;
 import calculator.separator.SeparatorStorage;
 import calculator.utility.NumberWrapper;
@@ -34,7 +34,7 @@ public class Calculator {
         }
 
         try {
-            String parsedInput = AddSeparator.addCustomSeparator(userInput);
+            String parsedInput = DelimiterAdder.addCustomSeparator(userInput);
 
             NumberWrapper[] toSumArrays = defaultSeparator.separateStringToSum(parsedInput, separatorStorage);
             NumberWrapper sum = calculateComposition.makeSum(toSumArrays);

@@ -3,7 +3,7 @@ package calculator.separator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class AddSeparator {
+public class DelimiterAdder {
 
     private static final String regex = "//(.)\\\\n(.*)";
     private static SeparatorStorage separatorStorage = new SeparatorStorage();
