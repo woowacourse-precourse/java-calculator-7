@@ -25,6 +25,19 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 공백_입력_테스트() {
+        // Given
+        String input = "\"\""; // 입력값으로 공백 문자열
+
+        // When
+        assertSimpleTest(() -> {
+            run(input); // run 메서드에 공백 문자열을 전달
+            // Then
+            assertThat(output()).contains("결과 : 0"); // 출력 결과가 "결과 : 0"인지 확인
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
