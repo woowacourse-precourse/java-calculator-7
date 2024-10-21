@@ -5,6 +5,8 @@ import java.util.List;
 
 public class CalculatorService implements Service {
 
+    private static final String CUSTOM_SEPARATOR_REGEX = "^//\\D\n";
+
     @Override
     public List<String> createSeparators() {
         List<String> separators = new ArrayList<>();
@@ -15,8 +17,17 @@ public class CalculatorService implements Service {
     }
 
     @Override
+    public boolean isCustomSeparator(String input) {
+        return input.matches(CUSTOM_SEPARATOR_REGEX);
+    }
+
+    @Override
     public String checkCustomSeparator(String input) {
-        return "";
+        String regex = "^//\\D\n";
+        if (input.matches(regex)) {
+
+        }
+        return input;
     }
 
     @Override

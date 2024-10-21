@@ -6,6 +6,8 @@ public interface Service {
 
     List<String> createSeparators();
 
+    boolean isCustomSeparator(String input);
+
     String checkCustomSeparator(String input);
 
     String removeCustomPart(String input);

@@ -22,10 +22,13 @@ public class CalculatorController {
         String input = inputView.inputString();
 
         List<String> separators = service.createSeparators();
-        String customSeparator = service.checkCustomSeparator(input);
-        separators.add(customSeparator);
-        String numAndSeparator = service.removeCustomPart(input);
-        String[] nums = service.separateInput(numAndSeparator, separators);
+        if (service.isCustomSeparator(input)) {
+            String customSeparator = service.checkCustomSeparator(input);
+            separators.add(customSeparator);
+            input = service.removeCustomPart(input);
+        }
+
+        String[] nums = service.separateInput(input, separators);
         int result = service.calculate(nums);
 
         outputView.outputResult(result);
