@@ -1,7 +1,82 @@
 package calculator;
 
-public class Application {
-    public static void main(String[] args) {
-        // TODO: í”„ë¡œê·¸ë¨ êµ¬í˜„
+import camp.nextstep.edu.missionutils.Console;
+
+public class Application{
+    public static void main(String[] args){
+/*
+        ¹®ÀÚ¿­ µ¡¼À °è»ê±â
+        0. ¹®ÀÚ¿­ ÀÔ·ÂÀº readLine()À» È°¿ëÇÑ´Ù.
+        1. ¹®ÀÚ¿­¿¡¼­ ±¸ºĞÀÚ·Î ºĞ¸®µÈ ¼ıÀÚ¸¦ ÃßÃâÇÏ¿© ´õÇÏ´Â °è»ê±â¸¦ ±¸ÇöÇÏÀÚ.
+        2. ±âº» ±¸ºĞÀÚ´Â ½°Ç¥(,) or Äİ·Ğ(:)ÀÌ´Ù.
+        3. Ä¿½ºÅÒ ±¸ºĞÀÚ´Â //¿Í \n »çÀÌ¿¡ ÀÛ¼ºµÇ¾î ÀÖ´Ù.
+        4. »ç¿ëÀÚ°¡ Àß¸øµÈ °ªÀ» ÀÔ·ÂÇÒ °æ¿ì IllegalArgumentExceptionÀ» ¹ß»ı½ÃÅ² ÈÄ Á¾·áµÈ´Ù.
+*/
+        try {
+            System.out.println("µ¡¼ÀÇÒ ¹®ÀÚ¿­À» ÀÔ·ÂÇØÁÖ¼¼¿ä.\n");
+
+            // ¹®ÀÚ¿­ ÀÔ·Â¹Ş±â
+            String input = Console.readLine();
+
+            // ¹®ÀÚ¿­À» °è»êÇÏ±â À§ÇÑ Å¬·¡½º
+            StringCalculator stringCalculator = new StringCalculator();
+
+            // ÀÔ·Â ¹ŞÀº °ªÀÌ ¾ø´Ù¸é ¿À·ù ¹ß»ı½ÃÅ°±â
+            if(input == null) {
+                throw new IllegalArgumentException();
+            }
+
+            Long output = 0L;
+            // ÀÔ·Â ¹ŞÀº °ªÀÌ ¼ıÀÚ·Î ½ÃÀÛµÇ¸é : ¶Ç´Â ,·Î ±¸ºĞµÇ¾î ÀÖ´Â °æ¿ìÀÌ´Ù.
+            if (!input.startsWith("//")) {
+                output = stringCalculator.Calculator(input);
+            } else if(input.charAt(0) == '/'){
+                String separator = input.split("\\\\n")[0].replaceAll("/", "").strip();
+                String str = input.split("\\\\n")[1];
+                output = stringCalculator.Calculator(str, separator);
+            }else{
+                // ÀÔ·Â ¹ŞÀº °ªÀÌ :°ú ,·Î ±¸ºĞµÇ¾î ÀÖÁöµµ ¾Ê°í, //·Î ½ÃÀÛµÈ °ªÀÌ ¾Æ´Ñ °æ¿ì
+                throw new IllegalArgumentException();
+            }
+
+            // °á°ú Ãâ·ÂÇÏ±â
+            System.out.println("°á°ú : " + output);
+        } catch (Exception e) {
+            throw new IllegalArgumentException();
+        }
+
+    }
+
+}
+class StringCalculator {
+
+    public Long Calculator(String str, String separator) {
+        Long sum = 0L;
+        Long number;
+        for(String num : str.split(separator)) {
+            number = Long.parseLong(num.strip());
+            if(number < 0){
+                throw new IllegalArgumentException();
+            }else {
+                sum += number;
+            }
+        }
+
+        return sum;
+    }
+
+    public Long Calculator(String str) {
+        Long sum = 0L;
+        Long number;
+        for(String num : str.split(",|:")){
+            number = Long.parseLong(num.strip());
+            if(number < 0){
+                throw new IllegalArgumentException();
+            }else {
+                sum += number;
+            }
+        }
+
+        return sum;
     }
 }
