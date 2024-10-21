@@ -1,5 +1,6 @@
 package calculator;
 
+import static calculator.BasicDelimiter.*;
 import static calculator.ErrorMessages.*;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -44,7 +45,7 @@ class ApplicationTest extends NsTest {
     void validateOnlyContainCOMMA() {
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> runException(",,,,,,")).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining("," + ERROR_BASIC_DELIMITER_ONLY_DELIMITER_SUPPORT);
+                    .hasMessageContaining(COMMA + ERROR_BASIC_DELIMITER_ONLY_DELIMITER_SUPPORT);
         });
         assertSimpleTest(() -> {
             assertThatNoException().isThrownBy(() -> run("1,3,"));
@@ -55,7 +56,7 @@ class ApplicationTest extends NsTest {
     void validateOnlyContainSEMICOLON() {
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> runException(";;;;;;;;")).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining(";" + ERROR_BASIC_DELIMITER_ONLY_DELIMITER_SUPPORT);
+                    .hasMessageContaining(SEMICOLON + ERROR_BASIC_DELIMITER_ONLY_DELIMITER_SUPPORT);
         });
         assertSimpleTest(() -> {
             assertThatNoException().isThrownBy(() -> run("1;;3"));
@@ -66,7 +67,7 @@ class ApplicationTest extends NsTest {
     void validateOnlyContainCOMMA_SEMICOLON() {
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> runException(",,,,,,;;;;;;;;")).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining(",|;" + ERROR_BASIC_DELIMITER_ONLY_DELIMITER_SUPPORT);
+                    .hasMessageContaining(COMMA_OR_SEMICOLON + ERROR_BASIC_DELIMITER_ONLY_DELIMITER_SUPPORT);
         });
         assertSimpleTest(() -> {
             assertThatNoException().isThrownBy(() -> run("1;3,1"));
