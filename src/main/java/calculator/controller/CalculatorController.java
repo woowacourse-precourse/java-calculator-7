@@ -5,7 +5,6 @@ import calculator.view.CalculatorView;
 import java.math.BigInteger;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Map;
 
 public class CalculatorController {
 
@@ -22,15 +21,9 @@ public class CalculatorController {
         calcView.printStartMsg();
         String userInput = calcView.getUserInput();
 
-        ArrayDeque<String> sepStack = calcService.detectNormalSeparator(userInput);
-        //FIXME: 컨트롤러에 로직이 들어가지 않도록
-        if (calcService.hasSpecialSeparator(userInput)) {
-            Map<String, String> specialResult = calcService.specialSepProcessing(userInput);
-            sepStack.addLast(specialResult.get("sep"));
-            userInput = specialResult.get("input");
-        }
+        String processedInput = calcService.detectSeparators(userInput);
 
-        ArrayList<String> splitResult = calcService.processingInputBySepStack(userInput, sepStack);
+        ArrayList<String> splitResult = calcService.processingInput(processedInput);
         BigInteger result = calcService.calcSplitResult(splitResult);
 
         calcView.printResultMsg(result);

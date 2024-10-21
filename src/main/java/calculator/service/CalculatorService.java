@@ -3,88 +3,89 @@ package calculator.service;
 import java.math.BigInteger;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
 public class CalculatorService {
 
     private final String SPECIAL_PREFIX = "//";
     private final String SPECIAL_SUFFIX = "\\n";
-    private final String SEPARATOR_COMMA = ",";
-    private final String SEPARATOR_COLON = ":";
+    private final StringTokenizer NORMAL_SEPARATORS = new StringTokenizer(", :");
+    private ArrayDeque<String> separatorQueue = new ArrayDeque<>();
 
-    public ArrayDeque<String> detectNormalSeparator(String input) {
-
-        ArrayDeque<String> separatorStack = new ArrayDeque<>();
-
-        if (input.contains(SEPARATOR_COLON)) {
-            separatorStack.addLast(SEPARATOR_COLON);
-        }
-
-        if (input.contains(SEPARATOR_COMMA)) {
-            separatorStack.addLast(SEPARATOR_COMMA);
-        }
-
-        return separatorStack;
+    public ArrayDeque<String> getSeparatorQueue() {
+        return separatorQueue;
     }
 
-    public Map<String, String> specialSepProcessing(String input) {
+    public String detectSeparators(String input) {
 
-        Map<String, String> specialProcessingResult = new HashMap<>();
+        if (hasSpecialSeparator(input)) {
+            String specialSeparator = extractSpecialSeparator(input);
+            separatorQueue.addLast(specialSeparator);
+            input = modifyInputBySpecialSeparator(input, specialSeparator);
+        }
 
-        String specialSub = getSpecialSubstr(input);
+        detectNormalSeparators(input);
 
-        specialProcessingResult.put("sep", findSpecialSepBySubStr(specialSub));
-        specialProcessingResult.put("input", modifyInputBySpecialSub(input, specialSub));
-
-        return specialProcessingResult;
+        return input;
     }
 
-    private String modifyInputBySpecialSub(String input, String specialSub) {
-        return input.substring(specialSub.length() - 1);
+    private void detectNormalSeparators(String input) {
+
+        while (NORMAL_SEPARATORS.hasMoreTokens()) {
+            String separator = NORMAL_SEPARATORS.nextToken();
+
+            if (input.contains(separator)) {
+                separatorQueue.addLast(separator);
+            }
+        }
+    }
+
+    private String modifyInputBySpecialSeparator(String input, String specialSeparator) {
+        return input.substring(input.indexOf(SPECIAL_SUFFIX) + SPECIAL_SUFFIX.length());
     }
 
     public boolean hasSpecialSeparator(String input) {
-
         return input.contains(SPECIAL_PREFIX) && input.contains(SPECIAL_SUFFIX);
     }
 
-    private String getSpecialSubstr(String input) {
+//    private String getSpecialSubstr(String input) {
+//
+//        int prefixLen = SPECIAL_PREFIX.length();
+//        int suffixLen = SPECIAL_SUFFIX.length();
+//        String prefixSub = input.substring(0, prefixLen);
+//        String suffixSub = input.substring(prefixLen + 1, prefixLen + suffixLen + 1);
+//
+//        if (!prefixSub.equals(SPECIAL_PREFIX) || !suffixSub.equals(SPECIAL_SUFFIX)) {
+//            throw new IllegalArgumentException("커스텀 구분자 설정 형식이 잘못되었습니다");
+//        }
+//
+//        return input.substring(0, prefixLen + suffixLen + 2);
+//    }
 
-        int prefixLen = SPECIAL_PREFIX.length();
-        int suffixLen = SPECIAL_SUFFIX.length();
-        String prefixSub = input.substring(0, prefixLen);
-        String suffixSub = input.substring(prefixLen + 1, prefixLen + suffixLen + 1);
+    private String extractSpecialSeparator(String input) {
 
-        if (!prefixSub.equals(SPECIAL_PREFIX) || !suffixSub.equals(SPECIAL_SUFFIX)) {
-            throw new IllegalArgumentException("커스텀 구분자 설정 형식이 잘못되었습니다");
-        }
+        int startIndex = SPECIAL_PREFIX.length();
+        int endIndex = input.indexOf(SPECIAL_SUFFIX);
+        String specialSeparator = input.substring(startIndex, endIndex);
 
-        return input.substring(0, prefixLen + suffixLen + 2);
-    }
-
-    private String findSpecialSepBySubStr(String specialSubstr) {
-
-        String specialSep = String.valueOf(specialSubstr.charAt(SPECIAL_PREFIX.length()));
-
-        if (specialSep.equals(SEPARATOR_COLON) || specialSep.equals(SEPARATOR_COMMA)) {
+        if (separatorQueue.contains(specialSeparator)) {
             throw new IllegalArgumentException("일반 구분자 (쉼표,콜론) 는 특수 구분자로 사용할 수 없습니다.");
         }
 
-        return specialSep;
+        return specialSeparator;
     }
 
-    public ArrayList<String> processingInputBySepStack(String input, ArrayDeque<String> sepStack) {
+    public ArrayList<String> processingInput(String input) {
 
         ArrayList<String> resultList = new ArrayList<>();
 
-        if(!input.isEmpty()) {
+        if (!input.isEmpty()) {
             resultList.add(input);
         }
 
-        while (!sepStack.isEmpty() && !input.isEmpty()) {
-            String sep = sepStack.removeLast();
+        while (!separatorQueue.isEmpty() && !input.isEmpty()) {
+            String sep = separatorQueue.removeFirst();
             resultList = splitStrListBySep(resultList, sep);
         }
 
