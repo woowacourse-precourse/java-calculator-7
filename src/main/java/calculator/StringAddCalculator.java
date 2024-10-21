@@ -40,7 +40,7 @@ public class StringAddCalculator {
             try {
                 int num = Integer.parseInt(inputArray[i]);
 
-                if (num < 0) {
+                if (num <= 0) {
                     throw new IllegalArgumentException(ErrorSubstance.NEGATIVE_NUM_AVAILABLE.getMessage());
                 }
 
