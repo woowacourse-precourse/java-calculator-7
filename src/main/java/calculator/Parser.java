@@ -59,7 +59,7 @@ public class Parser {
             if (number.isEmpty()) {
                 continue;
             } else if (!operands.validate(number)) {
-                throw new IllegalArgumentException("잘못 된 입력입니다.");
+                throw new IllegalArgumentException("잘못된 입력입니다.");
             } else {
                 operands.addOperand(number);
             }
