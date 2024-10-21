@@ -21,8 +21,8 @@ public class Application {
     private static String[] splitInput(String inputStr) {
         if (inputStr.startsWith("//")) {
             // "\n"으로 개행 문자 처리
-            String delimiter = inputStr.substring(2, inputStr.indexOf("\n"));
-            inputStr = inputStr.substring(inputStr.indexOf("\n") + 1);
+            String delimiter = inputStr.substring(2, inputStr.indexOf("\\n"));
+            inputStr = inputStr.substring(inputStr.indexOf("\\n") + 2);
             return splitString(inputStr, delimiter);
         }
         return splitString(inputStr, ",|:"); // 기본 구분자 처리
@@ -34,11 +34,11 @@ public class Application {
             try {
                 int intNum = Integer.parseInt(num);
                 if (intNum < 0) {
-                    throw new IllegalArgumentException("음수는 입력할 수 없습니다: " + num);
+                    throw new IllegalArgumentException();
                 }
                 return intNum;
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("잘못된 숫자 형식입니다: " + num);
+                throw new IllegalArgumentException();
             }
         }).sum();
     }
