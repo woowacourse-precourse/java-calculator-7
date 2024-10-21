@@ -1,6 +1,8 @@
 package calculator;
 
 public class CalculateM {
+    private static final int MAX_NUMBER = Integer.MAX_VALUE;
+
     public int calculate(String input) {
         validateInput(input);
 
@@ -42,20 +44,27 @@ public class CalculateM {
     }
 
     private int sumNumbers(String[] numberArray) {
-        int sum = 0;
+        long sum = 0;
         for (String numberStr : numberArray) {
             if (!numberStr.trim().isEmpty()) {
                 int number = parseNumber(numberStr);
                 validateNumber(number);
                 sum += number;
+                if (sum > MAX_NUMBER) {
+                    throw new IllegalArgumentException("합이 너무 큽니다 (최대 " + MAX_NUMBER + ")");
+                }
             }
         }
-        return sum;
+        return (int) sum;
     }
 
     private int parseNumber(String numberStr) {
         try {
-            return Integer.parseInt(numberStr.trim());
+            long number = Long.parseLong(numberStr.trim());
+            if (number > MAX_NUMBER) {
+                throw new IllegalArgumentException("숫자가 너무 큽니다 (최대 " + MAX_NUMBER + "): " + number);
+            }
+            return (int) number;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("유효하지 않은 숫자 형식입니다: " + numberStr);
         }
