@@ -13,32 +13,32 @@ public class StringCalculator {
     private final DelimiterParser delimiterParser = new DelimiterParser();
     private int[] expression;
 
-    public StringCalculator(String input) {
-        preprocessOnInput(input);
-    }
-
     public int doSum() {
         return Arrays.stream(expression).sum();
     }
 
+    public StringCalculator(String input) {
+        preprocessOnInput(input);
+    }
+
     private void preprocessOnInput(String input) {
-        String[] stringExpression = makeStringToExpression(input);
+        String[] stringExpression = stringDivideByDelimiter(input);
         expression = stringToIntegerArray(stringExpression);
+    }
+
+    private String[] stringDivideByDelimiter(String input) {
+        DelimiterContentPair parsed = delimiterParser.parseInput(input);
+        return makeStringArray(parsed);
+    }
+
+    private String[] makeStringArray(DelimiterContentPair parsedInput) {
+        String delimiter = parsedInput.getDelimiter();
+        String content = parsedInput.getContent();
+        return content.split(delimiter);
     }
 
     private int[] stringToIntegerArray(String[] arr) {
         return Arrays.stream(arr).mapToInt(this::parseInt).toArray();
-    }
-
-    private String[] makeStringToExpression(String input) {
-        DelimiterContentPair parsed = delimiterParser.parseInput(input);
-        return makeStrArray(parsed);
-    }
-
-    private String[] makeStrArray(DelimiterContentPair parsedInput) {
-        String delimiter = parsedInput.getDelimiter();
-        String content = parsedInput.getContent();
-        return content.split(delimiter);
     }
 
     private Integer parseInt(String str) {
