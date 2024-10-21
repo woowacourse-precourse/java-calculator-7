@@ -9,8 +9,11 @@ public class Application {
         // TODO: 프로그램 구현
 
         String splits = ":,";
-        String patterString = "(?<=//).*"; //사이만 추출가능
+        String patterString = "(?<=//).*?(?=\\\\n)"; //사이만 추출가능
+        String patterString2 = "//.*?\\\\n";
+        System.out.println("Please Enter Your String!");
         String input = Console.readLine();
+
         if (input.startsWith("//")) {
             Pattern pattern = Pattern.compile(patterString);
             Matcher matcher = pattern.matcher(input);
@@ -20,7 +23,8 @@ public class Application {
             } else {
                 System.out.println("there is no matched String");
             }
-            input = Console.readLine(); //새 input받기
+            input = input.replaceAll(patterString2,""); //새 input받기
+
         } else if (input.matches("^[^0-9]*$")) {
             try {
                 throw new IllegalArgumentException();
@@ -49,6 +53,7 @@ public class Application {
             for (int j : intArr) { //배열의 값 모두 출력
                 sum += j;
             }
+            System.out.print("The Sum is : ");
             System.out.println(sum);
         }
     }
