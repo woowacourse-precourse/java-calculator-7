@@ -27,9 +27,17 @@ public class Application {
                 throw new IllegalArgumentException("잘못된 커스텀 구분자 형식입니다.");
             }
         }
+        else if (!isNumeric(input.substring(0, 1))) {
+            throw new IllegalArgumentException("음수 혹은 잘못된 커스텀 구분자 입력입니다.");
+        }
 
 
     }
 
+    // 문자열이 양수인지 확인하는 함수
+    public static boolean isNumeric(String str) {
+        String regex = "[1-9]\\d*";
+        return str.matches(regex);
+    }
 
 }
