@@ -1,4 +1,4 @@
-package exception;
+package calculator.exception;
 
 
 public enum ErrorMessage {
