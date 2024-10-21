@@ -24,13 +24,12 @@ public class StringValidator {
     // 문자열 앞부분의 "//"와 "\n" 사이에 커스텀 구분자를 지정하지 않은 경우
     // "//"와 "\n" 사이에 2개 이상의 문자가 포함되어 있는 경우
     public static void validateCustomDelimiter(String inputString){
-        Pattern customDelimiterPattern = Pattern.compile("//(.)\\\\n(.*)");
-        Matcher matcher = customDelimiterPattern.matcher(inputString);
-        if(matcher.matches()){
-            String customDelimiter = matcher.group(1);
-            String otherText = matcher.group(2);
+        if(inputString.matches("//(.)\\\\n(.*)")){
+            String customDelimiter = Pattern.quote(inputString.substring(2,3));
+            String otherText = inputString.substring(5);
 
-            String newDelimiter = Constants.DEFAULT_DELIMITERS + "|"+customDelimiter;
+            String newDelimiter = Constants.DEFAULT_DELIMITERS + "|" + customDelimiter;
+            System.out.println(newDelimiter);
             validateDelimiters(otherText, newDelimiter);
 
         }else throw new IllegalArgumentException("잘못된 커스텀 구분자 형식입니다.");
