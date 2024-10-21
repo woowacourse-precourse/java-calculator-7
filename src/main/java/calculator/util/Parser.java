@@ -4,6 +4,8 @@ import calculator.domain.Calculator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Parser {
 
@@ -15,7 +17,7 @@ public class Parser {
     }
 
     private char parseIdentifier(Calculator calculator, String input) {
-        if(input.matches("^//.\\n.*")) {
+        if(matches(input)) {
             calculator.addIdentifier(input.charAt(2));
             return input.charAt(2);
         }
@@ -24,7 +26,7 @@ public class Parser {
 
     private String parseExpression(char identifier, String input) {
         if(identifier != '\0') {
-            return input.substring(5);
+            return input.substring(4);
         }
         return input;
     }
@@ -44,4 +46,9 @@ public class Parser {
         return operands;
     }
 
+    private boolean matches(String input) {
+        Pattern pattern = Pattern.compile("//.\n.+");
+        Matcher matcher = pattern.matcher(input);
+        return matcher.matches();
+    }
 }

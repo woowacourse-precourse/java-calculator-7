@@ -3,6 +3,7 @@ package calculator.domain;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Calculator {
 
@@ -30,6 +31,12 @@ public class Calculator {
     }
 
     public String identifiersToString() {
-        return identifiers.toString();
+        StringBuilder joinString = new StringBuilder();
+        joinString.append('[');
+        for (char c : identifiers) {
+            joinString.append(c);
+        }
+        joinString.append(']');
+        return joinString.toString();
     }
 }
