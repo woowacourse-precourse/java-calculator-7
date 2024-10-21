@@ -55,7 +55,7 @@ public class StringValidator {
 	}
 
 	private int checkInputDelimiter(String input, int index) {
-		if (!delimiters.contains(input.substring(index, index + 1))) {
+		if (!delimiters.contains(input.substring(index, index + DELIMITER_LENGTH))) {
 			throw new IllegalArgumentException(ERROR_MESSAGE);
 		}
 		return index + DELIMITER_LENGTH;
