@@ -54,6 +54,12 @@ public class NumberParser {
             numberList.add(value);
         }
     }
+
+    /**
+     * 문자의 숫자 여부를 리턴
+     * @param c 문자
+     * @return 숫자 여부
+     */
     private boolean isNumber(char c) {
         return c <= '9' && c >= '0';
     }

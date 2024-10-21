@@ -37,10 +37,19 @@ public class Delimiter {
         return false;
     }
 
+    /**
+     * 주어진 문자열이 커스텀 구분자인지 확인
+     * @param in 주어진 문자열
+     * @return 커스텀 구분자인지 여부
+     */
     public boolean isCustomDelimiter(String in) {
         return hasCustomDelimiter && in.equals(customDelimiter);
     }
 
+    /**
+     *
+     * @return 커스텀 구분자의 길이
+     */
     public int getCustomDelimiterLength() {
         return customDelimiter.length();
     }
