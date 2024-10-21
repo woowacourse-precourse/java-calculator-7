@@ -1,6 +1,5 @@
 package calculator.domain.machine;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -16,16 +15,14 @@ class LineSplitterTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"2,3,4", "2:3,4", "2:3:4"})
-    @DisplayName("기본 구분자 성공")
-    void basicDelimiterSuccess(String input) {
+    void 기본_구분자_성공(String input) {
         // when
         List<Long> operands = lineSplitter.getOperands(input);
         assertArrayEquals(new Long[]{2L, 3L, 4L}, operands.toArray());
     }
 
     @Test
-    @DisplayName("커스텀 구분자 성공")
-    void basicDelimiterFailure() {
+    void 커스텀_구분자_성공() {
         // given
         String line = "//@\\n2@3@4";
 
@@ -37,8 +34,7 @@ class LineSplitterTest {
     }
 
     @Test
-    @DisplayName("커스텀 구분자가 공백일 때")
-    void blankCustomDelimiter() {
+    void 커스텀_구분자가_공백일_때() {
         // given
         String line = "//\\n234";
 

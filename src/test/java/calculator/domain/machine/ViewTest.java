@@ -22,7 +22,7 @@ class ViewTest {
     }
 
     @Test
-    void printInputRequestMsg() {
+    void 입력_요청_메시지_출력() {
         // given
         // when
         view.printInputRequestMsg();
@@ -32,7 +32,7 @@ class ViewTest {
     }
 
     @Test
-    void readInputMsg() {
+    void 입력_받기() {
         // given
         String input = "2:3:4";
 
@@ -47,7 +47,7 @@ class ViewTest {
     }
 
     @Test
-    void printResult() {
+    void 결과값_출력() {
         // given
         // when
         view.printResult(6L);
