@@ -5,6 +5,10 @@ public class NumberExtractor {
     public static final String DEFAULT_SEPARATOR = "[,:]+";
 
     public int[] extractNumbersWithDefaultSeparator(String source) throws IllegalArgumentException{
+        if (source.equals("")) {
+            return new int[1];
+        }
+
         String[] extractNumbers = source.split(DEFAULT_SEPARATOR);
 
         int size = extractNumbers.length;

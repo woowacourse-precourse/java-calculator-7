@@ -61,7 +61,7 @@ class NumberExtractorTest {
     void extractNumbersWithCustomSeparator() {
         //given
         NumberExtractor numberExtractor = new NumberExtractor();
-        String source = "//;\n1;2;3";
+        String source = "//;\\n1;2;3";
 
         //when
         int[] numbers = numberExtractor.extractNumbersWithCustomSeparator(source);
@@ -78,7 +78,7 @@ class NumberExtractorTest {
     void extractNumbersWithCustomSeparators() {
         //given
         NumberExtractor numberExtractor = new NumberExtractor();
-        String source = "//,;\n1,2;3";
+        String source = "//,;\\n1,2;3";
 
         //when
         int[] numbers = numberExtractor.extractNumbersWithCustomSeparator(source);

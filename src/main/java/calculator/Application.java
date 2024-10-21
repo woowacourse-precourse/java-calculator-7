@@ -14,11 +14,7 @@ public class Application {
         IOHandler handler = new ConsoleIOHandler();
 
         Calculator calculator = new Calculator(sumCalculator, handler);
-        try {
-            calculator.run();
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
+        calculator.run();
     }
 
 }
