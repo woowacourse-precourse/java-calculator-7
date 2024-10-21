@@ -8,12 +8,20 @@ public class Separator {
 
     public Separator() {
         separator = new StringBuilder();
+        separator.append(BASIC_SEPARATOR);
+    }
+
+    public boolean validateNONeedToRegister(String separatorSection) {
+        return separatorSection.isEmpty();
     }
 
     public void registerSeparator(String separatorSection) {
+        if (validateNONeedToRegister(separatorSection)) {
+            return;
+        }
         for (int nowSeparatorIdx = 0; nowSeparatorIdx < separatorSection.length(); nowSeparatorIdx++) {
             separator.append(DELIMITER_OF_SEPARATOR);
-            separator.append(BASIC_SEPARATOR);
+            separator.append(separatorSection.charAt(nowSeparatorIdx));
         }
     }
 
