@@ -5,7 +5,7 @@ public class DelimiterProcessor {
     public static String extractDelimiter(String input) {
         if (input.startsWith("//")) {
             // 구분자 포맷 확인
-            if (!input.contains("\n")) {
+            if (!input.contains("\n") && !input.contains("\\n")) {
                 throw new IllegalArgumentException("잘못된 구분자 포맷입니다. 형식은 //[구분자]\\n 입니다.");
             }
 
