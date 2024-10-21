@@ -7,8 +7,9 @@ public class Application {
         Calculator calculator = new Calculator();
 
         String input = calculator.input();
-        String basicProcess = calculator.basicSeparate(input);
-        String customProcess = (calculator.customSeparate(basicProcess));
+        String basicProcess = calculator.replaceBasicSeparators(input);
+        String customProcess = (calculator.replaceCustomSeparate(basicProcess));
+        calculator.validationCheck(customProcess);
         calculator.calculationResult(customProcess);
     }
 }

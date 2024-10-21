@@ -23,7 +23,7 @@ public class Calculator {
      * @param inputStr 변환할 문자열
      * @return 변환된 문자열
      */
-    public String basicSeparate(String inputStr){
+    public String replaceBasicSeparators(String inputStr){
         String resultStr = inputStr.replace(":", "@");
         resultStr = resultStr.replace(",", "@");
 
@@ -36,7 +36,7 @@ public class Calculator {
      * @param inputStr 변환할 문자열
      * @return 변환된 문자열
      */
-    public String customSeparate(String inputStr){
+    public String replaceCustomSeparate(String inputStr){
         ArrayList<String> customSeparators = getCustomSeparators(inputStr);
         inputStr = inputStr.replaceAll("\\/\\/(.)\\\\n", "");
 
@@ -46,7 +46,12 @@ public class Calculator {
 
         return inputStr;
     }
-
+    /**
+     * 커스텀 구분자들을 반환하는 함수.
+     *
+     * @param inputStr 변환할 문자열
+     * @return 구분자 모음 ArrayList
+     */
     public ArrayList<String> getCustomSeparators(String inputStr){
         Pattern pattern = Pattern.compile("\\/\\/(.)\\\\n");
         Matcher matcher = pattern.matcher(inputStr);
@@ -59,17 +64,36 @@ public class Calculator {
 
         return custom;
     }
-
+    /**
+     * 최종 구분자 처리한 문자열에서 숫자를 추출해 더하여 걀과를 출력하는 함수
+     *
+     * @param resultStr 변환할 문자열
+     */
     public void calculationResult(String resultStr){
         String[] splitNum = resultStr.split("@");
 
         int result = 0;
-
         for (String s : splitNum) {
+            if(s.isEmpty()) continue;
             result += Integer.parseInt(s);
         }
 
         System.out.println("결과 : " + result);
     }
 
+    /**
+     * 주어진 문자열에서 숫자 또는 '@'가 아닌 문자가 있을 경우
+     * IllegalArgumentException을 발생시키는 함수.
+     *
+     * @param resultStr 검사할 문자열
+     * @throws IllegalArgumentException 숫자나 '@'가 아닌 문자가 포함된 경우
+     */
+    public void validationCheck(String resultStr){
+        for (int i = 0; i < resultStr.length(); i++) {
+            char currentChar = resultStr.charAt(i);
+            if (!Character.isDigit(currentChar) && currentChar != '@') {
+                throw new IllegalArgumentException("잘못된 문자 '" + currentChar + "'가 포함되어 있습니다.");
+            }
+        }
+    }
 }
