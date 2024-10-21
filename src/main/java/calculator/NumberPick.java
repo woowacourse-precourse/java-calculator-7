@@ -2,7 +2,7 @@ package calculator;
 
 public class NumberPick {
     public static int[] pickNumbers(String[] numbers) {
-        int[] pickedNumbers = new int[numbers.length];
+        int[] pickedNumbers = new int[numbers.length]; // 최대 숫자 개수로 초기화
         int count = 0; // 실제 숫자의 개수 카운트
 
         for (String numberStr : numbers) {

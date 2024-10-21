@@ -5,7 +5,7 @@ public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         System.out.println("입력:");
-        String input = Console.readLine();
+        String input = Console.readLine(); // 사용자 입력 받기
 
         try {
             String[] numbers = Distiniction.splitInput(input); // 입력을 분리
