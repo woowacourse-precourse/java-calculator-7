@@ -42,7 +42,13 @@ public class Calculator {
             if (start == -1) {
                 throw new IllegalArgumentException("잘못된 입력입니다: " + str);
             }
-            delimiter += "|" + str.substring(2, start);
+
+            String customDelimiter = str.substring(2, start);
+            if (Character.isDigit(customDelimiter.charAt(0))) {
+                throw new IllegalArgumentException("잘못된 커스텀 구분자입니다: " + customDelimiter);
+            }
+
+            delimiter += "|" + customDelimiter;
             str = str.substring(start + 2);
         }
 

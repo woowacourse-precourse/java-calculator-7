@@ -49,6 +49,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 커스텀_구분자가_숫자일_경우() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//1\\n11213"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
     void 커스텀_구분자_사용시_예외_테스트() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//;1;2;3"))
