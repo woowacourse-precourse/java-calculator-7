@@ -22,7 +22,7 @@ public class InputService {
         try {
             return Console.readLine();
         } catch (NoSuchElementException e) {
-            return "";
+            return ""; // 입력값이 없을 경우 빈 문자열 반환
         }
 
     }

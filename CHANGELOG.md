@@ -1,0 +1,14 @@
+- docs (README.md): README.md에 리팩토링 관련 3차 개발 TODO 작성
+- fix (CalculateService.java): 음수 예외처리 추가 구현 및 README.md 반영
+- fix (InputService.java): 커스텀 구분자의 끝을 나타내는 개행 문자 상수 수정
+- fix (InputService.java): 공백 입력시 NoSuchElementException에러  핸들링
+- docs (README.md): README.md에 테스트 관련 2차 개발 TODO 작성
+- feat: 결과 출력 기능 구현 및 README.md 반영
+- feat: 구분자 기준으로 숫자 추출 기능, 추출된 숫자를 더하는 기능 구현 및 README.md에 진행상황 반영
+- style (InputServiceTest.java): ApplicationTest.java 파일과 테스트 구조 통일
+- docs (README.md): 입력 기능 구현에 따른 README.md 파일 업데이트
+- feat: 데이터 입력 기능, 입력된 데이터에서 커스텀 구분자 추출 기능 구현 및 테스트코드 작성
+- style (Application.java): Application.java에 구현할 기능 TODO 작성 후 Class 생성
+- test (ApplicationTest.java): 기본적으로 고려해야하는 예외사항에 대한 테스트코드 작성
+- docs (README.md): 문제 정의 및 구현할 함수 정의 후 문서 작성
+- feat: setup project
