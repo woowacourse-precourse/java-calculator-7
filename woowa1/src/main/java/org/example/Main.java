@@ -39,18 +39,13 @@ public class Main {
                         } else {
                             // error
                             throw new IllegalArgumentException("String cannot be converted to Integer: " + c); // 특정 예외를 던짐
-
                         }
 
                     }
                 } else {// 포함되어있는 기호가 아닐때
-                    //todo 숫자가 아닐때 error
                     // 숫자일 때
                     Integer.parseInt(String.valueOf(c));
-
-
                     temp_buf = temp_buf + c;
-
                 }
             }
             sum += Integer.parseInt(temp_buf);
