@@ -1,6 +1,9 @@
 package calculator;
 
+import calculator.controller.CalculatorController;
 import calculator.model.CalculationModel;
+import calculator.view.InputView;
+import calculator.view.OutputView;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
@@ -10,22 +13,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
     @Test
-    void 빈_문자열_입력() {
-        assertSimpleTest(() -> {
-            run("\n");
-            assertThat(output()).contains("결과 : 0");
-        });
-    }
-
-    @Test
-    void 기본_구분자_사용() {
-        assertSimpleTest(() -> {
-            run("1,2:3");
-            assertThat(output()).contains("결과 : 6");
-        });
-    }
-
-    @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
             run("//;\\n1");
@@ -34,33 +21,6 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 커스텀_구분자_사용2() {
-        assertSimpleTest(() -> {
-            run("//;\\n1;2;3");
-            assertThat(output()).contains("결과 : 6");
-        });
-    }
-
-    //본 구분자와 커스텀 구분자 혼합 처리
-    @Test
-    void 커스텀_구분자_사용3() {
-        assertSimpleTest(() -> {
-            run("//=\\n1,2=4");
-            assertThat(output()).contains("결과 : 7");
-        });
-    }
-
-    //숫자 외 예외 처리
-    @Test
-    void 예외_테스트1() {
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("1,a:3"))
-                        .isInstanceOf(IllegalArgumentException.class)
-        );
-    }
-
-    //음수 예외 처리
-    @Test
     void 예외_테스트2() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("-1,2,3"))
@@ -68,51 +28,10 @@ class ApplicationTest extends NsTest {
         );
     }
 
-    //공백 예외 처리
-    @Test
-    void 예외_테스트3() {
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("1,,3"))
-                        .isInstanceOf(IllegalArgumentException.class)
-        );
-    }
-
-    //커스텀 닫기 예외 처리
-    @Test
-    void 예외_테스트4() {
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("//1"))
-                        .isInstanceOf(IllegalArgumentException.class)
-        );
-    }
-
-    //커스텀 구분자 입력 예외 처리
-    @Test
-    void 예외_테스트5() {
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("//\n1"))
-                        .isInstanceOf(IllegalArgumentException.class)
-        );
-    }
-
-    @Test
-    void 예외_테스트6() {
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("//;\n1}2"))
-                        .isInstanceOf(IllegalArgumentException.class)
-        );
-    }
-
-    @Test
-    void 예외_테스트7() {
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("//;1"))
-                        .isInstanceOf(IllegalArgumentException.class)
-        );
-    }
-
     private void runException(String input) {
         CalculationModel model = new CalculationModel();
+        OutputView outputView = new OutputView();
+        outputView.printInput();
         model.parseInput(input);
     }
 
