@@ -3,6 +3,7 @@ package calculator.model;
 import calculator.constant.CalculatorConstants;
 import calculator.constant.ExceptionMessageConstants;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Calculator {
     private final List<Integer> numbers;
@@ -13,7 +14,7 @@ public class Calculator {
                 .filter(s -> !s.isEmpty())
                 .map(Integer::parseInt)
                 .peek(this::validateNumber)
-                .toList();
+                .collect(Collectors.toUnmodifiableList());
     }
 
     private void validateNumber(int num) {
