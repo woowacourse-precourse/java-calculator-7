@@ -1,22 +1,22 @@
 package calculator;
 
 public class DelimiterExtractor {
+    private final ArrayBuilder arrBuilder = new ArrayBuilder();
+    private final NumberCalculator numberCalculator = new NumberCalculator();
 
-    public String getDelimiter(String numbers) {
-        String delimiter = ":|,";
+    private String delimiter = ":|,";
+    private int delimiterEndIndex;
 
+    public int getResult(String numbers) {
         if (isCustomDelimiter(numbers)) {
-            int delimiterEndIndex = getDelimiterEndIndex(numbers);
+            this.delimiterEndIndex = getDelimiterEndIndex(numbers);
             if (delimiterEndIndex != -1) {
-                delimiter = numbers.substring(2, delimiterEndIndex);
-                return delimiter;
+                this.delimiter = numbers.substring(2, delimiterEndIndex);
             }
         }
-        return delimiter;
-    }
-
-    public boolean checkDelimiter(String delimiter) {
-        return !delimiter.contains(":|,");
+        String strNumbers = arrBuilder.getStrNumbers(numbers, delimiterEndIndex);
+        String[] splitCustomNumbers = arrBuilder.getSplitNumbers(strNumbers, delimiter);
+        return numberCalculator.calculateSum(splitCustomNumbers);
     }
 
     private boolean isCustomDelimiter(String numbers) {

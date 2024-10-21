@@ -1,6 +1,7 @@
 package calculator;
 
 public abstract class NumberValidator {
+
     public static int validate(String str) {
         if (!isNumeric(str)) {
             throw new IllegalArgumentException("잘못된 입력입니다: " + str);
