@@ -4,8 +4,8 @@ public class InputValidator {
 
     private static final String REGEX_NUMERIC = "\\d+";
 
-    public boolean isNegativeNumber(String input) {
-        return input.contains("-");
+    public boolean isNonPositiveNumber(String input) {
+        return input.contains("-") || input.equals("0");
     }
 
     public boolean checkInputEmpty(String input) {

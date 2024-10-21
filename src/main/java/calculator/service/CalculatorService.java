@@ -1,8 +1,8 @@
 package calculator.service;
 
 
-import static calculator.exception.ErrorMessages.INCLUDES_NEGATIVE_NUMBER;
 import static calculator.exception.ErrorMessages.INCLUDES_NON_NUMERIC;
+import static calculator.exception.ErrorMessages.NON_POSITIVE_NUMBER;
 
 import calculator.domain.adder.NumberAdder;
 import calculator.domain.parser.InputParser;
@@ -32,8 +32,8 @@ public class CalculatorService {
             if (!inputValidator.isValidNumber(numberToken)) {
                 throw new IllegalArgumentException(INCLUDES_NON_NUMERIC.getMessage());
             }
-            if (inputValidator.isNegativeNumber(numberToken)) {
-                throw new IllegalArgumentException(INCLUDES_NEGATIVE_NUMBER.getMessage());
+            if (inputValidator.isNonPositiveNumber(numberToken)) {
+                throw new IllegalArgumentException(NON_POSITIVE_NUMBER.getMessage());
             }
         }
 

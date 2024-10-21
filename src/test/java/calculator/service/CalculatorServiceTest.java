@@ -71,8 +71,16 @@ public class CalculatorServiceTest {
     }
 
     @Test
-    void 커스텀_구분자_닫기_없음_테스트() {
+    void 커스텀_구분자_닫기_없음_예외_테스트() {
         String input = "//;13;21";
+
+        assertThatThrownBy(() -> calculatorService.calculate(input))
+                .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    void 숫자_0_예외_테스트() {
+        String input = "0";
 
         assertThatThrownBy(() -> calculatorService.calculate(input))
                 .isInstanceOf(RuntimeException.class);
