@@ -8,6 +8,7 @@ public class Processor {
     private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
     private List<String> delimiters = new ArrayList<>(List.of(",", ":"));
     private String input;
+    private Numbers numbers;
 
     public Processor(String input) {
         this.input = input;
@@ -26,10 +27,9 @@ public class Processor {
         String[] splitInput = Splitter.splitByDelimiters(input, delimiters);
         Validator.isAllNumbers(splitInput);
 
-        int[] numbers = Converter.toIntArray(splitInput);
-        Validator.isAllPositiveNumbers(numbers);
+        numbers = new Numbers(Converter.toIntArray(splitInput));
 
-        return Calculator.calculateSum(numbers);
+        return numbers.calculateSum();
     }
 
     public String extractCustomDelimiter() {
