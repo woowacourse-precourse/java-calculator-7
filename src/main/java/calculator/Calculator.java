@@ -56,6 +56,9 @@ public class Calculator {
 
         ArrayList<Integer> numbers = new ArrayList<>();
         Arrays.stream(input.split(regex)).forEach(number -> numbers.add(Integer.parseInt(number)));
+        if (numbers.isEmpty()) {
+            throw new IllegalArgumentException("최소 하나 이상의 숫자를 입력하세요");
+        }
         return numbers;
     }
 }
