@@ -3,11 +3,21 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
+
+    public static void throwException() {
+        throw new IllegalArgumentException();
+    }
+
     public static String extractCustomDelimiter(String input) {
         if (!input.startsWith("//")) {
             return "";
         } else {
             int startOfCustomDelimiter = input.indexOf("\\n");
+
+            if (startOfCustomDelimiter == -1) {
+                throwException();
+            }
+            
             String customDelimiter = input.substring("//".length(), startOfCustomDelimiter);
 
             return customDelimiter;
