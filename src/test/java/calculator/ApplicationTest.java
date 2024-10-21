@@ -19,6 +19,18 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 기본_구분자_사용() {
+        int result = Calculator.calculate("100,2:5");
+        Assertions.assertEquals(result, 107);
+
+        result = Calculator.calculate("1,2:3");
+        Assertions.assertEquals(result, 6);
+
+        result = Calculator.calculate("");
+        Assertions.assertEquals(result, 0);
+    }
+
+    @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("-1,2,3"))
@@ -31,18 +43,6 @@ class ApplicationTest extends NsTest {
         IllegalArgumentException e = Assertions.assertThrows(IllegalArgumentException.class,
                 () -> Calculator.calculate("//\\n1,2"));
         Assertions.assertEquals(e.getMessage(), "잘못된 입력입니다. 빈칸(\"\")은 구분자가 될 수 없습니다.");
-    }
-
-    @Test
-    void 기본_구분자_사용() {
-        int result = Calculator.calculate("100,2:5");
-        Assertions.assertEquals(result, 107);
-
-        result = Calculator.calculate("1,2:3");
-        Assertions.assertEquals(result, 6);
-
-        result = Calculator.calculate("");
-        Assertions.assertEquals(result, 0);
     }
 
     @Override
