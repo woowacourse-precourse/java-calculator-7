@@ -4,6 +4,13 @@ import calculator.enums.ExceptionMessages;
 import java.util.List;
 
 public class ExceptionHandler {
+    private static final char PRE_CUSTOM_DELIM_SLASH = '/';
+    private static final char POST_CUSTOM_DELIM_BACKSLASH = '\\';
+    private static final char POST_CUSTOM_DELIM_N = 'n';
+    private static final char BASIC_DELIM_COMMA = ',';
+    private static final char BASIC_DELIM_COLON = ':';
+    private static final char HYPHEN = '-';
+
     private static ExceptionHandler instance;
 
     private ExceptionHandler() {
@@ -17,14 +24,14 @@ public class ExceptionHandler {
     }
 
     public void checkIncorrectCustomDelimGenerateInput(char elem) {
-        if (elem != '/' && elem != 'n' && elem != '\\') {
+        if (elem != PRE_CUSTOM_DELIM_SLASH && elem != POST_CUSTOM_DELIM_N && elem != POST_CUSTOM_DELIM_BACKSLASH) {
             throw new IllegalArgumentException(ExceptionMessages.INCORRECT_INPUT_MSG.getMsg());
         }
     }
 
     public void checkIncorrectInputWithoutCustomDelim(char[] elems) {
         for (char elem : elems) {
-            if (elem != ',' && elem != ':' && elem != '-' && !Character.isDigit(elem)) {
+            if (elem != BASIC_DELIM_COMMA && elem != BASIC_DELIM_COLON && elem != HYPHEN && !Character.isDigit(elem)) {
                 throw new IllegalArgumentException(ExceptionMessages.INCORRECT_INPUT_MSG.getMsg());
             }
         }
@@ -32,14 +39,14 @@ public class ExceptionHandler {
 
     public void checkIncorrectInputWithCustomDelim(char[] elems, char customDelim) {
         for (char elem : elems) {
-            if (elem != ',' && elem != ':' && elem != customDelim && elem != '-' && !Character.isDigit(elem)) {
+            if (elem != BASIC_DELIM_COMMA && elem != BASIC_DELIM_COLON && elem != customDelim && elem != HYPHEN && !Character.isDigit(elem)) {
                 throw new IllegalArgumentException(ExceptionMessages.INCORRECT_INPUT_MSG.getMsg());
             }
         }
     }
 
     public void checkIncorrectDelim(char delim) {
-        if (delim == ',' || delim == ':') {
+        if (delim == BASIC_DELIM_COMMA || delim == BASIC_DELIM_COLON) {
             throw new IllegalArgumentException(ExceptionMessages.INCORRECT_CUSTOM_DELIM_MSG.getMsg());
         }
     }
