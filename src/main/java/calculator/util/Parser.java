@@ -18,6 +18,10 @@ public class Parser {
 
     private char parseIdentifier(Calculator calculator, String input) {
         if(matches(input)) {
+            char identifier = input.charAt(2);
+            if(identifier >= '0' && identifier <= '9') {
+                throw new IllegalArgumentException("구분자는 숫자일 수 없습니다.");
+            }
             calculator.addIdentifier(input.charAt(2));
             return input.charAt(2);
         }
