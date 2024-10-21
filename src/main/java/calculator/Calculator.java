@@ -9,9 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Calculator {
+    private final Splitter splitter;
     private String userInput;
     private List<String> numbers = new ArrayList<>();
     private int total = 0;
+
+    public Calculator(Splitter splitter) {
+        this.splitter = splitter;
+    }
 
     public void run() {
         userInput = InputUtils.getInput("덧셈할 문자열을 입력해 주세요.");
@@ -25,7 +30,7 @@ public class Calculator {
     }
 
     private void calculating() {
-        numbers = Splitter.getCalculationSectionSplitByDelimiter(userInput);
+        numbers = splitter.getCalculationSectionSplitByDelimiter(userInput);
         checkEachInputIsValid();
         getTotal();
         PrintUtils.print("결과 : " + total);
