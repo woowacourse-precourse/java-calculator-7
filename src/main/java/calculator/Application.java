@@ -11,11 +11,11 @@ public class Application {
             .orElse(0);
     }
 
-    static List<Integer> parseNumberWithDelimiters(String str, List<Character> delimiters) {
+    static List<Integer> parseNumberWithDelimiters(CharacterBuffer buffer, List<Character> delimiters) {
         List<Integer> parsedNumbers = new ArrayList<>();
         int acc = -1;
-        for (int i = 0 ; i < str.length(); i++) {
-            char current = str.charAt(i);
+        while (buffer.hasNext()) {
+            char current = buffer.next();
             if (delimiters.contains(current)) {
                 parsedNumbers.add(acc == -1 ? 0 : acc);
                 acc = -1;
