@@ -13,8 +13,9 @@ class CustomSeparatorRegisterTest {
     void registerCustomSeparator() {
         // given
         String input = "//;\\n1";
+        CalcTarget calcTarget = CalcTarget.input(input);
         // when
-        CalcTarget calcTarget = CustomSeparatorRegister.registerCustomSeparator(input);
+        CustomSeparatorRegister.registerCustomSeparator(calcTarget);
         // then
         assertEquals(";", calcTarget.getCustomSeparator());
         assertEquals("1", calcTarget.getValue());
