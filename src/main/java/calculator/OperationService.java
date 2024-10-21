@@ -1,23 +1,17 @@
 package calculator;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class OperationService {
 
-    public static int sumStringNum(String stringNum) {
-        String delimiter = ",|:";
+    public static int sumStringNum(String stringNum, String delimiter) {
         int sum = 0;
 
-        // 커스텀 구분자인 경우 실행
-        if (stringNum.contains("//")) {
-            Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(stringNum);
-            if (matcher.find()) {
-                delimiter = Pattern.quote(matcher.group(1)); // 커스텀 구분자 설정
-                stringNum = matcher.group(2); // 실제 숫자 부분 추출
-            } else {
-                throw new IllegalArgumentException("잘못된 입력 형식입니다.");
-            }
+        if (stringNum == null || stringNum.isEmpty()) {
+            throw new IllegalArgumentException("stringNum은 null 또는 empty.");
+        }
+
+        if (delimiter == null || delimiter.isEmpty()) {
+            throw new IllegalArgumentException("delimiter은 null 또는 empty.");
         }
         String[] values = stringNum.split(delimiter);
 
