@@ -9,7 +9,6 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.NoSuchElementException;
 
 public class CalculatorController {
-    //private int result;
     private double result;
     private static final String BASIC_DELIMITER = ",|:";
 
