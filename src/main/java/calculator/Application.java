@@ -13,6 +13,8 @@ public class Application {
         String[] numberStrings = delimiterHandler.splitNumbers(input);
         int sum = 0;
 
+        System.out.print(numberStrings);
+
         for (String numberString : numberStrings) {
             if (!numberString.isEmpty()) {
                 int number = Integer.parseInt(numberString);
