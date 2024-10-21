@@ -12,7 +12,7 @@ class PositiveNumberTest {
     @Test
     void positiveNumberTest() {
 
-        Assertions.assertThatThrownBy(() -> new PositiveNumber(-1))
+        Assertions.assertThatThrownBy(() -> PositiveNumber.from(-1))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

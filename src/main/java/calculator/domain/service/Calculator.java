@@ -8,7 +8,7 @@ public class Calculator {
 
     public Long getSum(List<PositiveNumber> numbers) {
         return numbers.stream()
-                .mapToLong(PositiveNumber::value)
+                .mapToLong(number -> number.value)
                 .sum();
     }
 }

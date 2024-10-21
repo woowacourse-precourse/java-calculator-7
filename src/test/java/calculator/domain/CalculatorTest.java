@@ -19,9 +19,9 @@ class CalculatorTest {
         Calculator calculator = new Calculator();
 
         List<PositiveNumber> numbers = List.of(
-                new PositiveNumber(1),
-                new PositiveNumber(2),
-                new PositiveNumber(3)
+                PositiveNumber.from(1),
+                PositiveNumber.from(2),
+                PositiveNumber.from(3)
         );
 
 

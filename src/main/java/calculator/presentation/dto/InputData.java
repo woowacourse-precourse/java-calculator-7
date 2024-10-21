@@ -6,9 +6,11 @@ public final class InputData {
 
     public final String value;
 
+
     public InputData(String value) {
         this.value = value;
     }
+
 
     public int lastIndexOfCustomInfo() {
         int lastIndex = value.lastIndexOf(SUFFIX_CUSTOM_SEPARATOR);

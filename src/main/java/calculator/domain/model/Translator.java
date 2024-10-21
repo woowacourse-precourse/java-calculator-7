@@ -29,8 +29,7 @@ public class Translator {
         String[] splitData = majorData.split(separator);
 
         return Arrays.stream(splitData)
-                .map(Long::parseLong)
-                .map(PositiveNumber::new)
+                .map(PositiveNumber::from)
                 .toList();
     }
 }

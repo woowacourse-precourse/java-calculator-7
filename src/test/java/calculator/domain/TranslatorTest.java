@@ -26,7 +26,7 @@ class TranslatorTest {
 
         // then
         Assertions.assertThat(positiveNumbers)
-                .extracting(PositiveNumber::value)
+                .extracting(number -> number.value)
                 .containsExactly(1L, 2L, 3L);
     }
 
@@ -44,7 +44,7 @@ class TranslatorTest {
 
         // then
         Assertions.assertThat(positiveNumbers)
-                .extracting(PositiveNumber::value)
+                .extracting(number -> number.value)
                 .containsExactly(1L, 2L, 3L, 4L);
 
 
