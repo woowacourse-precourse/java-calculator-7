@@ -99,7 +99,7 @@ public class Application {
         if (input.startsWith("//")){
             return input.substring(2, input.indexOf("\n"));
         }
-        return "[,|:]";
+        return "[,:]";
     }
 
     /*
@@ -120,10 +120,7 @@ public class Application {
      */
     public static String[] splitByDelimiter(String input, String delimiter){
 
-        if (delimiter == "[,|:]"){
-            return input.split(delimiter);
-        }else{
-        return input.split(Pattern.quote(delimiter));}
+        return input.split(delimiter);
     }
 
 
