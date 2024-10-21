@@ -33,8 +33,6 @@ public class Calculator {
                 break;
         }
         String operandList[] = input.split(separator);
-        for (int i = 0; i < operandList.length; i++) {
-        }
 
         if (operandList.length == 0) {
             showSum(0);
@@ -69,6 +67,7 @@ public class Calculator {
     //구분자를 기준으로 숫자들의 합 구하기
     private Integer getResult(String list[]) {
         Integer sum = Integer.valueOf(0);
+        
         try {
             for (int i = 0; i < list.length; i++) {
                 Integer value = Integer.valueOf(list[i]);
