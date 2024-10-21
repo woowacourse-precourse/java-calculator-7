@@ -13,6 +13,8 @@ public class StringCalculator {
         }
 
         String[] tokens = split(string);
+
+        validate(tokens);
     }
 
     private String[] split(String string) {
@@ -24,5 +26,17 @@ public class StringCalculator {
         }
 
         return string.split(",|:");
+    }
+
+    private void validate(String[] tokens) {
+        for(String token : tokens) {
+            validatePositiveInteger(token);
+        }
+    }
+
+    private void validatePositiveInteger(String string){
+        if (!string.matches("[0-9]\\d*")) {
+            throw new IllegalArgumentException("양수가 아닌 값이 입력되었습니다.");
+        }
     }
 }
