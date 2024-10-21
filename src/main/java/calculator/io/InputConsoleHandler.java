@@ -9,6 +9,7 @@ public class InputConsoleHandler {
 
     private static final Pattern CUSTOM_SEPARATOR_PATTERN = Pattern.compile("(/{2})([^0-9 ]{1,})(\\\\n)");
     private static final Pattern OPERAND_PATTERN = Pattern.compile("-?\\d+([^0-9 ]{1,}-?\\d+)*");
+    private static final Pattern NoCustomSeparator_Pattern = Pattern.compile("-?\\d+([,|:]-?\\d+)*");
 
     public void showInputGuideMessage() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
@@ -92,7 +93,7 @@ public class InputConsoleHandler {
     }
 
     private boolean doesExistsCustomSeparator(String userInput) {
-        return !userInput.matches("-?\\d+([,|:]-?\\d+)*");
+        return !userInput.matches(NoCustomSeparator_Pattern.pattern());
     }
 
     public boolean askIfAppEnd() {
