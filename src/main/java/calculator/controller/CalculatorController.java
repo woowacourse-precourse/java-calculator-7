@@ -29,9 +29,19 @@ public class CalculatorController {
         ));
     }
 
+    public void run() {
+        try {
+            startCalculator();
+        } catch (IllegalArgumentException exception){
+            outputView.printException(exception);
+        }
+    }
+
     public void startCalculator(){
         String inputString = inputView.createString();
         DelimiterManager delimiterManager = extractCustomDelimiters(inputString);
+        Numbers number = createNumbers(inputString, delimiterManager);
+        outputView.printResult(number.calculateSum());
     }
 
     private DelimiterManager extractCustomDelimiters(String input) {
