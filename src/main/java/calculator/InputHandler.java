@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.regex.Pattern;
+
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputHandler {
@@ -22,10 +24,23 @@ public class InputHandler {
         if (input.startsWith(CUSTOM_DELIMITERS_PREFIX)) {
             int start = CUSTOM_DELIMITERS_PREFIX.length();
             int end = input.indexOf(CUSTOM_DELIMITERS_SUFFIX, start);
+            
+            // 커스텀 구분자를 위한 문자열이 완전하지 않은 경우
             if (end == -1) {
                 throw new IllegalArgumentException("구분자가 잘못 설정되었습니다.");
             }
-            return input.substring(start, end); // 커스텀 구분자 반환
+            String delimiter = input.substring(start, end);
+            
+            // 구분자가 숫자인 경우 예외 발생
+            if(Pattern.matches("\\d", delimiter)) {
+            	throw new IllegalArgumentException("구분자는 숫자가 될 수 없습니다.");
+            }
+           
+            if(delimiter.length() != 1) {
+            	throw new IllegalArgumentException("구분자는 반드시 한 글자여야 합니다.");
+            }
+            
+            return delimiter; // 커스텀 구분자 반환
         }
         return DEFAULT_DELIMITERS; // 기본 구분자 반환
     }
