@@ -3,7 +3,11 @@ package calculator;
 import java.util.Stack;
 
 public class Calculator {
+
+    private static final int LOW_PRECEDENCE = 1;
+    private static final int HIGH_PRECEDENCE = 2;
     private int result;
+
 
     public int getResult() {
         return result;
@@ -62,8 +66,8 @@ public class Calculator {
     }
 
     private int precedence(char operator) {
-        if (operator == '*' || operator == '/') return 2;
-        return 1;
+        if (operator == '*' || operator == '/') return HIGH_PRECEDENCE;
+        return LOW_PRECEDENCE;
     }
 
     private void processStacks(Stack<Integer> numbers, Stack<Character> operators) {
@@ -72,9 +76,9 @@ public class Calculator {
         char op = operators.pop();
 
         if (op == '+') numbers.push(a + b);
-        else if (op == '-') numbers.push(a - b);
-        else if (op == '*') numbers.push(a * b);
-        else if (op == '/') numbers.push(a / b);
+        if (op == '-') numbers.push(a - b);
+        if (op == '*') numbers.push(a * b);
+        if (op == '/') numbers.push(a / b);
     }
 
 }
