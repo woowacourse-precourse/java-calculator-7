@@ -43,6 +43,18 @@ public class SeparatorTest {
                 .hasMessage("커스텀 구분자는 문자만 가능합니다.");
     }
 
+    @DisplayName("커스텀 구분자 입력 실패 : 쉼표, 콜론 입력")
+    @ParameterizedTest
+    @ValueSource(strings = {"//,\\n", "//:\\n"})
+    void validateNotDefaultTest(String inputs) {
+        //given
+
+        //when, then
+        assertThatThrownBy(() -> new Separator(inputs))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("커스텀 구분자는 기본 구분자(쉼표, 콜론) 외의 문자로 지정할 수 있습니다.");
+    }
+
     @DisplayName("문자열 분리 성공")
     @ParameterizedTest
     @ValueSource(strings = {"1,2:3", "//;\\n1;2;3"})
