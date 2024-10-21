@@ -7,12 +7,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import static calculator.BasicDelimiter.*;
 import static calculator.ErrorMessages.*;
 
 public class Application {
-    private static final String COMMA = ",";
-    private static final String SEMICOLON = ";";
-    private static final String COMMA_OR_SEMICOLON = COMMA + "|" + SEMICOLON;
     private static final String EMPTY = "";
     private static final String CUSTOM_DELIMITER_START = "//";
     private static final String CUSTOM_DELIMITER_END = "\\\\n";
