@@ -28,4 +28,12 @@ public class Separator {
     String[] getNumbers(){
         return numbers;
     }
+
+    String getDividedInput(){
+        return dividedInput[1];
+    }
+
+    String getCustomSeparator(){
+        return dividedInput[0].substring(2, 3);
+    }
 }
