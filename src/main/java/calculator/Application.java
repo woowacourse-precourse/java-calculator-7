@@ -13,11 +13,11 @@ public class Application {
         try {
             // 문자열 덧셈 계산
             int result = add(input);
-            // 결과 출력
             System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
             // 예외 발생 시 메시지 출력
             System.out.println(e.getMessage());
+            throw e; // 예외를 다시 던져 테스트에서 예외가 발생하도록 합니다.
         }
     }
 
@@ -29,7 +29,6 @@ public class Application {
         }
 
         // 커스텀 구분자가 있는지 확인 (정규식: "//" 뒤에 구분자와 "\n" 뒤의 숫자들 매칭)
-        // 정규식 패턴: "//" 뒤에 오는 한 문자와 "\\n" (문자 그대로의 \n)을 매칭
         Pattern pattern = Pattern.compile("//(.)\\\\n(.*)");
         Matcher matcher = pattern.matcher(input);
 
