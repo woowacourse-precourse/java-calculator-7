@@ -6,22 +6,19 @@ import java.util.regex.Pattern;
 public class Application {
     public static void main(String[] args) {
         Application app = new Application();
+        Calculate calculate = new Calculate();
 
         String input = app.getInputString();
 
-        String[] slice;
-        if (input.startsWith("/")) {
-            slice = app.customSliceString(input);
-        } else {
-            slice = app.sliceString(input);
+        try{
+            int sum = calculate.calculate(input);
+            app.printResult(sum);
+        }catch (IllegalArgumentException e){
+            System.out.println("에러 : "+e.getMessage());
         }
-
-        int[] numList = app.stringArrayToIntArray(slice);
-        int sum = app.sumList(numList);
-        app.printResult(sum);
     }
 
-    public String getInputString() {
+    private String getInputString() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
@@ -31,7 +28,26 @@ public class Application {
         return input;
     }
 
-    public String[] sliceString(String input) {
+    private void printResult(int sum) {
+        System.out.println("결과 : " + sum);
+    }
+}
+
+
+class Calculate{
+    public int calculate(String input) {
+        String[] slice;
+        if (input.startsWith("/")) {
+            slice = customSliceString(input);
+        } else {
+            slice = sliceString(input);
+        }
+
+        int[] numList = stringArrayToIntArray(slice);
+        return sumList(numList);
+    }
+
+    private String[] sliceString(String input) {
         if (input.matches(".*[^0-9,;].*")) {
             throw new IllegalArgumentException("유효하지 않은 문자가 포함되어 있습니다.");
         }
@@ -40,7 +56,7 @@ public class Application {
         return slice;
     }
 
-    public int[] stringArrayToIntArray(String[] slice) {
+    private int[] stringArrayToIntArray(String[] slice) {
         int[] numList = new int[slice.length];
 
         for (int i = 0; i < slice.length; i++) {
@@ -57,7 +73,7 @@ public class Application {
         return numList;
     }
 
-    public int sumList(int[] numList) {
+    private int sumList(int[] numList) {
         int sum = 0;
         for (int j : numList) {
             sum += j;
@@ -65,7 +81,7 @@ public class Application {
         return sum;
     }
 
-    public String[] customSliceString(String input) {
+    private String[] customSliceString(String input) {
         input = input.replace("\\n", "\n");
         String[] s = input.split("\n");
         if (s.length != 2) {
@@ -80,13 +96,9 @@ public class Application {
         return slice;
     }
 
-    public void validateSlice(String[] slice) {
+    private void validateSlice(String[] slice) {
         if (slice.length == 0) {
             throw new IllegalArgumentException("입력 값이 유효하지 않습니다. 숫자가 포함되어 있지 않습니다.");
         }
-    }
-
-    public void printResult(int sum) {
-        System.out.println("결과 : " + sum);
     }
 }
