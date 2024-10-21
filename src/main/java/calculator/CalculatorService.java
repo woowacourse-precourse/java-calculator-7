@@ -12,6 +12,7 @@ public class CalculatorService {
     }
 
     public void calculate(String input){
+
         List<String> delimiters = new ArrayList<>();
 
         delimiters.add(","); // delimiters에 기본 구분자 추가
@@ -30,7 +31,9 @@ public class CalculatorService {
     // 입력값 검증 로직
     private void validateInput(String input, List<String> delimiters){
         if (input == null || input.trim().isEmpty()) {
-            throw new IllegalArgumentException("입력이 비어있거나 null입니다.");
+//            throw new IllegalArgumentException("입력이 비어있거나 null입니다.");
+            model.setResult(0);
+            return;
         }
 
         StringBuilder validChars = new StringBuilder("0123456789");
