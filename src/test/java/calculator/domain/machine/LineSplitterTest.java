@@ -1,0 +1,60 @@
+package calculator.domain.machine;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+
+class LineSplitterTest {
+
+    LineSplitter lineSplitter = new LineSplitter(new DelimiterExtractor());
+
+    @ParameterizedTest
+    @ValueSource(strings = {"2,3,4", "2:3,4", "2:3:4"})
+    void 기본_구분자_성공(String input) {
+        // when
+        List<Long> operands = lineSplitter.getOperands(input);
+        assertArrayEquals(new Long[]{2L, 3L, 4L}, operands.toArray());
+    }
+
+    @Test
+    void 커스텀_구분자_성공() {
+        // given
+        String line = "//@\\n2@3@4";
+
+        // when
+        List<Long> operands = lineSplitter.getOperands(line);
+
+        // then
+        assertArrayEquals(new Long[]{2L, 3L, 4L}, operands.toArray());
+    }
+
+    @Test
+    void 커스텀_구분자가_공백일_때() {
+        // given
+        String line = "//\\n234";
+
+        // when
+        // then
+        assertThatIllegalArgumentException().isThrownBy(() -> lineSplitter.getOperands(line));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "2:3:", ",2,3", "-1,2,3",
+            "@,3,4", "3,4,@", "3,@,4",
+            "//;\\n;2;3", "//;\\n2;3;", "//;\\n2;3;",
+            "//;\\nd;2;3", "//;\\n2;d;3", "//;\\n2;3;d",
+            "2;3;4", "//;\\n2;3@4"
+    })
+    void 예외_테스트(String input) {
+        // given
+        // when
+        // then
+        assertThatIllegalArgumentException().isThrownBy(() -> lineSplitter.getOperands(input));
+    }
+}
