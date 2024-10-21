@@ -54,7 +54,6 @@ public class Application {
                         sum += number;
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println(input);
                     throw new IllegalArgumentException("입력되지 않은 구분자입니다.");
                 }
             }
