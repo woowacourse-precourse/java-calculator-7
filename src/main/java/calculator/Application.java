@@ -5,6 +5,14 @@ public class Application {
         // TODO: 프로그램 구현
     }
 
+    private static int toPositiveInt(String number) {
+        int num = Integer.parseInt(number);
+        if (num < 0) {
+            throw new IllegalArgumentException("음수는 입력할 수 없습니다: " + num);
+        }
+        return num;
+    }
+
     public static int add(String input) {
         if (input == null || input.isEmpty()) {
             return 0;
