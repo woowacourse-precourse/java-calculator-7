@@ -42,6 +42,31 @@ class Calc {
         setSepAndInput();
     }
 
+    private String escapeRegexSpecialChars(String input) {
+        // 이스케이프가 필요한 기호 목록
+        String[] specialChars = {"\\", "[", "]", "(", ")", "{", "}", "^", "$", ".", "|", "*", "+", "?"};
+
+        // StringBuilder를 사용하여 이스케이프된 문자열을 빌드
+        StringBuilder escapedString = new StringBuilder();
+
+        // 입력 문자열을 순회하면서 이스케이프 처리
+        for (char c : input.toCharArray()) {
+            boolean isSpecialChar = false;
+            for (String special : specialChars) {
+                if (String.valueOf(c).equals(special)) {
+                    escapedString.append("\\").append(c);
+                    isSpecialChar = true;
+                    break;
+                }
+            }
+            if (!isSpecialChar) {
+                escapedString.append(c);
+            }
+        }
+
+        return escapedString.toString();
+    }
+
     // 1. 구분자 저장 및 input에서 커스텀 구분자 분리하기
     private void setSepAndInput() {
 
@@ -56,7 +81,7 @@ class Calc {
 
             String customSep = matcher.group(1);
 
-            sep.add(customSep);
+            sep.add(escapeRegexSpecialChars(customSep)); // 이스케이프 처리 후 추가
 
 
             this.input = input.replace(matcher.group(0), "").replace("\\n", "").trim(); // 첫 번째 매칭된 문자열 제거
