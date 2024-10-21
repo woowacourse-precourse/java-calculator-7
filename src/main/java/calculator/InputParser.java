@@ -31,6 +31,10 @@ public class InputParser {
             }
         }
 
+        if (input.matches(".*[,|:]{2,}.*")) {
+            throw new IllegalArgumentException("잘못된 구분자가 연속으로 사용되었습니다.");
+        }
+        
         String[] tokens = input.split(delimiter);
 
         for (String token : tokens) {
