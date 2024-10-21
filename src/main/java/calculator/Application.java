@@ -32,7 +32,21 @@ public class Application {
             }
         }
         return Arrays.stream(numbers.split(delimiter))
-                .map(Integer::parseInt)
+                .map(Application::validateAndParse)
                 .collect(Collectors.toList());
+    }
+
+    private static Integer validateAndParse(String value) {
+        int result = 0;
+        for (int i = 0; i < value.length(); i++) {
+            char curChar = value.charAt(i);
+            if (curChar < '0' || curChar > '9')
+                throw new IllegalArgumentException();
+
+            result *= 10;
+            result += curChar - '0';
+        }
+
+        return result;
     }
 }
