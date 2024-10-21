@@ -138,7 +138,7 @@ class CustomApplicationTest extends NsTest {
         // When-Then
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> runException(input))
-                    .isInstanceOf(NumberFormatException.class);
+                    .isInstanceOf(IllegalArgumentException.class);
         });
     }
 
@@ -150,7 +150,7 @@ class CustomApplicationTest extends NsTest {
         // When-Then
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> runException(input))
-                    .isInstanceOf(NumberFormatException.class);
+                    .isInstanceOf(IllegalArgumentException.class);
         });
     }
 
