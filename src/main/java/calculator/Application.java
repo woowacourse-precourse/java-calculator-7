@@ -9,6 +9,15 @@ public class Application {
         Scanner sc = new Scanner(System.in);
         String numString = sc.next();
 
+        try {
+            //writer
+            System.out.println("결과 : " + processor(numString));
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static Integer processor(String numString){
         //prcessor
         List<Character> sepList = new ArrayList<>();
         sepList.add(',');
@@ -28,8 +37,6 @@ public class Application {
             sum+=Integer.parseInt(s);
         }
 
-        //writer
-        System.out.print("결과 : ");
-        System.out.println(sum);
+        return sum;
     }
 }
