@@ -23,15 +23,15 @@ public class Application {
                 throw new IllegalArgumentException();
             }
             // 커스텀 구분자가 정확히 1개가 아니거나 \n이 정확한 위치에 없는 경우
-            if (input.charAt(4) != '\n') {
+            if (input.charAt(3) != '\n') {
                 throw new IllegalArgumentException();
             }
-            if (Character.isDigit(input.charAt(3))) {
+            if (Character.isDigit(input.charAt(2))) {
                 throw new IllegalArgumentException();
             }
-            char customDelimiter = input.charAt(3);
+            char customDelimiter = input.charAt(2);
             delimiters.add(customDelimiter);
-            input = input.substring(5);
+            input = input.substring(4);
         }
 
         // 문자열 파싱 (숫자 추출)
