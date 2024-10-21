@@ -56,7 +56,7 @@ class CalculatorTest {
     }
 
     @Test
-    @DisplayName("커스텀 문자열을 입력했을 경우 입력된 수들을 Numbers에 저장한다.")
+    @DisplayName("커스텀 구분자를 가진 문자열을 입력했을 경우 입력된 수들을 Numbers에 저장한다.")
     void InputCustomSeparatorNoException () {
         // given
         String input = INPUT_CUSTOM_SEPARATOR;
@@ -69,7 +69,7 @@ class CalculatorTest {
     }
 
     @Test
-    @DisplayName("빈 문자열을 입력했을 경우  입력된 수들을 Numbers에 저장한다.")
+    @DisplayName("기본 구분자를 가진 문자열을 입력했을 경우  입력된 수들을 Numbers에 저장한다.")
     void InputStartNumberNoException () {
         // given
         String input = INPUT_START_NUMBER;
