@@ -8,8 +8,7 @@ import java.util.List;
 
 public class Controller {
     public void executeProgram() {
-        InputView inputView = InputView.getInstance();
-        String input = inputView.getInputFromUser();
+        String input = getInput();
 
         InputProcessor inputProcessor = InputProcessor.getInstance();
         List<Integer> nums = inputProcessor.processInput(input);
@@ -19,5 +18,10 @@ public class Controller {
 
         OutputProcessor outputProcessor = new OutputProcessor();
         outputProcessor.printResult(result);
+    }
+
+    private String getInput() {
+        InputView inputView = InputView.getInstance();
+        return inputView.getInputFromUser();
     }
 }
