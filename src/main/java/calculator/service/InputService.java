@@ -19,6 +19,10 @@ public class InputService {
 		return Console.readLine();
 	}
 
+	public String removeBlank(String input) {
+		return input.trim();
+	}
+
 	public String[] splitInput(String input) {
 		List<Integer> prefixIndexes = findAllIndexes(input, CUSTOM_DELIMITER_PREFIX);
 		List<Integer> suffixIndexes = findAllIndexes(input, CUSTOM_DELIMITER_SUFFIX);

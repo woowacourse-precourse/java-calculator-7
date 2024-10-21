@@ -12,8 +12,9 @@ public class CalculatorService {
 	}
 
 	public long calculate(String input) {
+		input = inputService.removeBlank(input);
 		if (input == null || input.isEmpty()) {
-			throw new IllegalArgumentException(NULL_OR_EMPTY_INPUT.getMessage());
+			return 0L;
 		}
 		String[] numbers = inputService.splitInput(input);
 		return sum(numbers);
