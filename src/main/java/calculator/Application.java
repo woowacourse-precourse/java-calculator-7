@@ -1,7 +1,11 @@
 package calculator;
 
+import calculator.controller.CalculatorManager;
+import camp.nextstep.edu.missionutils.Console;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        new CalculatorManager().run();
+        Console.close();
     }
 }
