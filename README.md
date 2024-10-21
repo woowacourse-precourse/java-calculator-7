@@ -1,1 +1,8 @@
-# java-calculator-precourse
+## java-calculator-precourse
+
+- - -
+# 기능목록
+1. 숫자 및 구분자 입력받기
+2. 커스텀 구분자 여부 확인 및 저장하기
+4. 입력문자 검증하기
+5. 계산하기

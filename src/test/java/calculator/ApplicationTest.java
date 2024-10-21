@@ -23,6 +23,28 @@ class ApplicationTest extends NsTest {
                 .isInstanceOf(IllegalArgumentException.class)
         );
     }
+    @Test
+    void 예외_테스트_2() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//-\\n1,3:4-2"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+    @Test
+    void 계산_테스트() {
+        assertSimpleTest(() -> {
+            run("2,3:5");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+    @Test
+    void 계산_테스트_2() {
+        assertSimpleTest(() -> {
+
+            run("//-\\n2-3-5");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
 
     @Override
     public void runMain() {
