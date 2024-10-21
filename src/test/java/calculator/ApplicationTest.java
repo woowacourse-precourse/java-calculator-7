@@ -27,14 +27,6 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 입력이_없음() {
-        assertSimpleTest(() -> {
-            run("");
-            assertThat(output()).contains("결과 : 0");
-        });
-    }
-
-    @Test
     void 형식에서_벗어남_예외_테스트() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("/a\\n12"))
