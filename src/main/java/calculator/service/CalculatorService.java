@@ -26,13 +26,16 @@ public class CalculatorService {
     }
 
     private Numbers convertToNumbers(final String input) {
-        List<Number> numbers = (isCustomDelimiter(input) ? splitCustom(input) : splitNormal(input))
-                .stream()
-                .map(this::parseInt)
-                .map(Number::from)
-                .toList();
-
-        return Numbers.from(numbers);
+        if (isCustomDelimiter(input)) {
+            return Numbers.from(splitCustom(input).stream()
+                                                  .map(this::parseInt)
+                                                  .map(Number::from)
+                                                  .toList());
+        }
+        return Numbers.from(splitNormal(input).stream()
+                                              .map(this::parseInt)
+                                              .map(Number::from)
+                                              .toList());
     }
 
     private boolean isCustomDelimiter(final String input) {
