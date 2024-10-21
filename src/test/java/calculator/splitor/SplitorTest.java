@@ -1,7 +1,7 @@
 package calculator.splitor;
 
-import calculator.InputString;
-import calculator.SplittedResult;
+import calculator.dto.InputString;
+import calculator.dto.SplittedResult;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

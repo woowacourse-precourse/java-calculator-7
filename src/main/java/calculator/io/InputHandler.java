@@ -1,6 +1,6 @@
 package calculator.io;
 
-import calculator.InputString;
+import calculator.dto.InputString;
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputHandler {

@@ -1,11 +1,11 @@
 package calculator;
 
+import calculator.dto.InputString;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class InputStringTest {
     @DisplayName("문자열이 공백인지 확인한다.")

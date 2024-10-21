@@ -1,6 +1,6 @@
 package calculator.splitor;
 
-import calculator.SplittedResult;
+import calculator.dto.SplittedResult;
 import calculator.validator.Validator;
 
 import java.util.List;

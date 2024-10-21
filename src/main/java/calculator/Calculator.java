@@ -1,5 +1,7 @@
 package calculator;
 
+import calculator.dto.InputString;
+import calculator.dto.SplittedResult;
 import calculator.io.InputHandler;
 import calculator.io.OutputHandler;
 import calculator.splitor.Splitor;

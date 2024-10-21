@@ -1,6 +1,6 @@
 package calculator.util;
 
-import calculator.InputString;
+import calculator.dto.InputString;
 import calculator.splitor.BasicSplitor;
 import calculator.splitor.CustomSplitor;
 import org.junit.jupiter.api.DisplayName;

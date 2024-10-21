@@ -1,9 +1,6 @@
 package calculator.splitor;
 
-import calculator.InputString;
-import calculator.SplittedResult;
-
-import java.util.List;
+import calculator.dto.SplittedResult;
 
 public abstract class Splitor {
     protected final String numString;
