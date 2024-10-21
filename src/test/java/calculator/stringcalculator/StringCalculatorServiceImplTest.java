@@ -5,7 +5,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class StringCalculatorServiceTest {
+import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+class StringCalculatorServiceImplTest {
 
     StringCalculatorService stringCalculatorService;
 
@@ -17,29 +20,29 @@ class StringCalculatorServiceTest {
 
     @Test
     void validateInputFormTest1() {
-        String input = "/?+\\n123";
-        Assertions.assertThrows(IllegalArgumentException.class,
+        String input = "/?+\n123";
+        assertThrows(IllegalArgumentException.class,
                 () -> stringCalculatorService.validateInputForm(input));
     }
 
     @Test
     void validateInputFormTest2() {
-        String input = "//+\\n\\n123";
-        Assertions.assertThrows(IllegalArgumentException.class,
+        String input = "//+\n\n123";
+        assertThrows(IllegalArgumentException.class,
                 () -> stringCalculatorService.validateInputForm(input));
     }
 
     @Test
     void validateInputFormTest3() {
         String input = "k12::3";
-        Assertions.assertThrows(IllegalArgumentException.class,
+        assertThrows(IllegalArgumentException.class,
                 () -> stringCalculatorService.validateInputForm(input));
     }
 
     @Test
     void validateInputFormTest4() {
         String input = ":,12:,:3";
-        Assertions.assertDoesNotThrow(() -> stringCalculatorService.validateInputForm(input));
+        assertDoesNotThrow(() -> stringCalculatorService.validateInputForm(input));
     }
 
 }
