@@ -39,7 +39,17 @@ public class Application {
 
     public static String extractCustomDelimiter(String input) {
         int delimiterEndIndex = findDelimiterEndIndex(input);
-        return escapeSpecialCharactersInDelimiter(input.substring(2, delimiterEndIndex));
+
+        if (delimiterEndIndex == 2) {
+            throw new IllegalArgumentException("구분자가 비어 있습니다. 구분자를 입력하세요.");
+        }
+
+        String customDelimiter = input.substring(2, delimiterEndIndex);
+        if (customDelimiter.isEmpty()) {
+            throw new IllegalArgumentException("구분자가 올바르지 않습니다.");
+        }
+
+        return escapeSpecialCharactersInDelimiter(customDelimiter);
     }
 
     public static String extractNumbersSection(String input) {
