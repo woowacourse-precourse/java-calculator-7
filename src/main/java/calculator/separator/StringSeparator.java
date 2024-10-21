@@ -40,4 +40,8 @@ public class StringSeparator {
     public String addCustomDelimiters(String customDelimiters) {
         return delimiters += customDelimiters;
     }
+
+    public String splitCustomDelimiters() {
+        return basicString = basicString.split(CUSTOM_DELIMITER_END)[1];
+    }
 }

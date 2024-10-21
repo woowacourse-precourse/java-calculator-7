@@ -48,4 +48,19 @@ class StringSeparatorTest {
         //then
         assertThat(delimiters).contains(customDelimiters);
     }
+
+
+    @Test
+    public void 입력_문자열에서_커스텀_구분자_분리() throws Exception {
+        //given
+        String calculatableString = "3?2:4";
+        String inputString = "//?\\n" + calculatableString;
+        stringSeparator = new StringSeparator(inputString);
+
+        //when
+        String resultCalculatableString = stringSeparator.splitCustomDelimiters();
+
+        //then
+        assertThat(resultCalculatableString).isEqualTo(calculatableString);
+    }
 }
