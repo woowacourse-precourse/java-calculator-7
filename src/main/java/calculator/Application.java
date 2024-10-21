@@ -17,7 +17,7 @@ public class Application {
 
         String delimiter = ",:"; // 기본 구분자는 쉼표(,) 또는 콜론(:)
         if (input.startsWith("//")) {
-            int index = 0;
+            int index;
 
             // 커스텀 구분자라면 문자열에서 "\n"이 있어야 함.
             if (input.contains("\\n")) {
