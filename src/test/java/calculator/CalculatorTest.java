@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 class CalculatorTest {
     @ParameterizedTest
@@ -35,5 +36,19 @@ class CalculatorTest {
     void 구분자_콜론_테스트() {
         int result = Calculator.calculate("1:2");
         assertThat(result).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("음수 예외처리 테스트")
+    public void splitAndSum_negative() throws Exception {
+        assertThatThrownBy(() -> Calculator.calculate("-1,2,3"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("숫자 이외의 값 예외 처리 테스트")
+    public void NonNumeric_values() throws Exception {
+        assertThatThrownBy(() -> Calculator.calculate("asd"))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
