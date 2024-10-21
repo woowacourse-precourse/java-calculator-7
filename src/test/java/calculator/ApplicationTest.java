@@ -50,6 +50,22 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void int값을넘기는_예외테스트2() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("2147483648"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void int맥스값_테스트() {
+        assertSimpleTest(() -> {
+            run("2147483647");
+            assertThat(output()).contains("결과 : 2147483647");
+        });
+    }
+
+    @Test
     void 예외_테스트_문자테스트() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("a2b3c1 "))
