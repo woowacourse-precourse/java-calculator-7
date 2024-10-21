@@ -42,7 +42,7 @@ public class ParserTest {
         String input = "//;\n//;\n1,2:3";
         assertThrows(IllegalArgumentException.class,
                 () -> {
-            parser.parseInput(input);
-        });
+                    parser.parseInput(input);
+                });
     }
 }

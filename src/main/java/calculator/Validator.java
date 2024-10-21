@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 public class Validator {
 
     /**
-     *  커스텀 구분자 설정을 위한 문자열 형식이 올바른지 판단합니다.
+     * 커스텀 구분자 설정을 위한 문자열 형식이 올바른지 판단합니다.
      *
      * @param optionField 사용자가 입력한 커스텀 구분자 설정을 위한 문자열
      * @return 커스텀 구분자 설정을 위한 문자열 형식이 올바르면 true 아니면 false
@@ -20,9 +20,8 @@ public class Validator {
     /**
      * 추출할 숫자들이 포함된 문자열 형식이 올바른지 판단합니다.
      *
-     * @param targetField 사용자가 입력한 추출할 숫자들이 포함된 문자열
+     * @param targetField      사용자가 입력한 추출할 숫자들이 포함된 문자열
      * @param customSeparators 사용자가 입력한 커스텀 구분자
-     *
      * @return 추출할 숫자들이 포함된 문자열 형식이 올바르면 true 아니면 false
      */
     public boolean isValidTargetField(String targetField, String customSeparators) {

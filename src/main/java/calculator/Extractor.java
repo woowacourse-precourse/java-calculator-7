@@ -53,8 +53,8 @@ public class Extractor {
      * @param optionField 커스텀 문자열 영역(Option)
      * @return 커스텀 문자열
      */
-    public String extractCustomSeparators (String optionField) {
-        return optionField.substring(2, optionField.length()-2);
+    public String extractCustomSeparators(String optionField) {
+        return optionField.substring(2, optionField.length() - 2);
     }
 
 
@@ -62,7 +62,7 @@ public class Extractor {
      * 문자열에서 기본 구분자(쉼표, 콜론) 및 1개 이상의 커스텀 구분자를 사용하여 숫자를 추출합니다.
      *
      * @param customSeparators 커스텀 구분자를 포함한 문자열 (예: "-_'][,:.;").
-     * @param inputToExtract 구분자로 분리된 숫자가 포함된 입력 문자열 (예: "1-2,3_4'5").
+     * @param inputToExtract   구분자로 분리된 숫자가 포함된 입력 문자열 (예: "1-2,3_4'5").
      * @return 추출된 숫자 리스트를 반환합니다.
      */
     public List<Double> extractNumbersWithSeparator(String customSeparators, String inputToExtract) {

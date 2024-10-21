@@ -46,7 +46,6 @@ public class ExtractorTest {
     }
 
 
-
     @Test
     void 커스텀_구분자가_1개_존재할때_숫자_추출_테스트() {
         String customSeparators = "-";

@@ -1,4 +1,5 @@
 package calculator;
+
 import java.util.List;
 
 public class Calculator {
@@ -7,6 +8,7 @@ public class Calculator {
 
     /**
      * 입력된 문자열의 숫자들을 모두 더하고, 합계가 정수라면 long, 소수라면 double로 반환합니다.
+     *
      * @param input 입력 문자열
      * @return 합계가 정수인 경우 long, 아닌 경우 double로 반환
      */
