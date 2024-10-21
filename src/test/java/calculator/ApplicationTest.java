@@ -35,8 +35,7 @@ class ApplicationTest extends NsTest {
 
         DelimiterParser delimiterParser = new DelimiterParser(input);
 
-        assertThatThrownBy(delimiterParser::parseNumbers)
-                .isInstanceOf(IllegalArgumentException.class)
+        assertThatThrownBy(delimiterParser::parseNumbers).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("잘못된 입력 형식입니다. 커스텀 구분자는 //과 \\n을 포함해야 합니다.");
     }
 
@@ -93,10 +92,8 @@ class ApplicationTest extends NsTest {
 
     @Test
     void 예외_테스트() {
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("-1,2,3"))
-                        .isInstanceOf(IllegalArgumentException.class)
-        );
+        assertSimpleTest(
+                () -> assertThatThrownBy(() -> runException("-1,2,3")).isInstanceOf(IllegalArgumentException.class));
     }
 
     @Override
