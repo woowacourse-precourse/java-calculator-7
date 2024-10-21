@@ -7,7 +7,7 @@
 ### Model
 #### Calculator 
 추출된 숫자들을 덧셈 계산하는 클래스
-#### StringSplitter
+#### StringDelimiter
 입력된 문자열에서 기본 구분자와 커스텀 구분자를 기준으로 숫자를 추출하는 기능
 
 ### Util
