@@ -5,14 +5,14 @@ import calculator.view.InputView;
 import calculator.view.OutputView;
 
 public class CalculatorController {
+    private final CalculatorService calculatorService;
     private final InputView inputView;
     private final OutputView outputView;
-    private final CalculatorService calculatorService;
 
-    public CalculatorController(InputView inputView, OutputView outputView, CalculatorService calculatorService) {
-        this.inputView = inputView;
-        this.outputView = outputView;
-        this.calculatorService = calculatorService;
+    public CalculatorController() {
+        this.calculatorService = new CalculatorService();
+        this.inputView = new InputView();
+        this.outputView = new OutputView();
     }
 
     public void run() {
@@ -21,7 +21,7 @@ public class CalculatorController {
             int result = calculatorService.calculate(input);
             outputView.printResult(result);
         } catch (IllegalArgumentException e) {
-            outputView.printError(e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 }
