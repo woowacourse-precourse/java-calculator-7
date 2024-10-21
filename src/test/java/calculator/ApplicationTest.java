@@ -1,11 +1,11 @@
 package calculator;
 
-import camp.nextstep.edu.missionutils.test.NsTest;
-import org.junit.jupiter.api.Test;
-
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import camp.nextstep.edu.missionutils.test.NsTest;
+import org.junit.jupiter.api.Test;
 
 class ApplicationTest extends NsTest {
     @Test
@@ -17,10 +17,82 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 여러_커스텀_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("//;hefa\\n1;2h3e4f3a3");
+            assertThat(output()).contains("결과 : 16");
+        });
+    }
+
+    @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> runException("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_숫자인_구분자_사용시() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//9\\n1"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_중복된_구분자_사용시() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;;\\n1"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_유효하지_않은_숫자형식() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;\\n1;1;"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_커스텀_구분자_형식체크1() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//h\n1h1"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_커스텀_구분자_형식체크2() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//hn1h1"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_커스텀_구분자_형식체크3() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//h1h1"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_구분자앞뒤로_숫자존재확인() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//h\\n1h1h"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_유효하지않은_숫자확인() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//h\\n1h1h1h234234하33h"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
