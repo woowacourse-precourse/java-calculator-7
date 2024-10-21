@@ -1,4 +1,4 @@
-package calculator.exception;
+package calculator.system.exception;
 
 public class InvalidInputException extends IllegalArgumentException {
 

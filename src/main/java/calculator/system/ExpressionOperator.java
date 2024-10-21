@@ -1,10 +1,10 @@
 package calculator.system;
 
-import calculator.exception.OperationOutOfBoundsException;
+import calculator.system.exception.OperationOutOfBoundsException;
 import java.util.List;
 
 public class ExpressionOperator {
-	
+
 	private final DelimiterParser delimiterParser;
 
 	public ExpressionOperator() {
