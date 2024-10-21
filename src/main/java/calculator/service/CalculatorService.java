@@ -57,8 +57,58 @@ public class CalculatorService {
             operandString = inputString.substring(customDelimiterEndIndex + 2);
 
             String[] operands = operandString.split("[,:]|" + customDelimiter);
+
+            for (String operand : operands) {
+                if (!operand.matches(isNumber)) {
+                    throw new IllegalArgumentException(String.valueOf(CalculatorException.OPERAND_NOT_STRING));
+                }
+
+                if (Integer.parseInt(operand) >= Integer.MAX_VALUE) {
+                    throw new IllegalArgumentException(String.valueOf(CalculatorException.OPERAND_OVERFLOW));
+                }
+
+                if (Integer.parseInt(operand) == 0) {
+                    throw new IllegalArgumentException(String.valueOf(CalculatorException.OPERAND_NOT_ZERO));
+                }
+
+                if (Integer.parseInt(operand) < 0) {
+                    throw new IllegalArgumentException(String.valueOf(CalculatorException.OPERAND_NOT_NEGATIVE));
+                }
+
+                result += Integer.parseInt(operand);
+
+                if (result >= Integer.MAX_VALUE) {
+                    throw new IllegalArgumentException(String.valueOf(CalculatorException.RESULT_OVERFLOW));
+                }
+            }
+            
         } else {
             String[] operands = inputString.split("[,:]");
+
+            for (String operand : operands) {
+                if (!operand.matches(isNumber)) {
+                    throw new IllegalArgumentException(String.valueOf(CalculatorException.OPERAND_NOT_STRING));
+                }
+
+                if (Integer.parseInt(operand) >= Integer.MAX_VALUE) {
+                    throw new IllegalArgumentException(String.valueOf(CalculatorException.OPERAND_OVERFLOW));
+                }
+
+                if (Integer.parseInt(operand) == 0) {
+                    throw new IllegalArgumentException(String.valueOf(CalculatorException.OPERAND_NOT_ZERO));
+                }
+
+                if (Integer.parseInt(operand) < 0) {
+                    throw new IllegalArgumentException(String.valueOf(CalculatorException.OPERAND_NOT_NEGATIVE));
+                }
+
+                result += Integer.parseInt(operand);
+
+                if (result >= Integer.MAX_VALUE) {
+                    throw new IllegalArgumentException(String.valueOf(CalculatorException.RESULT_OVERFLOW));
+                }
+            }
+
         }
 
         return result;
