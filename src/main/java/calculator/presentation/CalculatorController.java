@@ -13,7 +13,12 @@ public class CalculatorController {
     private final CalculatorInput input;
     private final CalculatorOutput output;
 
-    public CalculatorController(NumberAdder numberAdder, Tokenizer tokenizer, CalculatorInput input, CalculatorOutput output) {
+    public CalculatorController(
+            NumberAdder numberAdder,
+            Tokenizer tokenizer,
+            CalculatorInput input,
+            CalculatorOutput output
+    ) {
         this.numberAdder = numberAdder;
         this.tokenizer = tokenizer;
         this.input = input;

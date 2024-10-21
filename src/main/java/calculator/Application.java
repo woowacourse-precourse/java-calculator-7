@@ -21,7 +21,12 @@ public class Application {
         Delimiters delimiters = new Delimiters();
         Tokenizer tokenizer = new RegexTokenizer(delimiters);
 
-        CalculatorController calculatorController = new CalculatorController(numberAdder, tokenizer, calculatorInput, calculatorOutput);
+        CalculatorController calculatorController = new CalculatorController(
+                numberAdder,
+                tokenizer,
+                calculatorInput,
+                calculatorOutput
+        );
         calculatorController.run();
     }
 }
