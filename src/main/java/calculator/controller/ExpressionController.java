@@ -2,9 +2,11 @@ package calculator.controller;
 
 import calculator.domain.CustomDelim;
 import calculator.domain.CustomDelimVerify;
+import calculator.domain.Prep;
 import calculator.domain.Unify;
 import calculator.domain.UserExpression;
 import calculator.domain.UserExpressionDivide;
+import calculator.domain.Validation;
 import calculator.repository.DelimiterRepository;
 import java.util.List;
 
@@ -37,5 +39,10 @@ public class ExpressionController {
 
     private String unifyAllDelim(String essenceExpression, List<String> delimiters) {
         return Unify.allDelimiters(essenceExpression, delimiters);
+    }
+
+    private List<String> prepExpressionDiced(String unified) {
+        Validation.undefinedStrMixedInExpression(unified,delimiterRepository.getDelimiters());
+        return Prep.dicedChunk(unified, delimiterRepository.getDelimiters().getFirst());
     }
 }
