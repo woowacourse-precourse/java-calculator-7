@@ -8,8 +8,11 @@ public class Application {
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
         Calculator calculator = new Calculator();
+
         String input = inputView.getInput();
+
         int result = calculator.addNumbers(input);
+
         outputView.printResult(result);
 
 //        System.out.println("1,2,3 = " + calculator.addNumbers("1,2,3"));
