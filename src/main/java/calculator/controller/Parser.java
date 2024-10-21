@@ -23,7 +23,7 @@ public class Parser {
     }
 
     // 커스텀 구분자 파싱
-    public void parsingCustomSeparators(String inputString) {
+    public void parsingSeparators(String inputString) {
 
         for (int i = 0; i < inputString.length(); i++) {
 
@@ -98,7 +98,7 @@ public class Parser {
     // 문자열 파싱 호출 메서드
     public void parseString(String inputString) {
         addBasicSeparators();
-        parsingCustomSeparators(inputString);
+        parsingSeparators(inputString);
         parsingOperands();
     }
 
