@@ -4,14 +4,11 @@ import camp.nextstep.edu.missionutils.Console;
 
 
 public class Application {
-    private static final String CUSTOM_SEPARATOR_REGEX = "//(.*?)\\\\n";
-
     public static void main(String[] args) {
         try {
             System.out.println("덧셈할 문자열을 입력해 주세요.");
             String input = Console.readLine();
             String[] sepArr = splitInput(input); // 커스텀 구분자 지정 및 구분자 기준으로 나누는 메서드 호출, 배열에 저장
-
             int sum = calculator(sepArr); // 합계 구하는 메서드 호출
             printResult(sum); // 출력 메서드
         } catch (IllegalArgumentException e) {
@@ -29,6 +26,9 @@ public class Application {
         String separator3 = ""; // 커스텀 구분자 추가 설정, 공백으로 초기화
 
         if (input.length() > 5 && input.substring(0, 2).equals("//") && input.substring(3, 5).equals("\\n")) {
+            if (input.substring(2, 3).equals(";") || input.substring(2, 3).equals(",")) {
+                throw new IllegalArgumentException("기존 구분자와 같습니다");
+            }
             separator3 = input.substring(2, 3);
             input = input.substring(5);
 
@@ -44,8 +44,8 @@ public class Application {
     private static int calculator(String[] sepArr) {
         int sum = 0;
         for (String numStr : sepArr) {
-            if (numStr.isEmpty()) {
-                throw new IllegalArgumentException("구분자 사이에 공백이 포함되어 있습니다.."); // 공백 포함시 예외처리
+            if (numStr.equals(" ")) {
+                throw new IllegalArgumentException("구분자 사이에 공백이 포함되어 있습니다."); // 공백 포함시 예외처리
             }
             sum += splitNumber(numStr);
         }
