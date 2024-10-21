@@ -6,7 +6,7 @@ public class Application {
     /**
      * 커스텀 구분자 처리를 위한 이스케이프 문자와 특수문자를 담은 문자열
      */
-    static final String special_letters = "+-*/%=><'\"\\";
+    static final String SPECIAL_LETTERS = "+-*/%=><'\"\\";
     static String identifier = ",|:"; // 구분자를 모아놓은 문자열
 
     public static void main(String[] args) {
@@ -46,7 +46,7 @@ public class Application {
 
     public static void addCustomIdentifier(String custom) {
         for (char c : custom.toCharArray()) {
-            if (special_letters.contains(c + "")) {
+            if (SPECIAL_LETTERS.contains(c + "")) {
                 identifier += "|\\" + c; // 특수문자는 이스케이프 처리
             } else {
                 identifier += "|" + c; // 일반문자는 그대로 추가
