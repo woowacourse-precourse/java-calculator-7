@@ -16,7 +16,7 @@ public class JudgmentAPI {
 		return false;
 	}
 
-	public boolean[] convertBooleanTypeNumbers(char[] charArrays) {
+	public boolean[] judgmentNumbers(char[] charArrays) {
 		boolean[] booleans = new boolean[charArrays.length];
 		int idx = 0;
 
@@ -36,12 +36,12 @@ public class JudgmentAPI {
 		return sentence.matches(REGEX_PATTERN.getString());
 	}
 
-    public int isNextTrue(boolean[] booleans, int init) {
-		int arrayLength = booleans.length;
-		int continuousTrue = 0;
+    public int judgmentContinuousTrue(boolean[] booleans, int idx) {
+		int booleansLength = booleans.length;
+		int continuousTrue = 1;
 
-		for(int i = init; i < arrayLength; i++) {
-			if(booleans[i]) {
+		for(int i = idx; i < booleansLength-1; i++) {
+			if(booleans[i] && judgmentNextTrue(booleans, i)) {
 				continuousTrue++;
 			} else {
 				return continuousTrue;
@@ -49,6 +49,10 @@ public class JudgmentAPI {
 		}
 
 		return continuousTrue;
+	}
+
+	private boolean judgmentNextTrue(boolean[] booleans, int idx) {
+		return booleans[idx] && booleans[idx+1];
 	}
 
 	public static JudgmentAPI getInstance() {

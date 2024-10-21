@@ -23,8 +23,8 @@ public class SeparateAPI {
 		return false;
 	}
 
-	public boolean findCustomSeparator(String sentence) {
-		if(BeanFactory.judgement().judgmentFormat(sentence)) {
+	private boolean findCustomSeparator(String sentence) {
+		if(judgmentAPI.judgmentFormat(sentence)) {
 			char customSeparator = sentence.replaceAll(REGEX_PATTERN.getString(), "$1").charAt(0);
 			separator.addSeparator(customSeparator);
 			return true;
@@ -35,30 +35,26 @@ public class SeparateAPI {
 
 	public String separateInput(String sentence) {
 		if(findCustomSeparator(sentence)) {
-			return sentence.substring(4);
+			return sentence.replaceAll(REGEX_PATTERN.getString(), "$2");
 		} else {
 			return sentence;
 		}
 	}
 
-	public void findNumberAndSave(String sentence) {
-		boolean[] booleans = judgmentAPI.convertBooleanTypeNumbers(sentence.toCharArray());
+	public void findNumbers(String sentence, boolean[] booleans) {
 		int idx = 0;
-		
+
 		while(idx < sentence.length()) {
+
 			if(booleans[idx]) {
-				int nextTrue = judgmentAPI.isNextTrue(booleans, idx);
-				String sub = sentence.substring(idx, nextTrue + idx);
+				int trueCnt = judgmentAPI.judgmentContinuousTrue(booleans, idx);
+				String sub = sentence.substring(idx, trueCnt + idx);
 				number.addNumber(Integer.parseInt(sub));
-
-				idx += nextTrue;
-			} else {
-				char separator = sentence.charAt(idx);
-				if(!validSeparator(separator)) {
-					throw new IllegalArgumentException("올바른 구분자가 아닙니다");
-				}
-
+				idx += trueCnt;
+			} else if(validSeparator(sentence.charAt(idx))) {
 				idx++;
+			} else {
+				throw new IllegalArgumentException("올바른 구분자가 아닙니다: " + sentence.charAt(idx));
 			}
 		}
 	}
