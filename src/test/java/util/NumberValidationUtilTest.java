@@ -12,7 +12,7 @@ public class NumberValidationUtilTest {
     @DisplayName("구분자가 아닌 문자 사용")
     public void testValidateNumberStringFormatWithInvalidSeparator() {
         assertThrows(IllegalArgumentException.class, () ->
-                NumberValidationUtil.validateNumbers("10000000000000,2/3", ";")
+                NumberValidationUtil.validateNumberString("10000000000000,2/3", ";")
         );
     }
 
@@ -20,7 +20,7 @@ public class NumberValidationUtilTest {
     @DisplayName("구분자 다음에 숫자가 오지않음")
     public void testValidateNumberAfterSeparator() {
         assertThrows(IllegalArgumentException.class, () ->
-                NumberValidationUtil.validateNumbers("1,2,,", ";")
+                NumberValidationUtil.validateNumberString("1,2,,", ";")
         );
     }
 
@@ -28,7 +28,7 @@ public class NumberValidationUtilTest {
     @DisplayName("숫자가 양수가 아님")
     public void testValidatePositiveNumbers() {
         assertThrows(IllegalArgumentException.class, () ->
-                NumberValidationUtil.validateNumbers("1,0,3", ";")
+                NumberValidationUtil.validateNumberString("1,0,3", ";")
         );
     }
 
@@ -36,15 +36,16 @@ public class NumberValidationUtilTest {
     @DisplayName("숫자가 없음")
     public void testValidateWithoutNumbers() {
         assertThrows(IllegalArgumentException.class, () ->
-                NumberValidationUtil.validateNumbers(",", ";")
+                NumberValidationUtil.validateNumberString(",", ";")
         );
     }
 
     @Test
     @DisplayName("올바른 숫자 문자열")
     public void testValidNumberString() {
-        NumberValidationUtil.validateNumbers("1;2;3", ";");
-        NumberValidationUtil.validateNumbers("1 2 3", " ");
-        NumberValidationUtil.validateNumbers("1a2a3", "a");
+        NumberValidationUtil.validateNumberString("1;2;3", ";");
+        NumberValidationUtil.validateNumberString("1 2 3", " ");
+        NumberValidationUtil.validateNumberString("1\\2\\3", "\\\\");
+        NumberValidationUtil.validateNumberString("1\"2\"3", "\"");
     }
 }
