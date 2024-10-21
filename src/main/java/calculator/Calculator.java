@@ -34,7 +34,14 @@ public class Calculator {
 
         // 추출된 숫자들을 합산
         for (String number : numbers) {
-            sum += Integer.parseInt(number);
+            int parsedNumber = Integer.parseInt(number);
+
+            // 합계 계산 시 int 범위 초과 여부 확인
+            if (sum > Integer.MAX_VALUE - parsedNumber) {
+                throw new IllegalArgumentException("합계가 int 범위를 초과했습니다.");
+            }
+
+            sum += parsedNumber;
         }
 
         // 합계 반환
