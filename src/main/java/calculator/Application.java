@@ -1,7 +1,6 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,6 +33,22 @@ class AddCalculator {
         return input.split("[,:]");
     }
 
+    static int[] toIntArray(String[] parsedList) {
+        int[] numbers = new int[parsedList.length];
+        for (int i = 0; i < parsedList.length; i++) {
+            numbers[i] = Integer.parseInt(parsedList[i]);
+        }
+        return numbers;
+    }
+
+    static int add(int[] numbers) {
+        int sum = 0;
+        for (int number : numbers) {
+            sum += number;
+        }
+        return sum;
+    }
+
 }
 
 public class Application {
@@ -42,16 +57,20 @@ public class Application {
         int result = 0;
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
-
-        AddCalculator addCalculator = new AddCalculator();
-        if (addCalculator.isCustomDelimiterExisted(input)) {
-            // 테스트용 출력문
-            System.out.println(Arrays.toString(addCalculator.validateCustomDelimiterInput(input)));
-        } else {
-            // 테스트용 출력문
-            System.out.println(Arrays.toString(addCalculator.validateDefaultInput(input)));
-        }
-
+        result = calculateSum(input);
         System.out.println("결과 : " + result);
     }
+
+    private static int calculateSum(String input) {
+        AddCalculator calculator = new AddCalculator();
+        String[] parsedList;
+        if (calculator.isCustomDelimiterExisted(input)) {
+            parsedList = calculator.validateCustomDelimiterInput(input);
+        } else {
+            parsedList = calculator.validateDefaultInput(input);
+        }
+        int[] numbers = AddCalculator.toIntArray(parsedList);
+        return AddCalculator.add(numbers);
+    }
+
 }
