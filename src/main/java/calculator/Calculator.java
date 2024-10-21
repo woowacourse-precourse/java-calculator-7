@@ -70,6 +70,7 @@ public class Calculator {
     }
 
     public String extractCustomDelimiter(String userInput) {
+        Validator.validateDelimiterDeclaration(userInput, CUSTOM_DELIMITER_PREFIX, CUSTOM_DELIMITER_SUFFIX);
         String customDelimiter = "";
         if (userInput.startsWith(CUSTOM_DELIMITER_PREFIX) && userInput.contains(CUSTOM_DELIMITER_SUFFIX)) {
             int delimiterEndIndex = userInput.indexOf(CUSTOM_DELIMITER_SUFFIX);

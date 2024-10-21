@@ -30,4 +30,15 @@ public class Validator {
             throw new IllegalArgumentException("숫자 0은 입력할 수 없습니다. (양수만 허용)");
         }
     }
+
+    // "//"과 "\n" 중 하나만 사용한 경우 예외 발생
+    public static void validateDelimiterDeclaration(String userInput, String declarationPrefix,
+                                                    String declarationSuffix) {
+        if (userInput.startsWith(declarationPrefix) && !userInput.contains(declarationSuffix)) {
+            throw new IllegalArgumentException("커스텀 구분자를 사용할 경우 반드시 '//'와 '\\n'을 함께 사용해야 합니다.");
+        }
+        if (userInput.contains(declarationSuffix) && !userInput.startsWith(declarationPrefix)) {
+            throw new IllegalArgumentException("커스텀 구분자를 사용할 경우 반드시 '//'와 '\\n'을 함께 사용해야 합니다.");
+        }
+    }
 }
