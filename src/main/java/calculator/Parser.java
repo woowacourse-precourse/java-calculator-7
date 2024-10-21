@@ -27,7 +27,7 @@ public class Parser {
 
     }
 
-        public void parseNums(String input){
+    public void parseNums(String input){
 
         if(Objects.isNull(input)) {
             checkInteger("");
@@ -35,13 +35,13 @@ public class Parser {
         }
 
         parseSeparator(input);
-
         initialNums();
 
         if(checkSeparator(input))
             input = input.substring(5);
 
         String num = "";
+
         for(int i=0; i<input.length(); i++){
 
             String currentString = input.substring(i,i+1);
