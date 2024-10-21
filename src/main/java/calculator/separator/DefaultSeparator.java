@@ -9,11 +9,13 @@ public class DefaultSeparator {
 
     public NumberWrapper[] separateStringToSum(String userInput, DelimiterStorage delimiterStorage) throws IllegalArgumentException{
 
-        if (containsInvalidDelimiter(userInput, delimiterStorage)) {
+        String allowedDelimiters = getAllowedDelimiters(delimiterStorage);
+
+        if (containsInvalidDelimiter(userInput, allowedDelimiters)) {
             throw new IllegalArgumentException("유효한 구분자가 입력에 포함되지 않았습니다");
         }
 
-        String [] parsedStrings = userInput.split(getRegex(delimiterStorage));
+        String [] parsedStrings = userInput.split(allowedDelimiters);
 
         if(Arrays.stream(parsedStrings)
                 .anyMatch(String::isEmpty)){
@@ -27,19 +29,14 @@ public class DefaultSeparator {
         return numbers;
     }
 
-    private static boolean containsInvalidDelimiter(String input, DelimiterStorage delimiterStorage) {
-
-        String allowedDelimiters = delimiterStorage.getDelimiters()
-                .stream()
-                .map(Pattern::quote)
-                .collect(Collectors.joining("|"));
+    private static boolean containsInvalidDelimiter(String input, String allowedDelimiters) {
 
         String regex = "^[\\d" + allowedDelimiters + "]+$";
 
         return !Pattern.matches(regex, input);
     }
 
-    private static String getRegex(DelimiterStorage delimiterStorage) {
+    private static String getAllowedDelimiters(DelimiterStorage delimiterStorage) {
         return delimiterStorage.getDelimiters()
                 .stream()
                 .map(Pattern::quote)
