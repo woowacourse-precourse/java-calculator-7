@@ -22,25 +22,28 @@ public class Calculator {
         if (argument.length()==0) {
             return result;
         }
-        if (argument.charAt(0)=='/') {
-            int idx = argument.indexOf("\n");
-            if (idx == -1) {
-                throw new IllegalStateException("잘못된 형식입니다.");
+        if (argument.contains("//")) {
+            if (!argument.contains("\\n")) {
+                throw new IllegalArgumentException("커스텀 구분자를 찾을 수 없습니다.");
             }
-            String[] tmp = argument.split("\n");
-            expression = tmp[1];
+            String[] tmp = argument.split("\\\\n");
             if (tmp.length!=2 || tmp[0].length()!=3) {
-                throw new IllegalStateException("잘못된 형식입니다.");
+                throw new IllegalArgumentException("커스텀 구분자를 찾을 수 없습니다.");
             }
+            expression = tmp[1];
             splitter = tmp[0].substring(2, 3);
         }
         String[] operands = expression.split(splitter);
         try {
             for (String operand : operands) {
-                result.add(Long.parseLong(operand));
+                long number = Long.parseLong(operand);
+                if (number < 0) {
+                    throw new IllegalArgumentException();
+                }
+                result.add(number);
             }
-        } catch (NumberFormatException e) {
-            throw new IllegalStateException("잘못된 형식입니다.");
+        } catch (RuntimeException e) {
+            throw new IllegalArgumentException("수 입력값을 파싱할 수 없습니다.");
         }
         return result;
     }
