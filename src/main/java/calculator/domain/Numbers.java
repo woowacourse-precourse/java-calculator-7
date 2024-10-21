@@ -10,7 +10,7 @@ public class Numbers {
 		this.numbers = numbers;
 	}
 
-	public void validateIsPositiveNumber(List<Integer> numbers){
+	private void validateIsPositiveNumber(List<Integer> numbers){
 		boolean hasNonPositive = numbers.stream()
 			.anyMatch(number -> number <= 0);
 
