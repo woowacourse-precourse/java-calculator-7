@@ -12,5 +12,13 @@ public class Application {
             input = input.substring(input.indexOf("\n") + 1);
             numbers = input.split(delimiter);
         }
+        int sum = 0;
+        for (String number : numbers) {
+            int num = Integer.parseInt(number.trim()); 
+            if (num < 0) {
+                throw new IllegalArgumentException("음수는 허용되지 않습니다.");
+            }
+            sum += num; 
+        }    
     }
 }
