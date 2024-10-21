@@ -2,8 +2,6 @@ package calculator.validation;
 
 import static calculator.exception.ErrorMessage.*;
 
-import java.util.regex.Pattern;
-
 import calculator.model.delimiter.Delimiters;
 
 public class InputValidator {
@@ -11,10 +9,7 @@ public class InputValidator {
 	}
 
 	public static void validateInvalidDelimiter(String input, Delimiters delimiters) {
-		String regex = "[\\d" + String.join("", delimiters.getDelimiters().stream()
-			.map(Pattern::quote) // 구분자를 정규식에 안전하게 포함
-			.toArray(String[]::new)) + "]*";
-		String filteredInput = input.replaceAll(regex, "");
+		String regex = "[\\d" + String.join("", delimiters.getRegex()) + "]*";
 
 		if (!input.matches(regex)) {
 			throw new IllegalArgumentException(INVALID_DELIMITER.getMessage());

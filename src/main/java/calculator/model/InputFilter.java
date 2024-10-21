@@ -26,12 +26,7 @@ public class InputFilter {
 	// 구분자들을 이용해 정규식을 만들고, 이를 이용해 입력값을 분리
 	private String[] splitInput(String processedInput, Delimiters delimiters) {
 		InputValidator.validateInvalidDelimiter(processedInput, delimiters);
-
-		String regex = String.join("|",
-			delimiters.getDelimiters().stream()
-				.map(Pattern::quote) // 구분자를 정규식에 안전하게 포함 (특수 문자의 경우 혼동의 여지가 있음)
-				.toArray(String[]::new)
-		);
+		String regex = String.join("|", delimiters.getRegex());
 
 		return processedInput.split(regex);
 	}
