@@ -25,4 +25,19 @@ public class InputValidator {
             validatePositiveNumber(Integer.parseInt(number));
         }
     }
+
+    public static void validateCustomDelimiter(String customDelimiter) {
+        if (isOnlyDigits(customDelimiter)) {
+            throw new IllegalArgumentException("Custom delimiter must contain a string");
+        }
+    }
+
+    public static boolean isOnlyDigits(String input) {
+        try {
+            Integer.parseInt(input);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 }

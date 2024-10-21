@@ -1,5 +1,6 @@
 package calculator.domain;
 
+import static calculator.domain.InputValidator.validateCustomDelimiter;
 import static calculator.domain.InputValidator.validateExtractedNumbers;
 
 import calculator.domain.constants.DefaultDelimiter;
@@ -19,12 +20,13 @@ public class InputParser {
 
 
     public void ensureCustomDelimiter() {
-        Pattern pattern = Pattern.compile("^//(.)\\\\n");
+        Pattern pattern = Pattern.compile("^//(.*)\\\\n");
         Matcher matcher = pattern.matcher(inputString);
 
         if (matcher.find()) {
             customDelimiter = matcher.group(1);
         }
+        validateCustomDelimiter(customDelimiter);
     }
 
     public void extractNumbers(Vector<Integer> extractedNumbers) {
