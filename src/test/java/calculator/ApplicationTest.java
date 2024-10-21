@@ -17,7 +17,6 @@ class ApplicationTest extends NsTest {
         });
     }
 
-
     @Test
     void 여러개_커스텀_구분자_파싱_테스트() {
         // given
