@@ -11,6 +11,7 @@ public class Application {
         String input = readLine();
 
         try{
+            input = input.replace("\\n", "\n");
             int result = add(input);
             System.out.println("결과 : "+result);
         } catch (Exception e) {
