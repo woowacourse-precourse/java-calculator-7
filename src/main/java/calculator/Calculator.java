@@ -18,7 +18,7 @@
                 if (regExIndex == -1) {
                     throw new IllegalArgumentException("커스텀 구분자 선언 후 개행이 필요 합니다.");
                 }
-                String customDelimiter = input.substring(2, regExIndex-1);
+                String customDelimiter = input.substring(2, regExIndex);
                 if(customDelimiter.isEmpty()){
                     throw new IllegalArgumentException();
                 }
@@ -46,7 +46,7 @@
 
             for (String num: numbers){
                 if(num.trim().isEmpty()){
-                    throw new IllegalArgumentException("숫자가 존재 하지 않는다.");
+                    return sum;
                 }
                 try{
                     int n = Integer.parseInt(num.trim());
