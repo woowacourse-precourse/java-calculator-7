@@ -130,6 +130,9 @@ public class StringCalculator extends Calculator {
      * @return 주어진 숫자의 합
      */
     public long sum(String line) {
+        if (line.isEmpty() || line.equals("")) {
+            throw new IllegalArgumentException("빈 문자열입니다.");
+        }
         line = parseSeparator(line);
         validateInput(line);
         int[] numbers = parseNumbers(line);
