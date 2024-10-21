@@ -17,7 +17,12 @@ public class Application {
         }
 
         String[] result = Converter.convert(data);
-        System.out.println(Arrays.toString(result));
+        int answer = Arrays.stream(result)
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .reduce(0, Integer::sum);
+
+        System.out.println("결과 : " + answer);
     }
 
 
