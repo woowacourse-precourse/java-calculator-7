@@ -8,10 +8,16 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String str = Console.readLine().replaceAll(":", ",");
         String customCharacter = ""; // 커스텀 구분자
-        if (str.indexOf("//") == 0 && str.indexOf("\\n") == 3) {
+        if (str.trim().isEmpty()) {
+            // 빈값 예외처리
+            throw new IllegalArgumentException();
+        }
+
+        if (str.indexOf("//") == 0 && str.indexOf("\\\\n") == 3) {
             // 커스텀 구분자는 문자열 앞부분의 "//"와 "\n" 사이에 위치하는 문자를 커스텀 구분자로 사용한다.
             customCharacter = String.valueOf(str.charAt(2));
             str = str.replace("/", "").replace("\\", "").replace("n", "").replace(customCharacter, ",");
+            str = str.substring(1);
         }
         if (str.indexOf(",,") > -1) {
             //사용자가 잘못된 값을 입력할 경우 IllegalArgumentException을 발생시킨 후 애플리케이션은 종료되어야 한다.
@@ -20,7 +26,16 @@ public class Application {
         String[] arr = str.split(",");
         for (String item : arr) {
             if (!item.isEmpty()) {
-                int n = Integer.parseInt(item);
+                int n = 0;
+                try {
+                    n = Integer.parseInt(item);
+                } catch (NumberFormatException e) {
+                    throw new IllegalArgumentException();
+                }
+                if (n <= 0) {
+                    //사용자가 잘못된 값을 입력할 경우 IllegalArgumentException을 발생시킨 후 애플리케이션은 종료되어야 한다.
+                    throw new IllegalArgumentException();
+                }
                 result += n;
             } else {
                 //사용자가 잘못된 값을 입력할 경우 IllegalArgumentException을 발생시킨 후 애플리케이션은 종료되어야 한다.
