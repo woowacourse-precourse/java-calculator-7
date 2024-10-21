@@ -16,33 +16,47 @@ public class Application {
 
     public static void main(String[] args) {
 
+
+        try{
         System.out.print("input : ");
         String userInput = Console.readLine();
+        String delimiter = "[,:]"; //기본 구분자
 
         if(userInput == null || userInput.trim().isEmpty()) {
             System.out.println("0");
             return;
         }
 
-        //구분자 추출
-        String delimiter = userInput.substring(userInput.indexOf("//")+2, userInput.indexOf("\\n"));
-        System.out.println("추출된 구분자 : " +delimiter);
+        if(userInput.startsWith("//")) { //userInput이 "//"로 시작하면 커스텀 구분자로
+            //구분자 추출
+            delimiter = userInput.substring(userInput.indexOf("//") + 2, userInput.indexOf("\\n"));
+            System.out.println("추출된 구분자 : " + delimiter);
 
-        //숫자 부분만 추출
-        userInput = userInput.substring(userInput.indexOf("\\n")+2);
-        System.out.println("추출된 숫자 : "+userInput);
+            //숫자 부분만 추출
+            userInput = userInput.substring(userInput.indexOf("\\n") + 2);
+            System.out.println("추출된 숫자 : " + userInput);
+        }
 
         // 쉼표 또는 콜론을 구분자로 가지는 문자열
-        String[] array = userInput.split("[,:"+delimiter+"]");
+        String[] array = userInput.split("["+delimiter+"]");
 
 
         int sum = 0;
         for (String s : array) {
 
+            if (s.trim().isEmpty()) {
+                throw new IllegalArgumentException("빈 값이 포함되어 있습니다.");
+            }
+
             sum += Integer.parseInt(s);
         }
 
         System.out.println(sum);
+
+        }catch (IllegalArgumentException e){
+            System.err.println(e.getMessage());
+
+        }
 
 
     }
