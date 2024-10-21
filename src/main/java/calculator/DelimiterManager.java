@@ -13,4 +13,8 @@ public class DelimiterManager {
             this.delimiters.add(delimiter);
         }
     }
+
+    public void add(char delimiter) {
+        delimiters.add(delimiter);
+    }
 }
