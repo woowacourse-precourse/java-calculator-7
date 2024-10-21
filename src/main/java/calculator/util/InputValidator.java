@@ -1,8 +1,5 @@
 package calculator.util;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class InputValidator {
     public static void validate(String input) {
         hasWhiteSpace(input);
@@ -30,15 +27,10 @@ public class InputValidator {
     }
 
     private static void validDelimiters(String input) {
-        String delimiter1 = ",|:";
-        Pattern pattern1 = Pattern.compile(delimiter1);
-        Matcher matcher1 = pattern1.matcher(input);
+        String defaultDelimiter = ",|:";
+        String customDelimiter = "//(.*)\\\\n(.*)";
 
-        String delimiter2 = "//(.*)\\n(.*)";
-        Pattern pattern2 = Pattern.compile(delimiter2);
-        Matcher matcher2 = pattern2.matcher(input);
-
-        if (!matcher1.find() && !matcher2.find()) {
+        if (!input.matches(defaultDelimiter) && !input.matches(customDelimiter)) {
             throw new IllegalArgumentException("입력 문자열이 유효한 구분자를 포함하지 않습니다.");
         }
     }
