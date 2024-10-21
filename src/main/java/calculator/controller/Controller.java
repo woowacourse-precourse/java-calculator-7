@@ -1,5 +1,6 @@
 package calculator.controller;
 
+import calculator.calculator.Calculator;
 import calculator.util.Validator;
 import calculator.view.View;
 
@@ -17,7 +18,8 @@ public class Controller {
         printStartMessage();
         var text = View.read();
         var regex = extractRegex(text);
-        printResult(sum(convertInt(splitNumbers(text, regex))));
+        var calculator = Calculator.calculate(convertInt(splitNumbers(text, regex)));
+        printResult(calculator.sum());
     }
 
     private String extractRegex(String text) {
@@ -47,11 +49,6 @@ public class Controller {
             list.add(Integer.parseInt(number));
         }
         return list;
-    }
-
-    public int sum(List<Integer> numbers) {
-        return numbers.stream()
-                .reduce(0, Integer::sum);
     }
 
     private void printStartMessage() {
