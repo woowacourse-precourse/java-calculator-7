@@ -1,7 +1,4 @@
 package calculator;
-
-import java.util.Scanner;
-
 public class Application {
     public static void main(String[] args) {
         Calculator calculator = new Calculator();
@@ -9,6 +6,7 @@ public class Application {
         String input = calculator.input();
         String basicProcess = calculator.replaceBasicSeparators(input);
         String customProcess = (calculator.replaceCustomSeparate(basicProcess));
+
         calculator.validationCheck(customProcess);
         calculator.calculationResult(customProcess);
     }

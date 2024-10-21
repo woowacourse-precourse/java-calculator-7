@@ -5,6 +5,9 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * 문자열을 처리하고 계산을 수행하는 계산기 클래스
+ */
 public class Calculator {
     /**
      * 문자열을 입력받아 반환하는 함수.
