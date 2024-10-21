@@ -24,7 +24,7 @@ public class Application {
             return 0;
         }
 
-        String delimiter = ",|:"; // 기본 구분자: 쉼표와 콜론
+        String delimiter = ",|:"; // 기본 구분자
 
         // 커스텀 구분자 처리
         if (input.startsWith("//")) {
