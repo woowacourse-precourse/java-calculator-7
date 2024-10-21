@@ -1,7 +1,7 @@
 # java-calculator-precourse
 
 
-## 기능 목록
+# 기능 목록
 
 1. 입력 값 처리
     - 사용자가 입력한 문자열을 Console.readLine()으로 입력받음.
