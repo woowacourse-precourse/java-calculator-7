@@ -25,10 +25,6 @@ public class InputParser {
             }
         });
 
-        List<String> parseList = List.of(tokens);
-        if (parseList.contains("")) {
-            throw new IllegalArgumentException("Invalid input: " + numbers);
-        }
-        return parseList;
+        return List.of(tokens);
     }
 }
