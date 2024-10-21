@@ -1,7 +1,6 @@
 package calculator;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Processor {
@@ -20,7 +19,7 @@ public class Processor {
             delimiters.add(customDelimiter);
         }
 
-        int[] numbers = convertToIntArray(splitByDelimiters());
+        String[] splitInput = Splitter.splitByDelimiters(input, delimiters);
 
         return Calculator.calculateSum(numbers);
     }
@@ -34,22 +33,5 @@ public class Processor {
         input = input.substring(endOfDelimiterSection);
 
         return customDelimiter;
-    }
-
-    private String[] splitByDelimiters() {
-        String regex = String.join("|", delimiters.stream()
-                .map(delimiter -> "\\" + delimiter)
-                .toArray(String[]::new));
-        return input.split(regex);
-    }
-
-    private int[] convertToIntArray(String[] splittedInput) {
-        return java.util.Arrays.stream(splittedInput)
-                .mapToInt(Integer::parseInt)
-                .toArray();
-    }
-
-    private int calculateSum(int[] numbers) {
-        return Arrays.stream(numbers).sum();
     }
 }
