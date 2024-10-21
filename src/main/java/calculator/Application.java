@@ -34,7 +34,7 @@ class StringCalculator{
             int index = input.indexOf("\\n");
             String n = input.substring(2, index);
             input = input.substring(index+2);
-            String[] numbers = input.split(Pattern.quote(n));
+            String[] numbers = input.split(Pattern.quote(n) + "|," + "|:");
 
             int sum = 0;
             for(String number : numbers){
@@ -47,18 +47,7 @@ class StringCalculator{
             return sum;
         } // 커스텀 구분자 지정
 
-        String[] numbers = input.split("[,:]"); // 구분자로 문자열 분리
-
-        int sum = 0;
-
-        for (String number : numbers) {
-            int num = Integer.parseInt(number);
-
-            checkNum(num);
-
-            sum += num;
-        }
-        return sum; // 분리한 숫자를 합해 결과 출력
+        throw new IllegalArgumentException("입력이 잘못되었습니다.");
     }
 
     private void checkNum(int num){
