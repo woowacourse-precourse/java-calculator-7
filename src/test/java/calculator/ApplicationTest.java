@@ -3,6 +3,8 @@ package calculator;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigInteger;
+
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -17,10 +19,66 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 연속된_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("1,,2::3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 커스텀_연속된_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("//;!\\n1;;2!!3::4");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
+    @Test
+    void 두_자리_이상_숫자() {
+        assertSimpleTest(() -> {
+            run("1,20,300:4000");
+            assertThat(output()).contains("결과 : 4321");
+        });
+    }
+
+    @Test
+    void 오버플로우_무시_합연산() {
+        assertSimpleTest(() -> {
+            run(String.valueOf(Integer.MAX_VALUE)+",2:3");
+            assertThat(output()).contains("결과 : "+BigInteger.valueOf(Long.sum(Integer.MAX_VALUE, 5)));
+        });
+    }
+
+    @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> runException("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void zero_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("0,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 영문_입력_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("a,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 한글_입력_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("별,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
