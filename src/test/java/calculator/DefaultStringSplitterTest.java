@@ -19,7 +19,7 @@ public class DefaultStringSplitterTest {
             "'1:2:3'",
             "'45,67:89'"
     })
-    void 기본_문자열_지원확인(String input) {
+    void 기본_문자열_지원_TRUE(String input) {
         Assertions.assertTrue(stringSplitter.canSupport(input));
     }
 

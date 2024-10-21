@@ -37,11 +37,18 @@ public class CustomStringSplitter implements StringSplitter {
         String conjoinedDelimiter = DEFAULT_DELIMITER + customDelimiter;
 
         String numbersAndDelimiter = matcher.group(2);
-        numbersAndDelimiter = numbersAndDelimiter.replace("\\", ":");
+        numbersAndDelimiter = replaceBackSlash(customDelimiter, numbersAndDelimiter);
         List<String> result = splitSubstring(conjoinedDelimiter, numbersAndDelimiter);
         validateContinuousDelimiter(result, str);
 
         return result;
+    }
+
+    private String replaceBackSlash(String customDelimiter, String numbersAndDelimiter) {
+        if (customDelimiter.contains("\\")) {
+            numbersAndDelimiter = numbersAndDelimiter.replace("\\", String.valueOf(DEFAULT_DELIMITER.charAt(0)));
+        }
+        return numbersAndDelimiter;
     }
 
     private String generatePatternRegex() {
@@ -49,7 +56,7 @@ public class CustomStringSplitter implements StringSplitter {
 
         delimiterBuilder.append("^")
                 .append(CUSTOM_DELIMITER_HEADER)
-                .append("(.+)")
+                .append("([^0-9]+)")
                 .append(CUSTOM_DELIMITER_FOOTER)
                 .append("(.+)");
 
