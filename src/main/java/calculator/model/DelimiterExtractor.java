@@ -11,6 +11,9 @@ public class DelimiterExtractor {
 
         if (input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
             int delimiterIndex = input.indexOf(NEWLINE);
+            if (delimiterIndex == -1) {
+                throw new IllegalArgumentException("잘못된 형식입니다.");
+            }
             String customDelimiter = input.substring(2, delimiterIndex);
             delimiter = DEFAULT_DELIMITER + "|" + customDelimiter;
             numbers = input.substring(delimiterIndex + NEWLINE.length());
