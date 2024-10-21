@@ -45,6 +45,7 @@ public class Application {
                     throw new IllegalArgumentException(INPUT_VALIDATION_EXCEPTION_MESSAGE);
                 }
             });
+            negativeCheck();
         }   catch (Exception e){
             throw new IllegalArgumentException(INPUT_VALIDATION_EXCEPTION_MESSAGE);
         }
@@ -68,6 +69,12 @@ public class Application {
 //        잘 못 된 입력 체크
         if(!input.contains(SEMICOLON) && !input.contains(COMMA)) throw new IllegalArgumentException(INPUT_VALIDATION_EXCEPTION_MESSAGE);
         return input;
+    }
+
+    public static void negativeCheck(){
+        for(Long l: numberList){
+            if(l <= 0) throw new IllegalArgumentException(NEGATIVE_NUMBER_EXCEPTION_MESSAGE);
+        }
     }
 
     }
