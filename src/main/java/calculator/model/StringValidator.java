@@ -38,7 +38,7 @@ public class StringValidator {
 
 	public void validate() {
 		int index = INPUT_START_INDEX;
-		Status status = Status.checkStatus(input.charAt(index));
+		Status status = Status.checkStatus(input);
 		while (index < input.length()) {
 			index = this.checkInputStatus(input, index, status);
 			status = Status.changeStatus(status);
