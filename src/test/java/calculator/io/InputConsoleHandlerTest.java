@@ -59,4 +59,21 @@ class InputConsoleHandlerTest {
         System.setIn(System.in);
         Console.close();
     }
+
+    @Test
+    @DisplayName("구분자가 여러개여도 정상적으로 분리하여 반환한다")
+    void inputSplitWithMultipleSeparators() {
+        // given
+        String input = "1,2:3";
+
+        // when
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        // then
+        String[] inputSplit = INPUT_CONSOLE_HANDLER.getUserInput();
+        assertThat(inputSplit).containsExactly("1", "2", "3");
+
+        System.setIn(System.in);
+        Console.close();
+    }
 }
