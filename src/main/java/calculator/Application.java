@@ -1,12 +1,13 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Application {
-    private static String delimitier = ",|:";
+    private static final String delimiterIdentifier = "^//(.*)\\n";  // 구분자를 식별하는 정규식 문자열
+    private static String delimiter = ",|:"; // 정규식 구분자 모음
 
     public static void main(String[] args) {
         String operand = inPut();
@@ -20,7 +21,9 @@ public class Application {
 
     public static String inPut() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-        return Console.readLine();
+        String input = Console.readLine();
+        input = input.replace("\\n", "\n"); // \n을 개행문자로 인식하지 못해 이를 처리
+        return addCustomDelimiter(input);
     }
 
     public static int add(int operandA, int operandB) {
@@ -42,7 +45,7 @@ public class Application {
     }
 
     public static ArrayList<Integer> extractIntFromString(String input) {
-        String[] tmp = input.split(delimitier);
+        String[] tmp = input.split(delimiter);
 
         // split된 값에 정수 이외의 값이 있는지 확인하는 로직 필요.
 
@@ -52,5 +55,16 @@ public class Application {
             operandList.add(intValue);
         }
         return operandList;
+    }
+
+    public static String addCustomDelimiter(String input) {
+        Pattern delimiterPattern = Pattern.compile(delimiterIdentifier);
+        Matcher delimiterMatcher = delimiterPattern.matcher(input);
+        if (delimiterMatcher.find()) {
+            delimiter += "|" + delimiterMatcher.group(1);
+            int startIndexOfOperand = delimiterMatcher.end(1) + 1;
+            return input.substring(startIndexOfOperand);
+        }
+        return input;
     }
 }
