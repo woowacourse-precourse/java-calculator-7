@@ -13,10 +13,10 @@ public class CalculatorModel {
     }
 
     String seperator = DEFAULT_DELIMITER;
-
     // 커스텀 구분자 지정한 경우
     if (input.startsWith("//")) {
-      seperator = CalculatorUtils.extractCustomSeparator(input);
+      String customSeparator = CalculatorUtils.extractCustomSeparator(input);
+      seperator = DEFAULT_DELIMITER + "|" + Pattern.quote(customSeparator);
       input = input.substring(input.indexOf("\\n") + 2);
     }
 
@@ -25,6 +25,10 @@ public class CalculatorModel {
     }
 
     String[] numbers = input.split(seperator);
+
+    if (numbers.length == 0) {
+      return 0;
+    }
     return CalculatorUtils.calculateSum(numbers);
   }
 }
