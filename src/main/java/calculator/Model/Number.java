@@ -74,6 +74,13 @@ public class Number {
     }
 
     public int parseInt(String numberString) {
+        if (numberString.equals("0")) {
+            throw  new IllegalArgumentException("0은 입력할 수 없습니다.");
+        }
+
+        if (numberString.equals("")) {
+            numberString += "0";
+        }
         try {
             return Integer.parseInt(numberString);
         } catch (NumberFormatException exception) {
@@ -90,9 +97,6 @@ public class Number {
 
     public void registerNumber(String numberString) {
         int number = parseInt(numberString);
-        if (number == 0) {
-            throw  new IllegalArgumentException("0은 입력할 수 없습니다.");
-        }
         if (!checkValidNumber(number)) {
             throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
         }
