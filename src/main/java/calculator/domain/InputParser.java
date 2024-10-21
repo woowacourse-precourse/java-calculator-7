@@ -17,15 +17,19 @@ public class InputParser {
     public List<Double> parse(String input){
         List<Double> numbers = new ArrayList<>();
 
-        delimiters.addDelimiter(input);
+        input = processDelimiter(input);
         String delimiterRegex = delimiters.getDelimiterRegex();
-        input = removeDelimiterDefinition(input);
 
         for(String number : input.split(delimiterRegex)) {
             validateNumber(number);
             numbers.add(Double.parseDouble(number));
         }
         return numbers;
+    }
+
+    private String processDelimiter(String input) {
+        delimiters.addDelimiter(input);
+        return removeDelimiterDefinition(input);
     }
 
     private void validateNumber(String number){
