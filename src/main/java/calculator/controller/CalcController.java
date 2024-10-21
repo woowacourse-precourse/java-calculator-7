@@ -34,6 +34,10 @@ public class CalcController {
         Validation.overflowOccurInLongValue(calc.getValue());
     }
 
-
+    public Long calcTheNumbers() {
+        calc.sumAllNumbers(numberRepository.getNumbers());
+        checkingResult();
+        return calc.getValue();
+    }
 
 }
