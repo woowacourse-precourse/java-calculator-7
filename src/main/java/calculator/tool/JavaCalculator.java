@@ -29,6 +29,8 @@ public class JavaCalculator {
         List<Integer> numbers = new ArrayList<>();
         splitAndAddNumbers(input, numbers);
 
+        checkIfNegativeNumberExists(numbers);
+
         return numbers.stream().mapToInt(Integer::intValue).sum();
     }
 
@@ -68,6 +70,14 @@ public class JavaCalculator {
             return true;
         } catch (NumberFormatException e) {
             return false;
+        }
+    }
+
+    private void checkIfNegativeNumberExists(List<Integer> numbers) {
+        for (int number : numbers) {
+            if (number < 0) {
+                throw new IllegalArgumentException("Negative number not allowed");
+            }
         }
     }
 }
