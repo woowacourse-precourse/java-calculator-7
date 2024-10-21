@@ -7,7 +7,7 @@ public final class NumberString {
 
     }
 
-    public static Character getSeparatorToken(String Input) {
+    public static Character getCustomDivider(String Input) {
         if(Input.startsWith("//") && Input.startsWith("\\n", 3)){
             return Input.charAt(2);
         }
@@ -15,12 +15,12 @@ public final class NumberString {
     }
 
     public static List<String> parse(String input){
-        Character customSeparator = getSeparatorToken(input);
-        if(customSeparator != null) {
+        Character customDivider = getCustomDivider(input);
+        if(customDivider != null) {
             input = input.substring(5);
         }
 
-        Separator separator = new Separator(customSeparator);
+        Separator separator = new Separator(customDivider);
         return separator.separate(input);
     }
 }
