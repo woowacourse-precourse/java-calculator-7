@@ -2,6 +2,8 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.Arrays;
+
 public class Application {
     public static void main(String[] args) {
         Application application = new Application();
@@ -15,14 +17,22 @@ public class Application {
         text = text.replace("//"+defaultSeparator+"\\n", "");
         String[] textArray = replaceSeparator(text, defaultSeparator).split(defaultSeparator);
         int sum = 0;
-        for (String number : textArray) {
-            try {
-                sum += Integer.parseInt(number);
-            } catch (NumberFormatException e) {
+        for (String str : textArray) {
+            int num = parseInt(str);
+            if(num < 0) {
                 throw new IllegalArgumentException();
             }
+            sum += num;
         }
         return sum;
+    }
+
+    private int parseInt(String str) {
+        try {
+            return Integer.parseInt(str);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException();
+        }
     }
 
     private String findSeparator(String text) {
