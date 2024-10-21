@@ -11,24 +11,28 @@ public class Application {
     전체 흐름 제어
      */
     public static void main(String[] args) {
+
         // 사용자로부터 문자열을 입력 받음
-        String input = getUserInput();
-        if (input.contains("\\n")){
-            input = input.replace("\\n", "\n");
-        }
+        String input = preprocessInput(getUserInput());
+
         // 입력값이 빈 문자열인지 확인
         if (isEmpty(input)){
             System.out.println(0);
             return;
         }
+
         // 입력 형식이 올바른지 검증
         validateInput(input);
+
         // 기본 구분자 또는 커스텀 구분자 추출
         String delimiter = getDelimiter(input);
+
         // 문자열에서 커스텀 구분자 정의 섹션 제거
         input = removeDelimiterSection(input);
+
         // 구분자로 문자열을 분리
         String[] numbers = splitByDelimiter(input, delimiter);
+
         // 배열 요소를 정수로 변환하여 합을 계산
         int sum = sumNumbers(numbers);
         System.out.println("결과 : " + sum);
@@ -40,6 +44,13 @@ public class Application {
     public static String getUserInput(){
         System.out.println("덧셈할 문자열을 입력해주세요.");
         return Console.readLine();
+    }
+
+    /*
+     * 입력을 전처리하는 메서드
+     */
+    public static String preprocessInput(String input){
+        return input.contains("\\n") ? input.replace("\\n", "\n") : input;
     }
 
     /*
