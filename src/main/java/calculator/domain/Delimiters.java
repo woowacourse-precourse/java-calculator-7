@@ -22,24 +22,23 @@ public class Delimiters {
         delimiters.add(":");
     }
 
-    public List<String> getDelimiters(){
+    public List<String> getAllDelimiters(){
         return delimiters;
     }
 
-    public String getDelimiterRegex(String input){
-        return getAllDelimiters(input)
+    public String getDelimiterRegex(){
+        return getAllDelimiters()
                 .stream()
                 .collect(Collectors.joining("|"));
     }
 
-    public List<String> getAllDelimiters(String input){
+    public void addDelimiter(String input){
         String customDelimiter = findCustomDelimiter(input);
 
         if(!isDefaultDelimiter(customDelimiter)){
             validateDelimiter(customDelimiter);
             delimiters.add(customDelimiter);
         }
-        return delimiters;
     }
 
     public String findCustomDelimiter(String input) {

@@ -16,7 +16,7 @@ class DelimitersTest {
         Delimiters delimiters = new Delimiters();
 
         // when
-        List<String> defaultDelimiters = delimiters.getDelimiters();
+        List<String> defaultDelimiters = delimiters.getAllDelimiters();
 
         // then
         assertThat(defaultDelimiters).isEqualTo(Arrays.asList(",",":"));
@@ -42,7 +42,7 @@ class DelimitersTest {
         String input = "//;;;;\\n1;2;3";
 
         // when & then
-        assertThatThrownBy(() -> delimiters.getAllDelimiters(input))
+        assertThatThrownBy(() -> delimiters.addDelimiter(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("구분자는 길이가 1인 문자여야 합니다.");
     }
@@ -54,7 +54,7 @@ class DelimitersTest {
         String input = "//4\\n1,2,3";
 
         // when & then
-        assertThatThrownBy(() -> delimiters.getAllDelimiters(input))
+        assertThatThrownBy(() -> delimiters.addDelimiter(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("구분자는 숫자가 될 수 없습니다.");
     }
