@@ -18,7 +18,7 @@ public class StringCalculatorServiceImpl implements StringCalculatorService {
 
     @Override
     public String calculate(String input) {
-        List<String> delimiters = new ArrayList<>(Arrays.asList(";", ","));
+        List<String> delimiters = new ArrayList<>(Arrays.asList(":", ","));
 
         String delimiter =  extractDelimiter(input);
         delimiters.add(delimiter);
