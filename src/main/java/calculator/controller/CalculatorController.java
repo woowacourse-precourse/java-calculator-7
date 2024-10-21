@@ -14,6 +14,19 @@ public class CalculatorController {
         this.customcheckService = customcheckService;
     }
 
+    public void process() {
+        String input = calculatorView.getInput();
+
+        List<Integer> checked = customcheckService.checked(input);
+
+        int total = sum(checked);
+
+        calculatorView.getOutput(total);
+
+
+    }
+
+
     public int sum(List<Integer> checked) {
 
         int total = 0;
