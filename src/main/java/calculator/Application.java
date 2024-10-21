@@ -11,5 +11,9 @@ public class Application {
         InputReader inputReader = new InputReader();
         String input = inputReader.getInput();
         System.out.println("입력된 값: " + input);
+
+        // 2. 입력값을 검증.
+        Validator validator = new Validator();
+        validator.validateDefaultDelimiters(input);
     }
 }

@@ -12,7 +12,7 @@ public class ApplicationInputTest {
     @Test
     void 입력_테스트() {
         // Given: 가상 입력과 가상 출력을 설정
-        String simulatedInput = "1,2,3\n";
+        String simulatedInput = "1,2:3\n";
         ByteArrayInputStream in = new ByteArrayInputStream(simulatedInput.getBytes());
         System.setIn(in);
 
@@ -25,6 +25,7 @@ public class ApplicationInputTest {
 
         // Then: 출력된 값을 검증
         String output = out.toString();
-        assertTrue(output.contains("입력된 값: 1,2,3"));
+        assertTrue(output.contains("입력된 값: 1,2:3"));
+        assertTrue(output.contains("입력값이 올바른 형식입니다."));
     }
 }
