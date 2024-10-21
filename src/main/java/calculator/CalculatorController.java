@@ -31,6 +31,7 @@ public class CalculatorController {
             view.displayResult(result);
         } catch (IllegalArgumentException e) {
             view.displayError(e.getMessage());
+            throw e; // 예외를 다시 던져 프로그램이 종료되도록 함
         }
     }
 }
