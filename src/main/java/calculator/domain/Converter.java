@@ -15,7 +15,7 @@ public class Converter {
         delimiterList.add(":");
     }
 
-    public List<Number> convertWordsToString(String words){
+    public List<Number> convertWordsToString(String words) {
         List<String> dirtyWords = separateWords(words);
         List<String> cleanWords = dirtyWords.stream()
                 .map(String::trim)
@@ -56,15 +56,21 @@ public class Converter {
             delimiterList.add(word.substring(2, 3));
     }
 
-    private Number parsingNumber(String word){
-        try{
-            if(word.isEmpty())
+    private Number parsingNumber(String word) {
+        try {
+            if (word.isEmpty())
                 return new Number(0);
             Integer integer = Integer.valueOf(word);
+            validatePositiveNumber(integer);
             return new Number(integer);
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException("옳지 못한 입력");
         }
+    }
+
+    private void validatePositiveNumber(Integer integer) throws NumberFormatException {
+        if(integer < 0)
+            throw new NumberFormatException();
     }
 
 

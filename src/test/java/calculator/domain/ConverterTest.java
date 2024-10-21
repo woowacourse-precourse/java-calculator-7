@@ -69,7 +69,7 @@ public class ConverterTest {
         Converter converter = new Converter();
 
         //when
-        String str = " 1 ";
+        String str = "e21";
 
 
         //then
