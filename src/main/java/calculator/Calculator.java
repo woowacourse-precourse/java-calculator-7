@@ -21,34 +21,16 @@ public class Calculator {
     // find why readline could be null
     for (int i = 0; i < readLine.length(); i++) {
 
-      // 문자열이 커스텀 구분자로 시작하면
-      if (readLine.startsWith("//;\\n")) {
-        char index = readLine.charAt(i);
-        // 커스텀 구분자는 건너뛰고
-        if (index == '/' || index == '\\') {
-          continue;
-        }
+      if (calculateCustom(i)) {
+        continue;
+      }
 
-        if (index == ';' || index == 'n') {
-          continue;
-        }
-        // 정수는 target에 합산한다
-        if (isDigit(readLine.charAt(i))) {
-          addNumbers(readLine.charAt(i));
-        }
-        else {
-          // 아닌 경우는 예외 처리한다
-          throw new IllegalArgumentException(
-              "커스텀 구분자를 입력하려면 문자열 맨앞에 '//;\\n'를 붙인 다음 사용해주세요 (예시 //;\\n1;2;3)");
-          }
-        }
+      char index = readLine.charAt(i);
 
-        char index = readLine.charAt(i);
-
-        //  인덱스가 기본 구분자 ‘,’ , ‘:’ 인 경우
-        if (index == ',' || index == ':') {
-          // 다음 인덱스 탐색으로 넘어간다
-          continue;
+      //  인덱스가 기본 구분자 ‘,’ , ‘:’ 인 경우
+      if (index == ',' || index == ':') {
+        // 다음 인덱스 탐색으로 넘어간다
+        continue;
         }
         // 예외 체크
         checkException(index);
@@ -59,7 +41,38 @@ public class Calculator {
       return target;
     }
 
+  private boolean calculateCustom(int i) {
+    // 문자열이 커스텀 구분자로 시작하면
+    if (readLine.startsWith("//;\\n")) {
+      char index = readLine.charAt(i);
+      // 커스텀 구분자 조회시 건너뛰고
+      if (decisionContinue(index)) {
+        return true;
+      }
+      // 정수는 target에 합산한다
+      if (isDigit(readLine.charAt(i))) {
+        addNumbers(readLine.charAt(i));
+      }
+      if (index != '/' && index != '\\' && !validIsDigit(index) && index != 'n') {
+        // 커스텀 구분자 또는 정수가 아닌 경우는 예외 처리한다
+        throw new IllegalArgumentException(
+            "커스텀 구분자를 입력하려면 문자열 맨앞에 '//;\\n'를 붙인 다음 사용해주세요 (예시 //;\\n1;2;3)");
+        }
+      }
+    return false;
+  }
 
+  private static boolean decisionContinue(char index) {
+    // 커스텀 구분자는 건너뛰고
+    if (index == '/' || index == '\\') {
+      return true;
+    }
+
+    if (index == ';' || index == 'n') {
+      return true;
+    }
+    return false;
+  }
 
 
   private void addNumbers(char index) {
