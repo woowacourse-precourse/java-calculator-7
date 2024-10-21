@@ -12,10 +12,10 @@ public class CustomDelimiterExtractor {
     private static final String EMPTY_STRING = "";
 
     public String getCustomDelimiter(String stringWithDelimiter) {
-        if (!isUsingOriginalDelimiter(stringWithDelimiter)) {
-            return extractCustomDelimiter(stringWithDelimiter);
+        if (isUsingOriginalDelimiter(stringWithDelimiter)) {
+            return EMPTY_STRING;
         }
-        return EMPTY_STRING;
+        return extractCustomDelimiter(stringWithDelimiter);
     }
 
     private boolean isUsingOriginalDelimiter(String stringWithDelimiter) {

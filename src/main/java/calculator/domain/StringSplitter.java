@@ -22,12 +22,11 @@ public class StringSplitter {
      */
     public String[] getNumberStringsToAdd(String stringToAdd) {
         String customDelimiter = customDelimiterExtractor.getCustomDelimiter(stringToAdd);
-        if (!customDelimiter.isEmpty()) {
-            stringToAdd = changeStringWithoutFormat(stringToAdd);
-
-            return stringToAdd.split(Pattern.quote(customDelimiter) + "|" + COLON + "|" + COMMA);
+        if (customDelimiter.isEmpty()) {
+            return stringToAdd.split(COLON + "|" + COMMA);
         }
-        return stringToAdd.split(COLON + "|" + COMMA);
+        stringToAdd = changeStringWithoutFormat(stringToAdd);
+        return stringToAdd.split(Pattern.quote(customDelimiter) + "|" + COLON + "|" + COMMA);
     }
 
     private String changeStringWithoutFormat(String stringWithDelimiter) {
