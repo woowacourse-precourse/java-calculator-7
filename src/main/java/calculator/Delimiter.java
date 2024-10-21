@@ -8,7 +8,7 @@ public class Delimiter {
             int delimiterIndex = input.indexOf("\n");
             this.delimiter = input.substring(2, delimiterIndex);
         } else {
-            this.delimiter = "[,|:]";  // 기본 구분자
+            this.delimiter = "[,|:]";  // 기본 구분자 쉼표와 콜론
         }
     }
 
