@@ -10,9 +10,9 @@ public class CalculatorController {
     private final CalculatorView calculatorView;
 
 
-    public CalculatorController() {
-        this.stringCalculator = new StringCalculator();
-        this.calculatorView = new CalculatorView();
+    public CalculatorController(StringCalculator stringCalculator, CalculatorView calculatorView) {
+        this.stringCalculator = stringCalculator;
+        this.calculatorView = calculatorView;
     }
 
     public void run(){

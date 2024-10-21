@@ -11,8 +11,8 @@ public class StringCalculator {
 
     private final DelimiterExtractor delimiterExtractor;
 
-    public StringCalculator() {
-        this.delimiterExtractor = new DelimiterExtractor();
+    public StringCalculator(DelimiterExtractor delimiterExtractor) {
+        this.delimiterExtractor = delimiterExtractor;
     }
 
 
