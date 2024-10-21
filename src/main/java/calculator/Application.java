@@ -11,12 +11,8 @@ public class Application {
         int result;
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
-        try {
-            result = checkString(input);
-        } catch (IllegalArgumentException e) {
-            System.out.println("잘못된 값을 입력하여 프로그램이 종료됩니다.");
-            return;
-        }
+
+        result = checkString(input);
         System.out.println("결과 : " + result);
     }
 
@@ -26,36 +22,40 @@ public class Application {
         if (input.equals("")) {
             return 0;
         }
-        //구분자 파악하여 저장, 구분자 목록 배열 리턴
         char[] delims = getDelim(input);
-        // 문자열에서 숫자들 분류해내서 배열에 저장하기
         List<Integer> numbers = getNumbers(input, delims);
-        // 배열에 저장된 숫자들 모두 더하기
         answer = calc(numbers);
         return answer;
     }
 
     public static char[] getDelim(String input) {
-        char[] delim;
+        char[] delim = new char[1];
+        String customChecker1, customChecker2;
+
         String c1 = "//";
         String c2 = "\\n";
+        if (input.length() >= 5) {
+            customChecker1 = input.substring(0,2);
+            customChecker2 = input.substring(3,5);
 
-        String customChecker1 = input.substring(0,2);
-        String customChecker2 = input.substring(3,5);
-
-        if (customChecker1.equals(c1) && customChecker2.equals(c2)) { // 정상적인 구분자입력의 경우
-            delim = new char[3];
-            if (48 <= input.charAt(2) && input.charAt(2) <= 57) { // 구분자 입력을 숫자로 한 경우
-                throw new IllegalArgumentException("잘못된 입력 값입니다: 구분자가 숫자입니다.");
+            if (customChecker1.equals(c1) && customChecker2.equals(c2)) { // 커스텀구분자가 존재함
+                delim = new char[3];
+                if (48 <= input.charAt(2) && input.charAt(2) <= 57) { // 커스텀구분자 입력을 숫자로 한 경우
+                    throw new IllegalArgumentException("잘못된 입력 값입니다: 구분자가 숫자입니다.");
+                }
+                delim[2] = input.charAt(2);
             }
-            delim[2] = input.charAt(2);
-        }
-        else if (customChecker1.equals(c1) && input.contains(c2)) { // 커스텀문자열이 2자 이상
-            throw new IllegalArgumentException("잘못된 입력 값입니다: 커스텀 문자열이 2자 이상입니다.");
+            else if (customChecker1.equals(c1) && input.contains(c2)) { // 커스텀구분자가 2자 이상
+                throw new IllegalArgumentException("잘못된 입력 값입니다: 커스텀 구분자가 2자 이상입니다.");
+            }
+            else {
+                delim = new char[2];
+            }
         }
         else { // 커스텀구분자 없음
             delim = new char[2];
         }
+
         delim[0] = ',';
         delim[1] = ':';
         return delim;
@@ -81,6 +81,9 @@ public class Application {
         }
         for (String strNum: splArr) {
             int num = Integer.parseInt(strNum);
+            if (num < 0) {
+                throw new IllegalArgumentException("잘못된 입력 값입니다: 음수가 입력되었습니다.");
+            }
             numbersList.add(num);
         }
         return numbersList;
