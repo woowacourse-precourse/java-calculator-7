@@ -1,6 +1,7 @@
 package calculator.controller;
 
 import calculator.model.CustomSplitter;
+import calculator.model.ExtractString;
 import calculator.view.InputView;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ public class CalculatorController {
 
     InputView inputView = new InputView();
     CustomSplitter customSplitter;
+    ExtractString extractString;
 
     public static List<Character> splitters = new ArrayList<>();
 
@@ -18,6 +20,10 @@ public class CalculatorController {
         String input = inputView.inputString();
 
         customSplitter.addCustomSplitter(input);
+
+        extractString.ExtractInput(input, customSplitter.makeSplit());
+
+
 
     }
 
