@@ -10,7 +10,6 @@ public class Adder {
         this.extractedNumList = numList;
     }
 
-    // 추출된 숫자 리스트의 합계 반환
     public int getSum() {
         return extractedNumList.stream().mapToInt(Integer::intValue).sum();
     }

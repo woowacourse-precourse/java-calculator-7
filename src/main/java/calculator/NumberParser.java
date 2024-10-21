@@ -9,6 +9,10 @@ public class NumberParser {
     private List<Integer> extractedNumList = new ArrayList<>();
 
     NumberParser(String inputString) {
+        if (inputString == null || inputString.isEmpty()) {
+            throw new IllegalArgumentException("The input string is null or empty.");
+        }
+
         this.inputString = inputString;
         delimiterList.add(",");
         delimiterList.add(":");
@@ -26,7 +30,7 @@ public class NumberParser {
         int delimiterStartIndex = inputString.indexOf("//") + 2;
         int delimiterEndIndex = inputString.indexOf("\\n");
         if (delimiterEndIndex == -1) {
-            throw new IllegalArgumentException("잘못된 구분자 입력 형식입니다.");
+            throw new IllegalArgumentException("Invalid separator input format.");
         }
 
         // 커스텀 구분자를 추출하여 delimiterList에 추가
@@ -50,7 +54,7 @@ public class NumberParser {
                 extractedNumList.add(number);
             } catch (NumberFormatException e) {
                 // 예외 처리: 숫자가 아닌 값이 있을 경우 예외 발생
-                throw new IllegalArgumentException("유효하지 않은 숫자가 포함되어 있습니다: " + numberString);
+                throw new IllegalArgumentException("Contains invalid something.: " + numberString);
             }
         }
     }
