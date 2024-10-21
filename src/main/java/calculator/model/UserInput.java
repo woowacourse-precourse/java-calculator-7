@@ -1,4 +1,4 @@
-package calculator;
+package calculator.model;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -45,7 +45,7 @@ public class UserInput {
         List<Long> result = userInputNumbers
                 .stream()
                 .map(token -> {
-                    Number number = new Number(token);
+                    calculator.model.Number number = new Number(token);
                     return number.getInputNumber();
                 }).toList();
 

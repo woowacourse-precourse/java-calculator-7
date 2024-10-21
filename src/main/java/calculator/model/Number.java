@@ -1,4 +1,4 @@
-package calculator;
+package calculator.model;
 
 public class Number {
     private final Long inputNumber;
