@@ -48,7 +48,7 @@ public class Application {
         }
     }
 
-    private static String getCustomDelimiter(String string) {
+    private static String getCustomDelimiter(String string) throws IllegalArgumentException {
         String customDelimiterOpener = "//";
         String customDelimiterCloser = "\\n";
 
@@ -58,10 +58,13 @@ public class Application {
         if (!string.substring(0, 2).equals(customDelimiterOpener) || !string.substring(3, 5).equals(customDelimiterCloser)) {
             return null;
         }
+        if (string.charAt(2) == ',' || string.charAt(2) == ':') {
+            throw new IllegalArgumentException();
+        }
         return string.substring(2, 3);
     }
 
-    private static List<Integer> convertStringsToIntegers(List<String> stringList) {
+    private static List<Integer> convertStringsToIntegers(List<String> stringList) throws IllegalArgumentException{
         boolean isAllDigits = true;
         List<Integer> integerList = new ArrayList<>();
 
@@ -76,6 +79,6 @@ public class Application {
         if (isAllDigits) {
             return integerList;
         }
-        return null;
+        throw new IllegalArgumentException();
     }
 }
