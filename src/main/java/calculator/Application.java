@@ -55,14 +55,27 @@ public class Application {
         return nums;
     }
 
-    public static void main(String[] args) {
-        String str = Console.readLine();
-        int result = 0;
-        List<Integer> nums;
-        if(!isBlankOrNull(str)){
-            nums = extractNum(str);
+    public static long plusNums(List<Integer> nums){
+        long result = 0;
+
+        for(int i = 0; i<nums.size(); i++){
+            result += nums.get(i);
         }
 
+        return result;
+    }
+
+    public static void main(String[] args) {
+        String str = Console.readLine();
+        long result = 0;
+        List<Integer> nums;
+
+        if(!isBlankOrNull(str)){
+            nums = extractNum(str);
+            result = plusNums(nums);
+        }
+
+        System.out.println(result);
 
     }
 }
