@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.regex.Pattern;
+
 public class InputParser {
     public int[] parse(String input) {
         if (input == null) {
@@ -11,6 +13,16 @@ public class InputParser {
         }
 
         String delimiter = "[,|:]"; // 기본 구분자
+        if (input.startsWith("//")) {
+            int delimiterEnd = input.indexOf("\\n");
+            if (delimiterEnd != -1) {
+                delimiter = Pattern.quote(input.substring(2, delimiterEnd)); // 커스텀 구분자
+                input = input.substring(delimiterEnd + 2);
+            } else {
+                throw new IllegalArgumentException("잘못된 입력형식입니다: " + input);
+            }
+        }
+
         String[] tokens = input.split(delimiter);
         int[] numbers = new int[tokens.length];
 
