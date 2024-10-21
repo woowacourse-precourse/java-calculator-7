@@ -15,6 +15,8 @@ public class CalculatorController {
 
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
+        System.out.println(input);
+        System.out.println("\\n");
         Calculator calculator = new Calculator();
         ExceptionHandler exceptionHandler = new ExceptionHandler();
         CalculatorService service = new CalculatorService(calculator, exceptionHandler);
