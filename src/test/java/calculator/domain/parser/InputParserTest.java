@@ -100,4 +100,13 @@ public class InputParserTest {
         assertThat(parsedInput.numbers()).containsExactly("1","2","3");
     }
 
+    @Test
+    void 커스텀_문자_빈_테스트() {
+        String input = "//\\n1";
+
+        ParsedInput parsedInput = inputParser.parse(input);
+
+        assertThat(parsedInput.numbers()).containsExactly("1");
+    }
+
 }
