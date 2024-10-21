@@ -8,14 +8,17 @@ import calculator.dto.ExtractionResult;
 import calculator.service.DelimiterExtractor;
 import calculator.service.StringSplitter;
 import calculator.view.InputView;
+import calculator.view.OutputView;
 import java.util.List;
 
 public class Calculator {
     private final InputView inputView;
+    private final OutputView outputView;
     private final DelimiterExtractor delimiterExtractor;
 
     public Calculator() {
         this.inputView = new InputView();
+        this.outputView = new OutputView();
         this.delimiterExtractor = new DelimiterExtractor();
     }
 
@@ -30,5 +33,7 @@ public class Calculator {
 
         CalculatorNumbers calculatorNumbers = CalculatorNumberFactory.createCalculatorNumbersFrom(splitRemainingInput);
 
+        long result = calculatorNumbers.sum();
+        outputView.printResult(result);
     }
 }
