@@ -20,4 +20,9 @@ public class UserExpressionDivide {
         userExpression.setCustomDelimExpressionCandidate(rawExpression.substring(0,CUSTOM_DELIM_LENGTH));
     }
 
+    private static void assignRemainingPart(String rawExpression) {
+        userExpression.setEssentialExpression(rawExpression
+                .replace(userExpression.getCustomDelimExpressionCandidate(),""));
+    }
+
 }
