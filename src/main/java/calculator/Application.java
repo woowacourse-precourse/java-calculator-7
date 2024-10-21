@@ -15,7 +15,7 @@ public class Application {
     private static int calculateSum(String input){
         if(input.isEmpty()) return 0;
         String[] numbers;
-        if(input.startsWith("/")){
+        if(input.startsWith("//")){
             int delimiterIndex=input.indexOf("n");
             if (delimiterIndex == -1||delimiterIndex==2) {
                 throw new IllegalArgumentException("커스텀 구분자 형식이 잘못되었습니다.");
