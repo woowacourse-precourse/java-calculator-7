@@ -19,6 +19,11 @@ public class Application {
         System.out.print("input : ");
         String userInput = Console.readLine();
 
+        if(userInput == null || userInput.trim().isEmpty()) {
+            System.out.println("0");
+            return;
+        }
+
         //구분자 추출
         String delimiter = userInput.substring(userInput.indexOf("//")+2, userInput.indexOf("\\n"));
         System.out.println("추출된 구분자 : " +delimiter);
@@ -38,6 +43,7 @@ public class Application {
         }
 
         System.out.println(sum);
+
 
     }
 }
