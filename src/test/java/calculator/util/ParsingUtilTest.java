@@ -64,7 +64,7 @@ class ParsingUtilTest {
     }
 
     @ParameterizedTest(name = "{0} 커스텀 구별자 확인")
-    @ValueSource(strings = {"//; \n1;2;3", "//.\n1.2.3", "//|\n1|2|3"})
+    @ValueSource(strings = {"//; \\n1;2;3", "//.\\n1.2.3", "//|\\n1|2|3"})
     @DisplayName("커스텀 구분자가 포함된 문자열 테스트")
     void containsCustomDelimiter(final String input) {
 
@@ -79,7 +79,7 @@ class ParsingUtilTest {
     @DisplayName("커스텀 구분자 추출 테스트")
     void extractCustomDelimiter() {
         // given
-        final String input = "//; \n1;2;3";
+        final String input = "//; \\n1;2;3";
         final List<String> expected = List.of(";");
 
         // when
@@ -93,7 +93,7 @@ class ParsingUtilTest {
     @DisplayName("여러 커스텀 구분자 추출 테스트")
     void extractCustomDelimiter_Multiple() {
         // given
-        final String input = "//;\n//|\n1;2|3";
+        final String input = "//;\\n//|\\n1;2|3";
         final List<String> expected = List.of(";", "|");
 
         // when
@@ -118,7 +118,7 @@ class ParsingUtilTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"//;\n1;2;3", "///\n1/2/3", "//|\n1|2|3"})
+    @ValueSource(strings = {"//;\\n1;2;3", "///\\n1/2/3", "//|\\n1|2|3"})
     @DisplayName("커스텀 구분자, 숫자 추출 테스트")
     void parseWithCustomDelimiter(String input) {
         // given
@@ -132,7 +132,7 @@ class ParsingUtilTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"1,2,3", "1:2:3", "1:2,3", "1,2:3", "//;\n1;2;3", "///\n1/2/3", "//|\n1|2|3"})
+    @ValueSource(strings = {"1,2,3", "1:2:3", "1:2,3", "1,2:3", "//;\\n1;2;3", "///\\n1/2/3", "//|\\n1|2|3"})
     @DisplayName("통합 테스트 숫자 추출 테스트")
     void extractNumbers(String input) {
         // given
@@ -157,7 +157,7 @@ class ParsingUtilTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"//1\n1;2;3", "//2\n1/2/3", "//13\n1|2|3"})
+    @ValueSource(strings = {"//1\\n1;2;3", "//2\\n1/2/3", "//13\\n1|2|3"})
     @DisplayName("")
     void checkDelimiterFormat_Exception(String input) {
 
@@ -171,11 +171,22 @@ class ParsingUtilTest {
     @DisplayName("커스텀 구분자가 빈 문자열일 경우 오류발생 테스트")
     void checkDelimiterEmpty() {
         // given
-        final String input = "// \n1;2;3";
+        final String input = "// \\n1;2;3";
 
         // when & then
         assertThatThrownBy(() -> ParsingUtil.extractCustomDelimiter(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(CalculatorError.DELIMITER_IS_EMPTY.getMessage());
+    }
+
+    @Test
+    @DisplayName("테스트")
+    void test() {
+        // given
+        final String input = "//;\\n1";
+
+        final List<String> expected = List.of("1");
+        // when & then
+        assertThat(ParsingUtil.extractNumbers(input)).isEqualTo(expected);
     }
 }
