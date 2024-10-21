@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DelimiterStorage {
-    private static List<String> delimiters = new ArrayList<>();
+    private static final List<String> delimiters = new ArrayList<>();
     public void addDelimiter(String delimiter){
         delimiters.add(delimiter);
     }
