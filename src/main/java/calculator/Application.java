@@ -16,6 +16,11 @@ public class Application {
             if (setOperator == null) {
                 throw new IllegalArgumentException();
             }
+            // 기능 2. 문자열 파싱 전처리 : 시작점 잡기
+            int startParsingIdx = 0;
+            if (input.startsWith("//")) {
+                startParsingIdx = input.indexOf("\\n") + 2;
+            }
         } catch (IllegalArgumentException e) {
             System.out.println("잘못된 입력입니다.");
         }
@@ -38,5 +43,31 @@ public class Application {
         }
         return setOperator;
     }
-}
 
+    // 기능 2: 문자열 파싱
+    public static int parsingString(String input, Set<Character> setOperator, int startIdx) {
+        int idx = startIdx;
+        int curNum = 0;
+        int totalSum = 0;
+
+        while (idx < input.length()) {
+            char currentChar = input.charAt(idx);
+
+            if (setOperator.contains(currentChar)) {
+                totalSum += curNum;
+                curNum = 0;
+            } else if (Character.isDigit(currentChar)) {
+                curNum = curNum * 10 + Character.getNumericValue(currentChar);
+            } else {
+                return -1; // 에러 발생 시 -1 반환
+            }
+            idx++;
+        }
+        // curNum에 값이 남아있을 경우 처리
+        if (curNum > 0) {
+            totalSum += curNum;
+        }
+        // 결과 반환
+        return totalSum;
+    }
+}
