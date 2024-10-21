@@ -68,14 +68,14 @@ public class Calculator {
   // 유효한 경우 : 기본 구분자
   private void checkException(char index) {
 
-    if (index != ',' && index != ':' && !validIsDigit(index)) {
+    if (index != ',' && index != ':' && !validIsDigit(index) && index != ' ') {
       // [] 비정상 입력 예외 처리
       throw new IllegalArgumentException("입력 가능한 문자열인지 확인해주세요. ',', ':' 를 포함한 0-9의 정수 (예시 : 1, 2, 3 또는 1,2:3)");
     }
   }
 
   private static boolean validIsDigit(char index) {
-    boolean validDigit = Character.toString(index).matches("0-9");
+    boolean validDigit = Character.toString(index).matches("[0-9]");
     return validDigit;
   }
 }

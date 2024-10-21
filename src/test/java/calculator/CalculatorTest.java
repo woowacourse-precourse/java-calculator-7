@@ -32,6 +32,7 @@ class CalculatorTest {
 
 
   // java.lang.IllegalArgumentException at CalculatorTest.java:45
+  // 띄어쓰기 조건문 추가하여 해결..
   @Test
   public void 유효_문자열이_입력되면_계산_결과를_전달한다() throws Exception{
     //given
@@ -67,9 +68,9 @@ class CalculatorTest {
       //then
       assertThrows(IllegalArgumentException.class, () -> {
       calculator.calculating(deleteBamin);
-        calculator.calculating(NoMoreWoowa);
-        calculator.calculating(failConcert);
-        calculator.calculating(actual);
+      calculator.calculating(NoMoreWoowa);
+      calculator.calculating(failConcert);
+      calculator.calculating(actual);
     });
   }
 
