@@ -18,7 +18,7 @@ public class Application {
             result = calculator.stringCalculate(input);
             System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
-            System.out.println("error: "+e.getMessage());
+//            System.out.println("error: "+e.getMessage());
         }
     }
 }
