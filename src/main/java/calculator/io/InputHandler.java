@@ -1,4 +1,4 @@
-package calculator.util;
+package calculator.io;
 
 import camp.nextstep.edu.missionutils.Console;
 import java.util.NoSuchElementException;
@@ -11,6 +11,13 @@ public class InputHandler {
         } catch (NoSuchElementException e) {
             input = "";
         }
-        return ValidationUtil.handleBlankInput(input);
+        return handleBlankInput(input);
+    }
+
+    private String handleBlankInput(String input) {
+        if (input.isBlank()) {
+            return "0";
+        }
+        return input;
     }
 }

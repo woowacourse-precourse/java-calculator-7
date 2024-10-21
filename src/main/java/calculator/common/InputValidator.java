@@ -1,6 +1,6 @@
 package calculator.common;
 
-public class ValidationUtil {
+public class InputValidator {
 
     public static void validateNumbers(String[] tokens) {
         try {
