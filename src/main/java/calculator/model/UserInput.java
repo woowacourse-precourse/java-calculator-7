@@ -23,21 +23,15 @@ public class UserInput {
     }
 
     private String extractNumbers(String delimiterRegex) {
-        String numbers = "";
-
         if (delimiterRegex.equals(Delimiter.DEFAULT_DELIMITERS)) {
-            numbers = input;
-        } else {
-            String pattern = String.join("", Delimiter.CUSTOM_DELIMITERS_START, "(.)", Delimiter.CUSTOM_DELIMITERS_END,
-                    "(.*)");
-            Matcher m = Pattern.compile(pattern).matcher(input);
-            if (m.find()) {
-                numbers = m.group(2);
-            }
-
+            return input;
         }
 
-        return numbers;
+        String pattern = String.join("", Delimiter.CUSTOM_DELIMITERS_START, "(.)", Delimiter.CUSTOM_DELIMITERS_END,
+                "(.*)");
+        Matcher m = Pattern.compile(pattern).matcher(input);
+        
+        return m.find() ? m.group(2) : "";
     }
 
     private List<Long> convertToLongList(List<String> userInputNumbers) {
