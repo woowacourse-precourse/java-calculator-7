@@ -7,4 +7,8 @@ public class NumberExtractor {
     private static boolean isCustomDelimiterUsed(String inputString) {
         return inputString.contains(SEPARATOR_CHAR);
     }
+
+    private static String trimInputString(String inputString) {
+        return inputString.substring(START_NUMBER_INDEX);
+    }
 }
