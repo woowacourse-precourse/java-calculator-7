@@ -9,7 +9,9 @@ public class StringCalculator {
     private final StringValidator stringValidator;
     private final NumberParser numberParser;
 
-    public StringCalculator(DelimiterExtractor delimiterExtractor, StringValidator stringValidator, NumberParser numberParser) {
+    public StringCalculator(DelimiterExtractor delimiterExtractor,
+                            StringValidator stringValidator,
+                            NumberParser numberParser) {
         this.delimiterExtractor = delimiterExtractor;
         this.stringValidator = stringValidator;
         this.numberParser = numberParser;
@@ -20,10 +22,7 @@ public class StringCalculator {
         Set<Character> delimiterList = delimiterExtractor.extract(string);
 
         // 커스텀 구분자 prefix 제거
-        String trimmedString = string;
-        if (string.startsWith("//") && string.startsWith("\\n", 3)) {
-            trimmedString = string.substring(5);
-        }
+        String trimmedString = removePrefix(string);
 
         // 문자열 검사
         stringValidator.validate(trimmedString, delimiterList);
@@ -37,6 +36,14 @@ public class StringCalculator {
 
     private long sum(List<Long> numbers) {
         return numbers.stream().reduce(0L, Long::sum);
+    }
+
+    private String removePrefix(String string) {
+        if (string.startsWith("//") && string.startsWith("\\n", 3)) {
+            return string.substring(5);
+        }
+
+        return string;
     }
 
 }
