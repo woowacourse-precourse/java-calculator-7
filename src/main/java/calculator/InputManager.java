@@ -12,7 +12,7 @@ public class InputManager {
     }
 
     private void validate() {
-        if (input.matches(VALID_DEFAULT_INPUT_REGEX)) {
+        if (input.matches(VALID_DEFAULT_INPUT_REGEX) || input.isEmpty()) {
             return;
         }
         if (!(input.startsWith(CUSTOM_SEPARATOR_PREFIX) && input.contains(CUSTOM_SEPARATOR_POSTFIX))) {
