@@ -13,8 +13,5 @@ public class CalculatorView{
         System.out.println("결과 : " + result);
     }
 
-    public void showError(String message) {
-        System.out.println("잘못된 입력입니다: " + message);
-    }
 }
 

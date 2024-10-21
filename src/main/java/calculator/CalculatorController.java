@@ -6,11 +6,9 @@ public class CalculatorController {
 
     public void run() {
         String input = view.getInput();
-        try {
-            int result = calculator.add(input);
-            view.showResult(result);
-        } catch (IllegalArgumentException e) {
-            view.showError(e.getMessage());
-        }
+
+        int result = calculator.add(input);
+        view.showResult(result);
+
     }
 }
