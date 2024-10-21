@@ -130,4 +130,13 @@ public class InputStringTest {
         assertThrows(IllegalArgumentException.class, () -> new InputString(input));
     }
 
+    @Test
+    void 커스텀_구분자가_한_글자_초과() {
+        //given
+        String input = "//;;\n1;2;3";
+
+        //when, then
+        assertThrows(IllegalArgumentException.class, () -> new InputString(input));
+    }
+
 }
