@@ -31,6 +31,9 @@ public class StringCalculator {
         int sum = 0;
 
         for (String substring : substrings) {
+            if (!substring.matches("^[0-9]*$") || substring.matches("^0+$")) {
+                throw new IllegalArgumentException(substring + " is not a positive integer.");
+            }
             if (!substring.isEmpty()) {
                 sum += Integer.parseInt(substring);
             }
