@@ -1,7 +1,5 @@
 package calculator.service;
 
-import com.sun.source.tree.BreakTree;
-
 public class Calculator {
     public int calculate(String input) {
         int sum = 0;
