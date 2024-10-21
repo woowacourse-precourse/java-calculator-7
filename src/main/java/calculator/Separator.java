@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class Separator {
@@ -25,5 +27,23 @@ public class Separator {
             delimiterManager.add(customDelimiter);
             return Optional.of(customDelimiter);
         }
+    }
+
+    public List<String> separate() {
+        String pureTarget = target.substring(startOffset);
+        List<String> separatedResult = new ArrayList<>();
+        StringBuilder separated = new StringBuilder();
+        for (char ch : pureTarget.toCharArray()) {
+            if (delimiterManager.exists(ch)) {
+                separatedResult.add(separated.toString());
+                separated = new StringBuilder();
+            } else {
+                separated.append(ch);
+            }
+        }
+        if (!separated.isEmpty()) {
+            separatedResult.add(separated.toString());
+        }
+        return separatedResult;
     }
 }
