@@ -17,6 +17,10 @@ public class ListConverterUtil {
                 throw new IllegalArgumentException(
                         CustomExceptionMessage.FIND_NOT_INTEGER.getMessage());
             }
+            if (integer <= 0) {
+                throw new IllegalArgumentException(
+                        CustomExceptionMessage.FIND_NEGATIVE_INTEGER.getMessage());
+            }
             positiveIntegers.add(integer);
         }
         return positiveIntegers;

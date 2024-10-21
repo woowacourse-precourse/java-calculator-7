@@ -39,4 +39,21 @@ class ListConverterUtilTest {
                 CustomExceptionMessage.FIND_NOT_INTEGER.getMessage()
         );
     }
+
+
+    @Test
+    public void 양의_정수가_아닌_문자열_리스트를_정수_리스트로_변환() throws Exception {
+        //given
+        List<String> strings = Arrays.asList("3", "-2", "1");
+
+        //when
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            ListConverterUtil.convertToPositiveIntegers(strings);
+        });
+
+        //then
+        assertThat(exception.getMessage()).isEqualTo(
+                CustomExceptionMessage.FIND_NEGATIVE_INTEGER.getMessage()
+        );
+    }
 }
