@@ -66,4 +66,11 @@ class CalculatorServiceTest {
         int result = calculatorService.calculate(input);
         assertThat(result).isEqualTo(6);
     }
+
+    @Test
+    void 연속된_커스텀_구분자_입력_테스트() {
+        String input = "//***\\n1***2***3";
+        int result = calculatorService.calculate(input);
+        assertThat(result).isEqualTo(6);
+    }
 }
