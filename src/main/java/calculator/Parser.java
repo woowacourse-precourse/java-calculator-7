@@ -11,13 +11,14 @@ public class Parser {
     private static final String CUSTOM_DELIMITER_PREFIX = "//";
     private static final String CUSTOM_DELIMITER_SUFFIX = "\n";
 
-    public static String[] parse(String input) {
+    public static List<Double> parse(String input) {
         List<String> delimiters = new ArrayList<>();
         addDefaultDelimiters(delimiters);
         addCustomDelimiter(input, delimiters);
         input = adjustCustomDelimiterPart(input);
 
-        return splitInput(input, delimiters);
+        String[] targets = splitInput(input, delimiters);
+        return convert(targets);
     }
 
     private static void addDefaultDelimiters(List<String> delimiters) {
@@ -49,5 +50,16 @@ public class Parser {
 
         String splitPattern = String.join("|", quoteDelimiters);
         return input.split(splitPattern);
+    }
+
+    private static List<Double> convert(String[] targets) {
+        List<Double> numbers = new ArrayList<>();
+
+        for (String target: targets) {
+            double number = Validator.validateNumber(target);
+            numbers.add(number);
+        }
+
+        return numbers;
     }
 }
