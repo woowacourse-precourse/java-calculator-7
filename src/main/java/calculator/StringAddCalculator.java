@@ -31,7 +31,7 @@ public class StringAddCalculator {
         InputValidator.validateNoDecimalNumbers(numbers);
 
         // 숫자나 구분자를 제외한 문자가 포함되어 있는지 검증
-        InputValidator.validateNonNumericCharacters(numbers);
+        InputValidator.validateOnlyNumericAndDelimiters(numbers, delimiter);
 
         // 기본 구분자 처리
         if (delimiter.equals(",|:")) {

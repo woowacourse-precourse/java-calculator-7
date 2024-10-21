@@ -70,9 +70,9 @@ public class InputValidator {
         }
     }
 
-    public static void validateNonNumericCharacters(String input) {
-        // 숫자, 구분자 외의 문자가 있는지 검사
-        String regex = "[^\\d" + Pattern.quote(",|:") + "]";
+    public static void validateOnlyNumericAndDelimiters(String input, String delimiter) {
+        // 숫자와 사용할 구분자 외의 문자가 포함되었는지 검사
+        String regex = "[^\\d" + Pattern.quote(delimiter) + "]";
         if (input.matches(".*" + regex + ".*")) {
             throw new IllegalArgumentException("계산 대상 문자열에는 숫자와 구분자 외의 문자가 포함될 수 없습니다.");
         }

@@ -152,4 +152,28 @@ public class StringAddCalculatorTest {
         // then
         assertThat(result).isEqualTo(6);
     }
+
+    @Test
+    void 커스텀_구분자로_숫자_합산이_정상_작동한다() {
+        // given
+        String input = "//#\n1#2#3";
+
+        // when
+        int result = StringAddCalculator.add(input);
+
+        // then
+        assertThat(result).isEqualTo(6);
+    }
+
+    @Test
+    void 커스텀_구분자와_기본_구분자가_혼합된_입력은_예외가_발생한다() {
+        // given
+        String input = "//#\n1#2:3";
+
+        // when, then
+        assertThatThrownBy(() -> StringAddCalculator.add(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("계산 대상 문자열에는 숫자와 구분자 외의 문자가 포함될 수 없습니다.");
+    }
+
 }
