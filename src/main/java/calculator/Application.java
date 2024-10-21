@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Application {
@@ -13,7 +14,7 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
         if (input.isEmpty()) {
-            System.out.println("결과: 0");
+            System.out.println("결과 : 0");
             return;
         }
 
@@ -52,6 +53,6 @@ public class Application {
                 .mapToInt(Integer::parseInt)
                 .sum();
 
-        System.out.println("결과: " + result);
+        System.out.println("결과 : " + result);
     }
 }
