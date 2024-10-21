@@ -29,6 +29,7 @@ public class Application {
                 int idx = input.indexOf(CUSTOM_DELIMITER_END_STR);
                 input = input.substring(idx + 2);
             }
+            else delimiter = parserDelimiter(input);
             String[] inputArray = input.split(delimiter);
         }   catch (Exception e){
             throw new IllegalArgumentException(INPUT_VALIDATION_EXCEPTION_MESSAGE);
@@ -42,6 +43,11 @@ public class Application {
             return input.substring(0, idx);
         }
         throw new IllegalArgumentException(INPUT_VALIDATION_EXCEPTION_MESSAGE);
+    }
+
+    public static String parserDelimiter(String input){
+        inputCheck(input);
+        return input.contains(SEMICOLON)?SEMICOLON:COMMA;
     }
 
     }
