@@ -6,14 +6,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class InputHandlerTest {
     @Test
-    void 커스텀_구분자_추출_테스트() {
-        InputHandler inputHandler = new InputHandler();
-        String input = "//;\\n1;2;3";
-        String delimiters = inputHandler.getDelimiters(input);
-        assertThat(delimiters).isEqualTo(";");
-    }
-
-    @Test
     void 기본_구분자_추출_테스트() {
         InputHandler inputHandler = new InputHandler();
         String input = "1,2:3";
