@@ -2,6 +2,7 @@ package calculator;
 
 
 import camp.nextstep.edu.missionutils.Console;
+import exception.ErrorMessage;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 public class Calculator {
@@ -34,7 +35,7 @@ public class Calculator {
         if (matcher.matches()) {
             return new String[]{"[,:]", matcher.group(1)};
         }
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException(ErrorMessage.INVALID_TYPE.getErrorMessage());
     }
 
     // 커스텀 구분자 검증
@@ -43,7 +44,7 @@ public class Calculator {
         if (matcher.matches()) {
             return new String[]{Pattern.quote(matcher.group(1)), matcher.group(2)};
         }
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException(ErrorMessage.INVALID_TYPE.getErrorMessage());
     }
 
     // 정규식 매처 생성
