@@ -130,4 +130,18 @@ class ParsingUtilTest {
         // then
         assertThat(result).isEqualTo(expected);
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,3", "1:2:3", "1:2,3", "1,2:3", "//;\n1;2;3", "///\n1/2/3", "//|\n1|2|3"})
+    @DisplayName("통합 테스트 숫자 추출 테스트")
+    void extractNumbers(String input) {
+        // given
+        final List<String> expected = List.of("1", "2", "3");
+
+        // when
+        var result = ParsingUtil.extractNumbers(input);
+
+        // then
+        assertThat(result).isEqualTo(expected);
+    }
 }
