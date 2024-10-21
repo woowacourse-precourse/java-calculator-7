@@ -59,6 +59,7 @@ public class Extractor {
 
         for (String token : tokens) {
             validateSeparatorExistOneByOne(token);
+            validateInputAnotherChar(token);
             numberList.add(new Number(Integer.parseInt(token)));
         }
 
@@ -68,6 +69,12 @@ public class Extractor {
     private void validateSeparatorExistOneByOne(String token) {
         if (token == "") {
             throw new IllegalArgumentException("[ERROR] 구분자는 한 개씩 존재해야 합니다.");
+        }
+    }
+
+    private void validateInputAnotherChar(String token) {
+        if (!token.matches("-?\\d+")) {
+            throw new IllegalArgumentException("[ERROR] 구분자 이외의 문자가 입력되면 안됩니다.");
         }
     }
 }

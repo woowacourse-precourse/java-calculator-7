@@ -40,4 +40,14 @@ public class ExtractorTest {
             assertEquals("[ERROR] 구분자는 한 개씩 존재해야 합니다.", e.getMessage());
         }
     }
+
+    @Test
+    void 구분자_이외_문자_입력_에러_처리() {
+        try {
+            Extractor extractor = new Extractor("//;\n1;2*3");
+            fail("테스트에 실패하였습니다.");
+        } catch (IllegalArgumentException e) {
+            assertEquals("[ERROR] 구분자 이외의 문자가 입력되면 안됩니다.", e.getMessage());
+        }
+    }
 }
