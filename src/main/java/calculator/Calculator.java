@@ -1,12 +1,12 @@
 package calculator;
 
-import java.util.Arrays;
+import java.util.List;
 
 public class Calculator {
     public Calculator() {
     }
 
-    public int getSummary(int[] numbers) {
-        return Arrays.stream(numbers).sum();
+    public int getSummary(List<Integer> numbers) {
+        return numbers.stream().reduce(0, Integer::sum);
     }
 }

@@ -1,6 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.List;
 
 public class Application {
     private static final String USER_INPUT_PROMPT = "덧셈할 문자열을 입력해 주세요.";
@@ -22,15 +23,15 @@ public class Application {
         Calculator calculator = new Calculator();
         Application app = new Application(calculator, delimiter, numberParser);
 
-        app.run(delimiter, numberParser, calculator);
+        app.run();
     }
 
-    private void run(Delimiter delimiter, NumberParser numberParser, Calculator calculator) {
+    private void run() {
         System.out.println(USER_INPUT_PROMPT);
         String input = Console.readLine();
 
-        String[] stringNumbers = delimiter.split(input);
-        int[] numbers = numberParser.parse(stringNumbers);
+        List<String> tokens = delimiter.split(input);
+        List<Integer> numbers = numberParser.parse(tokens);
         int summary = calculator.getSummary(numbers);
 
         System.out.println(RESULT_PREFIX + summary);

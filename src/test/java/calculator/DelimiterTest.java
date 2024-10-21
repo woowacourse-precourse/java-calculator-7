@@ -2,6 +2,7 @@ package calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,12 +16,12 @@ class DelimiterTest {
         //given
         Delimiter delimiter = new Delimiter();
         String token = "//;\\n1;2;3;4,5:6";
-        String[] expectedValue = {"1", "2", "3", "4", "5", "6"};
+        List<String> expectedValue = List.of("1", "2", "3", "4", "5", "6");
         //when
-        String[] numbers = delimiter.split(token);
+        List<String> numbers = delimiter.split(token);
         //then
-        assertThat(numbers).hasSize(expectedValue.length);
-        assertThat(numbers).contains(expectedValue);
+        assertThat(numbers).hasSize(expectedValue.size());
+        assertThat(numbers).containsAll(expectedValue);
     }
 
     @Test
@@ -29,12 +30,12 @@ class DelimiterTest {
         //given
         Delimiter delimiter = new Delimiter();
         String token = "1:2,3,4,5:6";
-        String[] expectedValue = {"1", "2", "3", "4", "5", "6"};
+        List<String> expectedValue = List.of("1", "2", "3", "4", "5", "6");
         //when
-        String[] numbers = delimiter.split(token);
+        List<String> numbers = delimiter.split(token);
         //then
-        assertThat(numbers).hasSize(expectedValue.length);
-        assertThat(numbers).contains(expectedValue);
+        assertThat(numbers).hasSize(expectedValue.size());
+        assertThat(numbers).containsAll(expectedValue);
     }
 
     @Test
@@ -43,12 +44,12 @@ class DelimiterTest {
         //given
         Delimiter delimiter = new Delimiter();
         String token = "1:2;3,4,5:6";
-        String[] expectedValue = {"1", "2;3", "4", "5", "6"};
+        List<String> expectedValue = List.of("1", "2;3", "4", "5", "6");
         //when
-        String[] numbers = delimiter.split(token);
+        List<String> numbers = delimiter.split(token);
         //then
-        assertThat(numbers).hasSize(expectedValue.length);
-        assertThat(numbers).contains(expectedValue);
+        assertThat(numbers).hasSize(expectedValue.size());
+        assertThat(numbers).containsAll(expectedValue);
     }
 
     @Test

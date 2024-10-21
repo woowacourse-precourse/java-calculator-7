@@ -1,6 +1,6 @@
 package calculator;
 
-import java.util.Arrays;
+import java.util.List;
 
 public class NumberParser {
     private static final String TRANSLATE_ERROR_MESSAGE = "잘못된 숫자 입니다.";
@@ -9,15 +9,16 @@ public class NumberParser {
     public NumberParser() {
     }
 
-    public int[] parse(String[] numbers) {
-        return Arrays.stream(numbers)
-                .map(this::convertToInt)
-                .mapToInt(number -> {
+    public List<Integer> parse(List<String> tokens) {
+        return tokens.stream()
+                .map(token -> {
+                    int number = convertToInt(token);
                     if (number < 0) {
                         throw new IllegalArgumentException(NEGATIVE_VALUE_ERROR_MESSAGE);
                     }
+
                     return number;
-                }).toArray();
+                }).toList();
     }
 
     private int convertToInt(String token) {

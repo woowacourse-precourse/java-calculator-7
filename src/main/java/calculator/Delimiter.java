@@ -1,16 +1,19 @@
 package calculator;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Delimiter {
     private static final String DEFAULT_DELIMITER = ",|:";
     private static final int NOT_FOUND = -1;
     private static final String CUSTOM_DELIMITER_FRONT = "//";
     private static final String CUSTOM_DELIMITER_BACK = "\\n";
-    private static String ERROR_MESSAGE = "잘못된 구분자 형식입니다.";
+    private static final String ERROR_MESSAGE = "잘못된 구분자 형식입니다.";
 
     public Delimiter() {
     }
 
-    public String[] split(String token) {
+    public List<String> split(String token) {
         String delimiterRegex = DEFAULT_DELIMITER;
         if (containCustomDelimiter(token)) {
             String customDelimiter = getDelimiter(token);
@@ -18,7 +21,7 @@ public class Delimiter {
             token = removeCustomDelimiterPattern(token);
         }
 
-        return token.split(delimiterRegex);
+        return Arrays.stream(token.split(delimiterRegex)).toList();
     }
 
     private String addDelimiter(String delimiter) {
