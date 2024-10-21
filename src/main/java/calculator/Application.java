@@ -17,33 +17,35 @@ public class Application {
                 // 커스텀 구분자 지정 여부 확인
                 if (input.startsWith("//") && input.charAt(3) == 92 && input.charAt(4) == 'n') {
                     char customSeperatorChar = input.charAt(2);
-
-                    if (48 <= customSeperatorChar && customSeperatorChar <= 57) {
-                        throw new IllegalArgumentException();
-                    }
-
                     customSeperator = Character.toString(customSeperatorChar);
-//                    System.out.println("customSeperatorChar = '" + customSeperatorChar + "'");
                 }
 
+                // 커스텀 구분자가 없을 경우 계산 처리
                 if (StringUtils.isBlank(customSeperator)) {
                     String[] splitedInput = input.split(",|:");
                     for (String inputNumber : splitedInput) {
                         int number = Integer.parseInt(inputNumber);
-                        if (number < 0)
+
+                        if (isNegative(number))
                             throw new IllegalArgumentException();
+
                         result += number;
                     }
                 }
 
+                // 커스텀 구분자가 있을 경우 계산 처리
                 if (StringUtils.isNotBlank(customSeperator)) {
                     String subInput = input.substring(5);
+
+                    // 커스텀 구분자만 입력됐을 경우 0을 출력하기 위한 조건문
                     if (StringUtils.isNotBlank(subInput)) {
                         String[] splitedInput = subInput.split(customSeperator);
                         for (String inputNumber : splitedInput) {
                             int number = Integer.parseInt(inputNumber);
-                            if (number < 0)
+
+                            if (isNegative(number))
                                 throw new IllegalArgumentException();
+
                             result += number;
                         }
                     }
@@ -54,5 +56,13 @@ public class Application {
         }
 
         System.out.println("결과 : " + result);
+    }
+
+    public static boolean isNegative(int number) {
+        if (number < 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
