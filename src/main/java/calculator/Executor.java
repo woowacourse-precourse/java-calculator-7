@@ -14,7 +14,6 @@ public class Executor {
         this.separator = separator;
     }
 
-
     public void executeCalculator() {
         String inputStr = consoleIO.readInput();
 
