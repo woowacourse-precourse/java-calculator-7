@@ -9,37 +9,34 @@ import java.util.regex.Pattern;
 import calculator.validation.InputValidator;
 
 public class InputParser {
-	List<String> delimiters;
 	private final InputValidator inputValidator;
 
 	public InputParser(String input) {
 		this.inputValidator = new InputValidator();
 		// 만약 사용자가 커스텀 구분자를 입력했다면, 커스텀 구분자를 따로 추출해서 구분자 목록에 추가한다..
-		List<String> delimiter = new ArrayList<>(List.of(",", ":"));
-		extractCustomDelimiter(input).ifPresent(delimiter::add);
-		this.delimiters = delimiter;
+		// extractCustomDelimiter(input).ifPresent(delimiter::add);
 	}
 
 	/**
 	 * 핵심 로직
 	 */
 	// 1차 가공된 입력값에서 숫자를 추출
-	public List<Integer> extractNumbers(String input) {
+	public List<Integer> extractNumbers(String input, Delimiter delimiter) {
 		if (input.isBlank()) {
 			return List.of();
 		}
-		String[] splitParts = splitInput(input, delimiters);
+		String[] splitParts = splitInput(input, delimiter);
 
 		return saveNumbers(splitParts);
 	}
 
 	// 구분자들을 이용해 정규식을 만들고, 이를 이용해 입력값을 분리
-	private String[] splitInput(String input, List<String> delimiters) {
+	private String[] splitInput(String input, Delimiter delimiter) {
 		String processedInput = removeCustomDelimiter(input);
-		inputValidator.validateInvalidDelimiter(processedInput, delimiters);
+		inputValidator.validateInvalidDelimiter(processedInput, delimiter);
 
 		String regex = String.join("|",
-			delimiters.stream()
+			delimiter.getDelimiters().stream()
 				.map(Pattern::quote) // 구분자를 정규식에 안전하게 포함 (특수 문자의 경우 혼동의 여지가 있음)
 				.toArray(String[]::new)
 		);

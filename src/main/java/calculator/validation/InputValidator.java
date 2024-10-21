@@ -2,12 +2,13 @@ package calculator.validation;
 
 import static calculator.exception.ErrorMessage.*;
 
-import java.util.List;
 import java.util.regex.Pattern;
 
+import calculator.model.Delimiter;
+
 public class InputValidator {
-	public void validateInvalidDelimiter(String input, List<String> delimiters) {
-		String regex = "[\\d" + String.join("", delimiters.stream()
+	public void validateInvalidDelimiter(String input, Delimiter delimiter) {
+		String regex = "[\\d" + String.join("", delimiter.getDelimiters().stream()
 			.map(Pattern::quote) // 구분자를 정규식에 안전하게 포함
 			.toArray(String[]::new)) + "]*";
 		String filteredInput = input.replaceAll(regex, "");
