@@ -23,6 +23,12 @@ public class Application {
         // 3. 커스텀 구분자가 지정되었는지 확인
         String delimiters = ",|:";
         String regex = "^[\\D]+$";
+        String[] specials = {
+                "`", "~", "!", "@", "#", "$", "%", "^",
+                "&", "*", "(", ")", "[", "]", "{", "}",
+                "-", "_", "+", "=", ";", "\"", "\'",
+                ".", "/", "?", "<", ">", "\\"
+        };
 
         int i = 0;
         int start = 0;
@@ -40,7 +46,17 @@ public class Application {
                     }
 
                     String delimiter = words.substring(start+2, end);
-                    if (delimiter.matches(regex)) {
+                    
+                    // 특수문자 인식을 위해 커스텀 구분자의 길이를 1로 설정
+                    if (delimiter.matches(regex) && delimiter.length() == 1){
+
+                        // 특수문자일 경우 인식되지 않을 수 있으므로
+                        // 문자로 인식될 수 있도록 앞에 "\" 추가
+                        for (String special: specials) {
+                            if (delimiter.equals(special)) {
+                                delimiter = "\\" + special;
+                            }
+                        }
                         delimiters += "|" + delimiter;
                     } else {
                         throw new IllegalArgumentException();
