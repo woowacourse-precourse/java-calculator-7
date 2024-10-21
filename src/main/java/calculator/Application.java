@@ -15,19 +15,12 @@ public class Application {
 
         String[] numberArray;
         int resultSum;
-        try {
-            checkValidDelimiters(contentWithoutDelimiter, customDelimiter);
-            numberArray = splitByDelimiter(contentWithoutDelimiter, customDelimiter);
-            resultSum = calculateSum(numberArray);
 
-            System.out.print("결과 : " + resultSum);
+        checkValidDelimiters(contentWithoutDelimiter, customDelimiter);
+        numberArray = splitByDelimiter(contentWithoutDelimiter, customDelimiter);
+        resultSum = calculateSum(numberArray);
 
-        } catch (IllegalArgumentException e) {
-            System.err.println(e.getMessage());
-        } finally {
-            Console.close();
-        }
-
+        System.out.print("결과 : " + resultSum);
     }
 
     public static String[] getCustomDelimiterAndContent(String input) {
