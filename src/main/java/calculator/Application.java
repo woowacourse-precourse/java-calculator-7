@@ -2,6 +2,11 @@ package calculator;
 
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        Splitter splitter = new Splitter();
+        Validator validator = new Validator();
+        StringSumCalculator stringSumCalculator = new StringSumCalculator();
+        Calculator calculator = new Calculator(splitter, validator, stringSumCalculator);
+
+        calculator.run();
     }
 }
