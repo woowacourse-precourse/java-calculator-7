@@ -26,6 +26,9 @@ public class Application {
             try{
                 for(int i = 0 ; i < nums.length ; i++){
                     nums[i] = Integer.parseInt(inputNumbers[i]);
+                    if(nums[i]<0){
+                        throw new IllegalArgumentException("입력된 숫자는 양수여야 합니다.");
+                    }
                 }
             }catch(Exception e) {
                 throw new IllegalArgumentException("구분자 사이에 정상적인 숫자를 입력해야 합니다.");
