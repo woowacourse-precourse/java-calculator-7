@@ -16,7 +16,6 @@ public class CalculatorView {
     }
 
     public void printError(ErrorMessage errorMessage) {
-        // 핸들러가 예외를 던질지 경고를 출력할지 결정함
         ErrorHandler.handlerError(errorMessage);
     }
 
