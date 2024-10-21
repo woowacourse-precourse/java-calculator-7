@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 import calculator.validation.InputValidator;
 
 public class InputParser {
-	public InputParser(String input) {
+	private InputParser() {
 		// extractCustomDelimiter(input).ifPresent(delimiter::add);
 	}
 
@@ -17,7 +17,7 @@ public class InputParser {
 	 * 핵심 로직
 	 */
 	// 1차 가공된 입력값에서 숫자를 추출
-	public List<Integer> extractNumbers(String input, Delimiter delimiter) {
+	public static List<Integer> extractNumbers(String input, Delimiter delimiter) {
 		if (input.isBlank()) {
 			return List.of();
 		}
@@ -27,7 +27,7 @@ public class InputParser {
 	}
 
 	// 구분자들을 이용해 정규식을 만들고, 이를 이용해 입력값을 분리
-	private String[] splitInput(String input, Delimiter delimiter) {
+	private static String[] splitInput(String input, Delimiter delimiter) {
 		String processedInput = removeCustomDelimiter(input);
 		InputValidator.validateInvalidDelimiter(processedInput, delimiter);
 
@@ -41,7 +41,7 @@ public class InputParser {
 	}
 
 	// 입력값에서 커스텀 구분자를 제거한 문자열을 반환
-	private String removeCustomDelimiter(String input) {
+	private static String removeCustomDelimiter(String input) {
 		if (hasCustomDelimiter(input)) {
 			int delimiterEnd = input.indexOf("\\n");
 
@@ -52,12 +52,12 @@ public class InputParser {
 	}
 
 	// 입력값에 커스텀 구분자가 있는지 확인
-	private boolean hasCustomDelimiter(String input) {
+	private static boolean hasCustomDelimiter(String input) {
 		return input.startsWith("//");
 	}
 
 	// 분리된 각 부분에서 숫자로 변환하여 리스트에 추가
-	private List<Integer> saveNumbers(String[] splitParts) {
+	private static List<Integer> saveNumbers(String[] splitParts) {
 		List<Integer> numbers = new ArrayList<>();
 		Arrays.stream(splitParts)
 			.map(String::trim)
@@ -74,7 +74,7 @@ public class InputParser {
 	 * 문자열 전처리
 	 */
 	// 입력값에서 커스텀 구분자를 추출 (없을 수 있음)
-	private Optional<String> extractCustomDelimiter(String input) {
+	private static Optional<String> extractCustomDelimiter(String input) {
 		if (!hasCustomDelimiter(input)) {
 			return Optional.empty();
 		}
@@ -83,7 +83,7 @@ public class InputParser {
 		return Optional.of(customDelimiter);
 	}
 
-	private String parseCustomDelimiter(String input) {
+	private static String parseCustomDelimiter(String input) {
 		int delimiterStart = input.indexOf("//") + 2;
 		int delimiterEnd = input.indexOf("\\n");
 		if (delimiterEnd == -1) {
