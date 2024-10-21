@@ -1,6 +1,8 @@
 package calculator;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Application {
@@ -31,5 +33,29 @@ public class Application {
             delimiters.add(customDelimiter);
             input = input.substring(5);
         }
+
+        // 문자열 파싱 (숫자 추출)
+        List<String> numbers = new ArrayList<>();
+        StringBuilder tempNumber = new StringBuilder();
+        for (char c : input.toCharArray()) {
+            if (delimiters.contains(c)) {
+                // 구분자로 시작하거나, 구분자가 두개 붙어있는 경우
+                if (tempNumber.isEmpty()) {
+                    throw new IllegalArgumentException();
+                }
+                numbers.add(tempNumber.toString());
+                tempNumber.setLength(0);
+                continue;
+            }
+            if (Character.isDigit(c)) {
+                tempNumber.append(c);
+                continue;
+            }
+            throw new IllegalArgumentException();
+        }
+        if (tempNumber.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+        numbers.add(tempNumber.toString());
     }
 }
