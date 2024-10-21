@@ -41,26 +41,6 @@ public class CustomDelimiter implements Delimiter {
         return MIN_LENGTH_THRESHOLD <= customDelimiterLength && customDelimiterLength <= MAX_LENGTH_THRESHOLD;
     }
 
-    @Override
-    public List<String> split() {
-        List<String> splitInput = splitByCustomDelimiterSuffix();
-        String customDelimiter = getCustomDelimiter(splitInput);
-        if (hasOnlyDelimiter(splitInput)) {
-            return Collections.emptyList();
-        }
-        return splitByCustomDelimiter(splitInput.getLast(), customDelimiter);
-    }
-
-    private List<String> splitByCustomDelimiterSuffix() {
-        return Arrays.stream(input.split(CUSTOM_DELIMITER_SUFFIX))
-                .toList();
-    }
-
-    private String getCustomDelimiter(final List<String> splitInput) {
-        return Pattern.quote(splitInput.getFirst()
-                .replaceAll(CUSTOM_DELIMITER_PREFIX, ""));
-    }
-
     private int getCustomDelimiterLength(final String customDelimiter) {
         return calculateTotalCharacterCount(customDelimiter) - calculateQuoteAffixCount(customDelimiter);
     }
@@ -84,6 +64,26 @@ public class CustomDelimiter implements Delimiter {
             quoteAffixCount += QUOTE_SUFFIX.length();
         }
         return quoteAffixCount;
+    }
+
+    @Override
+    public List<String> split() {
+        List<String> splitInput = splitByCustomDelimiterSuffix();
+        String customDelimiter = getCustomDelimiter(splitInput);
+        if (hasOnlyDelimiter(splitInput)) {
+            return Collections.emptyList();
+        }
+        return splitByCustomDelimiter(splitInput.getLast(), customDelimiter);
+    }
+
+    private List<String> splitByCustomDelimiterSuffix() {
+        return Arrays.stream(input.split(CUSTOM_DELIMITER_SUFFIX))
+                .toList();
+    }
+
+    private String getCustomDelimiter(final List<String> splitInput) {
+        return Pattern.quote(splitInput.getFirst()
+                .replaceAll(CUSTOM_DELIMITER_PREFIX, ""));
     }
 
     private boolean hasOnlyDelimiter(final List<String> numbers) {
