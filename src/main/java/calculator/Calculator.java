@@ -22,6 +22,11 @@ public class Calculator {
     public String[] parse(String expr) throws IllegalArgumentException {
         String del = ",|:";
 
+        if(expr.startsWith("//")) {
+            del = ",|:|" + expr.charAt(2);
+            expr = expr.substring(5);
+        }
+
         return expr.split(del);
     }
 
@@ -30,6 +35,7 @@ public class Calculator {
 
         for(String xstr : numstr) {
             try {
+                System.out.println(xstr);
                 int x = Integer.parseInt(xstr);
                 if(x < 0) {
                     throw new IllegalArgumentException();
