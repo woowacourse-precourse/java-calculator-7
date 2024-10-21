@@ -16,23 +16,7 @@ public class CustomDelimiterParserImpl implements CustomDelimiterParser {
         int customDelimiterEnd = input.indexOf("\\n");
 
         if (customDelimiterStart == 0 && customDelimiterEnd > 0) {
-            String customDelimiter = input.substring(customDelimiterStart + 2, customDelimiterEnd);
-
-            if (customDelimiter.isEmpty()) {
-                throw new IllegalArgumentException(Message.INCLUDE_NOT_NUMBER.getMessage() + "//\\n");
-            }
-
-            if (customDelimiter.length() > 1) {
-                throw new IllegalArgumentException(Message.ONLY_ONE_CUSTOM_DELIMITER.getMessage());
-            }
-
-            if (isNumeric(customDelimiter)) {
-                throw new IllegalArgumentException(Message.INVALID_NUMERIC_CUSTOM_DELIMITER.getMessage());
-            }
-
-            delimiterManager.addDelimiter(customDelimiter);
-
-            return input.substring(customDelimiterEnd + 2).trim();
+            return getString(input, customDelimiterStart, customDelimiterEnd);
         }
 
         if ((customDelimiterStart >= 0 && customDelimiterEnd == -1) || (customDelimiterStart == -1
@@ -41,10 +25,31 @@ public class CustomDelimiterParserImpl implements CustomDelimiterParser {
         }
 
         if (customDelimiterStart > customDelimiterEnd) {
-            throw new IllegalArgumentException(Message.INVALID_DELIMITER_ORDER.getMessage());
+            return getString(input, customDelimiterEnd, customDelimiterStart);
         }
 
         return input;
+    }
+
+    @Override
+    public String getString(String input, int customDelimiterStart, int customDelimiterEnd) {
+        String customDelimiter = input.substring(customDelimiterStart + 2, customDelimiterEnd);
+
+        if (customDelimiter.isEmpty()) {
+            throw new IllegalArgumentException(Message.INCLUDE_NOT_NUMBER.getMessage() + "//\\n");
+        }
+
+        if (customDelimiter.length() > 1) {
+            throw new IllegalArgumentException(Message.ONLY_ONE_CUSTOM_DELIMITER.getMessage());
+        }
+
+        if (isNumeric(customDelimiter)) {
+            throw new IllegalArgumentException(Message.INVALID_NUMERIC_CUSTOM_DELIMITER.getMessage());
+        }
+
+        delimiterManager.addDelimiter(customDelimiter);
+
+        return input.substring(customDelimiterEnd + 2).trim();
     }
 
     @Override
