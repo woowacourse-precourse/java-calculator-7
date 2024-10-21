@@ -11,7 +11,7 @@ public class Application {
         if (input.startsWith("//")) {
 
         } else {
-
+            String[] numbers = input.split("[,:]");
         }
     }
 }
