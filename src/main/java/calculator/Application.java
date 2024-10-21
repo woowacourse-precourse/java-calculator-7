@@ -9,7 +9,7 @@ public class Application {
         String input = scanner.nextLine();
 
         if (input.startsWith("//")) {
-
+            String sep = input.substring(2, input.indexOf("\\n"));
         } else {
             String[] numbers = input.split("[,:]");
         }
