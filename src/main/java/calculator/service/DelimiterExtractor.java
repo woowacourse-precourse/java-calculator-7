@@ -28,12 +28,17 @@ public class DelimiterExtractor {
         // matcher.group(2)는 커스텀 구분자를 의미함
         char[] charArray = matcher.group(2).toCharArray();
 
-        // 만약 커스텀 구분자에 \가 있다면 \\\\를 더해, 문자열에서 \\으로 나타날 수 있도록 함
+        // 커스텀 구분자에 들어가는 특수한 케이스들에 대해 백슬래시를 더해준다
         for(int i = 0; i < charArray.length; i++){
+            // \가 들어가는 경우 앞에 백슬래시를 하나씩 더해준다
             if(charArray[i] == '\\'){
                 appropriateDelimiter += "\\\\";
             }
-            // \가 아닌 경우는 그냥 더한다
+            // [ 또는 ]가 들어가는 경우 앞에 백슬래시를 더해준다
+            else if(charArray[i] == '[' || charArray[i] == ']'){
+                appropriateDelimiter += "\\" + charArray[i];
+            }
+            // 이외의 경우는 그냥 더한다
             else{
                 appropriateDelimiter += charArray[i];
             }
