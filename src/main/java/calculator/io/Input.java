@@ -17,11 +17,4 @@ public class Input {
         return line;
     }
 
-    private static boolean isBlank(String line) {
-        if (line.isBlank()) {
-            return true;
-        }
-        return false;
-    }
-
 }
