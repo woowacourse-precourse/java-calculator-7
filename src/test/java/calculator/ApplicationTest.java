@@ -54,10 +54,11 @@ class ApplicationTest extends NsTest {
 
     @Test
     void 커스텀_구분자_예외_테스트() {
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("//;;\\n1;2;3"))
-                        .isInstanceOf(IllegalArgumentException.class)
-        );
+        assertThatThrownBy(() -> {
+            Calculator.calculate("//;;\\n1;2;3");
+        })
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("잘못된 구분자 형식입니다");
     }
 
     @Override
