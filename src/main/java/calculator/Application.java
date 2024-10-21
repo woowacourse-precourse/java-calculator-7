@@ -22,7 +22,8 @@ public class Application {
         String[] nums = splitNum(str, delimiters);
 
         checkError(nums);
-        // 나눠진 문자열 이용해 합계 계산
+
+        answer = calculator(nums);
 
         System.out.println("결과 : " + answer);
 
@@ -55,6 +56,14 @@ public class Application {
                     "덧셈을 수행할 숫자가 없습니다."
             );
         }
+    }
+
+    private static long calculator(String[] num) {
+        long ans = 0;
+        for (String s : num) {
+            ans += Long.parseLong(s);
+        }
+        return ans;
     }
 
 }
