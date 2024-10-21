@@ -17,3 +17,12 @@
     * 잘못된 값 있을 시 에러 발생 후 종료
 * 잘못된 값이 없으면 숫자값들을 모두 더하는 연산 수행
 * 값을 출력
+
+## 설계
+MVC 패턴
+### Model
+Calculator 클래스 : 파싱, 검증, 합계 계산
+### View
+ConsoleView 클래스 : 사용자에게 요청 및 결과를 출력하는 클래스
+### Controller
+CalculatorController 클래스 : 모델과 뷰를 연결
