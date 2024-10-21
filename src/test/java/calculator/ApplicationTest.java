@@ -24,6 +24,34 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 올바르지_않은_커스텀_구분자_설정_문자열() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;\n1;2:3,4"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;n1;2:3,4"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("/;\\n1;2:3,4"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("///;\\n1;2:3,4"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;\\\\n1;2:3,4"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
