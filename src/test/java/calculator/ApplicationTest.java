@@ -17,10 +17,75 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 예외_테스트() {
+    void 커스텀_구분자_사용1() {
+        assertSimpleTest(() -> {
+            run("//&\n23&3&74,03");
+            assertThat(output()).contains("결과 : 103");
+        });
+    }
+
+
+    @Test
+    void 커스텀_구분자와_기본_구분자_함께_사용() {
+        assertSimpleTest(() -> {
+            run("//%\\n3%2:74,66");
+            assertThat(output()).contains("결과 : 145");
+        });
+    }
+
+    @Test
+    void 기본_구분자만_사용() {
+        assertSimpleTest(() -> {
+            run("12,453,112:1234,1234:654");
+            assertThat(output()).contains("결과 : 3699");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자와_빈문자열_처리() {
+        assertSimpleTest(() -> {
+            run("//;\\n");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void 빈문자열_처리() {
+        assertSimpleTest(() -> {
+            run("\n");              // input = "" : 아무것도 입력하지 않고 엔터를 친 경우
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void 구분자만_처리() {
+        assertSimpleTest(() -> {
+            run(":,");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_지정_및_구분자만_처리() {
+        assertSimpleTest(() -> {
+            run("//;\\n;:,");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void 띄어쓰기_예외처리() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> runException(" "))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 음수_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
