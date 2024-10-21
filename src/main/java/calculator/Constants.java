@@ -5,7 +5,6 @@ public final class Constants {
     public static final String MESSAGE_RESULT_FORMAT = "결과 : %d";
 
     public static final String ERROR_MISSING_DEFAULT_SEPARATOR = "구분자(쉼표, 콜론)를 포함하여 입력해 주세요";
-    public static final String ERROR_MISSING_CUSTOM_SEPARATOR = "지정한 커스텀 구분자를 포함하여 입력해 주세요";
     public static final String ERROR_INVALID_CUSTOM_FORMAT = "커스텀 구분자를 지정하려면, 다음의 형식으로 입력해 주세요." + "\n" + "//커스텀 구분자\\n덧셈할 문자열";
     public static final String ERROR_INVALID_NUMBER_RANGE = "덧셈할 숫자는 양수만 입력해 주세요.";
 
