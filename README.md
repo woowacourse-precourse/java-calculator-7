@@ -27,5 +27,6 @@
 
 ### 4. 예외 처리
 - **기능 4.1**: 예외 처리
+  - 커스텀 입력이 잘못된 형식인 경우`IllegalArgumentException`을 발생시킨다.
   - 입력에 음수가 포함된 경우 `IllegalArgumentException`을 발생시킨다.
   - 숫자가 아닌 잘못된 값이 입력된 경우 `IllegalArgumentException`을 발생시킨다.

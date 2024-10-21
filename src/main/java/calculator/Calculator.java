@@ -17,10 +17,14 @@ public class Calculator {
         // 커스텀 연산자 추출
         if (input.startsWith("//")) {
             int point = input.indexOf("\\n");
-
-            String customDelim = input.substring(2, point);
-            delim += "|" + Pattern.quote(customDelim);
-            numbers = input.substring(point + 2);
+            if (point != -1) {
+                String customDelim = input.substring(2, point);
+                delim += "|" + Pattern.quote(customDelim);
+                numbers = input.substring(point + 2);
+            }
+            else {
+                throw new IllegalArgumentException("잘못된 입력 형식");
+            }
         }
 
 
@@ -28,8 +32,17 @@ public class Calculator {
         String[] tokens = numbers.split(delim);
         int sum = 0;
         for (String token : tokens) {
-            int number = Integer.parseInt(token);
-            sum += number;
+            try {
+                int number = Integer.parseInt(token);
+                if (number < 0) {
+                    throw new IllegalArgumentException("잘못된 숫자 입력");
+                }
+
+                sum += number;
+            }
+            catch (NumberFormatException e) {
+                throw new IllegalArgumentException("잘못된 숫자 입력");
+            }
         }
 
         return sum;
