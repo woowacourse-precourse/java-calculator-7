@@ -3,8 +3,8 @@ package calculator;
 public class Number {
     private String[] extractedNumbers;
 
-    public void extractNumbers(String input, String seperator){
-        this.extractedNumbers = input.split(seperator);
+    public void extractNumbers(String input, String separator){
+        this.extractedNumbers = input.split(separator);
     }
 
     public int validateAndParseNumber(String number) {
