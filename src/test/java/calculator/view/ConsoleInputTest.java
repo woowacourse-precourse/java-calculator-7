@@ -43,13 +43,14 @@ class ConsoleInputTest {
 
     @Test
     @Order(2)
-    @DisplayName("입력값이 잘못되었을 때 IllegalArgumentException이 발생하는지 확인")
-    void shouldReturnNullWhenNoInputIsProvided() {
+    @DisplayName("입력값이 주어지지 않아도 0이 반환되는지 확인")
+    void shouldReturnZeroWhenNoInputIsProvided() {
         // given
 
-        // when // then
-        assertThrows(IllegalArgumentException.class, () -> {
-            consoleInput.input();
-        });
+        // when
+        String result = consoleInput.input();
+
+        // then
+        assertEquals(result, "0");
     }
 }

@@ -9,7 +9,7 @@ public class ConsoleInput implements InputRepository<String> {
         try {
             return Console.readLine();
         } catch (Exception e) {
-            throw new IllegalArgumentException();
+            return "0";
         }
     }
 }
