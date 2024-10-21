@@ -1,22 +1,18 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.regex.Pattern;
 
 public class Application {
     public static void main(String[] args) {
-        String input = getInput();
+        System.out.print("덧셈할 문자열을 입력해 주세요. : ");
+        String input = Console.readLine();
         try {
             int sum = calculateSum(input);
             System.out.println("결과: " + sum);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
-    }
-
-    // 입력 처리 메서드
-    private static String getInput() {
-        System.out.print("덧셈할 문자열을 입력해 주세요. : ");
-        return Console.readLine();
     }
 
     // 계산 메서드
@@ -29,7 +25,7 @@ public class Application {
         input = input.replace("\\n", "\n");
 
         // 기본 구분자의 경우
-        String delimiter = "[,:]";
+        String delimiter = ",|:"; // 기본 구분자
         String numbersPart = input;
 
         // 커스텀 구분자의 경우
@@ -38,7 +34,11 @@ public class Application {
             int startNum = input.indexOf("\n");
 
             if (startNum != -1) {
-                delimiter = input.substring(customDelimiterStart, startNum).trim(); // 커스텀 구분자
+                String customDelimiter = input.substring(customDelimiterStart, startNum).trim().replaceAll("\\s", ""); // 커스텀 구분자
+                if (customDelimiter.isEmpty()) {
+                    throw new IllegalArgumentException("구분자가 정의되지 않았습니다.");
+                }
+                delimiter = Pattern.quote(customDelimiter);
                 numbersPart = input.substring(startNum + 1); // \n 이후의 부분
             }
         }
@@ -51,23 +51,22 @@ public class Application {
         // 구분자를 기준으로 숫자 추출
         String[] numbers = numbersPart.split(delimiter);
 
-        // 구분자 사이에 숫자 확인
-        for (String number : numbers) {
-            if (number.trim().isEmpty()) {
-                throw new IllegalArgumentException("구분자 사이에 숫자가 없습니다.");
-            }
-        }
-
-        positiveNum(numbers); // 배열을 전달하여 유효성 검사
+        // 숫자 유효성 검사
+        validateNumbers(numbers);
 
         return sumNumbers(numbers);
     }
 
-    // 양수인지 확인
-    private static void positiveNum(String[] numbers) {
+    // 숫자 유효성 검사
+    private static void validateNumbers(String[] numbers) {
         for (String number : numbers) {
-            if (!number.trim().isEmpty() && Integer.parseInt(number.trim()) < 0) {
-                throw new IllegalArgumentException("양수가 아닙니다.");
+            if (number.trim().isEmpty()) {
+                throw new IllegalArgumentException("구분자 사이에 숫자가 없습니다.");
+            }
+
+            int num = Integer.parseInt(number.trim());
+            if (num < 0) {
+                throw new IllegalArgumentException("양수가 아닙니다: " + num);
             }
         }
     }
@@ -76,10 +75,7 @@ public class Application {
     private static int sumNumbers(String[] numbers) {
         int sum = 0;
         for (String number : numbers) {
-            String trimNumber = number.trim();
-            if (!trimNumber.isEmpty()) {
-                sum += Integer.parseInt(trimNumber);
-            }
+            sum += Integer.parseInt(number.trim());
         }
         return sum;
     }
