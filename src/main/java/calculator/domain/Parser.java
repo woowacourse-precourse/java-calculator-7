@@ -2,6 +2,7 @@ package calculator.domain;
 
 import static calculator.domain.constant.errorMessage.ValueError.INVALID_VALUE_FORMAT;
 import static calculator.domain.constant.errorMessage.ValueError.MINUS_VALUE;
+import static calculator.domain.constant.errorMessage.ValueError.OUT_OF_RANGE_VALUE;
 
 import calculator.global.exception.CalculatorException;
 import java.util.Arrays;
@@ -52,13 +53,18 @@ public class Parser {
         }
 
         try {
-            int number = Integer.parseInt(token);
-            if (number < 0) {
+            long number = Long.parseLong(token);
+            if (number < Integer.MIN_VALUE || number > Integer.MAX_VALUE) {
+                throw new CalculatorException(OUT_OF_RANGE_VALUE);
+            }
+            int intValue = (int) number;
+            if (intValue < 0) {
                 throw new CalculatorException(MINUS_VALUE);
             }
-            return number;
+            return intValue;
         } catch (NumberFormatException e) {
             throw new CalculatorException(INVALID_VALUE_FORMAT);
         }
     }
+
 }
