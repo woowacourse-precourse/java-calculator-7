@@ -70,8 +70,8 @@ public class Application {
     public static long plusNums(List<Integer> nums){
         long result = 0;
 
-        for(int i = 0; i<nums.size(); i++){
-            result += nums.get(i);
+        for (Integer num : nums) {
+            result += num;
         }
 
         return result;
