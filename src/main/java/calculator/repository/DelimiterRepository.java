@@ -15,4 +15,8 @@ public class DelimiterRepository {
     public List<String> getDelimiters() {
         return delimiters;
     }
+
+    public void addDelimiter(String delim) {
+        delimiters.add(delim);
+    }
 }
