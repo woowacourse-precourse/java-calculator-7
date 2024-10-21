@@ -69,4 +69,13 @@ public class InputParserTest {
 
         assertEquals(expectedNumbers, numbers);
     }
+    @Test
+    void 잘못된_커스텀_구분자_처리_테스트() {
+        String wrongDelimiterString = "//;1;2;3";
+
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> parser.parse(wrongDelimiterString))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
 }

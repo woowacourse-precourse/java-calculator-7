@@ -22,39 +22,37 @@ public class InputParser {
             numbers.add(0);
             return numbers;
         }
-        String customDelimiter = "";
-        if (input.startsWith("//")) {
-            if (input.length() < 4  || input.charAt(3) != '\n') {
-                throw new IllegalArgumentException("Error: 커스텀 구분자의 형식이 잘못되었습니다.");
-            }
-            customDelimiter = input.substring(2, input.indexOf('\n'));
+        String customDelimiter = extractCustomDelimiter(input);
+        if (!customDelimiter.isEmpty()) {
             input = input.substring(input.indexOf('\n') + 1);
         }
-        String[] splitInput;
-        if (!customDelimiter.isEmpty()) {
-            String regex = "[,:" + customDelimiter;
-            regex += "]";
-            splitInput = input.split(regex);
-        } else {
-            splitInput = input.split("[,:]");
-        }
-        for (String str : splitInput) {
-            if (str.isEmpty()) {
-                numbers.add(0);
-            } else {
-                if (str.contains(" ")) {
-                    throw new IllegalArgumentException("Error: 입력 값에 불필요한 공백이 있습니다.");
-                }
-                if (!str.matches("\\d+")) {
-                    throw new IllegalArgumentException("Error: 입력 값은 숫자여야 합니다.");
-                }
-                int number = Integer.parseInt(str);
-                if (number < 0) {
-                    throw new IllegalArgumentException("Error: 입력 값은 음수일 수 없습니다.");
-                }
-                numbers.add(number);
+        String[] splitInput = splitInputByDelimiter(input, customDelimiter);
+        return convertToIntegerList(splitInput);
+    }
+    private String extractCustomDelimiter(String input) {
+        if (input.startsWith("//")) {
+            if (input.length() < 4 || input.charAt(3) != '\n') {
+                throw new IllegalArgumentException("Error: 커스텀 구분자의 형식이 잘못되었습니다.");
             }
+            return Pattern.quote(input.substring(2, input.indexOf('\n')));
         }
-        return numbers;
+        return "";
+    }
+    private String[] splitInputByDelimiter(String input, String customDelimiter) {
+        return customDelimiter.isEmpty() ? input.split("[,:]") : input.split(customDelimiter);
+    }
+    private List<Integer> convertToIntegerList(String[] splitInput) {
+        List<Integer> integerList = new ArrayList<>();
+        for (String s : splitInput) {
+            if (!s.matches("\\d+")) {
+                throw new IllegalArgumentException("Error: 입력 값은 숫자여야 합니다.");
+            }
+            int number = Integer.parseInt(s);
+            if (number < 0) {
+                throw new IllegalArgumentException("Error: 입력 값은 음수가 될 수 없습니다.");
+            }
+            integerList.add(number);
+        }
+        return integerList;
     }
 }
