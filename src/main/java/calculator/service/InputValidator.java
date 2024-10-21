@@ -16,7 +16,7 @@ public class InputValidator {
 
         if (!isOnlyOneCustomDeclare(input)) return false;
 
-        if (isContainInvalidChar(input)) return false;
+        if (hasInvalidChar(input)) return false;
 
         return true;
     }
@@ -47,7 +47,7 @@ public class InputValidator {
         return !matcher.find();
     }
 
-    public Boolean isContainInvalidChar(String inputValue) {
+    public Boolean hasInvalidChar(String inputValue) {
 
         List<String> delimiters = extractDelimiter(inputValue);
 

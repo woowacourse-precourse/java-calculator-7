@@ -93,10 +93,10 @@ class CalculatorUtilTest {
         InputValidator inputValidator = new InputValidator();
 
         // when
-        Boolean invalidDeclare = inputValidator.isContainInvalidChar("//:\\n//:\\n1:2:3,4|5|//:\\n6");
-        Boolean containSpace = inputValidator.isContainInvalidChar("//-\\n1 2:3-4:5,6");
-        Boolean validResult1 = inputValidator.isContainInvalidChar("1:2:3,4:5:6");
-        Boolean validResult2 = inputValidator.isContainInvalidChar("//-\\n1-2:3-4:5,6");
+        Boolean invalidDeclare = inputValidator.hasInvalidChar("//:\\n//:\\n1:2:3,4|5|//:\\n6");
+        Boolean containSpace = inputValidator.hasInvalidChar("//-\\n1 2:3-4:5,6");
+        Boolean validResult1 = inputValidator.hasInvalidChar("1:2:3,4:5:6");
+        Boolean validResult2 = inputValidator.hasInvalidChar("//-\\n1-2:3-4:5,6");
 
         // then
         assertTrue(invalidDeclare);
