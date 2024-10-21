@@ -8,7 +8,6 @@ public class CheckCompatibility {
         for (Character checkChar : parsedUserInput.toCharArray()) {
             if (!Character.isDigit(checkChar)) {
                 isDelimiter(delimiter, checkChar);
-
             }
         }
     }
