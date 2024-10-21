@@ -2,6 +2,7 @@ package calculator.service;
 
 import calculator.constant.CalculatorConstants;
 import calculator.constant.ExceptionMessageConstants;
+import calculator.model.Calculator;
 import calculator.validator.InputValidator;
 import java.util.List;
 
@@ -27,27 +28,7 @@ public class StringCalculatorService {
 
         inputValidator.validate(input);
         List<String> numbers = stringSplitter.split(input);
-        return sum(numbers);
-    }
-
-    private int sum(List<String> numbers) {
-        return numbers.stream()
-                .map(String::trim)
-                .filter(s -> !s.isEmpty())
-                .mapToLong(Long::parseLong)
-                .peek(this::validateNumberRange)
-                .mapToInt(Math::toIntExact)
-                .sum();
-    }
-
-    private void validateNumberRange(long num) {
-        if (num < 0) {
-            throw new IllegalArgumentException(
-                    String.format(ExceptionMessageConstants.NEGATIVE_NOT_ALLOWED, num));
-        }
-        if (num > CalculatorConstants.MAX_NUMBER) {
-            throw new IllegalArgumentException(
-                    String.format(ExceptionMessageConstants.NUMBER_TOO_LARGE, CalculatorConstants.MAX_NUMBER));
-        }
+        Calculator calculator = new Calculator(numbers);
+        return calculator.calculate();
     }
 }
