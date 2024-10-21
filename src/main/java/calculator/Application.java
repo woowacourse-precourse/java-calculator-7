@@ -14,6 +14,7 @@ public class Application {
     public static void main(String[] args) {
         try{
             // 0. 문자열 입력받기
+            System.out.println("덧셈할 문자열을 입력해 주세요.");
             String input = readLine();
 
             Calc calc = new Calc(input);
