@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.Arrays;
+
 public class StringAddCalculator {
     public static int splitInput(String input){
         if(isNullOrEmpty(input)){
@@ -16,6 +18,17 @@ public class StringAddCalculator {
 
     private static String[] splitString(String input){
         String delimiter = ",|:";
+
+        if (input.startsWith("//")) {
+            int delimiterIndex = input.indexOf("\\n");
+            if (delimiterIndex == -1) {
+                throw new IllegalArgumentException("구분자 지정 형식이 올바르지 않습니다. '\\n'이 필요합니다.");
+            }
+            delimiter = input.substring(2,delimiterIndex);
+            String anotherDelimiter = "|".concat(input.substring(2, delimiterIndex));
+            input = input.substring(delimiterIndex + 2);
+            delimiter = delimiter.concat(anotherDelimiter);
+        }
 
         return input.split(delimiter);
     }
