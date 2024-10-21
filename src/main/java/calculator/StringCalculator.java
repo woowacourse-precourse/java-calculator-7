@@ -30,6 +30,13 @@ public class StringCalculator {
 
         int sum = 0;
 
+        // 앞이나 중간에 빈 값이 있으면 에러 발생
+        for (String token : tokens) {
+            if (token.isEmpty()) {
+                throw new IllegalArgumentException("잘못된 형식: 숫자가 누락되었습니다.");
+            }
+        }`
+
         try {
             for (String token : tokens) {
                 if (!token.isEmpty()) {
