@@ -18,10 +18,19 @@ class CalculatorTest {
         assertEquals(10, result);
     }
 
-    @DisplayName("올바르지 않은 예시 동작 테스트")
+    @DisplayName("정의되지 않은 구분자")
     @ParameterizedTest
-    @ValueSource(strings = {"1,2:3,,;4", "//;\n1;2;3,:4", "-1-2-3:4"})
+    @ValueSource(strings = {"1,2:3,,;4", "-1-2-3:4", "ㄱ3,ㄴ5"})
     void calculateResultTest_2(String expression) {
+        Calculator calculator = new Calculator();
+        assertThatThrownBy(() -> calculator.calculateResult(expression))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("올바르지 않은 커스텀 구분자 정의")
+    @ParameterizedTest
+    @ValueSource(strings = {"//;\n1;2;3,:4", "//;n1;2;3,:4"})
+    void calculateResultTest_3(String expression) {
         Calculator calculator = new Calculator();
         assertThatThrownBy(() -> calculator.calculateResult(expression))
                 .isInstanceOf(IllegalArgumentException.class);
