@@ -48,4 +48,22 @@ public class InputValidator {
 			throw new IllegalArgumentException(EMPTY_CUSTOM_DELIMITER.getMessage());
 		}
 	}
+
+	public static void validateStartPattern(int startIndex) {
+		if (startIndex == -1) {
+			throw new IllegalArgumentException(INVALID_START_PATTERN.getMessage());
+		}
+	}
+
+	public static void validateEndPattern(int endIndex) {
+		if (endIndex == -1) {
+			throw new IllegalArgumentException(INVALID_END_PATTERN.getMessage());
+		}
+	}
+
+	public static void validatePatternPosition(int start, int end) {
+		if (start >= end) {
+			throw new IllegalArgumentException("구분자의 시작 패턴 및 종료 패턴 위치가 바뀌었습니다.");
+		}
+	}
 }
