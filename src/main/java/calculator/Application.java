@@ -7,15 +7,14 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
         String delimiters = ",|:";
-        delimiters = updateDelimiters(input, delimiters);
+        String inputTokens[] = splitByDelimiters(input, delimiters);
 
 
     }
 
 
-    public static String updateDelimiters(String input, String delimiters) {
-
-        String updateDelimiters = delimiters;
+    public static String[] splitByDelimiters(String input, String delimiters) {
+        String[] inputTokens;
 
         if (input.startsWith("//")) {
             int start_index = input.indexOf('/');
@@ -24,7 +23,10 @@ public class Application {
                 input = input.substring(start_index + 5);
             }
         }
-        return updateDelimiters;
+
+        inputTokens = input.split(delimiters);
+        return inputTokens;
     }
+
 
 }
