@@ -1,4 +1,4 @@
-package calculator.model;
+package calculator.model.implement;
 
 import static calculator.common.DelimiterConstant.CUSTOM_EXTRACTOR_REGEX;
 import static calculator.common.DelimiterConstant.REQUIRED_MATCHER_GROUP_NUMBER;

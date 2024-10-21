@@ -1,4 +1,4 @@
-package calculator.model;
+package calculator.model.service;
 
 public interface Calculator {
 

@@ -1,7 +1,10 @@
-package calculator.model;
+package calculator.model.service;
 
 import static calculator.common.CalculatorConstant.DEFAULT_VALUE;
 
+import calculator.model.implement.DelimiterManager;
+import calculator.model.implement.StringParser;
+import calculator.model.domain.CustomNumber;
 import java.util.List;
 
 public class StringSumCalculator implements Calculator {

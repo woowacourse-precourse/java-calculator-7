@@ -1,4 +1,4 @@
-package calculator.model;
+package calculator.model.domain;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,6 +22,6 @@ public enum DefaultDelimiter {
     public static List<String> getAll() {
         return Arrays.stream(DefaultDelimiter.values())
                 .map(DefaultDelimiter::getDelimiter)
-                .collect(Collectors.toList());
+                .toList();
     }
 }

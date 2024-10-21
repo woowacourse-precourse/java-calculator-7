@@ -1,13 +1,13 @@
 package calculator.common;
 
 import calculator.controller.StringCalculatorApplication;
-import calculator.model.Calculator;
-import calculator.model.DelimiterChecker;
-import calculator.model.DelimiterExtractor;
-import calculator.model.DelimiterManager;
-import calculator.model.DelimiterStore;
-import calculator.model.StringSumCalculator;
-import calculator.model.StringParser;
+import calculator.model.service.Calculator;
+import calculator.model.implement.DelimiterChecker;
+import calculator.model.implement.DelimiterExtractor;
+import calculator.model.implement.DelimiterManager;
+import calculator.model.implement.DelimiterStore;
+import calculator.model.service.StringSumCalculator;
+import calculator.model.implement.StringParser;
 import calculator.view.ApplicationConsoleView;
 import calculator.view.ApplicationView;
 import calculator.view.input.InputConsoleView;

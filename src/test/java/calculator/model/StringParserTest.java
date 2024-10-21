@@ -2,9 +2,11 @@ package calculator.model;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
+import calculator.model.domain.CustomNumber;
 import calculator.fixture.CalculatorAppFixture;
+import calculator.model.implement.DelimiterStore;
+import calculator.model.implement.StringParser;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -35,8 +37,8 @@ class StringParserTest {
     void parseToNumbers() {
         assertSimpleTest(() -> {
             delimiterStore.addDelimiters(List.of(";","/"));
-            List<Integer> numbers = stringParser.parseToNumbers("1;2/3");
-            assertThat(numbers).contains(1,2,3);
+            List<CustomNumber> numbers = stringParser.parseToNumbers("1;2/3");
+            assertThat(numbers).extracting(CustomNumber::getNumber).containsExactly(1, 2, 3);
         });
     }
 }

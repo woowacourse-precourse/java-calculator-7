@@ -1,11 +1,11 @@
 package calculator.fixture;
 
-import calculator.model.DelimiterChecker;
-import calculator.model.DelimiterExtractor;
-import calculator.model.DelimiterManager;
-import calculator.model.DelimiterStore;
-import calculator.model.StringParser;
-import calculator.model.StringSumCalculator;
+import calculator.model.implement.DelimiterChecker;
+import calculator.model.implement.DelimiterExtractor;
+import calculator.model.implement.DelimiterManager;
+import calculator.model.implement.DelimiterStore;
+import calculator.model.implement.StringParser;
+import calculator.model.service.StringSumCalculator;
 
 public class CalculatorAppFixture {
 

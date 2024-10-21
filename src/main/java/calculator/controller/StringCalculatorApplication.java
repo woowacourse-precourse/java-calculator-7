@@ -1,6 +1,6 @@
 package calculator.controller;
 
-import calculator.model.Calculator;
+import calculator.model.service.Calculator;
 import calculator.view.ApplicationView;
 
 public class StringCalculatorApplication implements CalculatorApplication {
