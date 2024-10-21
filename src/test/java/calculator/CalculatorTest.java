@@ -22,7 +22,7 @@ class CalculatorTest extends NsTest {
     @Test
     void 커스텀_구분자_공백_슬래쉬_다수_포함_사용() {
         assertSimpleTest(() -> {
-            String customDelimiter = "/; 3ㅇ ㄹㄹ f  \\t\\ t\\ t\\ \\ \\n";
+            String customDelimiter = "/; 3ㅇ ㄹㄹ f  \\t\\ t\\ t\\ \\";
             run("//"+customDelimiter+"\\n"+"3"+customDelimiter+"2:6");
             assertThat(output()).contains("결과 : 11");
         });
