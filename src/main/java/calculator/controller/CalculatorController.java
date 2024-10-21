@@ -18,10 +18,6 @@ public class CalculatorController {
 
         List<Long> inputNumbers = userInput.parser(userInput.getInput());
 
-        if (inputNumbers.size() > 10) {
-            throw new IllegalArgumentException("10개 이상의 숫자를 더할 수 없습니다.");
-        }
-
         long result = inputNumbers.stream().mapToLong(Long::longValue).sum();
         OutputView.printResult("결과 : " + result);
 

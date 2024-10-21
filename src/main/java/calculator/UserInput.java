@@ -42,12 +42,18 @@ public class UserInput {
     }
 
     private List<Long> convertToLongList(List<String> userInputNumbers) {
-        return userInputNumbers
+        List<Long> result = userInputNumbers
                 .stream()
                 .map(token -> {
                     Number number = new Number(token);
                     return number.getInputNumber();
                 }).toList();
+
+        if (result.size() > 10) {
+            throw new IllegalArgumentException("10개 이상의 숫자를 더할 수 없습니다.");
+        }
+
+        return result;
     }
 
     public String getInput() {
