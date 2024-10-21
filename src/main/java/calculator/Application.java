@@ -95,24 +95,20 @@ public class Application {
     }
     public static void main(String[] args) {
         // TODO: 프로그램 구현
-        try {
-            StringBuilder delimiter = new StringBuilder();
-            delimiter.append(",|:");
-            init_print();
-            String str = input();
-            if(str.isEmpty()) {
-                str = "0";
-            }
-            String[] tempResult = getCustomDelimiter(str);
-            if (!tempResult[0].isEmpty()) {
-                String newDelimiter = checkNewDelimiter(tempResult[0]);
-                delimiter.append("|").append(newDelimiter);
-            }
-            str = tempResult[1];
-            String[] result = parseString(delimiter.toString(), str);
-            System.out.println("결과 : " + add(result));
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+        StringBuilder delimiter = new StringBuilder();
+        delimiter.append(",|:");
+        init_print();
+        String str = input();
+        if(str.isEmpty()) {
+            str = "0";
         }
+        String[] tempResult = getCustomDelimiter(str);
+        if (!tempResult[0].isEmpty()) {
+            String newDelimiter = checkNewDelimiter(tempResult[0]);
+            delimiter.append("|").append(newDelimiter);
+        }
+        str = tempResult[1];
+        String[] result = parseString(delimiter.toString(), str);
+        System.out.println("결과 : " + add(result));
     }
 }
