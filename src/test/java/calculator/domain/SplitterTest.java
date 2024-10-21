@@ -1,5 +1,6 @@
 package calculator.domain;
 
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,33 +16,45 @@ class SplitterTest {
     }
 
     @Test
-    void 커스텀_구분자_추출() {
+    void 커스텀_구분자를_사용한_문자열_분리() {
         // given
         String input = "//;\n1;2;3";
         // when
-        String delimiter = splitter.extractDelimiter(input);
+        List<String> result = splitter.splitInputByDelimiter(input);
         // then
-        assertThat(delimiter).isEqualTo("[,:]|;");
+        assertThat(result).containsExactly("1", "2", "3");
     }
 
     @Test
-    void 기본_구분자가_사용() {
+    void 기본_구분자를_사용한_문자열_분리() {
         // given
         String input = "1,2:3";
         // when
-        String delimiter = splitter.extractDelimiter(input);
+        List<String> result = splitter.splitInputByDelimiter(input);
         // then
-        assertThat(delimiter).isEqualTo("[,:]");
+        assertThat(result).containsExactly("1", "2", "3");
     }
 
     @Test
     void 잘못된_커스텀_구분자_형식() {
         // given
-        String input = "//;\t1;2;";
+        String input = "//\n1,2,3";
         // when
-        assertThatThrownBy(() -> splitter.extractDelimiter(input))
+        assertThatThrownBy(() -> splitter.splitInputByDelimiter(input))
         // then
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(Validator.INVALID_DELIMITER_MSG);
     }
+
+    @Test
+    void 입력값이_비어있는_경우_예외() {
+        // given
+        String input = "   ";
+        // when
+        assertThatThrownBy(() -> splitter.splitInputByDelimiter(input))
+        // then
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(Validator.INVALID_INPUT_MSG);
+    }
+
 }
