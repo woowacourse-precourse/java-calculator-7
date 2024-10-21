@@ -33,3 +33,9 @@ out/
 
 ### Mac OS ###
 .DS_Store
+
+### Java ###
+*.class
+
+### others ###
+**/ex/
