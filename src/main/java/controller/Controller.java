@@ -19,20 +19,21 @@ public class Controller {
 
     public void processUserInput() {
         while (true) {
-            // 입력
-            String userInput = inputView.readInput();
+            try {
+                String userInput = inputView.readInput();
 
-            // "exit" 입력 시 프로그램 종료
-            if (userInput.equalsIgnoreCase("exit")) {
-                System.out.println("프로그램을 종료합니다.");
+                // "exit" 입력 시 프로그램 종료
+                if (userInput.equalsIgnoreCase("exit")) {
+                    System.out.println("프로그램을 종료합니다.");
+                    break;
+                }
+
+                int sum = calculator.processInputAndSum(userInput);
+                outputView.printResult(sum);
+            } catch (IllegalArgumentException error) {
+                System.out.println("에러: " + error.getMessage());
                 break;
             }
-
-            // 비즈니스 로직
-            int sum = calculator.processInputAndSum(userInput);
-
-            // 출력
-            outputView.printResult(sum);
         }
     }
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 import utils.Utils;
+import validator.Validator;
 
 public class Calculator {
 
@@ -42,6 +43,7 @@ public class Calculator {
     public String[] splitByDelimiter(String userInput, String customDelimiter) {
         String numbersPart = extractNumbersPart(userInput, customDelimiter);
         String delimiter = determineDelimiter(customDelimiter);
+        Validator.validateAllowedCharacters(numbersPart, customDelimiter);
         String[] splitNumbers = numbersPart.split(delimiter);
         return splitNumbers;
     }
