@@ -10,9 +10,9 @@ public class StringCalculator {
         String delimiter = ",|:";
 
         if (text.startsWith("//")) {
-            int delimiterIndex = text.indexOf("\n");
+            int delimiterIndex = text.indexOf("\\n");
             delimiter = text.substring(2, delimiterIndex);
-            text = text.substring(delimiterIndex + 1);
+            text = text.substring(delimiterIndex + 2);
         }
 
         String[] tokens = splitNumbers(text, delimiter);
