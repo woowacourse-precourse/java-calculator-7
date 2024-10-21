@@ -18,6 +18,7 @@ public class Application {
         } catch (IllegalArgumentException e) {
            // 예외 발생 시 프로그램 종료
             System.err.println(e);
+            throw(e);
         }
     }
 
@@ -32,7 +33,7 @@ public class Application {
 
         // 커스텀 구분자 처리
         if (input.startsWith("//")) {
-            Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
+            Matcher matcher = Pattern.compile("//(.)\\\\n(.*)").matcher(input);
             if (matcher.find()) {
                 delimiter = Pattern.quote(matcher.group(1)); // 커스텀 구분자를 추출
                 input = matcher.group(2); // 커스텀 구분자 이후의 숫자 문자열
@@ -63,6 +64,9 @@ public class Application {
             num = Integer.parseInt(number.trim()); // 문자열을 정수로 변환
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(); // 잘못된 값일 경우 예외 발생
+        }
+        if (num < 0){
+            throw new IllegalArgumentException();
         }
         return num;
     }
