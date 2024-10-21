@@ -14,6 +14,9 @@ public class StringCalculator {
         if (input.startsWith("//")) {
             int delimiterEndIndex = input.indexOf("\n");
             String customDelimiter = input.substring(2, delimiterEndIndex);
+            if (customDelimiter.length() != 1) {
+                throw new IllegalArgumentException("커스텀 구분자는 단일 문자여야 합니다.");
+            }
             separator = customDelimiter + "|,|:";
             input = input.substring(delimiterEndIndex + 1);
         }

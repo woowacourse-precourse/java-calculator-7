@@ -149,6 +149,19 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void testMultiCharacterCustomSeparatorThrowsException() {
+        assertSimpleTest(() -> {
+            // Given
+            StringCalculator calculator = new StringCalculator();
+            String input = "//;;\n1;2;3";
+
+            // When & Then
+            assertThatThrownBy(() -> calculator.add(input))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
