@@ -9,9 +9,17 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
 
+        try {
+            int result = calculate(input);
+            System.out.println("결과 : " + result);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static int calculate(String input) {
         if (input.trim().isEmpty()) {
-            System.out.println("결과 : 0");
-            return;
+            return 0;
         }
 
         // 입력 문자열에서 "\\n"을 "\n"으로 변환
@@ -26,26 +34,30 @@ public class Application {
         }
 
         String[] numbers = input.split(splitter);
-        int sum = 0;
 
-        try {
-            try {
-                for (String number : numbers) {
-                    int num = Integer.parseInt(number.trim());
-
-                    if (num < 0) {
-                        throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
-                    }
-                    sum += num;
-                }
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-        } catch (NumberFormatException e) {
-            System.out.println("유효하지 않은 입력입니다. 숫자만 포함해야 합니다.");
-            return;
-        }
-
-        System.out.println("결과 : " + sum);
+        return sumNumbers(numbers);
     }
+
+
+    public static int parseNumber(String number) {
+        try {
+            return Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("유효하지 않은 입력입니다. 숫자만 포함해야 합니다.");
+        }
+    }
+
+    public static int sumNumbers(String[] numbers) {
+        int sum = 0;
+        for (String number : numbers) {
+            int num = parseNumber(number.trim());
+
+            if (num < 0) {
+                throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+            }
+            sum += num;
+        }
+        return sum;
+    }
+
 }
