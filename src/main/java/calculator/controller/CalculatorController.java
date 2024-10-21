@@ -10,10 +10,10 @@ import calculator.view.CalculatorView;
 public class CalculatorController {
 
     private final Calculator calculator;
-    private final CalculatorView calcView;
+    private final CalculatorView calculatorView;
 
     public CalculatorController() {
-        this.calcView = new CalculatorView();
+        this.calculatorView = new CalculatorView();
         Validator validator = new Validator();
         DelimiterParser delimiterParser = new DelimiterParser();
         NumberConverter numberConverter = new NumberConverter();
@@ -23,8 +23,8 @@ public class CalculatorController {
 
 
     public void run() {
-        String input = calcView.getInput();
+        String input = calculatorView.getInput();
         int result = calculator.calculate(input);
-        calcView.displayResult(result);
+        calculatorView.displayResult(result);
     }//run
 }//class

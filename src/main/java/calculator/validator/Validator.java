@@ -11,11 +11,11 @@ public class Validator {
     private static final String EMPTY_NUMBER_ERROR_MESSAGE = "숫자가 입력되지 않았습니다.";
 
     public boolean inputValidate(String input) {
-        boolean chkEmpty = false;
+        boolean checkEmpty = false;
         if (input == null || input.isEmpty()) {
-            chkEmpty = true;
+            checkEmpty = true;
         }
-        return chkEmpty;
+        return checkEmpty;
     }//inputValidate
 
     public void numberValidate(String number) {

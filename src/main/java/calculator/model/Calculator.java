@@ -25,7 +25,7 @@ public class Calculator {
         return sum(numbers);
     }//calculate
 
-    public int sum(List<Integer> numbers) {
+    private int sum(List<Integer> numbers) {
         return numbers.stream()
                 .mapToInt(Integer::intValue)
                 .sum();
