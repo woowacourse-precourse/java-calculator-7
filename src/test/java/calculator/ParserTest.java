@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 class ParserTest {
     private Parser parser;
+    private Delimiter delimiter;
 
     @BeforeEach
     void resetResult() {
@@ -19,7 +20,7 @@ class ParserTest {
     @Test
     void startsWithCustomDelimiter() {
         //given
-        Delimiter delimiter = new CustomDelimiter();
+        delimiter = new CustomDelimiter();
         String input = delimiter.parseDelimiter("//?\\n1,2?3");
         String require = "6";
         //when
@@ -32,7 +33,7 @@ class ParserTest {
     @Test
     void startsWithPositiveNumber() {
         ///given
-        Delimiter delimiter = new DefaultDelimiter();
+        delimiter = new DefaultDelimiter();
         String input = delimiter.parseDelimiter("1,2,3:4");
         String require= "10";
         //when
