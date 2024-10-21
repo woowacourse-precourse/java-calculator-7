@@ -1,19 +1,13 @@
 package calculator;
 
 public class StringCalculator {
-    public int add(String input, String customDelimiter) {
+    public int add(String input, String delimiter) {
         // 입력값이 빈 문자열이거나 null인 경우 0 반환
         if (input == null || input.trim().isEmpty()) {
             return 0;
         }
 
-        // 쉼표와 콜론, 커스텀 문자를 포함하여 분리
-        String delimiter;
-        if (customDelimiter != null) {
-            delimiter = customDelimiter + "|,|:";
-        } else {
-            delimiter = ",|:";
-        }
+        System.out.println("사용할 구분자: " + delimiter); // 디버깅
 
         String[] numbers = input.split(delimiter);
 
@@ -21,7 +15,19 @@ public class StringCalculator {
         int sum = 0;
         for (String number : numbers) {
             // 문자열에 포함된 공백 제거
-            int num = Integer.parseInt(number.trim());
+            number = number.trim();
+
+            if (number.isEmpty()) {
+                continue;
+            }
+
+            int num;
+
+            try {
+                num = Integer.parseInt(number);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("잘못된 형식의 숫자입니다.");
+            }
 
             // 음수 예외 처리
             if (num < 0) {

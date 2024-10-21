@@ -27,7 +27,7 @@ public class DelimiterParser {
 
                 if (remainStart < input.length()) {
                     String remainString = input.substring(remainStart);
-                    String finalDelimiter = Pattern.quote(customDelimiter) + "|" + defaultDelimiter;
+                    String finalDelimiter = Pattern.quote(customDelimiter);
                     return new String[]{finalDelimiter, remainString};
 
                 } else {
