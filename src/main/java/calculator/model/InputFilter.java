@@ -2,6 +2,7 @@ package calculator.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -46,6 +47,6 @@ public class InputFilter {
 				numbers.add(Integer.parseInt(part));
 			});
 
-		return numbers;
+		return Collections.unmodifiableList(numbers);
 	}
 }
