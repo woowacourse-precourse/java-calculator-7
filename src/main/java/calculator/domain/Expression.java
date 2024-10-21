@@ -19,7 +19,7 @@ public class Expression {
         Delimiters.check(customDelimiters);
         Operands.check(operands);
 
-        delimiters = Delimiters.of(addDefaultDelimiters(DEFAULT_DELIMITERS));
+        delimiters = Delimiters.of(addDefaultDelimiters(customDelimiters));
         this.operands = operands;
     }
 
@@ -73,7 +73,7 @@ public class Expression {
     private static String buildDelimiterRegex(final Delimiters delimiters) {
         final StringBuilder sb = new StringBuilder();
 
-        final Set<String> delimiterSet = addDefaultDelimiters(delimiters.toSet());
+        final Set<String> delimiterSet = addDefaultDelimiters(delimiters);
 
         for (String delimiter : delimiterSet) {
             sb.append(Pattern.quote(delimiter));
@@ -83,9 +83,9 @@ public class Expression {
         return sb.toString();
     }
 
-    private static Set<String> addDefaultDelimiters(final Set<String> delimiters) {
+    private static Set<String> addDefaultDelimiters(final Delimiters delimiters) {
         Set<String> delimiterSet = new HashSet<>(DEFAULT_DELIMITERS);
-        delimiterSet.addAll(delimiters);
+        delimiterSet.addAll(delimiters.toSet());
 
         return delimiterSet;
     }
