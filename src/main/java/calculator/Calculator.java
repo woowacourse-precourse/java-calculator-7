@@ -1,13 +1,14 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import utils.NumberUtils;
 
 public class Calculator {
     private static final String INPUT_MESSAGE = "덧셈할 문자열을 입력해주세요.\n";
     private static final String OUTPUT_MESSAGE = "결과 : ";
 
     private String input;
-    private int result = 0;
+    private double result = 0;
     private String[] separators = {",", ":"};
     private String[] numbers;
 
@@ -65,9 +66,9 @@ public class Calculator {
         }
         for (String number : numbers) {
             try {
-                int numberInt = Integer.parseInt(number);
-                if (isPositiveNumber(numberInt)) {
-                    result = result + Integer.parseInt(number);
+                double numberDouble = Double.parseDouble(number);
+                if (NumberUtils.isPositiveNumber(numberDouble)) {
+                    result = result + numberDouble;
                 }
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException();
@@ -76,14 +77,11 @@ public class Calculator {
         printResult();
     }
 
-    private boolean isPositiveNumber(int number) {
-        if (number <= 0) {
-            throw new IllegalArgumentException();
-        }
-        return true;
-    }
-
     private void printResult() {
-        System.out.println(OUTPUT_MESSAGE + result);
+        if (NumberUtils.isInteger(result)) {
+            System.out.println(OUTPUT_MESSAGE + (int) result);
+        } else {
+            System.out.println(OUTPUT_MESSAGE + result);
+        }
     }
 }

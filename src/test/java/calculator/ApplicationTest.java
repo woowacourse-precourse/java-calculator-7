@@ -65,6 +65,18 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 실수_입력_테스트() {
+        run("1.5,2.5");
+        assertThat(output()).contains("결과 : 4");
+
+        run("1.5,2.3");
+        assertThat(output()).contains("결과 : 3.8");
+
+        run("//.\\n1.5,2.3");
+        assertThat(output()).contains("결과 : 11");
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
