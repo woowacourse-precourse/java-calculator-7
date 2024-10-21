@@ -1,138 +1,220 @@
 package calculator;
 
+import calculator.Controller.CalculatorController;
+import calculator.Controller.InputController;
+import calculator.Model.CalculatorModel;
+import calculator.View.CalculatorView;
+import calculator.vaildator.InputValidator;
+import calculator.vaildator.SeparatorHandler;
 import org.junit.jupiter.api.Test;
+
+import java.io.*;
+
 import static org.assertj.core.api.Assertions.*;
 
 class ApplicationTest {
 
-    // CustomSeparator() 메소드 테스트
     @Test
-    void 커스텀구분자_유효한경우() {
+    void 유효한_입력을_처리하는_테스트() {
+        CalculatorModel model = new CalculatorModel();
+        InputController inputController = new InputController();
+        CalculatorView view = new CalculatorView() {
+            @Override
+            public String getInput() {
+                return "1,2,3"; // 테스트를 위한 입력
+            }
+
+            @Override
+            public void showResult(int sum) {
+                assertThat(sum).isEqualTo(6); // 결과가 올바른지 확인
+            }
+        };
+
+        CalculatorController controller = new CalculatorController(model, view, inputController);
+        controller.run();
+    }
+
+    @Test
+    void 빈_입력을_처리하는_테스트() {
+        CalculatorModel model = new CalculatorModel();
+        InputController inputController = new InputController();
+        CalculatorView view = new CalculatorView() {
+            @Override
+            public String getInput() {
+                return ""; // 빈 입력 처리
+            }
+
+            @Override
+            public void showResult(int sum) {
+                assertThat(sum).isEqualTo(0); // 빈 입력일 때 0 반환
+            }
+        };
+
+        CalculatorController controller = new CalculatorController(model, view, inputController);
+        controller.run();
+    }
+
+    @Test
+    void 커스텀_구분자가_있는_경우_처리_테스트() {
+        InputController inputController = new InputController();
         String input = "//.\\n1.2.3";
-        char result = calculator.Application.CustomSeparator(input);
-        assertThat(result).isEqualTo('.');
+
+        String[] result = inputController.processInput(input);
+
+        assertThat(result).containsExactly("1", "2", "3");
     }
 
     @Test
-    void 커스텀구분자_잘못된경우() {
-        String input = "//l\n1,2,3";
-        assertThatThrownBy(() -> calculator.Application.CustomSeparator(input))
+    void 기본_구분자로_입력_처리_테스트() {
+        InputController inputController = new InputController();
+        String input = "1,2:3";
+
+        String[] result = inputController.processInput(input);
+
+        assertThat(result).containsExactly("1", "2", "3");
+    }
+
+    @Test
+    void 잘못된_구분자_형식을_처리하는_테스트() {
+        InputController inputController = new InputController();
+        String input = "/;\n1;2;3"; // 잘못된 구분자 형식
+
+        assertThatThrownBy(() -> inputController.processInput(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("구분자를 정확하게 입력해주세요.");
     }
 
-    // extractSeparator() 메소드 테스트
     @Test
-    void 구분자추출_유효한경우() {
-        String input = "//-\\n1-2";
-        char separator = calculator.Application.extractSeparator(input);
-        assertThat(separator).isEqualTo('-');
+    void 유효한_입력값_검증_테스트() {
+        InputValidator inputValidator = new InputValidator();
+        String[] inputArr = {"1", "2", "3"};
+
+        inputValidator.validateInputArray(inputArr); // 예외가 발생하지 않음
     }
 
     @Test
-    void 구분자추출_잘못된경우() {
-        String input = "//a1,2";
-        assertThatThrownBy(() -> calculator.Application.extractSeparator(input))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("구분자를 정확하게 입력해주세요.");
-    }
+    void 빈값_입력시_예외처리_테스트() {
+        InputValidator inputValidator = new InputValidator();
+        String[] inputArr = {"", "2", "3"};
 
-    // validateSeparator() 메소드 테스트
-    @Test
-    void 구분자_유효성검사() {
-        assertThatThrownBy(() -> calculator.Application.validateSeparator(','))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("기본 구분자입니다.");
-
-        assertThatThrownBy(() -> calculator.Application.validateSeparator(';'))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("기본 구분자입니다.");
-
-        assertThatThrownBy(() -> calculator.Application.validateSeparator('1'))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("숫자는 구분자로 사용할 수 없습니다.");
-    }
-
-    // InputArr() 메소드 테스트
-    @Test
-    void 입력배열변환_기본구분자() {
-        String input = "1,2;3";
-        String[] expectedArr = {"1", "2", "3"};
-        String[] result = calculator.Application.InputArr(input);
-        assertThat(result).isEqualTo(expectedArr);
-    }
-
-    @Test
-    void 입력배열변환_사용자정의구분자() {
-        String input = "//l\\n1l2l3";
-        String[] expectedArr = {"1", "2", "3"};
-        String[] result = calculator.Application.InputArr(input);
-        assertThat(result).isEqualTo(expectedArr);
-    }
-
-    // InputException() 메소드 테스트
-    @Test
-    void 입력예외_빈값포함() {
-        String[] invalidInput = {"", "2", "3"};
-        assertThatThrownBy(() -> calculator.Application.InputException(invalidInput))
+        assertThatThrownBy(() -> inputValidator.validateInputArray(inputArr))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("숫자 입력이 제대로 되지 않았습니다.");
     }
 
     @Test
-    void 입력예외_0포함() {
-        String[] invalidInput = {"0", "2", "3"};
-        assertThatThrownBy(() -> calculator.Application.InputException(invalidInput))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("0은 입력할 수 없습니다.");
-    }
+    void 음수값_입력시_예외처리_테스트() {
+        InputValidator inputValidator = new InputValidator();
+        String[] inputArr = {"-1", "2", "3"};
 
-    @Test
-    void 입력예외_0여러개_포함() {
-        String[] invalidInput = {"000", "2", "3"};
-        assertThatThrownBy(() -> calculator.Application.InputException(invalidInput))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("0은 입력할 수 없습니다.");
-    }
-
-    @Test
-    void 입력예외_음수인경우() {
-        String[] invalidInput = {"-3", "2", "3"};
-        assertThatThrownBy(() -> calculator.Application.InputException(invalidInput))
+        assertThatThrownBy(() -> inputValidator.validateInputArray(inputArr))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("음수는 입력할 수 없습니다.");
     }
 
     @Test
-    void 입력예외_숫자_구분자외문자() {
-        String[] invalidInput = {"a", "2", "3"};
-        assertThatThrownBy(() -> calculator.Application.InputException(invalidInput))
+    void 숫자_0_입력시_예외처리_테스트() {
+        InputValidator inputValidator = new InputValidator();
+        String[] inputArr = {"0", "2", "3"};
+
+        assertThatThrownBy(() -> inputValidator.validateInputArray(inputArr))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("0은 입력할 수 없습니다.");
+    }
+
+    @Test
+    void 잘못된_문자가_포함된_입력_처리_테스트() {
+        InputValidator inputValidator = new InputValidator();
+        String[] inputArr = {"a", "2", "3"};
+
+        assertThatThrownBy(() -> inputValidator.validateInputArray(inputArr))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("숫자, 구분자 이외의 문자가 들어왔습니다.");
     }
 
     @Test
-    void 입력예외_너무큰숫자() {
-        String[] invalidInput = {"9999999999999999999", "2", "3"};
-        assertThatThrownBy(() -> calculator.Application.InputException(invalidInput))
+    void 커스텀_구분자_추출_테스트() {
+        SeparatorHandler separatorHandler = new SeparatorHandler();
+        String input = "//;\\n1;2;3";
+
+        String separator = separatorHandler.getCustomSeparator(input);
+
+        assertThat(separator).isEqualTo(";");
+    }
+
+    @Test
+    void 잘못된_구분자_형식_처리_테스트() {
+        SeparatorHandler separatorHandler = new SeparatorHandler();
+        String input = "/;\n1;2;3"; // 잘못된 형식
+
+        assertThatThrownBy(() -> separatorHandler.getCustomSeparator(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("너무 큰 숫자는 입력할 수 없습니다.");
+                .hasMessage("구분자를 정확하게 입력해주세요.");
     }
 
-    // IntArr() 메소드 테스트
     @Test
-    void 문자열배열을_숫자배열로변환() {
-        String[] inputArr = {"2", "2", "3"};
-        int[] expectedArr = {2, 2, 3};
-        int[] result = calculator.Application.IntArr(inputArr);
-        assertThat(result).isEqualTo(expectedArr);
+    void 커스텀_구분자로_입력_분리_테스트() {
+        SeparatorHandler separatorHandler = new SeparatorHandler();
+        String separator = "--";
+        String input = "1--2--3";
+
+        String[] result = separatorHandler.splitInput(input, separator);
+
+        assertThat(result).containsExactly("1", "2", "3");
     }
 
-    // Sum() 메소드 테스트
     @Test
-    void 합계계산() {
-        int[] inputArr = {2, 3, 4};
-        int result = calculator.Application.Sum(inputArr);
-        assertThat(result).isEqualTo(9);
+    void 잘못된_구분자_유효성_검증_테스트() {
+        SeparatorHandler separatorHandler = new SeparatorHandler();
+
+        assertThatThrownBy(() -> separatorHandler.validateSeparator(","))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("기본 구분자를 커스텀 구분자로 사용할 수 없습니다.");
+    }
+
+    @Test
+    void 문자열을_정수_배열로_변환하는_테스트() {
+        CalculatorModel model = new CalculatorModel();
+        String[] inputArr = {"1", "2", "3"};
+
+        int[] result = model.convertToIntArray(inputArr);
+
+        assertThat(result).containsExactly(1, 2, 3);
+    }
+
+    @Test
+    void 숫자를_더하는_로직_테스트() {
+        CalculatorModel model = new CalculatorModel();
+        int[] inputArr = {1, 2, 3};
+
+        int result = model.sum(inputArr);
+
+        assertThat(result).isEqualTo(6);
+    }
+
+    @Test
+    void 결과_출력_테스트() {
+        CalculatorView view = new CalculatorView();
+
+        // 콘솔 출력을 모니터링
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        view.showResult(6);
+
+        assertThat(outContent.toString()).isEqualTo("결과 : 6");
+    }
+
+    @Test
+    void 오류_메시지_출력_테스트() {
+        CalculatorView view = new CalculatorView();
+
+        // 콘솔 출력을 모니터링
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        view.showError("에러 메시지");
+
+        assertThat(outContent.toString().trim()).isEqualTo("오류: 에러 메시지");
     }
 }
