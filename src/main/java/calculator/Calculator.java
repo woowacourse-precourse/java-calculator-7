@@ -8,7 +8,7 @@ public class Calculator {
     private String delimiter; // 기본 구분자
 
     public Calculator(String userInput) {
-        this(userInput, ",|:+");
+        this(userInput, ",|:");
     }
 
     public Calculator(String userInput, String delimiter) {
@@ -78,7 +78,7 @@ public class Calculator {
                 }
 
                 sum += value;
-                
+
                 if (sum < 0) {
                     throw new IllegalArgumentException("잘못된 입력: 더하는 과정에서 정수 표현범위를 넘어섰습니다. ");
                 }
