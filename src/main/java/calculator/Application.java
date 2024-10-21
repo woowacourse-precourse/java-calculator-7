@@ -16,9 +16,9 @@ public class Application {
 
         Parser parser = new StringDelimiterParser(DelimiterConfig.DEFAULT);
         Operator operator = new AdditionOperator();
-        StringAdditionCalculator stringAdditionCalculator = new StringAdditionCalculator(operator, parser);
+        StringCalculator stringCalculator = new StringAdditionCalculator(operator, parser);
 
-        BigDecimal result = stringAdditionCalculator.calculate(input);
+        BigDecimal result = stringCalculator.calculate(input);
         ResultPrinter.printResult(result);
     }
 }
