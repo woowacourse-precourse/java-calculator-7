@@ -10,16 +10,14 @@ public class Parser {
     private static final String DEFAULT_DELIMITERS = ",|:";
 
     public Tokens parse(String input) {
-        String numbers = input;
 
         if(input.startsWith("//")){
-            return parseCustomDelimiter(input);
+            return parseTokens(parseCustomDelimiter(input));
         }
-
         return parseTokens(new Calculator(input));
     }
 
-    private Tokens parseCustomDelimiter(String input) {
+    private Calculator parseCustomDelimiter(String input) {
         String delimiter =  DEFAULT_DELIMITERS;
         String numbers = input;
 
@@ -29,7 +27,7 @@ public class Parser {
             delimiter =  DEFAULT_DELIMITERS + "|" + customDelimiter;
             numbers = matcher.group(2);
 
-            return parseTokens(new Calculator(delimiter, numbers));
+            return new Calculator(delimiter, numbers);
         }else{
             throw new IllegalArgumentException("잘못된 구분자 형식입니다.");
         }
