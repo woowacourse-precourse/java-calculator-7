@@ -15,14 +15,10 @@ public class CalculatorController {
             Calculator calculator = new Calculator();
             ExceptionHandler exceptionHandler = new ExceptionHandler();
             CalculatorService service = new CalculatorService(calculator, exceptionHandler);
-
             service.getInputValues(input);
             service.validateInput();
-
-            // 계산 결과 출력
             service.sumOfList();
             service.printResult();
-
     }
 
 }
