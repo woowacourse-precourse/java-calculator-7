@@ -13,7 +13,6 @@ public class Converter {
         String token = numbersToken.getToken();
 
         String[] extractNumbers = token.split(delimiter.getDelimiter(), NUMBER_SPLIT_LIMIT.getNumber());
-        ;
 
         Numbers numbers = new Numbers();
 

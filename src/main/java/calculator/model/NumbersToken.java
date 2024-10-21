@@ -8,7 +8,6 @@ public class NumbersToken {
         this.token = token;
     }
 
-    // 토큰 값이 비어있는지 확인하는 메서드
     public boolean isEmpty() {
         return token.isEmpty();
     }
