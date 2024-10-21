@@ -7,6 +7,7 @@ import java.util.Arrays;
 public class Application {
     public static void main(String[] args) {
         Application application = new Application();
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
         int result = application.calculate(input);
         System.out.println("결과 : " + result);
