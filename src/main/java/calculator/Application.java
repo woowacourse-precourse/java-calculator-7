@@ -19,6 +19,8 @@ public class Application {
         delimiters.add((int)':');
         delimiters.add((int)',');
 
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+
         String line = Console.readLine();
 
         if (Objects.isNull(line)) {
