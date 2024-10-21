@@ -26,8 +26,9 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    //기본 구분자 추출되는지 테스트
     @Test
-    void getDefaultDelimiters_CommaAndColon_EqualTwoList() {
+    void 기본_구분자_추출() {
         assertSimpleTest(() -> {
             List<String> expectedDelimiter = List.of(":", ",");
             List<String> resultDelimiter = DefaultDelimiter.getDefaultDelimiters();
@@ -36,6 +37,71 @@ class ApplicationTest extends NsTest {
             }
         });
     }
+    
+    @Test
+    void 커스텀_구분자_숫자() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//1\n0"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 구분자_중복_입력() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//..\\n1.2.3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 구분자_메타문자_입력() {
+        assertSimpleTest(() -> {
+            run("//[]\\n1[2]3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 구분자_알파벳_입력() {
+        assertSimpleTest(() -> {
+            run("//n\\n1n2n3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 구분자_여러개_입력() {
+        assertSimpleTest(() -> {
+            run("//n%i\\n1n2%3i4");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
+    @Test
+    void 빈_문자열_입력() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException(""))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 숫자만_입력() {
+        assertSimpleTest(() -> {
+            run("123");
+            assertThat(output()).contains("결과 : 123");
+        });
+    }
+
+    @Test
+    void 기본_구분자_계산() {
+        assertSimpleTest(() -> {
+            run("//[\\n1,2:3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
 
     @Override
     public void runMain() {
