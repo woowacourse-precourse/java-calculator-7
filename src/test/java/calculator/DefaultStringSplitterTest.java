@@ -15,7 +15,17 @@ public class DefaultStringSplitterTest {
 
     @ParameterizedTest
     @CsvSource({
-            "'6:3:2', '6', '3', '2'",
+            "'1,2'",
+            "'1:2:3'",
+            "'45,67:89'"
+    })
+    void 기본_문자열_지원확인(String input) {
+        Assertions.assertTrue(stringSplitter.canSupport(input));
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "6:3:2, '6', '3', '2'",
             "'12,34,56', '12', '34', '56'",
             "'100:200,300', '100', '200', '300'",
     })

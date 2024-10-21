@@ -4,6 +4,7 @@ import calculator.domain.SumCalculator;
 import calculator.domain.stringsplitter.CustomStringSplitter;
 import calculator.domain.stringsplitter.DefaultStringSplitter;
 import calculator.domain.StringSplitterManager;
+import camp.nextstep.edu.missionutils.Console;
 
 import java.util.List;
 
@@ -25,5 +26,7 @@ public class Calculator {
         String result = sumCalculator.calculateSum();
 
         view.printOutput(result);
+
+        Console.close();
     }
 }

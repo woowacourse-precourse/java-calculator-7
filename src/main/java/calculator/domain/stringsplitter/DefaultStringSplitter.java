@@ -10,9 +10,9 @@ public class DefaultStringSplitter implements StringSplitter {
 
     @Override
     public boolean canSupport(String str) {
-        Pattern pattern = Pattern.compile("^[0-9]+([" + DEFAULT_DELIMITER + "][0-9]+)?");
+        Pattern pattern = Pattern.compile("^[0-9]+([" + DEFAULT_DELIMITER + "][0-9]+)*$");
         Matcher matcher = pattern.matcher(str);
-        return matcher.matches();
+        return matcher.find();
     }
 
     @Override

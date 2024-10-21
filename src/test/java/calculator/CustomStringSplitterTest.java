@@ -14,8 +14,19 @@ class CustomStringSplitterTest {
 
     @ParameterizedTest
     @CsvSource({
-            "'//*\n2*23*4', '2', '23', '4'",
-            "'//i\n2i23i4', '2', '23', '4'"
+            "'//;\\\n1'",
+            "'//;\\n1'",
+            "'//;\n1'",
+            "'///;\n1'"
+    })
+    void 커스텀_문자열_지원확인(String input) {
+        Assertions.assertTrue(stringSplitter.canSupport(input));
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "'//*\\n2\23*4', '2', '23', '4'",
+            "'///i\n2/23i4', '2', '23', '4'"
     })
     void 커스텀_문자열_나누기(String input, String expected1, String expected2, String expected3) {
         List<String> strings = stringSplitter.splitString(input);

@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 public class CustomStringSplitter implements StringSplitter {
 
     private static final String CUSTOM_DELIMITER_HEADER = "\\/\\/";
-    private static final String CUSTOM_DELIMITER_FOOTER = "\\\n";
+    private static final String CUSTOM_DELIMITER_FOOTER = "[(\n)(\\\\n)]";
 
     @Override
     public boolean canSupport(String str) {
@@ -37,6 +37,7 @@ public class CustomStringSplitter implements StringSplitter {
         String conjoinedDelimiter = DEFAULT_DELIMITER + customDelimiter;
 
         String numbersAndDelimiter = matcher.group(2);
+        numbersAndDelimiter = numbersAndDelimiter.replace("\\", ":");
         List<String> result = splitSubstring(conjoinedDelimiter, numbersAndDelimiter);
         validateContinuousDelimiter(result, str);
 
