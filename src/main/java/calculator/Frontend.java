@@ -6,9 +6,9 @@ public class Frontend {
   // 출력 테스트 작성을 위한 로직 작성
   private Calculator calculator;
   private String readLine;
-  public Frontend(String readLine) {
+  public Frontend() {
 
-    calculator = new Calculator(readLine);
+    calculator = new Calculator();
   }
 
   // 전달받은 계산 결과를 출력한다

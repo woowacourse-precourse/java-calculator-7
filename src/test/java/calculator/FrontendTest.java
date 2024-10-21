@@ -10,13 +10,7 @@ import org.junit.jupiter.api.Test;
 
 class FrontendTest {
 
-  private Frontend frontend;
-  private PrintStream printStream = System.out;
 
-  @AfterEach
-  void tearDown() {
-    System.setOut(System.out);
-  }
 
   //  java.lang.NullPointerException at FrontendTest.java:28
   // java.lang.NullPointerException: Cannot invoke "calculator.Frontend.accessTarget()" because "this.frontend" is null
@@ -24,9 +18,14 @@ class FrontendTest {
   @Test
   public void accessResult() throws Exception{
       //given
-      int expect = 10;
+      int expect = 21;
+      String target = "1, 2, 3, 4, 5";
 
       //when
+    Calculator calculator = new Calculator();
+    calculator.calculating(target);
+    // "calculator.Frontend.accessTarget()" because "this.frontend" is null
+    Frontend frontend = new Frontend();
       int actual = frontend.accessTarget();
 
     //then

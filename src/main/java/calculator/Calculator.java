@@ -6,7 +6,7 @@ import static java.lang.String.valueOf;
 
 public class Calculator {
 
-  public Calculator(String readLine) {
+  public Calculator() {
     this.target = target;
   }
 

@@ -31,7 +31,7 @@ class CalculatorTest {
   }
 
 
-  // java.lang.IllegalArgumentException at CalculatorTest.java:45
+
   @Test
   public void 유효_문자열이_입력되면_계산_결과를_전달한다() throws Exception{
     //given
@@ -42,7 +42,7 @@ class CalculatorTest {
     String readLine = scanner.nextLine();
 
     // when
-    Calculator calculator = new Calculator(input);
+    Calculator calculator = new Calculator();
     int actual = calculator.calculating(input);
 
     // then
@@ -63,7 +63,7 @@ class CalculatorTest {
      String NoMoreWoowa = "우아한 테크코스 탄핵 시위";
      String failConcert = "우아콘 추첨 실패";
     String actual = "-1,2,3";
-    Calculator calculator = new Calculator(deleteBamin);
+    Calculator calculator = new Calculator();
       //then
       assertThrows(IllegalArgumentException.class, () -> {
       calculator.calculating(deleteBamin);
@@ -102,8 +102,8 @@ class CalculatorTest {
 
     // "this.calculator" is null
     // "calculator.Calculator.calculating(String)" because "this.calculator" is null
-    Calculator customCalculator = new Calculator(customDelimeter);
-    Calculator defaultCalculator = new Calculator(defaultDelimeter);
+    Calculator customCalculator = new Calculator();
+    Calculator defaultCalculator = new Calculator();
 
 //    int calculateCustom = customCalculator.calculating(customDelimeter);
     int calculateDefault = defaultCalculator.calculating(defaultDelimeter);
