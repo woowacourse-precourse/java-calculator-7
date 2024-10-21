@@ -36,19 +36,14 @@ public class StringCalculator {
     }
 
     public void run(final Delimiters defaultDelimiters) {
-        // 0. 입력한다.
         String input = consoleInputHandler.getUserInput();
 
-        // 1.커스텀 구분자를 추출한다.
         Delimiters delimiters = delimiterExtractor.extractDelimitersFrom(input, defaultDelimiters);
 
-        //2. 구분자를 기준으로 문자열을 추출한다.
         List<String> splitInput = splitter.splitByDelimiters(input, delimiters);
 
-        //3. 추출한 문자열을 숫자로 변환한다.
         List numbers = numberConvertible.convertStringToNumber(splitInput);
 
-        // 4. 구한 숫자들을 더한 값을 출력한다.
         consoleOutputHandler.printResult(addable.addNumbers(numbers));
     }
 
