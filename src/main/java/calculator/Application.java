@@ -39,7 +39,6 @@ public class Application {
         return calculate(num);
     }
     
-    
     private static int calculate(String[] num) {
         int sum = 0;
         for (String n : num) {
@@ -50,8 +49,16 @@ public class Application {
         }
         return sum;
     }
-
-
-
-   
+    
+    private static int exceptionHandle(String num) {
+        try {
+            int intNum = Integer.parseInt(num);
+            if (intNum < 0) {
+                throw new IllegalArgumentException("음수는 입력할 수 없습니다: " + num);
+            }
+            return intNum;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("잘못된 숫자 형식입니다: " + num);
+        }
+    }  
 }
