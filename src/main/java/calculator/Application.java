@@ -23,9 +23,9 @@ public class Application {
         //구분자 파악하여 저장, 구분자 목록 배열 리턴
         char[] delims = getDelim(input);
         // 문자열에서 숫자들 분류해내서 배열에 저장하기
-        getNumbers(input, delims);
+        List<Integer> numbers = getNumbers(input, delims);
         // 배열에 저장된 숫자들 모두 더하기
-        answer = calc();
+        answer = calc(numbers);
         return answer;
     }
 
@@ -50,7 +50,6 @@ public class Application {
     }
 
     public static List<Integer> getNumbers(String input, char[] delims) {
-        // 문자열에서 숫자들 분류해내서 배열에 저장하기
         List<Integer> numbersList = new ArrayList<Integer>();
         String splitter = "";
         for (char c: delims) {
@@ -66,15 +65,14 @@ public class Application {
             int num = Integer.parseInt(strNum);
             numbersList.add(num);
         }
-        for (Integer num: numbersList) {
-            System.out.println(num);
-        }
         return numbersList;
     }
 
-    public static int calc() {
+    public static int calc(List<Integer> numbers) {
         int ans = 0;
-
+        for (Integer num: numbers) {
+            ans += num;
+        }
         return ans;
     }
 }
