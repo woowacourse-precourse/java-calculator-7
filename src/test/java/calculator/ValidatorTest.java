@@ -13,7 +13,7 @@ public class ValidatorTest {
 
         // When & Then : Validator 실행 시 예외가 발생하지 않으면 성공
         Validator validator = new Validator();
-        assertDoesNotThrow(() -> validator.validateDefaultDelimiters(input));
+        assertDoesNotThrow(() -> validator.validateInput(input));
     }
 
     @Test
@@ -23,6 +23,6 @@ public class ValidatorTest {
 
         // When & Then : Validator 실행 시 예외가 발생하지 않으면 성공
         Validator validator = new Validator();
-        assertDoesNotThrow(() -> validator.validateCustomDelimiters(input));
+        assertDoesNotThrow(() -> validator.validateInput(input));
     }
 }
