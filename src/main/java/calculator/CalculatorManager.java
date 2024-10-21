@@ -35,6 +35,9 @@ public class CalculatorManager {
         if (customDelimiter.isBlank()){
             throw new IllegalArgumentException("커스텀 구분자는 공백일 수 없습니다.");
         }
+        if (customDelimiter.length() > 1){
+            throw new IllegalArgumentException("커스텀 구분자는 문자열일 수 없습니다");
+        }
         // 구분자 이후 숫자들 추출
         String numberString = input.substring(customIndex + CUSTOM_DELIMITER_SURFIX.length());
         String escapedDelimiter = Pattern.quote(customDelimiter);
