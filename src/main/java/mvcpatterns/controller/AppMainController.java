@@ -36,6 +36,12 @@ public class AppMainController {
             throw new IllegalArgumentException("Input string is empty. please check input");
         }
 
+        final int maxLength = 300;
+
+        if (input.length() >= maxLength) {
+            throw new IllegalArgumentException("Input is too long.");
+        }
+
         //validate Whether input is utf-8 endcoded or not
         try {
             byte[] utf8Bytes = input.getBytes(StandardCharsets.UTF_8);

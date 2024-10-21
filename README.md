@@ -29,6 +29,7 @@
 
 - provide interface to user
 - manage all sub-controller which has specific task responsibility
+- validate input string whether input satisfies basic format.
 
 ### ParsingController
 
