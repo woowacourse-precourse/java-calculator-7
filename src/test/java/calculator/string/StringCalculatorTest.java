@@ -52,4 +52,11 @@ class StringCalculatorTest {
         assertThat(calculator.add("1,2:3")).isEqualTo(6);
         assertThat(calculator.add("1:2,3:4,5")).isEqualTo(15);
     }
+
+    @Test
+    void 커스텀_구분자_구분된_숫자_더하기() {
+        assertThat(calculator.add("//;\n1;2;3")).isEqualTo(6);
+        assertThat(calculator.add("//|\n1|2|3")).isEqualTo(6);
+        assertThat(calculator.add("//sep\n1sep2sep3")).isEqualTo(6);
+    }
 }
