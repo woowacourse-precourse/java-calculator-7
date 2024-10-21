@@ -88,6 +88,14 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 구분자가_아닌_문자포함_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1:2,3.4"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
 
 
 
