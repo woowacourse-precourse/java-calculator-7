@@ -65,13 +65,16 @@ public class Parser {
         if (inputArray[index] != '/') {
             throw new IllegalArgumentException("'/'다음에는 '/'가 입력되야 한다");
         }
+
         index++;
         char separator = inputArray[index];
-        if (Character.isDigit(separator) || Character.isAlphabetic(separator)) {
-            throw new IllegalArgumentException("숫자나 알파벳은 구분자가 될 수 없다");
+        if (Character.isDigit(separator) || Character.isAlphabetic(separator) || separator == '/'
+                || separator == '\\') {
+            throw new IllegalArgumentException("숫자와 알파벳, 문자 '/', 문자 '\\' 는 구분자가 될 수 없다");
         }
-        index++;
+        separators.add(separator);
 
+        index++;
         if (inputArray[index] != '\\') {
             throw new IllegalArgumentException("커스텀 구분자 입력 후에는 '\\' 가 입력되어야 한다");
         }
@@ -80,7 +83,6 @@ public class Parser {
         if (inputArray[index] != 'n') {
             throw new IllegalArgumentException("'\\'가 입력된 후에는 'n'이 입력되어야 한다");
         }
-        separators.add(separator);
         index++;
         return index;
     }

@@ -40,7 +40,7 @@ public class ExceptionTest {
         Throwable thrown = catchThrowable(() -> parser.parse(inputString));
         //then
         Assertions.assertThat(thrown).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("숫자나 알파벳은 구분자가 될 수 없다");
+                .hasMessage("숫자와 알파벳, 문자 '/', 문자 '\\' 는 구분자가 될 수 없다");
 
     }
 
@@ -67,5 +67,57 @@ public class ExceptionTest {
         Assertions.assertThat(thrown).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("'\\'가 입력된 후에는 'n'이 입력되어야 한다");
     }
+
+    @Test
+    public void 커스텀구분자예외처리테스트5() throws Exception {
+        //given
+        String inputString = "///\\n1/2,3";
+        Parser parser = new Parser();
+        //when
+        Throwable thrown = catchThrowable(() -> parser.parse(inputString));
+        //then
+        Assertions.assertThat(thrown).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("숫자와 알파벳, 문자 '/', 문자 '\\' 는 구분자가 될 수 없다");
+
+    }
+
+    @Test
+    public void 커스텀구분자예외처리테스트6() throws Exception {
+        //given
+        String inputString = "//\\\n1/2,3";
+        Parser parser = new Parser();
+        //when
+        Throwable thrown = catchThrowable(() -> parser.parse(inputString));
+        //then
+        Assertions.assertThat(thrown).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("숫자와 알파벳, 문자 '/', 문자 '\\' 는 구분자가 될 수 없다");
+
+    }
+    //
+//    @Test
+//    public void 커스텀구분자예외처리테스트6() throws Exception {
+//        //given
+//        String inputString = "//;$\\n1;2,3$4";
+//        //when
+//        Parser parser = new Parser();
+//        parser.parse(inputString);
+//        List<Integer> nums = parser.getNums();
+//        int sum = Calculator.sum(nums);
+//        //then
+//        Assertions.assertThat(sum).isEqualTo(10);
+//    }
+//
+//
+//    @Test
+//    public void 커스텀구분자예외처리테스트8() throws Exception {
+//        //given
+//        String inputString = "//$\\1;2,3";
+//        Parser parser = new Parser();
+//        //when
+//        Throwable thrown = catchThrowable(() -> parser.parse(inputString));
+//        //then
+//        Assertions.assertThat(thrown).isInstanceOf(IllegalArgumentException.class)
+//                .hasMessage("'\\'가 입력된 후에는 'n'이 입력되어야 한다");
+//    }
 
 }
