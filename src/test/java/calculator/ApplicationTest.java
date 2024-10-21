@@ -98,6 +98,80 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 커스텀_구분자_사용_빈문자열() {
+        assertSimpleTest(() -> {
+            run("//;\\n");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용_구분자가_숫자인_경우() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("//1\\n1,2,3"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용_구분자가_이모지인_경우() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("//❤️\\n1❤️2❤️3"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용_구분자가_2자리이상_숫자인_경우() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("//12\\n1,2,3"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용_구분자가_여러개인_경우() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("//;*\\n1;2;*3"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용_구분자가_백슬래시인_경우() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("//\\\\n1\\2\\3"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용_구분자가_입력되지_않은_경우() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("//\\n1,2,3"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용_기본_구분자도_사용하는_경우() {
+        assertSimpleTest(() -> {
+            run("//;\\n1,2:3;4");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용_올바른_구분자_패턴이_아닌_경우() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("//;\\1,2,3"))
+                    .isInstanceOf(IllegalArgumentException.class);
+            assertThatThrownBy(() -> runException("//;\\nn1,2,3"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+    }
+
+    @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("-1,2,3"))

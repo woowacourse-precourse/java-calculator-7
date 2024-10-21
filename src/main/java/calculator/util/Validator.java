@@ -19,4 +19,8 @@ public class Validator {
     public static boolean checkEndsWithNumber(String expression) {
         return expression.matches(".*\\d$");
     }
+
+    public static boolean checkValidCustomDelimiter(String expression) {
+        return expression.matches("^//.\\\\n.*");
+    }
 }

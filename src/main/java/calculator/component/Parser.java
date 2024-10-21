@@ -14,6 +14,14 @@ public class Parser {
     }
 
     public List<Integer> parse() {
+        if (formula.isBlank()) {
+            return List.of(0);
+        }
+
+        if (!Validator.checkEndsWithNumber(formula)) {
+            throw new IllegalArgumentException();
+        }
+
         return Arrays.stream(formula.split(delimiter.toString()))
                 .map(Validator::checkNumeric)
                 .map(Integer::parseInt)
@@ -22,19 +30,22 @@ public class Parser {
     }
 
     private String extractFormula(String expression) {
-        if (!Validator.checkEndsWithNumber(expression)) {
-            throw new IllegalArgumentException();
+        String formula = expression;
+        if (checkCustomDelimiter(formula)) {
+            formula = expression.substring(5);
         }
 
-        if (checkCustomDelimiter(expression)) {
-            return expression.substring(5);
-        }
-
-        return expression;
+        return formula;
     }
 
     private boolean checkCustomDelimiter(String expression) {
-        // TODO: CHECK IF THE EXPRESSION IS A VALID CUSTOM DELIMITER
-        return expression.startsWith("//");
+        if (expression.contains("//")) {
+            if (Validator.checkValidCustomDelimiter(expression)) {
+                return true;
+            } else {
+                throw new IllegalArgumentException();
+            }
+        }
+        return false;
     }
 }

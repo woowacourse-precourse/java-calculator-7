@@ -11,6 +11,10 @@ public class Delimiter {
     }
 
     private Delimiter(String delimiterExpression) {
+        if (delimiterExpression.charAt(2) == '\\') {
+            throw new IllegalArgumentException();
+        }
+
         this.delimiter = List.of(',', ':', delimiterExpression.charAt(2));
     }
 
