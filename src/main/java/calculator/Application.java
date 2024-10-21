@@ -17,9 +17,8 @@ public class Application {
         try {
             int result = add(input);
             System.out.println("결과: " + result);
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             System.out.println("에러 발생: " + e.getMessage());
-            e.printStackTrace();
         }
     }
 
@@ -37,16 +36,21 @@ public class Application {
         String[] tokens = input.split(delimiter);  // delimiter 사용해 분리
         int sum = 0;
 
-        // 숫자 합산 및 음수 처리
+        // 숫자 합산 및 음수 및 잘못된 입력 처리
         for (String token : tokens) {
-            int number = Integer.parseInt(token.trim());  // 문자열을 숫자로 변환
+            try {
+                int number = Integer.parseInt(token.trim());  // 문자열을 숫자로 변환
 
-            // 음수 값이 있을 경우 예외 처리
-            if (number < 0) {
-                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
+                // 음수 값이 있을 경우 예외 처리
+                if (number < 0) {
+                    throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
+                }
+
+                sum += number;  // 음수가 아닌 경우 합산
+
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("잘못된 숫자 형식입니다: " + token);
             }
-
-            sum += number;  // 음수가 아닌 경우 합산
         }
 
         return sum;  // 합산 결과 반환
