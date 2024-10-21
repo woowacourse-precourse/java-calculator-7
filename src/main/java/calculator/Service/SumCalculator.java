@@ -14,7 +14,7 @@ public class SumCalculator {
             try {
                 // 문자열을 정수로 변환 후 합산
                 int number = Integer.parseInt(element.trim());
-                if (number < 0) {
+                if (number <= 0) {
                     // 0 또는 음수가 입력된 경우
                     throw new IllegalArgumentException("[ERROR] 잘못된 입력 형식 (0 or 음수):" + element);
                 }
