@@ -2,7 +2,9 @@ package calculator.parser;
 
 public enum Delimiter {
     COMMA(","),
-    COLON(":");
+    COLON(":"),
+    CUSTOM_START("//"),
+    CUSTOM_END("\\n");
 
     private final String value;
 
