@@ -62,13 +62,17 @@ public class Application {
         int sum = 0;
         for (String number : numbers) {
             if (number.isEmpty()) throw new IllegalArgumentException("입력된 문자열이 유효하지 않습니다.");
+            try {
+                int num = Integer.parseInt(number);
 
-            int num = Integer.parseInt(number);
+                if (num <= 0) throw new IllegalArgumentException("입력된 문자열에는 양수만 포함되어야 합니다.");
 
-            if (num < 0) throw new IllegalArgumentException("입력된 문자열에 양수가 아닌 수가 포함돼 있습니다.");
-
-            sum += num;
+                sum += num;
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("문자열은 양수와 구분자만 입력해야 합니다.");
+            }
         }
         return sum;
     }
+
 }
