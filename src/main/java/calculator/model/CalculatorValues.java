@@ -8,11 +8,13 @@ public class CalculatorValues {
 
     private final List<BigDecimal> numbers = new ArrayList<>();
 
-    private String delimiter;
+    private final String delimiter;
 
-    private String expression;
+    private final String expression;
 
-    public CalculatorValues() {
+    public CalculatorValues(String delimiter, String expression) {
+        this.delimiter = delimiter;
+        this.expression = expression;
     }
 
     public List<BigDecimal> getNumbers() {
@@ -33,13 +35,5 @@ public class CalculatorValues {
 
     public String getExpression() {
         return expression;
-    }
-
-    public void setDelimiter(String delimiter) {
-        this.delimiter = delimiter;
-    }
-
-    public void setExpression(String expression) {
-        this.expression = expression;
     }
 }

@@ -1,33 +1,37 @@
 package calculator.model;
 
-import calculator.utils.IntegerExtractor;
 import calculator.utils.SumExpression;
+import calculator.utils.extractor.DelimiterExtractor;
+import calculator.utils.extractor.ExpressionExtractor;
+import calculator.utils.extractor.NumberExtractor;
 
 import java.math.BigDecimal;
 
 public class CalculatorImpl implements Calculator{
 
-    private final CalculatorValues calculatorValues;
+    private CalculatorValues calculatorValues;
 
     public CalculatorImpl() {
-        this.calculatorValues = new CalculatorValues();
     }
 
     @Override
     public void insertValues(String input) {
 
         boolean hasCustomDelimiter = input.startsWith("//");
-
-        String expression = hasCustomDelimiter ? input.substring(5) : input;
-        String delimiter = hasCustomDelimiter ? String.valueOf(input.charAt(2)) : "[,:]";
-
-        calculatorValues.setExpression(expression);
-        calculatorValues.setDelimiter(delimiter);
+        String expression = ExpressionExtractor.extractExpression(
+                input,
+                hasCustomDelimiter
+        );
+        String delimiter = DelimiterExtractor.extractDelimiter(
+                input,
+                hasCustomDelimiter
+        );
+        this.calculatorValues = new CalculatorValues(delimiter, expression);
     }
 
     @Override
     public void extract() {
-        IntegerExtractor.extractIntegerFromExpression(calculatorValues);
+        NumberExtractor.extractIntegerFromExpression(calculatorValues);
     }
 
     @Override
