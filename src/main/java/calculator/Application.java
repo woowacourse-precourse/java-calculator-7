@@ -35,7 +35,7 @@ public class Application {
                     sum += Character.getNumericValue(c);
                 }
 
-                if (i % 2 ==1) {
+                if (i % 2 == 1) {
                     if (GetSepException.isNotCustomSep(inputStr, String.valueOf(customSep))) {
                         throw new IllegalArgumentException();
                     }
@@ -56,7 +56,7 @@ public class Application {
                     sum += Character.getNumericValue(c);
                 }
 
-                if (i % 2 ==1) {
+                if (i % 2 == 1) {
                     if (GetSepException.isNotOriginSep(inputStr)) {
                         throw new IllegalArgumentException();
                     }
