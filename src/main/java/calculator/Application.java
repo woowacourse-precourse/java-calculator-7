@@ -2,6 +2,7 @@ package calculator;
 
 import calculator.controller.InputController;
 import calculator.parser.InputParser;
+import camp.nextstep.edu.missionutils.Console;
 
 import java.util.Scanner;
 
@@ -10,11 +11,10 @@ public class Application {
         // TODO: 프로그램 구현
         InputParser inputParser = new InputParser();
         InputController inputController = new InputController(inputParser);
-        Scanner scanner = new Scanner(System.in);
 
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String input = scanner.nextLine();
-
+        String input = Console.readLine();
+        
         inputController.processInput(input);
     }
 }

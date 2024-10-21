@@ -24,17 +24,20 @@ public class InputParser {
         }
         String customDelimiter = extractCustomDelimiter(input);
         if (!customDelimiter.isEmpty()) {
-            input = input.substring(input.indexOf('\n') + 1);
+            input = input.substring(input.indexOf('n') + 1);
         }
         String[] splitInput = splitInputByDelimiter(input, customDelimiter);
         return convertToIntegerList(splitInput);
     }
+    private boolean isNewline(String input) {
+        return input.charAt(3) == '\\' && input.charAt(4) == 'n';
+    }
     private String extractCustomDelimiter(String input) {
         if (input.startsWith("//")) {
-            if (input.length() < 4 || input.charAt(3) != '\n') {
+            if (input.length() < 4 || !isNewline(input)) {
                 throw new IllegalArgumentException("Error: 커스텀 구분자의 형식이 잘못되었습니다.");
             }
-            return Pattern.quote(input.substring(2, input.indexOf('\n')));
+            return Pattern.quote(input.substring(2, input.indexOf('\\')));
         }
         return "";
     }
