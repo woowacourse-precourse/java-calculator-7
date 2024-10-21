@@ -75,6 +75,36 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void testNumbersSeparatedByColon() {
+        assertSimpleTest(() -> {
+            // Given
+            StringCalculator calculator = new StringCalculator();
+            String input = "1:2";
+
+            // When
+            int result = calculator.add(input);
+
+            // Then
+            assertEquals(3, result);
+        });
+    }
+
+    @Test
+    void testNumbersSeparatedByCommaAndColon() {
+        assertSimpleTest(() -> {
+            // Given
+            StringCalculator calculator = new StringCalculator();
+            String input = "1,2:3";
+
+            // When
+            int result = calculator.add(input);
+
+            // Then
+            assertEquals(6, result);
+        });
+    }
+
 //    @Test
 //    void 예외_테스트() {
 //        assertSimpleTest(() ->
