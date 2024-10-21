@@ -1,11 +1,22 @@
 package calculator;
 
 public class Calculator {
-    // 빈 문자열이면 0을 반환하는 메서드
     public static int add(String input) {
         if (input == null || input.isEmpty()) {
-            return 0; // 빈 문자열은 0을 반환
+            return 0;
         }
-        return 0; // 이후 로직을 위해 임시로 0 반환
+
+        // 쉼표(,)와 콜론(:)을 구분자로 사용하여 숫자를 분리
+        String[] numbers = input.split(",|:");
+        return calculateSum(numbers); // 분리된 숫자 배열을 합산
+    }
+
+    // 숫자 배열을 합산하는 메서드
+    private static int calculateSum(String[] numbers) {
+        int sum = 0;
+        for (String number : numbers) {
+            sum += Integer.parseInt(number.trim());
+        }
+        return sum;
     }
 }
