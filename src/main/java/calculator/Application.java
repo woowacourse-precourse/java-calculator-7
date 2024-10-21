@@ -1,7 +1,6 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
-import camp.nextstep.edu.missionutils.test.NsTest;
 
 public class Application {
     public static void main(String[] args) {
@@ -12,7 +11,8 @@ public class Application {
     }
 
     public int calculate(String text) {
-        String defaultSeparator = ":";
+        String defaultSeparator = findSeparator(text);
+        text = text.replace("//"+defaultSeparator+"\\n", "");
         String[] textArray = replaceSeparator(text, defaultSeparator).split(defaultSeparator);
         int sum = 0;
         for (String number : textArray) {
@@ -25,8 +25,17 @@ public class Application {
         return sum;
     }
 
+    private String findSeparator(String text) {
+        int startIndex = text.indexOf("//") + 2;
+        int endIndex = text.indexOf("\\n");
+        if (startIndex != -1 && endIndex != -1) {
+            return text.substring(startIndex, endIndex);
+        }
+        return ":";
+    }
+
     private String replaceSeparator(String text, String separator) {
-        return text.replaceAll(",", separator);
+        return text.replaceAll("[:,]", separator);
     }
 
 }
