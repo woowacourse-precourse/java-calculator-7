@@ -15,28 +15,44 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("결과 : 1");
         });
 
-        assertSimpleTest(() -> {
-            run("//.\\n1.4.8");
-            assertThat(output().contains("결과 : 13"));
-        });
+    }
 
+    @Test
+    void 커스텀_구분자_사용2() {
+        assertSimpleTest(() -> {
+            run("1,2:3");
+            assertThat(output().contains("결과 : 6"));
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용3() {
         assertSimpleTest(() -> {
             run("");
             assertThat(output().contains("결과 : 0"));
         });
+    }
 
+    @Test
+    void 커스텀_구분자_사용4() {
+        assertSimpleTest(() -> {
+            run("//.\\n1.4.8");
+            assertThat(output().contains("결과 : 13"));
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용5() {
         assertSimpleTest(() -> {
             run("1,2");
             assertThat(output().contains("결과 : 3"));
         });
+    }
 
+    @Test
+    void 커스텀_구분자_사용6() {
         assertSimpleTest(() -> {
             run("1,2,3");
-            assertThat(output().contains("결과 : 6"));
-        });
-
-        assertSimpleTest(() -> {
-            run("1,2:3");
             assertThat(output().contains("결과 : 6"));
         });
     }
