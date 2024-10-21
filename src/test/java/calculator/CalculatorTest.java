@@ -29,4 +29,11 @@ class CalculatorTest {
         int result = Calculator.calculate("1,2");
         assertThat(result).isEqualTo(3);
     }
+
+    @Test
+    @DisplayName("구분자 콜론 테스트")
+    void 구분자_콜론_테스트() {
+        int result = Calculator.calculate("1:2");
+        assertThat(result).isEqualTo(3);
+    }
 }

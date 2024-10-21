@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Calculator {
     private static final int ZERO = 0;
-    private static final String DELIMITER = ",";
+    private static final String DELIMITER = ",|:";
 
     public static int calculate(String input) {
         if (isBlank(input)) {
