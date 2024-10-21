@@ -73,18 +73,13 @@ public class Calculator {
     }
 
     public boolean isValid(String inputString) {
+        String regex = "[" + COMMA + COLON + "]";
+
         if (division != null) {
             inputString = inputString.replace(division, "");
         }
+        inputString = inputString.replaceAll(regex, "");
 
-        inputString = inputString.replace(COMMA, "").replace(COLON, "");
-
-        char[] inputChars = inputString.toCharArray();
-        for (char inputChar : inputChars) {
-            if (!Character.isDigit(inputChar)) {
-                return false;
-            }
-        }
-        return true;
+        return inputString.chars().allMatch(Character::isDigit);
     }
 }
