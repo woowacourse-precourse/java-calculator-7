@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-public class DataCleaner {
+public class InputParser {
     private static final String INVALID_NUMBER_MESSAGE = "잘못된 입력 값";
     private static final String INVALID_CUSTOM_MESSAGE = "잘못된 입력 값, 구분자 다음에 줄바꿈이 필요합니다.";
     private static final String NEGATIVE_NOT_ALLOWED_MESSAGE = "음수 비허용: ";
 
 
-    public static int[] cleanData(String input) {
+    public static int[] parseAndValidateInput(String input) {
         String delimiter = ",|:";
 
         if (input.startsWith("//")) {

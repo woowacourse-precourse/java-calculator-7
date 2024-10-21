@@ -6,7 +6,7 @@ public class Calculator {
             return 0;
         }
 
-        int[] numbers = DataCleaner.cleanData(input);
+        int[] numbers = InputParser.parseAndValidateInput(input);
         return sum(numbers);
     }
 
