@@ -2,9 +2,9 @@ package calculator;
 
 public class StringCalculator {
     public static int calculate(String str){
-        Validator.validataInput(str);
         String[] numbers = InputParser.stringParse(str);
-
+        Validator.validateInput(numbers);
+        Validator.validateNegativeNumbers(numbers);
         return sum(numbers);
     }
     public static int sum(String[] numbers){
