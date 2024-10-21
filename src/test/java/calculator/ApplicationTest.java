@@ -27,7 +27,7 @@ class ApplicationTest extends NsTest {
     @Test
     void validateNoDelimiter() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> runException("1234")).isInstanceOf(IllegalArgumentException.class);
+            assertThatThrownBy(() -> runException("1234")).isInstanceOf(IllegalArgumentException.class).hasMessage(ERROR_NOT_CONTAIN_DELIMITER);
         });
         assertSimpleTest(() -> {
             assertThatNoException().isThrownBy(() -> runException("123;123"));
@@ -43,7 +43,7 @@ class ApplicationTest extends NsTest {
     @Test
     void validateOnlyContainCOMMA() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> runException(",,,,,,")).isInstanceOf(IllegalArgumentException.class);
+            assertThatThrownBy(() -> runException(",,,,,,")).isInstanceOf(IllegalArgumentException.class).hasMessageContaining(","+ERROR_BASIC_DELIMITER_ONLY_DELIMITER_SUPPORT);
         });
         assertSimpleTest(() -> {
             assertThatNoException().isThrownBy(() -> run("1,3,"));
@@ -53,7 +53,7 @@ class ApplicationTest extends NsTest {
     @Test
     void validateOnlyContainSEMICOLON() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> runException(";;;;;;;;")).isInstanceOf(IllegalArgumentException.class);
+            assertThatThrownBy(() -> runException(";;;;;;;;")).isInstanceOf(IllegalArgumentException.class).hasMessageContaining(";"+ERROR_BASIC_DELIMITER_ONLY_DELIMITER_SUPPORT);
         });
         assertSimpleTest(() -> {
             assertThatNoException().isThrownBy(() -> run("1;;3"));
@@ -63,7 +63,7 @@ class ApplicationTest extends NsTest {
     @Test
     void validateOnlyContainCOMMA_SEMICOLON() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> runException(",,,,,,;;;;;;;;")).isInstanceOf(IllegalArgumentException.class);
+            assertThatThrownBy(() -> runException(",,,,,,;;;;;;;;")).isInstanceOf(IllegalArgumentException.class).hasMessageContaining(",|;"+ERROR_BASIC_DELIMITER_ONLY_DELIMITER_SUPPORT);
         });
         assertSimpleTest(() -> {
             assertThatNoException().isThrownBy(() -> run("1;3,1"));
@@ -113,7 +113,7 @@ class ApplicationTest extends NsTest {
     @Test
     void validateAddingNotContainZero() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> runException("0,2;3")).isInstanceOf(IllegalArgumentException.class);
+            assertThatThrownBy(() -> runException("0,2;3")).isInstanceOf(IllegalArgumentException.class).hasMessage(ERROR_BASIC_DELIMITER_CONTAIN_ZERO);
         });
     }
 
