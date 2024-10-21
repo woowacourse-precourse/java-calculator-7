@@ -74,7 +74,7 @@ class ExtraApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_지정_안됨() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("//\n2:3:4"))
+                assertThatThrownBy(() -> runException("//\\n2:3:4"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
