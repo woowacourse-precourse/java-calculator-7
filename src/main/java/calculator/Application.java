@@ -7,7 +7,6 @@ public class Application {
 
     public static final String DELIMITER_INITIATOR = "//";
     public static final String DELIMITER_FINALIZER = "\\n";
-    public static String delimiterRegex = ",|:";
 
     public static final String MESSAGE_NORMAL_REQUEST = "덧셈할 문자열을 입력해 주세요.";
     public static final String MESSAGE_NORMAL_RESULT = "결과";
@@ -20,6 +19,8 @@ public class Application {
     public static void main(String[] args) {
         System.out.println(MESSAGE_NORMAL_REQUEST);
         String userInput = Console.readLine();
+
+        String delimiterRegex = ",|:";
 
         if (userInput.startsWith(DELIMITER_INITIATOR)) {
             String userDelimiterInput = "";
