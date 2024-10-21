@@ -12,8 +12,12 @@ public class Application {
         StringCalculator calculator = new StringCalculator();
         long result = 0;
 
-        result = calculator.stringCalculate(input);
-        System.out.println("결과 : " + result);
+        try{
+            result = calculator.stringCalculate(input);
+            System.out.println("결과 : " + result);
+        } catch(Exception e){
+            System.out.println("ERROR: " + e.getMessage());
+        }
 
     }
 }
