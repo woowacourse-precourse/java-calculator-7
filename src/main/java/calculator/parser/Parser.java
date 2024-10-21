@@ -70,7 +70,7 @@ public class Parser {
 	}
 
 	private List<Integer> extractNumbers(String expression) {
-		String regex = toRegex(delimiters);
+		String regex = delimitersToRegex();
 
 		String[] strNumbers = expression.split(regex);
 
@@ -85,7 +85,7 @@ public class Parser {
 				.toList();
 	}
 
-	private String toRegex(List<String> delimiters) {
+	private String delimitersToRegex() {
 		return delimiters.stream()
 				.map(Pattern::quote)
 				.collect(Collectors.joining("|"));
