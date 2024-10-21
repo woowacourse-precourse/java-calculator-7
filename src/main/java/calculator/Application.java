@@ -79,6 +79,14 @@ public class Application {
 
     }
 
+    public static long plus(){
+        return numberList
+                .stream()
+                .mapToLong(l -> l)
+                .sum();
+    }
+
+
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         inputMessage();
