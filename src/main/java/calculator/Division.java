@@ -10,4 +10,19 @@ public class Division {
         word.add(";");
         word.add(",");
     }
+
+    public void add(String customWord) {
+        word.add(customWord);
+    }
+
+    public String regularExpression() {
+        StringBuilder regularWord = new StringBuilder();
+        for (int i = 0; i < word.size(); i++) {
+            regularWord.append(word.get(i));
+            if (i != word.size() - 1) {
+                regularWord.append("|");
+            }
+        }
+        return String.valueOf(regularWord);
+    }
 }

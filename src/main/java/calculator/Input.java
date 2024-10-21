@@ -14,4 +14,11 @@ public class Input {
         int endIndex = word.indexOf("\n");
         return word.substring(startIndex, endIndex);
     }
+
+    public String numbers() {
+        if (isCustomDivision()) {
+            return word.substring(word.indexOf("\n"));
+        }
+        return word;
+    }
 }

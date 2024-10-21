@@ -19,4 +19,12 @@ public class Calculator {
             System.out.println("예기치 않은 문제가 발생했습니다. 해결해야 합니다");
         }
     }
+
+    public int result() {
+        int sum = 0;
+        for (Integer number : numbers) {
+            sum += number;
+        }
+        return sum;
+    }
 }
