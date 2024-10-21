@@ -1,21 +1,21 @@
 package calculator.model;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import calculator.model.delimiter.Delimiters;
 import calculator.validation.InputValidator;
 
 public class InputFilter {
-	public List<Integer> extractNumbers(String processedInput, Delimiters delimiters) {
+	public Set<Integer> extractNumbers(String processedInput, Delimiters delimiters) {
 		if (processedInput.isBlank()) {
-			return List.of(0);
+			return Set.of(0);
 		}
 		String[] splitParts = splitInput(processedInput, delimiters);
 		validateEachPart(splitParts);
 
-		return Collections.unmodifiableList(mapToInteger(splitParts));
+		return mapToIntegerSet(splitParts);
 	}
 
 	private String[] splitInput(String processedInput, Delimiters delimiters) {
@@ -31,9 +31,9 @@ public class InputFilter {
 			.forEach(InputValidator::validateCalculatorNumber);
 	}
 
-	private static List<Integer> mapToInteger(String[] splitParts) {
+	private static Set<Integer> mapToIntegerSet(String[] splitParts) {
 		return Arrays.stream(splitParts)
 			.map(Integer::valueOf)
-			.toList();
+			.collect(Collectors.toUnmodifiableSet());
 	}
 }

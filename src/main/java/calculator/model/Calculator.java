@@ -1,9 +1,9 @@
 package calculator.model;
 
-import java.util.List;
+import java.util.Set;
 
 public class Calculator {
-	public int sum(List<Integer> numbers) {
+	public int sum(Set<Integer> numbers) {
 		return numbers.stream()
 			.mapToInt(Integer::intValue)
 			.sum();

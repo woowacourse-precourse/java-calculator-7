@@ -2,6 +2,7 @@ package calculator.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import calculator.model.Calculator;
 import calculator.model.delimiter.CustomDelimiterProcessor;
@@ -38,7 +39,7 @@ public class CalculatorController {
 		String input = readInput();
 
 		String processedInput = processCustomDelimiter(input);
-		List<Integer> numbers = extractNumbers(processedInput);
+		Set<Integer> numbers = extractNumbers(processedInput);
 		int result = sum(numbers);
 
 		printResult(result);
@@ -59,11 +60,11 @@ public class CalculatorController {
 		return customDelimiterProcessor.removeCustomDelimiterPattern(input);
 	}
 
-	private List<Integer> extractNumbers(String processedInput) {
+	private Set<Integer> extractNumbers(String processedInput) {
 		return inputFilter.extractNumbers(processedInput, delimiters);
 	}
 
-	private int sum(List<Integer> numbers) {
+	private int sum(Set<Integer> numbers) {
 		return calculator.sum(numbers);
 	}
 
