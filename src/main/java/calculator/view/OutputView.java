@@ -2,7 +2,7 @@ package calculator.view;
 
 public interface OutputView {
 
-    public void inputString();
+    void inputString();
 
-    public void outputResult(int result);
+    void outputResult(int result);
 }
