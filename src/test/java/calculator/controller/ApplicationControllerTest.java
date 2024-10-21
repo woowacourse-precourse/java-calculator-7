@@ -1,7 +1,5 @@
 package calculator.controller;
 
-import calculator.view.ResultOutput;
-import calculator.view.UserInput;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

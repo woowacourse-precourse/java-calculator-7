@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,7 +23,7 @@ public class ResultOutputTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
         ResultOutput resultOutput = new ResultOutput();
-        resultOutput.promptResultOutput("3");
+        resultOutput.promptResultOutput(new BigDecimal("3"));
 
         assertEquals("결과 : 3\n", outputStream.toString());
 
@@ -35,7 +36,7 @@ public class ResultOutputTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
         ResultOutput resultOutput = new ResultOutput();
-        resultOutput.promptResultOutput("3.3");
+        resultOutput.promptResultOutput(new BigDecimal("3.3"));
 
         assertEquals("결과 : 3.3\n", outputStream.toString());
 

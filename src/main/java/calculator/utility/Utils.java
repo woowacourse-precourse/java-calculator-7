@@ -1,6 +1,5 @@
 package calculator.utility;
 
-import calculator.controller.UserInputController;
 import calculator.domain.Delimiter;
 
 public class Utils {

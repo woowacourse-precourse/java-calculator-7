@@ -3,6 +3,8 @@ package calculator.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -53,7 +55,7 @@ public class NumberStorageTest {
         numberStorage.addNumber("2", delimiter);
         numberStorage.addNumber("3", delimiter);
 
-        assertThat(numberStorage.getTotalSum()).isEqualTo(6.0);
+        assertThat(numberStorage.getTotalSum()).isEqualTo(new BigDecimal("6.0"));
     }
     @DisplayName("정상 동작 시 결과값 확인_소수")
     @Test
@@ -65,6 +67,6 @@ public class NumberStorageTest {
         numberStorage.addNumber("2.2", delimiter);
         numberStorage.addNumber("3.3", delimiter);
 
-        assertThat(numberStorage.getTotalSum()).isEqualTo(6.6);
+        assertThat(numberStorage.getTotalSum()).isEqualTo(new BigDecimal("6.6"));
     }
 }

@@ -5,6 +5,7 @@ import calculator.domain.NumberStorage;
 import calculator.view.ResultOutput;
 import calculator.view.UserInput;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class ApplicationController {
     private final Delimiter delimiter;
     private final NumberStorage numberStorage;
     private final String userInputMessage;
-    private final Double totalSum;
+    private final BigDecimal totalSum;
 
 
 
@@ -24,8 +25,8 @@ public class ApplicationController {
         delimiter = userInputController.getDelimiter();
         numberStorage = new NumberStorage();
         updateNumberStorage();
-        totalSum = numberStorage.getTotalSum();
-        resultOutput.promptResultOutput(changeResultToString(totalSum));
+        totalSum = new BigDecimal(String.valueOf(numberStorage.getTotalSum()));
+        resultOutput.promptResultOutput(totalSum);
     }
 
 
@@ -46,15 +47,6 @@ public class ApplicationController {
         else numList = getNumList(userInputMessage);
         for(int i = 0; i < numList.size(); i++){
             if(!numList.get(i).equals("")) numberStorage.addNumber(numList.get(i), delimiter);
-        }
-    }
-
-    private String changeResultToString(Double totalSum){
-        if(totalSum % 1 == 0.0){
-            return Integer.toString((int) Math.floor(totalSum));
-        }
-        else{
-            return Double.toString(totalSum);
         }
     }
 }

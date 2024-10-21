@@ -2,6 +2,7 @@ package calculator.domain;
 
 import calculator.utility.Utils;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,10 +27,10 @@ public class NumberStorage {
         }
     }
 
-    public Double getTotalSum(){
-        Double totalSum = 0.0;
+    public BigDecimal getTotalSum(){
+        BigDecimal totalSum = new BigDecimal("0.0");
         for(int i = 0; i < numberList.size(); i++){
-            totalSum += numberList.get(i);
+            totalSum = new BigDecimal(String.valueOf(totalSum.add(new BigDecimal(Double.toString(numberList.get(i))))));
         }
         return totalSum;
     }
