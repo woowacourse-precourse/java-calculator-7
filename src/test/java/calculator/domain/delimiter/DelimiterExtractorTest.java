@@ -2,9 +2,8 @@ package calculator.domain.delimiter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,13 +17,13 @@ class DelimiterExtractorTest {
         // Given
         String input = "//;\\n1";
         DelimiterExtractor delimiterExtractor = new DelimiterExtractor();
-        Delimiters defaultDelimiters = new Delimiters(List.of(new Delimiter(","), new Delimiter(":")));
+        Delimiters defaultDelimiters = new Delimiters(Collections.emptyList());
 
         // When
         Delimiters delimiters = delimiterExtractor.extractDelimitersFrom(input, defaultDelimiters);
 
         // Then
-        assertTrue(delimiters.getDelimiters().contains(new Delimiter(";")));
+        assertThat(delimiters).isEqualTo(new Delimiters(List.of(new Delimiter(";"))));
     }
 
     @Test
@@ -33,17 +32,14 @@ class DelimiterExtractorTest {
         // Given
         String input = "//*\\n//%\\n1*2%3//&\\n4&5";
         DelimiterExtractor delimiterExtractor = new DelimiterExtractor();
-        Delimiters defaultDelimiters = new Delimiters(List.of(new Delimiter(","), new Delimiter(":")));
+        Delimiters defaultDelimiters = new Delimiters(Collections.emptyList());
 
         // When
         Delimiters delimiters = delimiterExtractor.extractDelimitersFrom(input, defaultDelimiters);
 
         // Then
-        assertAll(
-                () -> assertTrue(delimiters.getDelimiters().contains(new Delimiter("*"))),
-                () -> assertTrue(delimiters.getDelimiters().contains(new Delimiter("%"))),
-                () -> assertTrue(delimiters.getDelimiters().contains(new Delimiter("&")))
-        );
+        assertThat(delimiters).isEqualTo(
+                new Delimiters(List.of(new Delimiter("*"), new Delimiter("%"), new Delimiter("&"))));
     }
 
     @Test
@@ -52,13 +48,13 @@ class DelimiterExtractorTest {
         // Given
         String input = "//!!\\n1!!2";
         DelimiterExtractor delimiterExtractor = new DelimiterExtractor();
-        Delimiters defaultDelimiters = new Delimiters(List.of(new Delimiter(","), new Delimiter(":")));
+        Delimiters defaultDelimiters = new Delimiters(Collections.emptyList());
 
         // When
         Delimiters delimiters = delimiterExtractor.extractDelimitersFrom(input, defaultDelimiters);
 
         // Then
-        assertThat(delimiters.getDelimiters()).contains(new Delimiter("!!"));
+        assertThat(delimiters).isEqualTo(new Delimiters(List.of(new Delimiter("!!"))));
     }
 
     @Test
@@ -67,13 +63,13 @@ class DelimiterExtractorTest {
         // Given
         String input = "//!5!\\n1!5!2";
         DelimiterExtractor delimiterExtractor = new DelimiterExtractor();
-        Delimiters defaultDelimiters = new Delimiters(List.of(new Delimiter(","), new Delimiter(":")));
+        Delimiters defaultDelimiters = new Delimiters(Collections.emptyList());
 
         // When
         Delimiters delimiters = delimiterExtractor.extractDelimitersFrom(input, defaultDelimiters);
 
         // Then
-        assertTrue(delimiters.getDelimiters().contains(new Delimiter("!5!")));
+        assertThat(delimiters).isEqualTo(new Delimiters(List.of(new Delimiter("!5!"))));
     }
 
     @Test
@@ -82,13 +78,13 @@ class DelimiterExtractorTest {
         // Given
         String input = "//(\\n1(2";
         DelimiterExtractor delimiterExtractor = new DelimiterExtractor();
-        Delimiters defaultDelimiters = new Delimiters(List.of(new Delimiter(","), new Delimiter(":")));
+        Delimiters defaultDelimiters = new Delimiters(Collections.emptyList());
 
         // When
         Delimiters delimiters = delimiterExtractor.extractDelimitersFrom(input, defaultDelimiters);
 
         // Then
-        assertTrue(delimiters.getDelimiters().contains(new Delimiter("(")));
+        assertThat(delimiters).isEqualTo(new Delimiters(List.of(new Delimiter("("))));
     }
 
     @Test
@@ -97,7 +93,7 @@ class DelimiterExtractorTest {
         // Given
         String input = "//5\\n15253";
         DelimiterExtractor delimiterExtractor = new DelimiterExtractor();
-        Delimiters defaultDelimiters = new Delimiters(List.of(new Delimiter(","), new Delimiter(":")));
+        Delimiters defaultDelimiters = new Delimiters(Collections.emptyList());
 
         // When & Then
         assertThatThrownBy(() -> delimiterExtractor.extractDelimitersFrom(input, defaultDelimiters))

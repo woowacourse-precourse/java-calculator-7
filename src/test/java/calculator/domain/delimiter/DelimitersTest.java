@@ -20,14 +20,14 @@ class DelimitersTest {
         @DisplayName("유효한 구분자이면 성공한다")
         void 성공_구분자추가_유효한구분자() {
             // Given
-            Delimiters delimiters = new Delimiters(List.of(new Delimiter(","), new Delimiter(":")));
+            Delimiters delimiters = new Delimiters(List.of(new Delimiter(",")));
             Delimiter newDelimiter = new Delimiter("a!");
 
             // When
             Delimiters totalDelimiters = delimiters.addDelimiter(newDelimiter);
 
             // Then
-            assertThat(totalDelimiters.getDelimiters()).contains(newDelimiter);
+            assertThat(totalDelimiters).isEqualTo(new Delimiters(List.of(new Delimiter(","), new Delimiter("a!"))));
         }
 
         @Test
