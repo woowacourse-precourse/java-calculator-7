@@ -22,4 +22,17 @@ public class InputReader {
         return instance;
     }
 
+    // 전체 입력을 처리하는 메서드
+    public int readAndProcess() {
+        System.out.println("문자열을 입력하세요:");
+        String input = Console.readLine();
+
+        if (input == null || input.isEmpty()) {
+            return 0;
+        }
+
+        String[] splitStrings = stringSplitter.split(input);
+        int[] numberArray = numberConverter.convertToNumberArray(splitStrings);
+        return sumCalculator.calculateSum(numberArray);
+    }
 }
