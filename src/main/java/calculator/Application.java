@@ -11,11 +11,11 @@ public class Application {
     public static void main(String[] args) {
         String operand = inPut();
 
-        ArrayList<Integer> result = extractIntFromString(operand);
-        System.out.println("결과 : ");
-        for (int output : result) {
-            System.out.println(output);
-        }
+        ArrayList<Integer> operandList = extractIntFromString(operand);
+
+        int result = iterateCalculation(operandList);
+
+        System.out.println("결과 : " + result);
     }
 
     public static String inPut() {
@@ -27,14 +27,15 @@ public class Application {
         return operandA + operandB;
     }
 
-    public static int iterateCalculation(Queue<Integer> operandQueue) {
-        if (operandQueue.peek() == null) {
+    public static int iterateCalculation(ArrayList<Integer> operandList) {
+        if (operandList.isEmpty()) {
             return 0;
         }
+        int operandA = operandList.get(0);
+        int listSize = operandList.size();
 
-        int operandA = operandQueue.poll();
-        while (!operandQueue.isEmpty()) {
-            int operandB = operandQueue.poll();
+        for (int i = 1; i < listSize; i++) {
+            int operandB = operandList.get(i);
             operandA = add(operandA, operandB);
         }
         return operandA;
@@ -45,11 +46,11 @@ public class Application {
 
         // split된 값에 정수 이외의 값이 있는지 확인하는 로직 필요.
 
-        ArrayList<Integer> operands = new ArrayList<>();
+        ArrayList<Integer> operandList = new ArrayList<>();
         for (String stringValue : tmp) {
             int intValue = Integer.parseInt(stringValue);
-            operands.add(intValue);
+            operandList.add(intValue);
         }
-        return operands;
+        return operandList;
     }
 }
