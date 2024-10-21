@@ -31,14 +31,18 @@ public class Application {
             }
         }
 
+        // 백슬래시 이스케이프 처리
+        if (customDelimiter.equals("\\")) {
+            customDelimiter = "\\\\";
+        }
+
         // 커스텀 구분자가 있다면 기본 구분자에 추가
-        String finalDelimiter = defaultDelimiter;
         if (!customDelimiter.isEmpty()) {
-            finalDelimiter += "|" + Pattern.quote(customDelimiter); // 커스텀 구분자 추가
+            defaultDelimiter = customDelimiter; // 커스텀 구분자 추가
         }
 
         // 구분자로 문자열을 분리하고 숫자를 추출
-        String[] tokens = numbers.split(finalDelimiter);
+        String[] tokens = numbers.split(defaultDelimiter);
 
         int sum = 0;
         // 3. 리스트 객체의 요소를 검사하고 더하고 출력한다. 양수가 아닌 경우 IllegalArgumentException을 발생시킨다.
