@@ -16,4 +16,9 @@ class StringAddCalculatorTest {
         assertEquals(6, StringAddCalculator.add("1,2,3"));
         assertEquals(6, StringAddCalculator.add("1,2:3"));
     }
+    @Test
+    void testCustomDelimiter() {
+        assertEquals(6, StringAddCalculator.add("//;\n1;2;3"));
+        assertEquals(10, StringAddCalculator.add("//|\n2|3|5"));
+    }
 }
