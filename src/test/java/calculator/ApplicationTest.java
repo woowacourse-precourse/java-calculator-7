@@ -18,10 +18,10 @@ class ApplicationTest extends NsTest {
 
     @Test
     void testException() {
-        assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
-        );
+        assertSimpleTest(() -> {
+            run("-1,2,3");
+            assertThat(output()).contains("음수는 허용되지 않습니다");
+        });
     }
 
     @Override

@@ -3,6 +3,7 @@
 > 입력된 문자열에서 숫자를 추출하여 더하는 계산기를 구현합니다.
 
 
+
 ## 기능 요구 사항
 
 ✅ camp.nextstep.edu.missionutils.Console의 readLine()을 활용하여 문자열을 입력받는다.
@@ -16,7 +17,6 @@
 ✅ 프로그램 종료 시 System.exit()를 호출하지 않는다.
 
 ✅ 사용자가 잘못된 값을 입력할 경우 IllegalArgumentException을 발생시킨 후 애플리케이션은 종료되어야 한다.
-
 
 
 ## 기능 구현 목록 
