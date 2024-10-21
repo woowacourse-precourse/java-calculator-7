@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Calculator {
 
-    private static final List<String> basicDelimiters = new ArrayList<>(Arrays.asList(",", ":")); // 추가 구분자
+    private static final List<String> basicDelimiters = new ArrayList<>(Arrays.asList(",", ":"));
     private final String[] checkingDelimiters = {"//", "\\n"};
 
     public Calculator() {
