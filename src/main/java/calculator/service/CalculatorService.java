@@ -2,22 +2,45 @@ package calculator.service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class CalculatorService {
 
     public List<String> splitByDelimiters(String input) {
-        String delimiter = ",|:";  //기본 구분자
-
-        //커스텀 구분자 탐색
-        if (input.startsWith("//")) {
-            int delimiterIndex = input.indexOf("\n");
-            String customDelimiter = input.substring(2, delimiterIndex);
-            delimiter = delimiter + "|" + customDelimiter;  //기본 구분자에 커스텀 구분자 추가
-            input = input.substring(delimiterIndex + 1);  //문자열에서 커스텀 구분자 부분 제거
+        if (input.isEmpty()) {
+            return List.of("0");
         }
 
-        return Arrays.stream(input.split(delimiter))
-                .toList();
+        String delimiter = getDelimiter(input);
+        String cleanedInput = cleanInputString(input);
+
+        List<String> splitInput = Arrays.stream(cleanedInput.split(delimiter)).toList();
+        validateNumbers(splitInput);
+        return splitInput;
+    }
+
+    private String getDelimiter(String input) {
+        String defaultDelimiter = ",|:";
+
+        //커스텀 구분자 처리
+        if (input.startsWith("//")) {
+            int delimiterIndex = input.indexOf("\\n");
+            if (delimiterIndex == -1) {
+                throw new IllegalArgumentException("Invalid custom delimiter format.");
+            }
+            String customDelimiter = Pattern.quote(input.substring(2, delimiterIndex));
+            return defaultDelimiter + "|" + customDelimiter;
+        }
+
+        return defaultDelimiter;  //기본 구분자 반환
+    }
+
+    private String cleanInputString(String input) {
+        if (input.startsWith("//")) {
+            int delimiterIndex = input.indexOf("\\n");
+            input = input.substring(delimiterIndex + 2);
+        }
+        return input;
     }
 
     public long sum(List<String> splitInput) {
