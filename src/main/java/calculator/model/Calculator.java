@@ -12,8 +12,13 @@ public class Calculator {
         String[] numbers = StringParser.parse(input);
         int sum = 0;
 
+        // 음수 값 검사
         for (String number : numbers) {
-            sum += Integer.parseInt(number);
+            int num = Integer.parseInt(number);
+            if (num < 0) {
+                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
+            }
+            sum += num;
         }
 
         return sum;
