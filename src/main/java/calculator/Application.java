@@ -38,4 +38,18 @@ public class Application {
         String[] numbers = input.split("[" + delimiter + "]");
         return calculate(numbers);
     }
+
+    private static int calculate(String[] numbers) {
+        int result = 0;
+
+        for (String number : numbers) {
+            // 숫자가 아닌 경우 예외 발생 추가해야됨.
+
+            int num = Integer.parseInt(number);
+            // 숫자가 음수인 경우 예외 발생 추가해야됨.
+            result += num;
+        }
+
+        return result;
+    }
 }
