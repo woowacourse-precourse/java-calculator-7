@@ -20,18 +20,30 @@ public class StringCalculatorServiceImpl implements StringCalculatorService {
 
     @Override
     public String calculate(String input) {
+        String delimiter = extractDelimiter(input);
 
         return "";
     }
 
     @Override
     public String extractDelimiter(String input) {
+        if(input.matches("//.+\\n.*")) {
+            Pattern pattern = Pattern.compile("//(.+)\\n(.*)");
+            Matcher matcher = pattern.matcher(input);
+            String delimiter = "";
+            if (matcher.find()) {
+                delimiter = matcher.group(1);
+            }
+
+            return delimiter;
+        }
 
         return "";
     }
 
     @Override
-    public void validateInputDelimiter(String input) {
+    public void validateInputDelimiter(String delimiter) {
+
 
     }
 
