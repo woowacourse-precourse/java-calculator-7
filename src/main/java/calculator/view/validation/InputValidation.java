@@ -5,50 +5,39 @@ import static calculator.utils.CalculationUtils.*;
 import java.util.Arrays;
 
 public class InputValidation {
-  private static final String INVALID_INPUT_DATE_ERROR = "[ERROR] 유효하지 않은 입력값입니다. 다시 입력해 주세요.";
-  private static String separator = ",|:";
+  private static final String INVALID_INPUT_DATE_ERROR = "[ERROR] 유효하지 않은 입력값입니다. 다시 입력해 주세요. ";
+  private static final String INVALID_CUSTOM_SEPARATOR_ERROR = "(커스텀 구분자 설정이 올바르지 않습니다.)";
+  private static final String ONLY_POSITIVE_NUMBER_ALLOWED_ERROR = "(양수만 입력 가능합니다.)";
+  private static final String INVALID_SEPARATOR_AND_POSITIVE_NUMBER_ERROR = "(구분자 또는 양수 설정이 올바르지 않습니다.)";
 
   public static void validateInputString(String inputData) {
 
-    inputData = inputData.trim();
-
-    if (inputData.isEmpty()) {
+    if (inputData == null || inputData.trim().isEmpty()) {
       return;
     }
 
-    if (inputData.startsWith("//")) {
-      inputData = checkCustomSeparator(inputData);
-    }
+    checkCustomSeparator(inputData);
+
+    String[] separatedInputData = inputDataToArray(inputData);
 
     try {
-
-      Arrays.stream(inputData.split(separator))
+      Arrays.stream(separatedInputData)
           .mapToInt(Integer::parseInt)
           .forEach(value -> {
             if (value < 1) {
-              throw new IllegalArgumentException(INVALID_INPUT_DATE_ERROR);
+              throw new IllegalArgumentException(INVALID_INPUT_DATE_ERROR + ONLY_POSITIVE_NUMBER_ALLOWED_ERROR);
             }
           });
 
     } catch (Exception e) {
-      throw new IllegalArgumentException(INVALID_INPUT_DATE_ERROR);
+      throw new IllegalArgumentException(INVALID_INPUT_DATE_ERROR + INVALID_SEPARATOR_AND_POSITIVE_NUMBER_ERROR);
     }
   }
 
-  private static String checkCustomSeparator(String inputData) {
+  private static void checkCustomSeparator(String inputData) {
 
-    int separatorEndIndex = inputData.indexOf("\\n");
-
-    if (separatorEndIndex == -1) {
-      throw new IllegalArgumentException(INVALID_INPUT_DATE_ERROR);
+    if (inputData.startsWith("//") && !inputData.contains("\\n")) {
+      throw new IllegalArgumentException(INVALID_INPUT_DATE_ERROR + INVALID_CUSTOM_SEPARATOR_ERROR);
     }
-
-    String customSeparator = inputData.substring(2, separatorEndIndex);
-
-
-    separator = escapeSpecialCharacters(customSeparator) + "|" + separator;
-    inputData = inputData.substring(separatorEndIndex + 2);
-
-    return inputData;
   }
 }
