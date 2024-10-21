@@ -5,7 +5,6 @@ import java.util.regex.Pattern;
 public class DelimiterHandler {
 
     public String[] checkDelimiter(String input) {
-        System.out.println(input);
         String basicDelimiter = "[,:]";
 
         if (input.startsWith("//")) {
