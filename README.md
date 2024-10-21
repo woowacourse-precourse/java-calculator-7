@@ -42,6 +42,12 @@
 
 <br>
 
+> ## 📖 1주일간의 개발 과정 및 회고
+
+- [Notion](https://puzzle-bard-f1b.notion.site/1-122335da252281779a5ce52dfe2c2a97?pvs=4)
+
+<br>
+
 > ## 📺 개발 환경
 - <img src="https://img.shields.io/badge/Build-%23121011?style=for-the-badge"><img src="https://img.shields.io/badge/Gradle-02303A?style=for-the-badge&logo=Gradle&logoColor=white"><img src="https://img.shields.io/badge/8.7-515151?style=for-the-badge">
 - <img src="https://img.shields.io/badge/Language-%23121011?style=for-the-badge"><img src="https://img.shields.io/badge/java-%23ED8B00?style=for-the-badge&logo=openjdk&logoColor=white"><img src="https://img.shields.io/badge/21-515151?style=for-the-badge">
