@@ -34,7 +34,7 @@ public class IOService {
         }
     }
 
-    public void printResult(BigDecimal result) {
-        System.out.println("결과 : " + result.toPlainString());
+    public void printResult(String result) {
+        System.out.println("결과 : " + result);
     }
 }
