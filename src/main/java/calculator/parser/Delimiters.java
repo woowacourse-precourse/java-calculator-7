@@ -6,8 +6,8 @@ import java.util.Set;
 
 public class Delimiters {
 
-    private final String COMMA = ",";
-    private final String COLON = ":";
+    private static final String COMMA = ",";
+    private static final String COLON = ":";
 
     private final Set<String> delimiters;
 
