@@ -9,7 +9,7 @@ import static calculator.utils.Util.isInteger;
 public class CalculationSegmentProcessor {
 
 
-    public void findNoneDelimeterString(List<String> delimterList, String input) {
+    public void findNoneDelimiterString(List<String> delimterList, String input) {
 
         String extractedCharacter;
 
@@ -26,9 +26,9 @@ public class CalculationSegmentProcessor {
         return input;
     }
 
-    public List<String> extractNumbers(List<String> delimeterList, String input) {
+    public List<String> extractNumbers(List<String> delimiterList, String input) {
 
-        String regularExpression = "[" + String.join("", delimeterList) + "]";
+        String regularExpression = "[" + String.join("", delimiterList) + "]";
         String[] extractedNumbers = input.split(regularExpression);
         List<String> extractedNumbersList = new ArrayList<>(Arrays.asList(extractedNumbers));
         return discardBlankSpace(extractedNumbersList);

@@ -6,37 +6,37 @@ import java.util.List;
 
 public class Preprocessor {
 
-    private final DelimeterSegmentProcessor delimeterSegmentProcessor;
+    private final DelimiterSegmentProcessor delimiterSegmentProcessor;
     private final CalculationSegmentProcessor calculationSegmentProcessor;
 
-    public Preprocessor(DelimeterSegmentProcessor delimeterSegmentProcessor, CalculationSegmentProcessor calculationSegmentProcessor) {
-        this.delimeterSegmentProcessor = delimeterSegmentProcessor;
+    public Preprocessor(DelimiterSegmentProcessor delimiterSegmentProcessor, CalculationSegmentProcessor calculationSegmentProcessor) {
+        this.delimiterSegmentProcessor = delimiterSegmentProcessor;
         this.calculationSegmentProcessor = calculationSegmentProcessor;
     }
 
-    public List<String> preprocessDelimeterSegment(String input) {
-        List<String> delimeterList = new ArrayList<>(Arrays.asList(",", ":"));
+    public List<String> preprocessDelimiterSegment(String input) {
+        List<String> delimiterList = new ArrayList<>(Arrays.asList(",", ":"));
 
-        if (delimeterSegmentProcessor.checkCustomDelimeterRequest(input)) {
-            return delimeterSegmentProcessor.extractDelimeterList(input);
+        if (delimiterSegmentProcessor.checkCustomDelimiterRequest(input)) {
+            return delimiterSegmentProcessor.extractDelimiterList(input);
         }
 
-        return delimeterList;
+        return delimiterList;
     }
 
     public String preprocessCalculationSegment(String input) {
-        if (delimeterSegmentProcessor.checkCustomDelimeterRequest(input)) {
-            return delimeterSegmentProcessor.extractCalculationSegment(input);
+        if (delimiterSegmentProcessor.checkCustomDelimiterRequest(input)) {
+            return delimiterSegmentProcessor.extractCalculationSegment(input);
         } else {
             return input;
         }
     }
 
-    public void validateCalculationSegment(List<String> delimeter, String input) {
-        calculationSegmentProcessor.findNoneDelimeterString(delimeter, input);
+    public void validateCalculationSegment(List<String> delimiter, String input) {
+        calculationSegmentProcessor.findNoneDelimiterString(delimiter, input);
     }
 
-    public List<String> extractSumNumbers(List<String> delimeterList, String input) {
-        return calculationSegmentProcessor.extractNumbers(delimeterList, input);
+    public List<String> extractSumNumbers(List<String> delimiterList, String input) {
+        return calculationSegmentProcessor.extractNumbers(delimiterList, input);
     }
 }

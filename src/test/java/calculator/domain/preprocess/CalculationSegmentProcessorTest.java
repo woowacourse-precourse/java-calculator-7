@@ -23,17 +23,17 @@ class CalculationSegmentProcessorTest {
 
 
     @Test
-    @DisplayName("findNoneDelimeterString 기능 테스트")
-    void findNoneDelimeterString_o(){
+    @DisplayName("findNoneDelimiterString 기능 테스트")
+    void findNoneDelimiterString_o(){
         assertDoesNotThrow(()->
-                calculationSegmentProcessor.findNoneDelimeterString(Arrays.asList(",",":"),"1,2,3,4:5:6:7"));
+                calculationSegmentProcessor.findNoneDelimiterString(Arrays.asList(",",":"),"1,2,3,4:5:6:7"));
     }
 
     @Test
-    @DisplayName("findNoneDelimeterString 예외 테스트")
-    void findNoneDelimeterString_x(){
+    @DisplayName("findNoneDelimiterString 예외 테스트")
+    void findNoneDelimiterString_x(){
         IllegalArgumentException e= assertThrows(IllegalArgumentException.class,()->
-                calculationSegmentProcessor.findNoneDelimeterString(Arrays.asList(",",":"),"1,2>3,4:5:6:7"));
+                calculationSegmentProcessor.findNoneDelimiterString(Arrays.asList(",",":"),"1,2>3,4:5:6:7"));
 
         assertEquals(e.getMessage(),"구분자 이외의 문자가 있습니다.");
     }
@@ -41,9 +41,9 @@ class CalculationSegmentProcessorTest {
     @Test
     @DisplayName("extractNumbers 빈칸 제거 기능 테스트")
     void extractNumbers_withblank() {
-        List<String> delimeterList = new ArrayList<>(Arrays.asList(",", ":","<"));
+        List<String> delimiterList = new ArrayList<>(Arrays.asList(",", ":","<"));
 
-        List<String> result = calculationSegmentProcessor.extractNumbers(delimeterList, "2,3:4<");
+        List<String> result = calculationSegmentProcessor.extractNumbers(delimiterList, "2,3:4<");
         List<String> expected = new ArrayList<>(Arrays.asList("2", "3", "4"));
 
         assertTrue(expected.containsAll(result));
@@ -52,9 +52,9 @@ class CalculationSegmentProcessorTest {
     @Test
     @DisplayName("extractNumbers 빈칸 발생 없는 기능 테스트")
     void extractNumbers_withoutblank() {
-        List<String> delimeterList = new ArrayList<>(Arrays.asList(",", ":", "<"));
+        List<String> delimiterList = new ArrayList<>(Arrays.asList(",", ":", "<"));
 
-        List<String> result = calculationSegmentProcessor.extractNumbers(delimeterList, "2,3:4<5");
+        List<String> result = calculationSegmentProcessor.extractNumbers(delimiterList, "2,3:4<5");
         List<String> expected = new ArrayList<>(Arrays.asList("2", "3", "4", "5"));
 
         assertTrue(expected.containsAll(result));
