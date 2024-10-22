@@ -16,7 +16,7 @@ public class StringCalculation {
         return sum;
     }
 
-    private int calculateExpression(String[] expression, int sum) {
+    private int calculateExpression(String[] expression) {
         int result = 0;
         for (String s : expression) {
             int operand = Integer.parseInt(s);
