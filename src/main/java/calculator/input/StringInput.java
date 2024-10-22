@@ -21,4 +21,3 @@ public class StringInput {
         return null;
     }
 }
-
