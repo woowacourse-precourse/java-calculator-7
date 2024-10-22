@@ -31,3 +31,34 @@
    - [x] 잘못된 입력값에 대한 IllegalArgumentException 처리
 6. 결과 출력
    - [x] 계산 결과를 출력해서 보여주기
+
+## 프로젝트 구조
+```
+📦src
+ ┣ 📂main
+ ┃ ┗ 📂java
+ ┃ ┃ ┗ 📂calculator
+ ┃ ┃ ┃ ┣ 📂delimiter
+ ┃ ┃ ┃ ┃ ┣ 📜CustomDelimiterDetector.java
+ ┃ ┃ ┃ ┃ ┗ 📜CustomDelimiterDetectorInterface.java
+ ┃ ┃ ┃ ┣ 📂operation
+ ┃ ┃ ┃ ┃ ┣ 📜addOperator.java
+ ┃ ┃ ┃ ┃ ┗ 📜OperatorInterface.java
+ ┃ ┃ ┃ ┣ 📂parser
+ ┃ ┃ ┃ ┃ ┣ 📜Seperator.java
+ ┃ ┃ ┃ ┃ ┣ 📜SeperatorInterface.java
+ ┃ ┃ ┃ ┃ ┣ 📜Splitter.java
+ ┃ ┃ ┃ ┃ ┗ 📜SplitterInterface.java
+ ┃ ┃ ┃ ┗ 📜Application.java
+ ┗ 📂test
+ ┃ ┗ 📂java
+ ┃ ┃ ┗ 📂calculator
+ ┃ ┃ ┃ ┣ 📂delimiter
+ ┃ ┃ ┃ ┃ ┗ 📜CustomDelimiterDetectorTest.java
+ ┃ ┃ ┃ ┣ 📂operation
+ ┃ ┃ ┃ ┃ ┗ 📜addOperatorTest.java
+ ┃ ┃ ┃ ┣ 📂parser
+ ┃ ┃ ┃ ┃ ┣ 📜SeperatorTest.java
+ ┃ ┃ ┃ ┃ ┗ 📜SpliterTest.java
+ ┃ ┃ ┃ ┗ 📜ApplicationTest.java
+ ```
