@@ -29,3 +29,6 @@ Test로직
 작동하는지 테스트
 
 -고의적으로 비정상적으로 작동한다면 예외테스트가 TestNumberTest(부분테스트) 통과하여 전체적으로 ApplicationTest안의 예외테스트가 작동하는지 테스트
+
+자세한 관련 후기 내요은 blog를 참고 하시기 바랍니다.
+https://www.notion.so/git-reset-git-cherry-pick-git-log-git-reflog-127d3d93797280e698e4d47b9a331af3?pvs=4
