@@ -1,7 +1,19 @@
 package calculator;
 
+import calculator.Domain.Calculator;
+import calculator.Domain.Extractor;
+import calculator.View.InputView;
+import calculator.View.OutputView;
+import java.util.ArrayList;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        String calculationInput = InputView.readCalculationInput();
+
+        ArrayList<Integer> extractedNumbers = Extractor.extractNumbers(calculationInput);
+
+        int result = Calculator.addNumbers(extractedNumbers);
+
+        OutputView.printResult(result);
     }
 }
