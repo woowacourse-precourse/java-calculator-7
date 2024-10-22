@@ -6,10 +6,14 @@ import calculator.staticValue.RegexPatterns;
 
 public class Calculator {
 
-    private static final InputValidator inputValidator = new InputValidator();
+    private final InputValidator inputValidator;
 
-    private static final CalculatorService calculatorController = new CalculatorService();
+    private final CalculatorService calculatorService;
 
+    public Calculator(InputValidator inputValidator, CalculatorService calculatorService) {
+        this.inputValidator = inputValidator;
+        this.calculatorService = calculatorService;
+    }
 
     public int Calculate(String input) {
 
@@ -18,7 +22,7 @@ public class Calculator {
         }
 
         if (inputValidator.matchesPattern(input, RegexPatterns.CUSTOM_SEPARATOR.getValue())) {
-            String[] splitInputs = calculatorController.SplitInputBySeparators(
+            String[] splitInputs = calculatorService.SplitInputBySeparators(
                     input);
             return calculateAvailableInput(splitInputs);
         }
@@ -29,7 +33,7 @@ public class Calculator {
 
     private int calculateAvailableInput(String[] splitInputs) {
         inputValidator.validateInput(splitInputs);
-        return calculatorController.calculateSum(splitInputs);
+        return calculatorService.calculateSum(splitInputs);
     }
 
 }
