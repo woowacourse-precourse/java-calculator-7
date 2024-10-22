@@ -18,7 +18,6 @@ public class InputParser {
     public String findCustomSeparator(String input) {
         int customSeparatorStart = input.indexOf("//");
         int customSeparatorEnd = input.indexOf("\\n");
-        System.out.println("customSeparatorEnd = " + customSeparatorEnd);
 
         //커스텀 구분자가 존재하는 경우
         if (customSeparatorStart == 0 && customSeparatorEnd > 0) {
