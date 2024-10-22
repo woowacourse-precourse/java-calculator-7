@@ -12,6 +12,10 @@ public class NumberService {
     }
 
     private BigDecimal convertToBigDecimal(String numString) {
+        if (numString.isEmpty()) {
+            return BigDecimal.ZERO; // 빈 문자열일 경우 0 반환
+        }
+
         validateNumberString(numString);
 
         BigDecimal number = new BigDecimal(numString);
