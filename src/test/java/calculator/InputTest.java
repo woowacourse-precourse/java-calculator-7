@@ -82,6 +82,15 @@ class InputTest extends NsTest {
         );
     }
 
+    @Test
+    @DisplayName("0이 포함된 경우 예외가 발생해야 한다")
+    void 양수가_아닌값_0이_포함된_경우_예외처리() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;\\n0;2;3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
