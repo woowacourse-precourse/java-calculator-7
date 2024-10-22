@@ -30,9 +30,9 @@ public class InputValidator {
 
         if (matcher.find()) {
             return matcher;
-        } else {
-            throw new InputErrorController(InputErrorType.CANT_FIND_CUSTOM_SEPARATOR);
         }
+
+        throw new InputErrorController(InputErrorType.CANT_FIND_CUSTOM_SEPARATOR);
     }
 
 

@@ -21,10 +21,10 @@ public class Calculator {
             String[] splitInputs = calculatorController.SplitInputBySeparators(
                     input);
             return calculateAvailableInput(splitInputs);
-        } else {
-            String[] splitInputByBasicSeparators = input.split(RegexPatterns.BASIC_SEPARATORS.getValue());
-            return calculateAvailableInput(splitInputByBasicSeparators);
         }
+
+        String[] splitInputByBasicSeparators = input.split(RegexPatterns.BASIC_SEPARATORS.getValue());
+        return calculateAvailableInput(splitInputByBasicSeparators);
     }
 
     private int calculateAvailableInput(String[] splitInputs) {
