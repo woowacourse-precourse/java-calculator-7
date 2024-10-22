@@ -1,5 +1,9 @@
 # java-calculator-precourse
 
+![image](https://github.com/user-attachments/assets/bc7d4020-9201-4991-8ccc-7b4d511e539f)
+
+## **[프리코스 1주 차, 회고록](https://mak-ing.tistory.com/44)**
+
 # 문자열 덧셈 계산기
 
 입력한 문자열에서 구분자를 기준으로 숫자를 추출하여 더하는 계산기를 구현한다.
