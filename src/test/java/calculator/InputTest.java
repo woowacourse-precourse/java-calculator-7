@@ -11,61 +11,61 @@ class InputTest extends NsTest {
 
     // 커스텀 구분자를 사용하지 않은 경우 테스트
     @Test
-    void 기본_구분자_사용() {
+    void 기본_구분자로_입력된_숫자_계산() {
         assertSimpleTest(() -> {
             run("1,2:3");
             assertThat(output()).contains("결과 : 6");
         });
     }
 
-    // 커스텀 구분자 ";"를 사용한 경우 테스트
+    // 커스텀 구분자 ";"를 사용하는 경우
     @Test
-    void 커스텀_구분자_사용_세미콜론() {
+    void 커스텀_구분자로_세미콜론_사용한_숫자_계산() {
         assertSimpleTest(() -> {
             run("//;\\n1;2;3");
             assertThat(output()).contains("결과 : 6");
         });
     }
 
-    // 커스텀 구분자 "a"를 사용한 경우 테스트
+    // 커스텀 구분자 "a"를 사용하는 경우
     @Test
-    void 커스텀_구분자_사용_a() {
+    void 커스텀_구분자로_a_사용한_숫자_계산() {
         assertSimpleTest(() -> {
             run("//a\\n1a2a3");
             assertThat(output()).contains("결과 : 6");
         });
     }
 
-    // 잘못된 입력: 커스텀 구분자가 2개일 경우
+    // 잘못된 입력: 여러 개의 커스텀 구분자를 사용한 경우
     @Test
-    void 잘못된_입력_구분자_여러개() {
+    void 여러개의_커스텀_구분자_사용시_예외처리() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//;,&\\n1;2&3"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
-    // 잘못된 입력: 구분자가 숫자인 경우
+    // 잘못된 입력: 커스텀 구분자가 숫자인 경우
     @Test
-    void 잘못된_입력_구분자가_숫자인_경우() {
+    void 커스텀_구분자로_숫자를_사용한_경우_예외처리() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//1\\n11213"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
-    // 잘못된 입력: 공백이 있는 경우
+    // 잘못된 입력: 공백이 포함된 경우
     @Test
-    void 잘못된_입력_공백() {
+    void 입력값에_공백이_포함된_경우_예외처리() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("1, 2, 3, 45 67 89"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
-    // 음수가 포함된 경우 예외 처리 테스트
+    // 음수가 포함된 경우 예외 처리
     @Test
-    void 음수_포함_예외() {
+    void 음수가_포함된_경우_예외처리() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//;\\n-1;2;3"))
                         .isInstanceOf(IllegalArgumentException.class)
