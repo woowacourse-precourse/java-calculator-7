@@ -9,7 +9,16 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class InputTest extends NsTest {
 
-    // 커스텀 구분자를 사용하지 않은 경우 테스트
+    // 빈 문자열 입력 처리
+    @Test
+    void 빈_문자열_입력시_0반환() {
+        assertSimpleTest(() -> {
+            run("");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    // 기본 구분자(쉼표, 콜론)를 사용하는 경우
     @Test
     void 기본_구분자로_입력된_숫자_계산() {
         assertSimpleTest(() -> {
