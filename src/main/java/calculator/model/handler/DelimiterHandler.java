@@ -1,4 +1,4 @@
-package calculator.model.Handler;
+package calculator.model.handler;
 
 import java.util.regex.Pattern;
 
