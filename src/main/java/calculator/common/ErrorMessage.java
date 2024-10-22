@@ -2,7 +2,6 @@ package calculator.common;
 
 public enum ErrorMessage {
     NULL_INPUT("문자열이 입력되지 않았습니다."),
-    NULL_INPUT_ERROR("문자열에 0은 입력할 수 없습니다."),
     // 문자열 입력시
     EMPTY_CUSTOM_DELIMITER("커스텀 구분자 사이 값이 비어있습니다."),
     MULTIPLE_CUSTOM_DELIMITERS("커스텀 구분자는 한번만 입력할 수 있습니다."),
