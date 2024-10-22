@@ -1,14 +1,10 @@
 package calculator.view;
 
 import calculator.common.ErrorMessage;
-import calculator.exception.CalculatorException;
-import calculator.model.validator.NegativeNumberValidator;
-import calculator.model.validator.NumberRangeValidator;
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
-    private final NegativeNumberValidator negativeNumberValidator = new NegativeNumberValidator();
-    private final NumberRangeValidator numberRangeValidator = new NumberRangeValidator();
+
     public String inputString() {
         String input = Console.readLine();
 
@@ -16,12 +12,15 @@ public class InputView {
 
         return input;
     }
-    private void validateInput(String input) {
-        if (input.isEmpty()) {
-            throw new CalculatorException(ErrorMessage.NULL_INPUT);
+    public static String getInput() {
+        InputView inputView = new InputView();
+        String input = inputView.inputString();
+        validateInput(input);
+        return input;
+    }
+    private static void validateInput(String input) {
+        if (input == null || input.isEmpty()) {
+            throw new IllegalArgumentException(ErrorMessage.NULL_INPUT.getMessage());
         }
-        int number = Integer.parseInt(input);
-        negativeNumberValidator.validate(number);
-        numberRangeValidator.validate(number);
     }
 }
