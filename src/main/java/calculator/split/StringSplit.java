@@ -9,8 +9,8 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class StringSplit {
-    public static final String REGEX = "(\\\\n|\\n)";
-    public static final String DEFAULT_SEPARATOR = ",:";
+    private static final String REGEX = "(\\\\n|\\n)";
+    private static final String DEFAULT_SEPARATOR = ",:";
 
     public static String getSeparator(String string) {
         if (isInputStartWithSlash(string)) {

@@ -1,6 +1,5 @@
 package calculator.split;
 
-import static calculator.split.StringSplit.DEFAULT_SEPARATOR;
 import static calculator.split.StringSplit.getCalFormula;
 import static calculator.split.StringSplit.getSeparator;
 import static calculator.split.StringSplit.splitCalFormulaBySeparator;
@@ -81,8 +80,9 @@ class StringSplitTest {
     @DisplayName("기본 구분자 검증")
     void testDefaultSeparator() {
         String string = "1:2,3";
+        String defaultSeparator = ",:";
 
-        assertEquals(DEFAULT_SEPARATOR, getSeparator(string));
+        assertEquals(defaultSeparator, getSeparator(string));
     }
 
     @Test
