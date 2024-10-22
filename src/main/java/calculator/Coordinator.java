@@ -21,9 +21,9 @@ public class Coordinator {
 
             // 2. 구분자 처리 및 숫자 추출
             List<String> numberStrings = delimiterService.processInputAndExtractNumbers(input);
+            List<BigDecimal> numbers = numberService.processNumbers(numberStrings);
 
             // 3. 숫자 처리 및 계산
-            List<BigDecimal> numbers = numberService.processNumbers(numberStrings);
             BigDecimal result = numberService.calculateSum(numbers);
 
             // 4. 결과 출력
