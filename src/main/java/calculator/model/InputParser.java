@@ -14,6 +14,9 @@ public class InputParser {
         if (input == null) {
             throw new IllegalArgumentException(ErrorMessage.NULL_INPUT.getMessage());
         }
+        if (input.isEmpty()) {
+            return new String[]{};
+        }
         if (input.indexOf("//") != input.lastIndexOf("//")) {
             throw new IllegalArgumentException(ErrorMessage.MULTIPLE_CUSTOM_DELIMITERS.getMessage());
         }
@@ -34,11 +37,16 @@ public class InputParser {
         if (delimiterEnd < delimiterStart) {
             throw new IllegalArgumentException(ErrorMessage.INCORRECT_POSITION.getMessage());
         }
-        return input.substring(delimiterStart, delimiterEnd);
+        String delimiter = input.substring(delimiterStart, delimiterEnd);
+        if (delimiter.isEmpty()) {
+            throw new IllegalArgumentException(ErrorMessage.EMPTY_CUSTOM_DELIMITER.getMessage());
+        }
+
+        return delimiter;
     }
 
     private String[] splitInput(String input) {
-        String delimitersPattern = "[" + String.join("", delimiterHandler.getDelimiters()) + "]";
+        String delimitersPattern = "[" + String.join("", delimiterHandler.getDelimiters()).replaceAll("([\\W])", "\\\\$1") + "]";
         return Arrays.stream(input.split(delimitersPattern))
                 .map(String::trim)
                 .toArray(String[]::new);
