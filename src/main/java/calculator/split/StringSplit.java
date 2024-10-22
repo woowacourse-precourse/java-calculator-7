@@ -12,7 +12,7 @@ public class StringSplit {
     private static final String REGEX = "(\\\\n|\\n)";
     private static final String DEFAULT_SEPARATOR = ",:";
 
-    public static String getSeparator(String string) {
+    public static String getSeparator(final String string) {
         if (isInputStartWithSlash(string)) {
             validateNewLineInput(string);
             String[] split = string.split(REGEX);
@@ -21,7 +21,7 @@ public class StringSplit {
         return DEFAULT_SEPARATOR;
     }
 
-    public static String getCalFormula(String string) {
+    public static String getCalFormula(final String string) {
         String[] split = string.split(REGEX, 2);
         if (split.length > 1) {
             return split[1];
@@ -29,7 +29,7 @@ public class StringSplit {
         return string;
     }
 
-    public static int[] splitCalFormulaBySeparator(String calFormula, String separator) {
+    public static int[] splitCalFormulaBySeparator(final String calFormula, final String separator) {
         validateSeperator(separator);
         validateCalFormula(calFormula, separator);
         return Arrays.stream(calFormula.split(String.format("[%s]", separator), -1))
@@ -37,7 +37,7 @@ public class StringSplit {
                 .toArray();
     }
 
-    public static int stringToNumber(String strNum) {
+    public static int stringToNumber(final String strNum) {
         if (Objects.equals(strNum, "")) {
             return 0;
         }
