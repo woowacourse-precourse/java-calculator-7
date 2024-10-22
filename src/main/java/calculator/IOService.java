@@ -7,10 +7,14 @@ import java.math.BigDecimal;
 public class IOService {
 
     public String getInput() {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String input = Console.readLine();
-        validateInput(input);
-        return input;
+        try {
+            System.out.println("덧셈할 문자열을 입력해 주세요.");
+            String input = Console.readLine();
+            validateInput(input);
+            return input;
+        } finally {
+            Console.close();
+        }
     }
 
     private void validateInput(String input) {
