@@ -15,14 +15,14 @@ class AdderTest {
     })
     void 숫자열이_주어지는_경우_덧셈을_수행할_수_있다(int first, int second, int last, int expected) {
         // given
-        List<Integer> numbers = List.of(1, 2, 3);
+        List<Integer> numbers = List.of(first, second, last);
         Adder adder = new Adder();
 
         // when
         int result = adder.add(numbers);
 
         // then
-        assertThat(result).isEqualTo(6);
+        assertThat(result).isEqualTo(expected);
     }
 
     @Test
