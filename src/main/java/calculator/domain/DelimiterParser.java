@@ -14,11 +14,13 @@ public class DelimiterParser {
 
     //   새로운 구분자 설정
     /*결과적으로 "//"로 시작하지 않는 경우 , "//"로 시작하더라도 구분자가 없는 경우*/
-    public String parse(String input) {
+    /*빈 값이 들어올 경우 디폴트 구분자로 유지*/
+    public void parse(String input) {
+        if (input == null || input.isEmpty()) {
+            return;  // 빈 입력일 경우 기존 구분자
+        }
         validateCustomDelimiterInput(input);
-        String customDelimiter = extractCustomDelimiter(input);
-        this.delimiter = customDelimiter;
-        return customDelimiter;
+        this.delimiter = extractCustomDelimiter(input);
     }
 
     //    입력된 구분자 형식 검사 ("//"로 시작 + "//" 제외 문자가 있는지 확인)

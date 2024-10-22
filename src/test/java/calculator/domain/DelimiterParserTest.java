@@ -27,8 +27,7 @@ class DelimiterParserTest {
     @Test
     @DisplayName("커스텀 구분자 파싱 테스트")
     void testParseCustomDelimiter() {
-        String result = delimiterParser.parse("//;");
-        assertEquals(";", result);
+        delimiterParser.parse("//;");
         assertEquals(";", delimiterParser.getDelimiter());
     }
 
@@ -51,8 +50,7 @@ class DelimiterParserTest {
     @Test
     @DisplayName("복잡한 커스텀 구분자 테스트")
     void testComplexCustomDelimiter() {
-        String result = delimiterParser.parse("//[***]");
-        assertEquals("[***]", result);
+        delimiterParser.parse("//[***]");
         assertEquals("[***]", delimiterParser.getDelimiter());
     }
 }
