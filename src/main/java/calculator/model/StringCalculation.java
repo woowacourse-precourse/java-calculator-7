@@ -12,7 +12,7 @@ public class StringCalculation {
             return 0;
         }
         int sum = 0;
-        sum = calculateExpression(expression, sum);
+        sum = calculateExpression(expression);
         return sum;
     }
 
