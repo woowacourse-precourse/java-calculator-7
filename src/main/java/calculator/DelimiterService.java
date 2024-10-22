@@ -26,7 +26,7 @@ public class DelimiterService {
     // 커스텀 구분자를 추출하고 정규식 패턴으로 반환하는 메서드
     private String getCustomDelimiterPattern(String customDelimiterLine) {
         // 커스텀 구분자 형식 체크
-        if (!customDelimiterLine.startsWith("//") || customDelimiterLine.length() != 3) {
+        if (!isValidCustomDelimiter(customDelimiterLine)) {
             throw new IllegalArgumentException("잘못된 구분자 형식입니다.");
         }
 
@@ -39,6 +39,10 @@ public class DelimiterService {
 
         // 커스텀 구분자를 정규식 패턴으로 반환
         return Pattern.quote(String.valueOf(customDelimiter));
+    }
+
+    private boolean isValidCustomDelimiter(String customDelimiterLine) {
+        return customDelimiterLine.startsWith("//") && customDelimiterLine.length() == 3;
     }
 
     // 기본 구분자 반환 메서드
