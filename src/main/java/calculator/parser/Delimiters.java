@@ -1,6 +1,7 @@
 package calculator.parser;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Delimiters {
@@ -8,11 +9,10 @@ public class Delimiters {
     private final String COMMA = ",";
     private final String COLON = ":";
 
-    private final Set<String> delimiters = new HashSet<>();
+    private final Set<String> delimiters;
 
     public Delimiters() {
-        delimiters.add(COMMA);
-        delimiters.add(COLON);
+        this.delimiters = new HashSet<>(List.of(COMMA, COLON));
     }
 
     public void add(String newDelimiter) {
