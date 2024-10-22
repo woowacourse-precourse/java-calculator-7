@@ -3,13 +3,13 @@ package calculator.domain;
 import java.util.Arrays;
 
 public class Calculator {
-    private static final int CUSTOM_DELIMITER_START_INDEX = 2;
-    private static final int CUSTOM_DELIMITER_END_INDEX = 3;
-    private static final int CUSTOM_INPUT_START_INDEX = 5;
+    private final static int CUSTOM_DELIMITER_START_INDEX = 2;
+    private final static int CUSTOM_DELIMITER_END_INDEX = 3;
+    private final static int CUSTOM_INPUT_START_INDEX = 5;
     private final static String PARSE_ERROR_MESSAGE = "잘못된 값을 입력했습니다.";
     private final String[] formulas;
 
-    public Calculator(){
+    public Calculator() {
         this("");
     }
 
@@ -32,15 +32,15 @@ public class Calculator {
 
 
     public int parse(String input) {
-        try{
+        try {
             return validate(Integer.parseInt(input));
-        } catch(Exception e) {
+        } catch (Exception e) {
             throw new IllegalArgumentException(PARSE_ERROR_MESSAGE);
         }
     }
 
     private int validate(int number) {
-        if(number < 0) {
+        if (number < 0) {
             throw new IllegalArgumentException();
         }
         return number;
