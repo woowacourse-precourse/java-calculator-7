@@ -1,4 +1,7 @@
 package calculator.model.calculator;
+
+import java.util.Arrays;
+
 public class StringCalculator {
     public int add(String input) {
         if (input.isEmpty()) {
@@ -6,7 +9,11 @@ public class StringCalculator {
         }
         return calculateSum(input);
     }
+
     private int calculateSum(String input) {
-        return 0;
+        String[] numbers = input.split("[,:]");
+        return Arrays.stream(numbers)
+                .mapToInt(Integer::parseInt)
+                .sum();
     }
 }
