@@ -22,12 +22,11 @@ public class StringValidate {
     }
 
     public static void validateSeperator(final String seperator) {
-        for (char c : seperator.toCharArray()) {
-            if (Character.isDigit(c)) {
-                throw new IllegalArgumentException("해당 문자열은 문자로만 이루어져야 합니다.");
-            }
+        if (seperator.chars().anyMatch(Character::isDigit)) {
+            throw new IllegalArgumentException("해당 문자열은 문자로만 이루어져야 합니다.");
         }
     }
+
 
     public static void validateCalFormula(final String string, final String separator) {
         if (!Objects.equals(string, "")) {
