@@ -5,10 +5,9 @@ import calculator.view.OutputView;
 
 public class Calculator {
 
-    private OutputView outputView;
-    private InputView inputView;
-    private Separator separator;
-    private Numbers numbers;
+    private final OutputView outputView;
+    private final InputView inputView;
+    private final Separator separator;
 
     public Calculator() {
         this.outputView = new OutputView();
@@ -19,7 +18,7 @@ public class Calculator {
     public void calculate() {
         outputView.printStartMessage();
         String readString = inputView.readString();
-        numbers = separator.getNumbers(readString);
+        Numbers numbers = separator.getNumbers(readString);
         outputView.printResult(numbers);
     }
 }

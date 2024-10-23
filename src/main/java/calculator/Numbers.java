@@ -1,10 +1,9 @@
 package calculator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Numbers {
-    private List<Double> numbers;
+    private final List<Double> numbers;
     public Numbers(List<Double> numbers) {
         validateNegative(numbers);
         this.numbers = numbers;
