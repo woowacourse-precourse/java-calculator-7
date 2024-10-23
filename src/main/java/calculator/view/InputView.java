@@ -6,7 +6,7 @@ public class InputView {
     public String readString() {
         String s = Console.readLine();
         if(s.isEmpty()) {
-            throw new IllegalArgumentException("[ERROR]덧셈할 문자열을 입력해 주세요");
+            return "0";
         }
         return s;
     }
