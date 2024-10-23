@@ -2,7 +2,7 @@ package calculator.model.delimiter;
 
 public class CustomDelimiter implements Delimiter {
     private static final String DELIMITER_PREFIX = "//";
-    private static final String NEW_LINE = "\\n";
+    private static final String DELIMITER_SUFFIX = "\\n";
     private static final int PREFIX_LENGTH = 2;
     private static final String EMPTY = "";
 
@@ -20,11 +20,11 @@ public class CustomDelimiter implements Delimiter {
     }
 
     public boolean isApplicable(String input) {
-        return input.startsWith(DELIMITER_PREFIX) && input.contains(NEW_LINE);
+        return input.startsWith(DELIMITER_PREFIX) && input.contains(DELIMITER_SUFFIX);
     }
 
     private String extractDelimiter(String input) {
-        int newLineIndex = input.indexOf(NEW_LINE);
+        int newLineIndex = input.indexOf(DELIMITER_SUFFIX);
 
         return input.substring(PREFIX_LENGTH, newLineIndex);
     }
@@ -40,6 +40,6 @@ public class CustomDelimiter implements Delimiter {
     }
 
     public String getCustomDelimiterPattern() {
-        return DELIMITER_PREFIX + delimiter + NEW_LINE;
+        return DELIMITER_PREFIX + delimiter + DELIMITER_SUFFIX;
     }
 }
