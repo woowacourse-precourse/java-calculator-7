@@ -54,8 +54,7 @@ public class Separator {
 
     private String getNumberString(String readString) {
         int subStringInt = readString.indexOf(CUSTOM_SEPARATOR_END) + CUSTOM_SEPARATOR_END.length();
-        String substring = readString.substring(subStringInt);
-        return substring;
+        return readString.substring(subStringInt);
     }
 
     private String addCustomSeparator(String readString) {
@@ -69,9 +68,6 @@ public class Separator {
     }
 
     public boolean hasCustomSeparator(String readString) {
-        if(readString.contains(CUSTOM_SEPARATOR_START) && readString.contains(CUSTOM_SEPARATOR_END)){
-            return true;
-        }
-        return false;
+        return readString.contains(CUSTOM_SEPARATOR_START) && readString.contains(CUSTOM_SEPARATOR_END);
     }
 }
