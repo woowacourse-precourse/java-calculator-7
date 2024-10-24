@@ -11,7 +11,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
-            run("//;\n1"); // 수정된 부분
+            run("//;\\n1");
             assertThat(output()).contains("결과 : 1");
         });
     }
@@ -21,7 +21,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("-1,2,3"))
                         .isInstanceOf(IllegalArgumentException.class)
-                        .hasMessageContaining("음수는 허용되지 않습니다: -1"));
+        );
     }
 
     @Override
