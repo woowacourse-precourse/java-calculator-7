@@ -85,7 +85,7 @@ public class CalculatorService {
     public Number sumOfList() {
         List<Number> values = calculator.getProcessedValue();
         double sum = 0;
-        for (Number value : values) {`
+        for (Number value : values) {
             sum += value.doubleValue();
         }
         calculator.setSumValue(sum);
