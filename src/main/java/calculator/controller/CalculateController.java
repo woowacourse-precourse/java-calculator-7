@@ -7,6 +7,7 @@ import calculator.domain.service.DelimiterParser;
 import calculator.domain.service.OperandParser;
 import calculator.view.InputView;
 import calculator.view.OutputView;
+import java.util.List;
 
 
 public class CalculateController {
@@ -34,7 +35,7 @@ public class CalculateController {
         outputView.printStartString();
         String inputString = inputView.getInputString();
         DelimiterParserResult delimParserResult = delimiterParser.parsingDelimiters(inputString);
-        String[] operands = operandParser.parsingOperands(delimParserResult);
+        List<String> operands = operandParser.parsingOperands(delimParserResult);
         int result = calculator.sum(operands);
         outputView.printResult(result);
     }

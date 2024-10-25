@@ -1,9 +1,11 @@
 package calculator.domain;
 
 
+import java.util.List;
+
 public class Calculator {
 
-    public int sum(String[] operands) {
+    public int sum(List<String> operands) {
         int sum = 0;
 
         for (String operand : operands) {
