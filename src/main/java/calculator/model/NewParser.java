@@ -2,8 +2,12 @@ package calculator.model;
 
 public class NewParser {
     public static int sum(String inputString) {
-
         int sum = 0;
+
+        if (inputString == null || inputString.isEmpty()) {
+            return 0;
+        }
+
         String[] operands = inputString.split(",|:");
 
         for (String operand : operands) {

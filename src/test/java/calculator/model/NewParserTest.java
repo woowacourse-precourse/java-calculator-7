@@ -11,4 +11,10 @@ class NewParserTest {
         Assertions.assertThat(NewParser.sum("1,2,3")).isEqualTo(6);
         Assertions.assertThat(NewParser.sum("1,2:3")).isEqualTo(6);
     }
+
+    @Test
+    void 빈문자_입력시_0_반환() {
+        Assertions.assertThat(NewParser.sum("")).isEqualTo(0);
+        Assertions.assertThat(NewParser.sum(null)).isEqualTo(0);
+    }
 }
