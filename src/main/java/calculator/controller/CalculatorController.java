@@ -1,41 +1,23 @@
 package calculator.controller;
 
-import calculator.model.NumberParser;
-import calculator.model.DelimiterParser;
 import calculator.service.CalculatorService;
+import calculator.view.InputView;
+import calculator.view.OutputView;
 
 public class CalculatorController {
     private final CalculatorService calculatorService;
-    private final NumberParser numberParser;
-    private final DelimiterParser delimiterParser;
-    private final ErrorResponseHandler errorResponseHandler; // ErrorResponseHandler 추가
+    private final InputView inputView;
+    private final OutputView outputView;
 
-    public CalculatorController(CalculatorService calculatorService) {
+    public CalculatorController(CalculatorService calculatorService, InputView inputView, OutputView outputView) {
         this.calculatorService = calculatorService;
-        this.numberParser = new NumberParser();
-        this.delimiterParser = new DelimiterParser();
-        this.errorResponseHandler = new ErrorResponseHandler(); // 인스턴스 생성
+        this.inputView = inputView;
+        this.outputView = outputView;
     }
 
-    public String handleRequest(String input) {
-        try {
-            // DelimiterParser를 사용하여 입력값 파싱
-            String[] numbers = delimiterParser.parse(input);
-
-            // 파싱된 숫자들을 검증
-            for (String number : numbers) {
-                if (!number.trim().isEmpty()) {
-                    int parsedNumber = numberParser.parseNumber(number.trim());
-                    numberParser.validatePositive(parsedNumber); // 이 메서드에서 예외 발생 가능
-                }
-            }
-
-            // 계산 서비스 호출
-            return String.valueOf(calculatorService.calculate(String.join(",", numbers)));
-        } catch (IllegalArgumentException e) {
-            return errorResponseHandler.handleError(e); // 에러 메시지 반환
-        }
+    public void run() {
+        String input = inputView.getInput();
+        int result = calculatorService.calculate(input); // 예외가 발생하면 여기서 처리됨
+        outputView.printResult(result);
     }
-
-
 }

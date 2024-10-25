@@ -1,15 +1,30 @@
 package calculator;
 
-import camp.nextstep.edu.missionutils.Console;
+import calculator.controller.CalculatorController;
+import calculator.model.Calculator;
+import calculator.model.DelimiterParser;
+import calculator.model.InputValidator;
+import calculator.service.CalculatorService;
+import calculator.view.InputView;
+import calculator.view.OutputView;
 
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        // Model 인스턴스 생성
+        Calculator calculator = new Calculator();
+        DelimiterParser delimiterParser = new DelimiterParser();
+        InputValidator inputValidator = new InputValidator();
 
-        System.out.println("덧셈할 문자를 입력하세요:");
-        String input = Console.readLine();
+        // Service 인스턴스 생성
+        CalculatorService calculatorService = new CalculatorService(calculator, delimiterParser, inputValidator);
 
-        int result = Calculator.add(input);
-        System.out.println("결과 : " + result);
+        // View 인스턴스 생성
+        InputView inputView = new InputView();
+        OutputView outputView = new OutputView();
+
+        // Controller 인스턴스 생성 및 실행
+        CalculatorController calculatorController = new CalculatorController(calculatorService, inputView, outputView);
+        calculatorController.run();
     }
+
 }
