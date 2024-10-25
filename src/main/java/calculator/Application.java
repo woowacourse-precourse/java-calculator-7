@@ -1,18 +1,17 @@
 package calculator;
 
+
 import calculator.controller.CalculateController;
-import calculator.controller.Parser;
 import calculator.model.CalculateModel;
-import calculator.view.CalculateView;
+import calculator.model.Parser;
+import calculator.view.InputView;
+import calculator.view.OutputView;
 
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
-        CalculateView calculateView = new CalculateView();
-        CalculateModel calculateModel = new CalculateModel();
-        Parser parser = new Parser();
-        CalculateController calculateController = new CalculateController();
+        CalculateController controller =
+                new CalculateController(new InputView(), new OutputView(), new Parser(), new CalculateModel());
 
-        calculateController.calculate(calculateView, calculateModel, parser);
+        controller.calculate();
     }
 }
