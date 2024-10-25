@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 class NewParserTest {
 
     @Test
-    void 쉼표를_구분자로_가지는_문자열의_합_출력() {
+    void 쉼표와_콜론을_구분자로_가지는_문자열의_합_출력() {
         Assertions.assertThat(NewParser.sum("1,2,3")).isEqualTo(6);
+        Assertions.assertThat(NewParser.sum("1,2:3")).isEqualTo(6);
     }
-
 }
