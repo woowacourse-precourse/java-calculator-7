@@ -22,7 +22,6 @@ public class OperandParser {
                 }
             }
         }
-
         return operands;
     }
 }

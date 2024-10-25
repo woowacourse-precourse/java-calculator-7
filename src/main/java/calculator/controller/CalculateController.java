@@ -34,9 +34,14 @@ public class CalculateController {
 
         outputView.printStartString();
         String inputString = inputView.getInputString();
-        DelimiterParserResult delimParserResult = delimiterParser.parsingDelimiters(inputString);
-        List<String> operands = operandParser.parsingOperands(delimParserResult);
-        int result = calculator.sum(operands);
-        outputView.printResult(result);
+        if (inputString == null || inputString.isEmpty()) {
+            outputView.printResult(0);
+        } else {
+            DelimiterParserResult delimParserResult = delimiterParser.parsingDelimiters(inputString);
+            List<String> operands = operandParser.parsingOperands(delimParserResult);
+            int result = calculator.sum(operands);
+            outputView.printResult(result);
+        }
+
     }
 }
