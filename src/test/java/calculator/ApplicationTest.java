@@ -20,7 +20,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
-            run("//;\n1");
+            run("//;\\n1");
             assertThat(output()).contains("결과 : 1");
         });
     }
@@ -47,6 +47,20 @@ class ApplicationTest extends NsTest {
                 assertThatThrownBy(() -> runException("-1,2,3"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
+    }
+
+
+    @Test
+    void 공백_또는_null_입력된_경우() {
+        assertSimpleTest(() -> {
+            run("");
+            assertThat(output()).contains("결과 : 0");
+        });
+
+        assertSimpleTest(() -> {
+            run(null);
+            assertThat(output()).contains("결과 : 0");
+        });
     }
 
     @Override
