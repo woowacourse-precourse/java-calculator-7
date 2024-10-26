@@ -18,12 +18,16 @@ public class CalculateController {
     private final OperandParser operandParser;
     private final Calculator calculator;
 
-    public CalculateController() {
-        this.inputView = new InputView();
-        this.outputView = new OutputView();
-        this.operandParser = new OperandParser();
-        this.delimiterParser = new DelimiterParser();
-        this.calculator = new Calculator();
+    public CalculateController(InputView inputView,
+                               OutputView outputView,
+                               OperandParser operandParser,
+                               DelimiterParser delimiterParser,
+                               Calculator calculator) {
+        this.inputView = inputView;
+        this.outputView = outputView;
+        this.operandParser = operandParser;
+        this.delimiterParser = delimiterParser;
+        this.calculator = calculator;
     }
 
     public void calculate() {
