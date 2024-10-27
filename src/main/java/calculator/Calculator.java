@@ -26,9 +26,8 @@ public class Calculator {
     public static int sum(String[] parsedNumbers) {
         int result = 0;
 
-            int parsedNumber = Integer.parseInt(number);
-            result += parsedNumber;
         for (String number : parsedNumbers) {
+            result += Integer.parseInt(number);
         }
 
         return result;
