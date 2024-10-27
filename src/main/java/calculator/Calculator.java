@@ -23,12 +23,12 @@ public class Calculator {
         System.out.println(RESULT_COMMENT + result);
     }
 
-    public static int sum(String[] delimiterArray) {
+    public static int sum(String[] parsedNumbers) {
         int result = 0;
 
-        for (String number : delimiterArray) {
             int parsedNumber = Integer.parseInt(number);
             result += parsedNumber;
+        for (String number : parsedNumbers) {
         }
 
         return result;
