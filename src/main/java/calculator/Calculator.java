@@ -49,9 +49,9 @@ public class Calculator {
     }
 
     private void validateNumber(String token) {
-        inputValidator.validateIsNumeric(token);            // 숫자인지 확인
-        inputValidator.validateInRange(token);              // 숫자가 int 범위에 있는지 확인
-        int number = Integer.parseInt(token);               // 숫자로 변환
-        inputValidator.validateNonNegative(number);         // 음수인지 검증
+        inputValidator.validateIsNumeric(token);
+        inputValidator.validateInRange(token);
+        int number = Integer.parseInt(token);
+        inputValidator.validateNonNegative(number);
     }
 }

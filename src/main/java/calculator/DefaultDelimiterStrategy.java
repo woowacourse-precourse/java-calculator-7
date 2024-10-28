@@ -11,7 +11,6 @@ public class DefaultDelimiterStrategy implements DelimiterStrategy {
 
     @Override
     public boolean matches(String input) {
-        // 사용자 정의 구분자 "//"가 아닌 경우 기본 구분자 전략을 사용
         return !input.startsWith("//");
     }
 }

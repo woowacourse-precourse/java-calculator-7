@@ -16,7 +16,6 @@ public class CustomDelimiterStrategy implements DelimiterStrategy {
 
     @Override
     public boolean matches(String input) {
-        // 입력이 "//"로 시작하면 사용자 정의 구분자로 처리
         return input.startsWith("//");
     }
 
