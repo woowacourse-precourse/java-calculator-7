@@ -2,6 +2,8 @@
 
 About 1st pre-course project
 
+---
+
 ## 📁 디렉토리 구조
 ```
 calculator
