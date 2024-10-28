@@ -1,13 +1,10 @@
 package calculator;
 
-import java.util.Arrays;
-
 public class CustomDelimiterStrategy implements DelimiterStrategy {
 
     @Override
     public String[] splitNumbers(String input) {
         String[] parts = input.split("\\\\n", 2);
-        System.out.println(Arrays.toString(parts));
         if (parts.length < 2) {
             throw new IllegalArgumentException("잘못된 구분자 형식입니다.");
         }
