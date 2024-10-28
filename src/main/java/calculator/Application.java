@@ -5,12 +5,13 @@ public class Application {
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
-        
+
         try {
-            int result = StringAddCalculator.add(input);
+            StringAddCalculator calculator = new StringAddCalculator();
+            int result = calculator.add(input);
             System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
-        	throw e;
+            throw e;
         }
     }
 }
