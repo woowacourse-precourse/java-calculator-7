@@ -9,7 +9,7 @@ calculator
 │   ├── InputRequest.java
 │   └── OutputResponse.java
 ├── error
-│   ├── CustomException.java
+│   └── CustomException.java
 ├── message
 │   ├── ErrorMessage.java
 │   ├── InputMessage.java
