@@ -2,29 +2,36 @@ package calculator;
 
 public class DelimiterFinder {
 
-	public static String findDelimiter(String input) {
-		int customPrefixIndex = input.indexOf("//");
-		String delimiter = ",:";
+    private static String PREFIX_FORMAT = "//";
+    private static String SUFFIX_FORMAT = "\n";
 
-		if (customPrefixIndex == 0) {
-			input = input.replace("\\n", "\n");
-			int customSuffixIndex = input.indexOf('\n');
-			// 커스텀 구분자 포맷을 커스텀 구분자로 사용하지 못하게 함
-			if (customSuffixIndex == -1 || customPrefixIndex + 2 == customSuffixIndex
-				|| input.indexOf("///") == 0) {
-				throw new IllegalArgumentException("잘못된 커스텀 구분자 포맷");
-			}
-			delimiter = input.substring(2, customSuffixIndex);
-		}
-		return delimiter;
-	}
+    public static String findDelimiter(String input) {
+        int customPrefixIndex = input.indexOf(PREFIX_FORMAT);
+        String delimiter = ",:";
 
-	public static int findDelimiterEndIndex(String input) {
-		input = input.replace("\\n", "\n");
-		if (input.indexOf("//") == -1) {
-			return 0;
-		}
-		int customSuffixIndex = input.indexOf('\n');
-		return customSuffixIndex + 2; // 커스텀 구분자 지정 문자를 뺀 끝 인덱스 반환
-	}
+        if (customPrefixIndex == 0) {
+            input = input.replace("\\n", SUFFIX_FORMAT);
+            int customSuffixIndex = input.indexOf(SUFFIX_FORMAT);
+            checkDelimiterFormat(customSuffixIndex, customPrefixIndex, input);
+            delimiter = input.substring(2, customSuffixIndex);
+        }
+        return delimiter;
+    }
+
+    private static void checkDelimiterFormat(int customSuffixIndex, int customPrefixIndex,
+        String input) {
+        if (customSuffixIndex == -1 || customPrefixIndex + 2 == customSuffixIndex
+            || input.indexOf("///") == 0) {
+            throw new IllegalArgumentException("잘못된 커스텀 구분자 포맷");
+        }
+    }
+
+    public static int findDelimiterEndIndex(String input) {
+        input = input.replace("\\n", SUFFIX_FORMAT);
+        if (input.indexOf(PREFIX_FORMAT) == -1) {
+            return 0;
+        }
+        int customSuffixIndex = input.indexOf(SUFFIX_FORMAT);
+        return customSuffixIndex + 2;
+    }
 }
