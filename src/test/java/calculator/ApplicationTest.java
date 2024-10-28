@@ -19,11 +19,29 @@ class ApplicationTest extends NsTest {
     @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> run("-1,2,3"))
+            assertThatThrownBy(() -> runException("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
         );
     }
-
+    
+    @Test
+    void 기본_구분자_테스트() {
+        assertSimpleTest(() -> {
+            run("1,2:3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+    
+    
+    @Test
+    void 잘못된_형식_예외_테스트() {
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException("//;1;2"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("잘못된 형식의 입력입니다.")
+        );
+    }
+    
     @Override
     public void runMain() {
         Application.main(new String[]{});
