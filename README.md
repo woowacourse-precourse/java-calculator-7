@@ -1,6 +1,6 @@
 # java-calculator-precourse
 
-About 1st pre-course project
+About 1st Pre-Course Project : Calculator
 
 ---
 
