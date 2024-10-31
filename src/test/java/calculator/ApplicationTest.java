@@ -23,6 +23,50 @@ class ApplicationTest extends NsTest {
                 .isInstanceOf(IllegalArgumentException.class)
         );
     }
+    @Test
+    void 커스텀_구분자_한줄_인풋() {
+        assertSimpleTest(() -> {
+            run("//;\\n3;3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+    @Test
+    void 시퀀스_구분자_엔터_인풋() {
+        assertSimpleTest(() -> {
+            run("//\\\n" +
+                    "3\\3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+    @Test
+    void 시퀀스_구분자_한줄_인풋() {
+        assertSimpleTest(() -> {
+            run("//;\\\\n3\\3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+    @Test
+    void 시퀀스_구분자_한줄_인풋_널() {
+        assertSimpleTest(() -> {
+            run("//;\\n");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+    @Test
+    void 시퀀스_구분자_엔터_인풋_널() {
+        assertSimpleTest(() -> {
+            run("//;\\\n" +
+                    "\n");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+    @Test
+    void 커스텀_시퀀스_구분자_한줄_인풋() {
+        assertSimpleTest(() -> {
+            run("//\\;\\n3\\3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
 
     @Override
     public void runMain() {
