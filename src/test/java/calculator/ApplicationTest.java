@@ -15,14 +15,22 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("결과 : 1");
         });
     }
-
     @Test
-    void 예외_테스트() {
+    void test1() { // 음수 입력 테스트
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> Calculator.add("1,-2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
+
+    @Test
+    void test4() { //여러개의 피연산자
+        assertSimpleTest(() -> {
+            run("//;\\n3;7;1:200,1");
+            assertThat(output()).contains("결과 : 212");
+        });
+    }
+
 
     @Override
     public void runMain() {
