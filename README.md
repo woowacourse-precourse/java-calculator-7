@@ -105,4 +105,4 @@ Console이 수정이 가능한지 알 수 없기 때문에 try-with-resources �
 데이터의 불변성을 위해 사용하는 것이므로 외부로는 빼지 않는것이 좋을것같다. 그렇게 되면 합연산이 아닌 다른 연산에 대한 확장성이 떨어진다. 불변성에 문제없도록 하면 외부에서 처리해도 되지않을까?
 
 
-[d6960307-02ff-42ec-87b3-4f9d7f378f3e_1주차.pdf](https://github.com/user-attachments/files/17693754/d6960307-02ff-42ec-87b3-4f9d7f378f3e_1.pdf)
+-02ff-42ec-87b3-4f9d7f378f3e_1.pdf)
