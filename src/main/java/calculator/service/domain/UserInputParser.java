@@ -24,7 +24,7 @@ public class UserInputParser {
 
     private static void checkOnlyNumberAndDelimiter(String userInputAfterParse, DelimiterHandler delimiterHandler) {
         for (Character each : userInputAfterParse.toCharArray()) {
-            if (!Character.isDigit(each) && !delimiterHandler.isVaildDelimiter(each)) {
+            if (!Character.isDigit(each) && !delimiterHandler.isValidDelimiter(each)) {
                 throw new IllegalArgumentException("형식에 맞지 않는 문자열을 입력했습니다.");
             }
         }
@@ -35,7 +35,7 @@ public class UserInputParser {
         List<Double> numberList = new ArrayList<>();
 
         for (Character each : userInputAfterParse.toCharArray()) {
-            if (delimiterHandler.isVaildDelimiter(each)) {
+            if (delimiterHandler.isValidDelimiter(each)) {
                 if (numberBuilder.isEmpty()) {
                     continue;
                 }
@@ -76,7 +76,6 @@ public class UserInputParser {
     }
 
     private static Matcher createMatcher(String userInput) {
-        //Pattern pattern = Pattern.compile("(?<=//)(.)(?=\\\\n)");
         Pattern pattern = Pattern.compile("//.\\\\n");
 
         return pattern.matcher(userInput);

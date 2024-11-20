@@ -16,7 +16,7 @@ public class DelimiterHandler {
         }
     }
 
-    public boolean isVaildDelimiter(char delimiter) {
+    public boolean isValidDelimiter(char delimiter) {
         Delimiter target = new Delimiter(delimiter);
         for (Delimiter each : delimiterList) {
             if (each.equals(target)) {

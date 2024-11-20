@@ -10,24 +10,27 @@ ___
 ## OuputHandler
 > 출력을 처리하는 클래스
 ### Printer
-> 출력을 하는 클래스
+> 출력을 수행하는 클래스
 
 
-## Calculator
-> 계산을 처리하는 클래스
-### TargetNumber
+## NumberHandler
 > 숫자를 관리하는 클래스
+### Number
+> 숫자를 구체화 한 클래스
 
 
-## DelimiterParser
-> 입력 받은 문자열을 파싱하는 클래스
-### Delimiter
+## DelimiterHandler
 > 구분자를 관리하는 클래스
+### Delimiter
+> 구분자를 구체화 한 클래스
 
+## UserInputParser
+> 사용자 입력을 파싱하는 클래스
 
-## CalculateService
+## ServiceHandler
 > 도메인 흐름을 담당하는 클래스
- 
 
-## CalculateController
-> 입출력과 함께 도메인 흐름을 담당하는 클래스
+## Controller
+> 입출력을 담당하고 ServiceHandler에게 도메인 로직을 요청하는 클래스
+
+

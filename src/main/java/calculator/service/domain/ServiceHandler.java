@@ -14,14 +14,14 @@ public class ServiceHandler {
 
     private void setNumberHandler(String userInput, DelimiterHandler delimiterHandler) {
         List<Double> numbers = UserInputParser.parseNumber(userInput, delimiterHandler);
-        for(Double each : numbers) {
+        for (Double each : numbers) {
             numberHandler.addNumber(each);
         }
     }
 
     private void setDelimiterHandler(String userInput) {
         List<Character> customDelimiter = UserInputParser.parseCustomDelimiter(userInput);
-        for(Character each : customDelimiter) {
+        for (Character each : customDelimiter) {
             delimiterHandler.addDelimiter(each);
         }
     }
