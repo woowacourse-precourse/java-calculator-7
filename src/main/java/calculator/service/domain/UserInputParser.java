@@ -16,9 +16,18 @@ public class UserInputParser {
 
     public static List<Double> parseNumber(String userInput, DelimiterHandler delimiterHandler) {
         String userInputAfterParse = getUserInputAfterParse(userInput);
+        checkOnlyNumberAndDelimiter(userInputAfterParse, delimiterHandler);
         List<Double> result = extractNumbers(userInputAfterParse, delimiterHandler);
 
         return result;
+    }
+
+    private static void checkOnlyNumberAndDelimiter(String userInputAfterParse, DelimiterHandler delimiterHandler) {
+        for (Character each : userInputAfterParse.toCharArray()) {
+            if (!Character.isDigit(each) && !delimiterHandler.isVaildDelimiter(each)) {
+                throw new IllegalArgumentException("형식에 맞지 않는 문자열을 입력했습니다.");
+            }
+        }
     }
 
     private static List<Double> extractNumbers(String userInputAfterParse, DelimiterHandler delimiterHandler) {
@@ -27,7 +36,9 @@ public class UserInputParser {
 
         for (Character each : userInputAfterParse.toCharArray()) {
             if (delimiterHandler.isVaildDelimiter(each)) {
-                if(numberBuilder.isEmpty()) continue;
+                if (numberBuilder.isEmpty()) {
+                    continue;
+                }
                 numberList.add(Double.valueOf(numberBuilder.toString()));
                 numberBuilder.delete(0, numberBuilder.length());
                 continue;
