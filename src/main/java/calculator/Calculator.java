@@ -7,7 +7,6 @@ import java.util.regex.Pattern;
 public class Calculator {
 
     private final String argument;
-    private static final Pattern pattern = Pattern.compile("//[^\\\\n]\\\\n[^\\\\n]*");
 
     public Calculator(String argument) {
         this.argument = argument;
@@ -21,10 +20,10 @@ public class Calculator {
         List<Long> result = new ArrayList<>();
         String expression = argument;
         String splitter = "[,:]";
-        if (argument.length()==0) {
+        if (argument.isEmpty()) {
             return result;
         }
-        if (pattern.matcher(argument).matches()) {
+        if (argument.startsWith("//")) {
             String[] tmp = argument.split("\\\\n");
             if (tmp.length!=2 || tmp[0].length()!=3) {
                 throw new IllegalArgumentException("커스텀 구분자를 찾을 수 없습니다.");
