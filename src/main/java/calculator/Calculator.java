@@ -1,8 +1,8 @@
 package calculator;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class Calculator {
 
@@ -12,45 +12,57 @@ public class Calculator {
         this.argument = argument;
     }
 
-    public Long calculate() {
+    public BigInteger calculate() {
         return addElements(parse());
     }
 
-    private List<Long> parse() {
-        List<Long> result = new ArrayList<>();
+    private List<BigInteger> parse() {
         String expression = argument;
-        String splitter = "[,:]";
+        String delimiter = "[,:]";
+        List<BigInteger> result = new ArrayList<>();
         if (argument.isEmpty()) {
             return result;
         }
         if (argument.startsWith("//")) {
-            String[] tmp = argument.split("\\\\n");
-            if (tmp.length!=2 || tmp[0].length()!=3) {
-                throw new IllegalArgumentException("커스텀 구분자를 찾을 수 없습니다.");
-            }
-            expression = tmp[1];
-            splitter = tmp[0].substring(2, 3);
+            String[] token = argument.split("\\\\n");
+            validateCustomDelimiter(token);
+            expression = token[1];
+            delimiter = token[0].substring(2, 3);
         }
-        String[] operands = expression.split(splitter);
-        try {
-            for (String operand : operands) {
-                long number = Long.parseLong(operand);
-                if (number < 0) {
-                    throw new IllegalArgumentException();
-                }
-                result.add(number);
-            }
-        } catch (RuntimeException e) {
-            throw new IllegalArgumentException("수 입력값을 파싱할 수 없습니다.");
+        String[] operands = expression.split(delimiter);
+        validateNumbers(operands);
+        for (String operand : operands) {
+            result.add(new BigInteger(operand));
         }
         return result;
     }
 
-    private Long addElements(List<Long> elements) {
-        Long sum = 0L;
-        for (Long element: elements) {
-            sum += element;
+    private static void validateNumbers(String[] operands) {
+        try {
+            for (String operand : operands) {
+                BigInteger number = new BigInteger(operand);
+                if (number.compareTo(BigInteger.ZERO) <= 0) {
+                    throw new IllegalArgumentException();
+                }
+            }
+        } catch (RuntimeException e) {
+            throw new IllegalArgumentException("수 입력값을 파싱할 수 없습니다.");
+        }
+    }
+
+    private static void validateCustomDelimiter(String[] tokens) {
+        if (tokens.length!=2 || tokens[0].length()!=3) {
+            throw new IllegalArgumentException("커스텀 구분자를 찾을 수 없습니다.");
+        }
+    }
+
+    private BigInteger addElements(List<BigInteger> elements) {
+        BigInteger sum = BigInteger.ZERO;
+        for (BigInteger element: elements) {
+            sum = sum.add(element);
         }
         return sum;
     }
+
+
 }
