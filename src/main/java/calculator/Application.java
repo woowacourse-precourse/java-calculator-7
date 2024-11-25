@@ -24,7 +24,7 @@ public class Application {
     }
 
     private int cal(String input) {
-        String delimiters = ",;";
+        String delimiters = ",:";
 
         if (input.startsWith("//")) {
             int delimiterEnd = input.indexOf("\\n");
