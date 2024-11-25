@@ -4,18 +4,21 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     private String res;
+    private String delimiters = ",:";
+    static String input;
 
     public static void main(String[] args) {
 
         // 프로그램 실행
-        String input = Console.readLine();  // Console API로부터 입력값 읽기
+        input = Console.readLine();  // Console API로부터 입력값 읽기
         Application app = new Application();
-        app.run(input);
+        app.run();
         System.out.println(app.output());
     }
 
-    public void run(String input) {
-        int calRes = cal(input);
+    public void run() {
+        addDelimiter();
+        int calRes = cal();
         res = "결과 : " + calRes;
     }
 
@@ -23,9 +26,7 @@ public class Application {
         return res;
     }
 
-    private int cal(String input) {
-        String delimiters = ",:";
-
+    private void addDelimiter() {
         if (input.startsWith("//")) {
             int delimiterEnd = input.indexOf("\\n");
             if (delimiterEnd != -1) {
@@ -36,22 +37,18 @@ public class Application {
                 throw new IllegalArgumentException("wrong type.");
             }
         }
+    }
 
+    private int cal() {
         String[] tokens = input.split("[" + delimiters + "]");
         int ans = 0;
-
         for (String token : tokens) {
             if (!token.isEmpty()) {
                 int num = Integer.parseInt(token);
-
-                if (num < 0) {
-                    throw new IllegalArgumentException("negative num detected.");
-                }
-
+                if (num < 0) { throw new IllegalArgumentException("negative num detected."); }
                 ans += num;
             }
         }
-
         return ans;
     }
 }
