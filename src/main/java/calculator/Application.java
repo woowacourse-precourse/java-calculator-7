@@ -1,17 +1,19 @@
 package calculator;
 
-import camp.nextstep.edu.missionutils.Console;
+import java.util.List;
 
 public class Application {
 
     public static void main(String[] args) {
-        System.out.println("덧셈 할 문자열을 입력해주세요.");
-        String input = Console.readLine();
-
-        Calculator calculator = new Calculator(input);
-
-        Integer result = calculator.caculate();
-
+        InputView inputView = new InputView();
+        String input = inputView.readInput();
+        Validator validator = new Validator();
+        StringType stringType = validator.getStringType(input);
+        Splitor splitor = stringType.getSplitor();
+        Converter converter = new Converter();
+        List<Integer> numbers = converter.convert(splitor.split());
+        Calculator calculator = new Calculator(numbers);
+        Integer result = calculator.sum();
         System.out.printf("결과 : %d\n", result);
     }
 }

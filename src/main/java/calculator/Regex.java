@@ -2,16 +2,17 @@ package calculator;
 
 public enum Regex {
     DEFAULT_SEPARATOR_REGEX(",|:"),
-    NUMBER_REGEX("\\d+"),
+    CUSTOM_SEPARATOR_REGEX("//.\\n."),
+    START_WITH_NUMBER_REGEX("\\d+"),
     SPECIAL_CHARACTER_REGEX("[\\.\\*\\+\\^\\$\\[\\]\\{\\}\\(\\)\\|\\\\\\?]");
 
-    private final String value;
+    private final String pattern;
 
-    Regex(String value) {
-        this.value = value;
+    Regex(String pattern) {
+        this.pattern = pattern;
     }
 
     public String getPattern() {
-        return value;
+        return pattern;
     }
 }
