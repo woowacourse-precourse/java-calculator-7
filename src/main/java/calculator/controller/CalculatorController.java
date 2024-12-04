@@ -19,6 +19,7 @@ public class CalculatorController {
             displayResult(result);
         } catch (Exception e) {
             displayError(e.getMessage());
+            throw e;
         }
     }
 
@@ -28,7 +29,7 @@ public class CalculatorController {
     }
 
     private void displayResult(int result) {
-        System.out.println("Result: " + result);
+        System.out.println("결과 : " + result);
     }
 
     private void displayError(String message) {

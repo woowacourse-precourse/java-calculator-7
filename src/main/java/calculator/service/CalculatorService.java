@@ -4,9 +4,9 @@ import calculator.domain.CalculatorInput;
 
 public class CalculatorService {
     private String delimiters = ",:";
-
+    private String input;
     public int calculate(CalculatorInput calculatorInput) {
-        String input = calculatorInput.getInput();
+        this.input = calculatorInput.getInput();
         addDelimiter(input);
         return computeSum(input);
     }
@@ -18,7 +18,7 @@ public class CalculatorService {
                 String customDelimiter = input.substring(2, delimiterEnd);
                 delimiters += customDelimiter;
                 // Update input to exclude custom delimiter declaration
-                input = input.substring(delimiterEnd + 2);
+                this.input = input.substring(delimiterEnd + 2);
             } else {
                 throw new IllegalArgumentException("Wrong input format.");
             }
