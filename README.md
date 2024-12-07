@@ -1,24 +1,49 @@
 # java-calculator-precourse
 
-## input을 받는 함수를 만들어준다.
+> -  입력받은 문자열을 특정 구분자로 분리한 뒤, 숫자들의 합을 계산하는 간단한 문자열 계산기 애플리케이션입니다. MVC(Model-View-Controller) 패턴을 적용하여, 입력/출력과 비즈니스 로직을 명확히 분리하고 유지보수성과 확장성을 높였습니다.
 
-> main() : input
-- 기본적으로는 쉼표(,) or (:) 구분자로 가지는 문자열이다. (String으로 받아보자)
-- 예: "" => 0, "1,2" => 3, "1,2,3" => 6, "1,2:3" => 
 
-> cal() : 받은 문자열에서 커스텀 구분자를 뽑아내자.
+![alt text](image.png)
 
-- 예를 들어 "//;\n1;2;3"과 같이 값을 입력할 경우 커스텀 구분자에 세미콜론(;)이 추가된다.
+## **Application.java**  
+  > 애플리케이션 시작점으로 `CalculatorController`를 생성하여 전체 프로세스를 시작합니다.
 
-- 문제를 잘 읽어보면 커스텀 구분자는 문자열 앞부분에 나온다고 명시되어있다 !!
+## **controller/CalculatorController.java**  
+  > 전체 흐름(Controller)을 담당하는 클래스입니다.  
+  - 사용자의 입력을 받아 `CalculatorInput` 객체를 생성합니다.  
+  - 이 입력 객체를 `CalculatorService`에 전달하여 계산 결과를 얻습니다.  
+  - 최종 결과를 콘솔에 출력합니다.  
+  - 컨트롤러는 비즈니스 로직을 직접 수행하지 않고 서비스 계층에 위임합니다.
 
-- 성립하지 않는다면 -> illegal, 구분자가 아닌 문자가 나온다면 -> illegal
+##  **domain/CalculatorInput.java**  
+  > 사용자가 입력한 문자열을 나타내는 도메인 객체입니다.  
+  - 구분자를 파싱하거나 기본 구분자(`,`나 `:`)를 사용하도록 지원할 수 있습니다.  
+  - 인풋 검증 로직을 추가하여 예외 상황 처리도 가능합니다.
 
-- illegal이 아니라면 계산을 시작한다.
+## **service/CalculatorService.java**  
+  > 비즈니스 로직을 처리하는 서비스 계층입니다.  
+  - `CalculatorInput`에서 추출한 숫자들을 합산합니다.  
+  - 음수나 잘못된 형식의 입력에 대해 예외를 던지는 등 핵심 계산 로직을 담고 있습니다.
 
-- delimiter 기준으로 input을 split 하여 parseInt로 숫자로 바꿔준다.
+## 실행 방법
 
-- 계속해서 더해주다가 음수가 나온다면 illegal
+1. `Application.java`를 실행합니다.
+2. 콘솔에 계산할 문자열을 입력합니다. 예) `"1,2,3"`, `"//;\n1;2;3"` 등
+3. 결과로 합산된 숫자의 합을 출력합니다.
+
+# Package 구조
+```
+
+📦calculator
+ ┣ 📂controller
+ ┃ ┗ 📜CalculatorController.java
+ ┣ 📂domain
+ ┃ ┗ 📜CalculatorInput.java
+ ┣ 📂service
+ ┃ ┗ 📜CalculatorService.java
+ ┗ 📜Application.java
+
+ ```
 
 # 주의할 점
 > 양수의 범위가 정해져있지 않다. int 타입을 사용해보자.
