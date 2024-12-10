@@ -14,11 +14,11 @@ public class RecommendService {
             String menu = null;
             while (true) {
                 menu = Category.recommendMenu(category);
-                if (!recommend.getInedible().get(coach).contains(menu)) {
+                if (!recommend.getRecommendMenu().get(coach).contains(menu)) {
                     break;
                 }
             }
-            recommend.getInedible().get(coach).add(menu);
+            recommend.getRecommendMenu(coach).add(menu);
         }
     }
 }

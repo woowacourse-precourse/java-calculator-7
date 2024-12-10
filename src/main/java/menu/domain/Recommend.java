@@ -8,10 +8,12 @@ public class Recommend {
     private List<String> categories = new ArrayList<>();
     private List<String> coach;
     private Map<String, List<String>> inedible;
+    private Map<String, List<String>> recommendMenu;
 
-    public Recommend(List<String> coach, Map<String, List<String>> inedible) {
+    public Recommend(List<String> coach, Map<String, List<String>> inedible, Map<String, List<String>> recommendMenu) {
         this.coach = coach;
         this.inedible = inedible;
+        this.recommendMenu = recommendMenu;
     }
 
     public boolean isCategoryAmountOverThree(String category) {
@@ -34,11 +36,15 @@ public class Recommend {
         return coach;
     }
 
-    public Map<String, List<String>> getInedible() {
+    public Map<String, List<String>> getRecommendMenu() {
         return inedible;
     }
 
     public List<String> getCategories() {
         return categories;
+    }
+
+    public List<String> getRecommendMenu(String coach) {
+        return recommendMenu.get(coach);
     }
 }

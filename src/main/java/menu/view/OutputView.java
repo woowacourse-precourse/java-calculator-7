@@ -1,5 +1,6 @@
 package menu.view;
 
+import java.util.List;
 import menu.domain.Recommend;
 
 public class OutputView {
@@ -30,8 +31,7 @@ public class OutputView {
     }
 
     private void printMenu(Recommend recommend, String coach) {
-        System.out.printf(COACH_RESULT, coach, recommend.getInedible().get(coach).get(0),
-                recommend.getInedible().get(coach).get(1), recommend.getInedible().get(coach).get(2),
-                recommend.getInedible().get(coach).get(3), recommend.getInedible().get(coach).get(4));
+        List<String> menus = recommend.getRecommendMenu(coach);
+        System.out.printf(COACH_RESULT, coach, menus.get(0), menus.get(1), menus.get(2), menus.get(3), menus.get(4));
     }
 }
