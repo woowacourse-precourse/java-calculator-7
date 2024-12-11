@@ -30,6 +30,7 @@ public class InputView {
                 System.out.printf(INPUT_INEDIBLE, name);
                 String input = Console.readLine();
                 String[] splitInput = Spliter.splitInput(input);
+                Validator.validateInedible(splitInput);
                 return Parser.parseInputToList(splitInput);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());

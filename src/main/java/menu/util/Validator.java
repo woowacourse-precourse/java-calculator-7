@@ -1,6 +1,7 @@
 package menu.util;
 
 import java.util.List;
+import menu.domain.Category;
 
 public class Validator {
     public static void validateCoach(String[] coachs) {
@@ -22,11 +23,12 @@ public class Validator {
         }
     }
 
-    public static void validateCategory(String category) {
-
-    }
-
     public static void validateInedible(String[] inedible) {
-
+        List<String> allMenu = Category.getAllMenu();
+        for (String inedibleMenu : inedible) {
+            if (!allMenu.contains(inedibleMenu)) {
+                throw new IllegalArgumentException(Exception.ERROR + Exception.INVALID_INEDIBLE);
+            }
+        }
     }
 }

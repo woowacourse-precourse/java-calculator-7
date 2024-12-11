@@ -1,6 +1,7 @@
 package menu.domain;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import menu.util.Exception;
@@ -32,5 +33,15 @@ public enum Category {
                 .map(Category::name)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(Exception.ERROR + Exception.RANDOM_NUMBER));
+    }
+
+    public static List<String> getAllMenu() {
+        List<String> allMenu = new ArrayList<>();
+        for (Category value : values()) {
+            for (String menu : value.menus) {
+                allMenu.add(menu);
+            }
+        }
+        return allMenu;
     }
 }

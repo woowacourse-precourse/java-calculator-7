@@ -18,7 +18,7 @@ public class Recommend {
 
     public boolean isCategoryAmountOverThree(String category) {
         long count = categories.stream().filter(c -> c.equals(category)).count();
-        if (count >= 3) {
+        if (count >= 2) {
             return true;
         }
         return false;
