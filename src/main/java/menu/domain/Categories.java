@@ -15,6 +15,13 @@ public class Categories {
         categories.add(category);
     }
 
+    public boolean isComplete() {
+        if (categories.size() == 5) {
+            return true;
+        }
+        return false;
+    }
+
     private void validateCategory(String category) {
         long count = categories.stream()
                 .filter(c -> c.equals(category))
