@@ -16,4 +16,12 @@ public class InedibleMenu {
             throw new IllegalArgumentException(Exception.ERROR + Exception.INEDIBLE_MENU_AMOUNT_OVER_RANGE);
         }
     }
+
+    private void validateInedibleMenu(List<String> menus) {
+        for (String menu : menus) {
+            if (!Menu.isInMenu(menu)) {
+                throw new IllegalArgumentException(Exception.ERROR + Exception.NOT_EXIST_MENU);
+            }
+        }
+    }
 }
