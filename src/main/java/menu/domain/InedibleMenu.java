@@ -8,6 +8,7 @@ public class InedibleMenu {
 
     public InedibleMenu(List<String> menus) {
         validateMenuAmount(menus);
+        validateInedibleMenu(menus);
         this.menus = menus;
     }
 
