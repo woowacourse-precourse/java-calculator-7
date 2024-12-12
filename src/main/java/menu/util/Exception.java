@@ -8,4 +8,5 @@ public class Exception {
     public static final String INEDIBLE_MENU_AMOUNT_OVER_RANGE = "못 먹는 메뉴는 최대 2개입니다.";
     public static final String DUPLICATE_RECOMMEND_MENU = "이미 추천받은 메뉴입니다.";
     public static final String NOT_EXIST_MENU = "존재하지 않는 메뉴입니다.";
+    public static final String OVER_CATEGORY_AMOUNT = "추천할 수 있는 카테고리의 횟수를 넘었습니다.";
 }
