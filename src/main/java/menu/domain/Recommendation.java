@@ -16,4 +16,11 @@ public class Recommendation {
     public void addRecommendMenu(String category) {
         coachs.recommendMenuOneCycle(category);
     }
+
+    public boolean isCompleteRecommendation() {
+        if (categories.isComplete()) {
+            return true;
+        }
+        return false;
+    }
 }
