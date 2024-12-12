@@ -12,15 +12,16 @@ public class Coachs {
     }
 
     public void recommendMenuOneCycle() {
+        String category = Menu.randomCategory();
         for (Coach coach : coachs) {
-            recommendMenu(coach);
+            recommendMenu(coach, category);
         }
     }
 
-    private void recommendMenu(Coach coach) {
+    private void recommendMenu(Coach coach, String category) {
         while (true) {
             try {
-                coach.addRecommendMenu(Menu.recommendationMenu());
+                coach.addRecommendMenu(Menu.recommendationMenu(category));
                 break;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
