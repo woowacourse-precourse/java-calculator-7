@@ -18,6 +18,10 @@ public class Coach {
         recommendMenu.addRecommendMenu(menu);
     }
 
+    public String getName() {
+        return name;
+    }
+
     private void validateNameLength(String name) {
         if (name.length() < 2 || name.length() > 4) {
             throw new IllegalArgumentException(Exception.ERROR + Exception.COACH_NAME_LENGTH);

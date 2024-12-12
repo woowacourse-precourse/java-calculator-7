@@ -17,6 +17,10 @@ public class Coachs {
         }
     }
 
+    public List<Coach> getCoachs() {
+        return getCoachs();
+    }
+
     private void recommendMenu(Coach coach, String category) {
         while (true) {
             try {

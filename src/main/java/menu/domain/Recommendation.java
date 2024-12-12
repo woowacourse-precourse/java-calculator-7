@@ -27,4 +27,8 @@ public class Recommendation {
     public Categories getCategories() {
         return categories;
     }
+
+    public Coachs getCoachs() {
+        return coachs;
+    }
 }
