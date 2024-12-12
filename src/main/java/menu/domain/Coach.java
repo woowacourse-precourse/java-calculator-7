@@ -26,6 +26,10 @@ public class Coach {
         return recommendMenu;
     }
 
+    public InedibleMenu getInedibleMenu() {
+        return inedibleMenu;
+    }
+
     private void validateNameLength(String name) {
         if (name.length() < 2 || name.length() > 4) {
             throw new IllegalArgumentException(Exception.ERROR + Exception.COACH_NAME_LENGTH);

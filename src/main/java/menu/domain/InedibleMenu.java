@@ -1,13 +1,24 @@
 package menu.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import menu.util.Exception;
 
 public class InedibleMenu {
-    private List<String> menus;
+    private List<String> menus = new ArrayList<>();
 
-    public InedibleMenu(List<String> menus) {
-        if (menus != null) {
+    public InedibleMenu() {
+    }
+
+    public boolean isEdibleMenu(String menu) {
+        if (menus.contains(menu)) {
+            return true;
+        }
+        return false;
+    }
+
+    public void setEdibleMenu(List<String> menus) {
+        if (!(menus.size() == 1 && menus.get(0).equals(""))) {
             validateMenuAmount(menus);
             validateInedibleMenu(menus);
         }

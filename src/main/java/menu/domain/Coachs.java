@@ -31,12 +31,18 @@ public class Coachs {
     }
 
     private void recommendMenu(Coach coach, String category) {
-        while (true) {
-            try {
-                coach.addRecommendMenu(Menu.recommendationMenu(category));
-                break;
-            } catch (IllegalArgumentException e) {
-            }
+        try {
+            String menu = Menu.recommendationMenu(category);
+            validateMenuIsInedible(coach, menu);
+            coach.addRecommendMenu(menu);
+        } catch (IllegalArgumentException e) {
+            recommendMenu(coach, category);
+        }
+    }
+
+    private void validateMenuIsInedible(Coach coach, String menu) {
+        if (coach.getInedibleMenu().isEdibleMenu(menu)) {
+            throw new IllegalArgumentException(Exception.ERROR);
         }
     }
 

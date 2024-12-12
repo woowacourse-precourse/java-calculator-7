@@ -26,20 +26,45 @@ public class RecommendationController {
 
     public void run() {
         outputView.printStart();
-        List<Coach> coaches = new ArrayList<>();
-        List<String> inputCoachs = inputView.readCoachs();
-        for (String coach : inputCoachs) {
-            List<String> indeibles = inputView.readInedibles(coach);
-            InedibleMenu inedibleMenu = new InedibleMenu(indeibles);
-            RecommendMenu recommendMenu = new RecommendMenu();
-            coaches.add(new Coach(coach, inedibleMenu, recommendMenu));
+        Coachs coachs = createCoachs();
+        for (Coach coach : coachs.getCoachs()) {
+            createInedible(coach);
         }
-        Coachs coachs = new Coachs(coaches);
         Categories categories = new Categories();
         recommendation = new Recommendation(coachs, categories);
         recommendationService = new RecommendationService(recommendation);
         recommendationService.recommendationMenu();
         outputView.printResult(recommendation.getCategories().getCategories(),
                 recommendation.getCoachs().getCoachs());
+    }
+
+    private void createCoach(String coach, List<Coach> coaches) {
+        InedibleMenu inedibleMenu = new InedibleMenu();
+        RecommendMenu recommendMenu = new RecommendMenu();
+        coaches.add(new Coach(coach, inedibleMenu, recommendMenu));
+    }
+
+    private Coachs createCoachs() {
+        try {
+            List<Coach> coaches = new ArrayList<>();
+            List<String> inputCoachs = inputView.readCoachs();
+            for (String coach : inputCoachs) {
+                createCoach(coach, coaches);
+            }
+            Coachs coachs = new Coachs(coaches);
+            return coachs;
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return createCoachs();
+        }
+    }
+
+    private void createInedible(Coach coach) {
+        try {
+            coach.getInedibleMenu().setEdibleMenu(inputView.readInedibles(coach.getName()));
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            createInedible(coach);
+        }
     }
 }

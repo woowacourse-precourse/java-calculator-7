@@ -22,13 +22,12 @@ public class RecommendationService {
     }
 
     private String randomCategory() {
-        while (true) {
-            try {
-                String category = Menu.randomCategory();
-                recommendation.addCategory(category);
-                return category;
-            } catch (IllegalArgumentException e) {
-            }
+        try {
+            String category = Menu.randomCategory();
+            recommendation.addCategory(category);
+            return category;
+        } catch (IllegalArgumentException e) {
+            return randomCategory();
         }
     }
 }
