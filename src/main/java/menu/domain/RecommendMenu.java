@@ -15,6 +15,10 @@ public class RecommendMenu {
         menus.add(menu);
     }
 
+    public List<String> getMenus() {
+        return menus;
+    }
+
     private void validateRecommendMenu(String menu) {
         if (menus.contains(menu)) {
             throw new IllegalArgumentException(Exception.ERROR + Exception.DUPLICATE_RECOMMEND_MENU);

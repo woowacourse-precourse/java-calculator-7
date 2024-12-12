@@ -1,5 +1,6 @@
 package menu.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import menu.util.Exception;
 
@@ -17,8 +18,16 @@ public class Coachs {
         }
     }
 
+    public List<String> getCoachNames() {
+        List<String> coachNames = new ArrayList<>();
+        for (Coach coach : coachs) {
+            coachNames.add(coach.getName());
+        }
+        return coachNames;
+    }
+
     public List<Coach> getCoachs() {
-        return getCoachs();
+        return coachs;
     }
 
     private void recommendMenu(Coach coach, String category) {
@@ -27,7 +36,6 @@ public class Coachs {
                 coach.addRecommendMenu(Menu.recommendationMenu(category));
                 break;
             } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
             }
         }
     }

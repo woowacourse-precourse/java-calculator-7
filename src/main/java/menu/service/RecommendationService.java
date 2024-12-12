@@ -28,7 +28,6 @@ public class RecommendationService {
                 recommendation.addCategory(category);
                 return category;
             } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
             }
         }
     }
