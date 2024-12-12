@@ -7,8 +7,10 @@ public class InedibleMenu {
     private List<String> menus;
 
     public InedibleMenu(List<String> menus) {
-        validateMenuAmount(menus);
-        validateInedibleMenu(menus);
+        if (menus != null) {
+            validateMenuAmount(menus);
+            validateInedibleMenu(menus);
+        }
         this.menus = menus;
     }
 
