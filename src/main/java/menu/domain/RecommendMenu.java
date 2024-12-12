@@ -10,7 +10,9 @@ public class RecommendMenu {
     public RecommendMenu() {
     }
 
-    public void adRecommendMenu() {
+    public void adRecommendMenu(String menu) {
+        validateRecommendMenu(menu);
+        menus.add(menu);
     }
 
     private void validateRecommendMenu(String menu) {
