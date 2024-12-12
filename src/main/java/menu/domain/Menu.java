@@ -18,16 +18,18 @@ public enum Menu {
         this.menus = menus;
     }
 
-    public String recommendationMenu() {
-
+    public static String recommendationMenu() {
+        String category = randomCategory();
+        return Randoms.shuffle(Menu.valueOf(category).menus).get(0);
     }
 
-    private String randomCategory() {
+    private static String randomCategory() {
         int number = Randoms.pickNumberInRange(1, 5);
         for (Menu value : Menu.values()) {
             if (value.category == number) {
                 return value.name();
             }
         }
+        return null;
     }
 }
