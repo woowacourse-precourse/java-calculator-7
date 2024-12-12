@@ -23,4 +23,8 @@ public class Recommendation {
         }
         return false;
     }
+
+    public Categories getCategories() {
+        return categories;
+    }
 }
