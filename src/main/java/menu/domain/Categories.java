@@ -10,7 +10,7 @@ public class Categories {
     public Categories() {
     }
 
-    private void addCategory(String category) {
+    public void addCategory(String category) {
         validateCategory(category);
         categories.add(category);
     }
