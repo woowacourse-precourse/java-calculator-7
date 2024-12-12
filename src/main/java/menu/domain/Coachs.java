@@ -11,8 +11,7 @@ public class Coachs {
         this.coachs = coachs;
     }
 
-    public void recommendMenuOneCycle() {
-        String category = Menu.randomCategory();
+    public void recommendMenuOneCycle(String category) {
         for (Coach coach : coachs) {
             recommendMenu(coach, category);
         }
