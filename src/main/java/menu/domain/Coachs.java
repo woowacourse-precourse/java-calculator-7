@@ -7,6 +7,25 @@ public class Coachs {
     private List<Coach> coachs;
 
     public Coachs(List<Coach> coachs) {
+        validateCoachAmount(coachs);
+        this.coachs = coachs;
+    }
+
+    public void recommendMenuOneCycle() {
+        for (Coach coach : coachs) {
+            recommendMenu(coach);
+        }
+    }
+
+    private void recommendMenu(Coach coach) {
+        while (true) {
+            try {
+                coach.addRecommendMenu(Menu.recommendationMenu());
+                break;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     private void validateCoachAmount(List<Coach> coachs) {
