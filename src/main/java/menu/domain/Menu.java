@@ -1,6 +1,7 @@
 package menu.domain;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import java.util.ArrayList;
 import java.util.List;
 
 public enum Menu {
@@ -21,6 +22,19 @@ public enum Menu {
     public static String recommendationMenu() {
         String category = randomCategory();
         return Randoms.shuffle(Menu.valueOf(category).menus).get(0);
+    }
+
+    public static boolean isInMenu(String inputMenu) {
+        List<String> allMenu = new ArrayList<>();
+        for (Menu value : Menu.values()) {
+            for (String menu : value.menus) {
+                allMenu.add(menu);
+            }
+        }
+        if (allMenu.contains(inputMenu)) {
+            return true;
+        }
+        return false;
     }
 
     private static String randomCategory() {
