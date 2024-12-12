@@ -19,8 +19,7 @@ public enum Menu {
         this.menus = menus;
     }
 
-    public static String recommendationMenu() {
-        String category = randomCategory();
+    public static String recommendationMenu(String category) {
         return Randoms.shuffle(Menu.valueOf(category).menus).get(0);
     }
 
@@ -37,7 +36,7 @@ public enum Menu {
         return false;
     }
 
-    private static String randomCategory() {
+    public static String randomCategory() {
         int number = Randoms.pickNumberInRange(1, 5);
         for (Menu value : Menu.values()) {
             if (value.category == number) {
