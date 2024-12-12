@@ -22,6 +22,10 @@ public class Categories {
         return false;
     }
 
+    public List<String> getCategories() {
+        return categories;
+    }
+
     private void validateCategory(String category) {
         long count = categories.stream()
                 .filter(c -> c.equals(category))
