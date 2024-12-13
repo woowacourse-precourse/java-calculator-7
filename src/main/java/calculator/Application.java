@@ -17,5 +17,6 @@ public class Application {
         output.printResult();
         System.out.println(result);
 
+
     }
 }

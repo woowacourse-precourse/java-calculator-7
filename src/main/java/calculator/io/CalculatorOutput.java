@@ -9,4 +9,5 @@ public class CalculatorOutput {
     public void printResult() {
         System.out.print("결과 : ");
     }
+
 }
